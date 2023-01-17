@@ -101,6 +101,10 @@ h4,
   line-height: var(--font-leading-h4);
 }
 
+:root {
+  --transition: 0.15s;
+}
+
 body {
   background-color: #F3F3F7;
 }
