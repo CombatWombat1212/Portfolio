@@ -1,0 +1,154 @@
+
+
+@font-face {
+    font-family: "Gira Sans";
+    src: url("/assets/fonts/gira_sans/Gira_Sans.otf");
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+
+
+@font-face {
+    font-family: "Tenon";
+    src: url("/assets/fonts/tenon/Tenon.otf");
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+
+
+
+
+
+
+// $font-title: "Ubuntu", "sans-serif";
+// $font-body: "Ubuntu", "sans-serif";
+
+
+
+
+
+
+// @include text {
+//   font-family: $font-title;
+//   color: $col-secondary;
+// }
+
+// :root {
+//   --font-size-h1: 1.875rem;
+//   --font-size-h2: 1.375rem;
+//   --font-size-h3: 1.125rem;
+//   --font-size-h4: 1rem;
+
+//   --font-size-body: 1rem;
+//   --font-size-body_sm: 0.875rem;
+//   --font-size-body_xs: 0.75rem;
+//   --font-size-button: 1rem;
+// }
+
+
+// @mixin weight-light {
+//   font-weight: 300;
+// }
+// @mixin weight-reg {
+//   font-weight: 400;
+// }
+// @mixin weight-med {
+//   font-weight: 500;
+// }
+// @mixin weight-bold {
+//   font-weight: 600;
+// }
+
+
+// @mixin heading {
+//   @include weight-med;
+// }
+
+// @mixin h1 {
+//   font-size: var(--font-size-h1);
+//   @include heading;
+// }
+
+// @mixin h2 {
+//   font-size: var(--font-size-h2);
+//   @include heading;
+// }
+// @mixin h2_italic {
+//   font-size: var(--font-size-h2);
+//   font-style: italic;
+//   font-weight: 400;
+// }
+
+// @mixin h3 {
+//   font-size: var(--font-size-h3);
+//   @include heading;
+// }
+
+// @mixin h4 {
+//   font-size: var(--font-size-h4);
+//   @include heading;
+// }
+
+// @mixin h4_italic {
+//   font-size: var(--font-size-h4);
+//   font-style: italic;
+//   font-weight: 400;
+// }
+
+
+// @mixin body {
+//   font-size: var(--font-size-body);
+//   font-weight: 400;
+// }
+
+
+
+
+// h1,
+// .h1 {
+//   @include h1;
+// }
+
+// h2,
+// .h2 {
+//   @include h2;
+// }
+
+// h3,
+// .h3 {
+//   @include h3;
+// }
+
+// h4,
+// .h4 {
+//   @include h4;
+// }
+
+// .weight {
+//   &__light {
+//     @include weight-light;
+//   }
+//   &__reg {
+//     @include weight-reg;
+//   }
+//   &__med {
+//     @include weight-med;
+//   }
+//   &__bold {
+//     @include weight-bold;
+//   }
+// }
+
+// .body {
+//   font-size: var(--font-size-h4);
+//   line-height: 1.25rem;
+
+//   &__tertiary {
+//     @extend .body;
+//     color: $col-secondary_mid;
+//   }
+// }

@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+iframe {
+  border: none;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+input, button, textarea, select {
+    font: inherit;
+  }
+  
+
+@mixin table-reset {
+  table {
+    border-spacing: 0;
+  }
+}

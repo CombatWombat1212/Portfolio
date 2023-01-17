@@ -1,0 +1,193 @@
+
+
+
+// $spacer: 1rem !default;
+$spacer: 2rem !default;
+$spacers: (0: 0,
+    1: $spacer * .25,
+    2: $spacer * .5,
+    3: $spacer,
+    4: $spacer * 1.5,
+    5: $spacer * 3,
+) !default;
+
+
+
+
+// stylelint-disable indentation
+
+// Utilities
+
+$utilities: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$utilities: map-merge(( // scss-docs-start utils-vertical-align
+        // "align": (property: vertical-align,
+        //     class: align,
+        //     values: baseline top middle bottom text-bottom text-top),
+        // // scss-docs-start utils-float
+        // "float": (responsive: true,
+        //     property: float,
+        //     values: (start: left,
+        //         end: right,
+        //         none: none,
+        //     )),
+        // // scss-docs-end utils-float
+        // // scss-docs-start utils-overflow
+        // "overflow": (property: overflow,
+        //     values: auto hidden visible scroll,
+        // ),
+        // // scss-docs-end utils-overflow
+        // // scss-docs-start utils-display
+        "display": (responsive: true,
+            property: display,
+            class: d,
+            values: block grid flex none),
+        "flex": (responsive: true,
+            property: flex-direction,
+            class: flex,
+            values: (
+                col: column,
+                row: row,),
+            defaults: (
+                display: flex,
+            ) ),
+        // "position": (property: position,
+        //     values: static relative absolute fixed sticky),
+        "gap": (responsive:true,
+            property: --column-gap --row-gap --gap column-gap row-gap gap,
+            class: gap,
+            values: $spacers),
+        "margin-y": (
+            property: margin-top margin-bottom,
+            class: my,
+            values: (auto:auto)),
+        "margin-x": (
+            property: margin-left margin-right,
+            class: mx,
+            values: (auto:auto)),
+        "margin": (
+            property: margin,
+            class: m,
+            values: (auto:auto)),
+        // "max-width": (property: max-width,
+        //     class: mw,
+        //     values: (100: 100%)),
+        // "viewport-width": (property: width,
+        //     class: vw,
+        //     values: (100: 100vw)),
+        // "min-viewport-width": (property: min-width,
+        //     class: min-vw,
+        //     values: (100: 100vw)),
+        "height": (property: height,
+            class: h,
+            values: (
+                fit: fit-content,
+                // 50: 50%,
+                // 75: 75%,
+                // 100: 100%,
+                // auto: auto
+                )),
+        // "max-height": (property: max-height,
+        //     class: mh,
+        //     values: (100: 100%)),
+        // "viewport-height": (property: height,
+        //     class: vh,
+        //     values: (100: 100vh)),
+        // "min-viewport-height": (property: min-height,
+        //     class: min-vh,
+        //     values: (100: 100vh)),
+        "justify-content": (
+            responsive: true,
+            class: 'just',
+            property: justify-content,
+            values: (
+                // start: flex-start,
+                // end: flex-end,
+                center: center,
+                bet: space-between,
+                around: space-around,
+            )),
+        "align": (
+            responsive: true,
+            class: 'al',
+            property: align-content,
+            values: (
+                center: center,
+            )),
+        // "margin-x": (responsive: true,
+        //     property: margin-right margin-left,
+        //     class: mx,
+        //     values: map-merge($spacers, (auto: auto))),
+        // "margin-y": (responsive: true,
+        //     property: margin-top margin-bottom,
+        //     class: my,
+        //     values: map-merge($spacers, (auto: auto))),
+        // "margin-top": (responsive: true,
+        //     property: margin-top,
+        //     class: mt,
+        //     values: map-merge($spacers, (auto: auto))),
+        // "margin-bottom": (responsive: true,
+        //     property: margin-bottom,
+        //     class: mb,
+        //     values: map-merge($spacers, (auto: auto))),
+        // scss-docs-end utils-bg-color
+    ),
+    $utilities);
+
+
+
+
+
+
+
+
+
+
+//Generate Utilities
+
+// Loop over each breakpoint
+@each $breakpoint in map-keys($grid-breakpoints) {
+
+    // Generate media query if needed
+    @include media-breakpoint-down($breakpoint) {
+        $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+        // Loop over each utility property
+        @each $key,
+        $utility in $utilities {
+
+            // The utility can be disabled with `false`, thus check if the utility is a map first
+            // Only proceed if responsive media queries are enabled or if it's the base media query
+            @if type-of($utility)=="map"and (map-get($utility, responsive) or $infix=="") {
+                @include generate-utility($utility, $infix);
+            }
+        }
+    }
+}
+
+// RFS rescaling
+@media (min-width: $rfs-mq-value) {
+    @each $breakpoint in map-keys($grid-breakpoints) {
+        $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+        @if (map-get($grid-breakpoints, $breakpoint) < $rfs-breakpoint) {
+
+            // Loop over each utility property
+            @each $key,
+            $utility in $utilities {
+
+                // The utility can be disabled with `false`, thus check if the utility is a map first
+                // Only proceed if responsive media queries are enabled or if it's the base media query
+                @if type-of($utility)=="map"and map-get($utility, rfs) and (map-get($utility, responsive) or $infix=="") {
+                    @include generate-utility($utility, $infix, true);
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+

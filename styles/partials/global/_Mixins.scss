@@ -1,0 +1,578 @@
+@mixin text() {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    li,
+	a,
+	label,
+    span {
+        @content;
+    }
+
+}
+
+
+
+
+@mixin no-select {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+
+@mixin mx-auto {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+
+@mixin mx-0 {
+	margin-right: 0;
+	margin-left: 0;
+}
+
+@mixin m-0 {
+	margin: 0;
+}
+
+
+@mixin m-auto {
+	margin: auto;
+}
+
+
+@mixin my-auto {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+@mixin my-0 {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+
+@mixin flex-col {
+	display: flex;
+	flex-direction: column;
+}
+
+@mixin flex-col-between {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+@mixin flex-col-center {
+	@include flex-col();
+	justify-content: center;
+}
+
+
+@mixin flex-row {
+	display: flex;
+	flex-direction: row;
+}
+
+@mixin flex-row-left {
+	display: flex;
+	flex-direction: row;
+	justify-content: start;
+}
+
+@mixin flex-row-right {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+@mixin flex-row-center {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+
+@mixin flex-row-between {
+	@include flex-row();
+	justify-content: space-between;
+}
+
+
+
+
+
+@mixin line-cutoff($key) {
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: $key;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+}
+
+
+
+
+@mixin pad-x($val) {
+	padding-left: $val;
+	padding-right: $val;
+}
+
+@mixin pad-y($val) {
+	padding-top: $val;
+	padding-bottom: $val;
+}
+
+
+@mixin x-100() {
+	width: 100%;
+}
+
+@mixin y-100() {
+	height: 100%;
+}
+
+@mixin xy-100() {
+	width: 100%;
+	height: 100%;
+}
+
+
+
+
+@mixin s($val:var(--size)) {
+	@if $val !=var(--size) {
+		--size: #{$val};
+	}
+
+	width: $val;
+	height: $val;
+}
+
+
+
+
+@mixin img-cover($val: 100%) {
+	width: $val;
+	height: $val;
+	object-fit: cover;
+}
+
+
+@mixin img-contain($val: 100%) {
+	width: $val;
+	height: $val;
+	object-fit: contain;
+}
+
+
+
+
+
+@mixin scrollbar {
+	&::-webkit-scrollbar {
+		@content;
+	}
+}
+
+@mixin scrollbar-track {
+	&::-webkit-scrollbar-track {
+		@content;
+	}
+}
+
+@mixin scrollbar-thumb {
+	&::-webkit-scrollbar-thumb {
+		@content;
+	}
+}
+
+
+@mixin scrollbar-none {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+
+
+
+@mixin scroll-smooth {
+	scroll-snap-type: y mandatory;
+	scroll-behavior: smooth;
+}
+
+
+@function r-rem($val) {
+	$px: 0.8;
+	$vmin: 0.05335;
+	$px: $px * $val * 16;
+	$vmin: $vmin * $val * 16;
+	@return Min(calc(#{#{$px}px + #{$vmin}vmin
+		}
+
+	), #{$val}rem);
+}
+
+
+
+
+
+@mixin aspect-support-fix($aspect-width, $aspect-height, $width, $height) {
+	@supports (aspect-ratio: 1/1) {
+		aspect-ratio: #{$aspect-width} / #{$aspect-height};
+	}
+
+	@supports not (aspect-ratio: 1/1) {
+		@if $width {
+			height: calc(#{$width} / (#{$aspect-width} / #{$aspect-height}));
+		}
+
+		@else if $height {
+			width: calc(#{$height} / (#{$aspect-height} / #{$aspect-width}));
+		}
+	}
+}
+
+
+
+
+@mixin b-rad($val: var(--b-rad)) {
+	border-radius: $val;
+	-webkit-border-radius: $val;
+	-moz-border-radius: $val;
+	-khtml-border-radius: $val;
+}
+
+
+
+@mixin trans($val:var(--transition)) {
+	transition: $val;
+}
+
+
+
+
+
+@mixin hover ($parent: (''), $child: (''), $transition:var(--transition)) {
+
+
+	@each $p in $parent {
+
+
+		@if $p == ('') and $child == ('') {
+			&{
+				transition: $transition;
+			}
+			&:hover,
+			&:focus{
+				@content;
+			}
+		}
+
+
+
+
+		@else if $child==('') {
+			//if there is no child
+			@at-root {
+				#{$p} {
+					transition: $transition;
+				}
+				#{$p}:hover,
+				#{$p}:focus {
+					@content;
+				}
+			}
+		}
+
+
+
+
+		@else {
+			@each $c in $child {
+
+				// use case for treating '&' correctly
+				@if $c=='&' {
+					@at-root {
+						#{$p} & {
+							transition: $transition;
+						}
+						#{$p}:hover &,
+						#{$p}:focus & {
+							@content;
+						}
+					}
+				}
+
+				@else {
+					@at-root {
+
+						// regular functionality
+						#{$p} #{$c} {
+							transition: $transition;
+						}
+						#{$p}:hover #{$c},
+						#{$p}:focus #{$c} {
+							@content;
+						}
+					}
+				}
+			}
+
+		}
+	}
+}
+
+
+
+
+
+
+@mixin colgutter($col: var(--col), $gut: var(--gutter)) {
+	width: calc((100%/#{$col}) - ((#{$gut} * (#{$col} - 1)) / #{$col})) !important;
+}
+
+
+@function colgutter($col: var(--col), $gut: var(--gutter)) {
+	@return calc((100%/#{$col}) - ((#{$gut} * (#{$col} - 1)) / #{$col}));
+}
+
+
+
+
+@mixin absolute-center{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@mixin responsive-down($str, $b) {
+
+    #{$str}-#{$b} {
+        @media screen and (max-width: map-get($grid-breakpoints, 'xxl') - $subtractor) {
+            @content;
+        }
+
+        @media screen and (min-width: map-get($grid-breakpoints, 'xxl')) {
+            @content;
+        }
+    }
+
+    @each $key,
+    $val in $grid-breakpoints_inverted {
+        @if($key !='xs') {
+            #{$str}-#{$key}-#{$b} {
+                @media screen and (max-width: map-get($grid-breakpoints, $key) - $subtractor) {
+                    @content;
+                }
+            }
+        }
+    }
+
+}
+
+
+
+
+@mixin injected-parameters($type, $props, $vals, $un, $i) {
+
+
+    @for $num from 1 through length($props) {
+
+
+        $x: "";
+
+        @if ((contains((nth($vals, $num)), 'xyz'))==true) {
+            $x: str-replace(nth($vals, $num), 'xyz', $i);
+
+            @if($type==range) {
+                @if ((contains((nth($vals, $num)), '/'))==true) {
+                    $a: str-split($x, '/');
+                    $a: (to-number(nth($a, 1)) / to-number(nth($a, 2)));
+                    $x: $a;
+                }
+            }
+        }
+
+        @else {
+            $x: nth($vals, $num);
+        }
+
+
+        @if(length($un)==1) {
+
+            @if($un==none) {
+                #{nth($props,$num)}: $x;
+            }
+
+            @else {
+                #{nth($props,$num)}: #{$x}#{$un};
+            }
+        }
+
+        @else {
+
+            @if(nth($un, $num)==none) {
+                #{nth($props,$num)}: $x;
+            }
+
+            @else {
+                $u: nth($un, $num);
+                #{nth($props,$num)}: #{$x}#{$u};
+            }
+
+        }
+
+
+
+
+    }
+
+}
+
+
+
+
+@mixin responsive-down-range($str, $type, $props, $vals, $un, $min, $max, $map) {
+    @for $i from $min to $max+1 {
+        #{$str}-#{$i} {
+            @media screen and (max-width: map-get($grid-breakpoints, 'xxl') - $subtractor) {
+                @include injected-parameters($type, $props, $vals, $un, $i);
+                @content;
+            }
+
+            @media screen and (min-width: map-get($grid-breakpoints, 'xxl')) {
+                @include injected-parameters($type, $props, $vals, $un, $i);
+                @content;
+            }
+        }
+    }
+
+    @each $key,
+    $val in $grid-breakpoints_inverted {
+        @for $i from $min to $max+1 {
+            @if($key !='xs') {
+                #{$str}-#{$key}-#{$i} {
+                    @media screen and (max-width: map-get($grid-breakpoints, $key) - $subtractor) {
+                        @include injected-parameters($type, $props, $vals, $un, $i);
+                        @content;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@mixin responsive-down-map($str, $type, $props, $vals, $un, $min, $max, $map) {
+
+    @each $thing,
+    $value in $map {
+        #{$str}-#{$thing} {
+            @media screen and (max-width: map-get($grid-breakpoints, 'xxl') - $subtractor) {
+                @include injected-parameters($type, $props, $vals, $un, $value);
+                @content;
+            }
+
+            @media screen and (min-width: map-get($grid-breakpoints, 'xxl')) {
+                @include injected-parameters($type, $props, $vals, $un, $value);
+                @content;
+            }
+        }
+    }
+
+    @each $key,
+    $val in $grid-breakpoints_inverted {
+
+        @each $thing,
+        $value in $map {
+            @if($key !='xs') {
+                #{$str}-#{$key}-#{$thing} {
+                    @media screen and (max-width: map-get($grid-breakpoints, $key) - $subtractor) {
+                        @include injected-parameters($type, $props, $vals, $un, $value);
+                        @content;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+@mixin responsive-down-manual($str, $type, $props, $vals, $un, $min, $max, $map) {
+
+    @if($type==range) {
+        @include responsive-down-range($str, $type, $props, $vals, $un, $min, $max, $map) {
+            @content;
+        }
+    }
+
+    @if($type==map) {
+        @include responsive-down-map($str, $type, $props, $vals, $un, $min, $max, $map) {
+            @content;
+        }
+    }
+
+}
+
+
+
+
+
+
+
+@mixin box-shadow-border($width: var(--b-width), $color: var(--b-color), $type: inset) {
+	
+	@if ($type==inset) {
+
+		box-shadow: 
+		$type calc(#{$width} * -1) 0 0 $color,
+		$type 0 calc(#{$width} * -1) 0 $color,
+		$type $width 0 0 $color,
+		$type 0 $width 0 $color;
+		
+	} 
+
+
+}
+
+
+@mixin image-layout-fill-contain(){
+    @include s;
+    position: relative;
+	img{
+		@include img-contain;
+	}
+}
+
