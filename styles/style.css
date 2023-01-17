@@ -37,10 +37,72 @@ input, button, textarea, select {
 }
 
 @font-face {
+  font-family: "Gira Sans";
+  src: url("/assets/fonts/gira_sans/Gira_Sans_Medium.otf");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gira Sans";
+  src: url("/assets/fonts/gira_sans/Gira_Sans_Light.otf");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
   font-family: "Tenon";
   src: url("/assets/fonts/tenon/Tenon.otf");
   font-weight: 400;
   font-style: normal;
+}
+
+:root {
+  --font-size-h1: 3.375rem;
+  --font-size-h2: 2.375rem;
+  --font-size-h3: 1.625rem;
+  --font-size-h4: 1.125rem;
+  --font-size-body: 1rem;
+  --font-leading-h1: 4.25rem;
+  --font-leading-h2: 3.125rem;
+  --font-leading-h3: 2.3125rem;
+  --font-leading-h4: 1.25rem;
+  --font-leading-body: 1.5rem;
+  font-family: "Tenon";
+  color: #074391;
+}
+
+h1,
+.t--h1 {
+  font-family: "Gira Sans";
+  font-size: var(--font-size-h1);
+  line-height: var(--font-leading-h1);
+}
+
+h2,
+.t--h2 {
+  font-family: "Gira Sans";
+  font-size: var(--font-size-h2);
+  line-height: var(--font-leading-h2);
+}
+
+h3,
+.t--h3 {
+  font-family: "Gira Sans";
+  font-size: var(--font-size-h3);
+  line-height: var(--font-leading-h3);
+  font-weight: 300;
+}
+
+h4,
+.t--h4 {
+  font-family: "Gira Sans";
+  font-size: var(--font-size-h4);
+  line-height: var(--font-leading-h4);
+}
+
+body {
+  background-color: #F3F3F7;
 }
 
 .d-block {
