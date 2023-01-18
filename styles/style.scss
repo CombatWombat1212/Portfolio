@@ -14,7 +14,9 @@
 
 
 
-@import "./partials/elements/Headers";
+@import "./partials/elements/Sections";
+@import "./partials/elements/Scrollblock";
+@import "./partials/elements/Buttons";
 
 
-// @import "./partials/pages/index";
+@import "./partials/pages/Home";

@@ -29,6 +29,18 @@ input, button, textarea, select {
   --xxl:87.5em;
 }
 
+.color--primary {
+  color: #074391;
+}
+
+.color--secondary {
+  color: #C41263;
+}
+
+.color--tertiary {
+  color: #404064;
+}
+
 @font-face {
   font-family: "Gira Sans";
   src: url("/assets/fonts/gira_sans/Gira_Sans.otf");
@@ -61,8 +73,8 @@ input, button, textarea, select {
   --font-size-h1: 3.375rem;
   --font-size-h2: 2.375rem;
   --font-size-h3: 1.625rem;
-  --font-size-h4: 1.125rem;
-  --font-size-body: 1rem;
+  --font-size-h4: 0.875rem;
+  --font-size-body: 1.125rem;
   --font-leading-h1: 4rem;
   --font-leading-h2: 3.125rem;
   --font-leading-h3: 2.3125rem;
@@ -111,6 +123,7 @@ p,
 
 :root {
   --transition: 0.15s;
+  --b-rad: 0.5rem;
 }
 
 body {
@@ -906,34 +919,150 @@ body {
   }
 }
 
-.hero {
+.section {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  --hero-margin-top: 1rem;
+  --section-description-spacing: 1rem;
 }
 
-.hero--desc * + * {
-  margin-top: var(--hero-margin-top);
+.section--desc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.hero--desc * + *:last-child {
-  margin-top: calc(var(--hero-margin-top)*1.3);
+.section--desc > * + * {
+  margin-top: var(--section-description-spacing);
 }
 
-.hero--img {
-  margin-right: auto;
-  margin-left: auto;
-  width: 10rem;
+.section--graphic {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.hero--img img {
+.section--img img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-.hero--name {
-  color: #C41263;
+.scrollblock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
+.scrollblock > * {
+  margin-bottom: 3rem;
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  border-radius: var(--b-rad);
+  -webkit-border-radius: var(--b-rad);
+  -moz-border-radius: var(--b-rad);
+  -khtml-border-radius: var(--b-rad);
+  font-family: "Tenon";
+  font-size: var(--font-size-body);
+  line-height: var(--font-leading-body);
+  font-weight: 400;
+  transition: var(--transition);
+  cursor: pointer;
+  width: fit-content;
+  --button-background: #C41263;
+  --button-color: #F3F3F7;
+  --button-padding: 1.125rem;
+  --button-icon-size: 1.25rem;
+  --button-icon-margin: 0.75rem;
+  background-color: var(--button-background);
+  padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.25rem);
+}
+
+.button > * + * {
+  margin-left: var(--button-icon-margin);
+}
+
+.button--img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.button--copy {
+  color: var(--button-color);
+}
+
+.button--icon {
+  margin-bottom: -0.125rem;
+  width: var(--size);
+  height: var(--size);
+  --size: var(--button-icon-size);
+}
+
+.button--icon__mask {
+  --mask-aspect-width: 205;
+  --mask-aspect-height: 168;
+  mask-image: var(--mask-img);
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  background-color: var(--button-color);
+}
+
+@supports (aspect-ratio: 1/1) {
+  .button--icon__mask {
+    aspect-ratio: var(--mask-aspect-width) / var(--mask-aspect-height);
+  }
+}
+
+@supports not (aspect-ratio: 1/1) {
+  .button--icon__mask {
+    height: calc(100% / (var(--mask-aspect-width) / var(--mask-aspect-height)));
+  }
+}
+
+.button__right {
+  padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.25rem) calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.1rem);
+}
+
+.button__left {
+  padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.25rem) calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.1rem);
+}
+
+.button {
+  transition: var(--transition);
+}
+
+.button:hover, .button:focus {
+  --button-background: #950647;
+}
+
+#Home--Hero .section--img {
+  margin-right: auto;
+  margin-left: auto;
+  width: 10rem;
+}
+
+#Home--Hero .section--desc .text--body {
+  margin-top: calc(var(--section-description-spacing) * 1.3);
+}
+
+#Home--Makeright .section--img {
+  height: 45rem;
+}
+
+#Home--Made .section--img {
+  height: 45rem;
+}
+
+#Home--Koalako .section--img {
+  height: 45rem;
+}
+
+#Home--Explorations .section--img {
+  height: 45rem;
 }
 /*# sourceMappingURL=style.css.map */

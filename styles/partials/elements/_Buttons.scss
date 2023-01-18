@@ -1,0 +1,70 @@
+@mixin mask {
+  --mask-aspect-width: 205;
+  --mask-aspect-height: 168;
+  mask-image: var(--mask-img);
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+
+  @include aspect-support-fix(var(--mask-aspect-width), var(--mask-aspect-height), 100%, null);
+}
+
+.button {
+  @include flex-row;
+  @include b-rad;
+  @include body;
+  @include trans;
+  cursor: pointer;
+
+  width: fit-content;
+
+  --button-background: #{$col-secondary};
+  --button-color: #{$col-background};
+  --button-padding: 1.125rem;
+  --button-icon-size: 1.25rem;
+  --button-icon-margin: 0.75rem;
+
+  background-color: var(--button-background);
+  padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.25rem);
+
+  & > * + * {
+    margin-left: var(--button-icon-margin);
+  }
+
+  &--img {
+    @include flex-col-center;
+  }
+
+  &--copy {
+    color: var(--button-color);
+  }
+
+  &--icon {
+    margin-bottom: -0.125rem;
+
+    @include s;
+    --size: var(--button-icon-size);
+
+    &__mask {
+      @include mask;
+      background-color: var(--button-color);
+    }
+  }
+
+  &__right {
+    padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.25rem) calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.1rem);
+  }
+
+  &__left {
+    padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.25rem) calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.1rem);
+  }
+
+
+
+
+
+@include hover{
+    --button-background: #{$col-secondary_hovered};
+}
+
+
+}

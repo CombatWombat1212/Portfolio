@@ -1,0 +1,45 @@
+#Home {
+
+    
+  &--Hero {
+    .section {
+      &--img {
+        @include mx-auto;
+        width: 10rem;
+      }
+
+      &--desc {
+        .text--body {
+          margin-top: calc(var(--section-description-spacing) * 1.3);
+        }
+      }
+    }
+  }
+
+
+
+
+  &--Makeright {
+    .section--img {
+      height: 45rem;
+    }
+  }
+
+  &--Made {
+    .section--img {
+      height: 45rem;
+    }
+  }
+
+  &--Koalako {
+    .section--img {
+      height: 45rem;
+    }
+  }
+
+  &--Explorations {
+    .section--img {
+      height: 45rem;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+
+
+
+.scrollblock{
+
+    @include flex-col-center;
+    height: 100vh;
+
+    &>*{
+        margin-bottom:3rem;
+    }
+
+
+}

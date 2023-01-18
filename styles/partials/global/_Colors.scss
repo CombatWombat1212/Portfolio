@@ -5,6 +5,7 @@
 
 $col-primary: #074391;
 $col-secondary: #C41263;
+$col-secondary_hovered: #950647;
 $col-tertiary: #404064;
 $col-background: #F3F3F7;
 
@@ -37,3 +38,19 @@ $col-background: #F3F3F7;
 //   rgba(255, 255, 255, 0.1),
 //   rgba(0, 209, 255, 0.1)
 // );
+
+
+
+.color{
+
+    &--primary{
+        color: $col-primary;
+    }
+    &--secondary{
+        color: $col-secondary;
+    }
+    &--tertiary{
+        color: $col-tertiary;
+    }
+
+}

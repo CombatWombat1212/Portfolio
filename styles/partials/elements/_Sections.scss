@@ -1,0 +1,31 @@
+
+
+
+.section {
+  @include flex-row-between;
+
+  --section-description-spacing: 1rem;
+
+  &--desc {
+
+    &>*+* {
+      margin-top: var(--section-description-spacing);
+    }
+
+    @include flex-col-center;
+    
+  }
+
+  &--graphic{
+    @include flex-col-center;
+  }
+
+  &--img {
+    img {
+      @include img-contain;
+    }
+  }
+
+
+
+}
