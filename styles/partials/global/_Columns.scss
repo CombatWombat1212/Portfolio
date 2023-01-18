@@ -1,0 +1,46 @@
+$column-grid-min: 0;
+$column-grid-max: 12;
+
+@mixin col-width($i, $b) {
+//     $col:0;
+//     @if($b == 0){
+//         $col: 1;
+//     } @else {
+//         $col: $column-grid-max/$b;
+//     }
+    
+//   width: Min( ((($b/$column-grid-max) * 100) + %), (colgutter($col, var(--gap))) );
+
+
+  width: (($b/$column-grid-max) * 100) + %;
+
+}
+
+
+
+
+@for $b from $column-grid-min to $column-grid-max+1 {
+    .col-#{$b} {
+        @media screen and (max-width: map-get($grid-breakpoints, $grid-breakpoint-max_key) - $subtractor) {
+            @include col-width(var(--flexChildren), $b);
+        }
+
+        @media screen and (min-width: map-get($grid-breakpoints, $grid-breakpoint-max_key)) {
+            @include col-width(var(--flexChildren), $b);
+        }
+    }
+}
+
+@each $key,
+$val in $grid-breakpoints_inverted {
+    @for $b from $column-grid-min to $column-grid-max+1 {
+        @if($key !=$grid-breakpoint-min_key) {
+            .col-#{$key}-#{$b} {
+                @media screen and (max-width: map-get($grid-breakpoints, $key) - $subtractor) {
+                    @include col-width(var(--flexChildren), $b);
+                }
+            }
+        }
+    }
+
+}

@@ -53,18 +53,18 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
             ) ),
         // "position": (property: position,
         //     values: static relative absolute fixed sticky),
-        "gap": (responsive:true,
-            property: --column-gap --row-gap --gap column-gap row-gap gap,
-            class: gap,
-            values: $spacers),
-        "margin-y": (
-            property: margin-top margin-bottom,
-            class: my,
-            values: (auto:auto)),
-        "margin-x": (
-            property: margin-left margin-right,
-            class: mx,
-            values: (auto:auto)),
+        // "gap": (responsive:true,
+        //     property: --column-gap --row-gap --gap column-gap row-gap gap,
+        //     class: gap,
+        //     values: $spacers),
+        // "margin-y": (
+        //     property: margin-top margin-bottom,
+        //     class: my,
+        //     values: (auto:auto)),
+        // "margin-x": (
+        //     property: margin-left margin-right,
+        //     class: mx,
+        //     values: (auto:auto)),
         "margin": (
             property: margin,
             class: m,
@@ -78,15 +78,15 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
         // "min-viewport-width": (property: min-width,
         //     class: min-vw,
         //     values: (100: 100vw)),
-        "height": (property: height,
-            class: h,
-            values: (
-                fit: fit-content,
-                // 50: 50%,
-                // 75: 75%,
-                // 100: 100%,
-                // auto: auto
-                )),
+        // "height": (property: height,
+        //     class: h,
+        //     values: (
+        //         fit: fit-content,
+        //         // 50: 50%,
+        //         // 75: 75%,
+        //         // 100: 100%,
+        //         // auto: auto
+        //         )),
         // "max-height": (property: max-height,
         //     class: mh,
         //     values: (100: 100%)),
@@ -107,13 +107,13 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
                 bet: space-between,
                 around: space-around,
             )),
-        "align": (
-            responsive: true,
-            class: 'al',
-            property: align-content,
-            values: (
-                center: center,
-            )),
+        // "align": (
+        //     responsive: true,
+        //     class: 'al',
+        //     property: align-content,
+        //     values: (
+        //         center: center,
+        //     )),
         // "margin-x": (responsive: true,
         //     property: margin-right margin-left,
         //     class: mx,

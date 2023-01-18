@@ -8,16 +8,20 @@ $font-body: "Tenon";
   --font-size-h4: 1.125rem;
   --font-size-body: 1rem;
 
-  --font-leading-h1: 4.25rem;
+  --font-leading-h1: 4rem;
   --font-leading-h2: 3.125rem;
   --font-leading-h3: 2.3125rem;
   --font-leading-h4: 1.25rem;
   --font-leading-body: 1.5rem;
 
+  // --font-leading-h1: 4.25rem;
+  // --font-leading-h2: 3.125rem;
+  // --font-leading-h3: 2.3125rem;
+  // --font-leading-h4: 1.25rem;
+  // --font-leading-body: 1.5rem;
 
-    font-family: $font-body;
-    color: $col-primary;
-  
+  font-family: $font-body;
+  color: $col-primary;
 }
 
 @mixin weight-light {
@@ -66,23 +70,28 @@ $font-body: "Tenon";
 }
 
 h1,
-.t--h1 {
+.text--h1 {
   @include h1;
 }
 
 h2,
-.t--h2 {
+.text--h2 {
   @include h2;
 }
 
 h3,
-.t--h3 {
+.text--h3 {
   @include h3;
 }
 
 h4,
-.t--h4 {
+.text--h4 {
   @include h4;
+}
+
+p,
+.text--body{
+  @include body;
 }
 
 // .weight {
@@ -100,7 +109,7 @@ h4,
 //   }
 // }
 
-// .t--body {
+// .text--body {
 //   font-size: var(--font-size-h4);
 //   line-height: 1.25rem;
 
