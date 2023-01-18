@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { cn } from "/scripts/GlobalUtilities";
 
 import Mask from "../utilities/Mask";
 import ICONS from "../../data/ICONS";

@@ -124,6 +124,7 @@ p,
 :root {
   --transition: 0.15s;
   --b-rad: 0.5rem;
+  --b-rad_less: 0.3125rem;
 }
 
 body {
@@ -948,6 +949,14 @@ body {
   object-fit: contain;
 }
 
+.section--tags {
+  margin-top: calc(var(--section-description-spacing) * 1.75);
+}
+
+.section--button {
+  margin-top: calc(var(--section-description-spacing) * 4);
+}
+
 .scrollblock {
   display: flex;
   flex-direction: column;
@@ -1025,11 +1034,11 @@ body {
 }
 
 .button__right {
-  padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.25rem) calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.1rem);
+  padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0rem) calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.1rem);
 }
 
 .button__left {
-  padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.25rem) calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.1rem);
+  padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.25rem) calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0rem);
 }
 
 .button {
@@ -1040,10 +1049,27 @@ body {
   --button-background: #950647;
 }
 
+.tag {
+  font-size: var(--font-size-h4);
+  padding: 0.4rem 0.5rem 0.25rem 0.5rem;
+  border: 0.125rem solid #074391;
+  border-radius: var(--b-rad_less);
+}
+
+.tag--group {
+  display: flex;
+  flex-direction: row;
+  --tag-spacing: 1rem;
+}
+
+.tag--group > * + * {
+  margin-left: var(--tag-spacing);
+}
+
 #Home--Hero .section--img {
   margin-right: auto;
   margin-left: auto;
-  width: 10rem;
+  width: 9.5rem;
 }
 
 #Home--Hero .section--desc .text--body {

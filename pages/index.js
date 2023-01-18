@@ -6,6 +6,7 @@ import CASE_STUDIES from "/data/CASE_STUDIES";
 import Scrollblock from "/components/global/Scrollblock";
 import { Panel, PanelDesc, PanelImg } from "/components/Elements/Panel";
 import Button from "/components/Elements/Buttons";
+import Tag from "/components/Elements/Tag";
 
 function Index() {
   return (
@@ -25,6 +26,7 @@ function Index() {
           </PanelDesc>
           <PanelImg className="col-6">
             {/* TODO: fix the pixelated look of this img */}
+            {/* TODO: I think all linked images like these are supposed to be imported? */}
             <Image src="/assets/images/flair/Arrow_Squiggle.png" alt="Squiggly arrow pointing downwards" width={651} height={1003} />
           </PanelImg>
         </Panel>
@@ -35,10 +37,17 @@ function Index() {
           <Scrollblock key={uuidv4()}>
             <Panel id={`Home--${item.id}`} key={item.key}>
               <PanelDesc>
-                <h2>{item.name}</h2>
+                <h2 className="color--secondary">{item.name}</h2>
                 <h3>{item.description.jsx}</h3>
-                <div className="section--tags"></div>
-                <Button type="regular" icon={["arrow_right", "right", 'mask']}>
+
+                {item.tags && (
+                  <div className="section--tags tag--group">
+                    {item.tags.map((tag) => {
+                      return <Tag key={uuidv4()}>{tag}</Tag>;
+                    })}
+                  </div>
+                )}
+                <Button className="section--button" type="regular" icon={["arrow_right", "right", "mask"]}>
                   Have a look see
                 </Button>
               </PanelDesc>

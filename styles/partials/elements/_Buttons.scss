@@ -51,11 +51,19 @@
   }
 
   &__right {
-    padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.25rem) calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.1rem);
+    padding: 
+    calc(var(--button-padding) - 0.25rem) 
+    calc(var(--button-padding) + 0rem) 
+    calc(var(--button-padding) - 0.25rem) 
+    calc(var(--button-padding) + 0.1rem);
   }
 
   &__left {
-    padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.25rem) calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.1rem);
+    padding: 
+    calc(var(--button-padding) - 0.25rem) 
+    calc(var(--button-padding) + 0.25rem) 
+    calc(var(--button-padding) - 0.25rem) 
+    calc(var(--button-padding) + 0rem);
   }
 
 
