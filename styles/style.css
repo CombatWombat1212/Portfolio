@@ -988,6 +988,8 @@ body {
   cursor: pointer;
   text-decoration: none;
   width: fit-content;
+  -webkit-touch-callout: none;
+  user-select: none;
   --button-background: #C41263;
   --button-color: #F3F3F7;
   --button-padding: 1.125rem;
@@ -1053,6 +1055,11 @@ body {
 
 .button:hover, .button:focus {
   --button-background: #950647;
+}
+
+.link {
+  -webkit-touch-callout: none;
+  user-select: none;
 }
 
 .tag {

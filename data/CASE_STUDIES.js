@@ -1,8 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 
-const CASE_STUDIES = [
+var CASE_STUDIES = [
   {
-    key: uuidv4(),
     name: "MakeRight",
     id: "Makeright",
     description: {
@@ -13,6 +12,7 @@ const CASE_STUDIES = [
         </>
       ),
     },
+    // tags: ["Thesis", "UX/UI Design", "User Research"],
     tags: ["Thesis", "UX/UI Design", "User Research"],
     img: {
       src: "/assets/images/case_study_thumbnails/MakeRight.png",
@@ -23,7 +23,6 @@ const CASE_STUDIES = [
     link:'/Studies/MakeRight',
   },
   {
-    key: uuidv4(),
     name: "Made Clothing Co.",
     id: "Made",
     description: {
@@ -34,6 +33,7 @@ const CASE_STUDIES = [
         </>
       ),
     },
+    // tags: ["Client", "3D Design", "Product Rendering"],
     tags: ["Client", "3D Design", "Product Rendering"],
     img: {
       src: "/assets/images/case_study_thumbnails/MADE.png",
@@ -44,7 +44,6 @@ const CASE_STUDIES = [
     link:'/Studies/MADE',
   },
   {
-    key: uuidv4(),
     name: "KoalaKo",
     id: "Koalako",
     description: {
@@ -55,6 +54,7 @@ const CASE_STUDIES = [
         </>
       ),
     },
+    // tags: ["UX/UI Design", "User Research", "Team Project"],
     tags: ["UX/UI Design", "User Research", "Team Project"],
     img: {
       src: "/assets/images/case_study_thumbnails/KoalaKo.png",
@@ -65,7 +65,6 @@ const CASE_STUDIES = [
     link:'/Studies/KoalaKo',
   },
   {
-    key: uuidv4(),
     name: "Explorations",
     id: "Explorations",
     description: {
@@ -86,4 +85,23 @@ const CASE_STUDIES = [
   },
 ];
 
-export default CASE_STUDIES;
+
+
+function caseStudiesInit(arr){
+
+  arr.forEach((item) => {
+    item.key = uuidv4();
+
+    if(!item.tags) return;
+    var tags = item.tags;
+    for(var i = 0; i < tags.length; i++){
+      tags[i] = {name: tags[i], key: uuidv4()};
+    }
+
+  });
+  return arr;
+}
+
+
+
+export default caseStudiesInit(CASE_STUDIES);

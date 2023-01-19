@@ -1,9 +1,31 @@
+//Libraries
 import Image from "next/image";
+import { useRef } from "react";
 
-import Mask from "../utilities/Mask";
+//Data
 import ICONS from "../../data/ICONS";
 
+//Utilities
+import {addAttrNonDestructive} from "../../scripts/GlobalUtilities";
+
+//Components
+import Mask from "../utilities/Mask";
 import DLink from "../utilities/DynamicLink";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function ButtonCopy({ children }) {
   return <span className="button--copy">{children}</span>;
@@ -29,10 +51,14 @@ function ButtonIcon({ img, type }) {
   );
 }
 
+
 function Button({ children, className, type, icon, ...props }) {
+  
+
   if (icon) {
     var [iconName, iconSide, iconType] = icon;
   }
+
 
   return (
     <>

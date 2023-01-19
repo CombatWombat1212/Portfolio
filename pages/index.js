@@ -1,20 +1,32 @@
+//Libraries
 import { v4 as uuidv4 } from "uuid";
 import Image from "next/image";
 
+//Data
 import CASE_STUDIES from "/data/CASE_STUDIES";
 
+//Utilities
+
+
+//Components
 import Scrollblock from "/components/global/Scrollblock";
 import { Panel, PanelDesc, PanelImg } from "/components/Elements/Panel";
 import Button from "/components/Elements/Buttons";
 import Tag from "/components/Elements/Tag";
 
+
+
+
+
 function Index() {
+
   return (
     <>
+    
       <Scrollblock>
         <Panel id="Home--Hero" type="img-desc">
           <PanelDesc className="col-6">
-            <h1 className="section--title">
+            <h1 className="section--title" id="Home">
               Hi, I'm <span className="color--secondary">Sam Giustizia</span>,<br></br>how are you?
             </h1>
             <p className="text--h3">
@@ -32,9 +44,10 @@ function Index() {
         </Panel>
       </Scrollblock>
 
+
       {CASE_STUDIES.map((item) => {
         return (
-          <Scrollblock key={uuidv4()}>
+          <Scrollblock key={item.key}>
             <Panel id={`Home--${item.id}`} key={item.key}>
               <PanelDesc>
                 <h2 className="color--secondary">{item.name}</h2>
@@ -43,7 +56,7 @@ function Index() {
                 {item.tags && (
                   <div className="section--tags tag--group">
                     {item.tags.map((tag) => {
-                      return <Tag key={uuidv4()}>{tag}</Tag>;
+                      return <Tag key={tag.key}>{tag.name}</Tag>;
                     })}
                   </div>
                 )}
@@ -57,7 +70,11 @@ function Index() {
             </Panel>
           </Scrollblock>
         );
+
       })}
+
+
+      
     </>
   );
 }

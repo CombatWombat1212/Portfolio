@@ -16,6 +16,7 @@
   cursor: pointer;
   text-decoration: none;
   width: fit-content;
+  @include no-select;
 
   --button-background: #{$col-secondary};
   --button-color: #{$col-background};
@@ -51,28 +52,21 @@
   }
 
   &__right {
-    padding: 
-    calc(var(--button-padding) - 0.25rem) 
-    calc(var(--button-padding) + 0rem) 
-    calc(var(--button-padding) - 0.25rem) 
-    calc(var(--button-padding) + 0.1rem);
+    padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0rem) calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.1rem);
   }
 
   &__left {
-    padding: 
-    calc(var(--button-padding) - 0.25rem) 
-    calc(var(--button-padding) + 0.25rem) 
-    calc(var(--button-padding) - 0.25rem) 
-    calc(var(--button-padding) + 0rem);
+    padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.25rem) calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0rem);
   }
 
-
-
-
-
-@include hover{
+  @include hover {
     --button-background: #{$col-secondary_hovered};
+  }
 }
 
 
+
+
+.link{
+  @include no-select;
 }

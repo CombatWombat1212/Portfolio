@@ -1,18 +1,30 @@
 import Link from "next/link";
+import { useRef } from "react";
+import { useMountEffect } from "../../scripts/hooks/useMountEffect";
+import { addAttrNonDestructive } from "/scripts/GlobalUtilities";
 
 function DLink(props) {
+  var props = { ...props };
 
-  var props = {...props};
-  var ref = props.reference;
+  const reference = useRef();
+
+  useMountEffect(() => {
+    if (!reference.current) return;
+    console.log(reference.current);
+    addAttrNonDestructive(reference.current, "onclick", "setTimeout(()=>{this.blur();},200)", ";");
+  });
+
 
   return (
     <>
       {props.href && props.href.length > 0 ? (
-        <Link href={props.href} {...props} ref={ref}>
-         {props.children}
+        <Link {...props} href={props.href} ref={reference} className={"link" + (props.className ? ` ${props.className}` : '')} >
+          {props.children}
         </Link>
       ) : (
-        <a {...props} ref={ref}>{props.children}</a>
+        <a {...props} ref={reference} className={"link" + (props.className ? ` ${props.className}` : '')}>
+          {props.children}
+        </a>
       )}
     </>
   );
