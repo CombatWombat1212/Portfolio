@@ -1,11 +1,15 @@
 import "../styles/style.css";
 import Layout from "../components/navigation/Layout";
 
-import useWindowSize from "/scripts/hooks/useWindowSize";
+import { useMountEffect } from "/scripts/hooks/useMountEffect";
+import { postScreenSizeToRoot } from "/scripts/GlobalUtilities";
 
 export default function App({ Component, pageProps }) {
 
-
+  // I am not currently using this
+  useMountEffect(() => {
+    postScreenSizeToRoot();
+  });
 
 
   return (

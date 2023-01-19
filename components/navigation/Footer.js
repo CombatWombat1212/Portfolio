@@ -12,6 +12,7 @@ function Footer() {
 
   return (
     <>
+
       <footer className="footer section">
 
         <PanelDesc className="footer--info col-6">
@@ -30,7 +31,7 @@ function Footer() {
         </PanelDesc>
 
         <div className="footer--links col-6">
-          <div></div>
+          <div ></div>
         </div>
       </footer>
     </>

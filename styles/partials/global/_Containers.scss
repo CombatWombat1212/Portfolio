@@ -23,7 +23,6 @@ $container-max-width: (
   xxl: 95.375rem,
 ) !default;
 
-
 // $container-max-width: (
 //   xs: 100%,
 //   sm: 32em,
@@ -35,11 +34,10 @@ $container-max-width: (
 
 $container-max-widths_inverted: mapReverse($container-max-width);
 
-@function container-width($w: 100%){
-//   @return calc(#{$w} - var(--sidebar-width));
+@function container-width($w: 100%) {
+  //   @return calc(#{$w} - var(--sidebar-width));
   @return #{$w};
 }
-
 
 @mixin container() {
   width: 100%;
@@ -47,8 +45,16 @@ $container-max-widths_inverted: mapReverse($container-max-width);
   margin-left: auto;
 }
 
+@mixin maxWidthToRoot($w) {
+  @at-root {
+    :root {
+      --site-max-width: #{$w};
+    }
+  }
+}
+
 // @mixin container-padding {
-  // @include pad-x(var(--site-pad-x));
+// @include pad-x(var(--site-pad-x));
 // }
 
 @if $enable-grid-classes {
@@ -60,7 +66,7 @@ $container-max-widths_inverted: mapReverse($container-max-width);
   }
 
   // .container-fluid{
-    // @include container-padding;
+  // @include container-padding;
   // }
 
   // Responsive containers that are 100% wide until a breakpoint
@@ -74,20 +80,20 @@ $container-max-widths_inverted: mapReverse($container-max-width);
     //in my sysem, the responsive downwards system, we need to offset the following by one depending on whether or not it is first breakpoint at xxl
     @if $breakpoint == nth(nth($container-max-widths_inverted, 1), 1) {
       .container {
+        $width: nth(map-values($container-max-widths_inverted), $i + 1);
         max-width: container-width($container-max-width);
+        @include maxWidthToRoot(#{container-width($container-max-width)});
         @include media-breakpoint-down($breakpoint) {
-          $width: nth(map-values($container-max-widths_inverted), $i + 1);
           max-width: container-width($width);
-          --site-max-width: #{container-width($width)};
-
+          @include maxWidthToRoot(#{container-width($width)});
         }
       }
     } @else {
       .container {
+        $width: nth(map-values($container-max-widths_inverted), $i + 1);
         @include media-breakpoint-down($breakpoint) {
-          $width: nth(map-values($container-max-widths_inverted), $i + 1);
           max-width: container-width($width);
-          --site-max-width: #{container-width($width)};
+          @include maxWidthToRoot(#{container-width($width)});
 
           //add padding on sm
           // @if $breakpoint == nth(nth($container-max-widths_inverted, -2), 1) {
@@ -96,6 +102,5 @@ $container-max-widths_inverted: mapReverse($container-max-width);
         }
       }
     }
-
   }
 }

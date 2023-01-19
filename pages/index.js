@@ -21,6 +21,8 @@ import Mask from "/components/utilities/Mask";
 
 function Index() {
 
+  console.log('redrawing')
+
   return (
     <>
     
