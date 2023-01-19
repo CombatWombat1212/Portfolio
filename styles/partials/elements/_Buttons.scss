@@ -39,6 +39,20 @@
       @include mask;
       background-color: var(--button-color);
     }
+
+
+
+    transform: translateX(0);
+
+    @include hover('.button__right', '&'){
+      transform: translateX(0.15rem);
+    }
+    @include hover('.button__left', '&'){
+      transform: translateX(-0.15rem);
+    }
+
+
+
   }
 
   &__right {
@@ -51,6 +65,8 @@
 
   @include hover {
     --button-background: #{$col-secondary_hovered};
+    // --button-background: #{$col-background_darkest};
+    // --button-color: #{$col-secondary};
   }
 }
 

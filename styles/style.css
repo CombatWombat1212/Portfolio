@@ -1018,6 +1018,7 @@ body {
   width: var(--size);
   height: var(--size);
   --size: var(--button-icon-size);
+  transform: translateX(0);
 }
 
 .button--icon__mask {
@@ -1039,6 +1040,24 @@ body {
   .button--icon__mask {
     height: calc(100% / (var(--mask-aspect-width) / var(--mask-aspect-height)));
   }
+}
+
+.button__right .button--icon {
+  transition: var(--transition);
+}
+
+.button__right:hover .button--icon,
+.button__right:focus .button--icon {
+  transform: translateX(0.15rem);
+}
+
+.button__left .button--icon {
+  transition: var(--transition);
+}
+
+.button__left:hover .button--icon,
+.button__left:focus .button--icon {
+  transform: translateX(-0.15rem);
 }
 
 .button__right {
@@ -1068,6 +1087,8 @@ body {
   border: 0.125rem solid #074391;
   border-radius: var(--b-rad_less);
   cursor: default;
+  -webkit-touch-callout: none;
+  user-select: none;
 }
 
 .tag--group {
