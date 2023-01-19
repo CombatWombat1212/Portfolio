@@ -1,4 +1,5 @@
 .tag {
+
   &--group {
     @include flex-row;
     --tag-spacing: 1rem;
@@ -13,4 +14,5 @@
   padding: 0.4rem 0.5rem 0.25rem 0.5rem;
   border: 0.125rem solid $col-primary;
   border-radius: var(--b-rad_less);
+  cursor: default;
 }

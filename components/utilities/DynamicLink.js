@@ -10,7 +10,6 @@ function DLink(props) {
 
   useMountEffect(() => {
     if (!reference.current) return;
-    console.log(reference.current);
     addAttrNonDestructive(reference.current, "onclick", "setTimeout(()=>{this.blur();},200)", ";");
   });
 

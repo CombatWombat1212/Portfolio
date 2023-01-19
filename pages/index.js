@@ -13,6 +13,7 @@ import Scrollblock from "/components/global/Scrollblock";
 import { Panel, PanelDesc, PanelImg } from "/components/Elements/Panel";
 import Button from "/components/Elements/Buttons";
 import Tag from "/components/Elements/Tag";
+import Mask from "/components/utilities/Mask";
 
 
 
@@ -37,9 +38,7 @@ function Index() {
             <p className="text--body">This is my portfolio. Enjoy your stay :)</p>
           </PanelDesc>
           <PanelImg className="col-6">
-            {/* TODO: fix the pixelated look of this img */}
-            {/* TODO: I think all linked images like these are supposed to be imported? */}
-            <Image src="/assets/images/flair/Arrow_Squiggle.png" alt="Squiggly arrow pointing downwards" width={651} height={1003} />
+            <Mask src="/assets/images/flair/Arrow_Squiggle.svg" alt="Squiggly arrow pointing downwards" width={160.42} height={248.06} />
           </PanelImg>
         </Panel>
       </Scrollblock>

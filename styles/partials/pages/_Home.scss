@@ -6,7 +6,12 @@
       &--img {
         @include mx-auto;
         width: 9.5rem;
+
+        .mask{
+          background-color: $col-secondary;
+        }
       }
+
 
       &--desc {
         .text--body {

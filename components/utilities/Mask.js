@@ -1,14 +1,13 @@
-function Mask({ className, img }) {
-
+function Mask({ className, src, alt, width, height }) {
   return (
     <div
       className={"mask" + (className ? ` ${className}` : "")}
       style={{
-        "--mask-aspect-width": img.width,
-        "--mask-aspect-height": img.height,
-        "--mask-img": `url('${img.src}')`,
+        "--mask-aspect-width": width,
+        "--mask-aspect-height": height,
+        "--mask-img": `url('${src}')`,
       }}
-      alt={img.alt} ></div>
+      alt={alt} ></div>
   );
 }
 

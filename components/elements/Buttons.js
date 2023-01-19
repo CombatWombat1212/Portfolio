@@ -39,7 +39,7 @@ function ButtonIcon({ img, type }) {
       <div className="button--img">
         {type == "mask" ? (
           <>
-            <Mask className="button--icon button--icon__mask" img={iconImg} />
+            <Mask className="button--icon button--icon__mask" src={iconImg.src} alt={iconImg.alt} width={iconImg.width} height={iconImg.height} />
           </>
         ) : (
           <>
@@ -65,9 +65,9 @@ function Button({ children, className, type, icon, ...props }) {
       <DLink className={"button" + (className ? ` ${className}` : "") + (type ? ` button__${type}` : "") + (iconSide ? ` button__${iconSide}` : "")} tabIndex="0" {...props}>
         {icon ? (
           <>
-            {iconSide == "right" && <ButtonCopy>{children}</ButtonCopy>}
-            <ButtonIcon img={iconName} type={iconType}></ButtonIcon>
-            {iconSide == "left" && <ButtonCopy>{children}</ButtonCopy>}
+            {iconSide == "left" && <ButtonIcon img={iconName} type={iconType}></ButtonIcon>}
+            <ButtonCopy>{children}</ButtonCopy>
+            {iconSide == "right" && <ButtonIcon img={iconName} type={iconType}></ButtonIcon>}
           </>
         ) : (
           <ButtonCopy>{children}</ButtonCopy>

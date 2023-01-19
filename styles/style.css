@@ -1067,6 +1067,7 @@ body {
   padding: 0.4rem 0.5rem 0.25rem 0.5rem;
   border: 0.125rem solid #074391;
   border-radius: var(--b-rad_less);
+  cursor: default;
 }
 
 .tag--group {
@@ -1160,10 +1161,34 @@ body {
   color: var(--nav-color);
 }
 
+.mask {
+  --mask-aspect-width: 205;
+  --mask-aspect-height: 168;
+  mask-image: var(--mask-img);
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+}
+
+@supports (aspect-ratio: 1/1) {
+  .mask {
+    aspect-ratio: var(--mask-aspect-width) / var(--mask-aspect-height);
+  }
+}
+
+@supports not (aspect-ratio: 1/1) {
+  .mask {
+    height: calc(100% / (var(--mask-aspect-width) / var(--mask-aspect-height)));
+  }
+}
+
 #Home--Hero .section--img {
   margin-right: auto;
   margin-left: auto;
   width: 9.5rem;
+}
+
+#Home--Hero .section--img .mask {
+  background-color: #C41263;
 }
 
 #Home--Hero .section--desc .text--body {
