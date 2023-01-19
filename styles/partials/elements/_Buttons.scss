@@ -14,7 +14,7 @@
   @include body;
   @include trans;
   cursor: pointer;
-
+  text-decoration: none;
   width: fit-content;
 
   --button-background: #{$col-secondary};

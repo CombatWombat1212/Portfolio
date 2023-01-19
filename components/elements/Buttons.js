@@ -3,6 +3,8 @@ import Image from "next/image";
 import Mask from "../utilities/Mask";
 import ICONS from "../../data/ICONS";
 
+import DLink from "../utilities/DynamicLink";
+
 function ButtonCopy({ children }) {
   return <span className="button--copy">{children}</span>;
 }
@@ -27,26 +29,24 @@ function ButtonIcon({ img, type }) {
   );
 }
 
-function Button({ children, className, type, icon }) {
+function Button({ children, className, type, icon, ...props }) {
   if (icon) {
     var [iconName, iconSide, iconType] = icon;
   }
 
   return (
     <>
-      <a className={"button" + (className ? ` ${className}` : "") + (type ? ` button__${type}` : "") + (iconSide ? ` button__${iconSide}` : "")} tabIndex="0">
+      <DLink className={"button" + (className ? ` ${className}` : "") + (type ? ` button__${type}` : "") + (iconSide ? ` button__${iconSide}` : "")} tabIndex="0" {...props}>
         {icon ? (
           <>
             {iconSide == "right" && <ButtonCopy>{children}</ButtonCopy>}
-
             <ButtonIcon img={iconName} type={iconType}></ButtonIcon>
-
             {iconSide == "left" && <ButtonCopy>{children}</ButtonCopy>}
           </>
         ) : (
           <ButtonCopy>{children}</ButtonCopy>
         )}
-      </a>
+      </DLink>
     </>
   );
 }

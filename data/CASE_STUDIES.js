@@ -20,6 +20,7 @@ const CASE_STUDIES = [
       width: 1038,
       height: 944,
     },
+    link:'/Studies/MakeRight',
   },
   {
     key: uuidv4(),
@@ -40,6 +41,7 @@ const CASE_STUDIES = [
       width: 526,
       height: 823,
     },
+    link:'/Studies/MADE',
   },
   {
     key: uuidv4(),
@@ -60,6 +62,7 @@ const CASE_STUDIES = [
       width: 738,
       height: 842,
     },
+    link:'/Studies/KoalaKo',
   },
   {
     key: uuidv4(),
@@ -79,6 +82,7 @@ const CASE_STUDIES = [
       width: 730,
       height: 1626,
     },
+    link:'/Explorations',
   },
 ];
 

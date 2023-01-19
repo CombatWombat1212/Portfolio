@@ -75,6 +75,7 @@ input, button, textarea, select {
   --font-size-h3: 1.625rem;
   --font-size-h4: 0.875rem;
   --font-size-body: 1.125rem;
+  --font-size-logo: 1.375rem;
   --font-leading-h1: 4rem;
   --font-leading-h2: 3.125rem;
   --font-leading-h3: 2.3125rem;
@@ -943,6 +944,10 @@ body {
   justify-content: center;
 }
 
+.section--img {
+  position: relative;
+}
+
 .section--img img {
   width: 100%;
   height: 100%;
@@ -981,6 +986,7 @@ body {
   font-weight: 400;
   transition: var(--transition);
   cursor: pointer;
+  text-decoration: none;
   width: fit-content;
   --button-background: #C41263;
   --button-color: #F3F3F7;
@@ -1064,6 +1070,87 @@ body {
 
 .tag--group > * + * {
   margin-left: var(--tag-spacing);
+}
+
+.nav {
+  --nav-height: 3.75rem;
+  --nav-color: #074391;
+  --nav-button-spacing: 0rem;
+  --nav-button-padding-multiplier: 1.15;
+  height: var(--nav-height);
+  background-color: var(--nav-color);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav--container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+  align-items: center;
+}
+
+.nav--group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.nav--logo a {
+  font-family: "Gira Sans";
+  font-size: var(--font-size-h3);
+  line-height: var(--font-leading-h3);
+  font-weight: 300;
+  --font-size: var(--font-size-logo);
+  font-size: var(--font-size);
+  font-weight: 400;
+}
+
+.nav--links a {
+  font-family: "Tenon";
+  font-size: var(--font-size-body);
+  line-height: var(--font-leading-body);
+  font-weight: 400;
+  --font-size: var(--font-size-body);
+}
+
+.nav--item {
+  text-decoration: none;
+  color: #F3F3F7;
+  background-color: var(--nav-color);
+  height: var(--font-size);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  --nav-button-pad-y: calc((var(--nav-height) - var(--font-size)) / 2);
+  --nav-button-pad-x: calc(var(--nav-button-pad-y) * var(--nav-button-padding-multiplier));
+  padding-top: var(--nav-button-pad-y);
+  padding-bottom: var(--nav-button-pad-y);
+  padding-left: var(--nav-button-pad-x);
+  padding-right: var(--nav-button-pad-x);
+}
+
+.nav--item + .nav--item {
+  margin-left: Max(calc(var(--nav-button-spacing) - (var(--nav-button-pad-x) * 2)), 0rem);
+}
+
+.nav--item:first-child {
+  margin-left: calc(var(--nav-button-pad-x) * -1);
+}
+
+.nav--item:last-child {
+  margin-right: calc(var(--nav-button-pad-x) * -1);
+}
+
+.nav--item {
+  transition: var(--transition);
+}
+
+.nav--item:hover, .nav--item:focus {
+  background-color: #E0E0EA;
+  color: var(--nav-color);
 }
 
 #Home--Hero .section--img {

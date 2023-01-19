@@ -1,0 +1,73 @@
+.nav {
+  --nav-height: 3.75rem;
+  --nav-color: #{$col-primary};
+  --nav-button-spacing: 0rem;
+  --nav-button-padding-multiplier: 1.15;
+
+  height: var(--nav-height);
+  background-color: var(--nav-color);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  &--container {
+    @include flex-row-between;
+    height: 100%;
+    align-items: center;
+}
+
+&--group {
+      @include flex-row-between;
+  }
+
+  &--logo {
+    a {
+      @include h3;
+      --font-size: var(--font-size-logo);
+      font-size: var(--font-size);
+      font-weight: 400;
+    }
+  }
+
+  &--links {
+    a {
+      @include body;
+      --font-size: var(--font-size-body);
+    }
+  }
+
+  &--item {
+    text-decoration: none;
+    color: $col-background;
+    background-color: var(--nav-color);
+
+    height: var(--font-size);
+    @include flex-col-center;
+    
+    --nav-button-pad-y: calc((var(--nav-height) - var(--font-size)) / 2);
+    --nav-button-pad-x: calc(var(--nav-button-pad-y) * var(--nav-button-padding-multiplier));
+    @include pad-y(var(--nav-button-pad-y));
+    @include pad-x(var(--nav-button-pad-x));
+
+    
+
+    & + & {
+      margin-left: Max(calc(var(--nav-button-spacing) - (var(--nav-button-pad-x) * 2)), 0rem);
+    }
+
+    &:first-child{
+        margin-left: calc(var(--nav-button-pad-x) * -1);
+    }
+
+    &:last-child{
+        margin-right: calc(var(--nav-button-pad-x) * -1);
+    }
+
+
+    @include hover {
+      background-color: $col-background_darkest;
+      color: var(--nav-color);
+    }
+
+  }
+}

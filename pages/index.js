@@ -47,11 +47,11 @@ function Index() {
                     })}
                   </div>
                 )}
-                <Button className="section--button" type="regular" icon={["arrow_right", "right", "mask"]}>
+                <Button className="section--button" type="regular" icon={["arrow_right", "right", "mask"]} href={item.link}>
                   Have a look see
                 </Button>
               </PanelDesc>
-              <PanelImg className="col-6">
+              <PanelImg className="col-6" /*effect="gradient-white"*/>
                 <Image src={item.img.src} alt={item.img.alt} width={item.img.width} height={item.img.height} />
               </PanelImg>
             </Panel>
