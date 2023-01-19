@@ -27,7 +27,7 @@ function Index() {
       <Scrollblock>
         <Panel id="Home--Hero" type="img-desc">
           <PanelDesc className="col-6">
-            <h1 className="section--title" id="Home">
+            <h1 className="section--title">
               Hi, I'm <span className="color--secondary">Sam Giustizia</span>,<br></br>how are you?
             </h1>
             <p className="text--h3">
@@ -59,7 +59,7 @@ function Index() {
                     })}
                   </div>
                 )}
-                <Button className="section--button" type="regular" icon={["arrow_right", "right", "mask"]} href={item.link}>
+                <Button className="section--button" type="regular" icon={["arrow_right", "right", "mask"]} animation={'pulse-right'} href={item.link}>
                   Have a look see
                 </Button>
               </PanelDesc>

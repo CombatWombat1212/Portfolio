@@ -1,31 +1,15 @@
 //Libraries
 import Image from "next/image";
-import { useRef } from "react";
+import propTypes from "prop-types";
 
 //Data
 import ICONS from "../../data/ICONS";
 
 //Utilities
-import {addAttrNonDestructive} from "../../scripts/GlobalUtilities";
 
 //Components
 import Mask from "../utilities/Mask";
 import DLink from "../utilities/DynamicLink";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function ButtonCopy({ children }) {
   return <span className="button--copy">{children}</span>;
@@ -51,30 +35,32 @@ function ButtonIcon({ img, type }) {
   );
 }
 
-
-function Button({ children, className, type, icon, ...props }) {
-  
-
-  if (icon) {
-    var [iconName, iconSide, iconType] = icon;
-  }
-
+function Button({ children, className, type, icon, animation, ...props }) {
+  if (icon) var [iconName, iconSide, iconType] = icon;
 
   return (
     <>
-      <DLink className={"button" + (className ? ` ${className}` : "") + (type ? ` button__${type}` : "") + (iconSide ? ` button__${iconSide}` : "")} tabIndex="0" {...props}>
+      <DLink className={"button" + (className ? ` ${className}` : "") + (type ? ` button__${type}` : "") + (iconSide ? ` button__${iconSide}` : "") + (animation ? ` button__${animation}` : "")} tabIndex="0" {...props}>
         {icon ? (
           <>
-            {iconSide == "left" && <ButtonIcon img={iconName} type={iconType}></ButtonIcon>}
-            <ButtonCopy>{children}</ButtonCopy>
+            {iconSide == "left" || (iconSide == "alone" && <ButtonIcon img={iconName} type={iconType}></ButtonIcon>)}
+            {iconSide != "alone" && <ButtonCopy>{children}</ButtonCopy>}
             {iconSide == "right" && <ButtonIcon img={iconName} type={iconType}></ButtonIcon>}
           </>
         ) : (
-          <ButtonCopy>{children}</ButtonCopy>
+          <>{iconSide != "alone" && <ButtonCopy>{children}</ButtonCopy>}</>
         )}
       </DLink>
     </>
   );
 }
+
+Button.defaultProps = {
+  type: "regular",
+};
+
+Button.propTypes = {
+  type: propTypes.oneOf(["regular"]),
+};
 
 export default Button;

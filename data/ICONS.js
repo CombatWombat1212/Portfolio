@@ -16,6 +16,38 @@ const ICONS = {
     width: 448,
     height: 384.15,
   },
+  document: {
+    name: 'document',
+    src: "/assets/icons/document.svg",
+    alt: "Icon of a text document",
+    width: 384,
+    height: 512,
+  },
+  email: {
+    name: 'email',
+    src: "/assets/icons/email.svg",
+    alt: "Envelope icon",
+    width: 512,
+    height: 384,
+  },
+  instagram: {
+    name: 'instagram',
+    src: "/assets/icons/instagram.svg",
+    alt: "Instagram logo",
+    width: 448,
+    height: 448.15,
+  },
+  linkedin: {
+    name: 'linkedin',
+    src: "/assets/icons/linkedin.svg",
+    alt: "LinkedIn logo",
+    width: 448,
+    height: 448,
+  },
+
+
+
+
 };
 
 

@@ -1,21 +1,35 @@
+.link {
+  @include no-select;
+}
+
 .button {
   @include flex-row;
   @include b-rad;
   @include body;
   @include trans;
+  @include no-select;
   cursor: pointer;
   text-decoration: none;
-  width: fit-content;
-  @include no-select;
-
+  background-color: var(--button-background);
+  
   --button-background: #{$col-secondary};
   --button-color: #{$col-background};
-  --button-padding: 1.125rem;
   --button-icon-size: 1.25rem;
   --button-icon-margin: 0.75rem;
+  --button-padding: 1.125rem;
+  --button-padding-top: calc(var(--button-padding) - 0.25rem);
+  --button-padding-bottom: calc(var(--button-padding) + 0.25rem);
+  --button-padding-x: calc(var(--button-padding));
+  
 
-  background-color: var(--button-background);
-  padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.25rem);
+  // padding:  var(--button-padding-top) var(--button-padding-x) var(--button-padding-bottom) var(--button-padding-x);
+  padding:  0 var(--button-padding-x);
+
+
+  width: fit-content;
+  height: calc(var(--button-icon-size) + var(--button-padding-top) + var(--button-padding-bottom));
+
+
 
   & > * + * {
     margin-left: var(--button-icon-margin);
@@ -27,52 +41,95 @@
 
   &--copy {
     color: var(--button-color);
+    @include flex-col-center;
   }
 
   &--icon {
-    margin-bottom: -0.125rem;
-
-    @include s;
+    @include trans;
     --size: var(--button-icon-size);
 
+    width: Min(var(--button-icon-size), calc(var(--button-icon-size) * (var(--mask-aspect-width) / var(--mask-aspect-height))));
+    height: Min(var(--button-icon-size), calc(var(--button-icon-size) * (var(--mask-aspect-height) / var(--mask-aspect-width))));
+
     &__mask {
-      @include mask;
       background-color: var(--button-color);
     }
-
-
-
-    transform: translateX(0);
-
-    @include hover('.button__right', '&'){
-      transform: translateX(0.15rem);
-    }
-    @include hover('.button__left', '&'){
-      transform: translateX(-0.15rem);
-    }
-
-
-
   }
 
-  &__right {
-    padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0rem) calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.1rem);
-  }
-
-  &__left {
-    padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.25rem) calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0rem);
-  }
 
   @include hover {
     --button-background: #{$col-secondary_hovered};
-    // --button-background: #{$col-background_darkest};
-    // --button-color: #{$col-secondary};
   }
+
+}
+
+
+// Button modifiers
+
+.button{
+  &__right {
+    // padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0rem) calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.1rem);
+  }
+
+  &__left {
+    // padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.25rem) calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0rem);
+  }
+
+  &__alone {
+    // padding: var(--button-padding);
+    .button--icon{
+      transform: scale(1.3);
+    }
+  }
+
 }
 
 
 
 
-.link{
-  @include no-select;
+
+
+
+
+// Button animations
+.button {
+
+  $button-scale-amount: 0.15;
+  $button-translate-amount: 0.15rem;
+
+  &__pulse-right {
+    transform: translateX(0rem);
+    @include hover {
+      .button--icon {
+        transform: translateX($button-translate-amount);
+      }
+    }
+  }
+
+  &__pulse-left {
+    transform: translateX(0rem);
+    @include hover {
+      .button--icon {
+        transform: translateX($button-translate-amount * -1);
+      }
+    }
+  }
+
+  &__scale-in {
+    transform: scale(1);
+    @include hover {
+      .button--icon {
+        transform: scale(1 - $button-scale-amount);
+      }
+    }
+  }
+
+  &__scale-out {
+    transform: scale(1);
+    @include hover {
+      .button--icon {
+        transform: scale(1 + $button-scale-amount);
+      }
+    }
+  }
 }

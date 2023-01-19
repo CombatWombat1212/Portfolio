@@ -1,0 +1,17 @@
+.footer{
+
+
+    &--info{}
+
+    &--actions{
+        @include flex-row;
+
+        &>*+*{
+            margin-left: 1.25rem;
+        }
+    }
+
+
+    &--{}
+
+}

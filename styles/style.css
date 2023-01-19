@@ -973,6 +973,11 @@ body {
   margin-bottom: 3rem;
 }
 
+.link {
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
 .button {
   display: flex;
   flex-direction: row;
@@ -985,18 +990,22 @@ body {
   line-height: var(--font-leading-body);
   font-weight: 400;
   transition: var(--transition);
-  cursor: pointer;
-  text-decoration: none;
-  width: fit-content;
   -webkit-touch-callout: none;
   user-select: none;
+  cursor: pointer;
+  text-decoration: none;
+  background-color: var(--button-background);
   --button-background: #C41263;
   --button-color: #F3F3F7;
-  --button-padding: 1.125rem;
   --button-icon-size: 1.25rem;
   --button-icon-margin: 0.75rem;
-  background-color: var(--button-background);
-  padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.25rem);
+  --button-padding: 1.125rem;
+  --button-padding-top: calc(var(--button-padding) - 0.25rem);
+  --button-padding-bottom: calc(var(--button-padding) + 0.25rem);
+  --button-padding-x: calc(var(--button-padding));
+  padding: 0 var(--button-padding-x);
+  width: fit-content;
+  height: calc(var(--button-icon-size) + var(--button-padding-top) + var(--button-padding-bottom));
 }
 
 .button > * + * {
@@ -1011,74 +1020,60 @@ body {
 
 .button--copy {
   color: var(--button-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .button--icon {
-  margin-bottom: -0.125rem;
-  width: var(--size);
-  height: var(--size);
+  transition: var(--transition);
   --size: var(--button-icon-size);
-  transform: translateX(0);
+  width: Min(var(--button-icon-size), calc(var(--button-icon-size) * (var(--mask-aspect-width) / var(--mask-aspect-height))));
+  height: Min(var(--button-icon-size), calc(var(--button-icon-size) * (var(--mask-aspect-height) / var(--mask-aspect-width))));
 }
 
 .button--icon__mask {
-  --mask-aspect-width: 205;
-  --mask-aspect-height: 168;
-  mask-image: var(--mask-img);
-  -webkit-mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
   background-color: var(--button-color);
-}
-
-@supports (aspect-ratio: 1/1) {
-  .button--icon__mask {
-    aspect-ratio: var(--mask-aspect-width) / var(--mask-aspect-height);
-  }
-}
-
-@supports not (aspect-ratio: 1/1) {
-  .button--icon__mask {
-    height: calc(100% / (var(--mask-aspect-width) / var(--mask-aspect-height)));
-  }
-}
-
-.button__right .button--icon {
-  transition: var(--transition);
-}
-
-.button__right:hover .button--icon,
-.button__right:focus .button--icon {
-  transform: translateX(0.15rem);
-}
-
-.button__left .button--icon {
-  transition: var(--transition);
-}
-
-.button__left:hover .button--icon,
-.button__left:focus .button--icon {
-  transform: translateX(-0.15rem);
-}
-
-.button__right {
-  padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0rem) calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.1rem);
-}
-
-.button__left {
-  padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.25rem) calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0rem);
-}
-
-.button {
-  transition: var(--transition);
 }
 
 .button:hover, .button:focus {
   --button-background: #950647;
 }
 
-.link {
-  -webkit-touch-callout: none;
-  user-select: none;
+.button__alone .button--icon {
+  transform: scale(1.3);
+}
+
+.button__pulse-right {
+  transform: translateX(0rem);
+}
+
+.button__pulse-right:hover .button--icon, .button__pulse-right:focus .button--icon {
+  transform: translateX(0.15rem);
+}
+
+.button__pulse-left {
+  transform: translateX(0rem);
+}
+
+.button__pulse-left:hover .button--icon, .button__pulse-left:focus .button--icon {
+  transform: translateX(-0.15rem);
+}
+
+.button__scale-in {
+  transform: scale(1);
+}
+
+.button__scale-in:hover .button--icon, .button__scale-in:focus .button--icon {
+  transform: scale(0.85);
+}
+
+.button__scale-out {
+  transform: scale(1);
+}
+
+.button__scale-out:hover .button--icon, .button__scale-out:focus .button--icon {
+  transform: scale(1.15);
 }
 
 .tag {
@@ -1173,10 +1168,6 @@ body {
   margin-right: calc(var(--nav-button-pad-x) * -1);
 }
 
-.nav--item {
-  transition: var(--transition);
-}
-
 .nav--item:hover, .nav--item:focus {
   background-color: #E0E0EA;
   color: var(--nav-color);
@@ -1200,6 +1191,15 @@ body {
   .mask {
     height: calc(100% / (var(--mask-aspect-width) / var(--mask-aspect-height)));
   }
+}
+
+.footer--actions {
+  display: flex;
+  flex-direction: row;
+}
+
+.footer--actions > * + * {
+  margin-left: 1.25rem;
 }
 
 #Home--Hero .section--img {

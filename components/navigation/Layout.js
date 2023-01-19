@@ -8,9 +8,9 @@ function Layout ({children}) {
 
     return (
         <>
-            <Navigation></Navigation>
+            <Navigation />
             <main className="main">{children}</main>
-            <Footer></Footer>
+            <Footer />
         </>
     );
 
