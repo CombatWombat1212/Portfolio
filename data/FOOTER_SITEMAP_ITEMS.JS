@@ -108,6 +108,4 @@ function footerSitemapItemsInit(arr){
   return arr;
 }
 
-
-
 export default footerSitemapItemsInit(FOOTER_SITEMAP_ITEMS);

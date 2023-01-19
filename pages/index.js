@@ -10,9 +10,9 @@ import CASE_STUDIES from "/data/CASE_STUDIES";
 
 //Components
 import Scrollblock from "/components/global/Scrollblock";
-import { Panel, PanelDesc, PanelImg } from "/components/Elements/Panel";
-import Button from "/components/Elements/Buttons";
-import Tag from "/components/Elements/Tag";
+import { Panel, PanelDesc, PanelImg } from "/components/elements/Panel";
+import Button from "/components/elements/Buttons";
+import Tag from "/components/elements/Tag";
 import Mask from "/components/utilities/Mask";
 
 
