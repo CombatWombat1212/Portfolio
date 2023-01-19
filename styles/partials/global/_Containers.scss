@@ -78,6 +78,7 @@ $container-max-widths_inverted: mapReverse($container-max-width);
         @include media-breakpoint-down($breakpoint) {
           $width: nth(map-values($container-max-widths_inverted), $i + 1);
           max-width: container-width($width);
+          --site-max-width: #{container-width($width)};
 
         }
       }
@@ -86,6 +87,7 @@ $container-max-widths_inverted: mapReverse($container-max-width);
         @include media-breakpoint-down($breakpoint) {
           $width: nth(map-values($container-max-widths_inverted), $i + 1);
           max-width: container-width($width);
+          --site-max-width: #{container-width($width)};
 
           //add padding on sm
           // @if $breakpoint == nth(nth($container-max-widths_inverted, -2), 1) {

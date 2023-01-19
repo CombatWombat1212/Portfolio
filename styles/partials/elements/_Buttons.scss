@@ -15,15 +15,13 @@
   --button-background: #{$col-secondary};
   --button-color: #{$col-background};
   --button-icon-size: 1.25rem;
+  --button-icon-scale:1;
   --button-icon-margin: 0.75rem;
-  --button-padding: 1.125rem;
+  --button-padding: 1rem;
   --button-padding-top: calc(var(--button-padding) - 0.25rem);
   --button-padding-bottom: calc(var(--button-padding) + 0.25rem);
-  --button-padding-x: calc(var(--button-padding));
   
-
-  // padding:  var(--button-padding-top) var(--button-padding-x) var(--button-padding-bottom) var(--button-padding-x);
-  padding:  0 var(--button-padding-x);
+  padding:  0 var(--button-padding);
 
 
   width: fit-content;
@@ -47,6 +45,8 @@
   &--icon {
     @include trans;
     --size: var(--button-icon-size);
+    transform: scale(var(--button-icon-scale)) translate(0rem);
+    
 
     width: Min(var(--button-icon-size), calc(var(--button-icon-size) * (var(--mask-aspect-width) / var(--mask-aspect-height))));
     height: Min(var(--button-icon-size), calc(var(--button-icon-size) * (var(--mask-aspect-height) / var(--mask-aspect-width))));
@@ -68,17 +68,17 @@
 
 .button{
   &__right {
-    // padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0rem) calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.1rem);
+    padding: 0 calc(var(--button-padding) + 0.15rem) 0 calc(var(--button-padding) + 0.25rem);
   }
 
   &__left {
-    // padding: calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0.25rem) calc(var(--button-padding) - 0.25rem) calc(var(--button-padding) + 0rem);
+    padding: 0 calc(var(--button-padding) + 0.4rem) 0 calc(var(--button-padding) + 0.15rem);
   }
 
   &__alone {
     // padding: var(--button-padding);
     .button--icon{
-      transform: scale(1.3);
+      --button-icon-scale: 1.3;
     }
   }
 
@@ -94,11 +94,10 @@
 // Button animations
 .button {
 
-  $button-scale-amount: 0.15;
+  $button-scale-amount: 0.1;
   $button-translate-amount: 0.15rem;
 
   &__pulse-right {
-    transform: translateX(0rem);
     @include hover {
       .button--icon {
         transform: translateX($button-translate-amount);
@@ -107,7 +106,6 @@
   }
 
   &__pulse-left {
-    transform: translateX(0rem);
     @include hover {
       .button--icon {
         transform: translateX($button-translate-amount * -1);
@@ -116,19 +114,17 @@
   }
 
   &__scale-in {
-    transform: scale(1);
     @include hover {
       .button--icon {
-        transform: scale(1 - $button-scale-amount);
+        transform: scale(calc(var(--button-icon-scale) - #{$button-scale-amount}));
       }
     }
   }
 
   &__scale-out {
-    transform: scale(1);
     @include hover {
       .button--icon {
-        transform: scale(1 + $button-scale-amount);
+        transform: scale(calc(var(--button-icon-scale) + #{$button-scale-amount}));
       }
     }
   }

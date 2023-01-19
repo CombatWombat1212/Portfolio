@@ -1,10 +1,20 @@
 .footer{
 
 
-    &--info{}
+    --footer-height: 20rem;
+
+    
+    &, &--info, &--actions{
+        height: var(--footer-height);
+    }
+
+    &--info{
+        background-color: $col-background_darkest;
+    }
 
     &--actions{
         @include flex-row;
+        margin-top: calc(var(--section-description-spacing) + 0.75rem);
 
         &>*+*{
             margin-left: 1.25rem;
