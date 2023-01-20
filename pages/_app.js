@@ -6,6 +6,8 @@ import { postScreenSizeToRoot } from "/scripts/GlobalUtilities";
 
 export default function App({ Component, pageProps }) {
 
+  // TODO: add somekind of page transition animation across the whole site
+
   // I am not currently using this
   useMountEffect(() => {
     postScreenSizeToRoot();

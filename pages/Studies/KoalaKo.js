@@ -1,7 +1,22 @@
+import { StudyPanel } from "/components/elements/Panel";
+import getStudy from "../../scripts/GetStudy";
+
+
+
+
+
+
 function KoalaKo() {
+
+  const study = getStudy();
+
+
+  
     return (
       <>
-        <>KoalaKo</>
+
+          <StudyPanel variant="study" study={study} />
+
       </>
     );
   }

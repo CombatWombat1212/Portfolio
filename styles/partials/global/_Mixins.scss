@@ -133,6 +133,17 @@
 }
 
 
+@mixin marg-x($val) {
+	margin-left: $val;
+	margin-right: $val;
+}
+
+@mixin marg-y($val) {
+	margin-top: $val;
+	margin-bottom: $val;
+}
+
+
 @mixin x-100() {
 	width: 100%;
 }

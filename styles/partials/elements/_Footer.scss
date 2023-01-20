@@ -47,18 +47,22 @@
 
 
 
-$sitemap-item-pad-y: 0.25rem;
-$sitemap-item-pad-x: 0.5rem;
+$sitemap-item-pad-top: 0.25rem;
+$sitemap-item-pad-right: 0.5rem;
+$sitemap-item-pad-bottom: 0.15rem;
+$sitemap-item-pad-left: 0.5rem;
 $sitemap-item-spacing: 0.9rem;
+
 
 @mixin footer-animation() {
   @include flex-row;
-  @include b-rad;
+  border-radius: var(--b-rad_less);
+
   width: fit-content;
-  margin: #{-$sitemap-item-pad-y} #{-$sitemap-item-pad-x};
+  margin: #{-$sitemap-item-pad-top} #{-$sitemap-item-pad-right} #{-$sitemap-item-pad-bottom} #{-$sitemap-item-pad-left};
 
   a {
-    padding: #{$sitemap-item-pad-y} #{$sitemap-item-pad-x};
+    padding: #{$sitemap-item-pad-top} #{$sitemap-item-pad-right} #{$sitemap-item-pad-bottom} #{$sitemap-item-pad-left};
   }
 
   @include hover {
@@ -87,7 +91,7 @@ $sitemap-item-spacing: 0.9rem;
 
   &--title {
     @include footer-animation;
-    margin-bottom: calc(var(--footer-text-block-top-margin) - #{$sitemap-item-pad-y});
+    margin-bottom: calc(var(--footer-text-block-top-margin) - #{$sitemap-item-pad-bottom});
 
     a {
       @include h3;
@@ -107,9 +111,20 @@ $sitemap-item-spacing: 0.9rem;
     //TODO: are you happy with the current footer animation? I think the animated underline idea might be better but it would take a while so i'm leaving it for now
 
     @include footer-animation;
+    
+    margin-bottom: -$sitemap-item-pad-bottom;
 
     & + & {
-      margin-top: $sitemap-item-spacing - $sitemap-item-pad-y;
+      margin-top: $sitemap-item-spacing - $sitemap-item-pad-top;
+      // margin-top: $sitemap-item-spacing - $sitemap-item-pad-top;
+      // margin-top: $sitemap-item-spacing - $sitemap-item-pad-top;
+      // margin-bottom: $sitemap-item-spacing - $sitemap-item-pad-bottom;
     }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+
   }
 }

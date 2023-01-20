@@ -2,7 +2,8 @@
   --nav-height: 3.75rem;
   --nav-color: #{$col-primary};
   --nav-button-spacing: 0rem;
-  --nav-button-padding-multiplier: 1.15;
+  --nav-button-padding-multiplier: 1.25;
+  // --nav-button-padding-multiplier: 1.15;
 
   height: var(--nav-height);
   background-color: var(--nav-color);

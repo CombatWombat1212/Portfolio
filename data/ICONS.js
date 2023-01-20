@@ -16,6 +16,13 @@ const ICONS = {
     width: 448,
     height: 384.15,
   },
+  arrow_down: {
+    name: 'arrow_down',
+    src: "/assets/icons/arrow_down.svg",
+    alt: "Arrow pointing down",
+    width: 384,
+    height: 447.98,
+  },
   document: {
     name: 'document',
     src: "/assets/icons/document.svg",

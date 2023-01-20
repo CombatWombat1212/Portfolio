@@ -4,7 +4,7 @@ var CASE_STUDIES = [
   {
     name: "MakeRight",
     id: "Makeright",
-    description: {
+    subtitle: {
       string: "Translating The Benefits of 3D Printing to Everyday Consumers",
       jsx: (
         <>
@@ -12,20 +12,31 @@ var CASE_STUDIES = [
         </>
       ),
     },
-    // tags: ["Thesis", "UX/UI Design", "User Research"],
     tags: ["Thesis", "UX/UI Design", "User Research"],
-    img: {
-      src: "/assets/images/case_study_thumbnails/MakeRight.png",
-      alt: "3D printed plastic elephant diving into a cardboard box",
-      width: 1038,
-      height: 944,
+    tools: ["Adobe XD / Figma", "Illustrator", "Mural", "HTML/CSS/JS", "After Effects", "InDesign"],
+
+    imgs: {
+      main: {
+        src: "./assets/images/case_study_thumbnails/MakeRight.png",
+        alt: "3D printed plastic elephant diving into a cardboard box",
+        width: 1038,
+        height: 944,
+      },
+
+      alt: {
+        src: "./assets/images/case_study_thumbnails/MakeRight_Alt.png",
+        alt: "3D printed plastic elephant sitting in a cardboard box",
+        width: 1038,
+        height: 716,
+      },
     },
-    link:'/Studies/MakeRight',
+
+    link: "/Studies/MakeRight",
   },
   {
     name: "Made Clothing Co.",
     id: "Made",
-    description: {
+    subtitle: {
       string: "Product Rendering for a Toronto-Based Men’s Fashion Brand",
       jsx: (
         <>
@@ -33,20 +44,31 @@ var CASE_STUDIES = [
         </>
       ),
     },
-    // tags: ["Client", "3D Design", "Product Rendering"],
     tags: ["Client", "3D Design", "Product Rendering"],
-    img: {
-      src: "/assets/images/case_study_thumbnails/MADE.png",
-      alt: "3D rendering of a blue dress-shirt",
-      width: 526,
-      height: 823,
+    tools: ["Blender 3D", "Photoshop", "Python"],
+
+    imgs: {
+      main: {
+        src: "./assets/images/case_study_thumbnails/MADE.png",
+        alt: "3D rendering of a blue dress-shirt",
+        width: 526,
+        height: 823,
+      },
+
+      // alt: {
+      //   src: "./assets/images/case_study_thumbnails/MADE.png",
+      //   alt: "3D rendering of a blue dress-shirt",
+      //   width: 526,
+      //   height: 823,
+      // },
     },
-    link:'/Studies/MADE',
+
+    link: "/Studies/MADE",
   },
   {
     name: "KoalaKo",
     id: "Koalako",
-    description: {
+    subtitle: {
       string: "Supporting Parents in Fostering Adolescent Creative Development",
       jsx: (
         <>
@@ -54,20 +76,31 @@ var CASE_STUDIES = [
         </>
       ),
     },
-    // tags: ["UX/UI Design", "User Research", "Team Project"],
     tags: ["UX/UI Design", "User Research", "Team Project"],
-    img: {
-      src: "/assets/images/case_study_thumbnails/KoalaKo.png",
-      alt: "3D rendering of a phone with an app called 'KoalaKo' open on the screen",
-      width: 738,
-      height: 842,
+    tools: ["Adobe XD / Figma", "Mural", "InDesign"],
+
+    imgs: {
+      main: {
+        src: "./assets/images/case_study_thumbnails/KoalaKo.png",
+        alt: "3D rendering of a phone with an app called 'KoalaKo' open on the screen",
+        width: 738,
+        height: 842,
+      },
+
+      // alt: {
+      //   src: "./assets/images/case_study_thumbnails/KoalaKo.png",
+      //   alt: "3D rendering of a phone with an app called 'KoalaKo' open on the screen",
+      //   width: 738,
+      //   height: 842,
+      // },
     },
-    link:'/Studies/KoalaKo',
+
+    link: "/Studies/KoalaKo",
   },
   {
     name: "Explorations",
     id: "Explorations",
-    description: {
+    subtitle: {
       string: "Undeserving of a case study, but well-deserving of your attention",
       jsx: (
         <>
@@ -75,32 +108,50 @@ var CASE_STUDIES = [
         </>
       ),
     },
-    img: {
-      src: "/assets/images/case_study_thumbnails/Explorations.png",
-      alt: "3D rendering of a worn steel compass",
-      width: 730,
-      height: 1626,
+
+    imgs: {
+      main: {
+        src: "./assets/images/case_study_thumbnails/Explorations.png",
+        alt: "3D rendering of a worn steel compass",
+        width: 730,
+        height: 1626,
+      },
+
+      alt: {
+        src: "./assets/images/case_study_thumbnails/Explorations.png",
+        alt: "3D rendering of a worn steel compass",
+        width: 730,
+        height: 1626,
+      },
     },
-    link:'/Explorations',
+
+    link: "/Explorations",
   },
 ];
 
 
 
-function caseStudiesInit(arr){
 
-  arr.forEach((item) => {
-    item.key = uuidv4();
-
-    if(!item.tags) return;
-    var tags = item.tags;
-    for(var i = 0; i < tags.length; i++){
-      tags[i] = {name: tags[i], key: uuidv4()};
-    }
-
-  });
+function addKey(arr) {
+  for (var i = 0; i < arr.length; i++) {
+    arr[i] = { name: arr[i], key: uuidv4() };
+  }
   return arr;
 }
+
+
+
+function caseStudiesInit(arr) {
+  arr.forEach((item) => {
+    item.key = uuidv4();
+    if (item.tags) item.tags = addKey(item.tags);
+    if (item.tools) item.tools = addKey(item.tools);
+  });
+
+  return arr;
+}
+
+
 
 
 

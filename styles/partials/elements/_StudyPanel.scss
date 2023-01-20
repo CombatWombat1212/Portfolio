@@ -1,0 +1,19 @@
+
+
+
+
+.studypanel {
+
+    --studypanel-img-height: 43rem;
+
+  &--img {
+    height: Min(var(--studypanel-img-height), calc(var(--studypanel-img-height) * (var(--img-aspect-height) / var(--img-aspect-width))));
+  }
+
+
+  &__study{
+    @include marg-y(8.5rem);
+  }
+
+
+}

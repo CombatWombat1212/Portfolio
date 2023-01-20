@@ -1,17 +1,14 @@
 #Home {
-
-
   &--Hero {
     .section {
       &--img {
         @include mx-auto;
         width: 9.5rem;
 
-        .mask{
+        .mask {
           background-color: $col-secondary;
         }
       }
-
 
       &--desc {
         .text--body {
@@ -21,30 +18,37 @@
     }
   }
 
+  // Moved to _StudyPanel.scss
 
-
-
-  &--Makeright {
-    .section--img {
-      height: 43rem;
-    }
-  }
-
-  &--Made {
-    .section--img {
-      height: 43rem;
-    }
-  }
-
-  &--Koalako {
-    .section--img {
-      height: 43rem;
-    }
-  }
-
+  &--Makeright,
+  &--Made,
+  &--Koalako,
   &--Explorations {
     .section--img {
       height: 43rem;
     }
   }
+
+  //   &--Makeright {
+  //     .section--img {
+  //       height: 43rem;
+  //     }
+  //   }
+
+  //   &--Made {
+  //     .section--img {
+  //       height: 43rem;
+  //     }
+  //   }
+
+  //   &--Koalako {
+  //     .section--img {
+  //       height: 43rem;
+  //     }
+  //   }
+
+  //   &--Explorations {
+  //     .section--img {
+  //       height: 43rem;
+  //     }
 }

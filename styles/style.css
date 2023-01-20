@@ -1090,13 +1090,12 @@ body {
 
 :root {
   --button-icon-size: 1.25rem;
-  --button-icon-scale:1;
+  --button-icon-scale: 1;
   --button-icon-margin: 0.75rem;
   --button-padding: 1rem;
   --button-padding-top: calc(var(--button-padding) - 0.25rem);
   --button-padding-bottom: calc(var(--button-padding) + 0.25rem);
-  --button-height: calc(var(--button-icon-size) + var(--button-padding-top) + var(--button-padding-bottom))
-;
+  --button-height: calc(var(--button-icon-size) + var(--button-padding-top) + var(--button-padding-bottom));
 }
 
 .button {
@@ -1188,6 +1187,18 @@ body {
   transform: translateX(-0.15rem);
 }
 
+.button__pulse-down .button--icon {
+  margin-top: -0.1rem;
+}
+
+.button__pulse-down {
+  transition: var(--transition);
+}
+
+.button__pulse-down:hover .button--icon, .button__pulse-down:focus .button--icon, .button__pulse-down.focus .button--icon {
+  transform: translateY(0.15rem);
+}
+
 .button__scale-in {
   transition: var(--transition);
 }
@@ -1228,7 +1239,7 @@ body {
   --nav-height: 3.75rem;
   --nav-color: #074391;
   --nav-button-spacing: 0rem;
-  --nav-button-padding-multiplier: 1.15;
+  --nav-button-padding-multiplier: 1.25;
   height: var(--nav-height);
   background-color: var(--nav-color);
   position: sticky;
@@ -1389,17 +1400,14 @@ body {
 .sitemap--title {
   display: flex;
   flex-direction: row;
-  border-radius: var(--b-rad);
-  -webkit-border-radius: var(--b-rad);
-  -moz-border-radius: var(--b-rad);
-  -khtml-border-radius: var(--b-rad);
+  border-radius: var(--b-rad_less);
   width: fit-content;
-  margin: -0.25rem -0.5rem;
-  margin-bottom: calc(var(--footer-text-block-top-margin) - 0.25rem);
+  margin: -0.25rem -0.5rem -0.15rem -0.5rem;
+  margin-bottom: calc(var(--footer-text-block-top-margin) - 0.15rem);
 }
 
 .sitemap--title a {
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.5rem 0.15rem 0.5rem;
 }
 
 .sitemap--title {
@@ -1431,16 +1439,14 @@ body {
 .sitemap--item {
   display: flex;
   flex-direction: row;
-  border-radius: var(--b-rad);
-  -webkit-border-radius: var(--b-rad);
-  -moz-border-radius: var(--b-rad);
-  -khtml-border-radius: var(--b-rad);
+  border-radius: var(--b-rad_less);
   width: fit-content;
-  margin: -0.25rem -0.5rem;
+  margin: -0.25rem -0.5rem -0.15rem -0.5rem;
+  margin-bottom: -0.15rem;
 }
 
 .sitemap--item a {
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.5rem 0.15rem 0.5rem;
 }
 
 .sitemap--item {
@@ -1453,6 +1459,23 @@ body {
 
 .sitemap--item + .sitemap--item {
   margin-top: 0.65rem;
+}
+
+.sitemap--item:last-child {
+  margin-bottom: 0;
+}
+
+.studypanel {
+  --studypanel-img-height: 43rem;
+}
+
+.studypanel--img {
+  height: Min(var(--studypanel-img-height), calc(var(--studypanel-img-height) * (var(--img-aspect-height) / var(--img-aspect-width))));
+}
+
+.studypanel__study {
+  margin-top: 8.5rem;
+  margin-bottom: 8.5rem;
 }
 
 #Home--Hero .section--img {
@@ -1469,19 +1492,7 @@ body {
   margin-top: calc(var(--section-description-spacing) * 1.3);
 }
 
-#Home--Makeright .section--img {
-  height: 43rem;
-}
-
-#Home--Made .section--img {
-  height: 43rem;
-}
-
-#Home--Koalako .section--img {
-  height: 43rem;
-}
-
-#Home--Explorations .section--img {
+#Home--Makeright .section--img, #Home--Made .section--img, #Home--Koalako .section--img, #Home--Explorations .section--img {
   height: 43rem;
 }
 /*# sourceMappingURL=style.css.map */

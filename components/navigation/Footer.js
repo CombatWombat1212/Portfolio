@@ -47,6 +47,8 @@ function Footer() {
           </div>
         </PanelDesc>
 
+
+{/* TODO: this is optional as all hell, but would it be cool if the text 'Sam Giustizia' animated to say 'Home' on mouseover? yes but feel free to say no this is very minor */}
         <div className="footer--sitemap col-6">
           <div className="sitemap">
             {FOOTER_SITEMAP_ITEMS.map((group) => {

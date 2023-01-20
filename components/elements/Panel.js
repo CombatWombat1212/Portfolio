@@ -1,65 +1,114 @@
 import Image from "next/image";
 import PropTypes from "prop-types";
+import Button from "../elements/Buttons";
+import Tag from "../elements/Tag";
 
 function Panel({ children, id, className, reference, ...props }) {
   return (
     <>
-      <div id={id} className={"container section" + (className ? ` ${className}` : '')} ref={reference} {...props}>
+      <div id={id} className={"container section" + (className ? ` ${className}` : "")} ref={reference} {...props}>
         {children}
       </div>
     </>
   );
 }
 
-function PanelDesc({ children, className, reference, ...props  }) {
+function PanelDesc({ children, className, reference, ...props }) {
   return (
     <>
-      <div className={"section--desc" + (className ? ` ${className}` : '')} ref={reference} {...props}>{children}</div>
+      <div className={"section--desc" + (className ? ` ${className}` : "")} ref={reference} {...props}>
+        {children}
+      </div>
     </>
   );
 }
 
-function PanelImg({ children, className, effect }) {
+function PanelImg({ children, className, variant, effect, ...props }) {
   return (
     <>
-
-      <div className={"section--graphic" + (className ? ` ${className}` : '')}>
-        <div className="section--img">
+      <div className={"section--graphic" + (className ? ` ${className}` : "")} >
+        <div className={"section--img" + (variant == "study" ? ` studypanel--img` : "")} {...props}>
           {/* {effect == 'gradient-white' && <div className="img--gradient img--gradient__white "></div>} */}
           {children}
-          </div>
+        </div>
       </div>
-
     </>
   );
 }
-
-
 
 PanelImg.defaultProps = {
   effect: "none",
+  variant: "home",
 };
 
 PanelImg.propTypes = {
   effect: PropTypes.oneOf(["none", "gradient-white"]),
 };
 
+function StudyPanel({ id, study, variant }) {
+  var main = study.imgs.main;
+  if (study.imgs.alt) var alt = study.imgs.alt;
 
+  var img = main;
 
+  if (variant == "home" || typeof study.imgs.alt == "undefined") {
+    img = main;
+  } else if (variant == "study" && study.imgs.alt) {
+    img = alt;
+  }
 
-// Panel.defaultProps = {
-//   reference: null,
-// };
+  return (
+    <>
+      <Panel id={id} className={'studypanel' + ` studypanel__${variant}`}>
+        <PanelDesc>
+          <h2 className="color--secondary">{study.name}</h2>
+          <h3>{study.subtitle.jsx}</h3>
 
-// PanelDesc.defaultProps = {
-//   reference: null,
-// };
+          {study.tags && (
+            <div className="section--tags tag--group">
+              {study.tags.map((tag) => {
+                return <Tag key={tag.key}>{tag.name}</Tag>;
+              })}
+            </div>
+          )}
 
-// PanelImg.defaultProps = {
-//   reference: null,
-// };
+          {variant == "home" ? (
+            <>
+              <Button className="section--button" type="regular" icon={["arrow_right", "right", "mask"]} animation={"pulse-right"} href={study.link}>
+                Have a look-see
+              </Button>
+            </>
+          ) : (
+            variant == "study" && (
+              <>
+                {/* TODO: link these buttons to the solution of each page's study */}
+                <Button className="section--button" type="regular" icon={["arrow_down", "right", "mask"]} animation={"pulse-down"} href={""}>
+                  Skip to Solution
+                </Button>
+              </>
+            )
+          )}
+        </PanelDesc>
 
+        <PanelImg className="col-6" variant={variant} 
+          style={{
+            "--img-aspect-width": img.width,
+            "--img-aspect-height": img.height,
+          }}
+                 /*effect="gradient-white"*/>
+          <Image src={img.src} alt={img.alt} width={img.width} height={img.height} />
+        </PanelImg>
+      </Panel>
+    </>
+  );
+}
 
+StudyPanel.defaultProps = {
+  variant: "home",
+};
 
+StudyPanel.propTypes = {
+  variant: PropTypes.oneOf(["home", "study"]),
+};
 
-export { Panel, PanelDesc, PanelImg };
+export { Panel, PanelDesc, PanelImg, StudyPanel };
