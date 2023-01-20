@@ -1,5 +1,4 @@
 import { useMountEffect } from "/scripts/hooks/useMountEffect";
-import { useRef } from "react";
 import FOOTER_SITEMAP_ITEMS from "../../data/FOOTER_SITEMAP_ITEMS";
 
 import Button from "../elements/Buttons";

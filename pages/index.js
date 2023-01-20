@@ -31,6 +31,7 @@ function Index() {
             <h1 className="section--title">
               Hi, I'm <span className="color--secondary">Sam Giustizia</span>,<br></br>how are you?
             </h1>
+            {/* TODO: i really think this should be 2 lines not 3 */}
             <p className="text--h3">
               I'm a multidisciplinary designer,<br></br>
               and a creator of digital solutions,<br></br>
