@@ -75,6 +75,7 @@ $container-max-widths_inverted: mapReverse($container-max-width);
   @for $i from 1 through length($container-max-widths_inverted) - 1 {
     $breakpoint: nth(map-keys($container-max-widths_inverted), $i);
     $container-max-width: nth(map-values($container-max-widths_inverted), $i);
+    
 
     //apply the correct container max-width to the correct breakpoint
     //in my sysem, the responsive downwards system, we need to offset the following by one depending on whether or not it is first breakpoint at xxl

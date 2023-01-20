@@ -277,7 +277,9 @@
 				transition: $transition;
 			}
 			&:hover,
-			&:focus{
+			&:focus,
+			&.focus
+			{
 				@content;
 			}
 		}
@@ -292,7 +294,9 @@
 					transition: $transition;
 				}
 				#{$p}:hover,
-				#{$p}:focus {
+				#{$p}:focus,
+				#{$p}.focus 
+				{
 					@content;
 				}
 			}
@@ -311,7 +315,9 @@
 							transition: $transition;
 						}
 						#{$p}:hover &,
-						#{$p}:focus & {
+						#{$p}:focus &,
+						#{$p}.focus 
+						{
 							@content;
 						}
 					}
@@ -325,7 +331,9 @@
 							transition: $transition;
 						}
 						#{$p}:hover #{$c},
-						#{$p}:focus #{$c} {
+						#{$p}:focus #{$c},
+						#{$p}.focus #{$c}
+						{
 							@content;
 						}
 					}

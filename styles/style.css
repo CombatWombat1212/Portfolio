@@ -123,7 +123,7 @@ p,
 }
 
 :root {
-  --transition: 0.15s;
+  --transition: 0.1s;
   --b-rad: 0.5rem;
   --b-rad_less: 0.3125rem;
 }
@@ -1156,7 +1156,7 @@ body {
   transition: var(--transition);
 }
 
-.button:hover, .button:focus {
+.button:hover, .button:focus, .button.focus {
   --button-background: #950647;
 }
 
@@ -1176,7 +1176,7 @@ body {
   transition: var(--transition);
 }
 
-.button__pulse-right:hover .button--icon, .button__pulse-right:focus .button--icon {
+.button__pulse-right:hover .button--icon, .button__pulse-right:focus .button--icon, .button__pulse-right.focus .button--icon {
   transform: translateX(0.15rem);
 }
 
@@ -1184,7 +1184,7 @@ body {
   transition: var(--transition);
 }
 
-.button__pulse-left:hover .button--icon, .button__pulse-left:focus .button--icon {
+.button__pulse-left:hover .button--icon, .button__pulse-left:focus .button--icon, .button__pulse-left.focus .button--icon {
   transform: translateX(-0.15rem);
 }
 
@@ -1192,7 +1192,7 @@ body {
   transition: var(--transition);
 }
 
-.button__scale-in:hover .button--icon, .button__scale-in:focus .button--icon {
+.button__scale-in:hover .button--icon, .button__scale-in:focus .button--icon, .button__scale-in.focus .button--icon {
   transform: scale(calc(var(--button-icon-scale) - 0.1));
 }
 
@@ -1200,7 +1200,7 @@ body {
   transition: var(--transition);
 }
 
-.button__scale-out:hover .button--icon, .button__scale-out:focus .button--icon {
+.button__scale-out:hover .button--icon, .button__scale-out:focus .button--icon, .button__scale-out.focus .button--icon {
   transform: scale(calc(var(--button-icon-scale) + 0.1));
 }
 
@@ -1300,7 +1300,7 @@ body {
   transition: var(--transition);
 }
 
-.nav--item:hover, .nav--item:focus {
+.nav--item:hover, .nav--item:focus, .nav--item.focus {
   background-color: #E0E0EA;
   color: var(--nav-color);
 }
@@ -1379,7 +1379,7 @@ body {
   margin-left: 4.75rem;
 }
 
-.sitemap--title,
+.sitemap--title a,
 .sitemap--item a {
   color: #F3F3F7;
   text-decoration: none;
@@ -1387,6 +1387,30 @@ body {
 }
 
 .sitemap--title {
+  display: flex;
+  flex-direction: row;
+  border-radius: var(--b-rad);
+  -webkit-border-radius: var(--b-rad);
+  -moz-border-radius: var(--b-rad);
+  -khtml-border-radius: var(--b-rad);
+  width: fit-content;
+  margin: -0.25rem -0.5rem;
+  margin-bottom: calc(var(--footer-text-block-top-margin) - 0.25rem);
+}
+
+.sitemap--title a {
+  padding: 0.25rem 0.5rem;
+}
+
+.sitemap--title {
+  transition: var(--transition);
+}
+
+.sitemap--title:hover, .sitemap--title:focus, .sitemap--title.focus {
+  background-color: #5D5D7E;
+}
+
+.sitemap--title a {
   font-family: "Gira Sans";
   font-size: var(--font-size-h3);
   line-height: var(--font-leading-h3);
@@ -1395,7 +1419,6 @@ body {
 
 .sitemap--links {
   list-style: none;
-  margin-top: var(--footer-text-block-top-margin);
 }
 
 .sitemap--links a {
@@ -1405,8 +1428,31 @@ body {
   font-weight: 400;
 }
 
+.sitemap--item {
+  display: flex;
+  flex-direction: row;
+  border-radius: var(--b-rad);
+  -webkit-border-radius: var(--b-rad);
+  -moz-border-radius: var(--b-rad);
+  -khtml-border-radius: var(--b-rad);
+  width: fit-content;
+  margin: -0.25rem -0.5rem;
+}
+
+.sitemap--item a {
+  padding: 0.25rem 0.5rem;
+}
+
+.sitemap--item {
+  transition: var(--transition);
+}
+
+.sitemap--item:hover, .sitemap--item:focus, .sitemap--item.focus {
+  background-color: #5D5D7E;
+}
+
 .sitemap--item + .sitemap--item {
-  margin-top: 0.9rem;
+  margin-top: 0.65rem;
 }
 
 #Home--Hero .section--img {

@@ -1,3 +1,4 @@
+import { useMountEffect } from "/scripts/hooks/useMountEffect";
 import { useRef } from "react";
 import FOOTER_SITEMAP_ITEMS from "../../data/FOOTER_SITEMAP_ITEMS";
 
@@ -8,8 +9,25 @@ import DLink from "../utilities/DynamicLink";
 //TODO: Add links to footer, including the sitemap links inside the /data/ object
 
 function Footer() {
+  useMountEffect(() => {
+    if (!document) return;
 
+    function footerFocusFix() {
+      var items = document.querySelectorAll(".sitemap--item, .sitemap--title");
+      var itemsArr = Array.from(items);
 
+      itemsArr.forEach((item) => {
+        item.addEventListener("focusin", () => {
+          item.classList.add("focus");
+        });
+        item.addEventListener("focusout", () => {
+          item.classList.remove("focus");
+        });
+      });
+    }
+
+    footerFocusFix();
+  });
 
   return (
     <>
@@ -35,18 +53,19 @@ function Footer() {
             {FOOTER_SITEMAP_ITEMS.map((group) => {
               return (
                 <div className="sitemap--group" key={group.key}>
-                  <DLink className="sitemap--title" href={group.link}>
-                    {group.name}
-                  </DLink>
-
+                  <div className="sitemap--title">
+                    <DLink className="" href={group.link}>
+                      {group.name}
+                    </DLink>
+                  </div>
                   <ul className="sitemap--links">
                     {group.list.slice(0, 3).map((link) => {
                       return (
-                          <li className="sitemap--item" key={link.key}>
-                            <DLink key={link.key} href={link.link}>
-                              {link.name}
-                            </DLink>
-                          </li>
+                        <li className="sitemap--item" key={link.key}>
+                          <DLink key={link.key} href={link.link}>
+                            {link.name}
+                          </DLink>
+                        </li>
                       );
                     })}
                   </ul>
