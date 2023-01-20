@@ -33,17 +33,17 @@ var FOOTER_SITEMAP_ITEMS = [
     list: [
       {
         name: "MakeRight",
-        link: "/MakeRight",
+        link: "/Studies/MakeRight",
         key: '',
       },
       {
         name: "MADE Clothing",
-        link: "/MADE",
+        link: "/Studies/MADE",
         key: '',
       },
       {
         name: "KoalaKo",
-        link: "/KoalaKo",
+        link: "/Studies/KoalaKo",
         key: '',
       },
     ]

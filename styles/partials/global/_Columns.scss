@@ -14,6 +14,10 @@ $column-grid-max: 12;
 
   width: (($b/$column-grid-max) * 100) + %;
 
+
+  //TODO: this isn't used in many places, at the time of writing its only utilized in the footer, and it adds about 100 lines of css just for that.  You may want to find a new way of approaching the footer styling unless this proves useful elsewhere.
+    --column-width: #{$b};
+
 }
 
 

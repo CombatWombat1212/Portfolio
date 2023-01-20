@@ -21,7 +21,6 @@ import Mask from "/components/utilities/Mask";
 
 function Index() {
 
-  console.log('redrawing')
 
   return (
     <>
@@ -62,7 +61,7 @@ function Index() {
                   </div>
                 )}
                 <Button className="section--button" type="regular" icon={["arrow_right", "right", "mask"]} animation={'pulse-right'} href={item.link}>
-                  Have a look see
+                  Have a look-see
                 </Button>
               </PanelDesc>
               <PanelImg className="col-6" /*effect="gradient-white"*/>

@@ -2,6 +2,18 @@
   @include no-select;
 }
 
+
+:root{
+  --button-icon-size: 1.25rem;
+  --button-icon-scale:1;
+  --button-icon-margin: 0.75rem;
+  --button-padding: 1rem;
+  --button-padding-top: calc(var(--button-padding) - 0.25rem);
+  --button-padding-bottom: calc(var(--button-padding) + 0.25rem);
+  --button-height: calc(var(--button-icon-size) + var(--button-padding-top) + var(--button-padding-bottom))
+}
+
+
 .button {
   @include flex-row;
   @include b-rad;
@@ -14,18 +26,12 @@
   
   --button-background: #{$col-secondary};
   --button-color: #{$col-background};
-  --button-icon-size: 1.25rem;
-  --button-icon-scale:1;
-  --button-icon-margin: 0.75rem;
-  --button-padding: 1rem;
-  --button-padding-top: calc(var(--button-padding) - 0.25rem);
-  --button-padding-bottom: calc(var(--button-padding) + 0.25rem);
   
   padding:  0 var(--button-padding);
 
 
   width: fit-content;
-  height: calc(var(--button-icon-size) + var(--button-padding-top) + var(--button-padding-bottom));
+  height: var(--button-height);
 
 
 
@@ -62,6 +68,8 @@
   }
 
 }
+
+
 
 
 // Button modifiers

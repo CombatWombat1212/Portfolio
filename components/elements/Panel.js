@@ -1,20 +1,20 @@
 import Image from "next/image";
 import PropTypes from "prop-types";
 
-function Panel({ children, id, className }) {
+function Panel({ children, id, className, reference, ...props }) {
   return (
     <>
-      <div id={id} className={"container section" + (className ? ` ${className}` : '')}>
+      <div id={id} className={"container section" + (className ? ` ${className}` : '')} ref={reference} {...props}>
         {children}
       </div>
     </>
   );
 }
 
-function PanelDesc({ children, className }) {
+function PanelDesc({ children, className, reference, ...props  }) {
   return (
     <>
-      <div className={"section--desc" + (className ? ` ${className}` : '')}>{children}</div>
+      <div className={"section--desc" + (className ? ` ${className}` : '')} ref={reference} {...props}>{children}</div>
     </>
   );
 }
@@ -43,6 +43,21 @@ PanelImg.defaultProps = {
 PanelImg.propTypes = {
   effect: PropTypes.oneOf(["none", "gradient-white"]),
 };
+
+
+
+
+// Panel.defaultProps = {
+//   reference: null,
+// };
+
+// PanelDesc.defaultProps = {
+//   reference: null,
+// };
+
+// PanelImg.defaultProps = {
+//   reference: null,
+// };
 
 
 

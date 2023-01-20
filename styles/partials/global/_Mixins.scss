@@ -274,7 +274,7 @@
 
 		@if $p == ('') and $child == ('') {
 			&{
-				// transition: $transition;
+				transition: $transition;
 			}
 			&:hover,
 			&:focus{
@@ -289,7 +289,7 @@
 			//if there is no child
 			@at-root {
 				#{$p} {
-					// transition: $transition;
+					transition: $transition;
 				}
 				#{$p}:hover,
 				#{$p}:focus {
@@ -308,7 +308,7 @@
 				@if $c=='&' {
 					@at-root {
 						#{$p} & {
-							// transition: $transition;
+							transition: $transition;
 						}
 						#{$p}:hover &,
 						#{$p}:focus & {
@@ -322,7 +322,7 @@
 
 						// regular functionality
 						#{$p} #{$c} {
-							// transition: $transition;
+							transition: $transition;
 						}
 						#{$p}:hover #{$c},
 						#{$p}:focus #{$c} {

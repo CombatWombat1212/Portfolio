@@ -1,28 +1,99 @@
-.footer{
+.footer {
+  --footer-height: 22rem;
+  --footer-text-block-top-margin: calc(var(--section-description-spacing) - 0.25rem);
+  --footer-button-top-margin: calc(var(--section-description-spacing) + 0.5rem);
+  --footer-contact-height: calc(var(--font-leading-h3) + var(--font-leading-body) + var(--footer-text-block-top-margin) + var(--footer-button-top-margin) + var(--button-height));
 
 
-    --footer-height: 20rem;
+  --column-grid-max: #{$column-grid-max};
+  
 
-    
-    &, &--info, &--actions{
-        height: var(--footer-height);
-    }
+  &,
+  &--info,
+  &--actions,
+  &--sitemap {
+    height: var(--footer-height);
+  }
 
-    &--info{
-        background-color: $col-background_darkest;
-        padding-left: calc((100% - var(--site-max-width)) / 2);
-    }
-
-    &--actions{
-        @include flex-row;
-        margin-top: calc(var(--section-description-spacing) + 0.75rem);
-        height: auto;
-
-        &>*+*{
-            margin-left: 1.25rem;
-        }
-    }
-
-
+  &--info {
+    background-color: $col-background_darkest;
+    // padding-left: calc((100% - var(--site-max-width)) / 2);
 }
 
+&--contact {
+    @include flex-col;
+    
+    padding-left: calc(((((100 * (var(--column-grid-max) / var(--column-width))) * 1%) - var(--site-max-width)) / 2) );
+
+    & > * + * {
+      margin-top: var(--footer-text-block-top-margin);
+    }
+  }
+
+  &--actions {
+    @include flex-row;
+    margin-top: var(--footer-button-top-margin);
+    height: auto;
+
+    & > * + * {
+      margin-left: 1.25rem;
+    }
+  }
+
+  &--sitemap {
+    background-color: $col-tertiary;
+    @include flex-col;
+  }
+}
+
+.sitemap {
+  @include flex-row-center;
+
+  margin-top: calc((var(--footer-height) - var(--footer-contact-height)) / 2);
+
+  & > * + * {
+    margin-left: 4.75rem;
+  }
+
+  &--title,
+  &--item a {
+    color: $col-background;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  &--title {
+    @include h3;
+  }
+
+  &--links {
+    list-style: none;
+    margin-top: var(--footer-text-block-top-margin);
+    a {
+      @include body;
+    }
+  }
+
+  &--item {
+
+
+    // TODO: Footer link hover animations, this commented one looks okay but functionally is poor.  The focus border only surrounds the letters not the whole button, and same with mouseover.  Which isn't great because if you address those issues then you'd have to change the spacing between each list item.  so my guess is you probably have to come up with a different animation idea or something idk or find a way to make this one work which is definetly possible you'd probably just have to nest the items into another div or something
+    // @include flex-row;
+    // width: fit-content;
+    // padding: 0.4rem 0.5rem;
+    // margin: -0.4rem -0.5rem;
+    // border-radius: var(--b-rad);
+
+    // @include hover{
+    //     background-color: $col-background_darkest;
+
+    //     a{
+    //         color: $col-tertiary;
+    //     }
+    // }
+
+    & + & {
+      margin-top: 0.9rem;
+    }
+  }
+}
