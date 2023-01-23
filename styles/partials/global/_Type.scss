@@ -18,6 +18,9 @@ $font-body: "Tenon";
   --font-leading-h4: 1.25rem;
   --font-leading-body: 1.5rem;
 
+  --font-margin-bottom-h2: 1.5rem;
+  --font-margin-bottom-h4: 0.25rem;
+
   // --font-leading-h1: 4.25rem;
   // --font-leading-h2: 3.125rem;
   // --font-leading-h3: 2.3125rem;
@@ -53,6 +56,11 @@ $font-body: "Tenon";
   line-height: var(--font-leading-h2);
 }
 
+@mixin h2-margin {
+  margin-bottom: var(--font-margin-bottom-h2);
+}
+
+
 @mixin h3 {
   font-family: $font-title;
   font-size: var(--font-size-h3);
@@ -65,6 +73,10 @@ $font-body: "Tenon";
   font-size: var(--font-size-h4);
   line-height: var(--font-leading-h4);
   color: $col-secondary;
+}
+
+@mixin h4-margin {
+  margin-bottom: var(--font-margin-bottom-h4);
 }
 
 @mixin body {
@@ -98,6 +110,7 @@ p,
 .text--body{
   @include body;
 }
+
 
 // .weight {
 //   &__light {

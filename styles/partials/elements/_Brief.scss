@@ -24,7 +24,7 @@
   }
 
   &--title{
-    margin-bottom: 0.5rem;
+    @include h4-margin;
   }
 
   &--list {

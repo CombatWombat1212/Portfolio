@@ -1,0 +1,46 @@
+// TODO: Find a way to ensure that these graphics are always locked to the correct scale
+
+#Makeright {
+  #Background {
+    .section {
+      &--copy {
+        width: 73%;
+      }
+
+      &--graphic {
+        width: 18%;
+      }
+    }
+  }
+
+  #Challenge {
+    .section {
+      &--copy {
+        width: 75%;
+      }
+
+      &--graphic {
+        width: 40%;
+      }
+    }
+  }
+
+  #HeroLogo {
+
+    $pad: 5rem;
+    padding-top: $pad;
+    padding-bottom: $pad * 1.1;
+
+
+    .section {
+      &--graphic {
+        @include flex-row-center;
+
+        & > * {
+          background-color: $col-background;
+          width: 70%;
+        }
+      }
+    }
+  }
+}

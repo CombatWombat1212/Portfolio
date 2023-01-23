@@ -26,7 +26,7 @@
   &--contact {
     @include flex-col;
 
-    padding-left: calc(((((100 * (var(--column-grid-max) / var(--column-width))) * 1%) - var(--site-max-width)) / 2));
+    padding-left: calc(((((100 * (var(--column-grid-max) / var(--column-width))) * 1%) - var(--site-max-width_wide)) / 2));
 
     & > * + * {
       margin-top: var(--footer-text-block-top-margin);

@@ -1,9 +1,98 @@
+@mixin section__background {
+  @at-root .section__background & {
+    @content;
+  }
+}
+
+:root {
+  --section-gap: 12.5rem;
+  --section-gap_half: calc(var(--section-gap) / 2);
+}
+
+.section {
+  &--wrapper {
+    margin-top: var(--section-gap);
+  }
+
+  --section-text-spacing: 1.25rem;
+
+  @include flex-row;
+
+  &--title {
+    & + * {
+      margin-top: var(--font-margin-bottom-h4);
+    }
+  }
+
+  &--heading {
+    & + * {
+      margin-top: var(--font-margin-bottom-h2);
+    }
+  }
+
+  &--copy {
+    @include flex-col-center;
+  }
+
+  &--description {
+    & > * + * {
+      margin-top: var(--section-text-spacing);
+    }
+  }
+
+  &--graphic {
+    img {
+      @include img-contain;
+    }
+  }
+}
+
+// Align variants
+
+.section {
+//   &__left {
+//     @include flex-row;
+//   }
+
+  &__center {
+    @include flex-col-center;
+  }
+
+//   &__right {
+//     @include flex-col-center;
+//   }
+}
 
 
 
+// Type variants
+.section {
+  &__background {
+    justify-content: space-between;
+    --gap: 6rem;
+    gap: var(--gap);
+    column-gap: var(--gap);
+    row-gap: var(--gap);
+  }
 
+  &--graphic {
+    @include section__background {
+      opacity: 0.3;
+    }
+  }
+}
 
-.section{
+// Color variants
+.section {
+  &__color {
+    @include pad-y(var(--section-gap_half));
 
-    
+    @include text {
+      color: $col-background;
+    }
+  }
+
+  &__primary {
+    background-color: $col-primary;
+  }
 }

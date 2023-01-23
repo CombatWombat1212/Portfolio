@@ -5,7 +5,7 @@ function Navigation() {
   return (
     <>
       <nav className="nav">
-        <div className="nav--container container">
+        <div className="nav--container container container__wide">
           <div className="nav--group nav--logo">
             {NAV_ITEMS.filter((item) => item.type == "Logo").map((item) => {
               return <NavLink key={item.key} item={item} />;

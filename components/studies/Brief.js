@@ -96,7 +96,7 @@ function BriefList({ brief }) {
 function Brief({ brief }) {
   return (
     <div className="brief">
-      <div className="container brief--container">
+      <div className="container container__wide brief--container">
         <BriefList brief={brief} />
       </div>
     </div>

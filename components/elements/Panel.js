@@ -6,7 +6,7 @@ import Tag from "../elements/Tag";
 function Panel({ children, id, className, reference, ...props }) {
   return (
     <>
-      <div id={id} className={"container panel" + (className ? ` ${className}` : "")} ref={reference} {...props}>
+      <div id={id} className={"container container__wide panel" + (className ? ` ${className}` : "")} ref={reference} {...props}>
         {children}
       </div>
     </>

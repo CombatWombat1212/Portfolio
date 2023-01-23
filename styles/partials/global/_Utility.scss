@@ -8,7 +8,8 @@ $spacers: (0: 0,
     2: $spacer * .5,
     3: $spacer,
     4: $spacer * 1.5,
-    5: $spacer * 3,
+    5: $spacer * 2,
+    6: $spacer * 4,
 ) !default;
 
 
@@ -53,10 +54,10 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
             ) ),
         // "position": (property: position,
         //     values: static relative absolute fixed sticky),
-        // "gap": (responsive:true,
-        //     property: --column-gap --row-gap --gap column-gap row-gap gap,
-        //     class: gap,
-        //     values: $spacers),
+        "gap": (responsive:true,
+            property: --column-gap --row-gap --gap column-gap row-gap gap,
+            class: gap,
+            values: $spacers),
         // "margin-y": (
         //     property: margin-top margin-bottom,
         //     class: my,
