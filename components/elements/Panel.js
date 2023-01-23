@@ -6,7 +6,7 @@ import Tag from "../elements/Tag";
 function Panel({ children, id, className, reference, ...props }) {
   return (
     <>
-      <div id={id} className={"container section" + (className ? ` ${className}` : "")} ref={reference} {...props}>
+      <div id={id} className={"container panel" + (className ? ` ${className}` : "")} ref={reference} {...props}>
         {children}
       </div>
     </>
@@ -16,7 +16,7 @@ function Panel({ children, id, className, reference, ...props }) {
 function PanelDesc({ children, className, reference, ...props }) {
   return (
     <>
-      <div className={"section--desc" + (className ? ` ${className}` : "")} ref={reference} {...props}>
+      <div className={"panel--desc" + (className ? ` ${className}` : "")} ref={reference} {...props}>
         {children}
       </div>
     </>
@@ -26,8 +26,8 @@ function PanelDesc({ children, className, reference, ...props }) {
 function PanelImg({ children, className, variant, effect, ...props }) {
   return (
     <>
-      <div className={"section--graphic" + (className ? ` ${className}` : "")} >
-        <div className={"section--img" + (variant == "study" ? ` studypanel--img` : "")} {...props}>
+      <div className={"panel--graphic" + (className ? ` ${className}` : "")} >
+        <div className={"panel--img" + (variant == "study" ? ` studypanel--img` : "")} {...props}>
           {/* {effect == 'gradient-white' && <div className="img--gradient img--gradient__white "></div>} */}
           {children}
         </div>
@@ -65,7 +65,7 @@ function StudyPanel({ id, study, variant }) {
           <h3>{study.subtitle.jsx}</h3>
 
           {study.tags && (
-            <div className="section--tags tag--group">
+            <div className="panel--tags tag--group">
               {study.tags.map((tag) => {
                 return <Tag key={tag.key}>{tag.name}</Tag>;
               })}
@@ -74,7 +74,7 @@ function StudyPanel({ id, study, variant }) {
 
           {variant == "home" ? (
             <>
-              <Button className="section--button" type="regular" icon={["arrow_right", "right", "mask"]} animation={"pulse-right"} href={study.link}>
+              <Button className="panel--button" type="regular" icon={["arrow_right", "right", "mask"]} animation={"pulse-right"} href={study.link}>
                 Have a look-see
               </Button>
             </>
@@ -82,7 +82,7 @@ function StudyPanel({ id, study, variant }) {
             variant == "study" && (
               <>
                 {/* TODO: link these buttons to the solution of each page's study */}
-                <Button className="section--button" type="regular" icon={["arrow_down", "right", "mask"]} animation={"pulse-down"} href={""}>
+                <Button className="panel--button" type="regular" icon={["arrow_down", "right", "mask"]} animation={"pulse-down"} href={""}>
                   Skip to Solution
                 </Button>
               </>

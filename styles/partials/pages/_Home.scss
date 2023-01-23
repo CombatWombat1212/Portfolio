@@ -1,6 +1,6 @@
 #Home {
   &--Hero {
-    .section {
+    .panel {
       &--img {
         @include mx-auto;
         width: 9.5rem;
@@ -12,7 +12,7 @@
 
       &--desc {
         .text--body {
-          margin-top: calc(var(--section-description-spacing) * 1.3);
+          margin-top: calc(var(--panel-description-spacing) * 1.3);
         }
       }
     }
@@ -24,31 +24,31 @@
   &--Made,
   &--Koalako,
   &--Explorations {
-    .section--img {
+    .panel--img {
       height: 43rem;
     }
   }
 
   //   &--Makeright {
-  //     .section--img {
+  //     .panel--img {
   //       height: 43rem;
   //     }
   //   }
 
   //   &--Made {
-  //     .section--img {
+  //     .panel--img {
   //       height: 43rem;
   //     }
   //   }
 
   //   &--Koalako {
-  //     .section--img {
+  //     .panel--img {
   //       height: 43rem;
   //     }
   //   }
 
   //   &--Explorations {
-  //     .section--img {
+  //     .panel--img {
   //       height: 43rem;
   //     }
 }

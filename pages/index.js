@@ -17,7 +17,7 @@ function Index() {
       <Scrollblock>
         <Panel id="Home--Hero" type="img-desc">
           <PanelDesc className="col-6">
-            <h1 className="section--title">
+            <h1 className="panel--title">
               Hi, I'm <span className="color--secondary">Sam Giustizia</span>,<br></br>how are you?
             </h1>
             {/* TODO: i really think this should be 2 lines not 3 */}

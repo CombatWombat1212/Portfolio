@@ -30,7 +30,7 @@ function Footer() {
 
   return (
     <>
-      <footer className="footer section">
+      <footer className="footer">
         <PanelDesc className="footer--info col-6">
           <div className="footer--contact">
             <h3>We need to talk...</h3>

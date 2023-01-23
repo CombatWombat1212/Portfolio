@@ -1,0 +1,61 @@
+
+
+.panel {
+  @include flex-row-between;
+
+  --panel-description-spacing: 1rem;
+
+  &--desc {
+
+    &>*+* {
+      margin-top: var(--panel-description-spacing);
+    }
+
+    @include flex-col-center;
+    
+  }
+
+  &--graphic{
+    @include flex-col-center;
+  }
+
+  &--img {
+    position: relative; 
+    img {
+      @include img-contain;
+    }
+  }
+
+  &--tags{
+    margin-top: calc(var(--panel-description-spacing) * 1.75);
+  }
+
+  &--button {
+    margin-top: calc(var(--panel-description-spacing) * 4);
+  }
+
+
+
+}
+
+
+
+
+
+.studypanel {
+
+  // TODO: Overall, even in the jsx and everthing, it might be more organized to replace 'studypanel' with 'panel__study' make it a variant of the panel element.
+
+  --studypanel-img-height: 43rem;
+
+&--img {
+  height: Min(var(--studypanel-img-height), calc(var(--studypanel-img-height) * (var(--img-aspect-height) / var(--img-aspect-width))));
+}
+
+
+&__study{
+  @include marg-y(8.5rem);
+}
+
+
+}

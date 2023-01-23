@@ -1,7 +1,12 @@
 .footer {
+
+  @include flex-row-between;
+  --footer-text-block-spacing: 1rem;
+
+
   --footer-height: 21rem;
-  --footer-text-block-top-margin: calc(var(--section-description-spacing) - 0.25rem);
-  --footer-button-top-margin: calc(var(--section-description-spacing) + 0.5rem);
+  --footer-text-block-top-margin: calc(var(--footer-text-block-spacing) - 0.25rem);
+  --footer-button-top-margin: calc(var(--footer-text-block-spacing) + 0.5rem);
   --footer-contact-height: calc(var(--font-leading-h3) + var(--font-leading-body) + var(--footer-text-block-top-margin) + var(--footer-button-top-margin) + var(--button-height));
 
   --column-grid-max: #{$column-grid-max};
