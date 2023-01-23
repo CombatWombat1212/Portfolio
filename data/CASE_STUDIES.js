@@ -13,7 +13,14 @@ var CASE_STUDIES = [
       ),
     },
     tags: ["Thesis", "UX/UI Design", "User Research"],
-    tools: ["Adobe XD / Figma", "Illustrator", "Mural", "HTML/CSS/JS", "After Effects", "InDesign"],
+
+    brief: {
+      description: "For my undergraduate capstone, I created a service that directly connects owners of 3D printers to customers in need.  Based on a gig-economy model, like Uber or DoorDash, this service enables access to 3D printing without the barriers of cost, and know-how. ",
+      tools: ["Adobe XD / Figma", "Illustrator", "Mural", "HTML/CSS/JS", "After Effects", "InDesign"],
+      deliverables: ["Hi-fidelity prototypes, of 2 user flows", "30+ Unique screens"],
+      timeline: "6 Months",
+      roles: ["UX/UI Designer", "UX Researcher", "Frontend Dev", "Graphic Design"],
+    },
 
     imgs: {
       main: {
@@ -44,8 +51,16 @@ var CASE_STUDIES = [
         </>
       ),
     },
+
     tags: ["Client", "3D Design", "Product Rendering"],
-    tools: ["Blender 3D", "Photoshop", "Python"],
+
+    brief: {
+      description: "MADE Clothing Co. reached out to me to work together in creating a dress shirt customization tool for their webstore.  With the software already built, they needed an artist to create realistic renderings of their shirt components, and fabrics.",
+      tools: ["Blender 3D", "Photoshop", "Python"],
+      deliverables: ["10 object models", "50+ custom textures", "600+ unique images"],
+      timeline: "3 active months of a 6 month partnership",
+      roles: ["3D Designer / Generalist"],
+    },
 
     imgs: {
       main: {
@@ -77,7 +92,13 @@ var CASE_STUDIES = [
       ),
     },
     tags: ["UX/UI Design", "User Research", "Team Project"],
-    tools: ["Adobe XD / Figma", "Mural", "InDesign"],
+
+    brief: {
+      description: "Supporting parents by providing a curated stream of unique, age-appropriate activities, and locations for play.  Easing the strain of fostering creative development by helping to fill gaps in a child’s exploration.",
+      tools: ["Adobe XD / Figma", "Mural", "InDesign"],
+      deliverables: ["Interactive prototype", "Video presentation & pitch"],
+      timeline: "9 Weeks",
+    },
 
     imgs: {
       main: {
@@ -129,9 +150,6 @@ var CASE_STUDIES = [
   },
 ];
 
-
-
-
 function addKey(arr) {
   for (var i = 0; i < arr.length; i++) {
     arr[i] = { name: arr[i], key: uuidv4() };
@@ -139,20 +157,18 @@ function addKey(arr) {
   return arr;
 }
 
-
-
 function caseStudiesInit(arr) {
   arr.forEach((item) => {
     item.key = uuidv4();
     if (item.tags) item.tags = addKey(item.tags);
-    if (item.tools) item.tools = addKey(item.tools);
+    if (!item.brief) return;
+    var brief = item.brief;
+    if (brief.tools) brief.tools = addKey(brief.tools);
+    if (brief.deliverables) brief.deliverables = addKey(brief.deliverables);
+    if (brief.roles) brief.roles = addKey(brief.roles);
   });
 
   return arr;
 }
-
-
-
-
 
 export default caseStudiesInit(CASE_STUDIES);

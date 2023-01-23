@@ -64,6 +64,7 @@ $font-body: "Tenon";
   font-family: $font-title;
   font-size: var(--font-size-h4);
   line-height: var(--font-leading-h4);
+  color: $col-secondary;
 }
 
 @mixin body {

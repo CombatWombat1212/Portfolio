@@ -1,0 +1,45 @@
+.brief {
+  background-color: $col-background_darkest;
+  @include pad-y(5rem);
+
+  &--container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  &--group {
+    &__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 3rem;
+    }
+  }
+
+  &--desc {
+    width: 80%;
+  }
+
+  &--point {
+    grid-column: span 1;
+  }
+
+  &--title{
+    margin-bottom: 0.5rem;
+  }
+
+  &--list {
+    li {
+      list-style-type: none;
+    }
+  }
+
+  &--tools {
+    @include flex-row;
+    flex-wrap: wrap;
+
+    --tag-spacing: 0.65rem;
+    // gap: var(--tag-spacing);
+    column-gap: calc(var(--tag-spacing) * 0.85);
+    row-gap: var(--tag-spacing);
+  }
+}
