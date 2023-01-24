@@ -1,6 +1,6 @@
-@mixin section__background {
-  @at-root .section__background & {
-    @content;
+@mixin section--heading-bottom-margin($m) {
+  &.#{$m} + * {
+    margin-top: var(--font-margin-bottom-#{$m});
   }
 }
 
@@ -9,11 +9,14 @@
   --section-gap_half: calc(var(--section-gap) / 2);
 }
 
-.section {
+.section,
+.chapter {
   &--wrapper {
     margin-top: var(--section-gap);
   }
+}
 
+.section {
   --section-text-spacing: 1.25rem;
 
   @include flex-row;
@@ -25,9 +28,10 @@
   }
 
   &--heading {
-    & + * {
-      margin-top: var(--font-margin-bottom-h2);
-    }
+    @include section--heading-bottom-margin(h1);
+    @include section--heading-bottom-margin(h2);
+    @include section--heading-bottom-margin(h3);
+    @include section--heading-bottom-margin(h4);
   }
 
   &--copy {
@@ -50,49 +54,117 @@
 // Align variants
 
 .section {
-//   &__left {
-//     @include flex-row;
-//   }
+  //   &__left {
+  //     @include flex-row;
+  //   }
 
   &__center {
     @include flex-col-center;
   }
 
-//   &__right {
-//     @include flex-col-center;
-//   }
+  //   &__right {
+  //     @include flex-col-center;
+  //   }
 }
-
-
 
 // Type variants
 .section {
   &__background {
     justify-content: space-between;
     --gap: 6rem;
+
     gap: var(--gap);
     column-gap: var(--gap);
     row-gap: var(--gap);
+
+    .section--graphic {
+      opacity: 0.3;
+    }
   }
 
-  &--graphic {
-    @include section__background {
-      opacity: 0.3;
+  &__pitch {
+    @include flex-row-between;
+
+    --gap: 6rem;
+    @include gap;
+
+    .section--heading {
+      margin-top: calc(var(--section-text-spacing) * 2);
+      & + * {
+        margin-top: 0;
+      }
+    }
+
+    .section--description {
+      margin-top: 0.5rem;
+      @include h3;
+      @include weight-reg;
+    }
+
+    .mask {
+      // --mask-aspect-width;
+      // --mask-aspect-height;
+      --mask-size: 7.5rem;
+      @include mask-width(var(--mask-size));
+    }
+
+    .section--graphic {
+      padding-left: 2rem;
     }
   }
 }
 
 // Color variants
+
+.section {
+  &__color,
+  &__image {
+    @include pad-y(var(--section-gap));
+  }
+}
+
 .section {
   &__color {
-    @include pad-y(var(--section-gap_half));
-
-    @include text {
-      color: $col-background;
+    & + & {
+      margin-top: 0;
     }
+
+    &:not(.section__background) {
+      * {
+        color: $col-background;
+      }
+    }
+  }
+}
+
+.chapter {
+  &__color {
+    // TODO: fix this ugly ass selector
+    & > * > *:not(.section__background) {
+      * {
+        color: $col-background;
+      }
+      .mask {
+        background-color: $col-background;
+      }
+    }
+  }
+}
+
+.section,
+.chapter {
+  &__color {
+  }
+
+  &__background {
+    background-color: $col-background;
   }
 
   &__primary {
     background-color: $col-primary;
+  }
+
+  &__makeright-tertiary {
+    background-color: $col-tertiary_makeright;
   }
 }

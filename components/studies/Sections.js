@@ -3,13 +3,37 @@ import { defaultProps, PropTypes } from "prop-types";
 import React from "react";
 import Mask from "../utilities/Mask";
 
-function Heading({ children }) {
+var backgroundColors = ["background", "primary", "secondary", "makeright tertiary"];
+
+function getHeadingClasses(type) {
+  var headingClasses = "section--heading";
+  if (type == "h1") headingClasses += " h1";
+  if (type == "h2") headingClasses += " h2";
+  if (type == "h3") headingClasses += " h3";
+  if (type == "h4") headingClasses += " h4";
+  return headingClasses;
+}
+
+function Heading({ children, type }) {
+  var headingClasses = getHeadingClasses(type);
+
   return (
-    <div className="section--heading">
-      <h2>{children}</h2>
+    <div className={headingClasses}>
+      {type == "h1" && <h1>{children}</h1>}
+      {type == "h2" && <h2>{children}</h2>}
+      {type == "h3" && <h3>{children}</h3>}
+      {type == "h4" && <h4>{children}</h4>}
     </div>
   );
 }
+
+Heading.defaultProps = {
+  type: "h2",
+};
+
+Heading.propTypes = {
+  type: PropTypes.oneOf(["h1", "h2", "h3", "h4"]),
+};
 
 function Title({ children }) {
   var title = children;
@@ -26,6 +50,10 @@ function Description({ children }) {
   return <div className="section--description">{children}</div>;
 }
 
+function Column({ children, className }) {
+  return <div className={`section--column ${className ? className : ""}`}>{children}</div>;
+}
+
 function Graphic({ type, img }) {
   var isImg = type == "image";
   var isMask = type == "mask";
@@ -33,7 +61,7 @@ function Graphic({ type, img }) {
   return (
     <>
       {isImg && <Image src={img.src} alt={img.alt} width={img.width} height={img.height} />}
-      {isMask && <Mask className="" src={img.src} alt={img.alt} width={img.width} height={img.height} />}
+      {isMask && <Mask src={img.src} alt={img.alt} width={img.width} height={img.height} />}
     </>
   );
 }
@@ -46,69 +74,220 @@ Graphic.propTypes = {
   type: PropTypes.oneOf(["image", "mask"]),
 };
 
+
+function Background() {
+  return <div></div>;
+}
+
+function getSectionChildren(children) {
+  var columns = [],
+    description = [],
+    title = [],
+    heading = [],
+    graphic = [];
+
+  var columns = children.filter((child) => child.type.name == "Column") || null;
+
+  if (columns.length == 0) {
+    description = children.filter((child) => child.type.name == "Description") || null;
+    title = children.filter((child) => child.type.name == "Title") || null;
+    heading = children.filter((child) => child.type.name == "Heading") || null;
+    graphic = children.filter((child) => child.type.name == "Graphic") || null;
+  } else {
+    for (var i = 0; i < columns.length; i++) {
+      var column = columns[i];
+      var columnChildren = column.props.children;
+      var columnDescription = columnChildren.filter((child) => child.type.name == "Description") || null;
+      var columnTitle = columnChildren.filter((child) => child.type.name == "Title") || null;
+      var columnHeading = columnChildren.filter((child) => child.type.name == "Heading") || null;
+      var columnGraphic = columnChildren.filter((child) => child.type.name == "Graphic") || null;
+
+      description.push(columnDescription);
+      title.push(columnTitle);
+      heading.push(columnHeading);
+      graphic.push(columnGraphic);
+    }
+  }
+
+  return { columns, description, title, heading, graphic };
+}
+
+function getMainClasses(pref, type, align) {
+  if (pref == undefined) pref = `${pref}`;
+  var mainClasses = `${pref}`;
+  if (type == undefined) return mainClasses;
+  if (type == "background") mainClasses += ` ${pref}__background`;
+  if (type == "pitch") mainClasses += ` ${pref}__pitch`;
+  if (align == "center") mainClasses += ` ${pref}__center`;
+  if (align == "right") mainClasses += ` ${pref}__right`;
+  if(SECTION_TYPE_C.indexOf(type) != -1) mainClasses += ' gap-4';
+
+  return mainClasses;
+}
+
+function getContainerMarginClass(margin) {
+  var containerMarginClass = " container";
+  if (margin == undefined) return containerMarginClass;
+  // if (margin == "regular") containerMarginClass += " container__regular";
+  if (margin == "wide") containerMarginClass += " container__wide";
+
+  return containerMarginClass;
+}
+
+function getWrapperClasses(pref, background) {
+  if (pref == undefined) pref = "section";
+
+  var wrapperClasses = `${pref}--wrapper`;
+  if (background == undefined) return wrapperClasses;
+
+  if (typeof background == "string") {
+    if (backgroundColors.indexOf(background) != -1) {
+      if (pref == "chapter" && background != "background") wrapperClasses += ` ${pref}__color`;
+      else if (pref == "section") wrapperClasses += ` ${pref}__color`;
+    }
+
+    if (background == "primary") wrapperClasses += ` ${pref}__primary`;
+    if (background == "makeright tertiary") wrapperClasses += ` ${pref}__makeright-tertiary`;
+    if (background == "background") wrapperClasses += ` ${pref}__background`;
+  } else if (typeof background == "object") {
+    wrapperClasses += ` ${pref}__image`;
+  }
+
+  return wrapperClasses;
+}
+
+function getHasBackground(background) {
+  var hasBackground = false;
+  if (background != "background") hasBackground = true;
+  return hasBackground;
+}
+
+function getHasText(childs) {
+  var hasText = false;
+  var { description, title, heading, graphic } = childs;
+  if (description.length != 0 || title.length != 0 || heading.length != 0) hasText = true;
+  return hasText;
+}
+
+function getHasGraphic(graphic) {
+  var hasGraphic = false;
+  hasGraphic = graphic.length != 0;
+  return hasGraphic;
+}
+
+const SECTION_TYPE_A = ["default", "background", "logo banner"];
+const SECTION_TYPE_B = ["pitch"];
+const SECTION_TYPE_C = ["columns"];
+
 function Section({ children, type, background, id, margin, align }) {
+  var pref = "section";
+
   if (children == undefined) return null;
   if (children.length == undefined) children = [children];
 
-  var description = children.filter((child) => child.type.name == "Description") || null;
-  var title = children.filter((child) => child.type.name == "Title") || null;
-  var heading = children.filter((child) => child.type.name == "Heading") || null;
-  var graphic = children.filter((child) => child.type.name == "Graphic") || null;
+  var childs = getSectionChildren(children);
+  var { columns, description, title, heading, graphic } = childs;
 
-  var sectionClasses = " section";
-  if (type == "background") sectionClasses += " section__background";
+  var mainClasses = getMainClasses(pref, type, align);
+  var containerMarginClass = getContainerMarginClass(margin);
+  var wrapperClasses = getWrapperClasses(pref, background);
 
-  var containerType = "";
-  if (margin == "regular") containerType = "container";
-  if (margin == "wide") containerType = "container container__wide";
+  var hasText = getHasText(childs);
+  var hasGraphic = getHasGraphic(graphic);
 
-  var wrapperClasses = "section--wrapper";
-  var hasBackground = false;
-  if (background != "background") hasBackground = true;
-  if (background == "primary") wrapperClasses += " section__color section__primary";
+  // var hasBackground = getHasBackground(background);
 
-  var hasText = false;
-  if (description.length != 0 || title.length != 0 || heading.length != 0) hasText = true;
 
-  if (align == "center") sectionClasses += " section__center";
-  if (align == "right") sectionClasses += " section__right";
+
 
   return (
     <>
       <div id={id} className={wrapperClasses}>
-        <div className={"section" + ` ${containerType}` + sectionClasses}>
-          {hasText && (
-            <div className="section--copy">
-              {title && <>{title}</>}
-              {heading && <>{heading}</>}
-              {description && <>{description}</>}
-            </div>
-          )}
+        <div className="test"></div>
+        <div className="section--inner">
+          <div className={mainClasses + containerMarginClass}>
+            {SECTION_TYPE_A.indexOf(type) != -1 ? (
+              <>
+                {hasText && (
+                  <div className="section--copy">
+                    {title && <>{title}</>}
+                    {heading && <>{heading}</>}
+                    {description && <>{description}</>}
+                  </div>
+                )}
 
-          {graphic && (
-            <>
-              <div className="section--graphic">
-                <>{graphic}</>
-              </div>
-            </>
-          )}
+                {hasGraphic && (
+                  <>
+                    <div className="section--graphic">
+                      <>{graphic}</>
+                    </div>
+                  </>
+                )}
+              </>
+            ) : SECTION_TYPE_B.indexOf(type) != -1 ? (
+              <>
+                <div className="section--copy col-4">
+                  <>{graphic[0]}</>
+                  {heading && <>{heading}</>}
+                  {description && <>{description}</>}
+                </div>
+                <div className="section--graphic col-8">
+                  <>{graphic[1]}</>
+                </div>
+              </>
+            ) : SECTION_TYPE_C.indexOf(type) != -1 ? (
+              <>
+                {columns.map((column, i) => {
+                  return (
+                    <Column className={`col-${12 / columns.length}`} key={`column ${i}`}>
+                      {graphic[i] && <>{graphic[i]}</>}
+                      {heading[i] && <>{heading[i]}</>}
+                      {description[i] && <>{description[i]}</>}
+                    </Column>
+                  );
+                })}
+              </>
+            ) : null}
+          </div>
         </div>
       </div>
     </>
   );
+
 }
 
 Section.defaultProps = {
-  background: "background",
+  background: "none",
   margin: "regular",
   align: "left",
+  type: "default",
 };
 
 Section.propTypes = {
   margin: PropTypes.oneOf(["regular", "wide"]),
-  background: PropTypes.oneOf(["background", "primary", "secondary"]),
   align: PropTypes.oneOf(["left", "center", "right"]),
+  type: PropTypes.oneOf(["default", "columns", "background", "logo banner", "pitch"]),
+
+  background: PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf(["none", ...backgroundColors])]),
 };
 
+// TODO: section and chapter background should be able to be set with an image, and named colors
+
+function Chapter({ children, type, background, id, margin, align }) {
+  var pref = "chapter";
+
+  var wrapperClasses = getWrapperClasses(pref, background);
+  var mainClasses = getMainClasses(pref, type, align);
+
+  return (
+    <div id={id} className={wrapperClasses}>
+      <div className={mainClasses}>{children}</div>
+    </div>
+  );
+}
+
+Chapter.defaultProps = Section.defaultProps;
+Chapter.propTypes = Section.propTypes;
+
 export default Section;
-export { Section, Description, Title, Heading, Graphic };
+export { Section, Chapter, Description, Column, Title, Heading, Graphic };

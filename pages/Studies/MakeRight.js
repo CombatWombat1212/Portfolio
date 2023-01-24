@@ -2,9 +2,10 @@ import { StudyPanel } from "/components/elements/Panel";
 import getStudy from "../../scripts/GetStudy";
 import CaseStudyPage from "/components/studies/CaseStudyPage";
 import Brief from "/components/studies/Brief";
-import { Section, Title, Heading, Description, Graphic } from "/components/studies/Sections";
-import Chapter from "/components/studies/Chapter";
+import { Section, Chapter, Title, Column, Heading, Description, Graphic } from "/components/studies/Sections";
 import MAKERIGHT_IMGS from "/data/MAKERIGHT_IMGS";
+
+// TODO:add the interactive chapter selection thingy
 
 function MakeRight() {
   const study = getStudy();
@@ -53,13 +54,12 @@ function MakeRight() {
           </Section>
         </Chapter>
 
-
-        <Chapter name="Pitch">
-          <Section id="HeroLogo" background="primary" align="center">
+        <Chapter name="Pitch" id="Pitch" background="makeright tertiary">
+          <Section id="HeroLogo" type="logo banner" background="primary" align="center">
             <Graphic type="mask" img={MAKERIGHT_IMGS["makeright_logo"]} />
           </Section>
 
-          <Section id="IntroSolution">
+          <Section id="IntroSolution" background="background">
             <Title>Solution</Title>
             <Heading>
               Directly connect consumers with owners of 3D printers
@@ -68,13 +68,72 @@ function MakeRight() {
             </Heading>
           </Section>
 
+          {/* TODO: go back and add the scrolling animations and fancy engineering planned for this section */}
 
-    {/* TODO: re-export the laptop images for better quality - go to the base level images they are made of, and re-export all the way up until you have them in about 2x the current quality without the ugly anti-aliesing issues that some currently have (blockyness) */}
-
-          <Section id="Pitch">
-            <Heading></Heading>
+          <Section id="Pitch--Choose" type="pitch" margin="wide">
+            <Heading>Choose</Heading>
+            <Description>
+              from our collection <br />
+              of sourced 3D models,
+              <br /> or upload your own
+            </Description>
+            <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_choose"]} />
+            <Graphic type="image" img={MAKERIGHT_IMGS["pitch_laptop_choose"]} />
           </Section>
 
+          <Section id="Pitch--Tweak" type="pitch" margin="wide">
+            <Heading>Tweak</Heading>
+            <Description>
+              and personalize
+              <br />
+              to suit your needs
+            </Description>
+            <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_tweak"]} />
+            <Graphic type="image" img={MAKERIGHT_IMGS["pitch_laptop_tweak"]} />
+          </Section>
+
+          <Section id="Pitch--Order" type="pitch" margin="wide">
+            <Heading>Order</Heading>
+            <Description>
+              your model, assigning it <br />
+              to one of our verified makers
+            </Description>
+            <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_order"]} />
+            <Graphic type="image" img={MAKERIGHT_IMGS["pitch_laptop_order"]} />
+          </Section>
+
+          <Section id="Pitch--Recieve" type="pitch" margin="wide">
+            <Heading>Recieve</Heading>
+            <Description>right at your front door</Description>
+            <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_recieve"]} />
+            <Graphic type="image" img={MAKERIGHT_IMGS["pitch_laptop_recieve"]} />
+          </Section>
+
+          <Section id="IntroSummary" type="columns" background="background">
+            <Column>
+              <Heading type="h3">Slashing the overhead of competitors</Heading>
+              <Description>
+                <p>Competing services ruin the low-cost benefits of 3D printing by charging steep overhead fees. Created by having countless technicians and printers operating under one roof.</p>
+                <p>MakeRight undercuts this overhead by connecting customers directly to makers. Only charging them for the work of one technician, paid to run their own equipment.</p>
+              </Description>
+            </Column>
+            <Column>
+              <Heading type="h3">
+                Operating much like an 'Uber'
+                <br />
+                for 3D prints from local makers.
+              </Heading>
+              <Description>
+                <p>Giving customers access to 3D printing's low-cost, customizable production, without owning or operating the technology. While also enabling hobbyist makers to profit off their skills and equipment. </p>
+              </Description>
+            </Column>
+          </Section>
+        </Chapter>
+
+        <Chapter name="Planning" id="Planning">
+          <Section id="BuildingMakeRight" background={MAKERIGHT_IMGS["building_makeright_banner"]}>
+            <Heading>Building MakeRight</Heading>
+          </Section>
         </Chapter>
       </CaseStudyPage>
     </>

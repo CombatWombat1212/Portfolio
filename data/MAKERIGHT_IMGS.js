@@ -56,7 +56,7 @@ const MAKERIGHT_IMGS = {
 
   pitch_laptop_choose: {
     name: "pitch laptop choose",
-    src: "./assets/images/case_studies/makeright/pitch_laptop_choose.svg",
+    src: "./assets/images/case_studies/makeright/pitch_laptop_choose.png",
     alt: "MakeRight UI screenshot showing a storefront page filled with different 3D models",
     width: 102.24,
     height: 128.4,
@@ -64,26 +64,35 @@ const MAKERIGHT_IMGS = {
 
   pitch_laptop_tweak: {
     name: "pitch laptop tweak",
-    src: "./assets/images/case_studies/makeright/pitch_laptop_tweak.svg",
+    src: "./assets/images/case_studies/makeright/pitch_laptop_tweak.png",
     alt: "MakeRight UI screenshot showing the ability to customize the scale, color, and material of your 3D printed object",
-    width: 1968,
-    height: 1146,
+    width: 2952,
+    height: 1743,
   },
 
   pitch_laptop_order: {
     name: "pitch laptop order",
-    src: "./assets/images/case_studies/makeright/pitch_laptop_order.svg",
+    src: "./assets/images/case_studies/makeright/pitch_laptop_order.png",
     alt: "MakeRight UI screenshot showing the order ticket page, where a plastic boat has been purchased",
-    width: 1968,
-    height: 1146,
+    width: 2952,
+    height: 1743,
   },
 
   pitch_laptop_recieve: {
     name: "pitch laptop recieve",
-    src: "./assets/images/case_studies/makeright/pitch_laptop_recieve.svg",
+    src: "./assets/images/case_studies/makeright/pitch_laptop_recieve.png",
     alt: "MakeRight UI screenshot showing a message from your assigned 3D printer - your order is ready and images are attatched to the message to prove it",
-    width: 1968,
-    height: 1146,
+    width: 2952,
+    height: 1743,
+  },
+
+
+  building_makeright_banner: {
+    name: "building_makeright_banner",
+    src: "./assets/images/case_studies/makeright/building_makeright_banner.png",
+    alt: "Photograph of a lab filled with 3D printers",
+    width: 3840,
+    height: 1400,
   },
 };
 

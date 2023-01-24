@@ -1,6 +1,9 @@
 import NAV_ITEMS from "../../data/NAV_ITEMS";
 import NavLink from "../navigation/NavLink";
 
+// TODO: make nav change colors when scrolling over sections that match its color
+
+
 function Navigation() {
   return (
     <>

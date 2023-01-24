@@ -100,6 +100,7 @@ $sitemap-item-spacing: 0.9rem;
 
     a {
       @include h3;
+      color: $col-background;
     }
   }
 

@@ -82,6 +82,7 @@ input, button, textarea, select {
   --font-leading-h4: 1.25rem;
   --font-leading-body: 1.5rem;
   --font-margin-bottom-h2: 1.5rem;
+  --font-margin-bottom-h3: 1.125rem;
   --font-margin-bottom-h4: 0.25rem;
   font-family: "Tenon";
   color: #074391;
@@ -1698,6 +1699,7 @@ body p, body li {
   --font-size: var(--font-size-logo);
   font-size: var(--font-size);
   font-weight: 400;
+  color: #F3F3F7;
 }
 
 .nav--links a {
@@ -1746,8 +1748,6 @@ body p, body li {
 }
 
 .mask {
-  --mask-aspect-width: 205;
-  --mask-aspect-height: 168;
   mask-image: var(--mask-img);
   -webkit-mask-size: contain;
   -webkit-mask-repeat: no-repeat;
@@ -1856,6 +1856,7 @@ body p, body li {
   font-size: var(--font-size-h3);
   line-height: var(--font-leading-h3);
   font-weight: 300;
+  color: #F3F3F7;
 }
 
 .sitemap--links {
@@ -1945,22 +1946,35 @@ body p, body li {
   --section-gap_half: calc(var(--section-gap) / 2);
 }
 
+.section--wrapper,
+.chapter--wrapper {
+  margin-top: var(--section-gap);
+}
+
 .section {
   --section-text-spacing: 1.25rem;
   display: flex;
   flex-direction: row;
 }
 
-.section--wrapper {
-  margin-top: var(--section-gap);
-}
-
 .section--title + * {
   margin-top: var(--font-margin-bottom-h4);
 }
 
-.section--heading + * {
+.section--heading.h1 + * {
+  margin-top: var(--font-margin-bottom-h1);
+}
+
+.section--heading.h2 + * {
   margin-top: var(--font-margin-bottom-h2);
+}
+
+.section--heading.h3 + * {
+  margin-top: var(--font-margin-bottom-h3);
+}
+
+.section--heading.h4 + * {
+  margin-top: var(--font-margin-bottom-h4);
 }
 
 .section--copy {
@@ -1997,27 +2011,76 @@ body p, body li {
   opacity: 0.3;
 }
 
-.section__color {
-  padding-top: var(--section-gap_half);
-  padding-bottom: var(--section-gap_half);
+.section__pitch {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  --gap: 6rem;
+  gap: var(--gap);
+  column-gap: var(--gap);
+  row-gap: var(--gap);
 }
 
-.section__color h1,
-.section__color h2,
-.section__color h3,
-.section__color h4,
-.section__color h5,
-.section__color h6,
-.section__color p,
-.section__color li,
-.section__color a,
-.section__color label,
-.section__color span {
+.section__pitch .section--heading {
+  margin-top: calc(var(--section-text-spacing) * 2);
+}
+
+.section__pitch .section--heading + * {
+  margin-top: 0;
+}
+
+.section__pitch .section--description {
+  margin-top: 0.5rem;
+  font-family: "Gira Sans";
+  font-size: var(--font-size-h3);
+  line-height: var(--font-leading-h3);
+  font-weight: 300;
+  font-weight: 400;
+}
+
+.section__pitch .mask {
+  --mask-size: 7.5rem;
+  width: calc((var(--mask-aspect-width) / var(--mask-aspect-height)) * var(--mask-size));
+}
+
+.section__pitch .section--graphic {
+  padding-left: 2rem;
+}
+
+.section__color, .section__image {
+  padding-top: var(--section-gap);
+  padding-bottom: var(--section-gap);
+}
+
+.section__color + .section__color {
+  margin-top: 0;
+}
+
+.section__color:not(.section__background) * {
   color: #F3F3F7;
 }
 
-.section__primary {
+.chapter__color > * > *:not(.section__background) * {
+  color: #F3F3F7;
+}
+
+.chapter__color > * > *:not(.section__background) .mask {
+  background-color: #F3F3F7;
+}
+
+.section__background,
+.chapter__background {
+  background-color: #F3F3F7;
+}
+
+.section__primary,
+.chapter__primary {
   background-color: #074391;
+}
+
+.section__makeright-tertiary,
+.chapter__makeright-tertiary {
+  background-color: #25313C;
 }
 
 #Home--Hero .panel--img {
@@ -2068,5 +2131,9 @@ body p, body li {
 #Makeright #HeroLogo .section--graphic > * {
   background-color: #F3F3F7;
   width: 70%;
+}
+
+#Makeright #Planning, #Makeright #BuildingMakeRight {
+  margin-top: 0;
 }
 /*# sourceMappingURL=style.css.map */

@@ -7,6 +7,10 @@ function Mask({ className, src, alt, width, height }) {
     src = imgSrc
   }
 
+
+  // TODO: add a fallback if the image doesn't load to display its alt text?
+
+
   return (
     <div
       className={"mask" + (className ? ` ${className}` : "")}

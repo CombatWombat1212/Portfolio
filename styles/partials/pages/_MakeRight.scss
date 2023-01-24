@@ -27,11 +27,11 @@
 
   #HeroLogo {
 
+    
     $pad: 5rem;
     padding-top: $pad;
     padding-bottom: $pad * 1.1;
-
-
+    
     .section {
       &--graphic {
         @include flex-row-center;
@@ -43,4 +43,16 @@
       }
     }
   }
+
+
+  #Planning,#BuildingMakeRight {
+    margin-top:0;
+  }
+
+
+
+  
+
+
+
 }

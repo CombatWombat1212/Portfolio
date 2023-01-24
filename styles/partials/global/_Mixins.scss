@@ -599,13 +599,36 @@
 
 
 @mixin mask {
-	--mask-aspect-width: 205;
-	--mask-aspect-height: 168;
+	// --mask-aspect-width: 205;
+	// --mask-aspect-height: 168;
 	mask-image: var(--mask-img);
 	-webkit-mask-size: contain;
 	-webkit-mask-repeat: no-repeat;
   
 	@include aspect-support-fix(var(--mask-aspect-width), var(--mask-aspect-height), 100%, null);
+  }
+
+
+
+  @mixin mask-width($w){
+	width:  calc((var(--mask-aspect-width) / var(--mask-aspect-height)) * #{$w});
+  }
+
+
+  @mixin img-width($w){
+	width:  calc((var(--img-aspect-width) / var(--img-aspect-height)) * #{$w});
+  }
+
+
+  @mixin gap($g:var(--gap)){
+	// TODO: this would be a great place to build out a mixin that can work when gap isn't supported and when it is
+
+	gap: #{$g};
+	column-gap: #{$g};
+	row-gap: #{$g};
+
+
+
   }
 
 
