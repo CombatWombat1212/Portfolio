@@ -63,11 +63,9 @@
 .section {
   &__background {
     justify-content: space-between;
-    --gap: 6rem;
 
-    gap: var(--gap);
-    column-gap: var(--gap);
-    row-gap: var(--gap);
+    --gap: 6rem;
+    @include gap;
 
     .section--graphic {
       opacity: 0.3;

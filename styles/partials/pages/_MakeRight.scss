@@ -1,37 +1,42 @@
 // TODO: Find a way to ensure that these graphics are always locked to the correct scale
 
-#Makeright {
-  #Background {
-    .section {
-      &--copy {
-        width: 73%;
-      }
+@mixin makeright-background-info-img {
+  @include img-width(17.5rem);
+}
 
+#Makeright {
+
+  --background-info-gap: 6rem;
+
+  #Background {
+
+    .section {
+      @include gap(var(--background-info-gap));
       &--graphic {
-        width: 18%;
+        img {
+          @include makeright-background-info-img;
+        }
       }
     }
   }
 
   #Challenge {
-    .section {
-      &--copy {
-        width: 75%;
-      }
 
+    .section {
+      @include gap(var(--background-info-gap));
       &--graphic {
-        width: 40%;
+        img {
+          @include makeright-background-info-img;
+        }
       }
     }
   }
 
   #HeroLogo {
-
-    
     $pad: 5rem;
     padding-top: $pad;
     padding-bottom: $pad * 1.1;
-    
+
     .section {
       &--graphic {
         @include flex-row-center;
@@ -45,15 +50,8 @@
     }
   }
 
-
-  #Plan,#BuildingMakeRight {
-    margin-top:0;
+  #Plan,
+  #BuildingMakeRight {
+    margin-top: 0;
   }
-
-
-
-  
-
-
-
 }

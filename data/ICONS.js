@@ -23,6 +23,13 @@ const ICONS = {
     width: 384,
     height: 447.98,
   },
+  chevron_down: {
+    name: 'chevron_down',
+    src: "/assets/icons/chevron_down.svg",
+    alt: "Chevron pointing down",
+    width: 17.84,
+    height: 11.75,
+  },
   document: {
     name: 'document',
     src: "/assets/icons/document.svg",
@@ -69,9 +76,15 @@ function Icon(icon){
 
 const arrow_right = new Icon(ICONS.arrow_right)
 const arrow_left = new Icon(ICONS.arrow_left)
+const arrow_down = new Icon(ICONS.arrow_down)
+const chevron_down = new Icon(ICONS.chevron_down)
+const document = new Icon(ICONS.document)
+const email = new Icon(ICONS.email)
+const instagram = new Icon(ICONS.instagram)
+const linkedin = new Icon(ICONS.linkedin)
 
 export default ICONS
-export {arrow_right, arrow_left}
+export { arrow_right, arrow_left, arrow_down, chevron_down, document, email, instagram, linkedin }
   
 
 

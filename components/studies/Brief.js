@@ -19,8 +19,6 @@ function BriefPoint({ items, type }) {
   //   if (type == "description") pointClasses += "col-6";
   //   if (type != "description") pointClasses += "col-3";
 
-
-  
   return (
     <>
       <div className={pointClasses}>
@@ -29,7 +27,7 @@ function BriefPoint({ items, type }) {
         {isList ? (
           <>
             {isTools ? (
-              <ul className="brief--list brief--tools">
+              <div className="brief--list brief--tools">
                 {items.map((item) => {
                   return (
                     <Tag key={item.key} variant="tool">
@@ -37,7 +35,7 @@ function BriefPoint({ items, type }) {
                     </Tag>
                   );
                 })}
-              </ul>
+              </div>
             ) : (
               <ul className="brief--list">
                 {items.map((item) => {
@@ -65,18 +63,13 @@ BriefPoint.propTypes = {
 };
 
 function BriefList({ brief }) {
-  var order = [
-    "deliverables", 
-    "roles", 
-    "timeline", 
-    "tools",
-];
-//   var order = [
-//     "deliverables", 
-//     "roles", 
-//     "timeline", 
-//     "tools",
-// ];
+  var order = ["deliverables", "roles", "timeline", "tools"];
+  //   var order = [
+  //     "deliverables",
+  //     "roles",
+  //     "timeline",
+  //     "tools",
+  // ];
 
   return (
     <>

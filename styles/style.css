@@ -69,6 +69,13 @@ input, button, textarea, select {
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Tenon";
+  src: url("/assets/fonts/tenon/Tenon_Medium.otf");
+  font-weight: 500;
+  font-style: normal;
+}
+
 :root {
   --font-size-h1: 3.375rem;
   --font-size-h2: 2.375rem;
@@ -1557,6 +1564,38 @@ body p, body li {
   object-fit: cover;
 }
 
+.gantt {
+  --gantt-label-width: 16rem;
+  --gantt-button-width: 3rem;
+}
+
+.gantt--timeline {
+  display: grid;
+  grid-template-columns: var(--gantt-label-width) repeat(var(--gantt-weeks), 1fr) var(--gantt-button-width);
+}
+
+.gantt .label--unit {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.gantt .label--unit span {
+  width: 100%;
+  position: absolute;
+  left: -25%;
+  transform: translateX(-25%);
+}
+
+.gantt .label__primary {
+  font-family: "Tenon";
+  font-size: var(--font-size-body);
+  line-height: var(--font-leading-body);
+  font-weight: 500;
+}
+
 .d-block {
   display: block;
 }
@@ -2120,20 +2159,28 @@ body p, body li {
   height: 43rem;
 }
 
-#Makeright #Background .section--copy {
-  width: 73%;
+#Makeright {
+  --background-info-gap: 6rem;
 }
 
-#Makeright #Background .section--graphic {
-  width: 18%;
+#Makeright #Background .section {
+  gap: var(--background-info-gap);
+  column-gap: var(--background-info-gap);
+  row-gap: var(--background-info-gap);
 }
 
-#Makeright #Challenge .section--copy {
-  width: 75%;
+#Makeright #Background .section--graphic img {
+  width: calc((var(--img-aspect-width) / var(--img-aspect-height)) * 17.5rem);
 }
 
-#Makeright #Challenge .section--graphic {
-  width: 40%;
+#Makeright #Challenge .section {
+  gap: var(--background-info-gap);
+  column-gap: var(--background-info-gap);
+  row-gap: var(--background-info-gap);
+}
+
+#Makeright #Challenge .section--graphic img {
+  width: calc((var(--img-aspect-width) / var(--img-aspect-height)) * 17.5rem);
 }
 
 #Makeright #HeroLogo {
@@ -2153,7 +2200,8 @@ body p, body li {
   width: 70%;
 }
 
-#Makeright #Plan, #Makeright #BuildingMakeRight {
+#Makeright #Plan,
+#Makeright #BuildingMakeRight {
   margin-top: 0;
 }
 /*# sourceMappingURL=style.css.map */

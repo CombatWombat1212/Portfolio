@@ -10,8 +10,8 @@ const MAKERIGHT_IMGS = {
     name: "barriers to entry",
     src: "./assets/images/case_studies/makeright/barriers_to_entry.svg",
     alt: "Gate / barrier with the symbols for knowledge, and money",
-    width: 359.84,
-    height: 329.02,
+    width: 360.84,
+    height: 330.02,
   },
 
   makeright_logo: {

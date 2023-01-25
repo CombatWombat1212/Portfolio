@@ -80,12 +80,27 @@ $font-body: "Tenon";
   margin-bottom: var(--font-margin-bottom-h4);
 }
 
-@mixin body {
+
+
+@mixin body-text{
   font-family: $font-body;
   font-size: var(--font-size-body);
   line-height: var(--font-leading-body);
-  font-weight: 400;
 }
+
+@mixin body {
+  @include body-text;
+  @include weight-reg;
+}
+
+@mixin body-med {
+  @include body-text;
+  @include weight-med;
+}
+
+
+
+
 
 h1,
 .text--h1 {

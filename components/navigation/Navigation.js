@@ -2,6 +2,7 @@ import NAV_ITEMS from "../../data/NAV_ITEMS";
 import NavLink from "../navigation/NavLink";
 
 // TODO: make nav change colors when scrolling over sections that match its color
+// TODO: make the case study item a dropdown
 
 
 function Navigation() {

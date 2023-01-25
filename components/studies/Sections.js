@@ -60,9 +60,11 @@ function Graphic({ type, img }) {
   var isImg = type == "image";
   var isMask = type == "mask";
 
+
+  // TODO: if you end up using this 'img-aspect-width' thing in multiple places then you should create a wrapper for Next/Image that automatically adds it to your image components, same as its done here and within the Mask component
   return (
     <>
-      {isImg && <Image src={img.src} alt={img.alt} width={img.width} height={img.height} />}
+      {isImg && <Image src={img.src} alt={img.alt} width={img.width} height={img.height} style={{'--img-aspect-width':img.width, '--img-aspect-height':img.height  }} />}
       {isMask && <Mask src={img.src} alt={img.alt} width={img.width} height={img.height} />}
     </>
   );
@@ -279,7 +281,7 @@ Section.propTypes = {
   background: PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf(["none", ...BACKGROUND_COLORS])]),
 };
 
-// TODO: section and chapter background should be able to be set with an image, and named colors
+// TODO: section and chapter background should be able to be set with an image, and named colors - only thing missing from that now is image background support for chapters but i don't even think that's used in the design
 
 function Chapter({ children, type, background, id, margin }) {
   var pref = "chapter";

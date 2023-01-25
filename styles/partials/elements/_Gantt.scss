@@ -1,0 +1,54 @@
+
+
+// TODO: mouseover the week number and it should highlight the week in the timeline in a darkish low-opactiy blue
+
+
+.gantt{
+
+    --gantt-label-width: 16rem;
+    --gantt-button-width: 3rem;
+
+
+    &--cycle{
+
+    }
+
+    &--timeline{
+
+        display:grid;
+        grid-template-columns: var(--gantt-label-width) repeat(var(--gantt-weeks), 1fr) var(--gantt-button-width);
+
+        
+    }
+
+
+
+    .label{
+
+        &--title{}
+
+
+        &--unit{
+            @include flex-row;
+            position:relative;
+            text-align: center;
+            width:100%;
+            span{
+                width:100%;
+                position: absolute;
+                left: -25%; 
+                transform: translateX(-25%);        
+            }
+        }
+
+
+
+        &__primary{
+            @include body-med;
+        }
+    }
+
+
+
+
+}
