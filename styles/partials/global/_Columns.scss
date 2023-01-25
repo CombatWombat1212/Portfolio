@@ -21,7 +21,7 @@ $column-grid-max: 12;
 }
 
 
-
+// TODO: it would be good if this could be done in such a way that it is all inside one media query rather than each one being its own media query. 
 
 @for $b from $column-grid-min to $column-grid-max+1 {
     .col-#{$b} {

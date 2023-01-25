@@ -35,6 +35,7 @@
     .section {
       &--graphic {
         @include flex-row-center;
+        width: 100%;
 
         & > * {
           background-color: $col-background;
@@ -45,7 +46,7 @@
   }
 
 
-  #Planning,#BuildingMakeRight {
+  #Plan,#BuildingMakeRight {
     margin-top:0;
   }
 

@@ -4,6 +4,7 @@ import CaseStudyPage from "/components/studies/CaseStudyPage";
 import Brief from "/components/studies/Brief";
 import { Section, Chapter, Title, Column, Heading, Description, Graphic } from "/components/studies/Sections";
 import MAKERIGHT_IMGS from "/data/MAKERIGHT_IMGS";
+import Gantt from "/components/studies/Gantt";
 
 // TODO:add the interactive chapter selection thingy
 
@@ -55,7 +56,7 @@ function MakeRight() {
         </Chapter>
 
         <Chapter name="Pitch" id="Pitch" background="makeright tertiary">
-          <Section id="HeroLogo" type="logo banner" background="primary" align="center">
+          <Section id="HeroLogo" type="logo banner" background="primary" align="just-center">
             <Graphic type="mask" img={MAKERIGHT_IMGS["makeright_logo"]} />
           </Section>
 
@@ -130,10 +131,21 @@ function MakeRight() {
           </Section>
         </Chapter>
 
-        <Chapter name="Planning" id="Planning">
+        <Chapter name="Plan" id="Plan">
           <Section id="BuildingMakeRight" background={MAKERIGHT_IMGS["building_makeright_banner"]}>
             <Heading>Building MakeRight</Heading>
           </Section>
+
+          <Section id="Plan--Gantt" className="flex-col">
+
+
+            {/* TODO: morning man! before getting started on the gantt chart, do what you did to the pitch icons to the graphics at the top of the page to ensure that they're always at the right scale.  This will require you to create an image wrapper of somekind, or figure out how to make changes to the next/image one, because you need to have a way to add width and height css variables to each image automaticalls */}
+
+            <Heading>Building MakeRight</Heading>
+            <Gantt />
+          </Section>
+
+
         </Chapter>
       </CaseStudyPage>
     </>

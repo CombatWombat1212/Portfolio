@@ -1,0 +1,18 @@
+.background {
+  position: absolute;
+  --size: 100%;
+  @include s;
+  top: 0;
+
+  @include flex-col-center;
+  z-index: -1;
+
+  &--img {
+    --size: 100%;
+    @include s;
+
+    img {
+      @include img-cover;
+    }
+  }
+}

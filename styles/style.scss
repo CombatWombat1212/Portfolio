@@ -7,7 +7,6 @@
 @import "./partials/global/Fonts";
 @import "./partials/global/Type";
 @import "./partials/global/Root";
-@import "./partials/global/Utility";
 @import "./partials/global/Containers";
 @import "./partials/global/Columns";
 
@@ -23,9 +22,13 @@
 @import "./partials/elements/Footer";
 @import "./partials/elements/Brief";
 @import "./partials/elements/Sections";
+@import "./partials/elements/Background";
 
 
 @import "./partials/effects/ImgGradient";
+
+
+@import "./partials/global/Utility";
 
 
 @import "./partials/pages/Home";
