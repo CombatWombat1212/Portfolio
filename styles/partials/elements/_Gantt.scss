@@ -1,54 +1,117 @@
-
-
 // TODO: mouseover the week number and it should highlight the week in the timeline in a darkish low-opactiy blue
 
+@mixin gantt-grid {
+  display: grid;
+  grid-template-columns: var(--gantt-label-width) repeat(var(--gantt-weeks_less), 1fr) var(--gantt-button-width);
+}
 
-.gantt{
 
-    --gantt-label-width: 16rem;
-    --gantt-button-width: 3rem;
+$col-gantt-bar-empty:#D1D1DE;
+
+.gantt {
+  --gantt-padding: 0.65rem;
+  --gantt-top-margin: 2.5rem;
+
+  --gantt-phase-height: 2.35rem;
+  --gantt-phase-spacing: 1.5rem;
+  --gantt-phase-top-margin: 1.25rem;
+  --gantt-cycle-spacing: 3.75rem;
+
+  --gantt-label-width: 16rem;
+  --gantt-button-width: 3rem;
+
+  --gantt-bar-height:0.285rem;
 
 
-    &--cycle{
+  .h2 + & {
+    margin-top: var(--gantt-top-margin);
+  }
 
+  &--cycle {
+    & + & {
+      margin-top: var(--gantt-cycle-spacing);
     }
+  }
 
-    &--timeline{
+  &--timeline {
+    @include gantt-grid;
+    margin-bottom: var(--gantt-phase-top-margin);
 
-        display:grid;
-        grid-template-columns: var(--gantt-label-width) repeat(var(--gantt-weeks), 1fr) var(--gantt-button-width);
+  }
 
+  &--phase {
+    background-color: $col-background_darker;
+    height: var(--gantt-phase-height);
+    @include b-rad;
+    @include gantt-grid;
+
+    & + & {
+      margin-top: var(--gantt-phase-spacing);
+    }
+  }
+
+
+
+  &--bar{
+
+    height: var(--gantt-bar-height);
+    background-color: $col-gantt-bar-empty;
+    @include b-rad(100rem);
+    @include my-auto;
+
+    grid-column: span var(--gantt-weeks_less);
+
+
+
+
+  }
+
+
+
+
+
+
+  &--icon{
+    @include flex-row-center;
+    align-items: center;
+      .mask{
+        margin-top: -0.15rem;
+        width: 1.1rem;
+        background-color: $col-secondary;
         
     }
+  }
 
 
-
-    .label{
-
-        &--title{}
-
-
-        &--unit{
-            @include flex-row;
-            position:relative;
-            text-align: center;
-            width:100%;
-            span{
-                width:100%;
-                position: absolute;
-                left: -25%; 
-                transform: translateX(-25%);        
-            }
-        }
-
-
-
-        &__primary{
-            @include body-med;
-        }
+  .label {
+    &--title {
     }
 
+    &--unit {
+      @include flex-row;
+      position: relative;
+      text-align: center;
+      width: 100%;
+      span {
+        width: 100%;
+        position: absolute;
+        left: -25%;
+        transform: translateX(-25%);
+      }
+    }
 
+    &--phase {
+      @include flex-col-center;
+      padding-left: var(--gantt-padding);
+    }
 
+    &__primary {
+      @include body-med;
+    }
 
+    &__secondary {
+      @include body;
+      color: $col-secondary;
+    }
+  }
 }

@@ -141,7 +141,8 @@ function MakeRight() {
 
             {/* TODO: morning man! before getting started on the gantt chart, do what you did to the pitch icons to the graphics at the top of the page to ensure that they're always at the right scale.  This will require you to create an image wrapper of somekind, or figure out how to make changes to the next/image one, because you need to have a way to add width and height css variables to each image automaticalls */}
 
-            <Heading>Building MakeRight</Heading>
+            <Title>Project Plan</Title>
+            <Heading>Project phases and timeline</Heading>
             <Gantt study="MakeRight" />
           </Section>
 

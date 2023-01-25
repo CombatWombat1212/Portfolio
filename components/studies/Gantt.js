@@ -1,17 +1,40 @@
+import Mask from "../utilities/Mask";
 import GANTT_CHARTS from "/data/GANTT_CHARTS";
+import { chevron_down } from "@/data/ICONS";
 
 function Phase({ phase }) {
-  return <div className="gantt--phase">{phase.name}</div>;
+  return (
+    <>
+      <div className="gantt--phase">
+        <div className="label--phase label__secondary">
+          <span>{phase.name}</span>
+        </div>
+
+
+        <div className="gantt--bar gantt--bar__empty">
+        </div>
+
+        {/* <div className="gantt--bar gantt--bar__filled">
+        </div> */}
+
+        <div className="gantt--icon">
+          <Mask img={chevron_down} />
+        </div>
+
+
+      </div>
+    </>
+  );
 }
 
 function Cycle({ cycle, weeks }) {
   var phases = cycle.phases;
 
   return (
-    <div className="gantt--cycle" style={{ "--gantt-weeks": cycle.length }}>
+    <div className="gantt--cycle" style={{ "--gantt-weeks": cycle.length, "--gantt-weeks_less": cycle.length-1  }}>
       <div className="gantt--timeline">
         <div className="label--title label__primary">
-          <span>Weeks</span>
+          <span>Week</span>
         </div>
 
         {weeks.map((week) => {

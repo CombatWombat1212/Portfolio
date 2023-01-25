@@ -1565,13 +1565,69 @@ body p, body li {
 }
 
 .gantt {
+  --gantt-padding: 0.65rem;
+  --gantt-top-margin: 2.5rem;
+  --gantt-phase-height: 2.35rem;
+  --gantt-phase-spacing: 1.5rem;
+  --gantt-phase-top-margin: 1.25rem;
+  --gantt-cycle-spacing: 3.75rem;
   --gantt-label-width: 16rem;
   --gantt-button-width: 3rem;
+  --gantt-bar-height:0.285rem;
+}
+
+.h2 + .gantt {
+  margin-top: var(--gantt-top-margin);
+}
+
+.gantt--cycle + .gantt--cycle {
+  margin-top: var(--gantt-cycle-spacing);
 }
 
 .gantt--timeline {
   display: grid;
-  grid-template-columns: var(--gantt-label-width) repeat(var(--gantt-weeks), 1fr) var(--gantt-button-width);
+  grid-template-columns: var(--gantt-label-width) repeat(var(--gantt-weeks_less), 1fr) var(--gantt-button-width);
+  margin-bottom: var(--gantt-phase-top-margin);
+}
+
+.gantt--phase {
+  background-color: #E9E9F2;
+  height: var(--gantt-phase-height);
+  border-radius: var(--b-rad);
+  -webkit-border-radius: var(--b-rad);
+  -moz-border-radius: var(--b-rad);
+  -khtml-border-radius: var(--b-rad);
+  display: grid;
+  grid-template-columns: var(--gantt-label-width) repeat(var(--gantt-weeks_less), 1fr) var(--gantt-button-width);
+}
+
+.gantt--phase + .gantt--phase {
+  margin-top: var(--gantt-phase-spacing);
+}
+
+.gantt--bar {
+  height: var(--gantt-bar-height);
+  background-color: #D1D1DE;
+  border-radius: 100rem;
+  -webkit-border-radius: 100rem;
+  -moz-border-radius: 100rem;
+  -khtml-border-radius: 100rem;
+  margin-top: auto;
+  margin-bottom: auto;
+  grid-column: span var(--gantt-weeks_less);
+}
+
+.gantt--icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.gantt--icon .mask {
+  margin-top: -0.15rem;
+  width: 1.1rem;
+  background-color: #C41263;
 }
 
 .gantt .label--unit {
@@ -1589,11 +1645,26 @@ body p, body li {
   transform: translateX(-25%);
 }
 
+.gantt .label--phase {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: var(--gantt-padding);
+}
+
 .gantt .label__primary {
   font-family: "Tenon";
   font-size: var(--font-size-body);
   line-height: var(--font-leading-body);
   font-weight: 500;
+}
+
+.gantt .label__secondary {
+  font-family: "Tenon";
+  font-size: var(--font-size-body);
+  line-height: var(--font-leading-body);
+  font-weight: 400;
+  color: #C41263;
 }
 
 .d-block {

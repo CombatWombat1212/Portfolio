@@ -1,4 +1,16 @@
-function Mask({ className, src, alt, width, height }) {
+import { defaultProps, PropTypes } from "prop-types";
+
+
+
+function Mask({ className, src, alt, width, height, img }) {
+  
+
+  if(img){
+    src = img.src
+    alt = img.alt
+    width = img.width
+    height = img.height
+  }
 
 
   var imgSrc = src;
@@ -22,5 +34,17 @@ function Mask({ className, src, alt, width, height }) {
       alt={alt} ></div>
   );
 }
+
+
+
+Mask.defaultProps = {
+  img: undefined,
+};
+
+Mask.propTypes = {
+  img: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+};
+
+
 
 export default Mask;
