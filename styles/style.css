@@ -1573,7 +1573,7 @@ body p, body li {
   --gantt-cycle-spacing: 3.75rem;
   --gantt-label-width: 16rem;
   --gantt-button-width: 3rem;
-  --gantt-bar-height:0.285rem;
+  --gantt-bar-height: 0.3125rem;
 }
 
 .h2 + .gantt {
@@ -1605,16 +1605,46 @@ body p, body li {
   margin-top: var(--gantt-phase-spacing);
 }
 
-.gantt--bar {
-  height: var(--gantt-bar-height);
-  background-color: #D1D1DE;
+.gantt .bar {
   border-radius: 100rem;
   -webkit-border-radius: 100rem;
   -moz-border-radius: 100rem;
   -khtml-border-radius: 100rem;
+}
+
+.gantt .bar--group {
+  grid-column: span var(--gantt-weeks_less);
+  height: var(--gantt-bar-height);
   margin-top: auto;
   margin-bottom: auto;
+  border-radius: 100rem;
+  -webkit-border-radius: 100rem;
+  -moz-border-radius: 100rem;
+  -khtml-border-radius: 100rem;
+  display: grid;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.gantt .bar--wrapper {
+  display: grid;
   grid-column: span var(--gantt-weeks_less);
+  grid-template-columns: repeat(var(--gantt-days_less), 1fr);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
+
+.gantt .bar__empty {
+  background-color: #d1d1de;
+  grid-column: span var(--gantt-days_less);
+}
+
+.gantt .bar__filled {
+  background-color: #C41263;
+  grid-column: var(--gantt-phase-start)/var(--gantt-phase-end);
 }
 
 .gantt--icon {
@@ -1625,7 +1655,6 @@ body p, body li {
 }
 
 .gantt--icon .mask {
-  margin-top: -0.15rem;
   width: 1.1rem;
   background-color: #C41263;
 }

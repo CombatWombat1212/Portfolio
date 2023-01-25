@@ -541,8 +541,10 @@ var GANTT_CHARTS = [
                   },
                   {
                     name: "Write / Design Presentation",
-                    start: 183,
-                    end: 190,
+                    // start: 183,
+                    start: [170, 183],
+                    // end: 190,
+                    end: [175, 190],
                   },
                 ],
               },
@@ -550,6 +552,8 @@ var GANTT_CHARTS = [
           },
         ],
       },
+
+      
     ],
   },
 ];
@@ -623,6 +627,131 @@ function ganttInit(arr) {
       });
     }
   }
+
+  // adding start and end to each phase
+  for (var i = 0; i < arr.length; i++) {
+    var chart = arr[i];
+
+    for (var j = 0; j < chart.cycles.length; j++) {
+      var cycle = chart.cycles[j];
+
+      for (var k = 0; k < cycle.phases.length; k++) {
+        var phase = cycle.phases[k];
+
+        var phaseStart = 10000;
+        var phaseEnd = 0;
+
+        for (var l = 0; l < phase.stages.length; l++) {
+          var stage = phase.stages[l];
+
+          for (var m = 0; m < stage.tasks.length; m++) {
+            var task = stage.tasks[m];
+
+            if (typeof task.start == "number") {
+              if (task.start < phaseStart) {
+                phaseStart = task.start;
+              }
+            } else{
+              for (var n = 0; n < task.start.length; n++) {
+                if (task.start[n] < phaseStart) {
+                  phaseStart = task.start[n];
+                }
+              }
+            }
+
+            if (typeof task.end == "number") {
+              if (task.end > phaseEnd) {
+                phaseEnd = task.end;
+              }
+            } else{
+              for (var n = 0; n < task.end.length; n++) {
+                if (task.end[n] > phaseEnd) {
+                  phaseEnd = task.end[n];
+                }
+              }
+
+            }
+            
+          }
+        }
+
+        phase.start = phaseStart;
+        phase.end = phaseEnd;
+      }
+
+    }
+  }
+
+
+
+  for (var i = 0; i < arr.length; i++) {
+    var chart = arr[i];
+
+    for (var j = 0; j < chart.cycles.length; j++) {
+      var cycle = chart.cycles[j];
+      cycle.index = j;
+    }
+  }
+
+
+
+
+
+
+
+
+
+  // // adding start and end to each stage
+  // for (var i = 0; i < arr.length; i++) {
+  //   var chart = arr[i];
+
+  //   for (var j = 0; j < chart.cycles.length; j++) {
+  //     var cycle = chart.cycles[j];
+
+  //     for (var k = 0; k < cycle.phases.length; k++) {
+  //       var phase = cycle.phases[k];
+
+  //       for (var l = 0; l < phase.stages.length; l++) {
+  //         var stage = phase.stages[l];
+
+  //         var stageStart = 100000;
+  //         var stageEnd = 0;
+
+  //         for (var m = 0; m < stage.tasks.length; m++) {
+  //           var task = stage.tasks[m];
+
+  //           if (typeof task.start == "number") {
+  //             if (task.start < stageStart) {
+  //               stageStart = task.start;
+  //             }
+  //           } else {
+  //             for (var n = 0; n < task.start.length; n++) {
+  //               if (task.start[n] < stageStart) {
+  //                 stageStart = task.start[n];
+  //               }
+  //             }
+  //           }
+
+  //           if (typeof task.end == "number") {
+  //             if (task.end > stageEnd) {
+  //               stageEnd = task.end;
+  //             }
+  //           } else {
+  //             for (var n = 0; n < task.end.length; n++) {
+  //               if (task.end[n] > stageEnd) {
+  //                 stageEnd = task.end[n];
+  //               }
+  //             }
+  //           }
+  //         }
+
+  //         stage.start = stageStart;
+  //         stage.end = stageEnd;
+
+  //       }
+  //     }
+  //   }
+  // }
 
   checkGantt(arr);
 
