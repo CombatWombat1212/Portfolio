@@ -8,7 +8,7 @@
 $col-gantt-bar-empty: #d1d1de;
 
 .gantt {
-  --gantt-padding: 0.65rem;
+  --gantt-padding: 0.735rem;
   --gantt-top-margin: 2.5rem;
 
   --gantt-phase-height: 2.35rem;
@@ -63,8 +63,8 @@ $col-gantt-bar-empty: #d1d1de;
     }
 
     &--wrapper {
-        display: grid;
-        grid-column: span var(--gantt-weeks_less);
+      display: grid;
+      grid-column: span var(--gantt-weeks_less);
       grid-template-columns: repeat(var(--gantt-days_less), 1fr);
       position: absolute;
       width: 100%;

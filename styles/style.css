@@ -1565,7 +1565,7 @@ body p, body li {
 }
 
 .gantt {
-  --gantt-padding: 0.65rem;
+  --gantt-padding: 0.735rem;
   --gantt-top-margin: 2.5rem;
   --gantt-phase-height: 2.35rem;
   --gantt-phase-spacing: 1.5rem;
