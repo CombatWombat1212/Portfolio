@@ -198,6 +198,7 @@ function Gantt({ study }) {
 
   var lengths = cycles.map((cycle) => cycle.length);
 
+  
   return (
     <>
       <div className="gantt">
