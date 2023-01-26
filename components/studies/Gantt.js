@@ -5,11 +5,32 @@ import Mask from "../utilities/Mask";
 import GANTT_CHARTS from "/data/GANTT_CHARTS";
 import { chevron_down } from "/data/ICONS";
 
-function BarFilled({ className, start, end }) {
+function BarFilled({ className, start, end, cycle }) {
+  var type = className.split("__")[1];
+  var isPhase = type == "phase";
+
+  var endPoint = (cycle.end - cycle.start - 1) * 7 + 1;
+  var endClasses = "";
+
+  if (start == 1) {
+    endClasses += "bar__start ";
+  }
+  if (end == endPoint) {
+    endClasses += "bar__end ";
+  }
+
   return (
-    <div className={`bar--wrapper ${className}`} style={{ "--gantt-start": start, "--gantt-end": end }}>
-      <div className="bar bar__filled"></div>
-    </div>
+    <>
+      {isPhase && (
+        <div className={`bar--wrapper ${className}`} style={{ "--gantt-start": start, "--gantt-end": end }}>
+          <div className="bar__background bar__background__closed "></div>
+        </div>
+      )}
+
+      <div className={`bar--wrapper ${className}`} style={{ "--gantt-start": start, "--gantt-end": end }}>
+        <div className={`bar bar__filled ${endClasses}`}></div>
+      </div>
+    </>
   );
 }
 
@@ -27,6 +48,9 @@ function Bar({ className, bars, cycle }) {
     adjustedBars[i] = { ...bar, start: barStart, end: barEnd };
   }
 
+  // var type = className.split("__")[1];
+  // var isPhase = type == "phase";
+
   return (
     <div className="bar--group">
       <div className={`bar--wrapper ${className}`}>
@@ -34,7 +58,7 @@ function Bar({ className, bars, cycle }) {
       </div>
 
       {adjustedBars.map((bar) => {
-        return <BarFilled key={bar.key} className={className} start={bar.start} end={bar.end} />;
+        return <BarFilled key={bar.key} className={className} start={bar.start} end={bar.end} cycle={cycle} />;
       })}
     </div>
   );
@@ -77,10 +101,7 @@ function Stage({ stage, cycle }) {
   );
 }
 
-
-
-
-function phaseCloseAllOthers(elem){
+function phaseCloseAllOthers(elem) {
   var phases = document.querySelectorAll(".gantt--phase");
   for (var i = 0; i < phases.length; i++) {
     var phase = phases[i];
@@ -92,18 +113,55 @@ function phaseCloseAllOthers(elem){
       icon.classList.remove("gantt--icon__open");
       icon.classList.add("gantt--icon__closed");
 
+      var background = phase.querySelector(".bar__background");
+      background.classList.remove("bar__background__open");
+      background.classList.add("bar__background__closed");
     }
   }
 }
 
+var waiting = false;
 
 function phaseOnClick(elem) {
+  var trans = getComputedStyle(elem).getPropertyValue("--gant-phase-trans").split("s")[0] * 1000;
+  var delay = getComputedStyle(elem).getPropertyValue("--gant-phase-delay").split("s")[0] * 1000;
+
+
+
+
   elem.classList.toggle("gantt--phase__closed");
   elem.classList.toggle("gantt--phase__open");
 
   var icon = elem.querySelector(".gantt--icon");
   icon.classList.toggle("gantt--icon__open");
   icon.classList.toggle("gantt--icon__closed");
+
+  var background = elem.querySelector(".bar__background");
+  var on = elem.classList.contains("gantt--phase__open");
+
+  if(on) {
+    background.classList.add("bar__background__open");
+    background.classList.add("bar__background__open-transition")
+    background.classList.remove("bar__background__closed");
+  } else {
+    background.classList.add("bar__background__closed");
+    background.classList.add("bar__background__closed-transition")
+    background.classList.remove("bar__background__open");
+  }
+
+  if (!waiting) {
+    waiting = true;
+
+    setTimeout(() => {
+      waiting = false;
+
+        background.classList.remove("bar__background__open-transition");
+        background.classList.remove("bar__background__closed-transition");
+
+    }, trans + trans + delay );
+  }
+
+
 }
 
 function phaseOnClickHandler(e) {
@@ -149,6 +207,7 @@ function Phase({ phase, cycle }) {
         tabIndex="0"
         style={{ "--gantt-stage-count": stages.length, "--gantt-task-count": taskCount }}>
         <Label className="label--phase label__inner label__secondary">{phase.name}</Label>
+
         <Bar className="bar__phase" bars={phase.bars} cycle={cycle} />
 
         <div className="gantt--icon gantt--icon__closed">
@@ -188,8 +247,7 @@ function Cycle({ cycle, weeks }) {
 }
 
 function Gantt({ study }) {
-
-// TODO: add the background thing behind the filled phase bar
+  // TODO: add the background thing behind the filled phase bar
 
   // TODO: Collapse all phases once scrolled past
 
@@ -198,7 +256,6 @@ function Gantt({ study }) {
 
   var lengths = cycles.map((cycle) => cycle.length);
 
-  
   return (
     <>
       <div className="gantt">
