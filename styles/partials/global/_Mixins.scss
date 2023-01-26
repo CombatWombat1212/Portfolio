@@ -120,6 +120,19 @@
 }
 
 
+@mixin word-cutoff($key){
+	display: block;
+	width: $key;
+	// max-width: $key;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+  }
+
+
+
+
+
 
 
 @mixin pad-x($val) {

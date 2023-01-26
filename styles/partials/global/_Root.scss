@@ -22,3 +22,15 @@ body {
     }
 }
 
+
+
+.overflow__ellipsis {
+    height: var(--rounded-height);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: var(--visible-lines);
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
+
+

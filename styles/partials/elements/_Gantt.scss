@@ -14,6 +14,8 @@ $col-gantt-bar-empty: #d1d1de;
   --gantt-phase-height: 2.35rem;
   --gantt-phase-spacing: 1.5rem;
   --gantt-phase-top-margin: 1.25rem;
+  --gantt-stage-top-margin: 1.5rem;
+  --gantt-task-top-margin: 0.15rem;
   --gantt-cycle-spacing: 3.75rem;
 
   --gantt-label-width: 16rem;
@@ -38,7 +40,10 @@ $col-gantt-bar-empty: #d1d1de;
 
   &--phase {
     background-color: $col-background_darker;
-    height: var(--gantt-phase-height);
+
+    // height: var(--gantt-phase-height);
+
+    @include pad-y(calc(var(--gantt-padding) / 2));
     @include b-rad;
     @include gantt-grid;
 
@@ -47,7 +52,19 @@ $col-gantt-bar-empty: #d1d1de;
     }
   }
 
+  &--stage {
+    grid-column: span calc(var(--gantt-weeks_less) + 2);
+    margin-top: var(--gantt-stage-top-margin);
+  }
+
+  &--task {
+    @include gantt-grid;
+      margin-top: var(--gantt-task-top-margin);
+  }
+
   .bar {
+    @include b-rad(100rem);
+
     &--group {
       // --gantt-phase-start
       // --gantt-phase-end
@@ -64,15 +81,21 @@ $col-gantt-bar-empty: #d1d1de;
 
     &--wrapper {
       display: grid;
-      grid-column: span var(--gantt-weeks_less);
-      grid-template-columns: repeat(var(--gantt-days_less), 1fr);
       position: absolute;
       width: 100%;
       height: 100%;
       top: 0;
     }
 
-    @include b-rad(100rem);
+    &__phase {
+      grid-column: span var(--gantt-weeks_less);
+      grid-template-columns: repeat(var(--gantt-days_less), 1fr);
+    }
+
+    &__task {
+      grid-column: span var(--gantt-weeks_less);
+      grid-template-columns: repeat(var(--gantt-days_less), 1fr);
+    }
 
     &__empty {
       background-color: $col-gantt-bar-empty;
@@ -81,7 +104,7 @@ $col-gantt-bar-empty: #d1d1de;
 
     &__filled {
       background-color: $col-secondary;
-      grid-column: var(--gantt-phase-start) / var(--gantt-phase-end);
+      grid-column: var(--gantt-start) / var(--gantt-end);
     }
   }
 
@@ -95,6 +118,10 @@ $col-gantt-bar-empty: #d1d1de;
   }
 
   .label {
+    span {
+      @include word-cutoff(calc(100% - 3ch));
+    }
+
     &--title {
     }
 
@@ -113,6 +140,16 @@ $col-gantt-bar-empty: #d1d1de;
 
     &--phase {
       @include flex-col-center;
+    }
+
+    &--stage {
+    }
+
+    &--task {
+      //
+    }
+
+    &__inner {
       padding-left: var(--gantt-padding);
     }
 
@@ -123,6 +160,11 @@ $col-gantt-bar-empty: #d1d1de;
     &__secondary {
       @include body;
       color: $col-secondary;
+    }
+
+    &__tertiary {
+      @include body;
+      color: $col-primary;
     }
   }
 }

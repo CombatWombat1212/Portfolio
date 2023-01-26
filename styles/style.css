@@ -150,6 +150,14 @@ body p, body li {
   font-weight: 400;
 }
 
+.overflow__ellipsis {
+  height: var(--rounded-height);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: var(--visible-lines);
+  text-overflow: ellipsis;
+}
+
 .container,
 .container-fluid {
   width: 100%;
@@ -1570,6 +1578,8 @@ body p, body li {
   --gantt-phase-height: 2.35rem;
   --gantt-phase-spacing: 1.5rem;
   --gantt-phase-top-margin: 1.25rem;
+  --gantt-stage-top-margin: 1.5rem;
+  --gantt-task-top-margin: 0.15rem;
   --gantt-cycle-spacing: 3.75rem;
   --gantt-label-width: 16rem;
   --gantt-button-width: 3rem;
@@ -1592,7 +1602,8 @@ body p, body li {
 
 .gantt--phase {
   background-color: #E9E9F2;
-  height: var(--gantt-phase-height);
+  padding-top: calc(var(--gantt-padding) / 2);
+  padding-bottom: calc(var(--gantt-padding) / 2);
   border-radius: var(--b-rad);
   -webkit-border-radius: var(--b-rad);
   -moz-border-radius: var(--b-rad);
@@ -1603,6 +1614,17 @@ body p, body li {
 
 .gantt--phase + .gantt--phase {
   margin-top: var(--gantt-phase-spacing);
+}
+
+.gantt--stage {
+  grid-column: span calc(var(--gantt-weeks_less) + 2);
+  margin-top: var(--gantt-stage-top-margin);
+}
+
+.gantt--task {
+  display: grid;
+  grid-template-columns: var(--gantt-label-width) repeat(var(--gantt-weeks_less), 1fr) var(--gantt-button-width);
+  margin-top: var(--gantt-task-top-margin);
 }
 
 .gantt .bar {
@@ -1629,12 +1651,20 @@ body p, body li {
 
 .gantt .bar--wrapper {
   display: grid;
-  grid-column: span var(--gantt-weeks_less);
-  grid-template-columns: repeat(var(--gantt-days_less), 1fr);
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
+}
+
+.gantt .bar__phase {
+  grid-column: span var(--gantt-weeks_less);
+  grid-template-columns: repeat(var(--gantt-days_less), 1fr);
+}
+
+.gantt .bar__task {
+  grid-column: span var(--gantt-weeks_less);
+  grid-template-columns: repeat(var(--gantt-days_less), 1fr);
 }
 
 .gantt .bar__empty {
@@ -1644,7 +1674,7 @@ body p, body li {
 
 .gantt .bar__filled {
   background-color: #C41263;
-  grid-column: var(--gantt-phase-start)/var(--gantt-phase-end);
+  grid-column: var(--gantt-start)/var(--gantt-end);
 }
 
 .gantt--icon {
@@ -1657,6 +1687,14 @@ body p, body li {
 .gantt--icon .mask {
   width: 1.1rem;
   background-color: #C41263;
+}
+
+.gantt .label span {
+  display: block;
+  width: calc(100% - 3ch);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .gantt .label--unit {
@@ -1678,6 +1716,9 @@ body p, body li {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.gantt .label__inner {
   padding-left: var(--gantt-padding);
 }
 
@@ -1694,6 +1735,14 @@ body p, body li {
   line-height: var(--font-leading-body);
   font-weight: 400;
   color: #C41263;
+}
+
+.gantt .label__tertiary {
+  font-family: "Tenon";
+  font-size: var(--font-size-body);
+  line-height: var(--font-leading-body);
+  font-weight: 400;
+  color: #074391;
 }
 
 .d-block {

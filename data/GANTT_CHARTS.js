@@ -541,10 +541,8 @@ var GANTT_CHARTS = [
                   },
                   {
                     name: "Write / Design Presentation",
-                    // start: 183,
-                    start: [170, 183],
-                    // end: 190,
-                    end: [175, 190],
+                    start: 183,
+                    end: 190,
                   },
                 ],
               },
@@ -552,8 +550,6 @@ var GANTT_CHARTS = [
           },
         ],
       },
-
-      
     ],
   },
 ];
@@ -574,18 +570,82 @@ function checkGantt(arr) {
       console.error("Chart " + chart.name + " has a length of " + length + " but the sum of its cycles is " + cyclesLength + " These values should be equal.");
     }
   }
+
+  for (var i = 0; i < arr.length; i++) {
+    var chart = arr[i];
+
+    for (var j = 0; j < chart.cycles.length; j++) {
+      var cycle = chart.cycles[j];
+
+      for (var k = 0; k < cycle.phases.length; k++) {
+        var phase = cycle.phases[k];
+
+        for (var l = 0; l < phase.stages.length; l++) {
+          var stage = phase.stages[l];
+
+          for (var m = 0; m < stage.tasks.length; m++) {
+            var task = stage.tasks[m];
+
+            if (typeof task.start != typeof task.end) {
+              console.error(`Task "${task.name}," from stage "${stage.name}," phase "${phase.name}," chart "${chart.name}," has start and end values that are not the same type. They should both be either numbers or arrays of numbers. Task.start is a "${typeof task.start}" and task.end is a "${typeof task.end}".`);
+            }
+            if (typeof task.start == "object" && typeof task.end == "object") {
+              if (task.start.length != task.end.length) {
+                console.error(`Task "${task.name}," from stage "${stage.name}," phase "${phase.name}," chart "${chart.name}," has start and end value arrays that are not the same length. Task.start.length is "${task.start.length}" and task.end.length is "${task.end.length}".`);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
+
+
+
+
+
+
+function barToObj(obj){
+  if (typeof obj.start == "number") {
+    obj.bars = [
+      {
+        start: obj.start,
+        end: obj.end,
+        key: uuidv4(),
+      },
+    ];
+  } else if (typeof obj.start == "object") {
+    obj.bars = obj.start.map((item, index) => {
+      return {
+        start: item,
+        end: obj.end[index],
+        key: uuidv4(),
+      };
+    });
+  }
+}
+
+
+
+
+
+
 function ganttInit(arr) {
+  checkGantt(arr);
+
+
+  
   // Adding keys to everything that needs to be mapped through
   for (var i = 0; i < arr.length; i++) {
     var chart = arr[i];
     chart.key = uuidv4();
-
+    
     for (var j = 0; j < chart.cycles.length; j++) {
       var cycle = chart.cycles[j];
       cycle.key = uuidv4();
-
+      
       for (var k = 0; k < cycle.phases.length; k++) {
         var phase = cycle.phases[k];
         phase.key = uuidv4();
@@ -651,7 +711,7 @@ function ganttInit(arr) {
               if (task.start < phaseStart) {
                 phaseStart = task.start;
               }
-            } else{
+            } else {
               for (var n = 0; n < task.start.length; n++) {
                 if (task.start[n] < phaseStart) {
                   phaseStart = task.start[n];
@@ -663,27 +723,25 @@ function ganttInit(arr) {
               if (task.end > phaseEnd) {
                 phaseEnd = task.end;
               }
-            } else{
+            } else {
               for (var n = 0; n < task.end.length; n++) {
                 if (task.end[n] > phaseEnd) {
                   phaseEnd = task.end[n];
                 }
               }
-
             }
-            
           }
         }
 
         phase.start = phaseStart;
         phase.end = phaseEnd;
-      }
 
+
+      }
     }
   }
 
-
-
+  //giving each cycle an index
   for (var i = 0; i < arr.length; i++) {
     var chart = arr[i];
 
@@ -695,11 +753,31 @@ function ganttInit(arr) {
 
 
 
+  //  converting start and end to a bar object for better support for multiple bars
+  for (var i = 0; i < arr.length; i++) {
+    var chart = arr[i];
 
+    for (var j = 0; j < chart.cycles.length; j++) {
+      var cycle = chart.cycles[j];
 
+      for (var k = 0; k < cycle.phases.length; k++) {
+        var phase = cycle.phases[k];
+        barToObj(phase);
 
+      
 
+        for (var l = 0; l < phase.stages.length; l++) {
+          var stage = phase.stages[l];
 
+          for (var m = 0; m < stage.tasks.length; m++) {
+            var task = stage.tasks[m];
+            barToObj(task);
+
+          }
+        }
+      }
+    }
+  }
 
   // // adding start and end to each stage
   // for (var i = 0; i < arr.length; i++) {
@@ -752,8 +830,6 @@ function ganttInit(arr) {
   //     }
   //   }
   // }
-
-  checkGantt(arr);
 
   return arr;
 }

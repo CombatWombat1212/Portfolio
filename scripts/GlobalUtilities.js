@@ -1,6 +1,41 @@
+var resizeTimeout = 200;
+
+function semicolonSuffix(str) {
+  if (str[str.length - 1] != ";") {
+    str = str + ";";
+  }
+  return str;
+}
+
+function RemoveSemicolonSuffix(str) {
+  if (str[str.length - 1] == ";") {
+    str = str.slice(0, -1);
+  }
+  return str;
+}
+
 function sepSuffix(str, sep) {
   if (str[str.length - 1] != sep) {
     str = str + sep;
+  }
+  return str;
+}
+
+function splitPx(str) {
+  str = Number(str.split("px")[0]);
+  return str;
+}
+
+function splitRem(str) {
+  str = Number(str.split("rem")[0]) * 16;
+  return str;
+}
+
+function splitS(str) {
+  if (str.includes("s")) {
+    str = Number(str.split("s")[0]) * 1000;
+  } else if (str.includes("ms")) {
+    str = Number(str.split("ms")[0]);
   }
   return str;
 }
@@ -50,7 +85,6 @@ function addAttrNonDestructive(elem, prop, val, sep) {
 }
 
 function postScreenSizeToRoot() {
-
   if (typeof window == "undefined") return;
   var width;
   var height;
@@ -66,14 +100,12 @@ function postScreenSizeToRoot() {
 
   getScreenSize();
 
-  var resizeTimeout = 200;
-  // var resizeTimeout = 0;
-  var isResizingGlobalScript;
+  var isResizing;
   window.addEventListener(
     "resize",
     function (event) {
-      window.clearTimeout(isResizingGlobalScript);
-      isResizingGlobalScript = setTimeout(function () {
+      window.clearTimeout(isResizing);
+      isResizing = setTimeout(function () {
         getScreenSize();
       }, resizeTimeout);
     },
@@ -81,4 +113,33 @@ function postScreenSizeToRoot() {
   );
 }
 
-export { addStyleNonDestructive, addAttrNonDestructive, postScreenSizeToRoot };
+function overflowEllipsis() {
+  function run() {
+    var overflowEllipsisElems = document.getElementsByClassName("overflow__ellipsis");
+    for (var i = 0; i < overflowEllipsisElems.length; i++) {
+      var elem = overflowEllipsisElems[i];
+      var elemLineHeight = splitPx(window.getComputedStyle(elem, null).lineHeight);
+      var elemHeight = splitPx(window.getComputedStyle(elem.parentElement, null).height) - splitPx(window.getComputedStyle(elem.parentElement, null).paddingTop) - splitPx(window.getComputedStyle(elem.parentElement, null).paddingBottom);
+      var lines = Math.round(elemHeight / elemLineHeight);
+
+      addStyleNonDestructive(elem, "--rounded-height", lines * elemLineHeight + "px");
+      addStyleNonDestructive(elem, "--visible-lines", lines);
+      addStyleNonDestructive(elem, "--line-height", elemLineHeight + "px");
+    }
+  }
+
+  run();
+  var isResizing;
+  window.addEventListener(
+    "resize",
+    function (event) {
+      window.clearTimeout(isResizing);
+      isResizing = setTimeout(function () {
+        run();
+      }, resizeTimeout);
+    },
+    false
+  );
+}
+
+export { addStyleNonDestructive, addAttrNonDestructive, postScreenSizeToRoot, overflowEllipsis };
