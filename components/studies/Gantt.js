@@ -247,7 +247,6 @@ function Cycle({ cycle, weeks }) {
 }
 
 function Gantt({ study }) {
-  // TODO: add the background thing behind the filled phase bar
 
   // TODO: Collapse all phases once scrolled past
 
