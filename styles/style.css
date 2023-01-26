@@ -1573,9 +1573,9 @@ body p, body li {
 }
 
 .gantt {
-  --gantt-padding: 0.735rem;
+  --gantt-pad: 0.45rem;
+  --gantt-pad-bot: calc(var(--gantt-pad) * 1.2);
   --gantt-top-margin: 2.5rem;
-  --gantt-phase-height: 2.35rem;
   --gantt-phase-spacing: 1.5rem;
   --gantt-phase-top-margin: 1.25rem;
   --gantt-stage-top-margin: 1.5rem;
@@ -1584,6 +1584,10 @@ body p, body li {
   --gantt-label-width: 16rem;
   --gantt-button-width: 3rem;
   --gantt-bar-height: 0.3125rem;
+  --gantt-label-font-size: var(--font-size-body);
+  --gantt-label-line-height: var(--font-leading-body);
+  --gantt-label-height:  Max(var(--font-size-body), var(--font-leading-body));
+  --gantt-phase-height: calc(var(--gantt-label-height));
 }
 
 .h2 + .gantt {
@@ -1601,19 +1605,44 @@ body p, body li {
 }
 
 .gantt--phase {
+  --gantt-phase-height_max: calc(
+      var(--gantt-phase-height) + 
+      (var(--gantt-stage-count) * var(--gantt-stage-top-margin)) +
+      (var(--gantt-task-count) * var(--gantt-task-top-margin)) +
+      ((var(--gantt-stage-count) + var(--gantt-task-count)) * var(--gantt-label-height))
+      );
   background-color: #E9E9F2;
-  padding-top: calc(var(--gantt-padding) / 2);
-  padding-bottom: calc(var(--gantt-padding) / 2);
+  padding-top: var(--gantt-pad);
+  padding-bottom: var(--gantt-pad-bot);
   border-radius: var(--b-rad);
   -webkit-border-radius: var(--b-rad);
   -moz-border-radius: var(--b-rad);
   -khtml-border-radius: var(--b-rad);
   display: grid;
   grid-template-columns: var(--gantt-label-width) repeat(var(--gantt-weeks_less), 1fr) var(--gantt-button-width);
+  transition: height 0.5s, background-color var(--transition);
+  overflow: hidden;
+  cursor: pointer;
 }
 
 .gantt--phase + .gantt--phase {
   margin-top: var(--gantt-phase-spacing);
+}
+
+.gantt--phase__closed {
+  height: var(--gantt-phase-height);
+}
+
+.gantt--phase__open {
+  height: var(--gantt-phase-height_max);
+}
+
+.gantt--phase {
+  transition: var(--transition);
+}
+
+.gantt--phase:hover, .gantt--phase:focus, .gantt--phase.focus {
+  background-color: #e1e1ed;
 }
 
 .gantt--stage {
@@ -1625,13 +1654,6 @@ body p, body li {
   display: grid;
   grid-template-columns: var(--gantt-label-width) repeat(var(--gantt-weeks_less), 1fr) var(--gantt-button-width);
   margin-top: var(--gantt-task-top-margin);
-}
-
-.gantt .bar {
-  border-radius: 100rem;
-  -webkit-border-radius: 100rem;
-  -moz-border-radius: 100rem;
-  -khtml-border-radius: 100rem;
 }
 
 .gantt .bar--group {
@@ -1668,8 +1690,19 @@ body p, body li {
 }
 
 .gantt .bar__empty {
+  transition: var(--transition);
   background-color: #d1d1de;
   grid-column: span var(--gantt-days_less);
+}
+
+.gantt--phase .bar__empty {
+  transition: var(--transition);
+}
+
+.gantt--phase:hover .bar__empty,
+.gantt--phase:focus .bar__empty,
+.gantt--phase.focus .bar__empty {
+  background-color: #cacad9;
 }
 
 .gantt .bar__filled {
@@ -1719,7 +1752,7 @@ body p, body li {
 }
 
 .gantt .label__inner {
-  padding-left: var(--gantt-padding);
+  padding-left: calc(var(--gantt-pad) * 2);
 }
 
 .gantt .label__primary {

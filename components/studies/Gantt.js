@@ -1,7 +1,9 @@
+import { addAttrNonDestructive } from "@/scripts/GlobalUtilities";
+import { useMountEffect } from "@/scripts/hooks/useMountEffect";
+import { useRef } from "react";
 import Mask from "../utilities/Mask";
 import GANTT_CHARTS from "/data/GANTT_CHARTS";
 import { chevron_down } from "/data/ICONS";
-
 
 function BarFilled({ className, start, end }) {
   return (
@@ -12,7 +14,6 @@ function BarFilled({ className, start, end }) {
 }
 
 function Bar({ className, bars, cycle }) {
-
   var { index } = cycle;
 
   var adjustedBars = [];
@@ -25,8 +26,6 @@ function Bar({ className, bars, cycle }) {
 
     adjustedBars[i] = { ...bar, start: barStart, end: barEnd };
   }
-
-
 
   return (
     <div className="bar--group">
@@ -50,7 +49,6 @@ function Label({ className, children }) {
 }
 
 function Task({ task, cycle }) {
-
   var bars = task.bars;
 
   return (
@@ -79,20 +77,53 @@ function Stage({ stage, cycle }) {
   );
 }
 
+function phaseOnClickHandler(e) {
+  var phase = e.current;
+  phase.classList.toggle("gantt--phase__closed");
+  phase.classList.toggle("gantt--phase__open");
+}
+
 function Phase({ phase, cycle }) {
+
+  var ref = useRef(null);
+
+  useMountEffect(() => {
+    // TODO: find all instances of this and make it so only one exists in the main app file
+    // at the time of writing there are 2, one here and one under the DynamicLink component
+    if (!ref.current) return;
+    addAttrNonDestructive(ref.current, "onclick", "setTimeout(()=>{this.blur();},100)", ";");
+  });
+
+
+
 
   var stages = phase.stages;
 
+  var taskCount = 0;
+  for (var i = 0; i < stages.length; i++) {
+    taskCount += stages[i].tasks.length;
+  }
+
+
+
   return (
     <>
-      <div className="gantt--phase">
+      <div
+        className="gantt--phase gantt--phase__closed"
+        ref={ref}
+        onClick={() => {
+          phaseOnClickHandler(ref);
+        }}
+        tabIndex="0"
+        style={{'--gantt-stage-count':stages.length,'--gantt-task-count':taskCount}}>
         <Label className="label--phase label__inner label__secondary">{phase.name}</Label>
-        <Bar className="bar__phase" bars={phase.bars} cycle={cycle} />{/* <Bar className="bar__phase" start={phaseStart} end={phaseEnd} /> */}
+        <Bar className="bar__phase" bars={phase.bars} cycle={cycle} />
+        {/* <Bar className="bar__phase" start={phaseStart} end={phaseEnd} /> */}
         <div className="gantt--icon">
           <Mask img={chevron_down} />
         </div>
         {stages.map((stage) => {
-          return <Stage key={stage.key} stage={stage} cycle={cycle}  />;
+          return <Stage key={stage.key} stage={stage} cycle={cycle} />;
         })}
       </div>
     </>
@@ -128,7 +159,6 @@ function Gantt({ study }) {
   var cycles = chart.cycles;
 
   var lengths = cycles.map((cycle) => cycle.length);
-
 
   return (
     <>

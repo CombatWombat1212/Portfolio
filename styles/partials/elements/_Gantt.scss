@@ -6,12 +6,22 @@
 }
 
 $col-gantt-bar-empty: #d1d1de;
+$gantt-hover-darken-amt: 2.5%;
+
+
+
 
 .gantt {
-  --gantt-padding: 0.735rem;
+
+  // --gantt-stage-count
+  // --gantt-task-count
+
+
+  --gantt-pad: 0.45rem;
+  --gantt-pad-bot: calc(var(--gantt-pad) * 1.2);
   --gantt-top-margin: 2.5rem;
 
-  --gantt-phase-height: 2.35rem;
+  // --gantt-phase-height: 2.35rem;
   --gantt-phase-spacing: 1.5rem;
   --gantt-phase-top-margin: 1.25rem;
   --gantt-stage-top-margin: 1.5rem;
@@ -22,6 +32,14 @@ $col-gantt-bar-empty: #d1d1de;
   --gantt-button-width: 3rem;
 
   --gantt-bar-height: 0.3125rem;
+
+  --gantt-label-font-size: var(--font-size-body);
+  --gantt-label-line-height: var(--font-leading-body);
+  --gantt-label-height:  Max(var(--font-size-body), var(--font-leading-body));
+  --gantt-phase-height: calc(var(--gantt-label-height));
+
+
+
 
   .h2 + & {
     margin-top: var(--gantt-top-margin);
@@ -39,17 +57,45 @@ $col-gantt-bar-empty: #d1d1de;
   }
 
   &--phase {
+
+    // TODO: there literally HAS to be a better way
+    --gantt-phase-height_max: calc(
+      var(--gantt-phase-height) + 
+      (var(--gantt-stage-count) * var(--gantt-stage-top-margin)) +
+      (var(--gantt-task-count) * var(--gantt-task-top-margin)) +
+      ((var(--gantt-stage-count) + var(--gantt-task-count)) * var(--gantt-label-height))
+      );
+
     background-color: $col-background_darker;
+    padding-top: var(--gantt-pad);
+    padding-bottom: var(--gantt-pad-bot);
 
-    // height: var(--gantt-phase-height);
-
-    @include pad-y(calc(var(--gantt-padding) / 2));
     @include b-rad;
     @include gantt-grid;
+
+    transition: height 0.5s, background-color var(--transition);
+
+    overflow: hidden;
+    cursor: pointer;
 
     & + & {
       margin-top: var(--gantt-phase-spacing);
     }
+
+    &__closed {
+      height: var(--gantt-phase-height);
+    }
+
+    &__open {
+      height: var(--gantt-phase-height_max);
+    }
+
+
+    @include hover{
+      background-color: darken($col-background_darker, $gantt-hover-darken-amt);
+    }
+
+
   }
 
   &--stage {
@@ -59,12 +105,10 @@ $col-gantt-bar-empty: #d1d1de;
 
   &--task {
     @include gantt-grid;
-      margin-top: var(--gantt-task-top-margin);
+    margin-top: var(--gantt-task-top-margin);
   }
 
   .bar {
-    @include b-rad(100rem);
-
     &--group {
       // --gantt-phase-start
       // --gantt-phase-end
@@ -98,8 +142,14 @@ $col-gantt-bar-empty: #d1d1de;
     }
 
     &__empty {
+      @include trans;
       background-color: $col-gantt-bar-empty;
       grid-column: span var(--gantt-days_less);
+
+      @include hover('.gantt--phase', '.bar__empty'){
+        background-color: darken($col-gantt-bar-empty, $gantt-hover-darken-amt);
+      }
+  
     }
 
     &__filled {
@@ -150,7 +200,7 @@ $col-gantt-bar-empty: #d1d1de;
     }
 
     &__inner {
-      padding-left: var(--gantt-padding);
+      padding-left: calc(var(--gantt-pad) * 2);
     }
 
     &__primary {
