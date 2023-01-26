@@ -114,6 +114,7 @@ function phaseOnClickHandler(e) {
 function phaseEnterHandler(e) {
   if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
     phaseOnClick(e.target);
+    phaseCloseAllOthers(e.target);
   }
 }
 
