@@ -73,7 +73,7 @@ $gantt-hover-darken-amt: 2.5%;
     @include b-rad;
     @include gantt-grid;
 
-    transition: height 0.5s, background-color var(--transition);
+    transition: height 0.6s, background-color var(--transition)!important;
 
     overflow: hidden;
     cursor: pointer;
@@ -161,10 +161,20 @@ $gantt-hover-darken-amt: 2.5%;
   &--icon {
     @include flex-row-center;
     align-items: center;
+    transition: 0.4s;
+
     .mask {
       width: 1.1rem;
       background-color: $col-secondary;
     }
+
+    &__open{
+      transform : rotate(180deg);
+    }
+    &__closed{
+      transform : rotate(0deg);
+    }
+
   }
 
   .label {

@@ -77,14 +77,47 @@ function Stage({ stage, cycle }) {
   );
 }
 
+
+
+
+function phaseCloseAllOthers(elem){
+  var phases = document.querySelectorAll(".gantt--phase");
+  for (var i = 0; i < phases.length; i++) {
+    var phase = phases[i];
+    if (phase !== elem) {
+      phase.classList.remove("gantt--phase__open");
+      phase.classList.add("gantt--phase__closed");
+
+      var icon = phase.querySelector(".gantt--icon");
+      icon.classList.remove("gantt--icon__open");
+      icon.classList.add("gantt--icon__closed");
+
+    }
+  }
+}
+
+
+function phaseOnClick(elem) {
+  elem.classList.toggle("gantt--phase__closed");
+  elem.classList.toggle("gantt--phase__open");
+
+  var icon = elem.querySelector(".gantt--icon");
+  icon.classList.toggle("gantt--icon__open");
+  icon.classList.toggle("gantt--icon__closed");
+}
+
 function phaseOnClickHandler(e) {
-  var phase = e.current;
-  phase.classList.toggle("gantt--phase__closed");
-  phase.classList.toggle("gantt--phase__open");
+  phaseOnClick(e.current);
+  phaseCloseAllOthers(e.current);
+}
+
+function phaseEnterHandler(e) {
+  if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+    phaseOnClick(e.target);
+  }
 }
 
 function Phase({ phase, cycle }) {
-
   var ref = useRef(null);
 
   useMountEffect(() => {
@@ -94,17 +127,12 @@ function Phase({ phase, cycle }) {
     addAttrNonDestructive(ref.current, "onclick", "setTimeout(()=>{this.blur();},100)", ";");
   });
 
-
-
-
   var stages = phase.stages;
 
   var taskCount = 0;
   for (var i = 0; i < stages.length; i++) {
     taskCount += stages[i].tasks.length;
   }
-
-
 
   return (
     <>
@@ -114,14 +142,18 @@ function Phase({ phase, cycle }) {
         onClick={() => {
           phaseOnClickHandler(ref);
         }}
+        onKeyDown={(e) => {
+          phaseEnterHandler(e, ref);
+        }}
         tabIndex="0"
-        style={{'--gantt-stage-count':stages.length,'--gantt-task-count':taskCount}}>
+        style={{ "--gantt-stage-count": stages.length, "--gantt-task-count": taskCount }}>
         <Label className="label--phase label__inner label__secondary">{phase.name}</Label>
         <Bar className="bar__phase" bars={phase.bars} cycle={cycle} />
-        {/* <Bar className="bar__phase" start={phaseStart} end={phaseEnd} /> */}
-        <div className="gantt--icon">
+
+        <div className="gantt--icon gantt--icon__closed">
           <Mask img={chevron_down} />
         </div>
+
         {stages.map((stage) => {
           return <Stage key={stage.key} stage={stage} cycle={cycle} />;
         })}
@@ -155,6 +187,11 @@ function Cycle({ cycle, weeks }) {
 }
 
 function Gantt({ study }) {
+
+// TODO: add the background thing behind the filled phase bar
+
+  // TODO: Collapse all phases once scrolled past
+
   var chart = GANTT_CHARTS.find((c) => c.name === study);
   var cycles = chart.cycles;
 
