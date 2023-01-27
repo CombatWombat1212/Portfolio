@@ -5,7 +5,7 @@ import Mask from "../utilities/Mask";
 import Background from "../utilities/Background";
 
 const DEFINED_CHILDREN = ["Column", "Description", "Title", "Heading", "Graphic"];
-const BACKGROUND_COLORS = ["background", "primary", "secondary", "makeright tertiary"];
+const BACKGROUND_COLORS = ["background", "background darker", "primary", "secondary", "makeright tertiary"];
 
 function getHeadingClasses(type) {
   var headingClasses = "section--heading";
@@ -52,6 +52,24 @@ function Description({ children }) {
   return <div className="section--description">{children}</div>;
 }
 
+function ColumnGroup({ columns }) {
+  return (
+    <>
+      {columns.map((column, i) => {
+        var { graphic, heading, description, other } = column;
+        return (
+          <Column className={`col-${Math.floor(12 / columns.length)}`} key={`column ${i}`}>
+            {graphic && <div className="section--graphic">{graphic}</div>}
+            {heading && <>{heading}</>}
+            {description && <>{description}</>}
+            {other && <>{other}</>}
+          </Column>
+        );
+      })}
+    </>
+  );
+}
+
 function Column({ children, className }) {
   return <div className={`section--column ${className ? className : ""}`}>{children}</div>;
 }
@@ -60,11 +78,12 @@ function Graphic({ type, img }) {
   var isImg = type == "image";
   var isMask = type == "mask";
 
-
   // TODO: if you end up using this 'img-aspect-width' thing in multiple places then you should create a wrapper for Next/Image that automatically adds it to your image components, same as its done here and within the Mask component
+
+  // TODO: for some reason section--graphic is only applied occasionally but you should fix this and make it so that its always wrapped in section--graphic right here
   return (
     <>
-      {isImg && <Image src={img.src} alt={img.alt} width={img.width} height={img.height} style={{'--img-aspect-width':img.width, '--img-aspect-height':img.height  }} />}
+      {isImg && <Image src={img.src} alt={img.alt} width={img.width} height={img.height} style={{ "--img-aspect-width": img.width, "--img-aspect-height": img.height }} />}
       {isMask && <Mask src={img.src} alt={img.alt} width={img.width} height={img.height} />}
     </>
   );
@@ -78,37 +97,112 @@ Graphic.propTypes = {
   type: PropTypes.oneOf(["image", "mask"]),
 };
 
+function organizeChildren(allChildren) {
+  var allTypes = [...DEFINED_CHILDREN, "Other"];
+
+  var arr = [];
+
+  for (var i = 0; i < allTypes.length; i++) {
+    arr.push({ type: allTypes[i].toLocaleLowerCase(), elems: [] });
+  }
+
+  for (var i = 0; i < allTypes.length; i++) {
+    var type = arr[i].type;
+    if (type != "other") {
+      arr[i].elems = allChildren.filter((child) => child.type.name == allTypes[i]) || null;
+    } else {
+      arr[i].elems = allChildren.filter((child) => DEFINED_CHILDREN.indexOf(child.type.name) == -1) || null;
+    }
+  }
+  return arr;
+}
+
 function getSectionChildren(children) {
-  var columns = [],
-    description = [],
-    title = [],
-    heading = [],
-    graphic = [],
-    other = [];
+  var allChildren = children;
 
-  var columns = children.filter((child) => child.type.name == "Column") || null;
+  var allTypes = [...DEFINED_CHILDREN, "Other"];
 
-  if (columns.length == 0) {
-    description = children.filter((child) => child.type.name == "Description") || null;
-    title = children.filter((child) => child.type.name == "Title") || null;
-    heading = children.filter((child) => child.type.name == "Heading") || null;
-    graphic = children.filter((child) => child.type.name == "Graphic") || null;
-    other = children.filter((child) => DEFINED_CHILDREN.indexOf(child.type.name) == -1) || null;
-  } else {
+  // var columns = [],
+  //   description = [],
+  //   title = [],
+  //   heading = [],
+  //   graphic = [],
+  //   other = [];
+
+  var organizedChildren = [];
+
+  organizedChildren = organizeChildren(allChildren);
+
+  var [columns, description, title, heading, graphic, other] = [organizedChildren[0].elems, organizedChildren[1].elems, organizedChildren[2].elems, organizedChildren[3].elems, organizedChildren[4].elems, organizedChildren[5].elems];
+
+  // console.log(organizedChildren)
+
+  // var columns = organizedChildren.filter((child) => child.type == "column")[0];
+
+  // var flattenedChildren = children;
+  // var foundColumns = [];
+
+  // while (flattenedChildren.filter((child) => child.type.name == "Column")   ){
+  //   var column = flattenedChildren.filter((child) => child.type.name == "Column")[0];
+  //   flattenedChildren = flattenedChildren.filter((child) => child.type.name != "Column");
+  //   flattenedChildren = flattenedChildren.concat(column.props.children);
+  // }
+
+  // console.log(flattenedChildren)
+
+  // for (var i=0; i< flattenedChildren.length; i++){
+  //   if(flattenedChildren[i].type.name == "Column"){
+
+  //     var column = flattenedChildren[i];
+  //     column = organizeChildren(column.props.children);
+
+  //     // allChildren.indexOf(flattenedChildren[i]) = column;
+
+  //   }
+  // }
+
+  // for(var i =0; i< columns.elems.length ; i++){
+
+  //   // console.log(columns.elems[i])
+  //   columns.elems[i] = organizeChildren(columns.elems[i].props.children);
+
+  // }
+
+  // organizedChildren.filter((child) => child.type == "column")[0] = columns;
+
+  //  console.log(organizedChildren)
+
+  // var columns = organizedChildren.filter((child) => child.type == "column")[0];
+
+  // var emergencyStop = 0;
+
+  // while (columns.elems.length > 0 && emergencyStop < 20) {
+  //   emergencyStop++;
+
+  //   for (var i = 0; i < columns.elems.filter((child) => child.type == "column").length; i++) {
+  //     var column = columns.elems.filter((child) => child.type == "column");
+  //     // console.log(column)
+  //     // columns.elems.filter((child) => child.type == "column")[0] = organizeChildren([column]);
+  //     console.log(column)
+
+  //   }
+
+  //   if (emergencyStop == 20) {
+  //     console.log("emergency stop");
+  //   }
+  // }
+
+  // console.log(organizedChildren)
+
+  if (columns.length != 0) {
     for (var i = 0; i < columns.length; i++) {
       var column = columns[i];
       var columnChildren = column.props.children;
-      var columnDescription = columnChildren.filter((child) => child.type.name == "Description") || null;
-      var columnTitle = columnChildren.filter((child) => child.type.name == "Title") || null;
-      var columnHeading = columnChildren.filter((child) => child.type.name == "Heading") || null;
-      var columnGraphic = columnChildren.filter((child) => child.type.name == "Graphic") || null;
-      var columnOther = columnChildren.filter((child) => DEFINED_CHILDREN.indexOf(child.type.name) == -1) || null;
+      var organizedColumnChildren = organizeChildren(columnChildren);
 
-      description.push(columnDescription);
-      title.push(columnTitle);
-      heading.push(columnHeading);
-      graphic.push(columnGraphic);
-      other.push(columnOther);
+      var [columnColumns, columnDescription, columnTitle, columnHeading, columnGraphic, columnOther] = [organizedColumnChildren[0].elems, organizedColumnChildren[1].elems, organizedColumnChildren[2].elems, organizedColumnChildren[3].elems, organizedColumnChildren[4].elems, organizedColumnChildren[5].elems];
+
+      columns[i] = { columns: columnColumns, description: columnDescription, title: columnTitle, heading: columnHeading, graphic: columnGraphic, other: columnOther };
     }
   }
 
@@ -119,11 +213,18 @@ function getMainClasses(pref, type) {
   if (pref == undefined) pref = `${pref}`;
   var mainClasses = `${pref}`;
   if (type == undefined) return mainClasses;
-  if (type == "background") mainClasses += ` ${pref}__background`;
+  if (type == "overview") mainClasses += ` ${pref}__overview`;
   if (type == "pitch") mainClasses += ` ${pref}__pitch`;
-  if (SECTION_TYPE_C.indexOf(type) != -1) mainClasses += " gap-4";
 
   return mainClasses;
+}
+
+function getGapClasses(type) {
+  var gapClasses = ``;
+
+  if (SECTION_TYPE_C.indexOf(type) != -1) gapClasses += " gap-4";
+
+  return gapClasses;
 }
 
 function getContainerMarginClass(margin) {
@@ -150,6 +251,7 @@ function getWrapperClasses(pref, background) {
     if (background == "primary") wrapperClasses += ` ${pref}__primary`;
     if (background == "makeright tertiary") wrapperClasses += ` ${pref}__makeright-tertiary`;
     if (background == "background") wrapperClasses += ` ${pref}__background`;
+    if (background == "background darker") wrapperClasses += ` ${pref}__background ${pref}__background-darker`;
   } else if (typeof background == "object") {
     wrapperClasses += ` ${pref}__image`;
   }
@@ -181,11 +283,14 @@ function checkErrorCases(type, columns, children) {
 }
 
 // TODO: at some point these should be re-ordered in a way that's more logical, maybe that would include more descriptive names but they're really hard to think of for something as abstract as this
-const SECTION_TYPE_A = ["default", "background", "logo banner"];
+// and background should really be renammed to something else because in this case it means a literal section describing background information, but everywhere else in this file it refers to the background color
+const SECTION_TYPE_A = ["default", "overview", "logo banner"];
 const SECTION_TYPE_B = ["pitch"];
 const SECTION_TYPE_C = ["columns"];
+const SECTION_TYPE_D = ["titled columns"];
+const SECTION_TYPES = [...SECTION_TYPE_A, ...SECTION_TYPE_B, ...SECTION_TYPE_C, ...SECTION_TYPE_D];
 
-function Section({ className, children, type, background, id, margin }) {
+function Section({ className, children, type, background, id, margin, titled }) {
   var pref = "section";
 
   // TODO: the 'columns' concept should work with all variants of section i think
@@ -196,16 +301,21 @@ function Section({ className, children, type, background, id, margin }) {
   var childs = getSectionChildren(children);
   var { columns, description, title, heading, graphic, other } = childs;
 
+  // console.log(columns);
+
   var mainClasses = getMainClasses(pref, type);
   var containerMarginClass = getContainerMarginClass(margin);
   var wrapperClasses = getWrapperClasses(pref, background);
+  var gapClasses = getGapClasses(type);
 
   var hasText = getHasText(childs);
   var hasGraphic = getHasGraphic(graphic);
 
   var hasBackground = getHasBackground(background);
 
-  checkErrorCases(type, columns, children);
+  var isTitled = titled != undefined ? titled : false;
+
+  // checkErrorCases(type, columns, children);
 
   return (
     <>
@@ -216,7 +326,7 @@ function Section({ className, children, type, background, id, margin }) {
           </>
         )}
         <div className="section--inner">
-          <div className={`${mainClasses} ${containerMarginClass} ${className}`}>
+          <div className={`${mainClasses} ${containerMarginClass} ${className} ${isTitled ? '' : gapClasses}`}>
             {SECTION_TYPE_A.indexOf(type) != -1 ? (
               <>
                 {hasText && (
@@ -249,17 +359,23 @@ function Section({ className, children, type, background, id, margin }) {
               </>
             ) : SECTION_TYPE_C.indexOf(type) != -1 ? (
               <>
-                {columns.map((column, i) => {
-                  return (
-                    <Column className={`col-${Math.floor(12 / columns.length)}`} key={`column ${i}`}>
-                      {graphic[i] && <>{graphic[i]}</>}
-                      {heading[i] && <>{heading[i]}</>}
-                      {description[i] && <>{description[i]}</>}
-                      {other[i] && <>{other[i]}</>}
-                    </Column>
-                  );
-                })}
+                {isTitled && (
+                  <div className="section--copy col-12">
+                    {title && <>{title}</>}
+                    {heading && <>{heading}</>}
+                    {description && <>{description}</>}
+                  </div>
+                )}
+                {isTitled ? (
+                  <div className={`${gapClasses} flex-row section--col-group`}>
+                    <ColumnGroup columns={columns} />
+                  </div>
+                ) : (
+                  <ColumnGroup columns={columns} />
+                )}
               </>
+            ) : SECTION_TYPE_D.indexOf(type) != -1 ? (
+              <></>
             ) : null}
           </div>
         </div>
@@ -277,7 +393,7 @@ Section.defaultProps = {
 
 Section.propTypes = {
   margin: PropTypes.oneOf(["regular", "wide"]),
-  type: PropTypes.oneOf(["default", "columns", "background", "logo banner", "pitch"]),
+  type: PropTypes.oneOf(SECTION_TYPES),
   background: PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf(["none", ...BACKGROUND_COLORS])]),
 };
 

@@ -50,18 +50,20 @@
       @include img-contain;
     }
   }
+
+  
+  &--col-group {
+    margin-top: calc(var(--section-text-spacing)*1.75);
+  }
+
+
 }
-
-
-
-
-
 
 
 
 // Type variants
 .section {
-  &__background {
+  &__overview {
     justify-content: space-between;
 
     --gap: 6rem;
@@ -111,7 +113,7 @@
   &__image {
     @include pad-y(var(--section-gap));
 
-    &:not(.section__background) * {
+    &:not(.section__background) *{
       color: $col-background;
     }
 
@@ -142,6 +144,10 @@
 
   &__background {
     background-color: $col-background;
+  }
+
+  &__background-darker {
+    background-color: $col-background_darker;
   }
 
   &__primary {

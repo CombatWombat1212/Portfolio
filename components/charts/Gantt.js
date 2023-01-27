@@ -2,7 +2,7 @@ import { addAttrNonDestructive } from "@/scripts/GlobalUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { useRef } from "react";
 import Mask from "../utilities/Mask";
-import GANTT_CHARTS from "/data/GANTT_CHARTS";
+import GANTT_CHARTS from "/data/charts/GANTT_CHARTS";
 import { chevron_down } from "/data/ICONS";
 
 function BarFilled({ className, start, end, cycle }) {

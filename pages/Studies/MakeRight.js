@@ -4,7 +4,7 @@ import CaseStudyPage from "/components/studies/CaseStudyPage";
 import Brief from "/components/studies/Brief";
 import { Section, Chapter, Title, Column, Heading, Description, Graphic } from "/components/studies/Sections";
 import MAKERIGHT_IMGS from "/data/MAKERIGHT_IMGS";
-import Gantt from "/components/studies/Gantt";
+import Gantt from "/components/charts/Gantt";
 
 // TODO:add the interactive chapter selection thingy
 
@@ -18,8 +18,8 @@ function MakeRight() {
 
         <Brief brief={study.brief} />
 
-        <Chapter name="overview">
-          <Section id="Background" type="background">
+        <Chapter name="Overview">
+          <Section id="Overview" type="overview">
             <Title>Background</Title>
             <Heading>3D printing is yet to reach its full potential</Heading>
             <Description>
@@ -34,7 +34,7 @@ function MakeRight() {
             <Graphic type="image" img={MAKERIGHT_IMGS["full_potential"]} />
           </Section>
 
-          <Section id="Challenge" type="background">
+          <Section id="Challenge" type="overview">
             <Title>Challenge</Title>
             <Heading>
               Cost, and technical knowledge
@@ -137,16 +137,31 @@ function MakeRight() {
           </Section>
 
           <Section id="Plan--Gantt" className="flex-col">
-
-
-            {/* TODO: morning man! before getting started on the gantt chart, do what you did to the pitch icons to the graphics at the top of the page to ensure that they're always at the right scale.  This will require you to create an image wrapper of somekind, or figure out how to make changes to the next/image one, because you need to have a way to add width and height css variables to each image automaticalls */}
-
             <Title>Project Plan</Title>
             <Heading>Project phases and timeline</Heading>
             <Gantt study="MakeRight" />
           </Section>
+        </Chapter>
 
-
+        <Chapter name="Research" id="Research">
+          <Section type="columns" className="flex-col" titled background="background darker">
+            <Title>Approach</Title>
+            <Heading>Finding a focus within the field of 3D printing</Heading>
+            {/* TODO: give graphic the ability to have background colors */}
+            {/* TODO: give something the ability to put arrows between each column */}
+            <Column>
+              <Graphic type="mask" background="" img={MAKERIGHT_IMGS["secondary_research"]} />
+              <Description type="h3">
+                <b>Secondary research</b> to understand a high level context of the 3D printing world
+              </Description>
+            </Column>
+            <Column>
+              <Graphic type="mask" background="" img={MAKERIGHT_IMGS["interviews"]} />
+              <Description type="h3">
+                <b>Interviews & surveys</b> to understand peoples’ experiences at a lower level
+              </Description>
+            </Column>
+          </Section>
         </Chapter>
       </CaseStudyPage>
     </>

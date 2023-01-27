@@ -94,6 +94,42 @@ const MAKERIGHT_IMGS = {
     width: 3840,
     height: 1400,
   },
+
+
+
+
+
+  secondary_research: {
+    name: "secondary_research",
+    src: "./assets/images/case_studies/makeright/secondary_research.svg",
+    alt: "Graphic of a document with charts and a magnifying glass",
+    width: 191.61,
+    height: 184.39,
+  },
+
+
+  interviews: {
+    name: "interviews",
+    src: "./assets/images/case_studies/makeright/interviews.svg",
+    alt: "Graphic of two people sitting at a table",
+    width: 199.66,
+    height: 182.73,
+  },
+
+
+
+  aha_moment: {
+    name: "aha_moment",
+    src: "./assets/images/case_studies/makeright/aha_moment.svg",
+    alt: "Stylized graphic of a lightbulb",
+    width: 206.75,
+    height: 209.42,
+  },
+
+
+
+
+
 };
 
 //   function Img(icon){

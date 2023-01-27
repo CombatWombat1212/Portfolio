@@ -1464,7 +1464,11 @@ body p, body li {
   object-fit: contain;
 }
 
-.section__background {
+.section--col-group {
+  margin-top: calc(var(--section-text-spacing)*1.75);
+}
+
+.section__overview {
   justify-content: space-between;
   --gap: 6rem;
   gap: var(--gap);
@@ -1472,7 +1476,7 @@ body p, body li {
   row-gap: var(--gap);
 }
 
-.section__background .section--graphic {
+.section__overview .section--graphic {
   opacity: 0.3;
 }
 
@@ -1536,6 +1540,11 @@ body p, body li {
 .section__background,
 .chapter__background {
   background-color: #F3F3F7;
+}
+
+.section__background-darker,
+.chapter__background-darker {
+  background-color: #E9E9F2;
 }
 
 .section__primary,
@@ -2404,13 +2413,13 @@ body p, body li {
   --background-info-gap: 6rem;
 }
 
-#Makeright #Background .section {
+#Makeright #Overview .section {
   gap: var(--background-info-gap);
   column-gap: var(--background-info-gap);
   row-gap: var(--background-info-gap);
 }
 
-#Makeright #Background .section--graphic img {
+#Makeright #Overview .section--graphic img {
   width: calc((var(--img-aspect-width) / var(--img-aspect-height)) * 17.5rem);
 }
 
@@ -2444,5 +2453,10 @@ body p, body li {
 #Makeright #Plan,
 #Makeright #BuildingMakeRight {
   margin-top: 0;
+}
+
+#Makeright #Research .section--graphic .mask {
+  width: calc((var(--mask-aspect-width) / var(--mask-aspect-height)) * 9rem);
+  background-color: #404064;
 }
 /*# sourceMappingURL=style.css.map */

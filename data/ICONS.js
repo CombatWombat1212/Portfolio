@@ -30,6 +30,13 @@ const ICONS = {
     width: 17.84,
     height: 11.75,
   },
+  chevron_right: {
+    name: 'chevron_right',
+    src: "/assets/icons/chevron_right.svg",
+    alt: "Chevron pointing right",
+    width: 19,
+    height: 30,
+  },
   document: {
     name: 'document',
     src: "/assets/icons/document.svg",

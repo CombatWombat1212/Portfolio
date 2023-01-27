@@ -5,11 +5,9 @@
 }
 
 #Makeright {
-
   --background-info-gap: 6rem;
 
-  #Background {
-
+  #Overview {
     .section {
       @include gap(var(--background-info-gap));
       &--graphic {
@@ -21,7 +19,6 @@
   }
 
   #Challenge {
-
     .section {
       @include gap(var(--background-info-gap));
       &--graphic {
@@ -53,5 +50,16 @@
   #Plan,
   #BuildingMakeRight {
     margin-top: 0;
+  }
+
+  #Research {
+    .section {
+      &--graphic {
+        .mask{
+          @include mask-width(9rem);
+          background-color: $col-tertiary;
+        }
+      }
+    }
   }
 }
