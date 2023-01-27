@@ -150,13 +150,15 @@ function MakeRight() {
             {/* TODO: give graphic the ability to have background colors */}
             {/* TODO: give something the ability to put arrows between each column */}
             <Column>
-              <Graphic type="mask" background="" img={MAKERIGHT_IMGS["secondary_research"]} />
+
+            {/* TODO: next step today is backgrounds on graphics */}
+              <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["secondary_research"]} />
               <Description type="h3">
                 <b>Secondary research</b> to understand a high level context of the 3D printing world
               </Description>
             </Column>
             <Column>
-              <Graphic type="mask" background="" img={MAKERIGHT_IMGS["interviews"]} />
+              <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["interviews"]} />
               <Description type="h3">
                 <b>Interviews & surveys</b> to understand peoples’ experiences at a lower level
               </Description>

@@ -9,10 +9,10 @@ const BACKGROUND_COLORS = ["background", "background darker", "primary", "second
 
 function getHeadingClasses(type) {
   var headingClasses = "section--heading";
-  if (type == "h1") headingClasses += " h1";
-  if (type == "h2") headingClasses += " h2";
-  if (type == "h3") headingClasses += " h3";
-  if (type == "h4") headingClasses += " h4";
+  if (type == "h1") headingClasses += " text--h1";
+  if (type == "h2") headingClasses += " text--h2";
+  if (type == "h3") headingClasses += " text--h3";
+  if (type == "h4") headingClasses += " text--h4";
   return headingClasses;
 }
 
@@ -48,8 +48,10 @@ function Title({ children }) {
   );
 }
 
-function Description({ children }) {
-  return <div className="section--description">{children}</div>;
+function Description({ children, type }) {
+  var descriptionClasses = getHeadingClasses(type);
+
+  return <div className={`section--description ${descriptionClasses}`}>{children}</div>;
 }
 
 function ColumnGroup({ columns }) {
@@ -80,7 +82,6 @@ function Graphic({ type, img }) {
 
   // TODO: if you end up using this 'img-aspect-width' thing in multiple places then you should create a wrapper for Next/Image that automatically adds it to your image components, same as its done here and within the Mask component
 
-  // TODO: for some reason section--graphic is only applied occasionally but you should fix this and make it so that its always wrapped in section--graphic right here
   return (
     <>
       {isImg && <Image src={img.src} alt={img.alt} width={img.width} height={img.height} style={{ "--img-aspect-width": img.width, "--img-aspect-height": img.height }} />}
@@ -122,77 +123,11 @@ function getSectionChildren(children) {
 
   var allTypes = [...DEFINED_CHILDREN, "Other"];
 
-  // var columns = [],
-  //   description = [],
-  //   title = [],
-  //   heading = [],
-  //   graphic = [],
-  //   other = [];
-
   var organizedChildren = [];
 
   organizedChildren = organizeChildren(allChildren);
 
   var [columns, description, title, heading, graphic, other] = [organizedChildren[0].elems, organizedChildren[1].elems, organizedChildren[2].elems, organizedChildren[3].elems, organizedChildren[4].elems, organizedChildren[5].elems];
-
-  // console.log(organizedChildren)
-
-  // var columns = organizedChildren.filter((child) => child.type == "column")[0];
-
-  // var flattenedChildren = children;
-  // var foundColumns = [];
-
-  // while (flattenedChildren.filter((child) => child.type.name == "Column")   ){
-  //   var column = flattenedChildren.filter((child) => child.type.name == "Column")[0];
-  //   flattenedChildren = flattenedChildren.filter((child) => child.type.name != "Column");
-  //   flattenedChildren = flattenedChildren.concat(column.props.children);
-  // }
-
-  // console.log(flattenedChildren)
-
-  // for (var i=0; i< flattenedChildren.length; i++){
-  //   if(flattenedChildren[i].type.name == "Column"){
-
-  //     var column = flattenedChildren[i];
-  //     column = organizeChildren(column.props.children);
-
-  //     // allChildren.indexOf(flattenedChildren[i]) = column;
-
-  //   }
-  // }
-
-  // for(var i =0; i< columns.elems.length ; i++){
-
-  //   // console.log(columns.elems[i])
-  //   columns.elems[i] = organizeChildren(columns.elems[i].props.children);
-
-  // }
-
-  // organizedChildren.filter((child) => child.type == "column")[0] = columns;
-
-  //  console.log(organizedChildren)
-
-  // var columns = organizedChildren.filter((child) => child.type == "column")[0];
-
-  // var emergencyStop = 0;
-
-  // while (columns.elems.length > 0 && emergencyStop < 20) {
-  //   emergencyStop++;
-
-  //   for (var i = 0; i < columns.elems.filter((child) => child.type == "column").length; i++) {
-  //     var column = columns.elems.filter((child) => child.type == "column");
-  //     // console.log(column)
-  //     // columns.elems.filter((child) => child.type == "column")[0] = organizeChildren([column]);
-  //     console.log(column)
-
-  //   }
-
-  //   if (emergencyStop == 20) {
-  //     console.log("emergency stop");
-  //   }
-  // }
-
-  // console.log(organizedChildren)
 
   if (columns.length != 0) {
     for (var i = 0; i < columns.length; i++) {
@@ -287,8 +222,7 @@ function checkErrorCases(type, columns, children) {
 const SECTION_TYPE_A = ["default", "overview", "logo banner"];
 const SECTION_TYPE_B = ["pitch"];
 const SECTION_TYPE_C = ["columns"];
-const SECTION_TYPE_D = ["titled columns"];
-const SECTION_TYPES = [...SECTION_TYPE_A, ...SECTION_TYPE_B, ...SECTION_TYPE_C, ...SECTION_TYPE_D];
+const SECTION_TYPES = [...SECTION_TYPE_A, ...SECTION_TYPE_B, ...SECTION_TYPE_C];
 
 function Section({ className, children, type, background, id, margin, titled }) {
   var pref = "section";

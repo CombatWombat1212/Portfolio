@@ -1432,19 +1432,19 @@ body p, body li {
   margin-top: var(--font-margin-bottom-h4);
 }
 
-.section--heading.h1 + * {
+.section--heading.text--h1 + * {
   margin-top: var(--font-margin-bottom-h1);
 }
 
-.section--heading.h2 + * {
+.section--heading.text--h2 + * {
   margin-top: var(--font-margin-bottom-h2);
 }
 
-.section--heading.h3 + * {
+.section--heading.text--h3 + * {
   margin-top: var(--font-margin-bottom-h3);
 }
 
-.section--heading.h4 + * {
+.section--heading.text--h4 + * {
   margin-top: var(--font-margin-bottom-h4);
 }
 

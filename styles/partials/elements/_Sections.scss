@@ -1,5 +1,5 @@
 @mixin section--heading-bottom-margin($m) {
-  &.#{$m} + * {
+  &.text--#{$m} + * {
     margin-top: var(--font-margin-bottom-#{$m});
   }
 }
