@@ -4,21 +4,34 @@
   }
 }
 
+@mixin section-chapter-wrapper{
+  margin-top: var(--section-gap);
+  position: relative;
+}
+
+
+
 :root {
   --section-gap: 12.5rem;
   --section-gap_half: calc(var(--section-gap) / 2);
 }
 
-.section,
-.chapter {
-  &--wrapper {
-    margin-top: var(--section-gap);
-    position: relative;
+
+
+.chapter{
+  &--wrapper{
+    @include section-chapter-wrapper;
   }
 }
 
+
+
 .section {
   --section-text-spacing: 1.25rem;
+
+  &--wrapper{
+    @include section-chapter-wrapper;
+  }
 
   @include flex-row;
 
@@ -45,19 +58,51 @@
     }
   }
 
-  &--graphic {
+  .graphic {
+
+    &--panel{
+      @include b-rad;
+      @include flex-row-center;
+      padding: 2.5rem;
+    }
+
+    &--caption{
+      margin-top: var(--section-text-spacing);
+    }
+
+
+
     img {
       @include img-contain;
     }
+
+
+
+
   }
 
   
-  &--col-group {
+  &--main {
+    @include flex-row;
     margin-top: calc(var(--section-text-spacing)*1.75);
   }
 
 
+
+  .column{
+
+    &--arrow{
+      .mask{
+        @include mask-width(1.5rem,!important);
+        background-color: $col-primary!important;
+      }
+
+    }
+  }
+
+
 }
+
 
 
 
@@ -106,6 +151,19 @@
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Color variants
 
 .section {
@@ -113,7 +171,7 @@
   &__image {
     @include pad-y(var(--section-gap));
 
-    &:not(.section__background) *{
+    &:not(.background__background) *{
       color: $col-background;
     }
 
@@ -126,7 +184,7 @@
 .chapter {
   &__color {
     // TODO: fix this ugly ass selector
-    & > * > *:not(.section__background) {
+    & > * > *:not(.background__background) {
       * {
         color: $col-background;
       }
@@ -137,8 +195,10 @@
   }
 }
 
-.section,
-.chapter {
+
+
+
+.background {
   &__color {
   }
 
@@ -157,4 +217,21 @@
   &__makeright-tertiary {
     background-color: $col-tertiary_makeright;
   }
+}
+
+
+
+
+
+
+
+
+
+
+.test{
+
+  display:grid;
+
+
+
 }

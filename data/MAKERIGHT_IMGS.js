@@ -108,6 +108,8 @@ const MAKERIGHT_IMGS = {
   },
 
 
+  // TODO: fix this graphic
+
   interviews: {
     name: "interviews",
     src: "./assets/images/case_studies/makeright/interviews.svg",

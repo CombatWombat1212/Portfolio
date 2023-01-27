@@ -56,7 +56,7 @@
     .section {
       &--graphic {
         .mask{
-          @include mask-width(9rem);
+          @include mask-width(11.5rem);
           background-color: $col-tertiary;
         }
       }

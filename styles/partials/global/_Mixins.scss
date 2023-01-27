@@ -623,8 +623,11 @@
 
 
 
-  @mixin mask-width($w){
-	width:  calc((var(--mask-aspect-width) / var(--mask-aspect-height)) * #{$w});
+  @mixin mask-width($w, $i: ''){
+
+
+	width:  calc((var(--mask-aspect-width) / var(--mask-aspect-height)) * #{$w}) #{$i};
+  
   }
 
 

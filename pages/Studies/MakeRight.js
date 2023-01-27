@@ -2,7 +2,7 @@ import { StudyPanel } from "/components/elements/Panel";
 import getStudy from "../../scripts/GetStudy";
 import CaseStudyPage from "/components/studies/CaseStudyPage";
 import Brief from "/components/studies/Brief";
-import { Section, Chapter, Title, Column, Heading, Description, Graphic } from "/components/studies/Sections";
+import { Section, Chapter, Title, Column, Heading, Description, Graphic, GraphicGroup } from "/components/studies/Sections";
 import MAKERIGHT_IMGS from "/data/MAKERIGHT_IMGS";
 import Gantt from "/components/charts/Gantt";
 
@@ -144,22 +144,21 @@ function MakeRight() {
         </Chapter>
 
         <Chapter name="Research" id="Research">
-          <Section type="columns" className="flex-col" titled background="background darker">
+          <Section type="columns" className="flex-col" titled arrows background="background darker">
             <Title>Approach</Title>
             <Heading>Finding a focus within the field of 3D printing</Heading>
-            {/* TODO: give graphic the ability to have background colors */}
             {/* TODO: give something the ability to put arrows between each column */}
-            <Column>
+            {/* good morning man<3 i hope you had a great weekend and you're ready for a fresh new start!! you're going to fucking kill it this week.  i love you.  your first challenge is the arrows between the graphics thing.  what made it so hard is vertically centering it when you don't know the height of the images.  maybe you could wrap the images in something that has a definite height? just a thought, theres loads of ways to do it and i know you'll find one that works for your needs <3.  you did amazing last week and i cant wait to see what you accomplish next.  good luck today:)  */}
 
-            {/* TODO: next step today is backgrounds on graphics */}
+            <Column>
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["secondary_research"]} />
-              <Description type="h3">
+              <Description type="h3" className="graphic--caption">
                 <b>Secondary research</b> to understand a high level context of the 3D printing world
               </Description>
             </Column>
             <Column>
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["interviews"]} />
-              <Description type="h3">
+              <Description type="h3" className="graphic--caption">
                 <b>Interviews & surveys</b> to understand peoples’ experiences at a lower level
               </Description>
             </Column>
