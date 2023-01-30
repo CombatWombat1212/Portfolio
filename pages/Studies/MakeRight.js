@@ -147,8 +147,6 @@ function MakeRight() {
           <Section type="columns" className="flex-col" titled arrows background="background darker">
             <Title>Approach</Title>
             <Heading>Finding a focus within the field of 3D printing</Heading>
-            {/* TODO: give something the ability to put arrows between each column */}
-            {/* good morning man<3 i hope you had a great weekend and you're ready for a fresh new start!! you're going to fucking kill it this week.  i love you.  your first challenge is the arrows between the graphics thing.  what made it so hard is vertically centering it when you don't know the height of the images.  maybe you could wrap the images in something that has a definite height? just a thought, theres loads of ways to do it and i know you'll find one that works for your needs <3.  you did amazing last week and i cant wait to see what you accomplish next.  good luck today:)  */}
 
             <Column>
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["secondary_research"]} />

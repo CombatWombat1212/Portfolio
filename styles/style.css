@@ -1423,6 +1423,7 @@ body p, body li {
 
 .section {
   --section-text-spacing: 1.25rem;
+  --section-graphic-panel-pad: 2.5rem;
   display: flex;
   flex-direction: row;
 }
@@ -1470,7 +1471,12 @@ body p, body li {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: 2.5rem;
+  padding: var(--section-graphic-panel-pad);
+  align-items: center;
+}
+
+.section .graphic--panel .mask {
+  height: fit-content;
 }
 
 .section .graphic--caption {
@@ -1486,12 +1492,21 @@ body p, body li {
 .section--main {
   display: flex;
   flex-direction: row;
-  margin-top: calc(var(--section-text-spacing)*1.75);
+  margin-top: calc(var(--section-text-spacing) * 1.75);
+}
+
+.section .column--arrow {
+  position: absolute;
 }
 
 .section .column--arrow .mask {
-  width: calc((var(--mask-aspect-width) / var(--mask-aspect-height)) * 1.5rem) !important;
+  --arrow-height: calc((( var(--mask-aspect-height) / var(--mask-aspect-width) )) * 1.5rem) ;
+  --arrow-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 1.5rem) ;
+  height: var(--arrow-height) !important;
+  width: var(--arrow-width) !important;
   background-color: #074391 !important;
+  margin-top: calc(((var(--section-graphic-panel-pad) * 2) + var(--img-panel-height) - var(--arrow-height)) / 2);
+  margin-left: calc(((var(--gap) + var(--arrow-width)) / 2) * -1);
 }
 
 .section__overview {
@@ -1533,13 +1548,13 @@ body p, body li {
   font-weight: 400;
 }
 
+.section__pitch .section--graphic {
+  padding-left: 2rem;
+}
+
 .section__pitch .mask {
   --mask-size: 7.5rem;
   width: calc((var(--mask-aspect-width) / var(--mask-aspect-height)) * var(--mask-size)) ;
-}
-
-.section__pitch .section--graphic {
-  padding-left: 2rem;
 }
 
 .section__color, .section__image {
@@ -1577,10 +1592,6 @@ body p, body li {
 
 .background__makeright-tertiary {
   background-color: #25313C;
-}
-
-.test {
-  display: grid;
 }
 
 .background {
@@ -1944,21 +1955,21 @@ body p, body li {
 }
 
 .gap-5 {
-  --column-gap: 4rem;
-  --row-gap: 4rem;
-  --gap: 4rem;
-  column-gap: 4rem;
-  row-gap: 4rem;
-  gap: 4rem;
+  --column-gap: 6rem;
+  --row-gap: 6rem;
+  --gap: 6rem;
+  column-gap: 6rem;
+  row-gap: 6rem;
+  gap: 6rem;
 }
 
 .gap-6 {
-  --column-gap: 8rem;
-  --row-gap: 8rem;
-  --gap: 8rem;
-  column-gap: 8rem;
-  row-gap: 8rem;
-  gap: 8rem;
+  --column-gap: 6rem;
+  --row-gap: 6rem;
+  --gap: 6rem;
+  column-gap: 6rem;
+  row-gap: 6rem;
+  gap: 6rem;
 }
 
 .m-auto {
@@ -2039,20 +2050,20 @@ body p, body li {
     gap: 3rem;
   }
   .gap-sm-5 {
-    --column-gap: 4rem;
-    --row-gap: 4rem;
-    --gap: 4rem;
-    column-gap: 4rem;
-    row-gap: 4rem;
-    gap: 4rem;
+    --column-gap: 6rem;
+    --row-gap: 6rem;
+    --gap: 6rem;
+    column-gap: 6rem;
+    row-gap: 6rem;
+    gap: 6rem;
   }
   .gap-sm-6 {
-    --column-gap: 8rem;
-    --row-gap: 8rem;
-    --gap: 8rem;
-    column-gap: 8rem;
-    row-gap: 8rem;
-    gap: 8rem;
+    --column-gap: 6rem;
+    --row-gap: 6rem;
+    --gap: 6rem;
+    column-gap: 6rem;
+    row-gap: 6rem;
+    gap: 6rem;
   }
   .just-sm-center {
     justify-content: center;
@@ -2127,20 +2138,20 @@ body p, body li {
     gap: 3rem;
   }
   .gap-md-5 {
-    --column-gap: 4rem;
-    --row-gap: 4rem;
-    --gap: 4rem;
-    column-gap: 4rem;
-    row-gap: 4rem;
-    gap: 4rem;
+    --column-gap: 6rem;
+    --row-gap: 6rem;
+    --gap: 6rem;
+    column-gap: 6rem;
+    row-gap: 6rem;
+    gap: 6rem;
   }
   .gap-md-6 {
-    --column-gap: 8rem;
-    --row-gap: 8rem;
-    --gap: 8rem;
-    column-gap: 8rem;
-    row-gap: 8rem;
-    gap: 8rem;
+    --column-gap: 6rem;
+    --row-gap: 6rem;
+    --gap: 6rem;
+    column-gap: 6rem;
+    row-gap: 6rem;
+    gap: 6rem;
   }
   .just-md-center {
     justify-content: center;
@@ -2215,20 +2226,20 @@ body p, body li {
     gap: 3rem;
   }
   .gap-lg-5 {
-    --column-gap: 4rem;
-    --row-gap: 4rem;
-    --gap: 4rem;
-    column-gap: 4rem;
-    row-gap: 4rem;
-    gap: 4rem;
+    --column-gap: 6rem;
+    --row-gap: 6rem;
+    --gap: 6rem;
+    column-gap: 6rem;
+    row-gap: 6rem;
+    gap: 6rem;
   }
   .gap-lg-6 {
-    --column-gap: 8rem;
-    --row-gap: 8rem;
-    --gap: 8rem;
-    column-gap: 8rem;
-    row-gap: 8rem;
-    gap: 8rem;
+    --column-gap: 6rem;
+    --row-gap: 6rem;
+    --gap: 6rem;
+    column-gap: 6rem;
+    row-gap: 6rem;
+    gap: 6rem;
   }
   .just-lg-center {
     justify-content: center;
@@ -2303,20 +2314,20 @@ body p, body li {
     gap: 3rem;
   }
   .gap-xl-5 {
-    --column-gap: 4rem;
-    --row-gap: 4rem;
-    --gap: 4rem;
-    column-gap: 4rem;
-    row-gap: 4rem;
-    gap: 4rem;
+    --column-gap: 6rem;
+    --row-gap: 6rem;
+    --gap: 6rem;
+    column-gap: 6rem;
+    row-gap: 6rem;
+    gap: 6rem;
   }
   .gap-xl-6 {
-    --column-gap: 8rem;
-    --row-gap: 8rem;
-    --gap: 8rem;
-    column-gap: 8rem;
-    row-gap: 8rem;
-    gap: 8rem;
+    --column-gap: 6rem;
+    --row-gap: 6rem;
+    --gap: 6rem;
+    column-gap: 6rem;
+    row-gap: 6rem;
+    gap: 6rem;
   }
   .just-xl-center {
     justify-content: center;
@@ -2391,20 +2402,20 @@ body p, body li {
     gap: 3rem;
   }
   .gap-xxl-5 {
-    --column-gap: 4rem;
-    --row-gap: 4rem;
-    --gap: 4rem;
-    column-gap: 4rem;
-    row-gap: 4rem;
-    gap: 4rem;
+    --column-gap: 6rem;
+    --row-gap: 6rem;
+    --gap: 6rem;
+    column-gap: 6rem;
+    row-gap: 6rem;
+    gap: 6rem;
   }
   .gap-xxl-6 {
-    --column-gap: 8rem;
-    --row-gap: 8rem;
-    --gap: 8rem;
-    column-gap: 8rem;
-    row-gap: 8rem;
-    gap: 8rem;
+    --column-gap: 6rem;
+    --row-gap: 6rem;
+    --gap: 6rem;
+    column-gap: 6rem;
+    row-gap: 6rem;
+    gap: 6rem;
   }
   .just-xxl-center {
     justify-content: center;
@@ -2481,8 +2492,19 @@ body p, body li {
   margin-top: 0;
 }
 
+#Makeright #Research {
+  --img-panel-height: 12rem;
+}
+
+#Makeright #Research .section--graphic {
+  --graphic-height: calc((( var(--mask-aspect-height) / var(--mask-aspect-width) )) * 11.5rem) ;
+  --graphic-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 11.5rem) ;
+  height: var(--img-panel-height);
+}
+
 #Makeright #Research .section--graphic .mask {
-  width: calc((var(--mask-aspect-width) / var(--mask-aspect-height)) * 11.5rem) ;
+  height: var(--graphic-height);
+  width: var(--graphic-width);
   background-color: #404064;
 }
 /*# sourceMappingURL=style.css.map */

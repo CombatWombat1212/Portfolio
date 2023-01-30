@@ -27,9 +27,12 @@ function getMainClasses(pref, type) {
   return mainClasses;
 }
 
-function getGapClasses(type) {
+function getGapClasses(type, arrows) {
   var gapClasses = ``;
   if (SECTION_TYPE_C.indexOf(type) != -1) gapClasses += " gap-4";
+  if (arrows) {
+    gapClasses = "gap-5";
+  }
   return gapClasses;
 }
 
@@ -69,7 +72,6 @@ function getBackgroundClasses(pref, background) {
     backgroundClasses += ` ${pref}__image`;
   }
   return backgroundClasses;
-
 }
 
 function getHasBackground(background) {
@@ -91,13 +93,12 @@ function getHasGraphic(graphic) {
   return hasGraphic;
 }
 
-
 function organizeChildren(allChildren) {
   var allTypes = [...DEFINED_CHILDREN, "Other"];
 
   var arr = [];
 
-  if(allChildren.length == undefined) allChildren = [allChildren]; 
+  if (allChildren.length == undefined) allChildren = [allChildren];
 
   for (var i = 0; i < allTypes.length; i++) {
     arr.push({ type: allTypes[i].toLocaleLowerCase(), elems: [] });
@@ -107,15 +108,13 @@ function organizeChildren(allChildren) {
     var type = arr[i].type;
 
     if (type != "other") {
-      arr[i].elems = allChildren.filter((child) =>  child.type.name == allTypes[i]);
+      arr[i].elems = allChildren.filter((child) => child.type.name == allTypes[i]);
     } else {
       arr[i].elems = allChildren.filter((child) => DEFINED_CHILDREN.indexOf(child.type.name) == -1) || null;
     }
   }
   return arr;
 }
-
-
 
 function getSectionChildren(children) {
   var allChildren = children;
@@ -142,9 +141,6 @@ function getSectionChildren(children) {
 
   return { columns, description, title, heading, graphic, other };
 }
-
-
-
 
 function Heading({ children, type }) {
   var headingClasses = getHeadingClasses(type);
@@ -185,27 +181,23 @@ function Description({ className, children, type }) {
 }
 
 function ColumnGroup({ columns, arrows }) {
-
-
   return (
     <>
       {columns.map((column, i) => {
         var { graphic, heading, description, other } = columns[i];
         return (
-
           <>
-  
-            {arrows && i != 0 && <div className="column--arrow"><Graphic type="mask" img={ICONS["chevron_right"]}></Graphic></div>}
-  
-            <Column className={
-              `column col-${Math.floor(12 / columns.length)}`
-          } key={`column ${i}`}>
+            <Column className={`column col-${Math.floor(12 / columns.length)}`} key={`column ${i}`}>
+              {arrows && i != 0 && (
+                <div className="column--arrow">
+                  <Graphic type="mask" img={ICONS["chevron_right"]}></Graphic>
+                </div>
+              )}
               {graphic && <>{graphic}</>}
               {heading && <>{heading}</>}
               {description && <>{description}</>}
               {other && <>{other}</>}
             </Column>
-
           </>
         );
       })}
@@ -230,10 +222,16 @@ function Graphic({ className, type, img, background }) {
 
   return (
     <>
-      <div className={`section--graphic graphic ${backgroundClasses}`}>
+      {/* <div className={`section--graphic graphic ${backgroundClasses}`}>
         {isImg && <Image src={img.src} alt={img.alt} width={img.width} height={img.height} style={{ "--img-aspect-width": img.width, "--img-aspect-height": img.height }} />}
         {isMask && <Mask src={img.src} alt={img.alt} width={img.width} height={img.height} />}
-      </div>
+      </div> */}
+      {isImg && <div className={`section--graphic graphic ${backgroundClasses}`}style={{ "--img-aspect-width": img.width, "--img-aspect-height": img.height }}>
+        {isImg && <Image src={img.src} alt={img.alt} width={img.width} height={img.height}  />}
+      </div>}
+      {isMask && <div className={`section--graphic graphic ${backgroundClasses}`}style={{ "--mask-aspect-width": img.width, "--mask-aspect-height": img.height }}>
+        {isMask && <Mask src={img.src} alt={img.alt} width={img.width} height={img.height} />}
+      </div>}
     </>
   );
 }
@@ -270,7 +268,7 @@ function Section({ className, children, type, background, id, margin, titled, ar
   var containerMarginClass = getContainerMarginClass(margin);
   var wrapperClasses = getWrapperClasses(pref);
   var backgroundClasses = getBackgroundClasses(pref, background);
-  var gapClasses = getGapClasses(type);
+  var gapClasses = getGapClasses(type, arrows);
 
   var hasText = getHasText(childs);
   var hasGraphic = getHasGraphic(graphic);

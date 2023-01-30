@@ -102,33 +102,28 @@ function Stage({ stage, cycle }) {
 }
 
 function phaseCloseAllOthers(elem) {
-  var phases = document.querySelectorAll(".gantt--phase");
-  for (var i = 0; i < phases.length; i++) {
-    var phase = phases[i];
-    if (phase !== elem) {
-      phase.classList.remove("gantt--phase__open");
-      phase.classList.add("gantt--phase__closed");
+  // TODO: add the fancy animation protection from spam clicking to this function
 
-      var icon = phase.querySelector(".gantt--icon");
+  for (var i = 0; i < allPhases.length; i++) {
+    var phase = allPhases[i];
+    if (phase.elem !== elem) {
+      phase.elem.classList.remove("gantt--phase__open");
+      phase.elem.classList.add("gantt--phase__closed");
+
+      var icon = phase.elem.querySelector(".gantt--icon");
       icon.classList.remove("gantt--icon__open");
       icon.classList.add("gantt--icon__closed");
 
-      var background = phase.querySelector(".bar__background");
-      background.classList.remove("bar__background__open");
-      background.classList.add("bar__background__closed");
+      phaseBackgroundAnimate(phase.elem);
+
+      // var background = phase.querySelector(".bar__background");
+      // background.classList.remove("bar__background__open");
+      // background.classList.add("bar__background__closed");
     }
   }
 }
 
-var waiting = false;
-
 function phaseOnClick(elem) {
-  var trans = getComputedStyle(elem).getPropertyValue("--gant-phase-trans").split("s")[0] * 1000;
-  var delay = getComputedStyle(elem).getPropertyValue("--gant-phase-delay").split("s")[0] * 1000;
-
-
-
-
   elem.classList.toggle("gantt--phase__closed");
   elem.classList.toggle("gantt--phase__open");
 
@@ -136,32 +131,90 @@ function phaseOnClick(elem) {
   icon.classList.toggle("gantt--icon__open");
   icon.classList.toggle("gantt--icon__closed");
 
-  var background = elem.querySelector(".bar__background");
-  var on = elem.classList.contains("gantt--phase__open");
+  phaseBackgroundAnimate(elem);
 
-  if(on) {
+  // var background = elem.querySelector(".bar__background");
+  // var on = elem.classList.contains("gantt--phase__open");
+
+  // if(on) {
+  //   background.classList.add("bar__background__open");
+  //   background.classList.add("bar__background__open-transition")
+  //   background.classList.remove("bar__background__closed");
+  // } else {
+  //   background.classList.add("bar__background__closed");
+  //   background.classList.add("bar__background__closed-transition")
+  //   background.classList.remove("bar__background__open");
+  // }
+
+  // if (!waiting) {
+  //   waiting = true;
+
+  //   setTimeout(() => {
+  //     waiting = false;
+
+  //       background.classList.remove("bar__background__open-transition");
+  //       background.classList.remove("bar__background__closed-transition");
+
+  //   }, trans + trans + delay );
+  // }
+}
+
+class PhaseObj {
+  constructor(elem) {
+    this.elem = elem;
+    this.waiting = false;
+    this.on = false;
+  }
+}
+
+var allPhases = [];
+
+function phaseInit() {
+  var phases = document.querySelectorAll(".gantt--phase");
+
+  for (var i = 0; i < phases.length; i++) {
+    var phase = phases[i];
+    allPhases[i] = new PhaseObj(phase);
+  }
+}
+
+function phaseBackgroundClasslistToggle(phase) {
+  var background = phase.elem.querySelector(".bar__background");
+  phase.on = phase.elem.classList.contains("gantt--phase__open") ? true : false;
+  
+  if (phase.on) {
     background.classList.add("bar__background__open");
-    background.classList.add("bar__background__open-transition")
+    background.classList.add("bar__background__open-transition");
     background.classList.remove("bar__background__closed");
   } else {
     background.classList.add("bar__background__closed");
-    background.classList.add("bar__background__closed-transition")
+    background.classList.add("bar__background__closed-transition");
     background.classList.remove("bar__background__open");
   }
+}
 
-  if (!waiting) {
-    waiting = true;
-
+function phaseBackgroundAnimate(elem) {
+  var index = Array.from(document.querySelectorAll(".gantt--phase")).indexOf(elem);
+  var phase = allPhases[index];
+  
+  var trans = getComputedStyle(elem).getPropertyValue("--gant-phase-trans").split("s")[0] * 1000;
+  var delay = getComputedStyle(elem).getPropertyValue("--gant-phase-delay").split("s")[0] * 1000;
+  
+  var background = elem.querySelector(".bar__background");
+  
+  phaseBackgroundClasslistToggle(phase);
+  
+  if (!phase.waiting) {
+    phase.waiting = true;
+    
     setTimeout(() => {
-      waiting = false;
+      phase.waiting = false;
+      
+      background.classList.remove("bar__background__open-transition");
+      background.classList.remove("bar__background__closed-transition");
 
-        background.classList.remove("bar__background__open-transition");
-        background.classList.remove("bar__background__closed-transition");
-
-    }, trans + trans + delay );
+    }, trans + trans  + delay);
   }
-
-
 }
 
 function phaseOnClickHandler(e) {
@@ -247,13 +300,16 @@ function Cycle({ cycle, weeks }) {
 }
 
 function Gantt({ study }) {
-
   // TODO: Collapse all phases once scrolled past
 
   var chart = GANTT_CHARTS.find((c) => c.name === study);
   var cycles = chart.cycles;
 
   var lengths = cycles.map((cycle) => cycle.length);
+
+  useMountEffect(() => {
+    phaseInit();
+  });
 
   return (
     <>

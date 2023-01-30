@@ -624,11 +624,42 @@
 
 
   @mixin mask-width($w, $i: ''){
-
-
 	width:  calc((var(--mask-aspect-width) / var(--mask-aspect-height)) * #{$w}) #{$i};
-  
   }
+
+  @mixin mask-height($h, $i: ''){
+	height:  calc(( var(--mask-aspect-height/ var(--mask-aspect-width))) * #{$h}) #{$i};
+  }
+
+
+
+
+  @function mask-width($w, $i: ''){
+	  $result: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * #{$w}) #{$i};
+	  @return $result;
+	}
+	
+	@function mask-height($h, $i: ''){
+	  $result: calc((( var(--mask-aspect-height) / var(--mask-aspect-width) )) * #{$h}) #{$i};
+	  @return $result;
+  }
+
+
+
+
+  @function aspect-width($aw, $ah, $w, $i: ''){
+	  $result: calc(( #{$aw} / #{$ah}) * #{$w}) #{$i};
+	  @return $result;
+	}
+
+  @function aspect-height($aw, $ah, $w, $i: ''){
+	  $result: calc(( #{$ah} / #{$aw}) * #{$w}) #{$i};
+	  @return $result;
+	}
+
+
+
+
 
 
   @mixin img-width($w){

@@ -4,32 +4,28 @@
   }
 }
 
-@mixin section-chapter-wrapper{
+@mixin section-chapter-wrapper {
   margin-top: var(--section-gap);
   position: relative;
 }
-
-
 
 :root {
   --section-gap: 12.5rem;
   --section-gap_half: calc(var(--section-gap) / 2);
 }
 
-
-
-.chapter{
-  &--wrapper{
+.chapter {
+  &--wrapper {
     @include section-chapter-wrapper;
   }
 }
 
-
-
 .section {
   --section-text-spacing: 1.25rem;
+  --section-graphic-panel-pad: 2.5rem;
+  // --section-column-arrow-height: 1.7rem;
 
-  &--wrapper{
+  &--wrapper {
     @include section-chapter-wrapper;
   }
 
@@ -59,52 +55,46 @@
   }
 
   .graphic {
-
-    &--panel{
+    &--panel {
       @include b-rad;
       @include flex-row-center;
-      padding: 2.5rem;
+      padding: var(--section-graphic-panel-pad);
+      align-items: center;
+
+      .mask{
+        height: fit-content;
+      }
     }
 
-    &--caption{
+    &--caption {
       margin-top: var(--section-text-spacing);
     }
-
-
 
     img {
       @include img-contain;
     }
-
-
-
-
   }
 
-  
   &--main {
     @include flex-row;
-    margin-top: calc(var(--section-text-spacing)*1.75);
+    margin-top: calc(var(--section-text-spacing) * 1.75);
   }
 
-
-
-  .column{
-
-    &--arrow{
-      .mask{
-        @include mask-width(1.5rem,!important);
-        background-color: $col-primary!important;
+  .column {
+    &--arrow {
+      position: absolute;
+      .mask {
+        --arrow-height: #{mask-height(1.5rem)};
+        --arrow-width: #{mask-width(1.5rem)};
+        height: var(--arrow-height)!important;
+        width: var(--arrow-width)!important;
+        background-color: $col-primary !important;
+        margin-top: calc(((var(--section-graphic-panel-pad) * 2) + var(--img-panel-height) - var(--arrow-height)) / 2);
+        margin-left: calc(((var(--gap) + var(--arrow-width)) / 2) * -1);
       }
-
     }
   }
-
-
 }
-
-
-
 
 // Type variants
 .section {
@@ -121,7 +111,6 @@
 
   &__pitch {
     @include flex-row-between;
-
     --gap: 10rem;
     @include gap;
 
@@ -138,31 +127,18 @@
       @include weight-reg;
     }
 
+    .section--graphic {
+      padding-left: 2rem;
+    }
+
     .mask {
       // --mask-aspect-width;
       // --mask-aspect-height;
       --mask-size: 7.5rem;
       @include mask-width(var(--mask-size));
     }
-
-    .section--graphic {
-      padding-left: 2rem;
-    }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Color variants
 
@@ -171,7 +147,7 @@
   &__image {
     @include pad-y(var(--section-gap));
 
-    &:not(.background__background) *{
+    &:not(.background__background) * {
       color: $col-background;
     }
 
@@ -195,9 +171,6 @@
   }
 }
 
-
-
-
 .background {
   &__color {
   }
@@ -217,21 +190,4 @@
   &__makeright-tertiary {
     background-color: $col-tertiary_makeright;
   }
-}
-
-
-
-
-
-
-
-
-
-
-.test{
-
-  display:grid;
-
-
-
 }
