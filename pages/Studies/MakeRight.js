@@ -5,6 +5,8 @@ import Brief from "/components/studies/Brief";
 import { Section, Chapter, Title, Column, Heading, Description, Graphic, GraphicGroup } from "/components/studies/Sections";
 import MAKERIGHT_IMGS from "/data/MAKERIGHT_IMGS";
 import Gantt from "/components/charts/Gantt";
+import BarGraph from "@/components/charts/BarGraph";
+import DLink from "@/components/utilities/DynamicLink";
 
 // TODO:add the interactive chapter selection thingy
 
@@ -151,14 +153,46 @@ function MakeRight() {
             <Column>
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["secondary_research"]} />
               <Description type="h3" className="graphic--caption">
-                <b>Secondary research</b> to understand a high level context of the 3D printing world
+                <b>Secondary research</b> for high-level context of the 3D printing world
+                {/* <b>Secondary research</b> to understand a high level context of the 3D printing world */}
               </Description>
             </Column>
             <Column>
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["interviews"]} />
               <Description type="h3" className="graphic--caption">
-                <b>Interviews & surveys</b> to understand peoples’ experiences at a lower level
+                {/* <b>Interviews & surveys</b> to understand peoples’ experiences at a lower level */}
+                <b>Interviews & surveys</b> to understand users' experiences at a lower level
               </Description>
+            </Column>
+          </Section>
+
+          <Section id="Research--Limits" background="background darkest" className="flex-col">
+            <Title>Secondary Research</Title>
+            <Heading>
+              Cost and knowledge gaps prevent adoption and use, <br />
+              while hobbyist printers sit idle
+            </Heading>
+          </Section>
+
+          <Section className="flex-col" background="background darkest">
+            <Heading type="h3">What factors limit the adoption of 3D printing?</Heading>
+            <BarGraph study="MakeRight" graph="Limiting Factors" type="default" />
+            {/* TODO: link to source */}
+            <Description>
+              <DLink>Source, Sculpteo, 2020</DLink>
+            </Description>
+          </Section>
+
+          <Section type="columns" className="gap-6" background="background darkest">
+            <Column>
+              <Heading type="h3">Hobbyists often surpass<br />
+these barriers out of passion</Heading>
+              <BarGraph study="MakeRight" graph="Limiting Factors" type="default" />
+            </Column>
+            <Column>
+              <Heading type="h3">Only to have their printer sit idle<br />
+most of the time</Heading>
+              <BarGraph study="MakeRight" graph="Limiting Factors" type="default" />
             </Column>
           </Section>
         </Chapter>

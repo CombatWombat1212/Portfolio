@@ -181,13 +181,29 @@
 
   &__background-darker {
     background-color: $col-background_darker;
+    &+&{
+      padding-top: 0;
+    }
+  }
+
+  &__background-darkest {
+    background-color: $col-background_darkest;
+    &+&{
+      padding-top: 0;
+    }
   }
 
   &__primary {
     background-color: $col-primary;
+    &+&{
+      padding-top: 0;
+    }
   }
 
   &__makeright-tertiary {
     background-color: $col-tertiary_makeright;
+    &+&{
+      padding-top: 0;
+    }
   }
 }

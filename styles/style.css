@@ -1586,12 +1586,32 @@ body p, body li {
   background-color: #E9E9F2;
 }
 
+.background__background-darker + .background__background-darker {
+  padding-top: 0;
+}
+
+.background__background-darkest {
+  background-color: #E0E0EA;
+}
+
+.background__background-darkest + .background__background-darkest {
+  padding-top: 0;
+}
+
 .background__primary {
   background-color: #074391;
 }
 
+.background__primary + .background__primary {
+  padding-top: 0;
+}
+
 .background__makeright-tertiary {
   background-color: #25313C;
+}
+
+.background__makeright-tertiary + .background__makeright-tertiary {
+  padding-top: 0;
 }
 
 .background {
@@ -1880,6 +1900,158 @@ body p, body li {
   font-size: var(--font-size-body);
   line-height: var(--font-leading-body);
   font-weight: 400;
+  color: #074391;
+}
+
+.graph {
+  display: grid;
+  --size: 100%;
+  width: var(--size);
+  height: var(--size);
+}
+
+.graph--wrapper {
+  --graph-height: 24rem;
+  --graph-y-width: 2rem;
+  --graph-pad: 3.25rem;
+  --graph-pad-top: 3.25rem;
+  --graph-pad-bottom: 4.15rem;
+  --graph-y-line-height: 0.0625rem;
+  --graph-bar-width: 3.75rem;
+  --graph-cell-height: calc((var(--graph-height) - (var(--graph-pad-top) + var(--graph-pad-bottom))) / var(--graph-rows));
+  --graph-line-top-margin: calc((var(--graph-cell-height) - var(--graph-y-line-height)) / 2);
+  --graph-bar-spacing: 3.75rem;
+  --graph-bar-label-pad: 0.5rem;
+  --graph-bar-label-height: Min(var(--font-size-body), var(--font-leading-body));
+  background-color: #F3F3F7;
+  height: var(--graph-height);
+  border-radius: var(--b-rad);
+  -webkit-border-radius: var(--b-rad);
+  -moz-border-radius: var(--b-rad);
+  -khtml-border-radius: var(--b-rad);
+}
+
+.graph--wrapper + * {
+  margin-top: 0.85rem;
+}
+
+.graph--y {
+  display: grid;
+  grid-template-columns: var(--graph-y-width) 1fr;
+  padding: var(--graph-pad);
+  padding-top: var(--graph-pad-top);
+  padding-bottom: var(--graph-pad-bottom);
+  --gap: calc(var(--graph-pad) * 0.75);
+  gap: var(--gap);
+  column-gap: var(--gap);
+  row-gap: var(--gap);
+}
+
+.graph--grid {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: repeat(var(--graph-rows), var(--graph-cell-height));
+}
+
+.graph--cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.graph--cell * {
+  margin-top: auto;
+  margin-bottom: auto;
+  text-align: right;
+}
+
+.graph--table {
+  position: relative;
+}
+
+.graph--data {
+  position: absolute;
+  top: 0;
+  width: calc(100% - (var(--graph-pad) * 2));
+  padding-left: var(--graph-pad);
+  padding-top: var(--graph-line-top-margin);
+  height: calc(100% - (var(--graph-line-top-margin) * 2));
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.graph--line {
+  height: var(--graph-y-line-height);
+  background-color: #bcbcca;
+  width: 100%;
+}
+
+.graph--bar {
+  position: relative;
+  margin-top: auto;
+  width: var(--graph-bar-width);
+  height: var(--graph-bar-value);
+}
+
+.graph--bar + .graph--bar {
+  margin-left: var(--graph-bar-spacing);
+}
+
+.graph--bar__highlighted {
+  background-color: #C41263;
+}
+
+.graph--bar__default {
+  background-color: #074391;
+}
+
+.graph--bar__highlighted + .graph--bar__default {
+  margin-left: calc(var(--graph-bar-spacing) * 1.75);
+}
+
+.graph--bar-label {
+  width: 100%;
+  text-align: center;
+  height: var(--graph-bar-label-height);
+}
+
+.graph--bar-label__highlighted {
+  color: #C41263;
+  margin-top: calc((var(--graph-bar-label-height) + var(--graph-bar-label-pad)) * -1);
+}
+
+.graph--bar-label__default {
+  color: #F3F3F7;
+  margin-top: var(--graph-bar-label-pad);
+  margin-bottom: calc((var(--graph-bar-label-height) + var(--graph-bar-label-pad)) * -1);
+}
+
+.graph--bar-name {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.graph--bar-name span {
+  position: absolute;
+  bottom: 0;
+  transform: translate(0%, calc(100% + var(--graph-bar-label-pad)));
+}
+
+.graph--bar-name__highlighted {
+  margin-top: var(--graph-bar-label-pad);
+  color: #C41263;
+}
+
+.graph--bar-name__default {
   color: #074391;
 }
 

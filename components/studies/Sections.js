@@ -6,7 +6,7 @@ import Background from "../utilities/Background";
 import ICONS from "@/data/ICONS";
 
 const DEFINED_CHILDREN = ["Column", "Description", "Title", "Heading", "Graphic"];
-const BACKGROUND_COLORS = ["background", "background darker", "primary", "secondary", "makeright tertiary"];
+const BACKGROUND_COLORS = ["background", "background darker", "background darkest", "primary", "secondary", "makeright tertiary"];
 
 function getHeadingClasses(type) {
   var headingClasses = "section--heading";
@@ -68,6 +68,7 @@ function getBackgroundClasses(pref, background) {
     if (background == "makeright tertiary") backgroundClasses += ` background__makeright-tertiary`;
     if (background == "background") backgroundClasses += ` background__background`;
     if (background == "background darker") backgroundClasses += ` background__background background__background-darker`;
+    if (background == "background darkest") backgroundClasses += ` background__background background__background-darkest`;
   } else if (typeof background == "object") {
     backgroundClasses += ` ${pref}__image`;
   }
@@ -296,8 +297,8 @@ function Section({ className, children, type, background, id, margin, titled, ar
                   <div className="section--copy">
                     {title && <>{title}</>}
                     {heading && <>{heading}</>}
-                    {description && <>{description}</>}
                     {other && <>{other}</>}
+                    {description && <>{description}</>}
                   </div>
                 )}
 
