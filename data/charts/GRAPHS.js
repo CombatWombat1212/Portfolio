@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-var BAR_GRAPHS = [
+var GRAPHS = [
   {
     study: "MakeRight",
     graphs: [
@@ -184,4 +184,4 @@ function graphInit(arr) {
 }
 
 
-export default graphInit(BAR_GRAPHS);
+export default graphInit(GRAPHS);

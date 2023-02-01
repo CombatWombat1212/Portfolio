@@ -7,6 +7,7 @@ import MAKERIGHT_IMGS from "/data/MAKERIGHT_IMGS";
 import Gantt from "/components/charts/Gantt";
 import BarGraph from "@/components/charts/BarGraph";
 import DLink from "@/components/utilities/DynamicLink";
+import PieChart from "@/components/charts/PieChart";
 
 // TODO:add the interactive chapter selection thingy
 
@@ -185,14 +186,20 @@ function MakeRight() {
 
           <Section type="columns" className="gap-6" background="background darkest">
             <Column>
-              <Heading type="h3">Hobbyists often surpass<br />
-these barriers out of passion</Heading>
+              <Heading type="h3">
+                Hobbyists often surpass
+                <br />
+                these barriers out of passion
+              </Heading>
               <BarGraph study="MakeRight" graph="Limiting Factors" type="default" />
             </Column>
             <Column>
-              <Heading type="h3">Only to have their printer sit idle<br />
-most of the time</Heading>
-              <BarGraph study="MakeRight" graph="Limiting Factors" type="default" />
+              <Heading type="h3">
+                Only to have their printer sit idle
+                <br />
+                most of the time
+              </Heading>
+              <PieChart study="MakeRight" graph="Printer Uses" />
             </Column>
           </Section>
         </Chapter>

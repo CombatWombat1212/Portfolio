@@ -8,7 +8,7 @@ function BarGraph({ study, graph, type }) {
   var labels = graph.label;
 
 
-  // TODO: Animate on scroll
+  // TODO: Animate when scrolled to
 
   
 
