@@ -187,19 +187,17 @@ function ColumnGroup({ columns, arrows }) {
       {columns.map((column, i) => {
         var { graphic, heading, description, other } = columns[i];
         return (
-          <>
-            <Column className={`column col-${Math.floor(12 / columns.length)}`} key={`column ${i}`}>
-              {arrows && i != 0 && (
-                <div className="column--arrow">
-                  <Graphic type="mask" img={ICONS["chevron_right"]}></Graphic>
-                </div>
-              )}
-              {graphic && <>{graphic}</>}
-              {heading && <>{heading}</>}
-              {description && <>{description}</>}
-              {other && <>{other}</>}
-            </Column>
-          </>
+          <Column className={`column col-${Math.floor(12 / columns.length)}`} key={`column ${i}`}>
+            {arrows && i != 0 && (
+              <div className="column--arrow">
+                <Graphic type="mask" img={ICONS["chevron_right"]}></Graphic>
+              </div>
+            )}
+            {graphic && <>{graphic}</>}
+            {heading && <>{heading}</>}
+            {description && <>{description}</>}
+            {other && <>{other}</>}
+          </Column>
         );
       })}
     </>
@@ -227,12 +225,16 @@ function Graphic({ className, type, img, background }) {
         {isImg && <Image src={img.src} alt={img.alt} width={img.width} height={img.height} style={{ "--img-aspect-width": img.width, "--img-aspect-height": img.height }} />}
         {isMask && <Mask src={img.src} alt={img.alt} width={img.width} height={img.height} />}
       </div> */}
-      {isImg && <div className={`section--graphic graphic ${backgroundClasses}`}style={{ "--img-aspect-width": img.width, "--img-aspect-height": img.height }}>
-        {isImg && <Image src={img.src} alt={img.alt} width={img.width} height={img.height}  />}
-      </div>}
-      {isMask && <div className={`section--graphic graphic ${backgroundClasses}`}style={{ "--mask-aspect-width": img.width, "--mask-aspect-height": img.height }}>
-        {isMask && <Mask src={img.src} alt={img.alt} width={img.width} height={img.height} />}
-      </div>}
+      {isImg && (
+        <div className={`section--graphic graphic ${backgroundClasses}`} style={{ "--img-aspect-width": img.width, "--img-aspect-height": img.height }}>
+          {isImg && <Image src={img.src} alt={img.alt} width={img.width} height={img.height} />}
+        </div>
+      )}
+      {isMask && (
+        <div className={`section--graphic graphic ${backgroundClasses}`} style={{ "--mask-aspect-width": img.width, "--mask-aspect-height": img.height }}>
+          {isMask && <Mask src={img.src} alt={img.alt} width={img.width} height={img.height} />}
+        </div>
+      )}
     </>
   );
 }

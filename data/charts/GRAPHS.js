@@ -57,17 +57,17 @@ var GRAPHS = [
         clamp: false,
         data: [
           {
-            name: "Own for Work",
+            name: "Own for work",
             value: 59,
             highlighted: false,
           },
           {
-            name: "Own for Hobbies",
+            name: "Own for hobbies",
             value: 24,
             highlighted: true,
           },
           {
-            name: "Own for Study",
+            name: "Own for study",
             value: 17,
             highlighted: false,
           },
@@ -114,7 +114,7 @@ function graphInit(arr) {
   arr.forEach((study) => {
     study.graphs.forEach((graph) => {
       graph.data.forEach((item) => {
-        item.id = uuidv4();
+        item.key = uuidv4();
       });
     });
   });

@@ -1,4 +1,98 @@
+// TODO: should this be the same for all charts? if so, put it in graphs.scss
+// $col-graph-background: #CFCFD8;
 
+.pie {
+  --pi: 3.14159265358979;
 
+  &--wrapper {
+    @include graph-wrapper;
+    --pie-pad-y: 3.25rem;
+    --pie-pad-x: 4rem;
+  }
 
+  @include pad-x(var(--pie-pad-x));
+  @include pad-y(var(--pie-pad-y));
+  height: calc(100% - (var(--pie-pad-y) * 2));
 
+  @include flex-row-between;
+
+  .circle {
+    &--wrapper {
+      @include flex-col-center;
+    }
+    &--inner {
+      position: relative;
+      @include flex-row-center;
+      margin-top: -0.15rem;
+    }
+
+    &--label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      @include h2;
+      @include font-body;
+      @include weight-light;
+      margin-left: 0.175rem;
+      margin-top:0.05rem;
+
+      &__highlighted {
+        color: $col-secondary;
+      }
+
+      &__default {
+        color: $col-primary;
+      }
+    }
+
+    &--name {
+      width: 80%;
+      text-align: center;
+      @include mx-auto;
+      margin-top: 0.75rem;
+
+      &__highlighted {
+        color: $col-secondary;
+      }
+
+      &__default {
+        color: $col-primary;
+      }
+    }
+
+    &--svg {
+      display: block;
+      --circle-r: 6.8rem;
+      --circle-r_real: calc((var(--circle-r) - (var(--circle-stroke))) / 2);
+      --circle-stroke: 0.5rem;
+      --circle-circumference: calc(2 * var(--circle-r_real) * var(--pi));
+      --circle-filled: calc((var(--circle-value) / 100) * var(--circle-circumference));
+      width: var(--circle-r);
+      height: var(--circle-r);
+      transform: rotate(-90deg);
+    }
+
+    fill: none;
+    stroke-width: var(--circle-stroke);
+    r: var(--circle-r_real);
+    cx: calc(var(--circle-r) / 2);
+    cy: calc(var(--circle-r) / 2);
+
+    &--empty {
+      stroke: $col-graph-empty;
+    }
+
+    &--filled {
+      stroke-dasharray: var(--circle-filled) var(--circle-circumference);
+
+      &__highlighted {
+        stroke: $col-secondary;
+      }
+
+      &__default {
+        stroke: $col-primary;
+      }
+    }
+  }
+}

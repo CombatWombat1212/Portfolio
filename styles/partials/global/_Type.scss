@@ -32,6 +32,17 @@ $font-body: "Tenon";
   color: $col-primary;
 }
 
+
+@mixin font-body {
+  font-family: $font-body;
+}
+
+@mixin font-title {
+  font-family: $font-title;
+}
+
+
+
 @mixin weight-light {
   font-weight: 300;
 }

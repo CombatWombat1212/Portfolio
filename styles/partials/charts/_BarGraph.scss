@@ -1,37 +1,32 @@
-@mixin graph-y-grid() {
+
+
+@mixin bar-graph-y-grid() {
   width: 100%;
   height: 100%;
   display: grid;
-  //   grid-template-rows: repeat(var(--graph-rows), calc(100% / var(--graph-rows)));
-  //   grid-template-rows: repeat(var(--graph-rows), 1fr);
-  grid-template-rows: repeat(var(--graph-rows), var(--graph-cell-height));
+  //   grid-template-rows: repeat(var(--bar-graph-rows), calc(100% / var(--bar-graph-rows)));
+  //   grid-template-rows: repeat(var(--bar-graph-rows), 1fr);
+  grid-template-rows: repeat(var(--bar-graph-rows), var(--bar-graph-cell-height));
 }
 
-$col-graph-line: #bcbcca;
 
-.graph {
+
+// $col-bar-graph-line: #bcbcca;
+
+.bar-graph {
   &--wrapper {
-    --graph-height: 24rem;
-    --graph-y-width: 2rem;
-    --graph-pad: 3.25rem;
-    --graph-pad-top: 3.25rem;
-    --graph-pad-bottom: 4.15rem;
-    --graph-y-line-height: 0.0625rem;
-    --graph-bar-width: 3.75rem;
-    --graph-cell-height: calc((var(--graph-height) - (var(--graph-pad-top) + var(--graph-pad-bottom))) / var(--graph-rows));
-    --graph-line-top-margin: calc((var(--graph-cell-height) - var(--graph-y-line-height)) / 2);
-    --graph-bar-spacing: 3.75rem;
-    --graph-bar-label-pad: 0.5rem;
-    --graph-bar-label-height: Min(var(--font-size-body), var(--font-leading-body));
+    --bar-graph-y-width: 2rem;
+    --bar-graph-pad: 3.25rem;
+    --bar-graph-pad-top: 3.25rem;
+    --bar-graph-pad-bottom: 4.15rem;
+    --bar-graph-y-line-height: 0.0625rem;
+    --bar-graph-bar-width: 3.65rem;
+    --bar-graph-cell-height: calc((var(--graph-height) - (var(--bar-graph-pad-top) + var(--bar-graph-pad-bottom))) / var(--bar-graph-rows));
+    --bar-graph-line-top-margin: calc((var(--bar-graph-cell-height) - var(--bar-graph-y-line-height)) / 2);
+    --bar-graph-bar-spacing: 3.75rem;
+    --bar-graph-bar-label-pad: 0.5rem;
+    --bar-graph-bar-label-height: Min(var(--font-size-body), var(--font-leading-body));
 
-
-    background-color: $col-background;
-    height: var(--graph-height);
-    @include b-rad;
-
-    & + * {
-      margin-top: 0.85rem;
-    }
   }
 
   display: grid;
@@ -40,16 +35,16 @@ $col-graph-line: #bcbcca;
 
   &--y {
     display: grid;
-    grid-template-columns: var(--graph-y-width) 1fr;
-    padding: var(--graph-pad) ;
-    padding-top: var(--graph-pad-top);
-    padding-bottom: var(--graph-pad-bottom);
-    --gap: calc(var(--graph-pad) * 0.75);
+    grid-template-columns: var(--bar-graph-y-width) 1fr;
+    padding: var(--bar-graph-pad) ;
+    padding-top: var(--bar-graph-pad-top);
+    padding-bottom: var(--bar-graph-pad-bottom);
+    --gap: calc(var(--bar-graph-pad) * 0.75);
     @include gap;
   }
 
   &--grid {
-    @include graph-y-grid;
+    @include bar-graph-y-grid;
   }
 
   &--cell {
@@ -67,29 +62,29 @@ $col-graph-line: #bcbcca;
   &--data {
     position: absolute;
     top: 0;
-    width: calc(100% - (var(--graph-pad) * 2));
-    padding-left: var(--graph-pad);
+    width: calc(100% - (var(--bar-graph-pad) * 2));
+    padding-left: var(--bar-graph-pad);
     // height:100%;
-    padding-top: var(--graph-line-top-margin);
-    height: calc(100% - (var(--graph-line-top-margin) * 2));
+    padding-top: var(--bar-graph-line-top-margin);
+    height: calc(100% - (var(--bar-graph-line-top-margin) * 2));
     @include flex-row-center;
     @include mx-auto;
   }
 
   &--line {
-    height: var(--graph-y-line-height);
-    background-color: $col-graph-line;
+    height: var(--bar-graph-y-line-height);
+    background-color: $col-graph-empty;
     width: 100%;
   }
 
   &--bar {
     position: relative;
     margin-top: auto;
-    width: var(--graph-bar-width);
-    height: var(--graph-bar-value);
+    width: var(--bar-graph-bar-width);
+    height: var(--bar-graph-bar-value);
 
     &+&{
-      margin-left: var(--graph-bar-spacing);
+      margin-left: var(--bar-graph-bar-spacing);
     }
     
     &__highlighted {
@@ -102,7 +97,7 @@ $col-graph-line: #bcbcca;
 
     
     &__highlighted+&__default {
-      margin-left: calc(var(--graph-bar-spacing) * 1.75);
+      margin-left: calc(var(--bar-graph-bar-spacing) * 1.75);
     }
 
   }
@@ -110,18 +105,18 @@ $col-graph-line: #bcbcca;
   &--bar-label {
     width: 100%;
     text-align: center;
-    height: var(--graph-bar-label-height);
+    height: var(--bar-graph-bar-label-height);
     
     &__highlighted {
       color: $col-secondary;
-      margin-top: calc((var(--graph-bar-label-height) + var(--graph-bar-label-pad)) * -1);
+      margin-top: calc((var(--bar-graph-bar-label-height) + var(--bar-graph-bar-label-pad)) * -1);
     }
 
     
     &__default {
       color: $col-background;
-      margin-top: var(--graph-bar-label-pad);
-      margin-bottom: calc((var(--graph-bar-label-height) + var(--graph-bar-label-pad)) * -1);
+      margin-top: var(--bar-graph-bar-label-pad);
+      margin-bottom: calc((var(--bar-graph-bar-label-height) + var(--bar-graph-bar-label-pad)) * -1);
     }
   }
 
@@ -137,15 +132,15 @@ $col-graph-line: #bcbcca;
     span{
       position: absolute;
       bottom: 0;
-      transform: translate(0%, calc(100% + var(--graph-bar-label-pad)));
+      transform: translate(0%, calc(100% + var(--bar-graph-bar-label-pad)));
     }
 
 
 
-    // height: var(--graph-bar-label-height);
+    // height: var(--bar-graph-bar-label-height);
     
     &__highlighted {
-      margin-top: var(--graph-bar-label-pad);
+      margin-top: var(--bar-graph-bar-label-pad);
       color: $col-secondary;
     }
 

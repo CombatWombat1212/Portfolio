@@ -1,0 +1,24 @@
+$col-graph-empty: #CFCFD8;
+
+@mixin graph-wrapper {
+  background-color: $col-background;
+  height: var(--graph-height);
+  @include b-rad;
+
+  & + * {
+    margin-top: 0.85rem;
+  }
+}
+
+
+
+.graph {
+  &--wrapper {
+    @include graph-wrapper;
+    --graph-height: 24rem;
+
+    &__small {
+      --graph-height: auto;
+    }
+  }
+}

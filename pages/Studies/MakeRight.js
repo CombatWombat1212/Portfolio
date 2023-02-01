@@ -185,21 +185,23 @@ function MakeRight() {
           </Section>
 
           <Section type="columns" className="gap-6" background="background darkest">
-            <Column>
-              <Heading type="h3">
-                Hobbyists often surpass
-                <br />
-                these barriers out of passion
-              </Heading>
-              <BarGraph study="MakeRight" graph="Limiting Factors" type="default" />
-            </Column>
-            <Column>
+            
+          <Column>
               <Heading type="h3">
                 Only to have their printer sit idle
                 <br />
                 most of the time
               </Heading>
               <PieChart study="MakeRight" graph="Printer Uses" />
+            </Column>
+
+            <Column>
+              <Heading type="h3">
+                Hobbyists often surpass
+                <br />
+                these barriers out of passion
+              </Heading>
+              <BarGraph study="MakeRight" graph="Limiting Factors" type="Seperate" />
             </Column>
           </Section>
         </Chapter>

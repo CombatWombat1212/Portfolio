@@ -15,21 +15,21 @@ function BarGraph({ study, graph, type }) {
   return (
     <>
       <div
-        className="graph--wrapper"
+        className="bar-graph--wrapper graph--wrapper"
         style={{
-          "--graph-range-start": graph.clamp ? graph.clamp[0] : 0,
-          "--graph-range-end": graph.clamp ? graph.clamp[1] : 0,
-          "--graph-rows": graph.rows,
+          "--bar-graph-range-start": graph.clamp ? graph.clamp[0] : 0,
+          "--bar-graph-range-end": graph.clamp ? graph.clamp[1] : 0,
+          "--bar-graph-rows": graph.rows,
         }}>
-        <div className="graph">
-          <div className="graph--y">
-            <div className="graph--y-labels graph--grid">
+        <div className="bar-graph">
+          <div className="bar-graph--y">
+            <div className="bar-graph--y-labels bar-graph--grid">
               {labels
                 .slice(0)
                 .reverse()
                 .map((item) => {
                   return (
-                    <div key={item.key} className="graph--cell">
+                    <div key={item.key} className="bar-graph--cell">
                       <span>
                         {item.value}
                         {item.value != "" || item.value === 0 ? "%" : ""}
@@ -38,28 +38,28 @@ function BarGraph({ study, graph, type }) {
                   );
                 })}
             </div>
-            <div className="graph--table ">
-              <div className="graph--grid">
-                {labels.map(() => {
+            <div className="bar-graph--table ">
+              <div className="bar-graph--grid">
+                {labels.map((label) => {
                   return (
-                    <div className="graph--cell">
-                      <div className="graph--line"></div>
+                    <div className="bar-graph--cell" key={label.key}>
+                      <div className="bar-graph--line"></div>
                     </div>
                   );
                 })}
               </div>
 
-              <div className="graph--data">
+              <div className="bar-graph--data">
                 {graph.data.map((item) => {
-                  return <div className={`graph--bar ${item.highlighted ? 'graph--bar__highlighted' : 'graph--bar__default'}`} style={{
-                    "--graph-bar-value": item.value / graph.clamp[1] * 100 + "%",
+                  return <div key={item.key} className={`bar-graph--bar ${item.highlighted ? 'bar-graph--bar__highlighted' : 'bar-graph--bar__default'}`} style={{
+                    "--bar-graph-bar-value": item.value / graph.clamp[1] * 100 + "%",
                   }}>
 
-                  <div className={`graph--bar-label ${item.highlighted ? 'graph--bar-label__highlighted' : 'graph--bar-label__default'}`}>
+                  <div className={`bar-graph--bar-label ${item.highlighted ? 'bar-graph--bar-label__highlighted' : 'bar-graph--bar-label__default'}`}>
                     <span>{item.value + "%"}</span>
                   </div>
 
-                  <div className={`graph--bar-name ${item.highlighted ? 'graph--bar-name__highlighted' : 'graph--bar-name__default'}`}>
+                  <div className={`bar-graph--bar-name ${item.highlighted ? 'bar-graph--bar-name__highlighted' : 'bar-graph--bar-name__default'}`}>
                     <span>{item.name}</span>
                   </div>
 
