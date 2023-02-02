@@ -2,6 +2,9 @@
   &.text--#{$m} + * {
     margin-top: var(--font-margin-bottom-#{$m});
   }
+  &.text--#{$m} + *.mt-less {
+    margin-top: var(--font-margin-bottom-#{$m}_less);
+  }
 }
 
 @mixin section-chapter-wrapper {
@@ -54,6 +57,7 @@
     }
   }
 
+
   .graphic {
     &--panel {
       @include b-rad;
@@ -78,7 +82,25 @@
   &--main {
     @include flex-row;
     margin-top: calc(var(--section-text-spacing) * 1.75);
+
+    &.mt-less {
+      margin-top: calc(var(--section-text-spacing) * 1.25);
+    }
   }
+
+
+  &--quote{
+
+    *{
+      @include quote;
+    }
+
+    &__color{
+      padding: 1.875rem;
+    }
+
+  }
+
 
   .column {
     &--arrow {
@@ -123,12 +145,14 @@
 
     .section--description {
       margin-top: 0.5rem;
-      @include h3;
-      @include weight-reg;
+      *{
+        @include h3;
+        @include weight-reg;
+      }
     }
 
     .section--graphic {
-      padding-left: 2rem;
+      // padding-left: 2rem;
     }
 
     .mask {

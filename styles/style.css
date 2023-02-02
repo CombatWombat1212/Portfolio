@@ -63,6 +63,13 @@ input, button, textarea, select {
 }
 
 @font-face {
+  font-family: "Gira Sans";
+  src: url("/assets/fonts/gira_sans/Gira_Sans_Light_Italic.otf");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
   font-family: "Tenon";
   src: url("/assets/fonts/tenon/Tenon.otf");
   font-weight: 400;
@@ -82,14 +89,17 @@ input, button, textarea, select {
   --font-size-h3: 1.625rem;
   --font-size-h4: 0.875rem;
   --font-size-body: 1.125rem;
+  --font-size-quote: 1rem;
   --font-size-logo: 1.375rem;
   --font-leading-h1: 4rem;
   --font-leading-h2: 3.125rem;
-  --font-leading-h3: 2.3125rem;
+  --font-leading-h3: 2.1875rem;
   --font-leading-h4: 1.25rem;
   --font-leading-body: 1.5rem;
+  --font-leading-quote: 1.375rem;
   --font-margin-bottom-h2: 1.5rem;
   --font-margin-bottom-h3: 1.125rem;
+  --font-margin-bottom-h3_less: 0.75rem;
   --font-margin-bottom-h4: 0.25rem;
   font-family: "Tenon";
   color: #074391;
@@ -126,7 +136,8 @@ h4,
 }
 
 p,
-.text--body {
+.text--body,
+li, span {
   font-family: "Tenon";
   font-size: var(--font-size-body);
   line-height: var(--font-leading-body);
@@ -142,13 +153,6 @@ p,
 
 body {
   background-color: #F3F3F7;
-}
-
-body p, body li {
-  font-family: "Tenon";
-  font-size: var(--font-size-body);
-  line-height: var(--font-leading-body);
-  font-weight: 400;
 }
 
 .overflow__ellipsis {
@@ -1442,16 +1446,32 @@ body p, body li {
   margin-top: var(--font-margin-bottom-h1);
 }
 
+.section--heading.text--h1 + *.mt-less {
+  margin-top: var(--font-margin-bottom-h1_less);
+}
+
 .section--heading.text--h2 + * {
   margin-top: var(--font-margin-bottom-h2);
+}
+
+.section--heading.text--h2 + *.mt-less {
+  margin-top: var(--font-margin-bottom-h2_less);
 }
 
 .section--heading.text--h3 + * {
   margin-top: var(--font-margin-bottom-h3);
 }
 
+.section--heading.text--h3 + *.mt-less {
+  margin-top: var(--font-margin-bottom-h3_less);
+}
+
 .section--heading.text--h4 + * {
   margin-top: var(--font-margin-bottom-h4);
+}
+
+.section--heading.text--h4 + *.mt-less {
+  margin-top: var(--font-margin-bottom-h4_less);
 }
 
 .section--copy {
@@ -1494,6 +1514,22 @@ body p, body li {
   display: flex;
   flex-direction: row;
   margin-top: calc(var(--section-text-spacing) * 1.75);
+}
+
+.section--main.mt-less {
+  margin-top: calc(var(--section-text-spacing) * 1.25);
+}
+
+.section--quote * {
+  font-family: "Gira Sans";
+  font-size: var(--font-size-quote);
+  line-height: var(--font-leading-quote);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.section--quote__color {
+  padding: 1.875rem;
 }
 
 .section .column--arrow {
@@ -1542,15 +1578,14 @@ body p, body li {
 
 .section__pitch .section--description {
   margin-top: 0.5rem;
+}
+
+.section__pitch .section--description * {
   font-family: "Gira Sans";
   font-size: var(--font-size-h3);
   line-height: var(--font-leading-h3);
   font-weight: 300;
   font-weight: 400;
-}
-
-.section__pitch .section--graphic {
-  padding-left: 2rem;
 }
 
 .section__pitch .mask {
@@ -1646,7 +1681,7 @@ body p, body li {
   -webkit-border-radius: var(--b-rad);
   -moz-border-radius: var(--b-rad);
   -khtml-border-radius: var(--b-rad);
-  --graph-height: 24rem;
+  --graph-height: 26rem;
 }
 
 .graph--wrapper + * {
@@ -1931,9 +1966,9 @@ body p, body li {
 
 .bar-graph--wrapper {
   --bar-graph-y-width: 2rem;
-  --bar-graph-pad: 3.25rem;
+  --bar-graph-pad: 3.5rem;
   --bar-graph-pad-top: 3.25rem;
-  --bar-graph-pad-bottom: 4.15rem;
+  --bar-graph-pad-bottom: 4.75rem;
   --bar-graph-y-line-height: 0.0625rem;
   --bar-graph-bar-width: 3.65rem;
   --bar-graph-cell-height: calc((var(--graph-height) - (var(--bar-graph-pad-top) + var(--bar-graph-pad-bottom))) / var(--bar-graph-rows));
@@ -1949,7 +1984,7 @@ body p, body li {
   padding: var(--bar-graph-pad);
   padding-top: var(--bar-graph-pad-top);
   padding-bottom: var(--bar-graph-pad-bottom);
-  --gap: calc(var(--bar-graph-pad) * 0.75);
+  --gap: calc(var(--bar-graph-pad) * 0.5);
   gap: var(--gap);
   column-gap: var(--gap);
   row-gap: var(--gap);
@@ -2117,13 +2152,16 @@ body p, body li {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  margin-left: 0.175rem;
+  margin-top: 0.05rem;
+}
+
+.pie .circle--label span {
   font-family: "Gira Sans";
   font-size: var(--font-size-h2);
   line-height: var(--font-leading-h2);
   font-family: "Tenon";
   font-weight: 300;
-  margin-left: 0.175rem;
-  margin-top: 0.05rem;
 }
 
 .pie .circle--label__highlighted {
@@ -2218,7 +2256,7 @@ body p, body li {
 }
 
 .sep-graph--item.highlighted + .sep-graph--item.default {
-  margin-top: 1rem;
+  margin-top: 1.125rem;
 }
 
 .sep-graph--value {

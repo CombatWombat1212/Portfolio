@@ -5,11 +5,15 @@ import Mask from "../utilities/Mask";
 import Background from "../utilities/Background";
 import ICONS from "@/data/ICONS";
 
-const DEFINED_CHILDREN = ["Column", "Description", "Title", "Heading", "Graphic"];
+const DEFINED_CHILDREN = ["Column", "Description", "Title", "Heading", "Graphic", "Quote"];
 const BACKGROUND_COLORS = ["background", "background darker", "background darkest", "primary", "secondary", "makeright tertiary"];
 
+
+
+
+
 function getHeadingClasses(type) {
-  var headingClasses = "section--heading";
+  var headingClasses = "";
   if (type == "h1") headingClasses += " text--h1";
   if (type == "h2") headingClasses += " text--h2";
   if (type == "h3") headingClasses += " text--h3";
@@ -60,6 +64,7 @@ function getBackgroundClasses(pref, background) {
     if (BACKGROUND_COLORS.indexOf(background) != -1) {
       if (pref == "chapter" && background != "background") backgroundClasses += ` ${pref}__color`;
       else if (pref == "section") backgroundClasses += ` ${pref}__color`;
+      else if (pref == "section--quote") backgroundClasses += ` ${pref}__color`;
     }
 
     if (pref == "section--graphic") backgroundClasses += ` graphic--panel`;
@@ -126,7 +131,7 @@ function getSectionChildren(children) {
 
   organizedChildren = organizeChildren(allChildren);
 
-  var [columns, description, title, heading, graphic, other] = [organizedChildren[0].elems, organizedChildren[1].elems, organizedChildren[2].elems, organizedChildren[3].elems, organizedChildren[4].elems, organizedChildren[5].elems];
+  var [columns, description, title, heading, graphic, quote, other] = [organizedChildren[0].elems, organizedChildren[1].elems, organizedChildren[2].elems, organizedChildren[3].elems, organizedChildren[4].elems, organizedChildren[5].elems, organizedChildren[6].elems];
 
   if (columns.length != 0) {
     for (var i = 0; i < columns.length; i++) {
@@ -134,20 +139,30 @@ function getSectionChildren(children) {
       var columnChildren = column.props.children;
       var organizedColumnChildren = organizeChildren(columnChildren);
 
-      var [columnColumns, columnDescription, columnTitle, columnHeading, columnGraphic, columnOther] = [organizedColumnChildren[0].elems, organizedColumnChildren[1].elems, organizedColumnChildren[2].elems, organizedColumnChildren[3].elems, organizedColumnChildren[4].elems, organizedColumnChildren[5].elems];
+      var [columnColumns, columnDescription, columnTitle, columnHeading, columnGraphic, columnQuote, columnOther] = [organizedColumnChildren[0].elems, organizedColumnChildren[1].elems, organizedColumnChildren[2].elems, organizedColumnChildren[3].elems, organizedColumnChildren[4].elems, organizedColumnChildren[5].elems, organizedColumnChildren[6].elems];
 
-      columns[i] = { columns: columnColumns, description: columnDescription, title: columnTitle, heading: columnHeading, graphic: columnGraphic, other: columnOther };
+      columns[i] = { columns: columnColumns, description: columnDescription, title: columnTitle, heading: columnHeading, graphic: columnGraphic, quote: columnQuote, other: columnOther };
     }
   }
 
-  return { columns, description, title, heading, graphic, other };
+  return { columns, description, title, heading, graphic, quote, other };
+}
+
+function Quote({ children, background }) {
+  var backgroundClasses = getBackgroundClasses("section--quote", background);
+
+  return (
+    <div className={`section--quote quote ${backgroundClasses ? backgroundClasses : ""}`}>
+      <p>{children}</p>
+    </div>
+  );
 }
 
 function Heading({ children, type }) {
   var headingClasses = getHeadingClasses(type);
 
   return (
-    <div className={headingClasses}>
+    <div className={`section--heading ${headingClasses}`}>
       {type == "h1" && <h1>{children}</h1>}
       {type == "h2" && <h2>{children}</h2>}
       {type == "h3" && <h3>{children}</h3>}
@@ -178,14 +193,14 @@ function Title({ children }) {
 function Description({ className, children, type }) {
   var descriptionClasses = getHeadingClasses(type);
 
-  return <div className={`section--description ${descriptionClasses} ${className}`}>{children}</div>;
+  return <div className={`section--description ${className ? className : ""} ${descriptionClasses}`}>{children}</div>;
 }
 
 function ColumnGroup({ columns, arrows }) {
   return (
     <>
       {columns.map((column, i) => {
-        var { graphic, heading, description, other } = columns[i];
+        var { graphic, heading, description, quote, other } = columns[i];
         return (
           <Column className={`column col-${Math.floor(12 / columns.length)}`} key={`column ${i}`}>
             {arrows && i != 0 && (
@@ -196,6 +211,7 @@ function ColumnGroup({ columns, arrows }) {
             {graphic && <>{graphic}</>}
             {heading && <>{heading}</>}
             {description && <>{description}</>}
+            {quote && <>{quote}</>}
             {other && <>{other}</>}
           </Column>
         );
@@ -214,8 +230,6 @@ function Graphic({ className, type, img, background }) {
   var isMask = type == "mask";
   var hasBackground = getHasBackground(background);
   var backgroundClasses = getBackgroundClasses(pref, background);
-
-  // console.log(background)
 
   // TODO: if you end up using this 'img-aspect-width' thing in multiple places then you should create a wrapper for Next/Image that automatically adds it to your image components, same as its done here and within the Mask component
 
@@ -254,7 +268,7 @@ const SECTION_TYPE_B = ["pitch"];
 const SECTION_TYPE_C = ["columns"];
 const SECTION_TYPES = [...SECTION_TYPE_A, ...SECTION_TYPE_B, ...SECTION_TYPE_C];
 
-function Section({ className, children, type, background, id, margin, titled, arrows }) {
+function Section({ className, children, type, background, id, margin, titled, arrows, mainClassName }) {
   var pref = "section";
 
   // TODO: the 'columns' concept should work with all variants of section i think
@@ -265,7 +279,6 @@ function Section({ className, children, type, background, id, margin, titled, ar
   var childs = getSectionChildren(children);
   var { columns, description, title, heading, graphic, other } = childs;
 
-  // console.log(columns);
 
   var mainClasses = getMainClasses(pref, type);
   var containerMarginClass = getContainerMarginClass(margin);
@@ -280,8 +293,6 @@ function Section({ className, children, type, background, id, margin, titled, ar
 
   var hasArrows = arrows || false;
   var isTitled = titled || false;
-
-  // checkErrorCases(type, columns, children);
 
   return (
     <>
@@ -327,7 +338,7 @@ function Section({ className, children, type, background, id, margin, titled, ar
                   </div>
                 )}
                 {isTitled ? (
-                  <div className={`${gapClasses} section--main`}>
+                  <div className={`section--main ${gapClasses} ${mainClassName}`}>
                     <ColumnGroup columns={columns} arrows={hasArrows} />
                   </div>
                 ) : (
@@ -377,4 +388,4 @@ Chapter.defaultProps = Section.defaultProps;
 Chapter.propTypes = Section.propTypes;
 
 export default Section;
-export { Section, Chapter, Description, Column, Title, Heading, Graphic };
+export { Section, Chapter, Description, Column, Title, Heading, Graphic, Quote };

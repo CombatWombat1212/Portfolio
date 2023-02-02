@@ -81,7 +81,7 @@ function BarGraph({ study, graph, type, small }) {
             <div className="sep-graph--column">
               {graph.data.map((item) => {
                 return (
-                  <div className={`sep-graph--text sep-graph--value ${item.highlighted ? "highlighted" : "default"} sep-graph--item`}>
+                  <div key={`value - ${item.key}`} className={`sep-graph--text sep-graph--value ${item.highlighted ? "highlighted" : "default"} sep-graph--item`}>
                     <span>{item.value + "%"}</span>
                   </div>
                 );
@@ -91,7 +91,7 @@ function BarGraph({ study, graph, type, small }) {
             <div className="sep-graph--column">
               {graph.data.map((item) => {
                 return (
-                  <div className={`sep-graph--item ${item.highlighted ? "highlighted" : "default"}`}>
+                  <div key={`bar - ${item.key}`} className={`sep-graph--item ${item.highlighted ? "highlighted" : "default"}`}>
                     <div
                       className="bar--group"
                       style={{
@@ -113,7 +113,7 @@ function BarGraph({ study, graph, type, small }) {
             <div className="sep-graph--column">
               {graph.data.map((item) => {
                 return (
-                  <div className={`sep-graph--item ${item.highlighted ? "highlighted" : "default"} sep-graph--text sep-graph--name`}>
+                  <div key={`name - ${item.key}`} className={`sep-graph--item ${item.highlighted ? "highlighted" : "default"} sep-graph--text sep-graph--name`}>
                     <span>{item.name}</span>
                   </div>
                 );
@@ -131,7 +131,7 @@ BarGraph.defaultProps = {
 };
 
 BarGraph.propTypes = {
-  type: ["default", "seperated"],
+  type: PropTypes.oneOf(["default", "seperated"]),
 };
 
 export default BarGraph;

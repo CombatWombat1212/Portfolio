@@ -15,7 +15,7 @@ $col-graph-empty: #CFCFD8;
 .graph {
   &--wrapper {
     @include graph-wrapper;
-    --graph-height: 24rem;
+    --graph-height: 26rem;
 
     &__small {
       --graph-height: 17rem;

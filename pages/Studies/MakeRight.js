@@ -2,7 +2,7 @@ import { StudyPanel } from "/components/elements/Panel";
 import getStudy from "../../scripts/GetStudy";
 import CaseStudyPage from "/components/studies/CaseStudyPage";
 import Brief from "/components/studies/Brief";
-import { Section, Chapter, Title, Column, Heading, Description, Graphic, GraphicGroup } from "/components/studies/Sections";
+import { Section, Chapter, Title, Column, Heading, Description, Graphic, Quote } from "/components/studies/Sections";
 import MAKERIGHT_IMGS from "/data/MAKERIGHT_IMGS";
 import Gantt from "/components/charts/Gantt";
 import BarGraph from "@/components/charts/BarGraph";
@@ -77,9 +77,11 @@ function MakeRight() {
           <Section id="Pitch--Choose" type="pitch" margin="wide">
             <Heading>Choose</Heading>
             <Description>
-              from our collection <br />
-              of sourced 3D models,
-              <br /> or upload your own
+              <p>
+                from our collection <br />
+                of sourced 3D models,
+                <br /> or upload your own
+              </p>
             </Description>
             <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_choose"]} />
             <Graphic type="image" img={MAKERIGHT_IMGS["pitch_laptop_choose"]} />
@@ -88,9 +90,11 @@ function MakeRight() {
           <Section id="Pitch--Tweak" type="pitch" margin="wide">
             <Heading>Tweak</Heading>
             <Description>
-              and personalize
-              <br />
-              to suit your needs
+              <p>
+                and personalize
+                <br />
+                to suit your needs
+              </p>
             </Description>
             <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_tweak"]} />
             <Graphic type="image" img={MAKERIGHT_IMGS["pitch_laptop_tweak"]} />
@@ -99,8 +103,10 @@ function MakeRight() {
           <Section id="Pitch--Order" type="pitch" margin="wide">
             <Heading>Order</Heading>
             <Description>
-              your model, assigning it <br />
-              to one of our verified makers
+              <p>
+                your model, assigning it <br />
+                to one of our verified makers
+              </p>
             </Description>
             <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_order"]} />
             <Graphic type="image" img={MAKERIGHT_IMGS["pitch_laptop_order"]} />
@@ -108,7 +114,7 @@ function MakeRight() {
 
           <Section id="Pitch--Recieve" type="pitch" margin="wide">
             <Heading>Recieve</Heading>
-            <Description>right at your front door</Description>
+            <Description><p>right at your front door</p></Description>
             <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_recieve"]} />
             <Graphic type="image" img={MAKERIGHT_IMGS["pitch_laptop_recieve"]} />
           </Section>
@@ -180,13 +186,12 @@ function MakeRight() {
             <BarGraph study="MakeRight" graph="Limiting Factors" type="default" />
             {/* TODO: link to source */}
             <Description>
-              <DLink>Source, Sculpteo, 2020</DLink>
+              <p><DLink>Source, Sculpteo, 2020</DLink></p>
             </Description>
           </Section>
 
           <Section type="columns" className="gap-6" background="background darkest">
-            
-          <Column>
+            <Column>
               <Heading type="h3">
                 Hobbyists often surpass
                 <br />
@@ -204,6 +209,104 @@ function MakeRight() {
               <BarGraph study="MakeRight" graph="Printer Usage" type="seperated" small />
             </Column>
           </Section>
+
+          <Section background="background darkest">
+            <Title>Primary Research</Title>
+            <Heading>
+              Interviews with 4 makers, and 6 laypersons corroborated
+              <br />
+              these statistics
+            </Heading>
+          </Section>
+
+          <Section type="columns" titled className="flex-col" mainClassName="mt-less" background="background darkest">
+            <Heading type="h3">Non-printer owners have interest in the tech, and barriers to accessing it</Heading>
+            <Description className="mt-less">
+              <p>
+                Despite identifying benefits to using 3D printing, these architecture students avoided it due to intimidation.
+                <br />
+                Even with open access to printers through their schools.
+              </p>
+            </Description>
+
+            <Column>
+              <Quote background="background">
+                “...In architecture, some calculations are easier when <br />
+                you have a real model vs. digital...” - Layperson #6
+              </Quote>
+            </Column>
+
+            <Column>
+              <Quote background="background">
+                “But I never use [3D printing] because I don’t know <br />
+                how to work the machines.” - Layperson #4
+              </Quote>
+            </Column>
+          </Section>
+
+
+
+
+          <Section type="columns" titled className="flex-col" mainClassName="mt-less" background="background darkest">
+            <Heading type="h3">While many owners of 3D printers have idle machines, and free time</Heading>
+            <Description className="mt-less">
+              <p>
+                Owners' usage depended partially on free time, but mostly on current needs and projects. <br />
+                Meaning there was frequent overlap between their idle printer, and free time, due to a lack of printable ideas.
+              </p>
+            </Description>
+
+            <Column>
+              <Quote background="background">
+              “How often do you use your printer?” - Me
+              </Quote>
+            </Column>
+
+            <Column>
+              <Quote background="background">
+              “Not enough” - Owners #1-4, unanimously
+              </Quote>
+            </Column>
+          </Section>
+
+
+
+
+
+
+
+          <Section type="columns" background="background darkest">
+            <Heading type="h3">While many owners of 3D printers have idle machines, and free time</Heading>
+            <Description className="mt-less">
+              <p>
+                Owners' usage depended partially on free time, but mostly on current needs and projects. <br />
+                Meaning there was frequent overlap between their idle printer, and free time, due to a lack of printable ideas.
+              </p>
+            </Description>
+
+            <Column>
+              <Quote background="background">
+              “How often do you use your printer?” - Me
+              </Quote>
+            </Column>
+
+            <Column>
+              <Quote background="background">
+              “Not enough” - Owners #1-4, unanimously
+              </Quote>
+            </Column>
+          </Section>
+
+
+
+
+
+
+
+
+
+
+          
         </Chapter>
       </CaseStudyPage>
     </>

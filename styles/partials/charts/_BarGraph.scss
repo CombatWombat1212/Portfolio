@@ -16,9 +16,9 @@
 .bar-graph {
   &--wrapper {
     --bar-graph-y-width: 2rem;
-    --bar-graph-pad: 3.25rem;
+    --bar-graph-pad: 3.5rem;
     --bar-graph-pad-top: 3.25rem;
-    --bar-graph-pad-bottom: 4.15rem;
+    --bar-graph-pad-bottom: 4.75rem;
     --bar-graph-y-line-height: 0.0625rem;
     --bar-graph-bar-width: 3.65rem;
     --bar-graph-cell-height: calc((var(--graph-height) - (var(--bar-graph-pad-top) + var(--bar-graph-pad-bottom))) / var(--bar-graph-rows));
@@ -39,7 +39,7 @@
     padding: var(--bar-graph-pad) ;
     padding-top: var(--bar-graph-pad-top);
     padding-bottom: var(--bar-graph-pad-bottom);
-    --gap: calc(var(--bar-graph-pad) * 0.75);
+    --gap: calc(var(--bar-graph-pad) * 0.5);
     @include gap;
   }
 

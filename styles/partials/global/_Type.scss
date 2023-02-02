@@ -7,6 +7,7 @@ $font-body: "Tenon";
   --font-size-h3: 1.625rem;
   --font-size-h4: 0.875rem;
   --font-size-body: 1.125rem;
+  --font-size-quote: 1rem;
 
 
   // TODO: consolidate this with h3 if possible
@@ -14,12 +15,17 @@ $font-body: "Tenon";
 
   --font-leading-h1: 4rem;
   --font-leading-h2: 3.125rem;
-  --font-leading-h3: 2.3125rem;
+  // --font-leading-h3: 2.3125rem;
+  // --font-leading-h3: 2.125rem;
+  --font-leading-h3: 2.1875rem;
+  
   --font-leading-h4: 1.25rem;
   --font-leading-body: 1.5rem;
+  --font-leading-quote: 1.375rem;
 
   --font-margin-bottom-h2: 1.5rem;
   --font-margin-bottom-h3: 1.125rem;
+  --font-margin-bottom-h3_less: 0.75rem;
   --font-margin-bottom-h4: 0.25rem;
 
   // --font-leading-h1: 4.25rem;
@@ -54,6 +60,10 @@ $font-body: "Tenon";
 }
 @mixin weight-bold {
   font-weight: 600;
+}
+
+@mixin italic {
+  font-style: italic;
 }
 
 @mixin h1 {
@@ -110,6 +120,14 @@ $font-body: "Tenon";
 }
 
 
+@mixin quote{
+  font-family: $font-title;
+  font-size: var(--font-size-quote);
+  line-height: var(--font-leading-quote);
+  @include weight-light;
+  @include italic;
+}
+
 
 
 
@@ -134,7 +152,8 @@ h4,
 }
 
 p,
-.text--body{
+.text--body,
+li, span{
   @include body;
 }
 

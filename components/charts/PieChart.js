@@ -28,8 +28,6 @@ function PieChart({ study, graph }) {
   study = GRAPHS.find((item) => item.study == study);
   graph = study.graphs.find((item) => item.name == graph);
 
-  console.log(graph);
-
   return (
     <div className="pie--wrapper graph--wrapper graph--wrapper__small">
       <div className="pie">
