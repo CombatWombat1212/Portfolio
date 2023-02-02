@@ -53,22 +53,29 @@
   }
 
   #Research {
-
     --img-panel-height: 12rem;
 
     .section {
       &--graphic {
-
-        --graphic-height: #{mask-height(11.5rem)};
         --graphic-width: #{mask-width(11.5rem)};
+        // --graphic-height: #{mask-height(11.5rem)};
+        --graphic-height: calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
 
         height: var(--img-panel-height);
 
-
-        .mask{
+        .mask {
           height: var(--graphic-height);
           width: var(--graphic-width);
           background-color: $col-tertiary;
+        }
+      }
+    }
+
+    #Aha-Moment {
+      .section {
+        &--graphic {
+          --graphic-width: #{mask-width(13.35rem)};
+          --graphic-height: calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
         }
       }
     }

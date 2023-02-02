@@ -119,13 +119,44 @@ const MAKERIGHT_IMGS = {
   },
 
 
-
   aha_moment: {
     name: "aha_moment",
     src: "./assets/images/case_studies/makeright/aha_moment.svg",
     alt: "Stylized graphic of a lightbulb",
     width: 206.75,
     height: 209.42,
+  },
+
+
+
+
+  brainstorming: {
+    name: "brainstorming",
+    src: "./assets/images/case_studies/makeright/brainstorming.svg",
+    alt: "Graphic of a brain with a lightning bolt to represent brainstorming",
+    width: 147.7,
+    height: 193.83,
+  },
+  refine_ideas: {
+    name: "refine_ideas",
+    src: "./assets/images/case_studies/makeright/refine_ideas.svg",
+    alt: "Graphic of a lightbulb in a funnel to represent refining ideas",
+    width: 101.37,
+    height: 197.83,
+  },
+  focus_group_testing: {
+    name: "focus_group_testing",
+    src: "./assets/images/case_studies/makeright/focus_group_testing.svg",
+    alt: "Graphic of 3 people under a magnifying glass to represent focus group testing",
+    width: 169.33,
+    height: 171.65,
+  },
+  brainstorming_chart: {
+    name: "brainstorming_chart",
+    src: "./assets/images/case_studies/makeright/brainstorming_chart.svg",
+    alt: "Simplified version of a brainstorming mind map",
+    width: 230.48,
+    height: 252.89,
   },
 
 

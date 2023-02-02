@@ -266,12 +266,12 @@ function MakeRight() {
             </Column>
           </Section>
 
-          <Section type="columns" background="background">
-            <Column className="col-4">
-            <Graphic type="mask" className="graphic--panel__flexible" background="background darker" img={MAKERIGHT_IMGS["aha_moment"]} />
+          <Section id="Aha-Moment" type="columns" background="background">
+            <Column className="col-5">
+              <Graphic type="mask" className="graphic--panel__flexible" background="background darker" img={MAKERIGHT_IMGS["aha_moment"]} />
             </Column>
 
-            <Column className="col-8">
+            <Column className="col-7">
               <Title>'Aha' Moment</Title>
               <Heading>
                 Idle printers, <br />
@@ -283,9 +283,67 @@ function MakeRight() {
                   <br />I knew my solution would be found at their intersection.
                 </p>
                 <ol>
-                  <li><span>The machines of skilled printer owners are largely idle.</span></li>
-                  <li><span>Laypersons feel barred from 3D printing, despite having several ideas and uses for it.</span></li>
+                  <li>
+                    <span>The machines of skilled printer owners are largely idle</span>
+                  </li>
+                  <li>
+                    <span>Laypersons feel barred from 3D printing, despite having several ideas and uses for it</span>
+                  </li>
                 </ol>
+              </Description>
+            </Column>
+          </Section>
+        </Chapter>
+
+        
+
+        <Chapter name="Develop">
+          <Section type="columns" className="flex-col" titled arrows background="background darker">
+            <Title>Methodology</Title>
+            <Heading>Moving from problem to solution</Heading>
+
+            <Column>
+              <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["brainstorming"]} />
+              <Description type="h3" className="graphic--caption">
+                <b>Brainstorming</b> to generate a wide number of potential solutions
+              </Description>
+            </Column>
+            <Column>
+              <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["refine_ideas"]} />
+              <Description type="h3" className="graphic--caption">
+                <b>Refine ideas</b> to fully explore promising concepts
+              </Description>
+            </Column>
+
+            <Column>
+              <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["focus_group_testing"]} />
+              <Description type="h3" className="graphic--caption">
+                <b>Focus group testing</b> to gauge reception and feedback from users
+              </Description>
+            </Column>
+          </Section>
+
+          <Section type="columns" className="flex-col" titled background="background darker">
+            <Title>Methodology</Title>
+            <Heading>Moving from problem to solution</Heading>
+
+            <Column>
+              <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["brainstorming"]} />
+              <Description type="h3" className="graphic--caption">
+                <b>Brainstorming</b> to generate a wide number of potential solutions
+              </Description>
+            </Column>
+            <Column>
+              <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["refine_ideas"]} />
+              <Description type="h3" className="graphic--caption">
+                <b>Refine ideas</b> to fully explore promising concepts
+              </Description>
+            </Column>
+
+            <Column>
+              <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["focus_group_testing"]} />
+              <Description type="h3" className="graphic--caption">
+                <b>Focus group testing</b> to gauge reception and feedback from users
               </Description>
             </Column>
           </Section>

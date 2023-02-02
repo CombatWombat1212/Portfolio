@@ -1559,8 +1559,8 @@ body {
 }
 
 .section .column--arrow .mask {
-  --arrow-height: calc((( var(--mask-aspect-height) / var(--mask-aspect-width) )) * 1.5rem) ;
   --arrow-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 1.5rem) ;
+  --arrow-height: calc(var(--arrow-width) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
   height: var(--arrow-height) !important;
   width: var(--arrow-width) !important;
   background-color: #074391 !important;
@@ -2957,8 +2957,8 @@ body {
 }
 
 #Makeright #Research .section--graphic {
-  --graphic-height: calc((( var(--mask-aspect-height) / var(--mask-aspect-width) )) * 11.5rem) ;
   --graphic-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 11.5rem) ;
+  --graphic-height: calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
   height: var(--img-panel-height);
 }
 
@@ -2966,5 +2966,10 @@ body {
   height: var(--graphic-height);
   width: var(--graphic-width);
   background-color: #404064;
+}
+
+#Makeright #Research #Aha-Moment .section--graphic {
+  --graphic-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 13.35rem) ;
+  --graphic-height: calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
 }
 /*# sourceMappingURL=style.css.map */
