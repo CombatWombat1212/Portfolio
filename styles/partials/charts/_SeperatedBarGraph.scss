@@ -1,0 +1,96 @@
+.sep-graph {
+  $sep-graph-bar-spacing: 0.25rem;
+
+  &--wrapper {
+    --sep-graph-y: 3.25rem;
+    --sep-graph-x: 4rem;
+    --sep-graph-bar-height: 0.5rem;
+  }
+
+  @include pad-x(var(--sep-graph-x));
+  @include pad-y(var(--sep-graph-y));
+  @include flex-row-center;
+  height: calc(100% - (var(--sep-graph-y) * 2));
+  @include gap(1rem);
+
+  &--column {
+    @include flex-col-center;
+    margin-top: -0.25rem;
+    margin-right: -0.25rem;
+  }
+
+  &--item {
+    height: var(--font-height-body);
+    @include flex-col-center;
+
+    & + * {
+      margin-top: $sep-graph-bar-spacing;
+    }
+
+    &.highlighted + &.default {
+      margin-top: $sep-graph-bar-spacing * 4;
+    }
+  }
+
+  &--value {
+    text-align: right;
+  }
+
+//   &--name {
+//   }
+
+  &--text {
+
+    white-space: nowrap;
+
+    &.highlighted {
+      color: $col-secondary;
+    }
+
+    &.default {
+      color: $col-primary;
+    }
+  }
+
+  .bar {
+    &--group {
+      width: 7.5rem;
+      height: var(--sep-graph-bar-height);
+      @include my-auto;
+      position: relative;
+    }
+
+    &--wrapper {
+      display: grid;
+      grid-template-columns: repeat(100, 1fr);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+    }
+
+    &--item {
+      height: 100%;
+      width: 100%;
+    }
+
+    @include b-rad(100rem);
+
+    &__filled {
+      grid-column: span var(--sep-graph-value);
+    }
+
+    &__empty {
+      grid-column: span 100;
+      background-color: $col-graph-empty;
+    }
+
+    &.highlighted {
+      background-color: $col-secondary;
+    }
+
+    &.default {
+      background-color: $col-primary;
+    }
+  }
+}

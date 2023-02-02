@@ -75,7 +75,6 @@ var GRAPHS = [
       },
       {
         name: "Printer Usage",
-        title: "Only to have their printer sit idle most of the time",
         range: [0, 100],
         clamp: false,
         data: [

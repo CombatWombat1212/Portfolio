@@ -32,7 +32,8 @@ $gantt-phase-delay: 0.2s;
 
   --gantt-label-font-size: var(--font-size-body);
   --gantt-label-line-height: var(--font-leading-body);
-  --gantt-label-height: Max(var(--font-size-body), var(--font-leading-body));
+  // --gantt-label-height: Max(var(--font-size-body), var(--font-leading-body));
+  --gantt-label-height: var(--font-height-body);
   --gantt-phase-height: calc(var(--gantt-label-height));
 
   --gantt-phase-background-top: calc((((var(--gantt-label-height) - var(--gantt-bar-height)) / 2) + var(--gantt-pad)) * -1);
@@ -107,8 +108,6 @@ $gantt-phase-delay: 0.2s;
       grid-column: span var(--gantt-weeks_less);
       height: var(--gantt-bar-height);
       @include my-auto;
-      // @include b-rad(100rem);
-      // overflow: hidden;
       display: grid;
       width: 100%;
       position: relative;

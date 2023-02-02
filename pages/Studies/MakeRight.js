@@ -188,20 +188,20 @@ function MakeRight() {
             
           <Column>
               <Heading type="h3">
-                Only to have their printer sit idle
+                Hobbyists often surpass
                 <br />
-                most of the time
+                these barriers out of passion
               </Heading>
               <PieChart study="MakeRight" graph="Printer Uses" />
             </Column>
 
             <Column>
               <Heading type="h3">
-                Hobbyists often surpass
+                Only to have their printer sit idle
                 <br />
-                these barriers out of passion
+                most of the time
               </Heading>
-              <BarGraph study="MakeRight" graph="Limiting Factors" type="Seperate" />
+              <BarGraph study="MakeRight" graph="Printer Usage" type="seperated" small />
             </Column>
           </Section>
         </Chapter>
