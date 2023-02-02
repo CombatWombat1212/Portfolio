@@ -129,10 +129,11 @@ h3,
 
 h4,
 .text--h4 {
-  font-family: "Gira Sans";
+  font-family: "Tenon";
   font-size: var(--font-size-h4);
   line-height: var(--font-leading-h4);
   color: #C41263;
+  font-weight: 400;
 }
 
 p,
@@ -1484,6 +1485,22 @@ body {
   margin-top: var(--section-text-spacing);
 }
 
+.section--description ol {
+  --counter-width: 1.5rem;
+  list-style-position: inside;
+}
+
+.section--description ol > * + * {
+  margin-top: var(--section-text-spacing);
+}
+
+.section--description li span {
+  display: block;
+  margin-top: calc( var(--font-height-body) * -1);
+  width: calc( 100% - var(--counter-width));
+  padding-left: var(--counter-width);
+}
+
 .section .graphic--panel {
   border-radius: var(--b-rad);
   -webkit-border-radius: var(--b-rad);
@@ -1498,6 +1515,11 @@ body {
 
 .section .graphic--panel .mask {
   height: fit-content;
+}
+
+.section .graphic--panel__flexible {
+  height: 100% !important;
+  padding: 0;
 }
 
 .section .graphic--caption {
@@ -2152,7 +2174,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin-left: 0.175rem;
+  margin-left: 0.115rem;
   margin-top: 0.05rem;
 }
 
@@ -2190,7 +2212,7 @@ body {
 
 .pie .circle--svg {
   display: block;
-  --circle-r: 6.8rem;
+  --circle-r: 6.35rem;
   --circle-r_real: calc((var(--circle-r) - (var(--circle-stroke))) / 2);
   --circle-stroke: 0.5rem;
   --circle-circumference: calc(2 * var(--circle-r_real) * var(--pi));

@@ -91,10 +91,11 @@ $font-body: "Tenon";
 }
 
 @mixin h4 {
-  font-family: $font-title;
+  font-family: $font-body;
   font-size: var(--font-size-h4);
   line-height: var(--font-leading-h4);
   color: $col-secondary;
+  @include weight-reg;
 }
 
 @mixin h4-margin {

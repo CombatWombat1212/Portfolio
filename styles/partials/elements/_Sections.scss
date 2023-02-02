@@ -55,8 +55,28 @@
     & > * + * {
       margin-top: var(--section-text-spacing);
     }
-  }
 
+    ol {
+
+      --counter-width: 1.5rem;
+      & > * + * {
+        margin-top: var(--section-text-spacing);
+      }
+
+      list-style-position: inside;
+    }
+
+    li{
+
+      span{
+        display: block;
+        margin-top: calc( var(--font-height-body) * -1) ;
+        width: calc( 100% - var(--counter-width));
+        padding-left: var(--counter-width);
+      }
+    }
+
+  }
 
   .graphic {
     &--panel {
@@ -65,8 +85,13 @@
       padding: var(--section-graphic-panel-pad);
       align-items: center;
 
-      .mask{
+      .mask {
         height: fit-content;
+      }
+
+      &__flexible {
+        height: 100% !important;
+        padding: 0;
       }
     }
 
@@ -88,19 +113,15 @@
     }
   }
 
-
-  &--quote{
-
-    *{
+  &--quote {
+    * {
       @include quote;
     }
 
-    &__color{
+    &__color {
       padding: 1.875rem;
     }
-
   }
-
 
   .column {
     &--arrow {
@@ -108,8 +129,8 @@
       .mask {
         --arrow-height: #{mask-height(1.5rem)};
         --arrow-width: #{mask-width(1.5rem)};
-        height: var(--arrow-height)!important;
-        width: var(--arrow-width)!important;
+        height: var(--arrow-height) !important;
+        width: var(--arrow-width) !important;
         background-color: $col-primary !important;
         margin-top: calc(((var(--section-graphic-panel-pad) * 2) + var(--img-panel-height) - var(--arrow-height)) / 2);
         margin-left: calc(((var(--gap) + var(--arrow-width)) / 2) * -1);
@@ -145,7 +166,7 @@
 
     .section--description {
       margin-top: 0.5rem;
-      *{
+      * {
         @include h3;
         @include weight-reg;
       }
@@ -205,28 +226,28 @@
 
   &__background-darker {
     background-color: $col-background_darker;
-    &+&{
+    & + & {
       padding-top: 0;
     }
   }
 
   &__background-darkest {
     background-color: $col-background_darkest;
-    &+&{
+    & + & {
       padding-top: 0;
     }
   }
 
   &__primary {
     background-color: $col-primary;
-    &+&{
+    & + & {
       padding-top: 0;
     }
   }
 
   &__makeright-tertiary {
     background-color: $col-tertiary_makeright;
-    &+&{
+    & + & {
       padding-top: 0;
     }
   }

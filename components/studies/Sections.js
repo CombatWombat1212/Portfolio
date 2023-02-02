@@ -99,6 +99,27 @@ function getHasGraphic(graphic) {
   return hasGraphic;
 }
 
+
+
+function getColClassList(classList){
+
+  var classes = [];
+  var columnClasses = [];
+  var otherClasses = [];
+
+  if (classList == undefined || classList == '') return {colClasses: columnClasses, otherClasses: otherClasses};
+  if (typeof classList == 'string') classes = classList.split(' ');
+  
+  for( var i = 0; i < classes.length; i++){
+    if(classes[i].indexOf('col-') != -1) columnClasses.push(classes[i]);
+    else otherClasses.push(classes[i]);
+  }
+  
+  return {colClasses: columnClasses, otherClasses: otherClasses};
+
+  
+}
+
 function organizeChildren(allChildren) {
   var allTypes = [...DEFINED_CHILDREN, "Other"];
 
@@ -136,12 +157,15 @@ function getSectionChildren(children) {
   if (columns.length != 0) {
     for (var i = 0; i < columns.length; i++) {
       var column = columns[i];
+
+      var columnClasses = getColClassList(column.props.className);
+
       var columnChildren = column.props.children;
       var organizedColumnChildren = organizeChildren(columnChildren);
 
       var [columnColumns, columnDescription, columnTitle, columnHeading, columnGraphic, columnQuote, columnOther] = [organizedColumnChildren[0].elems, organizedColumnChildren[1].elems, organizedColumnChildren[2].elems, organizedColumnChildren[3].elems, organizedColumnChildren[4].elems, organizedColumnChildren[5].elems, organizedColumnChildren[6].elems];
 
-      columns[i] = { columns: columnColumns, description: columnDescription, title: columnTitle, heading: columnHeading, graphic: columnGraphic, quote: columnQuote, other: columnOther };
+      columns[i] = { columns: columnColumns, description: columnDescription, title: columnTitle, heading: columnHeading, graphic: columnGraphic, quote: columnQuote, other: columnOther, classes: columnClasses };
     }
   }
 
@@ -197,17 +221,27 @@ function Description({ className, children, type }) {
 }
 
 function ColumnGroup({ columns, arrows }) {
+
+
   return (
     <>
       {columns.map((column, i) => {
-        var { graphic, heading, description, quote, other } = columns[i];
+        var { graphic, heading, title, description, quote, other, classes } = columns[i];
+        console.log(classes)
+
+        var colClasses = `col-${Math.floor(12 / columns.length)}`;
+        var otherClasses = '';
+        if (classes.colClasses.length != 0) colClasses = classes.colClasses.join(' ');
+        if (classes.otherClasses.length != 0) otherClasses = classes.otherClasses.join(' ');
+        
         return (
-          <Column className={`column col-${Math.floor(12 / columns.length)}`} key={`column ${i}`}>
+          <Column className={`column ${colClasses} ${otherClasses}`} key={`column ${i}`}>
             {arrows && i != 0 && (
               <div className="column--arrow">
                 <Graphic type="mask" img={ICONS["chevron_right"]}></Graphic>
               </div>
             )}
+            {title && <>{title}</>}
             {graphic && <>{graphic}</>}
             {heading && <>{heading}</>}
             {description && <>{description}</>}
@@ -240,12 +274,12 @@ function Graphic({ className, type, img, background }) {
         {isMask && <Mask src={img.src} alt={img.alt} width={img.width} height={img.height} />}
       </div> */}
       {isImg && (
-        <div className={`section--graphic graphic ${backgroundClasses}`} style={{ "--img-aspect-width": img.width, "--img-aspect-height": img.height }}>
+        <div className={`section--graphic graphic ${backgroundClasses} ${className}`} style={{ "--img-aspect-width": img.width, "--img-aspect-height": img.height }}>
           {isImg && <Image src={img.src} alt={img.alt} width={img.width} height={img.height} />}
         </div>
       )}
       {isMask && (
-        <div className={`section--graphic graphic ${backgroundClasses}`} style={{ "--mask-aspect-width": img.width, "--mask-aspect-height": img.height }}>
+        <div className={`section--graphic graphic ${backgroundClasses} ${className}`} style={{ "--mask-aspect-width": img.width, "--mask-aspect-height": img.height }}>
           {isMask && <Mask src={img.src} alt={img.alt} width={img.width} height={img.height} />}
         </div>
       )}

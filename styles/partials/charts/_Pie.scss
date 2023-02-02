@@ -31,7 +31,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      margin-left: 0.175rem;
+      margin-left: 0.115rem;
       margin-top: 0.05rem;
       
       span{
@@ -66,7 +66,7 @@
 
     &--svg {
       display: block;
-      --circle-r: 6.8rem;
+      --circle-r: 6.35rem;
       --circle-r_real: calc((var(--circle-r) - (var(--circle-stroke))) / 2);
       --circle-stroke: 0.5rem;
       --circle-circumference: calc(2 * var(--circle-r_real) * var(--pi));

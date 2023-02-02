@@ -114,7 +114,9 @@ function MakeRight() {
 
           <Section id="Pitch--Recieve" type="pitch" margin="wide">
             <Heading>Recieve</Heading>
-            <Description><p>right at your front door</p></Description>
+            <Description>
+              <p>right at your front door</p>
+            </Description>
             <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_recieve"]} />
             <Graphic type="image" img={MAKERIGHT_IMGS["pitch_laptop_recieve"]} />
           </Section>
@@ -186,7 +188,9 @@ function MakeRight() {
             <BarGraph study="MakeRight" graph="Limiting Factors" type="default" />
             {/* TODO: link to source */}
             <Description>
-              <p><DLink>Source, Sculpteo, 2020</DLink></p>
+              <p>
+                <DLink>Source, Sculpteo, 2020</DLink>
+              </p>
             </Description>
           </Section>
 
@@ -244,9 +248,6 @@ function MakeRight() {
             </Column>
           </Section>
 
-
-
-
           <Section type="columns" titled className="flex-col" mainClassName="mt-less" background="background darkest">
             <Heading type="h3">While many owners of 3D printers have idle machines, and free time</Heading>
             <Description className="mt-less">
@@ -257,56 +258,37 @@ function MakeRight() {
             </Description>
 
             <Column>
-              <Quote background="background">
-              “How often do you use your printer?” - Me
-              </Quote>
+              <Quote background="background">“How often do you use your printer?” - Me</Quote>
             </Column>
 
             <Column>
-              <Quote background="background">
-              “Not enough” - Owners #1-4, unanimously
-              </Quote>
+              <Quote background="background">“Not enough” - Owners #1-4, unanimously</Quote>
             </Column>
           </Section>
 
-
-
-
-
-
-
-          <Section type="columns" background="background darkest">
-            <Heading type="h3">While many owners of 3D printers have idle machines, and free time</Heading>
-            <Description className="mt-less">
-              <p>
-                Owners' usage depended partially on free time, but mostly on current needs and projects. <br />
-                Meaning there was frequent overlap between their idle printer, and free time, due to a lack of printable ideas.
-              </p>
-            </Description>
-
-            <Column>
-              <Quote background="background">
-              “How often do you use your printer?” - Me
-              </Quote>
+          <Section type="columns" background="background">
+            <Column className="col-4">
+            <Graphic type="mask" className="graphic--panel__flexible" background="background darker" img={MAKERIGHT_IMGS["aha_moment"]} />
             </Column>
 
-            <Column>
-              <Quote background="background">
-              “Not enough” - Owners #1-4, unanimously
-              </Quote>
+            <Column className="col-8">
+              <Title>'Aha' Moment</Title>
+              <Heading>
+                Idle printers, <br />
+                potential for wider use
+              </Heading>
+              <Description>
+                <p>
+                  Primary and secondary research had converged on these 2 key takeaways.
+                  <br />I knew my solution would be found at their intersection.
+                </p>
+                <ol>
+                  <li><span>The machines of skilled printer owners are largely idle.</span></li>
+                  <li><span>Laypersons feel barred from 3D printing, despite having several ideas and uses for it.</span></li>
+                </ol>
+              </Description>
             </Column>
           </Section>
-
-
-
-
-
-
-
-
-
-
-          
         </Chapter>
       </CaseStudyPage>
     </>
