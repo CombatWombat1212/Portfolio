@@ -295,9 +295,7 @@ function MakeRight() {
           </Section>
         </Chapter>
 
-        
-
-        <Chapter name="Develop">
+        <Chapter name="Develop" id="Develop">
           <Section type="columns" className="flex-col" titled arrows background="background darker">
             <Title>Methodology</Title>
             <Heading>Moving from problem to solution</Heading>
@@ -324,26 +322,30 @@ function MakeRight() {
           </Section>
 
           <Section type="columns" className="flex-col" titled background="background darker">
-            <Title>Methodology</Title>
-            <Heading>Moving from problem to solution</Heading>
+            <Title>Brainstorming</Title>
+            <Heading>Out of all concepts, one stood out in terms of viability</Heading>
 
-            <Column>
-              <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["brainstorming"]} />
-              <Description type="h3" className="graphic--caption">
-                <b>Brainstorming</b> to generate a wide number of potential solutions
-              </Description>
-            </Column>
-            <Column>
-              <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["refine_ideas"]} />
-              <Description type="h3" className="graphic--caption">
-                <b>Refine ideas</b> to fully explore promising concepts
-              </Description>
-            </Column>
-
-            <Column>
+            <Column className="col-4">
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["focus_group_testing"]} />
               <Description type="h3" className="graphic--caption">
                 <b>Focus group testing</b> to gauge reception and feedback from users
+              </Description>
+            </Column>
+
+            <Column className="col-8">
+              <Description background="background">
+                <h3>
+                  A gig-economy-based 3D printing service,
+                  <br />a sort-of Uber for 3D models.
+                </h3>
+                <ul>
+                  <li className="mt-less">
+                    <span>Hobbyist makers could use their idle machines for passive income</span>
+                  </li>
+                  <li className="mt-less">
+                    <span>Consumers could access the technology without the typical barriers.</span>
+                  </li>
+                </ul>
               </Description>
             </Column>
           </Section>

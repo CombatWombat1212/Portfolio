@@ -8,10 +8,6 @@ import ICONS from "@/data/ICONS";
 const DEFINED_CHILDREN = ["Column", "Description", "Title", "Heading", "Graphic", "Quote"];
 const BACKGROUND_COLORS = ["background", "background darker", "background darkest", "primary", "secondary", "makeright tertiary"];
 
-
-
-
-
 function getHeadingClasses(type) {
   var headingClasses = "";
   if (type == "h1") headingClasses += " text--h1";
@@ -65,6 +61,7 @@ function getBackgroundClasses(pref, background) {
       if (pref == "chapter" && background != "background") backgroundClasses += ` ${pref}__color`;
       else if (pref == "section") backgroundClasses += ` ${pref}__color`;
       else if (pref == "section--quote") backgroundClasses += ` ${pref}__color`;
+      else if (pref == "section--description") backgroundClasses += ` ${pref}__color`;
     }
 
     if (pref == "section--graphic") backgroundClasses += ` graphic--panel`;
@@ -99,25 +96,20 @@ function getHasGraphic(graphic) {
   return hasGraphic;
 }
 
-
-
-function getColClassList(classList){
-
+function getColClassList(classList) {
   var classes = [];
   var columnClasses = [];
   var otherClasses = [];
 
-  if (classList == undefined || classList == '') return {colClasses: columnClasses, otherClasses: otherClasses};
-  if (typeof classList == 'string') classes = classList.split(' ');
-  
-  for( var i = 0; i < classes.length; i++){
-    if(classes[i].indexOf('col-') != -1) columnClasses.push(classes[i]);
+  if (classList == undefined || classList == "") return { colClasses: columnClasses, otherClasses: otherClasses };
+  if (typeof classList == "string") classes = classList.split(" ");
+
+  for (var i = 0; i < classes.length; i++) {
+    if (classes[i].indexOf("col-") != -1) columnClasses.push(classes[i]);
     else otherClasses.push(classes[i]);
   }
-  
-  return {colClasses: columnClasses, otherClasses: otherClasses};
 
-  
+  return { colClasses: columnClasses, otherClasses: otherClasses };
 }
 
 function organizeChildren(allChildren) {
@@ -214,26 +206,25 @@ function Title({ children }) {
   );
 }
 
-function Description({ className, children, type }) {
+function Description({ className, children, type, background }) {
   var descriptionClasses = getHeadingClasses(type);
 
-  return <div className={`section--description ${className ? className : ""} ${descriptionClasses}`}>{children}</div>;
+  var backgroundClasses = getBackgroundClasses("section--description", background);
+
+  return <div className={`section--description ${className ? className : ""} ${descriptionClasses} ${backgroundClasses ? backgroundClasses : ""}`}>{children}</div>;
 }
 
 function ColumnGroup({ columns, arrows }) {
-
-
   return (
     <>
       {columns.map((column, i) => {
         var { graphic, heading, title, description, quote, other, classes } = columns[i];
-        console.log(classes)
 
         var colClasses = `col-${Math.floor(12 / columns.length)}`;
-        var otherClasses = '';
-        if (classes.colClasses.length != 0) colClasses = classes.colClasses.join(' ');
-        if (classes.otherClasses.length != 0) otherClasses = classes.otherClasses.join(' ');
-        
+        var otherClasses = "";
+        if (classes.colClasses.length != 0) colClasses = classes.colClasses.join(" ");
+        if (classes.otherClasses.length != 0) otherClasses = classes.otherClasses.join(" ");
+
         return (
           <Column className={`column ${colClasses} ${otherClasses}`} key={`column ${i}`}>
             {arrows && i != 0 && (
@@ -312,7 +303,6 @@ function Section({ className, children, type, background, id, margin, titled, ar
 
   var childs = getSectionChildren(children);
   var { columns, description, title, heading, graphic, other } = childs;
-
 
   var mainClasses = getMainClasses(pref, type);
   var containerMarginClass = getContainerMarginClass(margin);

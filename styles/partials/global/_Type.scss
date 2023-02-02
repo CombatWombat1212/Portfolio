@@ -70,6 +70,7 @@ $font-body: "Tenon";
   font-family: $font-title;
   font-size: var(--font-size-h1);
   line-height: var(--font-leading-h1);
+  @include weight-med;
 }
 
 @mixin h2 {

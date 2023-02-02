@@ -110,6 +110,7 @@ h1,
   font-family: "Gira Sans";
   font-size: var(--font-size-h1);
   line-height: var(--font-leading-h1);
+  font-weight: 500;
 }
 
 h2,
@@ -947,6 +948,13 @@ body {
   object-fit: contain;
 }
 
+.panel--title, .panel--title > span {
+  font-family: "Gira Sans";
+  font-size: var(--font-size-h1);
+  line-height: var(--font-leading-h1);
+  font-weight: 500;
+}
+
 .panel--tags {
   margin-top: calc(var(--panel-description-spacing) * 1.75);
 }
@@ -1485,23 +1493,38 @@ body {
   margin-top: var(--section-text-spacing);
 }
 
-.section--description ol {
+.section--description ol, .section--description ul {
   --counter-width: 1.5rem;
   list-style-position: inside;
 }
 
-.section--description ol > * + * {
+.section--description ol > * + *, .section--description ul > * + * {
   margin-top: var(--section-text-spacing);
+}
+
+.section--description ol > * + *.mt-less, .section--description ul > * + *.mt-less {
+  margin-top: calc(var(--section-text-spacing) * 0.35);
 }
 
 .section--description li span {
   display: block;
-  margin-top: calc( var(--font-height-body) * -1);
-  width: calc( 100% - var(--counter-width));
+  margin-top: calc(var(--font-height-body) * -1);
+  width: calc(100% - var(--counter-width));
   padding-left: var(--counter-width);
 }
 
+.section--description__color {
+  padding: 2.25rem;
+}
+
+.section .graphic {
+  --img-panel-height: 12rem;
+  --graphic-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 11.5rem) ;
+  --graphic-height: calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
+}
+
 .section .graphic--panel {
+  height: var(--img-panel-height);
   border-radius: var(--b-rad);
   -webkit-border-radius: var(--b-rad);
   -moz-border-radius: var(--b-rad);
@@ -1515,6 +1538,9 @@ body {
 
 .section .graphic--panel .mask {
   height: fit-content;
+  height: var(--graphic-height);
+  width: var(--graphic-width);
+  background-color: #404064;
 }
 
 .section .graphic--panel__flexible {
@@ -2950,22 +2976,6 @@ body {
 #Makeright #Plan,
 #Makeright #BuildingMakeRight {
   margin-top: 0;
-}
-
-#Makeright #Research {
-  --img-panel-height: 12rem;
-}
-
-#Makeright #Research .section--graphic {
-  --graphic-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 11.5rem) ;
-  --graphic-height: calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
-  height: var(--img-panel-height);
-}
-
-#Makeright #Research .section--graphic .mask {
-  height: var(--graphic-height);
-  width: var(--graphic-width);
-  background-color: #404064;
 }
 
 #Makeright #Research #Aha-Moment .section--graphic {

@@ -26,6 +26,15 @@
     }
   }
 
+
+  &--title{
+
+    &, &>span{
+      @include h1;
+    }
+
+  }
+
   &--tags{
     margin-top: calc(var(--panel-description-spacing) * 1.75);
   }

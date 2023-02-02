@@ -20,6 +20,9 @@ function DLink(props) {
         <Link {...props} href={props.href} ref={reference} className={"link" + (props.className ? ` ${props.className}` : '')} >
           {props.children}
         </Link>
+        // <Link {...props} href={props.href} ref={reference} className={"link" + (props.className ? ` ${props.className}` : '')} >
+        //   {props.children}
+        // </Link>
       ) : (
         <a {...props} ref={reference} className={"link" + (props.className ? ` ${props.className}` : '')}>
           {props.children}

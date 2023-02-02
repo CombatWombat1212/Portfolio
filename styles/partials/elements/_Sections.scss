@@ -56,30 +56,42 @@
       margin-top: var(--section-text-spacing);
     }
 
-    ol {
-
+    ol,ul {
       --counter-width: 1.5rem;
       & > * + * {
         margin-top: var(--section-text-spacing);
+      }
+      & > * + *.mt-less {
+        margin-top: calc(var(--section-text-spacing) * 0.35);
       }
 
       list-style-position: inside;
     }
 
-    li{
-
-      span{
+    li {
+      span {
         display: block;
-        margin-top: calc( var(--font-height-body) * -1) ;
-        width: calc( 100% - var(--counter-width));
+        margin-top: calc(var(--font-height-body) * -1);
+        width: calc(100% - var(--counter-width));
         padding-left: var(--counter-width);
       }
     }
 
+    &__color {
+      padding: 2.25rem;
+    }
   }
 
   .graphic {
+
+    --img-panel-height: 12rem;
+
+    --graphic-width: #{mask-width(11.5rem)};
+    --graphic-height: calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
+
+    
     &--panel {
+      height: var(--img-panel-height);
       @include b-rad;
       @include flex-row-center;
       padding: var(--section-graphic-panel-pad);
@@ -87,6 +99,9 @@
 
       .mask {
         height: fit-content;
+        height: var(--graphic-height);
+        width: var(--graphic-width);
+        background-color: $col-tertiary;
       }
 
       &__flexible {
