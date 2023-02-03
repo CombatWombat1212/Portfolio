@@ -107,6 +107,11 @@
 	justify-content: space-between;
 }
 
+@mixin flex-row-end {
+	@include flex-row();
+	justify-content: end;
+}
+
 
 
 
@@ -696,3 +701,18 @@
     row-gap: $gut;
 }
 
+
+
+
+@mixin slider-handle{
+
+	&::-webkit-slider-thumb{
+		@content;
+	}
+	
+	&::-moz-range-thumb{
+		@content;
+	}
+	
+
+}

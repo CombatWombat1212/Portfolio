@@ -68,6 +68,30 @@ const ICONS = {
 
 
 
+  close: {
+    name: 'close',
+    src: "/assets/icons/close.svg",
+    alt: "Close icon",
+    width: 28.46,
+    height: 28.46,
+  },
+  plus: {
+    name: 'plus',
+    src: "/assets/icons/plus.svg",
+    alt: "Plus icon",
+    width: 19.5,
+    height: 19.5,
+  },
+  minus: {
+    name: 'minus',
+    src: "/assets/icons/minus.svg",
+    alt: "Minus icon",
+    width: 19.5,
+    height: 3,
+  },
+
+
+
 
 };
 

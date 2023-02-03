@@ -71,7 +71,7 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
-  color: propTypes.oneOf(["primary", "secondary"]),
+  color: propTypes.oneOf(["primary", "secondary", "tertiary", "transparent-primary", "transparent-secondary", "transparent-tertiary"]),
   type: propTypes.oneOf(["regular", "bottom"]),
 };
 

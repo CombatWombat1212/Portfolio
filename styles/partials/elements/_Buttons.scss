@@ -74,6 +74,16 @@
       --button-background: #{$col-primary_hovered};
     }
   }
+
+
+  &__transparent-primary {
+    --button-icon-size: 1.5rem;
+    --button-background: #00000000;
+    --button-color: #{$col-primary};
+    @include hover {
+      --button-color: #{$col-primary_hovered};
+    }
+  }
 }
 
 // Button modifiers
