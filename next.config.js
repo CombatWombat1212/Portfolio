@@ -7,6 +7,8 @@ const nextConfig = {
     formats: ["image/webp"],
   },
 
+  
+
   // async redirects() {
   //   return [
   //     {
@@ -17,5 +19,7 @@ const nextConfig = {
   //   ];
   // },
 };
+
+
 
 module.exports = nextConfig;

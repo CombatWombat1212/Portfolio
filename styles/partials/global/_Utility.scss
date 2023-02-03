@@ -43,8 +43,10 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
             property: display,
             class: d,
             values: block grid flex none),
-        "flex": (responsive: true,
+        "flex": (
+            responsive: true,
             property: flex-direction,
+            important: true,
             class: flex,
             values: (
                 col: column,
@@ -69,6 +71,11 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
         "margin": (
             property: margin,
             class: m,
+            values: (auto:auto)),
+        "height": (
+            property: height,
+            important: true,
+            class: h,
             values: (auto:auto)),
         // "max-width": (property: max-width,
         //     class: mw,

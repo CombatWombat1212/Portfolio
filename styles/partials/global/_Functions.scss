@@ -230,6 +230,9 @@ $enable-important-utilities: false !default;
         $property-class: if(map-has-key($utility, class), map-get($utility, class), nth($properties, 1));
         $property-class: if($property-class==null, "", $property-class);
 
+        // Get important 
+        $important: if(map-has-key($utility, important), map-get($utility, important), $enable-important-utilities);
+
         // State params to generate pseudo-classes
         $state: if(map-has-key($utility, state), map-get($utility, state), ());
 
@@ -262,7 +265,8 @@ $enable-important-utilities: false !default;
 
             .#{$property-class + $infix + $property-class-modifier} {
                 @each $property in $properties {
-                    #{$property}: $value if($enable-important-utilities,  !important, null);
+                    // #{$property}: $value if($enable-important-utilities,  !important, null);
+                    #{$property}: $value if($important,  !important, null);
                 }
 
                 @if $defaults {
@@ -270,7 +274,9 @@ $enable-important-utilities: false !default;
                     $v in $defaults {
 
                         @if $v {
-                            #{$k}: $v if($enable-important-utilities,  !important, null);
+                            // #{$k}: $v if($enable-important-utilities,  !important, null);
+                            #{$k}: $v if($important,  !important, null);
+                        
                         }
                     }
                 }
@@ -281,7 +287,8 @@ $enable-important-utilities: false !default;
             @each $pseudo in $state {
                 .#{$property-class + $infix + $property-class-modifier}-#{$pseudo}:#{$pseudo} {
                     @each $property in $properties {
-                        #{$property}: $value if($enable-important-utilities,  !important, null);
+                        // #{$property}: $value if($enable-important-utilities,  !important, null);
+                        #{$property}: $value if($important,  !important, null);
                     }
                 }
             }

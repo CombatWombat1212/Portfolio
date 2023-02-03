@@ -1,13 +1,13 @@
-import Image from "next/image";
+// import Image from "next/image";
 
-// not currently in use
+// // not currently in use
 
-function Image() {
-    return (
-        <>
-        <Image />
-        </>
-    );
-}
+// function Image() {
+//     return (
+//         <>
+//         <Image />
+//         </>
+//     );
+// }
 
-export default Image;
+// export default Image;

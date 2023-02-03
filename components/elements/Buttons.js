@@ -35,12 +35,22 @@ function ButtonIcon({ img, type }) {
   );
 }
 
-function Button({ children, className, type, icon, animation, ...props }) {
+function Button({ children, className, type, icon, animation,color, ...props }) {
   if (icon) var [iconName, iconSide, iconType] = icon;
 
   return (
     <>
-      <DLink className={"button" + (className ? ` ${className}` : "") + (type ? ` button__${type}` : "") + (iconSide ? ` button__${iconSide}` : "") + (animation ? ` button__${animation}` : "")} tabIndex="0" {...props}>
+      <DLink
+        className={
+            "button" +
+            (className ? ` ${className}` : "") +
+            (type ? ` button__${type}` : "") +
+            (color ? ` button__${color}` : "") +
+            (iconSide ? ` button__${iconSide}` : "") +
+            (animation ? ` button__${animation}` : "")
+        }
+        tabIndex="0"
+        {...props}>
         {icon ? (
           <>
             {iconSide == "left" || (iconSide == "alone" && <ButtonIcon img={iconName} type={iconType}></ButtonIcon>)}
@@ -57,10 +67,12 @@ function Button({ children, className, type, icon, animation, ...props }) {
 
 Button.defaultProps = {
   type: "regular",
+  color: "secondary",
 };
 
 Button.propTypes = {
-  type: propTypes.oneOf(["regular"]),
+  color: propTypes.oneOf(["primary", "secondary"]),
+  type: propTypes.oneOf(["regular", "bottom"]),
 };
 
 export default Button;

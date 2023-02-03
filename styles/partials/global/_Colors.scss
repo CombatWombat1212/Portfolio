@@ -6,7 +6,8 @@
 
 
 $col-primary: #074391;
-$col-primary_hovered: #074391;
+
+$col-primary_hovered: darken($col-primary, 5%);
 
 $col-secondary: #C41263;
 $col-secondary_hovered: #950647;

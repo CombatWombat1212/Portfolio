@@ -8,10 +8,13 @@ import Gantt from "/components/charts/Gantt";
 import BarGraph from "@/components/charts/BarGraph";
 import DLink from "@/components/utilities/DynamicLink";
 import PieChart from "@/components/charts/PieChart";
+import Button from "@/components/elements/Buttons";
+import { popupHandler, Popup } from "@/components/global/Popup";
 
 // TODO:add the interactive chapter selection thingy
 
-function MakeRight() {
+function MakeRight({setPopup}) {
+
   const study = getStudy();
 
   return (
@@ -131,12 +134,12 @@ function MakeRight() {
             </Column>
             <Column>
               <Heading type="h3">
-                Operating much like an 'Uber'
+                Operating much like an &apos;Uber&apos;
                 <br />
                 for 3D prints from local makers.
               </Heading>
               <Description>
-                <p>Giving customers access to 3D printing's low-cost, customizable production, without owning or operating the technology. While also enabling hobbyist makers to profit off their skills and equipment. </p>
+                <p>Giving customers access to 3D printing&apos;s low-cost, customizable production, without owning or operating the technology. While also enabling hobbyist makers to profit off their skills and equipment. </p>
               </Description>
             </Column>
           </Section>
@@ -170,7 +173,7 @@ function MakeRight() {
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["interviews"]} />
               <Description type="h3" className="graphic--caption">
                 {/* <b>Interviews & surveys</b> to understand peoples’ experiences at a lower level */}
-                <b>Interviews & surveys</b> to understand users' experiences at a lower level
+                <b>Interviews & surveys</b> to understand users&apos; experiences at a lower level
               </Description>
             </Column>
           </Section>
@@ -252,7 +255,7 @@ function MakeRight() {
             <Heading type="h3">While many owners of 3D printers have idle machines, and free time</Heading>
             <Description className="mt-less">
               <p>
-                Owners' usage depended partially on free time, but mostly on current needs and projects. <br />
+                Owners&apos; usage depended partially on free time, but mostly on current needs and projects. <br />
                 Meaning there was frequent overlap between their idle printer, and free time, due to a lack of printable ideas.
               </p>
             </Description>
@@ -272,7 +275,7 @@ function MakeRight() {
             </Column>
 
             <Column className="col-7">
-              <Title>'Aha' Moment</Title>
+              <Title>&apos;Aha&apos; Moment</Title>
               <Heading>
                 Idle printers, <br />
                 potential for wider use
@@ -321,15 +324,14 @@ function MakeRight() {
             </Column>
           </Section>
 
-          <Section type="columns" className="flex-col" titled background="background darker">
+          <Section id="Develop--Brainstorming" type="columns" className="flex-col" titled background="background darker">
             <Title>Brainstorming</Title>
             <Heading>Out of all concepts, one stood out in terms of viability</Heading>
 
             <Column className="col-4">
-              <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["focus_group_testing"]} />
-              <Description type="h3" className="graphic--caption">
-                <b>Focus group testing</b> to gauge reception and feedback from users
-              </Description>
+              <Graphic className="flex-col h-auto" background="background" type="mask" img={MAKERIGHT_IMGS["brainstorming_chart"]}>
+                <Button color="primary" type="bottom" onClick={()=>setPopup(MAKERIGHT_IMGS["brainstorming_chart_full"])}>View full exercise</Button>
+              </Graphic>
             </Column>
 
             <Column className="col-8">

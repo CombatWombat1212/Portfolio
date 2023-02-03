@@ -3,6 +3,8 @@ import Layout from "../components/navigation/Layout";
 
 import { useMountEffect } from "/scripts/hooks/useMountEffect";
 import { postScreenSizeToRoot } from "/scripts/GlobalUtilities";
+import Popup from "@/components/global/Popup";
+import { useRef, useState } from "react";
 
 export default function App({ Component, pageProps }) {
 
@@ -13,11 +15,14 @@ export default function App({ Component, pageProps }) {
     postScreenSizeToRoot();
   });
 
+  const [popup, setPopup] = useState(false);
+
 
   return (
     <>
       <Layout>
-        <Component {...pageProps} />
+        <Popup popup={popup} setPopup={setPopup} />
+        <Component popup={popup} setPopup={setPopup} {...pageProps} />
       </Layout>
     </>
   );

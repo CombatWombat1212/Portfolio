@@ -72,25 +72,23 @@
       }
     }
 
-
     #Aha-Moment {
       .section {
         &--graphic {
           --graphic-width: #{mask-width(13.35rem)};
-          --graphic-height: calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
+          // --graphic-height: calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
         }
       }
     }
-
-
-
   }
 
-
-  #Develop{
-    
-
+  #Develop {
+    &--Brainstorming {
+      .section {
+        &--graphic {
+          --graphic-width: #{mask-width(14rem)};
+        }
+      }
+    }
   }
-
-
 }

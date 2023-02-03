@@ -18,11 +18,11 @@ function Index() {
         <Panel id="Home--Hero" type="img-desc">
           <PanelDesc className="col-6">
             <h1 className="panel--title">
-              Hi, I'm <span className="color--secondary">Sam Giustizia</span>,<br></br>how are you?
+              Hi, I&apos;m <span className="color--secondary">Sam Giustizia</span>,<br></br>how are you?
             </h1>
             {/* TODO: i really think this should be 2 lines not 3 */}
             <p className="text--h3">
-              I'm a multidisciplinary designer,<br></br>
+              I&apos;m a multidisciplinary designer,<br></br>
               and a creator of digital solutions,<br></br>
               tailor-fitted to real-world problems.
             </p>

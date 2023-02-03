@@ -89,6 +89,9 @@
     --graphic-width: #{mask-width(11.5rem)};
     --graphic-height: calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
 
+    img {
+      @include img-contain;
+    }
     
     &--panel {
       height: var(--img-panel-height);
@@ -108,15 +111,22 @@
         height: 100% !important;
         padding: 0;
       }
+
     }
 
     &--caption {
       margin-top: var(--section-text-spacing);
     }
 
-    img {
-      @include img-contain;
+    &__container {
+      padding: 0;
+
+      img,.mask{
+        margin: var(--section-graphic-panel-pad);
+      }
+
     }
+
   }
 
   &--main {
@@ -134,7 +144,7 @@
     }
 
     &__color {
-      padding: 1.875rem;
+      padding: 1.75rem;
     }
   }
 
