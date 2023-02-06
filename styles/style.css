@@ -1803,23 +1803,10 @@ body {
 .popup--inner {
   width: 100%;
   display: flex;
-  padding: var(--popup-inner-pad);
-}
-
-.popup--header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: -0.35rem;
-}
-
-.popup--title {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .popup--content {
+  margin: var(--popup-inner-pad);
   border-radius: var(--b-rad);
   -webkit-border-radius: var(--b-rad);
   -moz-border-radius: var(--b-rad);
@@ -1833,6 +1820,19 @@ body {
   gap: var(--popup-gap);
   column-gap: var(--popup-gap);
   row-gap: var(--popup-gap);
+}
+
+.popup--header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: -0.35rem;
+}
+
+.popup--title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .popup--canvas {

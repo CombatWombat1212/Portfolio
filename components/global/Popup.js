@@ -9,257 +9,152 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Button from "../elements/Buttons";
 
+var canvas,
+  context,
+  canvasImage,
+  canvasImageLoaded = false;
 
-var canvas, context, canvasImage;
+var canvasTransform = { x: 0, y: 0, scale: 1, width: 0, height: 0, maxWidth: 0, maxHeight: 0, minWidth: 0, minHeight: 0 };
+
+var maxZoom = 1.5;
+
 var canvasInput;
-var cursorLocationCanvas = {x: 0, y: 0};
-var cursorLocationPage = {x: 0, y: 0};
 var lastPopup = null;
-
 
 var isDragging = false;
 var dragStartPosition = { x: 0, y: 0 };
 var currentTransformedCursor;
 
-
-
-
-
 function getTransformedPoint(x, y) {
-	const originalPoint = new DOMPoint(x, y);
+  const originalPoint = new DOMPoint(x, y);
   return context.getTransform().invertSelf().transformPoint(originalPoint);
 }
 
-
-// function applyTransform(elem, transform) {
-//   elem.style.webkitTransform = transform;
-//   elem.style.mozTransform = transform;
-//   elem.style.transform = transform;
-// }
-
-
-
 function drawImageToCanvas() {
+  var run = function () {
+    context.save();
+    context.setTransform(1, 0, 0, 1, 0, 0);
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.restore();
 
+    context.drawImage(canvasImage, 0, 0, canvasTransform.maxWidth, canvasTransform.maxHeight);
+  };
 
-
-	context.save();
-  context.setTransform(1,0,0,1,0,0);
-  context.clearRect(0,0,canvas.width,canvas.height);
-  context.restore();
-
-
-
-  context.drawImage(canvasImage, 0, 0, canvasImage.width, canvasImage.height);
+  if (canvasImageLoaded) {
+    run();
+  } else {
+    //TODO: maybe this is where a little loading animation would go
+  }
 }
 
-
-
-
-function canvasZoom(value, source){
-
-  // var scale = Number(canvasInput.value) / 10;
-  // var img = canvas.querySelector(".popup--img");
-
-
-  // var canvasMiddle = {
-  //   x: canvas.offsetWidth / 2,
-  //   y: canvas.offsetHeight / 2
-  // };
-
-
-  // if(scale < 1) scale = 1;
-  // if(scale > 10) scale = 10;
-
-  // if(canvasInput.value == 100 && scale > 0) return;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  // if(source == "input"){
-    // img.style.transform = `scale(${scale})`;
-    // img.style.transformOrigin = `${canvasMiddle.x}px ${canvasMiddle.y}px`;
-  // } else if(source == "wheel"){
-    // var x = cursorLocationCanvas.x;
-    // var y = cursorLocationCanvas.y;
-    
-    // img.style.transformOrigin = `${x}px ${y}px`;
-    // img.style.transform = `scale(${scale})`;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // img.style.transformOrigin = `${x}px ${y}px`;
-    // img.style.transformOrigin = `${canvasMiddle.x}px ${canvasMiddle.y}px`;
-    // img.style.transformOrigin = `${(x+canvasMiddle.x) / 2}px ${(y+canvasMiddle.y)/2}px`;
-    
-
-
-
-    // TODO: USE THIS ONE IT LOOKS GOOD MAYBE https://roblouie.com/article/617/transforming-mouse-coordinates-to-canvas-coordinates/ HAVE A GREAT START TO YOUR WEEK BIG GUY:) congrats on getting through such a hard week last week<3
-    
-    
-
-
-// https://jsfiddle.net/u3kmvbe0/8/
-    // var parentRect = canvas.getBoundingClientRect();
-    // var rect = img.getBoundingClientRect();
-    // var xPercent = Number((x / parentRect.width).toFixed(2));
-    // var yPercent = Number((y / parentRect.height).toFixed(2));
-    
-    // var left = Math.round(cursorLocationCanvas.x   - (xPercent * (rect.width * scale / oldScale)));
-    // var top = Math.round(cursorLocationCanvas.y - (yPercent * (rect.height * scale / oldScale)));
-
-    // console.log(cursorLocationCanvas.x)
-    
-
-    // console.log({
-    //   x: x,
-    //   y: y,
-    //   parentRectLeft: parentRect.left,
-    //   parentRectTop: parentRect.top,
-    //   xPercent: xPercent,
-    //   yPercent: yPercent,
-    //   rectWidth: rect.width,
-    //   rectHeight: rect.height,
-    //   scale: scale,
-    //   oldScale: oldScale,
-
-    // })
-
-    
-    // transform = 'matrix(' + scale + ',0,0,' + scale + ',' + left + ',' + top + ')';
-
-    // img.style.transform = transform;
-
-
-    // applyTransform(img, transform);
-    
-    // 
-
-
-
-  // }
-
-
-  // canvas.style.transform = `scale(${scale})`;
-  // canvas.style.transformOrigin = "0 0";
+function canvasImageSizeInit() {
+  var width, height;
+
+  var canvasImageAspect = canvasImage.width / canvasImage.height;
+
+  if (canvasImage.width > canvasImage.height) {
+    height = canvas.height;
+    width = canvas.height * canvasImageAspect;
+  } else {
+    width = canvas.width;
+    height = canvas.width / canvasImageAspect;
+  }
+
+  canvasTransform.width = width;
+  canvasTransform.height = height;
+  canvasTransform.maxWidth = width;
+  canvasTransform.maxHeight = height;
+  canvasTransform.minWidth = width / maxZoom;
+  canvasTransform.minHeight = height / maxZoom;
 }
 
+function canvasZoom(value, source) {}
 
-
-
-
-function canvasWheelHandler(e){
+function canvasWheelHandler(e) {
   e.preventDefault();
 
   const currentTransformedCursor = getTransformedPoint(e.offsetX, e.offsetY);
-  const zoom = e.deltaY < 0 ? 1.1 : 0.9;
+  var zoom = e.deltaY < 0 ? 1.1 : 0.9;
+
+
+  
+  // context.translate(currentTransformedCursor.x, currentTransformedCursor.y);
+  // context.scale(zoom, zoom);
+  // context.translate(-currentTransformedCursor.x, -currentTransformedCursor.y);
+  
+
+
 
   context.translate(currentTransformedCursor.x, currentTransformedCursor.y);
-  context.scale(zoom, zoom);
+  if (canvasTransform.scale * zoom < 1) {
+    context.scale(1 / canvasTransform.scale, 1 / canvasTransform.scale);
+    canvasTransform.scale = 1;
+    canvasTransform.width = canvasTransform.maxWidth;
+    canvasTransform.height = canvasTransform.maxHeight;
+  } else if (canvasTransform.scale * zoom > maxZoom) {
+    context.scale(maxZoom / canvasTransform.scale, maxZoom / canvasTransform.scale);
+    canvasTransform.scale = maxZoom;
+    canvasTransform.width *= maxZoom / canvasTransform.scale;
+    canvasTransform.height *= maxZoom / canvasTransform.scale;
+  } else {
+    context.scale(zoom, zoom);
+    canvasTransform.scale *= zoom;
+    canvasTransform.width *= canvasTransform.scale;
+    canvasTransform.height *= canvasTransform.scale;
+  }
   context.translate(-currentTransformedCursor.x, -currentTransformedCursor.y);
+  
+
+
 
   // Redraws the image after the scaling
   drawImageToCanvas();
-
-
-
-
-
-
-  // var delta = e.deltaY || e.detail || e.wheelDelta;
-  // var increment = 5;
-  // var zoom; 
-  // if(delta > 0) zoom = increment * -1;
-  // if(delta < 0) zoom = increment;
-
-  // canvasInput.value = parseInt(canvasInput.value) + zoom;
-  // canvasZoom(canvasInput.value, "wheel");
-
 }
 
+function canvasMouseMoveHandler(e) {
+  currentTransformedCursor = getTransformedPoint(e.offsetX, e.offsetY);
 
-function canvasMouseMoveHandler(e){
-  currentTransformedCursor = getTransformedPoint(e.offsetX, e.offsetY)
-  
   if (isDragging) {
-
-  	context.translate(currentTransformedCursor.x - dragStartPosition.x, currentTransformedCursor.y - dragStartPosition.y);
-		drawImageToCanvas();
+    context.translate(currentTransformedCursor.x - dragStartPosition.x, currentTransformedCursor.y - dragStartPosition.y);
+    drawImageToCanvas();
   }
-
-
-  // var rect = canvas.getBoundingClientRect();
-  // cursorLocationCanvas = {x: e.clientX - rect.left, y: e.clientY - rect.top};
-  // cursorLocationPage = {x: e.clientX, y: e.clientY};
-
-
 }
 
-
-function canvasMouseDownHandler(e){
-	isDragging = true;
-	dragStartPosition = getTransformedPoint(e.offsetX, e.offsetY);
+function canvasMouseDownHandler(e) {
+  isDragging = true;
+  dragStartPosition = getTransformedPoint(e.offsetX, e.offsetY);
 }
 
 function canvasMouseUpHandler() {
-	isDragging = false;
+  isDragging = false;
 }
 
-
-
-
 function canvasInit(canvas, popup) {
-
-  if(!canvas) return;
+  if (!canvas) return;
   canvas.addEventListener("wheel", canvasWheelHandler);
   canvas.addEventListener("mousemove", canvasMouseMoveHandler);
   canvas.addEventListener("mousedown", canvasMouseDownHandler);
   canvas.addEventListener("mouseup", canvasMouseUpHandler);
+
+  canvasImage = document.createElement("img");
+  canvasImage.src = "." + popup.src;
+  canvasImage.width = popup.width;
+  canvasImage.height = popup.height;
+  canvasImage.alt = popup.alt;
+  canvasImage.onload = function () {
+    canvasImageLoaded = true;
+    drawImageToCanvas();
+  };
+
+  popupResizeFunctions();
+  window.addEventListener("resize", popupResize, false);
+
+  canvasImageSizeInit();
+
   // context.imageSmoothingEnabled = false;
-  
 }
 
-
-
-function canvasZoomButtonHandler(str){
+function canvasZoomButtonHandler(str) {
   // var zoom = 5;
   // if(str == "in") zoom = zoom * -1;
   // if(str == "out") zoom = zoom * 1;
@@ -267,19 +162,12 @@ function canvasZoomButtonHandler(str){
   // canvasZoom(canvasInput.value, "input");
 }
 
-
-
-function canvasSetSize(){
+function canvasSetSize() {
   canvas.width = canvas.getBoundingClientRect().width;
   canvas.height = canvas.getBoundingClientRect().height;
 }
 
-
-
-
 function Scale({ className }) {
-
-
   var def = 10;
 
   return (
@@ -290,7 +178,17 @@ function Scale({ className }) {
 
       <div className="scale--slider">
         <div className="scale--end"></div>
-        <input type="range" min="1" max="100" defaultValue={def} className="scale--input" id="popupZoom" onInput={()=>{canvasZoom(canvasInput.value, "input")}} />
+        <input
+          type="range"
+          min="1"
+          max="100"
+          defaultValue={def}
+          className="scale--input"
+          id="popupZoom"
+          onInput={() => {
+            canvasZoom(canvasInput.value, "input");
+          }}
+        />
         <div className="scale--end"></div>
       </div>
 
@@ -315,24 +213,22 @@ function Popup({ popup, setPopup }) {
   }
 
   useEffect(() => {
+    console.log(popup);
 
-    if(popup){
+    if (popup) {
       canvas = document.querySelector(".popup--canvas");
-      context = canvas.getContext('2d');
+      context = canvas.getContext("2d");
       canvasInput = document.querySelector(".scale--input");
       canvasImage = document.querySelector(".popup--img img");
-      
-      canvasSetSize();
-      window.addEventListener("resize", popupResize,false);
-      
-      if(lastPopup != popup){
+
+      if (lastPopup != popup || lastPopup != false) {
         lastPopup = popup;
         canvasInit(canvas, popup);
       }
     } else {
-      window.removeEventListener("resize", popupResize,false);
+      window.removeEventListener("resize", popupResize, false);
+      canvasImageLoaded = false;
     }
-
   }, [popup]);
 
   return (
@@ -354,12 +250,11 @@ function Popup({ popup, setPopup }) {
                 </div>
 
                 <canvas className="popup--canvas">
-                  {type == "img" && (
+                  {/* {type == "img" && (
                     <div className="popup--img">
-                      <Image src={img.src} alt={img.alt} width={img.width} height={img.height} onLoad={drawImageToCanvas} />
+                      <Image src={img.src} alt={img.alt} width={img.width} height={img.height} onLoad={()=>{canvasImageLoaded = true;drawImageToCanvas();}}/>
                     </div>
-                  )}
-                  
+                  )} */}
                 </canvas>
 
                 <div className="popup--footer">
@@ -374,25 +269,17 @@ function Popup({ popup, setPopup }) {
   );
 }
 
-
-
-
-
-
-
 var isResizing;
 
 var resizeTimeout = 200;
-function popupResize(e){
-    window.clearTimeout(isResizing);
-    isResizing = setTimeout(function () {
-      canvasSetSize();
-      drawImageToCanvas();
-
-    }, resizeTimeout);
+function popupResize(e) {
+  window.clearTimeout(isResizing);
+  isResizing = setTimeout(popupResizeFunctions, resizeTimeout);
 }
 
-
-
+function popupResizeFunctions() {
+  canvasSetSize();
+  drawImageToCanvas();
+}
 
 export default Popup;

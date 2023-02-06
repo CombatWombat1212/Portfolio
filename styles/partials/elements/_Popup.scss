@@ -28,8 +28,19 @@
   &--inner {
     width: 100%;
     display: flex;
-    padding: var(--popup-inner-pad);
+    // padding: var(--popup-inner-pad);
   }
+  
+  &--content {
+    margin: var(--popup-inner-pad);
+    @include b-rad;
+    background-color: $col-background;
+    width: 100%;
+    padding: 1.875rem;
+    @include flex-col-between;
+    @include gap(var(--popup-gap));
+  }
+
 
   &--header {
     @include flex-row-between;
@@ -40,14 +51,6 @@
     @include flex-col-center;
   }
 
-  &--content {
-    @include b-rad;
-    background-color: $col-background;
-    width: 100%;
-    padding: 1.875rem;
-    @include flex-col-between;
-    @include gap(var(--popup-gap));
-  }
 
   &--canvas {
     height: calc(100% - (var(--button-height) * 2) - (var(--popup-gap) * 2));
@@ -60,7 +63,7 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
-@include trans;
+    @include trans;
     img {
       @include img-contain;
       pointer-events: none;
