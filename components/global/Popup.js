@@ -10,57 +10,125 @@ import React, { useEffect, useState } from "react";
 import Button from "../elements/Buttons";
 
 
-var canvas;
+var canvas, context, canvasImage;
 var canvasInput;
 var cursorLocationCanvas = {x: 0, y: 0};
 var cursorLocationPage = {x: 0, y: 0};
 var lastPopup = null;
 
 
+var isDragging = false;
+var dragStartPosition = { x: 0, y: 0 };
+var currentTransformedCursor;
 
-function applyTransform(elem, transform) {
-  elem.style.webkitTransform = transform;
-  elem.style.mozTransform = transform;
-  elem.style.transform = transform;
+
+
+
+
+function getTransformedPoint(x, y) {
+	const originalPoint = new DOMPoint(x, y);
+  return context.getTransform().invertSelf().transformPoint(originalPoint);
 }
 
 
+// function applyTransform(elem, transform) {
+//   elem.style.webkitTransform = transform;
+//   elem.style.mozTransform = transform;
+//   elem.style.transform = transform;
+// }
 
+
+
+function drawImageToCanvas() {
+
+
+
+	context.save();
+  context.setTransform(1,0,0,1,0,0);
+  context.clearRect(0,0,canvas.width,canvas.height);
+  context.restore();
+
+
+
+  context.drawImage(canvasImage, 0, 0, canvasImage.width, canvasImage.height);
+}
 
 
 
 
 function canvasZoom(value, source){
 
-  var scale = Number(canvasInput.value) / 10;
-  var img = canvas.querySelector(".popup--img");
-
-  var canvasMiddle = {
-    x: canvas.offsetWidth / 2,
-    y: canvas.offsetHeight / 2
-  };
+  // var scale = Number(canvasInput.value) / 10;
+  // var img = canvas.querySelector(".popup--img");
 
 
-  if(scale < 1) scale = 1;
-  if(scale > 10) scale = 10;
+  // var canvasMiddle = {
+  //   x: canvas.offsetWidth / 2,
+  //   y: canvas.offsetHeight / 2
+  // };
 
-  if(canvasInput.value == 100 && scale > 0) return;
+
+  // if(scale < 1) scale = 1;
+  // if(scale > 10) scale = 10;
+
+  // if(canvasInput.value == 100 && scale > 0) return;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
-  if(source == "input"){
-    img.style.transform = `scale(${scale})`;
-    img.style.transformOrigin = `${canvasMiddle.x}px ${canvasMiddle.y}px`;
-  } else if(source == "wheel"){
-    var x = cursorLocationCanvas.x;
-    var y = cursorLocationCanvas.y;
+  // if(source == "input"){
+    // img.style.transform = `scale(${scale})`;
+    // img.style.transformOrigin = `${canvasMiddle.x}px ${canvasMiddle.y}px`;
+  // } else if(source == "wheel"){
+    // var x = cursorLocationCanvas.x;
+    // var y = cursorLocationCanvas.y;
+    
+    // img.style.transformOrigin = `${x}px ${y}px`;
+    // img.style.transform = `scale(${scale})`;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     // img.style.transformOrigin = `${x}px ${y}px`;
     // img.style.transformOrigin = `${canvasMiddle.x}px ${canvasMiddle.y}px`;
     // img.style.transformOrigin = `${(x+canvasMiddle.x) / 2}px ${(y+canvasMiddle.y)/2}px`;
     
-    img.style.transformOrigin = `${x}px ${y}px`;
-    img.style.transform = `scale(${scale})`;
 
 
 
@@ -107,7 +175,7 @@ function canvasZoom(value, source){
 
 
 
-  }
+  // }
 
 
   // canvas.style.transform = `scale(${scale})`;
@@ -120,52 +188,91 @@ function canvasZoom(value, source){
 
 function canvasWheelHandler(e){
   e.preventDefault();
-  var delta = e.deltaY || e.detail || e.wheelDelta;
-  var increment = 5;
-  var zoom; 
-  if(delta > 0) zoom = increment * -1;
-  if(delta < 0) zoom = increment;
 
-  canvasInput.value = parseInt(canvasInput.value) + zoom;
-  canvasZoom(canvasInput.value, "wheel");
+  const currentTransformedCursor = getTransformedPoint(e.offsetX, e.offsetY);
+  const zoom = e.deltaY < 0 ? 1.1 : 0.9;
+
+  context.translate(currentTransformedCursor.x, currentTransformedCursor.y);
+  context.scale(zoom, zoom);
+  context.translate(-currentTransformedCursor.x, -currentTransformedCursor.y);
+
+  // Redraws the image after the scaling
+  drawImageToCanvas();
+
+
+
+
+
+
+  // var delta = e.deltaY || e.detail || e.wheelDelta;
+  // var increment = 5;
+  // var zoom; 
+  // if(delta > 0) zoom = increment * -1;
+  // if(delta < 0) zoom = increment;
+
+  // canvasInput.value = parseInt(canvasInput.value) + zoom;
+  // canvasZoom(canvasInput.value, "wheel");
 
 }
 
 
 function canvasMouseMoveHandler(e){
+  currentTransformedCursor = getTransformedPoint(e.offsetX, e.offsetY)
+  
+  if (isDragging) {
 
-  var rect = canvas.getBoundingClientRect();
-  cursorLocationCanvas = {x: e.clientX - rect.left, y: e.clientY - rect.top};
-  cursorLocationPage = {x: e.clientX, y: e.clientY};
+  	context.translate(currentTransformedCursor.x - dragStartPosition.x, currentTransformedCursor.y - dragStartPosition.y);
+		drawImageToCanvas();
+  }
+
+
+  // var rect = canvas.getBoundingClientRect();
+  // cursorLocationCanvas = {x: e.clientX - rect.left, y: e.clientY - rect.top};
+  // cursorLocationPage = {x: e.clientX, y: e.clientY};
+
 
 }
 
 
+function canvasMouseDownHandler(e){
+	isDragging = true;
+	dragStartPosition = getTransformedPoint(e.offsetX, e.offsetY);
+}
 
-function canvasInit(canvas) {
+function canvasMouseUpHandler() {
+	isDragging = false;
+}
+
+
+
+
+function canvasInit(canvas, popup) {
 
   if(!canvas) return;
-
-  
   canvas.addEventListener("wheel", canvasWheelHandler);
   canvas.addEventListener("mousemove", canvasMouseMoveHandler);
-
+  canvas.addEventListener("mousedown", canvasMouseDownHandler);
+  canvas.addEventListener("mouseup", canvasMouseUpHandler);
+  // context.imageSmoothingEnabled = false;
   
-
 }
 
 
 
 function canvasZoomButtonHandler(str){
-  var zoom = 5;
-  if(str == "in") zoom = zoom * -1;
-  if(str == "out") zoom = zoom * 1;
-  canvasInput.value = parseInt(canvasInput.value) + zoom;
-  canvasZoom(canvasInput.value, "input");
+  // var zoom = 5;
+  // if(str == "in") zoom = zoom * -1;
+  // if(str == "out") zoom = zoom * 1;
+  // canvasInput.value = parseInt(canvasInput.value) + zoom;
+  // canvasZoom(canvasInput.value, "input");
 }
 
 
 
+function canvasSetSize(){
+  canvas.width = canvas.getBoundingClientRect().width;
+  canvas.height = canvas.getBoundingClientRect().height;
+}
 
 
 
@@ -209,12 +316,21 @@ function Popup({ popup, setPopup }) {
 
   useEffect(() => {
 
-    if(!popup) return;
-    canvas = document.querySelector(".popup--canvas");
-    canvasInput = document.querySelector(".scale--input");
-    if(lastPopup != popup){
-      lastPopup = popup;
-      canvasInit(canvas);
+    if(popup){
+      canvas = document.querySelector(".popup--canvas");
+      context = canvas.getContext('2d');
+      canvasInput = document.querySelector(".scale--input");
+      canvasImage = document.querySelector(".popup--img img");
+      
+      canvasSetSize();
+      window.addEventListener("resize", popupResize,false);
+      
+      if(lastPopup != popup){
+        lastPopup = popup;
+        canvasInit(canvas, popup);
+      }
+    } else {
+      window.removeEventListener("resize", popupResize,false);
     }
 
   }, [popup]);
@@ -237,13 +353,14 @@ function Popup({ popup, setPopup }) {
                   </div>
                 </div>
 
-                <div className="popup--canvas">
+                <canvas className="popup--canvas">
                   {type == "img" && (
                     <div className="popup--img">
-                      <Image src={img.src} alt={img.alt} width={img.width} height={img.height} />
+                      <Image src={img.src} alt={img.alt} width={img.width} height={img.height} onLoad={drawImageToCanvas} />
                     </div>
                   )}
-                </div>
+                  
+                </canvas>
 
                 <div className="popup--footer">
                   <Scale className="popup--scale" />
@@ -256,5 +373,26 @@ function Popup({ popup, setPopup }) {
     </>
   );
 }
+
+
+
+
+
+
+
+var isResizing;
+
+var resizeTimeout = 200;
+function popupResize(e){
+    window.clearTimeout(isResizing);
+    isResizing = setTimeout(function () {
+      canvasSetSize();
+      drawImageToCanvas();
+
+    }, resizeTimeout);
+}
+
+
+
 
 export default Popup;
