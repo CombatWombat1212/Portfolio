@@ -16,9 +16,13 @@ var canvas,
 
 var canvasImgTransform = { x: 0, y: 0, scale: 1, width: 0, height: 0, maxWidth: 0, maxHeight: 0, minWidth: 0, minHeight: 0, middleX: 0, middleY: 0 };
 
+
 var startZoom = 0.95;
 var minZoom = 0.95;
-var maxZoom = 4;
+var maxZoom = 5;
+var panBorderPadding = -50;
+
+
 
 var canvasInput;
 var lastPopup = null;
@@ -140,18 +144,16 @@ function canvasWheelHandler(e) {
     height= canvasImgTransform.height*(canvasImgTransform.scale);
   }
 
-  context.scale(scaleX, scaleY);
-  context.translate(-currentTransformedCursor.x, -currentTransformedCursor.y);
+  
   
 
-
-
+  
   
   canvasImgTransform.scale = scale;
   
   var xDelta = canvasImgTransform.width - (canvasImgTransform.width * scaleX);
   var yDelta = canvasImgTransform.height - (canvasImgTransform.height * scaleY);
-
+  
   var xPosPercent = (e.offsetX - canvasImgTransform.x) / canvasImgTransform.width;
   var yPosPercent = (e.offsetY - canvasImgTransform.y) / canvasImgTransform.height;
   
@@ -160,12 +162,14 @@ function canvasWheelHandler(e) {
   
   canvasImgTransform.x += xDelta * xPosPercent;
   canvasImgTransform.y += yDelta * yPosPercent;
-    
+  
+  
+  
+  context.scale(scaleX, scaleY);
+  context.translate(-currentTransformedCursor.x, -currentTransformedCursor.y);
+  
 
-
-
-
-
+  
   
 
 
@@ -227,14 +231,32 @@ function canvasMouseMoveHandler(e) {
   
   
   if (isDragging) {
-  
+    
     canvasImgTransform.x += currentTransformedCursor.x - dragStartPosition.x;
     canvasImgTransform.y += currentTransformedCursor.y - dragStartPosition.y;
 
     var x = (currentTransformedCursor.x - dragStartPosition.x) / canvasImgTransform.scale;
     var y = (currentTransformedCursor.y - dragStartPosition.y) / canvasImgTransform.scale;
     
-    console.log(canvasImgTransform.x, canvasImgTransform.y);
+    
+
+    
+    // console.log(canvasImgTransform.x);
+    // if(canvasImgTransform.x < 0){
+    //   canvasImgTransform.x = 0;
+    //   x = 0;
+    // }
+    
+    
+    
+    
+
+
+
+
+
+
+    
 
     context.translate(x, y);
 
