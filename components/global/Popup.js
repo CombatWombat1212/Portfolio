@@ -16,7 +16,9 @@ var canvas,
 
 var canvasImgTransform = { x: 0, y: 0, scale: 1, width: 0, height: 0, maxWidth: 0, maxHeight: 0, minWidth: 0, minHeight: 0, middleX: 0, middleY: 0 };
 
-var maxZoom = 2;
+var startZoom = 0.95;
+var minZoom = 0.95;
+var maxZoom = 4;
 
 var canvasInput;
 var lastPopup = null;
@@ -38,7 +40,11 @@ function drawImageToCanvas() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.restore();
 
-    context.drawImage(canvasImage, (canvas.width - canvasImgTransform.maxWidth)/2, (canvas.height - canvasImgTransform.maxHeight)/2, canvasImgTransform.maxWidth, canvasImgTransform.maxHeight);
+    context.drawImage(canvasImage, 
+      (canvas.width - canvasImgTransform.maxWidth)/2, 
+      (canvas.height - canvasImgTransform.maxHeight)/2, 
+      canvasImgTransform.maxWidth, 
+      canvasImgTransform.maxHeight);
   };
 
   if (canvasImageLoaded) {
@@ -51,6 +57,7 @@ function drawImageToCanvas() {
 function canvasImageSizeInit() {
   var width, height;
 
+
   var canvasImgAspect = canvasImage.width / canvasImage.height;
 
   if (canvas.width > canvas.height) {
@@ -60,6 +67,9 @@ function canvasImageSizeInit() {
     width = canvas.width;
     height = canvas.width / canvasImgAspect;
   }
+
+  height *= startZoom;
+  width *= startZoom;
 
   canvasImgTransform.x = (canvas.width - canvasImgTransform.maxWidth)/2;
   canvasImgTransform.y = (canvas.height - canvasImgTransform.maxHeight)/2;
@@ -83,85 +93,127 @@ function canvasWheelHandler(e) {
 
 
   
+  // canvasImgTransform.scale *= zoom;
+  
+  // var xDelta = canvasImgTransform.width - (canvasImgTransform.width * zoom);
+  // var yDelta = canvasImgTransform.height - (canvasImgTransform.height * zoom);
+
+  // var xPosPercent = (e.offsetX - canvasImgTransform.x) / canvasImgTransform.width;
+  // var yPosPercent = (e.offsetY - canvasImgTransform.y) / canvasImgTransform.height;
+  
+  // canvasImgTransform.width *= zoom;
+  // canvasImgTransform.height *= zoom;  
+  
+  // canvasImgTransform.x += xDelta * xPosPercent;
+  // canvasImgTransform.y += yDelta * yPosPercent;
+
   // context.translate(currentTransformedCursor.x, currentTransformedCursor.y);
   // context.scale(zoom, zoom);
   // context.translate(-currentTransformedCursor.x, -currentTransformedCursor.y);
-  
-  
+
+
 
 
   
+  var scaleX, scaleY, scale, width, height;
+
+  context.translate(currentTransformedCursor.x, currentTransformedCursor.y);
+
+  if (canvasImgTransform.scale * zoom < minZoom) {
+    scaleX = minZoom / canvasImgTransform.scale;
+    scaleY = minZoom / canvasImgTransform.scale;
+    scale = minZoom;
+    width = canvasImgTransform.maxWidth;
+    height = canvasImgTransform.maxHeight;
+
+  } else if (canvasImgTransform.scale * zoom > maxZoom) {
+    scaleX = maxZoom / canvasImgTransform.scale;
+    scaleY = maxZoom / canvasImgTransform.scale;
+    scale = maxZoom;
+    width = canvasImgTransform.width * (maxZoom / canvasImgTransform.scale);
+    height = canvasImgTransform.height*(maxZoom / canvasImgTransform.scale);
+  } else {
+    scaleX = zoom;
+    scaleY = zoom;
+    scale= canvasImgTransform.scale*(zoom);
+    width= canvasImgTransform.width*(canvasImgTransform.scale);
+    height= canvasImgTransform.height*(canvasImgTransform.scale);
+  }
+
+  context.scale(scaleX, scaleY);
+  context.translate(-currentTransformedCursor.x, -currentTransformedCursor.y);
   
+
+
+
   
+  canvasImgTransform.scale = scale;
   
-  
-  canvasImgTransform.scale *= zoom;
-  
-  var xDelta = canvasImgTransform.width - (canvasImgTransform.width * zoom);
-  var yDelta = canvasImgTransform.height - (canvasImgTransform.height * zoom);
+  var xDelta = canvasImgTransform.width - (canvasImgTransform.width * scaleX);
+  var yDelta = canvasImgTransform.height - (canvasImgTransform.height * scaleY);
 
   var xPosPercent = (e.offsetX - canvasImgTransform.x) / canvasImgTransform.width;
   var yPosPercent = (e.offsetY - canvasImgTransform.y) / canvasImgTransform.height;
   
-  canvasImgTransform.width *= zoom;
-  canvasImgTransform.height *= zoom;  
+  canvasImgTransform.width = width;
+  canvasImgTransform.height = height;
   
   canvasImgTransform.x += xDelta * xPosPercent;
   canvasImgTransform.y += yDelta * yPosPercent;
-
-  console.log(xPosPercent, yPosPercent)
-
-
-  context.translate(currentTransformedCursor.x, currentTransformedCursor.y);
-  context.scale(zoom, zoom);
-  context.translate(-currentTransformedCursor.x, -currentTransformedCursor.y);
+    
 
 
 
 
-
-  // canvasImgTransform.scale *= zoom;
-  
-  // var xDelta = canvasImgTransform.width - (canvasImgTransform.width * scaleX);
-  // var yDelta = canvasImgTransform.height - (canvasImgTransform.height * scaleY);
-  
-  // var xPosPercent = (currentTransformedCursor.x - canvasImgTransform.x) / canvasImgTransform.width;
-  // var yPosPercent = (currentTransformedCursor.y - canvasImgTransform.y) / canvasImgTransform.height;
-  
-  // canvasImgTransform.width *= scaleX;
-  // canvasImgTransform.height *= scaleY;
-
-  // canvasImgTransform.x += xDelta * xPosPercent;
-  // canvasImgTransform.y += yDelta * yPosPercent;
 
   
-  // context.translate(currentTransformedCursor.x, currentTransformedCursor.y);
 
-  // if (canvasImgTransform.scale * zoom < 1) {
-  //   scaleX = 1 / canvasImgTransform.scale;
-  //   scaleY = 1 / canvasImgTransform.scale;
-  //   context.scale(scaleX, scaleY);
-  //   canvasImgTransform.scale = 1;
-  //   canvasImgTransform.width = canvasImgTransform.maxWidth;
-  //   canvasImgTransform.height = canvasImgTransform.maxHeight;
 
-  // } else if (canvasImgTransform.scale * zoom > maxZoom) {
-  //   scaleX = maxZoom / canvasImgTransform.scale;
-  //   scaleY = maxZoom / canvasImgTransform.scale;
-  //   context.scale(scaleX, scaleY);
-  //   canvasImgTransform.scale = maxZoom;
-  //   canvasImgTransform.width *= maxZoom / canvasImgTransform.scale;
-  //   canvasImgTransform.height *= maxZoom / canvasImgTransform.scale;
-  // } else {
-  //   scaleX = zoom;
-  //   scaleY = zoom;-
-  //   context.scale(scaleX, scaleY);
-  //   canvasImgTransform.scale *= zoom;
-  //   canvasImgTransform.width *= canvasImgTransform.scale;
-  //   canvasImgTransform.height *= canvasImgTransform.scale;
-  // }
-  // context.translate(-currentTransformedCursor.x, -currentTransformedCursor.y);
+
+
+
+
+
+
   
+// var scaleX, scaleY;
+//   context.translate(currentTransformedCursor.x, currentTransformedCursor.y);
+
+//   if (canvasImgTransform.scale * zoom < minZoom) {
+//     scaleX = minZoom / canvasImgTransform.scale;
+//     scaleY = minZoom / canvasImgTransform.scale;
+//     context.scale(scaleX, scaleY);
+//     canvasImgTransform.scale = minZoom;
+//     canvasImgTransform.width = canvasImgTransform.maxWidth;
+//     canvasImgTransform.height = canvasImgTransform.maxHeight;
+
+//   } else if (canvasImgTransform.scale * zoom > maxZoom) {
+//     scaleX = maxZoom / canvasImgTransform.scale;
+//     scaleY = maxZoom / canvasImgTransform.scale;
+//     context.scale(scaleX, scaleY);
+//     canvasImgTransform.scale = maxZoom;
+//     canvasImgTransform.width *= maxZoom / canvasImgTransform.scale;
+//     canvasImgTransform.height *= maxZoom / canvasImgTransform.scale;
+//   } else {
+//     scaleX = zoom;
+//     scaleY = zoom;
+//     context.scale(scaleX, scaleY);
+//     canvasImgTransform.scale *= zoom;
+//     canvasImgTransform.width *= canvasImgTransform.scale;
+//     canvasImgTransform.height *= canvasImgTransform.scale;
+//   }
+//   context.translate(-currentTransformedCursor.x, -currentTransformedCursor.y);
+  
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -171,46 +223,20 @@ function canvasWheelHandler(e) {
 
 function canvasMouseMoveHandler(e) {
   const currentTransformedCursor = getTransformedPoint(e.offsetX, e.offsetY);
-
-
-  
-  // console.log(xPosPercent, yPosPercent)
   
   
   
   if (isDragging) {
-    
-
-
   
     canvasImgTransform.x += currentTransformedCursor.x - dragStartPosition.x;
     canvasImgTransform.y += currentTransformedCursor.y - dragStartPosition.y;
-
-    
-
 
     var x = (currentTransformedCursor.x - dragStartPosition.x) / canvasImgTransform.scale;
     var y = (currentTransformedCursor.y - dragStartPosition.y) / canvasImgTransform.scale;
     
     console.log(canvasImgTransform.x, canvasImgTransform.y);
 
-    // var x = 
-
-    // ;
-
-
-
-    // var y = currentTransformedCursor.y - dragStartPosition.y;
-    
-    // context.translate(x, currentTransformedCursor.y - dragStartPosition.y);
     context.translate(x, y);
-    
-    // adding max and min to translate
-    // context.translate(
-    //   (Math.min((currentTransformedCursor.x - dragStartPosition.x), canvasImgTransform.maxWidth - canvasImgTransform.width)),
-    //   currentTransformedCursor.y - dragStartPosition.y
-    // );
-
 
     drawImageToCanvas();
   }
