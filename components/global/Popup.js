@@ -23,6 +23,7 @@ var lastPopup = null;
 
 var isDragging = false;
 var dragStartPosition = { x: 0, y: 0 };
+var dragStartPosOffset = { x: 0, y: 0 };
 var currentTransformedCursor;
 
 function getTransformedPoint(x, y) {
@@ -87,32 +88,36 @@ function canvasWheelHandler(e) {
   // context.translate(-currentTransformedCursor.x, -currentTransformedCursor.y);
   
   
-  var scaleX, scaleY;
-
-
-
-  context.translate(currentTransformedCursor.x, currentTransformedCursor.y);
-  scaleX = zoom;
-  scaleY = zoom;
-  
 
 
   
-  context.scale(scaleX, scaleY);
+  
+  
+  
   
   canvasImgTransform.scale *= zoom;
   
-  var xDelta = canvasImgTransform.width - (canvasImgTransform.width * scaleX);
-  var yDelta = canvasImgTransform.height - (canvasImgTransform.height * scaleY);
-  
-  var xPosPercent = (currentTransformedCursor.x - canvasImgTransform.x) / canvasImgTransform.width;
-  var yPosPercent = (currentTransformedCursor.y - canvasImgTransform.y) / canvasImgTransform.height;
-  
-  canvasImgTransform.width *= scaleX;
-  canvasImgTransform.height *= scaleY;
+  var xDelta = canvasImgTransform.width - (canvasImgTransform.width * zoom);
+  var yDelta = canvasImgTransform.height - (canvasImgTransform.height * zoom);
 
+  var xPosPercent = (e.offsetX - canvasImgTransform.x) / canvasImgTransform.width;
+  var yPosPercent = (e.offsetY - canvasImgTransform.y) / canvasImgTransform.height;
+  
+  canvasImgTransform.width *= zoom;
+  canvasImgTransform.height *= zoom;  
+  
   canvasImgTransform.x += xDelta * xPosPercent;
   canvasImgTransform.y += yDelta * yPosPercent;
+
+  console.log(xPosPercent, yPosPercent)
+
+
+  context.translate(currentTransformedCursor.x, currentTransformedCursor.y);
+  context.scale(zoom, zoom);
+  context.translate(-currentTransformedCursor.x, -currentTransformedCursor.y);
+
+
+
 
 
   // canvasImgTransform.scale *= zoom;
@@ -130,7 +135,6 @@ function canvasWheelHandler(e) {
   // canvasImgTransform.y += yDelta * yPosPercent;
 
   
-  context.translate(-currentTransformedCursor.x, -currentTransformedCursor.y);
   // context.translate(currentTransformedCursor.x, currentTransformedCursor.y);
 
   // if (canvasImgTransform.scale * zoom < 1) {
@@ -166,22 +170,29 @@ function canvasWheelHandler(e) {
 }
 
 function canvasMouseMoveHandler(e) {
-  currentTransformedCursor = getTransformedPoint(e.offsetX, e.offsetY);
+  const currentTransformedCursor = getTransformedPoint(e.offsetX, e.offsetY);
 
 
-  console.log(canvasImgTransform.x, canvasImgTransform.y);
-
-
-
+  
+  // console.log(xPosPercent, yPosPercent)
+  
+  
+  
   if (isDragging) {
-
-    var x = currentTransformedCursor.x - dragStartPosition.x;
-    var y = currentTransformedCursor.y - dragStartPosition.y;
-
-    canvasImgTransform.x += x;
-    canvasImgTransform.y += y;
+    
 
 
+  
+    canvasImgTransform.x += currentTransformedCursor.x - dragStartPosition.x;
+    canvasImgTransform.y += currentTransformedCursor.y - dragStartPosition.y;
+
+    
+
+
+    var x = (currentTransformedCursor.x - dragStartPosition.x) / canvasImgTransform.scale;
+    var y = (currentTransformedCursor.y - dragStartPosition.y) / canvasImgTransform.scale;
+    
+    console.log(canvasImgTransform.x, canvasImgTransform.y);
 
     // var x = 
 
@@ -208,6 +219,7 @@ function canvasMouseMoveHandler(e) {
 function canvasMouseDownHandler(e) {
   isDragging = true;
   dragStartPosition = getTransformedPoint(e.offsetX, e.offsetY);
+  dragStartPosOffset = {x:e.offsetX, y:e.offsetY}
 }
 
 function canvasMouseUpHandler() {
