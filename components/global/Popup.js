@@ -14,9 +14,9 @@ var canvas,
   canvasImage,
   canvasImageLoaded = false;
 
-var canvasTransform = { x: 0, y: 0, scale: 1, width: 0, height: 0, maxWidth: 0, maxHeight: 0, minWidth: 0, minHeight: 0 };
+var canvasImgTransform = { x: 0, y: 0, scale: 1, width: 0, height: 0, maxWidth: 0, maxHeight: 0, minWidth: 0, minHeight: 0, middleX: 0, middleY: 0 };
 
-var maxZoom = 1.5;
+var maxZoom = 2;
 
 var canvasInput;
 var lastPopup = null;
@@ -37,7 +37,7 @@ function drawImageToCanvas() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.restore();
 
-    context.drawImage(canvasImage, 0, 0, canvasTransform.maxWidth, canvasTransform.maxHeight);
+    context.drawImage(canvasImage, (canvas.width - canvasImgTransform.maxWidth)/2, (canvas.height - canvasImgTransform.maxHeight)/2, canvasImgTransform.maxWidth, canvasImgTransform.maxHeight);
   };
 
   if (canvasImageLoaded) {
@@ -50,22 +50,26 @@ function drawImageToCanvas() {
 function canvasImageSizeInit() {
   var width, height;
 
-  var canvasImageAspect = canvasImage.width / canvasImage.height;
+  var canvasImgAspect = canvasImage.width / canvasImage.height;
 
-  if (canvasImage.width > canvasImage.height) {
+  if (canvas.width > canvas.height) {
     height = canvas.height;
-    width = canvas.height * canvasImageAspect;
-  } else {
+    width = canvas.height * canvasImgAspect;
+  } else if (canvas.width < canvas.height) {
     width = canvas.width;
-    height = canvas.width / canvasImageAspect;
+    height = canvas.width / canvasImgAspect;
   }
 
-  canvasTransform.width = width;
-  canvasTransform.height = height;
-  canvasTransform.maxWidth = width;
-  canvasTransform.maxHeight = height;
-  canvasTransform.minWidth = width / maxZoom;
-  canvasTransform.minHeight = height / maxZoom;
+  canvasImgTransform.x = (canvas.width - canvasImgTransform.maxWidth)/2;
+  canvasImgTransform.y = (canvas.height - canvasImgTransform.maxHeight)/2;
+  canvasImgTransform.width = width;
+  canvasImgTransform.height = height;
+  canvasImgTransform.maxWidth = width;
+  canvasImgTransform.maxHeight = height;
+  canvasImgTransform.minWidth = width / maxZoom;
+  canvasImgTransform.minHeight = height / maxZoom;
+  canvasImgTransform.middleX = width / 2;
+  canvasImgTransform.middleY = height / 2;
 }
 
 function canvasZoom(value, source) {}
@@ -82,27 +86,77 @@ function canvasWheelHandler(e) {
   // context.scale(zoom, zoom);
   // context.translate(-currentTransformedCursor.x, -currentTransformedCursor.y);
   
+  
+  var scaleX, scaleY;
 
 
 
   context.translate(currentTransformedCursor.x, currentTransformedCursor.y);
-  if (canvasTransform.scale * zoom < 1) {
-    context.scale(1 / canvasTransform.scale, 1 / canvasTransform.scale);
-    canvasTransform.scale = 1;
-    canvasTransform.width = canvasTransform.maxWidth;
-    canvasTransform.height = canvasTransform.maxHeight;
-  } else if (canvasTransform.scale * zoom > maxZoom) {
-    context.scale(maxZoom / canvasTransform.scale, maxZoom / canvasTransform.scale);
-    canvasTransform.scale = maxZoom;
-    canvasTransform.width *= maxZoom / canvasTransform.scale;
-    canvasTransform.height *= maxZoom / canvasTransform.scale;
-  } else {
-    context.scale(zoom, zoom);
-    canvasTransform.scale *= zoom;
-    canvasTransform.width *= canvasTransform.scale;
-    canvasTransform.height *= canvasTransform.scale;
-  }
+  scaleX = zoom;
+  scaleY = zoom;
+  
+
+
+  
+  context.scale(scaleX, scaleY);
+  
+  canvasImgTransform.scale *= zoom;
+  
+  var xDelta = canvasImgTransform.width - (canvasImgTransform.width * scaleX);
+  var yDelta = canvasImgTransform.height - (canvasImgTransform.height * scaleY);
+  
+  var xPosPercent = (currentTransformedCursor.x - canvasImgTransform.x) / canvasImgTransform.width;
+  var yPosPercent = (currentTransformedCursor.y - canvasImgTransform.y) / canvasImgTransform.height;
+  
+  canvasImgTransform.width *= scaleX;
+  canvasImgTransform.height *= scaleY;
+
+  canvasImgTransform.x += xDelta * xPosPercent;
+  canvasImgTransform.y += yDelta * yPosPercent;
+
+
+  // canvasImgTransform.scale *= zoom;
+  
+  // var xDelta = canvasImgTransform.width - (canvasImgTransform.width * scaleX);
+  // var yDelta = canvasImgTransform.height - (canvasImgTransform.height * scaleY);
+  
+  // var xPosPercent = (currentTransformedCursor.x - canvasImgTransform.x) / canvasImgTransform.width;
+  // var yPosPercent = (currentTransformedCursor.y - canvasImgTransform.y) / canvasImgTransform.height;
+  
+  // canvasImgTransform.width *= scaleX;
+  // canvasImgTransform.height *= scaleY;
+
+  // canvasImgTransform.x += xDelta * xPosPercent;
+  // canvasImgTransform.y += yDelta * yPosPercent;
+
+  
   context.translate(-currentTransformedCursor.x, -currentTransformedCursor.y);
+  // context.translate(currentTransformedCursor.x, currentTransformedCursor.y);
+
+  // if (canvasImgTransform.scale * zoom < 1) {
+  //   scaleX = 1 / canvasImgTransform.scale;
+  //   scaleY = 1 / canvasImgTransform.scale;
+  //   context.scale(scaleX, scaleY);
+  //   canvasImgTransform.scale = 1;
+  //   canvasImgTransform.width = canvasImgTransform.maxWidth;
+  //   canvasImgTransform.height = canvasImgTransform.maxHeight;
+
+  // } else if (canvasImgTransform.scale * zoom > maxZoom) {
+  //   scaleX = maxZoom / canvasImgTransform.scale;
+  //   scaleY = maxZoom / canvasImgTransform.scale;
+  //   context.scale(scaleX, scaleY);
+  //   canvasImgTransform.scale = maxZoom;
+  //   canvasImgTransform.width *= maxZoom / canvasImgTransform.scale;
+  //   canvasImgTransform.height *= maxZoom / canvasImgTransform.scale;
+  // } else {
+  //   scaleX = zoom;
+  //   scaleY = zoom;-
+  //   context.scale(scaleX, scaleY);
+  //   canvasImgTransform.scale *= zoom;
+  //   canvasImgTransform.width *= canvasImgTransform.scale;
+  //   canvasImgTransform.height *= canvasImgTransform.scale;
+  // }
+  // context.translate(-currentTransformedCursor.x, -currentTransformedCursor.y);
   
 
 
@@ -114,8 +168,39 @@ function canvasWheelHandler(e) {
 function canvasMouseMoveHandler(e) {
   currentTransformedCursor = getTransformedPoint(e.offsetX, e.offsetY);
 
+
+  console.log(canvasImgTransform.x, canvasImgTransform.y);
+
+
+
   if (isDragging) {
-    context.translate(currentTransformedCursor.x - dragStartPosition.x, currentTransformedCursor.y - dragStartPosition.y);
+
+    var x = currentTransformedCursor.x - dragStartPosition.x;
+    var y = currentTransformedCursor.y - dragStartPosition.y;
+
+    canvasImgTransform.x += x;
+    canvasImgTransform.y += y;
+
+
+
+    // var x = 
+
+    // ;
+
+
+
+    // var y = currentTransformedCursor.y - dragStartPosition.y;
+    
+    // context.translate(x, currentTransformedCursor.y - dragStartPosition.y);
+    context.translate(x, y);
+    
+    // adding max and min to translate
+    // context.translate(
+    //   (Math.min((currentTransformedCursor.x - dragStartPosition.x), canvasImgTransform.maxWidth - canvasImgTransform.width)),
+    //   currentTransformedCursor.y - dragStartPosition.y
+    // );
+
+
     drawImageToCanvas();
   }
 }
@@ -280,6 +365,7 @@ function popupResize(e) {
 function popupResizeFunctions() {
   canvasSetSize();
   drawImageToCanvas();
+  canvasImageSizeInit();
 }
 
 export default Popup;
