@@ -22,7 +22,8 @@
   height: 100%;
   display: flex;
 
-  --popup-inner-pad: 2.5rem;
+  --popup-pad: 2.5rem;
+  --popup-inner-pad: 1.875rem;
   --popup-gap: calc(var(--popup-inner-pad) * 0.8);
 
   &--inner {
@@ -32,19 +33,23 @@
   }
   
   &--content {
-    margin: var(--popup-inner-pad);
+    margin: var(--popup-pad);
     @include b-rad;
     background-color: $col-background;
     width: 100%;
-    padding: 1.875rem;
+    // padding: var(--popup-inner-pad);
     @include flex-col-between;
     @include gap(var(--popup-gap));
+    position:relative;
+    overflow: hidden;
   }
 
 
   &--header {
     @include flex-row-between;
     margin-top: -0.35rem;
+    @include pad-x(var(--popup-inner-pad));
+    padding-top: var(--popup-inner-pad);
   }
 
   &--title {
@@ -53,7 +58,8 @@
 
 
   &--canvas {
-    height: calc(100% - (var(--button-height) * 2) - (var(--popup-gap) * 2));
+    // height: calc(100% - (var(--button-height) * 1) - (var(--popup-gap) * 1) - var(--popup-inner-pad));
+    height: 100%;
     overflow: hidden;
     @include no-select;
     background-color: $col-background_darkest;
@@ -72,6 +78,14 @@
 
   &--footer {
     @include flex-row-end;
+    // @include pad-x(var(--popup-inner-pad));
+    // padding-bottom: var(--popup-inner-pad);
+    padding: var(--popup-inner-pad);
+    background-color: $col-background;
+    border-radius: Var(--b-rad) 0 0 0;
+    position:absolute;
+    bottom:0;
+    right:0;
   }
 }
 

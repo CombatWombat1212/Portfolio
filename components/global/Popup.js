@@ -235,21 +235,6 @@ function canvasMouseMoveHandler(e) {
 
     var x = (currentTransformedCursor.x - dragStartPosition.x) / canvasImgTransform.scale;
     var y = (currentTransformedCursor.y - dragStartPosition.y) / canvasImgTransform.scale;
-    
-
-    // TODO: pan limits here?
-
-    // pan limits
-
-    // this creates a constantly growing buffer zone around the image
-    // if (canvasImgTransform.x < 0) {
-    //   canvasImgTransform.x = 0;
-    // x = 0;
-    // }
-
-
-
-
 
     context.translate(x, y);
 
