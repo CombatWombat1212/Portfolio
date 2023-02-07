@@ -19,7 +19,7 @@ var canvasImgTransform = { x: 0, y: 0, scale: 1, width: 0, height: 0, maxWidth: 
 
 var startZoom = 0.95;
 var minZoom = 0.95;
-var maxZoom = 5;
+var maxZoom = 6;
 var panBorderPadding = -50;
 
 
@@ -145,10 +145,7 @@ function canvasWheelHandler(e) {
   }
 
   
-  
 
-  
-  
   canvasImgTransform.scale = scale;
   
   var xDelta = canvasImgTransform.width - (canvasImgTransform.width * scaleX);
@@ -162,11 +159,14 @@ function canvasWheelHandler(e) {
   
   canvasImgTransform.x += xDelta * xPosPercent;
   canvasImgTransform.y += yDelta * yPosPercent;
-  
-  
-  
+
+
+
   context.scale(scaleX, scaleY);
   context.translate(-currentTransformedCursor.x, -currentTransformedCursor.y);
+  
+  
+  
   
 
   
@@ -227,9 +227,7 @@ function canvasWheelHandler(e) {
 
 function canvasMouseMoveHandler(e) {
   const currentTransformedCursor = getTransformedPoint(e.offsetX, e.offsetY);
-  
-  
-  
+    
   if (isDragging) {
     
     canvasImgTransform.x += currentTransformedCursor.x - dragStartPosition.x;
@@ -238,25 +236,20 @@ function canvasMouseMoveHandler(e) {
     var x = (currentTransformedCursor.x - dragStartPosition.x) / canvasImgTransform.scale;
     var y = (currentTransformedCursor.y - dragStartPosition.y) / canvasImgTransform.scale;
     
-    
 
-    
-    // console.log(canvasImgTransform.x);
-    // if(canvasImgTransform.x < 0){
+    // TODO: pan limits here?
+
+    // pan limits
+
+    // this creates a constantly growing buffer zone around the image
+    // if (canvasImgTransform.x < 0) {
     //   canvasImgTransform.x = 0;
-    //   x = 0;
+    // x = 0;
     // }
-    
-    
-    
-    
 
 
 
 
-
-
-    
 
     context.translate(x, y);
 
@@ -272,6 +265,7 @@ function canvasMouseDownHandler(e) {
 
 function canvasMouseUpHandler() {
   isDragging = false;
+
 }
 
 function canvasInit(canvas, popup) {
