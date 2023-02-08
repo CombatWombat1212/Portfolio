@@ -1872,7 +1872,7 @@ body {
   position: absolute;
   bottom: 0;
   right: 0;
-  transition: var(--transition);
+  transition-duration: 0.2s;
 }
 
 .popup--footer__on {

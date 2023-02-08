@@ -87,37 +87,33 @@ function canvasImageSizeInit() {
   canvasImgTransform.middleY = height / 2;
 }
 
-function canvasZoom(value, source) {}
 
-function canvasWheelHandler(e) {
+function canvasZoom(e) {
   e.preventDefault();
 
-  const currentTransformedCursor = getTransformedPoint(e.offsetX, e.offsetY);
-  var zoom = e.deltaY < 0 ? 1.1 : 0.9;
+  var zoomIn= 1.1;
+  var zoomOut= 0.9;
 
+  var zoom;
+  var currentTransformedCursor;
 
+  var slider = document.querySelector(".scale--input");
   
-  // canvasImgTransform.scale *= zoom;
-  
-  // var xDelta = canvasImgTransform.width - (canvasImgTransform.width * zoom);
-  // var yDelta = canvasImgTransform.height - (canvasImgTransform.height * zoom);
-
-  // var xPosPercent = (e.offsetX - canvasImgTransform.x) / canvasImgTransform.width;
-  // var yPosPercent = (e.offsetY - canvasImgTransform.y) / canvasImgTransform.height;
-  
-  // canvasImgTransform.width *= zoom;
-  // canvasImgTransform.height *= zoom;  
-  
-  // canvasImgTransform.x += xDelta * xPosPercent;
-  // canvasImgTransform.y += yDelta * yPosPercent;
-
-  // context.translate(currentTransformedCursor.x, currentTransformedCursor.y);
-  // context.scale(zoom, zoom);
-  // context.translate(-currentTransformedCursor.x, -currentTransformedCursor.y);
-
-
-
-
+  if(e.type === "wheel"){
+    zoom = e.deltaY < 0 ? zoomIn : zoomOut;
+    currentTransformedCursor = getTransformedPoint(e.offsetX, e.offsetY);
+  } else if(e.type === "click"){
+    var target = e.target;
+    while(target.id !== "zoom-in" && target.id !== "zoom-out"){
+      target = target.parentElement;
+    }
+    zoom = target.id === "zoom-in" ? 1.2 : 0.8;
+    currentTransformedCursor = getTransformedPoint(canvas.width/2, canvas.height/2);
+  } else if (e.type === "input"){
+    currentTransformedCursor = getTransformedPoint(canvas.width/2, canvas.height/2);
+    var scaleVal = e.target.value/100;
+    zoom = scaleVal/canvasImgTransform.scale;
+  }
   
   var scaleX, scaleY, scale, width, height;
 
@@ -162,13 +158,15 @@ function canvasWheelHandler(e) {
 
 
 
+
+
+
   context.scale(scaleX, scaleY);
   context.translate(-currentTransformedCursor.x, -currentTransformedCursor.y);
   
   
   
-  
-
+  slider.value = canvasImgTransform.scale*100;
   
   
 
@@ -255,7 +253,7 @@ function canvasMouseUpHandler() {
 
 function canvasInit(canvas, popup) {
   if (!canvas) return;
-  canvas.addEventListener("wheel", canvasWheelHandler);
+  canvas.addEventListener("wheel", canvasZoom);
   canvas.addEventListener("mousemove", canvasMouseMoveHandler);
   canvas.addEventListener("mousedown", canvasMouseDownHandler);
   canvas.addEventListener("mouseup", canvasMouseUpHandler);
@@ -274,6 +272,7 @@ function canvasInit(canvas, popup) {
   window.addEventListener("resize", popupResize, false);
 
   canvas.addEventListener('mousemove',showScaleOnMouseMove,false);
+  canvas.addEventListener('wheel',showScaleOnMouseMove,false);
   var popFooter = document.querySelector(".popup--footer");
   popFooter.addEventListener('mouseenter',forceScale,false);
   popFooter.addEventListener('mouseleave',stopForceScale,false);
@@ -284,11 +283,7 @@ function canvasInit(canvas, popup) {
 }
 
 function canvasZoomButtonHandler(str) {
-  // var zoom = 5;
-  // if(str == "in") zoom = zoom * -1;
-  // if(str == "out") zoom = zoom * 1;
-  // canvasInput.value = parseInt(canvasInput.value) + zoom;
-  // canvasZoom(canvasInput.value, "input");
+
 }
 
 function canvasSetSize() {
@@ -314,27 +309,25 @@ function Scale({ className }) {
   return (
     <div className={`scale ${className ? className : ""}`}>
       <div className="scale--zoom scale--minus">
-        <Button icon={["minus", "alone", "mask"]} animation="scale-out" color="transparent-primary" onClick={() => canvasZoomButtonHandler("in")} />
+        <Button id="zoom-out" icon={["minus", "alone", "mask"]} animation="scale-out" color="transparent-primary" onClick={canvasZoom} />
       </div>
 
       <div className="scale--slider">
         <div className="scale--end"></div>
         <input
           type="range"
-          min="1"
-          max="100"
+          min={minZoom*100}
+          max={maxZoom*100}
           defaultValue={def}
           className="scale--input"
           id="popupZoom"
-          onInput={() => {
-            canvasZoom(canvasInput.value, "input");
-          }}
+          onInput={canvasZoom}
         />
         <div className="scale--end"></div>
       </div>
 
       <div className="scale--zoom scale--plus">
-        <Button icon={["plus", "alone", "mask"]} animation="scale-out" color="transparent-primary" onClick={() => canvasZoomButtonHandler("out")} />
+        <Button id="zoom-in" icon={["plus", "alone", "mask"]} animation="scale-out" color="transparent-primary" onClick={canvasZoom} />
       </div>
     </div>
   );
@@ -451,9 +444,6 @@ var isMouseMoving;
 var mouseMoveTimeout = 1000;
 var mouseMoveRan = false;
 function showScaleOnMouseMove(){
-
-  
-  
   if(!mouseMoveRan){
     sliderToggle();
     mouseMoveRan = true;
