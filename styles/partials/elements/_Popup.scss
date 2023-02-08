@@ -8,23 +8,20 @@
     @include flex-col-center;
     align-items: center;
 
-
     @include trans;
-    
-  &__on{
-    opacity: 1;
-  }
 
-  &__off{
-    opacity: 0;
-    display:none;
-  }
+    &__on {
+      opacity: 1;
+    }
 
-  &__tran{
-    opacity:0;
-  }
+    &__off {
+      opacity: 0;
+      display: none;
+    }
 
-
+    &__tran {
+      opacity: 0;
+    }
   }
 
   &--background {
@@ -49,7 +46,7 @@
     display: flex;
     // padding: var(--popup-inner-pad);
   }
-  
+
   &--content {
     margin: var(--popup-pad);
     @include b-rad;
@@ -58,10 +55,9 @@
     // padding: var(--popup-inner-pad);
     @include flex-col-between;
     @include gap(var(--popup-gap));
-    position:relative;
+    position: relative;
     overflow: hidden;
   }
-
 
   &--header {
     @include flex-row-between;
@@ -74,69 +70,60 @@
     @include flex-col-center;
   }
 
-
   &--canvas {
     // height: calc(100% - (var(--button-height) * 1) - (var(--popup-gap) * 1) - var(--popup-inner-pad));
     height: 100%;
     overflow: hidden;
     @include no-select;
-    background-color: $col-background_darkest;
+    background-color: $col-background_darker;
     cursor: grab;
     @include trans;
 
-    &__grabbed{
+    &__grabbed {
       cursor: grabbing;
     }
 
-
-    &__on{
+    &__on {
       opacity: 1;
     }
 
-    &__off{
+    &__off {
       opacity: 0;
       cursor: default;
     }
 
-    &__tran{
-      opacity:0;
+    &__tran {
+      opacity: 0;
     }
-
-
-
   }
 
-
-  &--loading{
-
-    position:absolute;
+  &--loading {
+    position: absolute;
     @include trans;
 
-    --size:15rem;
+    --size: 15rem;
     @include s;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 
-    img{
+    img {
       @include img-contain;
     }
 
-    &__on{
+    &__on {
       opacity: 1;
     }
 
-    &__off{
+    &__off {
       opacity: 0;
-      display:none;
+      display: none;
     }
 
-    &__tran{
-      opacity:0;
+    &__tran {
+      opacity: 0;
     }
-
   }
-
 
   &--img {
     width: 100%;
@@ -153,38 +140,29 @@
     @include flex-row-end;
     // @include pad-x(var(--popup-inner-pad));
     // padding-bottom: var(--popup-inner-pad);
-    padding: calc(var(--popup-inner-pad)/2);
+    padding: calc(var(--popup-inner-pad) / 2);
     background-color: $col-background;
     border-radius: Var(--b-rad) 0 0 0;
-    position:absolute;
-    bottom:0;
-    right:0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 
     transition-duration: 0.2s;
 
-  &__on{
-    display: flex;
-    opacity:1;
+    &__on {
+      display: flex;
+      opacity: 1;
+    }
+
+    &__off {
+      display: none;
+      opacity: 0;
+    }
+
+    &__tran {
+      opacity: 0;
+    }
   }
-
-  &__off{
-    display: none;
-    opacity: 0;
-  }
-  
-  &__tran{
-    opacity: 0;
-  }
-
-  }
-
-
-
-
-
-
-
-
 }
 
 .scale {
@@ -198,7 +176,7 @@
 
   @include flex-row;
   @include gap(0.5rem);
-  
+
   &--zoom {
     .mask {
       --button-icon-scale: 1;
@@ -260,9 +238,4 @@
       margin-left: var(--scale-end-margin);
     }
   }
-
-
-
-
-
 }

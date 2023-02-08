@@ -1864,7 +1864,7 @@ body {
   overflow: hidden;
   -webkit-touch-callout: none;
   user-select: none;
-  background-color: #E0E0EA;
+  background-color: #E9E9F2;
   cursor: grab;
   transition: var(--transition);
 }
@@ -1889,7 +1889,7 @@ body {
 .popup--loading {
   position: absolute;
   transition: var(--transition);
-  --size:15rem;
+  --size: 15rem;
   width: var(--size);
   height: var(--size);
   top: 50%;
@@ -1934,7 +1934,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: end;
-  padding: calc(var(--popup-inner-pad)/2);
+  padding: calc(var(--popup-inner-pad) / 2);
   background-color: #F3F3F7;
   border-radius: Var(--b-rad) 0 0 0;
   position: absolute;
