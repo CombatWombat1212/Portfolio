@@ -9,12 +9,10 @@ import BarGraph from "@/components/charts/BarGraph";
 import DLink from "@/components/utilities/DynamicLink";
 import PieChart from "@/components/charts/PieChart";
 import Button from "@/components/elements/Buttons";
-import { popupHandler, Popup } from "@/components/global/Popup";
 
 // TODO:add the interactive chapter selection thingy
 
-function MakeRight({setPopup}) {
-
+function MakeRight({ setPopup }) {
   const study = getStudy();
 
   return (
@@ -324,13 +322,15 @@ function MakeRight({setPopup}) {
             </Column>
           </Section>
 
-          <Section id="Develop--Brainstorming" type="columns" className="flex-col" titled background="background darker">
+          <Section id="Develop--Brainstorming" type="columns" className="flex-col" titled background="background darkest">
             <Title>Brainstorming</Title>
             <Heading>Out of all concepts, one stood out in terms of viability</Heading>
 
             <Column className="col-4">
               <Graphic className="flex-col h-auto" background="background" type="mask" img={MAKERIGHT_IMGS["brainstorming_chart"]}>
-                <Button color="primary" type="bottom" onClick={()=>setPopup(MAKERIGHT_IMGS["brainstorming_chart_full"])}>View full exercise</Button>
+                <Button color="primary" type="bottom" onClick={() => setPopup(MAKERIGHT_IMGS["brainstorming_chart_full"])}>
+                  View full exercise
+                </Button>
               </Graphic>
             </Column>
 
@@ -351,7 +351,145 @@ function MakeRight({setPopup}) {
               </Description>
             </Column>
           </Section>
+
+          <Section background="background darkest">
+            <Title>Refine Ideas</Title>
+            <Heading className="quote-table--heading">I expanded on this chosen idea by considering:</Heading>
+
+            <div className="quote-table">
+              <div className="quote-table--subheading">
+                <h3>Goals</h3>
+              </div>
+              <div className="quote-table--subheading">
+                <h3>How This Might Be Addressed</h3>
+              </div>
+
+              <div className="quote-table--cell quote-table__primary">
+                <span>Provide clear benefit and value to those who wouldn’t otherwise use 3D printing to solve their issues.</span>
+              </div>
+              <div className="quote-table--cell quote-table__secondary">
+                <span>Strong messaging, and UX, suited for those unfamiliar with 3D printing.</span>
+              </div>
+
+              <div className="quote-table--cell quote-table__primary">
+                <span>Ensure both customers and makers have a confident trust in the service.</span>
+              </div>
+              <div className="quote-table--cell quote-table__secondary">
+                <span>Vet makers & verify skills. Add verification checkpoints throughout the ordering process.</span>
+              </div>
+
+              <div className="quote-table--subheading">
+                <h3>Concerns</h3>
+              </div>
+              <div className="quote-table--subheading">
+                <h3></h3>
+              </div>
+
+              <div className="quote-table--cell quote-table__primary">
+                <span>What would get everyday consumers to use this service over alternatives?</span>
+              </div>
+              <div className="quote-table--cell quote-table__secondary">
+                <span>Cheap customizability. Encourage ‘window-shopping’ within the service, show examples of what printing can offer.</span>
+              </div>
+
+              <div className="quote-table--cell quote-table__primary">
+                <span>Would owners of 3D printers be interested in participating in this service?</span>
+              </div>
+              <div className="quote-table--cell quote-table__secondary">
+                <span>Fair compensation for makers, and realistic deadlines with room for human error.</span>
+              </div>
+            </div>
+          </Section>
+
+          <Section background="background darkest">
+            <Heading>
+              Focus group testing on the newly refined concept
+              <br />
+              allowed me to gauge reception, and gather feedback.
+            </Heading>
+          </Section>
+
+          <Section type="columns" titled titleType="above" className="flex-col" background="background darkest" mainClassName="section--main__title-above">
+            <Title>Focus Group Testing</Title>
+            <Column>
+              <Heading className="section--heading__title-above">Discovering a promising enthusiasm, and some important concerns</Heading>
+            </Column>
+            <Column>
+              <Description>
+                <p>I gathered 6 laypersons, and 4 printer owners, and asked each group questions surrounding my proposed service.</p>
+                <p>At the end of the test, I revealed the concept. I then asked more specific questions, collected feedback, and supported their discussion with prompts and clarification.</p>
+              </Description>
+            </Column>
+          </Section>
+
+          <Section type="columns" titled className="flex-col" background="background darkest">
+            <Heading type="h3">Reception was quite positive among both groups:</Heading>
+            <Description className="mt-less">Laypersons commented ideas for what they would print, while makers showed excitement towards profiting off their equipment.</Description>
+
+            <Column>
+              <Quote background="background">Laypersons commented ideas for what they would print, while makers showed excitement towards profiting off their equipment. </Quote>
+            </Column>
+            <Column>
+              <Quote background="background">“I would definitely use that service. Not having to set up and use a printer myself? I would print so much stuff!” - Layperson #4</Quote>
+            </Column>
+          </Section>
+
+          <Section background="background darkest">
+            <Heading type="h3" className="quote-table--heading">
+              With important concerns being raised, as well:
+            </Heading>
+
+            <div className="quote-table">
+              <div className="quote-table--cell quote-table__primary">
+                <p className="weight-bold mb-1">Distribution of responsibilities</p>
+                <p>Draw a line separating the responsibilities of makers, and customers.</p>
+              </div>
+              <Quote background="background" className="quote-table--cell quote-table__secondary">
+                “It’s a question of distributing responsibility. There’s 2 types of problems: maker problems, and customer problems.” - Layperson #3
+              </Quote>
+
+              <div className="quote-table--cell quote-table__primary">
+                <p className="weight-bold mb-1">Ensure a viable work experience for makers</p>
+                <p>Appropriate deadlines for printers, with some kind of flexibility.</p>
+              </div>
+              <Quote background="background" className="quote-table--cell quote-table__secondary">
+                “There’s a lot of little steps and things that go into making the print that can take time.” - Maker #3
+              </Quote>
+
+              <div className="quote-table--cell quote-table__primary">
+                <p className="weight-bold mb-1">3D modelling adds too much complication</p>
+                <p>Model creation and design is whole service in itself; including it in the service would drastically affect scope.</p>
+              </div>
+              <Quote background="background" className="quote-table--cell quote-table__secondary">
+                “I can't model things for people, so I’m not very interested in that side of the service.” - Maker #3
+              </Quote>
+            </div>
+          </Section>
+
+
+
+
+
+          <Section>
+            <Heading>With a foundation of research, and validation from testers, 
+it was time to begin prototyping</Heading>
+          </Section>
+
         </Chapter>
+
+
+
+<Chapter id="Prototyping">
+
+
+  jasdjkasbdjhb
+</Chapter>
+
+
+
+
+
+
       </CaseStudyPage>
     </>
   );

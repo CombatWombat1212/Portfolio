@@ -60,10 +60,10 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
             property: --column-gap --row-gap --gap column-gap row-gap gap,
             class: gap,
             values: $spacers),
-        // "margin-y": (
-        //     property: margin-top margin-bottom,
-        //     class: my,
-        //     values: (auto:auto)),
+        "margin-bottom": (
+            property: margin-bottom,
+            class: mb,
+            values: $spacers),
         // "margin-x": (
         //     property: margin-left margin-right,
         //     class: mx,

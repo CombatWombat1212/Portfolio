@@ -28,7 +28,7 @@ function getMainClasses(pref, type) {
 }
 
 function getGapClasses(type, arrows) {
-  var gapClasses = ``;
+  var gapClasses = "";
   if (SECTION_TYPE_C.indexOf(type) != -1) gapClasses += " gap-4";
   if (arrows) {
     gapClasses = "gap-5";
@@ -164,21 +164,21 @@ function getSectionChildren(children) {
   return { columns, description, title, heading, graphic, quote, other };
 }
 
-function Quote({ children, background }) {
+function Quote({ children, background, className }) {
   var backgroundClasses = getBackgroundClasses("section--quote", background);
 
   return (
-    <div className={`section--quote quote ${backgroundClasses ? backgroundClasses : ""}`}>
+    <div className={`section--quote quote ${backgroundClasses ? backgroundClasses : ""} ${className ? className : ""} `}>
       <p>{children}</p>
     </div>
   );
 }
 
-function Heading({ children, type }) {
+function Heading({ children, type, className }) {
   var headingClasses = getHeadingClasses(type);
 
   return (
-    <div className={`section--heading ${headingClasses}`}>
+    <div className={`section--heading ${headingClasses} ${className ? className : ''}`}>
       {type == "h1" && <h1>{children}</h1>}
       {type == "h2" && <h2>{children}</h2>}
       {type == "h3" && <h3>{children}</h3>}
@@ -342,7 +342,7 @@ function Section({ className, children, type, background, id, margin, titled, ar
           </>
         )}
         <div className="section--inner">
-          <div className={`${mainClasses} ${containerMarginClass} ${className} ${isTitled ? "" : gapClasses}`}>
+          <div className={`${mainClasses} ${containerMarginClass} ${className ? className : ''} ${isTitled ? "" : gapClasses}`}>
             {SECTION_TYPE_A.indexOf(type) != -1 ? (
               <>
                 {hasText && (
@@ -377,7 +377,7 @@ function Section({ className, children, type, background, id, margin, titled, ar
                   </div>
                 )}
                 {isTitled ? (
-                  <div className={`section--main ${gapClasses} ${mainClassName}`}>
+                  <div className={`section--main ${gapClasses} ${mainClassName ? mainClassName : ''}`}>
                     <ColumnGroup columns={columns} arrows={hasArrows} />
                   </div>
                 ) : (

@@ -146,6 +146,22 @@ li, span {
   font-weight: 400;
 }
 
+.weight-light {
+  font-weight: 300;
+}
+
+.weight-reg {
+  font-weight: 400;
+}
+
+.weight-med {
+  font-weight: 500;
+}
+
+.weight-bold {
+  font-weight: 600;
+}
+
 :root {
   --transition: 0.1s;
   --b-rad: 0.5rem;
@@ -1484,6 +1500,7 @@ body {
 .section {
   --section-text-spacing: 1.25rem;
   --section-graphic-panel-pad: 2.5rem;
+  --section_title-above-offset: -0.4rem;
   display: flex;
   flex-direction: row;
 }
@@ -1527,6 +1544,10 @@ body {
 
 .section--heading.text--h4 + *.mt-less {
   margin-top: var(--font-margin-bottom-h4_less);
+}
+
+.section--heading__title-above {
+  margin-top: var(--section_title-above-offset);
 }
 
 .section--copy {
@@ -1622,16 +1643,8 @@ body {
   margin-top: calc(var(--section-text-spacing) * 1.25);
 }
 
-.section--quote * {
-  font-family: "Gira Sans";
-  font-size: var(--font-size-quote);
-  line-height: var(--font-leading-quote);
-  font-weight: 300;
-  font-style: italic;
-}
-
-.section--quote__color {
-  padding: 1.75rem;
+.section--main__title-above {
+  margin-top: calc((var(--section_title-above-offset) * -1) + var(--font-margin-bottom-h4));
 }
 
 .section .column--arrow {
@@ -2071,6 +2084,47 @@ body {
 
 .scale--end:last-child {
   margin-left: var(--scale-end-margin);
+}
+
+.section--quote * {
+  font-family: "Gira Sans";
+  font-size: var(--font-size-quote);
+  line-height: var(--font-leading-quote);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.section--quote__color {
+  padding: 1.75rem;
+}
+
+.quote-table {
+  --quote-table-cell-margin-top: 1.875rem;
+  --quote-table-heading-margin-bottom: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.quote-table--heading {
+  margin-bottom: -1.15rem;
+}
+
+.quote-table--subheading {
+  margin-top: 3.5rem;
+  margin-bottom: calc( var(--quote-table-heading-margin-bottom) - var(--quote-table-cell-margin-top));
+}
+
+.quote-table--cell {
+  padding: 1.75rem;
+  margin-top: var(--quote-table-cell-margin-top);
+}
+
+.quote-table__primary {
+  background-color: #F3F3F7;
+}
+
+.quote-table__secondary {
+  background-color: #ECECF3;
 }
 
 .graph--wrapper {
@@ -2807,6 +2861,34 @@ body {
   column-gap: 6rem;
   row-gap: 6rem;
   gap: 6rem;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.mb-1 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-2 {
+  margin-bottom: 1rem;
+}
+
+.mb-3 {
+  margin-bottom: 2rem;
+}
+
+.mb-4 {
+  margin-bottom: 3rem;
+}
+
+.mb-5 {
+  margin-bottom: 6rem;
+}
+
+.mb-6 {
+  margin-bottom: 6rem;
 }
 
 .m-auto {

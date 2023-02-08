@@ -26,6 +26,8 @@
 .section {
   --section-text-spacing: 1.25rem;
   --section-graphic-panel-pad: 2.5rem;
+
+  --section_title-above-offset: -0.4rem;
   // --section-column-arrow-height: 1.7rem;
 
   &--wrapper {
@@ -45,6 +47,11 @@
     @include section--heading-bottom-margin(h2);
     @include section--heading-bottom-margin(h3);
     @include section--heading-bottom-margin(h4);
+
+    &__title-above{
+      margin-top: var(--section_title-above-offset);
+    }
+
   }
 
   &--copy {
@@ -136,17 +143,12 @@
     &.mt-less {
       margin-top: calc(var(--section-text-spacing) * 1.25);
     }
-  }
 
-  &--quote {
-    * {
-      @include quote;
-    }
-
-    &__color {
-      padding: 1.75rem;
+    &__title-above{
+      margin-top: calc((var(--section_title-above-offset) * -1) + var(--font-margin-bottom-h4));
     }
   }
+
 
   .column {
     &--arrow {

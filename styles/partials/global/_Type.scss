@@ -160,20 +160,20 @@ li, span{
 }
 
 
-// .weight {
-//   &__light {
-//     @include weight-light;
-//   }
-//   &__reg {
-//     @include weight-reg;
-//   }
-//   &__med {
-//     @include weight-med;
-//   }
-//   &__bold {
-//     @include weight-bold;
-//   }
-// }
+.weight {
+  &-light {
+    @include weight-light;
+  }
+  &-reg {
+    @include weight-reg;
+  }
+  &-med {
+    @include weight-med;
+  }
+  &-bold {
+    @include weight-bold;
+  }
+}
 
 // .text--body {
 //   font-size: var(--font-size-h4);
