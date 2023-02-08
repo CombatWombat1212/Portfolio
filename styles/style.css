@@ -1866,12 +1866,27 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: end;
-  padding: var(--popup-inner-pad);
+  padding: calc(var(--popup-inner-pad)/2);
   background-color: #F3F3F7;
   border-radius: Var(--b-rad) 0 0 0;
   position: absolute;
   bottom: 0;
   right: 0;
+  transition: var(--transition);
+}
+
+.popup--footer__on {
+  display: flex;
+  opacity: 1;
+}
+
+.popup--footer__off {
+  display: none;
+  opacity: 0;
+}
+
+.popup--footer__tran {
+  opacity: 0;
 }
 
 .scale {

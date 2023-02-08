@@ -4,6 +4,7 @@
 
 // TODO: make it so the canvas doesn't have padding and is flush with the edges of the popup, and give the zoom tool a background, and do some opacity stuff to make it fade away if the user isn't moving the cursor or something
 
+import toggle from "@/scripts/AnimationTools";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -20,7 +21,6 @@ var canvasImgTransform = { x: 0, y: 0, scale: 1, width: 0, height: 0, maxWidth: 
 var startZoom = 0.95;
 var minZoom = 0.95;
 var maxZoom = 6;
-var panBorderPadding = -50;
 
 
 
@@ -273,6 +273,11 @@ function canvasInit(canvas, popup) {
   popupResizeFunctions();
   window.addEventListener("resize", popupResize, false);
 
+  canvas.addEventListener('mousemove',showScaleOnMouseMove,false);
+  var popFooter = document.querySelector(".popup--footer");
+  popFooter.addEventListener('mouseenter',forceScale,false);
+  popFooter.addEventListener('mouseleave',stopForceScale,false);
+  
   canvasImageSizeInit();
 
   // context.imageSmoothingEnabled = false;
@@ -290,6 +295,18 @@ function canvasSetSize() {
   canvas.width = canvas.getBoundingClientRect().width;
   canvas.height = canvas.getBoundingClientRect().height;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 function Scale({ className }) {
   var def = 10;
@@ -362,6 +379,7 @@ function Popup({ popup, setPopup }) {
           <div className="popup--background" onClick={() => setPopup(false)}></div>
 
           <div className="popup container">
+
             <div className="popup--inner">
               <div className="popup--content">
                 <div className="popup--header">
@@ -381,7 +399,7 @@ function Popup({ popup, setPopup }) {
                   )} */}
                 </canvas>
 
-                <div className="popup--footer">
+                <div className="popup--footer popup--footer__off">
                   <Scale className="popup--scale" />
                 </div>
               </div>
@@ -392,6 +410,71 @@ function Popup({ popup, setPopup }) {
     </>
   );
 }
+
+
+
+
+
+
+var forceScaleOn = false;
+
+function forceScale(e){
+  forceScaleOn = true;
+  sliderToggle();
+}
+
+function stopForceScale(){
+  if(forceScaleOn){
+    forceScaleOn = false;
+    mouseMoveRan = true;
+  }
+}
+
+
+function sliderToggle(){
+  var target = document.querySelector(".popup--footer");
+  if(!target) return;
+  var on = target.classList.contains("popup--footer__on");
+  var tran = Number(window.getComputedStyle(target).getPropertyValue("transition-duration").split('s')[0]) * 1000;
+
+  if(on){
+    if(forceScaleOn) return;
+    toggle(target, 'popup--footer', tran, "animated", "");
+  }else{
+    toggle(target, 'popup--footer', tran, "animated", "");
+  }
+}
+
+
+
+var isMouseMoving;
+var mouseMoveTimeout = 1000;
+var mouseMoveRan = false;
+function showScaleOnMouseMove(){
+
+  
+  
+  if(!mouseMoveRan){
+    sliderToggle();
+    mouseMoveRan = true;
+  }
+  window.clearTimeout(isMouseMoving);
+  isMouseMoving = setTimeout(isMouseMovingFunctions, mouseMoveTimeout);
+}
+
+function isMouseMovingFunctions(){
+  mouseMoveRan = false;
+  sliderToggle();
+}
+
+
+
+
+
+
+
+
+
 
 var isResizing;
 
