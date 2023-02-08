@@ -164,7 +164,7 @@ const MAKERIGHT_IMGS = {
   brainstorming_chart_full: {
     name: "brainstorming_chart_smaller",
     title: "Cost and Difficulty of 3D Printing Mindmap",
-    src: "./assets/images/case_studies/makeright/brainstorming_chart_smaller.png",
+    src: "./assets/images/case_studies/makeright/brainstorming_chart_full.svg",
     alt: "A large-scale mindmap surrounding the cost and difficulty of 3D printing",
     width: 1445.2,
     height: 1210,

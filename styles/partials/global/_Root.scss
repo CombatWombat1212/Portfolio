@@ -28,7 +28,6 @@ body {
 }
 
 
-
 .overflow__ellipsis {
     height: var(--rounded-height);
     overflow: hidden;
@@ -39,3 +38,9 @@ body {
 }
 
 
+
+
+.noscroll{
+    overflow:hidden;
+    overflow:-moz-hidden-unscrollable;
+}
