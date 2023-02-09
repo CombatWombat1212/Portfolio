@@ -637,6 +637,15 @@
   }
 
 
+  @mixin graphic-width($w, $i: ''){
+	width:  Max(calc((var(--mask-aspect-width) / var(--mask-aspect-height)) * #{$w}),calc((var(--img-aspect-width) / var(--img-aspect-height)) * #{$w})) #{$i};
+  }
+
+  @mixin graphic-height($h, $i: ''){
+	height:  Max(calc(( var(--mask-aspect-height/ var(--mask-aspect-width))) * #{$h}), calc(( var(--img-aspect-height/ var(--img-aspect-width))) * #{$h})) #{$i};
+  }
+
+
 
 
   @function mask-width($w, $i: ''){
@@ -649,6 +658,18 @@
 	  @return $result;
   }
 
+
+
+
+  @function img-width($w, $i: ''){
+	$result: calc((var(--img-aspect-width) / ( var(--img-aspect-height))) * #{$w}) #{$i};
+	@return $result;
+  }
+  
+  @function img-height($h, $i: ''){
+	$result: calc((( var(--img-aspect-height) / var(--img-aspect-width) )) * #{$h}) #{$i};
+	@return $result;
+}
 
 
 

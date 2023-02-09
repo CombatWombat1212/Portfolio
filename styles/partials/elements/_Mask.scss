@@ -1,5 +1,16 @@
+.mask {
+  @include mask;
 
-
-.mask{
-    @include mask;
+  &__background {
+    background-color: $col-background !important;
+  }
+  &__primary {
+    background-color: $col-primary !important;
+  }
+  &__secondary {
+    background-color: $col-secondary !important;
+  }
+  &__tertiary {
+    background-color: $col-tertiary !important;
+  }
 }

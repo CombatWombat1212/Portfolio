@@ -83,6 +83,13 @@ input, button, textarea, select {
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Tenon";
+  src: url("/assets/fonts/tenon/Tenon_Bold.otf");
+  font-weight: 600;
+  font-style: bold;
+}
+
 :root {
   --font-size-h1: 3.375rem;
   --font-size-h2: 2.375rem;
@@ -1311,6 +1318,22 @@ body {
   }
 }
 
+.mask__background {
+  background-color: #F3F3F7 !important;
+}
+
+.mask__primary {
+  background-color: #074391 !important;
+}
+
+.mask__secondary {
+  background-color: #C41263 !important;
+}
+
+.mask__tertiary {
+  background-color: #404064 !important;
+}
+
 .footer {
   display: flex;
   flex-direction: row;
@@ -1560,6 +1583,10 @@ body {
   margin-top: var(--section-text-spacing);
 }
 
+.section--description > * + *.mt-less {
+  margin-top: calc(var(--section-text-spacing)* 0.15);
+}
+
 .section--description ol, .section--description ul {
   --counter-width: 1.5rem;
   list-style-position: inside;
@@ -1660,7 +1687,6 @@ body {
   --arrow-height: calc(var(--arrow-width) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
   height: var(--arrow-height) !important;
   width: var(--arrow-width) !important;
-  background-color: #074391 !important;
   margin-top: calc(((var(--section-graphic-panel-pad) * 2) + var(--img-panel-height) - var(--arrow-height)) / 2);
   margin-left: calc(((var(--gap) + var(--arrow-width)) / 2) * -1);
 }
@@ -3451,5 +3477,31 @@ body {
 #Makeright #Prototyping--Journey-Map .section--graphic {
   --graphic-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 14rem) ;
   --img-panel-height: auto;
+}
+
+#Makeright #Prototyping--Approach .graphic {
+  --img-panel-height: 7rem;
+}
+
+#Makeright #Prototyping--Approach .graphic--panel {
+  pointer-events: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+#Makeright #Prototyping--Approach .graphic--panel > * {
+  margin-top: -0.35rem;
+}
+
+#Makeright #Prototyping--Approach .graphic--img {
+  --graphic-width: calc((var(--img-aspect-width) / ( var(--img-aspect-height))) * 7rem) ;
+}
+
+#Makeright #Prototyping--Approach .graphic--img img {
+  width: var(--graphic-width);
+}
+
+#Makeright #Prototyping--Approach .graphic--mask {
+  --graphic-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 7rem) ;
 }
 /*# sourceMappingURL=style.css.map */

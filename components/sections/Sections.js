@@ -51,7 +51,6 @@ function Section({ className, children, type, background, id, margin, titled, ar
   var hasText = getHasText(childs);
   var hasGraphic = getHasGraphic(graphic);
   var hasBackground = getHasBackground(background);
-  var hasArrows = arrows || false;
 
   return (
     <>
@@ -98,10 +97,10 @@ function Section({ className, children, type, background, id, margin, titled, ar
                 )}
                 {isTitled ? (
                   <div className={`section--main ${gapClasses} ${mainClasses}`}>
-                    <ColumnGroup columns={columns} arrows={hasArrows} />
+                    <ColumnGroup columns={columns} arrows={arrows} />
                   </div>
                 ) : (
-                  <ColumnGroup columns={columns} arrows={hasArrows} />
+                  <ColumnGroup columns={columns} arrows={arrows} />
                 )}
                 {graphic && <>{graphic}</>}
                 {other && <>{other}</>}

@@ -1,7 +1,25 @@
 import Graphic from "./Graphic";
 import { chevron_right } from "@/data/ICONS";
 
+
+
+
+
+
+
 function ColumnGroup({ columns, arrows }) {
+
+
+  arrows = arrows || false;
+  var hasArrows = arrows ? true : false;
+
+
+  if(arrows == true) arrows= "primary"
+
+  var arrowClasses = `mask__${arrows}`;
+
+
+
     return (
       <>
         {columns.map((column, i) => {
@@ -14,9 +32,9 @@ function ColumnGroup({ columns, arrows }) {
   
           return (
             <Column className={`column ${colClasses} ${otherClasses}`} key={`column ${i}`}>
-              {arrows && i != 0 && (
+              {hasArrows && i != 0 && (
                 <div className="column--arrow">
-                  <Graphic type="mask" img={chevron_right}></Graphic>
+                  <Graphic innerClassName={arrowClasses} type="mask" img={chevron_right}></Graphic>
                 </div>
               )}
               {title && <>{title}</>}
@@ -35,6 +53,8 @@ function ColumnGroup({ columns, arrows }) {
   function Column({ children, className }) {
     return <div className={`section--column ${className ? className : ""}`}>{children}</div>;
   }
+
+
 
 
 

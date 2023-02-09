@@ -475,7 +475,11 @@ function MakeRight({ setPopup }) {
           <Section id="Prototyping--Journey-Map" type="columns" titled="above" background="tertiary light" mainClassName="mb-3">
             <Title>Methodology</Title>
             <Column className="col-7">
-              <Heading>Prototype scope covered the core journey of makers<br/>and customers</Heading>
+              <Heading>
+                Prototype scope covered the core journey of makers
+                <br />
+                and customers
+              </Heading>
             </Column>
             <Column className="col-5">
               <Description>
@@ -483,6 +487,49 @@ function MakeRight({ setPopup }) {
               </Description>
             </Column>
             <Graphic type="image" background="tertiary" img={MAKERIGHT_IMGS["journey_map"]} />
+          </Section>
+
+          <Section id="Prototyping--Approach" type="columns" titled arrows="background" background="tertiary light">
+            <Title>Approach</Title>
+            <Heading>Finding a focus within the field of 3D printing</Heading>
+
+            <Column>
+              <Graphic type="image" background="tertiary" img={MAKERIGHT_IMGS["maker_journey_low_fi"]} />
+              <Description className="graphic--caption">
+                <p>
+                  <b>Phase 1:</b>
+                </p>
+                <p className="mt-less">Maker Journey, Low-Fi</p>
+              </Description>
+            </Column>
+            <Column>
+              <Graphic type="image" background="tertiary" color="background" img={MAKERIGHT_IMGS["customer_journey_low_fi"]} />
+              <Description className="graphic--caption">
+                <p>
+                  <b>Phase 2:</b>
+                </p>
+                <p className="mt-less">Customer Journey, Low-Fi</p>
+              </Description>
+            </Column>
+
+            <Column>
+              <Graphic type="mask" background="tertiary" color="background" img={MAKERIGHT_IMGS["maker_journey_high_fi"]} />
+              <Description className="graphic--caption">
+                <p>
+                  <b>Phase 3:</b>
+                </p>
+                <p className="mt-less">Maker Journey, High-Fi</p>
+              </Description>
+            </Column>
+            <Column>
+              <Graphic type="mask" background="tertiary" color="background" img={MAKERIGHT_IMGS["customer_journey_high_fi"]} />
+              <Description className="graphic--caption">
+                <p>
+                  <b>Phase 4:</b>
+                </p>
+                <p className="mt-less">Customer Journey, High-Fi</p>
+              </Description>
+            </Column>
           </Section>
         </Chapter>
       </CaseStudyPage>

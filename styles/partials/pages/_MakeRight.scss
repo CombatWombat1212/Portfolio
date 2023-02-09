@@ -57,7 +57,7 @@
 
     .section {
       &--graphic {
-        //TODO: should this be the default?
+        //TODO: should this be the default? i did
         // --graphic-width: #{mask-width(11.5rem)};
         // --graphic-height: calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
 
@@ -97,5 +97,49 @@
         --img-panel-height: auto;
       }
     }
+
+
+
+    &--Approach{
+
+      .graphic {
+        --img-panel-height: 7rem;
+        $graphic-size: 7rem;
+
+
+        &--panel{
+          pointer-events: none;
+          @include no-select;
+          &>*{
+            margin-top:-0.35rem;
+          }
+        }
+
+        
+        &--img{
+          --graphic-width: #{img-width($graphic-size)};
+          img{
+            width: var(--graphic-width);
+          }
+        }
+        &--mask{          
+          --graphic-width: #{mask-width($graphic-size)};
+        }
+
+
+
+      }
+
+    }
+
+
+
   }
+
+
+
+
+
+
+
 }
