@@ -10,7 +10,7 @@ import DLink from "@/components/utilities/DynamicLink";
 import PieChart from "@/components/charts/PieChart";
 import Button from "@/components/elements/Buttons";
 
-// TODO:add the interactive chapter selection thingy
+// TODO: add the interactive chapter selection thingy
 
 function MakeRight({ setPopup }) {
   const study = getStudy();
@@ -413,6 +413,8 @@ function MakeRight({ setPopup }) {
 
 
             {/* TODO: you've just made it so that you no longer have to manually put section--main__title-above as the mainClassName of section, and you've replaced it with titled="above", whcih is great.  Now along with that, the class 'section--heading__title-above' should be automatically added to heading. but first i'm going to try to seperate section out into more chunks because I no longer like having it in one file, its too confusing.*/}
+
+            
           <Section type="columns" titled="above" className="flex-col" background="background darkest">
             <Title>Focus Group Testing</Title>
             <Column>
