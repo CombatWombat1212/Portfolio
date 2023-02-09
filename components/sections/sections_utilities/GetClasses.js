@@ -22,12 +22,26 @@ function getElemClasses(pref, type, titled) {
     return mainClassName;
   }
   
-  function getGapClasses(type, arrows) {
+  function getGapClasses(type, arrows, mainClasses) {
     var gapClasses = "";
     if (SECTION_TYPE_C.indexOf(type) != -1) gapClasses += " gap-4";
-    if (arrows) {
-      gapClasses = "gap-5";
-    }
+    if (arrows) gapClasses = "gap-5";
+
+
+
+    // TODO: enable the ability to override the default 'gap-5' class with new classes
+    // var overrideGapClasses = [];
+    // var otherClasses = [];
+    // if (typeof mainClasses == "string") mainClasses = mainClasses.split(" ");
+
+    // for (var i = 0; i < mainClasses.length; i++) {
+    //   if(mainClasses[i] == "") continue;
+    //   if (mainClasses[i].indexOf("gap-") != -1) overrideGapClasses.push(mainClasses[i]);
+    //   else otherClasses.push(classes[i]);
+    // }
+
+
+
     return gapClasses;
   }
   

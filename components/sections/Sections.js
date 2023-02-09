@@ -44,9 +44,10 @@ function Section({ className, children, type, background, id, margin, titled, ar
   var containerMarginClass = getContainerMarginClass(margin);
   var wrapperClasses = getWrapperClasses(pref);
   var backgroundClasses = getBackgroundClasses(pref, background);
-  var gapClasses = getGapClasses(type, arrows);
-
+  
   var mainClasses = getMainClasses(mainClassName, titled);
+
+  var gapClasses = getGapClasses(type, arrows, mainClasses);
 
   var hasText = getHasText(childs);
   var hasGraphic = getHasGraphic(graphic);

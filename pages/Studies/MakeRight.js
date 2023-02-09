@@ -489,7 +489,7 @@ function MakeRight({ setPopup }) {
             <Graphic type="image" background="tertiary" img={MAKERIGHT_IMGS["journey_map"]} />
           </Section>
 
-          <Section id="Prototyping--Approach" type="columns" titled arrows="background" background="tertiary light">
+          <Section id="Prototyping--Approach" type="columns" titled arrows="background" background="tertiary light" mainClassName="gap-4">
             <Title>Approach</Title>
             <Heading>Finding a focus within the field of 3D printing</Heading>
 
