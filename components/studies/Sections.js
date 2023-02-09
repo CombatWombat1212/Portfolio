@@ -6,7 +6,7 @@ import Background from "../utilities/Background";
 import ICONS from "@/data/ICONS";
 
 const DEFINED_CHILDREN = ["Column", "Description", "Title", "Heading", "Graphic", "Quote"];
-const BACKGROUND_COLORS = ["background", "background darker", "background darkest", "primary", "secondary", "makeright tertiary"];
+const BACKGROUND_COLORS = ["background", "background darker", "background darkest", "primary", "secondary", "tertiary", "tertiary light", "makeright tertiary"];
 
 function getHeadingClasses(type) {
   var headingClasses = "";
@@ -17,14 +17,33 @@ function getHeadingClasses(type) {
   return headingClasses;
 }
 
-function getMainClasses(pref, type) {
-  if (pref == undefined) pref = `${pref}`;
-  var mainClasses = `${pref}`;
-  if (type == undefined) return mainClasses;
-  if (type == "overview") mainClasses += ` ${pref}__overview`;
-  if (type == "pitch") mainClasses += ` ${pref}__pitch`;
+function getDescriptionClasses(type) {
+  var descriptionClasses = "";
+  if (type == "h1") descriptionClasses += " text--h1";
+  if (type == "h2") descriptionClasses += " text--h2";
+  if (type == "h3") descriptionClasses += " text--h3";
+  if (type == "h4") descriptionClasses += " text--h4";
+  return descriptionClasses;
+}
 
-  return mainClasses;
+function getElemClasses(pref, type) {
+  if (pref == undefined) pref = `${pref}`;
+  var elemClasses = `${pref}`;
+  if (type == undefined) return elemClasses;
+  if (type == "overview") elemClasses += ` ${pref}__overview`;
+  if (type == "pitch") elemClasses += ` ${pref}__pitch`;
+
+  return elemClasses;
+}
+
+
+function getMainClasses(mainClassName, titled){
+
+  if(mainClassName == undefined) mainClassName = "";
+  if(titled == true || titled == false) return mainClassName;
+  if(titled == "above") mainClassName += " section--main__title-above";
+
+  return mainClassName;
 }
 
 function getGapClasses(type, arrows) {
@@ -68,6 +87,8 @@ function getBackgroundClasses(pref, background) {
 
     if (background == "primary") backgroundClasses += ` background__primary`;
     if (background == "makeright tertiary") backgroundClasses += ` background__makeright-tertiary`;
+    if (background == "tertiary") backgroundClasses += ` background__tertiary`;
+    if (background == "tertiary light") backgroundClasses += ` background__tertiary-light`;
     if (background == "background") backgroundClasses += ` background__background`;
     if (background == "background darker") backgroundClasses += ` background__background background__background-darker`;
     if (background == "background darkest") backgroundClasses += ` background__background background__background-darkest`;
@@ -207,8 +228,8 @@ function Title({ children }) {
 }
 
 function Description({ className, children, type, background }) {
-  var descriptionClasses = getHeadingClasses(type);
-
+  
+  var descriptionClasses = getDescriptionClasses(type);
   var backgroundClasses = getBackgroundClasses("section--description", background);
 
   return <div className={`section--description ${className ? className : ""} ${descriptionClasses} ${backgroundClasses ? backgroundClasses : ""}`}>{children}</div>;
@@ -315,23 +336,27 @@ function Section({ className, children, type, background, id, margin, titled, ar
 
   if (children == undefined) return null;
   if (children.length == undefined) children = [children];
+  
+  titled = titled || false;
+  var isTitled = titled ? true : false;
 
   var childs = getSectionChildren(children);
   var { columns, description, title, heading, graphic, other } = childs;
 
-  var mainClasses = getMainClasses(pref, type);
+  var elemClasses = getElemClasses(pref, type);
   var containerMarginClass = getContainerMarginClass(margin);
   var wrapperClasses = getWrapperClasses(pref);
   var backgroundClasses = getBackgroundClasses(pref, background);
   var gapClasses = getGapClasses(type, arrows);
 
+  var mainClasses = getMainClasses(mainClassName, titled);
+
   var hasText = getHasText(childs);
   var hasGraphic = getHasGraphic(graphic);
-
   var hasBackground = getHasBackground(background);
-
   var hasArrows = arrows || false;
-  var isTitled = titled || false;
+
+
 
   return (
     <>
@@ -342,7 +367,7 @@ function Section({ className, children, type, background, id, margin, titled, ar
           </>
         )}
         <div className="section--inner">
-          <div className={`${mainClasses} ${containerMarginClass} ${className ? className : ''} ${isTitled ? "" : gapClasses}`}>
+          <div className={`${elemClasses} ${containerMarginClass} ${className ? className : ''} ${isTitled ? "" : gapClasses}`}>
             {SECTION_TYPE_A.indexOf(type) != -1 ? (
               <>
                 {hasText && (
@@ -377,7 +402,7 @@ function Section({ className, children, type, background, id, margin, titled, ar
                   </div>
                 )}
                 {isTitled ? (
-                  <div className={`section--main ${gapClasses} ${mainClassName ? mainClassName : ''}`}>
+                  <div className={`section--main ${gapClasses} ${mainClasses}`}>
                     <ColumnGroup columns={columns} arrows={hasArrows} />
                   </div>
                 ) : (
@@ -385,7 +410,11 @@ function Section({ className, children, type, background, id, margin, titled, ar
                 )}
               </>
             ) : SECTION_TYPE_D.indexOf(type) != -1 ? (
-              <></>
+              <>
+              
+              
+              
+              </>
             ) : null}
           </div>
         </div>
@@ -414,11 +443,11 @@ function Chapter({ children, type, background, id, margin }) {
 
   var wrapperClasses = getWrapperClasses(pref);
   var backgroundClasses = getBackgroundClasses(pref, background);
-  var mainClasses = getMainClasses(pref, type);
+  var elemClasses = getElemClasses(pref, type);
 
   return (
     <div id={id} className={wrapperClasses + backgroundClasses}>
-      <div className={mainClasses}>{children}</div>
+      <div className={elemClasses}>{children}</div>
     </div>
   );
 }

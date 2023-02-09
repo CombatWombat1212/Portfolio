@@ -409,7 +409,11 @@ function MakeRight({ setPopup }) {
             </Heading>
           </Section>
 
-          <Section type="columns" titled titleType="above" className="flex-col" background="background darkest" mainClassName="section--main__title-above">
+
+
+
+            {/* TODO: you've just made it so that you no longer have to manually put section--main__title-above as the mainClassName of section, and you've replaced it with titled="above", whcih is great.  Now along with that, the class 'section--heading__title-above' should be automatically added to heading. but first i'm going to try to seperate section out into more chunks because I no longer like having it in one file, its too confusing.*/}
+          <Section type="columns" titled="above" className="flex-col" background="background darkest">
             <Title>Focus Group Testing</Title>
             <Column>
               <Heading className="section--heading__title-above">Discovering a promising enthusiasm, and some important concerns</Heading>
@@ -421,6 +425,9 @@ function MakeRight({ setPopup }) {
               </Description>
             </Column>
           </Section>
+
+
+
 
           <Section type="columns" titled className="flex-col" background="background darkest">
             <Heading type="h3">Reception was quite positive among both groups:</Heading>
@@ -466,31 +473,35 @@ function MakeRight({ setPopup }) {
             </div>
           </Section>
 
-
-
-
-
           <Section>
-            <Heading>With a foundation of research, and validation from testers, 
-it was time to begin prototyping</Heading>
+            <Heading>With a foundation of research, and validation from testers, it was time to begin prototyping</Heading>
           </Section>
-
         </Chapter>
 
+        <Chapter id="Prototyping">
+          <Section>
+            <Heading></Heading>
+            <Description></Description>
+          </Section>
+
+          {/* <Section type="split header" titled className="flex-col" background="tertiary light" mainClassName="section--main__title-above flex-wrap">
+
+              <Title>Methodology</Title>
+              <Heading className="section--heading__title-above">Prototype scope covered the core journey of makers and customers</Heading>
+              <Description>
+                <p>The two journeys included all the main touch-points from sign-up to order fulfillment. This development goal would allow me to establish the foundation and core interactions of the service.</p>
+              </Description>
+
+              <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["focus_group_testing"]}/>
+
+          </Section> */}
 
 
-<Chapter id="Prototyping">
 
-
-  jasdjkasbdjhb
-</Chapter>
-
-
-
-
-
-
+        </Chapter>
       </CaseStudyPage>
+
+
     </>
   );
 }

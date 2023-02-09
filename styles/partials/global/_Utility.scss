@@ -50,10 +50,24 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
             class: flex,
             values: (
                 col: column,
-                row: row,),
+                row: row,
+                ),
             defaults: (
                 display: flex,
             ) ),
+        "flex-wrap": (
+            property: flex-wrap,
+            important: true,
+            class: flex,
+            values: (
+                wrap: wrap,
+                ),
+            defaults: (
+                display: flex,
+            ) ),
+
+
+
         // "position": (property: position,
         //     values: static relative absolute fixed sticky),
         "gap": (responsive:true,

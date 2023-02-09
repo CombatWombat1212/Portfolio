@@ -1765,6 +1765,22 @@ body {
   padding-top: 0;
 }
 
+.background__tertiary {
+  background-color: #404064;
+}
+
+.background__tertiary + .background__tertiary {
+  padding-top: 0;
+}
+
+.background__tertiary-light {
+  background-color: #5D5D7E;
+}
+
+.background__tertiary-light + .background__tertiary-light {
+  padding-top: 0;
+}
+
 .background {
   position: absolute;
   --size: 100%;
@@ -2797,6 +2813,11 @@ body {
 
 .flex-row {
   flex-direction: row !important;
+  display: flex !important;
+}
+
+.flex-wrap {
+  flex-wrap: wrap !important;
   display: flex !important;
 }
 
