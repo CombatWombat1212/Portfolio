@@ -84,10 +84,17 @@
 
   #Develop {
     &--Brainstorming {
-      .section {
-        &--graphic {
-          --graphic-width: #{mask-width(14rem)};
-        }
+      .section--graphic {
+        --graphic-width: #{mask-width(14rem)};
+      }
+    }
+  }
+
+  #Prototyping {
+    &--Journey-Map {
+      .section--graphic {
+        --graphic-width: #{mask-width(14rem)};
+        --img-panel-height: auto;
       }
     }
   }

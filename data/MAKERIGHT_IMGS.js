@@ -175,11 +175,11 @@ const MAKERIGHT_IMGS = {
 
 
 
-
-  system_map: {
-    name: "system_map",
-    src: "./assets/images/case_studies/makeright/system_map.svg",
-    alt: "System map of the MakeRight platform",
+  // TODO: its not actually a system map its a journey map
+  journey_map: {
+    name: "journey_map",
+    src: "./assets/images/case_studies/makeright/journey_map.svg",
+    alt: "Journey map of the MakeRight platform",
     width: 1045.55,
     height: 430.16,
   },

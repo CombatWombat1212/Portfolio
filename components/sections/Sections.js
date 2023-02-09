@@ -2,7 +2,7 @@ import { defaultProps, PropTypes } from "prop-types";
 import React from "react";
 import Background from "../utilities/Background";
 
-import {getElemClasses, getContainerMarginClass, getWrapperClasses, getMainClasses, getGapClasses, getBackgroundClasses, getColClassList} from "./sections_utilities/GetClasses";
+import { getElemClasses, getContainerMarginClass, getWrapperClasses, getMainClasses, getGapClasses, getBackgroundClasses, getColClassList } from "./sections_utilities/GetClasses";
 import { getHasText, getHasGraphic, getHasBackground } from "./sections_utilities/IfHas";
 import { getSectionChildren } from "./sections_utilities/GetSectionChildren";
 
@@ -11,20 +11,17 @@ import Quote from "./Quote";
 import Heading, { getAdditionalHeadingClassesFromParentProps } from "./Heading";
 import Title from "./Title";
 import Description from "./Description";
-import {Column, ColumnGroup} from "./Columns";
-
+import { Column, ColumnGroup } from "./Columns";
 
 const DEFINED_CHILDREN = ["Column", "Description", "Title", "Heading", "Graphic", "Quote"];
 const BACKGROUND_COLORS = ["background", "background darker", "background darkest", "primary", "secondary", "tertiary", "tertiary light", "makeright tertiary"];
-
-
-
 
 // TODO: at some point these should be re-ordered in a way that's more logical, maybe that would include more descriptive names but they're really hard to think of for something as abstract as this
 // and background should really be renammed to something else because in this case it means a literal section describing background information, but everywhere else in this file it refers to the background color
 const SECTION_TYPE_A = ["default", "overview", "logo banner"];
 const SECTION_TYPE_B = ["pitch"];
 const SECTION_TYPE_C = ["columns"];
+const SECTION_TYPE_D = ["split header"];
 const SECTION_TYPES = [...SECTION_TYPE_A, ...SECTION_TYPE_B, ...SECTION_TYPE_C];
 
 function Section({ className, children, type, background, id, margin, titled, arrows, mainClassName }) {
@@ -34,15 +31,14 @@ function Section({ className, children, type, background, id, margin, titled, ar
 
   if (children == undefined) return null;
   if (children.length == undefined) children = [children];
-  
-  
+
   var childs = getSectionChildren(children);
   var { columns, description, title, heading, graphic, other } = childs;
 
   titled = titled || false;
   var isTitled = titled ? true : false;
 
-  if(titled == "above") childs = getAdditionalHeadingClassesFromParentProps(childs, "titled above");
+  if (titled == "above") childs = getAdditionalHeadingClassesFromParentProps(childs, "titled above");
 
   var elemClasses = getElemClasses(pref, type, titled);
   var containerMarginClass = getContainerMarginClass(margin);
@@ -57,9 +53,6 @@ function Section({ className, children, type, background, id, margin, titled, ar
   var hasBackground = getHasBackground(background);
   var hasArrows = arrows || false;
 
-
-
-
   return (
     <>
       <div id={id} className={wrapperClasses + backgroundClasses}>
@@ -69,7 +62,7 @@ function Section({ className, children, type, background, id, margin, titled, ar
           </>
         )}
         <div className="section--inner">
-          <div className={`${elemClasses} ${containerMarginClass} ${className ? className : ''} ${isTitled ? "" : gapClasses}`}>
+          <div className={`${elemClasses} ${containerMarginClass} ${className ? className : ""} ${isTitled ? "" : gapClasses}`}>
             {SECTION_TYPE_A.indexOf(type) != -1 ? (
               <>
                 {hasText && (
@@ -110,11 +103,11 @@ function Section({ className, children, type, background, id, margin, titled, ar
                 ) : (
                   <ColumnGroup columns={columns} arrows={hasArrows} />
                 )}
+                {graphic && <>{graphic}</>}
+                {other && <>{other}</>}
               </>
             ) : SECTION_TYPE_D.indexOf(type) != -1 ? (
-              <>
-            
-              </>
+              <></>
             ) : null}
           </div>
         </div>
@@ -136,15 +129,12 @@ Section.propTypes = {
   background: PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf(["none", ...BACKGROUND_COLORS])]),
 };
 
-
 // TODO: might be worth checking if this is working properly, specifically the two variables below
 var SECTION_DEFAULT_PROPS = Section.defaultProps;
 var SECTION_PROP_TYPES = Section.propTypes;
 import Chapter from "./Chapter";
-export {SECTION_DEFAULT_PROPS, SECTION_PROP_TYPES}
-
+export { SECTION_DEFAULT_PROPS, SECTION_PROP_TYPES };
 
 export default Section;
-export { Section, Chapter, Description, Column, Title, Heading, Graphic, Quote};
-export {SECTION_TYPE_A, SECTION_TYPE_B, SECTION_TYPE_C, SECTION_TYPES, BACKGROUND_COLORS, DEFINED_CHILDREN};
-
+export { Section, Chapter, Description, Column, Title, Heading, Graphic, Quote };
+export { SECTION_TYPE_A, SECTION_TYPE_B, SECTION_TYPE_C, SECTION_TYPES, BACKGROUND_COLORS, DEFINED_CHILDREN };

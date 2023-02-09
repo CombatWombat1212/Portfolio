@@ -1500,7 +1500,7 @@ body {
 .section {
   --section-text-spacing: 1.25rem;
   --section-graphic-panel-pad: 2.5rem;
-  --section_title-above-offset: -0.4rem;
+  --section_title-above-offset: -0.425rem;
   display: flex;
   flex-direction: row;
 }
@@ -3446,5 +3446,10 @@ body {
 
 #Makeright #Develop--Brainstorming .section--graphic {
   --graphic-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 14rem) ;
+}
+
+#Makeright #Prototyping--Journey-Map .section--graphic {
+  --graphic-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 14rem) ;
+  --img-panel-height: auto;
 }
 /*# sourceMappingURL=style.css.map */

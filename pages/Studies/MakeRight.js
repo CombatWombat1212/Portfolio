@@ -409,7 +409,6 @@ function MakeRight({ setPopup }) {
             </Heading>
           </Section>
 
-            
           <Section type="columns" titled="above" background="background darkest">
             <Title>Focus Group Testing</Title>
             <Column>
@@ -422,9 +421,6 @@ function MakeRight({ setPopup }) {
               </Description>
             </Column>
           </Section>
-
-
-
 
           <Section type="columns" titled background="background darkest">
             <Heading type="h3">Reception was quite positive among both groups:</Heading>
@@ -476,29 +472,20 @@ function MakeRight({ setPopup }) {
         </Chapter>
 
         <Chapter id="Prototyping">
-          <Section>
-            <Heading></Heading>
-            <Description></Description>
-          </Section>
-
-          {/* <Section type="split header" titled className="flex-col" background="tertiary light" mainClassName="section--main__title-above flex-wrap">
-
-              <Title>Methodology</Title>
-              <Heading className="section--heading__title-above">Prototype scope covered the core journey of makers and customers</Heading>
+          <Section id="Prototyping--Journey-Map" type="columns" titled="above" background="tertiary light" mainClassName="mb-3">
+            <Title>Methodology</Title>
+            <Column className="col-7">
+              <Heading>Prototype scope covered the core journey of makers<br/>and customers</Heading>
+            </Column>
+            <Column className="col-5">
               <Description>
                 <p>The two journeys included all the main touch-points from sign-up to order fulfillment. This development goal would allow me to establish the foundation and core interactions of the service.</p>
               </Description>
-
-              <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["focus_group_testing"]}/>
-
-          </Section> */}
-
-
-
+            </Column>
+            <Graphic type="image" background="tertiary" img={MAKERIGHT_IMGS["journey_map"]} />
+          </Section>
         </Chapter>
       </CaseStudyPage>
-
-
     </>
   );
 }
