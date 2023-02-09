@@ -8,7 +8,7 @@ import { getSectionChildren } from "./sections_utilities/GetSectionChildren";
 
 import Graphic from "./Graphic";
 import Quote from "./Quote";
-import Heading from "./Heading";
+import Heading, { getAdditionalHeadingClassesFromParentProps } from "./Heading";
 import Title from "./Title";
 import Description from "./Description";
 import {Column, ColumnGroup} from "./Columns";
@@ -35,11 +35,14 @@ function Section({ className, children, type, background, id, margin, titled, ar
   if (children == undefined) return null;
   if (children.length == undefined) children = [children];
   
+  
+  var childs = getSectionChildren(children);
+  var { columns, description, title, heading, graphic, other } = childs;
+
   titled = titled || false;
   var isTitled = titled ? true : false;
 
-  var childs = getSectionChildren(children);
-  var { columns, description, title, heading, graphic, other } = childs;
+  if(titled == "above") childs = getAdditionalHeadingClassesFromParentProps(childs, "titled above");
 
   var elemClasses = getElemClasses(pref, type);
   var containerMarginClass = getContainerMarginClass(margin);
@@ -53,6 +56,7 @@ function Section({ className, children, type, background, id, margin, titled, ar
   var hasGraphic = getHasGraphic(graphic);
   var hasBackground = getHasBackground(background);
   var hasArrows = arrows || false;
+
 
 
 

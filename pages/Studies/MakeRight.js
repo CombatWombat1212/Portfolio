@@ -409,16 +409,11 @@ function MakeRight({ setPopup }) {
             </Heading>
           </Section>
 
-
-
-
-            {/* TODO: you've just made it so that you no longer have to manually put section--main__title-above as the mainClassName of section, and you've replaced it with titled="above", whcih is great.  Now along with that, the class 'section--heading__title-above' should be automatically added to heading. but first i'm going to try to seperate section out into more chunks because I no longer like having it in one file, its too confusing.*/}
-
             
           <Section type="columns" titled="above" className="flex-col" background="background darkest">
             <Title>Focus Group Testing</Title>
             <Column>
-              <Heading className="section--heading__title-above">Discovering a promising enthusiasm, and some important concerns</Heading>
+              <Heading>Discovering a promising enthusiasm, and some important concerns</Heading>
             </Column>
             <Column>
               <Description>

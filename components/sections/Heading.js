@@ -1,15 +1,33 @@
 import { defaultProps, PropTypes } from "prop-types";
 
+function getAdditionalHeadingClassesFromParentProps(childs, reason) {
+  function addClass(obj) {
+    var copy = { ...obj };
+    copy.props = { ...obj.props };
+    var className = copy.props.className ? copy.props.className : "";
+    if (reason == "titled above") copy.props.className = `${className} section--heading__title-above`;
+    return copy;
+  }
+  var childsCopy = childs;
+  for (var i = 0; i < childs.heading.length; i++) {
+    childsCopy.heading[i] = addClass(childs.heading[i]);
+  }
+  for (var i = 0; i < childs.columns.length; i++) {
+    for (var j = 0; j < childs.columns[i].heading.length; j++) {
+      childsCopy.columns[i].heading[j] = addClass(childs.columns[i].heading[j]);
+    }
+  }
+  return childsCopy;
+}
 
 function getHeadingClasses(type) {
-    var headingClasses = "";
-    if (type == "h1") headingClasses += " text--h1";
-    if (type == "h2") headingClasses += " text--h2";
-    if (type == "h3") headingClasses += " text--h3";
-    if (type == "h4") headingClasses += " text--h4";
-    return headingClasses;
-  }
-  
+  var headingClasses = "";
+  if (type == "h1") headingClasses += " text--h1";
+  if (type == "h2") headingClasses += " text--h2";
+  if (type == "h3") headingClasses += " text--h3";
+  if (type == "h4") headingClasses += " text--h4";
+  return headingClasses;
+}
 
 function Heading({ children, type, className }) {
   var headingClasses = getHeadingClasses(type);
@@ -33,3 +51,4 @@ Heading.propTypes = {
 };
 
 export default Heading;
+export { Heading, getAdditionalHeadingClassesFromParentProps };
