@@ -1,5 +1,5 @@
 
-import { getBackgroundClasses } from "./sections_utilities/GetBackgrounds";
+import { getBackgroundClasses } from "./sections_utilities/GetClasses";
 
 
 function Quote({ children, background, className }) {

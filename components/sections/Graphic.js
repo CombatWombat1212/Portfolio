@@ -2,9 +2,8 @@ import Image from "next/image";
 import { defaultProps, PropTypes } from "prop-types";
 import React from "react";
 import Mask from "../utilities/Mask";
-import {getHasBackground, getBackgroundClasses} from "./sections_utilities/GetBackgrounds";
-
-
+import { getHasBackground } from "./sections_utilities/IfHas";
+import { getBackgroundClasses } from "./sections_utilities/GetClasses";
 
 function Graphic({ className, type, img, background, children }) {
     var pref = "section--graphic";

@@ -3,100 +3,22 @@ import React from "react";
 import Background from "../utilities/Background";
 import ICONS from "@/data/ICONS";
 
-import {BACKGROUND_COLORS, getHasBackground, getBackgroundClasses} from "./sections_utilities/GetBackgrounds";
+import {getElemClasses, getContainerMarginClass, getWrapperClasses, getMainClasses, getGapClasses, getBackgroundClasses, getColClassList} from "./sections_utilities/GetClasses";
+import { getHasText, getHasGraphic, getHasBackground } from "./sections_utilities/IfHas";
 
 import Graphic from "./Graphic";
 import Quote from "./Quote";
 import Heading from "./Heading";
 import Title from "./Title";
+import Description from "./Description";
+import {Column, ColumnGroup} from "./Columns";
+
 
 const DEFINED_CHILDREN = ["Column", "Description", "Title", "Heading", "Graphic", "Quote"];
+const BACKGROUND_COLORS = ["background", "background darker", "background darkest", "primary", "secondary", "tertiary", "tertiary light", "makeright tertiary"];
 
 
 
-function getDescriptionClasses(type) {
-  var descriptionClasses = "";
-  if (type == "h1") descriptionClasses += " text--h1";
-  if (type == "h2") descriptionClasses += " text--h2";
-  if (type == "h3") descriptionClasses += " text--h3";
-  if (type == "h4") descriptionClasses += " text--h4";
-  return descriptionClasses;
-}
-
-function getElemClasses(pref, type) {
-  if (pref == undefined) pref = `${pref}`;
-  var elemClasses = `${pref}`;
-  if (type == undefined) return elemClasses;
-  if (type == "overview") elemClasses += ` ${pref}__overview`;
-  if (type == "pitch") elemClasses += ` ${pref}__pitch`;
-
-  return elemClasses;
-}
-
-
-function getMainClasses(mainClassName, titled){
-
-  if(mainClassName == undefined) mainClassName = "";
-  if(titled == true || titled == false) return mainClassName;
-  if(titled == "above") mainClassName += " section--main__title-above";
-
-  return mainClassName;
-}
-
-function getGapClasses(type, arrows) {
-  var gapClasses = "";
-  if (SECTION_TYPE_C.indexOf(type) != -1) gapClasses += " gap-4";
-  if (arrows) {
-    gapClasses = "gap-5";
-  }
-  return gapClasses;
-}
-
-function getContainerMarginClass(margin) {
-  var containerMarginClass = "container";
-  if (margin == undefined) return containerMarginClass;
-  // if (margin == "regular") containerMarginClass += " container__regular";
-  if (margin == "wide") containerMarginClass += " container__wide";
-
-  return containerMarginClass;
-}
-
-function getWrapperClasses(pref) {
-  if (pref == undefined) pref = "section";
-  var wrapperClasses = `${pref}--wrapper`;
-
-  return wrapperClasses;
-}
-
-
-function getHasText(childs) {
-  var hasText = false;
-  var { description, title, heading } = childs;
-  if (description.length != 0 || title.length != 0 || heading.length != 0) hasText = true;
-  return hasText;
-}
-
-function getHasGraphic(graphic) {
-  var hasGraphic = false;
-  hasGraphic = graphic.length != 0;
-  return hasGraphic;
-}
-
-function getColClassList(classList) {
-  var classes = [];
-  var columnClasses = [];
-  var otherClasses = [];
-
-  if (classList == undefined || classList == "") return { colClasses: columnClasses, otherClasses: otherClasses };
-  if (typeof classList == "string") classes = classList.split(" ");
-
-  for (var i = 0; i < classes.length; i++) {
-    if (classes[i].indexOf("col-") != -1) columnClasses.push(classes[i]);
-    else otherClasses.push(classes[i]);
-  }
-
-  return { colClasses: columnClasses, otherClasses: otherClasses };
-}
 
 function organizeChildren(allChildren) {
   var allTypes = [...DEFINED_CHILDREN, "Other"];
@@ -151,49 +73,6 @@ function getSectionChildren(children) {
 }
 
 
-
-function Description({ className, children, type, background }) {
-  
-  var descriptionClasses = getDescriptionClasses(type);
-  var backgroundClasses = getBackgroundClasses("section--description", background);
-
-  return <div className={`section--description ${className ? className : ""} ${descriptionClasses} ${backgroundClasses ? backgroundClasses : ""}`}>{children}</div>;
-}
-
-function ColumnGroup({ columns, arrows }) {
-  return (
-    <>
-      {columns.map((column, i) => {
-        var { graphic, heading, title, description, quote, other, classes } = columns[i];
-
-        var colClasses = `col-${Math.floor(12 / columns.length)}`;
-        var otherClasses = "";
-        if (classes.colClasses.length != 0) colClasses = classes.colClasses.join(" ");
-        if (classes.otherClasses.length != 0) otherClasses = classes.otherClasses.join(" ");
-
-        return (
-          <Column className={`column ${colClasses} ${otherClasses}`} key={`column ${i}`}>
-            {arrows && i != 0 && (
-              <div className="column--arrow">
-                <Graphic type="mask" img={ICONS["chevron_right"]}></Graphic>
-              </div>
-            )}
-            {title && <>{title}</>}
-            {graphic && <>{graphic}</>}
-            {heading && <>{heading}</>}
-            {description && <>{description}</>}
-            {quote && <>{quote}</>}
-            {other && <>{other}</>}
-          </Column>
-        );
-      })}
-    </>
-  );
-}
-
-function Column({ children, className }) {
-  return <div className={`section--column ${className ? className : ""}`}>{children}</div>;
-}
 
 
 
@@ -332,3 +211,4 @@ Chapter.propTypes = Section.propTypes;
 
 export default Section;
 export { Section, Chapter, Description, Column, Title, Heading, Graphic, Quote};
+export {SECTION_TYPE_A, SECTION_TYPE_B, SECTION_TYPE_C, SECTION_TYPES, BACKGROUND_COLORS};
