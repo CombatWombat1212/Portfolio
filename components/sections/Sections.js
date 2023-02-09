@@ -44,7 +44,7 @@ function Section({ className, children, type, background, id, margin, titled, ar
 
   if(titled == "above") childs = getAdditionalHeadingClassesFromParentProps(childs, "titled above");
 
-  var elemClasses = getElemClasses(pref, type);
+  var elemClasses = getElemClasses(pref, type, titled);
   var containerMarginClass = getContainerMarginClass(margin);
   var wrapperClasses = getWrapperClasses(pref);
   var backgroundClasses = getBackgroundClasses(pref, background);

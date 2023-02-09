@@ -156,7 +156,7 @@ function MakeRight({ setPopup }) {
         </Chapter>
 
         <Chapter name="Research" id="Research">
-          <Section type="columns" className="flex-col" titled arrows background="background darker">
+          <Section type="columns" titled arrows background="background darker">
             <Title>Approach</Title>
             <Heading>Finding a focus within the field of 3D printing</Heading>
 
@@ -224,7 +224,7 @@ function MakeRight({ setPopup }) {
             </Heading>
           </Section>
 
-          <Section type="columns" titled className="flex-col" mainClassName="mt-less" background="background darkest">
+          <Section type="columns" titled mainClassName="mt-less" background="background darkest">
             <Heading type="h3">Non-printer owners have interest in the tech, and barriers to accessing it</Heading>
             <Description className="mt-less">
               <p>
@@ -249,7 +249,7 @@ function MakeRight({ setPopup }) {
             </Column>
           </Section>
 
-          <Section type="columns" titled className="flex-col" mainClassName="mt-less" background="background darkest">
+          <Section type="columns" titled mainClassName="mt-less" background="background darkest">
             <Heading type="h3">While many owners of 3D printers have idle machines, and free time</Heading>
             <Description className="mt-less">
               <p>
@@ -297,7 +297,7 @@ function MakeRight({ setPopup }) {
         </Chapter>
 
         <Chapter name="Develop" id="Develop">
-          <Section type="columns" className="flex-col" titled arrows background="background darker">
+          <Section type="columns" titled arrows background="background darker">
             <Title>Methodology</Title>
             <Heading>Moving from problem to solution</Heading>
 
@@ -322,7 +322,7 @@ function MakeRight({ setPopup }) {
             </Column>
           </Section>
 
-          <Section id="Develop--Brainstorming" type="columns" className="flex-col" titled background="background darkest">
+          <Section id="Develop--Brainstorming" type="columns" titled background="background darkest">
             <Title>Brainstorming</Title>
             <Heading>Out of all concepts, one stood out in terms of viability</Heading>
 
@@ -410,7 +410,7 @@ function MakeRight({ setPopup }) {
           </Section>
 
             
-          <Section type="columns" titled="above" className="flex-col" background="background darkest">
+          <Section type="columns" titled="above" background="background darkest">
             <Title>Focus Group Testing</Title>
             <Column>
               <Heading>Discovering a promising enthusiasm, and some important concerns</Heading>
@@ -426,7 +426,7 @@ function MakeRight({ setPopup }) {
 
 
 
-          <Section type="columns" titled className="flex-col" background="background darkest">
+          <Section type="columns" titled background="background darkest">
             <Heading type="h3">Reception was quite positive among both groups:</Heading>
             <Description className="mt-less">Laypersons commented ideas for what they would print, while makers showed excitement towards profiting off their equipment.</Description>
 

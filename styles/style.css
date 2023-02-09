@@ -1581,6 +1581,10 @@ body {
 }
 
 .section--description__color {
+  border-radius: var(--b-rad);
+  -webkit-border-radius: var(--b-rad);
+  -moz-border-radius: var(--b-rad);
+  -khtml-border-radius: var(--b-rad);
   padding: 2.25rem;
 }
 
@@ -1779,11 +1783,6 @@ body {
 
 .background__tertiary-light + .background__tertiary-light {
   padding-top: 0;
-}
-
-.TEST----THING {
-  background-color: red;
-  transform: scale(20);
 }
 
 .background {

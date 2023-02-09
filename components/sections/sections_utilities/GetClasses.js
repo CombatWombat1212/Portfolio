@@ -1,12 +1,13 @@
 import { SECTION_TYPE_C } from "../Sections";
 import { BACKGROUND_COLORS } from "../Sections";
 
-function getElemClasses(pref, type) {
+function getElemClasses(pref, type, titled) {
     if (pref == undefined) pref = `${pref}`;
     var elemClasses = `${pref}`;
     if (type == undefined) return elemClasses;
     if (type == "overview") elemClasses += ` ${pref}__overview`;
     if (type == "pitch") elemClasses += ` ${pref}__pitch`;
+    if (pref=="section" && titled) elemClasses += ` flex-col`;
   
     return elemClasses;
   }

@@ -72,9 +72,10 @@
         margin-top: calc(var(--section-text-spacing) * 0.35);
       }
 
+      
       list-style-position: inside;
     }
-
+    
     li {
       span {
         display: block;
@@ -83,8 +84,9 @@
         padding-left: var(--counter-width);
       }
     }
-
+    
     &__color {
+      @include b-rad;
       padding: 2.25rem;
     }
   }
@@ -313,7 +315,7 @@
 
 
 
-.TEST----THING{
-  background-color:red;
-  transform: scale(20);
-}
+// .TEST----THING{
+//   background-color:red;
+//   transform: scale(20);
+// }
