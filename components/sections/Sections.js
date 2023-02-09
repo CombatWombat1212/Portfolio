@@ -8,6 +8,7 @@ import {BACKGROUND_COLORS, getHasBackground, getBackgroundClasses} from "./secti
 import Graphic from "./Graphic";
 import Quote from "./Quote";
 import Heading from "./Heading";
+import Title from "./Title";
 
 const DEFINED_CHILDREN = ["Column", "Description", "Title", "Heading", "Graphic", "Quote"];
 
@@ -150,19 +151,6 @@ function getSectionChildren(children) {
 }
 
 
-
-
-
-function Title({ children }) {
-  var title = children;
-  title = title.toUpperCase();
-
-  return (
-    <div className="section--title">
-      <h4>{title}</h4>
-    </div>
-  );
-}
 
 function Description({ className, children, type, background }) {
   
