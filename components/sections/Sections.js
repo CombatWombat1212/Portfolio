@@ -1,10 +1,10 @@
 import { defaultProps, PropTypes } from "prop-types";
 import React from "react";
 import Background from "../utilities/Background";
-import ICONS from "@/data/ICONS";
 
 import {getElemClasses, getContainerMarginClass, getWrapperClasses, getMainClasses, getGapClasses, getBackgroundClasses, getColClassList} from "./sections_utilities/GetClasses";
 import { getHasText, getHasGraphic, getHasBackground } from "./sections_utilities/IfHas";
+import { getSectionChildren } from "./sections_utilities/GetSectionChildren";
 
 import Graphic from "./Graphic";
 import Quote from "./Quote";
@@ -16,62 +16,6 @@ import {Column, ColumnGroup} from "./Columns";
 
 const DEFINED_CHILDREN = ["Column", "Description", "Title", "Heading", "Graphic", "Quote"];
 const BACKGROUND_COLORS = ["background", "background darker", "background darkest", "primary", "secondary", "tertiary", "tertiary light", "makeright tertiary"];
-
-
-
-
-function organizeChildren(allChildren) {
-  var allTypes = [...DEFINED_CHILDREN, "Other"];
-
-  var arr = [];
-
-  if (allChildren.length == undefined) allChildren = [allChildren];
-
-  for (var i = 0; i < allTypes.length; i++) {
-    arr.push({ type: allTypes[i].toLocaleLowerCase(), elems: [] });
-  }
-
-  for (var i = 0; i < allTypes.length; i++) {
-    var type = arr[i].type;
-
-    if (type != "other") {
-      arr[i].elems = allChildren.filter((child) => child.type.name == allTypes[i]);
-    } else {
-      arr[i].elems = allChildren.filter((child) => DEFINED_CHILDREN.indexOf(child.type.name) == -1) || null;
-    }
-  }
-  return arr;
-}
-
-function getSectionChildren(children) {
-  var allChildren = children;
-
-  var allTypes = [...DEFINED_CHILDREN, "Other"];
-
-  var organizedChildren = [];
-
-  organizedChildren = organizeChildren(allChildren);
-
-  var [columns, description, title, heading, graphic, quote, other] = [organizedChildren[0].elems, organizedChildren[1].elems, organizedChildren[2].elems, organizedChildren[3].elems, organizedChildren[4].elems, organizedChildren[5].elems, organizedChildren[6].elems];
-
-  if (columns.length != 0) {
-    for (var i = 0; i < columns.length; i++) {
-      var column = columns[i];
-
-      var columnClasses = getColClassList(column.props.className);
-
-      var columnChildren = column.props.children;
-      var organizedColumnChildren = organizeChildren(columnChildren);
-
-      var [columnColumns, columnDescription, columnTitle, columnHeading, columnGraphic, columnQuote, columnOther] = [organizedColumnChildren[0].elems, organizedColumnChildren[1].elems, organizedColumnChildren[2].elems, organizedColumnChildren[3].elems, organizedColumnChildren[4].elems, organizedColumnChildren[5].elems, organizedColumnChildren[6].elems];
-
-      columns[i] = { columns: columnColumns, description: columnDescription, title: columnTitle, heading: columnHeading, graphic: columnGraphic, quote: columnQuote, other: columnOther, classes: columnClasses };
-    }
-  }
-
-  return { columns, description, title, heading, graphic, quote, other };
-}
-
 
 
 
@@ -165,9 +109,7 @@ function Section({ className, children, type, background, id, margin, titled, ar
               </>
             ) : SECTION_TYPE_D.indexOf(type) != -1 ? (
               <>
-              
-              
-              
+            
               </>
             ) : null}
           </div>
@@ -190,25 +132,15 @@ Section.propTypes = {
   background: PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf(["none", ...BACKGROUND_COLORS])]),
 };
 
-// TODO: section and chapter background should be able to be set with an image, and named colors - only thing missing from that now is image background support for chapters but i don't even think that's used in the design
 
-function Chapter({ children, type, background, id, margin }) {
-  var pref = "chapter";
+// TODO: might be worth checking if this is working properly, specifically the two variables below
+var SECTION_DEFAULT_PROPS = Section.defaultProps;
+var SECTION_PROP_TYPES = Section.propTypes;
+import Chapter from "./Chapter";
+export {SECTION_DEFAULT_PROPS, SECTION_PROP_TYPES}
 
-  var wrapperClasses = getWrapperClasses(pref);
-  var backgroundClasses = getBackgroundClasses(pref, background);
-  var elemClasses = getElemClasses(pref, type);
-
-  return (
-    <div id={id} className={wrapperClasses + backgroundClasses}>
-      <div className={elemClasses}>{children}</div>
-    </div>
-  );
-}
-
-Chapter.defaultProps = Section.defaultProps;
-Chapter.propTypes = Section.propTypes;
 
 export default Section;
 export { Section, Chapter, Description, Column, Title, Heading, Graphic, Quote};
-export {SECTION_TYPE_A, SECTION_TYPE_B, SECTION_TYPE_C, SECTION_TYPES, BACKGROUND_COLORS};
+export {SECTION_TYPE_A, SECTION_TYPE_B, SECTION_TYPE_C, SECTION_TYPES, BACKGROUND_COLORS, DEFINED_CHILDREN};
+
