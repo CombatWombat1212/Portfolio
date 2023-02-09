@@ -1,13 +1,12 @@
-import Image from "next/image";
 import { defaultProps, PropTypes } from "prop-types";
 import React from "react";
-import Mask from "../utilities/Mask";
 import Background from "../utilities/Background";
 import ICONS from "@/data/ICONS";
 
 import {BACKGROUND_COLORS, getHasBackground, getBackgroundClasses} from "./sections_utilities/GetBackgrounds";
 
 import Graphic from "./Graphic";
+import Quote from "./Quote";
 
 const DEFINED_CHILDREN = ["Column", "Description", "Title", "Heading", "Graphic", "Quote"];
 
@@ -158,15 +157,6 @@ function getSectionChildren(children) {
   return { columns, description, title, heading, graphic, quote, other };
 }
 
-function Quote({ children, background, className }) {
-  var backgroundClasses = getBackgroundClasses("section--quote", background);
-
-  return (
-    <div className={`section--quote quote ${backgroundClasses ? backgroundClasses : ""} ${className ? className : ""} `}>
-      <p>{children}</p>
-    </div>
-  );
-}
 
 function Heading({ children, type, className }) {
   var headingClasses = getHeadingClasses(type);
