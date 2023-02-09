@@ -176,6 +176,124 @@ const MAKERIGHT_IMGS = {
 
 
 
+  system_map: {
+    name: "system_map",
+    src: "./assets/images/case_studies/makeright/system_map.svg",
+    alt: "System map of the MakeRight platform",
+    width: 1045.55,
+    height: 430.16,
+  },
+
+
+
+
+
+  maker_journey_low_fi: {
+    name: "maker_journey_low_fi",
+    src: "./assets/images/case_studies/makeright/maker_journey_low_fi.png",
+    alt: "A hand drawn sketch of a 3D printer nozzle",
+    width: 974,
+    height: 1130,
+  },
+
+
+
+  customer_journey_low_fi: {
+    name: "customer_journey_low_fi",
+    src: "./assets/images/case_studies/makeright/customer_journey_low_fi.png",
+    alt: "A hand drawn sketch of a shopping bag",
+    width: 978,
+    height: 960,
+  },
+
+
+
+
+  maker_journey_high_fi: {
+    name: "maker_journey_high_fi",
+    src: "./assets/images/case_studies/makeright/maker_journey_high_fi.svg",
+    alt: "A graphic of a 3D printer nozzle",
+    width: 95.56,
+    height: 105.54,
+  },
+
+
+
+  customer_journey_high_fi: {
+    name: "customer_journey_high_fi",
+    src: "./assets/images/case_studies/makeright/customer_journey_high_fi.svg",
+    alt: "A graphic of a shopping bag",
+    width: 93.59,
+    height: 90.66,
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  iterations_checkout_low_fi: {
+    name: "iterations_checkout_low_fi",
+    src: "./assets/images/case_studies/makeright/prototypes/iterations_checkout_low_fi.png",
+    alt: "A low fidelity prototype of the checkout page",
+    width: 2139,
+    height: 1305,
+  },
+
+
+
+  iterations_checkout_high_fi: {
+    name: "iterations_checkout_high_fi",
+    src: "./assets/images/case_studies/makeright/prototypes/iterations_checkout_high_fi.png",
+    alt: "A high fidelity prototype of the checkout page",
+    width: 2139,
+    height: 1305,
+  },
+
+
+
+  iterations_file_checking_low_fi: {
+    name: "iterations_file_checking_low_fi",
+    src: "./assets/images/case_studies/makeright/prototypes/iterations_file_checking_low_fi.png",
+    alt: "A low fidelity prototype of the file checking page",
+    width: 2139,
+    height: 1305,
+  },
+
+
+  iterations_file_checking_high_fi: {
+    name: "iterations_file_checking_high_fi",
+    src: "./assets/images/case_studies/makeright/prototypes/iterations_file_checking_high_fi.png",
+    alt: "A high fidelity prototype of the file checking page",
+    width: 2139,
+    height: 1305,
+  },
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 };
 
 //   function Img(icon){
