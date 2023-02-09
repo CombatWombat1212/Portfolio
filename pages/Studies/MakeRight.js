@@ -2,7 +2,7 @@ import { StudyPanel } from "/components/elements/Panel";
 import getStudy from "../../scripts/GetStudy";
 import CaseStudyPage from "/components/studies/CaseStudyPage";
 import Brief from "/components/studies/Brief";
-import { Section, Chapter, Title, Column, Heading, Description, Graphic, Quote } from "/components/studies/Sections";
+import { Section, Chapter, Title, Column, Heading, Description, Graphic, Quote } from "/components/sections/Sections";
 import MAKERIGHT_IMGS from "/data/MAKERIGHT_IMGS";
 import Gantt from "/components/charts/Gantt";
 import BarGraph from "@/components/charts/BarGraph";

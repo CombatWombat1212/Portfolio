@@ -5,8 +5,13 @@ import Mask from "../utilities/Mask";
 import Background from "../utilities/Background";
 import ICONS from "@/data/ICONS";
 
+import {BACKGROUND_COLORS, getHasBackground, getBackgroundClasses} from "./sections_utilities/GetBackgrounds";
+
+import Graphic from "./Graphic";
+
 const DEFINED_CHILDREN = ["Column", "Description", "Title", "Heading", "Graphic", "Quote"];
-const BACKGROUND_COLORS = ["background", "background darker", "background darkest", "primary", "secondary", "tertiary", "tertiary light", "makeright tertiary"];
+
+
 
 function getHeadingClasses(type) {
   var headingClasses = "";
@@ -71,38 +76,6 @@ function getWrapperClasses(pref) {
   return wrapperClasses;
 }
 
-function getBackgroundClasses(pref, background) {
-  var backgroundClasses = ``;
-  if (background == undefined) return backgroundClasses;
-
-  if (typeof background == "string") {
-    if (BACKGROUND_COLORS.indexOf(background) != -1) {
-      if (pref == "chapter" && background != "background") backgroundClasses += ` ${pref}__color`;
-      else if (pref == "section") backgroundClasses += ` ${pref}__color`;
-      else if (pref == "section--quote") backgroundClasses += ` ${pref}__color`;
-      else if (pref == "section--description") backgroundClasses += ` ${pref}__color`;
-    }
-
-    if (pref == "section--graphic") backgroundClasses += ` graphic--panel`;
-
-    if (background == "primary") backgroundClasses += ` background__primary`;
-    if (background == "makeright tertiary") backgroundClasses += ` background__makeright-tertiary`;
-    if (background == "tertiary") backgroundClasses += ` background__tertiary`;
-    if (background == "tertiary light") backgroundClasses += ` background__tertiary-light`;
-    if (background == "background") backgroundClasses += ` background__background`;
-    if (background == "background darker") backgroundClasses += ` background__background background__background-darker`;
-    if (background == "background darkest") backgroundClasses += ` background__background background__background-darkest`;
-  } else if (typeof background == "object") {
-    backgroundClasses += ` ${pref}__image`;
-  }
-  return backgroundClasses;
-}
-
-function getHasBackground(background) {
-  var hasBackground = false;
-  if (background != "background") hasBackground = true;
-  return hasBackground;
-}
 
 function getHasText(childs) {
   var hasText = false;
@@ -272,56 +245,6 @@ function Column({ children, className }) {
 
 
 
-
-
-
-
-function Graphic({ className, type, img, background, children }) {
-  var pref = "section--graphic";
-  var isImg = type == "image";
-  var isMask = type == "mask";
-  var hasBackground = getHasBackground(background);
-  var backgroundClasses = getBackgroundClasses(pref, background);
-
-  var hasButton = false;
-  if (children) {
-    var childrenArray = React.Children.toArray(children);
-    for (var i = 0; i < childrenArray.length; i++) {
-      if (childrenArray[i].type.name == "Button") {
-        hasButton = true;
-        break;
-      }
-    }
-  }
-
-  // TODO: if you end up using this 'img-aspect-width' thing in multiple places then you should create a wrapper for Next/Image that automatically adds it to your image components, same as its done here and within the Mask component
-
-  return (
-    <>
-      {isImg && (
-        <div className={`section--graphic graphic ${backgroundClasses} ${className ? className : ''} ${hasButton ? 'graphic__container' : ''}`} style={{ "--img-aspect-width": img.width, "--img-aspect-height": img.height }}>
-          <Image src={img.src} alt={img.alt} width={img.width} height={img.height} />
-          {children && children}
-        </div>
-      )}
-      {isMask && (
-        <div className={`section--graphic graphic ${backgroundClasses} ${className ? className : ''} ${hasButton ? 'graphic__container' : ''}`} style={{ "--mask-aspect-width": img.width, "--mask-aspect-height": img.height }}>
-          <Mask src={img.src} alt={img.alt} width={img.width} height={img.height} />
-          {children && children}
-        </div>
-      )}
-    </>
-  );
-}
-
-Graphic.defaultProps = {
-  type: "image",
-};
-
-Graphic.propTypes = {
-  type: PropTypes.oneOf(["image", "mask"]),
-};
-
 // TODO: at some point these should be re-ordered in a way that's more logical, maybe that would include more descriptive names but they're really hard to think of for something as abstract as this
 // and background should really be renammed to something else because in this case it means a literal section describing background information, but everywhere else in this file it refers to the background color
 const SECTION_TYPE_A = ["default", "overview", "logo banner"];
@@ -456,4 +379,4 @@ Chapter.defaultProps = Section.defaultProps;
 Chapter.propTypes = Section.propTypes;
 
 export default Section;
-export { Section, Chapter, Description, Column, Title, Heading, Graphic, Quote };
+export { Section, Chapter, Description, Column, Title, Heading, Graphic, Quote};
