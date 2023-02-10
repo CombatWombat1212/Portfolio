@@ -1877,13 +1877,13 @@ body {
 }
 
 .popup {
-  z-index: 10;
-  width: 100%;
-  height: 100%;
-  display: flex;
   --popup-pad: 2.5rem;
   --popup-inner-pad: 1.875rem;
   --popup-gap: calc(var(--popup-inner-pad) * 0.8);
+  z-index: 10;
+  width: calc(var(--site-max-width) - var(--popup-pad));
+  height: calc(100% - var(--nav-height) - var(--popup-pad));
+  display: flex;
 }
 
 .popup--wrapper {
@@ -1926,7 +1926,6 @@ body {
 }
 
 .popup--content {
-  margin: var(--popup-pad);
   border-radius: var(--b-rad);
   -webkit-border-radius: var(--b-rad);
   -moz-border-radius: var(--b-rad);
