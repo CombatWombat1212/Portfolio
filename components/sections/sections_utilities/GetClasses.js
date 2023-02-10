@@ -1,114 +1,107 @@
 import { SECTION_TYPE_C } from "../Sections";
 import { BACKGROUND_COLORS } from "../Sections";
+import { getClassesOfPrefix, removeClassesOfPrefix, removeEmptyClasses } from "./ClassUtilities";
 
 function getElemClasses(pref, type, titled) {
-    if (pref == undefined) pref = `${pref}`;
-    var elemClasses = `${pref}`;
-    if (type == undefined) return elemClasses;
-    if (type == "overview") elemClasses += ` ${pref}__overview`;
-    if (type == "pitch") elemClasses += ` ${pref}__pitch`;
-    if (pref=="section" && titled) elemClasses += ` flex-col`;
-  
-    return elemClasses;
+  if (pref == undefined) pref = `${pref}`;
+  var elemClasses = `${pref}`;
+  if (type == undefined) return elemClasses;
+  if (type == "overview") elemClasses += ` ${pref}__overview`;
+  if (type == "pitch") elemClasses += ` ${pref}__pitch`;
+  if (pref == "section" && titled) elemClasses += ` flex-col`;
+
+  return elemClasses;
+}
+
+function getMainClasses(mainClassName, titled) {
+  if (mainClassName == undefined) mainClassName = "";
+  // if (titled == true || titled == false) return mainClassName;
+  if (titled == "above") mainClassName += " section--main__title-above";
+
+  mainClassName = removeClassesOfPrefix(mainClassName, "gap-");
+
+  return mainClassName;
+}
+
+function getGapClasses(type, arrows, mainClassName) {
+  var gapClasses = "";
+  if (SECTION_TYPE_C.indexOf(type) != -1) gapClasses = "gap-4";
+  if (arrows) gapClasses = "gap-6";
+
+  if (!mainClassName) return gapClasses;
+  if(mainClassName.indexOf("gap-") == -1) return gapClasses;
+
+  gapClasses = getClassesOfPrefix(mainClassName, "gap-");
+
+  // var classes = { otherClasses: [], gapClasses: [] };
+  // var mainClassNameList = removeEmptyClasses(mainClassName).split(" ");
+
+  // for(var i=0; i<mainClassNameList.length ; i++) {
+  //   if (mainClassNameList[i].indexOf("gap-") != -1) classes.gapClasses.push(mainClassNameList[i]);
+  //   else classes.otherClasses.push(mainClassNameList[i]);
+  // }
+
+  return gapClasses;
+
+}
+
+function getContainerMarginClass(margin) {
+  var containerMarginClass = "container";
+  if (margin == undefined) return containerMarginClass;
+  // if (margin == "regular") containerMarginClass += " container__regular";
+  if (margin == "wide") containerMarginClass += " container__wide";
+
+  return containerMarginClass;
+}
+
+function getWrapperClasses(pref) {
+  if (pref == undefined) pref = "section";
+  var wrapperClasses = `${pref}--wrapper`;
+
+  return wrapperClasses;
+}
+
+function getColClassList(classList) {
+  var classes = [];
+  var columnClasses = [];
+  var otherClasses = [];
+
+  if (classList == undefined || classList == "") return { colClasses: columnClasses, otherClasses: otherClasses };
+  if (typeof classList == "string") classes = classList.split(" ");
+
+  for (var i = 0; i < classes.length; i++) {
+    if (classes[i].indexOf("col-") != -1) columnClasses.push(classes[i]);
+    else otherClasses.push(classes[i]);
   }
-  
-  
-  function getMainClasses(mainClassName, titled){
-  
-    if(mainClassName == undefined) mainClassName = "";
-    if(titled == true || titled == false) return mainClassName;
-    if(titled == "above") mainClassName += " section--main__title-above";
-  
-    return mainClassName;
-  }
-  
-  function getGapClasses(type, arrows, mainClasses) {
-    var gapClasses = "";
-    if (SECTION_TYPE_C.indexOf(type) != -1) gapClasses += " gap-4";
-    if (arrows) gapClasses = "gap-5";
 
+  return { colClasses: columnClasses, otherClasses: otherClasses };
+}
 
+function getBackgroundClasses(pref, background) {
+  var backgroundClasses = ``;
+  if (background == undefined) return backgroundClasses;
 
-    // TODO: enable the ability to override the default 'gap-5' class with new classes
-    // var overrideGapClasses = [];
-    // var otherClasses = [];
-    // if (typeof mainClasses == "string") mainClasses = mainClasses.split(" ");
-
-    // for (var i = 0; i < mainClasses.length; i++) {
-    //   if(mainClasses[i] == "") continue;
-    //   if (mainClasses[i].indexOf("gap-") != -1) overrideGapClasses.push(mainClasses[i]);
-    //   else otherClasses.push(classes[i]);
-    // }
-
-
-
-    return gapClasses;
-  }
-  
-  function getContainerMarginClass(margin) {
-    var containerMarginClass = "container";
-    if (margin == undefined) return containerMarginClass;
-    // if (margin == "regular") containerMarginClass += " container__regular";
-    if (margin == "wide") containerMarginClass += " container__wide";
-  
-    return containerMarginClass;
-  }
-  
-  function getWrapperClasses(pref) {
-    if (pref == undefined) pref = "section";
-    var wrapperClasses = `${pref}--wrapper`;
-  
-    return wrapperClasses;
-  }
-
-
-  function getColClassList(classList) {
-    var classes = [];
-    var columnClasses = [];
-    var otherClasses = [];
-  
-    if (classList == undefined || classList == "") return { colClasses: columnClasses, otherClasses: otherClasses };
-    if (typeof classList == "string") classes = classList.split(" ");
-  
-    for (var i = 0; i < classes.length; i++) {
-      if (classes[i].indexOf("col-") != -1) columnClasses.push(classes[i]);
-      else otherClasses.push(classes[i]);
+  if (typeof background == "string") {
+    if (BACKGROUND_COLORS.indexOf(background) != -1) {
+      if (pref == "chapter" && background != "background") backgroundClasses += ` ${pref}__color`;
+      else if (pref == "section") backgroundClasses += ` ${pref}__color`;
+      else if (pref == "section--quote") backgroundClasses += ` ${pref}__color`;
+      else if (pref == "section--description") backgroundClasses += ` ${pref}__color`;
     }
-  
-    return { colClasses: columnClasses, otherClasses: otherClasses };
+
+    if (pref == "section--graphic") backgroundClasses += ` graphic--panel`;
+
+    if (background == "primary") backgroundClasses += ` background__primary`;
+    if (background == "makeright tertiary") backgroundClasses += ` background__makeright-tertiary`;
+    if (background == "tertiary") backgroundClasses += ` background__tertiary`;
+    if (background == "tertiary light") backgroundClasses += ` background__tertiary-light`;
+    if (background == "background") backgroundClasses += ` background__background`;
+    if (background == "background darker") backgroundClasses += ` background__background background__background-darker`;
+    if (background == "background darkest") backgroundClasses += ` background__background background__background-darkest`;
+  } else if (typeof background == "object") {
+    backgroundClasses += ` ${pref}__image`;
   }
+  return backgroundClasses;
+}
 
-
-
-  function getBackgroundClasses(pref, background) {
-    var backgroundClasses = ``;
-    if (background == undefined) return backgroundClasses;
-  
-    if (typeof background == "string") {
-      if (BACKGROUND_COLORS.indexOf(background) != -1) {
-        if (pref == "chapter" && background != "background") backgroundClasses += ` ${pref}__color`;
-        else if (pref == "section") backgroundClasses += ` ${pref}__color`;
-        else if (pref == "section--quote") backgroundClasses += ` ${pref}__color`;
-        else if (pref == "section--description") backgroundClasses += ` ${pref}__color`;
-      }
-  
-      if (pref == "section--graphic") backgroundClasses += ` graphic--panel`;
-  
-      if (background == "primary") backgroundClasses += ` background__primary`;
-      if (background == "makeright tertiary") backgroundClasses += ` background__makeright-tertiary`;
-      if (background == "tertiary") backgroundClasses += ` background__tertiary`;
-      if (background == "tertiary light") backgroundClasses += ` background__tertiary-light`;
-      if (background == "background") backgroundClasses += ` background__background`;
-      if (background == "background darker") backgroundClasses += ` background__background background__background-darker`;
-      if (background == "background darkest") backgroundClasses += ` background__background background__background-darkest`;
-    } else if (typeof background == "object") {
-      backgroundClasses += ` ${pref}__image`;
-    }
-    return backgroundClasses;
-  }
-  
-  
-  
-
-  
-  export { getElemClasses, getContainerMarginClass, getWrapperClasses, getMainClasses, getGapClasses, getBackgroundClasses, getColClassList };
+export { getElemClasses, getContainerMarginClass, getWrapperClasses, getMainClasses, getGapClasses, getBackgroundClasses, getColClassList };

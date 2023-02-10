@@ -47,7 +47,7 @@ function Section({ className, children, type, background, id, margin, titled, ar
   
   var mainClasses = getMainClasses(mainClassName, titled);
 
-  var gapClasses = getGapClasses(type, arrows, mainClasses);
+  var gapClasses = getGapClasses(type, arrows, mainClassName);
 
   var hasText = getHasText(childs);
   var hasGraphic = getHasGraphic(graphic);
