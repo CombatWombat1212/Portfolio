@@ -328,7 +328,7 @@ function MakeRight({ setPopup }) {
 
             <Column className="col-4">
               <Graphic className="flex-col h-auto" background="background" type="mask" img={MAKERIGHT_IMGS["brainstorming_chart"]}>
-                <Button color="primary" type="bottom" onClick={() => setPopup(MAKERIGHT_IMGS["brainstorming_chart_full"])}>
+                <Button color="primary" type="bottom" onClick={() => setPopup({type:"interactive", img:MAKERIGHT_IMGS["brainstorming_chart_full"]})}>
                   View full exercise
                 </Button>
               </Graphic>
@@ -537,11 +537,11 @@ function MakeRight({ setPopup }) {
             <Heading>Progression & refinement</Heading>
             <Column caption="above">
               <Description className="graphic--caption graphic--caption__split"><p>Customer Journey, Low-Fi</p><p>Phase 1</p></Description>
-              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_checkout_low_fi"]} />
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_checkout_low_fi"]} lightbox setPopup={setPopup} />
             </Column>
             <Column caption="above">
             <Description className="graphic--caption graphic--caption__split"><p>Customer Journey, High-Fi</p><p>Phase 2</p></Description>
-              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_checkout_high_fi"]} />
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_checkout_high_fi"]} lightbox setPopup={setPopup} />
             </Column>
           </Section>
         </Chapter>

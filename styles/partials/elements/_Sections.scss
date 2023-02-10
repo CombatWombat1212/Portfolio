@@ -99,14 +99,11 @@
     --graphic-width: #{mask-width(11.5rem)};
     --graphic-height: calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
 
-
-    &--img{
-     
-     display:flex;
+    &--img {
+      display: flex;
       img {
-      @include img-contain;
-    }
-
+        @include img-contain;
+      }
     }
 
     &--panel {
@@ -137,10 +134,10 @@
         margin-bottom: calc(var(--section-text-spacing) * 0.5);
       }
 
-      &__split{
+      &__split {
         @include flex-row-between;
-        &>*+*{
-          margin:0;
+        & > * + * {
+          margin: 0;
         }
       }
     }
@@ -151,6 +148,19 @@
       img,
       .mask {
         margin: var(--section-graphic-panel-pad);
+      }
+    }
+
+    &__lightbox {
+      cursor: zoom-in;
+
+      img {
+        @include trans;
+        transform: scale(1);
+
+        @include hover(".graphic__lightbox", "img") {
+          transform: scale(1.025);
+        }
       }
     }
   }
@@ -175,9 +185,8 @@
   .column {
     // When you add a min width of any value to a column, preferably a value that it wont ever reach cause its such a small number, then the column's width appears to lock at the width it should be, i.e. 2 columns at 50% width, 3 columns at 33.3333%, and so on. not sure why! but it works!
     min-width: 0.1rem;
-    position:relative;
+    position: relative;
   }
-
 }
 
 // Type variants

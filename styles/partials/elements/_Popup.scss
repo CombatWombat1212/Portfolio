@@ -37,7 +37,6 @@
   --popup-gap: calc(var(--popup-inner-pad) * 0.8);
 
   z-index: 10;
-  // width: 100%;
   width: calc(var(--site-max-width) - var(--popup-pad));
   height: calc(100% - var(--nav-height) - var(--popup-pad));
   display: flex;
@@ -46,34 +45,80 @@
   &--inner {
     width: 100%;
     display: flex;
-    // padding: var(--popup-inner-pad);
   }
 
   &--content {
-    // margin: var(--popup-pad);
     @include b-rad;
     background-color: $col-background;
     width: 100%;
-    // padding: var(--popup-inner-pad);
     @include flex-col-between;
     @include gap(var(--popup-gap));
     position: relative;
     overflow: hidden;
   }
 
+
+
   &--header {
     @include flex-row-between;
-    margin-top: -0.35rem;
-    @include pad-x(var(--popup-inner-pad));
-    padding-top: var(--popup-inner-pad);
+    
+    
+    
+    &__full{
+      margin-top: -0.35rem;
+      @include pad-x(var(--popup-inner-pad));
+      padding-top: var(--popup-inner-pad);
+    }
+
+    &__condensed{
+      padding: calc(var(--popup-inner-pad) / 2);
+      background-color: $col-background;
+      border-radius: 0 0 0 var(--b-rad);
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
   }
+
+  &--footer {
+    @include flex-row-end;
+    padding: calc(var(--popup-inner-pad) / 2);
+    background-color: $col-background;
+    border-radius: var(--b-rad) 0 0 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+
+  &--nav{
+    transition-duration: 0.2s;
+
+
+    &__on {
+      display: flex;
+      opacity: 1;
+    }
+
+    &__off {
+      display: none;
+      opacity: 0;
+    }
+
+    &__tran {
+      opacity: 0;
+    }
+
+  }
+
+
 
   &--title {
     @include flex-col-center;
   }
 
   &--canvas {
-    // height: calc(100% - (var(--button-height) * 1) - (var(--popup-gap) * 1) - var(--popup-inner-pad));
     height: 100%;
     overflow: hidden;
     @include no-select;
@@ -138,33 +183,6 @@
     }
   }
 
-  &--footer {
-    @include flex-row-end;
-    // @include pad-x(var(--popup-inner-pad));
-    // padding-bottom: var(--popup-inner-pad);
-    padding: calc(var(--popup-inner-pad) / 2);
-    background-color: $col-background;
-    border-radius: Var(--b-rad) 0 0 0;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-
-    transition-duration: 0.2s;
-
-    &__on {
-      display: flex;
-      opacity: 1;
-    }
-
-    &__off {
-      display: none;
-      opacity: 0;
-    }
-
-    &__tran {
-      opacity: 0;
-    }
-  }
 }
 
 .scale {
