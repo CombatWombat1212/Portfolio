@@ -72,7 +72,7 @@
 
     &__condensed{
       padding: calc(var(--popup-inner-pad) / 2);
-      background-color: $col-background;
+      background-color: $col-background_darker;
       border-radius: 0 0 0 var(--b-rad);
       position: absolute;
       top: 0;

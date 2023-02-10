@@ -1976,7 +1976,7 @@ body {
 
 .popup--header__condensed {
   padding: calc(var(--popup-inner-pad) / 2);
-  background-color: #F3F3F7;
+  background-color: #E9E9F2;
   border-radius: 0 0 0 var(--b-rad);
   position: absolute;
   top: 0;

@@ -349,6 +349,8 @@ function Popup({ popup, setPopup }) {
 
 
   // TODO: happy monday! Next step is making the lighbox popup aspect ratio match that of the image so that it fills its container. This will look similar to that of setting the size of the image inside the canvas because its size will depend on which is bigger, the width or height of the container.
+  // TODO: after that is making the close button dissapear in the same way as the scale ui
+  // TODO: will there be a way of seeking between relevant images in the lightbox? i think so, yes, but strap in cause that one might be tricky.  You got this:)
 
   return (
     <>
