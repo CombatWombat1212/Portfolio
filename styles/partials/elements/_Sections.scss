@@ -162,27 +162,9 @@
   .column {
     // When you add a min width of any value to a column, preferably a value that it wont ever reach cause its such a small number, then the column's width appears to lock at the width it should be, i.e. 2 columns at 50% width, 3 columns at 33.3333%, and so on. not sure why! but it works!
     min-width: 0.1rem;
+    position:relative;
   }
 
-  .arrow {
-    &--column {
-      position: absolute;
-    }
-
-    &--mask {
-      --arrow-width: #{mask-width(1.5rem)};
-      // --arrow-height: #{mask-height(1.5rem)};
-
-      --arrow-height: calc(var(--arrow-width) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
-
-      // --arrow-height: calc((var(--arrow-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width)))
-
-      height: var(--arrow-height) !important;
-      width: var(--arrow-width) !important;
-      margin-top: calc(((var(--section-graphic-panel-pad) * 2) + var(--img-panel-height) - var(--arrow-height)) / 2);
-      margin-left: calc(((var(--gap) + var(--arrow-width)) / 2) * -1);
-    }
-  }
 }
 
 // Type variants
