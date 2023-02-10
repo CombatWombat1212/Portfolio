@@ -48,10 +48,9 @@
     @include section--heading-bottom-margin(h3);
     @include section--heading-bottom-margin(h4);
 
-    &__title-above{
+    &__title-above {
       margin-top: var(--section_title-above-offset);
     }
-
   }
 
   &--copy {
@@ -63,10 +62,11 @@
       margin-top: var(--section-text-spacing);
     }
     & > * + *.mt-less {
-      margin-top: calc(var(--section-text-spacing)* 0.15);
+      margin-top: calc(var(--section-text-spacing) * 0.15);
     }
 
-    ol,ul {
+    ol,
+    ul {
       --counter-width: 1.5rem;
       & > * + * {
         margin-top: var(--section-text-spacing);
@@ -75,10 +75,9 @@
         margin-top: calc(var(--section-text-spacing) * 0.35);
       }
 
-      
       list-style-position: inside;
     }
-    
+
     li {
       span {
         display: block;
@@ -87,7 +86,7 @@
         padding-left: var(--counter-width);
       }
     }
-    
+
     &__color {
       @include b-rad;
       padding: 2.25rem;
@@ -95,7 +94,6 @@
   }
 
   .graphic {
-
     --img-panel-height: 12rem;
 
     --graphic-width: #{mask-width(11.5rem)};
@@ -104,7 +102,7 @@
     img {
       @include img-contain;
     }
-    
+
     &--panel {
       height: var(--img-panel-height);
       @include b-rad;
@@ -123,22 +121,25 @@
         height: 100% !important;
         padding: 0;
       }
-
     }
 
     &--caption {
       margin-top: var(--section-text-spacing);
+
+      &__above {
+        margin-top: 0;
+        margin-bottom: calc(var(--section-text-spacing) * 0.5);
+      }
     }
 
     &__container {
       padding: 0;
 
-      img,.mask{
+      img,
+      .mask {
         margin: var(--section-graphic-panel-pad);
       }
-
     }
-
   }
 
   &--main {
@@ -149,41 +150,37 @@
       margin-top: calc(var(--section-text-spacing) * 1.25);
     }
 
-    &__grid{
-      display:grid;
+    &__grid {
+      display: grid;
     }
 
-    &__title-above{
+    &__title-above {
       margin-top: calc((var(--section_title-above-offset) * -1) + var(--font-margin-bottom-h4));
     }
   }
 
-
   .column {
-
     // When you add a min width of any value to a column, preferably a value that it wont ever reach cause its such a small number, then the column's width appears to lock at the width it should be, i.e. 2 columns at 50% width, 3 columns at 33.3333%, and so on. not sure why! but it works!
     min-width: 0.1rem;
+  }
 
-    &--arrow {
+  .arrow {
+    &--column {
       position: absolute;
-      .mask {
-        --arrow-width: #{mask-width(1.5rem)};
-        // --arrow-height: #{mask-height(1.5rem)};
+    }
 
-        --arrow-height: calc(var(--arrow-width) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
+    &--mask {
+      --arrow-width: #{mask-width(1.5rem)};
+      // --arrow-height: #{mask-height(1.5rem)};
 
-        // --arrow-height: calc((var(--arrow-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width)))
+      --arrow-height: calc(var(--arrow-width) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
 
-        height: var(--arrow-height) !important;
-        width: var(--arrow-width) !important;
-        margin-top: calc(((var(--section-graphic-panel-pad) * 2) + var(--img-panel-height) - var(--arrow-height)) / 2);
-        margin-left: calc(((var(--gap) + var(--arrow-width)) / 2) * -1);
-      }
+      // --arrow-height: calc((var(--arrow-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width)))
 
-
-
-
-
+      height: var(--arrow-height) !important;
+      width: var(--arrow-width) !important;
+      margin-top: calc(((var(--section-graphic-panel-pad) * 2) + var(--img-panel-height) - var(--arrow-height)) / 2);
+      margin-left: calc(((var(--gap) + var(--arrow-width)) / 2) * -1);
     }
   }
 }
@@ -215,7 +212,7 @@
 
     .section--description {
       margin-top: 0.5rem;
-      
+
       * {
         @include h3;
         @include weight-reg;
@@ -303,7 +300,6 @@
     }
   }
 
-
   &__tertiary {
     background-color: $col-tertiary;
     & + & {
@@ -311,25 +307,13 @@
     }
   }
 
-
   &__tertiary-light {
     background-color: $col-tertiary-light;
     & + & {
       padding-top: 0;
     }
   }
-
-
-
-
-
-
-
-
 }
-
-
-
 
 // .TEST----THING{
 //   background-color:red;

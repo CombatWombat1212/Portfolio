@@ -401,7 +401,7 @@ function MakeRight({ setPopup }) {
             </div>
           </Section>
 
-          <Section id="Develop--Focus-Intro"background="background darkest">
+          <Section id="Develop--Focus-Intro" background="background darkest">
             <Heading>
               Focus group testing on the newly refined concept
               <br />
@@ -532,19 +532,20 @@ function MakeRight({ setPopup }) {
             </Column>
           </Section>
 
-
-        <Section id="Prototyping--Progression" margin="wide"></Section>
-
-
-
-
-
-
-
-
-
-
-
+          <Section id="Prototyping--Progression" type="columns" margin="wide" arrows="background" background="tertiary" titled>
+            <Title>Project Iterations</Title>
+            <Heading>Progression & refinement</Heading>
+            <Column caption="above">
+              <Description className="graphic--caption"><p>Customer Journey, High-Fi</p></Description>
+              <Graphic type="image" background="background" img={MAKERIGHT_IMGS["iterations_checkout_low_fi"]} />
+            </Column>
+            <Column caption="above">
+              <Description className="graphic--caption">
+                <p>Customer Journey, High-Fi</p>
+              </Description>
+              <Graphic type="image" background="background"  img={MAKERIGHT_IMGS["iterations_checkout_high_fi"]} />
+            </Column>
+          </Section>
         </Chapter>
       </CaseStudyPage>
     </>

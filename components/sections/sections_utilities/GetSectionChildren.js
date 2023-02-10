@@ -46,7 +46,19 @@ function getSectionChildren(children) {
 
       var [columnColumns, columnDescription, columnTitle, columnHeading, columnGraphic, columnQuote, columnOther] = [organizedColumnChildren[0].elems, organizedColumnChildren[1].elems, organizedColumnChildren[2].elems, organizedColumnChildren[3].elems, organizedColumnChildren[4].elems, organizedColumnChildren[5].elems, organizedColumnChildren[6].elems];
 
-      columns[i] = { columns: columnColumns, description: columnDescription, title: columnTitle, heading: columnHeading, graphic: columnGraphic, quote: columnQuote, other: columnOther, classes: columnClasses };
+      columns[i] = {
+        columns: columnColumns,
+        description: columnDescription,
+        title: columnTitle,
+        heading: columnHeading,
+        graphic: columnGraphic,
+        quote: columnQuote,
+        other: columnOther,
+        props: {
+          classes: columnClasses,
+          ...column.props,
+        },
+      };
     }
   }
 

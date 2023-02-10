@@ -1585,19 +1585,22 @@ body {
 }
 
 .section--description > * + *.mt-less {
-  margin-top: calc(var(--section-text-spacing)* 0.15);
+  margin-top: calc(var(--section-text-spacing) * 0.15);
 }
 
-.section--description ol, .section--description ul {
+.section--description ol,
+.section--description ul {
   --counter-width: 1.5rem;
   list-style-position: inside;
 }
 
-.section--description ol > * + *, .section--description ul > * + * {
+.section--description ol > * + *,
+.section--description ul > * + * {
   margin-top: var(--section-text-spacing);
 }
 
-.section--description ol > * + *.mt-less, .section--description ul > * + *.mt-less {
+.section--description ol > * + *.mt-less,
+.section--description ul > * + *.mt-less {
   margin-top: calc(var(--section-text-spacing) * 0.35);
 }
 
@@ -1657,11 +1660,17 @@ body {
   margin-top: var(--section-text-spacing);
 }
 
+.section .graphic--caption__above {
+  margin-top: 0;
+  margin-bottom: calc(var(--section-text-spacing) * 0.5);
+}
+
 .section .graphic__container {
   padding: 0;
 }
 
-.section .graphic__container img, .section .graphic__container .mask {
+.section .graphic__container img,
+.section .graphic__container .mask {
   margin: var(--section-graphic-panel-pad);
 }
 
@@ -1687,11 +1696,11 @@ body {
   min-width: 0.1rem;
 }
 
-.section .column--arrow {
+.section .arrow--column {
   position: absolute;
 }
 
-.section .column--arrow .mask {
+.section .arrow--mask {
   --arrow-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 1.5rem) ;
   --arrow-height: calc(var(--arrow-width) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
   height: var(--arrow-height) !important;

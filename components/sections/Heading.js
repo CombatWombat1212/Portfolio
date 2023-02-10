@@ -26,6 +26,7 @@ function getHeadingClasses(type) {
   if (type == "h2") headingClasses += " text--h2";
   if (type == "h3") headingClasses += " text--h3";
   if (type == "h4") headingClasses += " text--h4";
+  if (type == "p") headingClasses += " text--body";
   return headingClasses;
 }
 
@@ -38,6 +39,7 @@ function Heading({ children, type, className }) {
       {type == "h2" && <h2>{children}</h2>}
       {type == "h3" && <h3>{children}</h3>}
       {type == "h4" && <h4>{children}</h4>}
+      {type == "p" && <p>{children}</p>}
     </div>
   );
 }
@@ -47,7 +49,7 @@ Heading.defaultProps = {
 };
 
 Heading.propTypes = {
-  type: PropTypes.oneOf(["h1", "h2", "h3", "h4"]),
+  type: PropTypes.oneOf(["h1", "h2", "h3", "h4", "p"]),
 };
 
 export default Heading;
