@@ -1625,7 +1625,11 @@ body {
   --graphic-height: calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
 }
 
-.section .graphic img {
+.section .graphic--img {
+  display: flex;
+}
+
+.section .graphic--img img {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -1831,6 +1835,11 @@ body {
 
 .arrow--mask__default {
   margin-top: calc(((var(--section-graphic-panel-pad) * 2) + var(--img-panel-height) - var(--arrow-height)) / 2);
+}
+
+.arrow--mask__anchored {
+  transition: var(--transition);
+  margin-top: var(--arrow-margin-top);
 }
 
 .background {
@@ -2970,6 +2979,11 @@ body {
 
 .h-auto {
   height: auto !important;
+}
+
+.b-rad {
+  border-radius: var(--b-rad);
+  overflow: hidden;
 }
 
 .just-center {

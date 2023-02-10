@@ -4,22 +4,20 @@
   }
 
   &--mask {
-      --arrow-width: #{mask-width(1.5rem)};
-      --arrow-height: calc(var(--arrow-width) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
-      height: var(--arrow-height) !important;
-      width: var(--arrow-width) !important;
-      margin-left: calc(((var(--gap) + var(--arrow-width)) / 2) * -1);
-
-
-    &__anchored{
-
-    }
-
-
+    --arrow-width: #{mask-width(1.5rem)};
+    --arrow-height: calc(var(--arrow-width) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
+    height: var(--arrow-height) !important;
+    width: var(--arrow-width) !important;
+    margin-left: calc(((var(--gap) + var(--arrow-width)) / 2) * -1);
+    
     &__default {
       margin-top: calc(((var(--section-graphic-panel-pad) * 2) + var(--img-panel-height) - var(--arrow-height)) / 2);
     }
-
-
+    
+    &__anchored {
+      // --arrow-margin-top provided by JS
+      @include trans;
+      margin-top: var(--arrow-margin-top);
+    }
   }
 }

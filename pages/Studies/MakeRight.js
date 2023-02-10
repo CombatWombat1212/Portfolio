@@ -537,13 +537,13 @@ function MakeRight({ setPopup }) {
             <Heading>Progression & refinement</Heading>
             <Column caption="above">
               <Description className="graphic--caption"><p>Customer Journey, High-Fi</p></Description>
-              <Graphic type="image" background="background" img={MAKERIGHT_IMGS["iterations_checkout_low_fi"]} />
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_checkout_low_fi"]} />
             </Column>
             <Column caption="above">
               <Description className="graphic--caption">
                 <p>Customer Journey, High-Fi</p>
               </Description>
-              <Graphic type="image" background="background"  img={MAKERIGHT_IMGS["iterations_checkout_high_fi"]} />
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_checkout_high_fi"]} />
             </Column>
           </Section>
         </Chapter>

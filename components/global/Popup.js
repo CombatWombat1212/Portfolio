@@ -8,6 +8,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Button from "../elements/Buttons";
 import { loading } from "@/data/ICONS";
+import { RESIZE_TIMEOUT } from "@/scripts/GlobalUtilities";
 
 
 var setPopupGlobal;
@@ -562,10 +563,9 @@ function isMouseMovingFunctions(){
 
 var isResizing;
 
-var resizeTimeout = 200;
 function popupResize(e) {
   window.clearTimeout(isResizing);
-  isResizing = setTimeout(popupResizeFunctions, resizeTimeout);
+  isResizing = setTimeout(popupResizeFunctions, RESIZE_TIMEOUT);
 }
 
 function popupResizeFunctions() {

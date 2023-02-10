@@ -1,4 +1,4 @@
-var resizeTimeout = 200;
+const RESIZE_TIMEOUT = 200;
 
 function semicolonSuffix(str) {
   if (str[str.length - 1] != ";") {
@@ -107,7 +107,7 @@ function postScreenSizeToRoot() {
       window.clearTimeout(isResizing);
       isResizing = setTimeout(function () {
         getScreenSize();
-      }, resizeTimeout);
+      }, RESIZE_TIMEOUT);
     },
     false
   );
@@ -136,10 +136,10 @@ function overflowEllipsis() {
       window.clearTimeout(isResizing);
       isResizing = setTimeout(function () {
         run();
-      }, resizeTimeout);
+      }, RESIZE_TIMEOUT);
     },
     false
   );
 }
 
-export { addStyleNonDestructive, addAttrNonDestructive, postScreenSizeToRoot, overflowEllipsis };
+export { addStyleNonDestructive, addAttrNonDestructive, postScreenSizeToRoot, overflowEllipsis, splitPx, splitRem, splitS, RESIZE_TIMEOUT };
