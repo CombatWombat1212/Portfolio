@@ -22,8 +22,8 @@ function MakeRight({ setPopup }) {
 
         <Brief brief={study.brief} />
 
-        <Chapter name="Overview">
-          <Section id="Overview" type="overview">
+        <Chapter id="Overview" name="Overview">
+          <Section id="Overview--Background" type="overview">
             <Title>Background</Title>
             <Heading>3D printing is yet to reach its full potential</Heading>
             <Description>
@@ -38,7 +38,7 @@ function MakeRight({ setPopup }) {
             <Graphic type="image" img={MAKERIGHT_IMGS["full_potential"]} />
           </Section>
 
-          <Section id="Challenge" type="overview">
+          <Section id="Overview--Challenge" type="overview">
             <Title>Challenge</Title>
             <Heading>
               Cost, and technical knowledge
@@ -53,18 +53,18 @@ function MakeRight({ setPopup }) {
             <Graphic type="image" img={MAKERIGHT_IMGS["barriers_to_entry"]} />
           </Section>
 
-          <Section id="Opportunity">
+          <Section id="Overview--Opportunity">
             <Title>Opportunity</Title>
             <Heading>How might we remove these barriers, and translate the benefits of 3D printing to the average consumer?</Heading>
           </Section>
         </Chapter>
 
         <Chapter name="Pitch" id="Pitch" background="makeright tertiary">
-          <Section id="HeroLogo" type="logo banner" background="primary" align="just-center">
+          <Section id="Pitch--Hero-Logo" type="logo banner" background="primary" align="just-center">
             <Graphic type="mask" img={MAKERIGHT_IMGS["makeright_logo"]} />
           </Section>
 
-          <Section id="IntroSolution" background="background">
+          <Section id="Pitch--Solution" background="background">
             <Title>Solution</Title>
             <Heading>
               Directly connect consumers with owners of 3D printers
@@ -122,7 +122,7 @@ function MakeRight({ setPopup }) {
             <Graphic type="image" img={MAKERIGHT_IMGS["pitch_laptop_recieve"]} />
           </Section>
 
-          <Section id="IntroSummary" type="columns" background="background">
+          <Section id="Pitch--Summary" type="columns" background="background">
             <Column>
               <Heading type="h3">Slashing the overhead of competitors</Heading>
               <Description>
@@ -144,7 +144,7 @@ function MakeRight({ setPopup }) {
         </Chapter>
 
         <Chapter name="Plan" id="Plan">
-          <Section id="BuildingMakeRight" background={MAKERIGHT_IMGS["building_makeright_banner"]}>
+          <Section id="Plan--Banner" background={MAKERIGHT_IMGS["building_makeright_banner"]}>
             <Heading>Building MakeRight</Heading>
           </Section>
 
@@ -156,7 +156,7 @@ function MakeRight({ setPopup }) {
         </Chapter>
 
         <Chapter name="Research" id="Research">
-          <Section type="columns" titled arrows background="background darker">
+          <Section id="Research--Approach" type="columns" titled arrows background="background darker">
             <Title>Approach</Title>
             <Heading>Finding a focus within the field of 3D printing</Heading>
 
@@ -184,7 +184,7 @@ function MakeRight({ setPopup }) {
             </Heading>
           </Section>
 
-          <Section className="flex-col" background="background darkest">
+          <Section id="Research--Factors" className="flex-col" background="background darkest">
             <Heading type="h3">What factors limit the adoption of 3D printing?</Heading>
             <BarGraph study="MakeRight" graph="Limiting Factors" type="default" />
             {/* TODO: link to source */}
@@ -195,7 +195,7 @@ function MakeRight({ setPopup }) {
             </Description>
           </Section>
 
-          <Section type="columns" className="gap-6" background="background darkest">
+          <Section id="Research--Hobbyists" type="columns" className="gap-6" background="background darkest">
             <Column>
               <Heading type="h3">
                 Hobbyists often surpass
@@ -215,7 +215,7 @@ function MakeRight({ setPopup }) {
             </Column>
           </Section>
 
-          <Section background="background darkest">
+          <Section id="Research--Primary" background="background darkest">
             <Title>Primary Research</Title>
             <Heading>
               Interviews with 4 makers, and 6 laypersons corroborated
@@ -224,7 +224,7 @@ function MakeRight({ setPopup }) {
             </Heading>
           </Section>
 
-          <Section type="columns" titled mainClassName="mt-less" background="background darkest">
+          <Section id="Research--Non-Owners" type="columns" titled mainClassName="mt-less" background="background darkest">
             <Heading type="h3">Non-printer owners have interest in the tech, and barriers to accessing it</Heading>
             <Description className="mt-less">
               <p>
@@ -249,7 +249,7 @@ function MakeRight({ setPopup }) {
             </Column>
           </Section>
 
-          <Section type="columns" titled mainClassName="mt-less" background="background darkest">
+          <Section id="Research--Owners" type="columns" titled mainClassName="mt-less" background="background darkest">
             <Heading type="h3">While many owners of 3D printers have idle machines, and free time</Heading>
             <Description className="mt-less">
               <p>
@@ -267,7 +267,7 @@ function MakeRight({ setPopup }) {
             </Column>
           </Section>
 
-          <Section id="Aha-Moment" type="columns" background="background">
+          <Section id="Research--Aha-Moment" type="columns" background="background">
             <Column className="col-5">
               <Graphic type="mask" className="graphic--panel__flexible" background="background darker" img={MAKERIGHT_IMGS["aha_moment"]} />
             </Column>
@@ -297,7 +297,7 @@ function MakeRight({ setPopup }) {
         </Chapter>
 
         <Chapter name="Develop" id="Develop">
-          <Section type="columns" titled arrows background="background darker">
+          <Section id="Develop--Methodology" type="columns" titled arrows background="background darker">
             <Title>Methodology</Title>
             <Heading>Moving from problem to solution</Heading>
 
@@ -352,7 +352,7 @@ function MakeRight({ setPopup }) {
             </Column>
           </Section>
 
-          <Section background="background darkest">
+          <Section id="Develop--Refine" background="background darkest">
             <Title>Refine Ideas</Title>
             <Heading className="quote-table--heading">I expanded on this chosen idea by considering:</Heading>
 
@@ -401,7 +401,7 @@ function MakeRight({ setPopup }) {
             </div>
           </Section>
 
-          <Section background="background darkest">
+          <Section id="Develop--Focus-Intro"background="background darkest">
             <Heading>
               Focus group testing on the newly refined concept
               <br />
@@ -409,7 +409,7 @@ function MakeRight({ setPopup }) {
             </Heading>
           </Section>
 
-          <Section type="columns" titled="above" background="background darkest">
+          <Section id="Develop--Focus" type="columns" titled="above" background="background darkest">
             <Title>Focus Group Testing</Title>
             <Column>
               <Heading>Discovering a promising enthusiasm, and some important concerns</Heading>
@@ -422,7 +422,7 @@ function MakeRight({ setPopup }) {
             </Column>
           </Section>
 
-          <Section type="columns" titled background="background darkest">
+          <Section id="Develop--Reception" type="columns" titled background="background darkest">
             <Heading type="h3">Reception was quite positive among both groups:</Heading>
             <Description className="mt-less">Laypersons commented ideas for what they would print, while makers showed excitement towards profiting off their equipment.</Description>
 
@@ -434,7 +434,7 @@ function MakeRight({ setPopup }) {
             </Column>
           </Section>
 
-          <Section background="background darkest">
+          <Section id="Develop--Concerns" background="background darkest">
             <Heading type="h3" className="quote-table--heading">
               With important concerns being raised, as well:
             </Heading>
@@ -466,7 +466,7 @@ function MakeRight({ setPopup }) {
             </div>
           </Section>
 
-          <Section>
+          <Section id="Develop--Conclusion">
             <Heading>With a foundation of research, and validation from testers, it was time to begin prototyping</Heading>
           </Section>
         </Chapter>
@@ -531,6 +531,20 @@ function MakeRight({ setPopup }) {
               </Description>
             </Column>
           </Section>
+
+
+        <Section id="Prototyping--Progression" margin="wide"></Section>
+
+
+
+
+
+
+
+
+
+
+
         </Chapter>
       </CaseStudyPage>
     </>

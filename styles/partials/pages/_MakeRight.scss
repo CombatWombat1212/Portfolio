@@ -8,49 +8,60 @@
   --background-info-gap: 6rem;
 
   #Overview {
-    .section {
-      @include gap(var(--background-info-gap));
-      &--graphic {
-        img {
-          @include makeright-background-info-img;
+    &--Background {
+      .section {
+        @include gap(var(--background-info-gap));
+        &--graphic {
+          img {
+            @include makeright-background-info-img;
+          }
+        }
+      }
+    }
+
+    &--Challenge {
+      .section {
+        @include gap(var(--background-info-gap));
+        &--graphic {
+          img {
+            @include makeright-background-info-img;
+          }
         }
       }
     }
   }
 
-  #Challenge {
-    .section {
-      @include gap(var(--background-info-gap));
-      &--graphic {
-        img {
-          @include makeright-background-info-img;
+  #Pitch {
+    &--Hero-Logo {
+      $pad: 5rem;
+      padding-top: $pad;
+      padding-bottom: $pad * 1.1;
+
+      .section {
+        &--graphic {
+          @include flex-row-center;
+          width: 100%;
+
+          & > * {
+            background-color: $col-background;
+            width: 70%;
+          }
         }
       }
     }
   }
 
-  #HeroLogo {
-    $pad: 5rem;
-    padding-top: $pad;
-    padding-bottom: $pad * 1.1;
 
-    .section {
-      &--graphic {
-        @include flex-row-center;
-        width: 100%;
+  #Plan{
 
-        & > * {
-          background-color: $col-background;
-          width: 70%;
-        }
-      }
+    &,&--Banner {
+      // TODO: not sure why this is needed, could be good to look at the edge case that's missing that necessitates this
+      margin-top: 0;
     }
   }
 
-  #Plan,
-  #BuildingMakeRight {
-    margin-top: 0;
-  }
+
+
 
   #Research {
     // --img-panel-height: 12rem;
@@ -72,7 +83,7 @@
       }
     }
 
-    #Aha-Moment {
+    &--Aha-Moment {
       .section {
         &--graphic {
           --graphic-width: #{mask-width(13.35rem)};

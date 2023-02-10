@@ -3433,49 +3433,48 @@ body {
   --background-info-gap: 6rem;
 }
 
-#Makeright #Overview .section {
+#Makeright #Overview--Background .section {
   gap: var(--background-info-gap);
   column-gap: var(--background-info-gap);
   row-gap: var(--background-info-gap);
 }
 
-#Makeright #Overview .section--graphic img {
+#Makeright #Overview--Background .section--graphic img {
   width: calc((var(--img-aspect-width) / var(--img-aspect-height)) * 17.5rem);
 }
 
-#Makeright #Challenge .section {
+#Makeright #Overview--Challenge .section {
   gap: var(--background-info-gap);
   column-gap: var(--background-info-gap);
   row-gap: var(--background-info-gap);
 }
 
-#Makeright #Challenge .section--graphic img {
+#Makeright #Overview--Challenge .section--graphic img {
   width: calc((var(--img-aspect-width) / var(--img-aspect-height)) * 17.5rem);
 }
 
-#Makeright #HeroLogo {
+#Makeright #Pitch--Hero-Logo {
   padding-top: 5rem;
   padding-bottom: 5.5rem;
 }
 
-#Makeright #HeroLogo .section--graphic {
+#Makeright #Pitch--Hero-Logo .section--graphic {
   display: flex;
   flex-direction: row;
   justify-content: center;
   width: 100%;
 }
 
-#Makeright #HeroLogo .section--graphic > * {
+#Makeright #Pitch--Hero-Logo .section--graphic > * {
   background-color: #F3F3F7;
   width: 70%;
 }
 
-#Makeright #Plan,
-#Makeright #BuildingMakeRight {
+#Makeright #Plan, #Makeright #Plan--Banner {
   margin-top: 0;
 }
 
-#Makeright #Research #Aha-Moment .section--graphic {
+#Makeright #Research--Aha-Moment .section--graphic {
   --graphic-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 13.35rem) ;
 }
 
