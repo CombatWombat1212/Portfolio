@@ -74,6 +74,8 @@ function anchoredArrowsInit() {
   getAnchoredArrows();
   refreshAnchorHeight();
 
+  
+  if(allAnchoredArrows.length == 0) return;
   var isResizing;
   window.addEventListener("resize", function (event) {
     window.clearTimeout(isResizing);
