@@ -136,6 +136,13 @@
         margin-top: 0;
         margin-bottom: calc(var(--section-text-spacing) * 0.5);
       }
+
+      &__split{
+        @include flex-row-between;
+        &>*+*{
+          margin:0;
+        }
+      }
     }
 
     &__container {

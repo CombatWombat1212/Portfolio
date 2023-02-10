@@ -1669,6 +1669,16 @@ body {
   margin-bottom: calc(var(--section-text-spacing) * 0.5);
 }
 
+.section .graphic--caption__split {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.section .graphic--caption__split > * + * {
+  margin: 0;
+}
+
 .section .graphic__container {
   padding: 0;
 }
