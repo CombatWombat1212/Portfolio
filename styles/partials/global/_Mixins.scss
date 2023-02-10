@@ -622,6 +622,7 @@
 	mask-image: var(--mask-img);
 	-webkit-mask-size: contain;
 	-webkit-mask-repeat: no-repeat;
+	-webkit-mask-position: center;
   
 	@include aspect-support-fix(var(--mask-aspect-width), var(--mask-aspect-height), 100%, null);
   }

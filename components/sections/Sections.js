@@ -24,7 +24,7 @@ const SECTION_TYPE_C = ["columns"];
 const SECTION_TYPE_D = ["split header"];
 const SECTION_TYPES = [...SECTION_TYPE_A, ...SECTION_TYPE_B, ...SECTION_TYPE_C];
 
-function Section({ className, children, type, background, id, margin, titled, arrows, mainClassName }) {
+function Section({ className, children, type, background, id, margin, titled, arrows, mainClassName,mainType }) {
   var pref = "section";
 
   // TODO: the 'columns' concept should work with all variants of section i think
@@ -45,7 +45,7 @@ function Section({ className, children, type, background, id, margin, titled, ar
   var wrapperClasses = getWrapperClasses(pref);
   var backgroundClasses = getBackgroundClasses(pref, background);
   
-  var mainClasses = getMainClasses(mainClassName, titled);
+  var mainClasses = getMainClasses(mainClassName, mainType, titled);
 
   var gapClasses = getGapClasses(type, arrows, mainClassName);
 
@@ -98,10 +98,10 @@ function Section({ className, children, type, background, id, margin, titled, ar
                 )}
                 {isTitled ? (
                   <div className={`section--main ${gapClasses} ${mainClasses}`}>
-                    <ColumnGroup columns={columns} arrows={arrows} />
+                    <ColumnGroup columns={columns} arrows={arrows} mainType={mainType} />
                   </div>
                 ) : (
-                  <ColumnGroup columns={columns} arrows={arrows} />
+                  <ColumnGroup columns={columns} arrows={arrows} mainType={mainType} />
                 )}
                 {graphic && <>{graphic}</>}
                 {other && <>{other}</>}
@@ -121,10 +121,12 @@ Section.defaultProps = {
   margin: "regular",
   type: "default",
   className: "",
+  mainType: "flex",
 };
 
 Section.propTypes = {
   margin: PropTypes.oneOf(["regular", "wide"]),
+  mainType: PropTypes.oneOf(["flex", "grid"]),
   type: PropTypes.oneOf(SECTION_TYPES),
   background: PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf(["none", ...BACKGROUND_COLORS])]),
 };

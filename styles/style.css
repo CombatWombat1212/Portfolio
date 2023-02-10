@@ -1304,6 +1304,7 @@ body {
   mask-image: var(--mask-img);
   -webkit-mask-size: contain;
   -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
 }
 
 @supports (aspect-ratio: 1/1) {
@@ -1674,8 +1675,16 @@ body {
   margin-top: calc(var(--section-text-spacing) * 1.25);
 }
 
+.section--main__grid {
+  display: grid;
+}
+
 .section--main__title-above {
   margin-top: calc((var(--section_title-above-offset) * -1) + var(--font-margin-bottom-h4));
+}
+
+.section .column {
+  min-width: 0.1rem;
 }
 
 .section .column--arrow {
@@ -3479,29 +3488,17 @@ body {
   --img-panel-height: auto;
 }
 
-#Makeright #Prototyping--Approach .graphic {
+#Makeright #Prototyping--Approach .section--main {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+#Makeright #Prototyping--Approach .section--graphic {
   --img-panel-height: 7rem;
 }
 
-#Makeright #Prototyping--Approach .graphic--panel {
-  pointer-events: none;
-  -webkit-touch-callout: none;
-  user-select: none;
-}
-
-#Makeright #Prototyping--Approach .graphic--panel > * {
-  margin-top: -0.35rem;
-}
-
-#Makeright #Prototyping--Approach .graphic--img {
-  --graphic-width: calc((var(--img-aspect-width) / ( var(--img-aspect-height))) * 5rem) ;
-}
-
-#Makeright #Prototyping--Approach .graphic--img img {
-  width: var(--graphic-width);
-}
-
-#Makeright #Prototyping--Approach .graphic--mask {
-  --graphic-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 5rem) ;
+#Makeright #Prototyping--Approach .section--graphic > * {
+  --size: 80%;
+  width: var(--size);
+  height: var(--size);
 }
 /*# sourceMappingURL=style.css.map */
