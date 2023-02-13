@@ -37,9 +37,23 @@
   --popup-gap: calc(var(--popup-inner-pad) * 0.8);
 
   z-index: 10;
-  width: calc(var(--site-max-width) - var(--popup-pad));
-  height: calc(100% - var(--nav-height) - var(--popup-pad));
   display: flex;
+
+
+  &__interactive{
+    width: calc(var(--site-max-width) - var(--popup-pad));
+    height: calc(100% - var(--nav-height) - var(--popup-pad));  
+  }
+
+  &__lightbox{
+    aspect-ratio: var(--img-aspect-width) / var(--img-aspect-height);
+    // max-width: calc(var(--site-max-width) - var(--popup-pad));
+    max-width: calc(var(--site-max-width));
+    max-height: calc(100% - var(--nav-height) - var(--popup-pad));  
+    width: auto;
+    height: auto;
+  }
+
 
 
   &--inner {
@@ -55,6 +69,11 @@
     @include gap(var(--popup-gap));
     position: relative;
     overflow: hidden;
+
+
+    &__lightbox{
+      @include no-select;
+    }
   }
 
 
@@ -71,12 +90,18 @@
     }
 
     &__condensed{
-      padding: calc(var(--popup-inner-pad) / 2);
-      background-color: $col-background_darker;
+      // padding: calc(var(--popup-inner-pad) / 2);
+      padding: calc(var(--popup-inner-pad) / 4);
+      background-color: $col-background;
+      // background-color: $col-primary;
       border-radius: 0 0 0 var(--b-rad);
       position: absolute;
       top: 0;
       right: 0;
+
+      // .mask{
+      //   background-color: $col-background;
+      // }
     }
 
   }

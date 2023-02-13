@@ -238,7 +238,7 @@ const MAKERIGHT_IMGS = {
 
 
 
-
+// TODO: these pages don't represent checkout, they show the store page listing
 
   iterations_checkout_low_fi: {
     name: "iterations_checkout_low_fi",
@@ -249,6 +249,14 @@ const MAKERIGHT_IMGS = {
   },
 
 
+
+  // iterations_checkout_high_fi: {
+  //   name: "iterations_checkout_high_fi",
+  //   src: "./assets/images/case_studies/makeright/test_please_delete.png",
+  //   alt: "A high fidelity prototype of the checkout page",
+  //   width: 1400,
+  //   height: 3840,
+  // },
 
   iterations_checkout_high_fi: {
     name: "iterations_checkout_high_fi",

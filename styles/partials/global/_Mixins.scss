@@ -296,11 +296,7 @@
 
 
 @mixin hover ($parent: (''), $child: (''), $transition:var(--transition)) {
-
-
 	@each $p in $parent {
-
-
 		@if $p == ('') and $child == ('') {
 			&{
 				transition: $transition;
@@ -312,10 +308,6 @@
 				@content;
 			}
 		}
-
-
-
-
 		@else if $child==('') {
 			//if there is no child
 			@at-root {
@@ -330,10 +322,6 @@
 				}
 			}
 		}
-
-
-
-
 		@else {
 			@each $c in $child {
 
@@ -373,7 +361,9 @@
 	}
 }
 
-
+	
+	
+	
 
 
 

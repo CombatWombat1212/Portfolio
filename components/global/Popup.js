@@ -17,6 +17,12 @@ var canvas,
   canvasImageLoaded = false,
   loadingImage;
 
+const HIDDEN_UI = [
+  { type: "interactive", area: ".popup--canvas", target: ".popup--footer" },
+  { type: "lightbox", area: ".popup--content", target: ".popup--header" },
+];
+var activeHiddenUI;
+
 var canvasImgTransform = { x: 0, y: 0, scale: 1, width: 0, height: 0, maxWidth: 0, maxHeight: 0, minWidth: 0, minHeight: 0, middleX: 0, middleY: 0 };
 
 //no more than 2 decimals
@@ -229,6 +235,20 @@ function loadingImageInit() {
   loadingImage.alt = loading.alt;
 }
 
+function hiddenUIInit() {
+  var area = document.querySelector(activeHiddenUI.area);
+  var target = document.querySelector(activeHiddenUI.target);
+
+  area.addEventListener("mousemove", showUIOnMouseMove, false);
+  area.addEventListener("wheel", showUIOnMouseMove, false);
+  target.addEventListener("mouseenter", forceScale, false);
+  target.addEventListener("mouseleave", stopForceScale, false);
+
+  target.classList.remove("popup--nav__on");
+  target.classList.add("popup--nav__off");
+  forceHiddenUIOn = false;
+}
+
 function canvasInit(popup) {
   canvas = document.querySelector(".popup--canvas");
   context = canvas.getContext("2d");
@@ -259,15 +279,9 @@ function canvasInit(popup) {
     canvas.addEventListener("mousedown", canvasMouseDownHandler);
     canvas.addEventListener("mouseup", canvasMouseUpHandler);
 
-    canvas.addEventListener("mousemove", showScaleOnMouseMove, false);
-    canvas.addEventListener("wheel", showScaleOnMouseMove, false);
-    var popFooter = document.querySelector(".popup--footer");
-    popFooter.addEventListener("mouseenter", forceScale, false);
-    popFooter.addEventListener("mouseleave", stopForceScale, false);
+    activeHiddenUI = HIDDEN_UI.filter((ui) => ui.type == "interactive")[0];
+    hiddenUIInit();
 
-    popFooter.classList.remove("popup--nav__on");
-    popFooter.classList.add("popup--nav__off");
-    forceScaleOn = false;
     drawImageToCanvas();
   };
 
@@ -278,8 +292,8 @@ function canvasInit(popup) {
 }
 
 function lightboxInit() {
-  // might not even need this
-  console.log("lightboxInit");
+  activeHiddenUI = HIDDEN_UI.filter((ui) => ui.type == "lightbox")[0];
+  hiddenUIInit();
 }
 
 function canvasSetSize() {
@@ -345,11 +359,9 @@ function Popup({ popup, setPopup }) {
     }
   }, [popup, setPopup]);
 
-  var headerClasses = type == "lightbox" ? "popup--header__condensed" : "popup--header__full";
+  var headerClasses = type == "lightbox" ? "popup--header__condensed popup--nav__off" : "popup--header__full";
+  var contentClasses = `popup--content ${type == "lightbox" && "popup--content__lightbox"}`;
 
-
-  // TODO: happy monday! Next step is making the lighbox popup aspect ratio match that of the image so that it fills its container. This will look similar to that of setting the size of the image inside the canvas because its size will depend on which is bigger, the width or height of the container.
-  // TODO: after that is making the close button dissapear in the same way as the scale ui
   // TODO: will there be a way of seeking between relevant images in the lightbox? i think so, yes, but strap in cause that one might be tricky.  You got this:)
 
   return (
@@ -362,9 +374,9 @@ function Popup({ popup, setPopup }) {
               closePopup(setPopup);
             }}></div>
 
-          <div className="popup container">
+          <div className={`popup container ${type == "lightbox" ? "popup__lightbox" : "popup__interactive"}`} style={type == "lightbox" ? { "--img-aspect-width": img.width, "--img-aspect-height": img.height } : {}}>
             <div className="popup--inner">
-              <div className="popup--content">
+              <div className={contentClasses}>
                 <div className={`popup--header ${headerClasses} popup--nav`}>
                   {type == "interactive" && (
                     <div className="popup--title">
@@ -438,28 +450,28 @@ function canvasReleased() {
   canvas.classList.remove("popup--canvas__grabbed");
 }
 
-var forceScaleOn = false;
+var forceHiddenUIOn = false;
 
 function forceScale(e) {
-  forceScaleOn = true;
-  sliderToggle();
+  forceHiddenUIOn = true;
+  hiddenUIToggle();
 }
 
 function stopForceScale() {
-  if (forceScaleOn) {
-    forceScaleOn = false;
+  if (forceHiddenUIOn) {
+    forceHiddenUIOn = false;
     mouseMoveRan = true;
   }
 }
 
-function sliderToggle() {
-  var target = document.querySelector(".popup--footer");
+function hiddenUIToggle() {
+  var target = document.querySelector(activeHiddenUI.target);
   if (!target) return;
   var on = target.classList.contains("popup--nav__on");
   var tran = Number(window.getComputedStyle(target).getPropertyValue("transition-duration").split("s")[0]) * 1000;
 
   if (on) {
-    if (forceScaleOn) return;
+    if (forceHiddenUIOn) return;
     toggle(target, "popup--nav", tran, "animated", "");
   } else {
     toggle(target, "popup--nav", tran, "animated", "");
@@ -469,9 +481,9 @@ function sliderToggle() {
 var isMouseMoving;
 var mouseMoveTimeout = 1000;
 var mouseMoveRan = false;
-function showScaleOnMouseMove() {
+function showUIOnMouseMove() {
   if (!mouseMoveRan) {
-    sliderToggle();
+    hiddenUIToggle();
     mouseMoveRan = true;
   }
   window.clearTimeout(isMouseMoving);
@@ -480,12 +492,12 @@ function showScaleOnMouseMove() {
 
 function isMouseMovingFunctions() {
   mouseMoveRan = false;
-  sliderToggle();
+  hiddenUIToggle();
 }
 
 var isResizing;
 
-function popupResize(e) {
+function popupResize() {
   window.clearTimeout(isResizing);
   isResizing = setTimeout(popupResizeFunctions, RESIZE_TIMEOUT);
 }
