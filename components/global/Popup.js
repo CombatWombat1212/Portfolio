@@ -41,6 +41,7 @@ var dragStartPosOffset = { x: 0, y: 0 };
 var currentTransformedCursor;
 
 
+
 function getTransformedPoint(x, y) {
   const originalPoint = new DOMPoint(x, y);
   return context.getTransform().invertSelf().transformPoint(originalPoint);
