@@ -80,7 +80,6 @@ function canvasImageSizeInit() {
   height *= startZoom;
   width *= startZoom;
 
-
   canvasImgTransform.x = (canvas.width - canvasImgTransform.maxWidth) / 2;
   canvasImgTransform.y = (canvas.height - canvasImgTransform.maxHeight) / 2;
   canvasImgTransform.width = width;
@@ -239,7 +238,6 @@ function loadingImageInit() {
 }
 
 function hiddenUIInit() {
-
   var area = document.querySelector(activeHiddenUI.area);
   var target = document.querySelector(activeHiddenUI.target);
 
@@ -248,14 +246,13 @@ function hiddenUIInit() {
   target.addEventListener("mouseenter", forceScale, false);
   target.addEventListener("mouseleave", stopForceScale, false);
 
-  if(activeHiddenUI.type == "interactive") target.classList.remove("popup--nav__on");
-  if(activeHiddenUI.type == "interactive") target.classList.add("popup--nav__off");
+  if (activeHiddenUI.type == "interactive") target.classList.remove("popup--nav__on");
+  if (activeHiddenUI.type == "interactive") target.classList.add("popup--nav__off");
 
   forceHiddenUIOn = false;
 }
 
 function canvasInit(popup) {
-
   canvas = document.querySelector(".popup--canvas");
   context = canvas.getContext("2d");
   canvasInput = document.querySelector(".scale--input");
@@ -271,7 +268,6 @@ function canvasInit(popup) {
   canvasImage.height = popup.img.height;
   canvasImage.alt = popup.img.alt;
 
-  
   canvasImage.onload = function () {
     popupResizeFunctions();
     canvasImageLoaded = true;
@@ -297,18 +293,25 @@ function canvasInit(popup) {
 var popupGroup = false;
 var popupIndex;
 function checkForRelevantGroups(popup, setPopup) {
+
+
+    // TODO: would it be better to always have the left and right buttons present rather than toggling them on and off depending on the index?
+  // TODO: should we add Pagination Indicators? lil dots at the bottom of the popup that indicate which image you're on and how many there are in total?
+  // TODO: should we add transitions between images in a gallery?
+
+
   var imgGroup = popup.img.group;
 
   if (!imgGroup) return;
   if (typeof MAKERIGHT_IMG_GROUPS[imgGroup] === "undefined") throw new Error(`No group with name ${imgGroup} found`);
-  
+
   var index = popup.img.index;
   var group = MAKERIGHT_IMG_GROUPS[imgGroup];
-  
+
   popupGroup = group;
   popupIndex = index;
 
-  if(popupGroup.imgs.length == 0 || popupGroup.imgs.length == 1) return;
+  if (popupGroup.imgs.length == 0 || popupGroup.imgs.length == 1) return;
 
   var seekRight = document.querySelector(".popup--seek__right");
   var seekLeft = document.querySelector(".popup--seek__left");
@@ -316,30 +319,39 @@ function checkForRelevantGroups(popup, setPopup) {
   var seekRightOn = seekRight.classList.contains("popup--seek__on") ? true : false;
   var seekLeftOn = seekLeft.classList.contains("popup--seek__on") ? true : false;
 
-
-
-  if(popupIndex == 0) {
-    if(!seekRightOn) toggle(seekRight, "popup--seek", "transition", "animated", "");
-    if(seekLeftOn) toggle(seekLeft, "popup--seek", "transition", "animated", "");
-  } 
-  if(popupIndex == popupGroup.imgs.length - 1) {
-    if(seekRightOn) toggle(seekRight, "popup--seek", "transition", "animated", "");
-    if(!seekLeftOn) toggle(seekLeft, "popup--seek", "transition", "animated", "");
+  if (popupIndex == 0) {
+    if (!seekRightOn) toggle(seekRight, "popup--seek", "transition", "animated", "");
+    if (seekLeftOn) toggle(seekLeft, "popup--seek", "transition", "animated", "");
   }
-  if(popupIndex > 0 && popupIndex < popupGroup.imgs.length - 1) {
-    if(!seekRightOn) toggle(seekRight, "popup--seek", "transition", "animated", "");
-    if(!seekLeftOn) toggle(seekLeft, "popup--seek", "transition", "animated", "");
+  if (popupIndex == popupGroup.imgs.length - 1) {
+    if (seekRightOn) toggle(seekRight, "popup--seek", "transition", "animated", "");
+    if (!seekLeftOn) toggle(seekLeft, "popup--seek", "transition", "animated", "");
   }
-
-
-
-
+  if (popupIndex > 0 && popupIndex < popupGroup.imgs.length - 1) {
+    if (!seekRightOn) toggle(seekRight, "popup--seek", "transition", "animated", "");
+    if (!seekLeftOn) toggle(seekLeft, "popup--seek", "transition", "animated", "");
+  }
 }
 
 function seekHandler(e, setPopup) {
-  var button = e.target;
-  while (!button.classList.contains("popup--seek")) {
-    button = button.parentElement;
+
+
+
+
+  var button;
+
+  if (e.type == "keydown") {
+    if (e.key == "ArrowRight") {
+      button = document.querySelector(".popup--seek__right");
+    }
+    if (e.key == "ArrowLeft") {
+      button = document.querySelector(".popup--seek__left");
+    }
+  } else {
+    button = e.target;
+    while (!button.classList.contains("popup--seek")) {
+      button = button.parentElement;
+    }
   }
 
   var direction = button.classList.contains("popup--seek__right") ? 1 : -1;
@@ -407,7 +419,7 @@ function Popup({ popup, setPopup }) {
         lastPopup = popup;
 
         window.addEventListener("resize", popupResize, false);
-        window.addEventListener("keydown", catchCloseKey, false);
+        window.addEventListener("keydown", catchKeys, false);
         if (type == "interactive") canvasInit(popup, setPopup);
         if (type == "lightbox") lightboxInit(popup, setPopup);
       }
@@ -419,7 +431,7 @@ function Popup({ popup, setPopup }) {
       setPopupGlobal = setPopup;
     } else {
       window.removeEventListener("resize", popupResize, false);
-      window.removeEventListener("keydown", catchCloseKey, false);
+      window.removeEventListener("keydown", catchKeys, false);
       canvasImageLoaded = false;
       document.body.classList.remove("noscroll");
       popupGroup = false;
@@ -517,9 +529,19 @@ function Popup({ popup, setPopup }) {
   );
 }
 
-function catchCloseKey(e) {
+function catchKeys(e) {
   if (e.keyCode == 27 || e.key == "Escape") {
     closePopup(setPopupGlobal);
+  }
+
+  if (popupGroup) {
+    if (e.keyCode == 37 || e.key == "ArrowLeft") {
+      seekHandler(e, setPopupGlobal);
+    }
+
+    if (e.keyCode == 39 || e.key == "ArrowRight") {
+      seekHandler(e, setPopupGlobal);
+    }
   }
 }
 
