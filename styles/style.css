@@ -1968,6 +1968,11 @@ body {
   height: auto;
 }
 
+.popup__lightbox-zoom {
+  max-height: calc(100% - var(--nav-height) - var(--popup-pad));
+  width: calc(var(--site-max-width) - var(--popup-pad));
+}
+
 .popup--inner {
   width: 100%;
   display: flex;
@@ -1994,6 +1999,12 @@ body {
 .popup--content__lightbox {
   -webkit-touch-callout: none;
   user-select: none;
+  background-color: #00000000;
+}
+
+.popup--content__lightbox-zoom {
+  overflow-y: scroll;
+  position: unset;
 }
 
 .popup--seek {
@@ -2158,6 +2169,10 @@ body {
   height: 100%;
   object-fit: contain;
   pointer-events: none;
+}
+
+.popup--img__lightbox-zoom img {
+  height: fit-content;
 }
 
 .scale {

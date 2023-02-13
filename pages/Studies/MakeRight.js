@@ -532,43 +532,85 @@ function MakeRight({ setPopup }) {
             </Column>
           </Section>
 
+
+
+
           <Section id="Prototyping--Progression" type="columns" margin="wide" arrows="background" background="tertiary" titled mainType="grid">
             <Title>Project Iterations</Title>
             <Heading>Progression & refinement</Heading>
 
-              <Column caption="above">
-                <Description className="graphic--caption graphic--caption__split">
-                  <p>Customer Journey - Item Listing (Low-Fi)</p>
-                  <p>Phase 1</p>
-                </Description>
-                <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_checkout_low_fi"]} lightbox setPopup={setPopup} />
-              </Column>
-              <Column caption="above">
-                <Description className="graphic--caption graphic--caption__split">
-                  <p>Customer Journey - Item Listing (High-Fi)</p>
-                  <p>Phase 2</p>
-                </Description>
-                <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_checkout_high_fi"]} lightbox setPopup={setPopup} />
-              </Column>
+            <Column caption="above">
+              <Description className="graphic--caption graphic--caption__split">
+                <p>Customer Journey - Item Listing (Low-Fi)</p>
+                <p>Phase 1</p>
+              </Description>
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_checkout_low_fi"]} lightbox setPopup={setPopup} />
+            </Column>
+            <Column caption="above">
+              <Description className="graphic--caption graphic--caption__split">
+                <p>Customer Journey - Item Listing (High-Fi)</p>
+                <p>Phase 2</p>
+              </Description>
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_checkout_high_fi"]} lightbox setPopup={setPopup} />
+            </Column>
 
-              <Column caption="above">
-                <Description className="graphic--caption graphic--caption__split">
-                  <p>Maker Journey - File Checking (Low-Fi)</p>
-                  <p>Phase 1</p>
-                </Description>
-                <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_file_checking_low_fi"]} lightbox setPopup={setPopup} />
-              </Column>
-              <Column caption="above">
-                <Description className="graphic--caption graphic--caption__split">
-                  <p>Maker Journey - File Checking (High-Fi)</p>
-                  <p>Phase 2</p>
-                </Description>
-                <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_file_checking_high_fi"]} lightbox setPopup={setPopup} />
-              </Column>
+            <Column caption="above">
+              <Description className="graphic--caption graphic--caption__split">
+                <p>Maker Journey - File Checking (Low-Fi)</p>
+                <p>Phase 1</p>
+              </Description>
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_file_checking_low_fi"]} lightbox setPopup={setPopup} />
+            </Column>
+            <Column caption="above">
+              <Description className="graphic--caption graphic--caption__split">
+                <p>Maker Journey - File Checking (High-Fi)</p>
+                <p>Phase 2</p>
+              </Description>
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_file_checking_high_fi"]} lightbox setPopup={setPopup} />
+            </Column>
+          </Section>
+
+          <Section id="Prototyping--Feedback" background="tertiary light">
+            <Title>Noteable Feedback Changes</Title>
+            <Heading>Significant issues addressed during testing and revision:</Heading>
+            <Description>
+              <p>
+                Some changes were a structural shift in the service's rules and mechanics, others were simply UI and UX improvements.
+                <br />
+                Here is a smattering of the most notable issues addressed along the way.
+              </p>
+            </Description>
           </Section>
 
 
-          
+
+
+          <Section id="Prototyping--Feedback" type="columns" arrows="background" background="tertiary">
+            <Heading>The Manufacturer Overview</Heading>
+
+            <Column>
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_overview_before"]} lightbox setPopup={setPopup} />
+              <Description className="graphic--caption graphic--caption__split">
+                <p>Aspiring makers need to understand the expectations of their new job.  Originally, this was taught with an 8-page slideshow.  But users found it droning, hard to retain, and too easy to skip.</p>
+              </Description>
+            </Column>
+            <Column>
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_overview_after"]} lightbox={MAKERIGHT_IMGS["feedback_overview_after_full"]} zoom setPopup={setPopup} />
+              <Description className="graphic--caption graphic--caption__split">
+                <p>Now, that info exists as a single inviting page. As well, I added a brief video chat at the end onboarding to ensure new Makers have read the overview, and can ask questions.</p>
+              </Description>
+            </Column>
+
+          </Section>
+
+
+
+
+
+
+
+
+
         </Chapter>
       </CaseStudyPage>
     </>

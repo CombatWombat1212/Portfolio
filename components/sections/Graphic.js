@@ -5,7 +5,7 @@ import Mask from "../utilities/Mask";
 import { getHasBackground } from "./sections_utilities/IfHas";
 import { getBackgroundClasses } from "./sections_utilities/GetClasses";
 
-function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, setPopup }) {
+function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup }) {
 
 
   // TODO: for mobile, add some kind of indication animation of the image being clocked on when its interactable or can be opened in a lightbox
@@ -35,9 +35,18 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
 
   var onClickHandler;
   lightbox = lightbox ? lightbox : false;
+  zoom = zoom ? true : false;
   if (lightbox) {
+
+    var lightboxImg = img;
+
+    if(typeof lightbox == "object"){
+      lightboxImg = lightbox;
+    }
+
+    // TODO: add loading indicator for lightbox images, and smoother transitions between non-zoomed images and zoomed images
     onClickHandler = () => {
-      setPopup({ type: "lightbox", img: img });
+      setPopup({ type: "lightbox", img: lightboxImg, zoom: zoom });
     };
   }
 

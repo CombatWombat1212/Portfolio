@@ -368,7 +368,9 @@ function seekHandler(e, setPopup) {
 
   var img = popupGroup.imgs[popupIndex];
 
-  setPopup({ type: "lightbox", img: img });
+  var zoom = img.zoom ? img.zoom : false;
+
+  setPopup({ type: "lightbox", img: img, zoom: zoom });
 }
 
 function lightboxInit(popup, setPopup) {
@@ -412,9 +414,12 @@ function Scale({ className }) {
 function Popup({ popup, setPopup }) {
   var type;
   var img;
+  var zoom;
 
   type = popup.type;
   img = popup.img;
+  zoom = popup.zoom ? popup.zoom : false;
+
 
   popupType = type;
 
@@ -446,7 +451,10 @@ function Popup({ popup, setPopup }) {
   }, [popup, setPopup]);
 
   var headerClasses = type == "lightbox" ? "popup--header__condensed popup--nav__off" : "popup--header__full";
-  var contentClasses = `popup--content ${type == "lightbox" && "popup--content__lightbox"}`;
+  var contentClasses = `popup--content ${type === "lightbox" ? (zoom ? "popup--content__lightbox-zoom" : "popup--content__lightbox") : "popup--content__interactive"}`;
+
+  var popupContainerClasses = 
+  `${type === "lightbox" ? (zoom ? "popup__lightbox-zoom" : "popup__lightbox") : "popup__interactive"}`;
 
   // TODO: will there be a way of seeking between relevant images in the lightbox? i think so, yes, but strap in cause that one might be tricky.  You got this:)
 
@@ -460,7 +468,7 @@ function Popup({ popup, setPopup }) {
               closePopup(setPopup);
             }}></div>
 
-          <div className={`popup container ${type == "lightbox" ? "popup__lightbox" : "popup__interactive"}`} style={type == "lightbox" ? { "--img-aspect-width": img.width, "--img-aspect-height": img.height } : {}}>
+          <div className={`popup container ${popupContainerClasses}`} style={type == "lightbox" ? { "--img-aspect-width": img.width, "--img-aspect-height": img.height } : {}}>
             <div className="popup--inner">
               {type == "lightbox" && (
                 <div className="popup--seek popup--seek__left popup--seek__off">
@@ -504,7 +512,7 @@ function Popup({ popup, setPopup }) {
                 )}
 
                 {type == "lightbox" && (
-                  <div className="popup--img">
+                  <div className={`popup--img ${zoom && 'popup--img__lightbox-zoom'}`}>
                     <Image src={img.src} alt={img.alt} width={img.width} height={img.height} />
                   </div>
                 )}

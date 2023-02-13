@@ -238,6 +238,185 @@ const MAKERIGHT_IMGS = {
     height: 1305,
     group: "iterations_file_checking",
   },
+
+
+
+
+
+
+
+
+  feedback_overview_before: {
+    name: "feedback_overview_before",
+    src: "./assets/images/case_studies/makeright/prototypes/feedback_overview_before.png",
+    alt: "A condensed stack of images that show the original version of the MakeRight Manufacturer Overview page",
+    width: 2084,
+    height: 1283,
+    group: "feedback_overview",
+  },
+
+
+  feedback_overview_after: {
+    name: "feedback_overview_after",
+    src: "./assets/images/case_studies/makeright/prototypes/feedback_overview_after.png",
+    alt: "A snippet of a single scrolling page, the final version of the MakeRight Manufacturer Overview",
+    width: 2084,
+    height: 1283,
+    // group: "feedback_overview",
+  },
+
+
+  feedback_overview_after_full: {
+    name: "feedback_overview_after_full",
+    src: "./assets/images/case_studies/makeright/prototypes/feedback_overview_after_full.png",
+    alt: "The full MakeRight Manufacturer Overview page",
+    width: 3840,
+    height: 19480,
+    group: "feedback_overview",
+    zoom: true,
+  },
+
+
+
+
+
+  feedback_printers_before: {
+    name: "feedback_printers_before",
+    src: "./assets/images/case_studies/makeright/prototypes/feedback_printers_before.png",
+    alt: "An older version of the UI for inputting a manufacturer's 3D printer during signup",
+    width: 2084,
+    height: 1065,
+    group: "feedback_printers",
+  },
+
+
+  feedback_printers_after: {
+    name: "feedback_printers_after",
+    src: "./assets/images/case_studies/makeright/prototypes/feedback_printers_after.png",
+    alt: "Updated UI for inputting a manufacturer's 3D printer during signup",
+    width: 2084,
+    height: 1065,
+    group: "feedback_printers",
+  },
+
+
+
+
+
+
+
+
+
+  feedback_filament_before: {
+    name: "feedback_filament_before",
+    src: "./assets/images/case_studies/makeright/prototypes/feedback_filament_before.png",
+    alt: "An early version of the UI for inputting a manufacturer's filament during signup",
+    width: 2084,
+    height: 1149,
+    group: "feedback_filament",
+  },
+
+
+  feedback_filament_after: {
+    name: "feedback_filament_after",
+    src: "./assets/images/case_studies/makeright/prototypes/feedback_filament_after.png",
+    alt: "Updated UI for inputting a manufacturer's filament during signup",
+    width: 2084,
+    height: 1149,
+    group: "feedback_filament",
+  },
+
+
+
+
+  feedback_tutorial: {
+    name: "feedback_tutorial",
+    src: "./assets/images/case_studies/makeright/prototypes/feedback_tutorial.png",
+    alt: "A screenshot of the Tutorial tooltips that were added throughout the manufacturer testing process",
+    width: 4568,
+    height: 1568,
+  },
+
+
+
+
+
+
+
+  delivered_project_banner: {
+    name: "delivered_project_banner",
+    src: "./assets/images/case_studies/makeright/delivered_project_banner.png",
+    alt: "A rendering of a 3D printed elephant, sitting in a cardboard box, with a MakeRight logo on the side, on a table",
+    width: 1920,
+    height: 500,
+  },
+
+
+
+
+
+
+
+
+  connecting_consumers: {
+    name: "connecting_consumers",
+    src: "./assets/images/case_studies/makeright/connecting_consumers.svg",
+    alt: "A graphic representing connecting consumers to manufacturers",
+    width: 224.16,
+    height: 177.14,
+  },
+
+
+
+
+  browseable_storefront: {
+    name: "browseable_storefront",
+    src: "./assets/images/case_studies/makeright/browseable_storefront.svg",
+    alt: "A graphic of a storefront",
+    width: 175.72,
+    height: 166.84,
+  },
+
+
+
+  maker_profit: {
+    name: "maker_profit",
+    src: "./assets/images/case_studies/makeright/maker_profit.svg",
+    alt: "A graphic of money being 3D printed to represent maker profit",
+    width: 158.88,
+    height: 178.89,
+  },
+
+
+
+
+  makeright_closing_banner: {
+    name: "makeright_closing_banner",
+    src: "./assets/images/case_studies/makeright/makeright_closing_banner.png",
+    alt: "A 3D rendering of the word 'MakeRight' in 3D printed letters",
+    width: 1920,
+    height: 650,
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 };
 
 
@@ -277,10 +456,6 @@ Object.keys(MAKERIGHT_IMGS).forEach((key) => {
     });
   }
 });
-
-
-console.log(MAKERIGHT_IMG_GROUPS);
-
 
 
 

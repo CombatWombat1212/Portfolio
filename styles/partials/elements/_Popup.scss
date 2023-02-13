@@ -53,6 +53,12 @@
     height: auto;
   }
 
+  &__lightbox-zoom{
+    max-height: calc(100% - var(--nav-height) - var(--popup-pad));
+    width: calc(var(--site-max-width) - var(--popup-pad));
+  }
+
+
   &--inner {
     width: 100%;
     display: flex;
@@ -70,6 +76,12 @@
 
     &__lightbox {
       @include no-select;
+      background-color: #00000000;
+    }
+
+    &__lightbox-zoom {
+      overflow-y: scroll;
+      position:unset;
     }
   }
 
@@ -235,6 +247,17 @@
       @include img-contain;
       pointer-events: none;
     }
+
+
+
+    &__lightbox-zoom{
+      img{
+        height: fit-content;
+      }
+    }
+
+
+
   }
 }
 
