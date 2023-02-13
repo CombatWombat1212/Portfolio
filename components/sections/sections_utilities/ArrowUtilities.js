@@ -2,6 +2,8 @@ import { RESIZE_TIMEOUT, splitPx } from "@/scripts/GlobalUtilities";
 
 var allAnchoredArrows = [];
 
+
+
 function refreshAnchorHeight() {
   if (allAnchoredArrows.length == 0) return;
 
@@ -39,6 +41,11 @@ function refreshAnchorHeight() {
   }
 }
 
+
+
+
+
+
 function getAnchoredArrows() {
   var arrows = document.querySelectorAll(".arrow--mask__anchored");
   arrows = Array.from(arrows);
@@ -68,6 +75,9 @@ function getAnchoredArrows() {
   }
 }
 
+
+
+
 function anchoredArrowsInit() {
   if (typeof window == "undefined") return;
 
@@ -85,4 +95,34 @@ function anchoredArrowsInit() {
   });
 }
 
-export { anchoredArrowsInit };
+
+
+
+function removeExcessArrows(){
+  var gridSections = document.querySelectorAll(".section--main__grid");
+
+  gridSections = Array.from(gridSections).filter((section) => {
+    var arrows = section.querySelectorAll(".arrow--column");
+    if (arrows.length > 0) return true;
+    else return false;
+  });
+
+  gridSections.forEach((section) => {
+    var columns = getComputedStyle(section).gridTemplateColumns;
+    var columnCount = columns.split(" ").length;
+
+    var children = section.children;
+    for (var i = 0; i < children.length; i += columnCount) {
+      var firstElement = children[i];
+      var arrow = firstElement.querySelector(".arrow--column");
+      if (arrow) {
+        arrow.classList.add("arrow--column__hidden");
+      }
+    }
+  });
+}
+
+
+
+
+export { anchoredArrowsInit, removeExcessArrows };

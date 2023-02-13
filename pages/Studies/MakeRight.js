@@ -2,7 +2,7 @@ import { StudyPanel } from "/components/elements/Panel";
 import getStudy from "../../scripts/GetStudy";
 import CaseStudyPage from "/components/studies/CaseStudyPage";
 import Brief from "/components/studies/Brief";
-import { Section, Chapter, Title, Column, Heading, Description, Graphic, Quote } from "/components/sections/Sections";
+import { Section, Chapter, Title, Column, Heading, Description, Graphic, Quote } from "@/components/sections/Sections";
 import MAKERIGHT_IMGS from "/data/MAKERIGHT_IMGS";
 import Gantt from "/components/charts/Gantt";
 import BarGraph from "@/components/charts/BarGraph";
@@ -328,7 +328,7 @@ function MakeRight({ setPopup }) {
 
             <Column className="col-4">
               <Graphic className="flex-col h-auto" background="background" type="mask" img={MAKERIGHT_IMGS["brainstorming_chart"]}>
-                <Button color="primary" type="bottom" onClick={() => setPopup({type:"interactive", img:MAKERIGHT_IMGS["brainstorming_chart_full"]})}>
+                <Button color="primary" type="bottom" onClick={() => setPopup({ type: "interactive", img: MAKERIGHT_IMGS["brainstorming_chart_full"] })}>
                   View full exercise
                 </Button>
               </Graphic>
@@ -532,18 +532,43 @@ function MakeRight({ setPopup }) {
             </Column>
           </Section>
 
-          <Section id="Prototyping--Progression" type="columns" margin="wide" arrows="background" background="tertiary" titled>
+          <Section id="Prototyping--Progression" type="columns" margin="wide" arrows="background" background="tertiary" titled mainType="grid">
             <Title>Project Iterations</Title>
             <Heading>Progression & refinement</Heading>
-            <Column caption="above">
-              <Description className="graphic--caption graphic--caption__split"><p>Customer Journey, Low-Fi</p><p>Phase 1</p></Description>
-              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_checkout_low_fi"]} lightbox setPopup={setPopup} />
-            </Column>
-            <Column caption="above">
-            <Description className="graphic--caption graphic--caption__split"><p>Customer Journey, High-Fi</p><p>Phase 2</p></Description>
-              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_checkout_high_fi"]} lightbox setPopup={setPopup} />
-            </Column>
+
+              <Column caption="above">
+                <Description className="graphic--caption graphic--caption__split">
+                  <p>Customer Journey - Item Listing (Low-Fi)</p>
+                  <p>Phase 1</p>
+                </Description>
+                <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_checkout_low_fi"]} lightbox setPopup={setPopup} />
+              </Column>
+              <Column caption="above">
+                <Description className="graphic--caption graphic--caption__split">
+                  <p>Customer Journey - Item Listing (High-Fi)</p>
+                  <p>Phase 2</p>
+                </Description>
+                <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_checkout_high_fi"]} lightbox setPopup={setPopup} />
+              </Column>
+
+              <Column caption="above">
+                <Description className="graphic--caption graphic--caption__split">
+                  <p>Maker Journey - File Checking (Low-Fi)</p>
+                  <p>Phase 1</p>
+                </Description>
+                <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_file_checking_low_fi"]} lightbox setPopup={setPopup} />
+              </Column>
+              <Column caption="above">
+                <Description className="graphic--caption graphic--caption__split">
+                  <p>Maker Journey - File Checking (High-Fi)</p>
+                  <p>Phase 2</p>
+                </Description>
+                <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_file_checking_high_fi"]} lightbox setPopup={setPopup} />
+              </Column>
           </Section>
+
+
+          
         </Chapter>
       </CaseStudyPage>
     </>

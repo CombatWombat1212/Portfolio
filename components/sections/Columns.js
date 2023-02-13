@@ -3,7 +3,7 @@ import Graphic from "./Graphic";
 import { chevron_right } from "@/data/ICONS";
 import { addClassNoRepeats, addClassToJsxObj } from "./sections_utilities/ClassUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
-import { anchoredArrowsInit } from "./sections_utilities/AnchoredArrows";
+import { anchoredArrowsInit, removeExcessArrows } from "./sections_utilities/ArrowUtilities";
 
 
 function ColumnGroup({ columns, arrows, mainType }) {
@@ -22,11 +22,13 @@ function ColumnGroup({ columns, arrows, mainType }) {
     }
   }
 
+
+  // TODO: these are firing every time when they should only fire once after the page has loaded if there are components that satisfy their conditions
   useMountEffect(() => {
     if (!hasAboveCaptions) return;
     anchoredArrowsInit();
+    if(mainType == "grid") removeExcessArrows();
   });
-
 
 
 

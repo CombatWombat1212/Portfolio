@@ -125,5 +125,17 @@
         }
       }
     }
+
+
+    &--Progression{
+      .section {
+        &--main {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+    }
+
+
   }
 }

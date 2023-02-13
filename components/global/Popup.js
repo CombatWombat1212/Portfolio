@@ -373,7 +373,11 @@ function lightboxInit(popup, setPopup) {
   checkForRelevantGroups(popup, setPopup);
 
   activeHiddenUI = HIDDEN_UI.filter((ui) => ui.type == "lightbox")[0];
-  hiddenUIInit();
+
+  var popWrapper = document.querySelector(".popup--wrapper");
+  var on = popWrapper.classList.contains("popup--wrapper__on") ? true : false;
+  if (!on) hiddenUIInit();
+  
 }
 
 function canvasSetSize() {

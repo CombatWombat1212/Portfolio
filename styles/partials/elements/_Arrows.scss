@@ -1,6 +1,11 @@
 .arrow {
   &--column {
     position: absolute;
+
+
+    &__hidden{
+      display: none;
+    }
   }
 
   &--mask {
