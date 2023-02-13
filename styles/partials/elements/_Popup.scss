@@ -39,26 +39,24 @@
   z-index: 10;
   display: flex;
 
-
-  &__interactive{
+  &__interactive {
     width: calc(var(--site-max-width) - var(--popup-pad));
-    height: calc(100% - var(--nav-height) - var(--popup-pad));  
+    height: calc(100% - var(--nav-height) - var(--popup-pad));
   }
 
-  &__lightbox{
+  &__lightbox {
     aspect-ratio: var(--img-aspect-width) / var(--img-aspect-height);
     // max-width: calc(var(--site-max-width) - var(--popup-pad));
     max-width: calc(var(--site-max-width));
-    max-height: calc(100% - var(--nav-height) - var(--popup-pad));  
+    max-height: calc(100% - var(--nav-height) - var(--popup-pad));
     width: auto;
     height: auto;
   }
 
-
-
   &--inner {
     width: 100%;
     display: flex;
+    position: relative;
   }
 
   &--content {
@@ -70,26 +68,63 @@
     position: relative;
     overflow: hidden;
 
-
-    &__lightbox{
+    &__lightbox {
       @include no-select;
     }
   }
 
+  &--seek {
+    --popup-seek-spacing: 2rem;
+    position: absolute;
+    z-index: 10;
+    top: calc(50% - (var(--button-height) / 2));
+    @include trans;
 
+    &__left {
+      left: 0;
+      transform: translateX(calc(-100% - var(--popup-seek-spacing)));
+    }
+
+    &__right {
+      right: 0;
+      transform: translateX(calc(100% + var(--popup-seek-spacing)));
+    }
+
+    .mask {
+      --button-icon-scale: 1.1;
+    }
+
+    &__off {
+      opacity: 0;
+      display: none;
+    }
+    &__on {
+      opacity: 1;
+    }
+    &__tran {
+      opacity: 0;
+    }
+
+
+    // &__inactive{
+    //   .mask{
+    //     opacity:0.5;
+    //   }
+    // }
+
+
+  }
 
   &--header {
     @include flex-row-between;
-    
-    
-    
-    &__full{
+
+    &__full {
       margin-top: -0.35rem;
       @include pad-x(var(--popup-inner-pad));
       padding-top: var(--popup-inner-pad);
     }
 
-    &__condensed{
+    &__condensed {
       // padding: calc(var(--popup-inner-pad) / 2);
       padding: calc(var(--popup-inner-pad) / 4);
       background-color: $col-background;
@@ -103,7 +138,6 @@
       //   background-color: $col-background;
       // }
     }
-
   }
 
   &--footer {
@@ -116,10 +150,8 @@
     right: 0;
   }
 
-
-  &--nav{
+  &--nav {
     transition-duration: 0.2s;
-
 
     &__on {
       display: flex;
@@ -134,10 +166,7 @@
     &__tran {
       opacity: 0;
     }
-
   }
-
-
 
   &--title {
     @include flex-col-center;
@@ -207,7 +236,6 @@
       pointer-events: none;
     }
   }
-
 }
 
 .scale {

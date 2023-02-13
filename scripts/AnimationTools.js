@@ -148,3 +148,4 @@ function toggle(elem, classPref, transitionTime, anim, transitions, overlap) {
 
 
 export default toggle;
+export {simpleToggleOn, simpleToggleOff, dualTransitionToggleOn, dualTransitionToggleOff, toggle};

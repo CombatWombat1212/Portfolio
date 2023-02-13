@@ -84,6 +84,21 @@
       --button-color: #{$col-primary_hovered};
     }
   }
+
+
+  &__background-primary {
+    --button-icon-size: 1.5rem;
+    --button-background: #{$col-background};
+    --button-color: #{$col-primary};
+    @include hover {
+      --button-color: #{$col-primary_hovered};
+    }
+  }
+
+
+
+
+
 }
 
 // Button modifiers
@@ -124,7 +139,7 @@
   &__pulse-right {
     @include hover {
       .button--icon {
-        transform: translateX($button-translate-amount);
+        transform: scale(var(--button-icon-scale)) translateX($button-translate-amount);
       }
     }
   }
@@ -132,7 +147,7 @@
   &__pulse-left {
     @include hover {
       .button--icon {
-        transform: translateX($button-translate-amount * -1);
+        transform: scale(var(--button-icon-scale)) translateX($button-translate-amount * -1);
       }
     }
   }

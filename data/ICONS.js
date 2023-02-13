@@ -37,6 +37,13 @@ const ICONS = {
     width: 19,
     height: 30,
   },
+  chevron_left: {
+    name: 'chevron_left',
+    src: "/assets/icons/chevron_left.svg",
+    alt: "Chevron pointing left",
+    width: 19,
+    height: 30,
+  },
   document: {
     name: 'document',
     src: "/assets/icons/document.svg",
@@ -119,6 +126,7 @@ const arrow_left = new Icon(ICONS.arrow_left);
 const arrow_down = new Icon(ICONS.arrow_down);
 const chevron_down = new Icon(ICONS.chevron_down);
 const chevron_right = new Icon(ICONS.chevron_right);
+const chevron_left = new Icon(ICONS.chevron_right);
 const document = new Icon(ICONS.document);
 const email = new Icon(ICONS.email);
 const instagram = new Icon(ICONS.instagram);
@@ -127,7 +135,7 @@ const linkedin = new Icon(ICONS.linkedin);
 const loading = new Icon(ICONS.loading);
 
 export default ICONS
-export { arrow_right, arrow_left, arrow_down, chevron_down, chevron_right, document, email, instagram, linkedin, loading }
+export { arrow_right, arrow_left, arrow_down, chevron_down, chevron_right,chevron_left, document, email, instagram, linkedin, loading }
   
 
 

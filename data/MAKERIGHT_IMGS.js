@@ -1,13 +1,13 @@
 const MAKERIGHT_IMGS = {
   full_potential: {
-    name: "full potential",
+    name: "full_potential",
     src: "./assets/images/case_studies/makeright/full_potential.svg",
     alt: "3D printer in the shape of a pad lock",
     width: 212.28,
     height: 283,
   },
   barriers_to_entry: {
-    name: "barriers to entry",
+    name: "barriers_to_entry",
     src: "./assets/images/case_studies/makeright/barriers_to_entry.svg",
     alt: "Gate / barrier with the symbols for knowledge, and money",
     width: 360.84,
@@ -15,7 +15,7 @@ const MAKERIGHT_IMGS = {
   },
 
   makeright_logo: {
-    name: "makeright logo",
+    name: "makeright_logo",
     src: "./assets/images/case_studies/makeright/makeright_logo.svg",
     alt: "The text 'MakeRight' with logo of a 3D printer nozzle",
     width: 889.88,
@@ -23,7 +23,7 @@ const MAKERIGHT_IMGS = {
   },
 
   pitch_choose: {
-    name: "pitch choose",
+    name: "pitch_choose",
     src: "./assets/images/case_studies/makeright/pitch_choose.svg",
     alt: "A graphic of a 3D model of a boat being clicked on",
     width: 102.24,
@@ -31,7 +31,7 @@ const MAKERIGHT_IMGS = {
   },
 
   pitch_tweak: {
-    name: "pitch tweak",
+    name: "pitch_tweak",
     src: "./assets/images/case_studies/makeright/pitch_tweak.svg",
     alt: "A graphic of a boat with different paint-job options",
     width: 96.56,
@@ -39,7 +39,7 @@ const MAKERIGHT_IMGS = {
   },
 
   pitch_order: {
-    name: "pitch order",
+    name: "pitch_order",
     src: "./assets/images/case_studies/makeright/pitch_order.svg",
     alt: "A graphic of a 3D printed boat inside a shopping cart",
     width: 110.73,
@@ -47,7 +47,7 @@ const MAKERIGHT_IMGS = {
   },
 
   pitch_recieve: {
-    name: "pitch recieve",
+    name: "pitch_recieve",
     src: "./assets/images/case_studies/makeright/pitch_recieve.svg",
     alt: "A graphic of a gift-wrapped 3D printed boat on a doorstep",
     width: 96.95,
@@ -55,7 +55,7 @@ const MAKERIGHT_IMGS = {
   },
 
   pitch_laptop_choose: {
-    name: "pitch laptop choose",
+    name: "pitch_laptop_choose",
     src: "./assets/images/case_studies/makeright/pitch_laptop_choose.png",
     alt: "MakeRight UI screenshot showing a storefront page filled with different 3D models",
     width: 102.24,
@@ -63,7 +63,7 @@ const MAKERIGHT_IMGS = {
   },
 
   pitch_laptop_tweak: {
-    name: "pitch laptop tweak",
+    name: "pitch_laptop_tweak",
     src: "./assets/images/case_studies/makeright/pitch_laptop_tweak.png",
     alt: "MakeRight UI screenshot showing the ability to customize the scale, color, and material of your 3D printed object",
     width: 2952,
@@ -71,7 +71,7 @@ const MAKERIGHT_IMGS = {
   },
 
   pitch_laptop_order: {
-    name: "pitch laptop order",
+    name: "pitch_laptop_order",
     src: "./assets/images/case_studies/makeright/pitch_laptop_order.png",
     alt: "MakeRight UI screenshot showing the order ticket page, where a plastic boat has been purchased",
     width: 2952,
@@ -79,13 +79,12 @@ const MAKERIGHT_IMGS = {
   },
 
   pitch_laptop_recieve: {
-    name: "pitch laptop recieve",
+    name: "pitch_laptop_recieve",
     src: "./assets/images/case_studies/makeright/pitch_laptop_recieve.png",
     alt: "MakeRight UI screenshot showing a message from your assigned 3D printer - your order is ready and images are attatched to the message to prove it",
     width: 2952,
     height: 1743,
   },
-
 
   building_makeright_banner: {
     name: "building_makeright_banner",
@@ -95,10 +94,6 @@ const MAKERIGHT_IMGS = {
     height: 1400,
   },
 
-
-
-
-
   secondary_research: {
     name: "secondary_research",
     src: "./assets/images/case_studies/makeright/secondary_research.svg",
@@ -106,7 +101,6 @@ const MAKERIGHT_IMGS = {
     width: 191.61,
     height: 184.39,
   },
-
 
   // TODO: fix this graphic
 
@@ -118,7 +112,6 @@ const MAKERIGHT_IMGS = {
     height: 182.73,
   },
 
-
   aha_moment: {
     name: "aha_moment",
     src: "./assets/images/case_studies/makeright/aha_moment.svg",
@@ -126,9 +119,6 @@ const MAKERIGHT_IMGS = {
     width: 206.75,
     height: 209.42,
   },
-
-
-
 
   brainstorming: {
     name: "brainstorming",
@@ -159,10 +149,8 @@ const MAKERIGHT_IMGS = {
     height: 252.89,
   },
 
-
-
   brainstorming_chart_full: {
-    name: "brainstorming_chart_smaller",
+    name: "brainstorming_chart_full",
     title: "Cost and Difficulty of 3D Printing Mindmap",
     src: "./assets/images/case_studies/makeright/brainstorming_chart_full.svg",
     alt: "A large-scale mindmap surrounding the cost and difficulty of 3D printing",
@@ -171,9 +159,6 @@ const MAKERIGHT_IMGS = {
     // width: 14452,
     // height: 12100,
   },
-
-
-
 
   // TODO: its not actually a system map its a journey map
   journey_map: {
@@ -184,10 +169,6 @@ const MAKERIGHT_IMGS = {
     height: 430.16,
   },
 
-
-
-
-
   maker_journey_low_fi: {
     name: "maker_journey_low_fi",
     src: "./assets/images/case_studies/makeright/maker_journey_low_fi.png",
@@ -195,8 +176,6 @@ const MAKERIGHT_IMGS = {
     width: 974,
     height: 1130,
   },
-
-
 
   customer_journey_low_fi: {
     name: "customer_journey_low_fi",
@@ -206,9 +185,6 @@ const MAKERIGHT_IMGS = {
     height: 960,
   },
 
-
-
-
   maker_journey_high_fi: {
     name: "maker_journey_high_fi",
     src: "./assets/images/case_studies/makeright/maker_journey_high_fi.svg",
@@ -216,8 +192,6 @@ const MAKERIGHT_IMGS = {
     width: 95.56,
     height: 105.54,
   },
-
-
 
   customer_journey_high_fi: {
     name: "customer_journey_high_fi",
@@ -227,18 +201,7 @@ const MAKERIGHT_IMGS = {
     height: 90.66,
   },
 
-
-
-
-
-
-
-
-
-
-
-
-// TODO: these pages don't represent checkout, they show the store page listing
+  // TODO: these pages don't represent checkout, they show the store page listing
 
   iterations_checkout_low_fi: {
     name: "iterations_checkout_low_fi",
@@ -246,17 +209,8 @@ const MAKERIGHT_IMGS = {
     alt: "A low fidelity prototype of the checkout page",
     width: 2139,
     height: 1305,
+    group: "iterations_checkout",
   },
-
-
-
-  // iterations_checkout_high_fi: {
-  //   name: "iterations_checkout_high_fi",
-  //   src: "./assets/images/case_studies/makeright/test_please_delete.png",
-  //   alt: "A high fidelity prototype of the checkout page",
-  //   width: 1400,
-  //   height: 3840,
-  // },
 
   iterations_checkout_high_fi: {
     name: "iterations_checkout_high_fi",
@@ -264,9 +218,8 @@ const MAKERIGHT_IMGS = {
     alt: "A high fidelity prototype of the checkout page",
     width: 2139,
     height: 1305,
+    group: "iterations_checkout",
   },
-
-
 
   iterations_file_checking_low_fi: {
     name: "iterations_file_checking_low_fi",
@@ -274,8 +227,8 @@ const MAKERIGHT_IMGS = {
     alt: "A low fidelity prototype of the file checking page",
     width: 2139,
     height: 1305,
+    group: "iterations_file_checking",
   },
-
 
   iterations_file_checking_high_fi: {
     name: "iterations_file_checking_high_fi",
@@ -283,36 +236,55 @@ const MAKERIGHT_IMGS = {
     alt: "A high fidelity prototype of the file checking page",
     width: 2139,
     height: 1305,
+    group: "iterations_file_checking",
   },
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 };
 
-//   function Img(icon){
-//       this.name = icon.name,
-//       this.src = icon.src,
-//       this.alt = icon.alt,
-//       this.width = icon.width,
-//       this.height = icon.height
-//   }
 
-//   const arrow_right = new Img(ICONS.arrow_right)
-//   const arrow_left = new Img(ICONS.arrow_left)
+
+const MAKERIGHT_IMG_GROUPS = {};
+
+Object.keys(MAKERIGHT_IMGS).forEach((key) => {
+  if (MAKERIGHT_IMGS[key].group) {
+    if (!MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group]) {
+      MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group] = {
+        name: MAKERIGHT_IMGS[key].group,
+        imgs: [],
+      };
+    }
+    let index = MAKERIGHT_IMGS[key].index;
+    if (typeof index === "undefined") {
+      // index = MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.length + 1;
+      index = MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.length;
+    } else {
+      const currentGroup = MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs;
+      for (let i = 0; i < currentGroup.length; i++) {
+        if (currentGroup[i].index === index) {
+          throw new Error(
+            `Overlapping indexes within group "${
+              MAKERIGHT_IMGS[key].group
+            }": ${currentGroup[i].name} and ${MAKERIGHT_IMGS[key].name}`
+          );
+        }
+      }
+    }
+    MAKERIGHT_IMGS[key].index = index;
+    MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.push(
+      MAKERIGHT_IMGS[key]
+    );
+    MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.sort((a, b) => {
+      return a.index - b.index;
+    });
+  }
+});
+
+
+console.log(MAKERIGHT_IMG_GROUPS);
+
+
+
+
+
 
 export default MAKERIGHT_IMGS;
+export { MAKERIGHT_IMG_GROUPS };

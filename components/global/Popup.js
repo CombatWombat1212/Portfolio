@@ -1,13 +1,14 @@
 // TODO: Do i want all popups to load when the page loads so they can open quickly? or do I want to save on the page load and only load the popup when it is needed? for right now i'm going to be loading it in on click
 // TODO: this should either be pre-fetched or otherwise loaded in before the user clicks on it
 
-import toggle from "@/scripts/AnimationTools";
+import toggle, { simpleToggleOn } from "@/scripts/AnimationTools";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Button from "../elements/Buttons";
 import { loading } from "@/data/ICONS";
 import { RESIZE_TIMEOUT } from "@/scripts/GlobalUtilities";
+import MAKERIGHT_IMGS, { MAKERIGHT_IMG_GROUPS } from "@/data/MAKERIGHT_IMGS";
 
 var setPopupGlobal;
 
@@ -22,6 +23,7 @@ const HIDDEN_UI = [
   { type: "lightbox", area: ".popup--content", target: ".popup--header" },
 ];
 var activeHiddenUI;
+var popupType;
 
 var canvasImgTransform = { x: 0, y: 0, scale: 1, width: 0, height: 0, maxWidth: 0, maxHeight: 0, minWidth: 0, minHeight: 0, middleX: 0, middleY: 0 };
 
@@ -77,6 +79,7 @@ function canvasImageSizeInit() {
 
   height *= startZoom;
   width *= startZoom;
+
 
   canvasImgTransform.x = (canvas.width - canvasImgTransform.maxWidth) / 2;
   canvasImgTransform.y = (canvas.height - canvasImgTransform.maxHeight) / 2;
@@ -236,6 +239,7 @@ function loadingImageInit() {
 }
 
 function hiddenUIInit() {
+
   var area = document.querySelector(activeHiddenUI.area);
   var target = document.querySelector(activeHiddenUI.target);
 
@@ -244,16 +248,18 @@ function hiddenUIInit() {
   target.addEventListener("mouseenter", forceScale, false);
   target.addEventListener("mouseleave", stopForceScale, false);
 
-  target.classList.remove("popup--nav__on");
-  target.classList.add("popup--nav__off");
+  if(activeHiddenUI.type == "interactive") target.classList.remove("popup--nav__on");
+  if(activeHiddenUI.type == "interactive") target.classList.add("popup--nav__off");
+
   forceHiddenUIOn = false;
 }
 
 function canvasInit(popup) {
+
   canvas = document.querySelector(".popup--canvas");
   context = canvas.getContext("2d");
   canvasInput = document.querySelector(".scale--input");
-  canvasImage = document.querySelector(".popup--img img");
+  // canvasImage = document.querySelector(".popup--img img");
 
   if (!canvas) return;
 
@@ -265,14 +271,11 @@ function canvasInit(popup) {
   canvasImage.height = popup.img.height;
   canvasImage.alt = popup.img.alt;
 
-  popupResizeFunctions();
-
-  window.addEventListener("resize", popupResize, false);
-  window.addEventListener("keydown", catchCloseKey, false);
-
+  
   canvasImage.onload = function () {
-    canvasImageSizeInit();
+    popupResizeFunctions();
     canvasImageLoaded = true;
+    canvasImageSizeInit();
     removeLoading();
     canvas.addEventListener("wheel", canvasZoom);
     canvas.addEventListener("mousemove", canvasMouseMoveHandler);
@@ -291,7 +294,71 @@ function canvasInit(popup) {
   // context.imageSmoothingEnabled = false;
 }
 
-function lightboxInit() {
+var popupGroup = false;
+var popupIndex;
+function checkForRelevantGroups(popup, setPopup) {
+  var imgGroup = popup.img.group;
+
+  if (!imgGroup) return;
+  if (typeof MAKERIGHT_IMG_GROUPS[imgGroup] === "undefined") throw new Error(`No group with name ${imgGroup} found`);
+  
+  var index = popup.img.index;
+  var group = MAKERIGHT_IMG_GROUPS[imgGroup];
+  
+  popupGroup = group;
+  popupIndex = index;
+
+  if(popupGroup.imgs.length == 0 || popupGroup.imgs.length == 1) return;
+
+  var seekRight = document.querySelector(".popup--seek__right");
+  var seekLeft = document.querySelector(".popup--seek__left");
+
+  var seekRightOn = seekRight.classList.contains("popup--seek__on") ? true : false;
+  var seekLeftOn = seekLeft.classList.contains("popup--seek__on") ? true : false;
+
+
+
+  if(popupIndex == 0) {
+    if(!seekRightOn) toggle(seekRight, "popup--seek", "transition", "animated", "");
+    if(seekLeftOn) toggle(seekLeft, "popup--seek", "transition", "animated", "");
+  } 
+  if(popupIndex == popupGroup.imgs.length - 1) {
+    if(seekRightOn) toggle(seekRight, "popup--seek", "transition", "animated", "");
+    if(!seekLeftOn) toggle(seekLeft, "popup--seek", "transition", "animated", "");
+  }
+  if(popupIndex > 0 && popupIndex < popupGroup.imgs.length - 1) {
+    if(!seekRightOn) toggle(seekRight, "popup--seek", "transition", "animated", "");
+    if(!seekLeftOn) toggle(seekLeft, "popup--seek", "transition", "animated", "");
+  }
+
+
+
+
+}
+
+function seekHandler(e, setPopup) {
+  var button = e.target;
+  while (!button.classList.contains("popup--seek")) {
+    button = button.parentElement;
+  }
+
+  var direction = button.classList.contains("popup--seek__right") ? 1 : -1;
+
+  var length = popupGroup.imgs.length;
+
+  popupIndex += direction;
+
+  if (popupIndex >= length) popupIndex = 0;
+  if (popupIndex < 0) popupIndex = length - 1;
+
+  var img = popupGroup.imgs[popupIndex];
+
+  setPopup({ type: "lightbox", img: img });
+}
+
+function lightboxInit(popup, setPopup) {
+  checkForRelevantGroups(popup, setPopup);
+
   activeHiddenUI = HIDDEN_UI.filter((ui) => ui.type == "lightbox")[0];
   hiddenUIInit();
 }
@@ -330,25 +397,24 @@ function Popup({ popup, setPopup }) {
   type = popup.type;
   img = popup.img;
 
+  popupType = type;
+
   useEffect(() => {
     if (popup) {
       document.body.classList.add("noscroll");
 
-      // if (type == "interactive") {
-      // canvas = document.querySelector(".popup--canvas");
-      // context = canvas.getContext("2d");
-      // canvasInput = document.querySelector(".scale--input");
-      // canvasImage = document.querySelector(".popup--img img");
-      // }
-
       if (lastPopup != popup || lastPopup != false) {
         lastPopup = popup;
 
-        toggle(document.querySelector(".popup--wrapper"), "popup--wrapper", "transition", "animated", "");
-
+        window.addEventListener("resize", popupResize, false);
+        window.addEventListener("keydown", catchCloseKey, false);
         if (type == "interactive") canvasInit(popup, setPopup);
         if (type == "lightbox") lightboxInit(popup, setPopup);
       }
+
+      var popWrapper = document.querySelector(".popup--wrapper");
+      var on = popWrapper.classList.contains("popup--wrapper__on") ? true : false;
+      if (!on) toggle(popWrapper, "popup--wrapper", "transition", "animated", "");
 
       setPopupGlobal = setPopup;
     } else {
@@ -356,6 +422,7 @@ function Popup({ popup, setPopup }) {
       window.removeEventListener("keydown", catchCloseKey, false);
       canvasImageLoaded = false;
       document.body.classList.remove("noscroll");
+      popupGroup = false;
     }
   }, [popup, setPopup]);
 
@@ -376,6 +443,19 @@ function Popup({ popup, setPopup }) {
 
           <div className={`popup container ${type == "lightbox" ? "popup__lightbox" : "popup__interactive"}`} style={type == "lightbox" ? { "--img-aspect-width": img.width, "--img-aspect-height": img.height } : {}}>
             <div className="popup--inner">
+              {type == "lightbox" && (
+                <div className="popup--seek popup--seek__left popup--seek__off">
+                  <Button
+                    icon={["chevron_left", "alone", "mask"]}
+                    animation="pulse-left"
+                    color="background-primary"
+                    onClick={(e) => {
+                      seekHandler(e, setPopup);
+                    }}
+                  />
+                </div>
+              )}
+
               <div className={contentClasses}>
                 <div className={`popup--header ${headerClasses} popup--nav`}>
                   {type == "interactive" && (
@@ -416,6 +496,19 @@ function Popup({ popup, setPopup }) {
                   </div>
                 )}
               </div>
+
+              {type == "lightbox" && (
+                <div className="popup--seek popup--seek__right popup--seek__off">
+                  <Button
+                    icon={["chevron_right", "alone", "mask"]}
+                    animation="pulse-right"
+                    color="background-primary"
+                    onClick={(e) => {
+                      seekHandler(e, setPopup);
+                    }}
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -503,9 +596,11 @@ function popupResize() {
 }
 
 function popupResizeFunctions() {
-  canvasSetSize();
-  drawImageToCanvas();
-  canvasImageSizeInit();
+  if (popupType == "interactive") {
+    canvasSetSize();
+    drawImageToCanvas();
+    canvasImageSizeInit();
+  }
 }
 
 export default Popup;
