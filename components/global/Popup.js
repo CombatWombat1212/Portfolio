@@ -298,6 +298,7 @@ function checkForRelevantGroups(popup, setPopup) {
     // TODO: would it be better to always have the left and right buttons present rather than toggling them on and off depending on the index?
   // TODO: should we add Pagination Indicators? lil dots at the bottom of the popup that indicate which image you're on and how many there are in total?
   // TODO: should we add transitions between images in a gallery?
+  // TODO: this one is stupid optional, what about an animation between the image on the page and the image in the popup? like a zoom in or something?
 
 
   var imgGroup = popup.img.group;
