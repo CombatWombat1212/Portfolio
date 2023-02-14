@@ -211,7 +211,7 @@ function canvasInit(popup) {
   canvasImage.alt = popup.img.alt;
 
   canvasImage.onload = function () {
-    popupResizeFunctions();
+    canvasOnResize();
     canvasImageLoaded = true;
     canvasImageSizeInit();
 
@@ -234,7 +234,18 @@ function canvasInit(popup) {
   // context.imageSmoothingEnabled = false;
 }
 
+
+function canvasOnResize(){
+    canvasSetSize();
+    canvasDrawImage();
+    canvasImageSizeInit();
+}
+
+
+
+
+
 //   export all functions
-export { canvasZoom, canvasGrabbed, canvasReleased, canvasMouseMoveHandler, canvasMouseDownHandler, canvasMouseUpHandler, canvasSetSize, canvasImageSizeInit, canvasInit, canvasDrawImage, setCanvasImageLoaded };
+export { canvasZoom, canvasGrabbed, canvasReleased, canvasMouseMoveHandler, canvasMouseDownHandler, canvasMouseUpHandler, canvasSetSize, canvasImageSizeInit, canvasInit, canvasDrawImage, setCanvasImageLoaded,canvasOnResize };
 
 export { canvas, context, canvasImage, canvasImageLoaded };
