@@ -90,7 +90,9 @@ function seekHandler(e, setPopup) {
 
 
 
-
+function lightboxImgLoaded(e){
+    console.log(e, 'loaded')
+}
 
 
 function lightboxInit(popup, setPopup) {
@@ -105,6 +107,6 @@ function lightboxInit(popup, setPopup) {
   }
   
   
-export {lightboxInit, seekHandler, checkForRelevantGroups, setPopupGroup}  
+export {lightboxInit, seekHandler, checkForRelevantGroups, setPopupGroup, lightboxImgLoaded}  
 
 export {popupGroup}

@@ -585,7 +585,7 @@ function MakeRight({ setPopup }) {
 
 
 
-          <Section id="Prototyping--Feedback" type="columns" arrows="background" background="tertiary">
+          <Section id="Prototyping--Feedback" type="columns" arrows="background anchored" background="tertiary">
             <Heading>The Manufacturer Overview</Heading>
 
             <Column>

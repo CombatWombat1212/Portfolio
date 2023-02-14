@@ -9,8 +9,10 @@ import { anchoredArrowsInit, removeExcessArrows } from "./sections_utilities/Arr
 function ColumnGroup({ columns, arrows, mainType }) {
   arrows = arrows || false;
   var hasArrows = arrows ? true : false;
+  var hasAnchoredArrows = typeof arrows == "string" && arrows.includes("anchored") ? true : false;
 
   if (arrows == true) arrows = "primary";
+  if(hasAnchoredArrows) arrows = (arrows.replace("anchored", "")).trim();
   var arrowClasses = `arrow--mask arrow--mask__default mask__${arrows}`;
 
 
@@ -52,9 +54,11 @@ function ColumnGroup({ columns, arrows, mainType }) {
         delete attrProps.children;
         var caption = attrProps.caption ? attrProps.caption : false;
 
-        if (caption == "above") description = addClassToJsxObj(description, "graphic--caption__above");
-
         if (caption == "above") {
+          description = addClassToJsxObj(description, "graphic--caption__above");
+        }
+        
+        if (caption == "above" || hasAnchoredArrows) {
           arrowClasses = arrowClasses.replace("arrow--mask__default", "");
           arrowClasses = addClassNoRepeats(arrowClasses, "arrow--mask__anchored");
         }

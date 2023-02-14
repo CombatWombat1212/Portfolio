@@ -8,7 +8,7 @@ import Button from "../../elements/Buttons";
 import { loading } from "@/data/ICONS";
 import { RESIZE_TIMEOUT } from "@/scripts/GlobalUtilities";
 import { canvasDrawImage, canvasImageSizeInit, canvasInit, canvasOnResize, canvasSetSize, canvasZoom, setCanvasImageLoaded } from "./popup_utilities/CanvasUtilities";
-import { lightboxInit, seekHandler, setPopupGroup } from "./popup_utilities/LightboxUtilities";
+import { lightboxImgLoaded, lightboxInit, seekHandler, setPopupGroup } from "./popup_utilities/LightboxUtilities";
 import { catchKeys, closePopup, setSetPopupGlobal } from "./popup_utilities/PopupUtilities";
 
 
@@ -148,7 +148,7 @@ function Popup({ popup, setPopup }) {
 
                 {type == "lightbox" && (
                   <div className={`popup--img ${zoom && 'popup--img__lightbox-zoom'}`}>
-                    <Image src={img.src} alt={img.alt} width={img.width} height={img.height} />
+                    <Image src={img.src} alt={img.alt} width={img.width} height={img.height} onLoad={lightboxImgLoaded} />
                   </div>
                 )}
 

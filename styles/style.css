@@ -1636,7 +1636,7 @@ body {
 .section .graphic {
   --img-panel-height: 12rem;
   --graphic-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 11.5rem) ;
-  --graphic-height: calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
+  --graphic-height: Max(100%, calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width))));
 }
 
 .section .graphic--img {
@@ -1881,7 +1881,7 @@ body {
 }
 
 .arrow--mask__default {
-  margin-top: calc(((var(--section-graphic-panel-pad) * 2) + var(--img-panel-height) - var(--arrow-height)) / 2);
+  margin-top: calc( ((var(--section-graphic-panel-pad) * 2) + var(--img-panel-height) - var(--arrow-height)) / 2);
 }
 
 .arrow--mask__anchored {

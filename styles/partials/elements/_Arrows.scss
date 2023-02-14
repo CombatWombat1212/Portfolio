@@ -16,7 +16,12 @@
     margin-left: calc(((var(--gap) + var(--arrow-width)) / 2) * -1);
     
     &__default {
-      margin-top: calc(((var(--section-graphic-panel-pad) * 2) + var(--img-panel-height) - var(--arrow-height)) / 2);
+      margin-top: 
+      calc(
+        ((var(--section-graphic-panel-pad) * 2) + var(--img-panel-height) - var(--arrow-height)) / 2
+        );
+
+      
     }
     
     &__anchored {

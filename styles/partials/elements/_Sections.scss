@@ -97,7 +97,7 @@
     --img-panel-height: 12rem;
 
     --graphic-width: #{mask-width(11.5rem)};
-    --graphic-height: calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
+    --graphic-height: Max(100%, calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width))));
 
     &--img {
       display: flex;
@@ -141,6 +141,7 @@
         }
       }
     }
+    
 
     &__container {
       padding: 0;

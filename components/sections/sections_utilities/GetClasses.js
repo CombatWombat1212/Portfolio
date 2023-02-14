@@ -82,6 +82,7 @@ function getBackgroundClasses(pref, background) {
   var backgroundClasses = ``;
   if (background == undefined) return backgroundClasses;
 
+
   if (typeof background == "string") {
     if (BACKGROUND_COLORS.indexOf(background) != -1) {
       if (pref == "chapter" && background != "background") backgroundClasses += ` ${pref}__color`;

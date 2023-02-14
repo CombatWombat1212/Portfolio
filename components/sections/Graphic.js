@@ -13,7 +13,6 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
   var pref = "section--graphic";
   var isImg = type == "image" || type == "img";
   var isMask = type == "mask";
-  var hasBackground = getHasBackground(background);
   var backgroundClasses = getBackgroundClasses(pref, background);
   color = color ? `mask__${color}` : "";
   innerClassName = innerClassName ? innerClassName : "";
@@ -29,7 +28,7 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
       }
     }
   }
-  var hasButtonClasses = hasButton ? "graphic__container" : "";
+  var buttonClasses = hasButton ? "graphic__container" : "";
 
   // TODO: if you end up using this 'img-aspect-width' thing in multiple places then you should create a wrapper for Next/Image that automatically adds it to your image components, same as its done here and within the Mask component
 
@@ -50,7 +49,7 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
     };
   }
 
-  var allClasses = `section--graphic graphic ${backgroundClasses} ${className} ${hasButtonClasses} ${lightbox ? "graphic__lightbox" : ""}`;
+  var allClasses = `section--graphic graphic ${backgroundClasses} ${className} ${buttonClasses} ${lightbox ? "graphic__lightbox" : ""}`;
 
   return (
     <>
