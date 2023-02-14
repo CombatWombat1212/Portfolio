@@ -46,3 +46,15 @@ body {
 
 
 }
+
+
+.off {
+    opacity: 0;
+    display: none;
+  }
+  .on {
+    opacity: 1;
+  }
+  .tran {
+    opacity: 0;
+  }

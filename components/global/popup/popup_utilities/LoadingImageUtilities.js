@@ -1,16 +1,4 @@
-import { loading } from "@/data/ICONS";
 import toggle from "@/scripts/AnimationTools";
-
-var loadingImage;
-
-function loadingImageInit() {
-  loadingImage = document.createElement("img");
-  loadingImage.src = `${loading.src}`;
-
-  loadingImage.width = loading.width;
-  loadingImage.height = loading.height;
-  loadingImage.alt = loading.alt;
-}
 
 function removeLoading(loading, canvas) {
   toggle(loading, "popup--loading", "transition", "animated", "");
@@ -19,4 +7,4 @@ function removeLoading(loading, canvas) {
 
 
 
-export { loadingImageInit, removeLoading };
+export { removeLoading };

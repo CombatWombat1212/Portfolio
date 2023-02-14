@@ -193,6 +193,19 @@ body {
   overflow: -moz-hidden-unscrollable;
 }
 
+.off {
+  opacity: 0;
+  display: none;
+}
+
+.on {
+  opacity: 1;
+}
+
+.tran {
+  opacity: 0;
+}
+
 .container,
 .container-fluid {
   width: 100%;
@@ -1917,6 +1930,7 @@ body {
   --popup-pad: 2.5rem;
   --popup-inner-pad: 1.875rem;
   --popup-gap: calc(var(--popup-inner-pad) * 0.8);
+  --popup-background: #F3F3F7;
   z-index: 10;
   display: flex;
 }
@@ -1952,7 +1966,7 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(64, 64, 100, 0.4);
+  background-color: rgba(64, 64, 100, 0.5);
 }
 
 .popup__interactive {
@@ -1984,7 +1998,7 @@ body {
   -webkit-border-radius: var(--b-rad);
   -moz-border-radius: var(--b-rad);
   -khtml-border-radius: var(--b-rad);
-  background-color: #F3F3F7;
+  background-color: var(--popup-background);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -1994,12 +2008,13 @@ body {
   row-gap: var(--popup-gap);
   position: relative;
   overflow: hidden;
+  transition: var(--transition);
 }
 
 .popup--content__lightbox {
   -webkit-touch-callout: none;
   user-select: none;
-  background-color: #00000000;
+  --popup-background: #00000000;
 }
 
 .popup--content__lightbox-zoom {
@@ -2078,6 +2093,7 @@ body {
 
 .popup--nav {
   transition-duration: 0.2s;
+  z-index: 15;
 }
 
 .popup--nav__on {
@@ -2129,13 +2145,18 @@ body {
 
 .popup--loading {
   position: absolute;
-  transition: var(--transition);
   --size: 15rem;
   width: var(--size);
   height: var(--size);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 1;
+  background-color: #F3F3F7;
+  border-radius: var(--b-rad);
+  -webkit-border-radius: var(--b-rad);
+  -moz-border-radius: var(--b-rad);
+  -khtml-border-radius: var(--b-rad);
 }
 
 .popup--loading img {
@@ -2158,13 +2179,17 @@ body {
 }
 
 .popup--img {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  aspect-ratio: auto var(--aspect-width)/var(--aspect-height);
+  width: 1000rem;
   pointer-events: none;
   transition: var(--transition);
+  z-index: 2;
 }
 
 .popup--img img {
+  transition: var(--transition);
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -2173,6 +2198,18 @@ body {
 
 .popup--img__lightbox-zoom img {
   height: fit-content;
+}
+
+.popup--img__on {
+  opacity: 1;
+}
+
+.popup--img__off {
+  opacity: 0;
+}
+
+.popup--img__tran {
+  opacity: 0;
 }
 
 .scale {

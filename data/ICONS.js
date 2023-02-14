@@ -100,7 +100,7 @@ const ICONS = {
 
   loading: {
     name: 'loading',
-    src: "/assets/loading/loading_spinner.svg",
+    src: "../assets/loading/loading_spinner.svg",
     alt: "Spinning loading icon",
     width: 100,
     height: 100,

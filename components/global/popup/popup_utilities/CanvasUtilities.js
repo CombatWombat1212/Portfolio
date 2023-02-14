@@ -1,6 +1,9 @@
 import { maxZoom, minZoom, popupResizeFunctions, startZoom } from "../Popup";
 import { hiddenUIInit, setActiveHiddenUI } from "./HiddenUIUtilities";
-import { loadingImageInit, removeLoading } from "./LoadingImageUtilities";
+import { removeLoading } from "./LoadingImageUtilities";
+import { loadImgExternally } from "./PopupUtilities";
+import { loading } from "@/data/ICONS";
+
 
 var canvas;
 var context;
@@ -202,15 +205,15 @@ function canvasInit(popup) {
 
   if (!canvas) return;
 
-  loadingImageInit();
+  // var loadingIcon = loading;
+  // loadingIcon.src = "../../assets/loading/loading_spinner.svg";
+  // console.log(loadingIcon);
+  // var loadingImg = loadImgExternally(loadingIcon);
 
-  canvasImage = document.createElement("img");
-  canvasImage.src = "." + popup.img.src;
-  canvasImage.width = popup.img.width;
-  canvasImage.height = popup.img.height;
-  canvasImage.alt = popup.img.alt;
+  canvasImage = loadImgExternally(popup.img);
 
   canvasImage.onload = function () {
+
     canvasOnResize();
     canvasImageLoaded = true;
     canvasImageSizeInit();
@@ -226,6 +229,7 @@ function canvasInit(popup) {
     hiddenUIInit();
 
     canvasDrawImage();
+
   };
 
   canvas.addEventListener("mousedown", canvasGrabbed, false);

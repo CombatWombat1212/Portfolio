@@ -1,21 +1,20 @@
 import MAKERIGHT_IMGS, { MAKERIGHT_IMG_GROUPS } from "@/data/MAKERIGHT_IMGS";
 import toggle from "@/scripts/AnimationTools";
+import { splitS } from "@/scripts/GlobalUtilities";
+import { setWaitingToShowLoading, waitToLoad } from "../Popup";
 import { hiddenUIInit, setActiveHiddenUI } from "./HiddenUIUtilities";
-
+import { loadImgExternally } from "./PopupUtilities";
 
 var popupGroup = false;
 var popupIndex;
 
-
-function setPopupGroup(bool){
-    popupGroup = bool;
+function setPopupGroup(bool) {
+  popupGroup = bool;
 }
 
 function checkForRelevantGroups(popup, setPopup) {
-
-    // TODO: would it be better to always have the left and right buttons present rather than toggling them on and off depending on the index?
+  // TODO: would it be better to always have the left and right buttons present rather than toggling them on and off depending on the index?
   // TODO: should we add Pagination Indicators? lil dots at the bottom of the popup that indicate which image you're on and how many there are in total?
-  // TODO: should we add transitions between images in a gallery?
   // TODO: this one is stupid optional, what about an animation between the image on the page and the image in the popup? like a zoom in or something?
 
   var imgGroup = popup.img.group;
@@ -51,10 +50,7 @@ function checkForRelevantGroups(popup, setPopup) {
   }
 }
 
-
-
 function seekHandler(e, setPopup) {
-
   var button;
 
   if (e.type == "keydown") {
@@ -87,26 +83,45 @@ function seekHandler(e, setPopup) {
   setPopup({ type: "lightbox", img: img, zoom: zoom });
 }
 
+var imgLoading = false;
 
+function lightboxInit(popup, setPopup, setShowLoading) {
+  if (imgLoading) return; // cancel image loading if one is already in progress
 
+  imgLoading = true;
 
-function lightboxImgLoaded(e){
-    console.log(e, 'loaded')
+  checkForRelevantGroups(popup, setPopup);
+  setActiveHiddenUI("lightbox");
+
+  var popWrapper = document.querySelector(".popup--wrapper");
+  var on = popWrapper.classList.contains("popup--wrapper__on") ? true : false;
+  if (!on) hiddenUIInit();
+
+  var img = loadImgExternally(popup.img);
+  var content = document.querySelector(".popup--content");
+
+  waitToLoad(setShowLoading);
+
+  img.onload = function () {
+    // transition = .popup--content transition-duration
+
+    var transition = splitS(window.getComputedStyle(content).transitionDuration);
+
+    var wrapper = document.querySelector(".popup--img");
+    var loader = document.querySelector(".popup--loading");
+    img.classList.add("popup--img__off");
+    wrapper.appendChild(img);
+
+    toggle(img, "popup--img", "transition", "animated", "");
+    toggle(content, "popup--content", "transition", "animated", "");
+
+    imgLoading = false; // indicate that the image has finished loading
+
+    setWaitingToShowLoading(false);
+    setShowLoading(false);
+  };
 }
 
+export { lightboxInit, seekHandler, checkForRelevantGroups, setPopupGroup };
 
-function lightboxInit(popup, setPopup) {
-    checkForRelevantGroups(popup, setPopup);
-  
-    setActiveHiddenUI("lightbox");
-  
-    var popWrapper = document.querySelector(".popup--wrapper");
-    var on = popWrapper.classList.contains("popup--wrapper__on") ? true : false;
-    if (!on) hiddenUIInit();
-    
-  }
-  
-  
-export {lightboxInit, seekHandler, checkForRelevantGroups, setPopupGroup, lightboxImgLoaded}  
-
-export {popupGroup}
+export { popupGroup, imgLoading };

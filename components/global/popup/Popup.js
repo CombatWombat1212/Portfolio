@@ -8,7 +8,7 @@ import Button from "../../elements/Buttons";
 import { loading } from "@/data/ICONS";
 import { RESIZE_TIMEOUT } from "@/scripts/GlobalUtilities";
 import { canvasDrawImage, canvasImageSizeInit, canvasInit, canvasOnResize, canvasSetSize, canvasZoom, setCanvasImageLoaded } from "./popup_utilities/CanvasUtilities";
-import { lightboxImgLoaded, lightboxInit, seekHandler, setPopupGroup } from "./popup_utilities/LightboxUtilities";
+import { imgLoading, lightboxInit, seekHandler, setPopupGroup } from "./popup_utilities/LightboxUtilities";
 import { catchKeys, closePopup, setSetPopupGlobal } from "./popup_utilities/PopupUtilities";
 
 
@@ -46,6 +46,30 @@ function Scale({ className }) {
   );
 }
 
+
+
+
+var waitingToShowLoading = false;
+
+
+function setWaitingToShowLoading(bool){
+  waitingToShowLoading = bool;
+}
+
+function waitToLoad(setShowLoading){
+
+  if(waitingToShowLoading) return;
+  waitingToShowLoading = true;
+  
+  const timeout = setTimeout(() => {
+    setShowLoading(true);
+    waitingToShowLoading = false;
+  }, 1000);
+
+  return () => clearTimeout(timeout);
+}
+
+
 function Popup({ popup, setPopup }) {
   var type;
   var img;
@@ -58,6 +82,33 @@ function Popup({ popup, setPopup }) {
 
   popupType = type;
 
+
+  const [showLoading, setShowLoading] = useState(false);
+
+
+  
+  useEffect(() => {
+
+    if(typeof document == 'undefined') return;
+    if(typeof document.querySelector('.popup--loading') == "undefined" || document.querySelector('.popup--loading') == null ) return;
+
+    var loader = document.querySelector('.popup--loading');
+    if(showLoading && imgLoading) {
+      loader.classList.add("popup--loading__on")
+      loader.classList.remove("popup--loading__off")
+    }
+    else {
+      loader.classList.add("popup--loading__off")
+      loader.classList.remove("popup--loading__on")
+    }
+
+
+  }, [showLoading]);
+
+
+
+
+
   useEffect(() => {
     if (popup) {
       document.body.classList.add("noscroll");
@@ -68,12 +119,18 @@ function Popup({ popup, setPopup }) {
         window.addEventListener("resize", popupResize, false);
         window.addEventListener("keydown", catchKeys, false);
         if (type == "interactive") canvasInit(popup, setPopup);
-        if (type == "lightbox") lightboxInit(popup, setPopup);
+        if (type == "lightbox") lightboxInit(popup, setPopup, setShowLoading);
       }
 
+      
+      
       var popWrapper = document.querySelector(".popup--wrapper");
       var on = popWrapper.classList.contains("popup--wrapper__on") ? true : false;
       if (!on) toggle(popWrapper, "popup--wrapper", "transition", "animated", "");
+
+      waitToLoad(setShowLoading);
+
+      if(on && document.querySelector('.popup--img *') != null) document.querySelector('.popup--img *').remove();
 
       setSetPopupGlobal(setPopup);
     } else {
@@ -87,9 +144,16 @@ function Popup({ popup, setPopup }) {
 
 
   var headerClasses = type == "lightbox" ? "popup--header__condensed popup--nav__on" : "popup--header__full";
-  var contentClasses = `popup--content ${type === "lightbox" ? (zoom ? "popup--content__lightbox-zoom" : "popup--content__lightbox") : "popup--content__interactive"}`;
+  var contentClasses = `popup--content ${type === "lightbox" ? (zoom ? "popup--content__lightbox-zoom" : "popup--content__lightbox") : "popup--content__interactive"} popup--content__on`;
   var popupContainerClasses = 
   `${type === "lightbox" ? (zoom ? "popup__lightbox-zoom" : "popup__lightbox") : "popup__interactive"}`;
+
+
+
+
+
+
+
 
 
   return (
@@ -136,21 +200,22 @@ function Popup({ popup, setPopup }) {
                   </div>
                 </div>
 
+
                 {type == "interactive" && (
                   <>
                     <canvas className="popup--canvas popup--canvas__off"></canvas>
                   </>
                 )}
 
-                <div className="popup--loading popup--loading__on">
-                  <img src={loading.src} alt={loading.alt} width={loading.width} height={loading.height} />
-                </div>
 
                 {type == "lightbox" && (
-                  <div className={`popup--img ${zoom && 'popup--img__lightbox-zoom'}`}>
-                    <Image src={img.src} alt={img.alt} width={img.width} height={img.height} onLoad={lightboxImgLoaded} />
+                  <div className={`popup--img ${zoom ? 'popup--img__lightbox-zoom' : ''}`} style={{ '--aspect-width': img.width, '--aspect-height': img.height}}>                      
                   </div>
                 )}
+
+                <div className={`popup--loading popup--loading__off`}>
+                  <img src={loading.src} alt={loading.alt} width={loading.width} height={loading.height} />
+                </div>
 
                 {type == "interactive" && (
                   <div className="popup--footer popup--nav popup--nav__off">
@@ -182,6 +247,8 @@ function Popup({ popup, setPopup }) {
 
 
 
+
+
 var isResizing;
 
 function popupResize() {
@@ -196,6 +263,8 @@ function popupResizeFunctions() {
 
 
 export default Popup;
+
+export {waitToLoad, setWaitingToShowLoading}
 
 export {startZoom,
   minZoom,

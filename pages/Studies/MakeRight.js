@@ -585,8 +585,8 @@ function MakeRight({ setPopup }) {
 
 
 
-          <Section id="Prototyping--Feedback" type="columns" arrows="background anchored" background="tertiary">
-            <Heading>The Manufacturer Overview</Heading>
+          <Section id="Prototyping--Feedback" titled type="columns" arrows="background anchored" background="tertiary">
+            <Heading type="h3">The Manufacturer Overview</Heading>
 
             <Column>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_overview_before"]} lightbox setPopup={setPopup} />
