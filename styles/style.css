@@ -213,6 +213,12 @@ body {
   margin-left: auto;
 }
 
+.container__none {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .container {
   max-width: 70.75rem;
 }
@@ -3695,5 +3701,17 @@ body {
 
 #Makeright #Prototyping--Progression .section--main {
   grid-template-columns: repeat(2, 1fr);
+}
+
+#Makeright #Prototyping--Equipment .section--main {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+#Makeright #Delivery {
+  margin-top: 0;
+}
+
+#Makeright #Delivery--Banner {
+  margin-top: 0;
 }
 /*# sourceMappingURL=style.css.map */

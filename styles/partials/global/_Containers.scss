@@ -84,6 +84,11 @@ $container_wide-max-widths_inverted: mapReverse($container_wide-max-width);
     @include container();
   }
 
+  .container__none {
+    @include container();
+  }
+
+
   // .container-fluid{
   // @include container-padding;
   // }

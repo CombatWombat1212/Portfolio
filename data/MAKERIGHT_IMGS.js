@@ -329,9 +329,9 @@ const MAKERIGHT_IMGS = {
 
 
 
-  feedback_tutorial: {
-    name: "feedback_tutorial",
-    src: "./assets/images/case_studies/makeright/prototypes/feedback_tutorial.png",
+  feedback_tutorials: {
+    name: "feedback_tutorials",
+    src: "./assets/images/case_studies/makeright/prototypes/feedback_tutorial_system.png",
     alt: "A screenshot of the Tutorial tooltips that were added throughout the manufacturer testing process",
     width: 4568,
     height: 1568,
@@ -390,8 +390,8 @@ const MAKERIGHT_IMGS = {
 
 
 
-  makeright_closing_banner: {
-    name: "makeright_closing_banner",
+  closing_banner: {
+    name: "closing_banner",
     src: "./assets/images/case_studies/makeright/makeright_closing_banner.png",
     alt: "A 3D rendering of the word 'MakeRight' in 3D printed letters",
     width: 1920,

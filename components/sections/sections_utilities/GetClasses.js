@@ -49,8 +49,8 @@ function getGapClasses(type, arrows, mainClassName) {
 function getContainerMarginClass(margin) {
   var containerMarginClass = "container";
   if (margin == undefined) return containerMarginClass;
-  // if (margin == "regular") containerMarginClass += " container__regular";
   if (margin == "wide") containerMarginClass += " container__wide";
+  if (margin == "none") containerMarginClass = " container__none";
 
   return containerMarginClass;
 }

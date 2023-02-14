@@ -51,17 +51,13 @@
     }
   }
 
-
-  #Plan{
-
-    &,&--Banner {
+  #Plan {
+    &,
+    &--Banner {
       // TODO: not sure why this is needed, could be good to look at the edge case that's missing that necessitates this
       margin-top: 0;
     }
   }
-
-
-
 
   #Research {
     // --img-panel-height: 12rem;
@@ -126,16 +122,27 @@
       }
     }
 
-
-    &--Progression{
+    &--Progression {
       .section {
         &--main {
           grid-template-columns: repeat(2, 1fr);
         }
       }
-
     }
 
+    &--Equipment {
+      .section {
+        &--main {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    }
+  }
 
+  #Delivery {
+    margin-top: 0;
+    &--Banner {
+      margin-top: 0;
+    }
   }
 }

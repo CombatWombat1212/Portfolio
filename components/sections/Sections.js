@@ -125,7 +125,7 @@ Section.defaultProps = {
 };
 
 Section.propTypes = {
-  margin: PropTypes.oneOf(["regular", "wide"]),
+  margin: PropTypes.oneOf(["regular", "wide", "none"]),
   mainType: PropTypes.oneOf(["flex", "grid"]),
   type: PropTypes.oneOf(SECTION_TYPES),
   background: PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf(["none", ...BACKGROUND_COLORS])]),

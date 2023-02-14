@@ -532,9 +532,6 @@ function MakeRight({ setPopup }) {
             </Column>
           </Section>
 
-
-
-
           <Section id="Prototyping--Progression" type="columns" margin="wide" arrows="background" background="tertiary" titled mainType="grid">
             <Title>Project Iterations</Title>
             <Heading>Progression & refinement</Heading>
@@ -582,16 +579,13 @@ function MakeRight({ setPopup }) {
             </Description>
           </Section>
 
-
-
-
-          <Section id="Prototyping--Feedback" titled type="columns" arrows="background anchored" background="tertiary">
+          <Section id="Prototyping--Overview" titled type="columns" arrows="background anchored" background="tertiary">
             <Heading type="h3">The Manufacturer Overview</Heading>
 
             <Column>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_overview_before"]} lightbox setPopup={setPopup} />
               <Description className="graphic--caption graphic--caption__split">
-                <p>Aspiring makers need to understand the expectations of their new job.  Originally, this was taught with an 8-page slideshow.  But users found it droning, hard to retain, and too easy to skip.</p>
+                <p>Aspiring makers need to understand the expectations of their new job. Originally, this was taught with an 8-page slideshow. But users found it droning, hard to retain, and too easy to skip.</p>
               </Description>
             </Column>
             <Column>
@@ -600,6 +594,69 @@ function MakeRight({ setPopup }) {
                 <p>Now, that info exists as a single inviting page. As well, I added a brief video chat at the end onboarding to ensure new Makers have read the overview, and can ask questions.</p>
               </Description>
             </Column>
+          </Section>
+
+          <Section id="Prototyping--Equipment" titled type="columns" arrows="background anchored" background="tertiary" mainType="grid">
+            <Heading type="h3">Equipment verification</Heading>
+
+            <Column>
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_printers_before"]} lightbox setPopup={setPopup} />
+              <Description className="graphic--caption graphic--caption__split">
+                <p>User’s noted: lack of parity between printer and filament inputs, and the inability to add multiple printers.</p>
+              </Description>
+            </Column>
+            <Column>
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_printers_after"]} lightbox zoom setPopup={setPopup} />
+              <Description className="graphic--caption graphic--caption__split">
+                <p>Redesign to match filament inputs, now with support for multiple printers, and integrated support via tooltips.</p>
+              </Description>
+            </Column>
+
+            <Column>
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_filament_before"]} lightbox setPopup={setPopup} />
+              <Description className="graphic--caption graphic--caption__split">
+                <p>User’s noted: lack of parity between printer and filament inputs, and the inability to add multiple printers.</p>
+              </Description>
+            </Column>
+            <Column>
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_filament_after"]} lightbox zoom setPopup={setPopup} />
+              <Description className="graphic--caption graphic--caption__split">
+                <p>Redesign to match filament inputs, now with support for multiple printers, and integrated support via tooltips.</p>
+              </Description>
+            </Column>
+          </Section>
+
+          <Section id="Prototyping--Tutorial" titled type="columns" background="tertiary">
+            <Heading type="h3">Tutorial system</Heading>
+
+            <Column>
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_tutorials"]} />
+              <Description className="graphic--caption gap-4 graphic--caption__split">
+                <p>Testers of the Maker journey were navigating much more fluidly halfway through each test. It was taking a few pages of exploration before the terminology, and flow finally clicked.</p>
+                <p>To ease the friction of a user’s first order fulfillment, I added an optional tutorial system. Boxes appear one by one describing important elements, and directing the user through their task.</p>
+              </Description>
+            </Column>
+          </Section>
+
+          <Section id="Prototyping--Closing" background="tertiary light">
+            <Heading>
+              With these and many other issues addressed, <br />I had actualized the core functionality of the service.
+            </Heading>
+          </Section>
+        </Chapter>
+
+        <Chapter id="Delivery">
+          <Section id="Delivery--Banner" background={MAKERIGHT_IMGS.delivered_project_banner}>
+            <Heading>Delivered Project</Heading>
+          </Section>
+
+
+
+
+
+          <Section id="Delivery--Maker" background="tertiary" margin="none">
+            <Heading>Maker user journey</Heading>
+
 
           </Section>
 
@@ -607,10 +664,7 @@ function MakeRight({ setPopup }) {
 
 
 
-
-
-
-
+          
         </Chapter>
       </CaseStudyPage>
     </>
