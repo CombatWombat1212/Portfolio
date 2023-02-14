@@ -239,13 +239,6 @@ const MAKERIGHT_IMGS = {
     group: "iterations_file_checking",
   },
 
-
-
-
-
-
-
-
   feedback_overview_before: {
     name: "feedback_overview_before",
     src: "./assets/images/case_studies/makeright/prototypes/feedback_overview_before.png",
@@ -255,7 +248,6 @@ const MAKERIGHT_IMGS = {
     group: "feedback_overview",
   },
 
-
   feedback_overview_after: {
     name: "feedback_overview_after",
     src: "./assets/images/case_studies/makeright/prototypes/feedback_overview_after.png",
@@ -264,7 +256,6 @@ const MAKERIGHT_IMGS = {
     height: 1283,
     // group: "feedback_overview",
   },
-
 
   feedback_overview_after_full: {
     name: "feedback_overview_after_full",
@@ -276,10 +267,6 @@ const MAKERIGHT_IMGS = {
     zoom: true,
   },
 
-
-
-
-
   feedback_printers_before: {
     name: "feedback_printers_before",
     src: "./assets/images/case_studies/makeright/prototypes/feedback_printers_before.png",
@@ -288,7 +275,6 @@ const MAKERIGHT_IMGS = {
     height: 1065,
     group: "feedback_printers",
   },
-
 
   feedback_printers_after: {
     name: "feedback_printers_after",
@@ -299,14 +285,6 @@ const MAKERIGHT_IMGS = {
     group: "feedback_printers",
   },
 
-
-
-
-
-
-
-
-
   feedback_filament_before: {
     name: "feedback_filament_before",
     src: "./assets/images/case_studies/makeright/prototypes/feedback_filament_before.png",
@@ -315,7 +293,6 @@ const MAKERIGHT_IMGS = {
     height: 1149,
     group: "feedback_filament",
   },
-
 
   feedback_filament_after: {
     name: "feedback_filament_after",
@@ -326,9 +303,6 @@ const MAKERIGHT_IMGS = {
     group: "feedback_filament",
   },
 
-
-
-
   feedback_tutorials: {
     name: "feedback_tutorials",
     src: "./assets/images/case_studies/makeright/prototypes/feedback_tutorial_system.png",
@@ -336,12 +310,6 @@ const MAKERIGHT_IMGS = {
     width: 4568,
     height: 1568,
   },
-
-
-
-
-
-
 
   delivered_project_banner: {
     name: "delivered_project_banner",
@@ -351,13 +319,6 @@ const MAKERIGHT_IMGS = {
     height: 500,
   },
 
-
-
-
-
-
-
-
   connecting_consumers: {
     name: "connecting_consumers",
     src: "./assets/images/case_studies/makeright/connecting_consumers.svg",
@@ -365,9 +326,6 @@ const MAKERIGHT_IMGS = {
     width: 224.16,
     height: 177.14,
   },
-
-
-
 
   browseable_storefront: {
     name: "browseable_storefront",
@@ -377,8 +335,6 @@ const MAKERIGHT_IMGS = {
     height: 166.84,
   },
 
-
-
   maker_profit: {
     name: "maker_profit",
     src: "./assets/images/case_studies/makeright/maker_profit.svg",
@@ -386,9 +342,6 @@ const MAKERIGHT_IMGS = {
     width: 158.88,
     height: 178.89,
   },
-
-
-
 
   closing_banner: {
     name: "closing_banner",
@@ -398,28 +351,398 @@ const MAKERIGHT_IMGS = {
     height: 650,
   },
 
+  // maker_screen_01: {
+  //   name: "maker_screen_01",
+  //   src: "./assets/images/case_studies/makeright/final_screens/maker_screen_01.png",
+  //   width: 3840,
+  //   height: 2160,
+  //   group: "makeright_final",
+  // },
 
+  // maker_screen_02: {
+  //   name: "maker_screen_02",
+  //   src: "./assets/images/case_studies/makeright/final_screens/maker_screen_02.png",
+  //   width: 3840,
+  //   height: 2160,
+  //   group: "makeright_final",
+  // },
 
+  // maker_screen_03: {
+  //   name: "maker_screen_03",
+  //   src: "./assets/images/case_studies/makeright/final_screens/maker_screen_03.png",
+  //   width: 3840,
+  //   height: 3134,
+  //   group: "makeright_final",
+  // },
 
+  // maker_screen_04: {
+  //   name: "maker_screen_04",
+  //   src: "./assets/images/case_studies/makeright/final_screens/maker_screen_04.png",
+  //   width: 3840,
+  //   height: 6818,
+  //   group: "makeright_final",
+  // },
 
+  // maker_screen_05: {
+  //   name: "maker_screen_05",
+  //   src: "./assets/images/case_studies/makeright/final_screens/maker_screen_05.png",
+  //   width: 3840,
+  //   height: 6198,
+  //   group: "makeright_final",
+  // },
 
+  // maker_screen_06: {
+  //   name: "maker_screen_06",
+  //   src: "./assets/images/case_studies/makeright/final_screens/maker_screen_06.png",
+  //   width: 3840,
+  //   height: 2160,
+  //   group: "makeright_final",
+  // },
 
+  // maker_screen_07: {
+  //   name: "maker_screen_07",
+  //   src: "./assets/images/case_studies/makeright/final_screens/maker_screen_07.png",
+  //   width: 3840,
+  //   height: 2160,
+  //   group: "makeright_final",
+  // },
 
+  // maker_screen_08: {
+  //   name: "maker_screen_08",
+  //   src: "./assets/images/case_studies/makeright/final_screens/maker_screen_08.png",
+  //   width: 3840,
+  //   height: 2160,
+  //   group: "makeright_final",
+  // },
 
+  // maker_screen_09: {
+  //   name: "maker_screen_09",
+  //   src: "./assets/images/case_studies/makeright/final_screens/maker_screen_09.png",
+  //   width: 3840,
+  //   height: 2160,
+  //   group: "makeright_final",
+  // },
 
+  // maker_screen_10: {
+  //   name: "maker_screen_10",
+  //   src: "./assets/images/case_studies/makeright/final_screens/maker_screen_10.png",
+  //   width: 3840,
+  //   height: 6600,
+  //   group: "makeright_final",
+  // },
 
+  // maker_screen_11: {
+  //   name: "maker_screen_11",
+  //   src: "./assets/images/case_studies/makeright/final_screens/maker_screen_11.png",
+  //   width: 3840,
+  //   height: 2160,
+  //   group: "makeright_final",
+  // },
 
+  // maker_screen_12: {
+  //   name: "maker_screen_12",
+  //   src: "./assets/images/case_studies/makeright/final_screens/maker_screen_12.png",
+  //   width: 3840,
+  //   height: 4518,
+  //   group: "makeright_final",
+  // },
 
+  // maker_screen_13: {
+  //   name: "maker_screen_13",
+  //   src: "./assets/images/case_studies/makeright/final_screens/maker_screen_13.png",
+  //   width: 3840,
+  //   height: 2062,
+  //   group: "makeright_final",
+  // },
 
+  // maker_screen_14: {
+  //   name: "maker_screen_14",
+  //   src: "./assets/images/case_studies/makeright/final_screens/maker_screen_14.png",
+  //   width: 3840,
+  //   height: 4538,
+  //   group: "makeright_final",
+  // },
 
+  // maker_screen_15: {
+  //   name: "maker_screen_15",
+  //   src: "./assets/images/case_studies/makeright/final_screens/maker_screen_15.png",
+  //   width: 3840,
+  //   height: 2160,
+  //   group: "makeright_final",
+  // },
 
+  // maker_screen_16: {
+  //   name: "maker_screen_16",
+  //   src: "./assets/images/case_studies/makeright/final_screens/maker_screen_16.png",
+  //   width: 3840,
+  //   height: 2160,
+  //   group: "makeright_final",
+  // },
 
+  // maker_screen_17: {
+  //   name: "maker_screen_17",
+  //   src: "./assets/images/case_studies/makeright/final_screens/maker_screen_17.png",
+  //   width: 3840,
+  //   height: 5270,
+  //   group: "makeright_final",
+  // },
 
+  maker_screen_01: {
+    name: "maker_screen_01",
+    src: "./assets/images/case_studies/makeright/final_screens/maker_screen_01.png",
+    width: 3840,
+    height: 2160,
+    group: "makeright_final",
+    section: "Getting Started",
+    title: "Login",
+    phase: "1/3",
+    description: ["Ideally we will have a welcoming and informative homepage, however, this was not within the project scope. Therefore each user journey begins at Login."],
+    actions: ["Click log-in or signup"],
+    notes: [],
+    alt: "Login screen",
+  },
 
+  maker_screen_02: {
+    name: "maker_screen_02",
+    src: "./assets/images/case_studies/makeright/final_screens/maker_screen_02.png",
+    width: 3840,
+    height: 2160,
+    group: "makeright_final",
+    section: "Getting Started",
+    title: "Create Account",
+    phase: "2/3",
+    description: ["Choose between the two user types, customer and maker."],
+    actions: ["Fill out the provided forms and continue on."],
+    notes: ["‘What is a maker?’ text links them to an overview page on being a maker (mocked-up for the project, but is not in this case study)."],
+    alt: "Create Account screen",
+  },
 
+  maker_screen_03: {
+    name: "maker_screen_03",
+    src: "./assets/images/case_studies/makeright/final_screens/maker_screen_03.png",
+    width: 3840,
+    height: 3134,
+    group: "makeright_final",
+    section: "Getting Started",
+    title: "Onboarding Overview",
+    phase: "3/3",
+    description: ["Communicate the steps of the onboarding process, and ensure users read the maker Overview page."],
+    actions: ["Click ‘View Overview’ to read the maker overview, then click the checkbox to verify that they have done so before moving forward."],
+    notes: ["The maker overview explains critical information about the rules and responsibilities of a maker. Like a ‘Terms of Service’ but more visual, and actually helpful."],
+    // TODO: "(include a tooltip on words like maker overview that explains what it is)"
+    alt: "Onboarding Overview screen",
+  },
+
+  maker_screen_04: {
+    name: "maker_screen_04",
+    src: "./assets/images/case_studies/makeright/final_screens/maker_screen_04.png",
+    width: 3840,
+    height: 6818,
+    group: "makeright_final",
+    section: "Account Setup",
+    title: "Account Setup",
+    phase: "1/1",
+    description: ["Collect personal details for the user’s account, banking information to pay them for their work, and their weekly availability to determine when they will receive new orders."],
+    actions: ["Fill out the provided forms and continue on."],
+    notes: ["Weekly availability UI has been filled to demonstrate the function of the section."],
+    alt: "Account Setup screen",
+  },
+
+  maker_screen_05: {
+    name: "maker_screen_05",
+    src: "./assets/images/case_studies/makeright/final_screens/maker_screen_05.png",
+    width: 3840,
+    height: 6198,
+    group: "makeright_final",
+    section: "Verification",
+    title: "Verification",
+    phase: "1/3",
+    description: ["Submit proof of ownership for their equipment and supplies. This ensures that no one is able to sign up under dishonest pretenses."],
+    actions: ["Submit images of valid photo id, and verification images of their printer(s), available filament(s), and any relevant additional equipment."],
+    notes: ["These details allow us to assign Makers based on the requirements of a job. This gives customers the ability to select the quality of machine, the print material and colour, and other printer features required to print certain forms."],
+    alt: "Verification screen",
+  },
+
+  maker_screen_06: {
+    name: "maker_screen_06",
+    src: "./assets/images/case_studies/makeright/final_screens/maker_screen_06.png",
+    width: 3840,
+    height: 2160,
+    group: "makeright_final",
+    section: "Verification",
+    title: "Verify Email",
+    phase: "2/3",
+    description: ["Ensure that users have verified their email."],
+    actions: ["Check their email for a verification code, resend the email if necessary, enter the code and begin the test."],
+    notes: ["Users need to verify their email to receive the results of the onboarding process. Therefore, this step is a brief yet necessary interruption to avoid upset Makers who weren’t able to receive their test results."],
+    alt: "Verify Email screen",
+  },
+
+  maker_screen_07: {
+    name: "maker_screen_07",
+    src: "./assets/images/case_studies/makeright/final_screens/maker_screen_07.png",
+    width: 3840,
+    height: 2160,
+    group: "makeright_final",
+    section: "Verification",
+    title: "Email Verified",
+    phase: "3/3",
+    description: ["Brief user feedback screen before moving forward."],
+    actions: [],
+    notes: [],
+    alt: "Email Verified screen",
+  },
+
+  maker_screen_08: {
+    name: "maker_screen_08",
+    src: "./assets/images/case_studies/makeright/final_screens/maker_screen_08.png",
+    width: 3840,
+    height: 2160,
+    group: "makeright_final",
+    section: "Maker Test Start",
+    title: "Test Start",
+    phase: "1/3",
+    description: ["A reminder of what will be expected, alongside the first instruction of the test."],
+    actions: ["Click the ‘Orders’ button in the navbar."],
+    notes: ["The following test teaches users the order completion process by walking them through a mock order. The resulting printed object is then reviewed to gauge the user’s 3D printing skills. Thereby feeding 2 birds with 1 seed."],
+    alt: "Test Start screen",
+  },
+
+  maker_screen_09: {
+    name: "maker_screen_09",
+    src: "./assets/images/case_studies/makeright/final_screens/maker_screen_09.png",
+    width: 3840,
+    height: 2160,
+    group: "makeright_final",
+    section: "Maker Test Start",
+    title: "Orders (Order Awaiting Acceptance)",
+    phase: "2/3",
+    description: ["A complete list of their past and present job orders."],
+    actions: ["Click through the provided tutorials, Select ‘Order Details’"],
+    notes: ["Users are reminded with the heading in the top left of the screen that all of the following process is a part of the test. The maker test also includes an ‘Info Mode’ mentioned in the top left to provide optional tutorials throughout the process."],
+    // TODO: (Include a way to disable or enable tutorials with a toggle)
+    alt: "Orders (Order Awaiting Acceptance) screen",
+  },
+
+  maker_screen_10: {
+    name: "maker_screen_10",
+    src: "./assets/images/case_studies/makeright/final_screens/maker_screen_10.png",
+    width: 3840,
+    height: 6600,
+    group: "makeright_final",
+    section: "Maker Test Start",
+    title: "Order Details",
+    phase: "3/3",
+    description: ["Provide the details of particular job order: the user’s chosen specifications, object info, a preview of the model, order timeline, and additional comments left by your customer."],
+    actions: ["Click through the provided tutorials, and accept or reject their incoming order."],
+    notes: ["Users can accept the order at any time, however, once accepted they have 24hrs to complete the vetting process. This allows for some flexibility as to when to begin the practical test. In a real order, they would have 2hrs to accept or reject a new job."],
+    alt: "Order Details screen",
+  },
+
+  maker_screen_11: {
+    name: "maker_screen_11",
+    src: "./assets/images/case_studies/makeright/final_screens/maker_screen_11.png",
+    width: 3840,
+    height: 2160,
+    group: "makeright_final",
+    section: "File Vetting",
+    title: "Orders (Order Awaiting Vetting)",
+    phase: "1/3",
+    description: ["Preview the deadline to vet the file, and click the button to perform the next step of the process."],
+    actions: [],
+    notes: [],
+    alt: "Orders (Order Awaiting Vetting) screen",
+  },
+
+  maker_screen_12: {
+    name: "maker_screen_12",
+    src: "./assets/images/case_studies/makeright/final_screens/maker_screen_12.png",
+    width: 3840,
+    height: 4518,
+    group: "makeright_final",
+    section: "File Vetting",
+    title: "File Vetting",
+    phase: "2/3",
+    description: ["Allow the user to download the file, and check to ensure that it is able to be printed via slicing software. This ensures makers are never expected to print a file that cannot be printed, and that they never have to modify models."],
+    actions: ["Click through the optional tutorials, review the steps and guidelines if needed, download the attached file, open it in their slicing software, assess, select the result of their vetting process, and submit."],
+    notes: [],
+    alt: "File Vetting screen",
+  },
+
+  maker_screen_13: {
+    name: "maker_screen_13",
+    src: "./assets/images/case_studies/makeright/final_screens/maker_screen_13.png",
+    width: 3840,
+    height: 2062,
+    group: "makeright_final",
+    section: "Submit Print",
+    title: "Orders (Ready to Submit Print)",
+    phase: "1/2",
+    description: ["Time to begin printing when ready. The maker already downloaded the file during the vetting stage, and prepared it in slicing software. Meaning, they will be ready to get started with the print as soon as they can."],
+    actions: ["Complete the order print, return to this page, and click ‘Submit Print’"],
+    notes: [],
+    alt: "Orders (Ready to Submit Print) screen",
+  },
+
+  maker_screen_14: {
+    name: "maker_screen_14",
+    src: "./assets/images/case_studies/makeright/final_screens/maker_screen_14.png",
+    width: 3840,
+    height: 4538,
+    group: "makeright_final",
+    section: "Submit Print",
+    title: "Submit for verification",
+    phase: "2/2",
+    description: ["Submit 4 images of the printed object to the customer. This gives the customer peace of mind that the print was totally successful, or the opportunity to intervene and request a reprint if something looks wrong."],
+    actions: ["Capture and submit each required image, and click ‘Submit’."],
+    notes: [],
+    alt: "Submit for verification screen",
+  },
+
+  maker_screen_15: {
+    name: "maker_screen_15",
+    src: "./assets/images/case_studies/makeright/final_screens/maker_screen_15.png",
+    width: 3840,
+    height: 2160,
+    group: "makeright_final",
+    section: "Job/Test Complete",
+    title: "Orders (Print Submitted)",
+    phase: "1/3",
+    description: ["Remind the maker that their order has been submitted, and it’s time to wait for the customer’s response. Ensuring the customer is satisfied and won't be surprised by the product that arrives on their doorstep."],
+    actions: ["Wait for the customer’s approval, prepare to ship the object if they want to, and view their submission if they want to double-check what they’ve delivered. "],
+    notes: [],
+    alt: "Orders (Print Submitted) screen",
+  },
+
+  maker_screen_16: {
+    name: "maker_screen_16",
+    src: "./assets/images/case_studies/makeright/final_screens/maker_screen_16.png",
+    width: 3840,
+    height: 2160,
+    group: "makeright_final",
+    section: "Job/Test Complete",
+    title: "Orders (Job Completed)",
+    phase: "2/3",
+    description: ["A completed job ticket. In the case of the maker test, they are about to review their results, marking the end of the process."],
+    actions: ["Click ‘View Feedback’ to review the results of their test. Outside of the test, this would allow them to see whether or not the user has verified their print. If they did, it would then be time to mail the object."],
+    notes: ["If they’ve passed, all that’s left is to complete a short video call, much like an uber driver’s last onboarding step would be an in-person inspection of themselves and their vehicle."],
+    alt: "Orders (Job Completed) screen",
+  },
+
+  maker_screen_17: {
+    name: "maker_screen_17",
+    src: "./assets/images/case_studies/makeright/final_screens/maker_screen_17.png",
+    width: 3840,
+    height: 5270,
+    group: "makeright_final",
+    section: "Job/Test Complete",
+    title: "Customer Feedback",
+    phase: "3/3",
+    description: ["Allows the maker to review the customer’s response to their submitted images.  They can see the rating and feedback provided by the customer, much like an uber driver receives a rating after a job.", "If the customer accepts and verifies the images then it’s time to mail the object.", "If they reject the object, they may have to reprint and correct their mistake.", "In the case of the maker test, this page shows their results.  If they’ve passed, all that’s left is to complete a short video call, much like an uber driver’s last onboarding step would be an in-person inspection of themselves and their vehicle."],
+    actions: [],
+    alt: "Customer Feedback screen",
+  },
 };
-
-
 
 const MAKERIGHT_IMG_GROUPS = {};
 
@@ -439,27 +762,17 @@ Object.keys(MAKERIGHT_IMGS).forEach((key) => {
       const currentGroup = MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs;
       for (let i = 0; i < currentGroup.length; i++) {
         if (currentGroup[i].index === index) {
-          throw new Error(
-            `Overlapping indexes within group "${
-              MAKERIGHT_IMGS[key].group
-            }": ${currentGroup[i].name} and ${MAKERIGHT_IMGS[key].name}`
-          );
+          throw new Error(`Overlapping indexes within group "${MAKERIGHT_IMGS[key].group}": ${currentGroup[i].name} and ${MAKERIGHT_IMGS[key].name}`);
         }
       }
     }
     MAKERIGHT_IMGS[key].index = index;
-    MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.push(
-      MAKERIGHT_IMGS[key]
-    );
+    MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.push(MAKERIGHT_IMGS[key]);
     MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.sort((a, b) => {
       return a.index - b.index;
     });
   }
 });
-
-
-
-
 
 export default MAKERIGHT_IMGS;
 export { MAKERIGHT_IMG_GROUPS };

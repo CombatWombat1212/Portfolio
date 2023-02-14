@@ -654,9 +654,8 @@ function MakeRight({ setPopup }) {
 
 
 
-          <Section id="Delivery--Maker" background="tertiary" margin="none">
+          <Section id="Delivery--Maker" background="tertiary" margin="none" copyClassName="container">
             <Heading>Maker user journey</Heading>
-
 
           </Section>
 

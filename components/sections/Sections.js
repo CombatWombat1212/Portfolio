@@ -24,7 +24,7 @@ const SECTION_TYPE_C = ["columns"];
 const SECTION_TYPE_D = ["split header"];
 const SECTION_TYPES = [...SECTION_TYPE_A, ...SECTION_TYPE_B, ...SECTION_TYPE_C];
 
-function Section({ className, children, type, background, id, margin, titled, arrows, mainClassName,mainType }) {
+function Section({ className, children, type, background, id, margin, titled, arrows, mainClassName, copyClassName, mainType }) {
   var pref = "section";
 
   // TODO: the 'columns' concept should work with all variants of section i think
@@ -46,8 +46,8 @@ function Section({ className, children, type, background, id, margin, titled, ar
   var backgroundClasses = getBackgroundClasses(pref, background);
   
   var mainClasses = getMainClasses(mainClassName, mainType, titled);
-
   var gapClasses = getGapClasses(type, arrows, mainClassName);
+  copyClassName = copyClassName ? copyClassName : "";
 
   var hasText = getHasText(childs);
   var hasGraphic = getHasGraphic(graphic);
@@ -66,7 +66,7 @@ function Section({ className, children, type, background, id, margin, titled, ar
             {SECTION_TYPE_A.indexOf(type) != -1 ? (
               <>
                 {hasText && (
-                  <div className="section--copy">
+                  <div className={`section--copy ${copyClassName}`}>
                     {title && <>{title}</>}
                     {heading && <>{heading}</>}
                     {other && <>{other}</>}
@@ -78,7 +78,7 @@ function Section({ className, children, type, background, id, margin, titled, ar
               </>
             ) : SECTION_TYPE_B.indexOf(type) != -1 ? (
               <>
-                <div className="section--copy col-3">
+                <div className={`section--copy ${copyClassName} col-3`}>
                   <>{graphic[0]}</>
                   {heading && <>{heading}</>}
                   {description && <>{description}</>}
@@ -90,7 +90,7 @@ function Section({ className, children, type, background, id, margin, titled, ar
             ) : SECTION_TYPE_C.indexOf(type) != -1 ? (
               <>
                 {isTitled && (
-                  <div className="section--copy col-12">
+                  <div className={`section--copy ${copyClassName} col-12`}>
                     {title && <>{title}</>}
                     {heading && <>{heading}</>}
                     {description && <>{description}</>}
