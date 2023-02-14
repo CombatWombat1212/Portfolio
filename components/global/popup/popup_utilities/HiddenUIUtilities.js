@@ -8,42 +8,21 @@ const HIDDEN_UI = [
 var activeHiddenUI;
 
 function setActiveHiddenUI(type) {
-  // activeHiddenUI = HIDDEN_UI.filter((ui) => ui.type == "lightbox")[0]);
   activeHiddenUI = HIDDEN_UI.filter((ui) => ui.type == type)[0];
 }
 
-// function hiddenUIToggle(bool) {
-//   var target = document.querySelector(activeHiddenUI.target);
-//   if (!target) return;
-// //   var on = target.classList.contains("popup--nav__on");
-//   var tran = Number(window.getComputedStyle(target).getPropertyValue("transition-duration").split("s")[0]) * 1000;
-
-//   if (bool && !forceHiddenUIOn) {
-//     toggle(target, "popup--nav", tran, "animated", "");
-//   } else {
-//     toggle(target, "popup--nav", tran, "animated", "");
-//   }
-// }
 function hiddenUIToggle() {
-    var target = document.querySelector(activeHiddenUI.target);
-    if (!target) return;
-    var tran = Number(window.getComputedStyle(target).getPropertyValue("transition-duration").split("s")[0]) * 1000;
-    var on = target.classList.contains("popup--nav__on");
+  var target = document.querySelector(activeHiddenUI.target);
+  if (!target) return;
+  var tran = Number(window.getComputedStyle(target).getPropertyValue("transition-duration").split("s")[0]) * 1000;
+  var on = target.classList.contains("popup--nav__on");
 
-    if (on && !forceHiddenUIOn && !mouseCurrentlyMoving) {
-        toggle(target, "popup--nav", tran, "animated", "");
-        }
-    else if (!on && (forceHiddenUIOn || mouseCurrentlyMoving)) {
-        toggle(target, "popup--nav", tran, "animated", "");
-    }
-
-    
-    
-    
+  if (on && !forceHiddenUIOn && !mouseCurrentlyMoving) {
+    toggle(target, "popup--nav", tran, "animated", "");
+  } else if (!on && (forceHiddenUIOn || mouseCurrentlyMoving)) {
+    toggle(target, "popup--nav", tran, "animated", "");
   }
-  
-
-
+}
 
 function forceHiddenUI(e) {
   forceHiddenUIOn = true;
@@ -79,20 +58,18 @@ var mouseCurrentlyMoving = false;
 
 function showUIOnMouseMove() {
   if (!mouseMoveRan) {
-      mouseMoveRan = true;
-      mouseCurrentlyMoving = true;
-      hiddenUIToggle();
+    mouseMoveRan = true;
+    mouseCurrentlyMoving = true;
+    hiddenUIToggle();
   }
   window.clearTimeout(isMouseMoving);
   isMouseMoving = setTimeout(isMouseMovingFunctions, mouseMoveTimeout);
 }
 
 function isMouseMovingFunctions() {
-    mouseCurrentlyMoving = false;
-    mouseMoveRan = false;
-    hiddenUIToggle();
+  mouseCurrentlyMoving = false;
+  mouseMoveRan = false;
+  hiddenUIToggle();
 }
-
-
 
 export { hiddenUIToggle, forceHiddenUI, stopForceHiddenUI, hiddenUIInit, setActiveHiddenUI, showUIOnMouseMove };
