@@ -3,7 +3,7 @@ import Layout from "../components/navigation/Layout";
 
 import { useMountEffect } from "/scripts/hooks/useMountEffect";
 import { postScreenSizeToRoot } from "/scripts/GlobalUtilities";
-import Popup from "@/components/global/Popup";
+import Popup from "@/components/global/popup/Popup";
 import { useRef, useState } from "react";
 
 export default function App({ Component, pageProps }) {
