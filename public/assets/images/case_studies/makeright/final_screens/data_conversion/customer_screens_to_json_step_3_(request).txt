@@ -1,0 +1,331 @@
+
+Customer
+Section 1. Getting Started
+Login - customer_screen_01
+Getting Started 1/2
+
+Description
+Ideally we will have a welcoming and informative homepage, however, this was not within the project scope.  Therefore each user journey begins at Login.
+
+Action(s):
+Click log-in or signup
+
+
+Create Account - customer_screen_02
+Getting Started 2/2
+
+Description
+Choose between the two user types, customer and maker.
+
+Additional Notes
+‘What is a maker?’ text links them to an overview page on being a maker (mocked-up for the project, but is not in this case study).
+
+
+
+Section 2. Account Setup
+Account Setup - customer_screen_03
+Account Setup 1/3
+
+Description
+Gather the necessary info for a new customer account.
+
+
+Select Interests - customer_screen_04
+Account Setup 2/3
+
+Description
+The target demographic is users who wouldn’t normally use 3D printing to solve their issues.  So, to help them explore the possibilities of the technology, we encourage users to select some personal interests.  We then use that info to create a storefront page tailored to their hobbies.
+
+Action(s)
+Select 3 or more topics, or skip this optional page.
+
+
+Verify Email - customer_screen_05
+Account Setup 3/3
+
+Description
+Verify the email of the new customer account.
+
+Action(s):
+Check their email for a verification code, resend the email if necessary, enter the code and move on. Or skip for now (purchasing is not possible until account is verified).
+
+
+Section 3. Browsing
+Storefront - customer_screen_06
+Browsing 1/2
+(use the revised copy of this image with a number of different store items)
+
+Description
+Acts essentially as the homepage for customers.  Encourages a new window-shopping approach to 3D printing for consumers, and enables them to explore the possibilities of the technology.
+
+Action(s):
+Browse and select items.
+
+
+Item Listing - customer_screen_07
+Browsing 2/2
+
+Description
+The full details of a selected item from the store.  Including an interactive 3D model, images of past prints, and comments from other customers.  
+
+Action(s)
+Customize the model’s scale, color, material, and print quality.  While simultaneously previewing these changes, and their impact on cost. Customers can then purchase the item and proceed to checkout. 
+
+Section 4. Purchasing
+Checkout - customer_screen_08
+Purchasing 1/2
+(The same title and description can be used on multiple pages, like here for example where the version of the screen with the menu for editing your item collapsed and expanded will both have this title and description)
+
+Description
+Checkout screen from which customers complete their purchase.  
+
+Action(s)
+Customize the model further, add additional comments to the order ticket, and customize the 2 separate timeline options; shipping speed, and production speed.  Where production speed changes the priority and deadline of the order for the assigned maker, for an added fee.
+
+
+Order Placed - customer_screen_09
+Purchasing 2/2
+
+Description
+Confirmation screen denoting that the order has been placed successfully, and is now pending assignment to one of our makers.
+
+Action(s)
+Continue browsing, or view your active orders.
+
+
+Section 5. Order In-Progress
+My Orders (pending) - customer_screen_10
+Order In-progress 1/3
+
+Description
+The page where users can view the full list of their ongoing and past orders. 
+
+Action(s)
+Interact with any of their order tickets.
+
+My Orders (accepted / vetting) - customer_screen_11
+Order In-progress 2/3
+
+Description
+The appearance of a customer’s My Orders page when their ticket has been accepted by a Maker.  At this stage, the Maker is currently assessing whether or not the ordered file is ready to be printed.
+
+Action(s)
+Click on the ticket to visit the order ticket page if they want more info.
+
+Order ticket (accepted / vetting) - customer_screen_12
+Order In-progress 3/3
+
+Description
+The expanded view of an order ticket, i.e. the ticket’s dedicated page.  Identical to the previous screen, this shows the appearance of an order ticket that has just been accepted by a Maker if the user were to click on it from the previous My Order’s screen.  
+
+Action(s)
+Users can cancel the order, request changes (for a fee), communicate with their maker, and view details on their maker and the order.
+
+
+Section 6. Print completed
+My Orders (Print completed) - customer_screen_13
+Print completed 1/4
+(includes expanded and collapsed ‘what to look for’ screens)
+
+Description
+Once the print has been completed, the Maker submits verification images to the customer.  This ensures that the customer is never surprised with the product that arrives at their front door, and can intervene if something appears off before shipping.
+
+Action(s)
+Check through the photos, refer to the attached guide for a list of common issues, and click the appropriate response option.
+
+My Orders (Print completed) - customer_screen_14
+Print completed 1/4
+Same as above
+
+Order Ticket (Print Verified) - customer_screen_15
+Print completed 2/4
+
+Description
+Here the customer has approved of the print, and is now waiting for the maker to respond with the shipping details.
+
+
+
+My Orders (Shipped) - customer_screen_16
+Print completed 3/4
+
+Description
+With the item approved by the customer, the Maker has now packaged and shipped the item, and provided the customer with the necessary tracking info.
+
+Order Ticket (Shipped) - customer_screen_17
+Print completed 3/4
+
+Same as above
+
+
+
+My Orders (Delivered) - customer_screen_18
+Print completed 4/4
+
+Once it has been confirmed that the package arrived to the customer, they have the opportunity to rate the Maker and provide feedback.  Otherwise, the ordering process is complete and the customer can enjoy their product.  
+
+Order Ticket (Delivered) - customer_screen_19
+Print completed 4/4
+
+Same as above
+
+
+
+
+Take this block of data, and input it into this format:
+customer_screen_01: {
+  name: "customer_screen_01",
+  src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_01.png",
+  width: 3840,
+  height: 2160,
+  group: "makeright_customer_final",
+},
+customer_screen_02: {
+  name: "customer_screen_02",
+  src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_02.png",
+  width: 3840,
+  height: 2160,
+  group: "makeright_customer_final",
+},
+customer_screen_03: {
+  name: "customer_screen_03",
+  src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_03.png",
+  width: 3840,
+  height: 4992,
+  group: "makeright_customer_final",
+},
+customer_screen_04: {
+  name: "customer_screen_04",
+  src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_04.png",
+  width: 3840,
+  height: 2736,
+  group: "makeright_customer_final",
+},
+customer_screen_05: {
+  name: "customer_screen_05",
+  src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_05.png",
+  width: 3840,
+  height: 2160,
+  group: "makeright_customer_final",
+},
+customer_screen_06: {
+  name: "customer_screen_06",
+  src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_06.png",
+  width: 3840,
+  height: 7016,
+  group: "makeright_customer_final",
+},
+customer_screen_07: {
+  name: "customer_screen_07",
+  src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_07.png",
+  width: 3840,
+  height: 5030,
+  group: "makeright_customer_final",
+},
+customer_screen_08: {
+  name: "customer_screen_08",
+  src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_08.png",
+  width: 3840,
+  height: 4042,
+  group: "makeright_customer_final",
+},
+customer_screen_09: {
+  name: "customer_screen_09",
+  src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_09.png",
+  width: 3840,
+  height: 3248,
+  group: "makeright_customer_final",
+},
+customer_screen_10: {
+  name: "customer_screen_10",
+  src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_10.png",
+  width: 3840,
+  height: 2160,
+  group: "makeright_customer_final",
+},
+customer_screen_11: {
+  name: "customer_screen_11",
+  src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_11.png",
+  width: 3840,
+  height: 3054,
+  group: "makeright_customer_final",
+},
+customer_screen_12: {
+  name: "customer_screen_12",
+  src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_12.png",
+  width: 3840,
+  height: 4504,
+  group: "makeright_customer_final",
+},
+
+customer_screen_13: {
+  name: "maker_screen_13",
+  src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_13.png",
+  width: 3840,
+  height: 3762,
+  group: "makeright_customer_final",
+},
+customer_screen_14: {
+  name: "maker_screen_14",
+  src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_14.png",
+  width: 3840,
+  height: 4576,
+  group: "makeright_customer_final",
+},
+customer_screen_15: {
+  name: "maker_screen_15",
+  src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_15.png",
+  width: 3840,
+  height: 7340,
+  group: "makeright_customer_final",
+},
+customer_screen_16: {
+  name: "maker_screen_16",
+  src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_16.png",
+  width: 3840,
+  height: 2662,
+  group: "makeright_customer_final",
+},
+customer_screen_17: {
+  name: "maker_screen_17",
+  src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_17.png",
+  width: 3840,
+  height: 7750,
+  group: "makeright_customer_final",
+},
+customer_screen_18: {
+  name: "maker_screen_18",
+  src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_18.png",
+  width: 3840,
+  height: 3474,
+  group: "makeright_customer_final",
+},
+
+customer_screen_19: {
+  name: "maker_screen_19",
+  src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_19.png",
+  width: 3840,
+  height: 9206,
+  group: "makeright_customer_final",
+},
+
+
+
+
+Here is an example of a completed entry:
+  maker_screen_17: {
+    name: "maker_screen_17",
+    src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_17.png",
+    width: 3840,
+    height: 5270,
+    group: "makeright_maker_final",
+    section: "Job/Test Complete",
+    title: "Customer Feedback",
+    phase: "3/3",
+    description: ["Allows the maker to review the customer’s response to their submitted images.  They can see the rating and feedback provided by the customer, much like an uber driver receives a rating after a job.", "If the customer accepts and verifies the images then it’s time to mail the object.", "If they reject the object, they may have to reprint and correct their mistake.", "In the case of the maker test, this page shows their results.  If they’ve passed, all that’s left is to complete a short video call, much like an uber driver’s last onboarding step would be an in-person inspection of themselves and their vehicle."],
+    actions: [],
+    alt: "A screen for makers to review customer feedback on their completed job order, including rating and feedback, and instructions for next steps.",
+  },
+
+I need the description, and actions to be an array of strings based on any line breaks they may contain. Please ensure that their name, src, width, height, and group are unchanged. The new additions to the object are as follows: section (string), title (string), phase (string, format of [number]/[number]), description (array of strings), and alt (string). Alt can be left as a blank string.
+
+Please do this for customer_screen_18 through customer_screen_19

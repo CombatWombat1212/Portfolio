@@ -1,0 +1,169 @@
+
+Customer
+Section 1. Getting Started
+Login - customer_screen_01
+Getting Started 1/2
+
+Description
+Ideally we will have a welcoming and informative homepage, however, this was not within the project scope.  Therefore each user journey begins at Login.
+
+Action(s):
+Click log-in or signup
+
+
+Create Account - customer_screen_02
+Getting Started 2/2
+
+Description
+Choose between the two user types, customer and maker.
+
+Additional Notes
+‘What is a maker?’ text links them to an overview page on being a maker (mocked-up for the project, but is not in this case study).
+
+
+
+Section 2. Account Setup
+Account Setup - customer_screen_03
+Account Setup 1/3
+
+Description
+Gather the necessary info for a new customer account.
+
+
+Select Interests - customer_screen_04
+Account Setup 2/3
+
+Description
+The target demographic is users who wouldn’t normally use 3D printing to solve their issues.  So, to help them explore the possibilities of the technology, we encourage users to select some personal interests.  We then use that info to create a storefront page tailored to their hobbies.
+
+Action(s)
+Select 3 or more topics, or skip this optional page.
+
+
+Verify Email - customer_screen_05
+Account Setup 3/3
+
+Description
+Verify the email of the new customer account.
+
+Action(s):
+Check their email for a verification code, resend the email if necessary, enter the code and move on. Or skip for now (purchasing is not possible until account is verified).
+
+
+Section 3. Browsing
+Storefront - customer_screen_06
+Browsing 1/2
+(use the revised copy of this image with a number of different store items)
+
+Description
+Acts essentially as the homepage for customers.  Encourages a new window-shopping approach to 3D printing for consumers, and enables them to explore the possibilities of the technology.
+
+Action(s):
+Browse and select items.
+
+
+Item Listing - customer_screen_07
+Browsing 2/2
+
+Description
+The full details of a selected item from the store.  Including an interactive 3D model, images of past prints, and comments from other customers.  
+
+Action(s)
+Customize the model’s scale, color, material, and print quality.  While simultaneously previewing these changes, and their impact on cost. Customers can then purchase the item and proceed to checkout. 
+
+Section 4. Purchasing
+Checkout - customer_screen_08
+Purchasing 1/2
+(The same title and description can be used on multiple pages, like here for example where the version of the screen with the menu for editing your item collapsed and expanded will both have this title and description)
+
+Description
+Checkout screen from which customers complete their purchase.  
+
+Action(s)
+Customize the model further, add additional comments to the order ticket, and customize the 2 separate timeline options; shipping speed, and production speed.  Where production speed changes the priority and deadline of the order for the assigned maker, for an added fee.
+
+
+Order Placed - customer_screen_09
+Purchasing 2/2
+
+Description
+Confirmation screen denoting that the order has been placed successfully, and is now pending assignment to one of our makers.
+
+Action(s)
+Continue browsing, or view your active orders.
+
+
+Section 5. Order In-Progress
+My Orders (pending) - customer_screen_10
+Order In-progress 1/3
+
+Description
+The page where users can view the full list of their ongoing and past orders. 
+
+Action(s)
+Interact with any of their order tickets.
+
+My Orders (accepted / vetting) - customer_screen_11
+Order In-progress 2/3
+
+Description
+The appearance of a customer’s My Orders page when their ticket has been accepted by a Maker.  At this stage, the Maker is currently assessing whether or not the ordered file is ready to be printed.
+
+Action(s)
+Click on the ticket to visit the order ticket page if they want more info.
+
+Order ticket (accepted / vetting) - customer_screen_12
+Order In-progress 3/3
+
+Description
+The expanded view of an order ticket, i.e. the ticket’s dedicated page.  Identical to the previous screen, this shows the appearance of an order ticket that has just been accepted by a Maker if the user were to click on it from the previous My Order’s screen.  
+
+Action(s)
+Users can cancel the order, request changes (for a fee), communicate with their maker, and view details on their maker and the order.
+
+
+Section 6. Print completed
+My Orders (Print completed) - customer_screen_13
+Print completed 1/4
+(includes expanded and collapsed ‘what to look for’ screens)
+
+Description
+Once the print has been completed, the Maker submits verification images to the customer.  This ensures that the customer is never surprised with the product that arrives at their front door, and can intervene if something appears off before shipping.
+
+Action(s)
+Check through the photos, refer to the attached guide for a list of common issues, and click the appropriate response option.
+
+My Orders (Print completed) - customer_screen_14
+Print completed 1/4
+Same as above
+
+Order Ticket (Print Verified) - customer_screen_15
+Print completed 2/4
+
+Description
+Here the customer has approved of the print, and is now waiting for the maker to respond with the shipping details.
+
+
+
+My Orders (Shipped) - customer_screen_16
+Print completed 3/4
+
+Description
+With the item approved by the customer, the Maker has now packaged and shipped the item, and provided the customer with the necessary tracking info.
+
+Order Ticket (Shipped) - customer_screen_17
+Print completed 3/4
+
+Same as above
+
+
+
+My Orders (Delivered) - customer_screen_18
+Print completed 4/4
+
+Once it has been confirmed that the package arrived to the customer, they have the opportunity to rate the Maker and provide feedback.  Otherwise, the ordering process is complete and the customer can enjoy their product.  
+
+Order Ticket (Delivered) - customer_screen_19
+Print completed 4/4
+
+Same as above
