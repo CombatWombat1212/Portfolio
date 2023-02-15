@@ -2,7 +2,6 @@ import Image from "next/image";
 import { defaultProps, PropTypes } from "prop-types";
 import React from "react";
 import Mask from "../utilities/Mask";
-import { getHasBackground } from "./sections_utilities/IfHas";
 import { getBackgroundClasses } from "./sections_utilities/GetClasses";
 
 function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup, width, height }) {

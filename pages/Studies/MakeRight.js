@@ -651,23 +651,13 @@ function MakeRight({ setPopup }) {
             <Heading>Delivered Project</Heading>
           </Section>
 
+          <Section type="passthrough" id="Delivery--Maker" background="tertiary" margin="none">
 
-
-
-
-          <Section id="Delivery--Maker" background="tertiary" margin="none" copyClassName="container">
-
-
-            <Heading>Maker user journey</Heading>
-            <Slideshow img={MAKERIGHT_IMGS.maker_screen_10} />
+            <Slideshow img={MAKERIGHT_IMGS.maker_screen_10}>
+              <Heading>Maker user journey</Heading>
+            </Slideshow>
 
           </Section>
-
-
-
-
-
-          
         </Chapter>
       </CaseStudyPage>
     </>

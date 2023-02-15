@@ -1,0 +1,119 @@
+@mixin toggle-checked($selector) {
+  @at-root {
+    .toggle--checkbox:checked + #{$selector} {
+      @content;
+    }
+  }
+}
+
+@mixin toggle-hover($selector) {
+  @at-root {
+    .toggle--checkbox:focus + #{$selector}, .toggle--checkbox:hover + #{$selector} {
+      @content;
+    }
+  }
+}
+
+
+@mixin toggle-checked-hovered($selector) {
+  @at-root {
+    .toggle--checkbox:checked:focus + #{$selector}, .toggle--checkbox:checked:hover + #{$selector} {
+      @content;
+    }
+  }
+}
+
+
+
+
+
+
+$col-toggle-background-checked: #e5afcb;
+
+.toggle {
+  --switch-width: 2.45rem;
+  --switch-height: 1.25rem;
+  --switch-toggle-width: calc(var(--switch-height) - var(--switch-padding) * 2);
+  --switch-toggle-height: calc(var(--switch-height) - var(--switch-padding) * 2);
+  --switch-padding: 0.125rem;
+
+  @include flex-row;
+  align-items: center;
+  gap: 1rem;
+
+  &--switch {
+    position: relative;
+    display: inline-block;
+    width: var(--switch-width);
+    height: var(--switch-height);
+  }
+
+  &--checkbox {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &--slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $col-background;
+    @include trans;
+    border-radius: 100rem;
+
+    
+    @include toggle-hover(".toggle--slider") {
+        background-color: darken($col-background, 5);
+    }
+
+    @include toggle-checked(".toggle--slider") {
+      background-color: $col-toggle-background-checked;
+    }
+
+    @include toggle-checked-hovered(".toggle--slider") {
+        background-color: lighten($col-toggle-background-checked, 10);
+    }
+
+
+    &:before {
+      position: absolute;
+      content: "";
+
+      width: calc(var(--switch-height) - var(--switch-padding) * 2);
+      height: calc(var(--switch-height) - var(--switch-padding) * 2);
+
+      left: var(--switch-padding);
+      bottom: var(--switch-padding);
+      background-color: $col-primary;
+      @include trans;
+      border-radius: 100rem;
+
+
+        @include toggle-hover(".toggle--slider:before") {
+            background-color: darken($col-primary, 5);
+        }
+
+
+
+      @include toggle-checked(".toggle--slider:before") {
+        background-color: $col-secondary;
+        --distance: calc(var(--switch-width) - var(--switch-height));
+
+        -webkit-transform: translateX(var(--distance));
+        -ms-transform: translateX(var(--distance));
+        transform: translateX(var(--distance));
+      }
+
+
+      @include toggle-checked-hovered(".toggle--slider:before") {
+        background-color: lighten($col-secondary, 5);
+      }
+
+
+    }
+  }
+}

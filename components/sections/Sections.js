@@ -21,8 +21,8 @@ const BACKGROUND_COLORS = ["background", "background darker", "background darkes
 const SECTION_TYPE_A = ["default", "overview", "logo banner"];
 const SECTION_TYPE_B = ["pitch"];
 const SECTION_TYPE_C = ["columns"];
-const SECTION_TYPE_D = ["split header"];
-const SECTION_TYPES = [...SECTION_TYPE_A, ...SECTION_TYPE_B, ...SECTION_TYPE_C];
+const SECTION_TYPE_D = ["passthrough"];
+const SECTION_TYPES = [...SECTION_TYPE_A, ...SECTION_TYPE_B, ...SECTION_TYPE_C, ...SECTION_TYPE_D];
 
 function Section({ className, children, type, background, id, margin, titled, arrows, mainClassName, copyClassName, mainType }) {
   var pref = "section";
@@ -107,7 +107,9 @@ function Section({ className, children, type, background, id, margin, titled, ar
                 {other && <>{other}</>}
               </>
             ) : SECTION_TYPE_D.indexOf(type) != -1 ? (
-              <></>
+              <>
+                    {children}
+              </>
             ) : null}
           </div>
         </div>
@@ -139,4 +141,4 @@ export { SECTION_DEFAULT_PROPS, SECTION_PROP_TYPES };
 
 export default Section;
 export { Section, Chapter, Description, Column, Title, Heading, Graphic, Quote };
-export { SECTION_TYPE_A, SECTION_TYPE_B, SECTION_TYPE_C, SECTION_TYPES, BACKGROUND_COLORS, DEFINED_CHILDREN };
+export { SECTION_TYPE_A, SECTION_TYPE_B, SECTION_TYPE_C,SECTION_TYPE_D, SECTION_TYPES, BACKGROUND_COLORS, DEFINED_CHILDREN };

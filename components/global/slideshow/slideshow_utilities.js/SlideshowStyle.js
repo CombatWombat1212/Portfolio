@@ -12,13 +12,14 @@ function slideshowSetDescHeightInit(elem) {
 }
 
 function slideshowSetDescHeight(elem) {
-    // TODO: run on resize
 
   var cardGraphic = elem.querySelector(".card--graphic");
   var width = cardGraphic.clientWidth;
   var height = cardGraphic.clientHeight;
 
   var description = elem.querySelector(".card--description");
+
+  if (description == null) return;
 
   description.style.setProperty("--graphic-width", `${width}px`);
   description.style.setProperty("--graphic-height", `${height}px`);

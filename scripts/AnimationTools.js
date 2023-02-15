@@ -168,6 +168,13 @@ function dualTransitionToggleOff(elem, str, ov, transitionTime) {
 
 
 function toggle(elem, classPref, transitionTime, anim, transitions, overlap) {
+   
+    var selectorPrefix = "__";
+    if (classPref == "") selectorPrefix = "";
+
+    classPref = classPref + selectorPrefix;
+
+   
     if (anim == "animated") {
         var overlapStart = false;
         var overlapEnd = false;
@@ -186,10 +193,6 @@ function toggle(elem, classPref, transitionTime, anim, transitions, overlap) {
         }
 
 
-        var selectorPrefix = "__";
-        if (classPref == "") selectorPrefix = "";
-
-        classPref = classPref + selectorPrefix;
 
 
 
