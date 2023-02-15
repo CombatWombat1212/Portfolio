@@ -39,7 +39,7 @@
   }
 
   &--copy {
-    color: var(--button-color);
+    color: var(--button-color)!important;
     @include flex-col-center;
   }
 
@@ -91,7 +91,18 @@
     --button-background: #{$col-background};
     --button-color: #{$col-primary};
     @include hover {
+      --button-background: #{$col-background_darkest};
       --button-color: #{$col-primary_hovered};
+    }
+  }
+
+  &__background-secondary {
+    --button-icon-size: 1.5rem;
+    --button-background: #{$col-background};
+    --button-color: #{$col-secondary};
+    @include hover {
+      --button-background: #{$col-background_darkest};
+      --button-color: #{$col-secondary_hovered};
     }
   }
 

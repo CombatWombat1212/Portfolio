@@ -153,6 +153,12 @@ h4,
   @include h4;
 }
 
+h5,
+.text--h5 {
+  @include body;
+  @include weight-med;
+}
+
 p,
 .text--body,
 li, span{

@@ -493,7 +493,7 @@ const MAKERIGHT_IMGS = {
     width: 3840,
     height: 2160,
     group: "makeright_maker_final",
-    section: "Getting Started",
+    section: "Getting started",
     title: "Login",
     phase: "1/3",
     description: ["Ideally we will have a welcoming and informative homepage, however, this was not within the project scope. Therefore each user journey begins at Login."],
@@ -508,8 +508,8 @@ const MAKERIGHT_IMGS = {
     width: 3840,
     height: 2160,
     group: "makeright_maker_final",
-    section: "Getting Started",
-    title: "Create Account",
+    section: "Getting started",
+    title: "Create account",
     phase: "2/3",
     description: ["Choose between the two user types, customer and maker."],
     actions: ["Fill out the provided forms and continue on."],
@@ -523,8 +523,8 @@ const MAKERIGHT_IMGS = {
     width: 3840,
     height: 3134,
     group: "makeright_maker_final",
-    section: "Getting Started",
-    title: "Onboarding Overview",
+    section: "Getting started",
+    title: "Onboarding overview",
     phase: "3/3",
     description: ["Communicate the steps of the onboarding process, and ensure users read the maker Overview page."],
     actions: ["Click ‘View Overview’ to read the maker overview, then click the checkbox to verify that they have done so before moving forward."],
@@ -539,8 +539,8 @@ const MAKERIGHT_IMGS = {
     width: 3840,
     height: 6818,
     group: "makeright_maker_final",
-    section: "Account Setup",
-    title: "Account Setup",
+    section: "Account setup",
+    title: "Account setup",
     phase: "1/1",
     description: ["Collect personal details for the user’s account, banking information to pay them for their work, and their weekly availability to determine when they will receive new orders."],
     actions: ["Fill out the provided forms and continue on."],
@@ -570,7 +570,7 @@ const MAKERIGHT_IMGS = {
     height: 2160,
     group: "makeright_maker_final",
     section: "Verification",
-    title: "Verify Email",
+    title: "Verify email",
     phase: "2/3",
     description: ["Ensure that users have verified their email."],
     actions: ["Check their email for a verification code, resend the email if necessary, enter the code and begin the test."],
@@ -585,7 +585,7 @@ const MAKERIGHT_IMGS = {
     height: 2160,
     group: "makeright_maker_final",
     section: "Verification",
-    title: "Email Verified",
+    title: "Email verified",
     phase: "3/3",
     description: ["Brief user feedback screen before moving forward."],
     actions: [],
@@ -599,8 +599,8 @@ const MAKERIGHT_IMGS = {
     width: 3840,
     height: 2160,
     group: "makeright_maker_final",
-    section: "Maker Test Start",
-    title: "Test Start",
+    section: "Maker test start",
+    title: "Test start",
     phase: "1/3",
     description: ["A reminder of what will be expected, alongside the first instruction of the test."],
     actions: ["Click the ‘Orders’ button in the navbar."],
@@ -614,8 +614,8 @@ const MAKERIGHT_IMGS = {
     width: 3840,
     height: 2160,
     group: "makeright_maker_final",
-    section: "Maker Test Start",
-    title: "Orders (Order Awaiting Acceptance)",
+    section: "Maker test start",
+    title: "Orders (awaiting acceptance)",
     phase: "2/3",
     description: ["A complete list of their past and present job orders."],
     actions: ["Click through the provided tutorials, Select ‘Order Details’"],
@@ -630,8 +630,8 @@ const MAKERIGHT_IMGS = {
     width: 3840,
     height: 6600,
     group: "makeright_maker_final",
-    section: "Maker Test Start",
-    title: "Order Details",
+    section: "Maker test start",
+    title: "Order details",
     phase: "3/3",
     description: ["Provide the details of particular job order: the user’s chosen specifications, object info, a preview of the model, order timeline, and additional comments left by your customer."],
     actions: ["Click through the provided tutorials, and accept or reject their incoming order."],
@@ -645,9 +645,9 @@ const MAKERIGHT_IMGS = {
     width: 3840,
     height: 2160,
     group: "makeright_maker_final",
-    section: "File Vetting",
-    title: "Orders (Order Awaiting Vetting)",
-    phase: "1/3",
+    section: "File vetting",
+    title: "Orders (awaiting vetting)",
+    phase: "1/2",
     description: ["Preview the deadline to vet the file, and click the button to perform the next step of the process."],
     actions: [],
     notes: [],
@@ -660,11 +660,11 @@ const MAKERIGHT_IMGS = {
     width: 3840,
     height: 4518,
     group: "makeright_maker_final",
-    section: "File Vetting",
-    title: "File Vetting",
-    phase: "2/3",
+    section: "File vetting",
+    title: "File vetting",
+    phase: "2/2",
     description: ["Allow the user to download the file, and check to ensure that it is able to be printed via slicing software. This ensures makers are never expected to print a file that cannot be printed, and that they never have to modify models."],
-    actions: ["Click through the optional tutorials, review the steps and guidelines if needed, download the attached file, open it in their slicing software, assess, select the result of their vetting process, and submit."],
+    actions: ["Click through the optional tutorials", "Review the steps and guidelines if needed, download the attached file, open it in their slicing software, and assess", "Select the result of their vetting process, and submit."],
     notes: [],
     alt: "A screen for makers to download and vet a file to ensure it can be printed, with optional tutorials.",
   },
@@ -673,10 +673,10 @@ const MAKERIGHT_IMGS = {
     name: "maker_screen_13",
     src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_13.png",
     width: 3840,
-    height: 2062,
+    height: 2160,
     group: "makeright_maker_final",
-    section: "Submit Print",
-    title: "Orders (Ready to Submit Print)",
+    section: "Submit print",
+    title: "Orders (ready to submit)",
     phase: "1/2",
     description: ["Time to begin printing when ready. The maker already downloaded the file during the vetting stage, and prepared it in slicing software. Meaning, they will be ready to get started with the print as soon as they can."],
     actions: ["Complete the order print, return to this page, and click ‘Submit Print’"],
@@ -690,7 +690,7 @@ const MAKERIGHT_IMGS = {
     width: 3840,
     height: 4538,
     group: "makeright_maker_final",
-    section: "Submit Print",
+    section: "Submit print",
     title: "Submit for verification",
     phase: "2/2",
     description: ["Submit 4 images of the printed object to the customer. This gives the customer peace of mind that the print was totally successful, or the opportunity to intervene and request a reprint if something looks wrong."],
@@ -705,8 +705,8 @@ const MAKERIGHT_IMGS = {
     width: 3840,
     height: 2160,
     group: "makeright_maker_final",
-    section: "Job/Test Complete",
-    title: "Orders (Print Submitted)",
+    section: "Job/Test complete",
+    title: "Orders (print submitted)",
     phase: "1/3",
     description: ["Remind the maker that their order has been submitted, and it’s time to wait for the customer’s response. Ensuring the customer is satisfied and won't be surprised by the product that arrives on their doorstep."],
     actions: ["Wait for the customer’s approval, prepare to ship the object if they want to, and view their submission if they want to double-check what they’ve delivered. "],
@@ -720,8 +720,8 @@ const MAKERIGHT_IMGS = {
     width: 3840,
     height: 2160,
     group: "makeright_maker_final",
-    section: "Job/Test Complete",
-    title: "Orders (Job Completed)",
+    section: "Job/Test complete",
+    title: "Orders (job completed)",
     phase: "2/3",
     description: ["A completed job ticket. In the case of the maker test, they are about to review their results, marking the end of the process."],
     actions: ["Click ‘View Feedback’ to review the results of their test. Outside of the test, this would allow them to see whether or not the user has verified their print. If they did, it would then be time to mail the object."],
@@ -735,8 +735,8 @@ const MAKERIGHT_IMGS = {
     width: 3840,
     height: 5270,
     group: "makeright_maker_final",
-    section: "Job/Test Complete",
-    title: "Customer Feedback",
+    section: "Job/Test complete",
+    title: "Customer feedback",
     phase: "3/3",
     description: ["Allows the maker to review the customer’s response to their submitted images.  They can see the rating and feedback provided by the customer, much like an uber driver receives a rating after a job.", "If the customer accepts and verifies the images then it’s time to mail the object.", "If they reject the object, they may have to reprint and correct their mistake.", "In the case of the maker test, this page shows their results.  If they’ve passed, all that’s left is to complete a short video call, much like an uber driver’s last onboarding step would be an in-person inspection of themselves and their vehicle."],
     actions: [],
@@ -763,7 +763,7 @@ const MAKERIGHT_IMGS = {
     height: 2160,
     group: "makeright_customer_final",
     section: "Getting Started",
-    title: "Create Account",
+    title: "Create account",
     phase: "2/2",
     description: ["Choose between the two user types, customer and maker."],
     notes: ["‘What is a maker?’ text links them to an overview page on being a maker (mocked-up for the project, but is not in this case study)."],
@@ -1034,6 +1034,83 @@ const MAKERIGHT_IMGS = {
   },
 };
 
+
+
+//Before 
+// const MAKERIGHT_IMG_GROUPS = {};
+
+// Object.keys(MAKERIGHT_IMGS).forEach((key) => {
+//   if (MAKERIGHT_IMGS[key].group) {
+//     if (!MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group]) {
+//       MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group] = {
+//         name: MAKERIGHT_IMGS[key].group,
+//         imgs: [],
+//       };
+//     }
+//     let index = MAKERIGHT_IMGS[key].index;
+//     if (typeof index === "undefined") {
+//       // index = MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.length + 1;
+//       index = MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.length;
+//     } else {
+//       const currentGroup = MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs;
+//       for (let i = 0; i < currentGroup.length; i++) {
+//         if (currentGroup[i].index === index) {
+//           throw new Error(`Overlapping indexes within group "${MAKERIGHT_IMGS[key].group}": ${currentGroup[i].name} and ${MAKERIGHT_IMGS[key].name}`);
+//         }
+//       }
+//     }
+//     MAKERIGHT_IMGS[key].index = index;
+//     MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.push(MAKERIGHT_IMGS[key]);
+//     MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.sort((a, b) => {
+//       return a.index - b.index;
+//     });
+//   }
+// });
+
+
+//Added width and height with min and max
+// const MAKERIGHT_IMG_GROUPS = {};
+
+// Object.keys(MAKERIGHT_IMGS).forEach((key) => {
+//   if (MAKERIGHT_IMGS[key].group) {
+//     if (!MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group]) {
+//       MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group] = {
+//         name: MAKERIGHT_IMGS[key].group,
+//         imgs: [],
+//         height: {
+//           min: Infinity,
+//           max: -Infinity
+//         },
+//         width: {
+//           min: Infinity,
+//           max: -Infinity
+//         }
+//       };
+//     }
+//     let index = MAKERIGHT_IMGS[key].index;
+//     if (typeof index === "undefined") {
+//       // index = MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.length + 1;
+//       index = MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.length;
+//     } else {
+//       const currentGroup = MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs;
+//       for (let i = 0; i < currentGroup.length; i++) {
+//         if (currentGroup[i].index === index) {
+//           throw new Error(`Overlapping indexes within group "${MAKERIGHT_IMGS[key].group}": ${currentGroup[i].name} and ${MAKERIGHT_IMGS[key].name}`);
+//         }
+//       }
+//     }
+//     MAKERIGHT_IMGS[key].index = index;
+//     MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.push(MAKERIGHT_IMGS[key]);
+//     MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].height.min = Math.min(MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].height.min, MAKERIGHT_IMGS[key].height);
+//     MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].height.max = Math.max(MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].height.max, MAKERIGHT_IMGS[key].height);
+//     MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].width.min = Math.min(MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].width.min, MAKERIGHT_IMGS[key].width);
+//     MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].width.max = Math.max(MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].width.max, MAKERIGHT_IMGS[key].width);
+//     MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.sort((a, b) => {
+//       return a.index - b.index;
+//     });
+//   }
+// });
+
 const MAKERIGHT_IMG_GROUPS = {};
 
 Object.keys(MAKERIGHT_IMGS).forEach((key) => {
@@ -1042,6 +1119,16 @@ Object.keys(MAKERIGHT_IMGS).forEach((key) => {
       MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group] = {
         name: MAKERIGHT_IMGS[key].group,
         imgs: [],
+        height: {
+          min: Infinity,
+          max: -Infinity,
+          constant: true
+        },
+        width: {
+          min: Infinity,
+          max: -Infinity,
+          constant: true
+        }
       };
     }
     let index = MAKERIGHT_IMGS[key].index;
@@ -1058,11 +1145,23 @@ Object.keys(MAKERIGHT_IMGS).forEach((key) => {
     }
     MAKERIGHT_IMGS[key].index = index;
     MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.push(MAKERIGHT_IMGS[key]);
+    MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].height.min = Math.min(MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].height.min, MAKERIGHT_IMGS[key].height);
+    MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].height.max = Math.max(MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].height.max, MAKERIGHT_IMGS[key].height);
+    MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].height.constant = MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].height.constant && MAKERIGHT_IMGS[key].height === MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].height.min;
+    MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].width.min = Math.min(MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].width.min, MAKERIGHT_IMGS[key].width);
+    MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].width.max = Math.max(MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].width.max, MAKERIGHT_IMGS[key].width);
+    MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].width.constant = MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].width.constant && MAKERIGHT_IMGS[key].width === MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].width.min;
     MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.sort((a, b) => {
       return a.index - b.index;
     });
   }
 });
+
+
+
+
+
+
 
 export default MAKERIGHT_IMGS;
 export { MAKERIGHT_IMG_GROUPS };

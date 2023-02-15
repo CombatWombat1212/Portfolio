@@ -5,7 +5,7 @@ import Mask from "../utilities/Mask";
 import { getHasBackground } from "./sections_utilities/IfHas";
 import { getBackgroundClasses } from "./sections_utilities/GetClasses";
 
-function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup }) {
+function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup, width, height }) {
 
 
   // TODO: for mobile, add some kind of indication animation of the image being clocked on when its interactable or can be opened in a lightbox
@@ -17,6 +17,10 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
   color = color ? `mask__${color}` : "";
   innerClassName = innerClassName ? innerClassName : "";
   className = className ? className : "";
+
+  width = width ? width : img.width;
+  height = height ? height : img.height;
+
 
   var hasButton = false;
   if (children) {
@@ -54,14 +58,14 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
   return (
     <>
       {isImg && (
-        <div className={`graphic--img ${allClasses}`} style={{ "--img-aspect-width": img.width, "--img-aspect-height": img.height }}>
-          <Image className={innerClassName} src={img.src} alt={img.alt} width={img.width} height={img.height} onClick={onClickHandler} />
+        <div className={`graphic--img ${allClasses}`} style={{ "--img-aspect-width": width, "--img-aspect-height": height }}>
+          <Image className={innerClassName} src={img.src} alt={img.alt} width={width} height={height} onClick={onClickHandler} />
           {children && children}
         </div>
       )}
       {isMask && (
-        <div className={`graphic--mask ${allClasses}`} style={{ "--mask-aspect-width": img.width, "--mask-aspect-height": img.height }}>
-          <Mask className={`${innerClassName} ${color}`} src={img.src} alt={img.alt} width={img.width} height={img.height} onClick={onClickHandler} />
+        <div className={`graphic--mask ${allClasses}`} style={{ "--mask-aspect-width": width, "--mask-aspect-height": height }}>
+          <Mask className={`${innerClassName} ${color}`} src={img.src} alt={img.alt} width={width} height={height} onClick={onClickHandler} />
           {children && children}
         </div>
       )}

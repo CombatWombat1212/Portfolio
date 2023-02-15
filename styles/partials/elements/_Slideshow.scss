@@ -1,0 +1,108 @@
+.slideshow {
+  --slide-inner-pad: 2.5rem;
+  --slide-scrollbar-width: 0.65rem;
+  --slide-max-height: calc(100% * var(--img-aspect-height) / var(--img-aspect-width));
+  --slide-inner-item-spacing: calc(var(--section-text-spacing) * 0.25);
+}
+
+.slideshow {
+  .card {
+    @include flex-row;
+    @include b-rad;
+    overflow: hidden;
+    background-color: $col-tertiary-light;
+
+    // @include gap(var(--slide-inner-pad));
+
+    &--title{
+        // margin-top: 0.3rem!important;
+        margin-bottom: -0.4rem!important;
+    }
+    
+    &--subtitle {
+        margin-bottom: -0.15rem;
+    }
+  
+    &--description {
+      padding: var(--slide-inner-pad);
+      max-height: calc(var(--graphic-height) - var(--slide-inner-pad) * 2);
+      overflow-y: auto;
+      @include trans;
+
+      & > * + * {
+        margin-top: calc(var(--section-text-spacing) * 0.75);
+      }
+
+      @include scrollbar {
+        width: var(--slide-scrollbar-width);
+      }
+
+      @include scrollbar-track {
+        background-color: darken($col-tertiary, 5);
+      }
+
+      @include scrollbar-thumb {
+        background-color: lighten($col-tertiary-light, 10);
+      }
+    }
+
+    &--graphic {
+      // provided in js
+      // --img-aspect-width:
+      // --img-aspect-height:
+      // same as --img-aspect-width, and --img-aspect-height but in px
+      // --img-width:
+      // --img-height:
+
+      position: relative;
+      aspect-ratio: var(--img-aspect-width) / var(--img-aspect-height);
+
+      max-height: var(--slide-max-height);
+      height: var(--slide-max-height);
+      overflow-y: auto;
+
+      @include scrollbar {
+        width: var(--slide-scrollbar-width);
+      }
+
+      @include scrollbar-track {
+        background-color: $col-background;
+      }
+
+      @include scrollbar-thumb {
+        background-color: $col-primary;
+      }
+    }
+
+    &--img {
+    }
+
+    &--paragraph{
+
+        &:nth-child(2){
+            margin-top: var(--slide-inner-item-spacing);
+        }
+        
+        margin-top: calc(var(--section-text-spacing) * 0.75);
+
+
+    }
+
+    &--subheading {
+        margin-top: calc(var(--section-text-spacing) * 1.85);
+      }
+
+  }
+}
+
+.slideshow {
+  .list {
+    --counter-width: 0.9rem;
+
+    margin-top: var(--slide-inner-item-spacing);
+
+    &--item {
+      margin-top: var(--slide-inner-item-spacing);
+    }
+  }
+}

@@ -9,6 +9,7 @@ import BarGraph from "@/components/charts/BarGraph";
 import DLink from "@/components/utilities/DynamicLink";
 import PieChart from "@/components/charts/PieChart";
 import Button from "@/components/elements/Buttons";
+import Slideshow from "@/components/global/slideshow/Slideshow";
 
 // TODO: add the interactive chapter selection thingy
 
@@ -655,7 +656,10 @@ function MakeRight({ setPopup }) {
 
 
           <Section id="Delivery--Maker" background="tertiary" margin="none" copyClassName="container">
+
+
             <Heading>Maker user journey</Heading>
+            <Slideshow img={MAKERIGHT_IMGS.maker_screen_10} />
 
           </Section>
 

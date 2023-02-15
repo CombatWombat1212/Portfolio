@@ -138,6 +138,7 @@
       
       &__split {
         @include flex-row-between;
+        align-items: end;
         & > * + * {
           margin: 0;
         }
