@@ -754,7 +754,7 @@ const MAKERIGHT_IMGS = {
     phase: "1/2",
     description: ["Ideally we will have a welcoming and informative homepage, however, this was not within the project scope. Therefore each user journey begins at Login."],
     actions: ["Click log-in or signup"],
-    alt: "",
+    alt: "Login page for MakeRight, where users can click the login or sign-up button.",
   },
   customer_screen_02: {
     name: "customer_screen_02",
@@ -768,7 +768,7 @@ const MAKERIGHT_IMGS = {
     description: ["Choose between the two user types, customer and maker."],
     notes: ["‘What is a maker?’ text links them to an overview page on being a maker (mocked-up for the project, but is not in this case study)."],
     actions: [],
-    alt: "",
+    alt: "Selection screen for users to choose between creating a customer or maker account.",
   },
   customer_screen_03: {
     name: "customer_screen_03",
@@ -782,7 +782,7 @@ const MAKERIGHT_IMGS = {
     description: ["Gather the necessary info for a new customer account."],
     notes: [],
     actions: [],
-    alt: "",
+    alt: "Account setup page for MakeRight, where new customers can input their information to create a new account.",
   },
   customer_screen_04: {
     name: "customer_screen_04",
@@ -796,7 +796,7 @@ const MAKERIGHT_IMGS = {
     description: ["The target demographic is users who wouldn’t normally use 3D printing to solve their issues.  So, to help them explore the possibilities of the technology, we encourage users to select some personal interests.  We then use that info to create a storefront page tailored to their hobbies."],
     actions: ["Select 3 or more topics, or skip this optional page."],
     notes: [],
-    alt: "",
+    alt: "Select Interests page for MakeRight, where customers can optionally select their interests to personalize their storefront page.",
   },
   customer_screen_05: {
     name: "customer_screen_05",
@@ -810,7 +810,7 @@ const MAKERIGHT_IMGS = {
     description: ["Verify the email of the new customer account."],
     actions: ["Check their email for a verification code, resend the email if necessary, enter the code and move on. Or skip for now (purchasing is not possible until account is verified)."],
     notes: [],
-    alt: "",
+    alt: "Email verification page for MakeRight, where new customers can verify their email address to activate their account.",
   },
 
   customer_screen_06: {
@@ -824,7 +824,7 @@ const MAKERIGHT_IMGS = {
     phase: "1/2",
     description: ["Acts essentially as the homepage for customers.  Encourages a new window-shopping approach to 3D printing for consumers, and enables them to explore the possibilities of the technology."],
     actions: ["Browse and select items."],
-    alt: "",
+    alt: "Storefront page for MakeRight, where customers can browse through available items.",
   },
   customer_screen_07: {
     name: "customer_screen_07",
@@ -837,7 +837,7 @@ const MAKERIGHT_IMGS = {
     phase: "2/2",
     description: ["The full details of a selected item from the store.  Including an interactive 3D model, images of past prints, and comments from other customers."],
     actions: ["Customize the model’s scale, color, material, and print quality. While simultaneously previewing these changes, and their impact on cost. Customers can then purchase the item and proceed to checkout."],
-    alt: "",
+    alt: "Item listing page for MakeRight, where customers can view detailed information about the selected item, including an interactive 3D model, images of past prints, and comments from other customers.",
   },
 
   customer_screen_08: {
@@ -851,7 +851,7 @@ const MAKERIGHT_IMGS = {
     phase: "1/2",
     description: ["Checkout screen from which customers complete their purchase."],
     actions: ["Customize the model further, add additional comments to the order ticket, and customize the 2 separate timeline options; shipping speed, and production speed.  Where production speed changes the priority and deadline of the order for the assigned maker, for an added fee."],
-    alt: "",
+    alt: "Checkout page for MakeRight, where customers can customize their order and finalize their purchase.",
   },
 
   customer_screen_09: {
@@ -865,7 +865,7 @@ const MAKERIGHT_IMGS = {
     phase: "1/2",
     description: ["Checkout screen from which customers complete their purchase."],
     actions: ["Customize the model further, add additional comments to the order ticket, and customize the 2 separate timeline options; shipping speed, and production speed.  Where production speed changes the priority and deadline of the order for the assigned maker, for an added fee."],
-    alt: "",
+    alt: "Expanded Checkout page for MakeRight, where customers can make final changes to their order, add comments, and adjust timeline options for an added fee.",
   },
 
   customer_screen_10: {
@@ -879,7 +879,7 @@ const MAKERIGHT_IMGS = {
     phase: "2/2",
     description: ["Confirmation screen denoting that the order has been placed successfully, and is now pending assignment to one of our makers."],
     actions: ["Continue browsing, or view your active orders."],
-    alt: "",
+    alt: "Order placed confirmation page for MakeRight, where customers are notified that their order has been successfully placed and is pending assignment to a maker.",
   },
 
   customer_screen_11: {
@@ -893,7 +893,7 @@ const MAKERIGHT_IMGS = {
     phase: "1/3",
     description: ["The page where users can view the full list of their ongoing and past orders."],
     actions: ["Interact with any of their order tickets."],
-    alt: "",
+    alt: "My Orders page for MakeRight, where customers can view the full list of their ongoing and past orders.",
   },
   customer_screen_12: {
     name: "customer_screen_12",
@@ -906,7 +906,7 @@ const MAKERIGHT_IMGS = {
     phase: "2/3",
     description: ["The appearance of a customer’s My Orders page when their ticket has been accepted by a Maker.  At this stage, the Maker is currently assessing whether or not the ordered file is ready to be printed."],
     actions: ["Click on the ticket to visit the order ticket page if they want more info."],
-    alt: "",
+    alt: "Accepted/Vetting Order Ticket page for MakeRight, where customers can view the status of their order ticket when it has been accepted by a Maker and is currently being assessed.",
   },
   customer_screen_13: {
     name: "customer_screen_13",
@@ -919,7 +919,7 @@ const MAKERIGHT_IMGS = {
     phase: "3/3",
     description: ["The expanded view of an order ticket, i.e. the ticket’s dedicated page.  Identical to the previous screen, this shows the appearance of an order ticket that has just been accepted by a Maker if the user were to click on it from the previous My Order’s screen."],
     actions: ["Users can cancel the order, request changes (for a fee), communicate with their maker, and view details on their maker and the order."],
-    alt: "",
+    alt: "Expanded Order Ticket page for MakeRight, where customers can manage their order details, communicate with their Maker, and request changes.",
   },
   customer_screen_14: {
     name: "customer_screen_14",
@@ -932,7 +932,7 @@ const MAKERIGHT_IMGS = {
     phase: "1/4",
     description: ["Once the print has been completed, the Maker submits verification images to the customer.  This ensures that the customer is never surprised with the product that arrives at their front door, and can intervene if something appears off before shipping."],
     actions: ["Check through the photos, refer to the attached guide for a list of common issues, and click the appropriate response option."],
-    alt: "",
+    alt: "Print verification page for MakeRight, where customers can check the verification images submitted by the Maker to ensure that the product matches their order specifications.",
   },
 
   customer_screen_15: {
@@ -946,7 +946,7 @@ const MAKERIGHT_IMGS = {
     phase: "1/4",
     description: ["Once the print has been completed, the Maker submits verification images to the customer.  This ensures that the customer is never surprised with the product that arrives at their front door, and can intervene if something appears off before shipping."],
     actions: ["Check through the photos, refer to the attached guide for a list of common issues, and click the appropriate response option."],
-    alt: "",
+    alt: "Print verification page for MakeRight, with additional guide on what to look for.",
   },
 
   customer_screen_16: {
@@ -960,7 +960,7 @@ const MAKERIGHT_IMGS = {
     phase: "1/4",
     description: ["Once the print has been completed, the Maker submits verification images to the customer.  This ensures that the customer is never surprised with the product that arrives at their front door, and can intervene if something appears off before shipping."],
     actions: ["Check through the photos, refer to the attached guide for a list of common issues, and click the appropriate response option."],
-    alt: "",
+    alt: "Expanded print verification page for MakeRight, where customers can see a detailed guide on what to look for when verifying their print.",
   },
 
   customer_screen_17: {
@@ -974,7 +974,7 @@ const MAKERIGHT_IMGS = {
     phase: "2/4",
     description: ["Here the customer has approved of the print, and is now waiting for the maker to respond with the shipping details."],
     actions: [],
-    alt: "",
+    alt: "Print verified confirmation page for MakeRight, where customers are notified that their print has been approved and are waiting for shipping details.",
   },
 
   customer_screen_18: {
@@ -988,7 +988,7 @@ const MAKERIGHT_IMGS = {
     phase: "3/4",
     description: ["With the item approved by the customer, the Maker has now packaged and shipped the item, and provided the customer with the necessary tracking info."],
     actions: [],
-    alt: "",
+    alt: "Shipped confirmation page for MakeRight, where customers are notified that their item has been packaged and shipped, and provided with the necessary tracking information.",
   },
 
   customer_screen_19: {
@@ -1002,7 +1002,7 @@ const MAKERIGHT_IMGS = {
     phase: "3/4",
     description: ["With the item approved by the customer, the Maker has now packaged and shipped the item, and provided the customer with the necessary tracking info."],
     actions: [],
-    alt: "",
+    alt: "Shipped confirmation page for MakeRight, with additional information.",
   },
 
   customer_screen_20: {
@@ -1016,7 +1016,7 @@ const MAKERIGHT_IMGS = {
     phase: "4/4",
     description: ["Once it has been confirmed that the package arrived to the customer, they have the opportunity to rate the Maker and provide feedback.  Otherwise, the ordering process is complete and the customer can enjoy their product."],
     actions: [],
-    alt: "",
+    alt: "Order delivered confirmation page for MakeRight, where customers are given the opportunity to rate their Maker and provide feedback.",
   },
 
   customer_screen_21: {
@@ -1030,7 +1030,7 @@ const MAKERIGHT_IMGS = {
     phase: "4/4",
     description: ["Once it has been confirmed that the package arrived to the customer, they have the opportunity to rate the Maker and provide feedback.  Otherwise, the ordering process is complete and the customer can enjoy their product."],
     actions: [],
-    alt: "",
+    alt: "Order ticket delivered confirmation page for MakeRight, where customers are given the opportunity to rate their Maker and provide feedback.",
   },
 };
 
