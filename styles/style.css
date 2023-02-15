@@ -1712,6 +1712,10 @@ body {
   margin: 0;
 }
 
+.section .graphic--caption.mt-more {
+  margin-top: calc(var(--section-text-spacing) * 1.2);
+}
+
 .section .graphic__container {
   padding: 0;
 }

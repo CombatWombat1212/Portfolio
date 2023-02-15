@@ -129,16 +129,23 @@
     &--caption {
       margin-top: var(--section-text-spacing);
 
+
+      
       &__above {
         margin-top: 0;
         margin-bottom: calc(var(--section-text-spacing) * 0.5);
       }
-
+      
       &__split {
         @include flex-row-between;
         & > * + * {
           margin: 0;
         }
+      }
+
+
+      &.mt-more {
+        margin-top: calc(var(--section-text-spacing) * 1.2);
       }
     }
     

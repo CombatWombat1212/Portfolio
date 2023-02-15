@@ -584,13 +584,13 @@ function MakeRight({ setPopup }) {
 
             <Column>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_overview_before"]} lightbox setPopup={setPopup} />
-              <Description className="graphic--caption graphic--caption__split">
+              <Description className="mt-more graphic--caption graphic--caption__split">
                 <p>Aspiring makers need to understand the expectations of their new job. Originally, this was taught with an 8-page slideshow. But users found it droning, hard to retain, and too easy to skip.</p>
               </Description>
             </Column>
             <Column>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_overview_after"]} lightbox={MAKERIGHT_IMGS["feedback_overview_after_full"]} zoom setPopup={setPopup} />
-              <Description className="graphic--caption graphic--caption__split">
+              <Description className="mt-more graphic--caption graphic--caption__split">
                 <p>Now, that info exists as a single inviting page. As well, I added a brief video chat at the end onboarding to ensure new Makers have read the overview, and can ask questions.</p>
               </Description>
             </Column>
@@ -601,27 +601,27 @@ function MakeRight({ setPopup }) {
 
             <Column>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_printers_before"]} lightbox setPopup={setPopup} />
-              <Description className="graphic--caption graphic--caption__split">
+              <Description className="mt-more graphic--caption graphic--caption__split">
                 <p>User’s noted: lack of parity between printer and filament inputs, and the inability to add multiple printers.</p>
               </Description>
             </Column>
             <Column>
-              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_printers_after"]} lightbox zoom setPopup={setPopup} />
-              <Description className="graphic--caption graphic--caption__split">
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_printers_after"]} lightbox setPopup={setPopup} />
+              <Description className="mt-more graphic--caption graphic--caption__split">
                 <p>Redesign to match filament inputs, now with support for multiple printers, and integrated support via tooltips.</p>
               </Description>
             </Column>
 
             <Column>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_filament_before"]} lightbox setPopup={setPopup} />
-              <Description className="graphic--caption graphic--caption__split">
-                <p>User’s noted: lack of parity between printer and filament inputs, and the inability to add multiple printers.</p>
+              <Description className="mt-more graphic--caption graphic--caption__split">
+                <p>Makers may have entire shelves of filament, so it would be useful to have more distinction between each added material.</p>
               </Description>
             </Column>
             <Column>
-              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_filament_after"]} lightbox zoom setPopup={setPopup} />
-              <Description className="graphic--caption graphic--caption__split">
-                <p>Redesign to match filament inputs, now with support for multiple printers, and integrated support via tooltips.</p>
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_filament_after"]} lightbox setPopup={setPopup} />
+              <Description className="mt-more graphic--caption graphic--caption__split">
+                <p>A stripe across the top of the cards match the real-world color of the inputted filament; making them much easier to differentiate.</p>
               </Description>
             </Column>
           </Section>
@@ -631,7 +631,7 @@ function MakeRight({ setPopup }) {
 
             <Column>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_tutorials"]} />
-              <Description className="graphic--caption gap-4 graphic--caption__split">
+              <Description className="mt-more graphic--caption gap-4 graphic--caption__split">
                 <p>Testers of the Maker journey were navigating much more fluidly halfway through each test. It was taking a few pages of exploration before the terminology, and flow finally clicked.</p>
                 <p>To ease the friction of a user’s first order fulfillment, I added an optional tutorial system. Boxes appear one by one describing important elements, and directing the user through their task.</p>
               </Description>
