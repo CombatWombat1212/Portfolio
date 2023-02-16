@@ -65,7 +65,16 @@ function Toggle({ state, set, name }) {
   return (
     <div className="toggle">
       <label className="toggle--switch">
-        <input className="toggle--checkbox" type="checkbox" ref={toggle} onClick={toggleState} checked={state} onChange={() => {set(!state)}} />
+        <input
+          className="toggle--checkbox"
+          type="checkbox"
+          ref={toggle}
+          onClick={toggleState}
+          checked={state}
+          onChange={() => {
+            set(!state);
+          }}
+        />
         <span className="toggle--slider"></span>
       </label>
       <div className="toggle--label">
@@ -118,7 +127,20 @@ function infoFormatList(val) {
   return val;
 }
 
-function Card({ img, index, width, height, descriptionOn }) {
+function getAdjacentImage(group, index, val) {
+  var result = false;
+  var adjacentIndex = index + val;
+
+  if (adjacentIndex >= 0 && adjacentIndex < group.imgs.length) {
+    result = {};
+    result.index = adjacentIndex;
+    result.img = group.imgs[result.index];
+  }
+
+  return result;
+}
+
+function Card({ img, currentIndex, cardIndex, width, height, descriptionOn }) {
   var hasActions = infoDoesExist(img.actions);
   var hasNotes = infoDoesExist(img.notes);
   var hasMultipleActions = hasActions && img.actions.length > 1;
@@ -129,25 +151,33 @@ function Card({ img, index, width, height, descriptionOn }) {
   if (hasActions) formattedActions = infoFormatList(img.actions);
   if (hasNotes) formattedNotes = infoFormatList(img.notes);
 
+  var affectedClasses = ["card--description-inner", "card--description", "card--graphic"];
 
-  var affectedClasses = ['card--description-inner', 'card--description', 'card--graphic']
 
+
+  var card = useRef(null);
 
   useEffect(() => {
-
+    if (card.current == null) return;
     for (var i = 0; i < affectedClasses.length; i++) {
-      var target = document.querySelector(`.${affectedClasses[i]}`);
-      if(target == null) continue;
+      var target = card.current.querySelector(`.${affectedClasses[i]}`);
+      if (target == null) continue;
 
       toggle(target, affectedClasses[i], "transition", "", "");
     }
-
   }, [descriptionOn]);
 
 
 
+  var cardClasses = ["card"];
+  if(cardIndex != currentIndex) cardClasses.push("card__off");
+  else cardClasses.push("card__on");
+  cardClasses = cardClasses.join(" ");
+
+
+
   return (
-    <div className="card">
+    <div className={`${cardClasses}`} ref={card}>
       <div className="card--graphic card--graphic__off" width={width} height={height}>
         <Graphic className="card--img" type="image" img={img} />
       </div>
@@ -173,10 +203,8 @@ function Card({ img, index, width, height, descriptionOn }) {
 
           {hasActions && <Info name="User Action" hasMultiple={hasMultipleActions} items={formattedActions} />}
           {hasNotes && <Info name="Note" hasMultiple={hasMultipleNotes} items={formattedNotes} />}
-
-          {/* {hasActions && <Info name="User Action" hasMultiple={hasMultipleActions} items={formattedActions} />} */}
         </div>
-      </div>{" "}
+      </div>
     </div>
   );
 }
@@ -185,7 +213,6 @@ function Slideshow({ children, img }) {
   // TODO: keep images stored after being loaded, so load them in outside the DOM and place them in after load in the same way as in the lightbox component
 
   var slideshow = useRef(null);
-  var description = useRef(null);
 
   useMountEffect(() => {
     slideshowSetDescHeightInit(slideshow);
@@ -193,8 +220,6 @@ function Slideshow({ children, img }) {
 
   const [cardImage, setCardImage] = useState(img);
   const [descriptionOn, setDescriptionOn] = useState(false);
-
-  // useEffect(() => {}, [descriptionOn]);
 
   var group = MAKERIGHT_IMG_GROUPS[cardImage.group];
   var index = cardImage.index;
@@ -209,6 +234,11 @@ function Slideshow({ children, img }) {
     "--img-height": `${height}px`,
   };
 
+  var prevImg = getAdjacentImage(group, index, -1);
+  var currentImg = getAdjacentImage(group, index, 0);
+  var nextImg = getAdjacentImage(group, index, 1);
+
+
   return (
     <div className="slideshow" style={cardGraphicStyle} ref={slideshow}>
       <div className="slideshow--header container">
@@ -218,8 +248,13 @@ function Slideshow({ children, img }) {
         </div>
       </div>
 
-      <div className="slideshow--content container">
-        <Card img={group.imgs[index]} index={index} width={width} height={height} descriptionOn={descriptionOn} />
+      <div className="slideshow--container">
+        <div className="slideshow--card">{prevImg && <Card img={prevImg.img} currentIndex={currentImg.index} cardIndex={prevImg.index} width={width} height={height} descriptionOn={descriptionOn} />}</div>
+
+        <div className="slideshow--card">
+          <Card img={currentImg.img} currentIndex={currentImg.index} cardIndex={currentImg.index} width={width} height={height} descriptionOn={descriptionOn} />
+        </div>
+        <div className="slideshow--card">{nextImg && <Card img={nextImg.img} currentIndex={currentImg.index} cardIndex={nextImg.index} width={width} height={height} descriptionOn={descriptionOn} />}</div>
       </div>
       <div className="slideshow--slider"></div>
 

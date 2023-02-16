@@ -13,16 +13,24 @@ function slideshowSetDescHeightInit(elem) {
 
 function slideshowSetDescHeight(elem) {
 
-  var cardGraphic = elem.querySelector(".card--graphic");
-  var width = cardGraphic.clientWidth;
-  var height = cardGraphic.clientHeight;
 
-  var description = elem.querySelector(".card--description");
+  // TODO: seems i didnt need this
 
-  if (description == null) return;
+  // console.log(elem)
 
-  description.style.setProperty("--graphic-width", `${width}px`);
-  description.style.setProperty("--graphic-height", `${height}px`);
+  // var cardGraphic = elem.querySelector(".card--graphic");
+  // var width = cardGraphic.clientWidth;
+  // var height = cardGraphic.clientHeight;
+
+  
+  // var description = elem.querySelector(".card--description");
+  // if (description == null) {console.log('returned'); return;}
+  
+  // console.log(height)
+  // console.log(description)
+
+  // description.style.setProperty("--graphic-width", `${width}px`);
+  // description.style.setProperty("--slideshow-graphic-height", `${height}px`);
 
 }
 

@@ -2422,6 +2422,29 @@ body {
   align-items: flex-end;
 }
 
+.slideshow--container {
+  min-width: var(--site-max-width);
+  display: flex;
+  flex-direction: row;
+}
+
+.slideshow--card {
+  --site-x-margin: calc((100% - var(--site-max-width)) / 2);
+  min-width: var(--site-max-width);
+  width: var(--site-max-width);
+  height: fit-content;
+  --gap: 8vw;
+}
+
+.slideshow--card:first-child {
+  margin-left: calc((var(--site-max-width) * -1) + var(--site-x-margin) - var(--gap));
+}
+
+.slideshow--card:nth-child(2) {
+  margin-left: var(--gap);
+  margin-right: var(--gap);
+}
+
 .slideshow .card {
   display: flex;
   flex-direction: row;
@@ -2446,7 +2469,6 @@ body {
   padding-bottom: var(--slide-inner-pad);
   overflow-y: auto;
   position: relative;
-  max-height: calc(var(--graphic-height) - var(--slide-inner-pad) * 2);
   --width: 33.33333%;
   width: calc(var(--width) + (var(--slide-inner-pad) * 2));
   min-width: var(--width);
@@ -2531,6 +2553,10 @@ body {
 
 .slideshow .card--subheading {
   margin-top: calc(var(--section-text-spacing) * 1.85);
+}
+
+.slideshow .card__off {
+  opacity: 0.35;
 }
 
 .slideshow .list {
