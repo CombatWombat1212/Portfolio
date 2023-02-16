@@ -96,7 +96,7 @@ function StudyPanel({ id, study, variant }) {
             "--img-aspect-height": img.height,
           }}
                  /*effect="gradient-white"*/>
-          <Image src={img.src} alt={img.alt} width={img.width} height={img.height} />
+          <Image priority src={img.src} alt={img.alt} width={img.width} height={img.height} />
         </PanelImg>
       </Panel>
     </>

@@ -109,7 +109,7 @@
 
 @mixin flex-row-end {
 	@include flex-row();
-	justify-content: end;
+	justify-content: flex-end;
 }
 
 

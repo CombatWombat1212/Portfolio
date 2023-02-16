@@ -1,4 +1,4 @@
-import { StudyPanel } from "/components/elements/Panel";
+import { StudyPanel } from "@/components/elements/Panel";
 import getStudy from "../../scripts/GetStudy";
 import CaseStudyPage from "/components/studies/CaseStudyPage";
 import Brief from "/components/studies/Brief";

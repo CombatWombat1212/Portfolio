@@ -138,11 +138,12 @@
       
       &__split {
         @include flex-row-between;
-        align-items: end;
+        align-items: flex-end;
         & > * + * {
           margin: 0;
         }
       }
+      
 
 
       &.mt-more {

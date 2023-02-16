@@ -260,32 +260,6 @@
     }
   }
 
-  // &--img {
-  //   width: 100%;
-  //   height: 100%;
-  //   pointer-events: none;
-  //   @include trans;
-  //   img {
-  //     @include img-contain;
-  //     pointer-events: none;
-  //   }
-
-  //   &__lightbox-zoom{
-  //     img{
-  //       height: fit-content;
-  //     }
-  //   }
-  // }
-
-  // &--img-placeholder{
-  //   max-width: 100%;
-  //   max-height: 100%;
-  //   aspect-ratio: auto var(--aspect-width) / var(--aspect-height);
-  //   --popup-background: #{$col-background};
-  //   background-color: var(--popup-background);
-  //   width: 1000rem;
-  //   }
-
   &--img {
     max-width: 100%;
     max-height: 100%;
@@ -327,6 +301,10 @@
 
 
   }
+
+
+
+
 }
 
 .scale {

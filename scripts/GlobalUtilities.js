@@ -142,4 +142,43 @@ function overflowEllipsis() {
   );
 }
 
-export { addStyleNonDestructive, addAttrNonDestructive, postScreenSizeToRoot, overflowEllipsis, splitPx, splitRem, splitS, RESIZE_TIMEOUT };
+
+
+
+
+function throwLoadErrors(img){
+  if(typeof img.src === "undefined") throw new Error("No src attribute found on img element");
+  if(typeof img.alt === "undefined") throw new Error("No alt attribute found on img element");
+  if(typeof img.width === "undefined") throw new Error("No width attribute found on img element");
+  if(typeof img.height === "undefined") throw new Error("No height attribute found on img element");
+
+}
+
+
+
+function loadImgExternally(img){
+
+  var elem;
+
+  throwLoadErrors(img);
+
+
+  elem = document.createElement("img");
+  elem.src = "." + img.src;
+  elem.width = img.width;
+  elem.height = img.height;
+  elem.alt = img.alt;
+  // elem.setAttribute("loading", "lazy"); // Use lazy loading to improve performance
+  elem.setAttribute("decoding", "async"); // Use async decoding to improve performance
+
+
+  return elem;
+
+}
+
+
+
+
+
+
+export { addStyleNonDestructive, addAttrNonDestructive, postScreenSizeToRoot, overflowEllipsis, splitPx, splitRem, splitS,loadImgExternally, RESIZE_TIMEOUT };

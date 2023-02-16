@@ -3,7 +3,7 @@ import toggle from "@/scripts/AnimationTools";
 import { splitS } from "@/scripts/GlobalUtilities";
 import { setWaitingToShowLoading, waitToLoad } from "../Popup";
 import { hiddenUIInit, setActiveHiddenUI } from "./HiddenUIUtilities";
-import { loadImgExternally } from "./PopupUtilities";
+import { loadImgExternally } from "@/scripts/GlobalUtilities"; 
 
 var popupGroup = false;
 var popupIndex;

@@ -1731,7 +1731,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: end;
+  align-items: flex-end;
 }
 
 .section .graphic--caption__split > * + * {
@@ -2118,7 +2118,7 @@ body {
 .popup--footer {
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: flex-end;
   padding: calc(var(--popup-inner-pad) / 2);
   background-color: #F3F3F7;
   border-radius: var(--b-rad) 0 0 0;
@@ -2419,7 +2419,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: end;
+  align-items: flex-end;
 }
 
 .slideshow .card {
