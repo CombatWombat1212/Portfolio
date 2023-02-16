@@ -36,6 +36,11 @@
   &--container{
     min-width: var(--site-max-width);
     @include flex-row;
+    overflow-x: scroll;
+
+    @include scrollbar{
+      display:none;
+    }
   }
 
   &--card{
@@ -58,7 +63,7 @@
     }
 
     &:last-child{
-      // margin-left: var(--gap);
+      margin-right: calc(var(--site-x-margin));
     }
 
   }

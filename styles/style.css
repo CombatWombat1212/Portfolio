@@ -2426,6 +2426,11 @@ body {
   min-width: var(--site-max-width);
   display: flex;
   flex-direction: row;
+  overflow-x: scroll;
+}
+
+.slideshow--container::-webkit-scrollbar {
+  display: none;
 }
 
 .slideshow--card {
@@ -2443,6 +2448,10 @@ body {
 .slideshow--card:nth-child(2) {
   margin-left: var(--gap);
   margin-right: var(--gap);
+}
+
+.slideshow--card:last-child {
+  margin-right: calc(var(--site-x-margin));
 }
 
 .slideshow .card {
