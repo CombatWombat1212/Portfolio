@@ -45,7 +45,13 @@
     // scroll-behavior: smooth;
 
     @include scrollbar {
-      // display: none;
+      display: none;
+    }
+
+
+    &__visible{}
+    &__hide{
+      opacity: 0;
     }
   }
 

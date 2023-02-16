@@ -2434,6 +2434,14 @@ body {
   transition-duration: 2s;
 }
 
+.slideshow--container::-webkit-scrollbar {
+  display: none;
+}
+
+.slideshow--container__hide {
+  opacity: 0;
+}
+
 .slideshow--card {
   min-width: var(--site-max-width);
   width: var(--site-max-width);
