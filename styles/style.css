@@ -2412,6 +2412,9 @@ body {
   --slide-inner-item-spacing: calc(var(--section-text-spacing) * 0.25);
   --slide-transition: 0.5s;
   width: 100%;
+  --site-x-margin: calc((100% - var(--site-max-width)) / 2);
+  --card-gap: 8vw;
+  --card-width: calc(var(--site-max-width) + var(--card-gap));
 }
 
 .slideshow--header {
@@ -2427,31 +2430,22 @@ body {
   display: flex;
   flex-direction: row;
   overflow-x: scroll;
-}
-
-.slideshow--container::-webkit-scrollbar {
-  display: none;
+  width: 100%;
+  transition-duration: 2s;
 }
 
 .slideshow--card {
-  --site-x-margin: calc((100% - var(--site-max-width)) / 2);
   min-width: var(--site-max-width);
   width: var(--site-max-width);
   height: fit-content;
-  --gap: 8vw;
+  margin-right: calc( var(--card-gap) / 2);
+  margin-left: calc( var(--card-gap) / 2);
 }
 
-.slideshow--card:first-child {
-  margin-left: calc((var(--site-max-width) * -1) + var(--site-x-margin) - var(--gap));
-}
-
-.slideshow--card:nth-child(2) {
-  margin-left: var(--gap);
-  margin-right: var(--gap);
-}
-
-.slideshow--card:last-child {
-  margin-right: calc(var(--site-x-margin));
+.slideshow--empty {
+  --width: calc(var(--site-x-margin) - var(--card-gap) / 2);
+  width: var(--width);
+  min-width: var(--width);
 }
 
 .slideshow .card {

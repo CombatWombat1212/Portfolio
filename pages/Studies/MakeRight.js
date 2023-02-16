@@ -658,6 +658,7 @@ function MakeRight({ setPopup }) {
             </Slideshow>
 
           </Section>
+          
         </Chapter>
       </CaseStudyPage>
     </>

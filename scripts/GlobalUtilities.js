@@ -176,9 +176,34 @@ function loadImgExternally(img){
 
 }
 
+function getSiblingStyle(property, elem1, elem2 = null) {
+  const elems = Array.from(elem1.parentElement.children);
+  const startIndex = elems.indexOf(elem1);
+  const endIndex = elem2 ? elems.indexOf(elem2) : elems.length;
+
+  const beforeElemStyle = elems.slice(0, startIndex).reduce((acc, elem) => {
+    const value = splitPx(getComputedStyle(elem).getPropertyValue(property));
+    return acc + value;
+  }, 0);
+
+  let afterElemStyle = 0;
+  if (elem2) {
+    afterElemStyle = elems.slice(endIndex + 1).reduce((acc, elem) => {
+      const value = splitPx(getComputedStyle(elem).getPropertyValue(property));
+      return acc + value;
+    }, 0);
+  } else {
+    afterElemStyle = elems.slice(startIndex + 1).reduce((acc, elem) => {
+      const value = splitPx(getComputedStyle(elem).getPropertyValue(property));
+      return acc + value;
+    }, 0);
+  }
+
+  return [beforeElemStyle, afterElemStyle];
+}
 
 
 
 
 
-export { addStyleNonDestructive, addAttrNonDestructive, postScreenSizeToRoot, overflowEllipsis, splitPx, splitRem, splitS,loadImgExternally, RESIZE_TIMEOUT };
+export { addStyleNonDestructive, addAttrNonDestructive, postScreenSizeToRoot, overflowEllipsis, splitPx, splitRem, splitS,loadImgExternally, getSiblingStyle, RESIZE_TIMEOUT };

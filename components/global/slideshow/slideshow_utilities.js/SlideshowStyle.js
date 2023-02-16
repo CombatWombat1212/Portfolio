@@ -1,15 +1,8 @@
 import { RESIZE_TIMEOUT } from "@/scripts/GlobalUtilities";
+import { containerSetPosition } from "../Slideshow";
 
 
-var isResizing;
 
-function slideshowSetDescHeightInit(elem) {
-  elem = elem.current;
-
-  slideshowSetDescHeight(elem);
-  window.addEventListener("resize", slideshowResize, false);
-
-}
 
 function slideshowSetDescHeight(elem) {
 
@@ -35,19 +28,5 @@ function slideshowSetDescHeight(elem) {
 }
 
 
-function slideshowResize() {
-  window.clearTimeout(isResizing);
-  isResizing = setTimeout(slideshowResizeFunctions, RESIZE_TIMEOUT);
-}
 
-function slideshowResizeFunctions() {
-
-
-    var elem = document.querySelectorAll(".slideshow");
-    elem.forEach((elem) => {
-        slideshowSetDescHeight(elem);
-    });
-    
-}
-
-export { slideshowSetDescHeightInit };
+export {slideshowSetDescHeight };
