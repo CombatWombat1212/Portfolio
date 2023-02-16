@@ -38,20 +38,21 @@
   &--container {
     min-width: var(--site-max-width);
     @include flex-row;
-    overflow-x: scroll;
+    // overflow-x: scroll;
     width: 100%;
-    transition-duration: 2s;
+    // transition-duration: 2s;
     // scroll-snap-type: x mandatory;
     // scroll-behavior: smooth;
+    overflow-x:hidden;
 
     @include scrollbar {
-      display: none;
+      // display: none;
     }
 
 
     &__visible{}
     &__hide{
-      opacity: 0;
+      // opacity: 0;
     }
   }
 
@@ -64,10 +65,11 @@
 
     margin-right: calc( var(--card-gap) / 2);
     margin-left: calc( var(--card-gap) / 2);
-    // scroll-snap-align: center;
+    scroll-snap-align: center;
   }
 
   &--empty {
+    transition-duration: 2s;
     --width: calc(var(--site-x-margin) - var(--card-gap) / 2);
     width: var(--width);
     min-width: var(--width);

@@ -2429,17 +2429,8 @@ body {
   min-width: var(--site-max-width);
   display: flex;
   flex-direction: row;
-  overflow-x: scroll;
   width: 100%;
-  transition-duration: 2s;
-}
-
-.slideshow--container::-webkit-scrollbar {
-  display: none;
-}
-
-.slideshow--container__hide {
-  opacity: 0;
+  overflow-x: hidden;
 }
 
 .slideshow--card {
@@ -2448,9 +2439,11 @@ body {
   height: fit-content;
   margin-right: calc( var(--card-gap) / 2);
   margin-left: calc( var(--card-gap) / 2);
+  scroll-snap-align: center;
 }
 
 .slideshow--empty {
+  transition-duration: 2s;
   --width: calc(var(--site-x-margin) - var(--card-gap) / 2);
   width: var(--width);
   min-width: var(--width);
