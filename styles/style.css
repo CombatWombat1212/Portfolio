@@ -2430,6 +2430,7 @@ body {
   display: flex;
   flex-direction: row;
   width: 100%;
+  transition-duration: 2s;
   overflow-x: hidden;
 }
 

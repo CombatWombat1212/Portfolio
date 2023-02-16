@@ -23,11 +23,10 @@ function getAdjacentImage(group, index, val) {
   return result;
 }
 
-function getCombinedStyle(elem, arr){
-
+function getCombinedStyle(elem, arr) {
   var result = 0;
 
-  arr.forEach((prop)=>{
+  arr.forEach((prop) => {
     result += splitPx(getComputedStyle(elem).getPropertyValue(prop));
   });
 
@@ -81,127 +80,181 @@ function getElemWidth(elem) {
   return splitPx(getComputedStyle(elem).getPropertyValue("width")) + splitPx(getComputedStyle(elem).getPropertyValue("margin-left")) + splitPx(getComputedStyle(elem).getPropertyValue("margin-right"));
 }
 
+
+
+
+// function containerSetPosition(container, index, duration) {
+//   if (container == null) return;
+//   container = container.current ? container.current : container;
+//   duration = splitS(getComputedStyle(container).getPropertyValue("transition-duration"));
+
+//   var card = { width: 0, height: 0 };
+
+//   card.width = getElemWidth(container.children[1]);
+
+//   var scrollTarget = card.width * index;
+//   var empty = document.querySelector(".slideshow--empty");
+
+//   var currentScroll = splitPx(window.getComputedStyle(empty).getPropertyValue("margin-left"));
+//   console.log(currentScroll);
+//   empty.style.setProperty("margin-left", `-${scrollTarget}px`);
+// }
+
+
+
+
+// function containerSetPosition(container, index, duration) {
+//   if (container == null) return;
+//   container = container.current ? container.current : container;
+
+//   var card = { width: 0, height: 0 };
+//   card.width = getElemWidth(container.children[1]);
+
+//   var scrollTarget = card.width * index;
+//   var empty = document.querySelector(".slideshow--empty");
+//   var currentScroll = splitPx(window.getComputedStyle(empty).getPropertyValue("margin-left"));
+//   // empty left rect
+//   // var currentScroll = empty.getBoundingClientRect().left;
+//   //       console.log(currentScroll);  
+//   //       console.log(currentScroll, window.getComputedStyle(empty).getPropertyValue("left"));  
+    
+//     // calculate distance and speed
+//     var distance = Math.abs(scrollTarget - currentScroll);
+//     var speed = 5000; // pixels per second
+//     var duration = distance / speed;
+//     console.log(distance)
+
+//   // add more influence with exponent
+//   duration = duration ** 0.5;
+
+
+//   // set transition duration
+//   empty.style.transitionDuration = `${duration}s`;
+//   empty.style.setProperty("margin-left", `-${scrollTarget}px`);
+// }
+
+
+// TODO: get me in global
+function clamp(input, min, max) {
+  return input < min ? min : input > max ? max : input;
+}
+
+function map(current, in_min, in_max, out_min, out_max) {
+  const mapped = ((current - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
+  return clamp(mapped, out_min, out_max);
+}
+
+
+
+
+
 function containerSetPosition(container, index, duration) {
   if (container == null) return;
   container = container.current ? container.current : container;
-  duration = splitS(getComputedStyle(container).getPropertyValue("transition-duration"));
 
   var card = { width: 0, height: 0 };
-
   card.width = getElemWidth(container.children[1]);
 
-  
   var scrollTarget = card.width * index;
-
-  console.log(card.width)
-
-  
-  // container.scrollTo({ left: scrollTarget, behavior: "smooth" });
   var empty = document.querySelector(".slideshow--empty");
   
-  var currentScroll = splitPx(window.getComputedStyle(empty).getPropertyValue("margin-left"));
-  console.log(currentScroll);
-  // give empty margin left of scroll target
+  // get the current scroll position of empty at the beginning of the transition
+  var currentScroll = -1 * splitPx(empty.style.marginLeft);
+
+  // calculate distance and speed
+  var distance = Math.abs(scrollTarget - currentScroll);
+  var speed = 5000; // pixels per second
+  var duration = distance / speed;
+
+  // add more influence with exponent
+  // duration = duration ** 0.5;
+
+  duration = map(duration, 0, 5, 1.5, 5);
+
+  // set transition duration and starting position
+  empty.style.transitionDuration = `${duration}s`;
   empty.style.setProperty("margin-left", `-${scrollTarget}px`);
 
-  
-  console.log(empty);
-
-
-
+  // check if empty has reached the scroll target every 10 milliseconds
+  var transitionInterval = setInterval(function() {
+    if (-1 * splitPx(empty.style.marginLeft) == scrollTarget) {
+      // stop the interval if empty has reached the scroll target
+      clearInterval(transitionInterval);
+    } else {
+      // update currentScroll during transition
+      currentScroll = -1 * splitPx(empty.style.marginLeft);
+    }
+  }, 10);
 }
 
-// function slideshowInit(setHitStartPoint, startIndex, group, slideshow, container, index) {
-//   slideshow = slideshow.current;
-//   container = container.current;
-
-//   slideshowResizeFunctions(slideshow, container, index);
-
-//   container.addEventListener(
-//     "scroll",
-//     (e) => {
-//       slideshowScrolling(e, setHitStartPoint, startIndex, group);
-//     },
-//     false
-//   );
-//   container.addEventListener("scroll", slideshowScrollingDelayed, false);
-
-//   window.removeEventListener("resize", slideshowResize, false);
-//   window.addEventListener("resize", slideshowResize, false);
-// }
-
-// function slideshowScrolling(e, setHitStartPoint, startIndex, group) {
-//   var container = e.target;
-//   var slideshow = container.parentElement;
-//   var card = container.children[1];
-//   var drawnIndex = parseInt(getComputedStyle(container).getPropertyValue("--slide-img-index"));
-
-//   var buffer = 0.5;
-//   var cardWidth = getElemWidth(card);
-//   var scrollPos = container.scrollLeft;
-//   var calcIndex = Math.floor((scrollPos + cardWidth * buffer) / cardWidth);
-
-//   if (calcIndex === startIndex) {
-//     setHitStartPoint(true);
-//   }
-// }
-
-// var slideshowIsScrolling;
-
-// function slideshowScrollingDelayed() {
-//   window.clearTimeout(slideshowIsScrolling);
-//   slideshowIsScrolling = setTimeout(slideshowScrollingDelayedFunctions, RESIZE_TIMEOUT);
-// }
-
-// function slideshowScrollingDelayedFunctions() {
-//   function actions() {
-//     console.log("scrolling stopped");
-//   }
-//   actions();
-// }
 
 
 
-
-
-
-function slideshowInit(setHitStartPoint, startIndex, group, slideshow, container, index) {
+function slideshowInit(setHitStartPoint, setStoppedAfterInit, startIndex, group, slideshow, container, index) {
   slideshow = slideshow.current;
   container = container.current;
 
   slideshowResizeFunctions(slideshow, container, index);
 
-  var empty = container.querySelector('.slideshow--empty');
-  var emptyTransition = splitS(getComputedStyle(empty).getPropertyValue("transition-duration"));
+  var empty = container.querySelector(".slideshow--empty");
+  // var emptyTransition = splitS(getComputedStyle(empty).getPropertyValue("transition-duration"));
+
+  function run(emptyTransition) {
+    var interval = setInterval(() => {
+      slideshowScrolling(setHitStartPoint, startIndex, group, container);
+      slideshowScrollingDelayed(setStoppedAfterInit);
+    }, emptyTransition / 20);
+
+    setTimeout(() => {
+      clearInterval(interval);
+    }, emptyTransition);
+  }
+
+  run();
+
+  // Create a new MutationObserver that observes changes to the style property of container.querySelector('.slideshow--empty')
+  const existingObserver = empty.observer;
+  if (existingObserver) {
+    existingObserver.disconnect();
+    delete empty.observer;
+  }
 
   // Create a MutationObserver that observes changes to the style property of container.querySelector('.slideshow--empty')
+//   const observer = new MutationObserver((mutationsList, observer) => {
+//     for (let mutation of mutationsList) {
+//       if (mutation.attributeName === "style") {
+//         const empty = container.querySelector(".slideshow--empty");
+//         const marginLeft = parseInt(getComputedStyle(empty).marginLeft);
+//         if (marginLeft !== 0) {
+//           console.log('running')
+//           var emptyTransition = splitS(getComputedStyle(empty).getPropertyValue("transition-duration"));
+//           console.log(emptyTransition);
+//           run(emptyTransition);
+// }
+//       }
+//     }
+//   });
   const observer = new MutationObserver((mutationsList, observer) => {
     for (let mutation of mutationsList) {
-      if (mutation.attributeName === 'style') {
-        console.log('fired');
-        const empty = container.querySelector('.slideshow--empty');
-        const marginLeft = parseInt(getComputedStyle(empty).marginLeft);
-        if (marginLeft !== 0) {
-          slideshowScrolling(setHitStartPoint, startIndex, group, container);
-
-
-          console.log(emptyTransition)
-          var interval = setInterval(() => {
-            slideshowScrollingDelayed();
-          }, emptyTransition / 10);
-
-          setTimeout(() => {
-            clearInterval(interval);
-          }, emptyTransition);
-
-
+      if (mutation.attributeName === "style") {
+        const empty = container.querySelector(".slideshow--empty");
+        const rect = empty.getBoundingClientRect();
+        const isVisible = (rect.top >= 0 && rect.bottom <= window.innerHeight);
+        if (isVisible) {
+          console.log('running')
+          var emptyTransition = splitS(getComputedStyle(empty).getPropertyValue("transition-duration"));
+          run(emptyTransition);
         }
       }
     }
   });
+  
 
   // Start observing changes to the style property of container.querySelector('.slideshow--empty')
   observer.observe(empty, { attributes: true });
+
+  // Store the observer on the element for future access
+  empty.observer = observer;
 
   window.removeEventListener("resize", slideshowResize, false);
   window.addEventListener("resize", slideshowResize, false);
@@ -214,42 +267,28 @@ function slideshowScrolling(setHitStartPoint, startIndex, group, container) {
 
   var buffer = 0.5;
   var cardWidth = getElemWidth(card);
-  var scrollPos = container.scrollLeft;
-  var calcIndex = Math.floor((scrollPos + cardWidth * buffer) / cardWidth);
-
+  var scrollPos = splitPx(window.getComputedStyle(container.querySelector(".slideshow--empty")).getPropertyValue("margin-left"));
+  var calcIndex = Math.abs(Math.floor((scrollPos + cardWidth * buffer) / cardWidth));
   if (calcIndex === startIndex) {
-    setHitStartPoint(true);
+    setTimeout(() => {
+      setHitStartPoint(true);
+    }, 500);
   }
 }
-
 
 var slideshowIsScrolling;
 
-function slideshowScrollingDelayed() {
+function slideshowScrollingDelayed(setStoppedAfterInit) {
   window.clearTimeout(slideshowIsScrolling);
-  slideshowIsScrolling = setTimeout(slideshowScrollingDelayedFunctions, RESIZE_TIMEOUT);
+  slideshowIsScrolling = setTimeout(slideshowScrollingDelayedFunctions(setStoppedAfterInit), RESIZE_TIMEOUT);
 }
 
-function slideshowScrollingDelayedFunctions() {
+function slideshowScrollingDelayedFunctions(setStoppedAfterInit) {
   function actions() {
-    console.log("scrolling stopped");
+    setStoppedAfterInit(true);
   }
   actions();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 var slideshowIsResizing;
 
@@ -276,19 +315,6 @@ function slideshowResizeFunctions(slideshow = null, container = null, index = nu
     actions(slideshow, container, index);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function Card({ img, index, width, height, descriptionOn }) {
   var hasActions = infoDoesExist(img.actions);
@@ -359,8 +385,8 @@ function Slideshow({ children, img }) {
 
   const [cardImage, setCardImage] = useState(img);
   const [descriptionOn, setDescriptionOn] = useState(false);
-  // const [hitStartPoint, setHitStartPoint] = useState(false);
-  const [hitStartPoint, setHitStartPoint] = useState(true);
+  const [hitStartPoint, setHitStartPoint] = useState(false);
+  const [stoppedAfterInit, setStoppedAfterInit] = useState(false);
 
   var group = MAKERIGHT_IMG_GROUPS[img.group];
   var startIndex = img.index;
@@ -377,7 +403,7 @@ function Slideshow({ children, img }) {
   };
 
   useMountEffect(() => {
-    slideshowInit(setHitStartPoint, startIndex, group, slideshow, container);
+    slideshowInit(setHitStartPoint, setStoppedAfterInit, startIndex, group, slideshow, container);
     containerSetPosition(container, img.index);
   });
 
@@ -388,10 +414,16 @@ function Slideshow({ children, img }) {
   useEffect(() => {
     if (!hitStartPoint) return;
 
-    console.log("set");
-
     containerSetPosition(container, cardImage.index);
   }, [cardImage]);
+
+
+
+  useEffect(() => {
+console.log(hitStartPoint, stoppedAfterInit)
+  }, [hitStartPoint, stoppedAfterInit]);
+
+
 
   return (
     <div className="slideshow" style={cardGraphicStyle} ref={slideshow}>
@@ -403,7 +435,7 @@ function Slideshow({ children, img }) {
       </div>
 
       <div
-        className={`slideshow--container ${hitStartPoint ? "slideshow--container__visible" : "slideshow--container__hide"}`}
+        className={`slideshow--container ${hitStartPoint && stoppedAfterInit ? "slideshow--container__visible" : "slideshow--container__hide"}`}
         style={{
           "--slide-img-index": `${cardImage.index}`,
         }}
