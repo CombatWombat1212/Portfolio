@@ -203,7 +203,17 @@ function getSiblingStyle(property, elem1, elem2 = null) {
 }
 
 
+function clamp(input, min, max) {
+  return input < min ? min : input > max ? max : input;
+}
+
+function map(current, in_min, in_max, out_min, out_max) {
+  const mapped = ((current - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
+  return clamp(mapped, out_min, out_max);
+}
 
 
 
-export { addStyleNonDestructive, addAttrNonDestructive, postScreenSizeToRoot, overflowEllipsis, splitPx, splitRem, splitS,loadImgExternally, getSiblingStyle, RESIZE_TIMEOUT };
+
+
+export { addStyleNonDestructive, addAttrNonDestructive, postScreenSizeToRoot, overflowEllipsis, splitPx, splitRem, splitS,loadImgExternally, getSiblingStyle, clamp, map, RESIZE_TIMEOUT };

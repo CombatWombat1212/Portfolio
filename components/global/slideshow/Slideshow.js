@@ -2,7 +2,7 @@ import { Toggle } from "@/components/elements/Toggle";
 import Heading from "@/components/sections/Heading";
 import MAKERIGHT_IMGS, { MAKERIGHT_IMG_GROUPS } from "@/data/MAKERIGHT_IMGS";
 import toggle from "@/scripts/AnimationTools";
-import { addAttrNonDestructive, getSiblingStyle, RESIZE_TIMEOUT, splitPx, splitS } from "@/scripts/GlobalUtilities";
+import { addAttrNonDestructive, getSiblingStyle, map, RESIZE_TIMEOUT, splitPx, splitS } from "@/scripts/GlobalUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { useEffect, useRef, useState } from "react";
 import Button from "../../elements/Buttons";
@@ -134,19 +134,6 @@ function getElemWidth(elem) {
 // }
 
 
-// TODO: get me in global
-function clamp(input, min, max) {
-  return input < min ? min : input > max ? max : input;
-}
-
-function map(current, in_min, in_max, out_min, out_max) {
-  const mapped = ((current - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
-  return clamp(mapped, out_min, out_max);
-}
-
-
-
-
 
 function containerSetPosition(container, index, duration) {
   if (container == null) return;
@@ -165,9 +152,6 @@ function containerSetPosition(container, index, duration) {
   var distance = Math.abs(scrollTarget - currentScroll);
   var speed = 5000; // pixels per second
   var duration = distance / speed;
-
-  // add more influence with exponent
-  // duration = duration ** 0.5;
 
   duration = map(duration, 0, 5, 1.5, 5);
 
