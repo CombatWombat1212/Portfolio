@@ -68,7 +68,7 @@ function slideshowSetPosition(container, index) {
   card.width = getElemWidth(container.children[1]);
 
   var scrollTarget = card.width * index;
-  var empty = document.querySelector(".slideshow--empty");
+  var empty = container.querySelector(".slideshow--empty");
 
   // get the current scroll position of empty at the beginning of the transition
   var currentScroll = -1 * splitPx(empty.style.marginLeft);
