@@ -8,28 +8,10 @@ import { useEffect, useRef, useState } from "react";
 import Button from "../../elements/Buttons";
 import Graphic from "../../sections/Graphic";
 
-function getAdjacentImage(group, index, val) {
-  var result = false;
-  var adjacentIndex = index + val;
 
-  if (adjacentIndex >= 0 && adjacentIndex < group.imgs.length) {
-    result = {};
-    result.index = adjacentIndex;
-    result.img = group.imgs[result.index];
-  }
 
-  return result;
-}
+// TODO: touch support, and keyboard support, but its good for now.  Priority for touch support is on the sliders. SWIPE SUPPORT IS NOT A PRIORITY
 
-function getCombinedStyle(elem, arr) {
-  var result = 0;
-
-  arr.forEach((prop) => {
-    result += splitPx(getComputedStyle(elem).getPropertyValue(prop));
-  });
-
-  return result;
-}
 
 function Info({ name, hasMultiple, items }) {
   return (
@@ -115,41 +97,34 @@ function slideshowSetPosition(container, index) {
   }, 10);
 }
 
-
-
-
 function slideshowButtonsDisable(slideshow, cardImage, group) {
   slideshow = slideshow.current ? slideshow.current : slideshow;
 
-  var prevButton = slideshow.querySelectorAll(".slideshow--button")[0];
-  var nextButton = slideshow.querySelectorAll(".slideshow--button")[slideshow.querySelectorAll(".slideshow--button").length - 1];
-
+  var prevButton = slideshow.querySelectorAll(".slider--button")[0];
+  var nextButton = slideshow.querySelectorAll(".slider--button")[slideshow.querySelectorAll(".slider--button").length - 1];
 
   if (cardImage.index <= 0) {
-    prevButton.classList.add("slideshow--button__disabled");
-    prevButton.classList.remove("slideshow--button__enabled");
+    prevButton.classList.add("slider--button__disabled");
+    prevButton.classList.remove("slider--button__enabled");
   } else {
-    prevButton.classList.remove("slideshow--button__disabled");
-    prevButton.classList.add("slideshow--button__enabled");
+    prevButton.classList.remove("slider--button__disabled");
+    prevButton.classList.add("slider--button__enabled");
   }
 
   if (cardImage.index >= group.imgs.length - 1) {
-    nextButton.classList.add("slideshow--button__disabled");
-    nextButton.classList.remove("slideshow--button__enabled");
+    nextButton.classList.add("slider--button__disabled");
+    nextButton.classList.remove("slider--button__enabled");
   } else {
-    nextButton.classList.remove("slideshow--button__disabled");
-    nextButton.classList.add("slideshow--button__enabled");
+    nextButton.classList.remove("slider--button__disabled");
+    nextButton.classList.add("slider--button__enabled");
   }
 }
-
-
 
 function slideShowButtonHandler(e, cardImage, setCardImage, group, str) {
   var slideshow = e.target.closest(".slideshow");
   var container = slideshow.querySelector(".slideshow--container");
   var button = e.target.closest(".button");
   var slider = slideshow.querySelector(".slider");
-
 
   var index = cardImage.index;
 
@@ -163,7 +138,7 @@ function slideShowButtonHandler(e, cardImage, setCardImage, group, str) {
 
   index += move;
 
-  if(move == 0) return;
+  if (move == 0) return;
   var img = group.imgs[index];
   setCardImage(img);
   sliderHandleSet(slider, index);
@@ -316,7 +291,17 @@ function slideshowResizeFunctions(slideshow = null, container = null, index = nu
   }
 }
 
-function Card({ img, index, width, height, descriptionOn }) {
+function cardOnClickHandler(e, group, index, cardImage, setCardImage) {
+  if (cardImage.index == index) return;
+
+  var slideshow = e.target.closest(".slideshow");
+  var slider = slideshow.querySelector(".slider");
+
+  setCardImage(group.imgs[index]);
+  sliderHandleSet(slider, index);
+}
+
+function Card({ img, index, width, height, descriptionOn, onClick }) {
   var hasActions = infoDoesExist(img.actions);
   var hasNotes = infoDoesExist(img.notes);
   var hasMultipleActions = hasActions && img.actions.length > 1;
@@ -344,7 +329,7 @@ function Card({ img, index, width, height, descriptionOn }) {
   cardClasses = cardClasses.join(" ");
 
   return (
-    <div className={`${cardClasses}`} ref={card}>
+    <div className={`${cardClasses}`} ref={card} onClick={onClick}>
       <div className="card--graphic card--graphic__off" width={width} height={height}>
         <Graphic className="card--img" type="image" img={img} />
       </div>
@@ -440,48 +425,62 @@ function Slideshow({ children, img }) {
         {group.imgs.map((groupImg) => {
           return (
             <div className="slideshow--card" key={`card ${groupImg.index}`}>
-              <Card img={groupImg} index={groupImg.index} width={width} height={height} descriptionOn={descriptionOn} />
+              <Card img={groupImg} index={groupImg.index} width={width} height={height} descriptionOn={descriptionOn} onClick={groupImg.index === cardImage.index ? null : (e) => cardOnClickHandler(e, group, groupImg.index, cardImage, setCardImage)} />
             </div>
           );
         })}
         <div className="slideshow--empty"></div>
       </div>
 
-      <div className="slideshow--slider container">
-      <Button className='slideshow--button slideshow--button__enabled'
-          icon={["chevron_left", "alone", "mask"]}
-          animation="scale-in"
-          color="transparent-background"
-          onClick={(e) => {
-            slideShowButtonHandler(e, cardImage, setCardImage, group, "left");
-          }}
-        />
+      <div className="slideshow--footer">
+        <div className="slider--wrapper container">
+          <Button
+            className="slider--button slider--button__enabled"
+            icon={["chevron_left", "alone", "mask"]}
+            animation="scale-in"
+            color="transparent-background"
+            onClick={(e) => {
+              slideShowButtonHandler(e, cardImage, setCardImage, group, "left");
+            }}
+          />
 
-        <div
-          className="slider"
-          data-min="0"
-          data-max={group.imgs.length - 1}
-          data-value={cardImage.index}
-          style={{
-            "--slider-min": `0`,
-            "--slider-max": `${group.imgs.length - 1}`,
-          }}>
-          <div className="slider--bar">
-            <div className="slider--handle" onMouseDown={sliderHandleMouseDown} onMouseMove={sliderMouseMoveStart}></div>
+          <div
+            className="slider"
+            data-min="0"
+            data-max={group.imgs.length - 1}
+            data-value={cardImage.index}
+            style={{
+              "--slider-min": `0`,
+              "--slider-max": `${group.imgs.length - 1}`,
+              "--slider-section-start": `${group.sections.filter((section) => section.name == cardImage.section)[0].start}`,
+              "--slider-section-end": `${group.sections.filter((section) => section.name == cardImage.section)[0].end}`,
+            }}>
+            <div className="slider--bar">
+              <div className="slider--handle" onMouseDown={sliderHandleMouseDown} onMouseMove={sliderMouseMoveStart}></div>
 
-            {group.imgs.map((groupImg, i) => {
-              return <div className="slider--notch" style={{ "--slider-notch-index": `${i}` }} key={`marker ${groupImg.index}`}></div>;
-            })}
+              {group.imgs.map((groupImg, i) => {
+                const section = group.sections.find((section) => section.name === cardImage.section);
+                const isSectionActive = section && i >= section.start && i <= section.end;
+                const notchClass = `slider--notch slider--notch__hoverable${section ? (isSectionActive ? " slider--notch__active" : " slider--notch__inactive") : ""}`;
+                return <div className={notchClass} style={{ "--slider-notch-index": `${i}` }} key={`marker ${groupImg.index}`} onClick={(e) => sliderNotchOnClickHandler(e, i, group, setCardImage)}></div>;
+              })}
+            </div>
+
+            <div className="slider--bar slider--bar__empty"></div>
+            <div className="slider--bar slider--bar__filled"></div>
           </div>
-        </div>
 
-        <Button className='slideshow--button slideshow--button__enabled' icon={["chevron_right", "alone", "mask"]}
-          animation="scale-in"
-          color="transparent-background"
-          onClick={(e) => {
-            slideShowButtonHandler(e, cardImage, setCardImage, group, "right");
-          }}
-        />
+          <Button
+            className="slider--button slider--button__enabled"
+            icon={["chevron_right", "alone", "mask"]}
+            animation="scale-in"
+            color="transparent-background"
+            onClick={(e) => {
+              slideShowButtonHandler(e, cardImage, setCardImage, group, "right");
+            }}
+          />
+        </div>
+        <p className="slideshow--message container">Slide to explore the final user journey.</p>
       </div>
     </div>
   );
@@ -571,6 +570,12 @@ function sliderHandleMouseDown(e) {
 
   var handle = e.target;
   handle.classList.add("slider--handle__active");
+
+  var notches = handle.parentElement.querySelectorAll(".slider--notch");
+  notches.forEach((notch) => {
+    notch.classList.remove("slider--notch__hoverable");
+  });
+
   document.body.classList.add("grabbed");
 
   document.addEventListener("mousemove", (e) => {
@@ -587,12 +592,25 @@ function sliderHandleMouseUp(e, handle) {
   handle.classList.remove("slider--handle__active");
   document.body.classList.remove("grabbed");
 
+  var notches = handle.parentElement.querySelectorAll(".slider--notch");
+  notches.forEach((notch) => {
+    notch.classList.add("slider--notch__hoverable");
+  });
+
   document.removeEventListener("mousemove", (e) => {
     sliderHandleMouseMove(e, handle);
   });
   document.removeEventListener("mouseup", (e) => {
     sliderHandleMouseUp(e, handle);
   });
+}
+
+function sliderNotchOnClickHandler(e, index, group, setCardImage) {
+  const img = group.imgs[index];
+  setCardImage(img);
+
+  var slider = e.target.closest(".slider");
+  sliderHandleSet(slider, index);
 }
 
 function sliderHandler(index, group, setCardImage) {
