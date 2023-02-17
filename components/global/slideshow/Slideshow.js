@@ -2,7 +2,7 @@ import { Toggle } from "@/components/elements/Toggle";
 import Heading from "@/components/sections/Heading";
 import MAKERIGHT_IMGS, { MAKERIGHT_IMG_GROUPS } from "@/data/MAKERIGHT_IMGS";
 import toggle from "@/scripts/AnimationTools";
-import { addAttrNonDestructive, getSiblingStyle, map, RESIZE_TIMEOUT, splitPx, splitS } from "@/scripts/GlobalUtilities";
+import { addAttrNonDestructive, clamp, getSiblingStyle, map, RESIZE_TIMEOUT, splitPx, splitS } from "@/scripts/GlobalUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { useEffect, useRef, useState } from "react";
 import Button from "../../elements/Buttons";
@@ -80,61 +80,6 @@ function getElemWidth(elem) {
   return splitPx(getComputedStyle(elem).getPropertyValue("width")) + splitPx(getComputedStyle(elem).getPropertyValue("margin-left")) + splitPx(getComputedStyle(elem).getPropertyValue("margin-right"));
 }
 
-
-
-
-// function containerSetPosition(container, index, duration) {
-//   if (container == null) return;
-//   container = container.current ? container.current : container;
-//   duration = splitS(getComputedStyle(container).getPropertyValue("transition-duration"));
-
-//   var card = { width: 0, height: 0 };
-
-//   card.width = getElemWidth(container.children[1]);
-
-//   var scrollTarget = card.width * index;
-//   var empty = document.querySelector(".slideshow--empty");
-
-//   var currentScroll = splitPx(window.getComputedStyle(empty).getPropertyValue("margin-left"));
-//   console.log(currentScroll);
-//   empty.style.setProperty("margin-left", `-${scrollTarget}px`);
-// }
-
-
-
-
-// function containerSetPosition(container, index, duration) {
-//   if (container == null) return;
-//   container = container.current ? container.current : container;
-
-//   var card = { width: 0, height: 0 };
-//   card.width = getElemWidth(container.children[1]);
-
-//   var scrollTarget = card.width * index;
-//   var empty = document.querySelector(".slideshow--empty");
-//   var currentScroll = splitPx(window.getComputedStyle(empty).getPropertyValue("margin-left"));
-//   // empty left rect
-//   // var currentScroll = empty.getBoundingClientRect().left;
-//   //       console.log(currentScroll);  
-//   //       console.log(currentScroll, window.getComputedStyle(empty).getPropertyValue("left"));  
-    
-//     // calculate distance and speed
-//     var distance = Math.abs(scrollTarget - currentScroll);
-//     var speed = 5000; // pixels per second
-//     var duration = distance / speed;
-//     console.log(distance)
-
-//   // add more influence with exponent
-//   duration = duration ** 0.5;
-
-
-//   // set transition duration
-//   empty.style.transitionDuration = `${duration}s`;
-//   empty.style.setProperty("margin-left", `-${scrollTarget}px`);
-// }
-
-
-
 function containerSetPosition(container, index, duration) {
   if (container == null) return;
   container = container.current ? container.current : container;
@@ -144,7 +89,7 @@ function containerSetPosition(container, index, duration) {
 
   var scrollTarget = card.width * index;
   var empty = document.querySelector(".slideshow--empty");
-  
+
   // get the current scroll position of empty at the beginning of the transition
   var currentScroll = -1 * splitPx(empty.style.marginLeft);
 
@@ -153,14 +98,14 @@ function containerSetPosition(container, index, duration) {
   var speed = 5000; // pixels per second
   var duration = distance / speed;
 
-  duration = map(duration, 0, 5, 1.5, 5);
+  duration = map(duration, 0, 5, 1.5, 7);
 
   // set transition duration and starting position
   empty.style.transitionDuration = `${duration}s`;
   empty.style.setProperty("margin-left", `-${scrollTarget}px`);
 
   // check if empty has reached the scroll target every 10 milliseconds
-  var transitionInterval = setInterval(function() {
+  var transitionInterval = setInterval(function () {
     if (-1 * splitPx(empty.style.marginLeft) == scrollTarget) {
       // stop the interval if empty has reached the scroll target
       clearInterval(transitionInterval);
@@ -171,10 +116,37 @@ function containerSetPosition(container, index, duration) {
   }, 10);
 }
 
+function slideshowUpdateCardStyle(slideshow, cardImage) {
+  slideshow = slideshow.current ? slideshow.current : slideshow;
 
+  var container = slideshow.querySelector(".slideshow--container");
+  var index = cardImage.index;
+  var cards = container.querySelectorAll(".slideshow--card");
+  cards = Array.from(cards);
 
+  for (let i = 0; i < cards.length; i++) {
+    if (i != index) {
+      cards[i].classList.add("slideshow--card__active");
+      cards[i].classList.add("slideshow--card__inactive");
+    } else {
+      cards[i].classList.remove("slideshow--card__active");
+      cards[i].classList.remove("slideshow--card__inactive");
+    }
+  }
+}
 
-function slideshowInit(setHitStartPoint, setStoppedAfterInit, startIndex, group, slideshow, container, index) {
+function slideshowCheckInit(container, setHitStartPoint) {
+  container = container.current ? container.current : container;
+  var empty = container.querySelector(".slideshow--empty");
+  var card = { width: 0, height: 0 };
+  card.width = getElemWidth(container.children[1]);
+  var currentTransition = splitS(getComputedStyle(empty).getPropertyValue("transition-duration"));
+  setTimeout(() => {
+    setHitStartPoint(true);
+  }, currentTransition * 2);
+}
+
+function slideshowInit(group, slideshow, container, index) {
   slideshow = slideshow.current;
   container = container.current;
 
@@ -185,8 +157,8 @@ function slideshowInit(setHitStartPoint, setStoppedAfterInit, startIndex, group,
 
   function run(emptyTransition) {
     var interval = setInterval(() => {
-      slideshowScrolling(setHitStartPoint, startIndex, group, container);
-      slideshowScrollingDelayed(setStoppedAfterInit);
+      slideshowScrolling(group, container);
+      slideshowScrollingDelayed();
     }, emptyTransition / 20);
 
     setTimeout(() => {
@@ -203,36 +175,19 @@ function slideshowInit(setHitStartPoint, setStoppedAfterInit, startIndex, group,
     delete empty.observer;
   }
 
-  // Create a MutationObserver that observes changes to the style property of container.querySelector('.slideshow--empty')
-//   const observer = new MutationObserver((mutationsList, observer) => {
-//     for (let mutation of mutationsList) {
-//       if (mutation.attributeName === "style") {
-//         const empty = container.querySelector(".slideshow--empty");
-//         const marginLeft = parseInt(getComputedStyle(empty).marginLeft);
-//         if (marginLeft !== 0) {
-//           console.log('running')
-//           var emptyTransition = splitS(getComputedStyle(empty).getPropertyValue("transition-duration"));
-//           console.log(emptyTransition);
-//           run(emptyTransition);
-// }
-//       }
-//     }
-//   });
   const observer = new MutationObserver((mutationsList, observer) => {
     for (let mutation of mutationsList) {
       if (mutation.attributeName === "style") {
         const empty = container.querySelector(".slideshow--empty");
         const rect = empty.getBoundingClientRect();
-        const isVisible = (rect.top >= 0 && rect.bottom <= window.innerHeight);
+        const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
         if (isVisible) {
-          console.log('running')
           var emptyTransition = splitS(getComputedStyle(empty).getPropertyValue("transition-duration"));
           run(emptyTransition);
         }
       }
     }
   });
-  
 
   // Start observing changes to the style property of container.querySelector('.slideshow--empty')
   observer.observe(empty, { attributes: true });
@@ -240,11 +195,20 @@ function slideshowInit(setHitStartPoint, setStoppedAfterInit, startIndex, group,
   // Store the observer on the element for future access
   empty.observer = observer;
 
+  // TODO: keyboard navigation support
+  // container.removeEventListener("wheel", slideshowWheelHandler, false);
+  // container.addEventListener("wheel", slideshowWheelHandler, false);
+
+  // window.removeEventListener("keydown", (e)=>slideshowCatchKeys(e,container), true);
+  // window.addEventListener("keydown", (e)=>slideshowCatchKeys(e,container), true);
+  // window.removeEventListener("keyup", (e)=>handleKeyUp(e,container), true);
+  // window.addEventListener("keyup", (e)=>handleKeyUp(e,container), true);
+
   window.removeEventListener("resize", slideshowResize, false);
   window.addEventListener("resize", slideshowResize, false);
 }
 
-function slideshowScrolling(setHitStartPoint, startIndex, group, container) {
+function slideshowScrolling(group, container) {
   var slideshow = container.parentElement;
   var card = container.children[1];
   var drawnIndex = parseInt(getComputedStyle(container).getPropertyValue("--slide-img-index"));
@@ -253,24 +217,17 @@ function slideshowScrolling(setHitStartPoint, startIndex, group, container) {
   var cardWidth = getElemWidth(card);
   var scrollPos = splitPx(window.getComputedStyle(container.querySelector(".slideshow--empty")).getPropertyValue("margin-left"));
   var calcIndex = Math.abs(Math.floor((scrollPos + cardWidth * buffer) / cardWidth));
-  if (calcIndex === startIndex) {
-    setTimeout(() => {
-      setHitStartPoint(true);
-    }, 500);
-  }
 }
 
 var slideshowIsScrolling;
 
-function slideshowScrollingDelayed(setStoppedAfterInit) {
+function slideshowScrollingDelayed() {
   window.clearTimeout(slideshowIsScrolling);
-  slideshowIsScrolling = setTimeout(slideshowScrollingDelayedFunctions(setStoppedAfterInit), RESIZE_TIMEOUT);
+  slideshowIsScrolling = setTimeout(slideshowScrollingDelayedFunctions(), RESIZE_TIMEOUT);
 }
 
-function slideshowScrollingDelayedFunctions(setStoppedAfterInit) {
-  function actions() {
-    setStoppedAfterInit(true);
-  }
+function slideshowScrollingDelayedFunctions() {
+  function actions() {}
   actions();
 }
 
@@ -283,8 +240,16 @@ function slideshowResize() {
 
 function slideshowResizeFunctions(slideshow = null, container = null, index = null) {
   function actions(slideshow, container, index) {
+    if (index == null) index = parseInt(getComputedStyle(container).getPropertyValue("--slide-img-index"));
+
     slideshowSetDescHeight(slideshow);
     containerSetPosition(container, index);
+
+
+    // TODO: this works for now but you could always create a new state that's true while resizing, and false once resizing is done and use that to trigger the set position after a resize rather than just a timeout
+    setTimeout(() => {
+      containerSetPosition(container, index);
+    }, 1500);
   }
 
   if (slideshow == null && container == null && index == null) {
@@ -320,7 +285,6 @@ function Card({ img, index, width, height, descriptionOn }) {
     for (var i = 0; i < affectedClasses.length; i++) {
       var target = card.current.querySelector(`.${affectedClasses[i]}`);
       if (target == null) continue;
-
       toggle(target, affectedClasses[i], "transition", "", "");
     }
   }, [descriptionOn]);
@@ -370,7 +334,6 @@ function Slideshow({ children, img }) {
   const [cardImage, setCardImage] = useState(img);
   const [descriptionOn, setDescriptionOn] = useState(false);
   const [hitStartPoint, setHitStartPoint] = useState(false);
-  const [stoppedAfterInit, setStoppedAfterInit] = useState(false);
 
   var group = MAKERIGHT_IMG_GROUPS[img.group];
   var startIndex = img.index;
@@ -387,8 +350,13 @@ function Slideshow({ children, img }) {
   };
 
   useMountEffect(() => {
-    slideshowInit(setHitStartPoint, setStoppedAfterInit, startIndex, group, slideshow, container);
+    slideshowInit(group, slideshow, container);
     containerSetPosition(container, img.index);
+    slideshowUpdateCardStyle(slideshow, img);
+    slideshowCheckInit(container, setHitStartPoint);
+
+    sliderInit(slideshow, group, setCardImage);
+    // slideshow.current.querySelector(".slideshow--empty").style.setProperty("margin-left", `-${getElemWidth(container.current.children[1])* img.index}px`);
   });
 
   var containerStyle = {
@@ -397,17 +365,9 @@ function Slideshow({ children, img }) {
 
   useEffect(() => {
     if (!hitStartPoint) return;
-
+    slideshowUpdateCardStyle(slideshow, cardImage);
     containerSetPosition(container, cardImage.index);
   }, [cardImage]);
-
-
-
-  useEffect(() => {
-console.log(hitStartPoint, stoppedAfterInit)
-  }, [hitStartPoint, stoppedAfterInit]);
-
-
 
   return (
     <div className="slideshow" style={cardGraphicStyle} ref={slideshow}>
@@ -419,7 +379,7 @@ console.log(hitStartPoint, stoppedAfterInit)
       </div>
 
       <div
-        className={`slideshow--container ${hitStartPoint && stoppedAfterInit ? "slideshow--container__visible" : "slideshow--container__hide"}`}
+        className={`slideshow--container ${hitStartPoint ? "slideshow--container__visible" : "slideshow--container__hide"}`}
         style={{
           "--slide-img-index": `${cardImage.index}`,
         }}
@@ -435,44 +395,269 @@ console.log(hitStartPoint, stoppedAfterInit)
         <div className="slideshow--empty"></div>
       </div>
 
-      <div className="slideshow--slider"></div>
+      <div className="slideshow--slider container">
+        <div className="flex-row gap-4 mt-3">
+          <div className="slider" data-min="0" data-max={group.imgs.length - 1} data-value={cardImage.index} 
+          style={{
+            "--slider-min": `0`,
+            "--slider-max": `${group.imgs.length - 1}`,
+          }}
+          >
+            {/* <input
+              type="range"
+              min="0"
+              max={group.imgs.length - 1}
+              value={cardImage.index}
+              className="slider--input"
+              onChange={(e) => {
+                sliderHandler(e, group, setCardImage);
+              }}
+            /> */}
 
-      <div className="flex-row gap-4 mt-3">
-        <div>
-          <input
-            type="range"
-            min="0"
-            max={group.imgs.length - 1}
-            value={cardImage.index}
-            className="slider"
-            onChange={(e) => {
-              sliderHandler(e, group, setCardImage);
-            }}></input>
-        </div>
+            <div className="slider--bar">
+              <div className="slider--handle" onMouseDown={sliderHandleMouseDown} onMouseMove={sliderMouseMoveStart}></div>
 
-        {/* <Button
+              {group.imgs.map((groupImg, i) => {
+                return <div className="slider--notch" style={{"--slider-notch-index": `${i}`}} key={`marker ${groupImg.index}`}></div>;
+              })}
+            </div>
+          </div>
+
+          {/* <div className="slider">
+
+            <div className="slider--bar">
+            </div>
+
+
+            </div>
+ */}
+
+          {/* <Button
           onClick={(e) => {
             buttonHandler(e, group, cardImage, setCardImage);
           }}
           color="background-secondary">
           Left
-        </Button>
-        <Button
+          </Button>
+          <Button
           onClick={(e) => {
             buttonHandler(e, group, cardImage, setCardImage);
           }}
           color="background-secondary">
           Right
         </Button> */}
+        </div>
       </div>
     </div>
   );
 }
 
-function sliderHandler(e, group, setCardImage) {
-  var index = parseInt(e.target.value);
+var sliderMouse = {
+  start: { x: 0, y: 0 },
+  cur: { x: 0, y: 0 },
+};
+
+var sliderHandle = {
+  start: { x: 0, y: 0 },
+  cur: { x: 0, y: 0 },
+};
+
+var sliderMouseGrabbed = 0;
+
+function sliderHandleMouseMove(e, handle) {
+  if (sliderMouseGrabbed < 2) return;
+
+  var bar = handle.parentElement;
+  var slider = bar.parentElement;
+
+  var mouse = { x: 0, y: 0 };
+  mouse.x = e.clientX;
+
+  sliderMouse.cur.x = mouse.x;
+
+  var handlePos = sliderHandle.start.x + (sliderMouse.cur.x - sliderMouse.start.x);
+
+  var barWidth = getElemWidth(bar);
+  var handleWidth = getElemWidth(handle);
+
+  var min = 0;
+  var max = barWidth;
+
+  if (handlePos < 0) handlePos = 0;
+  if (handlePos > max) handlePos = max;
+
+  var min = parseInt(slider.getAttribute("data-min"));
+  var max = parseInt(slider.getAttribute("data-max"));
+
+  var notch = barWidth / (max - min);
+
+  var value = Math.round(handlePos / notch);
+
+  slider.setAttribute("data-value", value);
+
+  handlePos = Math.round(handlePos / notch) * notch;
+
+  handle.style.setProperty("--slider-handle-left", `${handlePos}px`);
+}
+
+
+
+function sliderHandleSet(slider, index) {
+  var bar = slider.querySelector(".slider--bar");
+  var handle = slider.querySelector(".slider--handle");
+
+  var barWidth = getElemWidth(bar);
+  var min = parseInt(slider.getAttribute("data-min"));
+  var max = parseInt(slider.getAttribute("data-max"));
+  var notch = barWidth / (max - min);
+
+  var handlePos = index * notch;
+
+  if (handlePos < 0) handlePos = 0;
+  if (handlePos > barWidth) handlePos = barWidth;
+
+  slider.setAttribute("data-value", index);
+  handle.style.setProperty("--slider-handle-left", `${handlePos}px`);
+}
+
+
+function sliderMouseMoveStart(e) {
+  var handle = e.target;
+  var slider = handle.parentElement;
+  var mouse = { x: 0, y: 0 };
+  mouse.x = e.clientX;
+
+  if (sliderMouseGrabbed == 1) {
+    sliderMouseGrabbed++;
+    sliderMouse.start.x = mouse.x;
+    sliderHandle.start.x = splitPx(window.getComputedStyle(handle).getPropertyValue("--slider-handle-left"));
+  }
+}
+
+function sliderHandleMouseDown(e) {
+  sliderMouseGrabbed++;
+
+  var handle = e.target;
+  handle.classList.add("slider--handle__active");
+  document.body.classList.add("grabbed");
+
+  document.addEventListener("mousemove", (e) => {
+    sliderHandleMouseMove(e, handle);
+  });
+  document.addEventListener("mouseup", (e) => {
+    sliderHandleMouseUp(e, handle);
+  });
+}
+
+function sliderHandleMouseUp(e, handle) {
+  sliderMouseGrabbed = 0;
+
+  handle.classList.remove("slider--handle__active");
+  document.body.classList.remove("grabbed");
+
+  document.removeEventListener("mousemove", (e) => {
+    sliderHandleMouseMove(e, handle);
+  });
+  document.removeEventListener("mouseup", (e) => {
+    sliderHandleMouseUp(e, handle);
+  });
+}
+
+function sliderHandler(index, group, setCardImage) {
+  // console.log(mutation);
+  // var index = parseInt(e.target.getAttribute("data-value"));
   var img = group.imgs[index];
   setCardImage(img);
+}
+
+// function sliderInit(slideshow, group, setCardImage){
+
+//   var slider = slideshow.current.querySelector(".slider");
+//   var handle = slider.querySelector(".slider--handle");
+//   var bar = slider.querySelector(".slider--bar");
+//   var barWidth = getElemWidth(bar);
+//   var max = slider.getAttribute("data-max");
+//   var notch = barWidth / max;
+//   var value = slider.getAttribute("data-value");
+//   var handlePos = value * notch;
+//   handle.style.setProperty("--slider-handle-left", `${handlePos}px`);
+
+//   const observer = new MutationObserver(mutations => {
+//     mutations.forEach(mutation => {
+//       if (mutation.type === 'attributes' && mutation.attributeName === 'data-value') {
+//         const newValue = mutation.target.getAttribute('data-value');
+//         if (newValue !== currentValue) {
+//           console.log(`data-value changed to ${newValue}`);
+//           sliderHandler(newValue, group, setCardImage);
+//           currentValue = newValue;
+//         }
+//       }
+//     });
+//   });
+
+//   // Initialize currentValue with the current value of the 'data-value' attribute
+//   let currentValue = slider.getAttribute('data-value');
+
+//   // Start observing changes to the 'data-value' attribute
+//   observer.observe(slider, { attributes: true });
+
+// }
+
+function sliderHandleInit(slider) {
+  // var handle = slider.querySelector(".slider--handle");
+  // var bar = slider.querySelector(".slider--bar");
+  // var barWidth = getElemWidth(bar);
+  // var max = slider.getAttribute("data-max");
+  // var notch = barWidth / max;
+  var value = slider.getAttribute("data-value");
+  // var handlePos = value * notch;
+  // handle.style.setProperty("--slider-handle-left", `${handlePos}px`);
+
+
+  sliderHandleSet(slider, value);
+}
+
+function sliderObserve(slider, group, setCardImage) {
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === "attributes" && mutation.attributeName === "data-value") {
+        const newValue = mutation.target.getAttribute("data-value");
+        if (newValue !== currentValue) {
+          console.log(`data-value changed to ${newValue}`);
+          sliderHandler(newValue, group, setCardImage);
+          currentValue = newValue;
+        }
+      }
+    });
+  });
+
+  // Initialize currentValue with the current value of the 'data-value' attribute
+  let currentValue = slider.getAttribute("data-value");
+
+  // Start observing changes to the 'data-value' attribute
+  observer.observe(slider, { attributes: true });
+}
+
+function sliderNotchesSetPos(slider) {
+  // var notches = slider.querySelectorAll(".slider--notch");
+  // var bar = slider.querySelector(".slider--bar");
+  // var barWidth = getElemWidth(bar);
+  // var max = slider.getAttribute("data-max");
+  // var notchWidth = barWidth / max;
+
+  // notches.forEach((notch, index) => {
+  //   var notchPos = notchWidth * index;
+  //   notch.style.setProperty("--slider-notch-left", `${notchPos}px`);
+  // });
+}
+
+
+
+function sliderInit(slideshow, group, setCardImage) {
+  var slider = slideshow.current.querySelector(".slider");
+  sliderHandleInit(slider);
+  sliderObserve(slider, group, setCardImage);
+  // sliderNotchesSetPos(slider);
 }
 
 export default Slideshow;
