@@ -7,8 +7,6 @@ import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { useEffect, useRef, useState } from "react";
 import Button from "../../elements/Buttons";
 import Graphic from "../../sections/Graphic";
-import { buttonHandler } from "./slideshow_utilities.js/SlideshowInteractions";
-import { slideshowSetDescHeight } from "./slideshow_utilities.js/SlideshowStyle";
 
 function getAdjacentImage(group, index, val) {
   var result = false;
@@ -80,7 +78,7 @@ function getElemWidth(elem) {
   return splitPx(getComputedStyle(elem).getPropertyValue("width")) + splitPx(getComputedStyle(elem).getPropertyValue("margin-left")) + splitPx(getComputedStyle(elem).getPropertyValue("margin-right"));
 }
 
-function containerSetPosition(container, index, duration) {
+function slideshowSetPosition(container, index) {
   if (container == null) return;
   container = container.current ? container.current : container;
 
@@ -98,7 +96,8 @@ function containerSetPosition(container, index, duration) {
   var speed = 5000; // pixels per second
   var duration = distance / speed;
 
-  duration = map(duration, 0, 5, 1.5, 7);
+  duration = map(duration, 0, 5, 0.4, 6);
+  // duration = 0;
 
   // set transition duration and starting position
   empty.style.transitionDuration = `${duration}s`;
@@ -114,6 +113,32 @@ function containerSetPosition(container, index, duration) {
       currentScroll = -1 * splitPx(empty.style.marginLeft);
     }
   }, 10);
+}
+
+function slideShowButtonHandler(e, cardImage, setCardImage, group, str) {
+  var slideshow = e.target.closest(".slideshow");
+  var container = slideshow.querySelector(".slideshow--container");
+  var button = e.target.closest(".button");
+  var slider = slideshow.querySelector(".slider");
+
+  console.log(button);
+
+  var index = cardImage.index;
+
+  var move = 0;
+
+  if (str == "left") move = -1;
+  else if (str == "right") move = 1;
+
+  if (index <= 0 && move == -1) move = 0;
+  if (index >= group.imgs.length - 1 && move == 1) move = 0;
+
+  index += move;
+
+  if(move == 0) return;
+  var img = group.imgs[index];
+  setCardImage(img);
+  sliderHandleSet(slider, index);
 }
 
 function slideshowUpdateCardStyle(slideshow, cardImage) {
@@ -242,14 +267,12 @@ function slideshowResizeFunctions(slideshow = null, container = null, index = nu
   function actions(slideshow, container, index) {
     if (index == null) index = parseInt(getComputedStyle(container).getPropertyValue("--slide-img-index"));
 
-    slideshowSetDescHeight(slideshow);
-    containerSetPosition(container, index);
-
+    sliderHandleSet(slideshow.querySelector(".slider"), index);
 
     // TODO: this works for now but you could always create a new state that's true while resizing, and false once resizing is done and use that to trigger the set position after a resize rather than just a timeout
     setTimeout(() => {
-      containerSetPosition(container, index);
-    }, 1500);
+      slideshowSetPosition(container, index);
+    }, 2000);
   }
 
   if (slideshow == null && container == null && index == null) {
@@ -351,7 +374,7 @@ function Slideshow({ children, img }) {
 
   useMountEffect(() => {
     slideshowInit(group, slideshow, container);
-    containerSetPosition(container, img.index);
+    slideshowSetPosition(container, img.index);
     slideshowUpdateCardStyle(slideshow, img);
     slideshowCheckInit(container, setHitStartPoint);
 
@@ -366,7 +389,7 @@ function Slideshow({ children, img }) {
   useEffect(() => {
     if (!hitStartPoint) return;
     slideshowUpdateCardStyle(slideshow, cardImage);
-    containerSetPosition(container, cardImage.index);
+    slideshowSetPosition(container, cardImage.index);
   }, [cardImage]);
 
   return (
@@ -396,57 +419,41 @@ function Slideshow({ children, img }) {
       </div>
 
       <div className="slideshow--slider container">
-        <div className="flex-row gap-4 mt-3">
-          <div className="slider" data-min="0" data-max={group.imgs.length - 1} data-value={cardImage.index} 
+        <Button
+          icon={["chevron_left", "alone", "mask"]}
+          animation="scale-in"
+          color="transparent-background"
+          onClick={(e) => {
+            slideShowButtonHandler(e, cardImage, setCardImage, group, "left");
+          }}
+        />
+
+        <div
+          className="slider"
+          data-min="0"
+          data-max={group.imgs.length - 1}
+          data-value={cardImage.index}
           style={{
             "--slider-min": `0`,
             "--slider-max": `${group.imgs.length - 1}`,
-          }}
-          >
-            {/* <input
-              type="range"
-              min="0"
-              max={group.imgs.length - 1}
-              value={cardImage.index}
-              className="slider--input"
-              onChange={(e) => {
-                sliderHandler(e, group, setCardImage);
-              }}
-            /> */}
+          }}>
+          <div className="slider--bar">
+            <div className="slider--handle" onMouseDown={sliderHandleMouseDown} onMouseMove={sliderMouseMoveStart}></div>
 
-            <div className="slider--bar">
-              <div className="slider--handle" onMouseDown={sliderHandleMouseDown} onMouseMove={sliderMouseMoveStart}></div>
-
-              {group.imgs.map((groupImg, i) => {
-                return <div className="slider--notch" style={{"--slider-notch-index": `${i}`}} key={`marker ${groupImg.index}`}></div>;
-              })}
-            </div>
+            {group.imgs.map((groupImg, i) => {
+              return <div className="slider--notch" style={{ "--slider-notch-index": `${i}` }} key={`marker ${groupImg.index}`}></div>;
+            })}
           </div>
-
-          {/* <div className="slider">
-
-            <div className="slider--bar">
-            </div>
-
-
-            </div>
- */}
-
-          {/* <Button
-          onClick={(e) => {
-            buttonHandler(e, group, cardImage, setCardImage);
-          }}
-          color="background-secondary">
-          Left
-          </Button>
-          <Button
-          onClick={(e) => {
-            buttonHandler(e, group, cardImage, setCardImage);
-          }}
-          color="background-secondary">
-          Right
-        </Button> */}
         </div>
+
+        <Button
+          icon={["chevron_right", "alone", "mask"]}
+          animation="scale-in"
+          color="transparent-background"
+          onClick={(e) => {
+            slideShowButtonHandler(e, cardImage, setCardImage, group, "right");
+          }}
+        />
       </div>
     </div>
   );
@@ -500,8 +507,6 @@ function sliderHandleMouseMove(e, handle) {
   handle.style.setProperty("--slider-handle-left", `${handlePos}px`);
 }
 
-
-
 function sliderHandleSet(slider, index) {
   var bar = slider.querySelector(".slider--bar");
   var handle = slider.querySelector(".slider--handle");
@@ -519,7 +524,6 @@ function sliderHandleSet(slider, index) {
   slider.setAttribute("data-value", index);
   handle.style.setProperty("--slider-handle-left", `${handlePos}px`);
 }
-
 
 function sliderMouseMoveStart(e) {
   var handle = e.target;
@@ -564,56 +568,12 @@ function sliderHandleMouseUp(e, handle) {
 }
 
 function sliderHandler(index, group, setCardImage) {
-  // console.log(mutation);
-  // var index = parseInt(e.target.getAttribute("data-value"));
   var img = group.imgs[index];
   setCardImage(img);
 }
 
-// function sliderInit(slideshow, group, setCardImage){
-
-//   var slider = slideshow.current.querySelector(".slider");
-//   var handle = slider.querySelector(".slider--handle");
-//   var bar = slider.querySelector(".slider--bar");
-//   var barWidth = getElemWidth(bar);
-//   var max = slider.getAttribute("data-max");
-//   var notch = barWidth / max;
-//   var value = slider.getAttribute("data-value");
-//   var handlePos = value * notch;
-//   handle.style.setProperty("--slider-handle-left", `${handlePos}px`);
-
-//   const observer = new MutationObserver(mutations => {
-//     mutations.forEach(mutation => {
-//       if (mutation.type === 'attributes' && mutation.attributeName === 'data-value') {
-//         const newValue = mutation.target.getAttribute('data-value');
-//         if (newValue !== currentValue) {
-//           console.log(`data-value changed to ${newValue}`);
-//           sliderHandler(newValue, group, setCardImage);
-//           currentValue = newValue;
-//         }
-//       }
-//     });
-//   });
-
-//   // Initialize currentValue with the current value of the 'data-value' attribute
-//   let currentValue = slider.getAttribute('data-value');
-
-//   // Start observing changes to the 'data-value' attribute
-//   observer.observe(slider, { attributes: true });
-
-// }
-
 function sliderHandleInit(slider) {
-  // var handle = slider.querySelector(".slider--handle");
-  // var bar = slider.querySelector(".slider--bar");
-  // var barWidth = getElemWidth(bar);
-  // var max = slider.getAttribute("data-max");
-  // var notch = barWidth / max;
   var value = slider.getAttribute("data-value");
-  // var handlePos = value * notch;
-  // handle.style.setProperty("--slider-handle-left", `${handlePos}px`);
-
-
   sliderHandleSet(slider, value);
 }
 
@@ -638,21 +598,6 @@ function sliderObserve(slider, group, setCardImage) {
   observer.observe(slider, { attributes: true });
 }
 
-function sliderNotchesSetPos(slider) {
-  // var notches = slider.querySelectorAll(".slider--notch");
-  // var bar = slider.querySelector(".slider--bar");
-  // var barWidth = getElemWidth(bar);
-  // var max = slider.getAttribute("data-max");
-  // var notchWidth = barWidth / max;
-
-  // notches.forEach((notch, index) => {
-  //   var notchPos = notchWidth * index;
-  //   notch.style.setProperty("--slider-notch-left", `${notchPos}px`);
-  // });
-}
-
-
-
 function sliderInit(slideshow, group, setCardImage) {
   var slider = slideshow.current.querySelector(".slider");
   sliderHandleInit(slider);
@@ -661,5 +606,3 @@ function sliderInit(slideshow, group, setCardImage) {
 }
 
 export default Slideshow;
-
-export { containerSetPosition };

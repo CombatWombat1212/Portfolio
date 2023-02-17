@@ -85,6 +85,15 @@
     }
   }
 
+  &__transparent-background {
+    --button-icon-size: 1.5rem;
+    --button-background: #00000000;
+    --button-color: #{$col-background};
+    @include hover {
+      --button-color: #{$col-background_darkest};
+    }
+  }
+
 
   &__background-primary {
     --button-icon-size: 1.5rem;

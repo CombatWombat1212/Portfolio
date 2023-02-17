@@ -1153,6 +1153,20 @@ body {
   --button-color: #063879;
 }
 
+.button__transparent-background {
+  --button-icon-size: 1.5rem;
+  --button-background: #00000000;
+  --button-color: #F3F3F7;
+}
+
+.button__transparent-background {
+  transition: var(--transition);
+}
+
+.button__transparent-background:hover, .button__transparent-background:focus, .button__transparent-background.focus {
+  --button-color: #E0E0EA;
+}
+
 .button__background-primary {
   --button-icon-size: 1.5rem;
   --button-background: #F3F3F7;
@@ -2468,6 +2482,15 @@ body {
   min-width: var(--width);
 }
 
+.slideshow--slider {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3.5rem;
+  gap: 3rem;
+}
+
 .slideshow .card {
   display: flex;
   flex-direction: row;
@@ -2594,16 +2617,16 @@ body {
 .slideshow .slider {
   --slider-bar-height: 0.25rem;
   --slider-thumb-size: 1.875rem;
-  width: 100%;
-  display: flex;
+  width: 70%;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   position: relative;
 }
 
 .slideshow .slider--bar {
-  width: 85%;
+  width: 100%;
   border-radius: 10rem;
   height: var(--slider-bar-height);
   background-color: #F3F3F7;
@@ -2631,7 +2654,7 @@ body {
 
 .slideshow .slider--notch {
   position: absolute;
-  --size: calc(var(--slider-thumb-size) / 3);
+  --size: calc(var(--slider-thumb-size) / 2);
   width: var(--size);
   height: var(--size);
   border-radius: 100rem;
