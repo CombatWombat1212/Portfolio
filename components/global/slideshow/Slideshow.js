@@ -115,13 +115,41 @@ function slideshowSetPosition(container, index) {
   }, 10);
 }
 
+
+
+
+function slideshowButtonsDisable(slideshow, cardImage, group) {
+  slideshow = slideshow.current ? slideshow.current : slideshow;
+
+  var prevButton = slideshow.querySelectorAll(".slideshow--button")[0];
+  var nextButton = slideshow.querySelectorAll(".slideshow--button")[slideshow.querySelectorAll(".slideshow--button").length - 1];
+
+
+  if (cardImage.index <= 0) {
+    prevButton.classList.add("slideshow--button__disabled");
+    prevButton.classList.remove("slideshow--button__enabled");
+  } else {
+    prevButton.classList.remove("slideshow--button__disabled");
+    prevButton.classList.add("slideshow--button__enabled");
+  }
+
+  if (cardImage.index >= group.imgs.length - 1) {
+    nextButton.classList.add("slideshow--button__disabled");
+    nextButton.classList.remove("slideshow--button__enabled");
+  } else {
+    nextButton.classList.remove("slideshow--button__disabled");
+    nextButton.classList.add("slideshow--button__enabled");
+  }
+}
+
+
+
 function slideShowButtonHandler(e, cardImage, setCardImage, group, str) {
   var slideshow = e.target.closest(".slideshow");
   var container = slideshow.querySelector(".slideshow--container");
   var button = e.target.closest(".button");
   var slider = slideshow.querySelector(".slider");
 
-  console.log(button);
 
   var index = cardImage.index;
 
@@ -390,6 +418,7 @@ function Slideshow({ children, img }) {
     if (!hitStartPoint) return;
     slideshowUpdateCardStyle(slideshow, cardImage);
     slideshowSetPosition(container, cardImage.index);
+    slideshowButtonsDisable(slideshow, cardImage, group);
   }, [cardImage]);
 
   return (
@@ -419,7 +448,7 @@ function Slideshow({ children, img }) {
       </div>
 
       <div className="slideshow--slider container">
-        <Button
+      <Button className='slideshow--button slideshow--button__enabled'
           icon={["chevron_left", "alone", "mask"]}
           animation="scale-in"
           color="transparent-background"
@@ -446,8 +475,7 @@ function Slideshow({ children, img }) {
           </div>
         </div>
 
-        <Button
-          icon={["chevron_right", "alone", "mask"]}
+        <Button className='slideshow--button slideshow--button__enabled' icon={["chevron_right", "alone", "mask"]}
           animation="scale-in"
           color="transparent-background"
           onClick={(e) => {
@@ -583,7 +611,6 @@ function sliderObserve(slider, group, setCardImage) {
       if (mutation.type === "attributes" && mutation.attributeName === "data-value") {
         const newValue = mutation.target.getAttribute("data-value");
         if (newValue !== currentValue) {
-          console.log(`data-value changed to ${newValue}`);
           sliderHandler(newValue, group, setCardImage);
           currentValue = newValue;
         }

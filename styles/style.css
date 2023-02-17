@@ -2491,6 +2491,20 @@ body {
   gap: 3rem;
 }
 
+.slideshow--button {
+  transition: var(--transition);
+}
+
+.slideshow--button__enabled {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.slideshow--button__disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
 .slideshow .card {
   display: flex;
   flex-direction: row;

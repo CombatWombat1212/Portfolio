@@ -113,6 +113,24 @@
   }
 
 
+  &--button{
+
+    @include trans;
+
+    &__enabled{
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    &__disabled{
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+
+  }
+
+
 }
 
 .slideshow {
