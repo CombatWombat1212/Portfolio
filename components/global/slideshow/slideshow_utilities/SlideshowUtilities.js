@@ -11,7 +11,6 @@ function slideshowSwipeListenersInit(slideshow, container, group, setCardImage){
   if(slideshows.includes(slideshow)) return
   slideshows.push(slideshow);
 
-  console.log('added')
   container.removeEventListener('swiped', (e)=>{slideshowContainerSwiped(e, group, setCardImage)}, true);
   container.addEventListener('swiped', (e)=>{slideshowContainerSwiped(e, group, setCardImage)}, true);
 
@@ -19,46 +18,111 @@ function slideshowSwipeListenersInit(slideshow, container, group, setCardImage){
 
 
 
-function slideshowContainerSwiped(e, group, setCardImage){
+// function slideshowContainerSwiped(e, group, setCardImage){
 
-  if(e.detail.dir != 'left' && e.detail.dir != 'right') return;
-  var slideshow = e.target.closest(".slideshow");
-  var slider = slideshow.querySelector(".slider");
-  var dir = e.detail.dir;
+//   if(e.detail.dir != 'left' && e.detail.dir != 'right') return;
+//   var slideshow = e.target.closest(".slideshow");
+//   var slider = slideshow.querySelector(".slider");
+//   var dir = e.detail.dir;
   
-  if(dir == 'left') dir = 'right';
-  else if(dir == 'right') dir = 'left';
+//   if(dir == 'left') dir = 'right';
+//   else if(dir == 'right') dir = 'left';
 
 
-  console.log('ran')
-
-  var cardImage = slideshowGetCardImage(slideshow);
-  console.log(cardImage.index)
+//   var cardImage = slideshowGetCardImage(slideshow);
   
-  var index = cardImage.index;
-  var move = 0;
+//   var index = cardImage.index;
+//   var move = 0;
 
 
-  if (dir == "left") move = -1;
-  else if (dir == "right") move = 1;
+//   if (dir == "left") move = -1;
+//   else if (dir == "right") move = 1;
 
+//   if (index <= 0 && move == -1) move = 0;
+//   if (index >= group.imgs.length - 1 && move == 1) move = 0;
+  
+  
+//   if (move == 0) return;
+  
+  
+//   index += move;
+//   var img = group.imgs[index];
+
+
+//   setCardImage(img);
+//   sliderHandleSet(slider, index);
+
+  
+// }
+
+
+// function slideShowButtonHandler(e, cardImage, setCardImage, group, str) {
+//   var slideshow = e.target.closest(".slideshow");
+//   var container = slideshow.querySelector(".slideshow--container");
+//   var button = e.target.closest(".button");
+//   var slider = slideshow.querySelector(".slider");
+
+//   var index = cardImage.index;
+
+//   var move = 0;
+
+//   if (str == "left") move = -1;
+//   else if (str == "right") move = 1;
+
+//   if (index <= 0 && move == -1) move = 0;
+//   if (index >= group.imgs.length - 1 && move == 1) move = 0;
+
+//   if (move == 0) return;
+
+  
+//   index += move;
+//   var img = group.imgs[index];
+
+
+//   setCardImage(img);
+//   sliderHandleSet(slider, index);
+// }
+
+
+function updateCardImageAndSlider(cardImage, setCardImage, slider, index, group, move) {
   if (index <= 0 && move == -1) move = 0;
   if (index >= group.imgs.length - 1 && move == 1) move = 0;
-  
-  
+
   if (move == 0) return;
-  
-  
+
   index += move;
   var img = group.imgs[index];
 
-
   setCardImage(img);
   sliderHandleSet(slider, index);
-
-  
 }
 
+function slideshowContainerSwiped(e, group, setCardImage) {
+  if (e.detail.dir != 'left' && e.detail.dir != 'right') return;
+
+  var slideshow = e.target.closest(".slideshow");
+  var slider = slideshow.querySelector(".slider");
+  var dir = e.detail.dir;
+
+  if (dir == 'left') dir = 'right';
+  else if (dir == 'right') dir = 'left';
+
+  var cardImage = slideshowGetCardImage(slideshow);
+  var index = cardImage.index;
+  var move = (dir == 'left') ? -1 : 1;
+
+  updateCardImageAndSlider(cardImage, setCardImage, slider, index, group, move);
+}
+
+function slideShowButtonHandler(e, cardImage, setCardImage, group, str) {
+  var slideshow = e.target.closest(".slideshow");
+  var slider = slideshow.querySelector(".slider");
+
+  var index = cardImage.index;
+  var move = (str == "left") ? -1 : 1;
+
+  updateCardImageAndSlider(cardImage, setCardImage, slider, index, group, move);
+}
 
 
 
@@ -126,35 +190,6 @@ function slideshowButtonsDisable(slideshow, cardImage, group) {
 }
 
 
-
-
-
-function slideShowButtonHandler(e, cardImage, setCardImage, group, str) {
-  var slideshow = e.target.closest(".slideshow");
-  var container = slideshow.querySelector(".slideshow--container");
-  var button = e.target.closest(".button");
-  var slider = slideshow.querySelector(".slider");
-
-  var index = cardImage.index;
-
-  var move = 0;
-
-  if (str == "left") move = -1;
-  else if (str == "right") move = 1;
-
-  if (index <= 0 && move == -1) move = 0;
-  if (index >= group.imgs.length - 1 && move == 1) move = 0;
-
-  if (move == 0) return;
-
-  
-  index += move;
-  var img = group.imgs[index];
-
-
-  setCardImage(img);
-  sliderHandleSet(slider, index);
-}
 
 
 

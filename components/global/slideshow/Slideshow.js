@@ -9,7 +9,6 @@ import { sliderInit, sliderHandleMouseDown, sliderMouseMoveStart, sliderNotchOnC
 import { slideShowButtonHandler, slideshowButtonsDisable, slideshowCheckInit, slideshowInit, slideshowMouseDown, slideshowSetPosition, slideshowUpdateCardStyle } from "./slideshow_utilities/SlideshowUtilities";
 import swipeEventsInit from "@/scripts/SwipeEvents";
 
-// TODO: touch support, and keyboard support, but its good for now.  Priority for touch support is on the sliders. SWIPE SUPPORT IS NOT A PRIORITY
 
 
 var loadOnceCount = 0;

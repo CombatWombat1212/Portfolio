@@ -671,6 +671,8 @@ function MakeRight({ setPopup }) {
           </Section>
           
 
+          {/* TODO: next up just finish up this page, making the last component you need */}
+
 {/*           
           <Section type="passthrough" id="Delivery--Customer" background="tertiary" margin="none">
 
