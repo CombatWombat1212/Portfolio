@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import Button from "../../elements/Buttons";
 import Card from "./slider_subcomponents/Card";
 import { cardOnClickHandler } from "./slideshow_utilities/CardUtilities";
-import { sliderInit, sliderHandleMouseDown, sliderMouseMoveStart, sliderNotchOnClickHandler } from "./slideshow_utilities/SliderUtilities";
+import { sliderInit, sliderHandleMouseDown, sliderMouseMoveStart, sliderNotchOnClickHandler, sliderHandleTouchDown } from "./slideshow_utilities/SliderUtilities";
 import { slideShowButtonHandler, slideshowButtonsDisable, slideshowCheckInit, slideshowInit, slideshowSetPosition, slideshowUpdateCardStyle } from "./slideshow_utilities/SlideshowUtilities";
 
 // TODO: touch support, and keyboard support, but its good for now.  Priority for touch support is on the sliders. SWIPE SUPPORT IS NOT A PRIORITY
@@ -105,7 +105,7 @@ function Slideshow({ children, img }) {
               "--slider-section-end": `${group.sections.filter((section) => section.name == cardImage.section)[0].end}`,
             }}>
             <div className="slider--bar">
-              <div className="slider--handle" onMouseDown={sliderHandleMouseDown} onMouseMove={sliderMouseMoveStart}></div>
+              <div className="slider--handle" onMouseDown={sliderHandleMouseDown} onTouchStart={sliderHandleMouseDown} onMouseMove={sliderMouseMoveStart} onTouchMove={sliderMouseMoveStart}></div>
 
               {group.imgs.map((groupImg, i) => {
                 const section = group.sections.find((section) => section.name === cardImage.section);

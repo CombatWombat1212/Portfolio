@@ -12,14 +12,90 @@ var sliderHandle = {
 
 var sliderMouseGrabbed = 0;
 
+
+// function sliderHandleMouseMove(e, handle) {
+//   if (sliderMouseGrabbed < 2) return;
+
+//   if (e.type == "mousemove") {
+//     var bar = handle.parentElement;
+//     var slider = bar.parentElement;
+
+//     var mouse = { x: 0, y: 0 };
+//     mouse.x = e.clientX;
+
+//     sliderMouse.cur.x = mouse.x;
+
+//     var handlePos = sliderHandle.start.x + (sliderMouse.cur.x - sliderMouse.start.x);
+
+//     var barWidth = getElemWidth(bar);
+//     var handleWidth = getElemWidth(handle);
+
+//     var min = 0;
+//     var max = barWidth;
+
+//     if (handlePos < 0) handlePos = 0;
+//     if (handlePos > max) handlePos = max;
+
+//     var min = parseInt(slider.getAttribute("data-min"));
+//     var max = parseInt(slider.getAttribute("data-max"));
+
+//     var notch = barWidth / (max - min);
+
+//     var value = Math.round(handlePos / notch);
+
+//     slider.setAttribute("data-value", value);
+
+//     handlePos = Math.round(handlePos / notch) * notch;
+
+//     handle.style.setProperty("--slider-handle-left", `${handlePos}px`);
+//   } else if (e.type == "touchmove") {
+//     var bar = handle.parentElement;
+//     var slider = bar.parentElement;
+
+//     var touch = e.touches[0];
+
+//     var mouse = { x: 0, y: 0 };
+//     mouse.x = touch.clientX;
+
+//     sliderMouse.cur.x = mouse.x;
+
+//     var handlePos = sliderHandle.start.x + (sliderMouse.cur.x - sliderMouse.start.x);
+
+//     var barWidth = getElemWidth(bar);
+//     var handleWidth = getElemWidth(handle);
+
+//     var min = 0;
+//     var max = barWidth;
+
+//     if (handlePos < 0) handlePos = 0;
+//     if (handlePos > max) handlePos = max;
+
+//     var min = parseInt(slider.getAttribute("data-min"));
+//     var max = parseInt(slider.getAttribute("data-max"));
+
+//     var notch = barWidth / (max - min);
+
+//     var value = Math.round(handlePos / notch);
+
+//     slider.setAttribute("data-value", value);
+
+//     handlePos = Math.round(handlePos / notch) * notch;
+
+//     handle.style.setProperty("--slider-handle-left", `${handlePos}px`);
+//   }
+// }
+
 function sliderHandleMouseMove(e, handle) {
   if (sliderMouseGrabbed < 2) return;
 
   var bar = handle.parentElement;
   var slider = bar.parentElement;
 
+  var isTouchMove = e.type == "touchmove";
+  var touchOrMouse = isTouchMove ? e.touches[0] : e;
+
   var mouse = { x: 0, y: 0 };
-  mouse.x = e.clientX;
+  mouse.x = touchOrMouse.clientX;
 
   sliderMouse.cur.x = mouse.x;
 
@@ -48,6 +124,9 @@ function sliderHandleMouseMove(e, handle) {
   handle.style.setProperty("--slider-handle-left", `${handlePos}px`);
 }
 
+
+
+
 function sliderHandleSet(slider, index) {
   var bar = slider.querySelector(".slider--bar");
   var handle = slider.querySelector(".slider--handle");
@@ -69,11 +148,18 @@ function sliderHandleSet(slider, index) {
 function sliderMouseMoveStart(e) {
   var handle = e.target;
   var slider = handle.parentElement;
-  var mouse = { x: 0, y: 0 };
-  mouse.x = e.clientX;
 
-  if (sliderMouseGrabbed == 1) {
+  var mouse = { x: 0, y: 0 };
+
+  if (e.type == "mousemove" && sliderMouseGrabbed == 1) {
     sliderMouseGrabbed++;
+    mouse.x = e.clientX;
+    sliderMouse.start.x = mouse.x;
+    sliderHandle.start.x = splitPx(window.getComputedStyle(handle).getPropertyValue("--slider-handle-left"));
+  } else if (e.type == "touchmove" && sliderMouseGrabbed == 1) {
+    sliderMouseGrabbed++;
+    var touch = e.touches[0];
+    mouse.x = touch.clientX;
     sliderMouse.start.x = mouse.x;
     sliderHandle.start.x = splitPx(window.getComputedStyle(handle).getPropertyValue("--slider-handle-left"));
   }
@@ -92,12 +178,24 @@ function sliderHandleMouseDown(e) {
 
   document.body.classList.add("grabbed");
 
-  document.addEventListener("mousemove", (e) => {
-    sliderHandleMouseMove(e, handle);
-  });
-  document.addEventListener("mouseup", (e) => {
-    sliderHandleMouseUp(e, handle);
-  });
+  if (e.type == "mousedown") {
+    document.addEventListener("mousemove", (e) => {
+      sliderHandleMouseMove(e, handle);
+    });
+    document.addEventListener("mouseup", (e) => {
+      sliderHandleMouseUp(e, handle);
+    });
+  } else if (e.type == "touchstart") {
+    console.log(sliderMouseGrabbed);
+
+    document.addEventListener("touchmove", (e) => {
+      sliderHandleMouseMove(e, handle);
+    });
+
+    document.addEventListener("touchend", (e) => {
+      sliderHandleMouseUp(e, handle);
+    });
+  }
 }
 
 function sliderHandleMouseUp(e, handle) {
