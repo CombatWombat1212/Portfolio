@@ -214,6 +214,29 @@ function map(current, in_min, in_max, out_min, out_max) {
 
 
 
+function arrayItemDoesExist(arr) {
+  return arr != null && arr != undefined && arr != [] && arr != "" && arr.length > 0;
+}
+
+function capFirstRemovePeriod(val) {
+  if (typeof val == "array") {
+    val = val.map((str) => {
+      str.trim();
+      str = str.charAt(0).toUpperCase() + str.slice(1);
+      str = str[str.length - 1] === "." ? str.slice(0, -1) : str;
+      return str;
+    });
+  } else if (typeof val == "string") {
+    val.trim();
+    val = val.charAt(0).toUpperCase() + val.slice(1);
+    val = val[val.length - 1] === "." ? val.slice(0, -1) : val;
+  }
+  return val;
+}
+
+function getElemWidth(elem) {
+  return splitPx(getComputedStyle(elem).getPropertyValue("width")) + splitPx(getComputedStyle(elem).getPropertyValue("margin-left")) + splitPx(getComputedStyle(elem).getPropertyValue("margin-right"));
+}
 
 
-export { addStyleNonDestructive, addAttrNonDestructive, postScreenSizeToRoot, overflowEllipsis, splitPx, splitRem, splitS,loadImgExternally, getSiblingStyle, clamp, map, RESIZE_TIMEOUT };
+export { addStyleNonDestructive, addAttrNonDestructive, postScreenSizeToRoot, overflowEllipsis, splitPx, splitRem, splitS,loadImgExternally, getSiblingStyle, clamp, map, arrayItemDoesExist,capFirstRemovePeriod, getElemWidth, RESIZE_TIMEOUT };

@@ -660,6 +660,8 @@ function MakeRight({ setPopup }) {
 
           </Section>
           
+
+
           <Section type="passthrough" id="Delivery--Customer" background="tertiary" margin="none">
 
             <Slideshow img={MAKERIGHT_IMGS.customer_screen_06}>
@@ -669,6 +671,16 @@ function MakeRight({ setPopup }) {
           </Section>
           
 
+{/*           
+          <Section type="passthrough" id="Delivery--Customer" background="tertiary" margin="none">
+
+            <Slideshow img={MAKERIGHT_IMGS.customer_screen_06}>
+              <Heading>Customer user journey</Heading>
+            </Slideshow>
+
+          </Section>
+          
+ */}
 
 
 
