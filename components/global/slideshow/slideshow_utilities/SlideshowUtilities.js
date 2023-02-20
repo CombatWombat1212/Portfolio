@@ -1,5 +1,68 @@
 import { getElemWidth, map, RESIZE_TIMEOUT, splitPx, splitS } from "@/scripts/GlobalUtilities";
+import { slideshowGetCardImage } from "../Slideshow";
 import { sliderHandleSet } from "./SliderUtilities";
+
+
+var slideshows = [];
+
+function slideshowSwipeListenersInit(slideshow, container, group, setCardImage){
+
+  // add slideshow to slideshows if it is not already there
+  if(slideshows.includes(slideshow)) return
+  slideshows.push(slideshow);
+
+  console.log('added')
+  container.removeEventListener('swiped', (e)=>{slideshowContainerSwiped(e, group, setCardImage)}, true);
+  container.addEventListener('swiped', (e)=>{slideshowContainerSwiped(e, group, setCardImage)}, true);
+
+}
+
+
+
+function slideshowContainerSwiped(e, group, setCardImage){
+
+  if(e.detail.dir != 'left' && e.detail.dir != 'right') return;
+  var slideshow = e.target.closest(".slideshow");
+  var slider = slideshow.querySelector(".slider");
+  var dir = e.detail.dir;
+  
+  if(dir == 'left') dir = 'right';
+  else if(dir == 'right') dir = 'left';
+
+
+  console.log('ran')
+
+  var cardImage = slideshowGetCardImage(slideshow);
+  console.log(cardImage.index)
+  
+  var index = cardImage.index;
+  var move = 0;
+
+
+  if (dir == "left") move = -1;
+  else if (dir == "right") move = 1;
+
+  if (index <= 0 && move == -1) move = 0;
+  if (index >= group.imgs.length - 1 && move == 1) move = 0;
+  
+  
+  if (move == 0) return;
+  
+  
+  index += move;
+  var img = group.imgs[index];
+
+
+  setCardImage(img);
+  sliderHandleSet(slider, index);
+
+  
+}
+
+
+
+
+
 
 
 function slideshowSetPosition(container, index) {
@@ -62,6 +125,10 @@ function slideshowButtonsDisable(slideshow, cardImage, group) {
   }
 }
 
+
+
+
+
 function slideShowButtonHandler(e, cardImage, setCardImage, group, str) {
   var slideshow = e.target.closest(".slideshow");
   var container = slideshow.querySelector(".slideshow--container");
@@ -78,13 +145,18 @@ function slideShowButtonHandler(e, cardImage, setCardImage, group, str) {
   if (index <= 0 && move == -1) move = 0;
   if (index >= group.imgs.length - 1 && move == 1) move = 0;
 
-  index += move;
-
   if (move == 0) return;
+
+  
+  index += move;
   var img = group.imgs[index];
+
+
   setCardImage(img);
   sliderHandleSet(slider, index);
 }
+
+
 
 function slideshowUpdateCardStyle(slideshow, cardImage) {
   slideshow = slideshow.current ? slideshow.current : slideshow;
@@ -116,10 +188,12 @@ function slideshowCheckInit(container, setHitStartPoint) {
   }, currentTransition * 2);
 }
 
-function slideshowInit(group, slideshow, container, index) {
+function slideshowInit(group, slideshow, container, cardImage, setCardImage) {
   slideshow = slideshow.current;
   container = container.current;
 
+  var index = cardImage.index;
+  slideshowSwipeListenersInit(slideshow, container, group, setCardImage);
   slideshowResizeFunctions(slideshow, container, index);
 
   var empty = container.querySelector(".slideshow--empty");
@@ -236,4 +310,22 @@ function slideshowResizeFunctions(slideshow = null, container = null, index = nu
 
 
 
-export { slideShowButtonHandler, slideshowInit, slideshowSetPosition, slideshowUpdateCardStyle, slideshowCheckInit, slideshowButtonsDisable };
+function slideshowMouseDown(e){
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+export { slideShowButtonHandler, slideshowInit, slideshowSetPosition, slideshowUpdateCardStyle, slideshowCheckInit, slideshowButtonsDisable, slideshowMouseDown };

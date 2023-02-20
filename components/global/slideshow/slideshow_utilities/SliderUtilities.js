@@ -186,7 +186,6 @@ function sliderHandleMouseDown(e) {
       sliderHandleMouseUp(e, handle);
     });
   } else if (e.type == "touchstart") {
-    console.log(sliderMouseGrabbed);
 
     document.addEventListener("touchmove", (e) => {
       sliderHandleMouseMove(e, handle);
@@ -259,7 +258,6 @@ function sliderInit(slideshow, group, setCardImage) {
   var slider = slideshow.current.querySelector(".slider");
   sliderHandleInit(slider);
   sliderObserve(slider, group, setCardImage);
-  // sliderNotchesSetPos(slider);
 }
 
 export { sliderHandleMouseMove, sliderHandleSet, sliderMouseMoveStart, sliderHandleMouseDown, sliderHandleMouseUp, sliderNotchOnClickHandler, sliderHandler, sliderHandleInit, sliderObserve, sliderInit };

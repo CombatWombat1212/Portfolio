@@ -1238,7 +1238,6 @@ function processImage(key) {
 
 Object.keys(MAKERIGHT_IMGS).forEach(processImage);
 
-console.log(MAKERIGHT_IMG_GROUPS);
 
 
 

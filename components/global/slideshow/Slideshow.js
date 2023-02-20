@@ -5,10 +5,28 @@ import { useEffect, useRef, useState } from "react";
 import Button from "../../elements/Buttons";
 import Card from "./slider_subcomponents/Card";
 import { cardOnClickHandler } from "./slideshow_utilities/CardUtilities";
-import { sliderInit, sliderHandleMouseDown, sliderMouseMoveStart, sliderNotchOnClickHandler, sliderHandleTouchDown } from "./slideshow_utilities/SliderUtilities";
-import { slideShowButtonHandler, slideshowButtonsDisable, slideshowCheckInit, slideshowInit, slideshowSetPosition, slideshowUpdateCardStyle } from "./slideshow_utilities/SlideshowUtilities";
+import { sliderInit, sliderHandleMouseDown, sliderMouseMoveStart, sliderNotchOnClickHandler } from "./slideshow_utilities/SliderUtilities";
+import { slideShowButtonHandler, slideshowButtonsDisable, slideshowCheckInit, slideshowInit, slideshowMouseDown, slideshowSetPosition, slideshowUpdateCardStyle } from "./slideshow_utilities/SlideshowUtilities";
+import swipeEventsInit from "@/scripts/SwipeEvents";
 
 // TODO: touch support, and keyboard support, but its good for now.  Priority for touch support is on the sliders. SWIPE SUPPORT IS NOT A PRIORITY
+
+
+var loadOnceCount = 0;
+
+var slideshows = [];
+var cardImages = [];
+
+
+
+function slideshowGetCardImage(slideshow){
+  for(var i = 0; i < slideshows.length; i++){
+    if(slideshows[i] == slideshow){
+      return cardImages[i];
+    }
+  }
+}
+
 
 function Slideshow({ children, img }) {
   // TODO: should they be container__wide?
@@ -35,13 +53,30 @@ function Slideshow({ children, img }) {
   };
 
   useMountEffect(() => {
-    slideshowInit(group, slideshow, container);
+    slideshowInit(group, slideshow, container, cardImage, setCardImage);
     slideshowSetPosition(container, img.index);
     slideshowUpdateCardStyle(slideshow, img);
     slideshowCheckInit(container, setHitStartPoint);
 
     sliderInit(slideshow, group, setCardImage);
     // slideshow.current.querySelector(".slideshow--empty").style.setProperty("margin-left", `-${getElemWidth(container.current.children[1])* img.index}px`);
+
+    if(!slideshows.includes(slideshow.current)) slideshows.push(slideshow.current);
+    for (var i = 0; i < slideshows.length; i++) {
+      cardImages[i] = cardImage;
+    }
+
+
+    function once() {
+      swipeEventsInit();
+    }
+
+    if (loadOnceCount == 0) {
+      once();
+      loadOnceCount++;
+    }
+
+
   });
 
   var containerStyle = {
@@ -53,7 +88,16 @@ function Slideshow({ children, img }) {
     slideshowUpdateCardStyle(slideshow, cardImage);
     slideshowSetPosition(container, cardImage.index);
     slideshowButtonsDisable(slideshow, cardImage, group);
+
+    for (var i = 0; i < slideshows.length; i++) {
+      cardImages[i] = cardImage;
+    }
+
   }, [cardImage]);
+
+
+
+
 
   return (
     <div className="slideshow" style={cardGraphicStyle} ref={slideshow}>
@@ -65,7 +109,7 @@ function Slideshow({ children, img }) {
       </div>
 
       <div
-        className={`slideshow--container ${hitStartPoint ? "slideshow--container__visible" : "slideshow--container__hide"}`}
+        className={`slideshow--container ${hitStartPoint ? "slideshow--container__visible" : "slideshow--container__hide"}`} onTouchStart={slideshowMouseDown}
         style={{
           "--slide-img-index": `${cardImage.index}`,
         }}
@@ -136,3 +180,6 @@ function Slideshow({ children, img }) {
 }
 
 export default Slideshow;
+
+
+export {slideshowGetCardImage};
