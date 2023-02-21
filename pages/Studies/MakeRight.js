@@ -1,7 +1,7 @@
 import { StudyPanel } from "@/components/elements/Panel";
-import getStudy from "../../scripts/GetStudy";
-import CaseStudyPage from "/components/studies/CaseStudyPage";
-import Brief from "/components/studies/Brief";
+import { getStudy, getAdjacentStudy } from "../../scripts/GetStudy";
+import CaseStudyPage from "@/components/studies/CaseStudyPage";
+import Brief from "@/components/studies/Brief";
 import { Section, Chapter, Title, Column, Heading, Description, Graphic, Quote } from "@/components/sections/Sections";
 import MAKERIGHT_IMGS from "/data/MAKERIGHT_IMGS";
 import Gantt from "/components/charts/Gantt";
@@ -10,19 +10,17 @@ import DLink from "@/components/utilities/DynamicLink";
 import PieChart from "@/components/charts/PieChart";
 import Button from "@/components/elements/Buttons";
 import Slideshow from "@/components/global/slideshow/Slideshow";
-import NextStudy from "@/components/studies/NextStudy";
+import NextStudies from "@/components/studies/NextStudies";
 
 // TODO: add the interactive chapter selection thingy
 
 function MakeRight({ setPopup }) {
   const study = getStudy();
 
+
   return (
     <>
-      <CaseStudyPage id={study.id}>
-        <StudyPanel variant="study" study={study} />
-
-        <Brief brief={study.brief} />
+      <CaseStudyPage id={study.id} study={study}>
 
         <Chapter id="Overview" name="Overview">
           <Section id="Overview--Background" type="overview">
@@ -779,32 +777,12 @@ function MakeRight({ setPopup }) {
               </Description>
             </Column>
           </Section>
+
+
+
+
+
         </Chapter>
-
-
-
-
-
-        <Section id="Closing--Next" type="columns" titled>
-            <Column>
-            <NextStudy></NextStudy>
-            </Column>
-
-            <Column>
-            <NextStudy></NextStudy>
-            </Column>
-          </Section>
-
-
-
-
-
-
-
-
-
-
-
 
 
       </CaseStudyPage>

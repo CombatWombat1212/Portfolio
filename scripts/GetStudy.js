@@ -12,4 +12,12 @@ function getStudy() {
   return study;
 }
 
-export default getStudy;
+function getAdjacentStudy(currentStudy, n) {
+  const studyCount = CASE_STUDIES.length;
+  const currentStudyIndex = CASE_STUDIES.findIndex((study) => study.link === currentStudy.link);
+  const nextStudyIndex = (currentStudyIndex + n + studyCount) % studyCount;
+  return CASE_STUDIES[nextStudyIndex];
+}
+
+
+export { getStudy, getAdjacentStudy };

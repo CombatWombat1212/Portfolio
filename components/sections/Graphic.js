@@ -8,8 +8,11 @@ import { getBackgroundClasses } from "./sections_utilities/GetClasses";
 
 
 
-function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup, width, height }) {
 
+
+
+function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup, width, height }) {
+  
 
   // TODO: for mobile, add some kind of indication animation of the image being clocked on when its interactable or can be opened in a lightbox
 
@@ -23,7 +26,6 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
 
   width = width ? width : img.width;
   height = height ? height : img.height;
-
 
   var hasButton = false;
   if (children) {
@@ -43,10 +45,9 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
   lightbox = lightbox ? lightbox : false;
   zoom = zoom ? true : false;
   if (lightbox) {
-
     var lightboxImg = img;
 
-    if(typeof lightbox == "object"){
+    if (typeof lightbox == "object") {
       lightboxImg = lightbox;
     }
 
@@ -83,5 +84,8 @@ Graphic.defaultProps = {
 Graphic.propTypes = {
   type: PropTypes.oneOf(["image", "img", "mask"]),
 };
+
+
+
 
 export default Graphic;

@@ -11,7 +11,7 @@ function Tag({ children, variant }) {
 
   return (
     <>
-      <div className={tagClasses}>{children}</div>
+      <div className={`${tagClasses} text-size-h4`}>{children}</div>
     </>
   );
 }

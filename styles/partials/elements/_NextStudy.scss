@@ -1,8 +1,61 @@
-.next-study{
+.next-study {
+  &--group {
+    margin-bottom: var(--section-gap);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr;
+  }
 
+  --next-study-pad: 2rem;
 
+  background-color: $col-background_darkest;
+  @include b-rad;
+  display: flex;
+  position: relative;
 
+  &--background {
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: calc(100% - var(--next-study-pad));
+    height: calc(100% - var(--button-height));
+    padding-right: var(--next-study-pad);
+    .graphic--img {
+      height: 70%;
+      margin: auto;
+      margin-right:0;
+      img {
+        @include img-contain;
+      }
+    }
+  }
 
+  &--body {
+    padding: var(--next-study-pad);
+  }
 
-    
+  &--description {
+    margin-top: 0.5rem !important;
+  }
+
+  &--inner {
+    @include flex-col;
+  }
+
+  &--tags {
+    @include flex-row;
+    margin-top: 1.25rem;
+    gap: 0.625rem;
+  }
+
+  &--title {
+  }
+
+  &--button {
+    margin-top: auto;
+
+    width: calc(100% - (var(--next-study-pad) * 2));
+    padding: 0rem var(--next-study-pad);
+  }
 }

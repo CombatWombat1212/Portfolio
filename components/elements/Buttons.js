@@ -35,44 +35,86 @@ function ButtonIcon({ img, type }) {
   );
 }
 
-function Button({ children, className, type, icon, animation,color, ...props }) {
+function Inner({ children, className, type, icon, animation, color, tag, ...props }) {
+  if (typeof icon == "string") icon = icon.split(" ");
+  if (icon?.length < 3) console.error("Button icon prop must be a string with 3 values separated by spaces, or an array of those same three values. These are the values: [iconName, iconSide, iconType]. Icon name must match the name of the imported image in the ICONS.js file.  The iconSide value must be either 'left', 'right', or 'alone'. The iconType value must be either 'img' or 'mask ");
+
   if (icon) var [iconName, iconSide, iconType] = icon;
 
   return (
     <>
-      <DLink
-        className={
-            "button" +
-            (className ? ` ${className}` : "") +
-            (type ? ` button__${type}` : "") +
-            (color ? ` button__${color}` : "") +
-            (iconSide ? ` button__${iconSide}` : "") +
-            (animation ? ` button__${animation}` : "")
-        }
-        tabIndex="0"
-        {...props}>
-        {icon ? (
-          <>
-            {iconSide == "left" || (iconSide == "alone" && <ButtonIcon img={iconName} type={iconType}></ButtonIcon>)}
-            {iconSide != "alone" && <ButtonCopy>{children}</ButtonCopy>}
-            {iconSide == "right" && <ButtonIcon img={iconName} type={iconType}></ButtonIcon>}
-          </>
-        ) : (
-          <>{iconSide != "alone" && <ButtonCopy>{children}</ButtonCopy>}</>
-        )}
-      </DLink>
+      {icon ? (
+        <>
+          {iconSide == "left" || (iconSide == "alone" && <ButtonIcon img={iconName} type={iconType}></ButtonIcon>)}
+          {iconSide != "alone" && <ButtonCopy>{children}</ButtonCopy>}
+          {iconSide == "right" && <ButtonIcon img={iconName} type={iconType}></ButtonIcon>}
+        </>
+      ) : (
+        <>{iconSide != "alone" && <ButtonCopy>{children}</ButtonCopy>}</>
+      )}
     </>
   );
 }
 
+// function Button({ children, className, type, icon, animation, color, tag, ...props }) {
+//   if (icon) var [iconName, iconSide, iconType] = icon;
+
+//   const isA = tag == "a" ? true : false;
+
+//   return (
+//     <>
+//       {isA ? (
+//         <DLink className={"button" + (className ? ` ${className}` : "") + (type ? ` button__${type}` : "") + (color ? ` button__${color}` : "") + (iconSide ? ` button__${iconSide}` : "") + (animation ? ` button__${animation}` : "")} tabIndex="0" {...props}>
+//           <Inner className={className} type={type} icon={icon} animation={animation} color={color} tag={tag} {...props}>
+//             {children}
+//           </Inner>
+//         </DLink>
+//       ) : (
+//         <div className={"button" + (className ? ` ${className}` : "") + (type ? ` button__${type}` : "") + (color ? ` button__${color}` : "") + (iconSide ? ` button__${iconSide}` : "") + (animation ? ` button__${animation}` : "")} tabIndex="0" {...props}>
+//           <Inner className={className} type={type} icon={icon} animation={animation} color={color} tag={tag} {...props}>
+//             {children}
+//           </Inner>
+//         </div>
+//       )}
+//     </>
+//   );
+// }
+
+function Button({ children, className, type, icon, animation, color, tag = 'button', ...props }) {
+  const ButtonWrapper = tag === 'a' ? DLink : tag;
+
+  const [iconName, iconSide, iconType] = icon || [];
+
+  const buttonClasses = ['button'];
+  if (className) buttonClasses.push(className);
+  if (type) buttonClasses.push(`button__${type}`);
+  if (color) buttonClasses.push(`button__${color}`);
+  if (iconSide) buttonClasses.push(`button__${iconSide}`);
+  if (animation) buttonClasses.push(`button__${animation}`);
+
+  return (
+    <ButtonWrapper className={buttonClasses.join(' ')} tabIndex="0" {...props}>
+      <Inner className={className} type={type} icon={icon} animation={animation} color={color} tag={tag} {...props}>
+        {children}
+      </Inner>
+    </ButtonWrapper>
+  );
+}
+
+
+
+
+
 Button.defaultProps = {
   type: "regular",
   color: "secondary",
+  tag: "a",
 };
 
 Button.propTypes = {
-  color: propTypes.oneOf(["primary", "secondary", "tertiary", "transparent-primary", "transparent-secondary", "transparent-tertiary","transparent-background", "background-primary","background-secondary"]),
+  color: propTypes.oneOf(["primary", "secondary", "tertiary", "transparent-primary", "transparent-secondary", "transparent-tertiary", "transparent-background", "background-primary", "background-secondary"]),
   type: propTypes.oneOf(["regular", "bottom"]),
+  tag: propTypes.oneOf(["a", "div"]),
 };
 
 export default Button;
