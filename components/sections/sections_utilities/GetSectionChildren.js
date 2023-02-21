@@ -3,7 +3,6 @@ import { getColClassList } from "./GetClasses";
 
 function organizeChildren(allChildren) {
   var allTypes = [...DEFINED_CHILDREN, "Other"];
-
   var arr = [];
 
   if (allChildren.length == undefined) allChildren = [allChildren];

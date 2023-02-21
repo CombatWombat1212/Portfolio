@@ -20,6 +20,7 @@ const BACKGROUND_COLORS = ["background", "background darker", "background darkes
 // and background should really be renammed to something else because in this case it means a literal section describing background information, but everywhere else in this file it refers to the background color
 const SECTION_TYPE_A = ["default", "overview", "logo banner"];
 const SECTION_TYPE_B = ["pitch"];
+// TODO: pitch is depreciated
 const SECTION_TYPE_C = ["columns"];
 const SECTION_TYPE_D = ["passthrough"];
 const SECTION_TYPES = [...SECTION_TYPE_A, ...SECTION_TYPE_B, ...SECTION_TYPE_C, ...SECTION_TYPE_D];
@@ -78,6 +79,8 @@ function Section({ className, children, type, background, id, margin, titled, ar
               </>
             ) : SECTION_TYPE_B.indexOf(type) != -1 ? (
               <>
+                  {children}
+
                 {/* <div className={`section--copy ${copyClassName} col-3`}>
                   <>{graphic[0]}</>
                   {heading && <>{heading}</>}
@@ -86,7 +89,7 @@ function Section({ className, children, type, background, id, margin, titled, ar
                   <div className="col-8">
                   <>{graphic[1]}</>
                 </div> */}
-                <Pitch copyClassName={copyClassName}>{children}</Pitch>
+                {/* <PitchGroup copyClassName={copyClassName}>{children}</PitchGroup> */}
               </>
             ) : SECTION_TYPE_C.indexOf(type) != -1 ? (
               <>
@@ -139,6 +142,7 @@ var SECTION_DEFAULT_PROPS = Section.defaultProps;
 var SECTION_PROP_TYPES = Section.propTypes;
 import Chapter from "./Chapter";
 import Pitch from "./Pitch";
+import PitchGroup from "./Pitch";
 export { SECTION_DEFAULT_PROPS, SECTION_PROP_TYPES };
 
 export default Section;
