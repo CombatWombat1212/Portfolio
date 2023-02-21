@@ -1,6 +1,7 @@
 import toggle from "@/scripts/AnimationTools";
 import { getAdjacentStudy } from "@/scripts/GetStudy";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
+import Link from "next/link";
 import { useRef } from "react";
 import Button from "../elements/Buttons";
 import Tag from "../elements/Tag";
@@ -67,7 +68,7 @@ function Study({ study }) {
   const reference = useRef(null);
 
   return (
-    <a
+    <Link
       ref={reference}
       className="next-study"
       onMouseEnter={(e) => {
@@ -82,7 +83,9 @@ function Study({ study }) {
       onBlur={(e) => {
         studyMouseLeave(e, reference);
       }}
-      tabIndex="0">
+      tabIndex="0"
+        href={study.link}
+      >
       <div className="next-study--background">
         <Graphic className="next-study--graphic" img={study.imgs.main} effect="gradient to-left transparent-to-background-darker transparent-to-background-darkest" />
       </div>
@@ -97,7 +100,7 @@ function Study({ study }) {
           Have a look-see
         </Button>
       </div>
-    </a>
+    </Link>
   );
 }
 

@@ -14,6 +14,9 @@
   position: relative;
   cursor: pointer;
 
+  text-decoration: none;
+  color: $col-primary;
+
   @include hover {
     background-color: $col-background_darkest;
   }
@@ -35,12 +38,6 @@
     margin-right: 0;
     transform: scale(1);
 
-
-    img {
-      @include img-contain;
-    }
-    
-    
     @include hover {
       transform: scale(1.025);
     }
