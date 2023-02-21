@@ -7,7 +7,7 @@ function getElemClasses(pref, type, titled) {
   var elemClasses = `${pref}`;
   if (type == undefined) return elemClasses;
   if (type == "overview") elemClasses += ` ${pref}__overview`;
-  if (type == "pitch") elemClasses += ` ${pref}__pitch`;
+  if (pref == "section" && type == "pitch") elemClasses += ` pitch ${pref}__pitch`;
   if (pref == "section" && titled) elemClasses += ` flex-col`;
 
   return elemClasses;

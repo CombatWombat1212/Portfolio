@@ -22,49 +22,65 @@ const MAKERIGHT_IMGS = {
     height: 162.04,
   },
 
-  pitch_choose: {
-    name: "pitch_choose",
-    src: "./assets/images/case_studies/makeright/pitch_choose.svg",
+
+
+
+
+
+
+  pitch_vector_choose: {
+    name: "pitch_vector_choose",
+    src: "./assets/images/case_studies/makeright/pitch/pitch_vector_choose.svg",
     alt: "A graphic of a 3D model of a boat being clicked on",
     width: 102.24,
     height: 128.4,
   },
 
-  pitch_tweak: {
-    name: "pitch_tweak",
-    src: "./assets/images/case_studies/makeright/pitch_tweak.svg",
+  pitch_vector_tweak: {
+    name: "pitch_vector_tweak",
+    src: "./assets/images/case_studies/makeright/pitch/pitch_vector_tweak.svg",
     alt: "A graphic of a boat with different paint-job options",
     width: 96.56,
     height: 119.75,
   },
 
-  pitch_order: {
-    name: "pitch_order",
-    src: "./assets/images/case_studies/makeright/pitch_order.svg",
+  pitch_vector_order: {
+    name: "pitch_vector_order",
+    src: "./assets/images/case_studies/makeright/pitch/pitch_vector_order.svg",
     alt: "A graphic of a 3D printed boat inside a shopping cart",
     width: 110.73,
     height: 100.59,
   },
 
-  pitch_recieve: {
-    name: "pitch_recieve",
-    src: "./assets/images/case_studies/makeright/pitch_recieve.svg",
+  pitch_vector_recieve: {
+    name: "pitch_vector_recieve",
+    src: "./assets/images/case_studies/makeright/pitch/pitch_vector_recieve.svg",
     alt: "A graphic of a gift-wrapped 3D printed boat on a doorstep",
     width: 96.95,
     height: 117.8,
   },
 
+
+
+
+
+
+
+
+
+
+
   pitch_laptop_choose: {
     name: "pitch_laptop_choose",
-    src: "./assets/images/case_studies/makeright/pitch_laptop_choose.png",
+    src: "./assets/images/case_studies/makeright/pitch/pitch_laptop_choose.png",
     alt: "MakeRight UI screenshot showing a storefront page filled with different 3D models",
-    width: 102.24,
-    height: 128.4,
+    width: 2952,
+    height: 1743,
   },
 
   pitch_laptop_tweak: {
     name: "pitch_laptop_tweak",
-    src: "./assets/images/case_studies/makeright/pitch_laptop_tweak.png",
+    src: "./assets/images/case_studies/makeright/pitch/pitch_laptop_tweak.png",
     alt: "MakeRight UI screenshot showing the ability to customize the scale, color, and material of your 3D printed object",
     width: 2952,
     height: 1743,
@@ -72,7 +88,7 @@ const MAKERIGHT_IMGS = {
 
   pitch_laptop_order: {
     name: "pitch_laptop_order",
-    src: "./assets/images/case_studies/makeright/pitch_laptop_order.png",
+    src: "./assets/images/case_studies/makeright/pitch/pitch_laptop_order.png",
     alt: "MakeRight UI screenshot showing the order ticket page, where a plastic boat has been purchased",
     width: 2952,
     height: 1743,
@@ -80,11 +96,82 @@ const MAKERIGHT_IMGS = {
 
   pitch_laptop_recieve: {
     name: "pitch_laptop_recieve",
-    src: "./assets/images/case_studies/makeright/pitch_laptop_recieve.png",
+    src: "./assets/images/case_studies/makeright/pitch/pitch_laptop_recieve.png",
     alt: "MakeRight UI screenshot showing a message from your assigned 3D printer - your order is ready and images are attatched to the message to prove it",
     width: 2952,
     height: 1743,
   },
+
+
+
+
+  pitch_laptop_frame: {
+    name: "pitch_laptop_frame",
+    src: "./assets/images/case_studies/makeright/pitch/pitch_laptop_frame.png",
+    alt: "Empty frame of a laptop bordering a screenshot of the MakeRight UI",
+    width: 2952,
+    height: 1743,
+  },
+
+
+
+
+  pitch_mockup_choose: {
+    name: "pitch_mockup_choose",
+    src: "./assets/images/case_studies/makeright/pitch/pitch_mockup_choose.png",
+    alt: "MakeRight UI screenshot showing a storefront page filled with different 3D models",
+    width: 2952,
+    height: 1743,
+  },
+
+  pitch_mockup_tweak: {
+    name: "pitch_mockup_tweak",
+    src: "./assets/images/case_studies/makeright/pitch/pitch_mockup_tweak.png",
+    alt: "MakeRight UI screenshot showing the ability to customize the scale, color, and material of your 3D printed object",
+    width: 2952,
+    height: 1743,
+  },
+
+  pitch_mockup_order: {
+    name: "pitch_mockup_order",
+    src: "./assets/images/case_studies/makeright/pitch/pitch_mockup_order.png",
+    alt: "MakeRight UI screenshot showing the order ticket page, where a plastic boat has been purchased",
+    width: 2952,
+    height: 1743,
+  },
+
+  pitch_mockup_recieve: {
+    name: "pitch_mockup_recieve",
+    src: "./assets/images/case_studies/makeright/pitch/pitch_mockup_recieve.png",
+    alt: "MakeRight UI screenshot showing a message from your assigned 3D printer - your order is ready and images are attatched to the message to prove it",
+    width: 2952,
+    height: 1743,
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   building_makeright_banner: {
     name: "building_makeright_banner",

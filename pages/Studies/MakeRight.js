@@ -10,18 +10,16 @@ import DLink from "@/components/utilities/DynamicLink";
 import PieChart from "@/components/charts/PieChart";
 import Button from "@/components/elements/Buttons";
 import Slideshow from "@/components/global/slideshow/Slideshow";
-import NextStudies from "@/components/studies/NextStudies";
+import Pitch from "@/components/sections/Pitch";
 
 // TODO: add the interactive chapter selection thingy
 
 function MakeRight({ setPopup }) {
   const study = getStudy();
 
-
   return (
     <>
       <CaseStudyPage id={study.id} study={study}>
-
         <Chapter id="Overview" name="Overview">
           <Section id="Overview--Background" type="overview">
             <Title>Background</Title>
@@ -84,8 +82,8 @@ function MakeRight({ setPopup }) {
                 <br /> or upload your own
               </p>
             </Description>
-            <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_choose"]} />
-            <Graphic type="image" img={MAKERIGHT_IMGS["pitch_laptop_choose"]} />
+            <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_choose"]} />
+            <Graphic type="image" img={MAKERIGHT_IMGS["pitch_mockup_choose"]} />
           </Section>
 
           <Section id="Pitch--Tweak" type="pitch" margin="wide">
@@ -97,8 +95,8 @@ function MakeRight({ setPopup }) {
                 to suit your needs
               </p>
             </Description>
-            <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_tweak"]} />
-            <Graphic type="image" img={MAKERIGHT_IMGS["pitch_laptop_tweak"]} />
+            <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_tweak"]} />
+            <Graphic type="image" img={MAKERIGHT_IMGS["pitch_mockup_tweak"]} />
           </Section>
 
           <Section id="Pitch--Order" type="pitch" margin="wide">
@@ -109,8 +107,8 @@ function MakeRight({ setPopup }) {
                 to one of our verified makers
               </p>
             </Description>
-            <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_order"]} />
-            <Graphic type="image" img={MAKERIGHT_IMGS["pitch_laptop_order"]} />
+            <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_order"]} />
+            <Graphic type="image" img={MAKERIGHT_IMGS["pitch_mockup_order"]} />
           </Section>
 
           <Section id="Pitch--Recieve" type="pitch" margin="wide">
@@ -118,8 +116,8 @@ function MakeRight({ setPopup }) {
             <Description>
               <p>right at your front door</p>
             </Description>
-            <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_recieve"]} />
-            <Graphic type="image" img={MAKERIGHT_IMGS["pitch_laptop_recieve"]} />
+            <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_recieve"]} />
+            <Graphic type="image" img={MAKERIGHT_IMGS["pitch_mockup_recieve"]} />
           </Section>
 
           <Section id="Pitch--Summary" type="columns" background="background">
@@ -777,14 +775,7 @@ function MakeRight({ setPopup }) {
               </Description>
             </Column>
           </Section>
-
-
-
-
-
         </Chapter>
-
-
       </CaseStudyPage>
     </>
   );

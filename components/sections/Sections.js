@@ -78,14 +78,15 @@ function Section({ className, children, type, background, id, margin, titled, ar
               </>
             ) : SECTION_TYPE_B.indexOf(type) != -1 ? (
               <>
-                <div className={`section--copy ${copyClassName} col-3`}>
+                {/* <div className={`section--copy ${copyClassName} col-3`}>
                   <>{graphic[0]}</>
                   {heading && <>{heading}</>}
                   {description && <>{description}</>}
-                </div>
-                <div className="col-8">
+                  </div>
+                  <div className="col-8">
                   <>{graphic[1]}</>
-                </div>
+                </div> */}
+                <Pitch copyClassName={copyClassName}>{children}</Pitch>
               </>
             ) : SECTION_TYPE_C.indexOf(type) != -1 ? (
               <>
@@ -137,6 +138,7 @@ Section.propTypes = {
 var SECTION_DEFAULT_PROPS = Section.defaultProps;
 var SECTION_PROP_TYPES = Section.propTypes;
 import Chapter from "./Chapter";
+import Pitch from "./Pitch";
 export { SECTION_DEFAULT_PROPS, SECTION_PROP_TYPES };
 
 export default Section;

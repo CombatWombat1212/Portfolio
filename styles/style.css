@@ -2981,6 +2981,16 @@ body {
   justify-content: space-between;
 }
 
+.pitch--graphic {
+  position: relative;
+}
+
+.pitch--laptop {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+}
+
 .graph--wrapper {
   background-color: #F3F3F7;
   height: var(--graph-height);
