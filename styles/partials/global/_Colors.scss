@@ -22,8 +22,34 @@ $col-background_darker: #E9E9F2;
 $col-background_darkest: #E0E0EA;
 
 
+$colors: (
+  primary: $col-primary,
+  primary-hovered: darken($col-primary, 5%),
+  secondary: $col-secondary,
+  secondary-hovered: $col-secondary-hovered,
+  tertiary-light: $col-tertiary_light,
+  tertiary: $col-tertiary,
+  tertiary-makeright: $col-tertiary_makeright,
+  background: $col-background,
+  background-darker: $col-background_darker,
+  background-darkest: $col-background_darkest
+);
 
 
+:root {
+    
+    @each $name, $value in $colors {
+        --col-#{$name}: #{$value};
+    }
+    
+    $color-names: ();
+    @each $name, $value in $colors {
+      $color-names: append($color-names, unquote("--col-#{ $name }"), comma);
+    }
+    --colors: #{ $color-names };
+        
+}
+  
 
 
 

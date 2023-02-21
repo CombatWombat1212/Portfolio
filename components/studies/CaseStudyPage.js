@@ -1,4 +1,5 @@
 import { StudyPanel } from "../elements/Panel";
+import Section from "../sections/Sections";
 import Brief from "./Brief";
 import NextStudies from "./NextStudies";
 
@@ -11,7 +12,7 @@ function CaseStudyPage({ id, study, children }) {
 
       {children}
 
-      <NextStudies study={study} />
+      <Section type="passthrough"><NextStudies study={study} /></Section>
 
     </div>
   );

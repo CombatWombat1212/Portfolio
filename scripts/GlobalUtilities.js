@@ -239,4 +239,26 @@ function getElemWidth(elem) {
 }
 
 
-export { addStyleNonDestructive, addAttrNonDestructive, postScreenSizeToRoot, overflowEllipsis, splitPx, splitRem, splitS,loadImgExternally, getSiblingStyle, clamp, map, arrayItemDoesExist,capFirstRemovePeriod, getElemWidth, RESIZE_TIMEOUT };
+function getColors() {
+  // return new Promise((resolve) => {
+  //   if (document.readyState === "complete") {
+  //     resolve();
+  //   } else {
+  //     window.addEventListener("load", resolve);
+  //   }
+  // }).then(() => {
+    var rootStyles = getComputedStyle(document.documentElement);
+    var colorsList = rootStyles.getPropertyValue("--colors").trim();
+    var colorNames = colorsList.split(",");
+    var colors = {};
+
+    for (let i = 0; i < colorNames.length; i++) {
+      var colorName = colorNames[i].trim();
+      var colorValue = rootStyles.getPropertyValue(colorName).trim();
+      colors[colorName] = { name: colorName, value: colorValue };
+    }
+    return colors;
+  // });
+}
+
+export { addStyleNonDestructive, addAttrNonDestructive, postScreenSizeToRoot, overflowEllipsis, splitPx, splitRem, splitS,loadImgExternally, getSiblingStyle, clamp, map, arrayItemDoesExist,capFirstRemovePeriod, getElemWidth, getColors, RESIZE_TIMEOUT };

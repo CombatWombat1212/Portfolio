@@ -93,6 +93,31 @@
     }
   }
 
+  &--main {
+    @include flex-row;
+    margin-top: calc(var(--section-text-spacing) * 1.75);
+
+    &.mt-less {
+      margin-top: calc(var(--section-text-spacing) * 1.25);
+    }
+
+    &__grid {
+      display: grid;
+    }
+
+    &__title-above {
+      margin-top: calc((var(--section_title-above-offset) * -1) + var(--font-margin-bottom-h4));
+    }
+  }
+
+  .column {
+    // When you add a min width of any value to a column, preferably a value that it wont ever reach cause its such a small number, then the column's width appears to lock at the width it should be, i.e. 2 columns at 50% width, 3 columns at 33.3333%, and so on. not sure why! but it works!
+    min-width: 0.1rem;
+    position: relative;
+  }
+}
+
+.section {
   .graphic {
     --img-panel-height: 12rem;
 
@@ -101,6 +126,7 @@
 
     &--img {
       display: flex;
+      position: relative;
       img {
         @include img-contain;
       }
@@ -129,13 +155,11 @@
     &--caption {
       margin-top: var(--section-text-spacing);
 
-
-      
       &__above {
         margin-top: 0;
         margin-bottom: calc(var(--section-text-spacing) * 0.5);
       }
-      
+
       &__split {
         @include flex-row-between;
         align-items: flex-end;
@@ -143,14 +167,37 @@
           margin: 0;
         }
       }
-      
-
 
       &.mt-more {
         margin-top: calc(var(--section-text-spacing) * 1.2);
       }
     }
-    
+
+    &--effect {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      &__gradient {
+        // --color-11;
+        // --color-12;
+        // --direction;
+
+        z-index:2;
+        background-image: linear-gradient(var(--direction), var(--color-1) 0%, var(--color-2) 140%);
+      }
+      
+      @include trans;
+
+      &__on.hover {
+        opacity: 0;
+      }
+      &__off.hover {
+        opacity: 1;
+      }
+    }
 
     &__container {
       padding: 0;
@@ -173,29 +220,6 @@
         }
       }
     }
-  }
-
-  &--main {
-    @include flex-row;
-    margin-top: calc(var(--section-text-spacing) * 1.75);
-
-    &.mt-less {
-      margin-top: calc(var(--section-text-spacing) * 1.25);
-    }
-
-    &__grid {
-      display: grid;
-    }
-
-    &__title-above {
-      margin-top: calc((var(--section_title-above-offset) * -1) + var(--font-margin-bottom-h4));
-    }
-  }
-
-  .column {
-    // When you add a min width of any value to a column, preferably a value that it wont ever reach cause its such a small number, then the column's width appears to lock at the width it should be, i.e. 2 columns at 50% width, 3 columns at 33.3333%, and so on. not sure why! but it works!
-    min-width: 0.1rem;
-    position: relative;
   }
 }
 

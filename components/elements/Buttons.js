@@ -80,7 +80,7 @@ function Inner({ children, className, type, icon, animation, color, tag, ...prop
 //   );
 // }
 
-function Button({ children, className, type, icon, animation, color, tag = 'button', ...props }) {
+function Button({ children, className, type, icon, animation, color, tag, ...props }) {
   const ButtonWrapper = tag === 'a' ? DLink : tag;
 
   const [iconName, iconSide, iconType] = icon || [];
@@ -92,8 +92,10 @@ function Button({ children, className, type, icon, animation, color, tag = 'butt
   if (iconSide) buttonClasses.push(`button__${iconSide}`);
   if (animation) buttonClasses.push(`button__${animation}`);
 
+  var tabIndex = tag === 'a' ? 0 : null;
+
   return (
-    <ButtonWrapper className={buttonClasses.join(' ')} tabIndex="0" {...props}>
+    <ButtonWrapper className={buttonClasses.join(' ')} tabIndex={tabIndex} {...props}>
       <Inner className={className} type={type} icon={icon} animation={animation} color={color} tag={tag} {...props}>
         {children}
       </Inner>

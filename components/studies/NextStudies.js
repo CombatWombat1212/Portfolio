@@ -1,10 +1,36 @@
+import toggle from "@/scripts/AnimationTools";
 import { getAdjacentStudy } from "@/scripts/GetStudy";
+import { useMountEffect } from "@/scripts/hooks/useMountEffect";
+import { useRef } from "react";
 import Button from "../elements/Buttons";
 import Tag from "../elements/Tag";
 import { Column } from "../sections/Columns";
 import Description from "../sections/Description";
 import Graphic from "../sections/Graphic";
 import Heading from "../sections/Heading";
+
+const STUDY_HOVER_AFFECTED = ["next-study", "next-study--button", "graphic--effect__default", "graphic--effect__hover", "next-study--graphic"];
+
+function studyMouseEnter(e, reference) {
+  var card = reference.current;
+
+  for (var i = 0; i < STUDY_HOVER_AFFECTED.length; i++) {
+    var target;
+    if (STUDY_HOVER_AFFECTED[i] == "next-study") target = card;
+    else target = card.querySelector(`.${STUDY_HOVER_AFFECTED[i]}`);
+    target.classList.add(`hover`);
+  }
+}
+
+function studyMouseLeave(e, reference) {
+  var card = reference.current;
+  for (var i = 0; i < STUDY_HOVER_AFFECTED.length; i++) {
+    var target;
+    if (STUDY_HOVER_AFFECTED[i] == "next-study") target = card;
+    else target = card.querySelector(`.${STUDY_HOVER_AFFECTED[i]}`);
+    target.classList.remove(`hover`);
+  }
+}
 
 function Tags({ study }) {
   const hasTags = study.tags?.length > 0;
@@ -38,10 +64,27 @@ function Copy({ study }) {
 }
 
 function Study({ study }) {
+  const reference = useRef(null);
+
   return (
-    <a className="next-study">
+    <a
+      ref={reference}
+      className="next-study"
+      onMouseEnter={(e) => {
+        studyMouseEnter(e, reference);
+      }}
+      onMouseLeave={(e) => {
+        studyMouseLeave(e, reference);
+      }}
+      onFocus={(e) => {
+        studyMouseEnter(e, reference);
+      }}
+      onBlur={(e) => {
+        studyMouseLeave(e, reference);
+      }}
+      tabIndex="0">
       <div className="next-study--background">
-        <Graphic img={study.imgs.main}></Graphic>
+        <Graphic className="next-study--graphic" img={study.imgs.main} effect="gradient to-left transparent-to-background-darker transparent-to-background-darkest" />
       </div>
 
       <div className="next-study--inner">
@@ -50,7 +93,9 @@ function Study({ study }) {
           <Tags study={study} />
         </div>
 
-        <Button tag="div" type="bottom" className="next-study--button just-bet" icon={["arrow_right", "right", "mask"]} animation="pulse-right">Have a look-see</Button>
+        <Button tag="div" type="bottom" className="next-study--button link" icon={["arrow_right", "right", "mask"]} animation="pulse-right">
+          Have a look-see
+        </Button>
       </div>
     </a>
   );
@@ -65,7 +110,7 @@ function NextStudies({ study }) {
   var adjacentStudies = [first, second];
 
   return (
-    <div className="next-study--group gap-4 section--wrapper container">
+    <div className="next-study--group gap-4">
       {adjacentStudies.map((study, index) => (
         <Study study={study} key={study.key} />
       ))}

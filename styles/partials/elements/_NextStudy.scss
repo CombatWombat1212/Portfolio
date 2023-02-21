@@ -8,10 +8,15 @@
 
   --next-study-pad: 2rem;
 
-  background-color: $col-background_darkest;
+  background-color: $col-background_darker;
   @include b-rad;
   display: flex;
   position: relative;
+  cursor: pointer;
+
+  @include hover {
+    background-color: $col-background_darkest;
+  }
 
   &--background {
     position: absolute;
@@ -21,14 +26,29 @@
     width: calc(100% - var(--next-study-pad));
     height: calc(100% - var(--button-height));
     padding-right: var(--next-study-pad);
-    .graphic--img {
-      height: 70%;
-      margin: auto;
-      margin-right:0;
-      img {
-        @include img-contain;
-      }
+    z-index: 0;
+  }
+
+  &--graphic {
+    height: 70%;
+    margin: auto;
+    margin-right: 0;
+    transform: scale(1);
+
+
+    img {
+      @include img-contain;
     }
+    
+    
+    @include hover {
+      transform: scale(1.025);
+    }
+  }
+
+  &--inner {
+    @include flex-col;
+    z-index: 1;
   }
 
   &--body {
@@ -37,10 +57,6 @@
 
   &--description {
     margin-top: 0.5rem !important;
-  }
-
-  &--inner {
-    @include flex-col;
   }
 
   &--tags {
@@ -57,5 +73,7 @@
 
     width: calc(100% - (var(--next-study-pad) * 2));
     padding: 0rem var(--next-study-pad);
+
+    @include flex-row-between;
   }
 }

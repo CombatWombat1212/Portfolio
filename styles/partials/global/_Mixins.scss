@@ -303,7 +303,8 @@
 			}
 			&:hover,
 			&:focus,
-			&.focus
+			&.focus,
+			&.hover
 			{
 				@content;
 			}
@@ -316,7 +317,8 @@
 				}
 				#{$p}:hover,
 				#{$p}:focus,
-				#{$p}.focus 
+				#{$p}.focus,
+				#{$p}.hover
 				{
 					@content;
 				}
@@ -334,6 +336,7 @@
 						#{$p}:hover &,
 						#{$p}:focus &,
 						#{$p}.focus 
+						#{$p}.hover 
 						{
 							@content;
 						}
@@ -350,6 +353,7 @@
 						#{$p}:hover #{$c},
 						#{$p}:focus #{$c},
 						#{$p}.focus #{$c}
+						#{$p}.hover #{$c}
 						{
 							@content;
 						}
