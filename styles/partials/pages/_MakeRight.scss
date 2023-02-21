@@ -4,6 +4,29 @@
   @include img-width(17.5rem);
 }
 
+@mixin section-mask-width($width) {
+  .section--graphic {
+    --graphic-width: #{mask-width($width)};
+  }
+}
+
+
+@mixin section-list-spacing($mt, $mt_less: null) {
+  $mt_less_value: #{if($mt_less == null, calc(#{$mt} * 0.5), $mt_less)};
+  
+  .section--description {
+    li + li{
+      margin-top: $mt;
+    }
+    
+    li + li.mt-less {
+      margin-top: $mt_less_value;
+    }
+
+  }
+}
+
+
 #Makeright {
   --background-info-gap: 6rem;
 
@@ -80,20 +103,13 @@
     }
 
     &--Aha-Moment {
-      .section {
-        &--graphic {
-          --graphic-width: #{mask-width(13.35rem)};
-          // --graphic-height: calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
-        }
-      }
+      @include section-mask-width(13.35rem);
     }
   }
 
   #Develop {
     &--Brainstorming {
-      .section--graphic {
-        --graphic-width: #{mask-width(14rem)};
-      }
+      @include section-mask-width(14rem);
     }
   }
 
@@ -105,7 +121,7 @@
       }
     }
 
-    &--Approach {
+    &--Methodology {
       .section {
         &--main {
           grid-template-columns: repeat(4, 1fr);
@@ -143,6 +159,26 @@
     margin-top: 0;
     &--Banner {
       margin-top: 0;
+    }
+
+    &--Conclusion {
+      @include section-mask-width(9.5rem);
+    }
+
+    &--Forward {
+
+      ul{
+        --section-text-spacing: 1.65rem;
+      }
+
+      @include section-list-spacing(0.75rem);
+    }
+
+
+    &--Banner{
+      .background{
+        background-color: $col-background_darker;
+      }
     }
   }
 }

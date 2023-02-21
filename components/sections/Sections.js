@@ -29,7 +29,7 @@ function Section({ className, children, type, background, id, margin, titled, ar
 
   // TODO: the 'columns' concept should work with all variants of section i think
 
-  if (children == undefined) return null;
+  if (children == undefined) children = children ?? <></>;
   if (children.length == undefined) children = [children];
 
   var childs = getSectionChildren(children);

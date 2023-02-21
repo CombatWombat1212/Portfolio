@@ -10,6 +10,7 @@ import DLink from "@/components/utilities/DynamicLink";
 import PieChart from "@/components/charts/PieChart";
 import Button from "@/components/elements/Buttons";
 import Slideshow from "@/components/global/slideshow/Slideshow";
+import NextStudy from "@/components/studies/NextStudy";
 
 // TODO: add the interactive chapter selection thingy
 
@@ -490,9 +491,12 @@ function MakeRight({ setPopup }) {
             <Graphic type="image" background="tertiary" img={MAKERIGHT_IMGS["journey_map"]} />
           </Section>
 
-          <Section id="Prototyping--Approach" type="columns" titled arrows="background" background="tertiary light" mainClassName="gap-5" mainType="grid">
-            <Title>Approach</Title>
-            <Heading>Finding a focus within the field of 3D printing</Heading>
+          <Section id="Prototyping--Methodology" type="columns" titled arrows="background" background="tertiary light" mainClassName="gap-5" mainType="grid">
+            <Title>Methodology</Title>
+            <Heading>The workload was divided across 4 project phases</Heading>
+            <Description className="mt-1">
+              <p>I broke development into 4 phases of 4-6 weeks. Each containing their own cycles of development, testing, and iteration.</p>
+            </Description>
 
             <Column>
               <Graphic type="image" background="tertiary" img={MAKERIGHT_IMGS["maker_journey_low_fi"]} />
@@ -652,41 +656,157 @@ function MakeRight({ setPopup }) {
           </Section>
 
           <Section type="passthrough" id="Delivery--Maker" background="tertiary" margin="none">
-    {/* TODO: i think maybe these should be the non-tutorial versions :/ what do you think?? */}
+            {/* TODO: i think maybe these should be the non-tutorial versions :/ what do you think?? */}
 
             <Slideshow img={MAKERIGHT_IMGS.maker_screen_10}>
               <Heading>Maker user journey</Heading>
             </Slideshow>
-
           </Section>
-          
-
 
           <Section type="passthrough" id="Delivery--Customer" background="tertiary" margin="none">
-
             <Slideshow img={MAKERIGHT_IMGS.customer_screen_06}>
               <Heading>Customer user journey</Heading>
             </Slideshow>
-
           </Section>
-          
 
           {/* TODO: next up just finish up this page, making the last component you need */}
 
-{/*           
-          <Section type="passthrough" id="Delivery--Customer" background="tertiary" margin="none">
+          <Section id="Delivery--Conclusion" type="columns" titled background="tertiary light">
+            <Heading>Bringing 3D printing to everyday consumers</Heading>
 
-            <Slideshow img={MAKERIGHT_IMGS.customer_screen_06}>
-              <Heading>Customer user journey</Heading>
-            </Slideshow>
+            <Column>
+              <Graphic type="mask" background="tertiary" color="background" img={MAKERIGHT_IMGS["connecting_consumers"]} />
+              <Description className="graphic--caption">
+                <h3 className="mt-less">Connecting consumers to local hobbyist makers for cheap, customizable manufacturing</h3>
+              </Description>
+            </Column>
+            <Column>
+              <Graphic type="mask" background="tertiary" color="background" img={MAKERIGHT_IMGS["browseable_storefront"]} />
+              <Description className="graphic--caption">
+                <h3 className="mt-less">A browsable online storefront of ready-to-print 3D models, sourced from around the internet</h3>
+              </Description>
+            </Column>
 
+            <Column>
+              <Graphic type="mask" background="tertiary" color="background" img={MAKERIGHT_IMGS["maker_profit"]} />
+              <Description className="graphic--caption">
+                <h3 className="mt-less">Enabling makers to profit off of their equipment and skills in their spare time</h3>
+              </Description>
+            </Column>
           </Section>
-          
- */}
 
+          <Section id="Delivery--Forward" type="columns" titled background="tertiary light">
+            <Heading>Going Forward</Heading>
 
+            <Column>
+              <Description>
+                <p>This project has only just begun. With every feature added, countless more had to be sidelined for the sake of scope. Some of the planned future additions to the project include:</p>
+                <ul>
+                  <li>
+                    <span>A full branding refresh (the logo and name are temporary)</span>
+                  </li>
+                  <li>
+                    <span>Wider testing with relevant users, both customers and makers</span>
+                  </li>
+                  <li>
+                    <span>Overhauling the visuals and UX of the store page</span>
+                  </li>
+                  <li>
+                    <span>UX of user profiles</span>
+                  </li>
+                  <li>
+                    <span>Real-world tests with owners of 3D printers</span>
+                  </li>
+                </ul>
+              </Description>
+            </Column>
+            <Column>
+              <Description>
+                <p>Several team members would need to be added in order to become a dedicated company. Like algorithm engineers to help design the systems that assign orders to makers, and determine how much they get paid per job. Other additions include:</p>
+                <ul>
+                  <li>
+                    <span>More UX designers</span>
+                  </li>
+                  <li>
+                    <span>Wider testing with relevant users, both customers and makers</span>
+                  </li>
+                  <li>
+                    <span>Backend developers (some with cyber-security experience)</span>
+                  </li>
+                  <li>
+                    <span>Financial advisors</span>
+                  </li>
+                </ul>
+              </Description>
+            </Column>
+          </Section>
 
+          <Section id="Delivery--Banner" background={MAKERIGHT_IMGS["closing_banner"]}></Section>
         </Chapter>
+
+        <Chapter id="Closing">
+          <Section id="Closing--Copy" type="columns" titled mainClassName="gap-6 mt-6">
+            <Title>Areas Of Growth</Title>
+            <Heading>
+              Considering entire userflows and journeys <br />
+              makes for far better UI than individual features
+            </Heading>
+            <Description className="text-col-2 text-gap-6">
+              <p>When I began planning my approach to prototyping, I chose a number of the service’s most important features. From there, I intended to create mockups of each. Eventually, I reached the question of how the service would verify that makers were capable and trustworthy. My solution was to have them create a mock customer order. But to prototype this, I would need to mock up the entire order fulfillment process. Only having a few select screens would be too disjointed.</p>
+
+              <p>At this moment, I decided the only way to consider all aspects of the service would be to build the 2 entire user flows. This caused a massive shift in my project approach. It allowed me to encounter numerous issues that would have gone unaddressed if I had only created separate feature screens.</p>
+
+              <p>This moment reminds me to always focus on the entire context of a user’s journey and experience. I need to avoid fixating on individual features without remembering the greater context of the system in which I’m working. Good UX design isn’t separated features in a vacuum, it's the creation of an entire experience.</p>
+            </Description>
+
+            <Column>
+              <Title>Learning</Title>
+              <Heading>The importance of involving users as early, and as often as possible</Heading>
+              <Description>
+                <p>In this project, I spoke with 10 potential users, in two separate groups before becoming invested in any concept or solution. This gave me important background information from which to build ideas. But equally valuable was my decision to involve this group once again after I had developed an idea. This allowed me to gather feedback on my concept, before having created any semblance of a prototype. Providing tangible validation that my ideas were worth pursuing, and a foundation of user feedback from which to expand and build.</p>
+
+                <p>This moment reminded me to always involve users as early and as often as possible. Often, designers forgo interviewing users in a project's early stages. This is usually done in favour of instead testing before ideation, or after a prototype has been actualized. But, by keeping users close to my project at every stage, my solution became tailor fitted to the exact problem that I had observed in the 3D printing space.</p>
+              </Description>
+            </Column>
+
+            <Column>
+              <Title>Sucesses</Title>
+              <Heading>Creating actionable steps to achieving the core functionality of the service</Heading>
+              <Description>
+                <p>I often questioned what the final outcome of this project should be. I felt strongly about this concept, and I needed to do it justice. Around the end of the first month, after much planning and revision, I had defined my goal of creating 2 user journey prototypes. With this finally established, I quickly fell into the groove of cycling through iterations week by week. I made screens, found testers, gathered feedback, implemented changes, and repeated. In the end, all the pieces fell together. Resulting in a polished, cohesive execution of my idea.</p>
+
+                <p>Despite many challenging time crunches during development, I steadily moved through each phase without any major snags. Working with a clear end goal, and defining actionable steps to reach it, is what brought this project to life. For this reason, the planning and organization of this project was its greatest success.</p>
+              </Description>
+            </Column>
+          </Section>
+        </Chapter>
+
+
+
+
+
+        <Section id="Closing--Next" type="columns" titled>
+            <Column>
+            <NextStudy></NextStudy>
+            </Column>
+
+            <Column>
+            <NextStudy></NextStudy>
+            </Column>
+          </Section>
+
+
+
+
+
+
+
+
+
+
+
+
+
       </CaseStudyPage>
     </>
   );

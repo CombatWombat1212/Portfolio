@@ -4,6 +4,10 @@ import React from "react";
 import Mask from "../utilities/Mask";
 import { getBackgroundClasses } from "./sections_utilities/GetClasses";
 
+
+
+
+
 function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup, width, height }) {
 
 
