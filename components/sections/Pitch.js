@@ -11,7 +11,6 @@ const laptop_frame = MAKERIGHT_IMGS.pitch_laptop_frame;
 
 
 
-// TODO: Only set the current row once per new current row (not every time the function is called)
 // TODO: i think you should do the same animation on the description side to make it have smooth scrolling transitions too? Or maybe something to lock it in place better next to the screen? might not be priority though
 // TODO: how tf is this gonna be responsive?? LOL good luck with that (nah u got this)
 
@@ -37,9 +36,10 @@ function PitchItem(pitch) {
   this.rows = {
     elems: Array.from(this.elem.querySelectorAll(".pitch--row.pitch--explaination")),
     current: 0,
+    previous: null, // Add a variable to track the previous row
   };
-  
 }
+
 
 
 
@@ -54,7 +54,7 @@ function pitchSetCurrentRow(pitch){
 
 function pitchGetCurrentRow(pitch) {
   // Get the rows array and the current row index
-  const { elems, current } = pitch.rows;
+  const { elems, current, previous } = pitch.rows;
 
   // Check if the current row is in view
   const currentRowRect = elems[current].getBoundingClientRect();
@@ -73,6 +73,12 @@ function pitchGetCurrentRow(pitch) {
       }
     }
     pitch.rows.current = maxIndex;
+  }
+
+  // Check if the current row is different from the previous row
+  if (current !== previous) {
+    pitch.rows.previous = current;
+    pitchSetCurrentRow(pitch);
   }
 }
 
@@ -222,7 +228,6 @@ function pitchScroll(e){
     if (!pitch.inView) return;
 
     pitchGetCurrentRow(pitch);
-    pitchSetCurrentRow(pitch);
     
     
     
