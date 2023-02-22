@@ -3034,6 +3034,22 @@ body {
   margin-top: calc(var(--mockup-margin-top) - (var(--pitch-current-row) * var(--pitch-row-height)));
 }
 
+.pitch .pitch--body {
+  height: var(--pitch-row-height);
+}
+
+.pitch .pitch--captions {
+  --pitch-empty-caption-delta: calc(var(--pitch-row-height) - var(--pitch-caption-inner-height));
+  --pitch-empty-caption-delta_half: calc(var(--pitch-empty-caption-delta) / 2);
+  height: var(--pitch-row-height);
+  position: sticky;
+  top: calc(var(--nav-height) + var(--sticky-buffer) + var(--section-gap_half));
+}
+
+.pitch .pitch--empties {
+  margin-top: calc((var(--pitch-row-height) + var(--section-gap_half)) * -1);
+}
+
 .graph--wrapper {
   background-color: #F3F3F7;
   height: var(--graph-height);

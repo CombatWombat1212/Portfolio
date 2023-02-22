@@ -95,9 +95,36 @@
         top: calc((var(--pitch-overflow-buffer-x)/2) * -1);
 
         margin-top: calc(var(--mockup-margin-top) - (var(--pitch-current-row) * var(--pitch-row-height)));
+    }
 
 
+
+
+    &--body{
+
+        height: var(--pitch-row-height);
+    }
+
+
+
+
+    &--captions{
+        --pitch-empty-caption-delta: calc(var(--pitch-row-height) - var(--pitch-caption-inner-height));
+        --pitch-empty-caption-delta_half: calc(var(--pitch-empty-caption-delta) / 2);
+
+        height: var(--pitch-row-height);
+        position: sticky;
+        top: calc(var(--nav-height) + var(--sticky-buffer) + var(--section-gap_half));
 
     }
+
+    &--empties{
+        // --pitch-caption-inner-height is the size of the innards of the caption, set in JS
+
+        margin-top: calc((var(--pitch-row-height) + var(--section-gap_half)) * -1);
+    }
+
+
+
   }
 }
