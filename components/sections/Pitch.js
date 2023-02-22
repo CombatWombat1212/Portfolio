@@ -202,7 +202,7 @@ function pitchInit(pitch) {
 
 // TODO: is giving the laptop the onLoad thing working well in practice? The other option is giving it priority.  Or both.  
 
-// TODO: The closer you are to completeing the scroll to the next row, add a lil push up or down to help feel like progress is being made.  So as the person scrolls have a value called progress to the next row or something like that then map it to just a lil movement up or down on the main elements in the css
+// TODO: The closer you are to completeing the scroll to the next row, add a lil push up or down to help feel like progress is being made.  So as the person scrolls have a value called progress to the next row or something like that then map it to just a lil movement up or down on the main elements in the css.  Then once you scroll to the next one it springs back to where it was
 
 function Laptop({ rows }) {
   return (
