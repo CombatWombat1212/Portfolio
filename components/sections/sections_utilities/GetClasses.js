@@ -1,4 +1,4 @@
-import { SECTION_TYPE_C } from "../Sections";
+import { SECTION_TYPE_B } from "../Sections";
 import { BACKGROUND_COLORS } from "../Sections";
 import { getClassesOfPrefix, removeClassesOfPrefix, removeEmptyClasses } from "./ClassUtilities";
 
@@ -26,7 +26,7 @@ function getMainClasses(mainClassName, mainType, titled) {
 
 function getGapClasses(type, arrows, mainClassName) {
   var gapClasses = "";
-  if (SECTION_TYPE_C.indexOf(type) != -1) gapClasses = "gap-4";
+  if (SECTION_TYPE_B.indexOf(type) != -1) gapClasses = "gap-4";
   if (arrows) gapClasses = "gap-6";
 
   if (!mainClassName) return gapClasses;

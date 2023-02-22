@@ -28,42 +28,44 @@ function Row({ childs, copyClassName }) {
 }
 
 function Pitch({ children, copyClassName }) {
+
   var sections = [];
 
   for (var i = 0; i < children.length; i++) {
     sections.push({ childs: getSectionChildren(children[i].props.children), props: children[i].props });
   }
 
-  return (
-    <>
-      {sections.map((section, index) => {
-        var childs = section.childs;
 
-        var { columns, description, title, heading, graphic, other } = childs;
 
-        var vector = graphic[0];
-        var image = graphic[1];
-        var vectorProps = vector.props;
+  // return (
+  //   <>
+  //     <Section {...section.props}>
+  //       {sections.map((section, index) => {
+  //       var childs = section.childs;
 
-        return (
-          <>
-            <Section {...section.props}>
-              {/* <Row key={index} copyClassName={copyClassName} childs={childs}></Row> */}
+  //       var { columns, description, title, heading, graphic, other } = childs;
 
-              <div className={`section--copy ${copyClassName} col-3`}>
-                <Graphic {...vectorProps} />
-                {heading && <>{heading}</>}
-                {description && <>{description}</>}
-              </div>
-              <div className="col-8">
-                <Laptop image={image} />
-              </div>
-            </Section>
-          </>
-        );
-      })}
-    </>
-  );
+  //       var vector = graphic[0];
+  //       var image = graphic[1];
+  //       var vectorProps = vector.props;
+
+  //       return (
+  //         <>
+
+  //             <div className={`section--copy ${copyClassName} col-3`}>
+  //               <Graphic {...vectorProps} />
+  //               {heading && <>{heading}</>}
+  //               {description && <>{description}</>}
+  //             </div>
+  //             <div className="col-8">
+  //               <Laptop image={image} />
+  //             </div>
+  //         </>
+  //       );
+  //     })}
+  //     </Section>
+  //   </>
+  // );
 }
 
 export default Pitch;

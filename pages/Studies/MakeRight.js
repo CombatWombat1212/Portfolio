@@ -73,54 +73,56 @@ function MakeRight({ setPopup }) {
 
           {/* TODO: go back and add the scrolling animations and fancy engineering planned for this section */}
 
-          <Pitch>
-            <Section id="Pitch--Choose" type="pitch" margin="wide">
-              <Heading>Choose</Heading>
-              <Description>
-                <p>
-                  from our collection <br />
-                  of sourced 3D models,
-                  <br /> or upload your own
-                </p>
-              </Description>
-              <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_choose"]} />
-              <Graphic type="image" img={MAKERIGHT_IMGS["pitch_mockup_choose"]} />
-            </Section>
+          <Section id="Pitch--Pitch" type="passthrough" margin="wide">
+            <Pitch>
+              <>
+                <Heading>Choose</Heading>
+                <Description>
+                  <p>
+                    from our collection <br />
+                    of sourced 3D models,
+                    <br /> or upload your own
+                  </p>
+                </Description>
+                <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_choose"]} />
+                <Graphic type="image" img={MAKERIGHT_IMGS["pitch_mockup_choose"]} />
+              </>
 
-            <Section id="Pitch--Tweak" type="pitch" margin="wide">
-              <Heading>Tweak</Heading>
-              <Description>
-                <p>
-                  and personalize
-                  <br />
-                  to suit your needs
-                </p>
-              </Description>
-              <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_tweak"]} />
-              <Graphic type="image" img={MAKERIGHT_IMGS["pitch_mockup_tweak"]} />
-            </Section>
+              <>
+                <Heading>Tweak</Heading>
+                <Description>
+                  <p>
+                    and personalize
+                    <br />
+                    to suit your needs
+                  </p>
+                </Description>
+                <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_tweak"]} />
+                <Graphic type="image" img={MAKERIGHT_IMGS["pitch_mockup_tweak"]} />
+              </>
 
-            <Section id="Pitch--Order" type="pitch" margin="wide">
-              <Heading>Order</Heading>
-              <Description>
-                <p>
-                  your model, assigning it <br />
-                  to one of our verified makers
-                </p>
-              </Description>
-              <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_order"]} />
-              <Graphic type="image" img={MAKERIGHT_IMGS["pitch_mockup_order"]} />
-            </Section>
+              <>
+                <Heading>Order</Heading>
+                <Description>
+                  <p>
+                    your model, assigning it <br />
+                    to one of our verified makers
+                  </p>
+                </Description>
+                <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_order"]} />
+                <Graphic type="image" img={MAKERIGHT_IMGS["pitch_mockup_order"]} />
+              </>
 
-            <Section id="Pitch--Recieve" type="pitch" margin="wide">
-              <Heading>Recieve</Heading>
-              <Description>
-                <p>right at your front door</p>
-              </Description>
-              <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_recieve"]} />
-              <Graphic type="image" img={MAKERIGHT_IMGS["pitch_mockup_recieve"]} />
-            </Section>
-          </Pitch>
+              <>
+                <Heading>Recieve</Heading>
+                <Description>
+                  <p>right at your front door</p>
+                </Description>
+                <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_recieve"]} />
+                <Graphic type="image" img={MAKERIGHT_IMGS["pitch_mockup_recieve"]} />
+              </>
+            </Pitch>
+          </Section>
 
           <Section id="Pitch--Summary" type="columns" background="background">
             <Column>
