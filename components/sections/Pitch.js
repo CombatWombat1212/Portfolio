@@ -177,18 +177,20 @@ function Pitch({ children }) {
           <Laptop rows={rows} />
         </div>
         <div className="pitch--column col-3">
-          {rows.map((row, i) => {
-            var { description, title, heading, graphic, other, vector, mockup } = formatRow(row);
-            var vectorProps = vector.props;
 
-            return (
-              <div className="pitch--row pitch--explaination" key={i}>
-                <Graphic {...vectorProps} />
-                {heading && <>{heading}</>}
-                {description && <>{description}</>}
-              </div>
-            );
-          })}
+            {rows.map((row, i) => {
+              var { description, title, heading, graphic, other, vector, mockup } = formatRow(row);
+              var vectorProps = vector.props;
+  
+              return (
+                <div className="pitch--row pitch--explaination" key={i}>
+                  <Graphic {...vectorProps} />
+                  {heading && <>{heading}</>}
+                  {description && <>{description}</>}
+                </div>
+              );
+            })}
+
         </div>
       </div>
     </>
