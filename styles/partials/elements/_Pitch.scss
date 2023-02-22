@@ -1,25 +1,102 @@
+// .pitch{
 
+//     &--graphic{
+//         position: relative;
+//     }
 
+//     &--laptop{
 
-.pitch{
+//         position:absolute!important;
+//         top:0;
+//         left:0;
 
+//     }
 
+// }
 
+.pitch {
+  @include flex-row-between;
+  --gap: 10rem;
+  @include gap;
+  width: 100%;
 
+  --sticky-buffer: calc(var(--section-gap_half) /2);
+  --pitch-overflow-buffer-x-percent: 5%;
+  --pitch-overflow-buffer-y-percent: 20%;
+  --pitch-overflow-buffer-x: 5%;
+  --pitch-overflow-buffer-y: 20%;
 
-    &--graphic{
-        position: relative;
+  @include pad-y(var(--section-gap_half));
+
+  .pitch {
+    &--row {
+      @include marg-y(var(--section-gap_half));
+      height: var(--pitch-row-height);
+      @include flex-col-center;
     }
 
-    &--laptop{
-
-        position:absolute!important;
-        top:0;
-        left:0;
-
+    &--heading {
+      margin-top: calc(var(--section-text-spacing) * 1.75);
+      & + * {
+        margin-top: 0;
+      }
     }
 
+    &--description {
+      margin-top: 0.5rem;
+
+      * {
+        @include h3;
+        @include weight-reg;
+      }
+    }
+
+    &--vector {
+      --mask-size: 7.5rem;
+      @include mask-width(var(--mask-size));
+    }
+
+    &--graphics {
+      position: sticky;
+      top: calc(var(--nav-height) + var(--sticky-buffer));
+      display: flex;
+    }
+
+    &--laptop {
+      z-index: 1;
+      position: sticky;
+      height: auto !important;
+    }
+
+    &--screens {
+      position: absolute;
+      top: calc(var(--section-gap_half) + (var(--pitch-overflow-buffer-x-percent)/2));
+      left: calc((var(--pitch-overflow-buffer-y-percent)/2));
+      width: calc(100% - var(--pitch-overflow-buffer-y-percent));
+      height: calc(100% - var(--section-gap) - var(--pitch-overflow-buffer-x-percent));
+      overflow: hidden;
+      background-color: #EAF0F8;
+    }
+
+    &--mockup {
+
+        --mockup-margin-top: calc(var(--pitch-row-index) * var(--pitch-row-height));
+
+        transition-duration: 0.75s;
+
+        @include marg-y(0);
+
+        position: absolute;
+        z-index: 0;
+        width: var(--pitch-row-width);
+        height: var(--pitch-row-height);
+        left: calc((var(--pitch-overflow-buffer-y)/2) * -1);
+        top: calc((var(--pitch-overflow-buffer-x)/2) * -1);
+
+        margin-top: calc(var(--mockup-margin-top) - (var(--pitch-current-row) * var(--pitch-row-height)));
 
 
 
+    }
+  }
 }

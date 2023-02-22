@@ -73,7 +73,7 @@ function MakeRight({ setPopup }) {
 
           {/* TODO: go back and add the scrolling animations and fancy engineering planned for this section */}
 
-          <Section id="Pitch--Pitch" type="passthrough" margin="wide">
+          <Section id="Pitch--Pitch" type="passthrough" margin="wide" wrapperClassName={'mt-0'}>
             <Pitch>
               <>
                 <Heading>Choose</Heading>
@@ -124,7 +124,7 @@ function MakeRight({ setPopup }) {
             </Pitch>
           </Section>
 
-          <Section id="Pitch--Summary" type="columns" background="background">
+          <Section id="Pitch--Summary" type="columns" background="background" wrapperClassName={'mt-0'}>
             <Column>
               <Heading type="h3">Slashing the overhead of competitors</Heading>
               <Description>

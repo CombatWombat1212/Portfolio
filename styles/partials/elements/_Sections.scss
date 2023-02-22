@@ -236,38 +236,6 @@
     }
   }
 
-  &__pitch {
-    @include flex-row-between;
-    --gap: 10rem;
-    @include gap;
-
-    .section--heading {
-      margin-top: calc(var(--section-text-spacing) * 2);
-      & + * {
-        margin-top: 0;
-      }
-    }
-
-    .section--description {
-      margin-top: 0.5rem;
-
-      * {
-        @include h3;
-        @include weight-reg;
-      }
-    }
-
-    .section--graphic {
-      // padding-left: 2rem;
-    }
-
-    .mask {
-      // --mask-aspect-width;
-      // --mask-aspect-height;
-      --mask-size: 7.5rem;
-      @include mask-width(var(--mask-size));
-    }
-  }
 }
 
 // Color variants

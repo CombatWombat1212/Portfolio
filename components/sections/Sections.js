@@ -23,8 +23,46 @@ const SECTION_TYPE_B = ["columns"];
 const SECTION_TYPE_C = ["passthrough"];
 const SECTION_TYPES = [...SECTION_TYPE_A, ...SECTION_TYPE_B, ...SECTION_TYPE_C];
 
-function Body({children, sec}) {
 
+
+
+
+
+
+function SectionBackground({ sec }) {
+  var { attrs, chil, has, classes } = sec;
+  return (
+    <>
+      {has.background && typeof attrs.background == "object" && (
+        <>
+          <Background img={attrs.background} />
+        </>
+      )}
+    </>
+  );
+}
+
+function SectionInner({ children, sec }) {
+  var { attrs, chil, has, classes } = sec;
+
+  return (
+    <div className="section--inner">
+      <div className={`${classes.elem} ${classes.containerMargin} ${classes.sec} ${has.titled ? "" : classes.gap}`}>{children}</div>
+    </div>
+  );
+}
+
+function SectionWrapper({ children, sec }) {
+  var { attrs, chil, has, classes } = sec;
+
+  return (
+    <div id={attrs.id} className={classes.wrapper + classes.background}>
+      {children}
+    </div>
+  );
+}
+
+function SectionBody({ children, sec }) {
   var { attrs, chil, has, classes } = sec;
 
   return (
@@ -68,94 +106,71 @@ function Body({children, sec}) {
   );
 }
 
-function Section({ className, children, type, background, id, margin, titled, arrows, mainClassName, copyClassName, mainType }) {
-  var pref = "section";
+function Section({className, children, type, background, id, margin, titled, arrows, mainClassName, copyClassName, wrapperClassName, mainType}) {
+  
+  var sec = createSectionObject(className, children, type, background, id, margin, titled, arrows, mainClassName, copyClassName, wrapperClassName, mainType);
 
-  // TODO: the 'columns' concept should work with all variants of section i think
+  return (
+    <>
+      <SectionWrapper sec={sec}>
+        <SectionBackground sec={sec} />
+        <SectionInner sec={sec}>
+          <SectionBody sec={sec}>{children}</SectionBody>
+        </SectionInner>
+      </SectionWrapper>
+    </>
+  );
+}
+
+function createSectionObject(className, children, type, background, id, margin, titled, arrows, mainClassName, copyClassName, wrapperClassName, mainType) {
+  var pref = "section";
 
   if (children == undefined) children = children ?? <></>;
   if (children.length == undefined) children = [children];
 
-  var childs = getSectionChildren(children);
-  var { columns, description, title, heading, graphic, other } = childs;
-
+  var { columns, description, title, heading, graphic, other } = getSectionChildren(children);
   titled = titled || false;
   var hasTitled = titled ? true : false;
+  if (titled == "above") ({ columns, description, title, heading, graphic, other } = getAdditionalHeadingClassesFromParentProps({ columns, description, title, heading, graphic, other }, "titled above"));
 
-  if (titled == "above") childs = getAdditionalHeadingClassesFromParentProps(childs, "titled above");
-
-  var elemClasses = getElemClasses(pref, type, titled);
-  var containerMarginClass = getContainerMarginClass(margin);
-  var wrapperClasses = getWrapperClasses(pref);
-  var backgroundClasses = getBackgroundClasses(pref, background);
-
-  var mainClasses = getMainClasses(mainClassName, mainType, titled);
-  var gapClasses = getGapClasses(type, arrows, mainClassName);
-  copyClassName = copyClassName ? copyClassName : "";
-
-  className = className ? className : "";
-
-  var hasText = getHasText(childs);
-  var hasGraphic = getHasGraphic(graphic);
-  var hasBackground = getHasBackground(background);
 
   var sec = {
     has: {
-      text: hasText,
-      graphic: hasGraphic,
-      background: hasBackground,
+      text: getHasText({ columns, description, title, heading, graphic, other }),
+      graphic: getHasGraphic(graphic),
+      background: getHasBackground(background),
       titled: hasTitled,
     },
     classes: {
-      sec: className,
-      elem: elemClasses,
-      containerMargin: containerMarginClass,
-      wrapper: wrapperClasses,
-      main: mainClasses,
-      gap: gapClasses,
-      background: backgroundClasses,
-      copy: copyClassName,
+      sec: className ? className : "",
+      elem: getElemClasses(pref, type, titled),
+      containerMargin: getContainerMarginClass(margin),
+      wrapper: getWrapperClasses(wrapperClassName, pref),
+      main: getMainClasses(mainClassName, mainType, titled),
+      gap: getGapClasses(type, arrows, mainClassName),
+      background: getBackgroundClasses(pref, background),
+      copy: copyClassName ? copyClassName : "",
     },
     chil: {
-      columns: columns,
-      description: description,
-      title: title,
-      heading: heading,
-      graphic: graphic,
-      other: other,
+      columns,
+      description,
+      title,
+      heading,
+      graphic,
+      other,
     },
     attrs: {
-      id: id,
-      mainType: mainType,
-      arrows: arrows,
-      titled: titled,
-      margin: margin,
-      type: type,
-      background: background,
+      id,
+      mainType,
+      arrows,
+      titled,
+      margin,
+      type,
+      background,
     },
   };
 
-  var has = sec.has;
-  var classes = sec.classes;
-  var chil = sec.children;
-  var attrs = sec.attrs;
-
-  return (
-    <>
-      <div id={attrs.id} className={classes.wrapper + classes.background}>
-        {has.background && typeof attrs.background == "object" && (
-          <>
-            <Background img={attrs.background} />
-          </>
-        )}
-        <div className="section--inner">
-          <div className={`${classes.elem} ${classes.containerMargin} ${classes.sec} ${has.titled ? "" : classes.gap}`}>
-            <Body sec={sec} > {children} </Body>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+  return sec;
 }
 
 Section.defaultProps = {
@@ -177,10 +192,9 @@ Section.propTypes = {
 var SECTION_DEFAULT_PROPS = Section.defaultProps;
 var SECTION_PROP_TYPES = Section.propTypes;
 import Chapter from "./Chapter";
-import Pitch from "./Pitch";
-import PitchGroup from "./Pitch";
 export { SECTION_DEFAULT_PROPS, SECTION_PROP_TYPES };
 
 export default Section;
 export { Section, Chapter, Description, Column, Title, Heading, Graphic, Quote };
 export { SECTION_TYPE_A, SECTION_TYPE_B, SECTION_TYPE_C, SECTION_TYPES, BACKGROUND_COLORS, DEFINED_CHILDREN };
+export { SectionBackground, SectionInner, SectionWrapper, SectionBody };

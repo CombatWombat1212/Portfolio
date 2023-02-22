@@ -6,10 +6,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Mask from "../utilities/Mask";
 import { getBackgroundClasses } from "./sections_utilities/GetClasses";
 
-
-
-
-function getColor(color, colors){
+function getColor(color, colors) {
   return color.split("-to-").map((color) => {
     if (color == "transparent") {
       return { name: color, value: "#00000000" };
@@ -20,7 +17,6 @@ function getColor(color, colors){
     }
   });
 }
-
 
 function Effect({ effect }) {
   if (typeof effect == "string") effect = effect.split(" ");
@@ -69,7 +65,6 @@ function Effect({ effect }) {
         "--direction": dir,
       });
 
-
       if (hover) {
         hover = getColor(hover, colors);
         setHoverStyle({
@@ -78,8 +73,6 @@ function Effect({ effect }) {
           "--direction": dir,
         });
       }
-
-
     }
   }, [colors]);
 
@@ -99,7 +92,7 @@ function Effect({ effect }) {
   );
 }
 
-function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup, width, height, effect }) {
+function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup, width, height, effect, style }) {
   // TODO: for mobile, add some kind of indication animation of the image being clocked on when its interactable or can be opened in a lightbox
 
   var pref = "section--graphic";
@@ -150,14 +143,14 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
   return (
     <>
       {isImg && (
-        <div className={`graphic--img ${allClasses}`} style={{ "--img-aspect-width": width, "--img-aspect-height": height }}>
+        <div className={`graphic--img ${allClasses}`} style={{ "--img-aspect-width": width, "--img-aspect-height": height, ...style }}>
           {effect && <Effect effect={effect} />}
           <Image className={innerClassName} src={img.src} alt={img.alt} width={width} height={height} onClick={onClickHandler} />
           {children && children}
         </div>
       )}
       {isMask && (
-        <div className={`graphic--mask ${allClasses}`} style={{ "--mask-aspect-width": width, "--mask-aspect-height": height }}>
+        <div className={`graphic--mask ${allClasses}`} style={{ "--mask-aspect-width": width, "--mask-aspect-height": height, ...style }}>
           {effect && <Effect effect={effect} />}
           <Mask className={`${innerClassName} ${color}`} src={img.src} alt={img.alt} width={width} height={height} onClick={onClickHandler} />
           {children && children}

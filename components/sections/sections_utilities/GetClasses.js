@@ -55,11 +55,12 @@ function getContainerMarginClass(margin) {
   return containerMarginClass;
 }
 
-function getWrapperClasses(pref) {
+function getWrapperClasses(wrapperClassName, pref) {
+  wrapperClassName = wrapperClassName ? wrapperClassName : "";
   if (pref == undefined) pref = "section";
-  var wrapperClasses = `${pref}--wrapper`;
+  wrapperClassName += ` ${pref}--wrapper`;
 
-  return wrapperClasses;
+  return wrapperClassName;
 }
 
 function getColClassList(classList) {

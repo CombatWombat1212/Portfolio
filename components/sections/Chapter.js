@@ -3,10 +3,10 @@ import { getWrapperClasses, getBackgroundClasses, getElemClasses } from "./secti
 
 // TODO: section and chapter background should be able to be set with an image, and named colors - only thing missing from that now is image background support for chapters but i don't even think that's used in the design
 
-function Chapter({ children, type, background, id, margin }) {
+function Chapter({ children, type, wrapperClassName, background, id, margin }) {
   var pref = "chapter";
 
-  var wrapperClasses = getWrapperClasses(pref);
+  var wrapperClasses = getWrapperClasses(wrapperClassName, pref);
   var backgroundClasses = getBackgroundClasses(pref, background);
   var elemClasses = getElemClasses(pref, type);
 

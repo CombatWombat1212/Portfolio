@@ -51,18 +51,17 @@ function addClassToJsxObj(jsxObj, className) {
   function addClass(obj, className) {
     var copy = { ...obj };
     copy.props = { ...obj.props };
-    if (typeof copy.props.className == "undefined") copy.props.className = className;
-    else if (copy.props.className.includes(className)) return copy;
-    else copy.props.className = `${copy.props.className} ${className}`;
+    copy.props.className = copy.props.className ? `${copy.props.className} ${className}` : className;
     return copy;
   }
 
-  var jsxObjCopy = jsxObj;
-  for (var i = 0; i < jsxObj.length; i++) {
-    jsxObjCopy[i] = addClass(jsxObj[i], className);
+  var jsxObjCopy = Array.isArray(jsxObj) ? jsxObj.slice() : [jsxObj];
+
+  for (var i = 0; i < jsxObjCopy.length; i++) {
+    jsxObjCopy[i] = addClass(jsxObjCopy[i], className);
   }
 
-  return jsxObjCopy;
+  return Array.isArray(jsxObj) ? jsxObjCopy : jsxObjCopy[0];
 }
 
 export { removeEmptyClasses, removeClassesOfPrefix, getClassesOfPrefix, addClassToJsxObj, addClassNoRepeats };
