@@ -92,7 +92,7 @@ function Effect({ effect }) {
   );
 }
 
-function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup, width, height, effect, style }) {
+function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup, width, height, effect, style, priority, onLoad }) {
   // TODO: for mobile, add some kind of indication animation of the image being clocked on when its interactable or can be opened in a lightbox
 
   var pref = "section--graphic";
@@ -105,6 +105,8 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
 
   width = width ? width : img.width;
   height = height ? height : img.height;
+  priority = priority ? true : false;
+  onLoad = onLoad ? onLoad : () => {};
 
   var hasButton = false;
   if (children) {
@@ -145,14 +147,14 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
       {isImg && (
         <div className={`graphic--img ${allClasses}`} style={{ "--img-aspect-width": width, "--img-aspect-height": height, ...style }}>
           {effect && <Effect effect={effect} />}
-          <Image className={innerClassName} src={img.src} alt={img.alt} width={width} height={height} onClick={onClickHandler} />
+          <Image className={innerClassName} src={img.src} alt={img.alt} width={width} height={height} onClick={onClickHandler} priority={priority} onLoad={onLoad}/>
           {children && children}
         </div>
       )}
       {isMask && (
         <div className={`graphic--mask ${allClasses}`} style={{ "--mask-aspect-width": width, "--mask-aspect-height": height, ...style }}>
           {effect && <Effect effect={effect} />}
-          <Mask className={`${innerClassName} ${color}`} src={img.src} alt={img.alt} width={width} height={height} onClick={onClickHandler} />
+          <Mask className={`${innerClassName} ${color}`} src={img.src} alt={img.alt} width={width} height={height} onClick={onClickHandler} priority={priority} onLoad={onLoad}/>
           {children && children}
         </div>
       )}

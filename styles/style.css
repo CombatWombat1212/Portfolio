@@ -2955,11 +2955,12 @@ body {
   column-gap: var(--gap);
   row-gap: var(--gap);
   width: 100%;
-  --sticky-buffer: calc(var(--section-gap_half) /2);
+  --sticky-buffer: calc(var(--section-gap_half) / 2);
   --pitch-overflow-buffer-x-percent: 5%;
   --pitch-overflow-buffer-y-percent: 20%;
   --pitch-overflow-buffer-x: 5%;
   --pitch-overflow-buffer-y: 20%;
+  --pitch-transition: 0.75s;
   padding-top: var(--section-gap_half);
   padding-bottom: var(--section-gap_half);
 }
@@ -3012,38 +3013,46 @@ body {
 
 .pitch .pitch--screens {
   position: absolute;
-  top: calc(var(--section-gap_half) + (var(--pitch-overflow-buffer-x-percent)/2));
-  left: calc((var(--pitch-overflow-buffer-y-percent)/2));
+  top: calc(var(--section-gap_half) + (var(--pitch-overflow-buffer-x-percent) / 2));
+  left: calc((var(--pitch-overflow-buffer-y-percent) / 2));
   width: calc(100% - var(--pitch-overflow-buffer-y-percent));
   height: calc(100% - var(--section-gap) - var(--pitch-overflow-buffer-x-percent));
   overflow: hidden;
-  background-color: #EAF0F8;
+  background-color: #eaf0f8;
 }
 
 .pitch .pitch--mockup {
   --mockup-margin-top: calc(var(--pitch-row-index) * var(--pitch-row-height));
-  transition-duration: 0.75s;
+  transition-duration: var(--pitch-transition);
   margin-top: 0;
   margin-bottom: 0;
   position: absolute;
   z-index: 0;
   width: var(--pitch-row-width);
   height: var(--pitch-row-height);
-  left: calc((var(--pitch-overflow-buffer-y)/2) * -1);
-  top: calc((var(--pitch-overflow-buffer-x)/2) * -1);
+  left: calc((var(--pitch-overflow-buffer-y) / 2) * -1);
+  top: calc((var(--pitch-overflow-buffer-x) / 2) * -1);
   margin-top: calc(var(--mockup-margin-top) - (var(--pitch-current-row) * var(--pitch-row-height)));
 }
 
 .pitch .pitch--body {
   height: var(--pitch-row-height);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition-duration: var(--pitch-transition);
+  --mockup-margin-top: calc(var(--pitch-row-index) * var(--pitch-row-height));
+  margin-top: calc(var(--mockup-margin-top) - (var(--pitch-current-row) * var(--pitch-row-height)));
 }
 
 .pitch .pitch--captions {
-  --pitch-empty-caption-delta: calc(var(--pitch-row-height) - var(--pitch-caption-inner-height));
-  --pitch-empty-caption-delta_half: calc(var(--pitch-empty-caption-delta) / 2);
   height: var(--pitch-row-height);
   position: sticky;
   top: calc(var(--nav-height) + var(--sticky-buffer) + var(--section-gap_half));
+  margin-top: var(--section-gap_half);
+  margin-bottom: var(--section-gap_half);
+  overflow: hidden;
 }
 
 .pitch .pitch--empties {

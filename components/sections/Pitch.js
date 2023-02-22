@@ -32,55 +32,52 @@ function PitchItem(pitch) {
     current: 0,
     previous: null,
   };
-  this.captions = {
-    height: 0,
-    width: 0,
-    elem: this.elem.querySelector(".pitch--captions"),
-    children: captionsChildrenInit(Array.from(this.elem.querySelectorAll(".pitch--captions"))),
-  };
+  // this.captions = {
+  // height: 0,
+  // width: 0,
+  // elem: this.elem.querySelector(".pitch--captions"),
+  // children: captionsChildrenInit(Array.from(this.elem.querySelectorAll(".pitch--captions"))),
+  // };
 
-  
-  function captionsChildrenInit(arr) {
-    var objs = [];
-    for (let i = 0; i < arr.length; i++) {
-      const child = arr[i];
-      var obj = {
-        height: 0,
-        width: 0,
-        elems: child,
-        children: captionsInnerInit(Array.from(child.children)),
-      };
-      objs.push(obj);
-    }
-    return objs;
-  }
+  // function captionsChildrenInit(arr) {
+  //   var objs = [];
+  //   for (let i = 0; i < arr.length; i++) {
+  //     const child = arr[i];
+  //     var obj = {
+  //       height: 0,
+  //       width: 0,
+  //       elems: child,
+  //       children: captionsInnerInit(Array.from(child.children)),
+  //     };
+  //     objs.push(obj);
+  //   }
+  //   return objs;
+  // }
 
-  function captionsInnerInit(arr) {
-    var objs = [];
-    for (let i = 0; i < arr.length; i++) {
-      const child = arr[i];
-      var obj = {
-        height: 0,
-        width: 0,
-        elems: child,
-        children: captionsInnerInit(Array.from(child.children)),
-      };
-      objs.push(obj);
-    }
-    return objs;
-  }
+  // function captionsInnerInit(arr) {
+  //   var objs = [];
+  //   for (let i = 0; i < arr.length; i++) {
+  //     const child = arr[i];
+  //     var obj = {
+  //       height: 0,
+  //       width: 0,
+  //       elems: child,
+  //       children: captionsInnerInit(Array.from(child.children)),
+  //     };
+  //     objs.push(obj);
+  //   }
+  //   return objs;
+  // }
 
   console.log(this);
 }
 
 function pitchSetCurrentRow(pitch) {
-  var elem = pitch.elem;
-  elem.style.setProperty("--pitch-current-row", pitch.rows.current);
-
   var { current, previous } = pitch.rows;
   if (current !== previous) {
     pitch.rows.previous = current;
-    pitchSetCurrentRow(pitch);
+    var elem = pitch.elem;
+    elem.style.setProperty("--pitch-current-row", pitch.rows.current);
   }
 }
 
@@ -129,23 +126,20 @@ function pitchSetRowSize(pitch) {
   elem.style.setProperty("--pitch-overflow-buffer-x", height - pitch.screens.height + "px");
   elem.style.setProperty("--pitch-overflow-buffer-y", width - pitch.screens.width + "px");
 
-
   // Set the caption height and width
-  elem.style.setProperty("--pitch-caption-height", pitch.captions.height + "px");
-  elem.style.setProperty("--pitch-caption-width", pitch.captions.width + "px");
+  // elem.style.setProperty("--pitch-caption-height", pitch.captions.height + "px");
+  // elem.style.setProperty("--pitch-caption-width", pitch.captions.width + "px");
 
   // Set the caption inner height and width
-  var placeholders = Array.from(elem.querySelectorAll(".pitch--placeholder"));
-  for (let i = 0; i < pitch.captions.children.length; i++) {
-    const child = pitch.captions.children[i];
-    for (let j = 0; j < child.children.length; j++) {
-      const child2 = child.children[j];
-      child2.elems.style.setProperty("--pitch-caption-inner-height", child2.height + "px");
-      placeholders[j].style.setProperty("--pitch-caption-inner-height", child2.height + "px");
-    }
-  }
-
-
+  // var placeholders = Array.from(elem.querySelectorAll(".pitch--placeholder"));
+  // for (let i = 0; i < pitch.captions.children.length; i++) {
+  //   const child = pitch.captions.children[i];
+  //   for (let j = 0; j < child.children.length; j++) {
+  //     const child2 = child.children[j];
+  //     child2.elems.style.setProperty("--pitch-caption-inner-height", child2.height + "px");
+  //     placeholders[j].style.setProperty("--pitch-caption-inner-height", child2.height + "px");
+  //   }
+  // }
 }
 
 function pitchGetRowSize(pitch) {
@@ -165,54 +159,56 @@ function pitchGetRowSize(pitch) {
   pitch.screens.height = screensHeight;
   pitch.screens.width = screensWidth;
 
-
-
   // width from this point on isnt needed
 
-
   // get width and height of the captions, same as the frame
-  for (let i = 0; i < pitch.captions.children.length; i++) {
-    const child = pitch.captions.children[i];
-    child.height = pitch.frame.height;
-  }
+  // for (let i = 0; i < pitch.captions.children.length; i++) {
+  //   const child = pitch.captions.children[i];
+  //   child.height = pitch.frame.height;
+  // }
 
-  
-  // get width and height of the captions inner
-  for (let i = 0; i < pitch.captions.children.length; i++) {
-    const child = pitch.captions.children[i];
-    for (let j = 0; j < child.children.length; j++) {
-      const innerChild = child.children[j];
+  // // get width and height of the captions inner
+  // for (let i = 0; i < pitch.captions.children.length; i++) {
+  //   const child = pitch.captions.children[i];
+  //   for (let j = 0; j < child.children.length; j++) {
+  //     const innerChild = child.children[j];
 
-      var h = 0;
-      for (let k = 0; k < innerChild.children.length; k++) {
-        const innerInnerChild = innerChild.children[k];
-        var captions = innerInnerChild.elems;
-        var captionsHeight = splitPx(window.getComputedStyle(captions).height);
-        captionsHeight += splitPx(window.getComputedStyle(captions).marginTop);
-        captionsHeight += splitPx(window.getComputedStyle(captions).marginBottom);
-        h += captionsHeight;
-      }
-      innerChild.height = h;
-    }
-  }
-  
+  //     var h = 0;
+  //     for (let k = 0; k < innerChild.children.length; k++) {
+  //       const innerInnerChild = innerChild.children[k];
+  //       var captions = innerInnerChild.elems;
+  //       var captionsHeight = splitPx(window.getComputedStyle(captions).height);
+  //       captionsHeight += splitPx(window.getComputedStyle(captions).marginTop);
+  //       captionsHeight += splitPx(window.getComputedStyle(captions).marginBottom);
+  //       h += captionsHeight;
+  //     }
+  //     innerChild.height = h;
+  //   }
+  // }
 }
 
 function pitchInit(pitch) {
   pitch = pitch.current ? pitch.current : pitch;
+
   pitchResize(pitch);
-  pitchScroll(pitch);
+  pitchScroll(true);
+
   window.removeEventListener("resize", pitchResize, false);
   window.addEventListener("resize", pitchResize, false);
   window.removeEventListener("scroll", pitchScroll, false);
   window.addEventListener("scroll", pitchScroll, false);
 }
 
+
+// TODO: is giving the laptop the onLoad thing working well in practice? The other option is giving it priority.  Or both.  
+
+// TODO: The closer you are to completeing the scroll to the next row, add a lil push up or down to help feel like progress is being made.  So as the person scrolls have a value called progress to the next row or something like that then map it to just a lil movement up or down on the main elements in the css
+
 function Laptop({ rows }) {
   return (
     <>
       <div className="pitch--graphics">
-        <Graphic img={laptop_frame} className={`pitch--row pitch--image pitch--laptop`} />
+        <Graphic img={laptop_frame} className={`pitch--row pitch--image pitch--laptop`} onLoad={pitchResize} />
 
         <div className="pitch--screens">
           {rows.map((row, i) => {
@@ -256,7 +252,7 @@ function Pitch({ children }) {
               var vectorProps = vector.props;
 
               return (
-                <div className="pitch--row pitch--body" key={i}>
+                <div className="pitch--row pitch--body" key={i} style={{ "--pitch-row-index": i }}>
                   <Graphic {...vectorProps} />
                   {heading && <>{heading}</>}
                   {description && <>{description}</>}
@@ -295,16 +291,24 @@ function formatRow(row) {
   };
 }
 
-function pitchScroll(e) {
+
+function pitchScroll(force) {
   // detect if pitch.elem is in view and console log it
   pitches.forEach((pitch) => {
     pitchGetInView(pitch);
-    if (!pitch.inView) return;
+    if (!pitch.inView && !force) return;
 
     pitchGetCurrentRow(pitch);
     pitchSetCurrentRow(pitch);
+
   });
 }
+
+
+
+
+
+
 
 var pitchIsResizing;
 
