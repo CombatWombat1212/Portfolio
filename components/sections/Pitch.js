@@ -184,24 +184,6 @@ function Pitch({ children }) {
             );
           })}
         </div>
-
-
-        {/* var childs = section.childs;
-
-        var { columns, description, title, heading, graphic, other } = childs;
-
-        var vector = graphic[0];
-        var image = graphic[1];
-        var vectorProps = vector.props; */}
-
-        {/* <div className={`section--copy ${copyClassName} col-3`}>
-        <Graphic {...vectorProps} />
-        {heading && <>{heading}</>}
-        {description && <>{description}</>}
-      </div>
-      <div className="col-8">
-        <Laptop image={image} />
-      </div> */}
       </div>
     </>
   );
