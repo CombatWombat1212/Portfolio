@@ -1,0 +1,29 @@
+.chapter-indicator {
+
+    
+    &--wrapper {
+      --site-x-margin: calc((100% - var(--site-max-width_wide)) / 2);
+      --temp-buffer:10rem;
+
+
+      display:flex;
+      height: var(--button-height);
+      position: sticky;
+      z-index: 10;
+      top: calc(var(--nav-height) + var(--temp-buffer));
+    //   margin-top:10rem;
+    }
+    
+    height:100%;
+    background-color: $col-tertiary;
+    @include flex-col-center;
+    padding-left: calc(var(--site-x-margin));
+    padding-right: 1.5625rem;
+
+
+    &--name{
+        margin-top: -0.03125rem;
+        color: $col-background;
+    }
+
+}

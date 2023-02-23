@@ -78,6 +78,18 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
             property: margin-bottom,
             class: mb,
             values: $spacers),
+        "padding-bottom": (
+            property: padding-bottom,
+            class: pb,
+            values: $spacers),
+        "padding-top": (
+            property: padding-top,
+            class: pt,
+            values: $spacers),
+        "padding-y": (
+            property: (padding-top, padding-bottom),
+            class: py,
+            values: $spacers),
         "margin": (
             property: margin,
             class: m,

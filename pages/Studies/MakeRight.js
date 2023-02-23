@@ -11,8 +11,15 @@ import PieChart from "@/components/charts/PieChart";
 import Button from "@/components/elements/Buttons";
 import Slideshow from "@/components/global/slideshow/Slideshow";
 import Pitch from "@/components/sections/Pitch";
+import { useMountEffect } from "@/scripts/hooks/useMountEffect";
+import { useEffect, useState } from "react";
 
 // TODO: add the interactive chapter selection thingy
+
+
+
+
+
 
 function MakeRight({ setPopup }) {
   const study = getStudy();
@@ -20,6 +27,8 @@ function MakeRight({ setPopup }) {
   return (
     <>
       <CaseStudyPage id={study.id} study={study}>
+
+
         <Chapter id="Overview" name="Overview">
           <Section id="Overview--Background" type="overview">
             <Title>Background</Title>
@@ -55,14 +64,12 @@ function MakeRight({ setPopup }) {
             <Title>Opportunity</Title>
             <Heading>How might we remove these barriers, and translate the benefits of 3D printing to the average consumer?</Heading>
           </Section>
-        </Chapter>
 
-        <Chapter name="Pitch" id="Pitch" background="makeright tertiary">
-          <Section id="Pitch--Hero-Logo" type="logo banner" background="primary" align="just-center">
+          <Section id="Overview--Hero-Logo" type="logo banner" background="primary" align="just-center">
             <Graphic type="mask" img={MAKERIGHT_IMGS["makeright_logo"]} />
           </Section>
 
-          <Section id="Pitch--Solution" background="background">
+          <Section id="Overview--Solution" background="background">
             <Title>Solution</Title>
             <Heading>
               Directly connect consumers with owners of 3D printers
@@ -71,9 +78,7 @@ function MakeRight({ setPopup }) {
             </Heading>
           </Section>
 
-          {/* TODO: go back and add the scrolling animations and fancy engineering planned for this section */}
-
-          <Section id="Pitch--Pitch" type="passthrough" margin="wide" wrapperClassName={'mt-0'}>
+          <Section id="Overview--Pitch" type="passthrough" margin="wide" wrapperClassName={'mt-0 py-0'} background="makeright tertiary">
             <Pitch>
               <>
                 <Heading>Choose</Heading>
@@ -124,7 +129,7 @@ function MakeRight({ setPopup }) {
             </Pitch>
           </Section>
 
-          <Section id="Pitch--Summary" type="columns" background="background" wrapperClassName={'mt-0'}>
+          <Section id="Overview--Summary" type="columns" background="background" wrapperClassName='mt-0'>
             <Column>
               <Heading type="h3">Slashing the overhead of competitors</Heading>
               <Description>
@@ -473,7 +478,7 @@ function MakeRight({ setPopup }) {
           </Section>
         </Chapter>
 
-        <Chapter id="Prototyping">
+        <Chapter name="Prototyping" id="Prototyping">
           <Section id="Prototyping--Journey-Map" type="columns" titled="above" background="tertiary light" mainClassName="mb-3">
             <Title>Methodology</Title>
             <Column className="col-7">
@@ -650,7 +655,7 @@ function MakeRight({ setPopup }) {
           </Section>
         </Chapter>
 
-        <Chapter id="Delivery">
+        <Chapter name="Delivery" id="Delivery">
           <Section id="Delivery--Banner" background={MAKERIGHT_IMGS.delivered_project_banner}>
             <Heading>Delivered Project</Heading>
           </Section>
@@ -744,7 +749,7 @@ function MakeRight({ setPopup }) {
           <Section id="Delivery--Banner" background={MAKERIGHT_IMGS["closing_banner"]}></Section>
         </Chapter>
 
-        <Chapter id="Closing">
+        <Chapter name="Closing" id="Closing">
           <Section id="Closing--Copy" type="columns" titled mainClassName="gap-6 mt-6">
             <Title>Areas Of Growth</Title>
             <Heading>

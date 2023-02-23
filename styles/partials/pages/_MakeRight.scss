@@ -52,9 +52,15 @@
         }
       }
     }
-  }
 
-  #Pitch {
+    &--Pitch{
+
+      .mask{
+        background-color: $col-background;
+      }
+
+    }
+
     &--Hero-Logo {
       $pad: 5rem;
       padding-top: $pad;

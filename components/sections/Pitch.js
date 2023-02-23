@@ -35,10 +35,6 @@ function PitchItem(pitch) {
   };
 }
 
-
-
-
-
 function pitchSetCurrentRow(pitch) {
   var { current, previous } = pitch.rows;
   if (current !== previous) {
@@ -48,25 +44,18 @@ function pitchSetCurrentRow(pitch) {
   }
 }
 
-
-
 let pitchSetRowProgressCounter = 0;
 
 function pitchSetRowProgress(pitch) {
   pitchSetRowProgressCounter++;
-
 
   if (pitchSetRowProgressCounter % 5 === 0) {
     pitch.elem.style.setProperty("--pitch-row-progress", pitch.rows.progress);
   }
 }
 
-
-
-
-
 function pitchGetRowProgress(pitch) {
-  const captions = pitch.elem.querySelector('.pitch--captions');
+  const captions = pitch.elem.querySelector(".pitch--captions");
   const captionsRect = captions.getBoundingClientRect();
   const captionsCenterY = (captionsRect.top + captionsRect.bottom) / 2;
   const currentRow = pitch.rows.elems[pitch.rows.current];
@@ -82,15 +71,7 @@ function pitchGetRowProgress(pitch) {
   } else {
     pitch.rows.progress = distance;
   }
-
 }
-
-
-
-
-
-
-
 
 function pitchGetCurrentRow(pitch) {
   // Get the rows array and the current row index
@@ -136,7 +117,6 @@ function pitchSetRowSize(pitch) {
   // Set the row overflow buffer
   elem.style.setProperty("--pitch-overflow-buffer-x", height - pitch.screens.height + "px");
   elem.style.setProperty("--pitch-overflow-buffer-y", width - pitch.screens.width + "px");
-
 }
 
 function pitchGetRowSize(pitch) {
@@ -155,14 +135,13 @@ function pitchGetRowSize(pitch) {
   var screensWidth = splitPx(window.getComputedStyle(screens).width);
   pitch.screens.height = screensHeight;
   pitch.screens.width = screensWidth;
-
 }
 
 function pitchInit(pitch) {
   pitch = pitch.current ? pitch.current : pitch;
 
   pitchResize(pitch);
-  pitchScroll(true);
+  pitchScroll(null, true);
 
   window.removeEventListener("resize", pitchResize, false);
   window.addEventListener("resize", pitchResize, false);
@@ -170,8 +149,7 @@ function pitchInit(pitch) {
   window.addEventListener("scroll", pitchScroll, false);
 }
 
-
-// TODO: is giving the laptop the onLoad thing working well in practice? The other option is giving it priority.  Or both.  
+// TODO: is giving the laptop the onLoad thing working well in practice? The other option is giving it priority.  Or both.
 
 // TODO: The closer you are to completeing the scroll to the next row, add a lil push up or down to help feel like progress is being made.  So as the person scrolls have a value called progress to the next row or something like that then map it to just a lil movement up or down on the main elements in the css.  Then once you scroll to the next one it springs back to where it was
 
@@ -262,26 +240,23 @@ function formatRow(row) {
   };
 }
 
+var scrolls = 0;
+function pitchScroll(e,force) {
+  scrolls++;
+  force = force ? force : false;
+  if (scrolls < 5) force = true;
 
-function pitchScroll(force) {
   // detect if pitch.elem is in view and console log it
   pitches.forEach((pitch) => {
     pitchGetInView(pitch);
-    if (!pitch.inView && !force) return;
-
-    pitchGetCurrentRow(pitch);
-    pitchSetCurrentRow(pitch);
-    pitchGetRowProgress(pitch);
-    pitchSetRowProgress(pitch);
-
+    if (pitch.inView || force) {
+      pitchGetCurrentRow(pitch);
+      pitchSetCurrentRow(pitch);
+      pitchGetRowProgress(pitch);
+      pitchSetRowProgress(pitch);
+    }
   });
 }
-
-
-
-
-
-
 
 var pitchIsResizing;
 
