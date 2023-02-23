@@ -1,3 +1,5 @@
+import { processImage } from "@/scripts/ProcessImages";
+
 const MAKERIGHT_IMGS = {
   full_potential: {
     name: "full_potential",
@@ -59,14 +61,6 @@ const MAKERIGHT_IMGS = {
     width: 96.95,
     height: 117.8,
   },
-
-
-
-
-
-
-
-
 
 
 
@@ -1122,44 +1116,83 @@ const MAKERIGHT_IMGS = {
 };
 
 
+const MAKERIGHT_IMG_GROUPS = processImage(MAKERIGHT_IMGS);
 
-//Before 
 // const MAKERIGHT_IMG_GROUPS = {};
 
-// Object.keys(MAKERIGHT_IMGS).forEach((key) => {
-//   if (MAKERIGHT_IMGS[key].group) {
-//     if (!MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group]) {
-//       MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group] = {
-//         name: MAKERIGHT_IMGS[key].group,
-//         imgs: [],
-//       };
+
+
+// // function to check for overlapping indexes within a group
+// function checkForOverlappingIndexes(group, index, name) {
+//   const currentGroup = MAKERIGHT_IMG_GROUPS[group].imgs;
+//   for (let i = 0; i < currentGroup.length; i++) {
+//     if (currentGroup[i].index === index) {
+//       throw new Error(`Overlapping indexes within group "${group}": ${currentGroup[i].name} and ${name}`);
 //     }
-//     let index = MAKERIGHT_IMGS[key].index;
-//     if (typeof index === "undefined") {
-//       // index = MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.length + 1;
-//       index = MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.length;
-//     } else {
-//       const currentGroup = MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs;
-//       for (let i = 0; i < currentGroup.length; i++) {
-//         if (currentGroup[i].index === index) {
-//           throw new Error(`Overlapping indexes within group "${MAKERIGHT_IMGS[key].group}": ${currentGroup[i].name} and ${MAKERIGHT_IMGS[key].name}`);
-//         }
-//       }
-//     }
-//     MAKERIGHT_IMGS[key].index = index;
-//     MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.push(MAKERIGHT_IMGS[key]);
-//     MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.sort((a, b) => {
-//       return a.index - b.index;
-//     });
 //   }
-// });
+// }
+
+
+// // function to add sections to a group
+// function addSectionsToGroup(group) {
+//   // Check if all images in the group have a section
+//   const allHaveSection = MAKERIGHT_IMG_GROUPS[group].imgs.every((img) => {
+//     return img.section !== undefined;
+//   });
+
+//   if (allHaveSection) {
+//     // Add sections to the group
+//     const sections = [];
+//     MAKERIGHT_IMG_GROUPS[group].imgs.forEach((img, index) => {
+//       const sectionName = img.section;
+//       if (sectionName && !sections.some((section) => section.name === sectionName)) {
+//         const sectionStart = index;
+//         let sectionEnd = index;
+//         // find the end index of the current section
+//         for (let i = index + 1; i < MAKERIGHT_IMG_GROUPS[group].imgs.length; i++) {
+//           if (MAKERIGHT_IMG_GROUPS[group].imgs[i].section === sectionName) {
+//             sectionEnd = i;
+//           } else {
+//             break;
+//           }
+//         }
+//         sections.push({
+//           name: sectionName,
+//           start: sectionStart,
+//           end: sectionEnd
+//         });
+//       }
+//     });
+//     MAKERIGHT_IMG_GROUPS[group].sections = sections;
+//   }
+// }
+
+
+// // function to update group properties
+// function updateGroupProperties(group, img) {
+//   MAKERIGHT_IMG_GROUPS[group].imgs.push(img);
+//   MAKERIGHT_IMG_GROUPS[group].height.min = Math.min(MAKERIGHT_IMG_GROUPS[group].height.min, img.height);
+//   MAKERIGHT_IMG_GROUPS[group].height.max = Math.max(MAKERIGHT_IMG_GROUPS[group].height.max, img.height);
+//   MAKERIGHT_IMG_GROUPS[group].height.constant = MAKERIGHT_IMG_GROUPS[group].height.constant && img.height === MAKERIGHT_IMG_GROUPS[group].height.min;
+//   MAKERIGHT_IMG_GROUPS[group].width.min = Math.min(MAKERIGHT_IMG_GROUPS[group].width.min, img.width);
+//   MAKERIGHT_IMG_GROUPS[group].width.max = Math.max(MAKERIGHT_IMG_GROUPS[group].width.max, img.width);
+//   MAKERIGHT_IMG_GROUPS[group].width.constant = MAKERIGHT_IMG_GROUPS[group].width.constant && img.width === MAKERIGHT_IMG_GROUPS[group].width.min;
+
+//   addSectionsToGroup(group);
+
+//   MAKERIGHT_IMG_GROUPS[group].imgs.sort((a, b) => {
+//     return a.index - b.index;
+//   });
+// }
 
 
 
 
-// const MAKERIGHT_IMG_GROUPS = {};
 
-// Object.keys(MAKERIGHT_IMGS).forEach((key) => {
+
+
+// // function to process each image in the object
+// function processImage(key) {
 //   if (MAKERIGHT_IMGS[key].group) {
 //     if (!MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group]) {
 //       MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group] = {
@@ -1179,157 +1212,16 @@ const MAKERIGHT_IMGS = {
 //     }
 //     let index = MAKERIGHT_IMGS[key].index;
 //     if (typeof index === "undefined") {
-//       // index = MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.length + 1;
 //       index = MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.length;
 //     } else {
-//       const currentGroup = MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs;
-//       for (let i = 0; i < currentGroup.length; i++) {
-//         if (currentGroup[i].index === index) {
-//           throw new Error(`Overlapping indexes within group "${MAKERIGHT_IMGS[key].group}": ${currentGroup[i].name} and ${MAKERIGHT_IMGS[key].name}`);
-//         }
-//       }
+//       checkForOverlappingIndexes(MAKERIGHT_IMGS[key].group, index, MAKERIGHT_IMGS[key].name);
 //     }
 //     MAKERIGHT_IMGS[key].index = index;
-//     MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.push(MAKERIGHT_IMGS[key]);
-//     MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].height.min = Math.min(MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].height.min, MAKERIGHT_IMGS[key].height);
-//     MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].height.max = Math.max(MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].height.max, MAKERIGHT_IMGS[key].height);
-//     MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].height.constant = MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].height.constant && MAKERIGHT_IMGS[key].height === MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].height.min;
-//     MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].width.min = Math.min(MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].width.min, MAKERIGHT_IMGS[key].width);
-//     MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].width.max = Math.max(MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].width.max, MAKERIGHT_IMGS[key].width);
-//     MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].width.constant = MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].width.constant && MAKERIGHT_IMGS[key].width === MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].width.min;
-//     MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.sort((a, b) => {
-//       return a.index - b.index;
-//     });
+//     updateGroupProperties(MAKERIGHT_IMGS[key].group, MAKERIGHT_IMGS[key]);
 //   }
-// });
-
-// global variable
-const MAKERIGHT_IMG_GROUPS = {};
-
-// function to check for overlapping indexes within a group
-function checkForOverlappingIndexes(group, index, name) {
-  const currentGroup = MAKERIGHT_IMG_GROUPS[group].imgs;
-  for (let i = 0; i < currentGroup.length; i++) {
-    if (currentGroup[i].index === index) {
-      throw new Error(`Overlapping indexes within group "${group}": ${currentGroup[i].name} and ${name}`);
-    }
-  }
-}
-
-// function to update group properties
-// function updateGroupProperties(group, img) {
-//   MAKERIGHT_IMG_GROUPS[group].imgs.push(img);
-//   MAKERIGHT_IMG_GROUPS[group].height.min = Math.min(MAKERIGHT_IMG_GROUPS[group].height.min, img.height);
-//   MAKERIGHT_IMG_GROUPS[group].height.max = Math.max(MAKERIGHT_IMG_GROUPS[group].height.max, img.height);
-//   MAKERIGHT_IMG_GROUPS[group].height.constant = MAKERIGHT_IMG_GROUPS[group].height.constant && img.height === MAKERIGHT_IMG_GROUPS[group].height.min;
-//   MAKERIGHT_IMG_GROUPS[group].width.min = Math.min(MAKERIGHT_IMG_GROUPS[group].width.min, img.width);
-//   MAKERIGHT_IMG_GROUPS[group].width.max = Math.max(MAKERIGHT_IMG_GROUPS[group].width.max, img.width);
-//   MAKERIGHT_IMG_GROUPS[group].width.constant = MAKERIGHT_IMG_GROUPS[group].width.constant && img.width === MAKERIGHT_IMG_GROUPS[group].width.min;
-//   MAKERIGHT_IMG_GROUPS[group].imgs.sort((a, b) => {
-//     return a.index - b.index;
-//   });
 // }
 
-
-
-
-
-// function to add sections to a group
-function addSectionsToGroup(group) {
-  // Check if all images in the group have a section
-  const allHaveSection = MAKERIGHT_IMG_GROUPS[group].imgs.every((img) => {
-    return img.section !== undefined;
-  });
-
-  if (allHaveSection) {
-    // Add sections to the group
-    const sections = [];
-    MAKERIGHT_IMG_GROUPS[group].imgs.forEach((img, index) => {
-      const sectionName = img.section;
-      if (sectionName && !sections.some((section) => section.name === sectionName)) {
-        const sectionStart = index;
-        let sectionEnd = index;
-        // find the end index of the current section
-        for (let i = index + 1; i < MAKERIGHT_IMG_GROUPS[group].imgs.length; i++) {
-          if (MAKERIGHT_IMG_GROUPS[group].imgs[i].section === sectionName) {
-            sectionEnd = i;
-          } else {
-            break;
-          }
-        }
-        sections.push({
-          name: sectionName,
-          start: sectionStart,
-          end: sectionEnd
-        });
-      }
-    });
-    MAKERIGHT_IMG_GROUPS[group].sections = sections;
-  }
-}
-
-
-// function to update group properties
-function updateGroupProperties(group, img) {
-  MAKERIGHT_IMG_GROUPS[group].imgs.push(img);
-  MAKERIGHT_IMG_GROUPS[group].height.min = Math.min(MAKERIGHT_IMG_GROUPS[group].height.min, img.height);
-  MAKERIGHT_IMG_GROUPS[group].height.max = Math.max(MAKERIGHT_IMG_GROUPS[group].height.max, img.height);
-  MAKERIGHT_IMG_GROUPS[group].height.constant = MAKERIGHT_IMG_GROUPS[group].height.constant && img.height === MAKERIGHT_IMG_GROUPS[group].height.min;
-  MAKERIGHT_IMG_GROUPS[group].width.min = Math.min(MAKERIGHT_IMG_GROUPS[group].width.min, img.width);
-  MAKERIGHT_IMG_GROUPS[group].width.max = Math.max(MAKERIGHT_IMG_GROUPS[group].width.max, img.width);
-  MAKERIGHT_IMG_GROUPS[group].width.constant = MAKERIGHT_IMG_GROUPS[group].width.constant && img.width === MAKERIGHT_IMG_GROUPS[group].width.min;
-
-  addSectionsToGroup(group);
-
-  MAKERIGHT_IMG_GROUPS[group].imgs.sort((a, b) => {
-    return a.index - b.index;
-  });
-}
-
-
-
-
-
-
-
-// function to process each image in the object
-function processImage(key) {
-  if (MAKERIGHT_IMGS[key].group) {
-    if (!MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group]) {
-      MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group] = {
-        name: MAKERIGHT_IMGS[key].group,
-        imgs: [],
-        height: {
-          min: Infinity,
-          max: -Infinity,
-          constant: true
-        },
-        width: {
-          min: Infinity,
-          max: -Infinity,
-          constant: true
-        }
-      };
-    }
-    let index = MAKERIGHT_IMGS[key].index;
-    if (typeof index === "undefined") {
-      index = MAKERIGHT_IMG_GROUPS[MAKERIGHT_IMGS[key].group].imgs.length;
-    } else {
-      checkForOverlappingIndexes(MAKERIGHT_IMGS[key].group, index, MAKERIGHT_IMGS[key].name);
-    }
-    MAKERIGHT_IMGS[key].index = index;
-    updateGroupProperties(MAKERIGHT_IMGS[key].group, MAKERIGHT_IMGS[key]);
-  }
-}
-
-
-Object.keys(MAKERIGHT_IMGS).forEach(processImage);
-
-
-
-
-
-
+// Object.keys(MAKERIGHT_IMGS).forEach(processImage);
 
 
 
