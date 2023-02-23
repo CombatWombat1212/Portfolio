@@ -1,6 +1,6 @@
 import { addAttrNonDestructive } from "@/scripts/GlobalUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Mask from "../utilities/Mask";
 import GANTT_CHARTS from "/data/charts/GANTT_CHARTS";
 import { chevron_down } from "/data/ICONS";
@@ -47,9 +47,6 @@ function Bar({ className, bars, cycle }) {
 
     adjustedBars[i] = { ...bar, start: barStart, end: barEnd };
   }
-
-  // var type = className.split("__")[1];
-  // var isPhase = type == "phase";
 
   return (
     <div className="bar--group">
@@ -115,10 +112,6 @@ function phaseCloseAllOthers(elem) {
       icon.classList.add("gantt--icon__closed");
 
       phaseBackgroundAnimate(phase.elem);
-
-      // var background = phase.querySelector(".bar__background");
-      // background.classList.remove("bar__background__open");
-      // background.classList.add("bar__background__closed");
     }
   }
 }
@@ -133,30 +126,6 @@ function phaseOnClick(elem) {
 
   phaseBackgroundAnimate(elem);
 
-  // var background = elem.querySelector(".bar__background");
-  // var on = elem.classList.contains("gantt--phase__open");
-
-  // if(on) {
-  //   background.classList.add("bar__background__open");
-  //   background.classList.add("bar__background__open-transition")
-  //   background.classList.remove("bar__background__closed");
-  // } else {
-  //   background.classList.add("bar__background__closed");
-  //   background.classList.add("bar__background__closed-transition")
-  //   background.classList.remove("bar__background__open");
-  // }
-
-  // if (!waiting) {
-  //   waiting = true;
-
-  //   setTimeout(() => {
-  //     waiting = false;
-
-  //       background.classList.remove("bar__background__open-transition");
-  //       background.classList.remove("bar__background__closed-transition");
-
-  //   }, trans + trans + delay );
-  // }
 }
 
 class PhaseObj {
@@ -307,13 +276,39 @@ function Gantt({ study }) {
 
   var lengths = cycles.map((cycle) => cycle.length);
 
+  const ganttRef = useRef(null);
+  
   useMountEffect(() => {
     phaseInit();
   });
+  
+
+
+  useEffect(() => {
+    const gantt = ganttRef.current;
+
+    
+
+    const observer = new IntersectionObserver((entries) => {
+      const [entry] = entries;
+      if (!entry.isIntersecting){
+        phaseCloseAllOthers();
+      }
+    });
+
+    observer.observe(gantt);
+
+    return () => {
+      observer.unobserve(gantt);
+    };
+  }, []);
+
+
+
 
   return (
     <>
-      <div className="gantt">
+      <div className="gantt" ref={ganttRef}>
         {cycles.map((cycle) => {
           return <Cycle key={cycle.key} cycle={cycle} weeks={cycle.weeks} />;
         })}

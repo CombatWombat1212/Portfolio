@@ -55,6 +55,7 @@ let pitchSetRowProgressCounter = 0;
 function pitchSetRowProgress(pitch) {
   pitchSetRowProgressCounter++;
 
+
   if (pitchSetRowProgressCounter % 5 === 0) {
     pitch.elem.style.setProperty("--pitch-row-progress", pitch.rows.progress);
   }
