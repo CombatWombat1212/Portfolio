@@ -3077,7 +3077,7 @@ body {
 
 .chapter-indicator--wrapper {
   --site-x-margin: calc((100% - var(--site-max-width_wide)) / 2);
-  --temp-buffer:10rem;
+  --temp-buffer: 10rem;
   display: flex;
   height: var(--button-height);
   position: sticky;
@@ -3088,6 +3088,9 @@ body {
 .chapter-indicator--name {
   margin-top: -0.03125rem;
   color: #F3F3F7;
+  height: var(--font-height-body);
+  display: flex;
+  flex-direction: column;
 }
 
 .graph--wrapper {
