@@ -13,6 +13,9 @@
 
   --pitch-transition: 0.75s;
 
+  --pitch-progress-transition: 0.2s;
+  --pitch-progress-distance: 2rem;
+
   @include pad-y(var(--section-gap_half));
 
   .pitch {
@@ -45,8 +48,12 @@
 
     &--graphics {
       position: sticky;
-      top: calc(var(--nav-height) + var(--sticky-buffer));
       display: flex;
+      // top: calc(var(--nav-height) + var(--sticky-buffer));
+      --graphics-top: calc(var(--nav-height) + var(--sticky-buffer));
+      top: calc(var(--graphics-top) + ((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
+      transition-duration: var(--pitch-progress-transition);
+
     }
 
     &--laptop {
@@ -57,12 +64,13 @@
 
     &--screens {
       position: absolute;
-      top: calc(var(--section-gap_half) + (var(--pitch-overflow-buffer-x-percent) / 2));
-      left: calc((var(--pitch-overflow-buffer-y-percent) / 2));
       width: calc(100% - var(--pitch-overflow-buffer-y-percent));
       height: calc(100% - var(--section-gap) - var(--pitch-overflow-buffer-x-percent));
       overflow: hidden;
       background-color: #eaf0f8;
+      left: calc((var(--pitch-overflow-buffer-y-percent) / 2));
+      top: calc(var(--section-gap_half) + (var(--pitch-overflow-buffer-x-percent) / 2));
+
     }
 
     &--mockup {
@@ -99,9 +107,11 @@
     &--captions {
       height: var(--pitch-row-height);
       position: sticky;
-      top: calc(var(--nav-height) + var(--sticky-buffer) + var(--section-gap_half));
+      --captions-top: calc(var(--nav-height) + var(--sticky-buffer) + var(--section-gap_half));
       @include marg-y(var(--section-gap_half));
       overflow: hidden;
+      top: calc(var(--captions-top) + ((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
+      transition-duration: var(--pitch-progress-transition);
     }
 
     &--empties {

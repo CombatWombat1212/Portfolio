@@ -2961,6 +2961,8 @@ body {
   --pitch-overflow-buffer-x: 5%;
   --pitch-overflow-buffer-y: 20%;
   --pitch-transition: 0.75s;
+  --pitch-progress-transition: 0.2s;
+  --pitch-progress-distance: 2rem;
   padding-top: var(--section-gap_half);
   padding-bottom: var(--section-gap_half);
 }
@@ -3001,8 +3003,10 @@ body {
 
 .pitch .pitch--graphics {
   position: sticky;
-  top: calc(var(--nav-height) + var(--sticky-buffer));
   display: flex;
+  --graphics-top: calc(var(--nav-height) + var(--sticky-buffer));
+  top: calc(var(--graphics-top) + ((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
+  transition-duration: var(--pitch-progress-transition);
 }
 
 .pitch .pitch--laptop {
@@ -3013,12 +3017,12 @@ body {
 
 .pitch .pitch--screens {
   position: absolute;
-  top: calc(var(--section-gap_half) + (var(--pitch-overflow-buffer-x-percent) / 2));
-  left: calc((var(--pitch-overflow-buffer-y-percent) / 2));
   width: calc(100% - var(--pitch-overflow-buffer-y-percent));
   height: calc(100% - var(--section-gap) - var(--pitch-overflow-buffer-x-percent));
   overflow: hidden;
   background-color: #eaf0f8;
+  left: calc((var(--pitch-overflow-buffer-y-percent) / 2));
+  top: calc(var(--section-gap_half) + (var(--pitch-overflow-buffer-x-percent) / 2));
 }
 
 .pitch .pitch--mockup {
@@ -3049,10 +3053,12 @@ body {
 .pitch .pitch--captions {
   height: var(--pitch-row-height);
   position: sticky;
-  top: calc(var(--nav-height) + var(--sticky-buffer) + var(--section-gap_half));
+  --captions-top: calc(var(--nav-height) + var(--sticky-buffer) + var(--section-gap_half));
   margin-top: var(--section-gap_half);
   margin-bottom: var(--section-gap_half);
   overflow: hidden;
+  top: calc(var(--captions-top) + ((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
+  transition-duration: var(--pitch-progress-transition);
 }
 
 .pitch .pitch--empties {

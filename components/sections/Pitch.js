@@ -5,7 +5,7 @@ import MAKERIGHT_IMGS from "@/data/MAKERIGHT_IMGS";
 import Section from "./Sections";
 import React, { useRef, useState } from "react";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
-import { RESIZE_TIMEOUT, splitPx } from "@/scripts/GlobalUtilities";
+import { clamp, RESIZE_TIMEOUT, splitPx } from "@/scripts/GlobalUtilities";
 const laptop_frame = MAKERIGHT_IMGS.pitch_laptop_frame;
 
 // TODO: i think you should do the same animation on the description side to make it have smooth scrolling transitions too? Or maybe something to lock it in place better next to the screen? might not be priority though
@@ -30,47 +30,14 @@ function PitchItem(pitch) {
   this.rows = {
     elems: Array.from(this.elem.querySelectorAll(".pitch--placeholder")),
     current: 0,
+    progress: 0,
     previous: null,
   };
-  // this.captions = {
-  // height: 0,
-  // width: 0,
-  // elem: this.elem.querySelector(".pitch--captions"),
-  // children: captionsChildrenInit(Array.from(this.elem.querySelectorAll(".pitch--captions"))),
-  // };
-
-  // function captionsChildrenInit(arr) {
-  //   var objs = [];
-  //   for (let i = 0; i < arr.length; i++) {
-  //     const child = arr[i];
-  //     var obj = {
-  //       height: 0,
-  //       width: 0,
-  //       elems: child,
-  //       children: captionsInnerInit(Array.from(child.children)),
-  //     };
-  //     objs.push(obj);
-  //   }
-  //   return objs;
-  // }
-
-  // function captionsInnerInit(arr) {
-  //   var objs = [];
-  //   for (let i = 0; i < arr.length; i++) {
-  //     const child = arr[i];
-  //     var obj = {
-  //       height: 0,
-  //       width: 0,
-  //       elems: child,
-  //       children: captionsInnerInit(Array.from(child.children)),
-  //     };
-  //     objs.push(obj);
-  //   }
-  //   return objs;
-  // }
-
-  console.log(this);
 }
+
+
+
+
 
 function pitchSetCurrentRow(pitch) {
   var { current, previous } = pitch.rows;
@@ -80,6 +47,49 @@ function pitchSetCurrentRow(pitch) {
     elem.style.setProperty("--pitch-current-row", pitch.rows.current);
   }
 }
+
+
+
+let pitchSetRowProgressCounter = 0;
+
+function pitchSetRowProgress(pitch) {
+  pitchSetRowProgressCounter++;
+
+  if (pitchSetRowProgressCounter % 5 === 0) {
+    pitch.elem.style.setProperty("--pitch-row-progress", pitch.rows.progress);
+  }
+}
+
+
+
+
+
+function pitchGetRowProgress(pitch) {
+  const captions = pitch.elem.querySelector('.pitch--captions');
+  const captionsRect = captions.getBoundingClientRect();
+  const captionsCenterY = (captionsRect.top + captionsRect.bottom) / 2;
+  const currentRow = pitch.rows.elems[pitch.rows.current];
+  const currentRowRect = currentRow.getBoundingClientRect();
+  const currentRowCenterY = (currentRowRect.top + currentRowRect.bottom) / 2;
+
+  const distance = (captionsCenterY - currentRowCenterY) / (pitch.frame.height / 2);
+
+  if (distance > 1) {
+    pitch.rows.progress = 1;
+  } else if (distance < -1) {
+    pitch.rows.progress = -1;
+  } else {
+    pitch.rows.progress = distance;
+  }
+
+}
+
+
+
+
+
+
+
 
 function pitchGetCurrentRow(pitch) {
   // Get the rows array and the current row index
@@ -126,20 +136,6 @@ function pitchSetRowSize(pitch) {
   elem.style.setProperty("--pitch-overflow-buffer-x", height - pitch.screens.height + "px");
   elem.style.setProperty("--pitch-overflow-buffer-y", width - pitch.screens.width + "px");
 
-  // Set the caption height and width
-  // elem.style.setProperty("--pitch-caption-height", pitch.captions.height + "px");
-  // elem.style.setProperty("--pitch-caption-width", pitch.captions.width + "px");
-
-  // Set the caption inner height and width
-  // var placeholders = Array.from(elem.querySelectorAll(".pitch--placeholder"));
-  // for (let i = 0; i < pitch.captions.children.length; i++) {
-  //   const child = pitch.captions.children[i];
-  //   for (let j = 0; j < child.children.length; j++) {
-  //     const child2 = child.children[j];
-  //     child2.elems.style.setProperty("--pitch-caption-inner-height", child2.height + "px");
-  //     placeholders[j].style.setProperty("--pitch-caption-inner-height", child2.height + "px");
-  //   }
-  // }
 }
 
 function pitchGetRowSize(pitch) {
@@ -159,32 +155,6 @@ function pitchGetRowSize(pitch) {
   pitch.screens.height = screensHeight;
   pitch.screens.width = screensWidth;
 
-  // width from this point on isnt needed
-
-  // get width and height of the captions, same as the frame
-  // for (let i = 0; i < pitch.captions.children.length; i++) {
-  //   const child = pitch.captions.children[i];
-  //   child.height = pitch.frame.height;
-  // }
-
-  // // get width and height of the captions inner
-  // for (let i = 0; i < pitch.captions.children.length; i++) {
-  //   const child = pitch.captions.children[i];
-  //   for (let j = 0; j < child.children.length; j++) {
-  //     const innerChild = child.children[j];
-
-  //     var h = 0;
-  //     for (let k = 0; k < innerChild.children.length; k++) {
-  //       const innerInnerChild = innerChild.children[k];
-  //       var captions = innerInnerChild.elems;
-  //       var captionsHeight = splitPx(window.getComputedStyle(captions).height);
-  //       captionsHeight += splitPx(window.getComputedStyle(captions).marginTop);
-  //       captionsHeight += splitPx(window.getComputedStyle(captions).marginBottom);
-  //       h += captionsHeight;
-  //     }
-  //     innerChild.height = h;
-  //   }
-  // }
 }
 
 function pitchInit(pitch) {
@@ -300,6 +270,8 @@ function pitchScroll(force) {
 
     pitchGetCurrentRow(pitch);
     pitchSetCurrentRow(pitch);
+    pitchGetRowProgress(pitch);
+    pitchSetRowProgress(pitch);
 
   });
 }
