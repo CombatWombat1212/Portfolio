@@ -2961,8 +2961,8 @@ body {
   --pitch-overflow-buffer-x: 5%;
   --pitch-overflow-buffer-y: 20%;
   --pitch-transition: 0.75s;
-  --pitch-progress-transition: 0.2s;
-  --pitch-progress-distance: 2rem;
+  --pitch-progress-transition: 0.25s;
+  --pitch-progress-distance: 3rem;
   padding-top: var(--section-gap_half);
   padding-bottom: var(--section-gap_half);
 }
@@ -3006,7 +3006,7 @@ body {
   display: flex;
   --graphics-top: calc(var(--nav-height) + var(--sticky-buffer));
   top: calc(var(--graphics-top) + ((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
-  transition-duration: var(--pitch-progress-transition);
+  transition: var(--pitch-progress-transition);
 }
 
 .pitch .pitch--laptop {
@@ -3058,7 +3058,7 @@ body {
   margin-bottom: var(--section-gap_half);
   overflow: hidden;
   top: calc(var(--captions-top) + ((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
-  transition-duration: var(--pitch-progress-transition);
+  transition: var(--pitch-progress-transition);
 }
 
 .pitch .pitch--empties {

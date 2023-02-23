@@ -286,9 +286,6 @@ function Gantt({ study }) {
 
   useEffect(() => {
     const gantt = ganttRef.current;
-
-    
-
     const observer = new IntersectionObserver((entries) => {
       const [entry] = entries;
       if (!entry.isIntersecting){
