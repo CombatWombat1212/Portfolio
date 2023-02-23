@@ -9,60 +9,59 @@ function Chapter(elem) {
   this.observer = null;
 }
 
+function chapterUpdateHeight(obj, chapter) {
+  var newHeight = splitPx(window.getComputedStyle(chapter.elem).height);
+  console.log(`Chapter ${chapter.index}: height changed to ${newHeight}px`);
+
+  const updatedChapters = [...obj.chapters];
+  updatedChapters[chapter.index].height = newHeight;
+
+  const updatedObj = { ...obj, chapters: updatedChapters };
+  obj.chapters = updatedChapters;
+  return updatedObj;
+}
+
 function chaptersInit(obj, setChapters) {
-    var all = document.querySelectorAll(".chapter--wrapper");
-    obj.elems = Array.from(all);
-    obj.chapters = obj.elems.map((elem) => new Chapter(elem));
-  
-    obj.chapters.forEach((chapter, index) => {
-      chapter.index = index;
-    });
-  
-    var resizeTimer;
-  
-    obj.chapters.forEach((chapter) => {
-      var prevHeight = splitPx(window.getComputedStyle(chapter.elem).height);
-      chapter.observer = new ResizeObserver((entries) => {
-        if (resizeTimer) {
-          clearTimeout(resizeTimer);
-        }
-        resizeTimer = setTimeout(() => {
-          resizeTimer = null;
-          var newHeight = splitPx(window.getComputedStyle(chapter.elem).height);
-          console.log(`Chapter ${chapter.index}: height changed from ${prevHeight}px to ${newHeight}px`);
-          prevHeight = newHeight;
-  
-          const updatedChapters = [...obj.chapters];
-          updatedChapters[chapter.index].height = newHeight;
-  
-          const updatedObj = { ...obj, chapters: updatedChapters }; // create a new object with updated chapters and existing elems
-          setChapters(updatedObj); // set the state to the updated chapters object
-  
-        }, RESIZE_TIMEOUT);
-      });
-      chapter.observer.observe(chapter.elem);
-    });
-  }
-  
-function chaptersGetHeight(obj) {
-  obj.chapters.forEach((chapter) => {
-    chapter.height = splitPx(window.getComputedStyle(chapter.elem).height);
+  var all = document.querySelectorAll(".chapter--wrapper");
+  obj.elems = Array.from(all);
+  obj.chapters = obj.elems.map((elem) => new Chapter(elem));
+
+  obj.chapters.forEach((chapter, index) => {
+    chapter.index = index;
   });
+
+  var resizeTimer;
+
+  obj.chapters.forEach((chapter) => {
+    var prevHeight = splitPx(window.getComputedStyle(chapter.elem).height);
+    chapter.observer = new ResizeObserver((entries) => {
+      if (resizeTimer) {
+        clearTimeout(resizeTimer);
+      }
+      resizeTimer = setTimeout(() => {
+        resizeTimer = null;
+
+        const updatedObj = chapterUpdateHeight(obj, chapter);
+        setChapters(updatedObj);
+      }, RESIZE_TIMEOUT);
+    });
+    chapter.observer.observe(chapter.elem);
+  });
+
+  window.removeEventListener("resize", () => progressResize(obj, setChapters));
+  window.addEventListener("resize", () => progressResize(obj, setChapters));
 }
 
 function progressInit(chapters, setChapters) {
   var chaps = {};
+
   chaptersInit(chaps, setChapters);
-  chaptersGetHeight(chaps);
 
   setChapters(chaps);
-
-  window.removeEventListener("scroll", progressScroll, false);
-  window.addEventListener("scroll", progressScroll, false);
 }
 
 function StudyProgress({}) {
-  const [chapters, setChapters] = useState([]);
+  const [chapters, setChapters] = useState({});
 
   useMountEffect(() => {
     progressInit(chapters, setChapters);
@@ -81,6 +80,22 @@ function StudyProgress({}) {
   );
 }
 
-function progressScroll(e) {}
+
+
+var progressIsResizing;
+
+function progressResize(obj, setChapters) {
+  window.clearTimeout(progressIsResizing);
+  progressIsResizing = setTimeout(() => progressResizeFunctions(obj, setChapters), RESIZE_TIMEOUT);
+}
+
+function progressResizeFunctions(obj, setChapters) {
+  const updatedChapters = obj.chapters.map((chapter) => chapterUpdateHeight(obj, chapter));
+  const updatedObj = { ...obj, chapters: updatedChapters };
+  setChapters(updatedObj);
+}
+
+
+
 
 export default StudyProgress;
