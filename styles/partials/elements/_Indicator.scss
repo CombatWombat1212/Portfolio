@@ -18,12 +18,12 @@
   padding-left: calc(var(--site-x-margin));
   padding-right: 1.5625rem;
 
-  &__hidden{
-    opacity: 0;
-    @include no-select;
-  }
+  // &__hidden{
+  //   opacity: 0;
+  //   @include no-select;
+  // }
 
-  .name {
+  .label {
     margin-top: -0.03125rem;
     color: $col-background;
     height: var(--font-height-body);
@@ -38,7 +38,8 @@
 
     }
 
-    &--chapter {
+    &--name {
+      width:fit-content;
       // --name-index:0;
       // --chapter-progress:0;
       // --offset: 1;

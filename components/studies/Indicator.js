@@ -4,16 +4,17 @@ import { useEffect, useRef, useState } from "react";
 
 // TODO: fix scss system so theres no gaps between chapters
 
-var globChapters;
-
 var indicators = [];
 
 function IndicatorItem(indicator) {
   this.elem = indicator.current ? indicator.current : indicator;
   this.chapters = [];
+  this.label = { elem: null };
   this.names = [];
   this.width = 0;
   this.height = 0;
+  this.touching = [];
+  this.progress = 0;
 }
 
 function Chapter(elem, index) {
@@ -37,70 +38,86 @@ function Chapter(elem, index) {
 function Name(elem) {
   this.chapter = elem;
   this.index = 0;
-  this.name = elem?.getAttribute("name") || "";
+  this.text = elem.getAttribute("name");
+  this.width = 0;
+  this.elem = null;
 }
 
-function namesAddElems(names) {
-  var nameElems = document.querySelectorAll(".indicator .name--chapter");
-  nameElems = Array.from(nameElems);
-  var n = [...names];
-  n.forEach((name, index) => {
-    name.elem = nameElems[index];
+function indicatorNamesGetSizes(indicator) {
+  indicator.names.forEach((name) => {
+    console.log(name);
+    var width = splitPx(window.getComputedStyle(name.elem).width);
+    name.width = width;
   });
-  return n;
+  console.log(indicator);
 }
 
-function namesGet(chapters) {
-  var n = [];
-  chapters.chapters.forEach((chapter) => {
-    var name = new Name(chapter.elem);
-    name.index = chapter.index;
-    n.push(name);
+function indicatorNamesGet(indicator) {
+  var arr = Array.from(document.querySelectorAll(".chapter--wrapper"));
+  var names = arr.map((elem) => {
+    var newName = new Name(elem);
+    var index = arr.indexOf(elem);
+    newName.elem = Array.from(indicator.elem.querySelectorAll(".label--name"))[index];
+    newName.index = index;
+    indicator.names.push(newName);
   });
-  return n;
 }
 
-function namesInit(indicator, setNames, setNamesInitialized) {
-  // console.log(indicator);
-  // var n = namesGet(chapters);
-  // setNames(n);
-  // setNamesInitialized(true);
+function namesGet() {
+  var arr = Array.from(document.querySelectorAll(".chapter--wrapper"));
+  var names = arr.map((elem, i) => {
+    return elem.getAttribute("name");
+  });
+  return names;
 }
 
-function indicatorGetTouching(chapters, text) {
-  var touching = [];
+function labelStyleSet(indicator) {
+  indicator.label.elem.style.setProperty("--chapter-progress", indicator.progress);
+}
 
-  chapters.chapters.forEach((chapter) => {
-    var textRect = text.getBoundingClientRect();
+function labelInit(indicator) {
+  var label = indicator.elem.querySelector(".label");
+  indicator.label.elem = label;
+}
+
+function namesInit(indicator, setNames) {
+  var names = namesGet(indicator);
+  setNames(names);
+}
+
+function indicatorGetTouching(indicator) {
+  indicator.touching = [];
+
+  indicator.chapters.forEach((chapter) => {
+    var labelRect = indicator.label.elem.getBoundingClientRect();
     var chapterRect = chapter.elem.getBoundingClientRect();
 
-    var textTop = textRect.top;
-    var textBottom = textRect.bottom;
+    var labelTop = labelRect.top;
+    var labelBottom = labelRect.bottom;
 
     var chapterTop = chapterRect.top;
     var chapterBottom = chapterRect.bottom;
 
     var progress = 0;
 
-    if (chapterTop >= textTop && chapterBottom <= textBottom) {
+    if (chapterTop >= labelTop && chapterBottom <= labelBottom) {
       progress = 1;
-    } else if (chapterTop < textTop && chapterBottom <= textBottom) {
-      progress = (chapterBottom - textTop) / textRect.height;
-    } else if (chapterTop >= textTop && chapterBottom > textBottom) {
-      progress = (textBottom - chapterTop) / textRect.height;
-    } else if (chapterTop < textTop && chapterBottom > textBottom) {
+    } else if (chapterTop < labelTop && chapterBottom <= labelBottom) {
+      progress = (chapterBottom - labelTop) / labelRect.height;
+    } else if (chapterTop >= labelTop && chapterBottom > labelBottom) {
+      progress = (labelBottom - chapterTop) / labelRect.height;
+    } else if (chapterTop < labelTop && chapterBottom > labelBottom) {
       progress = 1;
     }
 
     if (progress > 0) {
-      touching.push({ chapter: chapter, progress: progress });
+      indicator.touching.push({ chapter: chapter, progress: progress });
     }
   });
-
-  return touching;
 }
 
-function indicatorGetProgress(touching) {
+function indicatorGetProgress(indicator) {
+  var touching = indicator.touching;
   var nextChapter = touching[touching.length - 1];
   var index, p;
   if (nextChapter == undefined) {
@@ -111,7 +128,7 @@ function indicatorGetProgress(touching) {
     p = nextChapter.progress;
   }
   var progress = index + p;
-  return progress;
+  indicator.progress = progress;
 }
 
 function chaptersInit(indicator) {
@@ -124,10 +141,25 @@ function chaptersInit(indicator) {
   window.addEventListener("resize", indicatorOnResize);
 }
 
-function indicatorSetVisibility(progress) {
-  var indicator = document.querySelector(".indicator--wrapper");
-  if (!indicator) return;
+
+// TODO: this is where you're at, good luck this week! 
+// TODO: make sure this only runs when the value changes not every time
+function indicatorWidthSet(indicator) {
+  // if indicator, or indicator names is empty then return
+  // run this function only when indicator.progress changes to a new value
+  // first, using progress get the index of the current chapter
+  // progress can be a float when you are crossing over into the next chapter, so round it down
+  // store just the decimal part of progress as we will need it later.
+  // using progress which you've now rounded down, find indicator.names[progressRounded] and get the width of that element
+  // that info can be found at indicator.names[progressRounded].width
+  // finally, set the width of indicator.label.elem to the width of the current chapter name
 }
+
+
+
+
+
+
 
 function indicatorSetSize(indicator) {
   indicator.elem.style.setProperty("--indicator-width", `${indicator.width}px`);
@@ -139,72 +171,55 @@ function indicatorGetSize(indicator) {
   indicator.height = splitPx(window.getComputedStyle(indicator.elem).height);
 }
 
-function chapterSetSize(chapter) {
-  // chapter.elem.style.setProperty("--chapter-width", `${chapter.width}px`);
-  // chapter.elem.style.setProperty("--chapter-height", `${chapter.height}px`);
-}
-
 function chapterGetSize(chapter) {
-  // chapter.width = splitPx(window.getComputedStyle(chapter.elem).width);
   chapter.height = splitPx(window.getComputedStyle(chapter.elem).height);
 }
 
 function indicatorInit(indicator) {
   chaptersInit(indicator);
-  // setChapters(obj);
-
-  // indicatorOnScroll();
-  // indicatorOnResizeFunctions();
+  labelInit(indicator);
+  indicatorOnScroll();
+  indicatorOnResizeFunctions();
 }
 
 function Indicator({}) {
   const [names, setNames] = useState([]);
-  const [namesInitialized, setNamesInitialized] = useState(false);
-
   var indicator = useRef(null);
 
   useMountEffect(() => {
     var indicatorObj = new IndicatorItem(indicator);
-    indicators.push(indicatorObj);
-
+    if (indicators.length == 0 || indicators[indicators.length - 1].elem != indicatorObj.elem) {
+      indicators.push(indicatorObj);
+    }
     indicators.forEach((indicator) => {
       indicatorInit(indicator);
+      namesInit(indicator, setNames);
     });
   });
 
   useEffect(() => {
-    if (namesInitialized) return;
-    if (indicators.length == 0) return;
+    if (names.length < 1) return;
     indicators.forEach((indicator) => {
-      namesInit(indicator, setNames, setNamesInitialized);
+      indicatorNamesGet(indicator);
+      indicatorNamesGetSizes(indicator);
     });
-  }, [namesInitialized]);
-
-  useEffect(() => {
-    if (!namesInitialized) return;
-    var n = namesAddElems(names);
-    setNames(n);
-  }, [namesInitialized]);
-
-  useEffect(() => {
-    console.log(names);
   }, [names]);
 
   return (
-    <div className="indicator--wrapper indicator--wrapper__off" ref={indicator}>
-      <div className="indicator indicator__hidden">
-        <div className="name">
-          <span className="name--empty"></span>
-          {namesInitialized &&
-            names.map((n) => {
+    <div className="indicator--wrapper" ref={indicator}>
+      <div className="indicator">
+        <div className="label">
+          <span className="label--empty"></span>
+          {names &&
+            names.map((n, i) => {
               return (
                 <span
-                  key={n.index}
-                  className="name--chapter"
+                  key={i}
+                  className="label--name"
                   style={{
-                    "--name-index": n.index,
+                    "--label-index": i,
                   }}>
-                  {n.name}
+                  {n}
                 </span>
               );
             })}
@@ -217,17 +232,16 @@ function Indicator({}) {
 function indicatorOnScroll() {
   // TODO: These calculations are honestly so extra, you don't need to do this based on the exact position of the chapter, and whether or not its overlapping text, you could probably just do it based on the chapter's position on screen i think?  like the whole idea of it needing to be an exact float seems like much
 
-  if (!globChapters) return;
-  if (!globChapters.chapters) return;
-  if (!globChapters.chapters[0].elem) return;
+  if (!indicators) return;
 
-  var chapters = globChapters;
-  var name = document.querySelector(".indicator .name");
-  var touching = indicatorGetTouching(chapters, name);
-  var progress = indicatorGetProgress(touching);
-  name.style.setProperty("--chapter-progress", progress);
-
-  indicatorSetVisibility(progress);
+  indicators.forEach((indicator) => {
+    var chapters = indicator.chapters;
+    var label = indicator.label;
+    indicatorGetTouching(indicator);
+    indicatorGetProgress(indicator);
+    labelStyleSet(indicator);
+    indicatorWidthSet(indicator);
+  });
 }
 
 var indicatorIsResizing;
@@ -241,7 +255,7 @@ function indicatorOnResizeFunctions() {
   indicators.forEach((indicator) => {
     indicatorGetSize(indicator);
     indicatorSetSize(indicator);
-
+    indicatorNamesGetSizes(indicator);
     indicator.chapters.forEach((chapter) => {
       chapterGetSize(chapter);
     });

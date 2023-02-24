@@ -3089,13 +3089,7 @@ body {
   top: calc(var(--nav-height) + var(--temp-buffer));
 }
 
-.indicator__hidden {
-  opacity: 0;
-  -webkit-touch-callout: none;
-  user-select: none;
-}
-
-.indicator .name {
+.indicator .label {
   margin-top: -0.03125rem;
   color: #F3F3F7;
   height: var(--font-height-body);
@@ -3104,11 +3098,15 @@ body {
   overflow: hidden;
 }
 
-.indicator .name--empty {
+.indicator .label--empty {
   transition-duration: 0.1s;
   height: var(--font-height-body);
   min-height: var(--font-height-body);
   margin-top: calc((var(--chapter-progress) * -1) * var(--font-height-body));
+}
+
+.indicator .label--name {
+  width: fit-content;
 }
 
 .graph--wrapper {

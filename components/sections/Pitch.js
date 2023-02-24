@@ -186,6 +186,14 @@ function Pitch({ children }) {
     var pitchObj = new PitchItem(pitch);
     pitches.push(pitchObj);
     pitchInit(pitchObj);
+
+    // TODO: there are 2 pitch items inside pitches after mount so certain things must be running twice.
+    // if (indicators.length == 0 || indicators[indicators.length - 1].elem != indicatorObj.elem) {
+    //   indicators.push(indicatorObj);
+    // }
+    // I fixed it like this in indicator
+
+
   });
 
   return (
