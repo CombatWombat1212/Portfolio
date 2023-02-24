@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 
 var globChapters;
 var namesSet = false;
+var namesElemSet = false;
 
 function Chapter(elem, index, chapters, setChapters) {
   this.elem = elem;
@@ -34,18 +35,43 @@ function Chapter(elem, index, chapters, setChapters) {
 
 
 function Name(elem) {
-  this.elem = elem;
-  this.height = 0;
+  this.chapter = elem;
   this.index = 0;
-  this.name = elem.getAttribute("name");
+  this.name = elem?.getAttribute("name") || "";
 }
 
+
+
+function namesAddElems(names) {
+  var nameElems = document.querySelectorAll(".indicator .name--chapter");
+  nameElems = Array.from(nameElems);
+  var n = [...names];
+  n.forEach((name, index) => {
+    name.elem = nameElems[index];
+  });
+  return n;
+}
+
+
+
+function namesGet(chapters){
+  var n = [];
+  chapters.chapters.forEach((chapter) => {
+    var name = new Name(chapter.elem);
+    name.index = chapter.index;
+    n.push(name);
+  });
+  return n;
+}
+
+
 function namesInit(chapters, setNames){
-  setNames(chapters.chapters.map((chapter) => chapter.name));
+  var n = namesGet(chapters);
+  setNames(n);
   namesSet = true;
 }
 
-function chapterGetTouching(chapters, text) {
+function indicatorGetTouching(chapters, text) {
   var touching = [];
 
   chapters.chapters.forEach((chapter) => {
@@ -78,7 +104,7 @@ function chapterGetTouching(chapters, text) {
   return touching;
 }
 
-function chapterGetProgress(touching) {
+function indicatorGetProgress(touching) {
   var nextChapter = touching[touching.length - 1];
   var index, p;
   if (nextChapter == undefined) {
@@ -101,37 +127,6 @@ function chaptersGetUpdatedHeights(obj, chapter) {
   return updatedObj;
 }
 
-// function chaptersInit(obj, chapters, setChapters) {
-//   var all = document.querySelectorAll(".chapter--wrapper");
-//   obj.elems = Array.from(all);
-//   obj.chapters = obj.elems.map((elem) => new Chapter(elem));
-
-//   obj.chapters.forEach((chapter, index) => {
-//     chapter.index = index;
-//   });
-
-//   var resizeTimer;
-
-//   obj.chapters.forEach((chapter) => {
-//     var prevHeight = splitPx(window.getComputedStyle(chapter.elem).height);
-//     chapter.observer = new ResizeObserver((entries) => {
-//       if (resizeTimer) {
-//         clearTimeout(resizeTimer);
-//       }
-//       resizeTimer = setTimeout(() => {
-//         resizeTimer = null;
-//         const updatedObj = chaptersGetUpdatedHeights(obj, chapter);
-//         setChapters(updatedObj);
-//       }, RESIZE_TIMEOUT);
-//     });
-//     chapter.observer.observe(chapter.elem);
-//   });
-
-//   window.removeEventListener("scroll", indicatorOnScroll);
-//   window.addEventListener("scroll", indicatorOnScroll);
-//   window.removeEventListener("resize", () => indicatorOnResize(obj, setChapters));
-//   window.addEventListener("resize", () => indicatorOnResize(obj, setChapters));
-// }
 
 function chaptersInit(obj, chapters, setChapters) {
   var all = document.querySelectorAll(".chapter--wrapper");
@@ -149,6 +144,8 @@ function indicatorInit(indicator, chapters, setChapters) {
   var obj = {};
   chaptersInit(obj, chapters, setChapters);
   setChapters(obj);
+
+  // indicatorOnResizeFunctions(obj, setChapters)
 }
 
 function Indicator({}) {
@@ -167,20 +164,30 @@ function Indicator({}) {
     namesInit(chapters, setNames);
   }, [chapters]);
 
+  useEffect(() => {
+    if (!names) return;
+    if (names.length < 1) return;
+    if (namesElemSet) return;
+    namesElemSet = true;
+    setNames(namesAddElems(names));
+  }, [names]);
+  
+  
   return (
     <div className="indicator--wrapper" ref={indicator}>
       <div className="indicator">
-        <div className="indicator--name">
+        <div className="name">
+          <span className="name--empty"></span>
           {names &&
-            names.map((name, index) => {
+            names.map((n) => {
               return (
                 <span
-                  key={index}
-                  className=""
+                  key={n.index}
+                  className="name--chapter"
                   style={{
-                    "--name-index": index,
+                    "--name-index": n.index,
                   }}>
-                  {name}
+                  {n.name}
                 </span>
               );
             })}
@@ -198,12 +205,12 @@ function indicatorOnScroll(e) {
   if (!globChapters.chapters[0].elem) return;
 
   var chapters = globChapters;
-  var wrapper = document.querySelector(".indicator--wrapper");
-  var text = document.querySelector(".indicator--name");
-  var touching = chapterGetTouching(chapters, text);
-  var progress = chapterGetProgress(touching);
-  var name = document.querySelector(".indicator--name");
+  var name = document.querySelector(".indicator .name");
+  var touching = indicatorGetTouching(chapters, name);
+  var progress = indicatorGetProgress(touching);
+  console.log(progress)
   name.style.setProperty("--chapter-progress", progress);
+  
 }
 
 var indicatorIsResizing;
@@ -214,9 +221,11 @@ function indicatorOnResize(obj, setChapters) {
 }
 
 function indicatorOnResizeFunctions(obj, setChapters) {
-  const updatedChapters = obj.chapters.map((chapter) => chaptersGetUpdatedHeights(obj, chapter));
-  const updatedObj = { ...obj, chapters: updatedChapters };
-  setChapters(updatedObj);
+  const updatedChapters = obj.chapters.map((chapter) => {
+    const newHeight = splitPx(window.getComputedStyle(chapter.elem).height);
+    return { ...chapter, height: newHeight };
+  });
+  setChapters({ ...obj, chapters: updatedChapters });
 }
 
 export default Indicator;

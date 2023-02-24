@@ -3085,7 +3085,7 @@ body {
   top: calc(var(--nav-height) + var(--temp-buffer));
 }
 
-.indicator--name {
+.indicator .name {
   margin-top: -0.03125rem;
   color: #F3F3F7;
   height: var(--font-height-body);
@@ -3094,13 +3094,11 @@ body {
   overflow: hidden;
 }
 
-.indicator--name span {
+.indicator .name--empty {
   transition-duration: 0.1s;
-  --offset: 1;
-}
-
-.indicator--name span:first-child {
-  margin-top: calc(((var(--chapter-progress)*-1) + var(--offset)) * var(--font-height-body));
+  height: var(--font-height-body);
+  min-height: var(--font-height-body);
+  margin-top: calc((var(--chapter-progress) * -1) * var(--font-height-body));
 }
 
 .graph--wrapper {
