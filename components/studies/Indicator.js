@@ -5,16 +5,33 @@ import { useEffect, useRef, useState } from "react";
 // TODO: fix scss system so theres no gaps between chapters
 
 var globChapters;
-var names = [];
 var namesSet = false;
 
-function Chapter(elem) {
+function Chapter(elem, index, chapters, setChapters) {
   this.elem = elem;
-  this.height = 0;
-  this.index = 0;
-  this.observer = null;
+  this.height = splitPx(window.getComputedStyle(elem).height);
+  this.index = index;
   this.name = elem.getAttribute("name");
+
+  this.observer = new ResizeObserver((entries) => {
+    let resizeTimer;
+    if (resizeTimer) {
+      clearTimeout(resizeTimer);
+    }
+    resizeTimer = setTimeout(() => {
+      resizeTimer = null;
+      const updatedHeight = splitPx(window.getComputedStyle(elem).height);
+      this.height = updatedHeight;
+      setChapters((prevChapters) => {
+        const updatedChapters = [...prevChapters.chapters];
+        updatedChapters[this.index].height = this.height;
+        return { ...prevChapters, chapters: updatedChapters };
+      });
+    }, RESIZE_TIMEOUT);
+  });
+  this.observer.observe(elem);
 }
+
 
 function Name(elem) {
   this.elem = elem;
@@ -23,8 +40,9 @@ function Name(elem) {
   this.name = elem.getAttribute("name");
 }
 
-function namesInit() {
-
+function namesInit(chapters, setNames){
+  setNames(chapters.chapters.map((chapter) => chapter.name));
+  namesSet = true;
 }
 
 function chapterGetTouching(chapters, text) {
@@ -83,31 +101,42 @@ function chaptersGetUpdatedHeights(obj, chapter) {
   return updatedObj;
 }
 
+// function chaptersInit(obj, chapters, setChapters) {
+//   var all = document.querySelectorAll(".chapter--wrapper");
+//   obj.elems = Array.from(all);
+//   obj.chapters = obj.elems.map((elem) => new Chapter(elem));
+
+//   obj.chapters.forEach((chapter, index) => {
+//     chapter.index = index;
+//   });
+
+//   var resizeTimer;
+
+//   obj.chapters.forEach((chapter) => {
+//     var prevHeight = splitPx(window.getComputedStyle(chapter.elem).height);
+//     chapter.observer = new ResizeObserver((entries) => {
+//       if (resizeTimer) {
+//         clearTimeout(resizeTimer);
+//       }
+//       resizeTimer = setTimeout(() => {
+//         resizeTimer = null;
+//         const updatedObj = chaptersGetUpdatedHeights(obj, chapter);
+//         setChapters(updatedObj);
+//       }, RESIZE_TIMEOUT);
+//     });
+//     chapter.observer.observe(chapter.elem);
+//   });
+
+//   window.removeEventListener("scroll", indicatorOnScroll);
+//   window.addEventListener("scroll", indicatorOnScroll);
+//   window.removeEventListener("resize", () => indicatorOnResize(obj, setChapters));
+//   window.addEventListener("resize", () => indicatorOnResize(obj, setChapters));
+// }
+
 function chaptersInit(obj, chapters, setChapters) {
   var all = document.querySelectorAll(".chapter--wrapper");
   obj.elems = Array.from(all);
-  obj.chapters = obj.elems.map((elem) => new Chapter(elem));
-
-  obj.chapters.forEach((chapter, index) => {
-    chapter.index = index;
-  });
-
-  var resizeTimer;
-
-  obj.chapters.forEach((chapter) => {
-    var prevHeight = splitPx(window.getComputedStyle(chapter.elem).height);
-    chapter.observer = new ResizeObserver((entries) => {
-      if (resizeTimer) {
-        clearTimeout(resizeTimer);
-      }
-      resizeTimer = setTimeout(() => {
-        resizeTimer = null;
-        const updatedObj = chaptersGetUpdatedHeights(obj, chapter);
-        setChapters(updatedObj);
-      }, RESIZE_TIMEOUT);
-    });
-    chapter.observer.observe(chapter.elem);
-  });
+  obj.chapters = obj.elems.map((elem, index) => new Chapter(elem, index, chapters, setChapters));
 
   window.removeEventListener("scroll", indicatorOnScroll);
   window.addEventListener("scroll", indicatorOnScroll);
@@ -115,11 +144,11 @@ function chaptersInit(obj, chapters, setChapters) {
   window.addEventListener("resize", () => indicatorOnResize(obj, setChapters));
 }
 
+
 function indicatorInit(indicator, chapters, setChapters) {
   var obj = {};
   chaptersInit(obj, chapters, setChapters);
   setChapters(obj);
-  namesInit(chapters);
 }
 
 function Indicator({}) {
@@ -134,10 +163,8 @@ function Indicator({}) {
 
   useEffect(() => {
     globChapters = chapters;
-
     if (!chapters.chapters || namesSet) return;
-    setNames(chapters.chapters.map((chapter) => chapter.name));
-    namesSet = true;
+    namesInit(chapters, setNames);
   }, [chapters]);
 
   return (
