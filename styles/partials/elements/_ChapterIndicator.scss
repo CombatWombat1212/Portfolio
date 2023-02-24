@@ -21,9 +21,11 @@
     color: $col-background;
     height: var(--font-height-body);
     @include flex-col;
+    overflow: hidden;
 
     span{
 
+      transition-duration: 0.2s;
       // --chapter-name-index:0;
       // --chapter-progress:0;
       --offset: 1;

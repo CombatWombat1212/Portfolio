@@ -2962,7 +2962,7 @@ body {
   --pitch-overflow-buffer-y: 20%;
   --pitch-transition: 0.75s;
   --pitch-progress-transition: 0.25s;
-  --pitch-progress-distance: 3rem;
+  --pitch-progress-distance: 2rem;
   padding-top: var(--section-gap_half);
   padding-bottom: var(--section-gap_half);
 }
@@ -3091,9 +3091,11 @@ body {
   height: var(--font-height-body);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .chapter-indicator--name span {
+  transition-duration: 0.2s;
   --offset: 1;
 }
 

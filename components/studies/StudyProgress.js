@@ -2,7 +2,6 @@ import { RESIZE_TIMEOUT, splitPx } from "@/scripts/GlobalUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { useEffect, useState } from "react";
 
-
 // TODO: fix scss system so theres no gaps between chapters
 
 var globChapters;
@@ -110,79 +109,25 @@ function StudyProgress({}) {
   );
 }
 
-// function progressScroll(e) {
-//   if (!globChapters) return;
-//   if (!globChapters.chapters) return;
-
-//   var chapters = globChapters;
-//   var wrapper = document.querySelector(".chapter-indicator--wrapper");
-//   var text = document.querySelector(".chapter-indicator--name");
-
-//   var touching = getTouchingChapters(chapters, text);
-
-//   var chapterProgress = getChapterProgress(chapters, touching, text);
-
-//   var chapterNames = document.querySelectorAll(".chapter-indicator--name span");
-
-//   chapterNames.forEach((name, index) => {
-
-//     name.style.setProperty("--chapter-name-progress", chapterProgress[index]);
-
-//   });
-
-// }
-
 function progressScroll(e) {
   if (!globChapters) return;
   if (!globChapters.chapters) return;
+  if (!globChapters.chapters[0].elem) return;
 
   var chapters = globChapters;
   var wrapper = document.querySelector(".chapter-indicator--wrapper");
   var text = document.querySelector(".chapter-indicator--name");
-
   var touching = getTouchingChapters(chapters, text);
-
   var progress = getChapterProgress(touching);
-
   var name = document.querySelector(".chapter-indicator--name");
+  name.style.setProperty("--chapter-progress", progress);
 
-    name.style.setProperty("--chapter-progress", progress);
 }
 
-// function getTouchingChapters(chapters, text) {
-//   var touching = [];
-
-//   chapters.chapters.forEach((chapter) => {
-//     var textRect = text.getBoundingClientRect();
-//     var chapterRect = chapter.elem.getBoundingClientRect();
-
-//     var textTop = textRect.top;
-//     var textBottom = textRect.bottom;
-
-//     var chapterTop = chapterRect.top;
-//     var chapterBottom = chapterRect.bottom;
-
-//     var progress = 0;
-
-//     if (chapterTop >= textTop && chapterBottom <= textBottom) {
-//       progress = 1;
-//     } else if (chapterTop < textTop && chapterBottom <= textBottom) {
-//       progress = (chapterBottom - textTop) / textRect.height;
-//     } else if (chapterTop >= textTop && chapterBottom > textBottom) {
-//       progress = (textBottom - chapterTop) / textRect.height;
-//     } else if (chapterTop < textTop && chapterBottom > textBottom) {
-//       progress = 1;
-//     }
-
-//     if (progress > 0) {
-//       touching.push({ chapter: chapter, progress: progress });
-//     }
-//   });
-
-//   return touching;
-// }
 function getTouchingChapters(chapters, text) {
   var touching = [];
+
+  // TODO: These calculations are honestly so extra, you don't need to do this based on the exact position of the chapter, and whether or not its overlapping text, you could probably just do it based on the chapter's position on screen i think?  like the whole idea of it needing to be an exact float seems like much
 
   chapters.chapters.forEach((chapter) => {
     var textRect = text.getBoundingClientRect();
@@ -214,44 +159,6 @@ function getTouchingChapters(chapters, text) {
   return touching;
 }
 
-// function getChapterProgress(chapters, touching, text) {
-//   var chapterProgress = chapters.chapters.map((chapter) => {
-//     var chapterRect = chapter.elem.getBoundingClientRect();
-//     var chapterTop = chapterRect.top;
-//     var progress = chapterTop < text.getBoundingClientRect().top ? 1 : 0;
-
-//     if (progress === 0 && touching.length > 0) {
-//       var chapterIndex = touching.findIndex((c) => c.chapter === chapter);
-
-//       if (chapterIndex >= 0) {
-//         progress = touching[chapterIndex].progress;
-//       } else {
-//         var totalProgress = touching.reduce((acc, t) => acc + t.progress, 0);
-//         var totalHeight = touching.reduce((acc, t) => acc + t.chapter.height, 0);
-
-//         if (totalHeight > 0 && chapter.height > 0) {
-//           progress = Math.min(totalProgress / totalHeight, 1);
-//         }
-//       }
-//     }
-
-//     return progress;
-//   });
-
-//   var ind = chapterProgress.lastIndexOf(1);
-//   for (var i = 0; i < chapterProgress.length; i++) {
-//     if (chapterProgress[i] === 1) {
-//       chapterProgress[i] = ind - i+1;
-//     } else if (chapterProgress[i] > 0) {
-//       chapterProgress[i] = ind - i + chapterProgress[i]+1;
-//     } else {
-//       chapterProgress[i] = -(i - ind)+1;
-//     }
-//   }
-
-//   console.log(chapterProgress);
-//   return chapterProgress;
-// }
 
 function getChapterProgress(touching) {
   var nextChapter = touching[touching.length - 1];
