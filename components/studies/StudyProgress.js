@@ -14,9 +14,11 @@ function Chapter(elem) {
   this.name = elem.getAttribute("name");
 }
 
+
+
+
 function chapterUpdateHeight(obj, chapter) {
   var newHeight = splitPx(window.getComputedStyle(chapter.elem).height);
-  //   console.log(`Chapter ${chapter.index}: height changed to ${newHeight}px`);
 
   const updatedChapters = [...obj.chapters];
   updatedChapters[chapter.index].height = newHeight;
@@ -45,7 +47,6 @@ function chaptersInit(obj, chapters, setChapters) {
       }
       resizeTimer = setTimeout(() => {
         resizeTimer = null;
-
         const updatedObj = chapterUpdateHeight(obj, chapter);
         setChapters(updatedObj);
       }, RESIZE_TIMEOUT);
@@ -58,6 +59,9 @@ function chaptersInit(obj, chapters, setChapters) {
   window.removeEventListener("resize", () => progressResize(obj, setChapters));
   window.addEventListener("resize", () => progressResize(obj, setChapters));
 }
+
+
+
 
 function progressInit(chapters, setChapters) {
   var chaps = {};
@@ -78,7 +82,6 @@ function StudyProgress({}) {
 
   useEffect(() => {
     globChapters = chapters;
-    console.log(chapters);
 
     if (chapters.chapters && !namesSet) {
       setNames(chapters.chapters.map((chapter) => chapter.name));
@@ -110,6 +113,9 @@ function StudyProgress({}) {
 }
 
 function progressScroll(e) {
+
+  // TODO: These calculations are honestly so extra, you don't need to do this based on the exact position of the chapter, and whether or not its overlapping text, you could probably just do it based on the chapter's position on screen i think?  like the whole idea of it needing to be an exact float seems like much
+
   if (!globChapters) return;
   if (!globChapters.chapters) return;
   if (!globChapters.chapters[0].elem) return;
@@ -126,8 +132,6 @@ function progressScroll(e) {
 
 function getTouchingChapters(chapters, text) {
   var touching = [];
-
-  // TODO: These calculations are honestly so extra, you don't need to do this based on the exact position of the chapter, and whether or not its overlapping text, you could probably just do it based on the chapter's position on screen i think?  like the whole idea of it needing to be an exact float seems like much
 
   chapters.chapters.forEach((chapter) => {
     var textRect = text.getBoundingClientRect();
@@ -174,6 +178,10 @@ function getChapterProgress(touching) {
   return progress;
 }
 
+
+
+
+
 var progressIsResizing;
 
 function progressResize(obj, setChapters) {
@@ -186,5 +194,8 @@ function progressResizeFunctions(obj, setChapters) {
   const updatedObj = { ...obj, chapters: updatedChapters };
   setChapters(updatedObj);
 }
+
+
+
 
 export default StudyProgress;
