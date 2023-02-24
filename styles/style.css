@@ -3093,8 +3093,12 @@ body {
   flex-direction: column;
 }
 
+.chapter-indicator--name span {
+  --offset: 1;
+}
+
 .chapter-indicator--name span:first-child {
-  margin-top: calc((var(--chapter-name-progress)*-1) * (var(--font-height-body)));
+  margin-top: calc(((var(--chapter-progress)*-1) + var(--offset)) * var(--font-height-body));
 }
 
 .graph--wrapper {

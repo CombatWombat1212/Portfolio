@@ -25,10 +25,11 @@
     span{
 
       // --chapter-name-index:0;
-      // --chapter-name-progress:0;
+      // --chapter-progress:0;
+      --offset: 1;
 
       &:first-child{
-        margin-top: calc((var(--chapter-name-progress)*-1) * (var(--font-height-body)));
+        margin-top: calc(((var(--chapter-progress)*-1) + var(--offset)) * var(--font-height-body))
       }
 
     }
