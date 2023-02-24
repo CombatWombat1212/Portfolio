@@ -5,8 +5,6 @@ import { useEffect, useRef, useState } from "react";
 // TODO: fix scss system so theres no gaps between chapters
 
 var globChapters;
-var namesSet = false;
-var namesElemSet = false;
 
 function Chapter(elem, index, chapters, setChapters) {
   this.elem = elem;
@@ -41,7 +39,6 @@ function Name(elem) {
 }
 
 
-
 function namesAddElems(names) {
   var nameElems = document.querySelectorAll(".indicator .name--chapter");
   nameElems = Array.from(nameElems);
@@ -65,10 +62,11 @@ function namesGet(chapters){
 }
 
 
-function namesInit(chapters, setNames){
+
+function namesInit(chapters, setNames, setNamesInitialized){
   var n = namesGet(chapters);
   setNames(n);
-  namesSet = true;
+  setNamesInitialized(true);
 }
 
 function indicatorGetTouching(chapters, text) {
@@ -151,6 +149,7 @@ function indicatorInit(indicator, chapters, setChapters) {
 function Indicator({}) {
   const [chapters, setChapters] = useState({});
   const [names, setNames] = useState([]);
+  const [namesInitialized, setNamesInitialized] = useState(false);
 
   var indicator = useRef(null);
 
@@ -160,42 +159,47 @@ function Indicator({}) {
 
   useEffect(() => {
     globChapters = chapters;
-    if (!chapters.chapters || namesSet) return;
-    namesInit(chapters, setNames);
-  }, [chapters]);
+    if (!chapters.chapters || namesInitialized) return;
+    namesInit(chapters, setNames, setNamesInitialized);
+  }, [chapters, namesInitialized]);
+
 
   useEffect(() => {
-    if (!names) return;
-    if (names.length < 1) return;
-    if (namesElemSet) return;
-    namesElemSet = true;
-    setNames(namesAddElems(names));
+    if (!namesInitialized) return;
+    var n = namesAddElems(names);
+    setNames(n);
+  }, [namesInitialized]);
+
+
+  useEffect(() => {
+    console.log(names);
   }, [names]);
-  
+
   
   return (
     <div className="indicator--wrapper" ref={indicator}>
       <div className="indicator">
         <div className="name">
           <span className="name--empty"></span>
-          {names &&
-            names.map((n) => {
-              return (
-                <span
-                  key={n.index}
-                  className="name--chapter"
-                  style={{
-                    "--name-index": n.index,
-                  }}>
-                  {n.name}
-                </span>
-              );
-            })}
+          {namesInitialized && names.map((n) => {
+            return (
+              <span
+                key={n.index}
+                className="name--chapter"
+                style={{
+                  "--name-index": n.index,
+                }}>
+                {n.name}
+              </span>
+            );
+          })}
         </div>
       </div>
     </div>
   );
 }
+
+
 
 function indicatorOnScroll(e) {
   // TODO: These calculations are honestly so extra, you don't need to do this based on the exact position of the chapter, and whether or not its overlapping text, you could probably just do it based on the chapter's position on screen i think?  like the whole idea of it needing to be an exact float seems like much
@@ -208,9 +212,10 @@ function indicatorOnScroll(e) {
   var name = document.querySelector(".indicator .name");
   var touching = indicatorGetTouching(chapters, name);
   var progress = indicatorGetProgress(touching);
-  console.log(progress)
   name.style.setProperty("--chapter-progress", progress);
   
+  
+
 }
 
 var indicatorIsResizing;
