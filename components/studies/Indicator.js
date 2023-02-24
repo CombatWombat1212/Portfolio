@@ -1,6 +1,6 @@
 import { RESIZE_TIMEOUT, splitPx } from "@/scripts/GlobalUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // TODO: fix scss system so theres no gaps between chapters
 
@@ -23,7 +23,9 @@ function Name(elem) {
   this.name = elem.getAttribute("name");
 }
 
-function namesInit() {}
+function namesInit() {
+
+}
 
 function chapterGetTouching(chapters, text) {
   var touching = [];
@@ -113,7 +115,7 @@ function chaptersInit(obj, chapters, setChapters) {
   window.addEventListener("resize", () => indicatorOnResize(obj, setChapters));
 }
 
-function indicatorInit(chapters, setChapters) {
+function indicatorInit(indicator, chapters, setChapters) {
   var obj = {};
   chaptersInit(obj, chapters, setChapters);
   setChapters(obj);
@@ -124,8 +126,10 @@ function Indicator({}) {
   const [chapters, setChapters] = useState({});
   const [names, setNames] = useState([]);
 
+  var indicator = useRef(null);
+
   useMountEffect(() => {
-    indicatorInit(chapters, setChapters);
+    indicatorInit(indicator, chapters, setChapters);
   });
 
   useEffect(() => {
@@ -137,7 +141,7 @@ function Indicator({}) {
   }, [chapters]);
 
   return (
-    <div className="indicator--wrapper">
+    <div className="indicator--wrapper" ref={indicator}>
       <div className="indicator">
         <div className="indicator--name">
           {names &&
