@@ -1,4 +1,4 @@
-.chapter-indicator {
+.indicator {
   &--wrapper {
     --site-x-margin: calc((100% - var(--site-max-width_wide)) / 2);
     --temp-buffer: 10rem;
@@ -26,7 +26,7 @@
     span{
 
       transition-duration: 0.1s;
-      // --chapter-name-index:0;
+      // --name-index:0;
       // --chapter-progress:0;
       --offset: 1;
 

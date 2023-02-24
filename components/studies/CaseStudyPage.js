@@ -2,7 +2,7 @@ import { StudyPanel } from "../elements/Panel";
 import Section from "../sections/Sections";
 import Brief from "./Brief";
 import NextStudies from "./NextStudies";
-import StudyProgress from "./StudyProgress";
+import Indicator from "./Indicator";
 
 function CaseStudyPage({ id, study, children }) {
 
@@ -10,7 +10,7 @@ function CaseStudyPage({ id, study, children }) {
     <div id={id} className="casestudy">
 
 
-      <StudyProgress/>
+      <Indicator />
 
       <StudyPanel variant="study" study={study} />
 

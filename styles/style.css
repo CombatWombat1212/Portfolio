@@ -3065,7 +3065,7 @@ body {
   margin-top: calc((var(--pitch-row-height) + var(--section-gap_half)) * -1);
 }
 
-.chapter-indicator {
+.indicator {
   height: 100%;
   background-color: #404064;
   display: flex;
@@ -3075,7 +3075,7 @@ body {
   padding-right: 1.5625rem;
 }
 
-.chapter-indicator--wrapper {
+.indicator--wrapper {
   --site-x-margin: calc((100% - var(--site-max-width_wide)) / 2);
   --temp-buffer: 10rem;
   display: flex;
@@ -3085,7 +3085,7 @@ body {
   top: calc(var(--nav-height) + var(--temp-buffer));
 }
 
-.chapter-indicator--name {
+.indicator--name {
   margin-top: -0.03125rem;
   color: #F3F3F7;
   height: var(--font-height-body);
@@ -3094,12 +3094,12 @@ body {
   overflow: hidden;
 }
 
-.chapter-indicator--name span {
+.indicator--name span {
   transition-duration: 0.1s;
   --offset: 1;
 }
 
-.chapter-indicator--name span:first-child {
+.indicator--name span:first-child {
   margin-top: calc(((var(--chapter-progress)*-1) + var(--offset)) * var(--font-height-body));
 }
 
