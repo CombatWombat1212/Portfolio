@@ -222,15 +222,19 @@ body {
 
 .off {
   opacity: 0;
-  display: none;
+  display: none !important;
 }
 
 .on {
   opacity: 1;
 }
 
-.tran {
+.tran, .tran1 {
   opacity: 0;
+}
+
+.tran2 {
+  opacity: 1;
 }
 
 .grabbed {
@@ -3083,6 +3087,12 @@ body {
   position: sticky;
   z-index: 10;
   top: calc(var(--nav-height) + var(--temp-buffer));
+}
+
+.indicator__hidden {
+  opacity: 0;
+  -webkit-touch-callout: none;
+  user-select: none;
 }
 
 .indicator .name {
