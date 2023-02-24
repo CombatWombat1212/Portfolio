@@ -186,21 +186,14 @@ function getChapterProgress(chapters, touching, text) {
   });
 
 
-  // chapterProgress is currently like this [1,1,1,0.3434,0,0,0]
-  // we want to make it like this [4,3,2,0.3434,-1, -2, -3]
-  //  The first 1 is always always the current chapter, so use that to increment and decrement the rest as described above
-  // each item before it is one more, each item after it is one less
-
-  // last instance of 1 in the array
   var ind = chapterProgress.lastIndexOf(1);
-
   for (var i = 0; i < chapterProgress.length; i++) {
     if (chapterProgress[i] === 1) {
-      chapterProgress[i] = ind - i;
+      chapterProgress[i] = ind - i+1;
     } else if (chapterProgress[i] > 0) {
-      chapterProgress[i] = ind - i + chapterProgress[i];
+      chapterProgress[i] = ind - i + chapterProgress[i]+1;
     } else {
-      chapterProgress[i] = -(i - ind);
+      chapterProgress[i] = -(i - ind)+1;
     }
   }
   

@@ -3093,6 +3093,10 @@ body {
   flex-direction: column;
 }
 
+.chapter-indicator--name span:first-child {
+  margin-top: calc((var(--chapter-name-progress)*-1) * (var(--font-height-body)));
+}
+
 .graph--wrapper {
   background-color: #F3F3F7;
   height: var(--graph-height);

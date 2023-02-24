@@ -27,8 +27,9 @@
       // --chapter-name-index:0;
       // --chapter-name-progress:0;
 
-      // margin-top: calc(var(--chapter-name-progress) * var(--chapter-name-index) * (var(--font-height-body)*-1))
-
+      &:first-child{
+        margin-top: calc((var(--chapter-name-progress)*-1) * (var(--font-height-body)));
+      }
 
     }
   }
