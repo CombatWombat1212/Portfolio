@@ -1,4 +1,3 @@
-import toggle, { dualTransitionToggleOff, dualTransitionToggleOn, simpleToggleOff, simpleToggleOn } from "@/scripts/AnimationTools";
 import { RESIZE_TIMEOUT, splitPx } from "@/scripts/GlobalUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { useEffect, useRef, useState } from "react";
@@ -7,27 +6,29 @@ import { useEffect, useRef, useState } from "react";
 
 var globChapters;
 
+var indicators = [];
 
-function Chapter(elem, index, chapters, setChapters) {
+function IndicatorItem(indicator) {
+  this.elem = indicator.current ? indicator.current : indicator;
+  this.chapters = [];
+  this.names = [];
+  this.width = 0;
+  this.height = 0;
+}
+
+function Chapter(elem, index) {
   this.elem = elem;
-  this.height = splitPx(window.getComputedStyle(elem).height);
+  this.height = chapterGetSize(this);
   this.index = index;
   this.name = elem.getAttribute("name");
-
+  let resizeTimer;
   this.observer = new ResizeObserver((entries) => {
-    let resizeTimer;
     if (resizeTimer) {
       clearTimeout(resizeTimer);
     }
     resizeTimer = setTimeout(() => {
       resizeTimer = null;
-      const updatedHeight = splitPx(window.getComputedStyle(elem).height);
-      this.height = updatedHeight;
-      setChapters((prevChapters) => {
-        const updatedChapters = [...prevChapters.chapters];
-        updatedChapters[this.index].height = this.height;
-        return { ...prevChapters, chapters: updatedChapters };
-      });
+      chapterGetSize(this);
     }, RESIZE_TIMEOUT);
   });
   this.observer.observe(elem);
@@ -59,10 +60,11 @@ function namesGet(chapters) {
   return n;
 }
 
-function namesInit(chapters, setNames, setNamesInitialized) {
-  var n = namesGet(chapters);
-  setNames(n);
-  setNamesInitialized(true);
+function namesInit(indicator, setNames, setNamesInitialized) {
+  // console.log(indicator);
+  // var n = namesGet(chapters);
+  // setNames(n);
+  // setNamesInitialized(true);
 }
 
 function indicatorGetTouching(chapters, text) {
@@ -112,15 +114,14 @@ function indicatorGetProgress(touching) {
   return progress;
 }
 
-function chaptersInit(obj, chapters, setChapters) {
-  var all = document.querySelectorAll(".chapter--wrapper");
-  obj.elems = Array.from(all);
-  obj.chapters = obj.elems.map((elem, index) => new Chapter(elem, index, chapters, setChapters));
+function chaptersInit(indicator) {
+  var all = Array.from(document.querySelectorAll(".chapter--wrapper"));
+  indicator.chapters = all.map((elem, index) => new Chapter(elem, index));
 
   window.removeEventListener("scroll", indicatorOnScroll);
   window.addEventListener("scroll", indicatorOnScroll);
-  window.removeEventListener("resize", () => indicatorOnResize(obj, setChapters));
-  window.addEventListener("resize", () => indicatorOnResize(obj, setChapters));
+  window.removeEventListener("resize", indicatorOnResize);
+  window.addEventListener("resize", indicatorOnResize);
 }
 
 function indicatorSetVisibility(progress) {
@@ -128,48 +129,56 @@ function indicatorSetVisibility(progress) {
   if (!indicator) return;
 }
 
-
-function indicatorSetSize(indicator, size){
-  indicator.style.setProperty("--indicator-width", `${size.width}px`);
-  indicator.style.setProperty("--indicator-height", `${size.height}px`);
+function indicatorSetSize(indicator) {
+  indicator.elem.style.setProperty("--indicator-width", `${indicator.width}px`);
+  indicator.elem.style.setProperty("--indicator-height", `${indicator.height}px`);
 }
 
-
-function indicatorGetSize(indicator){
-  var width = splitPx(window.getComputedStyle(indicator).width);
-  var height = splitPx(window.getComputedStyle(indicator).height);
-  return {width: width, height: height};
+function indicatorGetSize(indicator) {
+  indicator.width = splitPx(window.getComputedStyle(indicator.elem).width);
+  indicator.height = splitPx(window.getComputedStyle(indicator.elem).height);
 }
 
+function chapterSetSize(chapter) {
+  // chapter.elem.style.setProperty("--chapter-width", `${chapter.width}px`);
+  // chapter.elem.style.setProperty("--chapter-height", `${chapter.height}px`);
+}
 
+function chapterGetSize(chapter) {
+  // chapter.width = splitPx(window.getComputedStyle(chapter.elem).width);
+  chapter.height = splitPx(window.getComputedStyle(chapter.elem).height);
+}
 
+function indicatorInit(indicator) {
+  chaptersInit(indicator);
+  // setChapters(obj);
 
-
-function indicatorInit(indicator, chapters, setChapters) {
-  var obj = {};
-  chaptersInit(obj, chapters, setChapters);
-  setChapters(obj);
-
-  indicatorOnScroll();
-  indicatorOnResizeFunctions(obj, setChapters);
+  // indicatorOnScroll();
+  // indicatorOnResizeFunctions();
 }
 
 function Indicator({}) {
-  const [chapters, setChapters] = useState({});
   const [names, setNames] = useState([]);
   const [namesInitialized, setNamesInitialized] = useState(false);
 
   var indicator = useRef(null);
 
   useMountEffect(() => {
-    indicatorInit(indicator, chapters, setChapters);
+    var indicatorObj = new IndicatorItem(indicator);
+    indicators.push(indicatorObj);
+
+    indicators.forEach((indicator) => {
+      indicatorInit(indicator);
+    });
   });
 
   useEffect(() => {
-    globChapters = chapters;
-    if (!chapters.chapters || namesInitialized) return;
-    namesInit(chapters, setNames, setNamesInitialized);
-  }, [chapters, namesInitialized]);
+    if (namesInitialized) return;
+    if (indicators.length == 0) return;
+    indicators.forEach((indicator) => {
+      namesInit(indicator, setNames, setNamesInitialized);
+    });
+  }, [namesInitialized]);
 
   useEffect(() => {
     if (!namesInitialized) return;
@@ -183,29 +192,29 @@ function Indicator({}) {
 
   return (
     <div className="indicator--wrapper indicator--wrapper__off" ref={indicator}>
-        <div className="indicator indicator__hidden">
-          <div className="name">
-            <span className="name--empty"></span>
-            {namesInitialized &&
-              names.map((n) => {
-                return (
-                  <span
-                    key={n.index}
-                    className="name--chapter"
-                    style={{
-                      "--name-index": n.index,
-                    }}>
-                    {n.name}
-                  </span>
-                );
-              })}
+      <div className="indicator indicator__hidden">
+        <div className="name">
+          <span className="name--empty"></span>
+          {namesInitialized &&
+            names.map((n) => {
+              return (
+                <span
+                  key={n.index}
+                  className="name--chapter"
+                  style={{
+                    "--name-index": n.index,
+                  }}>
+                  {n.name}
+                </span>
+              );
+            })}
         </div>
       </div>
     </div>
   );
 }
 
-function indicatorOnScroll(e) {
+function indicatorOnScroll() {
   // TODO: These calculations are honestly so extra, you don't need to do this based on the exact position of the chapter, and whether or not its overlapping text, you could probably just do it based on the chapter's position on screen i think?  like the whole idea of it needing to be an exact float seems like much
 
   if (!globChapters) return;
@@ -223,22 +232,20 @@ function indicatorOnScroll(e) {
 
 var indicatorIsResizing;
 
-function indicatorOnResize(obj, setChapters) {
+function indicatorOnResize() {
   window.clearTimeout(indicatorIsResizing);
-  indicatorIsResizing = setTimeout(() => indicatorOnResizeFunctions(obj, setChapters), RESIZE_TIMEOUT);
+  indicatorIsResizing = setTimeout(indicatorOnResizeFunctions, RESIZE_TIMEOUT);
 }
 
-function indicatorOnResizeFunctions(obj, setChapters) {
+function indicatorOnResizeFunctions() {
+  indicators.forEach((indicator) => {
+    indicatorGetSize(indicator);
+    indicatorSetSize(indicator);
 
-  var indicator = document.querySelector(".indicator--wrapper");
-  var indicatorSize = indicatorGetSize(indicator);
-  indicatorSetSize(indicator, indicatorSize);
-
-  const updatedChapters = obj.chapters.map((chapter) => {
-    const newHeight = splitPx(window.getComputedStyle(chapter.elem).height);
-    return { ...chapter, height: newHeight };
+    indicator.chapters.forEach((chapter) => {
+      chapterGetSize(chapter);
+    });
   });
-  setChapters({ ...obj, chapters: updatedChapters });
 }
 
 export default Indicator;
