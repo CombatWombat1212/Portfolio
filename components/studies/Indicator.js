@@ -3,7 +3,7 @@ import { RESIZE_TIMEOUT, splitPx, splitS } from "@/scripts/GlobalUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { useEffect, useRef, useState } from "react";
 
-// TODO: fix scss system so theres no gaps between chapters
+// TODO: work on the interactive progress thingy before you work on the color changing backgrounds of the indicator
 
 var indicators = [];
 
@@ -15,8 +15,8 @@ function IndicatorItem(indicator) {
   this.width = 0;
   this.height = 0;
   this.touching = [];
-  this.progress = { current: null, previous: null };
-  this.visible = {set: false, applied: false};
+  this.progress = { label: { current: null, previous: null } };
+  this.visible = { set: false, applied: false };
   this.init = false;
 }
 
@@ -44,6 +44,7 @@ function Name(elem) {
   this.text = elem.getAttribute("name");
   this.width = 0;
   this.elem = null;
+  this.background = null;
   let resizeTimer;
   this.observer = new ResizeObserver((entries) => {
     if (resizeTimer) {
@@ -68,16 +69,14 @@ function namesGetSizes(name) {
 }
 
 function indicatorGetVisibility(indicator) {
-  indicator.visible.set = indicator.progress.current > 0;
+  indicator.visible.set = indicator.progress.label.current > 0;
 }
 
 function indicatorSetVisibility(indicator) {
-
   if (!indicator.init) return;
   var elem = indicator.elem.querySelector(".indicator");
   var transition = splitS(window.getComputedStyle(elem).getPropertyValue("--indicator-transition"));
 
-  
   if (indicator.visible.set !== indicator.visible.applied) {
     if (indicator.visible.set) {
       elem.classList.remove("indicator__hidden");
@@ -113,7 +112,7 @@ function namesGet() {
 }
 
 function labelStyleSet(indicator) {
-  indicator.label.elem.style.setProperty("--chapter-progress", indicator.progress.current);
+  indicator.elem.style.setProperty("--chapter-progress", indicator.progress.label.current);
 }
 
 function labelInit(indicator) {
@@ -169,10 +168,10 @@ function indicatorGetProgress(indicator) {
     p = nextChapter.progress;
   }
   var progress = index + p;
-  indicator.progress.current = progress;
-  if (progress != indicator.progress.previous) {
-    indicator.progress.previous = progress;
-    indicator.progress.current = progress;
+  indicator.progress.label.current = progress;
+  if (progress != indicator.progress.label.previous) {
+    indicator.progress.label.previous = progress;
+    indicator.progress.label.current = progress;
     return true;
   } else {
     return false;
@@ -191,17 +190,17 @@ function chaptersInit(indicator) {
 
 function indicatorNameWidthSet(indicator) {
   if (!indicator) return;
-  var progress = indicator.progress.current;
+  var progress = indicator.progress.label.current;
 
   if (progress < 1) {
-    indicator.label.elem.style.setProperty("--label-width", `${indicator.names[0].width}px`);
+    indicator.elem.style.setProperty("--label-width", `${indicator.names[0].width}px`);
     return;
   } else {
     progress = progress - 1;
     var currentChapter = Math.round(progress);
     var decimal = progress - currentChapter;
     var chapterNameWidth = indicator.names[currentChapter].width;
-    indicator.label.elem.style.setProperty("--label-width", `${chapterNameWidth}px`);
+    indicator.elem.style.setProperty("--label-width", `${chapterNameWidth}px`);
   }
 }
 
@@ -266,6 +265,11 @@ function Indicator({}) {
   return (
     <div className="indicator--wrapper indicator--wrapper__hidden" ref={indicator}>
       <div className="indicator indicator__hidden indicator__off">
+        {names &&
+          names.map((n, i) => {
+            return <div className={"indicator--background"} key={i} style={{ "--indicator-background-index": i }}></div>;
+          })}
+
         <div className="label">
           <span className="label--empty"></span>
           {names &&

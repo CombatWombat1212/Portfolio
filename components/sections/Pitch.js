@@ -11,6 +11,8 @@ const laptop_frame = MAKERIGHT_IMGS.pitch_laptop_frame;
 // TODO: i think you should do the same animation on the description side to make it have smooth scrolling transitions too? Or maybe something to lock it in place better next to the screen? might not be priority though
 // TODO: how tf is this gonna be responsive?? LOL good luck with that (nah u got this)
 
+// TODO:something i think in this code is causing a violation warning
+
 var pitches = [];
 
 function PitchItem(pitch) {

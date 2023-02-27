@@ -8,41 +8,52 @@
     position: sticky;
     z-index: 10;
     top: calc(var(--nav-height) + var(--temp-buffer));
-    margin-top: calc( var(--button-height) * -1);
+    margin-top: calc(var(--button-height) * -1);
     --indicator-transition: 0.6s;
 
     pointer-events: none;
-  
 
-    &__hidden{
+    &__hidden {
       opacity: 0;
     }
   }
-
 
   height: 100%;
   background-color: $col-tertiary;
   @include flex-col-center;
   padding-left: var(--site-x-margin);
   padding-right: 1.5625rem;
-  margin-left:0;
+  margin-left: 0;
   pointer-events: all;
+  overflow: hidden;
+  position: relative;
+
+  &--background {
+    background-color: $col-tertiary;
+
+    position: absolute;
+    width: 100%;
+    margin-top: calc(var(--indicator-background-index) * var(--button-height));
+    height: var(--button-height);
+    
+    --empty-margin-top: calc((var(--chapter-progress) * -1) * var(--button-height));
+    left: 0;
+    top:  Min(calc(var(--button-height) * -1), var(--empty-margin-top));    
+  }
 
 
 
-  &__hidden{
+  &__hidden {
     @include no-select;
   }
 
-  &__off{
+  &__off {
     margin-left: calc(var(--indicator-width) * -1);
   }
 
-  &__on{
+  &__on {
     margin-left: 0;
   }
-
-
 
   .label {
     margin-top: -0.03125rem;
@@ -52,7 +63,8 @@
     overflow: hidden;
     max-width: var(--label-width);
     transition: 0.2s;
-    
+    z-index: 1;
+
     &--empty {
       transition-duration: 0.1s;
       height: var(--font-height-body);
@@ -62,11 +74,10 @@
     }
 
     &--name {
-      width:fit-content;
+      width: fit-content;
       // --name-index:0;
       // --chapter-progress:0;
       // --offset: 1;
-
     }
   }
 }
