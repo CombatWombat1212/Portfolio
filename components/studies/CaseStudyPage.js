@@ -19,7 +19,7 @@ function CaseStudyPage({ id, study, children }) {
 
       {children}
 
-      <Section type="passthrough"><NextStudies study={study} /></Section>
+      <Section type="passthrough" wrapperClassName={'pt-0'}><NextStudies study={study} /></Section>
 
     </div>
   );

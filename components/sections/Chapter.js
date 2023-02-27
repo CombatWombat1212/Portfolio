@@ -1,3 +1,4 @@
+import React from "react";
 import Section, { SECTION_DEFAULT_PROPS, SECTION_PROP_TYPES } from "./Sections";
 import { getWrapperClasses, getBackgroundClasses, getElemClasses } from "./sections_utilities/GetClasses";
 
@@ -10,9 +11,32 @@ function Chapter({ children, type, wrapperClassName, background, id, name, margi
   var backgroundClasses = getBackgroundClasses(pref, background);
   var elemClasses = getElemClasses(pref, type);
 
+  var lastChildHasBackground = false;
+  if (children.length > 0) {
+    var lastChild = children[children.length - 1];
+    if (lastChild.props.background != undefined && lastChild.props.background != null && lastChild.props.background != "" && lastChild.props.background != "none") {
+      lastChildHasBackground = true;
+    }
+  }
+
+  // Clone the children array so that we can modify it without affecting the original
+  var newChildren = React.Children.toArray(children);
+
+  // Add a wrapper class to each child that has a background color, so that we can add padding to the bottom of the child
+  newChildren = newChildren.map((child, i) => {
+    if (i < children.length - 1) {
+      var nextSibling = children[i + 1];
+      var nextSiblingBackground = nextSibling.props.background;
+      if (nextSiblingBackground && nextSiblingBackground !== "none") {
+        return React.cloneElement(child, { wrapperClassName: "section--wrapper__before-color" });
+      }
+    }
+    return child;
+  });
+
   return (
-    <div id={id} className={wrapperClasses + backgroundClasses} name={name ? name : ''}>
-      <div className={elemClasses}>{children}</div>
+    <div id={id} className={`${wrapperClasses} ${backgroundClasses} ${lastChildHasBackground ? "pb-0" : ""}`} name={name ? name : ""}>
+      <div className={elemClasses}>{newChildren}</div>
     </div>
   );
 }

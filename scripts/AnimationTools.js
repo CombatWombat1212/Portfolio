@@ -10,10 +10,9 @@ function getTransition(elem) {
 }
 
 function simpleToggleOn(elem, str, ov, transitionTime) {
-  var selectorPrefix = "__";
-  if (str == "") selectorPrefix = "";
-
-  str = str + selectorPrefix;
+  // var selectorPrefix = "__";
+  // if (str == "") selectorPrefix = "";
+  // str = str + selectorPrefix;
 
   if (!tran) {
     tran = getTransition(elem);
@@ -40,10 +39,9 @@ function simpleToggleOn(elem, str, ov, transitionTime) {
 }
 
 function simpleToggleOff(elem, str, ov, transitionTime) {
-  var selectorPrefix = "__";
-  if (str == "") selectorPrefix = "";
-
-  str = str + selectorPrefix;
+  // var selectorPrefix = "__";
+  // if (str == "") selectorPrefix = "";
+  // str = str + selectorPrefix;
 
   if (transitionTime != tran) {
     transitionTime = getTransition(elem);
@@ -66,11 +64,10 @@ function simpleToggleOff(elem, str, ov, transitionTime) {
 }
 
 function dualTransitionToggleOn(elem, str, ov, transitionTime) {
-  var selectorPrefix = "__";
-  if (str == "") selectorPrefix = "";
-
-  str = str + selectorPrefix;
-
+  // var selectorPrefix = "__";
+  // if (str == "") selectorPrefix = "";
+  // str = str + selectorPrefix;
+  
   if (transitionTime != tran) {
     transitionTime = getTransition(elem);
   }
@@ -91,10 +88,10 @@ function dualTransitionToggleOn(elem, str, ov, transitionTime) {
 }
 
 function dualTransitionToggleOff(elem, str, ov, transitionTime) {
-  var selectorPrefix = "__";
-  if (str == "") selectorPrefix = "";
+  // var selectorPrefix = "__";
+  // if (str == "") selectorPrefix = "";
+  // str = str + selectorPrefix;
 
-  str = str + selectorPrefix;
 
   if (transitionTime != tran) {
     transitionTime = getTransition(elem);
@@ -160,7 +157,6 @@ function dualTransitionToggleOff(elem, str, ov, transitionTime) {
 function toggle(elem, classPref, transitionTime, anim, transitions, overlap, state) {
   var selectorPrefix = "__";
   if (classPref == "") selectorPrefix = "";
-
   classPref = classPref + selectorPrefix;
 
   if (anim == "animated") {

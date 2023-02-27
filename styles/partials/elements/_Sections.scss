@@ -7,11 +7,6 @@
   }
 }
 
-@mixin section-chapter-wrapper {
-  margin-top: var(--section-gap);
-  position: relative;
-}
-
 :root {
   --section-gap: 12.5rem;
   --section-gap_half: calc(var(--section-gap) / 2);
@@ -19,7 +14,9 @@
 
 .chapter {
   &--wrapper {
-    @include section-chapter-wrapper;
+    position: relative;
+    // padding-top: var(--section-gap);
+    padding-bottom: var(--section-gap);
   }
 }
 
@@ -31,7 +28,12 @@
   // --section-column-arrow-height: 1.7rem;
 
   &--wrapper {
-    @include section-chapter-wrapper;
+    padding-top: var(--section-gap);
+    position: relative;
+    
+    &__before-color{
+      padding-bottom: var(--section-gap);
+    }
   }
 
   @include flex-row;
@@ -185,10 +187,10 @@
         // --color-12;
         // --direction;
 
-        z-index:2;
+        z-index: 2;
         background-image: linear-gradient(var(--direction), var(--color-1) 0%, var(--color-2) 140%);
       }
-      
+
       @include trans;
 
       &__on.hover {
@@ -235,7 +237,6 @@
       opacity: 0.3;
     }
   }
-
 }
 
 // Color variants

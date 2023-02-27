@@ -1,4 +1,5 @@
-import { RESIZE_TIMEOUT, splitPx } from "@/scripts/GlobalUtilities";
+import toggle from "@/scripts/AnimationTools";
+import { RESIZE_TIMEOUT, splitPx, splitS } from "@/scripts/GlobalUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { useEffect, useRef, useState } from "react";
 
@@ -15,6 +16,8 @@ function IndicatorItem(indicator) {
   this.height = 0;
   this.touching = [];
   this.progress = { current: null, previous: null };
+  this.visible = {set: false, applied: false};
+  this.init = false;
 }
 
 function Chapter(elem, index) {
@@ -49,14 +52,45 @@ function Name(elem) {
     resizeTimer = setTimeout(() => {
       resizeTimer = null;
       namesGetSizes(this);
+      indicators.forEach((indicator) => {
+        indicatorNameWidthSet(indicator);
+        indicatorGetSize(indicator);
+        indicatorSetSize(indicator);
+      });
     }, RESIZE_TIMEOUT);
   });
   this.observer.observe(elem);
 }
 
 function namesGetSizes(name) {
-  var width = splitPx(window.getComputedStyle(name.elem).width);
+  var width = name.elem.getBoundingClientRect().width;
   name.width = width;
+}
+
+function indicatorGetVisibility(indicator) {
+  indicator.visible.set = indicator.progress.current > 0;
+}
+
+function indicatorSetVisibility(indicator) {
+
+  if (!indicator.init) return;
+  var elem = indicator.elem.querySelector(".indicator");
+  var transition = splitS(window.getComputedStyle(elem).getPropertyValue("--indicator-transition"));
+
+  
+  if (indicator.visible.set !== indicator.visible.applied) {
+    if (indicator.visible.set) {
+      elem.classList.remove("indicator__hidden");
+      elem.style.setProperty("transition", `${transition}ms`);
+      elem.classList.remove("indicator__off");
+      elem.classList.add("indicator__on");
+    } else {
+      elem.classList.remove("indicator__on");
+      elem.classList.add("indicator__off");
+      elem.classList.add("indicator__hidden");
+    }
+    indicator.visible.applied = indicator.visible.set;
+  }
 }
 
 function indicatorNamesGet(indicator) {
@@ -123,33 +157,7 @@ function indicatorGetTouching(indicator) {
   });
 }
 
-// function indicatorIfProgressChanged(indicator, progress = null) {
-//   progress = progress == null ? indicator.progress.current : progress;
-//   var previous = indicator.progress.previous;
-//   if (progress != previous) {
-//     indicator.progress.previous = progress;
-//     return true;
-//   } else {
-//     return false;
-//   }
-// }
-
 function indicatorGetProgress(indicator) {
-  // var touching = indicator.touching;
-  // var nextChapter = touching[touching.length - 1];
-  // var index, p;
-  // if (nextChapter == undefined) {
-  //   index = 0;
-  //   p = 0;
-  // } else {
-  //   index = nextChapter.chapter.index;
-  //   p = nextChapter.progress.current;
-  // }
-  // var progress = index + p;
-  // indicator.progress.current = progress;
-
-  // update the above function so that it only updates the progress when the value changes, making use of indicator.progress.previous
-
   var touching = indicator.touching;
   var nextChapter = touching[touching.length - 1];
   var index, p;
@@ -181,31 +189,18 @@ function chaptersInit(indicator) {
   window.addEventListener("resize", indicatorOnResize);
 }
 
-// TODO: this is where you're at, good luck this week!
-// TODO: make sure this only runs when the value changes not every time
-function indicatorWidthSet(indicator) {
-  // if indicator, or indicator names is empty then return
-  // run this function only when indicator.progress.current changes to a new value
-  // first, using progress get the index of the current chapter
-  // progress can be a float when you are crossing over into the next chapter, so round it down
-  // store just the decimal part of progress as we will need it later.
-  // using progress which you've now rounded down, find indicator.names[progressRounded] and get the width of that element
-  // that info can be found at indicator.names[progressRounded].width
-  // finally, set the width of indicator.label.elem to the width of the current chapter name
-
+function indicatorNameWidthSet(indicator) {
   if (!indicator) return;
   var progress = indicator.progress.current;
 
   if (progress < 1) {
-    indicator.label.elem.style.setProperty("--label-width", `0px`);
+    indicator.label.elem.style.setProperty("--label-width", `${indicator.names[0].width}px`);
     return;
   } else {
     progress = progress - 1;
-    var currentChapter = Math.floor(progress);
+    var currentChapter = Math.round(progress);
     var decimal = progress - currentChapter;
-
     var chapterNameWidth = indicator.names[currentChapter].width;
-
     indicator.label.elem.style.setProperty("--label-width", `${chapterNameWidth}px`);
   }
 }
@@ -216,8 +211,10 @@ function indicatorSetSize(indicator) {
 }
 
 function indicatorGetSize(indicator) {
-  indicator.width = splitPx(window.getComputedStyle(indicator.elem).width);
-  indicator.height = splitPx(window.getComputedStyle(indicator.elem).height);
+  var width = splitPx(window.getComputedStyle(indicator.elem.querySelector(".indicator")).width) + splitPx(window.getComputedStyle(indicator.elem.querySelector(".indicator")).paddingLeft) + splitPx(window.getComputedStyle(indicator.elem.querySelector(".indicator")).paddingRight);
+  var height = splitPx(window.getComputedStyle(indicator.elem.querySelector(".indicator")).height) + splitPx(window.getComputedStyle(indicator.elem.querySelector(".indicator")).paddingTop) + splitPx(window.getComputedStyle(indicator.elem.querySelector(".indicator")).paddingBottom);
+  indicator.width = width;
+  indicator.height = height;
 }
 
 function chapterGetSize(chapter) {
@@ -229,6 +226,16 @@ function indicatorInit(indicator) {
   labelInit(indicator);
   indicatorOnScroll();
   indicatorOnResizeFunctions();
+
+  setTimeout(() => {
+    indicator.init = true;
+    indicator.elem.classList.remove("indicator--wrapper__hidden");
+    indicatorGetVisibility(indicator);
+    indicatorSetVisibility(indicator);
+
+    indicatorOnScroll();
+    indicatorOnResizeFunctions();
+  }, 1000);
 }
 
 function Indicator({}) {
@@ -240,6 +247,8 @@ function Indicator({}) {
     if (indicators.length == 0 || indicators[indicators.length - 1].elem != indicatorObj.elem) {
       indicators.push(indicatorObj);
     }
+    indicatorObj.elem.querySelector(".indicator").classList.add("indicator__off");
+    indicatorObj.elem.querySelector(".indicator").classList.add("indicator__hidden");
     indicators.forEach((indicator) => {
       namesInit(indicator, setNames);
     });
@@ -255,8 +264,8 @@ function Indicator({}) {
   }, [names]);
 
   return (
-    <div className="indicator--wrapper" ref={indicator}>
-      <div className="indicator">
+    <div className="indicator--wrapper indicator--wrapper__hidden" ref={indicator}>
+      <div className="indicator indicator__hidden indicator__off">
         <div className="label">
           <span className="label--empty"></span>
           {names &&
@@ -278,8 +287,6 @@ function Indicator({}) {
   );
 }
 
-
-
 function indicatorOnScroll() {
   // TODO: These calculations are honestly so extra, you don't need to do this based on the exact position of the chapter, and whether or not its overlapping text, you could probably just do it based on the chapter's position on screen i think?  like the whole idea of it needing to be an exact float seems like much
 
@@ -290,10 +297,14 @@ function indicatorOnScroll() {
     var label = indicator.label;
     indicatorGetTouching(indicator);
     var changed = indicatorGetProgress(indicator);
-    console.log(changed)
-    // if (!changed) return;
+    if (!changed) return;
+    indicatorNameWidthSet(indicator);
+    indicatorGetSize(indicator);
+    indicatorSetSize(indicator);
     labelStyleSet(indicator);
-    indicatorWidthSet(indicator);
+
+    indicatorGetVisibility(indicator);
+    indicatorSetVisibility(indicator);
   });
 }
 

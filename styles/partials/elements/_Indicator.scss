@@ -8,7 +8,13 @@
     position: sticky;
     z-index: 10;
     top: calc(var(--nav-height) + var(--temp-buffer));
+    margin-top: calc( var(--button-height) * -1);
+    --indicator-transition: 0.6s;
+  
 
+    &__hidden{
+      opacity: 0;
+    }
   }
 
 
@@ -17,11 +23,24 @@
   @include flex-col-center;
   padding-left: calc(var(--site-x-margin));
   padding-right: 1.5625rem;
+  margin-left:0;
 
-  // &__hidden{
-  //   opacity: 0;
-  //   @include no-select;
-  // }
+
+
+
+  &__hidden{
+    @include no-select;
+  }
+
+  &__off{
+    margin-left: calc(var(--indicator-width) * -1);
+  }
+
+  &__on{
+    margin-left: 0;
+  }
+
+
 
   .label {
     margin-top: -0.03125rem;
@@ -29,14 +48,15 @@
     height: var(--font-height-body);
     @include flex-col;
     overflow: hidden;
-    width: var(--label-width);
-
+    max-width: var(--label-width);
+    transition: 0.2s;
+    
     &--empty {
       transition-duration: 0.1s;
       height: var(--font-height-body);
       min-height: var(--font-height-body);
-      margin-top: calc((var(--chapter-progress) * -1) * var(--font-height-body));
-
+      --empty-margin-top: calc((var(--chapter-progress) * -1) * var(--font-height-body));
+      margin-top: Min(calc(var(--font-height-body) * -1), var(--empty-margin-top));
     }
 
     &--name {

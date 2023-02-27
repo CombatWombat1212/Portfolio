@@ -129,7 +129,7 @@ function MakeRight({ setPopup }) {
             </Pitch>
           </Section>
 
-          <Section id="Overview--Summary" type="columns" background="background" wrapperClassName='mt-0'>
+          <Section id="Overview--Summary" type="columns" wrapperClassName='mt-0'>
             <Column>
               <Heading type="h3">Slashing the overhead of competitors</Heading>
               <Description>
@@ -274,7 +274,7 @@ function MakeRight({ setPopup }) {
             </Column>
           </Section>
 
-          <Section id="Research--Aha-Moment" type="columns" background="background">
+          <Section id="Research--Aha-Moment" type="columns">
             <Column className="col-5">
               <Graphic type="mask" className="graphic--panel__flexible" background="background darker" img={MAKERIGHT_IMGS["aha_moment"]} />
             </Column>
@@ -304,7 +304,7 @@ function MakeRight({ setPopup }) {
         </Chapter>
 
         <Chapter name="Develop" id="Develop">
-          <Section id="Develop--Methodology" type="columns" titled arrows background="background darker">
+          <Section id="Develop--Methodology" type="columns" titled arrows background="background darker" wrapperClassName='mt-0'>
             <Title>Methodology</Title>
             <Heading>Moving from problem to solution</Heading>
 
