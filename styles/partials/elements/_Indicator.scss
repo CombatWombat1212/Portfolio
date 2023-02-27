@@ -29,6 +29,7 @@
     height: var(--font-height-body);
     @include flex-col;
     overflow: hidden;
+    width: var(--label-width);
 
     &--empty {
       transition-duration: 0.1s;

@@ -3096,6 +3096,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  width: var(--label-width);
 }
 
 .indicator .label--empty {
