@@ -3086,9 +3086,10 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-left: calc(var(--site-x-margin));
+  padding-left: var(--site-x-margin);
   padding-right: 1.5625rem;
   margin-left: 0;
+  pointer-events: all;
 }
 
 .indicator--wrapper {
@@ -3101,6 +3102,7 @@ body {
   top: calc(var(--nav-height) + var(--temp-buffer));
   margin-top: calc( var(--button-height) * -1);
   --indicator-transition: 0.6s;
+  pointer-events: none;
 }
 
 .indicator--wrapper__hidden {
