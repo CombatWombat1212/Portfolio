@@ -28,11 +28,18 @@ function Chapter({ children, type, wrapperClassName, background, id, name, margi
       var nextSibling = children[i + 1];
       var nextSiblingBackground = nextSibling.props.background;
       if (nextSiblingBackground && nextSiblingBackground !== "none") {
-        return React.cloneElement(child, { wrapperClassName: "section--wrapper__before-color" });
+        return React.cloneElement(child, { wrapperClassName: child.wrapperClassName ? child.wrapperClassName + "pb-section-gap" : "pb-section-gap" });
       }
     }
     return child;
   });
+
+  newChildren = newChildren.map((child, i) => {
+    if(i != children.length - 1) return child;
+      return React.cloneElement(child, { wrapperClassName: child.wrapperClassName ? child.wrapperClassName + " pb-section-gap" : "pb-section-gap" });
+  });
+
+
 
   return (
     <div id={id} className={`${wrapperClasses} ${backgroundClasses} ${lastChildHasBackground ? "pb-0" : ""}`} name={name ? name : ""}>

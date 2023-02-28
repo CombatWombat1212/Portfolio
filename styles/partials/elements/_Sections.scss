@@ -12,11 +12,20 @@
   --section-gap_half: calc(var(--section-gap) / 2);
 }
 
+
+
+
+.pb-section-gap {
+  padding-bottom: var(--section-gap);
+}
+
+
+
 .chapter {
   &--wrapper {
     position: relative;
     // padding-top: var(--section-gap);
-    padding-bottom: var(--section-gap);
+    // padding-bottom: var(--section-gap);
   }
 }
 
@@ -31,9 +40,6 @@
     padding-top: var(--section-gap);
     position: relative;
     
-    &__before-color{
-      padding-bottom: var(--section-gap);
-    }
   }
 
   @include flex-row;

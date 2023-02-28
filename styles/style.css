@@ -1621,9 +1621,12 @@ body {
   --section-gap_half: calc(var(--section-gap) / 2);
 }
 
+.pb-section-gap {
+  padding-bottom: var(--section-gap);
+}
+
 .chapter--wrapper {
   position: relative;
-  padding-bottom: var(--section-gap);
 }
 
 .section {
@@ -1637,10 +1640,6 @@ body {
 .section--wrapper {
   padding-top: var(--section-gap);
   position: relative;
-}
-
-.section--wrapper__before-color {
-  padding-bottom: var(--section-gap);
 }
 
 .section--title + * {
