@@ -19,7 +19,7 @@ function IndicatorItem(indicator) {
   this.width = 0;
   this.height = 0;
   this.touching = { chapters: [], sections: [] };
-  this.progress = { current: null, previous: null };
+  this.progress = { chapter: { current: null, previous: null }, section: { current: null, previous: null } };
   this.visible = { set: false, applied: false };
   this.init = false;
 }
@@ -65,9 +65,9 @@ function Name(elem) {
       resizeTimer = null;
       namesGetSizes(this);
       indicators.forEach((indicator) => {
-        // indicatorNameWidthSet(indicator);
-        // indicatorGetSize(indicator);
-        // indicatorSetSize(indicator);
+        indicatorNameWidthSet(indicator);
+        indicatorGetSize(indicator);
+        indicatorSetSize(indicator);
       });
     }, RESIZE_TIMEOUT);
   });
@@ -80,7 +80,7 @@ function namesGetSizes(name) {
 }
 
 function indicatorGetVisibility(indicator) {
-  indicator.visible.set = indicator.progress.current > 0;
+  indicator.visible.set = indicator.progress.chapter.current > 0;
 }
 
 function indicatorSetVisibility(indicator) {
@@ -123,7 +123,7 @@ function namesGet() {
 }
 
 function labelStyleSet(indicator) {
-  indicator.elem.style.setProperty("--chapter-progress", indicator.progress.current);
+  indicator.elem.style.setProperty("--chapter-progress", indicator.progress.chapter.current);
 }
 
 function labelInit(indicator) {
@@ -141,34 +141,6 @@ function indicatorGetTouching(indicator) {
   indicator.touching.sections = [];
 
   indicator.chapters.forEach((chapter) => {
-    // var targetElem = indicator.elem.querySelector(".indicator");
-
-    // var targetRect = targetElem.getBoundingClientRect();
-    // var chapterRect = chapter.elem.getBoundingClientRect();
-
-    // var targetTop = targetRect.top;
-    // var targetBottom = targetRect.bottom;
-
-    // var chapterTop = chapterRect.top;
-    // var chapterBottom = chapterRect.bottom;
-
-    // var progress = 0;
-
-    // if (chapterTop >= targetTop && chapterBottom <= targetBottom) {
-    //   progress = 1;
-    // } else if (chapterTop < targetTop && chapterBottom <= targetBottom) {
-    //   progress = (chapterBottom - targetTop) / targetRect.height;
-    // } else if (chapterTop >= targetTop && chapterBottom > targetBottom) {
-    //   progress = (targetBottom - chapterTop) / targetRect.height;
-    // } else if (chapterTop < targetTop && chapterBottom > targetBottom) {
-    //   progress = 1;
-    // }
-
-    // if (progress > 0) {
-    //   indicator.touching.chapters.push({ chapter: chapter, progress: progress });
-    // }
-
-    // console.log(indicator.touching.chapters);
 
     chapter.sections.forEach((section, index) => {
       var elem = section.elem;
@@ -196,18 +168,6 @@ function indicatorGetTouching(indicator) {
       if (progress > 0) {
         indicator.touching.sections.push({ section: section, progress: progress });
       }
-
-      // var chapterProgress = 0;
-      // var sectionIsLast = index == chapter.sections.length - 1;
-      // var sectionIsFirst = index == 0;
-
-      // if (sectionIsLast || sectionIsFirst) {
-      //   chapterProgress = progress;
-      // } else {
-      //   chapterProgress = 1;
-      // }
-
-      // console.log(indicator.touching.chapters);
     });
   });
 
@@ -253,46 +213,35 @@ function indicatorGetTouching(indicator) {
 }
 
 function indicatorGetProgress(indicator) {
-  // var touching = indicator.touching.sections;
-  // var nextSection = touching[touching.length - 1];
-  // var index, p;
-  // if (nextSection == undefined) {
-  //   index = 0;
-  //   p = 0;
-  // } else {
-  //   index = nextSection.section.index;
-  //   p = nextSection.progress;
-  // }
-  // var progress = index + p;
-  // indicator.progress.current = progress;
-  // if (progress != indicator.progress.previous) {
-  //   indicator.progress.previous = progress;
-  //   indicator.progress.current = progress;
-  //   return true;
-  // } else {
-  //   return false;
-  // }
+  function getNextElement(touching, indexName) {
+    var nextElement = touching[touching.length - 1];
+    var index = 0, progress = 0;
+    if (nextElement) {
+      index = nextElement[indexName].index;
+      progress = nextElement.progress;
+    }
+    return index + progress;
+  }
 
-  var touching = indicator.touching.chapters;
-  var nextChapter = touching[touching.length - 1];
-  var index, p;
-  if (nextChapter == undefined) {
-    index = 0;
-    p = 0;
-  } else {
-    index = nextChapter.chapter.index;
-    p = nextChapter.progress;
+  var chapterProgress = getNextElement(indicator.touching.chapters, 'chapter');
+  var sectionProgress = getNextElement(indicator.touching.sections, 'section');
+
+  if (chapterProgress !== indicator.progress.chapter.current) {
+    indicator.progress.chapter.previous = indicator.progress.chapter.current;
+    indicator.progress.chapter.current = chapterProgress;
   }
-  var progress = index + p;
-  indicator.progress.current = progress;
-  if (progress != indicator.progress.previous) {
-    indicator.progress.previous = progress;
-    indicator.progress.current = progress;
+
+  if (sectionProgress !== indicator.progress.section.current) {
+    indicator.progress.section.previous = indicator.progress.section.current;
+    indicator.progress.section.current = sectionProgress;
     return true;
-  } else {
-    return false;
   }
+
+  return false;
 }
+
+
+
 
 function sectionsInit(indicator) {
   var secIndex = 0;
@@ -323,7 +272,7 @@ function chaptersInit(indicator) {
 
 function indicatorNameWidthSet(indicator) {
   if (!indicator) return;
-  var progress = indicator.progress.current;
+  var progress = indicator.progress.chapter.current;
 
   if (progress < 1) {
     indicator.elem.style.setProperty("--label-width", `${indicator.names[0].width}px`);

@@ -21,6 +21,7 @@ function Chapter({ children, type, wrapperClassName, background, id, name, margi
 
   // Clone the children array so that we can modify it without affecting the original
   var newChildren = React.Children.toArray(children);
+  if(!Array.isArray(newChildren)) newChildren = [newChildren];
 
   // Add a wrapper class to each child that has a background color, so that we can add padding to the bottom of the child
   newChildren = newChildren.map((child, i) => {
@@ -35,10 +36,10 @@ function Chapter({ children, type, wrapperClassName, background, id, name, margi
   });
 
   newChildren = newChildren.map((child, i) => {
-    if(i != children.length - 1) return child;
+    if(i != newChildren.length - 1) return child;
+    if(!child.props.background || child.props.background != "none") return child;
       return React.cloneElement(child, { wrapperClassName: child.wrapperClassName ? child.wrapperClassName + " pb-section-gap" : "pb-section-gap" });
   });
-
 
 
   return (
