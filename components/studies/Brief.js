@@ -23,7 +23,6 @@ function BriefPoint({ items, type }) {
     <>
       <div className={pointClasses}>
         <h4 className="brief--title">{title}</h4>
-
         {isList ? (
           <>
             {isTools ? (

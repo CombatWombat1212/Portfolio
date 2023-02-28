@@ -6,7 +6,7 @@
     display: flex;
     height: var(--button-height);
     position: sticky;
-    z-index: 10;
+    z-index: 9;
     top: calc(var(--nav-height) + var(--temp-buffer));
     margin-top: calc(var(--button-height) * -1);
     --indicator-transition: 0.6s;

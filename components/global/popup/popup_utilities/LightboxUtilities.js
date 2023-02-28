@@ -37,16 +37,16 @@ function checkForRelevantGroups(popup, setPopup) {
   var seekLeftOn = seekLeft.classList.contains("popup--seek__on") ? true : false;
 
   if (popupIndex == 0) {
-    if (!seekRightOn) toggle(seekRight, {classPref: "popup--seek", anim: "animated", duration: "transition"});
-    if (seekLeftOn) toggle(seekLeft, {classPref: "popup--seek", anim: "animated", duration: "transition"});
+    if (!seekRightOn) toggle(seekRight, {classPref: "popup--seek", duration: "transition"});
+    if (seekLeftOn) toggle(seekLeft, {classPref: "popup--seek", duration: "transition"});
   }
   if (popupIndex == popupGroup.imgs.length - 1) {
-    if (seekRightOn) toggle(seekRight, {classPref: "popup--seek", anim: "animated", duration: "transition"});
-    if (!seekLeftOn) toggle(seekLeft, {classPref: "popup--seek", anim: "animated", duration: "transition"});
+    if (seekRightOn) toggle(seekRight, {classPref: "popup--seek", duration: "transition"});
+    if (!seekLeftOn) toggle(seekLeft, {classPref: "popup--seek", duration: "transition"});
   }
   if (popupIndex > 0 && popupIndex < popupGroup.imgs.length - 1) {
-    if (!seekRightOn) toggle(seekRight, {classPref: "popup--seek", anim: "animated", duration: "transition"});
-    if (!seekLeftOn) toggle(seekLeft, {classPref: "popup--seek", anim: "animated", duration: "transition"});
+    if (!seekRightOn) toggle(seekRight, {classPref: "popup--seek", duration: "transition"});
+    if (!seekLeftOn) toggle(seekLeft, {classPref: "popup--seek", duration: "transition"});
   }
   }
 
@@ -112,8 +112,8 @@ function lightboxInit(popup, setPopup, setShowLoading) {
     img.classList.add("popup--img__off");
     wrapper.appendChild(img);
 
-    toggle(img, {classPref: "popup--img", anim: "animated", duration: "transition"});
-    toggle(content, {classPref: "popup--content", anim: "animated", duration: "transition"});
+    toggle(img, {classPref: "popup--img", duration: "transition"});
+    toggle(content, {classPref: "popup--content", duration: "transition"});
     
     imgLoading = false; // indicate that the image has finished loading
 

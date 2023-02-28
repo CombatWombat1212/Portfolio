@@ -18,9 +18,9 @@ function hiddenUIToggle() {
   var on = target.classList.contains("popup--nav__on");
 
   if (on && !forceHiddenUIOn && !mouseCurrentlyMoving) {
-    toggle(target, {classPref: "popup--nav", duration: tran, anim: "animated"});
+    toggle(target, {classPref: "popup--nav", duration: tran});
   } else if (!on && (forceHiddenUIOn || mouseCurrentlyMoving)) {
-    toggle(target, {classPref: "popup--nav", duration: tran, anim: "animated"});
+    toggle(target, {classPref: "popup--nav", duration: tran});
   }
 }
 

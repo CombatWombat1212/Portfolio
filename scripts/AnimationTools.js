@@ -9,7 +9,7 @@ function getTransition(elem) {
   return Number(window.getComputedStyle(elem, null).transitionDuration.split("s")[0]) * 1000;
 }
 
-function simpleToggleOn(elem, { classPref = "", overlap = false, duration = 0 } = {}) {
+function simpleToggleOn(elem, { classPref = "", overlap = true, duration = 0 } = {}) {
   if (!tran) {
     tran = getTransition(elem);
   }
@@ -19,18 +19,18 @@ function simpleToggleOn(elem, { classPref = "", overlap = false, duration = 0 } 
   }
 
   if (overlap) {
+    elem.classList.remove(classPref + "off");
     elem.classList.add(classPref + "tran");
     setTimeout(() => {
-      elem.classList.remove(classPref + "on");
-      elem.classList.add(classPref + "off");
       elem.classList.remove(classPref + "tran");
+      elem.classList.add(classPref + "on");
     }, 0);
   } else {
+    elem.classList.remove(classPref + "off");
     elem.classList.add(classPref + "tran");
     setTimeout(() => {
-      elem.classList.remove(classPref + "on");
-      elem.classList.add(classPref + "off");
       elem.classList.remove(classPref + "tran");
+      elem.classList.add(classPref + "on");
     }, duration);
   }
 }
@@ -46,14 +46,17 @@ function simpleToggleOff(elem, { classPref = "", overlap = false, duration = 0 }
 
   if (overlap) {
     setTimeout(() => {
-      elem.classList.remove(classPref + "off");
+      elem.classList.add(classPref + "off");
+      elem.classList.remove(classPref + "on");
       elem.classList.remove(classPref + "tran");
     }, 0);
     setTimeout(() => {}, tran);
   } else {
     setTimeout(() => {
-      elem.classList.remove(classPref + "off");
+      elem.classList.add(classPref + "off");
+      elem.classList.remove(classPref + "on");
       elem.classList.remove(classPref + "tran");
+
     }, duration);
   }
 }
@@ -102,12 +105,12 @@ function dualTransitionToggleOff(elem, { classPref = "", overlap = false, durati
   }
 }
 
-function toggle(elem, { classPref = "", duration = 0, anim = "", transitions = "", overlap = "" } = {}) {
+function toggle(elem, { classPref = "", duration = 0, animated = true, transitions = "", overlap = "overlap start", state = "" } = {}) {
   var selectorPrefix = "__";
   if (classPref == "") selectorPrefix = "";
   classPref = classPref + selectorPrefix;
 
-  if (anim == "animated") {
+  if (animated) {
     var overlapStart = false;
     var overlapEnd = false;
     if (overlap == "overlap end") {
@@ -125,21 +128,38 @@ function toggle(elem, { classPref = "", duration = 0, anim = "", transitions = "
     }
 
     if (transitions != "2 transitions") {
-      if (elem.classList.contains(classPref + "on")) {
+      if (state == "on" && elem.classList.contains(classPref + "on")) {
+        // do nothing
+      } else if (state == "on" || (state === "" && elem.classList.contains(classPref + "off"))) {
         simpleToggleOn(elem, { classPref, overlap: overlapStart, duration });
+      } else if (state == "off" && elem.classList.contains(classPref + "off")) {
+        // do nothing
       } else {
         simpleToggleOff(elem, { classPref, overlap: overlapEnd, duration });
       }
     } else {
-      if (elem.classList.contains(classPref + "on")) {
+      if (state == "on" && elem.classList.contains(classPref + "on")) {
+        // do nothing
+      } else if (state == "on" || (state === "" && elem.classList.contains(classPref + "off"))) {
         dualTransitionToggleOn(elem, { classPref, overlap: overlapStart, duration });
+      } else if (state == "off" && elem.classList.contains(classPref + "off")) {
+        // do nothing
       } else {
         dualTransitionToggleOff(elem, { classPref, overlap: overlapEnd, duration });
       }
     }
   } else {
-    elem.classList.toggle(classPref + "on");
-    elem.classList.toggle(classPref + "off");
+    if (state == "on" && elem.classList.contains(classPref + "on")) {
+      // do nothing
+    } else if (state == "on" || (state === "" && elem.classList.contains(classPref + "off"))) {
+      elem.classList.remove(classPref + "off");
+      elem.classList.add(classPref + "on");
+    } else if (state == "off" && elem.classList.contains(classPref + "off")) {
+      // do nothing
+    } else {
+      elem.classList.remove(classPref + "on");
+      elem.classList.add(classPref + "off");
+    }
   }
 }
 

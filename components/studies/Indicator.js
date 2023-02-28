@@ -230,7 +230,9 @@ function indicatorInit(indicator) {
     indicator.init = true;
     indicator.elem.classList.remove("indicator--wrapper__hidden");
     indicatorGetVisibility(indicator);
-    indicatorSetVisibility(indicator);
+    indicatorSetVisibility(indicator);  
+
+
 
     indicatorOnScroll();
     indicatorOnResizeFunctions();
@@ -250,7 +252,15 @@ function Indicator({}) {
     indicatorObj.elem.querySelector(".indicator").classList.add("indicator__hidden");
     indicators.forEach((indicator) => {
       namesInit(indicator, setNames);
+
+
+
     });
+
+
+
+
+
   });
 
   useEffect(() => {
