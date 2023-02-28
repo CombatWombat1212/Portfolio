@@ -5,6 +5,10 @@ import { useEffect, useRef, useState } from "react";
 
 // TODO: work on the interactive progress thingy before you work on the color changing backgrounds of the indicator
 
+
+// TODO: change progress to be calculated based on the indicator rather than the label, then use that to affect the color and update the label when it pases the halfway point
+
+
 var indicators = [];
 
 function IndicatorItem(indicator) {

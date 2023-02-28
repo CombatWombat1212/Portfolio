@@ -1,3 +1,4 @@
+import toggle from "@/scripts/AnimationTools";
 import { defaultProps, PropTypes } from "prop-types";
 import Tag from "../elements/Tag";
 
@@ -23,6 +24,7 @@ function BriefPoint({ items, type }) {
     <>
       <div className={pointClasses}>
         <h4 className="brief--title">{title}</h4>
+
         {isList ? (
           <>
             {isTools ? (

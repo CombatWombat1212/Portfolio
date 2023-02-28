@@ -24,7 +24,7 @@ function Card({ img, index, width, height, descriptionOn, onClick }) {
       for (var i = 0; i < affectedClasses.length; i++) {
         var target = card.current.querySelector(`.${affectedClasses[i]}`);
         if (target == null) continue;
-        toggle(target, {classPref: affectedClasses[i], duration: "transition"});
+        toggle(target, {classPref: affectedClasses[i], duration: "transition", overlap:"overlap both"});
       }
     }, [descriptionOn]);
   

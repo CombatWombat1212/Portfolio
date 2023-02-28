@@ -20,17 +20,17 @@ function simpleToggleOn(elem, { classPref = "", overlap = true, duration = 0 } =
 
   if (overlap) {
     elem.classList.remove(classPref + "off");
+    elem.classList.add(classPref + "on");
     elem.classList.add(classPref + "tran");
     setTimeout(() => {
       elem.classList.remove(classPref + "tran");
-      elem.classList.add(classPref + "on");
     }, 0);
   } else {
     elem.classList.remove(classPref + "off");
+    elem.classList.add(classPref + "on");
     elem.classList.add(classPref + "tran");
     setTimeout(() => {
       elem.classList.remove(classPref + "tran");
-      elem.classList.add(classPref + "on");
     }, duration);
   }
 }
