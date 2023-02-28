@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 // TODO: work on the interactive progress thingy before you work on the color changing backgrounds of the indicator
 
 
-// TODO: change progress to be calculated based on the indicator rather than the label, then use that to affect the color and update the label when it pases the halfway point
+// TODO: update the way progress is being calculated.  Right now it happens at the border of every chapter, we need that data but we also need the border of every section. hoverever these need to be made from the same data so that we arent calculating too much.  So do it based on section, then mark the chapter divisions based on how many sections are in that chapter and how many have been scrolled past.  That way progress is only calculated once.  Then use that to affect the color and update the label when it pases the halfway point
 
 
 var indicators = [];
@@ -19,7 +19,7 @@ function IndicatorItem(indicator) {
   this.width = 0;
   this.height = 0;
   this.touching = [];
-  this.progress = { label: { current: null, previous: null } };
+  this.progress = { current: null, previous: null };
   this.visible = { set: false, applied: false };
   this.init = false;
 }
@@ -73,7 +73,7 @@ function namesGetSizes(name) {
 }
 
 function indicatorGetVisibility(indicator) {
-  indicator.visible.set = indicator.progress.label.current > 0;
+  indicator.visible.set = indicator.progress.current > 0;
 }
 
 function indicatorSetVisibility(indicator) {
@@ -116,7 +116,7 @@ function namesGet() {
 }
 
 function labelStyleSet(indicator) {
-  indicator.elem.style.setProperty("--chapter-progress", indicator.progress.label.current);
+  indicator.elem.style.setProperty("--chapter-progress", indicator.progress.current);
 }
 
 function labelInit(indicator) {
@@ -133,11 +133,15 @@ function indicatorGetTouching(indicator) {
   indicator.touching = [];
 
   indicator.chapters.forEach((chapter) => {
-    var labelRect = indicator.label.elem.getBoundingClientRect();
+
+    // var targetElem = indicator.label.elem;
+    var targetElem = indicator.elem.querySelector('.indicator');
+
+    var targetRect = targetElem.getBoundingClientRect();
     var chapterRect = chapter.elem.getBoundingClientRect();
 
-    var labelTop = labelRect.top;
-    var labelBottom = labelRect.bottom;
+    var labelTop = targetRect.top;
+    var labelBottom = targetRect.bottom;
 
     var chapterTop = chapterRect.top;
     var chapterBottom = chapterRect.bottom;
@@ -147,9 +151,9 @@ function indicatorGetTouching(indicator) {
     if (chapterTop >= labelTop && chapterBottom <= labelBottom) {
       progress = 1;
     } else if (chapterTop < labelTop && chapterBottom <= labelBottom) {
-      progress = (chapterBottom - labelTop) / labelRect.height;
+      progress = (chapterBottom - labelTop) / targetRect.height;
     } else if (chapterTop >= labelTop && chapterBottom > labelBottom) {
-      progress = (labelBottom - chapterTop) / labelRect.height;
+      progress = (labelBottom - chapterTop) / targetRect.height;
     } else if (chapterTop < labelTop && chapterBottom > labelBottom) {
       progress = 1;
     }
@@ -172,10 +176,10 @@ function indicatorGetProgress(indicator) {
     p = nextChapter.progress;
   }
   var progress = index + p;
-  indicator.progress.label.current = progress;
-  if (progress != indicator.progress.label.previous) {
-    indicator.progress.label.previous = progress;
-    indicator.progress.label.current = progress;
+  indicator.progress.current = progress;
+  if (progress != indicator.progress.previous) {
+    indicator.progress.previous = progress;
+    indicator.progress.current = progress;
     return true;
   } else {
     return false;
@@ -194,7 +198,7 @@ function chaptersInit(indicator) {
 
 function indicatorNameWidthSet(indicator) {
   if (!indicator) return;
-  var progress = indicator.progress.label.current;
+  var progress = indicator.progress.current;
 
   if (progress < 1) {
     indicator.elem.style.setProperty("--label-width", `${indicator.names[0].width}px`);

@@ -3122,6 +3122,10 @@ body {
   top: Min(calc(var(--button-height) * -1), var(--empty-margin-top));
 }
 
+.indicator--background:nth-child(2n) {
+  background-color: #5D5D7E;
+}
+
 .indicator__hidden {
   -webkit-touch-callout: none;
   user-select: none;

@@ -39,6 +39,11 @@
     --empty-margin-top: calc((var(--chapter-progress) * -1) * var(--button-height));
     left: 0;
     top:  Min(calc(var(--button-height) * -1), var(--empty-margin-top));    
+
+
+    &:nth-child(2n){
+      background-color: $col-tertiary_light;
+    }
   }
 
 
