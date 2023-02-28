@@ -112,6 +112,7 @@ function dualTransitionToggleOff(elem, str, ov, transitionTime) {
   }
 }
 
+
 // function toggle(elem, classPref, transitionTime, anim, transitions, overlap) {
 //   var selectorPrefix = "__";
 //   if (classPref == "") selectorPrefix = "";
@@ -154,7 +155,7 @@ function dualTransitionToggleOff(elem, str, ov, transitionTime) {
 //   }
 // }
 
-function toggle(elem, classPref, transitionTime, anim, transitions, overlap, state) {
+function toggle(elem, { classPref = "", duration = 0, anim = "", transitions = "", overlap = "" } = {}) {
   var selectorPrefix = "__";
   if (classPref == "") selectorPrefix = "";
   classPref = classPref + selectorPrefix;
@@ -177,31 +178,73 @@ function toggle(elem, classPref, transitionTime, anim, transitions, overlap, sta
     }
 
     if (transitions != "2 transitions") {
-      if (state === "on") {
-        simpleToggleOn(elem, classPref, overlapStart, transitionTime);
-      } else if (state === "off") {
-        simpleToggleOff(elem, classPref, overlapEnd, transitionTime);
-      } else if (elem.classList.contains(classPref + "on")) {
-        simpleToggleOff(elem, classPref, overlapEnd, transitionTime);
+      if (elem.classList.contains(classPref + "on")) {
+        simpleToggleOn(elem, classPref, overlapStart, duration);
       } else {
-        simpleToggleOn(elem, classPref, overlapStart, transitionTime);
+        simpleToggleOff(elem, classPref, overlapEnd, duration);
       }
     } else {
-      if (state === "on") {
-        dualTransitionToggleOn(elem, classPref, overlapStart, transitionTime);
-      } else if (state === "off") {
-        dualTransitionToggleOff(elem, classPref, overlapEnd, transitionTime);
-      } else if (elem.classList.contains(classPref + "on")) {
-        dualTransitionToggleOff(elem, classPref, overlapEnd, transitionTime);
+      if (elem.classList.contains(classPref + "on")) {
+        dualTransitionToggleOn(elem, classPref, overlapStart, duration);
       } else {
-        dualTransitionToggleOn(elem, classPref, overlapStart, transitionTime);
+        dualTransitionToggleOff(elem, classPref, overlapEnd, duration);
       }
     }
   } else {
-    elem.classList.toggle(classPref + "on", state === "on");
-    elem.classList.toggle(classPref + "off", state === "off");
+    elem.classList.toggle(classPref + "on");
+    elem.classList.toggle(classPref + "off");
   }
 }
+
+
+// function toggle(elem, classPref, transitionTime, anim, transitions, overlap, state) {
+//   var selectorPrefix = "__";
+//   if (classPref == "") selectorPrefix = "";
+//   classPref = classPref + selectorPrefix;
+
+//   if (anim == "animated") {
+//     var overlapStart = false;
+//     var overlapEnd = false;
+//     if (overlap == "overlap end") {
+//       overlapStart = false;
+//       overlapEnd = true;
+//     } else if (overlap == "overlap start") {
+//       overlapStart = true;
+//       overlapEnd = false;
+//     } else if (overlap == "overlap both") {
+//       overlapStart = true;
+//       overlapEnd = true;
+//     } else {
+//       overlapStart = false;
+//       overlapEnd = false;
+//     }
+
+//     if (transitions != "2 transitions") {
+//       if (state === "on") {
+//         simpleToggleOn(elem, classPref, overlapStart, transitionTime);
+//       } else if (state === "off") {
+//         simpleToggleOff(elem, classPref, overlapEnd, transitionTime);
+//       } else if (elem.classList.contains(classPref + "on")) {
+//         simpleToggleOff(elem, classPref, overlapEnd, transitionTime);
+//       } else {
+//         simpleToggleOn(elem, classPref, overlapStart, transitionTime);
+//       }
+//     } else {
+//       if (state === "on") {
+//         dualTransitionToggleOn(elem, classPref, overlapStart, transitionTime);
+//       } else if (state === "off") {
+//         dualTransitionToggleOff(elem, classPref, overlapEnd, transitionTime);
+//       } else if (elem.classList.contains(classPref + "on")) {
+//         dualTransitionToggleOff(elem, classPref, overlapEnd, transitionTime);
+//       } else {
+//         dualTransitionToggleOn(elem, classPref, overlapStart, transitionTime);
+//       }
+//     }
+//   } else {
+//     elem.classList.toggle(classPref + "on", state === "on");
+//     elem.classList.toggle(classPref + "off", state === "off");
+//   }
+// }
 
 
 

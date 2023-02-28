@@ -126,7 +126,7 @@ function Popup({ popup, setPopup }) {
       
       var popWrapper = document.querySelector(".popup--wrapper");
       var on = popWrapper.classList.contains("popup--wrapper__on") ? true : false;
-      if (!on) toggle(popWrapper, "popup--wrapper", "transition", "animated", "");
+      if (!on) toggle(popWrapper, {classPref: "popup--wrapper", anim: "animated", duration: "transition"});
 
       waitToLoad(setShowLoading);
 

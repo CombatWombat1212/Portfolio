@@ -28,7 +28,7 @@ function catchKeys(e) {
   
   function closePopup(setPopup) {
     var trans = Number(window.getComputedStyle(document.querySelector(".popup--wrapper")).transitionDuration.split("s")[0]) * 1000;
-    toggle(document.querySelector(".popup--wrapper"), "popup--wrapper", "transition", "animated", "");
+    toggle(document.querySelector(".popup--wrapper"), {classPref: "popup--wrapper", anim: "animated", duration: "transition"});
     setTimeout(() => setPopup(false), trans);
   }
 

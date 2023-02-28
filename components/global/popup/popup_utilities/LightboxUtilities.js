@@ -37,18 +37,18 @@ function checkForRelevantGroups(popup, setPopup) {
   var seekLeftOn = seekLeft.classList.contains("popup--seek__on") ? true : false;
 
   if (popupIndex == 0) {
-    if (!seekRightOn) toggle(seekRight, "popup--seek", "transition", "animated", "");
-    if (seekLeftOn) toggle(seekLeft, "popup--seek", "transition", "animated", "");
+    if (!seekRightOn) toggle(seekRight, {classPref: "popup--seek", anim: "animated", duration: "transition"});
+    if (seekLeftOn) toggle(seekLeft, {classPref: "popup--seek", anim: "animated", duration: "transition"});
   }
   if (popupIndex == popupGroup.imgs.length - 1) {
-    if (seekRightOn) toggle(seekRight, "popup--seek", "transition", "animated", "");
-    if (!seekLeftOn) toggle(seekLeft, "popup--seek", "transition", "animated", "");
+    if (seekRightOn) toggle(seekRight, {classPref: "popup--seek", anim: "animated", duration: "transition"});
+    if (!seekLeftOn) toggle(seekLeft, {classPref: "popup--seek", anim: "animated", duration: "transition"});
   }
   if (popupIndex > 0 && popupIndex < popupGroup.imgs.length - 1) {
-    if (!seekRightOn) toggle(seekRight, "popup--seek", "transition", "animated", "");
-    if (!seekLeftOn) toggle(seekLeft, "popup--seek", "transition", "animated", "");
+    if (!seekRightOn) toggle(seekRight, {classPref: "popup--seek", anim: "animated", duration: "transition"});
+    if (!seekLeftOn) toggle(seekLeft, {classPref: "popup--seek", anim: "animated", duration: "transition"});
   }
-}
+  }
 
 function seekHandler(e, setPopup) {
   var button;
@@ -112,9 +112,9 @@ function lightboxInit(popup, setPopup, setShowLoading) {
     img.classList.add("popup--img__off");
     wrapper.appendChild(img);
 
-    toggle(img, "popup--img", "transition", "animated", "");
-    toggle(content, "popup--content", "transition", "animated", "");
-
+    toggle(img, {classPref: "popup--img", anim: "animated", duration: "transition"});
+    toggle(content, {classPref: "popup--content", anim: "animated", duration: "transition"});
+    
     imgLoading = false; // indicate that the image has finished loading
 
     setWaitingToShowLoading(false);

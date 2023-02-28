@@ -1,8 +1,8 @@
 import toggle from "@/scripts/AnimationTools";
 
 function removeLoading(loading, canvas) {
-  toggle(loading, "popup--loading", "transition", "animated", "");
-  toggle(canvas, "popup--canvas", "transition", "animated", "");
+  toggle(loading, {classPref: "popup--loading", anim: "animated", duration: "transition"});
+  toggle(canvas, {classPref: "popup--canvas", anim: "animated", duration: "transition"});
 }
 
 

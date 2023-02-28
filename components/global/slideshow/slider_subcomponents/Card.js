@@ -24,7 +24,7 @@ function Card({ img, index, width, height, descriptionOn, onClick }) {
       for (var i = 0; i < affectedClasses.length; i++) {
         var target = card.current.querySelector(`.${affectedClasses[i]}`);
         if (target == null) continue;
-        toggle(target, affectedClasses[i], "transition", "", "");
+        toggle(target, {classPref: affectedClasses[i], duration: "transition"});
       }
     }, [descriptionOn]);
   
