@@ -29,6 +29,7 @@ function Chapter(elem, index) {
   this.height = chapterGetSize(this);
   this.index = index;
   this.name = elem.getAttribute("name");
+  this.sections = [];
   let resizeTimer;
   this.observer = new ResizeObserver((entries) => {
     if (resizeTimer) {
@@ -41,6 +42,15 @@ function Chapter(elem, index) {
   });
   this.observer.observe(elem);
 }
+
+
+
+function Section(elem){
+  this.chapter = elem;
+}
+
+
+
 
 function Name(elem) {
   this.chapter = elem;
@@ -162,7 +172,13 @@ function indicatorGetTouching(indicator) {
       indicator.touching.push({ chapter: chapter, progress: progress });
     }
   });
+
+
 }
+
+
+
+
 
 function indicatorGetProgress(indicator) {
   var touching = indicator.touching;
@@ -186,10 +202,32 @@ function indicatorGetProgress(indicator) {
   }
 }
 
+
+
+function sectionsInit(indicator){
+
+  indicator.chapters.forEach((chapter) => {
+    var all = Array.from(chapter.elem.querySelectorAll(".section--wrapper"));
+    all.forEach((elem, index) => {
+      var newSection = new Section(elem);
+      chapter.sections.push(newSection);
+    });
+  });
+}
+
+
+
 function chaptersInit(indicator) {
   var all = Array.from(document.querySelectorAll(".chapter--wrapper"));
-  indicator.chapters = all.map((elem, index) => new Chapter(elem, index));
 
+  all.forEach((elem, index) => {
+    var newChapter = new Chapter(elem, index);
+    indicator.chapters.push(newChapter);
+  });
+
+
+
+  // TODO: couldn't this just be in indicatorInit?
   window.removeEventListener("scroll", indicatorOnScroll);
   window.addEventListener("scroll", indicatorOnScroll);
   window.removeEventListener("resize", indicatorOnResize);
@@ -230,6 +268,7 @@ function chapterGetSize(chapter) {
 
 function indicatorInit(indicator) {
   chaptersInit(indicator);
+  sectionsInit(indicator);
   labelInit(indicator);
   indicatorOnScroll();
   indicatorOnResizeFunctions();

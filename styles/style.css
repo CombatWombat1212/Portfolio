@@ -3142,7 +3142,7 @@ body {
 .indicator .label {
   margin-top: -0.03125rem;
   color: #F3F3F7;
-  height: var(--font-height-body);
+  height: var(--button-height);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -3155,12 +3155,16 @@ body {
   transition-duration: 0.1s;
   height: var(--font-height-body);
   min-height: var(--font-height-body);
-  --empty-margin-top: calc((var(--chapter-progress) * -1) * var(--font-height-body));
-  margin-top: Min(calc(var(--font-height-body) * -1), var(--empty-margin-top));
+  --empty-margin-top: calc((var(--chapter-progress) * -1) * var(--button-height));
+  margin-top: Min(calc(var(--button-height) * -1), var(--empty-margin-top));
+  padding-top: calc((var(--button-height) - var(--font-height-body))/2);
+  padding-bottom: calc((var(--button-height) - var(--font-height-body))/2);
 }
 
 .indicator .label--name {
   width: fit-content;
+  padding-top: calc((var(--button-height) - var(--font-height-body))/2);
+  padding-bottom: calc((var(--button-height) - var(--font-height-body))/2);
 }
 
 .graph--wrapper {
