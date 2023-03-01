@@ -3147,7 +3147,7 @@ body {
 }
 
 .indicator .label--empty {
-  transition-duration: 0.05s;
+  transition-duration: 0.1s;
   height: var(--font-height-body);
   min-height: var(--font-height-body);
   --empty-margin-top: calc((var(--chapter-progress) * -1) * var(--button-height));
