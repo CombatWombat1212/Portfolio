@@ -26,7 +26,8 @@
   height: 100%;
   background-color: $col-tertiary;
   @include flex-col-center;
-  padding-left: var(--site-x-margin);
+  // padding-left: var(--site-x-margin);
+  padding-left: 2rem;
   padding-right: 1.5625rem;
   margin-left: 0;
   pointer-events: all;
