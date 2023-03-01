@@ -3,6 +3,11 @@
     --site-x-margin: calc((100% - var(--site-max-width_wide)) / 2);
     --temp-buffer: 10rem;
 
+  
+    // --section-background_col-background: col-tertiary;
+    // --section-background_dark: col-background;
+
+
     display: flex;
     height: var(--button-height);
     position: sticky;
@@ -29,21 +34,21 @@
   position: relative;
 
   &--background {
-    background-color: $col-tertiary;
 
+
+
+
+
+    background-color: var(--indicator-background-color);
     position: absolute;
     width: 100%;
     margin-top: calc(var(--indicator-background-index) * var(--button-height));
     height: var(--button-height);
-    
-    --empty-margin-top: calc((var(--chapter-progress) * -1) * var(--button-height));
+    --margin-top: calc((var(--section-progress) * -1) * var(--button-height));
+    --offset: 1;
     left: 0;
-    top:  Min(calc(var(--button-height) * -1), var(--empty-margin-top));    
+    top:  calc(var(--margin-top) + (var(--offset)*var(--button-height)));
 
-
-    &:nth-child(2n){
-      background-color: $col-tertiary_light;
-    }
   }
 
 

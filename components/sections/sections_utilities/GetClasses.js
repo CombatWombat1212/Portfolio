@@ -95,7 +95,7 @@ function getBackgroundClasses(pref, background) {
     if (pref == "section--graphic") backgroundClasses += ` graphic--panel`;
 
     if (background == "primary") backgroundClasses += ` background__primary`;
-    if (background == "makeright tertiary") backgroundClasses += ` background__makeright-tertiary`;
+    if (background == "makeright tertiary") backgroundClasses += ` background__tertiary-makeright`;
     if (background == "tertiary") backgroundClasses += ` background__tertiary`;
     if (background == "tertiary light") backgroundClasses += ` background__tertiary-light`;
     if (background == "background") backgroundClasses += ` background__background`;

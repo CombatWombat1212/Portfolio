@@ -1,5 +1,5 @@
 import toggle from "@/scripts/AnimationTools";
-import { RESIZE_TIMEOUT, splitPx, splitS } from "@/scripts/GlobalUtilities";
+import { getColors, RESIZE_TIMEOUT, splitPx, splitS } from "@/scripts/GlobalUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { useEffect, useRef, useState } from "react";
 
@@ -47,6 +47,8 @@ function Section(elem, chapter, chapIndex, secIndex) {
   this.elem = elem;
   this.index = { chapter: chapIndex, section: secIndex };
   this.chapter = chapter;
+  this.background = null;
+  this.color = null;
 }
 
 function Name(elem) {
@@ -124,6 +126,7 @@ function namesGet() {
 
 function labelStyleSet(indicator) {
   indicator.elem.style.setProperty("--chapter-progress", indicator.progress.chapter.current);
+  indicator.elem.style.setProperty("--section-progress", indicator.progress.section.current);
 }
 
 function labelInit(indicator) {
@@ -141,7 +144,6 @@ function indicatorGetTouching(indicator) {
   indicator.touching.sections = [];
 
   indicator.chapters.forEach((chapter) => {
-
     chapter.sections.forEach((section, index) => {
       var elem = section.elem;
       var targetElem = indicator.elem.querySelector(".indicator");
@@ -230,7 +232,6 @@ function indicatorGetProgress(indicator) {
     indicator.progress.chapter.current = progress;
   }
 
-
   var touching = indicator.touching.sections;
   var nextSection = touching[touching.length - 1];
   var index, p;
@@ -244,7 +245,7 @@ function indicatorGetProgress(indicator) {
   var progress = index + p;
   indicator.progress.section.current = progress;
 
-  console.log(progress)
+  console.log(progress);
   if (progress != indicator.progress.section.previous) {
     indicator.progress.section.previous = progress;
     indicator.progress.section.current = progress;
@@ -254,26 +255,80 @@ function indicatorGetProgress(indicator) {
   }
 }
 
+function sectionGetBackgroundColors(section) {
+  var list = section.elem.classList.value;
+  var background = list.match(/background\S*/g)?.join(" ");
 
+  // TODO: Support is needed for image backgrounds, you should be able to add them in as a custom prop in the section element, otherwise default is tertiary
 
+  if (!background) {
+    section.background = "background__background";
+  } else {
+    if (background.includes("background__background") && background.includes(" ")) {
+      section.background = background.replace("background__background", "").trim();
+    } else {
+      section.background = background;
+    }
+  }
+  section.background = section.background.split("__")[1];
+}
+
+function sectionGetColors(indicator) {
+  var colors = [
+    ["primary", "background"],
+    ["primary-hovered", "background"],
+    ["secondary", "background"],
+    ["secondary-hovered", "background"],
+    ["tertiary-light", "background"],
+    ["tertiary", "background"],
+    ["tertiary-makeright", "background"],
+    ["background", "tertiary"],
+    ["background-darker", "tertiary"],
+    ["background-darkest", "tertiary"],
+  ];
+
+  indicator.chapters.forEach((chapter) => {
+    chapter.sections.forEach((section) => {
+      var elem = section.elem;
+      var background = section.background;
+
+      colors.forEach((color) => {
+        if (color[0] == background) {
+          section.color = color[1];
+        }
+      });
+      console.log(section.color);
+      if(section.color == null){
+        console.log(section)
+      }
+
+    });
+  });
+}
 
 function sectionsInit(indicator, sections, setSections) {
-  var secIndex = 0;
+  indicator.chapters.forEach((chapter) => {
+    chapter.sections = [];
+  });
 
+  var secIndex = 0;
   var sec = [];
 
   indicator.chapters.forEach((chapter) => {
     var all = Array.from(chapter.elem.querySelectorAll(".section--wrapper"));
     all.forEach((elem, chapIndex) => {
       var newSection = new Section(elem, chapter, chapIndex, secIndex++);
+      sectionGetBackgroundColors(newSection);
       chapter.sections.push(newSection);
       sec.push(newSection);
     });
   });
-  
-  setSections(sec);
-  // indicator.elem.style.setProperty("--section-count", `${secIndex}`);
 
+  sectionGetColors(indicator);
+
+  if (sections.length > 0) return;
+  setSections(sec);
+  indicator.elem.style.setProperty("--section-count", `${secIndex}`);
 }
 
 function chaptersInit(indicator) {
@@ -370,19 +425,20 @@ function Indicator({}) {
   useEffect(() => {
     if (sections.length < 1) return;
     console.log(sections);
-
   }, [sections]);
-
-
-
 
   return (
     <div className="indicator--wrapper indicator--wrapper__hidden" ref={indicator}>
       <div className="indicator indicator__hidden indicator__off">
+        {sections &&
+          sections.map((s, i) => {
+            return <div className={"indicator--background"} key={i} style={
+              { 
+                "--indicator-background-index": i,
+                "--indicator-background-color": `var(--col-${s.color})`,
 
-        {names &&
-          names.map((n, i) => {
-            return <div className={"indicator--background"} key={i} style={{ "--indicator-background-index": i }}></div>;
+          }
+        }></div>;
           })}
 
         <div className="label">

@@ -1928,11 +1928,11 @@ body {
   padding-top: 0;
 }
 
-.background__makeright-tertiary {
+.background__tertiary-makeright {
   background-color: #25313C;
 }
 
-.background__makeright-tertiary + .background__makeright-tertiary {
+.background__tertiary-makeright + .background__tertiary-makeright {
   padding-top: 0;
 }
 
@@ -3110,18 +3110,15 @@ body {
 }
 
 .indicator--background {
-  background-color: #404064;
+  background-color: var(--indicator-background-color);
   position: absolute;
   width: 100%;
   margin-top: calc(var(--indicator-background-index) * var(--button-height));
   height: var(--button-height);
-  --empty-margin-top: calc((var(--chapter-progress) * -1) * var(--button-height));
+  --margin-top: calc((var(--section-progress) * -1) * var(--button-height));
+  --offset: 1;
   left: 0;
-  top: Min(calc(var(--button-height) * -1), var(--empty-margin-top));
-}
-
-.indicator--background:nth-child(2n) {
-  background-color: #5D5D7E;
+  top: calc(var(--margin-top) + (var(--offset)*var(--button-height)));
 }
 
 .indicator__hidden {
