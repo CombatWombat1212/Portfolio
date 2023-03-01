@@ -67,7 +67,7 @@
 
   .label {
     margin-top: -0.03125rem;
-    color: $col-background;
+    color: var(--indicator-primary-color);
     height: var(--button-height);
     @include flex-col;
     overflow: hidden;

@@ -3136,7 +3136,7 @@ body {
 
 .indicator .label {
   margin-top: -0.03125rem;
-  color: #F3F3F7;
+  color: var(--indicator-primary-color);
   height: var(--button-height);
   display: flex;
   flex-direction: column;

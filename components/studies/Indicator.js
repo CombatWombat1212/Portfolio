@@ -47,8 +47,11 @@ function Section(elem, chapter, chapIndex, secIndex) {
   this.elem = elem;
   this.index = { chapter: chapIndex, section: secIndex };
   this.chapter = chapter;
-  this.background = null;
-  this.color = null;
+  this.color = {
+    contrast: null,
+    text: null,
+    background: null,
+  };
 }
 
 function Name(elem) {
@@ -127,6 +130,27 @@ function namesGet() {
 function labelStyleSet(indicator) {
   indicator.elem.style.setProperty("--chapter-progress", indicator.progress.chapter.current);
   indicator.elem.style.setProperty("--section-progress", indicator.progress.section.current);
+
+  var chapterIndex = Math.round(indicator.progress.chapter.current) - 1;
+  if (chapterIndex < 0) chapterIndex = 0;
+
+  var sectionIndex = Math.round(indicator.progress.section.current) - 1;
+  if (sectionIndex < 0) sectionIndex = 0;
+
+  var color;
+  var sections = [];
+  indicator.chapters.forEach((chapter) => {
+    chapter.sections.forEach((section) => {
+      sections.push(section);
+    });
+  });
+
+  var section = sections[sectionIndex];
+
+  if (!section) color = "background";
+  else color = section.color.text;
+
+  indicator.elem.style.setProperty("--indicator-primary-color", `var(--col-${color})`);
 }
 
 function labelInit(indicator) {
@@ -245,7 +269,6 @@ function indicatorGetProgress(indicator) {
   var progress = index + p;
   indicator.progress.section.current = progress;
 
-  console.log(progress);
   if (progress != indicator.progress.section.previous) {
     indicator.progress.section.previous = progress;
     indicator.progress.section.current = progress;
@@ -262,48 +285,44 @@ function sectionGetBackgroundColors(section) {
   // TODO: Support is needed for image backgrounds, you should be able to add them in as a custom prop in the section element, otherwise default is tertiary
 
   if (!background) {
-    section.background = "background__background";
+    section.color.background = "background__background";
   } else {
-    if (background.includes("background__background") && background.includes(" ")) {
-      section.background = background.replace("background__background", "").trim();
+    if (background.includes("background__background") && background.trim().includes(" ")) {
+      section.color.background = background.replace("background__background", "").trim();
     } else {
-      section.background = background;
+      section.color.background = background;
     }
   }
-  section.background = section.background.split("__")[1];
+  section.color.background = section.color.background.split("__")[1];
 }
 
-function sectionGetColors(indicator) {
+function sectionGetColors(section) {
+  // // [section color, indicator background color, indicator text color]
   var colors = [
-    ["primary", "background"],
-    ["primary-hovered", "background"],
-    ["secondary", "background"],
-    ["secondary-hovered", "background"],
-    ["tertiary-light", "background"],
-    ["tertiary", "background"],
-    ["tertiary-makeright", "background"],
-    ["background", "tertiary"],
-    ["background-darker", "tertiary"],
-    ["background-darkest", "tertiary"],
+    ["primary", "background-darker", "tertiary"],
+    ["primary-hovered", "background-darker", "tertiary"],
+    ["secondary", "background-darker", "tertiary"],
+    ["secondary-hovered", "background-darker", "tertiary"],
+    ["tertiary-light", "background-darker", "tertiary"],
+    ["tertiary", "background-darker", "tertiary"],
+    ["tertiary-makeright", "background-darker", "tertiary"],
+    ["background", "tertiary", "background"],
+    ["background-darker", "tertiary", "background"],
+    ["background-darkest", "tertiary", "background"],
   ];
 
-  indicator.chapters.forEach((chapter) => {
-    chapter.sections.forEach((section) => {
-      var elem = section.elem;
-      var background = section.background;
+  var background = section.color.background;
 
-      colors.forEach((color) => {
-        if (color[0] == background) {
-          section.color = color[1];
-        }
-      });
-      console.log(section.color);
-      if(section.color == null){
-        console.log(section)
-      }
 
-    });
-  });
+  for (var i = 0; i < colors.length; i++) {
+    var color = colors[i];
+    if (color[0] == background) {
+      section.color.contrast = color[1];
+      section.color.text = color[2];
+      break;
+    }
+  }
+
 }
 
 function sectionsInit(indicator, sections, setSections) {
@@ -319,12 +338,13 @@ function sectionsInit(indicator, sections, setSections) {
     all.forEach((elem, chapIndex) => {
       var newSection = new Section(elem, chapter, chapIndex, secIndex++);
       sectionGetBackgroundColors(newSection);
+      sectionGetColors(newSection);
       chapter.sections.push(newSection);
-      sec.push(newSection);
+      if (sec.filter((obj) => obj.elem == newSection.elem).length == 0) {
+        sec.push(newSection);
+      }
     });
   });
-
-  sectionGetColors(indicator);
 
   if (sections.length > 0) return;
   setSections(sec);
@@ -336,7 +356,9 @@ function chaptersInit(indicator) {
 
   all.forEach((elem, index) => {
     var newChapter = new Chapter(elem, index);
-    indicator.chapters.push(newChapter);
+    if (indicator.chapters.filter((obj) => obj.elem == newChapter.elem).length == 0) {
+      indicator.chapters.push(newChapter);
+    }
   });
 
   // TODO: couldn't this just be in indicatorInit?
@@ -422,23 +444,20 @@ function Indicator({}) {
     });
   }, [names]);
 
-  useEffect(() => {
-    if (sections.length < 1) return;
-    console.log(sections);
-  }, [sections]);
-
   return (
     <div className="indicator--wrapper indicator--wrapper__hidden" ref={indicator}>
       <div className="indicator indicator__hidden indicator__off">
         {sections &&
           sections.map((s, i) => {
-            return <div className={"indicator--background"} key={i} style={
-              { 
-                "--indicator-background-index": i,
-                "--indicator-background-color": `var(--col-${s.color})`,
-
-          }
-        }></div>;
+            return (
+              <div
+                className={"indicator--background"}
+                key={i}
+                style={{
+                  "--indicator-background-index": i,
+                  "--indicator-background-color": `var(--col-${s.color.contrast})`,
+                }}></div>
+            );
           })}
 
         <div className="label">
