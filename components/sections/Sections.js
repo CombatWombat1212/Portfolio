@@ -56,7 +56,7 @@ function SectionWrapper({ children, sec }) {
   var { attrs, chil, has, classes } = sec;
 
   return (
-    <div id={attrs.id} className={classes.wrapper + classes.background}>
+    <div id={attrs.id} className={classes.wrapper + classes.background} ref={attrs.reference ? attrs.reference : null}>
       {children}
     </div>
   );
@@ -106,9 +106,9 @@ function SectionBody({ children, sec }) {
   );
 }
 
-function Section({className, children, type, background, id, margin, titled, arrows, mainClassName, copyClassName, wrapperClassName, mainType}) {
+function Section({className, children, type, background, id, margin, titled, arrows, mainClassName, copyClassName, wrapperClassName, mainType, reference}) {
   
-  var sec = createSectionObject(className, children, type, background, id, margin, titled, arrows, mainClassName, copyClassName, wrapperClassName, mainType);
+  var sec = createSectionObject(className, children, type, background, id, margin, titled, arrows, mainClassName, copyClassName, wrapperClassName, mainType, reference);
 
   return (
     <>
@@ -122,7 +122,7 @@ function Section({className, children, type, background, id, margin, titled, arr
   );
 }
 
-function createSectionObject(className, children, type, background, id, margin, titled, arrows, mainClassName, copyClassName, wrapperClassName, mainType) {
+function createSectionObject(className, children, type, background, id, margin, titled, arrows, mainClassName, copyClassName, wrapperClassName, mainType, reference) {
   var pref = "section";
 
   if (children == undefined) children = children ?? <></>;
@@ -167,6 +167,7 @@ function createSectionObject(className, children, type, background, id, margin, 
       margin,
       type,
       background,
+      reference: reference ? reference : null,
     },
   };
 

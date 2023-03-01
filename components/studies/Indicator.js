@@ -213,46 +213,67 @@ function indicatorGetTouching(indicator) {
 }
 
 function indicatorGetProgress(indicator) {
-  function getNextElement(touching, indexName) {
-    var nextElement = touching[touching.length - 1];
-    var index = 0, progress = 0;
-    if (nextElement) {
-      index = nextElement[indexName].index;
-      progress = nextElement.progress;
-    }
-    return index + progress;
+  var touching = indicator.touching.chapters;
+  var nextChapter = touching[touching.length - 1];
+  var index, p;
+  if (nextChapter == undefined) {
+    index = 0;
+    p = 0;
+  } else {
+    index = nextChapter.chapter.index;
+    p = nextChapter.progress;
+  }
+  var progress = index + p;
+  indicator.progress.chapter.current = progress;
+  if (progress != indicator.progress.chapter.previous) {
+    indicator.progress.chapter.previous = progress;
+    indicator.progress.chapter.current = progress;
   }
 
-  var chapterProgress = getNextElement(indicator.touching.chapters, 'chapter');
-  var sectionProgress = getNextElement(indicator.touching.sections, 'section');
 
-  if (chapterProgress !== indicator.progress.chapter.current) {
-    indicator.progress.chapter.previous = indicator.progress.chapter.current;
-    indicator.progress.chapter.current = chapterProgress;
+  var touching = indicator.touching.sections;
+  var nextSection = touching[touching.length - 1];
+  var index, p;
+  if (nextSection == undefined) {
+    index = 0;
+    p = 0;
+  } else {
+    index = nextSection.section.index.section;
+    p = nextSection.progress;
   }
+  var progress = index + p;
+  indicator.progress.section.current = progress;
 
-  if (sectionProgress !== indicator.progress.section.current) {
-    indicator.progress.section.previous = indicator.progress.section.current;
-    indicator.progress.section.current = sectionProgress;
+  console.log(progress)
+  if (progress != indicator.progress.section.previous) {
+    indicator.progress.section.previous = progress;
+    indicator.progress.section.current = progress;
     return true;
+  } else {
+    return false;
   }
-
-  return false;
 }
 
 
 
 
-function sectionsInit(indicator) {
+function sectionsInit(indicator, sections, setSections) {
   var secIndex = 0;
+
+  var sec = [];
 
   indicator.chapters.forEach((chapter) => {
     var all = Array.from(chapter.elem.querySelectorAll(".section--wrapper"));
     all.forEach((elem, chapIndex) => {
       var newSection = new Section(elem, chapter, chapIndex, secIndex++);
       chapter.sections.push(newSection);
+      sec.push(newSection);
     });
   });
+  
+  setSections(sec);
+  // indicator.elem.style.setProperty("--section-count", `${secIndex}`);
+
 }
 
 function chaptersInit(indicator) {
@@ -302,9 +323,9 @@ function chapterGetSize(chapter) {
   chapter.height = splitPx(window.getComputedStyle(chapter.elem).height);
 }
 
-function indicatorInit(indicator) {
+function indicatorInit(indicator, sections, setSections) {
   chaptersInit(indicator);
-  sectionsInit(indicator);
+  sectionsInit(indicator, sections, setSections);
   labelInit(indicator);
   indicatorOnScroll();
   indicatorOnResizeFunctions();
@@ -322,6 +343,7 @@ function indicatorInit(indicator) {
 
 function Indicator({}) {
   const [names, setNames] = useState([]);
+  const [sections, setSections] = useState([]);
   var indicator = useRef(null);
 
   useMountEffect(() => {
@@ -341,13 +363,23 @@ function Indicator({}) {
     indicators.forEach((indicator) => {
       indicatorNamesGet(indicator);
       namesGetSizes(indicator);
-      indicatorInit(indicator);
+      indicatorInit(indicator, sections, setSections);
     });
   }, [names]);
+
+  useEffect(() => {
+    if (sections.length < 1) return;
+    console.log(sections);
+
+  }, [sections]);
+
+
+
 
   return (
     <div className="indicator--wrapper indicator--wrapper__hidden" ref={indicator}>
       <div className="indicator indicator__hidden indicator__off">
+
         {names &&
           names.map((n, i) => {
             return <div className={"indicator--background"} key={i} style={{ "--indicator-background-index": i }}></div>;

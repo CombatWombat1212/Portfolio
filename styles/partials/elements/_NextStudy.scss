@@ -1,6 +1,6 @@
 .next-study {
   &--group {
-    margin-bottom: var(--section-gap);
+    // margin-bottom: var(--section-gap);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: 1fr;
@@ -62,8 +62,8 @@
     gap: 0.625rem;
   }
 
-  &--title {
-  }
+  // &--title {
+  // }
 
   &--button {
     margin-top: auto;

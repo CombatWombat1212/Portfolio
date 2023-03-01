@@ -75,7 +75,11 @@
       height: var(--font-height-body);
       min-height: var(--font-height-body);
       --empty-margin-top: calc((var(--chapter-progress) * -1) * var(--button-height));
-      margin-top: Min(calc(var(--button-height) * -1), var(--empty-margin-top));
+      --min: calc(var(--button-height) * -1);
+      // --max: calc((var(--button-height) * -1) * var(--section-count));
+
+      margin-top: Min(var(--min), var(--empty-margin-top) );
+
       @include pad-y(calc((var(--button-height) - var(--font-height-body))/2));
     }
 

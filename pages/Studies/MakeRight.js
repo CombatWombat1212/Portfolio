@@ -13,10 +13,9 @@ import Slideshow from "@/components/global/slideshow/Slideshow";
 import Pitch from "@/components/sections/Pitch";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { useEffect, useState } from "react";
+import NextStudies from "@/components/studies/NextStudies";
 
 // TODO: add the interactive chapter selection thingy
-
-
 
 
 
@@ -783,7 +782,12 @@ function MakeRight({ setPopup }) {
                 <p>Despite many challenging time crunches during development, I steadily moved through each phase without any major snags. Working with a clear end goal, and defining actionable steps to reach it, is what brought this project to life. For this reason, the planning and organization of this project was its greatest success.</p>
               </Description>
             </Column>
+
+
+
           </Section>
+          
+
         </Chapter>
       </CaseStudyPage>
     </>

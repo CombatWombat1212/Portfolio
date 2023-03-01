@@ -165,7 +165,7 @@ $gantt-phase-delay: 0.2s;
       opacity: 1;
       top: var(--gantt-phase-background-top);
 
-      transition: $gantt-phase-trans $gantt-phase-trans/2 height, 0s 0.2s opacity;
+      transition: $gantt-phase-trans calc($gantt-phase-trans/2) height, 0s 0.2s opacity;
 
 
       &__open {
@@ -184,7 +184,7 @@ $gantt-phase-delay: 0.2s;
       &__open-transition {
         opacity: 1!important;
         height: calc(var(--gantt-phase-height_max) + (var(--gantt-phase-background-top) * -1))!important;
-        transition: $gantt-phase-trans $gantt-phase-trans/2 height, 0s 0.2s opacity!important;
+        transition: $gantt-phase-trans calc($gantt-phase-trans/2) height, 0s 0.2s opacity!important;
 
       }
 
