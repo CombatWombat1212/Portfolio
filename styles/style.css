@@ -3084,7 +3084,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-left: 2rem;
+  padding-left: Min(var(--site-x-margin), 1.5625rem);
   padding-right: 1.5625rem;
   margin-left: 0;
   pointer-events: all;
@@ -3094,7 +3094,7 @@ body {
 
 .indicator--wrapper {
   --site-x-margin: calc((100% - var(--site-max-width_wide)) / 2);
-  --temp-buffer: 10rem;
+  --temp-buffer: 9rem;
   display: flex;
   height: var(--button-height);
   position: sticky;
@@ -3147,7 +3147,7 @@ body {
 }
 
 .indicator .label--empty {
-  transition-duration: 0.1s;
+  transition-duration: 0.05s;
   height: var(--font-height-body);
   min-height: var(--font-height-body);
   --empty-margin-top: calc((var(--chapter-progress) * -1) * var(--button-height));

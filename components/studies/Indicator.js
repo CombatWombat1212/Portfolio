@@ -151,6 +151,11 @@ function labelStyleSet(indicator) {
   else color = section.color.text;
 
   indicator.elem.style.setProperty("--indicator-primary-color", `var(--col-${color})`);
+
+
+
+
+
 }
 
 function labelInit(indicator) {
