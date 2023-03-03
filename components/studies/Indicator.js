@@ -152,11 +152,9 @@ function labelStyleSet(indicator) {
 
   indicator.elem.style.setProperty("--indicator-primary-color", `var(--col-${color})`);
 
-
-
-
-
 }
+
+
 
 function labelInit(indicator) {
   var label = indicator.elem.querySelector(".label");
@@ -451,7 +449,7 @@ function Indicator({}) {
 
   return (
     <div className="indicator--wrapper indicator--wrapper__hidden" ref={indicator}>
-      <div className="indicator indicator__hidden indicator__off">
+      <div className="indicator indicator__hidden indicator__off" onMouseEnter={indicatorOnHover} onMouseLeave={indicatorOnMouseLeave}>
         {sections &&
           sections.map((s, i) => {
             return (
@@ -485,6 +483,36 @@ function Indicator({}) {
     </div>
   );
 }
+
+
+
+
+function indicatorOnHover(e){
+
+  var indicator = e.target.closest('.indicator');
+
+  indicator.classList.add('indicator__hover')
+
+
+  
+}
+
+
+function indicatorOnMouseLeave(e){
+
+  var indicator = e.target.closest('.indicator');
+
+  indicator.classList.remove('indicator__hover')
+
+
+  
+}
+
+
+
+
+
+
 
 function indicatorOnScroll() {
   // TODO: These calculations are honestly so extra, you don't need to do this based on the exact position of the chapter, and whether or not its overlapping text, you could probably just do it based on the chapter's position on screen i think?  like the whole idea of it needing to be an exact float seems like much

@@ -3090,6 +3090,7 @@ body {
   pointer-events: all;
   overflow: hidden;
   position: relative;
+  cursor: pointer;
 }
 
 .indicator--wrapper {
