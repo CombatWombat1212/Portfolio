@@ -32,14 +32,9 @@
   pointer-events: all;
   overflow: hidden;
   position: relative;
-
-  // transition: padding-left 2s;
+  cursor: pointer;
 
   &--background {
-
-
-
-
 
     background-color: var(--indicator-background-color);
     position: absolute;
