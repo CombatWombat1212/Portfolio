@@ -48,8 +48,7 @@ function Section(elem, chapter, chapIndex, secIndex) {
   this.index = { chapter: chapIndex, section: secIndex };
   this.chapter = chapter;
   this.color = {
-    contrast: null,
-    text: null,
+    theme: null,
     background: null,
   };
 }
@@ -96,9 +95,11 @@ function indicatorSetVisibility(indicator) {
   if (indicator.visible.set !== indicator.visible.applied) {
     if (indicator.visible.set) {
       elem.classList.remove("indicator__hidden");
-      elem.style.setProperty("transition", `${transition}ms`);
+      // elem.style.setProperty("transition", `margin-left ${transition}ms`);
       elem.classList.remove("indicator__off");
       elem.classList.add("indicator__on");
+      
+
     } else {
       elem.classList.remove("indicator__on");
       elem.classList.add("indicator__off");
@@ -137,7 +138,7 @@ function labelStyleSet(indicator) {
   var sectionIndex = Math.round(indicator.progress.section.current) - 1;
   if (sectionIndex < 0) sectionIndex = 0;
 
-  var color;
+  var theme;
   var sections = [];
   indicator.chapters.forEach((chapter) => {
     chapter.sections.forEach((section) => {
@@ -147,10 +148,17 @@ function labelStyleSet(indicator) {
 
   var section = sections[sectionIndex];
 
-  if (!section) color = "background";
-  else color = section.color.text;
+  if (!section) theme = "theme";
+  else theme = section.color.theme;
 
-  indicator.elem.style.setProperty("--indicator-primary-color", `var(--col-${color})`);
+  var classes = indicator.elem.classList;
+  classes.forEach((className) => {
+    if (className.includes("theme")) {
+      indicator.elem.classList.remove(className);
+    }
+  });
+
+  indicator.elem.classList.add(`indicator--wrapper__${theme}`);
 
 }
 
@@ -301,17 +309,32 @@ function sectionGetBackgroundColors(section) {
 
 function sectionGetColors(section) {
   // // [section color, indicator background color, indicator text color]
+  // var colors = [
+  //   ["primary", "background-darker", "tertiary"],
+  //   ["primary-hovered", "background-darker", "tertiary"],
+  //   ["secondary", "background-darker", "tertiary"],
+  //   ["secondary-hovered", "background-darker", "tertiary"],
+  //   ["tertiary-light", "background-darker", "tertiary"],
+  //   ["tertiary", "background-darker", "tertiary"],
+  //   ["tertiary-makeright", "background-darker", "tertiary"],
+  //   ["background", "tertiary", "background"],
+  //   ["background-darker", "tertiary", "background"],
+  //   ["background-darkest", "tertiary", "background"],
+  // ];
+
+
+  // [section color, indicator background color, theme]
   var colors = [
-    ["primary", "background-darker", "tertiary"],
-    ["primary-hovered", "background-darker", "tertiary"],
-    ["secondary", "background-darker", "tertiary"],
-    ["secondary-hovered", "background-darker", "tertiary"],
-    ["tertiary-light", "background-darker", "tertiary"],
-    ["tertiary", "background-darker", "tertiary"],
-    ["tertiary-makeright", "background-darker", "tertiary"],
-    ["background", "tertiary", "background"],
-    ["background-darker", "tertiary", "background"],
-    ["background-darkest", "tertiary", "background"],
+    ["primary", "background-darker", "theme-light"],
+    ["primary-hovered", "background-darker", "theme-light"],
+    ["secondary", "background-darker", "theme-light"],
+    ["secondary-hovered", "background-darker", "theme-light"],
+    ["tertiary-light", "background-darker", "theme-light"],
+    ["tertiary", "background-darker", "theme-light"],
+    ["tertiary-makeright", "background-darker", "theme-light"],
+    ["background", "tertiary", "theme-dark"],
+    ["background-darker", "tertiary", "theme-dark"],
+    ["background-darkest", "tertiary", "theme-dark"],
   ];
 
   var background = section.color.background;
@@ -320,8 +343,10 @@ function sectionGetColors(section) {
   for (var i = 0; i < colors.length; i++) {
     var color = colors[i];
     if (color[0] == background) {
+      // section.color.text = color[2];
       section.color.contrast = color[1];
-      section.color.text = color[2];
+      section.color.theme = color[2];
+      // section.color.text = color[2];
       break;
     }
   }
@@ -452,13 +477,14 @@ function Indicator({}) {
       <div className="indicator indicator__hidden indicator__off" onMouseEnter={indicatorOnHover} onMouseLeave={indicatorOnMouseLeave}>
         {sections &&
           sections.map((s, i) => {
+            console.log(s);
             return (
               <div
-                className={"indicator--background"}
+                className={`indicator--background indicator--background__${s.color.theme}`}
                 key={i}
                 style={{
                   "--indicator-background-index": i,
-                  "--indicator-background-color": `var(--col-${s.color.contrast})`,
+                  // "--indicator-background-color": `var(--col-${s.color.contrast})`,
                 }}></div>
             );
           })}
