@@ -1,7 +1,5 @@
-import { StudyPanel } from "@/components/elements/Panel";
-import { getStudy, getAdjacentStudy } from "../../scripts/GetStudy";
+import { getStudy } from "@/scripts/GetStudy";
 import CaseStudyPage from "@/components/studies/CaseStudyPage";
-import Brief from "@/components/studies/Brief";
 import { Section, Chapter, Title, Column, Heading, Description, Graphic, Quote } from "@/components/sections/Sections";
 import MAKERIGHT_IMGS from "/data/MAKERIGHT_IMGS";
 import Gantt from "/components/charts/Gantt";
@@ -11,14 +9,8 @@ import PieChart from "@/components/charts/PieChart";
 import Button from "@/components/elements/Buttons";
 import Slideshow from "@/components/global/slideshow/Slideshow";
 import Pitch from "@/components/sections/Pitch";
-import { useMountEffect } from "@/scripts/hooks/useMountEffect";
-import { useEffect, useState } from "react";
-import NextStudies from "@/components/studies/NextStudies";
 
 // TODO: add the interactive chapter selection thingy
-
-
-
 
 function MakeRight({ setPopup }) {
   const study = getStudy();
@@ -26,8 +18,6 @@ function MakeRight({ setPopup }) {
   return (
     <>
       <CaseStudyPage id={study.id} study={study}>
-
-
         <Chapter id="Overview" name="Overview">
           <Section id="Overview--Background" type="overview">
             <Title>Background</Title>
@@ -77,7 +67,7 @@ function MakeRight({ setPopup }) {
             </Heading>
           </Section>
 
-          <Section id="Overview--Pitch" type="passthrough" margin="wide" wrapperClassName={'mt-0 py-0'} background="makeright tertiary">
+          <Section id="Overview--Pitch" type="passthrough" margin="wide" wrapperClassName={"mt-0 py-0"} background="makeright tertiary">
             <Pitch>
               <>
                 <Heading>Choose</Heading>
@@ -128,7 +118,7 @@ function MakeRight({ setPopup }) {
             </Pitch>
           </Section>
 
-          <Section id="Overview--Summary" type="columns" wrapperClassName='mt-0'>
+          <Section id="Overview--Summary" type="columns" wrapperClassName="mt-0">
             <Column>
               <Heading type="h3">Slashing the overhead of competitors</Heading>
               <Description>
@@ -303,7 +293,7 @@ function MakeRight({ setPopup }) {
         </Chapter>
 
         <Chapter name="Develop" id="Develop">
-          <Section id="Develop--Methodology" type="columns" titled arrows background="background darker" wrapperClassName='mt-0'>
+          <Section id="Develop--Methodology" type="columns" titled arrows background="background darker" wrapperClassName="mt-0">
             <Title>Methodology</Title>
             <Heading>Moving from problem to solution</Heading>
 
@@ -782,12 +772,7 @@ function MakeRight({ setPopup }) {
                 <p>Despite many challenging time crunches during development, I steadily moved through each phase without any major snags. Working with a clear end goal, and defining actionable steps to reach it, is what brought this project to life. For this reason, the planning and organization of this project was its greatest success.</p>
               </Description>
             </Column>
-
-
-
           </Section>
-          
-
         </Chapter>
       </CaseStudyPage>
     </>

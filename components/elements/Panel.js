@@ -46,8 +46,9 @@ PanelImg.propTypes = {
 };
 
 function StudyPanel({ id, study, variant }) {
-  var main = study.imgs.main;
-  if (study.imgs.alt) var alt = study.imgs.alt;
+  var main, alt;
+  main = study.imgs.main;
+  if (study.imgs.alt) alt = study.imgs.alt;
 
   var img = main;
 
@@ -56,6 +57,8 @@ function StudyPanel({ id, study, variant }) {
   } else if (variant == "study" && study.imgs.alt) {
     img = alt;
   }
+
+
 
   return (
     <>
