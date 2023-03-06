@@ -9,6 +9,8 @@ import { useEffect, useRef, useState } from "react";
 
 // TODO: why do we need to be storing the height of chapters and sections?  its calculated everytime we use rect anyways? there's probably a reason, but if not we could save some memory by not storing it
 
+// TODO: Add the chapter selection menu on hover
+
 var indicators = [];
 
 function IndicatorItem(indicator) {
@@ -98,8 +100,6 @@ function indicatorSetVisibility(indicator) {
       // elem.style.setProperty("transition", `margin-left ${transition}ms`);
       elem.classList.remove("indicator__off");
       elem.classList.add("indicator__on");
-      
-
     } else {
       elem.classList.remove("indicator__on");
       elem.classList.add("indicator__off");
@@ -160,9 +160,8 @@ function labelStyleSet(indicator) {
 
   indicator.elem.classList.add(`indicator--wrapper__${theme}`);
 
+  // indicator.elem.querySelector('.empty').style.setProperty('background-color', section.color.background);
 }
-
-
 
 function labelInit(indicator) {
   var label = indicator.elem.querySelector(".label");
@@ -322,35 +321,31 @@ function sectionGetColors(section) {
   //   ["background-darkest", "tertiary", "background"],
   // ];
 
-
   // [section color, indicator background color, theme]
-  var colors = [
-    ["primary", "background-darker", "theme-light"],
-    ["primary-hovered", "background-darker", "theme-light"],
-    ["secondary", "background-darker", "theme-light"],
-    ["secondary-hovered", "background-darker", "theme-light"],
-    ["tertiary-light", "background-darker", "theme-light"],
-    ["tertiary", "background-darker", "theme-light"],
-    ["tertiary-makeright", "background-darker", "theme-light"],
-    ["background", "tertiary", "theme-dark"],
-    ["background-darker", "tertiary", "theme-dark"],
-    ["background-darkest", "tertiary", "theme-dark"],
-  ];
-
+  var colors = [  
+  ["primary", "theme-light"],
+  ["primary-hovered", "theme-light"],
+  ["secondary", "theme-light"],
+  ["secondary-hovered", "theme-light"],
+  ["tertiary-light", "theme-light"],
+  ["tertiary", "theme-light"],
+  ["tertiary-makeright", "theme-light"],
+  ["background", "theme-dark"],
+  ["background-darker", "theme-dark"],
+  ["background-darkest", "theme-dark"],
+];
   var background = section.color.background;
-
 
   for (var i = 0; i < colors.length; i++) {
     var color = colors[i];
     if (color[0] == background) {
       // section.color.text = color[2];
-      section.color.contrast = color[1];
-      section.color.theme = color[2];
+      // section.color.contrast = color[1];
+      section.color.theme = color[1];
       // section.color.text = color[2];
       break;
     }
   }
-
 }
 
 function sectionsInit(indicator, sections, setSections) {
@@ -472,73 +467,69 @@ function Indicator({}) {
     });
   }, [names]);
 
+
+  // useEffect(() => {
+  //   if (sections.length < 1) return;
+  //   indicators.forEach((indicator) => {
+  //     indicator.elem.style.setProperty("--section-count", `${sections.length}`);
+
+  //   });
+
+  // }, [sections]);
+
   return (
     <div className="indicator--wrapper indicator--wrapper__hidden" ref={indicator}>
-      <div className="indicator indicator__hidden indicator__off" onMouseEnter={indicatorOnHover} onMouseLeave={indicatorOnMouseLeave}>
-        {sections &&
-          sections.map((s, i) => {
-            console.log(s);
-            return (
-              <div
-                className={`indicator--background indicator--background__${s.color.theme}`}
-                key={i}
-                style={{
-                  "--indicator-background-index": i,
-                  // "--indicator-background-color": `var(--col-${s.color.contrast})`,
-                }}></div>
-            );
-          })}
-
-        <div className="label">
-          <span className="label--empty"></span>
-          {names &&
-            names.map((n, i) => {
-              return (
-                <span
-                  key={i}
-                  className="label--name"
-                  style={{
-                    "--label-index": i,
-                  }}>
-                  {n}
-                </span>
-              );
-            })}
+      <div className="indicator--inner">
+        <div className="indicator indicator__hidden indicator__off" 
+        // onMouseEnter={indicatorOnHover} onMouseLeave={indicatorOnMouseLeave}
+        >
+          <div className="indicator--back">
+            {sections &&
+              sections.map((s, i) => {
+                return (
+                  <div
+                    className={`indicator--background indicator--background__${s.color.theme}`}
+                    key={i}
+                    style={{
+                      "--indicator-background-index": i,
+                      // "--indicator-background-color": `var(--col-${s.color.contrast})`,
+                    }}></div>
+                );
+              })}
+          </div>
+          <div className="label">
+            <span className="label--empty"></span>
+            {names &&
+              names.map((n, i) => {
+                return (
+                  <span
+                    key={i}
+                    className="label--name"
+                    style={{
+                      "--label-index": i,
+                    }}>
+                    {n}
+                  </span>
+                );
+              })}
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
+// function indicatorOnHover(e) {
+//   var indicator = e.target.closest(".indicator");
 
+//   indicator.classList.add("indicator__hover");
+// }
 
+// function indicatorOnMouseLeave(e) {
+//   var indicator = e.target.closest(".indicator");
 
-function indicatorOnHover(e){
-
-  var indicator = e.target.closest('.indicator');
-
-  indicator.classList.add('indicator__hover')
-
-
-  
-}
-
-
-function indicatorOnMouseLeave(e){
-
-  var indicator = e.target.closest('.indicator');
-
-  indicator.classList.remove('indicator__hover')
-
-
-  
-}
-
-
-
-
-
-
+//   indicator.classList.remove("indicator__hover");
+// }
 
 function indicatorOnScroll() {
   // TODO: These calculations are honestly so extra, you don't need to do this based on the exact position of the chapter, and whether or not its overlapping text, you could probably just do it based on the chapter's position on screen i think?  like the whole idea of it needing to be an exact float seems like much

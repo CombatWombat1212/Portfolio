@@ -82,7 +82,7 @@ function StudyPanel({ id, study, variant }) {
             variant == "study" && (
               <>
                 {/* TODO: link these buttons to the solution of each page's study */}
-                <Button className="panel--button" type="regular" icon={["arrow_down", "right", "mask"]} animation={"pulse-down"} href={""}>
+                <Button className="panel--button" type="regular" icon={["arrow_down", "right", "mask"]} animation={"pulse-down"} href={"#Delivery"}>
                   Skip to Solution
                 </Button>
               </>

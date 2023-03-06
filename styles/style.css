@@ -208,6 +208,7 @@ li, span {
   --b-rad: 0.5rem;
   --b-rad_less: 0.3125rem;
   --font-height-body: Max(var(--font-size-body), var(--font-leading-body));
+  scroll-behavior: smooth;
 }
 
 body {
@@ -1322,6 +1323,7 @@ body {
 
 :root {
   --nav-height: 3.75rem;
+  scroll-padding-top: var(--nav-height);
 }
 
 .nav {
@@ -3090,7 +3092,6 @@ body {
   pointer-events: all;
   overflow: hidden;
   position: relative;
-  cursor: pointer;
   width: var(--label-width);
   transition: margin-left var(--indicator-transition), width 0.2s, opacity 0s;
 }
@@ -3098,13 +3099,17 @@ body {
 .indicator--wrapper {
   --site-x-margin: calc((100% - var(--site-max-width_wide)) / 2);
   --temp-buffer: 9rem;
+  --set-indicator-height: var(--button-height);
+  --name-height: var(--font-height-body);
+  --name-pad-y: calc((var(--set-indicator-height) - var(--name-height)) / 2);
+  --name-margin-top: -0.03125rem;
   display: flex;
-  height: var(--button-height);
+  height: var(--set-indicator-height);
   position: sticky;
   z-index: 9;
-  top: calc(var(--nav-height) + var(--temp-buffer));
-  margin-top: calc(var(--button-height) * -1);
+  margin-top: calc(var(--set-indicator-height) * -1);
   --indicator-transition: 0.6s;
+  top: calc(var(--nav-height) + var(--temp-buffer));
   pointer-events: none;
 }
 
@@ -3112,48 +3117,28 @@ body {
   opacity: 0;
 }
 
+.indicator--inner {
+  width: 100%;
+}
+
 .indicator--background {
   background-color: var(--indicator-background-color);
   position: absolute;
   width: 100%;
-  margin-top: calc(var(--indicator-background-index) * var(--button-height));
-  height: var(--button-height);
-  --margin-top: calc((var(--section-progress) * -1) * var(--button-height));
+  margin-top: calc(var(--indicator-background-index) * var(--set-indicator-height));
+  height: var(--set-indicator-height);
+  --margin-top: calc((var(--section-progress) * -1) * var(--set-indicator-height));
   --offset: 1;
   left: 0;
-  top: calc(var(--margin-top) + (var(--offset) * var(--button-height)));
+  top: calc(var(--margin-top) + (var(--offset) * var(--set-indicator-height)));
 }
 
 .indicator--background__theme-dark {
   background-color: #404064;
-  transition: background-color 0.2s !important;
-}
-
-.indicator--wrapper .indicator--background__theme-dark {
-  transition: var(--transition);
-}
-
-.indicator--wrapper:hover .indicator--background__theme-dark,
-.indicator--wrapper:focus .indicator--background__theme-dark,
-.indicator--wrapper.focus
-.indicator--wrapper.hover {
-  background-color: #5D5D7E;
 }
 
 .indicator--background__theme-light {
   background-color: #F3F3F7;
-  transition: background-color 0.2s !important;
-}
-
-.indicator--wrapper .indicator--background__theme-light {
-  transition: var(--transition);
-}
-
-.indicator--wrapper:hover .indicator--background__theme-light,
-.indicator--wrapper:focus .indicator--background__theme-light,
-.indicator--wrapper.focus
-.indicator--wrapper.hover {
-  background-color: #E0E0EA;
 }
 
 .indicator__hidden {
@@ -3170,31 +3155,34 @@ body {
 }
 
 .indicator .label {
-  margin-top: -0.03125rem;
-  height: var(--button-height);
+  --empty-margin-top_real: calc((var(--chapter-progress) * -1) * var(--set-indicator-height));
+  --empty-margin-top_min: calc(var(--set-indicator-height) * -1);
+  --empty-margin-top: Min(var(--empty-margin-top_min), var(--empty-margin-top_real));
+  height: var(--set-indicator-height);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   max-width: var(--label-width);
   transition: left 0.2s;
   z-index: 1;
+  padding-top: 0rem;
 }
 
 .indicator .label--empty {
   transition-duration: 0.1s;
-  height: var(--font-height-body);
-  min-height: var(--font-height-body);
-  --empty-margin-top: calc((var(--chapter-progress) * -1) * var(--button-height));
-  --min: calc(var(--button-height) * -1);
-  margin-top: Min(var(--min), var(--empty-margin-top));
-  padding-top: calc((var(--button-height) - var(--font-height-body)) / 2);
-  padding-bottom: calc((var(--button-height) - var(--font-height-body)) / 2);
+  height: var(--name-height);
+  min-height: var(--name-height);
+  margin-top: var(--empty-margin-top);
+  padding-top: var(--name-pad-y);
+  padding-bottom: var(--name-pad-y);
 }
 
 .indicator .label--name {
   width: fit-content;
-  padding-top: calc((var(--button-height) - var(--font-height-body)) / 2);
-  padding-bottom: calc((var(--button-height) - var(--font-height-body)) / 2);
+  height: var(--name-height);
+  min-height: var(--name-height);
+  padding-top: var(--name-pad-y);
+  padding-bottom: var(--name-pad-y);
   transition: color 0.05s !important;
 }
 

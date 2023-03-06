@@ -11,10 +11,13 @@
     --transition: 0.1s;
     $b-rad: 0.5rem;
     $b-rad_less: 0.3125rem;
-    --b-rad: 0.5rem;
-    --b-rad_less: 0.3125rem;
+    --b-rad: #{$b-rad};
+    --b-rad_less: #{$b-rad_less};
 
     --font-height-body: Max(var(--font-size-body), var(--font-leading-body));
+
+    scroll-behavior: smooth;
+    
 
 }
 

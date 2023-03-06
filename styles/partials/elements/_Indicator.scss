@@ -20,23 +20,44 @@
   &--wrapper {
     --site-x-margin: calc((100% - var(--site-max-width_wide)) / 2);
     --temp-buffer: 9rem;
+    --set-indicator-height: var(--button-height);
+
+    --name-height: var(--font-height-body);
+    --name-pad-y: calc((var(--set-indicator-height) - var(--name-height)) / 2);
+    --name-margin-top: -0.03125rem;
 
     // --section-background_col-background: col-tertiary;
     // --section-background_dark: col-background;
 
     display: flex;
-    height: var(--button-height);
+    height: var(--set-indicator-height);
     position: sticky;
     z-index: 9;
-    top: calc(var(--nav-height) + var(--temp-buffer));
-    margin-top: calc(var(--button-height) * -1);
+    margin-top: calc(var(--set-indicator-height) * -1);
     --indicator-transition: 0.6s;
+
+
+    top: calc(var(--nav-height) + var(--temp-buffer));
+
 
     pointer-events: none;
 
     &__hidden {
       opacity: 0;
     }
+
+
+    // transition: 1s!important;
+    // @include hover{
+      // --set-indicator-height: 10rem;
+    // }
+
+
+  }
+
+
+  &--inner{
+    width:100%;
   }
 
   height: 100%;
@@ -48,7 +69,7 @@
   pointer-events: all;
   overflow: hidden;
   position: relative;
-  cursor: pointer;
+  // cursor: pointer;
   width: var(--label-width);
   transition: margin-left var(--indicator-transition), width 0.2s, opacity 0s;
 
@@ -56,30 +77,30 @@
     background-color: var(--indicator-background-color);
     position: absolute;
     width: 100%;
-    margin-top: calc(var(--indicator-background-index) * var(--button-height));
-    height: var(--button-height);
-    --margin-top: calc((var(--section-progress) * -1) * var(--button-height));
+    margin-top: calc(var(--indicator-background-index) * var(--set-indicator-height));
+    height: var(--set-indicator-height);
+    --margin-top: calc((var(--section-progress) * -1) * var(--set-indicator-height));
     --offset: 1;
     left: 0;
-    top: calc(var(--margin-top) + (var(--offset) * var(--button-height)));
+    top: calc(var(--margin-top) + (var(--offset) * var(--set-indicator-height)));
 
 
 
     &__theme-dark {
       background-color: $col-tertiary;
       
-      @include hover('.indicator--wrapper', '&'){
-        background-color: $col-tertiary_light;
-      }
-      transition: background-color 0.2s!important;
+      // @include hover('.indicator--wrapper', '&'){
+      //   background-color: $col-tertiary_light;
+      // }
+      // transition: background-color 0.2s!important;
     }
     
     &__theme-light {
       background-color: $col-background;
-      @include hover('.indicator--wrapper', '&'){
-        background-color: $col-background_darkest;
-      }
-      transition: background-color 0.2s!important;
+      // @include hover('.indicator--wrapper', '&'){
+      //   background-color: $col-background_darkest;
+      // }
+      // transition: background-color 0.2s!important;
     }
 
 
@@ -98,29 +119,69 @@
   }
 
   .label {
-    margin-top: -0.03125rem;
-    height: var(--button-height);
+    
+    --empty-margin-top_real: calc((var(--chapter-progress) * -1) * var(--set-indicator-height));
+    --empty-margin-top_min: calc(var(--set-indicator-height) * -1);
+    --empty-margin-top: Min(var(--empty-margin-top_min), var(--empty-margin-top_real));
+    
+    // margin-top: var(--name-margin-top);
+    height: var(--set-indicator-height);
     @include flex-col;
     overflow: hidden;
     max-width: var(--label-width);
     transition: left 0.2s;
     z-index: 1;
 
+    padding-top:0rem;
+    // transition: 1s!important;
+    // @include hover('.indicator--wrapper', '&') {
+      // padding-top: calc(
+      // var(--name-height) + var(--name-pad-y) + (var(--set-indicator-height) * (var(--chapter-progress) - 1))
+      // + var(--name-margin-top)
+      // );
+    // }
+
+
+
+
     &--empty {
       transition-duration: 0.1s;
-      height: var(--font-height-body);
-      min-height: var(--font-height-body);
-      --empty-margin-top: calc((var(--chapter-progress) * -1) * var(--button-height));
-      --min: calc(var(--button-height) * -1);
-      margin-top: Min(var(--min), var(--empty-margin-top));
-      @include pad-y(calc((var(--button-height) - var(--font-height-body)) / 2));
+      height: var(--name-height);
+      min-height: var(--name-height);
+      margin-top: var(--empty-margin-top);
+      @include pad-y(var(--name-pad-y));
+
+
+      // transition: 1s!important;
+      // @include hover('.indicator--wrapper', '&'){
+      //   @include pad-y(0rem);
+      // }
+      // transition: 1s!important;
+      // @include hover('.indicator--wrapper', '&'){
+
+      //   margin-top:
+      //   calc(
+      //     var(--name-height) * (var(--chapter-progress) * -1) - var(--name-pad-y)
+          // )
+
+        //   padding-bottom: calc(
+      //     var(--name-height) + 
+      //     (var(--name-height) * (var(--chapter-progress) - 1) )
+      // // + var(--name-margin-top)
+      // );
+      // }
+
     }
 
     &--name {
       width: fit-content;
-      @include pad-y(calc((var(--button-height) - var(--font-height-body)) / 2));
+      height: var(--name-height);
+      min-height: var(--name-height);
 
-      transition: color 0.05s !important;
+      @include pad-y(var(--name-pad-y));
+
+      transition: color 0.05s!important;
+      // transition: 1s!important;
 
       @include indicator-dark ('.label--name') {
         color: $col-background;
@@ -129,6 +190,13 @@
       @include indicator-light ('.label--name') {
         color: $col-tertiary;
       }
+
+
+      // @include hover('.indicator--wrapper', '&'){
+      //   @include marg-y(calc(var(--name-pad-y) * -1));
+      // }
+
+
 
 
     }
