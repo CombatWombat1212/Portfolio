@@ -1,6 +1,6 @@
-import { processImage } from "@/scripts/ProcessImages";
+import { processGroups, processImages } from "@/scripts/ProcessImages";
 
-const MADE_IMGS = {
+const MADE_IMGS = processImages({
   banner_building_renders: {
     name: "banner_building_renders",
     src: "./assets/images/case_studies/made/banners/banner_building_renders.png",
@@ -605,9 +605,9 @@ delivery_shirt_09: {
     width: 2400,
     height: 1200,
   },
-};
+});
 
-const MADE_IMG_GROUPS = processImage(MADE_IMGS);
+const MADE_IMG_GROUPS = processGroups(MADE_IMGS);
 
 
 

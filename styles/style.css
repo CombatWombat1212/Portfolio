@@ -1782,6 +1782,17 @@ body {
   object-fit: contain;
 }
 
+.section .graphic--video {
+  display: flex;
+  position: relative;
+}
+
+.section .graphic--video video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .section .graphic--panel {
   height: var(--img-panel-height);
   border-radius: var(--b-rad);
@@ -4865,10 +4876,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-#Made #Overview--Goal .mask {
-  opacity: 0.3;
 }
 
 #Made #Overview--Needs .section--graphic .mask {

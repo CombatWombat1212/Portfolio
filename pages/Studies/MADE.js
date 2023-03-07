@@ -39,79 +39,74 @@ function MADE({ setPopup }) {
             </Column>
           </Section>
 
-          <Section id="Overview--Goal" type="overview" mainClassName={'gap-6'}>
-            {/* <Column> */}
-              <Title>Goal</Title>
-              <Heading>Provide online customers with the same flexibility as in-store clientele with a dress shirt configurator</Heading>
-              <Description>
-                <p><b>MADE needed identical images of their offerings to slot into their software</b>. These images would also become product thumbnails for their webstore, allowing customers to browse their catalogue <b>without MADE individually photographing each shirt</b>.</p>
-                <p>With 3D renders being the most efficient way to complete this goal, MADE reached out to me to work together in creating this customization utility.</p>
-              </Description>
-            {/* </Column> */}
-            {/* <Column> */}
-              <Graphic type="mask" img={MADE_IMGS.configurator_graphic} />
-            {/* </Column> */}
+          <Section id="Overview--Goal" type="overview" mainClassName={"gap-6"}>
+            <Title>Goal</Title>
+            <Heading>Provide online customers with the same flexibility as in-store clientele with a dress shirt configurator</Heading>
+            <Description>
+              <p>
+                <b>MADE needed identical images of their offerings to slot into their software</b>. These images would also become product thumbnails for their webstore, allowing customers to browse their catalogue <b>without MADE individually photographing each shirt</b>.
+              </p>
+              <p>With 3D renders being the most efficient way to complete this goal, MADE reached out to me to work together in creating this customization utility.</p>
+            </Description>
+            <Graphic type="mask" img={MADE_IMGS.configurator_graphic} />
           </Section>
-
-
-
 
           <Section id="Overview--Needs" type="columns" titled mainClassName="mt-2" mainType="grid">
             <Title>Needs</Title>
             <Heading>MADE required:</Heading>
 
-
             <Column>
-              <Graphic type="mask" background="background darkest" img={MADE_IMGS.requirements_photorealism} />
+              <Graphic type="mask" background="background darker" img={MADE_IMGS.requirements_photorealism} />
               <Description className="graphic--caption">
-                <h3><b>Photorealism</b></h3>
+                <h3>
+                  <b>Photorealism</b>
+                </h3>
                 <p className="mt-less">Images need to be 1 to 1 with product the customer receives</p>
               </Description>
             </Column>
 
-
             <Column>
-              <Graphic type="mask" background="background darkest" img={MADE_IMGS.requirements_consistency} />
+              <Graphic type="mask" background="background darker" img={MADE_IMGS.requirements_consistency} />
               <Description className="graphic--caption">
-                <h3><b>Consistency</b></h3>
+                <h3>
+                  <b>Consistency</b>
+                </h3>
                 <p className="mt-less">Shirt components cannot shift in position when their style or material is changed</p>
               </Description>
             </Column>
 
-
             <Column>
-              <Graphic type="mask" background="background darkest" img={MADE_IMGS.requirements_scalability} />
+              <Graphic type="mask" background="background darker" img={MADE_IMGS.requirements_scalability} />
               <Description className="graphic--caption">
-                <h3><b>Scalability</b></h3>
+                <h3>
+                  <b>Scalability</b>
+                </h3>
                 <p className="mt-less">40+ fabric variations, with a scalable approach to add more materials down the road</p>
               </Description>
             </Column>
 
             <Column>
-              <Graphic type="mask" background="background darkest" img={MADE_IMGS.requirements_experimentation} />
+              <Graphic type="mask" background="background darker" img={MADE_IMGS.requirements_experimentation} />
               <Description className="graphic--caption">
-                <h3><b>Experimentation</b></h3>
+                <h3>
+                  <b>Experimentation</b>
+                </h3>
                 <p className="mt-less">With the software still being ironed-out, room for testing was needed in the early stages</p>
               </Description>
             </Column>
-
-
-
-
-
           </Section>
 
+          <Section id="Overview--Goal" background="tertiary" type={"columns"} titled>
+            <Title>Outcome</Title>
+            <Heading>The final configurator</Heading>
 
-
-
-
-
-
+            <Column>
+              <Graphic type="video" img={MADE_IMGS.configurator_demo} className="b-rad" />
+            </Column>
+          </Section>
         </Chapter>
 
-        <Chapter id="Closing" name="Closing">
-
-        </Chapter>
+        <Chapter id="Closing" name="Closing"></Chapter>
       </CaseStudyPage>
     </>
   );

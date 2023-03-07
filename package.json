@@ -10,12 +10,21 @@
   },
   "dependencies": {
     "@next/font": "13.1.2",
+    "@vidstack/player": "^1.6.5",
+    "@vidstack/player-react": "^1.6.5",
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.2",
+    "lit": "^2.6.1",
     "next": "13.1.2",
+    "next-videos": "^1.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-player": "^2.12.0",
     "uuid": "^9.0.0",
-    "uuidv4": "^6.2.13"
+    "uuidv4": "^6.2.13",
+    "vidstack": "^0.4.2"
+  },
+  "devDependencies": {
+    "video.js": "^8.0.4"
   }
 }

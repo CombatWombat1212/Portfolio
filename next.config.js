@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const withVideos = require('next-videos')
+
 const nextConfig = {
   reactStrictMode: true,
   images: {
@@ -6,8 +8,6 @@ const nextConfig = {
     loaderFile: "./configs/ImageLoader.js",
     formats: ["image/webp"],
   },
-
-  
 
   // async redirects() {
   //   return [
@@ -18,8 +18,7 @@ const nextConfig = {
   //     },
   //   ];
   // },
-};
 
+}
 
-
-module.exports = nextConfig;
+module.exports = withVideos(nextConfig)

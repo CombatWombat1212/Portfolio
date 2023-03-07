@@ -158,6 +158,15 @@
       }
     }
 
+    &--video {
+      display: flex;
+      position: relative;
+
+      video {
+        @include img-contain;
+      }
+    }
+
     &--panel {
       height: var(--img-panel-height);
       @include b-rad;

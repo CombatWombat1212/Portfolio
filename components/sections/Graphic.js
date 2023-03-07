@@ -6,6 +6,20 @@ import React, { useEffect, useRef, useState } from "react";
 import Mask from "../utilities/Mask";
 import { getBackgroundClasses } from "./sections_utilities/GetClasses";
 
+
+
+
+
+// TODO: figure out how to pass in stuff like 'loop' and 'autoplay' from where graphic the component is invoked, without making them all seperate props, or actually now that i think about it maybe thats not bad
+
+// TODO: have an easy-to-add solution for autoplay on scroll
+
+
+
+
+
+
+
 function getColor(color, colors) {
   return color.split("-to-").map((color) => {
     if (color == "transparent") {
@@ -92,12 +106,13 @@ function Effect({ effect }) {
   );
 }
 
-function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup, width, height, effect, style, priority, onLoad }) {
+function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup, width, height, effect, style, priority, onLoad, options }) {
   // TODO: for mobile, add some kind of indication animation of the image being clocked on when its interactable or can be opened in a lightbox
 
   var pref = "section--graphic";
   var isImg = type == "image" || type == "img";
   var isMask = type == "mask";
+  var isVideo = type == "video";
   var backgroundClasses = getBackgroundClasses(pref, background);
   color = color ? `mask__${color}` : "";
   innerClassName = innerClassName ? innerClassName : "";
@@ -142,17 +157,17 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
 
   var allClasses = `section--graphic graphic ${backgroundClasses} ${className} ${buttonClasses} ${lightbox ? "graphic__lightbox" : ""}`;
 
-  var typePref = isImg ? "img" : "mask";
+  var typePref = isImg ? "img" : isMask ? "mask" : isVideo ? "video" : "";
 
   var styleVariables = {
     [`--${typePref}-aspect-width`]: width,
     [`--${typePref}-aspect-height`]: height,
-    [`--${typePref[0]}w`]: `${width/16}rem`,
-    [`--${typePref[0]}h`]: `${height/16}rem`,
+    [`--${typePref[0]}w`]: `${width / 16}rem`,
+    [`--${typePref[0]}h`]: `${height / 16}rem`,
   };
 
 
-  
+
   return (
     <>
       {isImg && (
@@ -169,6 +184,20 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
           {children && children}
         </div>
       )}
+      {isVideo && (
+        <div className={`graphic--video ${allClasses}`} style={{ ...styleVariables, ...style }}>
+          {effect && <Effect effect={effect} />}
+          
+          <video className={innerClassName} alt={img.alt} width={width} height={height} onClick={onClickHandler} priority={priority} onLoad={onLoad}>
+            <source src={`.${img.src}`} type={`video/${img.type}`}></source>
+          </video>
+
+
+        </div>
+      )}
+
+
+
     </>
   );
 }
@@ -179,7 +208,7 @@ Graphic.defaultProps = {
 };
 
 Graphic.propTypes = {
-  type: PropTypes.oneOf(["image", "img", "mask"]),
+  type: PropTypes.oneOf(["image", "img", "mask", "video"]),
 };
 
 export default Graphic;

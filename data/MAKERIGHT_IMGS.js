@@ -1,4 +1,4 @@
-import { processImage } from "@/scripts/ProcessImages";
+import { processGroups } from "@/scripts/ProcessImages";
 
 const MAKERIGHT_IMGS = {
   full_potential: {
@@ -1115,7 +1115,7 @@ const MAKERIGHT_IMGS = {
 };
 
 
-const MAKERIGHT_IMG_GROUPS = processImage(MAKERIGHT_IMGS);
+const MAKERIGHT_IMG_GROUPS = processGroups(MAKERIGHT_IMGS);
 
 // const MAKERIGHT_IMG_GROUPS = {};
 
