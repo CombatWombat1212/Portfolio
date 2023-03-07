@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 149.44 149.45">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #404064;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #404064;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 8px;
+      }
+    </style>
+  </defs>
+  <g id="Group_4288" data-name="Group 4288">
+    <g id="Group_4284" data-name="Group 4284">
+      <path id="Path_847" data-name="Path 847" class="cls-2" d="m118.59,98.69c-6.12,31.35-36.49,51.8-67.83,45.68C19.42,138.25-1.04,107.88,5.08,76.54c4.57-23.43,23.08-41.64,46.58-45.85"/>
+      <path id="Path_848" data-name="Path 848" class="cls-2" d="m93.98,99.03c-6.33,17.69-25.81,26.89-43.49,20.56-17.69-6.33-26.89-25.81-20.56-43.49,3.5-9.77,11.27-17.41,21.1-20.75"/>
+      <path id="Path_849" data-name="Path 849" class="cls-1" d="m61.82,99.17c-6.37,0-11.53-5.17-11.53-11.54s5.17-11.53,11.54-11.53c6.37,0,11.53,5.17,11.53,11.54,0,6.37-5.17,11.53-11.54,11.54"/>
+      <line id="Line_1800" data-name="Line 1800" class="cls-2" x1="61.82" y1="87.64" x2="115.91" y2="33.54"/>
+      <line id="Line_1801" data-name="Line 1801" class="cls-2" x1="115.91" y1="33.54" x2="115.91" y2="22.88"/>
+      <line id="Line_1802" data-name="Line 1802" class="cls-2" x1="103.55" y1="45.9" x2="103.55" y2="32.14"/>
+      <line id="Line_1803" data-name="Line 1803" class="cls-2" x1="117.31" y1="45.9" x2="103.55" y2="45.9"/>
+      <line id="Line_1804" data-name="Line 1804" class="cls-2" x1="115.91" y1="33.54" x2="126.57" y2="33.54"/>
+      <line id="Line_1805" data-name="Line 1805" class="cls-2" x1="61.82" y1="87.63" x2="136.42" y2="70.69"/>
+      <line id="Line_1806" data-name="Line 1806" class="cls-2" x1="136.42" y1="70.69" x2="142.1" y2="61.67"/>
+      <line id="Line_1807" data-name="Line 1807" class="cls-2" x1="119.37" y1="74.56" x2="126.71" y2="62.93"/>
+      <line id="Line_1808" data-name="Line 1808" class="cls-2" x1="131.01" y1="81.9" x2="119.38" y2="74.56"/>
+      <line id="Line_1809" data-name="Line 1809" class="cls-2" x1="136.42" y1="70.69" x2="145.44" y2="76.38"/>
+      <line id="Line_1810" data-name="Line 1810" class="cls-2" x1="61.82" y1="87.64" x2="78.69" y2="13.02"/>
+      <line id="Line_1811" data-name="Line 1811" class="cls-2" x1="78.69" y1="13.02" x2="73" y2="4"/>
+      <line id="Line_1812" data-name="Line 1812" class="cls-2" x1="74.84" y1="30.06" x2="67.49" y2="18.43"/>
+      <line id="Line_1813" data-name="Line 1813" class="cls-2" x1="86.47" y1="22.72" x2="74.84" y2="30.07"/>
+      <line id="Line_1814" data-name="Line 1814" class="cls-2" x1="78.69" y1="13.02" x2="87.71" y2="7.33"/>
+    </g>
+  </g>
+</svg>

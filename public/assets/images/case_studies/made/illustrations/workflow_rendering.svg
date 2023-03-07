@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 133.87 108.72">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #404064;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #404064;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 8px;
+      }
+    </style>
+  </defs>
+  <g id="Group_4319" data-name="Group 4319">
+    <rect id="Rectangle_2921" data-name="Rectangle 2921" class="cls-2" x="18.69" y="55.55" width="87.7" height="49.17"/>
+    <path id="Path_902" data-name="Path 902" class="cls-2" d="m129.87,101.69l-23.48-11.56v-20l23.48-11.56v43.12Z"/>
+    <rect id="Rectangle_2922" data-name="Rectangle 2922" class="cls-2" x="4" y="69.17" width="14.69" height="21.92"/>
+    <path id="Path_903" data-name="Path 903" class="cls-2" d="m57.64,35.54c0,11.05-8.96,20.01-20.01,20.01s-20.01-8.96-20.01-20.01,8.96-20.01,20.01-20.01h0c11.05,0,20.01,8.96,20.01,20.01Z"/>
+    <path id="Path_904" data-name="Path 904" class="cls-2" d="m108.55,29.54c0,14.11-11.44,25.54-25.54,25.54s-25.54-11.44-25.54-25.54,11.44-25.54,25.54-25.54h0c14.11,0,25.54,11.44,25.54,25.54Z"/>
+    <rect id="Rectangle_2923" data-name="Rectangle 2923" class="cls-2" x="36.22" y="72.66" width="32.92" height="14.95"/>
+    <path id="Path_905" data-name="Path 905" class="cls-1" d="m87.46,76.85c-3.09,0-5.6-2.51-5.6-5.6s2.51-5.6,5.6-5.6c3.09,0,5.6,2.51,5.6,5.6h0c0,3.09-2.51,5.59-5.6,5.6"/>
+    <path id="Path_906" data-name="Path 906" class="cls-1" d="m83,35.15c-3.09,0-5.6-2.51-5.6-5.6s2.51-5.6,5.6-5.6c3.09,0,5.6,2.51,5.6,5.6h0c0,3.09-2.51,5.59-5.6,5.6"/>
+    <path id="Path_907" data-name="Path 907" class="cls-1" d="m37.63,41.14c-3.09,0-5.6-2.51-5.6-5.6s2.51-5.6,5.6-5.6c3.09,0,5.6,2.51,5.6,5.6h0c0,3.09-2.51,5.59-5.6,5.6"/>
+    <path id="Path_908" data-name="Path 908" class="cls-1" d="m87.46,93.92c-3.09,0-5.6-2.51-5.6-5.6s2.51-5.6,5.6-5.6c3.09,0,5.6,2.51,5.6,5.6h0c0,3.09-2.51,5.59-5.6,5.6"/>
+  </g>
+</svg>

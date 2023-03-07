@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148.43 136.95">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #404064;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 8px;
+      }
+    </style>
+  </defs>
+  <g id="Group_4315" data-name="Group 4315">
+    <line id="Line_1854" data-name="Line 1854" class="cls-1" x1="122.95" y1="15.37" x2="122.95" y2="107.52"/>
+    <path id="Path_874" data-name="Path 874" class="cls-1" d="m31,26.75H4v-9.25c0-7.46,6.04-13.5,13.5-13.5h91.95c7.46,0,13.5,6.04,13.5,13.5"/>
+    <path id="Path_875" data-name="Path 875" class="cls-1" d="m42.25,122.01l76.78,10.94c13.59,0,24.78-10.68,25.4-24.26H58c0,7.46-6.04,13.5-13.5,13.5s-13.5-6.04-13.5-13.5V17.5c0-7.46-6.04-13.5-13.5-13.5s-13.5,6.04-13.5,13.5"/>
+    <path id="Path_876" data-name="Path 876" class="cls-1" d="m57.48,45.25l-10.06,11.64,10.06,12.21"/>
+    <path id="Path_877" data-name="Path 877" class="cls-1" d="m95.56,45.25l10.06,11.64-10.06,12.21"/>
+    <line id="Line_1855" data-name="Line 1855" class="cls-1" x1="79.8" y1="45.24" x2="72.97" y2="69.09"/>
+  </g>
+</svg>

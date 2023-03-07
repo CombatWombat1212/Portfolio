@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 123.1 124.03">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #404064;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #404064;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 8px;
+      }
+    </style>
+  </defs>
+  <g id="Group_4316" data-name="Group 4316">
+    <path id="Path_878" data-name="Path 878" class="cls-2" d="m119.1,27.82l-57.55,23.82v68.39l57.55-23.82V27.82Z"/>
+    <line id="Line_1856" data-name="Line 1856" class="cls-2" x1="119.1" y1="27.82" x2="61.55" y2="120.03"/>
+    <line id="Line_1857" data-name="Line 1857" class="cls-2" x1="119.1" y1="96.21" x2="61.55" y2="51.64"/>
+    <path id="Path_879" data-name="Path 879" class="cls-2" d="m4,96.21l57.55,23.82V51.64L4,27.82v68.39Z"/>
+    <path id="Path_880" data-name="Path 880" class="cls-2" d="m33.05,108.23c0-19.05-13-39.88-29.05-46.52"/>
+    <path id="Path_881" data-name="Path 881" class="cls-2" d="m55.09,117.35c0-33.52-22.88-70.16-51.09-81.84"/>
+    <path id="Path_882" data-name="Path 882" class="cls-2" d="m119.1,96.21l-57.55,23.82V51.64l57.55-23.82v68.39Z"/>
+    <path id="Path_883" data-name="Path 883" class="cls-2" d="m4,96.21l57.55,23.82V51.64L4,27.82v68.39Z"/>
+    <path id="Path_884" data-name="Path 884" class="cls-2" d="m61.55,51.64l57.55-23.82L61.55,4,4,27.82l57.55,23.82Z"/>
+    <path id="Path_885" data-name="Path 885" class="cls-2" d="m119.1,27.82L61.55,4,4,27.82l57.55,23.82,57.55-23.82Z"/>
+    <path id="Path_886" data-name="Path 886" class="cls-2" d="m75.49,9.77c-8.19,3.39-8.19,8.89.01,12.28s21.47,3.39,29.66,0"/>
+    <path id="Path_887" data-name="Path 887" class="cls-2" d="m58.13,50.22c-6.67-4.08-5.64-9.67,3.1-13.29,9.9-4.1,25.95-4.1,35.85,0"/>
+    <path id="Path_888" data-name="Path 888" class="cls-1" d="m46.91,31.82c-1.69.02-3.38-.28-4.96-.89-2.44-1.01-3.89-2.92-3.89-5.11s1.45-4.11,3.89-5.11c3.2-1.19,6.72-1.19,9.91,0,2.44,1.01,3.89,2.92,3.89,5.11s-1.45,4.11-3.89,5.12c-1.58.61-3.26.91-4.96.89"/>
+  </g>
+</svg>

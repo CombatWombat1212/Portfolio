@@ -110,6 +110,11 @@
     @include no-select;
   }
 
+
+  &__unloaded {
+    transition:0s!important;
+  }
+
   &__off {
     margin-left: calc(var(--indicator-width) * -1);
   }

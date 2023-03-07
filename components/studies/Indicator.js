@@ -97,7 +97,7 @@ function indicatorSetVisibility(indicator) {
   if (indicator.visible.set !== indicator.visible.applied) {
     if (indicator.visible.set) {
       elem.classList.remove("indicator__hidden");
-      // elem.style.setProperty("transition", `margin-left ${transition}ms`);
+      elem.classList.remove("indicator__unloaded");
       elem.classList.remove("indicator__off");
       elem.classList.add("indicator__on");
     } else {
@@ -480,7 +480,7 @@ function Indicator({}) {
   return (
     <div className="indicator--wrapper indicator--wrapper__hidden" ref={indicator}>
       <div className="indicator--inner">
-        <div className="indicator indicator__hidden indicator__off" 
+        <div className="indicator indicator__unloaded indicator__hidden indicator__off" 
         // onMouseEnter={indicatorOnHover} onMouseLeave={indicatorOnMouseLeave}
         >
           <div className="indicator--back">

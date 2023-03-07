@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 76.57 83.85">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #404064;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 4px;
+      }
+    </style>
+  </defs>
+  <g id="Group_4368" data-name="Group 4368">
+    <path id="Path_934" data-name="Path 934" class="cls-1" d="m38.28,2c9.14,0,48.58-2.06,32.45,79.85l-32.45-6.81c52.7-45.31,21.02-58.25,0-58.25s-52.7,12.94,0,58.25l-32.45,6.81C-10.3-.05,29.15,2,38.28,2Z"/>
+  </g>
+</svg>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 94.32 61.01">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #404064;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 4px;
+      }
+    </style>
+  </defs>
+  <g id="Group_4573" data-name="Group 4573">
+    <line id="Line_1898" data-name="Line 1898" class="cls-1" x1="25.85" y1="50.1" x2="25.85" y2="43.35"/>
+    <line id="Line_1899" data-name="Line 1899" class="cls-1" x1="7.89" y1="2" x2="92.32" y2="2"/>
+    <line id="Line_1900" data-name="Line 1900" class="cls-1" x1="86.38" y1="59.01" x2="6.87" y2="59.01"/>
+    <path id="Path_952" data-name="Path 952" class="cls-1" d="m44.54,2h0c3.47,9.41,4.5,19.56,2.99,29.48-1.31,8.61-1.97,17.31-1.97,26.02v1.51"/>
+    <path id="Path_953" data-name="Path 953" class="cls-1" d="m6.87,59.01s-.92-16.38-3.25-26.95C.66,18.71,1.57,2,7.89,2c5.02,0,3.08,20.04,2.41,30.05-.59,9.05-1.74,18.05-3.43,26.95"/>
+    <line id="Line_1901" data-name="Line 1901" class="cls-1" x1="46.04" y1="44.53" x2="75.46" y2="44.53"/>
+  </g>
+</svg>

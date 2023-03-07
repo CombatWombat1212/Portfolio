@@ -3146,6 +3146,10 @@ body {
   user-select: none;
 }
 
+.indicator__unloaded {
+  transition: 0s !important;
+}
+
 .indicator__off {
   margin-left: calc(var(--indicator-width) * -1);
 }
@@ -4844,5 +4848,24 @@ body {
 
 #Makeright #Delivery--Banner .background {
   background-color: #E9E9F2;
+}
+
+#Made #Overview--Goal .section--graphic {
+  --graphic-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 4rem) ;
+}
+
+#Made #Overview--Goal .section--graphic .mask {
+  background-color: #404064;
+}
+
+#Made #Overview--Goal .section--graphic {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#Made #Overview--Goal .mask {
+  opacity: 0.3;
 }
 /*# sourceMappingURL=style.css.map */

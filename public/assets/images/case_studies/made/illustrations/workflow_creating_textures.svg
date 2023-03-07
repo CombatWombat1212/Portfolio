@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 153.37 154.45">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #404064;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #404064;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 8px;
+      }
+    </style>
+  </defs>
+  <g id="Group_4314" data-name="Group 4314">
+    <line id="Line_1847" data-name="Line 1847" class="cls-2" x1="4" y1="76.95" x2="149.37" y2="76.95"/>
+    <line id="Line_1848" data-name="Line 1848" class="cls-2" x1="76.69" y1="4" x2="76.69" y2="150.45"/>
+    <rect id="Rectangle_2917" data-name="Rectangle 2917" class="cls-2" x="76.69" y="25.64" width="51.27" height="51.27"/>
+    <rect id="Rectangle_2918" data-name="Rectangle 2918" class="cls-2" x="25.41" y="25.64" width="51.27" height="51.27"/>
+    <rect id="Rectangle_2919" data-name="Rectangle 2919" class="cls-2" x="76.69" y="77.21" width="51.27" height="51.27"/>
+    <rect id="Rectangle_2920" data-name="Rectangle 2920" class="cls-2" x="25.41" y="77.21" width="51.27" height="51.27"/>
+    <line id="Line_1849" data-name="Line 1849" class="cls-2" x1="123.54" y1="81.76" x2="81.1" y2="124.19"/>
+    <line id="Line_1850" data-name="Line 1850" class="cls-2" x1="123.54" y1="124.19" x2="81.1" y2="81.76"/>
+    <line id="Line_1851" data-name="Line 1851" class="cls-2" x1="52.4" y1="26.31" x2="41.54" y2="37.16"/>
+    <line id="Line_1852" data-name="Line 1852" class="cls-2" x1="41.55" y1="60.74" x2="60.08" y2="42.2"/>
+    <line id="Line_1853" data-name="Line 1853" class="cls-2" x1="61.72" y1="64.43" x2="49.15" y2="77.01"/>
+    <path id="Path_869" data-name="Path 869" class="cls-2" d="m51.29,128.47c0-14.29-11.59-25.87-25.88-25.86"/>
+    <path id="Path_870" data-name="Path 870" class="cls-2" d="m70.93,128.47c0-25.13-20.38-45.5-45.51-45.5"/>
+    <path id="Path_871" data-name="Path 871" class="cls-2" d="m89.11,25.65c.06,7.3,6.03,13.16,13.33,13.1,7.21-.06,13.04-5.89,13.1-13.1"/>
+    <path id="Path_872" data-name="Path 872" class="cls-2" d="m124.91,76.92c-8.66-1.68-14.31-10.07-12.63-18.73,1.46-7.5,8.03-12.92,15.68-12.92"/>
+    <path id="Path_873" data-name="Path 873" class="cls-1" d="m94.28,63.04c-3.62,0-6.56-2.94-6.56-6.56s2.94-6.56,6.56-6.56c3.62,0,6.56,2.94,6.56,6.56h0c0,3.62-2.94,6.56-6.56,6.56"/>
+  </g>
+</svg>

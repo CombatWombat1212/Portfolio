@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 94.32 61.72">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #404064;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 4px;
+      }
+    </style>
+  </defs>
+  <g id="Group_4572" data-name="Group 4572">
+    <path id="Path_949" data-name="Path 949" class="cls-1" d="m86.31,59.71H8.55c-3.61,0-6.54-2.93-6.55-6.54V8.55c0-3.62,2.93-6.55,6.55-6.55h83.77"/>
+    <line id="Line_1893" data-name="Line 1893" class="cls-1" x1="49.3" y1="2" x2="49.3" y2="59.72"/>
+    <path id="Path_950" data-name="Path 950" class="cls-1" d="m2,11.49h0c0,7.52,3.27,14.68,8.96,19.6l.03.03c4.71,4.08,8.58,6.33,19.4,6.33h46.16"/>
+    <path id="Path_951" data-name="Path 951" class="cls-1" d="m2,52.84h0c0-7.91,2.52-15.6,7.2-21.98"/>
+    <circle id="Ellipse_286" data-name="Ellipse 286" class="cls-1" cx="25.62" cy="23.28" r="3.37"/>
+    <line id="Line_1894" data-name="Line 1894" class="cls-1" x1="25.62" y1="19.9" x2="25.62" y2="17.54"/>
+    <line id="Line_1895" data-name="Line 1895" class="cls-1" x1="25.62" y1="29.02" x2="25.62" y2="26.65"/>
+    <circle id="Ellipse_287" data-name="Ellipse 287" class="cls-1" cx="25.62" cy="47.91" r="3.37"/>
+    <line id="Line_1896" data-name="Line 1896" class="cls-1" x1="25.62" y1="44.53" x2="25.62" y2="42.17"/>
+    <line id="Line_1897" data-name="Line 1897" class="cls-1" x1="25.62" y1="53.65" x2="25.62" y2="51.28"/>
+  </g>
+</svg>

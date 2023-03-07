@@ -1,30 +1,8 @@
-// TODO: Find a way to ensure that these graphics are always locked to the correct scale
-
 @mixin makeright-background-info-img {
   @include img-width(17.5rem);
 }
 
-@mixin section-mask-width($width) {
-  .section--graphic {
-    --graphic-width: #{mask-width($width)};
-  }
-}
 
-
-@mixin section-list-spacing($mt, $mt_less: null) {
-  $mt_less_value: #{if($mt_less == null, calc(#{$mt} * 0.5), $mt_less)};
-  
-  .section--description {
-    li + li{
-      margin-top: $mt;
-    }
-    
-    li + li.mt-less {
-      margin-top: $mt_less_value;
-    }
-
-  }
-}
 
 
 #Makeright {

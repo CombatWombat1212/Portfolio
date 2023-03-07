@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 94.5 95.65">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #404064;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 4px;
+      }
+    </style>
+  </defs>
+  <g id="Group_4367" data-name="Group 4367">
+    <path id="Path_941" data-name="Path 941" class="cls-1" d="m23.15,2c3.8,7.27,11.34,16.24,24.1,27.21l-10.1,2.12-20.63,4.33c-2.65-13.48-3.72-24.56-3.61-33.66"/>
+    <path id="Path_942" data-name="Path 942" class="cls-1" d="m81.58,2c.11,9.1-.96,20.18-3.61,33.66l-30.72-6.45c12.76-10.97,20.3-19.94,24.1-27.21"/>
+    <line id="Line_1882" data-name="Line 1882" class="cls-1" x1="37.15" y1="31.33" x2="37.15" y2="93.65"/>
+    <path id="Path_943" data-name="Path 943" class="cls-1" d="m92.5,2v84.78c0,3.79-3.35,6.87-7.47,6.87H9.47c-4.12,0-7.47-3.08-7.47-6.88V2"/>
+    <circle id="Ellipse_283" data-name="Ellipse 283" class="cls-1" cx="47.53" cy="61.13" r="3.37"/>
+    <line id="Line_1883" data-name="Line 1883" class="cls-1" x1="47.53" y1="57.75" x2="47.53" y2="55.39"/>
+    <line id="Line_1884" data-name="Line 1884" class="cls-1" x1="47.53" y1="66.87" x2="47.53" y2="64.5"/>
+    <circle id="Ellipse_284" data-name="Ellipse 284" class="cls-1" cx="47.53" cy="41.81" r="3.37"/>
+    <line id="Line_1885" data-name="Line 1885" class="cls-1" x1="47.53" y1="38.43" x2="47.53" y2="36.06"/>
+    <line id="Line_1886" data-name="Line 1886" class="cls-1" x1="47.53" y1="47.55" x2="47.53" y2="45.18"/>
+    <circle id="Ellipse_285" data-name="Ellipse 285" class="cls-1" cx="47.53" cy="80.46" r="3.37"/>
+    <line id="Line_1887" data-name="Line 1887" class="cls-1" x1="47.53" y1="77.08" x2="47.53" y2="74.71"/>
+    <line id="Line_1888" data-name="Line 1888" class="cls-1" x1="47.53" y1="86.2" x2="47.53" y2="83.83"/>
+  </g>
+</svg>

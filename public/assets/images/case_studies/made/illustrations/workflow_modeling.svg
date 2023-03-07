@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 151.51 153.45">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #404064;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 8px;
+      }
+    </style>
+  </defs>
+  <g id="Group_4312" data-name="Group 4312">
+    <line id="Line_1836" data-name="Line 1836" class="cls-1" x1="138.58" y1="67.68" x2="138.58" y2="85.73"/>
+    <line id="Line_1837" data-name="Line 1837" class="cls-1" x1="75.76" y1="116.55" x2="75.76" y2="95.55"/>
+    <line id="Line_1838" data-name="Line 1838" class="cls-1" x1="37.86" y1="54.02" x2="50.19" y2="59.8"/>
+    <line id="Line_1839" data-name="Line 1839" class="cls-1" x1="37.86" y1="24.74" x2="50.19" y2="18.97"/>
+    <line id="Line_1840" data-name="Line 1840" class="cls-1" x1="37.86" y1="123.8" x2="50.19" y2="129.57"/>
+    <line id="Line_1841" data-name="Line 1841" class="cls-1" x1="113.33" y1="53.92" x2="101.01" y2="59.7"/>
+    <line id="Line_1842" data-name="Line 1842" class="cls-1" x1="113.33" y1="24.64" x2="101.01" y2="18.87"/>
+    <line id="Line_1843" data-name="Line 1843" class="cls-1" x1="113.33" y1="123.7" x2="101.01" y2="129.47"/>
+    <rect id="Rectangle_2907" data-name="Rectangle 2907" class="cls-1" x="66.83" y="4" width="17.85" height="17.85"/>
+    <rect id="Rectangle_2908" data-name="Rectangle 2908" class="cls-1" x="4" y="33.42" width="17.85" height="17.85"/>
+    <rect id="Rectangle_2909" data-name="Rectangle 2909" class="cls-1" x="4" y="102.67" width="17.85" height="17.85"/>
+    <rect id="Rectangle_2911" data-name="Rectangle 2911" class="cls-1" x="66.83" y="131.6" width="17.85" height="17.85"/>
+    <rect id="Rectangle_2912" data-name="Rectangle 2912" class="cls-1" x="66.83" y="62.85" width="17.85" height="17.85"/>
+    <rect id="Rectangle_2913" data-name="Rectangle 2913" class="cls-1" x="129.66" y="33.42" width="17.85" height="17.85"/>
+    <rect id="Rectangle_2914" data-name="Rectangle 2914" class="cls-1" x="129.66" y="102.67" width="17.85" height="17.85"/>
+    <line id="Line_1844" data-name="Line 1844" class="cls-1" x1="12.93" y1="67.68" x2="12.93" y2="85.73"/>
+  </g>
+</svg>

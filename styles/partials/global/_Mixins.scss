@@ -732,3 +732,38 @@
 	
 
 }
+
+
+
+
+
+
+@mixin section-mask-width($width) {
+	.section--graphic {
+	  --graphic-width: #{mask-width($width)};
+	}
+  }
+  
+@mixin section-mask-color($col) {
+	.section--graphic {
+		.mask{
+			background-color: $col;
+		}
+	}
+  }
+  
+  @mixin section-list-spacing($mt, $mt_less: null) {
+	$mt_less_value: #{if($mt_less == null, calc(#{$mt} * 0.5), $mt_less)};
+	
+	.section--description {
+	  li + li{
+		margin-top: $mt;
+	  }
+	  
+	  li + li.mt-less {
+		margin-top: $mt_less_value;
+	  }
+  
+	}
+  }
+  
