@@ -81,6 +81,7 @@ function Name(elem) {
 }
 
 function namesGetSizes(name) {
+  if (!name.elem) return;
   var width = name.elem.getBoundingClientRect().width;
   name.width = width;
 }
@@ -396,7 +397,7 @@ function indicatorNameWidthSet(indicator) {
   var progress = indicator.progress.chapter.current;
 
   if (progress < 1) {
-    indicator.elem.style.setProperty("--label-width", `${indicator.names[0].width}px`);
+    indicator.elem.style.setProperty("--label-width", `${indicator.names[0]?.width}px`);
     return;
   } else {
     progress = progress - 1;

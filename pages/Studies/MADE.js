@@ -2,6 +2,7 @@ import { getStudy } from "@/scripts/GetStudy";
 import CaseStudyPage from "@/components/studies/CaseStudyPage";
 import { Section, Chapter, Title, Column, Heading, Description, Graphic, Quote } from "@/components/sections/Sections";
 import { MADE_IMGS, MADE_IMG_GROUPS } from "@/data/MADE_IMGS";
+import MAKERIGHT_IMGS from "@/data/MAKERIGHT_IMGS";
 // import MAKERIGHT_IMGS from "/data/MAKERIGHT_IMGS";
 // import Gantt from "/components/charts/Gantt";
 // import BarGraph from "@/components/charts/BarGraph";
@@ -51,9 +52,66 @@ function MADE({ setPopup }) {
               <Graphic type="mask" img={MADE_IMGS.configurator_graphic} />
             </Column>
           </Section>
+
+
+
+
+          <Section id="Overview--Needs" type="columns" titled mainClassName="mt-2" mainType="grid">
+            <Title>Needs</Title>
+            <Heading>MADE required:</Heading>
+
+
+            <Column>
+              <Graphic type="mask" background="background darkest" img={MADE_IMGS.requirements_photorealism} />
+              <Description className="graphic--caption">
+                <h3><b>Photorealism</b></h3>
+                <p className="mt-less">Images need to be 1 to 1 with product the customer receives</p>
+              </Description>
+            </Column>
+
+
+            <Column>
+              <Graphic type="mask" background="background darkest" img={MADE_IMGS.requirements_consistency} />
+              <Description className="graphic--caption">
+                <h3><b>Consistency</b></h3>
+                <p className="mt-less">Shirt components cannot shift in position when their style or material is changed</p>
+              </Description>
+            </Column>
+
+
+            <Column>
+              <Graphic type="mask" background="background darkest" img={MADE_IMGS.requirements_scalability} />
+              <Description className="graphic--caption">
+                <h3><b>Scalability</b></h3>
+                <p className="mt-less">40+ fabric variations, with a scalable approach to add more materials down the road</p>
+              </Description>
+            </Column>
+
+            <Column>
+              <Graphic type="mask" background="background darkest" img={MADE_IMGS.requirements_experimentation} />
+              <Description className="graphic--caption">
+                <h3><b>Experimentation</b></h3>
+                <p className="mt-less">With the software still being ironed-out, room for testing was needed in the early stages</p>
+              </Description>
+            </Column>
+
+
+
+
+
+          </Section>
+
+
+
+
+
+
+
         </Chapter>
 
-        <Chapter id="Closing" name="Closing"></Chapter>
+        <Chapter id="Closing" name="Closing">
+
+        </Chapter>
       </CaseStudyPage>
     </>
   );

@@ -2903,6 +2903,7 @@ body {
 
 .next-study:hover, .next-study:focus, .next-study.focus, .next-study.hover {
   background-color: #E0E0EA;
+  color: #063879;
 }
 
 .next-study--background {
@@ -2928,7 +2929,7 @@ body {
 }
 
 .next-study--graphic:hover, .next-study--graphic:focus, .next-study--graphic.focus, .next-study--graphic.hover {
-  transform: scale(1.025);
+  transform: scale(1.05);
 }
 
 .next-study--inner {
@@ -2959,6 +2960,16 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.next-study .tag {
+  transition: var(--transition);
+}
+
+.next-study .tag:hover, .next-study .tag:focus, .next-study .tag.focus, .next-study .tag.hover {
+  background-color: #E9E9F2;
+  border-color: #063879;
+  color: #063879;
 }
 
 .pitch {
@@ -4867,5 +4878,17 @@ body {
 
 #Made #Overview--Goal .mask {
   opacity: 0.3;
+}
+
+#Made #Overview--Needs .section--graphic {
+  --img-panel-height: 10rem;
+}
+
+#Made #Overview--Needs .section--graphic .mask {
+  --graphic-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 10rem) ;
+}
+
+#Made #Overview--Needs .section--main {
+  grid-template-columns: repeat(4, 1fr);
 }
 /*# sourceMappingURL=style.css.map */

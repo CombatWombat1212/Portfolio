@@ -19,6 +19,7 @@
 
   @include hover {
     background-color: $col-background_darkest;
+    color: $col-primary_hovered;
   }
 
   &--background {
@@ -39,7 +40,7 @@
     transform: scale(1);
 
     @include hover {
-      transform: scale(1.025);
+      transform: scale(1.05);
     }
   }
 
@@ -73,4 +74,19 @@
 
     @include flex-row-between;
   }
+
+
+
+  .tag{
+
+    @include hover{
+      background-color: $col-background_darker;
+      border-color: $col-primary_hovered;
+      color: $col-primary_hovered;
+    }
+
+
+  }
+
+
 }

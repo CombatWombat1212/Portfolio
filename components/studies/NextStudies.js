@@ -10,26 +10,26 @@ import Description from "../sections/Description";
 import Graphic from "../sections/Graphic";
 import Heading from "../sections/Heading";
 
-const STUDY_HOVER_AFFECTED = ["next-study", "next-study--button", "graphic--effect__default", "graphic--effect__hover", "next-study--graphic"];
+const STUDY_HOVER_AFFECTED = ["next-study", "next-study--button", "graphic--effect__default", "graphic--effect__hover", "next-study--graphic", 'tag'];
 
 function studyMouseEnter(e, reference) {
   var card = reference.current;
 
   for (var i = 0; i < STUDY_HOVER_AFFECTED.length; i++) {
-    var target;
-    if (STUDY_HOVER_AFFECTED[i] == "next-study") target = card;
-    else target = card.querySelector(`.${STUDY_HOVER_AFFECTED[i]}`);
-    target.classList.add(`hover`);
+    var targets;
+    if (STUDY_HOVER_AFFECTED[i] == "next-study") targets = [card];
+    else targets = card.querySelectorAll(`.${STUDY_HOVER_AFFECTED[i]}`);
+    targets.forEach(target => target.classList.add(`hover`));
   }
 }
 
 function studyMouseLeave(e, reference) {
   var card = reference.current;
   for (var i = 0; i < STUDY_HOVER_AFFECTED.length; i++) {
-    var target;
-    if (STUDY_HOVER_AFFECTED[i] == "next-study") target = card;
-    else target = card.querySelector(`.${STUDY_HOVER_AFFECTED[i]}`);
-    target.classList.remove(`hover`);
+    var targets;
+    if (STUDY_HOVER_AFFECTED[i] == "next-study") targets = [card];
+    else targets = card.querySelectorAll(`.${STUDY_HOVER_AFFECTED[i]}`);
+    targets.forEach(target => target.classList.remove(`hover`));
   }
 }
 

@@ -1,26 +1,39 @@
-#Made{
+#Made {
+  #Overview {
+    &--Goal {
+      @include section-mask-width(4rem);
+      @include section-mask-color($col-tertiary);
 
+      .section--graphic {
+        height: 100%;
+        @include flex-col-center;
+      }
+      .mask {
+        opacity: 0.3;
+      }
+    }
 
+    &--Needs {
+    //   @include section-mask-width(6rem);
 
-    #Overview{
+      .section {
+        &--graphic {
 
-        &--Goal{
-            @include section-mask-width(4rem);
-            @include section-mask-color($col-tertiary);
+          --img-panel-height: 10rem;
 
-            .section--graphic{
-                height:100%;
-                @include flex-col-center;
-            }
-            .mask{
-                opacity: 0.3;
-            }
+          .mask {
+
+            --graphic-width: #{mask-width(10rem)};
+
+          }
+
         }
 
 
+        &--main {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
     }
-
-
-
-
+  }
 }

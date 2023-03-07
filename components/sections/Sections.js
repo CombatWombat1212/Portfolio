@@ -1,5 +1,5 @@
 import { defaultProps, PropTypes } from "prop-types";
-import React from "react";
+import React, from "react";
 import Background from "../utilities/Background";
 
 import { getElemClasses, getContainerMarginClass, getWrapperClasses, getMainClasses, getGapClasses, getBackgroundClasses, getColClassList } from "./sections_utilities/GetClasses";
@@ -122,6 +122,9 @@ function Section({className, children, type, background, id, margin, titled, arr
   );
 }
 
+
+
+
 function createSectionObject(className, children, type, background, id, margin, titled, arrows, mainClassName, copyClassName, wrapperClassName, mainType, reference) {
   var pref = "section";
 
@@ -132,7 +135,15 @@ function createSectionObject(className, children, type, background, id, margin, 
   titled = titled || false;
   var hasTitled = titled ? true : false;
   if (titled == "above") ({ columns, description, title, heading, graphic, other } = getAdditionalHeadingClassesFromParentProps({ columns, description, title, heading, graphic, other }, "titled above"));
+  
+  var hasGraphics = getFlattenedChildren(children).filter((child) => {
+    return child.type.name == "Graphic"
+  }).length > 0
+  
+  console.log(hasGraphics)
+  console.log(children)
 
+  
 
   var sec = {
     has: {
@@ -140,6 +151,7 @@ function createSectionObject(className, children, type, background, id, margin, 
       graphic: getHasGraphic(graphic),
       background: getHasBackground(background),
       titled: hasTitled,
+      // graphics:
     },
     classes: {
       sec: className ? className : "",
@@ -193,6 +205,7 @@ Section.propTypes = {
 var SECTION_DEFAULT_PROPS = Section.defaultProps;
 var SECTION_PROP_TYPES = Section.propTypes;
 import Chapter from "./Chapter";
+import getFlattenedChildren from "./sections_utilities/getFlattenedChildren";
 export { SECTION_DEFAULT_PROPS, SECTION_PROP_TYPES };
 
 export default Section;
