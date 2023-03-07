@@ -183,7 +183,6 @@ const MAKERIGHT_IMGS = {
     height: 184.39,
   },
 
-  // TODO: fix this graphic
 
   interviews: {
     name: "interviews",

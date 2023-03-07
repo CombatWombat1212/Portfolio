@@ -135,19 +135,6 @@
   .graphic {
     --img-panel-height: 12rem;
 
-    // --mw: calc(var(--mask-aspect-width) * 1px);
-    // --mh: calc(var(--mask-aspect-height) * 1px);
-    // --iw: calc(var(--img-aspect-width) * 1px);
-    // --ih: calc(var(--img-aspect-height) * 1px);
-
-
-
-    // --graphic-width: #{mask-width(11.5rem)};
-    // --graphic-height: Max(100%, calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width))));
-
-    // --graphic-width: calc((var(--mw) / var(--mh)) * 10);
-
-
     // TODO: update all graphics to follow this syntax, and get rid of all the other clutter
 
     &--mask{

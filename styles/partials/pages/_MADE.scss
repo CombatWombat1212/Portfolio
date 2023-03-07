@@ -14,18 +14,11 @@
 
     &--Needs {
         @include section-mask-color($col-tertiary);
-    //   @include section-mask-width(6rem);
 
       .section {
         &--graphic {
 
           --img-panel-height: 10rem;
-
-          .mask {
-
-            // --graphic-width: #{mask-width(10rem)};
-
-          }
 
         }
 
