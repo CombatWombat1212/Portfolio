@@ -1,8 +1,9 @@
 @mixin section--heading-bottom-margin($m) {
-  &.text--#{$m} + * {
+  &.text--#{$m}+* {
     margin-top: var(--font-margin-bottom-#{$m});
   }
-  &.text--#{$m} + *.mt-less {
+
+  &.text--#{$m}+*.mt-less {
     margin-top: var(--font-margin-bottom-#{$m}_less);
   }
 }
@@ -39,13 +40,13 @@
   &--wrapper {
     padding-top: var(--section-gap);
     position: relative;
-    
+
   }
 
   @include flex-row;
 
   &--title {
-    & + * {
+    &+* {
       margin-top: var(--font-margin-bottom-h4);
     }
   }
@@ -66,20 +67,23 @@
   }
 
   &--description {
-    & > * + * {
+    &>*+* {
       margin-top: var(--section-text-spacing);
     }
-    & > * + *.mt-less {
+
+    &>*+*.mt-less {
       margin-top: calc(var(--section-text-spacing) * 0.15);
     }
 
     ol,
     ul {
       --counter-width: 1.5rem;
-      & > * + * {
+
+      &>*+* {
         margin-top: var(--section-text-spacing);
       }
-      & > * + *.mt-less {
+
+      &>*+*.mt-less {
         margin-top: calc(var(--section-text-spacing) * 0.35);
       }
 
@@ -126,15 +130,42 @@
 }
 
 .section {
+  --graphic-scale: 1; 
+  
   .graphic {
     --img-panel-height: 12rem;
 
-    --graphic-width: #{mask-width(11.5rem)};
-    --graphic-height: Max(100%, calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width))));
+    // --mw: calc(var(--mask-aspect-width) * 1px);
+    // --mh: calc(var(--mask-aspect-height) * 1px);
+    // --iw: calc(var(--img-aspect-width) * 1px);
+    // --ih: calc(var(--img-aspect-height) * 1px);
+
+
+
+    // --graphic-width: #{mask-width(11.5rem)};
+    // --graphic-height: Max(100%, calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width))));
+
+    // --graphic-width: calc((var(--mw) / var(--mh)) * 10);
+
+
+    // TODO: update all graphics to follow this syntax, and get rid of all the other clutter
+
+    &--mask{
+      --w: calc(var(--mw) * var(--graphic-scale));
+      --h: calc(var(--mh) * var(--graphic-scale));
+
+      .mask{
+        width: var(--w);
+        height: var(--h);
+        background-color: $col-tertiary;
+      }
+    }
+
 
     &--img {
       display: flex;
       position: relative;
+
       img {
         @include img-contain;
       }
@@ -146,17 +177,6 @@
       @include flex-row-center;
       padding: var(--section-graphic-panel-pad);
       align-items: center;
-
-      .mask {
-        height: fit-content;
-        height: var(--graphic-height);
-        width: var(--graphic-width);
-        background-color: $col-tertiary;
-
-        // width:100%;
-        // height:100%;
-
-      }
 
       &__flexible {
         height: 100% !important;
@@ -175,7 +195,8 @@
       &__split {
         @include flex-row-between;
         align-items: flex-end;
-        & > * + * {
+
+        &>*+* {
           margin: 0;
         }
       }
@@ -206,6 +227,7 @@
       &__on.hover {
         opacity: 0;
       }
+
       &__off.hover {
         opacity: 1;
       }
@@ -252,6 +274,7 @@
 // Color variants
 
 .section {
+
   &__color,
   &__image {
     @include pad-y(var(--section-gap));
@@ -260,7 +283,7 @@
       color: $col-background;
     }
 
-    & + & {
+    &+& {
       margin-top: 0;
     }
   }
@@ -268,11 +291,13 @@
 
 .chapter {
   &__color {
+
     // TODO: fix this ugly ass selector
-    & > * > *:not(.background__background) {
+    &>*>*:not(.background__background) {
       * {
         color: $col-background;
       }
+
       .mask {
         background-color: $col-background;
       }
@@ -281,8 +306,7 @@
 }
 
 .background {
-  &__color {
-  }
+  &__color {}
 
   &__background {
     background-color: $col-background;
@@ -290,43 +314,49 @@
 
   &__background-darker {
     background-color: $col-background_darker;
+
     // TODO: move this to a general class applied to all of these
-    & + & {
+    &+& {
       padding-top: 0;
     }
   }
 
   &__background-darkest {
     background-color: $col-background_darkest;
-    & + & {
+
+    &+& {
       padding-top: 0;
     }
   }
 
   &__primary {
     background-color: $col-primary;
-    & + & {
+
+    &+& {
       padding-top: 0;
     }
   }
 
   &__tertiary-makeright {
     background-color: $col-tertiary_makeright;
-    & + & {
+
+    &+& {
       padding-top: 0;
     }
   }
 
   &__tertiary {
     background-color: $col-tertiary;
-    & + & {
+
+    &+& {
       padding-top: 0;
     }
   }
 
   &__tertiary-light {
     background-color: $col-tertiary-light;
-    & + & {
+
+    &+& {
       padding-top: 0;
     }
   }

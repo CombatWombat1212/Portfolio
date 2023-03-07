@@ -1,8 +1,8 @@
 import { defaultProps, PropTypes } from "prop-types";
-import React, from "react";
+import React from "react";
 import Background from "../utilities/Background";
 
-import { getElemClasses, getContainerMarginClass, getWrapperClasses, getMainClasses, getGapClasses, getBackgroundClasses, getColClassList } from "./sections_utilities/GetClasses";
+import { getElemClasses, getContainerMarginClass, getWrapperClasses, getMainClasses, getGapClasses, getBackgroundClasses, getColClassList, getGraphicClasses } from "./sections_utilities/GetClasses";
 import { getHasText, getHasGraphic, getHasBackground } from "./sections_utilities/IfHas";
 import { getSectionChildren } from "./sections_utilities/GetSectionChildren";
 
@@ -135,23 +135,23 @@ function createSectionObject(className, children, type, background, id, margin, 
   titled = titled || false;
   var hasTitled = titled ? true : false;
   if (titled == "above") ({ columns, description, title, heading, graphic, other } = getAdditionalHeadingClassesFromParentProps({ columns, description, title, heading, graphic, other }, "titled above"));
-  
-  var hasGraphics = getFlattenedChildren(children).filter((child) => {
-    return child.type.name == "Graphic"
-  }).length > 0
-  
-  console.log(hasGraphics)
-  console.log(children)
 
+  var hasGraphic = getHasGraphic(graphic);
   
+  // var hasGraphics = getFlattenedChildren(children).filter((child) => {
+  //   return child.type.name == "Graphic"
+  // }).length > 0
+  
+  // console.log(hasGraphics)
+  // console.log(children)
+
 
   var sec = {
     has: {
       text: getHasText({ columns, description, title, heading, graphic, other }),
-      graphic: getHasGraphic(graphic),
+      graphic: hasGraphic,
       background: getHasBackground(background),
       titled: hasTitled,
-      // graphics:
     },
     classes: {
       sec: className ? className : "",
@@ -161,6 +161,7 @@ function createSectionObject(className, children, type, background, id, margin, 
       main: getMainClasses(mainClassName, mainType, titled),
       gap: getGapClasses(type, arrows, mainClassName),
       background: getBackgroundClasses(pref, background),
+      graphic: getGraphicClasses(type),
       copy: copyClassName ? copyClassName : "",
     },
     chil: {
@@ -168,7 +169,7 @@ function createSectionObject(className, children, type, background, id, margin, 
       description,
       title,
       heading,
-      graphic,
+      graphic: getGraphicChanges(type, graphic),
       other,
     },
     attrs: {
@@ -182,6 +183,9 @@ function createSectionObject(className, children, type, background, id, margin, 
       reference: reference ? reference : null,
     },
   };
+
+
+
 
   return sec;
 }
@@ -206,6 +210,8 @@ var SECTION_DEFAULT_PROPS = Section.defaultProps;
 var SECTION_PROP_TYPES = Section.propTypes;
 import Chapter from "./Chapter";
 import getFlattenedChildren from "./sections_utilities/getFlattenedChildren";
+import { addClassToJsxObj } from "./sections_utilities/ClassUtilities";
+import { getGraphicChanges, getGraphicElem } from "./sections_utilities/GetConditionalElemAdditions";
 export { SECTION_DEFAULT_PROPS, SECTION_PROP_TYPES };
 
 export default Section;

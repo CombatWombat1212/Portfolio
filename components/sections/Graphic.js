@@ -142,19 +142,30 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
 
   var allClasses = `section--graphic graphic ${backgroundClasses} ${className} ${buttonClasses} ${lightbox ? "graphic__lightbox" : ""}`;
 
+  var typePref = isImg ? "img" : "mask";
+
+  var styleVariables = {
+    [`--${typePref}-aspect-width`]: width,
+    [`--${typePref}-aspect-height`]: height,
+    [`--${typePref[0]}w`]: `${width/16}rem`,
+    [`--${typePref[0]}h`]: `${height/16}rem`,
+  };
+
+
+  
   return (
     <>
       {isImg && (
-        <div className={`graphic--img ${allClasses}`} style={{ "--img-aspect-width": width, "--img-aspect-height": height, ...style }}>
+        <div className={`graphic--img ${allClasses}`} style={{ ...styleVariables, ...style }}>
           {effect && <Effect effect={effect} />}
-          <Image className={innerClassName} src={img.src} alt={img.alt} width={width} height={height} onClick={onClickHandler} priority={priority} onLoad={onLoad}/>
+          <Image className={innerClassName} src={img.src} alt={img.alt} width={width} height={height} onClick={onClickHandler} priority={priority} onLoad={onLoad} />
           {children && children}
         </div>
       )}
       {isMask && (
-        <div className={`graphic--mask ${allClasses}`} style={{ "--mask-aspect-width": width, "--mask-aspect-height": height, ...style }}>
+        <div className={`graphic--mask ${allClasses}`} style={{ ...styleVariables, ...style }}>
           {effect && <Effect effect={effect} />}
-          <Mask className={`${innerClassName} ${color}`} src={img.src} alt={img.alt} width={width} height={height} onClick={onClickHandler} priority={priority} onLoad={onLoad}/>
+          <Mask className={`${innerClassName} ${color}`} src={img.src} alt={img.alt} width={width} height={height} onClick={onClickHandler} priority={priority} onLoad={onLoad} />
           {children && children}
         </div>
       )}

@@ -1752,10 +1752,23 @@ body {
   position: relative;
 }
 
+.section {
+  --graphic-scale: 1;
+}
+
 .section .graphic {
   --img-panel-height: 12rem;
-  --graphic-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 11.5rem) ;
-  --graphic-height: Max(100%, calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width))));
+}
+
+.section .graphic--mask {
+  --w: calc(var(--mw) * var(--graphic-scale));
+  --h: calc(var(--mh) * var(--graphic-scale));
+}
+
+.section .graphic--mask .mask {
+  width: var(--w);
+  height: var(--h);
+  background-color: #404064;
 }
 
 .section .graphic--img {
@@ -1780,13 +1793,6 @@ body {
   justify-content: center;
   padding: var(--section-graphic-panel-pad);
   align-items: center;
-}
-
-.section .graphic--panel .mask {
-  height: fit-content;
-  height: var(--graphic-height);
-  width: var(--graphic-width);
-  background-color: #404064;
 }
 
 .section .graphic--panel__flexible {
@@ -3022,11 +3028,6 @@ body {
   font-weight: 400;
 }
 
-.pitch .pitch--vector {
-  --mask-size: 7.5rem;
-  width: calc((var(--mask-aspect-width) / var(--mask-aspect-height)) * var(--mask-size)) ;
-}
-
 .pitch .pitch--graphics {
   position: sticky;
   display: flex;
@@ -4074,6 +4075,16 @@ body {
   margin: auto;
 }
 
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .h-auto {
   height: auto !important;
 }
@@ -4757,20 +4768,14 @@ body {
   gap: var(--background-info-gap);
   column-gap: var(--background-info-gap);
   row-gap: var(--background-info-gap);
-}
-
-#Makeright #Overview--Background .section--graphic img {
-  width: calc((var(--img-aspect-width) / var(--img-aspect-height)) * 17.5rem);
+  --graphic-scale: 0.95;
 }
 
 #Makeright #Overview--Challenge .section {
   gap: var(--background-info-gap);
   column-gap: var(--background-info-gap);
   row-gap: var(--background-info-gap);
-}
-
-#Makeright #Overview--Challenge .section--graphic img {
-  width: calc((var(--img-aspect-width) / var(--img-aspect-height)) * 17.5rem);
+  --graphic-scale: 0.95;
 }
 
 #Makeright #Overview--Pitch .mask {
@@ -4798,17 +4803,13 @@ body {
   margin-top: 0;
 }
 
-#Makeright #Research--Aha-Moment .section--graphic {
-  --graphic-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 13.35rem) ;
-}
-
-#Makeright #Develop--Brainstorming .section--graphic {
-  --graphic-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 14rem) ;
-}
-
 #Makeright #Prototyping--Journey-Map .section--graphic {
-  --graphic-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 14rem) ;
   --img-panel-height: auto;
+  width: calc(100% - (var(--section-graphic-panel-pad) * 2));
+}
+
+#Makeright #Prototyping--Methodology .section .mask {
+  background-color: #F3F3F7;
 }
 
 #Makeright #Prototyping--Methodology .section--main {
@@ -4819,10 +4820,8 @@ body {
   --img-panel-height: 7rem;
 }
 
-#Makeright #Prototyping--Methodology .section--graphic > * {
-  --size: 80%;
-  width: var(--size);
-  height: var(--size);
+#Makeright #Prototyping--Methodology .section--column:nth-child(1), #Makeright #Prototyping--Methodology .section--column:nth-child(2) {
+  --graphic-scale: 0.1;
 }
 
 #Makeright #Prototyping--Progression .section--main {
@@ -4841,10 +4840,6 @@ body {
   margin-top: 0;
 }
 
-#Makeright #Delivery--Conclusion .section--graphic {
-  --graphic-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 9.5rem) ;
-}
-
 #Makeright #Delivery--Forward ul {
   --section-text-spacing: 1.65rem;
 }
@@ -4859,10 +4854,6 @@ body {
 
 #Makeright #Delivery--Banner .background {
   background-color: #E9E9F2;
-}
-
-#Made #Overview--Goal .section--graphic {
-  --graphic-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 4rem) ;
 }
 
 #Made #Overview--Goal .section--graphic .mask {
@@ -4880,12 +4871,12 @@ body {
   opacity: 0.3;
 }
 
-#Made #Overview--Needs .section--graphic {
-  --img-panel-height: 10rem;
+#Made #Overview--Needs .section--graphic .mask {
+  background-color: #404064;
 }
 
-#Made #Overview--Needs .section--graphic .mask {
-  --graphic-width: calc((var(--mask-aspect-width) / ( var(--mask-aspect-height))) * 10rem) ;
+#Made #Overview--Needs .section--graphic {
+  --img-panel-height: 10rem;
 }
 
 #Made #Overview--Needs .section--main {

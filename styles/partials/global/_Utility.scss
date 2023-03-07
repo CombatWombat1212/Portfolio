@@ -94,6 +94,14 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
             property: margin,
             class: m,
             values: (auto:auto)),
+        "margin-y": (
+            property: (margin-top, margin-bottom),
+            class: my,
+            values: (auto:auto)),
+        "margin-x": (
+            property: (margin-left, margin-right),
+            class: mx,
+            values: (auto:auto)),
         "height": (
             property: height,
             important: true,

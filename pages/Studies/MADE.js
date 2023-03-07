@@ -39,18 +39,18 @@ function MADE({ setPopup }) {
             </Column>
           </Section>
 
-          <Section id="Overview--Goal" type="columns" mainClassName={'gap-6'}>
-            <Column>
+          <Section id="Overview--Goal" type="overview" mainClassName={'gap-6'}>
+            {/* <Column> */}
               <Title>Goal</Title>
               <Heading>Provide online customers with the same flexibility as in-store clientele with a dress shirt configurator</Heading>
               <Description>
                 <p><b>MADE needed identical images of their offerings to slot into their software</b>. These images would also become product thumbnails for their webstore, allowing customers to browse their catalogue <b>without MADE individually photographing each shirt</b>.</p>
                 <p>With 3D renders being the most efficient way to complete this goal, MADE reached out to me to work together in creating this customization utility.</p>
               </Description>
-            </Column>
-            <Column>
+            {/* </Column> */}
+            {/* <Column> */}
               <Graphic type="mask" img={MADE_IMGS.configurator_graphic} />
-            </Column>
+            {/* </Column> */}
           </Section>
 
 

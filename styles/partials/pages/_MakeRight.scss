@@ -1,10 +1,3 @@
-@mixin makeright-background-info-img {
-  @include img-width(17.5rem);
-}
-
-
-
-
 #Makeright {
   --background-info-gap: 6rem;
 
@@ -12,31 +5,37 @@
     &--Background {
       .section {
         @include gap(var(--background-info-gap));
-        &--graphic {
-          img {
-            @include makeright-background-info-img;
-          }
-        }
+
+        --graphic-scale: 0.95;
+
+        // .graphic--mask {
+        //   .mask {
+        //     background-color:$col-tertiary;
+
+        //   }
+        // }
       }
     }
 
     &--Challenge {
       .section {
         @include gap(var(--background-info-gap));
-        &--graphic {
-          img {
-            @include makeright-background-info-img;
-          }
-        }
+
+        --graphic-scale: 0.95;
+
+        // .graphic--mask {
+        //   .mask {
+        //     background-color:$col-tertiary;
+
+        //   }
+        // }
       }
     }
 
-    &--Pitch{
-
-      .mask{
+    &--Pitch {
+      .mask {
         background-color: $col-background;
       }
-
     }
 
     &--Hero-Logo {
@@ -55,9 +54,6 @@
           }
         }
       }
-
-
-
     }
   }
 
@@ -70,57 +66,47 @@
   }
 
   #Research {
-    // --img-panel-height: 12rem;
-
-    .section {
-      &--graphic {
-        //TODO: should this be the default? i did
-        // --graphic-width: #{mask-width(11.5rem)};
-        // --graphic-height: calc((var(--graphic-width)) * (var(--mask-aspect-height) / var(--mask-aspect-width)));
-
-        // height: var(--img-panel-height);
-
-        .mask {
-          // Added to section--graphic .mask cause why not
-          // height: var(--graphic-height);
-          // width: var(--graphic-width);
-          // background-color: $col-tertiary;
-        }
-      }
+    &--Approach {
     }
 
     &--Aha-Moment {
-      @include section-mask-width(13.35rem);
     }
   }
 
   #Develop {
     &--Brainstorming {
-      @include section-mask-width(14rem);
     }
   }
 
   #Prototyping {
     &--Journey-Map {
       .section--graphic {
-        --graphic-width: #{mask-width(14rem)};
         --img-panel-height: auto;
+        width: calc(100% - (var(--section-graphic-panel-pad) * 2));
       }
     }
 
     &--Methodology {
       .section {
+
+        .mask {
+          background-color: $col-background;
+        }
+
         &--main {
           grid-template-columns: repeat(4, 1fr);
         }
 
+
         &--graphic {
           --img-panel-height: 7rem;
 
-          & > * {
-            --size: 80%;
-            @include s;
+          $imgs-sel: #{nth-children('#{trim-id(#{&})} .section--column', '', 1, 2) };
+          @at-root #{$imgs-sel} {
+              --graphic-scale: 0.1;
           }
+
+
         }
       }
     }
@@ -149,21 +135,19 @@
     }
 
     &--Conclusion {
-      @include section-mask-width(9.5rem);
+      // @include section-mask-width(9.5rem);
     }
 
     &--Forward {
-
-      ul{
+      ul {
         --section-text-spacing: 1.65rem;
       }
 
       @include section-list-spacing(0.6875rem);
     }
 
-
-    &--Banner{
-      .background{
+    &--Banner {
+      .background {
         background-color: $col-background_darker;
       }
     }

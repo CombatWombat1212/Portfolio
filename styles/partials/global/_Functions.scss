@@ -309,3 +309,34 @@ $enable-important-utilities: false !default;
 
 
 
+@function trim-id($selector) {
+    $selector-ids: ();
+    $selector-parts: str-split($selector, ' ');
+  
+    @each $part in $selector-parts {
+      @if str-index($part, '#') {
+        $selector-ids: append($selector-ids, $part);
+      }
+    }
+  
+    @return join($selector-ids, ' ');
+  }
+  
+
+
+  @function nth-children($base-selector, $optional-selector: null, $numbers...) {
+    $selector: "";
+  
+    @for $i from 1 through length($numbers) {
+      $selector: $selector + "#{$base-selector}:nth-child(#{nth($numbers, $i)})";
+      @if $optional-selector != null {
+        $selector: $selector + " #{$optional-selector}";
+      }
+      @if $i < length($numbers) {
+        $selector: $selector + ", ";
+      }
+    }
+  
+    @return $selector;
+  }
+  

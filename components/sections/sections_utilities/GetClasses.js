@@ -17,7 +17,7 @@ function getMainClasses(mainClassName, mainType, titled) {
   if (mainClassName == undefined) mainClassName = "";
   // if (titled == true || titled == false) return mainClassName;
   if (titled == "above") mainClassName += " section--main__title-above";
-  if(mainType == "grid") mainClassName += " section--main__grid";
+  if (mainType == "grid") mainClassName += " section--main__grid";
 
   mainClassName = removeClassesOfPrefix(mainClassName, "gap-");
 
@@ -30,7 +30,7 @@ function getGapClasses(type, arrows, mainClassName) {
   if (arrows) gapClasses = "gap-6";
 
   if (!mainClassName) return gapClasses;
-  if(mainClassName.indexOf("gap-") == -1) return gapClasses;
+  if (mainClassName.indexOf("gap-") == -1) return gapClasses;
 
   gapClasses = getClassesOfPrefix(mainClassName, "gap-");
 
@@ -43,7 +43,6 @@ function getGapClasses(type, arrows, mainClassName) {
   // }
 
   return gapClasses;
-
 }
 
 function getContainerMarginClass(margin) {
@@ -83,7 +82,6 @@ function getBackgroundClasses(pref, background) {
   var backgroundClasses = ``;
   if (background == undefined) return backgroundClasses;
 
-
   if (typeof background == "string") {
     if (BACKGROUND_COLORS.indexOf(background) != -1) {
       if (pref == "chapter" && background != "background") backgroundClasses += ` ${pref}__color`;
@@ -107,4 +105,11 @@ function getBackgroundClasses(pref, background) {
   return backgroundClasses;
 }
 
-export { getElemClasses, getContainerMarginClass, getWrapperClasses, getMainClasses, getGapClasses, getBackgroundClasses, getColClassList };
+function getGraphicClasses(type) {
+  var classes = "";
+  if (type == "oveview") classes += " my-auto";
+
+  return classes;
+}
+
+export { getElemClasses, getContainerMarginClass, getWrapperClasses, getMainClasses, getGapClasses, getBackgroundClasses, getColClassList, getGraphicClasses };

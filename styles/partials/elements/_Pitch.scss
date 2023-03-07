@@ -41,10 +41,10 @@
       }
     }
 
-    &--vector {
-      --mask-size: 7.5rem;
-      @include mask-width(var(--mask-size));
-    }
+    // &--vector {
+    //   --mask-size: 7.5rem;
+    //   @include mask-width(var(--mask-size));
+    // }
 
     &--graphics {
       position: sticky;

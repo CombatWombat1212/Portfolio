@@ -738,11 +738,6 @@
 
 
 
-@mixin section-mask-width($width) {
-	.section--graphic {
-	  --graphic-width: #{mask-width($width)};
-	}
-  }
   
 @mixin section-mask-color($col) {
 	.section--graphic {
@@ -764,6 +759,16 @@
 		margin-top: $mt_less_value;
 	  }
   
+	}
+  }
+  
+
+
+  @mixin nth-children($numbers...) {
+	@for $i from 1 through length($numbers) {
+	  &:nth-child(#{nth($numbers, $i)}) {
+		@content;
+	  }
 	}
   }
   

@@ -31,7 +31,7 @@ function MakeRight({ setPopup }) {
               <p>In the early 2010s, we were told they would be found in every home; giving consumer’s the power to create anything. But its barriers were too great to reach these expectations, and this reality fell flat. Now, 3D printing hardly has any impact on the average consumer’s life.</p>
             </Description>
 
-            <Graphic type="image" img={MAKERIGHT_IMGS["full_potential"]} />
+            <Graphic type="mask" img={MAKERIGHT_IMGS["full_potential"]} />
           </Section>
 
           <Section id="Overview--Challenge" type="overview">
@@ -46,7 +46,7 @@ function MakeRight({ setPopup }) {
               <p>There needs to be a way to eliminate these barriers so that 3D printing can reach its full potential. Allowing average consumers to access the benefits of the technology.</p>
             </Description>
 
-            <Graphic type="image" img={MAKERIGHT_IMGS["barriers_to_entry"]} />
+            <Graphic type="mask" img={MAKERIGHT_IMGS["barriers_to_entry"]} />
           </Section>
 
           <Section id="Overview--Opportunity">
@@ -493,7 +493,7 @@ function MakeRight({ setPopup }) {
             </Description>
 
             <Column>
-              <Graphic type="image" background="tertiary" img={MAKERIGHT_IMGS["maker_journey_low_fi"]} />
+              <Graphic type="mask" background="tertiary" img={MAKERIGHT_IMGS["maker_journey_low_fi"]} />
               <Description className="graphic--caption">
                 <p>
                   <b>Phase 1:</b>
@@ -502,7 +502,7 @@ function MakeRight({ setPopup }) {
               </Description>
             </Column>
             <Column>
-              <Graphic type="image" background="tertiary" color="background" img={MAKERIGHT_IMGS["customer_journey_low_fi"]} />
+              <Graphic type="mask" background="tertiary" color="background" img={MAKERIGHT_IMGS["customer_journey_low_fi"]} />
               <Description className="graphic--caption">
                 <p>
                   <b>Phase 2:</b>
