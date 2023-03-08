@@ -19,11 +19,57 @@
 
         }
 
-
         &--main {
           grid-template-columns: repeat(4, 1fr);
         }
       }
     }
+
   }
+
+
+
+
+  #Approach {
+
+    &--Workflow {
+
+      .section {
+        --sec-gap:5.5rem;
+        --graphic-scale: 0.925;
+        --col: 4;
+
+        .graphic{
+          &--panel{
+            --pw: calc(
+              ((var(--site-max-width) - (var(--sec-gap) * (var(--col) - 1) )) / var(--col)) - (var(--section-graphic-panel-pad) * 2)
+              );
+            width: var(--pw);
+            height: var(--pw);
+
+          }
+          &--caption{
+            white-space: nowrap;
+          }
+        }
+
+        &--main{
+          margin-top: 4rem;
+          grid-template-columns: repeat(4, 1fr);
+          @include gap(var(--sec-gap));
+        }
+        
+      }
+    }
+
+  }
+
+
+
+
+
+
+
+
+
 }

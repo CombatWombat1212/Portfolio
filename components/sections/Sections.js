@@ -56,7 +56,8 @@ function SectionWrapper({ children, sec }) {
   var { attrs, chil, has, classes } = sec;
 
   return (
-    <div id={attrs.id} className={classes.wrapper + classes.background} ref={attrs.reference ? attrs.reference : null}>
+    <div id={attrs.id} className={classes.wrapper + classes.background} ref={attrs.reference ? attrs.reference : null} 
+    {...(attrs.line ? { 'data-line': attrs.line } : {})}>
       {children}
     </div>
   );
@@ -91,10 +92,10 @@ function SectionBody({ children, sec }) {
           )}
           {has.titled ? (
             <div className={`section--main ${classes.gap} ${classes.main}`}>
-              <ColumnGroup columns={chil.columns} arrows={attrs.arrows} mainType={attrs.mainType} />
+              <ColumnGroup columns={chil.columns} arrows={attrs.arrows} line={attrs.line} mainType={attrs.mainType} />
             </div>
           ) : (
-            <ColumnGroup columns={chil.columns} arrows={attrs.arrows} mainType={attrs.mainType} />
+            <ColumnGroup columns={chil.columns} arrows={attrs.arrows} line={attrs.line} mainType={attrs.mainType} />
           )}
           {chil.graphic && <>{chil.graphic}</>}
           {chil.other && <>{chil.other}</>}
@@ -106,9 +107,9 @@ function SectionBody({ children, sec }) {
   );
 }
 
-function Section({className, children, type, background, id, margin, titled, arrows, mainClassName, copyClassName, wrapperClassName, mainType, reference}) {
+function Section({className, children, type, background, id, margin, titled, arrows, line, mainClassName, copyClassName, wrapperClassName, mainType, reference}) {
   
-  var sec = createSectionObject(className, children, type, background, id, margin, titled, arrows, mainClassName, copyClassName, wrapperClassName, mainType, reference);
+  var sec = createSectionObject(className, children, type, background, id, margin, titled, arrows, line, mainClassName, copyClassName, wrapperClassName, mainType, reference);
 
   return (
     <>
@@ -125,7 +126,7 @@ function Section({className, children, type, background, id, margin, titled, arr
 
 
 
-function createSectionObject(className, children, type, background, id, margin, titled, arrows, mainClassName, copyClassName, wrapperClassName, mainType, reference) {
+function createSectionObject(className, children, type, background, id, margin, titled, arrows, line, mainClassName, copyClassName, wrapperClassName, mainType, reference) {
   var pref = "section";
 
   if (children == undefined) children = children ?? <></>;
@@ -176,6 +177,7 @@ function createSectionObject(className, children, type, background, id, margin, 
       id,
       mainType,
       arrows,
+      line: line ? line : false,
       titled,
       margin,
       type,

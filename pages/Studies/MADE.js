@@ -3,6 +3,7 @@ import CaseStudyPage from "@/components/studies/CaseStudyPage";
 import { Section, Chapter, Title, Column, Heading, Description, Graphic, Quote } from "@/components/sections/Sections";
 import { MADE_IMGS, MADE_IMG_GROUPS } from "@/data/MADE_IMGS";
 import MAKERIGHT_IMGS from "@/data/MAKERIGHT_IMGS";
+import Configurator from "@/components/global/Configurator";
 // import MAKERIGHT_IMGS from "/data/MAKERIGHT_IMGS";
 // import Gantt from "/components/charts/Gantt";
 // import BarGraph from "@/components/charts/BarGraph";
@@ -101,9 +102,91 @@ function MADE({ setPopup }) {
             <Heading>The final configurator</Heading>
 
             <Column>
-              <Graphic type="video" img={MADE_IMGS.configurator_demo} className="b-rad" />
+              <Graphic type="video" img={MADE_IMGS.configurator_demo} className="b-rad" muted autoplay="scroll" controls loop />
             </Column>
           </Section>
+        </Chapter>
+
+        <Chapter id="Approach" name="Approach">
+          <Section id="Approach--Banner" background={MADE_IMGS.banner_building_renders}>
+            <Heading>Building product renders</Heading>
+          </Section>
+
+          <Section id="Approach--Workflow" type="columns" titled mainType="grid" line="graphic--panel">
+            <Title>Development Pipeline</Title>
+            <Heading>Workflow overview</Heading>
+
+            <Column caption="above">
+              <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_modeling} />
+              <Description type="h3" className="graphic--caption">
+                <b>Modelling</b>
+              </Description>
+            </Column>
+
+            <Column caption="above">
+              <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_sculpting} />
+              <Description type="h3" className="graphic--caption">
+                <b>Sculpting</b>
+              </Description>
+            </Column>
+
+            <Column caption="above">
+              <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_creating_textures} />
+              <Description type="h3" className="graphic--caption">
+                <b>Creating Textures</b>
+              </Description>
+            </Column>
+
+            <Column caption="above">
+              <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_scripting} />
+              <Description type="h3" className="graphic--caption">
+                <b>Scripting</b>
+              </Description>
+            </Column>
+
+            <Column>
+              <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_texturing} />
+              <Description type="h3" className="graphic--caption mt-less">
+                <b>Texturing</b>
+              </Description>
+            </Column>
+
+            <Column>
+              <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_composing} />
+              <Description type="h3" className="graphic--caption mt-less">
+                <b>Composing</b>
+              </Description>
+            </Column>
+
+            <Column>
+              <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_compositing} />
+              <Description type="h3" className="graphic--caption mt-less">
+                <b>Compositing</b>
+              </Description>
+            </Column>
+
+            <Column>
+              <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_rendering} />
+              <Description type="h3" className="graphic--caption mt-less">
+                <b>Rendering</b>
+              </Description>
+            </Column>
+          </Section>
+
+
+
+          <Section id="Approach--Scope">
+            <Title>Development Pipeline</Title>
+            <Heading>Workflow overview</Heading>
+
+            <Configurator />
+
+          </Section>
+
+
+
+
+          
         </Chapter>
 
         <Chapter id="Closing" name="Closing"></Chapter>

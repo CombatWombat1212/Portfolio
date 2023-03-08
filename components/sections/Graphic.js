@@ -106,7 +106,9 @@ function Effect({ effect }) {
   );
 }
 
-function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup, width, height, effect, style, priority, onLoad, options }) {
+var allVideos = [];
+
+function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup, width, height, effect, style, priority, onLoad, loop, muted, autoplay, controls }) {
   // TODO: for mobile, add some kind of indication animation of the image being clocked on when its interactable or can be opened in a lightbox
 
   var pref = "section--graphic";
@@ -168,27 +170,52 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
 
 
 
+
+  var reference = useRef(null);
+  useMountEffect(() => {
+    if(autoplay == 'scroll') {      
+      var video = reference.current.querySelector('video');
+      if(allVideos.includes(video)) return;
+      allVideos.push(video);
+      
+      var observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) {
+            video.play();
+          } else {
+            video.pause();
+          }
+        });
+      });
+      observer.observe(video);
+    }
+    
+  });
+  
+  var ap = autoplay == 'scroll' ? false : autoplay ? true : false; 
+
+
   return (
     <>
       {isImg && (
-        <div className={`graphic--img ${allClasses}`} style={{ ...styleVariables, ...style }}>
+        <div className={`graphic--img ${allClasses}`} style={{ ...styleVariables, ...style }} ref={reference}>
           {effect && <Effect effect={effect} />}
           <Image className={innerClassName} src={img.src} alt={img.alt} width={width} height={height} onClick={onClickHandler} priority={priority} onLoad={onLoad} />
           {children && children}
         </div>
       )}
       {isMask && (
-        <div className={`graphic--mask ${allClasses}`} style={{ ...styleVariables, ...style }}>
+        <div className={`graphic--mask ${allClasses}`} style={{ ...styleVariables, ...style }} ref={reference}>
           {effect && <Effect effect={effect} />}
           <Mask className={`${innerClassName} ${color}`} src={img.src} alt={img.alt} width={width} height={height} onClick={onClickHandler} priority={priority} onLoad={onLoad} />
           {children && children}
         </div>
       )}
       {isVideo && (
-        <div className={`graphic--video ${allClasses}`} style={{ ...styleVariables, ...style }}>
+        <div className={`graphic--video ${allClasses}`} style={{ ...styleVariables, ...style }} ref={reference}>
           {effect && <Effect effect={effect} />}
           
-          <video className={innerClassName} alt={img.alt} width={width} height={height} onClick={onClickHandler} priority={priority} onLoad={onLoad}>
+          <video className={innerClassName} alt={img.alt} width={width} height={height} onClick={onClickHandler}  onLoad={onLoad} loop={loop} muted={muted} autoPlay={ap} controls={controls} >
             <source src={`.${img.src}`} type={`video/${img.type}`}></source>
           </video>
 
@@ -205,6 +232,10 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
 Graphic.defaultProps = {
   type: "image",
   effect: null,
+  loop: false,
+  muted: false,
+  autoplay: false,
+  controls: false,
 };
 
 Graphic.propTypes = {

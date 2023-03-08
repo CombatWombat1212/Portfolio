@@ -108,6 +108,7 @@
   &--main {
     @include flex-row;
     margin-top: calc(var(--section-text-spacing) * 1.75);
+    // position: relative;
 
     &.mt-less {
       margin-top: calc(var(--section-text-spacing) * 1.25);
@@ -199,6 +200,10 @@
 
       &.mt-more {
         margin-top: calc(var(--section-text-spacing) * 1.2);
+      }
+
+      &.mt-less {
+        margin-top: calc(var(--section-text-spacing) * 0.65);
       }
     }
 

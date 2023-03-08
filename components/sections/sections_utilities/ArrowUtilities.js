@@ -93,6 +93,7 @@ function anchoredArrowsInit() {
       refreshAnchorHeight();
     }, RESIZE_TIMEOUT);
   });
+  
 }
 
 

@@ -1835,6 +1835,10 @@ body {
   margin-top: calc(var(--section-text-spacing) * 1.2);
 }
 
+.section .graphic--caption.mt-less {
+  margin-top: calc(var(--section-text-spacing) * 0.65);
+}
+
 .section .graphic--effect {
   position: absolute;
   top: 0;
@@ -3219,6 +3223,26 @@ body {
 
 .indicator--wrapper.indicator--wrapper__theme-light .label--name {
   color: #404064;
+}
+
+.col-line {
+  transition: var(--transition);
+  --buffer: 2rem;
+  height: var(--col-line-height);
+  background-color: #404064;
+  opacity: 0.4;
+  position: absolute;
+  width: calc(100% - (var(--site-x-margin) * var(--line-isnt-middle)) - (var(--buffer) * var(--line-isnt-middle)));
+  top: calc(var(--line-top) - (var(--col-line-height) / 2));
+  left: calc(var(--site-x-margin) + (var(--site-x-margin) * var(--line-left-offset)) + (var(--buffer) * var(--line-is-first)));
+}
+
+.col-line--wrapper {
+  --site-x-margin: calc((100% - var(--site-max-width)) / 2);
+  --col-line-height: 0.5rem;
+  position: absolute;
+  left: calc(var(--site-x-margin) * -1);
+  width: 100%;
 }
 
 .graph--wrapper {
@@ -4888,5 +4912,31 @@ body {
 
 #Made #Overview--Needs .section--main {
   grid-template-columns: repeat(4, 1fr);
+}
+
+#Made #Approach--Workflow .section {
+  --sec-gap:5.5rem;
+  --graphic-scale: 0.925;
+  --col: 4;
+}
+
+#Made #Approach--Workflow .section .graphic--panel {
+  --pw: calc(
+              ((var(--site-max-width) - (var(--sec-gap) * (var(--col) - 1) )) / var(--col)) - (var(--section-graphic-panel-pad) * 2)
+              );
+  width: var(--pw);
+  height: var(--pw);
+}
+
+#Made #Approach--Workflow .section .graphic--caption {
+  white-space: nowrap;
+}
+
+#Made #Approach--Workflow .section--main {
+  margin-top: 4rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sec-gap);
+  column-gap: var(--sec-gap);
+  row-gap: var(--sec-gap);
 }
 /*# sourceMappingURL=style.css.map */

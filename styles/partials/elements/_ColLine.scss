@@ -1,0 +1,25 @@
+.col-line {
+  &--wrapper {
+    --site-x-margin: calc((100% - var(--site-max-width)) / 2);
+    --col-line-height: 0.5rem;
+
+    position: absolute;
+    left: calc(var(--site-x-margin) * -1);
+    width: 100%;
+  }
+
+
+  @include trans;
+
+  --buffer: 2rem;
+  height: var(--col-line-height);
+  background-color: $col-tertiary;
+  opacity: 0.4;
+  position: absolute;
+
+  width: calc(100% - (var(--site-x-margin) * var(--line-isnt-middle)) - (var(--buffer) * var(--line-isnt-middle)));
+
+  top: calc(var(--line-top) - (var(--col-line-height) / 2));
+
+  left: calc(var(--site-x-margin) + (var(--site-x-margin) * var(--line-left-offset)) + (var(--buffer) * var(--line-is-first)));
+}
