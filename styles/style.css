@@ -3245,6 +3245,100 @@ body {
   width: 100%;
 }
 
+.configurator {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  --config-gap: 6.25rem;
+  gap: var(--config-gap);
+  column-gap: var(--config-gap);
+  row-gap: var(--config-gap);
+}
+
+.configurator--panel {
+  --config-panel-width: calc(((var(--site-max-width) - (var(--config-gap) * (2 - 1))) / 2) - 0rem);
+  width: var(--config-panel-width);
+}
+
+.configurator .assets {
+  --assets-gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.configurator .assets--row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--assets-gap);
+  column-gap: var(--assets-gap);
+  row-gap: var(--assets-gap);
+}
+
+.configurator .assets--row + .assets--row {
+  margin-top: calc(var(--config-gap) / 2);
+}
+
+.configurator .assets--category {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.configurator .assets--inner {
+  display: flex;
+  flex-direction: row;
+  gap: var(--assets-gap);
+  column-gap: var(--assets-gap);
+  row-gap: var(--assets-gap);
+}
+
+.configurator .assets--panel {
+  padding: 0rem;
+  --graphic-scale: 1;
+  --asset-panel-width: calc(((var(--config-panel-width) - (var(--assets-gap) * (3 - 1))) / 3) - 0rem);
+  width: 100%;
+  min-width: var(--asset-panel-width);
+  height: var(--asset-panel-width);
+  cursor: pointer;
+}
+
+.configurator .assets--panel {
+  transition: var(--transition);
+}
+
+.configurator .assets--panel:hover, .configurator .assets--panel:focus, .configurator .assets--panel.focus, .configurator .assets--panel.hover {
+  background-color: #E0E0EA;
+}
+
+.configurator .viewer {
+  background-color: #F3F3F7;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.configurator .viewer--inner {
+  border-radius: var(--b-rad);
+  -webkit-border-radius: var(--b-rad);
+  -moz-border-radius: var(--b-rad);
+  -khtml-border-radius: var(--b-rad);
+  height: 100%;
+  background-color: #E9E9F2;
+}
+
+.configurator .preview {
+  position: relative;
+  width: 100%;
+}
+
+.configurator .preview--component {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
 .graph--wrapper {
   background-color: #F3F3F7;
   height: var(--graph-height);

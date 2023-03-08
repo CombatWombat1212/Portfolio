@@ -173,20 +173,13 @@ function MADE({ setPopup }) {
             </Column>
           </Section>
 
-
-
-          <Section id="Approach--Scope">
-            <Title>Development Pipeline</Title>
-            <Heading>Workflow overview</Heading>
-
-            <Configurator />
-
+          <Section id="Approach--Scope" type="columns" titled>
+            <Title>Scope</Title>
+            <Heading>Required 3D assets</Heading>
+            <Column>
+              <Configurator />
+            </Column>
           </Section>
-
-
-
-
-          
         </Chapter>
 
         <Chapter id="Closing" name="Closing"></Chapter>

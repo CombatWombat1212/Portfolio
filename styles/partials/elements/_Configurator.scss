@@ -1,10 +1,94 @@
+@function col-gap-width($container-width: var(--site-max-width), $col: var(--col), $gap: var(--gap), $additional: 0rem) {
+  @return calc(((#{$container-width} - (#{$gap} * (#{$col} - 1))) / #{$col}) - #{$additional});
+}
+
+.configurator {
+  //   &--wrapper {
+  //     width: 100%;
+  //   }
+
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  --config-gap: 6.25rem;
+  @include gap(var(--config-gap));
+
+  &--panel {
+    --config-panel-width: #{col-gap-width(var(--site-max-width), 2, var(--config-gap))};
+    width: var(--config-panel-width);
+  }
+
+  .assets {
+    --assets-gap: 2rem;
+
+    @include flex-col-between;
+
+    &--row {
+      @include flex-row;
+      @include gap(var(--assets-gap));
+      & + .assets--row {
+        margin-top: calc(var(--config-gap) / 2);
+      }
+    }
+
+    &--category {
+      @include flex-col;
+      flex: 1;
+    }
+
+    &--inner {
+      @include flex-row;
+      @include gap(var(--assets-gap));
+    }
+
+    &--panel {
+      padding: 0rem;
+      --graphic-scale: 1;
+      --asset-panel-width: #{col-gap-width(var(--config-panel-width), 3, var(--assets-gap))};
+
+      width: 100%;
+      min-width: var(--asset-panel-width);
+      height: var(--asset-panel-width);
+
+      cursor: pointer;
+      @include hover{
+        background-color: $col-background_darkest;
+      }
+    }
+  }
+
+  .viewer {
+    background-color: $col-background;
+    @include flex-col;
+    height: 100%;
+
+    &--inner {
+      @include b-rad;
+      height: 100%;
+      background-color: $col-background_darker;
+    }
+  }
 
 
 
-.configurator{
+
+  .preview{
 
 
+    position: relative;
+    width:100%;
 
-    
+    &--component{
+        position: absolute;
+        width: 100%;
+        top:0;
+        left:0;
+
+    }
+
+  }
+
+
 
 }
