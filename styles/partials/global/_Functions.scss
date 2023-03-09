@@ -340,3 +340,9 @@ $enable-important-utilities: false !default;
     @return $selector;
   }
   
+
+
+  @function col-gap-width($container-width: var(--site-max-width), $col: var(--col), $gap: var(--gap), $additional: 0rem) {
+    @return calc(((#{$container-width} - (#{$gap} * (#{$col} - 1))) / #{$col}) - #{$additional});
+  }
+  

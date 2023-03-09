@@ -4,6 +4,7 @@ import { Section, Chapter, Title, Column, Heading, Description, Graphic, Quote }
 import { MADE_IMGS, MADE_IMG_GROUPS } from "@/data/MADE_IMGS";
 import MAKERIGHT_IMGS from "@/data/MAKERIGHT_IMGS";
 import Configurator from "@/components/global/Configurator";
+import Split from "@/components/global/Split";
 // import MAKERIGHT_IMGS from "/data/MAKERIGHT_IMGS";
 // import Gantt from "/components/charts/Gantt";
 // import BarGraph from "@/components/charts/BarGraph";
@@ -178,6 +179,82 @@ function MADE({ setPopup }) {
             <Heading>Required 3D assets</Heading>
             <Column>
               <Configurator />
+            </Column>
+          </Section>
+
+          <Section id="Approach--Considerations" type="columns" titled>
+            <Title>Considerations</Title>
+            <Heading>Understanding shirt anatomy to create accurate models</Heading>
+            <Description className={"mt-less"}>A few key considerations when designing the shirt models that needed to be just right in order to accurately reflect MADE’s products:</Description>
+
+            <Column>
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_seam_positions} />
+              <Heading type="h3" className="graphic--caption">
+                Seam positions
+              </Heading>
+              <Description className="graphic--caption mt-less">Shirt proportions, and placement of the main seams</Description>
+            </Column>
+            <Column>
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_seam_indents} />
+              <Heading type="h3" className="graphic--caption">
+                Seam indents
+              </Heading>
+              <Description className="graphic--caption mt-less">Making the object feel like real cloth, indented by the seams holding it together</Description>
+            </Column>
+            <Column>
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_button_positions} />
+              <Heading type="h3" className="graphic--caption">
+                Button positions
+              </Heading>
+              <Description className="graphic--caption mt-less">Which components have or don’t have buttons, and where those buttons are placed</Description>
+            </Column>
+            <Column>
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_collar_shape} />
+              <Heading type="h3" className="graphic--caption">
+                Collar shape
+              </Heading>
+              <Description className="graphic--caption mt-less">Ensuring that all the collars match the contours and shape of the base shirt</Description>
+            </Column>
+          </Section>
+
+          <Section id="Approach--Models" type="columns" titled mainClassName={"gap-"}>
+            <Title>Models</Title>
+
+            <Column>
+              <Graphic type="image" background="background darker" className="b-rad" img={MADE_IMGS.completed_collar_wide} />
+            </Column>
+            <Column>
+              <Graphic type="image" background="background darker" className="b-rad" img={MADE_IMGS.completed_collar_mini_wide} />
+            </Column>
+            <Column>
+              <Graphic type="image" background="background darker" className="b-rad" img={MADE_IMGS.completed_collar_band} />
+            </Column>
+            <Column>
+              <Graphic type="image" background="background darker" className="b-rad" img={MADE_IMGS.completed_cuff_regular} />
+            </Column>
+            <Column>
+              <Graphic type="image" background="background darker" className="b-rad" img={MADE_IMGS.completed_cuff_french} />
+            </Column>
+          </Section>
+
+          <Section id="Approach--Imperfections" type="columns">
+            <Column>
+              <Split before={MADE_IMGS.sculpting_before} after={MADE_IMGS.sculpting_after} />
+            </Column>
+            <Column>
+              <Title>Imperfections</Title>
+              <Heading>
+                Nothing real is perfect,
+                <br />
+                but too imperfect
+                <br />
+                is just messy
+              </Heading>
+              <Description>
+                <p>With MADE’s goal of photorealism, the shirts needed an accurate ruffle to their appearance, without losing their high-fashion image. Too few wrinkles, and the shirts looked starched to death. Too many imperfections and they looked straight out of the hamper.</p>
+
+                <p>They needed just a light touch of wrinkles, which varied across components due to their construction. Ex. Some collars had stiffer reinforcements than others.</p>
+              </Description>
             </Column>
           </Section>
         </Chapter>
