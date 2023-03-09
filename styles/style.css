@@ -3246,6 +3246,9 @@ body {
 }
 
 .configurator {
+  --outline-on: 0.25rem solid #404064;
+  --outline-off: 0rem solid #404064;
+  --outline-partial: 0.125rem solid #404064;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -3312,11 +3315,11 @@ body {
 }
 
 .configurator .assets--panel__on {
-  outline: 0.25rem solid #404064;
+  outline: var(--outline-on);
 }
 
 .configurator .assets--panel__off {
-  outline: 0rem solid #404064;
+  outline: var(--outline-off);
 }
 
 .configurator .viewer {
@@ -3333,11 +3336,67 @@ body {
   -khtml-border-radius: var(--b-rad);
   height: 100%;
   background-color: #E9E9F2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 1rem;
+}
+
+.configurator .material {
+  border-radius: 100rem;
+  overflow: hidden;
+  width: 100%;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.configurator .material--group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  --gap:1.5rem;
+  gap: var(--gap);
+  column-gap: var(--gap);
+  row-gap: var(--gap);
+  margin-top: 0.25rem;
+  margin-bottom: 3.25rem;
+}
+
+.configurator .material__on {
+  outline: var(--outline-on);
+}
+
+.configurator .material__off {
+  outline: var(--outline-off);
+}
+
+.configurator .material--graphic {
+  filter: brightness(1);
+}
+
+.material .material--graphic {
+  transition: var(--transition);
+}
+
+.material:hover .material--graphic,
+.material:focus .material--graphic,
+.material.focus .material--graphic
+.material.hover .material--graphic {
+  filter: brightness(0.95);
+}
+
+.configurator .material--graphic img {
+  transform: scale(2.5);
 }
 
 .configurator .preview {
   position: relative;
   width: 100%;
+  height: var(--image-height);
+  transition: opacity 0.3s;
 }
 
 .configurator .preview--component {
@@ -3354,6 +3413,10 @@ body {
 }
 
 .configurator .preview--component__off {
+  opacity: 0;
+}
+
+.configurator .preview__loading {
   opacity: 0;
 }
 

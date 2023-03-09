@@ -2,10 +2,16 @@
   @return calc(((#{$container-width} - (#{$gap} * (#{$col} - 1))) / #{$col}) - #{$additional});
 }
 
+
+
 .configurator {
   //   &--wrapper {
   //     width: 100%;
   //   }
+
+  --outline-on: 0.25rem solid #{$col-tertiary};
+  --outline-off: 0rem solid #{$col-tertiary};
+  --outline-partial: 0.125rem solid #{$col-tertiary};
 
   width: 100%;
   display: grid;
@@ -58,10 +64,10 @@
 
 
       &__on{
-        outline: 0.25rem solid $col-tertiary;
+        outline: var(--outline-on);
       }
       &__off{
-        outline: 0rem solid $col-tertiary;
+        outline: var(--outline-off);
       }
 
 
@@ -78,7 +84,55 @@
       @include b-rad;
       height: 100%;
       background-color: $col-background_darker;
+      @include flex-col-center;
+      padding-top:1rem;
     }
+  }
+
+
+
+  .material{
+
+    &--group{
+      @include flex-row-between;
+      width:50%;
+      @include mx-auto;
+      --gap:1.5rem;
+      @include gap;
+      margin-top:0.25rem;
+      margin-bottom:3.25rem;
+    }
+
+    border-radius: 100rem;
+    overflow: hidden;
+    width:100%;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &__on{
+      outline: var(--outline-on);
+    }
+    &__off{
+      outline: var(--outline-off);
+    }
+    
+    &--graphic{
+      filter: brightness(1);
+      
+      @include hover('.material', '.material--graphic'){
+        filter: brightness(0.95);
+      }
+
+
+      img{
+        transform: scale(2.5);
+      }
+      
+    }
+
+
+
+
   }
 
 
@@ -89,6 +143,10 @@
 
     position: relative;
     width:100%;
+    height: var(--image-height);
+    transition: opacity 0.3s;
+
+    
 
     &--component{
         position: absolute;
@@ -105,6 +163,11 @@
         &__off{
           opacity:0;
         }
+    }
+
+
+    &__loading{
+      opacity:0;
     }
 
   }

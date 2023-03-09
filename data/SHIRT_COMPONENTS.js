@@ -49,8 +49,8 @@ const SHIRT_COMPONENTS = processImages({
     alt: "A 3D rendering of a french cuff in a material known as '755027'",
     group: "755027",
   },
-  fabric_thumbnail_755027: {
-    name:"fabric_thumbnail_755027",
+  thumbnail_755027: {
+    name:"thumbnail_755027",
     src: "./assets/images/case_studies/made/complete_shirts/755027/755027_Fabric_Thumbnail.png",
     width: 1200,
     height: 1200,
@@ -129,8 +129,8 @@ const SHIRT_COMPONENTS = processImages({
     alt: "A 3D rendering of a french cuff in a material known as '755032'",
     group: "755032",
   },
-  fabric_thumbnail_755032: {
-    name:"fabric_thumbnail_755032",
+  thumbnail_755032: {
+    name:"thumbnail_755032",
     src: "./assets/images/case_studies/made/complete_shirts/755032/755032_Fabric_Thumbnail.png",
     width: 1200,
     height: 1200,
@@ -209,8 +209,8 @@ const SHIRT_COMPONENTS = processImages({
     alt: "A 3D rendering of a french cuff in a material known as '755039'",
     group: "755039",
   },
-  fabric_thumbnail_755039: {
-    name:"fabric_thumbnail_755039",
+  thumbnail_755039: {
+    name:"thumbnail_755039",
     src: "./assets/images/case_studies/made/complete_shirts/755039/755039_Fabric_Thumbnail.png",
     width: 1200,
     height: 1200,
@@ -289,8 +289,8 @@ const SHIRT_COMPONENTS = processImages({
     alt: "A 3D rendering of a french cuff in a material known as 'canvas 5'",
     group: "canvas_5",
   },
-  fabric_thumbnail_canvas_5: {
-    name:"fabric_thumbnail_canvas_5",
+  thumbnail_canvas_5: {
+    name:"thumbnail_canvas_5",
     src: "./assets/images/case_studies/made/complete_shirts/Canvas_5/Canvas_5_Fabric_Thumbnail.png",
     width: 1200,
     height: 1200,
