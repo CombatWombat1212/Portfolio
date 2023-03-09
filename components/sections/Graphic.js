@@ -108,7 +108,7 @@ function Effect({ effect }) {
 
 var allVideos = [];
 
-function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup, width, height, effect, style, priority, onLoad, loop, muted, autoplay, controls, tabIndex }) {
+function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup, width, height, effect, style, priority, onLoad, loop, muted, autoplay, controls, tabIndex, onClick, ...props }) {
   // TODO: for mobile, add some kind of indication animation of the image being clocked on when its interactable or can be opened in a lightbox
 
   var pref = "section--graphic";
@@ -198,8 +198,9 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
   return (
     <>
       {isImg && (
-        <div className={`graphic--img ${allClasses}`} style={{ ...styleVariables, ...style }} ref={reference}
-            {...(tabIndex != undefined ? { 'tabIndex': tabIndex } : {})}
+        <div className={`graphic--img ${allClasses}`} style={{ ...styleVariables, ...style }} ref={reference} onClick={onClick}
+        {...(tabIndex !== undefined ? { tabIndex } : {})}
+        {...props}
         >
           {effect && <Effect effect={effect} />}
           <Image className={innerClassName} src={img.src} alt={img.alt} width={width} height={height} onClick={onClickHandler} priority={priority} onLoad={onLoad} />
@@ -207,8 +208,9 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
         </div>
       )}
       {isMask && (
-        <div className={`graphic--mask ${allClasses}`} style={{ ...styleVariables, ...style }} ref={reference}
+        <div className={`graphic--mask ${allClasses}`} style={{ ...styleVariables, ...style }} ref={reference} onClick={onClick}
             {...(tabIndex != undefined ? { 'tabIndex': tabIndex } : {})}
+            {...props}
         >
           {effect && <Effect effect={effect} />}
           <Mask className={`${innerClassName} ${color}`} src={img.src} alt={img.alt} width={width} height={height} onClick={onClickHandler} priority={priority} onLoad={onLoad} />
@@ -216,8 +218,9 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
         </div>
       )}
       {isVideo && (
-        <div className={`graphic--video ${allClasses}`} style={{ ...styleVariables, ...style }} ref={reference}
+        <div className={`graphic--video ${allClasses}`} style={{ ...styleVariables, ...style }} ref={reference} onClick={onClick}
             {...(tabIndex != undefined ? { 'tabIndex': tabIndex } : {})}
+            {...props}
         >
           {effect && <Effect effect={effect} />}
           

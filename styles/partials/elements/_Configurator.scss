@@ -55,6 +55,17 @@
       @include hover{
         background-color: $col-background_darkest;
       }
+
+
+      &__on{
+        outline: 0.25rem solid $col-tertiary;
+      }
+      &__off{
+        outline: 0rem solid $col-tertiary;
+      }
+
+
+
     }
   }
 
@@ -84,7 +95,16 @@
         width: 100%;
         top:0;
         left:0;
+        z-index: var(--preview-img-order);
 
+        transition:0.2s;
+
+        &__on{
+          opacity:1;
+        }
+        &__off{
+          opacity:0;
+        }
     }
 
   }

@@ -11,7 +11,7 @@ function ColumnGroup({ columns, arrows, line, mainType }) {
   var hasArrows = arrows ? true : false;
   var hasAnchoredArrows = typeof arrows == "string" && arrows.includes("anchored") ? true : false;
 
-  if (arrows) arrows = "primary";
+  if (arrows == true) arrows = "primary";
   if (hasAnchoredArrows) arrows = arrows.replace("anchored", "").trim();
   var arrowClasses = `arrow--mask arrow--mask__default mask__${arrows}`;
 

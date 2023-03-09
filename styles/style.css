@@ -3311,6 +3311,14 @@ body {
   background-color: #E0E0EA;
 }
 
+.configurator .assets--panel__on {
+  outline: 0.25rem solid #404064;
+}
+
+.configurator .assets--panel__off {
+  outline: 0rem solid #404064;
+}
+
 .configurator .viewer {
   background-color: #F3F3F7;
   display: flex;
@@ -3337,6 +3345,16 @@ body {
   width: 100%;
   top: 0;
   left: 0;
+  z-index: var(--preview-img-order);
+  transition: 0.2s;
+}
+
+.configurator .preview--component__on {
+  opacity: 1;
+}
+
+.configurator .preview--component__off {
+  opacity: 0;
 }
 
 .graph--wrapper {
