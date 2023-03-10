@@ -257,6 +257,10 @@ function MADE({ setPopup }) {
               </Description>
             </Column>
           </Section>
+
+
+
+          
         </Chapter>
 
         <Chapter id="Closing" name="Closing"></Chapter>

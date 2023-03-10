@@ -1,9 +1,6 @@
-import { clamp, RESIZE_TIMEOUT, splitPx } from "@/scripts/GlobalUtilities";
-import { useMountEffect } from "@/scripts/hooks/useMountEffect";
+import { clamp, RESIZE_TIMEOUT } from "@/scripts/GlobalUtilities";
 import { useEffect, useRef, useState } from "react";
 import { Graphic } from "../sections/Sections";
-
-// TODO: finish it, obviously but also the event listener on mouse up is compounding and not being removed
 
 function SplitItem(split) {
   this.elem = split;
@@ -21,14 +18,13 @@ function SplitItem(split) {
       start: { x: 0, y: 0 },
       current: { x: 0, y: 0 },
     },
-    // handle: {
-    //   start: { x: 0, y: 0 },
-    //   current: { x: 0, y: 0 },
-    // },
   };
 }
 
 function splitSetProgress(split) {
+  split.elem.style.setProperty("--split-width", `${split.width}px`);
+  split.elem.style.setProperty("--split-before-width", `${split.width * split.progress}px`);
+  split.elem.style.setProperty("--split-after-width", `${split.width * (1 - split.progress)}px`);
   split.elem.style.setProperty("--split-progress", `${split.progress * 100}%`);
 }
 
@@ -155,7 +151,10 @@ function Split({ before, after }) {
       </div>
       <div
         className="split--division"
-        // onTouchStart={splitMouseDown} onMouseDown={splitMouseDown} onMouseMove={splitMouseMoveStart} onTouchMove={splitMouseMoveStart}
+        // onTouchStart={splitMouseDown}
+        // onMouseDown={splitMouseDown}
+        // onMouseMove={splitMouseMoveStart}
+        // onTouchMove={splitMouseMoveStart}
       >
         <div className="split--line">
           <div className="split--handle">
