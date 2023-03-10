@@ -163,7 +163,12 @@ h4,
   font-size: var(--font-size-h4);
   line-height: var(--font-leading-h4);
   color: #C41263;
-  font-weight: 400;
+  font-weight: 400 !important;
+}
+
+h4 > *,
+.text--h4 > * {
+  font-weight: 400 !important;
 }
 
 .text-size-h4 {
@@ -175,8 +180,13 @@ h5,
   font-family: "Tenon";
   font-size: var(--font-size-body);
   line-height: var(--font-leading-body);
-  font-weight: 400;
+  font-weight: 400 !important;
   font-weight: 500;
+}
+
+h5 > *,
+.text--h5 > * {
+  font-weight: 400 !important;
 }
 
 p,
@@ -185,7 +195,13 @@ li, span {
   font-family: "Tenon";
   font-size: var(--font-size-body);
   line-height: var(--font-leading-body);
-  font-weight: 400;
+  font-weight: 400 !important;
+}
+
+p > *,
+.text--body > *,
+li > *, span > * {
+  font-weight: 400 !important;
 }
 
 .weight-light {
@@ -193,7 +209,11 @@ li, span {
 }
 
 .weight-reg {
-  font-weight: 400;
+  font-weight: 400 !important;
+}
+
+.weight-reg > * {
+  font-weight: 400 !important;
 }
 
 .weight-med {
@@ -1103,7 +1123,7 @@ body {
   font-family: "Tenon";
   font-size: var(--font-size-body);
   line-height: var(--font-leading-body);
-  font-weight: 400;
+  font-weight: 400 !important;
   transition: var(--transition);
   -webkit-touch-callout: none;
   user-select: none;
@@ -1113,6 +1133,10 @@ body {
   padding: 0 var(--button-padding);
   width: fit-content;
   height: var(--button-height);
+}
+
+.button > * {
+  font-weight: 400 !important;
 }
 
 .button > * + * {
@@ -1367,8 +1391,12 @@ body {
   font-family: "Tenon";
   font-size: var(--font-size-body);
   line-height: var(--font-leading-body);
-  font-weight: 400;
+  font-weight: 400 !important;
   --font-size: var(--font-size-body);
+}
+
+.nav--links a > * {
+  font-weight: 400 !important;
 }
 
 .nav--item {
@@ -1545,7 +1573,11 @@ body {
   font-family: "Tenon";
   font-size: var(--font-size-body);
   line-height: var(--font-leading-body);
-  font-weight: 400;
+  font-weight: 400 !important;
+}
+
+.sitemap--links a > * {
+  font-weight: 400 !important;
 }
 
 .sitemap--item {
@@ -3045,7 +3077,11 @@ body {
   font-size: var(--font-size-h3);
   line-height: var(--font-leading-h3);
   font-weight: 300;
-  font-weight: 400;
+  font-weight: 400 !important;
+}
+
+.pitch .pitch--description * > * {
+  font-weight: 400 !important;
 }
 
 .pitch .pitch--graphics {
@@ -3790,16 +3826,24 @@ body {
   font-family: "Tenon";
   font-size: var(--font-size-body);
   line-height: var(--font-leading-body);
-  font-weight: 400;
+  font-weight: 400 !important;
   color: #C41263;
+}
+
+.gantt .label__secondary > * {
+  font-weight: 400 !important;
 }
 
 .gantt .label__tertiary {
   font-family: "Tenon";
   font-size: var(--font-size-body);
   line-height: var(--font-leading-body);
-  font-weight: 400;
+  font-weight: 400 !important;
   color: #074391;
+}
+
+.gantt .label__tertiary > * {
+  font-weight: 400 !important;
 }
 
 .bar-graph {

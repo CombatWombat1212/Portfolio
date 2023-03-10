@@ -185,32 +185,32 @@ function MADE({ setPopup }) {
           <Section id="Approach--Considerations" type="columns" titled>
             <Title>Considerations</Title>
             <Heading>Understanding shirt anatomy to create accurate models</Heading>
-            <Description className={"mt-less"}>A few key considerations when designing the shirt models that needed to be just right in order to accurately reflect MADE’s products:</Description>
+            <Description className="mt-less">A few key considerations when designing the shirt models that needed to be just right in order to accurately reflect MADE’s products:</Description>
 
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_seam_positions} />
-              <Heading type="h3" className="graphic--caption">
+              <Heading type="h3" className="graphic--caption weight-reg">
                 Seam positions
               </Heading>
               <Description className="graphic--caption mt-less">Shirt proportions, and placement of the main seams</Description>
             </Column>
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_seam_indents} />
-              <Heading type="h3" className="graphic--caption">
+              <Heading type="h3" className="graphic--caption weight-reg">
                 Seam indents
               </Heading>
               <Description className="graphic--caption mt-less">Making the object feel like real cloth, indented by the seams holding it together</Description>
             </Column>
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_button_positions} />
-              <Heading type="h3" className="graphic--caption">
+              <Heading type="h3" className="graphic--caption weight-reg">
                 Button positions
               </Heading>
               <Description className="graphic--caption mt-less">Which components have or don’t have buttons, and where those buttons are placed</Description>
             </Column>
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_collar_shape} />
-              <Heading type="h3" className="graphic--caption">
+              <Heading type="h3" className="graphic--caption weight-reg">
                 Collar shape
               </Heading>
               <Description className="graphic--caption mt-less">Ensuring that all the collars match the contours and shape of the base shirt</Description>
