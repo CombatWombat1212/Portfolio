@@ -258,9 +258,77 @@ function MADE({ setPopup }) {
             </Column>
           </Section>
 
+          <Section id="Approach--Summary" titled mainClassName={"gap-"}>
+            <Heading>
+              The shirts now needed to be textured <br />
+              using MADE’s own fabric swatches.
+            </Heading>
+          </Section>
+        </Chapter>
+
+        <Chapter id="Texturing" name="Texturing">
+          <Section id="Texturing--Workflow" type="columns" titled="above">
+            <Title>Workflow</Title>
+            <Column>
+              <Heading>
+                Converting fabric swatches
+                <br />
+                to 3D textures
+              </Heading>
+            </Column>
+            <Column>
+              <Description className={"mt-less"}>
+                <p>
+                  <b>In order for the models to reflect actual products, they needed to be textured with over 40 scans of MADE’s custom fabrics.</b>
+                </p>
+                <p>Working closely together, I tested several workflows for converting fabric scans to 3D textures. This allowed me to determine which was the most time-efficient, best looking, and scalable; as MADE needed the capability to rapidly add fabrics in the future.</p>
+                <p>I used a combination of Blender and Photoshop to undistort the scans, and create the repeatable textures. Chosen for its efficiency, and compatibility with MADE’s scanning hardware.</p>
+              </Description>
+            </Column>
+          </Section>
+
+          <Section id="Texturing--Stages" type="columns" wrapperClassName="mt-less" titled arrows mainClassName="gap-6" mainType="grid">
+
+            <Column caption="above">
+              <Description type="h3" className="graphic--caption weight-reg">
+              Fabric Scan
+              </Description>
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_1_scan} />
+            </Column>
+            <Column caption="above">
+              <Description type="h3" className="graphic--caption weight-reg">
+              Cropped
+              </Description>
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_2_cropped} />
+            </Column>
+            <Column caption="above">
+              <Description type="h3" className="graphic--caption weight-reg">
+              Traced
+              </Description>
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_3_traced} />
+            </Column>
+            <Column caption="above">
+              <Description type="h3" className="graphic--caption weight-reg">
+              Straightened
+              </Description>
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_4_straightened} />
+            </Column>
+            <Column caption="above">
+              <Description type="h3" className="graphic--caption weight-reg">
+              Repeatable texture
+              </Description>
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_5_repeatable} />
+            </Column>
+            <Column caption="above">
+              <Description type="h3" className="graphic--caption weight-reg">
+              3D material
+              </Description>
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_6_material} />
+            </Column>
 
 
-          
+
+          </Section>
         </Chapter>
 
         <Chapter id="Closing" name="Closing"></Chapter>

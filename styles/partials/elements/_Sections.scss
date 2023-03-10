@@ -40,6 +40,10 @@
   &--wrapper {
     padding-top: var(--section-gap);
     position: relative;
+    
+    &.mt-less{
+      padding-top: calc(var(--section-gap) * 0.5);
+    }
 
   }
 

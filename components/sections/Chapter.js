@@ -13,6 +13,7 @@ function Chapter({ children, type, wrapperClassName, background, id, name, margi
 
   var lastChildHasBackground = false;
 
+  
   if (typeof children === "undefined") children = [<></>];
   if (children.length > 0) {
     var lastChild = children[children.length - 1];
@@ -20,28 +21,31 @@ function Chapter({ children, type, wrapperClassName, background, id, name, margi
       lastChildHasBackground = true;
     }
   }
-
+  
   // Clone the children array so that we can modify it without affecting the original
   var newChildren = React.Children.toArray(children);
   if (!Array.isArray(newChildren)) newChildren = [newChildren];
-
+  
   // Add a wrapper class to each child that has a background color, so that we can add padding to the bottom of the child
   newChildren = newChildren.map((child, i) => {
     if (i < children.length - 1) {
       var nextSibling = children[i + 1];
       var nextSiblingBackground = nextSibling.props.background;
       if (nextSiblingBackground && nextSiblingBackground !== "none") {
-        return React.cloneElement(child, { wrapperClassName: child.wrapperClassName ? child.wrapperClassName + "pb-section-gap" : "pb-section-gap" });
+        const wrapperClassName = child.props.wrapperClassName ? `${child.props.wrapperClassName} pb-section-gap` : 'pb-section-gap';
+        return React.cloneElement(child, { wrapperClassName });
       }
     }
     return child;
   });
-
+    
   newChildren = newChildren.map((child, i) => {
     if (i != newChildren.length - 1) return child;
     if (!child.props.background || child.props.background != "none") return child;
-    return React.cloneElement(child, { wrapperClassName: child.wrapperClassName ? child.wrapperClassName + " pb-section-gap" : "pb-section-gap" });
+    const wrapperClassName = child.props.wrapperClassName ? `${child.props.wrapperClassName} pb-section-gap` : 'pb-section-gap';
+    return React.cloneElement(child, { wrapperClassName });
   });
+    
 
   return (
     <div id={id} className={`${wrapperClasses} ${backgroundClasses} ${lastChildHasBackground ? "pb-0" : ""}`} name={name ? name : ""}>

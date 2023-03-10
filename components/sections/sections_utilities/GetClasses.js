@@ -55,6 +55,7 @@ function getContainerMarginClass(margin) {
 }
 
 function getWrapperClasses(wrapperClassName, pref) {
+  console.log(wrapperClassName);
   wrapperClassName = wrapperClassName ? wrapperClassName : "";
   if (pref == undefined) pref = "section";
   wrapperClassName += ` ${pref}--wrapper`;

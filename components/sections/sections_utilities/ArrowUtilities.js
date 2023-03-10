@@ -36,7 +36,7 @@ function refreshAnchorHeight() {
       anchorNextSiblingsHeight += splitPx(window.getComputedStyle(anchorNextSiblings[j]).height);
     }
 
-    var arrowMarginTop = anchorPreviousSiblingsHeight + (anchorHeight - arrowHeight) / 2;
+    var arrowMarginTop = anchorPreviousSiblingsHeight + (anchorHeight - arrowHeight/2) / 2;
     arrow.style.setProperty("--arrow-margin-top", `${arrowMarginTop}px`);
   }
 }

@@ -108,7 +108,9 @@ function SectionBody({ children, sec }) {
 }
 
 function Section({className, children, type, background, id, margin, titled, arrows, line, mainClassName, copyClassName, wrapperClassName, mainType, reference}) {
+  console.log(wrapperClassName);
   
+
   var sec = createSectionObject(className, children, type, background, id, margin, titled, arrows, line, mainClassName, copyClassName, wrapperClassName, mainType, reference);
 
   return (
@@ -128,6 +130,8 @@ function Section({className, children, type, background, id, margin, titled, arr
 
 function createSectionObject(className, children, type, background, id, margin, titled, arrows, line, mainClassName, copyClassName, wrapperClassName, mainType, reference) {
   var pref = "section";
+
+
 
   if (children == undefined) children = children ?? <></>;
   if (children.length == undefined) children = [children];

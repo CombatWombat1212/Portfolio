@@ -1645,6 +1645,10 @@ body {
   position: relative;
 }
 
+.section--wrapper.mt-less {
+  padding-top: calc(var(--section-gap) * 0.5);
+}
+
 .section--title + * {
   margin-top: var(--font-margin-bottom-h4);
 }
@@ -3431,6 +3435,7 @@ body {
   width: 100%;
   position: relative;
   --line-width: 0.5rem;
+  --split-graphic-scale:1;
 }
 
 .split--viewer {
@@ -3442,7 +3447,9 @@ body {
 }
 
 .split--graphic {
-  width: var(--split-width);
+  width: calc(var(--split-width) * var(--split-graphic-scale));
+  margin-right: auto;
+  margin-left: auto;
   height: 100%;
 }
 
@@ -3496,6 +3503,11 @@ body {
   width: var(--split-before-width);
 }
 
+.split--before > .graphic {
+  position: absolute;
+  left: calc((var(--split-width) - (var(--split-width) * var(--split-graphic-scale))) / 2);
+}
+
 .split--after {
   right: 0;
   width: var(--split-after-width);
@@ -3503,7 +3515,7 @@ body {
 
 .split--after > .graphic {
   position: absolute;
-  right: 0;
+  right: calc((var(--split-width) - (var(--split-width) * var(--split-graphic-scale))) / 2);
 }
 
 .graph--wrapper {
@@ -5226,5 +5238,15 @@ body {
 #Made #Approach--Models .section--graphic img {
   width: calc(var(--iw) * var(--graphic-scale));
   height: calc(var(--ih) * var(--graphic-scale));
+}
+
+#Made #Approach--Imperfections .split {
+  height: unset;
+  aspect-ratio: 1 / 1;
+  --split-graphic-scale:0.85;
+}
+
+#Made #Texturing--Stages .section--main {
+  grid-template-columns: repeat(3, 1fr);
 }
 /*# sourceMappingURL=style.css.map */

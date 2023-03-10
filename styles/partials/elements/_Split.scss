@@ -6,6 +6,9 @@
   position: relative;
   --line-width: 0.5rem;
 
+  --split-graphic-scale:1;
+
+  
   &--viewer {
     position: absolute;
     width: 100%;
@@ -15,7 +18,8 @@
   }
 
   &--graphic {
-    width: var(--split-width);
+    width: calc(var(--split-width) * var(--split-graphic-scale));
+    @include mx-auto;
     height: 100%;
   }
 
@@ -58,16 +62,22 @@
   }
 
   &--before {
-    left: 0;
+    left: 0 ;
     width: var(--split-before-width);
+
+    & > .graphic {
+      position: absolute;
+      left: calc((var(--split-width) - (var(--split-width) * var(--split-graphic-scale))) / 2 );
+    }
   }
+
   &--after {
     right: 0;
     width: var(--split-after-width);
 
     & > .graphic {
       position: absolute;
-      right: 0;
+      right: calc((var(--split-width) - (var(--split-width) * var(--split-graphic-scale))) / 2 );
     }
   }
 }
