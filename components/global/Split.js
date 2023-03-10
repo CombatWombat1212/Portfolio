@@ -1,44 +1,149 @@
-import { clamp, splitPx } from "@/scripts/GlobalUtilities";
+import { clamp, RESIZE_TIMEOUT, splitPx } from "@/scripts/GlobalUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Graphic } from "../sections/Sections";
 
+// TODO: finish it, obviously but also the event listener on mouse up is compounding and not being removed
 
+function SplitItem(split) {
+  this.elem = split;
+  this.width = 0;
+  this.left = 0;
+  this.progress = 0.5;
+  this.division = split.querySelector(".split--division");
+  (this.grabbed = 0),
+    (this.line = {
+      elem: split.querySelector(".split--line"),
+      width: 0,
+    });
+  this.pos = {
+    mouse: {
+      start: { x: 0, y: 0 },
+      current: { x: 0, y: 0 },
+    },
+    // handle: {
+    //   start: { x: 0, y: 0 },
+    //   current: { x: 0, y: 0 },
+    // },
+  };
+}
 
-// TODO: finish it, obviously but also the event listener on mouse up is compounding and not being removed 
-
-function splitSetPosition(split) {
+function splitSetProgress(split) {
   split.elem.style.setProperty("--split-progress", `${split.progress * 100}%`);
 }
 
+function splitGetProgress(e, split) {
+  var isTouchMove = e.type == "touchmove";
+  var isTouchStart = e.type == "touchstart";
+  var touchOrMouse = isTouchMove || isTouchStart ? e.touches[0] : e;
+  var mouse = { x: 0, y: 0 };
+  mouse.x = touchOrMouse.clientX;
+  split.pos.mouse.current.x = mouse.x - split.left - split.line.width / 2;
+  var domainWidth = split.width;
+  var handleWidth = split.line.width;
+
+  var handlePos = split.pos.mouse.current.x;
+
+  var min = 0;
+  var max = domainWidth - handleWidth;
+
+  if (handlePos < min) handlePos = min;
+  if (handlePos > max) handlePos = max;
+
+  var progress = clamp(handlePos / domainWidth, 0, 1);
+  split.progress = progress;
+}
+
 function splitGetScale(split) {
-  var division = split.elem.querySelector(".split--division");
-  split.width = division.offsetWidth;
+  split.width = split.division.offsetWidth;
   split.line.width = split.line.elem.offsetWidth;
+  split.left = split.division.getBoundingClientRect().left;
 }
 
 function splitInit(split) {
-  split = {
-    elem: split,
-    width: 0,
-    progress: 0.5,
-    line: {
-      elem: split.querySelector(".split--line"),
-      width: 0,
-    },
-  };
+  init();
 
-  splitGetScale(split);
-  splitSetPosition(split);
+  function refresh() {
+    splitGetScale(split);
+    splitSetProgress(split);
+  }
+
+  function init() {
+    refresh();
+    split.elem.addEventListener("mousedown", splitMouseDown);
+    split.elem.addEventListener("touchstart", splitMouseDown);
+    split.elem.addEventListener("mousemove", splitMouseMoveStart);
+    split.elem.addEventListener("touchmove", splitMouseMoveStart);
+  }
+
+  function splitMouseMoveStart(e) {
+    var mouse = { x: 0, y: 0 };
+    if (e.type == "mousemove" && split.grabbed == 1) {
+      split.grabbed++;
+      mouse.x = e.clientX;
+      split.pos.mouse.start.x = mouse.x;
+    } else if (e.type == "touchmove" && split.grabbed == 1) {
+      split.grabbed++;
+      var touch = e.touches[0];
+      mouse.x = touch.clientX;
+      split.pos.mouse.start.x = mouse.x;
+    }
+  }
+
+  function splitMouseMove(e) {
+    if (split.grabbed < 2) return;
+    splitGetProgress(e, split);
+    splitSetProgress(split);
+  }
+
+  function splitMouseDown(e) {
+    split.grabbed++;
+
+    splitGetProgress(e, split);
+    splitSetProgress(split);
+
+    if (e.type == "mousedown") {
+      document.addEventListener("mousemove", splitMouseMove);
+      document.addEventListener("mouseup", splitMouseUp);
+    } else if (e.type == "touchstart") {
+      document.addEventListener("touchmove", splitMouseMove);
+      document.addEventListener("touchend", splitMouseUp);
+    }
+  }
+
+  function splitMouseUp(e) {
+    split.grabbed = 0;
+    document.removeEventListener("mousemove", splitMouseMove);
+    document.removeEventListener("mouseup", splitMouseUp);
+    document.removeEventListener("touchmove", splitMouseMove);
+    document.removeEventListener("touchend", splitMouseUp);
+  }
+
+  function refreshed() {
+    window.clearTimeout(isResizing);
+    isResizing = setTimeout(function () {
+      refresh();
+    }, RESIZE_TIMEOUT);
+  }
+
+  var isResizing;
+  window.removeEventListener("resize", refreshed);
+  window.addEventListener("resize", refreshed);
 }
 
 function Split({ before, after }) {
-  var reference = useRef(null);
+  const reference = useRef(null);
+  const [mounted, setMounted] = useState(false);
 
-  useMountEffect(() => {
-    var split = reference.current;
+  useEffect(() => {
+    setMounted(true);
+  }, [reference]);
+
+  useEffect(() => {
+    if (!mounted) return;
+    var split = new SplitItem(reference.current);
     splitInit(split);
-  });
+  }, [mounted]);
 
   return (
     <div className="split" ref={reference}>
@@ -48,7 +153,10 @@ function Split({ before, after }) {
       <div className="split--viewer split--after">
         <Graphic type="image" className="split--graphic" img={after} />
       </div>
-      <div className="split--division" onTouchStart={splitMouseDown} onMouseDown={splitMouseDown} onMouseMove={splitMouseMoveStart} onTouchMove={splitMouseMoveStart}>
+      <div
+        className="split--division"
+        // onTouchStart={splitMouseDown} onMouseDown={splitMouseDown} onMouseMove={splitMouseMoveStart} onTouchMove={splitMouseMoveStart}
+      >
         <div className="split--line">
           <div className="split--handle">
             <div className="split--inner"></div>
@@ -57,111 +165,6 @@ function Split({ before, after }) {
       </div>
     </div>
   );
-}
-
-var splitMouse = {
-  start: { x: 0, y: 0 },
-  cur: { x: 0, y: 0 },
-};
-
-var splitHandle = {
-  start: { x: 0, y: 0 },
-  cur: { x: 0, y: 0 },
-};
-
-var splitMouseGrabbed = 0;
-
-
-
-
-function splitMouseMoveStart(e) {
-    var handle = e.target;
-    var slider = handle.parentElement;
-  
-    var mouse = { x: 0, y: 0 };
-  
-    if (e.type == "mousemove" && splitMouseGrabbed == 1) {
-      splitMouseGrabbed++;
-      mouse.x = e.clientX;
-      splitMouse.start.x = mouse.x;
-      splitHandle.start.x = splitPx(window.getComputedStyle(handle).getPropertyValue("--slider-handle-left"));
-    } else if (e.type == "touchmove" && splitMouseGrabbed == 1) {
-      splitMouseGrabbed++;
-      var touch = e.touches[0];
-      mouse.x = touch.clientX;
-      splitMouse.start.x = mouse.x;
-      sliderHandle.start.x = splitPx(window.getComputedStyle(handle).getPropertyValue("--slider-handle-left"));
-    }
-  }
-  
-
-
-
-function splitMouseDown(e) {
-  splitMouseGrabbed++;
-  console.log('down');
-
-  var handle = e.target.closest(".split--division");
-  handle.classList.add("split--division__active");
-
-  const mouseMoveHandler = (e) => {
-    splitMouseMove(e, handle);
-  };
-  const mouseUpHandler = (e) => {
-    splitMouseUp(e, handle);
-  };
-
-  
-  if (e.type == "mousedown") {
-    document.addEventListener("mousemove", mouseMoveHandler);
-    document.addEventListener("mouseup", mouseUpHandler);
-  } else if (e.type == "touchstart") {
-    document.addEventListener("touchmove", mouseMoveHandler);
-    document.addEventListener("touchend", mouseUpHandler);
-  }
-}
-
-function splitMouseUp(e, handle) {
-  splitMouseGrabbed = 0;
-  console.log('up');
-
-  handle.classList.remove("slider--handle__active");
-  document.body.classList.remove("grabbed");
-
-  const mouseMoveHandler = (e) => {
-    splitMouseMove(e, handle);
-  };
-  const mouseUpHandler = (e) => {
-    splitMouseUp(e, handle);
-  };
-
-  if (e.type == "mousedown") {
-    document.removeEventListener("mousemove", mouseMoveHandler);
-    document.removeEventListener("mouseup", mouseUpHandler);
-  } else if (e.type == "touchstart") {
-    document.removeEventListener("touchmove", mouseMoveHandler);
-    document.removeEventListener("touchend", mouseUpHandler);
-  }
-}
-
-function splitMouseMove(e, handle) {
-  if (splitMouseGrabbed < 2) return;
-
-  var bar = handle.parentElement;
-  var slider = bar.parentElement;
-
-  var isTouchMove = e.type == "touchmove";
-  var touchOrMouse = isTouchMove ? e.touches[0] : e;
-
-  var mouse = { x: 0, y: 0 };
-  mouse.x = touchOrMouse.clientX;
-
-  splitMouse.cur.x = mouse.x;
-
-  var handlePos = splitMouse.start.x + (splitMouse.cur.x - splitMouse.start.x);
-
-
-  // handle.style.setProperty("--slider-handle-left", `${handlePos}px`);
 }
 
 export default Split;
