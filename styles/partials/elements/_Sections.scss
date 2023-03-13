@@ -1,9 +1,9 @@
 @mixin section--heading-bottom-margin($m) {
-  &.text--#{$m}+* {
+  &.text--#{$m} + * {
     margin-top: var(--font-margin-bottom-#{$m});
   }
 
-  &.text--#{$m}+*.mt-less {
+  &.text--#{$m} + *.mt-less {
     margin-top: var(--font-margin-bottom-#{$m}_less);
   }
 }
@@ -13,14 +13,9 @@
   --section-gap_half: calc(var(--section-gap) / 2);
 }
 
-
-
-
 .pb-section-gap {
   padding-bottom: var(--section-gap);
 }
-
-
 
 .chapter {
   &--wrapper {
@@ -40,17 +35,19 @@
   &--wrapper {
     padding-top: var(--section-gap);
     position: relative;
-    
-    &.mt-less{
+
+    &.mt-less {
       padding-top: calc(var(--section-gap) * 0.5);
     }
-
+    &.mt-less-2 {
+      padding-top: calc(var(--section-gap) * 0.25);
+    }
   }
 
   @include flex-row;
 
   &--title {
-    &+* {
+    & + * {
       margin-top: var(--font-margin-bottom-h4);
     }
   }
@@ -71,11 +68,11 @@
   }
 
   &--description {
-    &>*+* {
+    & > * + * {
       margin-top: var(--section-text-spacing);
     }
 
-    &>*+*.mt-less {
+    & > * + *.mt-less {
       margin-top: calc(var(--section-text-spacing) * 0.15);
     }
 
@@ -83,11 +80,11 @@
     ul {
       --counter-width: 1.5rem;
 
-      &>*+* {
+      & > * + * {
         margin-top: var(--section-text-spacing);
       }
 
-      &>*+*.mt-less {
+      & > * + *.mt-less {
         margin-top: calc(var(--section-text-spacing) * 0.35);
       }
 
@@ -135,24 +132,23 @@
 }
 
 .section {
-  --graphic-scale: 1; 
-  
+  --graphic-scale: 1;
+
   .graphic {
     --img-panel-height: 12rem;
 
     // TODO: update all graphics to follow this syntax, and get rid of all the other clutter
 
-    &--mask{
+    &--mask {
       --w: calc(var(--mw) * var(--graphic-scale));
       --h: calc(var(--mh) * var(--graphic-scale));
 
-      .mask{
+      .mask {
         width: var(--w);
         height: var(--h);
         background-color: $col-tertiary;
       }
     }
-
 
     &--img {
       display: flex;
@@ -166,9 +162,52 @@
     &--video {
       display: flex;
       position: relative;
+      transition: 0.2s;
 
-      video {
-        @include img-contain;
+      &[data-autoplay-hover="true"] {
+        cursor: pointer;
+        &.background__background {
+          &:hover,
+          &:focus,
+          &[data-playing="true"] {
+            background-color: $col-background_darker;
+          }
+        }
+        &.background__background-darker {
+          &:hover,
+          &:focus,
+          &[data-playing="true"] {
+            background-color: $col-background_darkest;
+          }
+        }
+        &.background__background-darkest {
+          &:hover,
+          &:focus,
+          &[data-playing="true"] {
+            background-color: desaturate(darken($col-background_darker, 8),7);
+          }
+        }
+      }
+
+      .video {
+        &--foreground {
+          @include img-contain;
+          z-index: 1;
+        }
+
+        &--background {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: calc(100% - (var(--section-graphic-panel-pad) * 2));
+          height: calc(100% - (var(--section-graphic-panel-pad) * 2));
+          z-index: 0;
+          transform: translate(-50%, -50%);
+        }
+
+        &__hidden {
+          opacity: 0;
+        }
       }
     }
 
@@ -197,7 +236,7 @@
         @include flex-row-between;
         align-items: flex-end;
 
-        &>*+* {
+        & > * + * {
           margin: 0;
         }
       }
@@ -279,7 +318,6 @@
 // Color variants
 
 .section {
-
   &__color,
   &__image {
     @include pad-y(var(--section-gap));
@@ -288,7 +326,7 @@
       color: $col-background;
     }
 
-    &+& {
+    & + & {
       margin-top: 0;
     }
   }
@@ -296,9 +334,8 @@
 
 .chapter {
   &__color {
-
     // TODO: fix this ugly ass selector
-    &>*>*:not(.background__background) {
+    & > * > *:not(.background__background) {
       * {
         color: $col-background;
       }
@@ -311,7 +348,8 @@
 }
 
 .background {
-  &__color {}
+  &__color {
+  }
 
   &__background {
     background-color: $col-background;
@@ -321,7 +359,7 @@
     background-color: $col-background_darker;
 
     // TODO: move this to a general class applied to all of these
-    &+& {
+    & + & {
       padding-top: 0;
     }
   }
@@ -329,7 +367,7 @@
   &__background-darkest {
     background-color: $col-background_darkest;
 
-    &+& {
+    & + & {
       padding-top: 0;
     }
   }
@@ -337,7 +375,7 @@
   &__primary {
     background-color: $col-primary;
 
-    &+& {
+    & + & {
       padding-top: 0;
     }
   }
@@ -345,7 +383,7 @@
   &__tertiary-makeright {
     background-color: $col-tertiary_makeright;
 
-    &+& {
+    & + & {
       padding-top: 0;
     }
   }
@@ -353,7 +391,7 @@
   &__tertiary {
     background-color: $col-tertiary;
 
-    &+& {
+    & + & {
       padding-top: 0;
     }
   }
@@ -361,7 +399,7 @@
   &__tertiary-light {
     background-color: $col-tertiary-light;
 
-    &+& {
+    & + & {
       padding-top: 0;
     }
   }

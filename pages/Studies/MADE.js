@@ -267,7 +267,7 @@ function MADE({ setPopup }) {
         </Chapter>
 
         <Chapter id="Texturing" name="Texturing">
-          <Section id="Texturing--Workflow" type="columns" titled="above">
+          <Section id="Texturing--Workflow" type="columns" titled="above" background="background darker">
             <Title>Workflow</Title>
             <Column>
               <Heading>
@@ -287,47 +287,68 @@ function MADE({ setPopup }) {
             </Column>
           </Section>
 
-          <Section id="Texturing--Stages" type="columns" wrapperClassName="mt-less" titled arrows mainClassName="gap-6" mainType="grid">
-
+          <Section id="Texturing--Stages" type="columns" wrapperClassName="mt-less" titled arrows mainClassName="gap-6" mainType="grid" background="background darker">
             <Column caption="above">
               <Description type="h3" className="graphic--caption weight-reg">
-              Fabric Scan
+                Fabric Scan
               </Description>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_1_scan} />
             </Column>
             <Column caption="above">
               <Description type="h3" className="graphic--caption weight-reg">
-              Cropped
+                Cropped
               </Description>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_2_cropped} />
             </Column>
             <Column caption="above">
               <Description type="h3" className="graphic--caption weight-reg">
-              Traced
+                Traced
               </Description>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_3_traced} />
             </Column>
             <Column caption="above">
               <Description type="h3" className="graphic--caption weight-reg">
-              Straightened
+                Straightened
               </Description>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_4_straightened} />
             </Column>
             <Column caption="above">
               <Description type="h3" className="graphic--caption weight-reg">
-              Repeatable texture
+                Repeatable texture
               </Description>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_5_repeatable} />
             </Column>
             <Column caption="above">
               <Description type="h3" className="graphic--caption weight-reg">
-              3D material
+                3D material
               </Description>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_6_material} />
             </Column>
+          </Section>
 
+          <Section id="Texturing--Contrast-Desc" type="columns" titled="above">
+            <Title>Contrast Areas</Title>
+            <Column>
+              <Heading>
+                Adding customizable <br />
+                accent fabric to reflect <br />
+                in-store offerings
+              </Heading>
+            </Column>
+            <Column>
+              <Description>
+                ‘Contrast areas’ are the parts of the dress shirt which accent the garment with an alternate fabric pallet. They were a <b>critical project requirement</b> as the online tool needed to represent the full scope of the customization available, which includes personalized accent areas.
+              </Description>
+            </Column>
+          </Section>
 
-
+          <Section id="Texturing--Contrast-Visuals" type="columns" wrapperClassName="mt-less-2">
+            <Column caption="above">
+              <Graphic type="video" className="b-rad" img={MADE_IMGS.contrast_split_mini_wide_video} background="background darkest" autoplay="scroll staggered hover" muted sync="Texturing--Contrast-Visuals" />
+            </Column>
+            <Column caption="above">
+              <Graphic type="video" className="b-rad" img={MADE_IMGS.contrast_split_wide_video} background="background darkest" autoplay="scroll staggered hover" muted sync="Texturing--Contrast-Visuals" />
+            </Column>
           </Section>
         </Chapter>
 
