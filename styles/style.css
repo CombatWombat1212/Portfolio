@@ -3598,6 +3598,35 @@ body {
   right: calc((var(--split-width) - (var(--split-width) * var(--split-graphic-scale))) / 2);
 }
 
+.image-row {
+  --image-row-scale: 1;
+  --image-row-col-offset:1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: calc(100%);
+}
+
+.image-row--wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  overflow-x: clip;
+  position: relative;
+  height: var(--image-height);
+}
+
+.image-row--image {
+  --col-width: calc(((100% - (0rem * (calc(var(--image-row-cols) - var(--image-row-col-offset)) - 1))) / calc(var(--image-row-cols) - var(--image-row-col-offset))) - 0rem);
+  width: var(--col-width);
+  min-width: var(--col-width);
+  transform: scale(var(--image-row-scale));
+  position: absolute !important;
+  top: 0;
+  left: calc((var(--image-row-index) * var(--col-width)) + var(--image-row-left));
+}
+
 .graph--wrapper {
   background-color: #F3F3F7;
   height: var(--graph-height);
@@ -5348,5 +5377,9 @@ body {
 
 #Made #Texturing--Details .section--main {
   grid-template-columns: repeat(4, 1fr);
+}
+
+#Made #Texturing--Transition .image-row {
+  --image-row-scale: 1.25;
 }
 /*# sourceMappingURL=style.css.map */

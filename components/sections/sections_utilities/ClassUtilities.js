@@ -45,6 +45,23 @@ function addClassNoRepeats(className, newClass) {
 
 
 
+function addStyleToJsxObj(jsxObj, propName, propValue) {
+  function addStyle(obj, propName, propValue) {
+    var copy = { ...obj };
+    copy.props = { ...obj.props };
+    copy.props.style = { ...obj.props.style };
+    copy.props.style[propName] = propValue;
+    return copy;
+  }
+
+  var jsxObjCopy = Array.isArray(jsxObj) ? jsxObj.slice() : [jsxObj];
+
+  for (var i = 0; i < jsxObjCopy.length; i++) {
+    jsxObjCopy[i] = addStyle(jsxObjCopy[i], propName, propValue);
+  }
+
+  return Array.isArray(jsxObj) ? jsxObjCopy : jsxObjCopy[0];
+}
 
 
 function addClassToJsxObj(jsxObj, className) {
@@ -64,4 +81,8 @@ function addClassToJsxObj(jsxObj, className) {
   return Array.isArray(jsxObj) ? jsxObjCopy : jsxObjCopy[0];
 }
 
-export { removeEmptyClasses, removeClassesOfPrefix, getClassesOfPrefix, addClassToJsxObj, addClassNoRepeats };
+
+
+
+
+export { removeEmptyClasses, removeClassesOfPrefix, getClassesOfPrefix, addClassToJsxObj, addStyleToJsxObj, addClassNoRepeats };

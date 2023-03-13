@@ -5,6 +5,7 @@ import { MADE_IMGS, MADE_IMG_GROUPS } from "@/data/MADE_IMGS";
 import MAKERIGHT_IMGS from "@/data/MAKERIGHT_IMGS";
 import Configurator from "@/components/global/Configurator";
 import Split from "@/components/global/Split";
+import ImageRow from "@/components/global/ImageRow";
 // import MAKERIGHT_IMGS from "/data/MAKERIGHT_IMGS";
 // import Gantt from "/components/charts/Gantt";
 // import BarGraph from "@/components/charts/BarGraph";
@@ -407,13 +408,27 @@ function MADE({ setPopup }) {
               <Description className="graphic--caption mt-less">Added with a focus on legibility, without being overbearing.</Description>
             </Column>
 
+          </Section>
 
 
 
 
+          <Section id="Texturing--Transition" type="passthrough" margin="none">
 
+            <ImageRow col="6">
+              <Graphic type="image" img={MADE_IMGS.shirt_row_01} />
+              <Graphic type="image" img={MADE_IMGS.shirt_row_02} />
+              <Graphic type="image" img={MADE_IMGS.shirt_row_03} />
+              <Graphic type="image" img={MADE_IMGS.shirt_row_04} />
+              <Graphic type="image" img={MADE_IMGS.shirt_row_05} />
+              <Graphic type="image" img={MADE_IMGS.shirt_row_06} />
+            </ImageRow>
 
           </Section>
+
+
+
+
         </Chapter>
 
         <Chapter id="Closing" name="Closing"></Chapter>
