@@ -118,9 +118,24 @@
 
 
 
-    &--Contrast-Visuals{
+    &--Contrast-Areas{
       .graphic{
         height: unset;
+      }
+    }
+
+    &--Contrast-Split{
+      .graphic{
+        height: unset;
+      }
+    }
+
+
+    &--Details{
+      .section{
+        &--main{
+        grid-template-columns: repeat(4, 1fr);
+        }
       }
     }
 

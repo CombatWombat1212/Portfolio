@@ -326,7 +326,7 @@ function MADE({ setPopup }) {
             </Column>
           </Section>
 
-          <Section id="Texturing--Contrast-Desc" type="columns" titled="above">
+          <Section id="Texturing--Contrast-Desc" type="columns" titled="above" background="background darker" wrapperClassName="mb-less-2">
             <Title>Contrast Areas</Title>
             <Column>
               <Heading>
@@ -342,13 +342,77 @@ function MADE({ setPopup }) {
             </Column>
           </Section>
 
-          <Section id="Texturing--Contrast-Visuals" type="columns" wrapperClassName="mt-less-2">
-            <Column caption="above">
-              <Graphic type="video" className="b-rad" img={MADE_IMGS.contrast_split_mini_wide_video} background="background darkest" autoplay="scroll staggered hover" muted sync="Texturing--Contrast-Visuals" />
+          <Section id="Texturing--Contrast-Areas" type="columns" background="background darker">
+            <Column>
+              <Graphic type="video" className="b-rad" img={MADE_IMGS.contrast_split_mini_wide_video} background="background darkest" autoplay="scroll staggered hover" muted sync="Texturing--Contrast-Areas" />
             </Column>
-            <Column caption="above">
-              <Graphic type="video" className="b-rad" img={MADE_IMGS.contrast_split_wide_video} background="background darkest" autoplay="scroll staggered hover" muted sync="Texturing--Contrast-Visuals" />
+            <Column>
+              <Graphic type="video" className="b-rad" img={MADE_IMGS.contrast_split_wide_video} background="background darkest" autoplay="scroll staggered hover" muted sync="Texturing--Contrast-Areas" />
             </Column>
+          </Section>
+
+          {/* TODO: Come back, get the final rendered videos from sheepit, import em and pop em in */}
+
+          <Section id="Texturing--Contrast-Split" type="columns" background="background darker">
+            <Column>
+              <Graphic type="video" className="b-rad" img={MADE_IMGS.contrast_split_mini_wide_video} background="background darkest" autoplay="scroll staggered hover" muted sync="Texturing--Contrast-Split" />
+              <Description className="graphic--caption">Our goal was to give shoppers the ability to alter their shirt's accent fabric, with 50+ available materials.</Description>
+            </Column>
+            <Column>
+              <Graphic type="video" className="b-rad" img={MADE_IMGS.contrast_split_wide_video} background="background darkest" autoplay="scroll staggered hover" muted sync="Texturing--Contrast-Split" />
+              <Description className="graphic--caption">To enable this, the inner lining of all 3 collars, and 1 cuff, needed to be isolated, and rendered as separate images.</Description>
+            </Column>
+          </Section>
+
+          <Section id="Texturing--Details" type="columns" titled="above" background="background darker" wrapperClassName="mb-less-2">
+            <Title>Additional Details</Title>
+            <Column>
+              <Heading>
+                The devil is in the details / <br />
+                The realism is in the seams
+              </Heading>
+            </Column>
+            <Column>
+              <Description>Lastly, the following details were added to increase the accuracy of the objects in relation to the real world products, and the subtleties of their design.</Description>
+            </Column>
+          </Section>
+
+          <Section id="Texturing--Details" type="columns" titled mainType="grid" background="background darker" mainClassName="mt-0">
+            <Column>
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.details_threading} />
+              <Heading type="h3" className="graphic--caption weight-reg">
+                Color-matched threading
+              </Heading>
+              <Description className="graphic--caption mt-less">I manually approximated matching thread colors for each shirt material. A simple task for solid-colors, occasionally tricky with complex patterns.</Description>
+            </Column>
+            <Column>
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.details_holes} />
+              <Heading type="h3" className="graphic--caption weight-reg">
+              Color-matched button holes
+              </Heading>
+              <Description className="graphic--caption mt-less">Buttonhole colors for each material were done separately, in a similar way to the threading.  Requiring their own fine-tuning to better match the threads in the final renders.</Description>
+            </Column>
+            <Column>
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.details_button} />
+              <Heading type="h3" className="graphic--caption weight-reg">
+              Button color
+              </Heading>
+              <Description className="graphic--caption mt-less">Either a dark or light button was assigned to each shirt material respective of its colour.</Description>
+            </Column>
+            <Column>
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.details_logo} />
+              <Heading type="h3" className="graphic--caption weight-reg">
+              MADE Logo tag
+              </Heading>
+              <Description className="graphic--caption mt-less">Added with a focus on legibility, without being overbearing.</Description>
+            </Column>
+
+
+
+
+
+
+
           </Section>
         </Chapter>
 

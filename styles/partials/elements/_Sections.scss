@@ -42,6 +42,12 @@
     &.mt-less-2 {
       padding-top: calc(var(--section-gap) * 0.25);
     }
+    &.mb-less {
+      padding-bottom: calc(var(--section-gap) * 0.5);
+    }
+    &.mb-less-2 {
+      padding-bottom: calc(var(--section-gap) * 0.25);
+    }
   }
 
   @include flex-row;

@@ -1685,6 +1685,14 @@ body {
   padding-top: calc(var(--section-gap) * 0.25);
 }
 
+.section--wrapper.mb-less {
+  padding-bottom: calc(var(--section-gap) * 0.5);
+}
+
+.section--wrapper.mb-less-2 {
+  padding-bottom: calc(var(--section-gap) * 0.25);
+}
+
 .section--title + * {
   margin-top: var(--font-margin-bottom-h4);
 }
@@ -5330,7 +5338,15 @@ body {
   grid-template-columns: repeat(3, 1fr);
 }
 
-#Made #Texturing--Contrast-Visuals .graphic {
+#Made #Texturing--Contrast-Areas .graphic {
   height: unset;
+}
+
+#Made #Texturing--Contrast-Split .graphic {
+  height: unset;
+}
+
+#Made #Texturing--Details .section--main {
+  grid-template-columns: repeat(4, 1fr);
 }
 /*# sourceMappingURL=style.css.map */

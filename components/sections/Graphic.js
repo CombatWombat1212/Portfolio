@@ -6,7 +6,6 @@ import React, { useEffect, useRef, useState } from "react";
 import Mask from "../utilities/Mask";
 import { getBackgroundClasses } from "./sections_utilities/GetClasses";
 
-// TODO: figure out how to pass in stuff like 'loop' and 'autoplay' from where graphic the component is invoked, without making them all seperate props, or actually now that i think about it maybe thats not bad
 
 function getColor(color, colors) {
   return color.split("-to-").map((color) => {
@@ -95,7 +94,7 @@ function Effect({ effect }) {
 }
 
 function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup, width, height, effect, style, priority, onLoad, loop, muted, autoplay, controls, tabIndex, onClick, square, sync, ...props }) {
-  // TODO: for mobile, add some kind of indication animation of the image being clocked on when its interactable or can be opened in a lightbox
+  // TODO: for mobile, add some kind of indication animation of the image being clicked on when its interactable or can be opened in a lightbox
 
   var pref = "section--graphic";
   var isImg = type == "image" || type == "img";
@@ -270,6 +269,9 @@ function graphicKeepSquare(elem) {
   window.addEventListener("resize", ran);
 }
 
+
+
+
 function graphicVideoInit(elem) {
   function GraphicItem(elem) {
     this.elem = elem.closest(".graphic--video");
@@ -343,15 +345,11 @@ function graphicVideoInit(elem) {
 
               const playNextVideo = () => {
                 const video = videos[videoIndex];
-                // video.parentElement.setAttribute("data-autoplaying", "true");
                 video.currentTime = 0;
                 graphicVideoPlay(video);
-                // console.log("play", video);
 
                 video.addEventListener("ended", () => {
-                  // video.parentElement.setAttribute("data-autoplaying", "false");
                   graphicVideoPause(video);
-                  // console.log("paused", video);
                   if (graphic.is.staggered && videoIndex < videos.length - 1) {
                     videoIndex++;
                     playNextVideo();
@@ -360,11 +358,12 @@ function graphicVideoInit(elem) {
 
                 if (!graphic.is.staggered) {
                   videos.forEach((v, i) => {
-                    if (i !== videoIndex) {
+                    graphicVideoPlay(v);
+
+                    v.addEventListener("ended", () => {
                       graphicVideoPause(v);
-                      // console.log("paused", v);
-                      // v.parentElement.setAttribute("data-autoplaying", "false");
-                    }
+                    });
+
                   });
                 }
               };
@@ -373,8 +372,6 @@ function graphicVideoInit(elem) {
             } else {
               videos.forEach((v) => {
                 graphicVideoPause(v);
-                // console.log("paused", v);
-                // v.parentElement.setAttribute("data-autoplaying", "false");
               });
             }
           });
@@ -384,7 +381,6 @@ function graphicVideoInit(elem) {
         firstVideo.setAttribute("data-observed", "true");
         observer.observe(firstVideo);
       } else {
-        // Not all videos are loaded yet, wait and try again
         setTimeout(startPlaying, 100);
       }
     }
