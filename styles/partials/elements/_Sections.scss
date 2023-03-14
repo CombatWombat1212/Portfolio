@@ -178,6 +178,9 @@
           &[data-playing="true"] {
             background-color: $col-background_darker;
           }
+          &[data-playing="false"] {
+            background-color: $col-background!important;
+          }
         }
         &.background__background-darker {
           &:hover,
@@ -185,12 +188,18 @@
           &[data-playing="true"] {
             background-color: $col-background_darkest;
           }
+          &[data-playing="false"] {
+            background-color: $col-background_darker!important;
+          }
         }
         &.background__background-darkest {
           &:hover,
           &:focus,
           &[data-playing="true"] {
             background-color: desaturate(darken($col-background_darker, 8),7);
+          }
+          &[data-playing="false"] {
+            background-color: $col-background_darkest!important;
           }
         }
       }

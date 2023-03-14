@@ -6,7 +6,6 @@ import React, { useEffect, useRef, useState } from "react";
 import Mask from "../utilities/Mask";
 import { getBackgroundClasses } from "./sections_utilities/GetClasses";
 
-
 function getColor(color, colors) {
   return color.split("-to-").map((color) => {
     if (color == "transparent") {
@@ -269,34 +268,42 @@ function graphicKeepSquare(elem) {
   window.addEventListener("resize", ran);
 }
 
-
-
-
 function graphicVideoInit(elem) {
   function GraphicItem(elem) {
     this.elem = elem.closest(".graphic--video");
     this.video = this.elem.querySelector("video");
-    this.transition = getComputedStyle(this.elem).transitionDuration && getComputedStyle(this.elem).transitionDuration !== "0s" ? splitS(getComputedStyle(this.elem).transitionDuration) : splitS(getComputedStyle(document.documentElement).getPropertyValue("--transition").trim());
+
+    // Check if transition duration is set and not equal to 0s. Otherwise, use a default value from a CSS variable.
+    if (getComputedStyle(this.elem).transitionDuration && getComputedStyle(this.elem).transitionDuration !== "0s") {
+      this.transition = splitS(getComputedStyle(this.elem).transitionDuration);
+    } else {
+      this.transition = splitS(getComputedStyle(document.documentElement).getPropertyValue("--transition").trim());
+    }
+
+    // Set autoplay and sync properties based on data attributes of the element.
     this.autoplay = this.elem.getAttribute("data-autoplay") ? this.elem.getAttribute("data-autoplay") : false;
     this.sync = this.elem.getAttribute("data-sync") ? this.elem.getAttribute("data-sync") : false;
-    this.group = typeof this.sync === "string" ? Array.from(document.querySelectorAll(`[data-sync="${this.sync}"]`)) : [this.elem];
-    this.index = this.group && this.group.indexOf(this.elem) ? this.group.indexOf(this.elem) : 0;
-    this.observer = null;
+
+    // If sync is set, group all elements with the same sync value together.
+    if (typeof this.sync === "string") {
+      this.group = Array.from(document.querySelectorAll(`[data-sync="${this.sync}"]`));
+    } else {
+      this.group = [this.elem];
+    }
+
+    // Get the index of the element within its group.
+    this.index = this.group.indexOf(this.elem);
+    this.playObserver = null;
+
+    // Set a boolean flag to indicate if autoplay is staggered or synchronized.
     this.is = {
       staggered: typeof this.autoplay === "string" && this.autoplay.includes("staggered"),
-      sync: this.sync ? true : false,
+      sync: Boolean(this.sync),
+      inView: false,
     };
   }
 
-
-
-
-
-
-
-  
   var graphic = new GraphicItem(elem);
-
   if (graphic.index != graphic.group.length - 1) return;
 
   graphic.group.forEach((v, i) => {
@@ -305,14 +312,15 @@ function graphicVideoInit(elem) {
   });
 
   if (typeof graphic.autoplay === "string" && graphic.autoplay.includes("scroll")) {
-    graphicCreateIntersectionObserver(graphic);
+    graphicCreatePlaybackIntersectionObserver(graphic);
+    // graphicCreateInViewIntersectionObserver(graphic);
   }
 
   if (typeof graphic.autoplay === "string" && graphic.autoplay.includes("hover")) {
     graphicPlayOnHoverInit(graphic);
   }
 
-  function graphicCreateIntersectionObserver(graphic) {
+  function graphicCreatePlaybackIntersectionObserver(graphic) {
     var videos = graphic.group.map((v) => v.elem.querySelector("video"));
     var firstVideo = videos[0];
     if (firstVideo.parentElement.getAttribute("data-observed") === "true") return;
@@ -335,63 +343,83 @@ function graphicVideoInit(elem) {
       });
     });
 
+
     Promise.all(promises).then(() => {
       if (graphic.is.sync && !graphic.is.staggered) {
-        setTimeout(() => startPlaying(), 500);
+        setTimeout(() => intersectionObserverStartPlaying(graphic, loadedFlags), 500);
       } else {
-        startPlaying();
+        intersectionObserverStartPlaying(graphic, loadedFlags);
       }
     });
+  }
 
-    function startPlaying() {
-      if (loadedFlags.every((f) => f)) {
-        var observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              let videoIndex = 0;
+  // TODO: right now this creates one observer for every group that is synced, and once it is in view then the videos either play together or staggered if staggered is true.  However, if on the mobile version the videos are split and say for example only the second video is visible, then it won't work.  So i'm wondering if we need to rework this so that the observer is added to all of them, but and the sync and staggered functionality still works, but only with videos that are within the viewport at the time. For now though i'm keeping it like this because i haven't specifically encountered that scenario yet.
+  function intersectionObserverStartPlaying(graphic, loadedFlags) {
+    var firstVideo = graphic.group[0].elem.querySelector("video");
+    var videos = graphic.group.map((v) => v.elem.querySelector("video"));
+    if (loadedFlags.every((f) => f)) {
+      var observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            let videoIndex = 0;
+            const playNextVideo = () => {
+              const video = videos[videoIndex];
+              video.currentTime = 0;
+              graphicVideoPlay(video);
 
-              const playNextVideo = () => {
-                const video = videos[videoIndex];
-                video.currentTime = 0;
-                graphicVideoPlay(video);
-
-                video.addEventListener("ended", () => {
-                  graphicVideoPause(video);
-                  if (graphic.is.staggered && videoIndex < videos.length - 1) {
-                    videoIndex++;
-                    playNextVideo();
-                  }
-                });
-
-                if (!graphic.is.staggered) {
-                  videos.forEach((v, i) => {
-                    graphicVideoPlay(v);
-
-                    v.addEventListener("ended", () => {
-                      graphicVideoPause(v);
-                    });
-
-                  });
+              video.addEventListener("ended", () => {
+                graphicVideoPause(video);
+                if (graphic.is.staggered && videoIndex < videos.length - 1) {
+                  videoIndex++;
+                  playNextVideo();
                 }
-              };
-
-              playNextVideo();
-            } else {
-              videos.forEach((v) => {
-                graphicVideoPause(v);
               });
-            }
-          });
-        });
 
-        graphic.observer = observer;
-        firstVideo.setAttribute("data-observed", "true");
-        observer.observe(firstVideo);
-      } else {
-        setTimeout(startPlaying, 100);
-      }
+              if (!graphic.is.staggered) {
+                videos.forEach((v, i) => {
+                  graphicVideoPlay(v);
+
+                  v.addEventListener("ended", () => {
+                    graphicVideoPause(v);
+                  });
+                });
+              }
+            };
+            playNextVideo();
+          } else {
+            videos.forEach((v) => {
+              graphicVideoPause(v);
+            });
+          }
+        });
+      });
+
+      graphic.playObserver = observer;
+      firstVideo.setAttribute("data-observed", "true");
+      observer.observe(firstVideo);
+    } else {
+      setTimeout(startPlaying, 100);
     }
   }
+
+  // TODO: this is commented out because it will be used in the event that you address the above todo but for now its not in use.
+  // function graphicCreateInViewIntersectionObserver(graphic) {
+  //   graphic.group.forEach((g) => {
+  //     var observer = new IntersectionObserver((entries) => {
+  //       entries.forEach((entry) => {
+  //         if (entry.isIntersecting) {
+  //           g.is.inView = true;
+  //           if(graphic.elem == g.elem) graphic.is.inView = true;
+  //         } else {
+  //           g.is.inView = false;
+  //           if(graphic.elem == g.elem) graphic.is.inView = false;
+  //         }
+  //       });
+  //     });
+  //     observer.observe(g.elem);
+  //     g.inViewObserver = observer;
+  //   });
+  // }
 
   function graphicVideoPlay(video) {
     video.parentElement.setAttribute("data-playing", "true");

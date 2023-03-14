@@ -1,9 +1,10 @@
-import { clamp, map, splitPx } from "@/scripts/GlobalUtilities";
+import { clamp, map, RESIZE_TIMEOUT, splitPx } from "@/scripts/GlobalUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { useEffect, useRef, useState } from "react";
 import { addClassToJsxObj, addStyleToJsxObj } from "../sections/sections_utilities/ClassUtilities";
+import { defaultProps, PropTypes } from "prop-types";
 
-function ImageRow({ children, col }) {
+function ImageRow({ children,className, col, direction }) {
   const [mounted, setMounted] = useState(false);
 
   const reference = useRef(null);
@@ -25,17 +26,31 @@ function ImageRow({ children, col }) {
     return el;
   });
 
+
+  var dir = {
+    key: direction,
+    value: direction == "right" ? 1 : 0,
+  }
+
+
+
   return (
     <div
-      className="image-row"
+      className={`image-row ${className}`}
       style={{
-        "--image-row-cols": col,
+        "--image-row-col": col,
+        "--image-row-direction": dir.value,
       }}
       ref={reference}>
       <div className="image-row--wrapper">{childs}</div>
     </div>
   );
 }
+
+ImageRow.defaultProps = {
+  direction: "right",
+};
+
 
 function rowGetImages(row) {
   var images = Array.from(row.elem.querySelectorAll(".image-row--image"));
@@ -55,13 +70,11 @@ function rowGetDistance(row) {
   row.distance = window.innerHeight;
 }
 
+function rowSetLeft(row) {
+  row.elem.style.setProperty("--image-row-progress", `${row.progress}`);
+}
+
 function rowGetProgress(row) {
-  // row.progress is a value between 0 and 1. 0 means that the top of the row is underneath the viewport. 1 means that the bottom of the row is above the viewport.
-
-  // first, calculate progress by comparing the top of the row to the bottom of the viewport
-  // then, once the row is in the exact middle of the viewport, calculate progress by comparing the bottom of the row to the top of the viewport
-  // this should give a smooth transition between the two calculations, as the middle point should be exactly 0.5
-
   // Get the bounding rect of the row
   const rect = row.elem.getBoundingClientRect();
   // Calculate the middle point of the row
@@ -80,7 +93,6 @@ function rowGetProgress(row) {
   progress = map(progress, -1, 1, 0, 1);
 
   row.progress = progress;
-  console.log(progress);
 }
 
 function rowInit(elem) {
@@ -96,21 +108,15 @@ function rowInit(elem) {
     },
   };
 
-  rowGetImages(row);
-  rowGetImageSize(row);
-  rowSetHeight(row);
-  rowGetDistance(row);
-  rowSetListeners(row);
-
-  //   add intersection observer to row
+  run();
 
   row.observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          console.log(row, "in");
+          window.addEventListener("scroll", rowOnScroll);
         } else {
-          console.log(row, "out");
+          window.removeEventListener("scroll", rowOnScroll);
         }
       });
     },
@@ -121,14 +127,30 @@ function rowInit(elem) {
 
   row.observer.observe(row.elem);
 
-  function rowSetListeners(row) {
-    window.addEventListener("scroll", rowOnScroll);
-  }
-
   function rowOnScroll() {
     rowGetDistance(row);
     rowGetProgress(row);
+    rowSetLeft(row);
   }
+
+  function run() {
+    rowGetImages(row);
+    rowGetImageSize(row);
+    rowSetHeight(row);
+    rowGetDistance(row);
+    rowOnScroll(row);
+  }
+
+  function ran() {
+    window.clearTimeout(isResizing);
+    isResizing = setTimeout(function () {
+      run();
+    }, RESIZE_TIMEOUT);
+  }
+
+  var isResizing;
+  window.removeEventListener("resize", ran);
+  window.addEventListener("resize", ran);
 }
 
 export default ImageRow;

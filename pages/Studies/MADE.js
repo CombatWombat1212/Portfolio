@@ -413,7 +413,7 @@ function MADE({ setPopup }) {
 
           <Section id="Texturing--Transition" type="passthrough" margin="none">
 
-            <ImageRow col="6">
+            <ImageRow className="img-row-col-6" col="6" direction="right">
               <Graphic type="image" img={MADE_IMGS.shirt_row_01} />
               <Graphic type="image" img={MADE_IMGS.shirt_row_02} />
               <Graphic type="image" img={MADE_IMGS.shirt_row_03} />

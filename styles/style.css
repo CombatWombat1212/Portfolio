@@ -1845,12 +1845,24 @@ body {
   background-color: #E9E9F2;
 }
 
+.section .graphic--video[data-autoplay-hover="true"].background__background[data-playing="false"] {
+  background-color: #F3F3F7 !important;
+}
+
 .section .graphic--video[data-autoplay-hover="true"].background__background-darker:hover, .section .graphic--video[data-autoplay-hover="true"].background__background-darker:focus, .section .graphic--video[data-autoplay-hover="true"].background__background-darker[data-playing="true"] {
   background-color: #E0E0EA;
 }
 
+.section .graphic--video[data-autoplay-hover="true"].background__background-darker[data-playing="false"] {
+  background-color: #E9E9F2 !important;
+}
+
 .section .graphic--video[data-autoplay-hover="true"].background__background-darkest:hover, .section .graphic--video[data-autoplay-hover="true"].background__background-darkest:focus, .section .graphic--video[data-autoplay-hover="true"].background__background-darkest[data-playing="true"] {
   background-color: #d2d2e0;
+}
+
+.section .graphic--video[data-autoplay-hover="true"].background__background-darkest[data-playing="false"] {
+  background-color: #E0E0EA !important;
 }
 
 .section .graphic--video .video--foreground {
@@ -3600,7 +3612,7 @@ body {
 
 .image-row {
   --image-row-scale: 1;
-  --image-row-col-offset:1;
+  --image-row-offset: 1;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -3618,12 +3630,16 @@ body {
 }
 
 .image-row--image {
-  --col-width: calc(((100% - (0rem * (calc(var(--image-row-cols) - var(--image-row-col-offset)) - 1))) / calc(var(--image-row-cols) - var(--image-row-col-offset))) - 0rem);
+  --col-width: calc(((100% - (0rem * (calc(var(--image-row-col) - var(--image-row-offset)) - 1))) / calc(var(--image-row-col) - var(--image-row-offset))) - 0rem);
   width: var(--col-width);
   min-width: var(--col-width);
   transform: scale(var(--image-row-scale));
   position: absolute !important;
   top: 0;
+  --offset-size: calc((var(--image-row-offset) * var(--col-width)) * -1);
+  --value1: calc(1 - var(--image-row-progress));
+  --value2: var(--image-row-progress);
+  --image-row-left: calc( var(--offset-size) * calc(var(--value1) * var(--image-row-direction) + var(--value2) * (1 - var(--image-row-direction))) );
   left: calc((var(--image-row-index) * var(--col-width)) + var(--image-row-left));
 }
 

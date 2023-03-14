@@ -346,3 +346,8 @@ $enable-important-utilities: false !default;
     @return calc(((#{$container-width} - (#{$gap} * (#{$col} - 1))) / #{$col}) - #{$additional});
   }
   
+
+  @function weighted-average($value1: var(--value1), $value2: var(--value2), $bool: var(--bool)) {
+    @return calc(#{$value1} * #{$bool} + #{$value2} * (1 - #{$bool}));
+  }
+

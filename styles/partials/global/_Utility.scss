@@ -123,6 +123,19 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
                 4: 4,
                 )
             ),
+        // "img-row-col": (
+        //     responsive:true,
+        //     property: '--image-row-col',
+        //     class: img-row-col,
+        //     values: (
+        //         1: 1,
+        //         2: 2,
+        //         3: 3,
+        //         4: 4,
+        //         5: 5,
+        //         6: 6,
+        //         )
+        //     ),
         "text-gap": (
             property: column-gap,
             class: text-gap,
