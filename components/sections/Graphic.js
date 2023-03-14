@@ -312,114 +312,105 @@ function graphicVideoInit(elem) {
   });
 
   if (typeof graphic.autoplay === "string" && graphic.autoplay.includes("scroll")) {
-    graphicCreatePlaybackIntersectionObserver(graphic);
-    // graphicCreateInViewIntersectionObserver(graphic);
+    graphicCreateIntersectionObserver(graphic);
   }
 
   if (typeof graphic.autoplay === "string" && graphic.autoplay.includes("hover")) {
     graphicPlayOnHoverInit(graphic);
   }
 
-  function graphicCreatePlaybackIntersectionObserver(graphic) {
-    var videos = graphic.group.map((v) => v.elem.querySelector("video"));
-    var firstVideo = videos[0];
-    if (firstVideo.parentElement.getAttribute("data-observed") === "true") return;
-
-    var loadedFlags = videos.map((v) => {
-      return false;
-    });
-
-    var promises = videos.map((v, i) => {
-      return new Promise((resolve) => {
-        if (v.readyState >= 4) {
-          loadedFlags[i] = true;
-          resolve();
-        } else {
-          v.addEventListener("loadedmetadata", () => {
-            loadedFlags[i] = true;
-            resolve();
-          });
-        }
-      });
-    });
-
-
-    Promise.all(promises).then(() => {
-      if (graphic.is.sync && !graphic.is.staggered) {
-        setTimeout(() => intersectionObserverStartPlaying(graphic, loadedFlags), 500);
-      } else {
-        intersectionObserverStartPlaying(graphic, loadedFlags);
-      }
-    });
-  }
-
-  // TODO: right now this creates one observer for every group that is synced, and once it is in view then the videos either play together or staggered if staggered is true.  However, if on the mobile version the videos are split and say for example only the second video is visible, then it won't work.  So i'm wondering if we need to rework this so that the observer is added to all of them, but and the sync and staggered functionality still works, but only with videos that are within the viewport at the time. For now though i'm keeping it like this because i haven't specifically encountered that scenario yet.
-  function intersectionObserverStartPlaying(graphic, loadedFlags) {
-    var firstVideo = graphic.group[0].elem.querySelector("video");
-    var videos = graphic.group.map((v) => v.elem.querySelector("video"));
-    if (loadedFlags.every((f) => f)) {
-      var observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+  function graphicCreateIntersectionObserver(graphic) {
+    graphic.group.forEach((g) => {
+      var observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            var inView = [];
             let videoIndex = 0;
-            const playNextVideo = () => {
-              const video = videos[videoIndex];
-              video.currentTime = 0;
-              graphicVideoPlay(video);
 
-              video.addEventListener("ended", () => {
+            function checkInView(callback) {
+              const maxCount = 2;
+              let count = 0;
+
+              const checkInViewHelper = () => {
+                inView = graphic.group
+                  .filter((g) => g.is.inView)
+                  .sort((a, b) => graphic.group.indexOf(a) - graphic.group.indexOf(b))
+                  .map((g) => g.video);
+
+                if (inView.length === 0 && graphic.group.length > 0) {
+                  // No video element found in view, set inView to empty array
+                  inView = [];
+                }
+
+                if (inView.length < graphic.group.length && count < maxCount) {
+                  count++;
+                  setTimeout(checkInViewHelper, 50);
+                } else {
+                  callback();
+                }
+              };
+
+              checkInViewHelper();
+            }
+
+            function playNextVideo() {
+              function ended() {
                 graphicVideoPause(video);
-                if (graphic.is.staggered && videoIndex < videos.length - 1) {
+                if (graphic.is.staggered && videoIndex < inView.length - 1) {
+                  video.removeEventListener("ended", ended);
                   videoIndex++;
                   playNextVideo();
                 }
-              });
-
-              if (!graphic.is.staggered) {
-                videos.forEach((v, i) => {
-                  graphicVideoPlay(v);
-
-                  v.addEventListener("ended", () => {
-                    graphicVideoPause(v);
-                  });
-                });
               }
-            };
-            playNextVideo();
-          } else {
-            videos.forEach((v) => {
-              graphicVideoPause(v);
-            });
-          }
-        });
-      });
 
-      graphic.playObserver = observer;
-      firstVideo.setAttribute("data-observed", "true");
-      observer.observe(firstVideo);
-    } else {
-      setTimeout(startPlaying, 100);
-    }
+              const video = inView[videoIndex];
+              video.currentTime = 0;
+              if (graphic.is.staggered) {
+                graphicVideoPlay(video);
+                video.addEventListener("ended", ended);
+
+              } else {
+                setTimeout(() => {
+                  inView.forEach((v, i) => {
+                    graphicVideoPlay(v);
+                    v.addEventListener("ended", () => {
+                      graphicVideoPause(v);
+                    });
+                  });
+                }, 200);
+              }
+            }
+
+
+            function pauseOutOfViewVideos() {
+              var outOfView = graphic.group.filter((g) => !g.is.inView);
+
+              outOfView.forEach((g) => {
+                if (!g.paused) {
+                  graphicVideoReset(g);
+                }
+              });
+            }
+
+            if (entry.isIntersecting) {
+              g.is.inView = true;
+              if (graphic.elem == g.elem) graphic.is.inView = true;
+              checkInView(playNextVideo);
+            } else {
+              g.is.inView = false;
+              if (graphic.elem == g.elem) graphic.is.inView = false;
+              checkInView(pauseOutOfViewVideos);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+
+      g.playObserver = observer;
+      g.elem.setAttribute("data-observed", "true");
+      observer.observe(g.elem);
+    });
   }
-
-  // TODO: this is commented out because it will be used in the event that you address the above todo but for now its not in use.
-  // function graphicCreateInViewIntersectionObserver(graphic) {
-  //   graphic.group.forEach((g) => {
-  //     var observer = new IntersectionObserver((entries) => {
-  //       entries.forEach((entry) => {
-  //         if (entry.isIntersecting) {
-  //           g.is.inView = true;
-  //           if(graphic.elem == g.elem) graphic.is.inView = true;
-  //         } else {
-  //           g.is.inView = false;
-  //           if(graphic.elem == g.elem) graphic.is.inView = false;
-  //         }
-  //       });
-  //     });
-  //     observer.observe(g.elem);
-  //     g.inViewObserver = observer;
-  //   });
-  // }
 
   function graphicVideoPlay(video) {
     video.parentElement.setAttribute("data-playing", "true");
@@ -439,14 +430,24 @@ function graphicVideoInit(elem) {
       g.elem.addEventListener("touchend", pause);
     });
 
+    function loop(e) {
+      var target = e.target.closest(".graphic--video");
+      var g = graphic.group.find((g) => g.elem === target);
+      if (g.video.currentTime >= g.video.duration - 0.1) {
+        g.video.currentTime = 0;
+      }
+    }
+
     function play(e) {
       var target = e.target.closest(".graphic--video");
       var g = graphic.group.find((g) => g.elem === target);
       graphicVideoPlay(g.video);
+      g.video.addEventListener("timeupdate", loop);
 
       // pause others
       graphic.group.forEach((g) => {
         if (g.elem !== target) {
+          g.video.removeEventListener("timeupdate", loop);
           graphicVideoReset(g);
         }
       });
@@ -454,7 +455,9 @@ function graphicVideoInit(elem) {
 
     function pause(e) {
       var target = e.target.closest(".graphic--video");
-      graphicVideoReset(graphic.group.find((g) => g.elem === target));
+      var g = graphic.group.find((g) => g.elem === target);
+      graphicVideoReset(g);
+      g.video.removeEventListener("timeupdate", loop);
     }
   }
 
@@ -475,3 +478,5 @@ function graphicVideoInit(elem) {
 }
 
 export default Graphic;
+
+export { graphicKeepSquare };

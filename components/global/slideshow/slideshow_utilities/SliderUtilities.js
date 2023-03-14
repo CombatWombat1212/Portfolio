@@ -176,7 +176,7 @@ function sliderHandleMouseDown(e) {
     notch.classList.remove("slider--notch__hoverable");
   });
 
-  document.body.classList.add("grabbed");
+  document.body.classList.add("cursor-grabbed");
 
   if (e.type == "mousedown") {
     document.addEventListener("mousemove", (e) => {
@@ -201,7 +201,7 @@ function sliderHandleMouseUp(e, handle) {
   sliderMouseGrabbed = 0;
 
   handle.classList.remove("slider--handle__active");
-  document.body.classList.remove("grabbed");
+  document.body.classList.remove("cursor-grabbed");
 
   var notches = handle.parentElement.querySelectorAll(".slider--notch");
   notches.forEach((notch) => {

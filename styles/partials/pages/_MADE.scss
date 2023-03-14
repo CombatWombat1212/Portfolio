@@ -1,3 +1,11 @@
+
+@mixin split-hover{
+  &:hover, &:focus, &.hover {
+    @content;
+  }
+}
+
+
 #Made {
   #Overview {
     &--Goal {
@@ -88,6 +96,9 @@
         height: unset;
         aspect-ratio: 1 / 1;
         --split-graphic-scale:0.85;
+        @include split-hover{
+          --split-graphic-scale:0.865;
+        }
       }
 
 
@@ -143,7 +154,8 @@
     &--Transition{
 
       .image-row{
-        --image-row-scale: 1.25;
+        --image-row-scale: 1.15;
+        --image-row-offset: 2;
       }
 
     }
@@ -160,6 +172,23 @@
 
 
 
+  #Rendering {
+    &--Lighting {
+
+      .split {
+        background-color: $col-background_darker;
+        --split-graphic-scale:0.85;
+        @include split-hover{
+          --split-graphic-scale:0.865;
+          background-color: lighten($col-background_darker,3);
+        }
+
+
+      }
+
+
+    }
+  }
 
 
 

@@ -66,6 +66,10 @@ body {
   }
 
 
-  .grabbed {
+  .cursor-grabbed {
     cursor: grabbing!important;
+  }
+  
+  .cursor-ew-resize {
+    cursor: ew-resize!important;
   }

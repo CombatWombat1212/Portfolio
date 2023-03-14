@@ -1,6 +1,9 @@
 import { clamp, RESIZE_TIMEOUT } from "@/scripts/GlobalUtilities";
 import { useEffect, useRef, useState } from "react";
+import { graphicKeepSquare } from "../sections/Graphic";
 import { Graphic } from "../sections/Sections";
+
+// TODO: before and after text labels on either side?
 
 function SplitItem(split) {
   this.elem = split;
@@ -64,12 +67,20 @@ function splitInit(split) {
     splitSetProgress(split);
   }
 
+  function reset() {
+    splitGetScale(split);
+    split.progress = 0.5;
+    splitSetProgress(split);
+  }
+
   function init() {
     refresh();
     split.elem.addEventListener("mousedown", splitMouseDown);
     split.elem.addEventListener("touchstart", splitMouseDown);
     split.elem.addEventListener("mousemove", splitMouseMoveStart);
     split.elem.addEventListener("touchmove", splitMouseMoveStart);
+
+    splitResetObserver(split);
   }
 
   function splitMouseMoveStart(e) {
@@ -101,18 +112,46 @@ function splitInit(split) {
     if (e.type == "mousedown") {
       document.addEventListener("mousemove", splitMouseMove);
       document.addEventListener("mouseup", splitMouseUp);
+      document.body.classList.add("cursor-ew-resize");
+      split.elem.classList.add("hover");
     } else if (e.type == "touchstart") {
       document.addEventListener("touchmove", splitMouseMove);
       document.addEventListener("touchend", splitMouseUp);
     }
   }
 
+
+
+
+  function splitResetObserver(split){
+    var observer = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) {
+          reset();
+        }
+      });
+    }, { threshold: 0});
+    observer.observe(split.elem);
+  }
+
+
+
+
+
+
+
+
+
+
+  
   function splitMouseUp(e) {
     split.grabbed = 0;
     document.removeEventListener("mousemove", splitMouseMove);
     document.removeEventListener("mouseup", splitMouseUp);
     document.removeEventListener("touchmove", splitMouseMove);
     document.removeEventListener("touchend", splitMouseUp);
+    document.body.classList.remove("cursor-ew-resize");
+    split.elem.classList.remove("hover");
   }
 
   function refreshed() {
@@ -127,9 +166,10 @@ function splitInit(split) {
   window.addEventListener("resize", refreshed);
 }
 
-function Split({ before, after }) {
+function Split({ before, after, square }) {
   const reference = useRef(null);
   const [mounted, setMounted] = useState(false);
+  var isSquare = square ? true : false;
 
   useEffect(() => {
     setMounted(true);
@@ -139,15 +179,25 @@ function Split({ before, after }) {
     if (!mounted) return;
     var split = new SplitItem(reference.current);
     splitInit(split);
+
+    if (isSquare) {
+      graphicKeepSquare(reference.current);
+    }
   }, [mounted]);
 
   return (
     <div className="split" ref={reference}>
       <div className="split--viewer split--before">
         <Graphic type="image" className="split--graphic" img={before} />
+        <div className="split--label split--label__before">
+          <span>Before</span>
+        </div>
       </div>
       <div className="split--viewer split--after">
         <Graphic type="image" className="split--graphic" img={after} />
+        <div className="split--label split--label__after">
+          <span>After</span>
+        </div>
       </div>
       <div
         className="split--division"

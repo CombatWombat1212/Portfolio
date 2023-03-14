@@ -414,20 +414,45 @@ function MADE({ setPopup }) {
           <Section id="Texturing--Transition" type="passthrough" margin="none">
 
             <ImageRow className="img-row-col-6" col="6" direction="right">
-              <Graphic type="image" img={MADE_IMGS.shirt_row_01} />
-              <Graphic type="image" img={MADE_IMGS.shirt_row_02} />
-              <Graphic type="image" img={MADE_IMGS.shirt_row_03} />
               <Graphic type="image" img={MADE_IMGS.shirt_row_04} />
-              <Graphic type="image" img={MADE_IMGS.shirt_row_05} />
               <Graphic type="image" img={MADE_IMGS.shirt_row_06} />
+              <Graphic type="image" img={MADE_IMGS.shirt_row_02} />
+              <Graphic type="image" img={MADE_IMGS.shirt_row_01} />
+              <Graphic type="image" img={MADE_IMGS.shirt_row_03} />
+              <Graphic type="image" img={MADE_IMGS.shirt_row_05} />
             </ImageRow>
 
           </Section>
 
 
+        </Chapter>
 
+
+
+        <Chapter id="Rendering" name="Rendering">
+
+        <Section id="Rendering--Lighting" type="columns" background="background darkest">
+            <Column>
+              <Split before={MADE_IMGS.lighting_before} after={MADE_IMGS.lighting_after} square />
+            </Column>
+            <Column>
+              <Title>Lighting</Title>
+              <Heading>
+                Lighting 
+                <br />
+                the final composition
+              </Heading>
+              <Description>
+                <p>At this stage, MADE’s design goals were on soft, consistent lighting, without it being so flat that shirts appear bland or even artificial. Gentle shadows, with nothing distracting from the product.</p>
+              </Description>
+            </Column>
+          </Section>
 
         </Chapter>
+
+
+
+
 
         <Chapter id="Closing" name="Closing"></Chapter>
       </CaseStudyPage>
