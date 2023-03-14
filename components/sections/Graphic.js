@@ -288,6 +288,13 @@ function graphicVideoInit(elem) {
     };
   }
 
+
+
+
+
+
+
+  
   var graphic = new GraphicItem(elem);
 
   if (graphic.index != graphic.group.length - 1) return;

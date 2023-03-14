@@ -345,14 +345,12 @@ function MADE({ setPopup }) {
 
           <Section id="Texturing--Contrast-Areas" type="columns" background="background darker">
             <Column>
-              <Graphic type="video" className="b-rad" img={MADE_IMGS.contrast_split_mini_wide_video} background="background darkest" autoplay="scroll staggered hover" muted sync="Texturing--Contrast-Areas" />
+              <Graphic type="video" className="b-rad" img={MADE_IMGS.contrast_glow_mini_wide_fabric_video} background="background darkest" autoplay="scroll staggered hover" muted sync="Texturing--Contrast-Areas" />
             </Column>
             <Column>
-              <Graphic type="video" className="b-rad" img={MADE_IMGS.contrast_split_wide_video} background="background darkest" autoplay="scroll staggered hover" muted sync="Texturing--Contrast-Areas" />
+              <Graphic type="video" className="b-rad" img={MADE_IMGS.contrast_glow_wide_fabric_video} background="background darkest" autoplay="scroll staggered hover" muted sync="Texturing--Contrast-Areas" />
             </Column>
           </Section>
-
-          {/* TODO: Come back, get the final rendered videos from sheepit, import em and pop em in */}
 
           <Section id="Texturing--Contrast-Split" type="columns" background="background darker">
             <Column>
