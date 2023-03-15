@@ -9,11 +9,10 @@ import PieChart from "@/components/charts/PieChart";
 import Button from "@/components/elements/Buttons";
 import Slideshow from "@/components/global/slideshow/Slideshow";
 import Pitch from "@/components/sections/Pitch";
+import { KOALAKO_IMGS } from "@/data/KOALAKO_IMGS";
 
 function KoalaKo() {
   const study = getStudy();
-
-  console.log(study);
 
   return (
     <CaseStudyPage id={study.id} study={study}>
