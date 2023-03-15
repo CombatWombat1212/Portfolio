@@ -1,21 +1,13 @@
 import { getStudy } from "@/scripts/GetStudy";
 import CaseStudyPage from "@/components/studies/CaseStudyPage";
-import { Section, Chapter, Title, Column, Heading, Description, Graphic, Quote } from "@/components/sections/Sections";
 import { MADE_IMGS } from "@/data/MADE_IMGS";
+import { Section, Chapter, Title, Column, Heading, Description, Graphic, Quote } from "@/components/sections/Sections";
 import Configurator from "@/components/global/Configurator";
 import Split from "@/components/global/Split";
 import ImageRow from "@/components/global/ImageRow";
 import ProsCons, { Con, Pro } from "@/components/global/ProsCons";
-// import MAKERIGHT_IMGS from "/data/MAKERIGHT_IMGS";
-// import Gantt from "/components/charts/Gantt";
-// import BarGraph from "@/components/charts/BarGraph";
-// import DLink from "@/components/utilities/DynamicLink";
-// import PieChart from "@/components/charts/PieChart";
-// import Button from "@/components/elements/Buttons";
-// import Slideshow from "@/components/global/slideshow/Slideshow";
-// import Pitch from "@/components/sections/Pitch";
 
-function MADE({ setPopup }) {
+function MADE() {
   // TODO: just make it a prop
   const study = getStudy();
 

@@ -108,9 +108,14 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
             class: h,
             values: (auto:auto,
             unset: unset)),
-        "border-radius": (property: border-radius,
+        "border-radius": (
+            property: border-radius,
+            important: true,
             class: b,
-            values: (rad: var(--b-rad)),
+            values: (
+                rad: var(--b-rad),
+                round: 1000rem,
+                ),
             defaults: (
                 overflow: hidden,
             )),
@@ -130,19 +135,14 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
                 4: 4,
                 )
             ),
-        // "img-row-col": (
-        //     responsive:true,
-        //     property: '--image-row-col',
-        //     class: img-row-col,
-        //     values: (
-        //         1: 1,
-        //         2: 2,
-        //         3: 3,
-        //         4: 4,
-        //         5: 5,
-        //         6: 6,
-        //         )
-        //     ),
+        "text-align": (
+            responsive:true,
+            property: 'text-align',
+            class: text-align,
+            values: (
+                center: center,
+                )
+            ),
         "text-gap": (
             property: column-gap,
             class: text-gap,

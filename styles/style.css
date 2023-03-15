@@ -4590,8 +4590,13 @@ body {
 }
 
 .b-rad {
-  border-radius: var(--b-rad);
-  overflow: hidden;
+  border-radius: var(--b-rad) !important;
+  overflow: hidden !important;
+}
+
+.b-round {
+  border-radius: 1000rem !important;
+  overflow: hidden !important;
 }
 
 .p-0 {
@@ -4636,6 +4641,10 @@ body {
 
 .text-col-4 {
   column-count: 4;
+}
+
+.text-align-center {
+  text-align: center;
 }
 
 .text-gap-0 {
@@ -4787,6 +4796,9 @@ body {
     row-gap: 6rem;
     gap: 6rem;
   }
+  .text-align-sm-center {
+    text-align: center;
+  }
   .just-sm-center {
     justify-content: center;
   }
@@ -4898,6 +4910,9 @@ body {
     column-gap: 6rem;
     row-gap: 6rem;
     gap: 6rem;
+  }
+  .text-align-md-center {
+    text-align: center;
   }
   .just-md-center {
     justify-content: center;
@@ -5011,6 +5026,9 @@ body {
     row-gap: 6rem;
     gap: 6rem;
   }
+  .text-align-lg-center {
+    text-align: center;
+  }
   .just-lg-center {
     justify-content: center;
   }
@@ -5123,6 +5141,9 @@ body {
     row-gap: 6rem;
     gap: 6rem;
   }
+  .text-align-xl-center {
+    text-align: center;
+  }
   .just-xl-center {
     justify-content: center;
   }
@@ -5234,6 +5255,9 @@ body {
     column-gap: 6rem;
     row-gap: 6rem;
     gap: 6rem;
+  }
+  .text-align-xxl-center {
+    text-align: center;
   }
   .just-xxl-center {
     justify-content: center;
@@ -5572,5 +5596,63 @@ body {
 
 #Made #Deliver--Closing .background {
   background-color: #E9E9F2;
+}
+
+#Koalako #Overview--Team .mask {
+  background-color: #074391;
+  opacity: 0.8;
+  width: 65%;
+  height: 65%;
+}
+
+#Koalako #Overview--Challenge .section--copy {
+  margin-right: -6rem;
+}
+
+#Koalako #Overview--Challenge .mask {
+  margin-top: 1.5rem;
+  margin-bottom: -1.5rem;
+}
+
+#Koalako #Overview--Privacy .mask, #Koalako #Overview--Wordly .mask {
+  margin-top: 1.1rem;
+  background-color: #F3F3F7;
+}
+
+#Koalako #Overview--Privacy .section--graphic, #Koalako #Overview--Wordly .section--graphic {
+  margin-top: 0rem;
+}
+
+#Koalako #Overview--Privacy .section--graphic .graphic--img, #Koalako #Overview--Wordly .section--graphic .graphic--img {
+  height: fit-content;
+}
+
+#Koalako #Overview--Privacy .section--graphic img, #Koalako #Overview--Wordly .section--graphic img {
+  height: fit-content;
+}
+
+#Koalako #Overview--Privacy .section--heading, #Koalako #Overview--Wordly .section--heading {
+  margin-top: 1.2rem;
+}
+
+#Koalako #Overview--Privacy .section--description, #Koalako #Overview--Wordly .section--description {
+  margin-top: 1.25rem;
+}
+
+#Koalako #Overview--Privacy .solution--copy, #Koalako #Overview--Wordly .solution--copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#Koalako #Overview--Privacy .solution--graphics, #Koalako #Overview--Wordly .solution--graphics {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  --gap: 2rem;
+  gap: var(--gap);
+  column-gap: var(--gap);
+  row-gap: var(--gap);
+  align-items: center;
 }
 /*# sourceMappingURL=style.css.map */

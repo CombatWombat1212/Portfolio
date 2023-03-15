@@ -2,8 +2,9 @@ import { defaultProps, PropTypes } from "prop-types";
 
 
 
-function Mask({ className, src, alt, width, height, img }) {
-  
+function Mask({ className, src, alt, width, height, img, style }) {
+
+  style = style || {}
 
   if(img){
     src = img.src
@@ -30,6 +31,7 @@ function Mask({ className, src, alt, width, height, img }) {
         "--mask-aspect-width": width,
         "--mask-aspect-height": height,
         "--mask-img": `url('${src}')`,
+        ...style
       }}
       alt={alt} ></div>
   );

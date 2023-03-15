@@ -343,6 +343,7 @@ const KOALAKO_IMGS = processImages({
     alt: "A high fidelity mockup of the location screen of the KoalaKo app, where the user is able to view a map of their local area and its child friendly locations.",
     width: 942,
     height: 2036,
+    group: "solution_mockup_map",
   },
   solution_mockup_map_item: {
     name: "solution_mockup_map_item",
@@ -350,6 +351,7 @@ const KOALAKO_IMGS = processImages({
     alt: "A high fidelity mockup of a selected location on the map screen of the KoalaKo app.  Where the user is able to more information about the location, and the activities available there.",
     width: 942,
     height: 2036,
+    group: "solution_mockup_map",
   },
   solution_mockup_setup: {
     name: "solution_mockup_setup",
@@ -357,6 +359,7 @@ const KOALAKO_IMGS = processImages({
     alt: "A high fidelity mockup of the child profile setup screen of the KoalaKo app, which can be skipped if the user doesn't want to track play history, and just wants to use the app for its activity database and location features.",
     width: 942,
     height: 2040,
+    group: "solution_mockup_signup",
   },
   solution_mockup_skip_signup: {
     name: "solution_mockup_skip_signup",
@@ -364,8 +367,9 @@ const KOALAKO_IMGS = processImages({
     alt: "A high fidelity mockup of a user having skipped the child profile setup screen of the KoalaKo app, and is now seeing a message encouraging them to opt-in to tracking their play history, as it enables greater functionality.  Ultimately, this is completely optional.",
     width: 942,
     height: 2040,
+    group: "solution_mockup_signup",
   },
-});
+}, "koalako");
 
 const KOALAKO_IMG_GROUPS = processGroups(KOALAKO_IMGS);
 

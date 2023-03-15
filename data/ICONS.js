@@ -122,6 +122,13 @@ const ICONS = {
     height: 17,
   },
 
+  user: {
+    name: "user",
+    src: "/assets/icons/user.svg",
+    alt: "",
+    width: 448,
+    height: 512,
+  },
 
 
 
@@ -151,6 +158,7 @@ const linkedin = new Icon(ICONS.linkedin);
 const loading = new Icon(ICONS.loading);
 const checkmark = new Icon(ICONS.checkmark);
 const xmark = new Icon(ICONS.xmark);
+
 
 export default ICONS
 export { arrow_right, arrow_left, arrow_down, chevron_down, chevron_right,chevron_left, document, email, instagram, linkedin, loading, checkmark, xmark }

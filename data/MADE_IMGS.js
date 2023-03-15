@@ -633,7 +633,7 @@ const MADE_IMGS = processImages({
     width: 1000,
     height: 1000,
   },
-});
+}, "made");
 
 const MADE_IMG_GROUPS = processGroups(MADE_IMGS);
 

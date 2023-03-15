@@ -80,8 +80,8 @@ function Next({ study }) {
     "Case studies, anyone?",
     "Lets keep the good times rollin'",
     "Another one",
-    "One more for the road?",
     "There's more where that came from",
+    "Get 'em while they're hot",
     "We're just gettin' started",
   ]
 

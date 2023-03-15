@@ -92,7 +92,7 @@ function Effect({ effect }) {
   );
 }
 
-function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup, width, height, effect, style, priority, onLoad, loop, muted, autoplay, controls, tabIndex, onClick, square, sync, ...props }) {
+function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup, width, height, effect, style, priority, onLoad, loop, muted, autoplay, controls, tabIndex, onClick, square, sync, innerStyle, ...props }) {
   // TODO: for mobile, add some kind of indication animation of the image being clicked on when its interactable or can be opened in a lightbox
 
   var pref = "section--graphic";
@@ -102,6 +102,7 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
   var isSquare = square ? true : false;
   var backgroundClasses = getBackgroundClasses(pref, background);
   color = color ? `mask__${color}` : "";
+  innerStyle = innerStyle ? innerStyle : {};
   innerClassName = innerClassName ? innerClassName : "";
   className = className ? className : "";
 
@@ -180,14 +181,14 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
       {isImg && (
         <div className={`graphic--img ${allClasses}`} style={{ ...styleVariables, ...style }} ref={reference} onClick={onClick} {...(tabIndex !== undefined ? { tabIndex } : {})} {...props}>
           {effect && <Effect effect={effect} />}
-          <Image className={innerClassName} src={img.src} alt={img.alt} width={width} height={height} onClick={onClickHandler} priority={priority} onLoad={onLoad} />
+          <Image className={innerClassName} src={img.src} alt={img.alt} width={width} height={height} onClick={onClickHandler} priority={priority} onLoad={onLoad} style={innerStyle} />
           {children && children}
         </div>
       )}
       {isMask && (
         <div className={`graphic--mask ${allClasses}`} style={{ ...styleVariables, ...style }} ref={reference} onClick={onClick} {...(tabIndex != undefined ? { tabIndex: tabIndex } : {})} {...props}>
           {effect && <Effect effect={effect} />}
-          <Mask className={`${innerClassName} ${color}`} src={img.src} alt={img.alt} width={width} height={height} onClick={onClickHandler} priority={priority} onLoad={onLoad} />
+          <Mask className={`${innerClassName} ${color}`} src={img.src} alt={img.alt} width={width} height={height} onClick={onClickHandler} priority={priority} onLoad={onLoad} style={innerStyle} />
           {children && children}
         </div>
       )}

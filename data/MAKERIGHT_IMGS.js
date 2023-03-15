@@ -1,6 +1,6 @@
-import { processGroups } from "@/scripts/ProcessImages";
+import { processGroups, processImages } from "@/scripts/ProcessImages";
 
-const MAKERIGHT_IMGS = {
+const MAKERIGHT_IMGS = processImages({
   full_potential: {
     name: "full_potential",
     src: "./assets/images/case_studies/makeright/full_potential.svg",
@@ -1112,7 +1112,7 @@ const MAKERIGHT_IMGS = {
     actions: [],
     alt: "Order ticket delivered confirmation page for MakeRight, where customers are given the opportunity to rate their Maker and provide feedback.",
   },
-};
+}, "makeright");
 
 
 const MAKERIGHT_IMG_GROUPS = processGroups(MAKERIGHT_IMGS);

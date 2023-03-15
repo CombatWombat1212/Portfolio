@@ -1,9 +1,11 @@
 import MAKERIGHT_IMGS, { MAKERIGHT_IMG_GROUPS } from "@/data/MAKERIGHT_IMGS";
+
 import toggle from "@/scripts/AnimationTools";
 import { splitS } from "@/scripts/GlobalUtilities";
 import { setWaitingToShowLoading, waitToLoad } from "../Popup";
 import { hiddenUIInit, setActiveHiddenUI } from "./HiddenUIUtilities";
-import { loadImgExternally } from "@/scripts/GlobalUtilities"; 
+import { loadImgExternally } from "@/scripts/GlobalUtilities";
+import { KOALAKO_IMG_GROUPS } from "@/data/KOALAKO_IMGS";
 
 var popupGroup = false;
 var popupIndex;
@@ -18,12 +20,19 @@ function checkForRelevantGroups(popup, setPopup) {
   // TODO: this one is stupid optional, what about an animation between the image on the page and the image in the popup? like a zoom in or something?
 
   var imgGroup = popup.img.group;
+  var imgStudy = popup.img.study;
+
+  var IMG_GROUP; 
+  if (imgStudy == "koalako") IMG_GROUP = KOALAKO_IMG_GROUPS;
+  if (imgStudy == "makeright") IMG_GROUP = MAKERIGHT_IMG_GROUPS;
+
+
 
   if (!imgGroup) return;
-  if (typeof MAKERIGHT_IMG_GROUPS[imgGroup] === "undefined") throw new Error(`No group with name ${imgGroup} found`);
+  if (typeof IMG_GROUP[imgGroup] === "undefined") throw new Error(`No group with name ${imgGroup} found`);
 
   var index = popup.img.index;
-  var group = MAKERIGHT_IMG_GROUPS[imgGroup];
+  var group = IMG_GROUP[imgGroup];
 
   popupGroup = group;
   popupIndex = index;
@@ -37,18 +46,18 @@ function checkForRelevantGroups(popup, setPopup) {
   var seekLeftOn = seekLeft.classList.contains("popup--seek__on") ? true : false;
 
   if (popupIndex == 0) {
-    if (!seekRightOn) toggle(seekRight, {classPref: "popup--seek", duration: "transition"});
-    if (seekLeftOn) toggle(seekLeft, {classPref: "popup--seek", duration: "transition"});
+    if (!seekRightOn) toggle(seekRight, { classPref: "popup--seek", duration: "transition" });
+    if (seekLeftOn) toggle(seekLeft, { classPref: "popup--seek", duration: "transition" });
   }
   if (popupIndex == popupGroup.imgs.length - 1) {
-    if (seekRightOn) toggle(seekRight, {classPref: "popup--seek", duration: "transition"});
-    if (!seekLeftOn) toggle(seekLeft, {classPref: "popup--seek", duration: "transition"});
+    if (seekRightOn) toggle(seekRight, { classPref: "popup--seek", duration: "transition" });
+    if (!seekLeftOn) toggle(seekLeft, { classPref: "popup--seek", duration: "transition" });
   }
   if (popupIndex > 0 && popupIndex < popupGroup.imgs.length - 1) {
-    if (!seekRightOn) toggle(seekRight, {classPref: "popup--seek", duration: "transition"});
-    if (!seekLeftOn) toggle(seekLeft, {classPref: "popup--seek", duration: "transition"});
+    if (!seekRightOn) toggle(seekRight, { classPref: "popup--seek", duration: "transition" });
+    if (!seekLeftOn) toggle(seekLeft, { classPref: "popup--seek", duration: "transition" });
   }
-  }
+}
 
 function seekHandler(e, setPopup) {
   var button;
@@ -112,9 +121,9 @@ function lightboxInit(popup, setPopup, setShowLoading) {
     img.classList.add("popup--img__off");
     wrapper.appendChild(img);
 
-    toggle(img, {classPref: "popup--img", duration: "transition"});
-    toggle(content, {classPref: "popup--content", duration: "transition"});
-    
+    toggle(img, { classPref: "popup--img", duration: "transition" });
+    toggle(content, { classPref: "popup--content", duration: "transition" });
+
     imgLoading = false; // indicate that the image has finished loading
 
     setWaitingToShowLoading(false);

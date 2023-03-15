@@ -105,13 +105,15 @@ function checkForOverlappingIndexes(group, index, name, currentGroup) {
 
 
 
-  function processImages(images) {
+  function processImages(images, study) {
     const processedImages = {};
+    study = study || "";
     for (const key in images) {
       if (images.hasOwnProperty(key)) {
         const image = images[key];
         const fileExtension = image.src.split(".").pop();
         image.type = fileExtension;
+        image.study = study;
         processedImages[key] = image;
       }
     }

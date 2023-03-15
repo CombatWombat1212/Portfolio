@@ -58,21 +58,23 @@ function ColumnGroup({ columns, arrows, line, mainType }) {
           if (props.classes.colClasses.length != 0) colClasses = props.classes.colClasses.join(" ");
           if (props.classes.otherClasses.length != 0) otherClasses = props.classes.otherClasses.join(" ");
         }
-
+        
         var attrProps = { ...props };
         delete attrProps.classes;
         delete attrProps.children;
+        delete attrProps.className;
         var caption = attrProps.caption ? attrProps.caption : false;
 
+        
         if (caption == "above") {
           description = addClassToJsxObj(description, "graphic--caption__above");
         }
-
+        
         if (caption == "above" || hasAnchoredArrows) {
           arrowClasses = arrowClasses.replace("arrow--mask__default", "");
           arrowClasses = addClassNoRepeats(arrowClasses, "arrow--mask__anchored");
         }
-
+        
         return (
           <Column className={`column ${colClasses} ${otherClasses}`} key={`column ${i}`} {...attrProps}>
             {hasArrows && i != 0 && (
