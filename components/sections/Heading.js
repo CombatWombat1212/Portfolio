@@ -33,15 +33,11 @@ function getHeadingClasses(type) {
 
 function Heading({ children, type, className }) {
   var headingClasses = getHeadingClasses(type);
+  const HeadingTag = type;
 
   return (
     <div className={`section--heading ${headingClasses} ${className ? className : ""}`}>
-      {type == "h1" && <h1>{children}</h1>}
-      {type == "h2" && <h2>{children}</h2>}
-      {type == "h3" && <h3>{children}</h3>}
-      {type == "h4" && <h4>{children}</h4>}
-      {type == "h5" && <h5>{children}</h5>}
-      {type == "p" && <p>{children}</p>}
+      <HeadingTag>{children}</HeadingTag>
     </div>
   );
 }

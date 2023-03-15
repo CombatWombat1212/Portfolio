@@ -20,9 +20,11 @@ function BriefPoint({ items, type }) {
   //   if (type == "description") pointClasses += "col-6";
   //   if (type != "description") pointClasses += "col-3";
 
+
+
   return (
     <>
-      <div className={pointClasses}>
+      {items && <div className={pointClasses}>
         <h4 className="brief--title">{title}</h4>
 
         {isList ? (
@@ -54,7 +56,7 @@ function BriefPoint({ items, type }) {
             <p className={itemClasses}>{items}</p>
           </>
         )}
-      </div>
+      </div>}
     </>
   );
 }
@@ -71,6 +73,7 @@ function BriefList({ brief }) {
   //     "timeline",
   //     "tools",
   // ];
+
 
   return (
     <>

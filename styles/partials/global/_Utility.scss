@@ -106,13 +106,20 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
             property: height,
             important: true,
             class: h,
-            values: (auto:auto)),
+            values: (auto:auto,
+            unset: unset)),
         "border-radius": (property: border-radius,
             class: b,
             values: (rad: var(--b-rad)),
             defaults: (
                 overflow: hidden,
             )),
+        "padding": (property: padding,
+            class: p,
+            values: ($spacers),
+            important: true,
+
+            ),
         "text-col": (
             property: column-count,
             class: text-col,

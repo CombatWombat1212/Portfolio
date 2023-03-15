@@ -364,6 +364,7 @@ function graphicVideoInit(elem) {
               }
 
               const video = inView[videoIndex];
+              if (!video) return;
               video.currentTime = 0;
               if (graphic.is.staggered) {
                 graphicVideoPlay(video);

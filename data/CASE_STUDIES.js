@@ -15,7 +15,7 @@ var CASE_STUDIES = [
     tags: ["Thesis", "UX/UI Design", "User Research"],
 
     brief: {
-      description: "For my undergraduate capstone, I created a service that directly connects owners of 3D printers to customers in need.  Based on a gig-economy model, like Uber or DoorDash, this service enables access to 3D printing without the barriers of cost, and know-how. ",
+      description: "For my undergraduate capstone, I created a service that directly connects owners of 3D printers to customers in need.  Based on a gig-economy model, like Uber or DoorDash, this service enables access to 3D printing without the barriers of cost, and know-how.",
       tools: ["Adobe XD / Figma", "Illustrator", "Mural", "HTML/CSS/JS", "After Effects", "InDesign"],
       deliverables: ["Hi-fidelity prototypes, of 2 user flows", "30+ Unique screens"],
       timeline: "6 Months",

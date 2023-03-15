@@ -1,9 +1,9 @@
 import { StudyPanel } from "../elements/Panel";
-import Section from "../sections/Sections";
+import Section, { Heading } from "../sections/Sections";
 import Brief from "./Brief";
 import NextStudies from "./NextStudies";
 import Indicator from "./Indicator";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 
 
@@ -74,8 +74,30 @@ function CaseStudyPage({ id, study, children }) {
 
 
 function Next({ study }) {
+
+  const captions = [
+    "Room for one more?",
+    "Case studies, anyone?",
+    "Lets keep the good times rollin'",
+    "Another one",
+    "One more for the road?",
+    "There's more where that came from",
+    "We're just gettin' started",
+  ]
+
+  const [chosen, setChosen] = useState(null);
+
+  useEffect(() => {
+    setChosen(captions[Math.floor(Math.random() * captions.length)]);
+  }, []);
+
+  if (!chosen) {
+    return null;
+  }
+
   return (
-    <Section id="Closing--Next" type="passthrough" wrapperClassName={'pb-section-gap'}>
+    <Section id="Closing--Next" type="passthrough" wrapperClassName={'pb-section-gap'} titled>
+      <Heading>{chosen}</Heading>
       <NextStudies study={study} />
     </Section>
   );

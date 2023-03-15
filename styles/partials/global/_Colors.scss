@@ -22,6 +22,11 @@ $col-background_darker: #E9E9F2;
 $col-background_darkest: #E0E0EA;
 
 
+$col-negative: #C4123C;
+$col-positive: #08B430;
+
+
+
 $colors: (
   primary: $col-primary,
   primary-hovered: darken($col-primary, 5%),
@@ -32,7 +37,9 @@ $colors: (
   tertiary-makeright: $col-tertiary_makeright,
   background: $col-background,
   background-darker: $col-background_darker,
-  background-darkest: $col-background_darkest
+  background-darkest: $col-background_darkest,
+    negative: $col-negative,
+    positive: $col-positive
 );
 
 

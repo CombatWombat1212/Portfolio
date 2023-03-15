@@ -107,6 +107,22 @@ const ICONS = {
   },
 
 
+  checkmark: {
+    name: "checkmark",
+    src: "/assets/icons/checkmark.svg",
+    alt: "",
+    width: 22,
+    height: 17,
+  },
+    xmark: {
+    name: "xmark",
+    src: "/assets/icons/xmark.svg",
+    alt: "",
+    width: 17,
+    height: 17,
+  },
+
+
 
 
 };
@@ -133,9 +149,11 @@ const instagram = new Icon(ICONS.instagram);
 const linkedin = new Icon(ICONS.linkedin);
 
 const loading = new Icon(ICONS.loading);
+const checkmark = new Icon(ICONS.checkmark);
+const xmark = new Icon(ICONS.xmark);
 
 export default ICONS
-export { arrow_right, arrow_left, arrow_down, chevron_down, chevron_right,chevron_left, document, email, instagram, linkedin, loading }
+export { arrow_right, arrow_left, arrow_down, chevron_down, chevron_right,chevron_left, document, email, instagram, linkedin, loading, checkmark, xmark }
   
 
 

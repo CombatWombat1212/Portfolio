@@ -1,10 +1,26 @@
-
-@mixin split-hover{
-  &:hover, &:focus, &.hover {
+@mixin split-hover {
+  &:hover,
+  &:focus,
+  &.hover {
     @content;
   }
 }
 
+@mixin hoverable-graphic-panel-with-background($b: 1.075) {
+  .section {
+    --section-graphic-panel-pad: 0rem;
+    &--graphic:not(.pro-con--icon) {
+      height: unset;
+      filter: brightness(1);
+      &:hover,
+      &:focus,
+      &.hover,
+      &[data-playing="true"] {
+        filter: brightness(#{$b});
+      }
+    }
+  }
+}
 
 #Made {
   #Overview {
@@ -88,111 +104,143 @@
       }
     }
 
-
-
-    &--Imperfections{
-
-      .split{
+    &--Imperfections {
+      .split {
         height: unset;
         aspect-ratio: 1 / 1;
-        --split-graphic-scale:0.85;
-        @include split-hover{
-          --split-graphic-scale:0.865;
+        --split-graphic-scale: 0.85;
+        @include split-hover {
+          --split-graphic-scale: 0.865;
         }
       }
-
-
-
     }
-
-
-
   }
 
-
-
-  #Texturing{
-
-
-    &--Stages{
-
-
-      .section{
-        &--main{
-        grid-template-columns: repeat(3, 1fr);
-        }
-      }
-
-
-    }
-
-
-
-
-    &--Contrast-Areas{
-      .graphic{
-        height: unset;
-      }
-    }
-
-    &--Contrast-Split{
-      .graphic{
-        height: unset;
-      }
-    }
-
-
-    &--Details{
-      .section{
-        &--main{
-        grid-template-columns: repeat(4, 1fr);
+  #Texturing {
+    &--Stages {
+      .section {
+        &--main {
+          grid-template-columns: repeat(3, 1fr);
         }
       }
     }
 
+    &--Contrast-Areas {
+      .graphic {
+        height: unset;
+      }
+    }
 
-    &--Transition{
+    &--Contrast-Split {
+      .graphic {
+        height: unset;
+      }
+    }
 
-      .image-row{
+    &--Details {
+      .section {
+        &--main {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+    }
+
+    &--Transition {
+      .image-row {
         --image-row-scale: 1.15;
         --image-row-offset: 2;
       }
-
     }
-
-
-
-
-
-
-
-
-
   }
-
-
 
   #Rendering {
     &--Lighting {
-
       .split {
         background-color: $col-background_darker;
-        --split-graphic-scale:0.85;
-        @include split-hover{
-          --split-graphic-scale:0.865;
-          background-color: lighten($col-background_darker,3);
+        --split-graphic-scale: 0.85;
+        @include split-hover {
+          --split-graphic-scale: 0.865;
+          background-color: lighten($col-background_darker, 2.25);
+        }
+      }
+    }
+
+    &--Shadow-Graphics {
+      .section {
+        // &--graphic {
+        //   --graphic-scale: 0.5;
+        //   img {
+        //     width: calc(var(--iw) * var(--graphic-scale));
+        //     height: calc(var(--ih) * var(--graphic-scale));
+        //   }
+        // }
+      }
+    }
+
+    &--Post {
+      .section {
+        --section-graphic-panel-pad: 0rem;
+
+        &--main {
+          margin-top: 2.5rem;
         }
 
+        &--graphic {
+          height: unset;
+        }
 
+        &--main {
+          row-gap: 3rem;
+          grid-template-columns: repeat(3, 1fr);
+        }
       }
+    }
 
+    &--Roadblocks-Graphics {
+      @include hoverable-graphic-panel-with-background;
+    }
 
+    &--Python-Graphic {
+      @include hoverable-graphic-panel-with-background;
+    }
+
+    &--Scalable {
+      @include hoverable-graphic-panel-with-background(1.025);
     }
   }
 
+  #Deliver {
+    &--Config {
+      .section {
+        &--wrapper {
+          padding-bottom: calc(var(--section-gap) * 1.25);
+        }
+      }
+    }
+
+    &--Images {
+      .image-row {
+        --image-row-scale: 1.35;
+        --image-row-offset: 0.5;
+      }
+
+      & {
+        padding-bottom: 13%;
+      }
+    }
+
+
+    &--Closing {
+
+      .background{
+        background-color: $col-background_darker;
+      }
+
+
+    
+    }
 
 
 
-
-
+  }
 }

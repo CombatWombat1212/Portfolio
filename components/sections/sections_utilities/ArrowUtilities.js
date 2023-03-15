@@ -23,20 +23,21 @@ function refreshAnchorHeight() {
     anchorNextSiblings = Array.from(anchorParent.children).slice(Array.from(anchorParent.children).indexOf(anchor) + 1, anchorParent.children.length);
 
     var arrowHeight = splitPx(window.getComputedStyle(arrow).height);
-    var anchorHeight = splitPx(window.getComputedStyle(anchor).height);
+    var anchorHeight = splitPx(window.getComputedStyle(anchor).height) + splitPx(window.getComputedStyle(anchor).paddingTop) + splitPx(window.getComputedStyle(anchor).paddingBottom);
 
     var anchorPreviousSiblingsHeight = 0,
       anchorNextSiblingsHeight = 0;
 
     for (var j = 0; j < anchorPreviousSiblings.length; j++) {
-      anchorPreviousSiblingsHeight += splitPx(window.getComputedStyle(anchorPreviousSiblings[j]).height);
+      anchorPreviousSiblingsHeight += splitPx(window.getComputedStyle(anchorPreviousSiblings[j]).height) + splitPx(window.getComputedStyle(anchorPreviousSiblings[j]).marginBottom) + splitPx(window.getComputedStyle(anchorPreviousSiblings[j]).marginTop);
     }
 
     for (var j = 0; j < anchorNextSiblings.length; j++) {
       anchorNextSiblingsHeight += splitPx(window.getComputedStyle(anchorNextSiblings[j]).height);
     }
 
-    var arrowMarginTop = anchorPreviousSiblingsHeight + (anchorHeight - arrowHeight/2) / 2;
+    var arrowMarginTop = anchorPreviousSiblingsHeight + (anchorHeight/2) - (arrowHeight/2) ;
+
     arrow.style.setProperty("--arrow-margin-top", `${arrowMarginTop}px`);
   }
 }

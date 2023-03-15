@@ -99,6 +99,15 @@ function ColumnGroup({ columns, arrows, line, mainType }) {
               </>
             )}
 
+            {caption == "split" && (
+              <>
+                {heading && <>{heading}</>}
+                {graphic && <>{graphic}</>}
+                {description && <>{description}</>}
+              </>
+            )}
+            
+
             {quote && <>{quote}</>}
             {other && <>{other}</>}
           </Column>

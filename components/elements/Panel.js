@@ -26,7 +26,7 @@ function PanelDesc({ children, className, reference, ...props }) {
 function PanelImg({ children, className, variant, effect, ...props }) {
   return (
     <>
-      <div className={"panel--graphic" + (className ? ` ${className}` : "")} >
+      <div className={"panel--graphic" + (className ? ` ${className}` : "")}>
         <div className={"panel--img" + (variant == "study" ? ` studypanel--img` : "")} {...props}>
           {/* {effect == 'gradient-white' && <div className="img--gradient img--gradient__white "></div>} */}
           {children}
@@ -45,7 +45,7 @@ PanelImg.propTypes = {
   effect: PropTypes.oneOf(["none", "gradient-white"]),
 };
 
-function StudyPanel({ id, study, variant }) {
+function StudyPanel({ id, study, variant, button }) {
   var main, alt;
   main = study.imgs.main;
   if (study.imgs.alt) alt = study.imgs.alt;
@@ -58,11 +58,11 @@ function StudyPanel({ id, study, variant }) {
     img = alt;
   }
 
-
+  var btnStyle = button == "" ? { opacity: 0 } : { opacity: 1 };
 
   return (
     <>
-      <Panel id={id} className={'studypanel' + ` studypanel__${variant}`}>
+      <Panel id={id} className={"studypanel" + ` studypanel__${variant}`}>
         <PanelDesc>
           <h2 className="color--secondary">{study.name}</h2>
           <h3>{study.subtitle.jsx}</h3>
@@ -77,8 +77,8 @@ function StudyPanel({ id, study, variant }) {
 
           {variant == "home" ? (
             <>
-              <Button className="panel--button" type="regular" icon={["arrow_right", "right", "mask"]} animation={"pulse-right"} href={study.link}>
-                Have a look-see
+              <Button className="panel--button" type="regular" icon={["arrow_right", "right", "mask"]} animation={"pulse-right"} href={study.link} style={btnStyle}>
+                {button}
               </Button>
             </>
           ) : (
@@ -93,12 +93,15 @@ function StudyPanel({ id, study, variant }) {
           )}
         </PanelDesc>
 
-        <PanelImg className="col-6" variant={variant} 
+        <PanelImg
+          className="col-6"
+          variant={variant}
           style={{
             "--img-aspect-width": img.width,
             "--img-aspect-height": img.height,
           }}
-                 /*effect="gradient-white"*/>
+          /*effect="gradient-white"*/
+        >
           <Image priority src={img.src} alt={img.alt} width={img.width} height={img.height} />
         </PanelImg>
       </Panel>
@@ -108,6 +111,7 @@ function StudyPanel({ id, study, variant }) {
 
 StudyPanel.defaultProps = {
   variant: "home",
+  button: "",
 };
 
 StudyPanel.propTypes = {

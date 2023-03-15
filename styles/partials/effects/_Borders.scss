@@ -1,0 +1,11 @@
+.border{
+
+
+
+    &-negative{
+        border: 0.5rem rgba($col-negative, 0.2) solid;
+    }
+    &-positive{
+        border: 0.5rem rgba($col-positive, 0.2) solid;
+    }
+}

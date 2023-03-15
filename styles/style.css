@@ -40,7 +40,9 @@ input, button, textarea, select {
   --col-background: #F3F3F7;
   --col-background-darker: #E9E9F2;
   --col-background-darkest: #E0E0EA;
-  --colors: --col-primary, --col-primary-hovered, --col-secondary, --col-secondary-hovered, --col-tertiary-light, --col-tertiary, --col-tertiary-makeright, --col-background, --col-background-darker, --col-background-darkest;
+  --col-negative: #C4123C;
+  --col-positive: #08B430;
+  --colors: --col-primary, --col-primary-hovered, --col-secondary, --col-secondary-hovered, --col-tertiary-light, --col-tertiary, --col-tertiary-makeright, --col-background, --col-background-darker, --col-background-darkest, --col-negative, --col-positive;
 }
 
 .color--primary {
@@ -139,7 +141,7 @@ h1,
   font-family: "Gira Sans";
   font-size: var(--font-size-h1);
   line-height: var(--font-leading-h1);
-  font-weight: 500;
+  font-weight: 500 !important;
 }
 
 h2,
@@ -180,13 +182,8 @@ h5,
   font-family: "Tenon";
   font-size: var(--font-size-body);
   line-height: var(--font-leading-body);
-  font-weight: 400 !important;
-  font-weight: 500;
-}
-
-h5 > *,
-.text--h5 > * {
-  font-weight: 400 !important;
+  font-weight: 400;
+  font-weight: 500 !important;
 }
 
 p,
@@ -195,13 +192,7 @@ li, span {
   font-family: "Tenon";
   font-size: var(--font-size-body);
   line-height: var(--font-leading-body);
-  font-weight: 400 !important;
-}
-
-p > *,
-.text--body > *,
-li > *, span > * {
-  font-weight: 400 !important;
+  font-weight: 400;
 }
 
 .weight-light {
@@ -217,7 +208,7 @@ li > *, span > * {
 }
 
 .weight-med {
-  font-weight: 500;
+  font-weight: 500 !important;
 }
 
 .weight-bold {
@@ -1067,7 +1058,7 @@ body {
   font-family: "Gira Sans";
   font-size: var(--font-size-h1);
   line-height: var(--font-leading-h1);
-  font-weight: 500;
+  font-weight: 500 !important;
 }
 
 .panel--tags {
@@ -1127,7 +1118,7 @@ body {
   font-family: "Tenon";
   font-size: var(--font-size-body);
   line-height: var(--font-leading-body);
-  font-weight: 400 !important;
+  font-weight: 400;
   transition: var(--transition);
   -webkit-touch-callout: none;
   user-select: none;
@@ -1137,10 +1128,6 @@ body {
   padding: 0 var(--button-padding);
   width: fit-content;
   height: var(--button-height);
-}
-
-.button > * {
-  font-weight: 400 !important;
 }
 
 .button > * + * {
@@ -1395,12 +1382,8 @@ body {
   font-family: "Tenon";
   font-size: var(--font-size-body);
   line-height: var(--font-leading-body);
-  font-weight: 400 !important;
+  font-weight: 400;
   --font-size: var(--font-size-body);
-}
-
-.nav--links a > * {
-  font-weight: 400 !important;
 }
 
 .nav--item {
@@ -1577,11 +1560,7 @@ body {
   font-family: "Tenon";
   font-size: var(--font-size-body);
   line-height: var(--font-leading-body);
-  font-weight: 400 !important;
-}
-
-.sitemap--links a > * {
-  font-weight: 400 !important;
+  font-weight: 400;
 }
 
 .sitemap--item {
@@ -3679,6 +3658,46 @@ body {
   left: calc((var(--image-row-index) * var(--col-width)) + var(--image-row-left));
 }
 
+.pro-con--item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.pro-con--item + .pro-con--item {
+  margin-top: 0.375rem;
+}
+
+.pro-con--icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  --graphic-scale: 0.975;
+  width: 1.75rem;
+}
+
+.pro-con--dash {
+  margin-right: 0.5rem;
+  margin-left: 0.35rem;
+}
+
+.pro-con--pro {
+  color: #08B430;
+}
+
+.pro-con--pro .mask {
+  background-color: #08B430 !important;
+}
+
+.pro-con--con {
+  color: #C4123C;
+}
+
+.pro-con--con .mask {
+  background-color: #C4123C !important;
+}
+
 .graph--wrapper {
   background-color: #F3F3F7;
   height: var(--graph-height);
@@ -3944,31 +3963,23 @@ body {
   font-family: "Tenon";
   font-size: var(--font-size-body);
   line-height: var(--font-leading-body);
-  font-weight: 500;
+  font-weight: 500 !important;
 }
 
 .gantt .label__secondary {
   font-family: "Tenon";
   font-size: var(--font-size-body);
   line-height: var(--font-leading-body);
-  font-weight: 400 !important;
+  font-weight: 400;
   color: #C41263;
-}
-
-.gantt .label__secondary > * {
-  font-weight: 400 !important;
 }
 
 .gantt .label__tertiary {
   font-family: "Tenon";
   font-size: var(--font-size-body);
   line-height: var(--font-leading-body);
-  font-weight: 400 !important;
+  font-weight: 400;
   color: #074391;
-}
-
-.gantt .label__tertiary > * {
-  font-weight: 400 !important;
 }
 
 .bar-graph {
@@ -4335,6 +4346,14 @@ body {
   background-color: #074391;
 }
 
+.border-negative {
+  border: 0.5rem rgba(196, 18, 60, 0.2) solid;
+}
+
+.border-positive {
+  border: 0.5rem rgba(8, 180, 48, 0.2) solid;
+}
+
 .d-block {
   display: block;
 }
@@ -4566,9 +4585,41 @@ body {
   height: auto !important;
 }
 
+.h-unset {
+  height: unset !important;
+}
+
 .b-rad {
   border-radius: var(--b-rad);
   overflow: hidden;
+}
+
+.p-0 {
+  padding: 0 !important;
+}
+
+.p-1 {
+  padding: 0.5rem !important;
+}
+
+.p-2 {
+  padding: 1rem !important;
+}
+
+.p-3 {
+  padding: 2rem !important;
+}
+
+.p-4 {
+  padding: 3rem !important;
+}
+
+.p-5 {
+  padding: 4rem !important;
+}
+
+.p-6 {
+  padding: 6rem !important;
 }
 
 .text-col-1 {
@@ -5412,11 +5463,11 @@ body {
 #Made #Approach--Imperfections .split {
   height: unset;
   aspect-ratio: 1 / 1;
-  --split-graphic-scale:0.85;
+  --split-graphic-scale: 0.85;
 }
 
 #Made #Approach--Imperfections .split:hover, #Made #Approach--Imperfections .split:focus, #Made #Approach--Imperfections .split.hover {
-  --split-graphic-scale:0.865;
+  --split-graphic-scale: 0.865;
 }
 
 #Made #Texturing--Stages .section--main {
@@ -5442,11 +5493,84 @@ body {
 
 #Made #Rendering--Lighting .split {
   background-color: #E9E9F2;
-  --split-graphic-scale:0.85;
+  --split-graphic-scale: 0.85;
 }
 
 #Made #Rendering--Lighting .split:hover, #Made #Rendering--Lighting .split:focus, #Made #Rendering--Lighting .split.hover {
-  --split-graphic-scale:0.865;
-  background-color: #f3f3f8;
+  --split-graphic-scale: 0.865;
+  background-color: #f0f0f6;
+}
+
+#Made #Rendering--Post .section {
+  --section-graphic-panel-pad: 0rem;
+}
+
+#Made #Rendering--Post .section--main {
+  margin-top: 2.5rem;
+}
+
+#Made #Rendering--Post .section--graphic {
+  height: unset;
+}
+
+#Made #Rendering--Post .section--main {
+  row-gap: 3rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+#Made #Rendering--Roadblocks-Graphics .section {
+  --section-graphic-panel-pad: 0rem;
+}
+
+#Made #Rendering--Roadblocks-Graphics .section--graphic:not(.pro-con--icon) {
+  height: unset;
+  filter: brightness(1);
+}
+
+#Made #Rendering--Roadblocks-Graphics .section--graphic:not(.pro-con--icon):hover, #Made #Rendering--Roadblocks-Graphics .section--graphic:not(.pro-con--icon):focus, #Made #Rendering--Roadblocks-Graphics .section--graphic:not(.pro-con--icon).hover, #Made #Rendering--Roadblocks-Graphics .section--graphic:not(.pro-con--icon)[data-playing="true"] {
+  filter: brightness(1.075);
+}
+
+#Made #Rendering--Python-Graphic .section {
+  --section-graphic-panel-pad: 0rem;
+}
+
+#Made #Rendering--Python-Graphic .section--graphic:not(.pro-con--icon) {
+  height: unset;
+  filter: brightness(1);
+}
+
+#Made #Rendering--Python-Graphic .section--graphic:not(.pro-con--icon):hover, #Made #Rendering--Python-Graphic .section--graphic:not(.pro-con--icon):focus, #Made #Rendering--Python-Graphic .section--graphic:not(.pro-con--icon).hover, #Made #Rendering--Python-Graphic .section--graphic:not(.pro-con--icon)[data-playing="true"] {
+  filter: brightness(1.075);
+}
+
+#Made #Rendering--Scalable .section {
+  --section-graphic-panel-pad: 0rem;
+}
+
+#Made #Rendering--Scalable .section--graphic:not(.pro-con--icon) {
+  height: unset;
+  filter: brightness(1);
+}
+
+#Made #Rendering--Scalable .section--graphic:not(.pro-con--icon):hover, #Made #Rendering--Scalable .section--graphic:not(.pro-con--icon):focus, #Made #Rendering--Scalable .section--graphic:not(.pro-con--icon).hover, #Made #Rendering--Scalable .section--graphic:not(.pro-con--icon)[data-playing="true"] {
+  filter: brightness(1.025);
+}
+
+#Made #Deliver--Config .section--wrapper {
+  padding-bottom: calc(var(--section-gap) * 1.25);
+}
+
+#Made #Deliver--Images .image-row {
+  --image-row-scale: 1.35;
+  --image-row-offset: 0.5;
+}
+
+#Made #Deliver--Images {
+  padding-bottom: 13%;
+}
+
+#Made #Deliver--Closing .background {
+  background-color: #E9E9F2;
 }
 /*# sourceMappingURL=style.css.map */

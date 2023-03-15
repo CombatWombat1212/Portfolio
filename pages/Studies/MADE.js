@@ -1,11 +1,11 @@
 import { getStudy } from "@/scripts/GetStudy";
 import CaseStudyPage from "@/components/studies/CaseStudyPage";
 import { Section, Chapter, Title, Column, Heading, Description, Graphic, Quote } from "@/components/sections/Sections";
-import { MADE_IMGS, MADE_IMG_GROUPS } from "@/data/MADE_IMGS";
-import MAKERIGHT_IMGS from "@/data/MAKERIGHT_IMGS";
+import { MADE_IMGS } from "@/data/MADE_IMGS";
 import Configurator from "@/components/global/Configurator";
 import Split from "@/components/global/Split";
 import ImageRow from "@/components/global/ImageRow";
+import ProsCons, { Con, Pro } from "@/components/global/ProsCons";
 // import MAKERIGHT_IMGS from "/data/MAKERIGHT_IMGS";
 // import Gantt from "/components/charts/Gantt";
 // import BarGraph from "@/components/charts/BarGraph";
@@ -387,33 +387,28 @@ function MADE({ setPopup }) {
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.details_holes} />
               <Heading type="h3" className="graphic--caption weight-reg">
-              Color-matched button holes
+                Color-matched button holes
               </Heading>
-              <Description className="graphic--caption mt-less">Buttonhole colors for each material were done separately, in a similar way to the threading.  Requiring their own fine-tuning to better match the threads in the final renders.</Description>
+              <Description className="graphic--caption mt-less">Buttonhole colors for each material were done separately, in a similar way to the threading. Requiring their own fine-tuning to better match the threads in the final renders.</Description>
             </Column>
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.details_button} />
               <Heading type="h3" className="graphic--caption weight-reg">
-              Button color
+                Button color
               </Heading>
               <Description className="graphic--caption mt-less">Either a dark or light button was assigned to each shirt material respective of its colour.</Description>
             </Column>
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.details_logo} />
               <Heading type="h3" className="graphic--caption weight-reg">
-              MADE Logo tag
+                MADE Logo tag
               </Heading>
               <Description className="graphic--caption mt-less">Added with a focus on legibility, without being overbearing.</Description>
             </Column>
-
           </Section>
 
-
-
-
           <Section id="Texturing--Transition" type="passthrough" margin="none">
-
-            <ImageRow className="img-row-col-6" col="6" direction="right">
+            <ImageRow col="6" direction="right">
               <Graphic type="image" img={MADE_IMGS.shirt_row_04} />
               <Graphic type="image" img={MADE_IMGS.shirt_row_06} />
               <Graphic type="image" img={MADE_IMGS.shirt_row_02} />
@@ -421,24 +416,18 @@ function MADE({ setPopup }) {
               <Graphic type="image" img={MADE_IMGS.shirt_row_03} />
               <Graphic type="image" img={MADE_IMGS.shirt_row_05} />
             </ImageRow>
-
           </Section>
-
-
         </Chapter>
 
-
-
         <Chapter id="Rendering" name="Rendering">
-
-        <Section id="Rendering--Lighting" type="columns" background="background darkest">
+          <Section id="Rendering--Lighting" type="columns" background="background darkest">
             <Column>
               <Split before={MADE_IMGS.lighting_before} after={MADE_IMGS.lighting_after} square />
             </Column>
             <Column>
               <Title>Lighting</Title>
               <Heading>
-                Lighting 
+                Lighting
                 <br />
                 the final composition
               </Heading>
@@ -448,13 +437,256 @@ function MADE({ setPopup }) {
             </Column>
           </Section>
 
+          <Section id="Rendering--Shadow-Description" type="columns" titled="above" background="background darkest" wrapperClassName="mb-less">
+            <Title>Shadows</Title>
+            <Column>
+              <Heading>Supporting the final use-case by embedding shadows within each component image.</Heading>
+            </Column>
+            <Column>
+              <Description className={"mt-less"}>
+                <p>Our goal was to create separate images of shirt components that could be stacked into one life-like photo. I knew that to do this realistically, each image would have to be a combination of the object, and a rendered shadow behind it. Allowing the shirt pieces to accurately sit atop each other without looking flat, or uncanny.</p>
+
+                <p>Adding generic ‘drop-shadows’ could quickly achieve this outcome, but it would sacrifice photorealism. To do this without compromise, I created isolated renderings of each shadow, and combined the images in post. This is the difference between each method:</p>
+              </Description>
+            </Column>
+          </Section>
+
+          <Section id="Rendering--Shadow-Graphics" type="columns" background="background darkest">
+            <Column caption="above">
+              <Heading type="h4" className="graphic--caption graphic--caption__above">
+                Drop-shadows:
+              </Heading>
+              <Graphic type="image" className="b-rad border-negative" img={MADE_IMGS.lighting_drop} background="background darker" square />
+            </Column>
+            <Column caption="above">
+              <Heading type="h4" className="graphic--caption graphic--caption__above">
+                Rendered shadows:
+              </Heading>
+              <Graphic type="image" className="b-rad border-positive" img={MADE_IMGS.lighting_after} background="background darker" square />
+            </Column>
+          </Section>
+
+          <Section id="Rendering--Post" type="columns" titled arrows="anchored primary" mainClassName="gap-6" mainType="grid" background="background darkest">
+            <Title>Post-Processing</Title>
+            <Heading>Creating isolated, physically accurate shadows</Heading>
+
+            <Column caption="above">
+              <Description className="graphic--caption weight-reg">
+                <h3>Target component</h3>
+              </Description>
+              <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_1_target} />
+            </Column>
+            <Column caption="above">
+              <Description className="graphic--caption weight-reg">
+                <h3>Hidden from render</h3>
+              </Description>
+              <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_2_hidden} />
+            </Column>
+            <Column caption="above">
+              <Description className="graphic--caption weight-reg">
+                <h3> Isolated shadow</h3>
+              </Description>
+              <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_3_isolated} />
+            </Column>
+            <Column caption="above">
+              <Description className="graphic--caption weight-reg">
+                <h3>Edited</h3>
+              </Description>
+              <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_4_edited} />
+            </Column>
+            <Column caption="above">
+              <Description className="graphic--caption weight-reg">
+                <h3>Combined</h3>
+              </Description>
+              <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_5_combined} />
+            </Column>
+            <Column caption="above">
+              <Description className="graphic--caption graphic--caption__above weight-reg">
+                <h3>Final</h3>
+              </Description>
+              <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_6_final} />
+            </Column>
+          </Section>
+
+          <Section id="Rendering--Roadblocks-Description" type="columns" titled="above" background="background darker" wrapperClassName="mb-less">
+            <Title>Roadblocks To Rendering</Title>
+            <Column>
+              <Heading>Working around my hardware limitations</Heading>
+            </Column>
+            <Column>
+              <Description className={"mt-less"}>
+                <p>
+                  With my <b>incredibly underpowered PC</b>, I was unable to complete the rendering for the entire project in a reasonable amount of time. To solve this, I used an online render farm service.
+                </p>
+
+                <p>
+                  This required me to build my 3D project file in such a way that it could <b>produce the hundreds of images in one continuous session</b>, so as to not waste time starting and stopping render jobs.
+                </p>
+
+                <p>
+                  However, the <b>rendering service I used had strict file size limitations</b>. This greatly impacted my available options when trying to build a file which could render all the images continuously.
+                </p>
+
+                <p>Possible approaches to creating a continuous render sequence:</p>
+              </Description>
+            </Column>
+          </Section>
+
+          <Section id="Rendering--Roadblocks-Graphics" type="columns" background="background darker">
+            <Column caption="split">
+              <Heading className="graphic--caption graphic--caption__above weight-reg" type="h3">
+                Move the virtual camera
+                <br /> across multiple objects
+              </Heading>
+              <Graphic type="video" className="b-rad border-negative" img={MADE_IMGS.limitations_multiple_objects} background="background darkest" autoplay="scroll staggered hover" muted sync="Rendering--Roadblocks-Graphics" />
+              <Description className="graphic--caption">
+                <ProsCons>
+                  <Con>Huge file size due to number of objects</Con>
+                  <Con>Harder to edit / less scalable</Con>
+                  <Pro>Easy to set-up</Pro>
+                </ProsCons>
+              </Description>
+            </Column>
+
+            <Column caption="split">
+              <Heading className="graphic--caption graphic--caption__above weight-reg" type="h3">
+                Stationary camera, with one object
+                <br />
+                that changes materials
+              </Heading>
+              <Graphic type="video" className="b-rad border-positive" img={MADE_IMGS.limitations_single_object} background="background darkest" autoplay="scroll staggered hover" muted sync="Rendering--Roadblocks-Graphics" />
+              <Description className="graphic--caption">
+                <ProsCons>
+                  <Pro>Tiny file size</Pro>
+                  <Pro>Future-proof, scalable, easy to manipulated</Pro>
+                  <Con>More involved set-up process</Con>
+                </ProsCons>
+              </Description>
+            </Column>
+          </Section>
+
+          <Section id="Rendering--Python-Description" type="columns" titled="above" background="background darker" wrapperClassName="mb-less-2">
+            <Title>Roadblocks To Rendering</Title>
+            <Column>
+              <Heading>Using Python to create a dynamic texture that could change fabrics every frame</Heading>
+            </Column>
+            <Column>
+              <Description className={"mt-less"}>
+                <p>Pursuing the latter solution, I wrote a python script which created a single 3D material containing all 41 fabrics, and had the ability to easily switch between them. </p>
+                <p>From there, I could then render a single “video” who’s frames contained every combination of object and fabric. This allowed me to push through the limits of my hardware and completed all of the rendering at no added cost to the project timeline.</p>
+              </Description>
+            </Column>
+          </Section>
+
+          <Section id="Rendering--Python-Graphic" type="columns" titled="above" background="background darker" wrapperClassName="mb-less">
+            <Column>
+              <Graphic type="video" className="b-rad" img={MADE_IMGS.limitations_switcher} background="background darkest" autoplay="scroll hover" muted />
+            </Column>
+          </Section>
+
+          <Section id="Rendering--Scalable" type="columns" titled background="background darker">
+            <Column>
+              <Graphic type="video" className="b-rad" img={MADE_IMGS.limitations_bottle} background="background darkest" autoplay="scroll hover" muted />
+            </Column>
+            <Column>
+              <Heading>
+                Benefits of a <br />
+                scalable approach
+              </Heading>
+              <Description>
+                <p>I’ve been able to tweak and reuse this same script numerous times since developing it for this project.</p>
+                <p>Many of my product rendering tasks employ this same workflow of having one object cycle through X materials. As such, choosing to create a strong, future-proof solution to this issue has since saved me countless hours.</p>
+              </Description>
+            </Column>
+          </Section>
+
+          <Section id="Rendering--Closing">
+            <Heading>
+              With rendering now complete, the final images
+              <br />
+              were delivered, and placed into the webstore’s
+              <br />
+              new dress-shirt customization tool.
+            </Heading>
+          </Section>
         </Chapter>
 
+        <Chapter id="Deliver" name="Deliver">
+          <Section id="Deliver--Banner" background={MADE_IMGS.banner_delivery}>
+            <Heading>Delivered Project</Heading>
+          </Section>
+
+          <Section id="Deliver--Config" background="background darkest" type={"columns"} titled>
+            <Heading className="color--primary">Final configurator</Heading>
+            <Column>
+              <Graphic type="video" img={MADE_IMGS.configurator_demo} className="b-rad" muted autoplay="scroll" controls loop />
+            </Column>
+          </Section>
+
+          <Section id="Deliver--Images" background="background darkest" type="passthrough" margin="none">
+            <ImageRow col="3" direction="right">
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_01} />
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_02} />
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_03} />
+            </ImageRow>
+          </Section>
+
+          <Section id="Deliver--Images" background="background darkest" type="passthrough" margin="none">
+            <ImageRow col="3" direction="left">
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_04} />
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_05} />
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_06} />
+            </ImageRow>
+          </Section>
+
+          <Section id="Deliver--Images" background="background darkest" type="passthrough" margin="none">
+            <ImageRow col="3" direction="right">
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_07} />
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_08} />
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_09} />
+            </ImageRow>
+          </Section>
+
+          <Section id="Deliver--Closing" background={MADE_IMGS.banner_final_blue} />
+
+
+        </Chapter>
+
+        <Chapter id="Closing" name="Closing">
+
+        <Section id="Closing--Copy" type="columns" titled mainClassName="gap-6 mt-6">
+            <Title>Successes</Title>
+            <Heading>
+            Foresight, and planning around project requirements
+            </Heading>
+            <Description className="text-col-2 text-gap-6">
+              <p>During this project's early stages, I identified many requirements for my images.  Ones that I needed to meet if they were to suit my client's needs.  An example of this was when we first discussed creating a single shirt from stacked image layers.  With this goal understood, I was able to discern the steps necessary to match the use-case.  I knew each image needed their object's shadows placed in the background.  Otherwise, they wouldn't combine realistically.</p>
+
+              <p>This gave me significant time to plan ahead.  I conducted tests using the first few models, and determined the best approach to creating realistic shadows.  Allowing me to then build the project from the ground-up with the eventuality of this challenge in mind.  Then, when the time came to create the objects' shadows, I was fully prepared to traverse the issue.  With this, and other similar moments, the greatest success of this project was my foresight and planning.</p>
+            </Description>
+
+            <Column>
+              <Title>Learning</Title>
+              <Heading>Scalable, future-proof foundations, over band-aid solutions</Heading>
+              <Description>
+                <p>This was a relatively long-term project with big plans for future expansion.  As such, I often had to make critical decisions on how to best spend my resources.  At the center of these decisions was usually a common internal question.  Should I take the time to craft a lasting foundation to address an issue, or use a more temporary solution? The latter allots more time to other important tasks.  But, the former is more likely to increase efficiency throughout the project.  </p>
+                <p>As the project went on, time and again I felt vindicated in choosing the former.  These solutions included working non-destructively when possible, and writing flexible, responsive scripts. Long-term fixes consistently saved me more time than hasty band-aid solutions.  As a result, this project serves as an important learning experience.  During long-term projects, especially in a 3D space, a strong foundation is incredibly important.  They almost always save more resources in the end, and may even apply to future projects.</p>
+              </Description>
+            </Column>
+
+            <Column>
+              <Title>Areas Of Growth</Title>
+              <Heading>Over fixation on a single aspect of a task</Heading>
+              <Description>
+                <p>After modelling, my objects needed to be UV-unwrapped so I could add their fabric textures.  As I was working on the shirt collars, I made the mistake of fixating on how they appeared in a small sampling of fabrics.  Rather than checking each texture, and comparing them to my references.  This caused me to think that the models were ready to be rendered, so I sent them off.  When the images arrived, I finally realized the mistake.  Some of the fabrics appeared distorted, and needed revision.  Thankfully, I was able to correct them, re-render, and meet the intended deadline.</p>
+                <p>This teachable moment reminded me of what is possible when you lose sight of a project's full scope.  Going forward, I aim to address this by regularly checking my project outline with every working session. Thereby reminding myself of the bigger picture, and to look ahead to the next steps towards which I’m building.</p>
+              </Description>
+            </Column>
+          </Section>
 
 
 
-
-        <Chapter id="Closing" name="Closing"></Chapter>
+        </Chapter>
       </CaseStudyPage>
     </>
   );

@@ -61,7 +61,7 @@ $font-body: "Tenon";
   }
 }
 @mixin weight-med {
-  font-weight: 500;
+  font-weight: 500!important;
 }
 @mixin weight-bold {
   font-weight: 600;
@@ -118,7 +118,7 @@ $font-body: "Tenon";
 
 @mixin body {
   @include body-text;
-  @include weight-reg;
+  font-weight: 400;
 }
 
 @mixin body-med {

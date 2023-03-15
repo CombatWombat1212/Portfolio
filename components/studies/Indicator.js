@@ -293,7 +293,7 @@ function sectionGetBackgroundColors(section) {
   var list = section.elem.classList.value;
   var background = list.match(/background\S*/g)?.join(" ");
 
-  // TODO: Support is needed for image backgrounds, you should be able to add them in as a custom prop in the section element, otherwise default is tertiary
+  // TODO: Support is needed for image backgrounds, you should be able to add them in as a custom prop in the section element, otherwise default is tertiary, default being tertiary is how it currently is.
 
   if (!background) {
     section.color.background = "background__background";
@@ -308,21 +308,7 @@ function sectionGetBackgroundColors(section) {
 }
 
 function sectionGetColors(section) {
-  // // [section color, indicator background color, indicator text color]
-  // var colors = [
-  //   ["primary", "background-darker", "tertiary"],
-  //   ["primary-hovered", "background-darker", "tertiary"],
-  //   ["secondary", "background-darker", "tertiary"],
-  //   ["secondary-hovered", "background-darker", "tertiary"],
-  //   ["tertiary-light", "background-darker", "tertiary"],
-  //   ["tertiary", "background-darker", "tertiary"],
-  //   ["tertiary-makeright", "background-darker", "tertiary"],
-  //   ["background", "tertiary", "background"],
-  //   ["background-darker", "tertiary", "background"],
-  //   ["background-darkest", "tertiary", "background"],
-  // ];
 
-  // [section color, indicator background color, theme]
   var colors = [  
   ["primary", "theme-light"],
   ["primary-hovered", "theme-light"],
@@ -334,19 +320,23 @@ function sectionGetColors(section) {
   ["background", "theme-dark"],
   ["background-darker", "theme-dark"],
   ["background-darkest", "theme-dark"],
+  ["image", "theme-dark"],
 ];
-  var background = section.color.background;
 
-  for (var i = 0; i < colors.length; i++) {
-    var color = colors[i];
-    if (color[0] == background) {
-      // section.color.text = color[2];
-      // section.color.contrast = color[1];
-      section.color.theme = color[1];
-      // section.color.text = color[2];
-      break;
-    }
-  }
+  // var background = section.color.background;
+  // for (var i = 0; i < colors.length; i++) {
+  //   var color = colors[i];
+  //   if (color[0] == background) {
+  //     section.color.theme = color[1];
+  //     break;
+  //   }
+  // }
+
+  const colorMapping = new Map(colors);
+  section.color.theme = colorMapping.get(section.color.background) || "";
+
+
+  
 }
 
 function sectionsInit(indicator, sections, setSections) {
