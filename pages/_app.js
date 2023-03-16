@@ -28,7 +28,7 @@ export default function App({ Component, pageProps }) {
   // const [isReadyToAnimate, setIsReadyToAnimate] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [transitioning, setTransitioning] = useState(false);
-  const [showLoading, setShowLoading] = useState(true);
+  // const [showLoading, setShowLoading] = useState(true);
 
   // var dur = 0.65;
   var dur = 0.65;
@@ -36,7 +36,7 @@ export default function App({ Component, pageProps }) {
 
   useEffect(() => {
     setLoaded(true);
-    setShowLoading(true);
+    // setShowLoading(true);
 
   }, [router.route]);
 
@@ -75,7 +75,7 @@ export default function App({ Component, pageProps }) {
       setTransitioning(false);
       setTimeout(() => {
         setChosen(chooseRandomMessage());
-        setShowLoading(false);
+        // setShowLoading(false);
       }, dur * 1000);
     }
   };
@@ -114,7 +114,10 @@ export default function App({ Component, pageProps }) {
             <Footer />
           </motion.div>
         </AnimatePresence>
-        <div className={`loading-screen ${showLoading ? "" : "loading-screen__hidden"}`}>
+        <div className={`loading-screen 
+        `
+        // ${showLoading ? "" : "loading-screen__hidden"}
+        }>
           <div className="loading-screen--text">
             {/* <h3 className="" dangerouslySetInnerHTML={{ __html: `${chosen}` }}></h3> */}
             {/* <h3 className="">{ellipse}</h3> */}
