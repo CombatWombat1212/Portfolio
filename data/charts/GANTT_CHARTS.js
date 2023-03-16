@@ -552,6 +552,156 @@ var GANTT_CHARTS = [
       },
     ],
   },
+
+  {
+    name: "KoalaKo",
+    weeks: 14,
+    cycles: [
+      {
+        length: 14,
+        phases: [
+          {
+            name: "Research",
+            stages: [
+              {
+                name: "Delete me 1",
+                tasks: [
+                  {
+                    name: "Project Planning",
+                    start: 19,
+                    end: 22,
+                  },
+                  {
+                    name: "Research Plan",
+                    start: 19,
+                    end: 22,
+                  },
+                  {
+                    name: "Secondary Research",
+                    start: 22,
+                    end: 31,
+                  },
+                  {
+                    name: "Accessibility Plan",
+                    start: 29,
+                    end: 31,
+                  },
+                ],
+              },
+            ],
+          },
+
+          {
+            name: "Ideation",
+            stages: [
+              {
+                name: "Delete me 2",
+                tasks: [
+                  {
+                    name: "Topic Brainstorm",
+                    start: 31,
+                    end: 33,
+                  },
+                  {
+                    name: "How Might We",
+                    start: 33,
+                    end: 34,
+                  },
+                  {
+                    name: "Crazy 8s",
+                    start: 34,
+                    end: 36,
+                  },
+                  {
+                    name: "Importance / Difficulty Chart",
+                    start: [36, 44],
+                    end: [38, 47],
+                  },
+                  {
+                    name: "Experience-Based Road Map",
+                    start: 38,
+                    end: 40,
+                  },
+                  {
+                    name: "Gathering Feedback",
+                    start: 40,
+                    end: 44,
+                  },
+                ],
+              },
+            ],
+          },
+
+          {
+            name: "Dev Phase 1",
+            stages: [
+              {
+                name: "Delete me 3",
+                tasks: [
+                  {
+                    name: "Prototyping",
+                    start: 47,
+                    end: 57,
+                  },
+                  {
+                    name: "Cognitive Walkthrough Test",
+                    start: 57,
+                    end: 58,
+                  },
+                  {
+                    name: "Affinity Diagram",
+                    start: 58,
+                    end: 60,
+                  },
+                  {
+                    name: "Design Studio",
+                    start: 60,
+                    end: 63,
+                  },
+                  {
+                    name: "User Testing",
+                    start: 63,
+                    end: 65,
+                  },
+                ],
+              },
+            ],
+          },
+
+          {
+            name: "Dev Phase 2",
+            stages: [
+              {
+                name: "Delete me 4",
+                tasks: [
+                  {
+                    name: "Affinity Diagram",
+                    start: 65,
+                    end: 67,
+                  },
+                  {
+                    name: "Importance / Difficulty Chart",
+                    start: 67,
+                    end: 69,
+                  },
+                  {
+                    name: "Design Studio",
+                    start: 69,
+                    end: 72,
+                  },
+                  {
+                    name: "Prototyping",
+                    start: 69,
+                    end: 82,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 function checkGantt(arr) {
@@ -601,13 +751,7 @@ function checkGantt(arr) {
   }
 }
 
-
-
-
-
-
-
-function barToObj(obj){
+function barToObj(obj) {
   if (typeof obj.start == "number") {
     obj.bars = [
       {
@@ -627,25 +771,18 @@ function barToObj(obj){
   }
 }
 
-
-
-
-
-
 function ganttInit(arr) {
   checkGantt(arr);
 
-
-  
   // Adding keys to everything that needs to be mapped through
   for (var i = 0; i < arr.length; i++) {
     var chart = arr[i];
     chart.key = uuidv4();
-    
+
     for (var j = 0; j < chart.cycles.length; j++) {
       var cycle = chart.cycles[j];
       cycle.key = uuidv4();
-      
+
       for (var k = 0; k < cycle.phases.length; k++) {
         var phase = cycle.phases[k];
         phase.key = uuidv4();
@@ -735,8 +872,6 @@ function ganttInit(arr) {
 
         phase.start = phaseStart;
         phase.end = phaseEnd;
-
-
       }
     }
   }
@@ -751,8 +886,6 @@ function ganttInit(arr) {
     }
   }
 
-
-
   //  converting start and end to a bar object for better support for multiple bars
   for (var i = 0; i < arr.length; i++) {
     var chart = arr[i];
@@ -764,72 +897,17 @@ function ganttInit(arr) {
         var phase = cycle.phases[k];
         barToObj(phase);
 
-      
-
         for (var l = 0; l < phase.stages.length; l++) {
           var stage = phase.stages[l];
 
           for (var m = 0; m < stage.tasks.length; m++) {
             var task = stage.tasks[m];
             barToObj(task);
-
           }
         }
       }
     }
   }
-
-  // // adding start and end to each stage
-  // for (var i = 0; i < arr.length; i++) {
-  //   var chart = arr[i];
-
-  //   for (var j = 0; j < chart.cycles.length; j++) {
-  //     var cycle = chart.cycles[j];
-
-  //     for (var k = 0; k < cycle.phases.length; k++) {
-  //       var phase = cycle.phases[k];
-
-  //       for (var l = 0; l < phase.stages.length; l++) {
-  //         var stage = phase.stages[l];
-
-  //         var stageStart = 100000;
-  //         var stageEnd = 0;
-
-  //         for (var m = 0; m < stage.tasks.length; m++) {
-  //           var task = stage.tasks[m];
-
-  //           if (typeof task.start == "number") {
-  //             if (task.start < stageStart) {
-  //               stageStart = task.start;
-  //             }
-  //           } else {
-  //             for (var n = 0; n < task.start.length; n++) {
-  //               if (task.start[n] < stageStart) {
-  //                 stageStart = task.start[n];
-  //               }
-  //             }
-  //           }
-
-  //           if (typeof task.end == "number") {
-  //             if (task.end > stageEnd) {
-  //               stageEnd = task.end;
-  //             }
-  //           } else {
-  //             for (var n = 0; n < task.end.length; n++) {
-  //               if (task.end[n] > stageEnd) {
-  //                 stageEnd = task.end[n];
-  //               }
-  //             }
-  //           }
-  //         }
-
-  //         stage.start = stageStart;
-  //         stage.end = stageEnd;
-
-  //       }
-  //     }
-  //   }
-  // }
 
   return arr;
 }

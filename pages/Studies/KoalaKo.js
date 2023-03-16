@@ -2,7 +2,7 @@ import { getStudy } from "@/scripts/GetStudy";
 import CaseStudyPage from "@/components/studies/CaseStudyPage";
 import { Section, Chapter, Title, Column, Heading, Description, Graphic, Quote } from "@/components/sections/Sections";
 import MAKERIGHT_IMGS from "/data/MAKERIGHT_IMGS";
-import Gantt from "/components/charts/Gantt";
+import Gantt from "@/components/charts/Gantt";
 import BarGraph from "@/components/charts/BarGraph";
 import DLink from "@/components/utilities/DynamicLink";
 import PieChart from "@/components/charts/PieChart";
@@ -15,7 +15,7 @@ import { MADE_IMGS } from "@/data/MADE_IMGS";
 import { STUDY_KOALAKO } from "@/data/CASE_STUDIES";
 import { useEffect } from "react";
 
-function KoalaKo({setPopup, onReady}) {
+function KoalaKo({ setPopup, onReady }) {
   const study = STUDY_KOALAKO;
   useEffect(() => {
     const handleLoad = () => {
@@ -24,21 +24,20 @@ function KoalaKo({setPopup, onReady}) {
       }
     };
 
-    if (document.readyState === 'complete') {
+    if (document.readyState === "complete") {
       handleLoad();
     } else {
-      document.addEventListener('readystatechange', () => {
-        if (document.readyState === 'complete') {
+      document.addEventListener("readystatechange", () => {
+        if (document.readyState === "complete") {
           handleLoad();
         }
       });
     }
 
     return () => {
-      document.removeEventListener('readystatechange', handleLoad);
+      document.removeEventListener("readystatechange", handleLoad);
     };
   }, []);
-
 
   // const colors = [
   //   "#074391",
@@ -172,33 +171,46 @@ function KoalaKo({setPopup, onReady}) {
           </Column>
 
           <Column className="solution--graphics">
-            <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_setup} lightbox setPopup={setPopup}/>
-            <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_skip_signup} lightbox setPopup={setPopup}/>
+            <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_setup} lightbox setPopup={setPopup} />
+            <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_skip_signup} lightbox setPopup={setPopup} />
           </Column>
         </Section>
-
 
         <Section id="Overview--Wordly" type="columns" background="tertiary">
           <Column className="solution--graphics">
-            <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_location} lightbox setPopup={setPopup}/>
-            <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_map_item} lightbox setPopup={setPopup}/>
+            <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_location} lightbox setPopup={setPopup} />
+            <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_map_item} lightbox setPopup={setPopup} />
           </Column>
           <Column className="solution--copy">
             <Graphic type="mask" img={KOALAKO_IMGS.solution_worldly_creativity} />
-            <Heading>
-            Encourages worldly creativity by providing safe nearby spots to explore
-            </Heading>
+            <Heading>Encourages worldly creativity by providing safe nearby spots to explore</Heading>
             <Description>
-              <p>Parents can browse locations that match their desired activity, or activities that match a desired location.  Refine these searches with filters for cost, distance from home, and other important factors.  </p>
-              <p>This allows KoalaKo to fit any parent's needs.  While still encouraging adventures outside the living room when possible. </p>
+              <p>Parents can browse locations that match their desired activity, or activities that match a desired location. Refine these searches with filters for cost, distance from home, and other important factors. </p>
+              <p>This allows KoalaKo to fit any parent's needs. While still encouraging adventures outside the living room when possible. </p>
             </Description>
           </Column>
-
         </Section>
 
-
         <Section id="Overview--Banner" background={KOALAKO_IMGS.banner_building}>
-            <Heading>Building KoalaKo</Heading>
+          <Heading>Building KoalaKo</Heading>
+        </Section>
+      </Chapter>
+
+      <Chapter name="Plan" id="Plan">
+
+
+
+        <Section id="Plan--Gantt" className="flex-col">
+          <Title>Project Plan</Title>
+          <Heading>
+            Roadmapping research exercises, deadlines, <br />
+            and team expectations
+          </Heading>
+          <Gantt study="KoalaKo" className="mt-3"/>
+          <Description className="text-col-2 mt-4">
+            <p>Our focus when designing this project plan was to ensure enough time to research our topic before developing ideas. From there we would distill concepts into those that were most promising.</p>
+            <p>Before creating a rough prototype, to test and gather feedback from potential users. Repeating this process in cycles while addressing feedback, and refining our solution.</p>
+          </Description>
         </Section>
 
 

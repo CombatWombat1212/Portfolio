@@ -5,6 +5,9 @@ import Mask from "../utilities/Mask";
 import GANTT_CHARTS from "/data/charts/GANTT_CHARTS";
 import { chevron_down } from "/data/ICONS";
 
+
+// TODO: Add the ability to set start and end points optionally which trim the chart to a specific range
+
 function BarFilled({ className, start, end, cycle }) {
   var type = className.split("__")[1];
   var isPhase = type == "phase";
@@ -268,7 +271,7 @@ function Cycle({ cycle, weeks }) {
   );
 }
 
-function Gantt({ study }) {
+function Gantt({ study, className }) {
   // TODO: Collapse all phases once scrolled past
 
   var chart = GANTT_CHARTS.find((c) => c.name === study);
@@ -305,7 +308,7 @@ function Gantt({ study }) {
 
   return (
     <>
-      <div className="gantt" ref={ganttRef}>
+      <div className={`gantt ${className ? className : ''}`} ref={ganttRef}>
         {cycles.map((cycle) => {
           return <Cycle key={cycle.key} cycle={cycle} weeks={cycle.weeks} />;
         })}
