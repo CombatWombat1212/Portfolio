@@ -1,5 +1,5 @@
 #Home {
-  &--Hero {
+  // &--Hero {
     .panel {
       &--img {
         @include mx-auto;
@@ -16,7 +16,7 @@
         }
       }
     }
-  }
+  // }
 
   // Moved to _StudyPanel.scss
 

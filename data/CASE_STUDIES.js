@@ -171,4 +171,15 @@ function caseStudiesInit(arr) {
   return arr;
 }
 
-export default caseStudiesInit(CASE_STUDIES);
+
+CASE_STUDIES = caseStudiesInit(CASE_STUDIES);
+const STUDY_MAKERIGHT = CASE_STUDIES[0];
+const STUDY_MADE = CASE_STUDIES[1];
+const STUDY_KOALAKO = CASE_STUDIES[2];
+const STUDY_EXPLORATIONS = CASE_STUDIES[3];
+
+
+
+
+export default CASE_STUDIES;
+export { STUDY_MAKERIGHT, STUDY_MADE, STUDY_KOALAKO, STUDY_EXPLORATIONS };

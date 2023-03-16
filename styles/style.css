@@ -5294,17 +5294,17 @@ body {
   }
 }
 
-#Home--Hero .panel--img {
+#Home .panel--img {
   margin-right: auto;
   margin-left: auto;
   width: 9.5rem;
 }
 
-#Home--Hero .panel--img .mask {
+#Home .panel--img .mask {
   background-color: #C41263;
 }
 
-#Home--Hero .panel--desc .text--body {
+#Home .panel--desc .text--body {
   margin-top: calc(var(--panel-description-spacing) * 1.3);
 }
 

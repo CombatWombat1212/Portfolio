@@ -12,9 +12,33 @@ import Pitch from "@/components/sections/Pitch";
 import { KOALAKO_IMGS } from "@/data/KOALAKO_IMGS";
 import ICONS from "@/data/ICONS";
 import { MADE_IMGS } from "@/data/MADE_IMGS";
+import { STUDY_KOALAKO } from "@/data/CASE_STUDIES";
+import { useEffect } from "react";
 
-function KoalaKo({setPopup}) {
-  const study = getStudy();
+function KoalaKo({setPopup, onReady}) {
+  const study = STUDY_KOALAKO;
+  useEffect(() => {
+    const handleLoad = () => {
+      if (onReady) {
+        onReady();
+      }
+    };
+
+    if (document.readyState === 'complete') {
+      handleLoad();
+    } else {
+      document.addEventListener('readystatechange', () => {
+        if (document.readyState === 'complete') {
+          handleLoad();
+        }
+      });
+    }
+
+    return () => {
+      document.removeEventListener('readystatechange', handleLoad);
+    };
+  }, []);
+
 
   // const colors = [
   //   "#074391",

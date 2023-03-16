@@ -17,7 +17,9 @@ function DLink(props) {
   return (
     <>
     {props.href && props.href.length > 0 && !props.href.startsWith('#') ? (
-        <Link {...props} href={props.href} ref={reference} className={"link" + (props.className ? ` ${props.className}` : '')} >
+        <Link {...props} href={props.href} ref={reference} className={"link" + (props.className ? ` ${props.className}` : '')} 
+        scroll={false}
+        >
           {props.children}
         </Link>
         // <Link {...props} href={props.href} ref={reference} className={"link" + (props.className ? ` ${props.className}` : '')} >

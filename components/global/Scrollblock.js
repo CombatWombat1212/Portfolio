@@ -1,5 +1,9 @@
-function Scrollblock({ children }) {
-  return <div className="scrollblock">{children}</div>;
+function Scrollblock({ children, id }) {
+  return <div className="scrollblock"
+  
+  {...(id != undefined ? { id: id } : {})}
+
+  >{children}</div>;
 }
 
 export default Scrollblock;

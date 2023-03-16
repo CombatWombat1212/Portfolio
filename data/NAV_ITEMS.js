@@ -4,7 +4,7 @@ var NAV_ITEMS = [
   {
     name: "Home",
     text: "Sam Giustizia",
-    link: "/",
+    link: "/#Home",
     type: "Logo",
     ariaLabel: "Home",
   },

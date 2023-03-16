@@ -6,10 +6,11 @@ import Configurator from "@/components/global/Configurator";
 import Split from "@/components/global/Split";
 import ImageRow from "@/components/global/ImageRow";
 import ProsCons, { Con, Pro } from "@/components/global/ProsCons";
+import { STUDY_MADE } from "@/data/CASE_STUDIES";
+import { useEffect } from "react";
 
 function MADE() {
-  // TODO: just make it a prop
-  const study = getStudy();
+  const study = STUDY_MADE;
 
   // TODO: update intro image to match the mockups
 

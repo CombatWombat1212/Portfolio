@@ -7,7 +7,7 @@ import CASE_STUDIES from "/data/CASE_STUDIES";
 //Utilities
 
 //Components
-import Scrollblock from "/components/global/Scrollblock";
+import Scrollblock from "@/components/global/Scrollblock";
 import { Panel, PanelDesc, PanelImg, StudyPanel } from "@/components/elements/Panel";
 import Mask from "/components/utilities/Mask";
 import { useEffect, useState } from "react";
@@ -46,7 +46,7 @@ function Index() {
 
   return (
     <>
-      <Scrollblock>
+      <Scrollblock id="Home">
         <Panel id="Home--Hero" type="img-desc">
           <PanelDesc className="col-6">
             <h1 className="panel--title">
