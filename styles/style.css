@@ -5678,4 +5678,26 @@ body, .base-page-size {
   row-gap: var(--gap);
   align-items: center;
 }
+
+#Koalako #Plan--Gantt .label--stage {
+  display: none;
+}
+
+#Koalako #Plan--Gantt .gantt {
+  --gantt-stage-top-margin: 0.35rem;
+}
+
+#Koalako #Plan--Gantt .gantt--phase {
+  --gantt-phase-height_max: calc(
+          
+          var(--gantt-phase-height) + 
+          (var(--gantt-stage-count) * var(--gantt-stage-top-margin))
+           + 
+           (var(--gantt-task-count) * var(--gantt-task-top-margin))
+            + 
+            (var(--gantt-task-count) * var(--gantt-label-height))
+            
+            )
+        ;
+}
 /*# sourceMappingURL=style.css.map */

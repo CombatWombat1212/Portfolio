@@ -28,16 +28,15 @@
       }
 
       .section {
-
         &--graphic {
           margin-top: 0rem;
 
-          .graphic--img{
-              height:fit-content;
+          .graphic--img {
+            height: fit-content;
           }
 
-          img{
-            height:fit-content;
+          img {
+            height: fit-content;
           }
         }
 
@@ -62,7 +61,31 @@
           align-items: center;
         }
       }
+    }
+  }
 
+  #Plan {
+    &--Gantt {
+      .label--stage {
+        display: none;
+      }
+
+      .gantt {
+        --gantt-stage-top-margin: 0.35rem;
+
+        &--phase {
+          --gantt-phase-height_max: calc(
+          
+          var(--gantt-phase-height) + 
+          (var(--gantt-stage-count) * var(--gantt-stage-top-margin))
+           + 
+           (var(--gantt-task-count) * var(--gantt-task-top-margin))
+            + 
+            (var(--gantt-task-count) * var(--gantt-label-height))
+            
+            )
+        }
+      }
     }
   }
 }
