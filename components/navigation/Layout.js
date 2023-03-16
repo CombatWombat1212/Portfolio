@@ -10,7 +10,6 @@ function Layout ({children}) {
         <>
             <Navigation />
             <main className="main">{children}</main>
-            <Footer />
         </>
     );
 
