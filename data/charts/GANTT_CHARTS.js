@@ -553,12 +553,162 @@ var GANTT_CHARTS = [
     ],
   },
 
+  // {
+  //   name: "KoalaKo",
+  //   weeks: 14,
+  //   cycles: [
+  //     {
+  //       length: 14,
+  //       phases: [
+  //         {
+  //           name: "Research",
+  //           stages: [
+  //             {
+  //               name: "Delete me 1",
+  //               tasks: [
+  //                 {
+  //                   name: "Project Planning",
+  //                   start: 19,
+  //                   end: 22,
+  //                 },
+  //                 {
+  //                   name: "Research Plan",
+  //                   start: 19,
+  //                   end: 22,
+  //                 },
+  //                 {
+  //                   name: "Secondary Research",
+  //                   start: 22,
+  //                   end: 31,
+  //                 },
+  //                 {
+  //                   name: "Accessibility Plan",
+  //                   start: 29,
+  //                   end: 31,
+  //                 },
+  //               ],
+  //             },
+  //           ],
+  //         },
+
+  //         {
+  //           name: "Ideation",
+  //           stages: [
+  //             {
+  //               name: "Delete me 2",
+  //               tasks: [
+  //                 {
+  //                   name: "Topic Brainstorm",
+  //                   start: 31,
+  //                   end: 33,
+  //                 },
+  //                 {
+  //                   name: "How Might We",
+  //                   start: 33,
+  //                   end: 34,
+  //                 },
+  //                 {
+  //                   name: "Crazy 8s",
+  //                   start: 34,
+  //                   end: 36,
+  //                 },
+  //                 {
+  //                   name: "Importance / Difficulty Chart",
+  //                   start: [36, 44],
+  //                   end: [38, 47],
+  //                 },
+  //                 {
+  //                   name: "Experience-Based Road Map",
+  //                   start: 38,
+  //                   end: 40,
+  //                 },
+  //                 {
+  //                   name: "Gathering Feedback",
+  //                   start: 40,
+  //                   end: 44,
+  //                 },
+  //               ],
+  //             },
+  //           ],
+  //         },
+
+  //         {
+  //           name: "Dev Phase 1",
+  //           stages: [
+  //             {
+  //               name: "Delete me 3",
+  //               tasks: [
+  //                 {
+  //                   name: "Prototyping",
+  //                   start: 47,
+  //                   end: 57,
+  //                 },
+  //                 {
+  //                   name: "Cognitive Walkthrough Test",
+  //                   start: 57,
+  //                   end: 58,
+  //                 },
+  //                 {
+  //                   name: "Affinity Diagram",
+  //                   start: 58,
+  //                   end: 60,
+  //                 },
+  //                 {
+  //                   name: "Design Studio",
+  //                   start: 60,
+  //                   end: 63,
+  //                 },
+  //                 {
+  //                   name: "User Testing",
+  //                   start: 63,
+  //                   end: 65,
+  //                 },
+  //               ],
+  //             },
+  //           ],
+  //         },
+
+  //         {
+  //           name: "Dev Phase 2",
+  //           stages: [
+  //             {
+  //               name: "Delete me 4",
+  //               tasks: [
+  //                 {
+  //                   name: "Affinity Diagram",
+  //                   start: 65,
+  //                   end: 67,
+  //                 },
+  //                 {
+  //                   name: "Importance / Difficulty Chart",
+  //                   start: 67,
+  //                   end: 69,
+  //                 },
+  //                 {
+  //                   name: "Design Studio",
+  //                   start: 69,
+  //                   end: 72,
+  //                 },
+  //                 {
+  //                   name: "Prototyping",
+  //                   start: 69,
+  //                   end: 82,
+  //                 },
+  //               ],
+  //             },
+  //           ],
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
+
   {
     name: "KoalaKo",
-    weeks: 14,
+    weeks: 11,
     cycles: [
       {
-        length: 14,
+        length: 11,
         phases: [
           {
             name: "Research",
@@ -568,23 +718,23 @@ var GANTT_CHARTS = [
                 tasks: [
                   {
                     name: "Project Planning",
-                    start: 19,
-                    end: 22,
+                    start: 5,
+                    end: 8,
                   },
                   {
                     name: "Research Plan",
-                    start: 19,
-                    end: 22,
+                    start: 5,
+                    end: 8,
                   },
                   {
                     name: "Secondary Research",
-                    start: 22,
-                    end: 31,
+                    start: 8,
+                    end: 17,
                   },
                   {
                     name: "Accessibility Plan",
-                    start: 29,
-                    end: 31,
+                    start: 15,
+                    end: 17,
                   },
                 ],
               },
@@ -599,33 +749,33 @@ var GANTT_CHARTS = [
                 tasks: [
                   {
                     name: "Topic Brainstorm",
-                    start: 31,
-                    end: 33,
+                    start: 17,
+                    end: 19,
                   },
                   {
                     name: "How Might We",
-                    start: 33,
-                    end: 34,
+                    start: 19,
+                    end: 20,
                   },
                   {
                     name: "Crazy 8s",
-                    start: 34,
-                    end: 36,
+                    start: 20,
+                    end: 22,
                   },
                   {
                     name: "Importance / Difficulty Chart",
-                    start: [36, 44],
-                    end: [38, 47],
+                    start: [22, 30],
+                    end: [24, 33],
                   },
                   {
                     name: "Experience-Based Road Map",
-                    start: 38,
-                    end: 40,
+                    start: 24,
+                    end: 26,
                   },
                   {
                     name: "Gathering Feedback",
-                    start: 40,
-                    end: 44,
+                    start: 26,
+                    end: 30,
                   },
                 ],
               },
@@ -640,28 +790,28 @@ var GANTT_CHARTS = [
                 tasks: [
                   {
                     name: "Prototyping",
-                    start: 47,
-                    end: 57,
+                    start: 33,
+                    end: 43,
                   },
                   {
                     name: "Cognitive Walkthrough Test",
-                    start: 57,
-                    end: 58,
+                    start: 43,
+                    end: 44,
                   },
                   {
                     name: "Affinity Diagram",
-                    start: 58,
-                    end: 60,
+                    start: 44,
+                    end: 46,
                   },
                   {
                     name: "Design Studio",
-                    start: 60,
-                    end: 63,
+                    start: 46,
+                    end: 49,
                   },
                   {
                     name: "User Testing",
-                    start: 63,
-                    end: 65,
+                    start: 49,
+                    end: 51,
                   },
                 ],
               },
@@ -676,23 +826,23 @@ var GANTT_CHARTS = [
                 tasks: [
                   {
                     name: "Affinity Diagram",
-                    start: 65,
-                    end: 67,
+                    start: 51,
+                    end: 53,
                   },
                   {
                     name: "Importance / Difficulty Chart",
-                    start: 67,
-                    end: 69,
+                    start: 53,
+                    end: 55,
                   },
                   {
                     name: "Design Studio",
-                    start: 69,
-                    end: 72,
+                    start: 55,
+                    end: 58,
                   },
                   {
                     name: "Prototyping",
-                    start: 69,
-                    end: 82,
+                    start: 55,
+                    end: 68,
                   },
                 ],
               },
@@ -702,6 +852,7 @@ var GANTT_CHARTS = [
       },
     ],
   },
+
 ];
 
 function checkGantt(arr) {

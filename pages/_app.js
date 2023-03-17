@@ -12,9 +12,67 @@ import usePageTransition from "@/scripts/hooks/usePageTransition";
 import useEllipse from "@/scripts/hooks/useEllipse";
 import Footer from "@/components/navigation/Footer";
 import LoadingScreen from "@/components/navigation/LoadingScreen";
+import useSecret from "@/scripts/hooks/useSecret";
+import useRandomString from "@/scripts/hooks/useRandomString";
+// const style =
+// `font-family: "Gira Sans"; font-size: 1.4375rem;` +
+// // +`line-height:2rem;`
+// `line-height:2rem;` +
+// `font-style:italic;` +
+// `font-weight: 400;  color: ${generateRainbowColor(hue)};` +
+// // +`padding: 0.225rem 0.775rem 1.375rem 0.775rem;`;
+// `padding: 0.725rem 0.775rem 0.875rem 0.775rem;`;
+
+
+function generateRainbowColor(hue) {
+  return `hsl(${hue}, 100%, 50%)`;
+}
+
+function generateWaveText(text, hue, translateY) {
+  const characters = text.split('');
+  const styledText = characters.map((char, i) => `%c${char}`).join('');
+  const styles = characters.map((char, i) => `color: ${generateRainbowColor((hue + i * 15) % 360)};` +
+    `font-family: "Gira Sans"; font-size: 1.4375rem;` +
+    `line-height:2rem;` +
+    `font-style:italic;` +
+    `font-weight: 400;` 
+    // +`transform: translateY(${translateY[i % translateY.length]}px);`
+    );
+  return [styledText, ...styles];
+}
+
+
+
+
 
 export default function App({ Component, pageProps }) {
   // TODO: add an easy out for people on the case study pages.  either a next or back button, skip to bottom, something that will allow them to quickly bounce around case studies
+
+  const secret = useSecret("password", 10000);
+  const secret2 = useSecret("stop", 1000);
+
+  const colors = Array.from({ length: 360 }, (_, i) => generateRainbowColor(i));
+
+  useEffect(() => {
+    if (!secret) return;
+
+    let hue = 0;
+    const translateY = [0, 2, 4, 6, 4, 2];
+    const interval = setInterval(() => {
+      const [waveText, ...styles] = generateWaveText("eat my ass", hue, translateY);
+      console.log(waveText, ...styles);
+
+      hue = (hue + Math.random() * 60) % 360;
+      translateY.push(translateY.shift());
+
+      if (secret2) {
+        clearInterval(interval);
+      }
+    }, 25);
+
+    return () => clearInterval(interval);
+  }, [secret, secret2]);
+
 
   // I am not currently using this
   useMountEffect(() => {
@@ -31,7 +89,6 @@ export default function App({ Component, pageProps }) {
   const [chosen, setChosen] = useState(null);
   const [unseenMessages, setUnseenMessages] = useState([...loadingMessages]);
 
-  
   // var dur = 0.65;
   var dur = 0.65;
   var delay = 0.1;
@@ -48,7 +105,6 @@ export default function App({ Component, pageProps }) {
 
   const { isEntering, getTransitionVariant } = usePageTransition(incomingVariants, outgoingVariants);
   const transitionVariant = getTransitionVariant(isEntering);
-
 
   const chooseRandomMessage = () => {
     const index = Math.floor(Math.random() * unseenMessages.length);
@@ -87,7 +143,8 @@ export default function App({ Component, pageProps }) {
       <Layout>
         <Popup popup={popup} setPopup={setPopup} />
 
-        <AnimatePresence
+        {/* TODO: They break when you go back in the browser */}
+        {/* <AnimatePresence
           mode="wait"
           onExitComplete={() => {
             window.scrollTo({
@@ -108,14 +165,17 @@ export default function App({ Component, pageProps }) {
               ease: "backInOut",
             }}
             variants={transitionVariant}
-            onTransitionEnd={handleTransitionEnd}>
-            <Component popup={popup} setPopup={setPopup} />
-            <Footer />
-          </motion.div>
-        </AnimatePresence>
+            onTransitionEnd={handleTransitionEnd}> */}
 
-        <LoadingScreen showLoading={showLoading} chosen={chosen} />
+        {/* TODO:delete this once you uncomment the rest */}
+        <div className="base-page-size">
+          <Component popup={popup} setPopup={setPopup} />
+        </div>
+        <Footer />
+        {/* </motion.div>
+        </AnimatePresence> */}
 
+        {/* <LoadingScreen showLoading={showLoading} chosen={chosen} /> */}
       </Layout>
     </>
   );

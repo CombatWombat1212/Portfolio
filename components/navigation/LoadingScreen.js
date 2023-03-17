@@ -8,10 +8,11 @@ const LoadingScreen = ({ chosen, showLoading }) => {
   return (
     <div className={`loading-screen 
     `
-    // ${showLoading ? "" : "loading-screen__hidden"}
     }>
       <h3
-        className="loading-screen--text"
+        className={`loading-screen--text
+        ${showLoading ? "" : "loading-screen--text__hidden"}
+        `}
         dangerouslySetInnerHTML={{
           __html: chosen ? (chosen.endsWith("...") ? `${chosen.slice(0, -3)}${ellipse}` : chosen) : ellipse,
         }}></h3>

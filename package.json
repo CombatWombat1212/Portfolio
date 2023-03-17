@@ -15,6 +15,7 @@
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.2",
     "framer-motion": "^10.4.0",
+    "imagemin-webp": "^8.0.0",
     "lit": "^2.6.1",
     "next": "13.1.2",
     "next-videos": "^1.4.1",

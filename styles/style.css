@@ -223,7 +223,7 @@ li, span {
   scroll-behavior: smooth;
 }
 
-body, .base-page-size {
+body {
   background-color: #F3F3F7;
 }
 
@@ -1031,10 +1031,6 @@ body, .base-page-size {
   z-index: -1;
 }
 
-.loading-screen__hidden {
-  opacity: 0;
-}
-
 .loading-screen--text {
   top: 50%;
   left: 50%;
@@ -1042,6 +1038,7 @@ body, .base-page-size {
   transform: translate(-50%, -50%);
   color: #F3F3F7;
   text-align: left;
+  opacity: 1;
 }
 
 .panel {
@@ -1264,6 +1261,21 @@ body, .base-page-size {
 .button__background-secondary:hover, .button__background-secondary:focus, .button__background-secondary.focus, .button__background-secondary.hover {
   --button-background: #E0E0EA;
   --button-color: #950647;
+}
+
+.button__background_darkest-primary {
+  --button-icon-size: 1.5rem;
+  --button-background: #E0E0EA;
+  --button-color: #074391;
+}
+
+.button__background_darkest-primary {
+  transition: var(--transition);
+}
+
+.button__background_darkest-primary:hover, .button__background_darkest-primary:focus, .button__background_darkest-primary.focus, .button__background_darkest-primary.hover {
+  --button-background: #d4d4e2;
+  --button-color: #063879;
 }
 
 .button__right {
@@ -3721,6 +3733,82 @@ body, .base-page-size {
   background-color: #C4123C !important;
 }
 
+.findings {
+  border-radius: var(--b-rad);
+  -webkit-border-radius: var(--b-rad);
+  -moz-border-radius: var(--b-rad);
+  -khtml-border-radius: var(--b-rad);
+  background-color: #F3F3F7;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.findings--p + .findings--p {
+  margin-top: 1.25rem;
+}
+
+.findings--h4 {
+  color: #074391;
+  margin-top: 1.35rem;
+}
+
+.findings--panel {
+  padding: 2rem;
+}
+
+.findings--main {
+  border-radius: var(--b-rad) var(--b-rad) 0 0;
+  background-color: #F3F3F7;
+}
+
+.findings--inner {
+  border-radius: var(--b-rad) var(--b-rad) 0 0;
+  padding-top: 0;
+}
+
+.findings--dropdown {
+  background-color: #F3F3F7;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+.findings--dropdown__open {
+  height: var(--findings-dropdown-height);
+}
+
+.findings--dropdown__closed {
+  height: 0rem;
+}
+
+.findings--button {
+  transition: background-color 0.5s;
+}
+
+.findings--button .mask {
+  transition: rotate 0.5s, translate 0.13s;
+  transform: rotate(0deg);
+}
+
+.findings--button .mask__closed {
+  rotate: 0deg;
+  translate: 0 0rem;
+}
+
+.findings--button .mask__open {
+  rotate: 180deg;
+  translate: 0 0rem;
+}
+
+.findings--button .mask__closed.hover {
+  rotate: 0deg;
+  translate: 0 0.15rem;
+}
+
+.findings--button .mask__open.hover {
+  rotate: 180deg;
+  translate: 0 -0.15rem;
+}
+
 .graph--wrapper {
   background-color: #F3F3F7;
   height: var(--graph-height);
@@ -5699,5 +5787,9 @@ body, .base-page-size {
             
             )
         ;
+}
+
+#Koalako #Research--Findings .section--main {
+  grid-template-columns: repeat(2, 1fr);
 }
 /*# sourceMappingURL=style.css.map */

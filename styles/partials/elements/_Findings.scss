@@ -1,0 +1,83 @@
+.findings {
+  @include b-rad;
+  background-color: $col-background;
+  cursor:pointer;
+  overflow:hidden;
+
+  &--h3 {
+  }
+
+  &--p {
+    & + & {
+      margin-top: 1.25rem;
+    }
+  }
+
+  &--h4 {
+    color: $col-primary;
+    margin-top: 1.35rem;
+  }
+
+  &--panel {
+    padding: 2rem;
+  }
+
+  &--main {
+    border-radius: var(--b-rad) var(--b-rad) 0 0 ;
+    background-color: $col-background;
+  }
+
+  &--inner{
+    border-radius: var(--b-rad) var(--b-rad) 0 0 ;
+    padding-top:0;
+}
+
+
+  &--dropdown {
+    background-color: $col-background;
+    overflow: hidden;
+
+    transition: 0.5s;
+
+    &__open{
+        height: var(--findings-dropdown-height);
+    }
+    &__closed{
+        height: 0rem;
+    }
+
+  }
+
+
+  &--button {
+    transition: background-color 0.5s;
+    .mask {
+      transition: rotate 0.5s, translate 0.13s;
+      transform: rotate(0deg);
+
+      &__closed {
+        rotate: 0deg;
+        translate: 0 0rem;
+      }
+
+      &__open {
+        rotate: 180deg;
+        translate: 0 0rem;
+      }
+
+      &__closed.hover {
+        rotate: 0deg;
+        translate: 0 0.15rem;
+      }
+
+      &__open.hover {
+        rotate: 180deg;
+        translate: 0 -0.15rem;
+      }
+
+
+
+
+    }
+  }
+}

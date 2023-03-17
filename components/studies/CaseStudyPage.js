@@ -4,6 +4,7 @@ import Brief from "./Brief";
 import NextStudies from "./NextStudies";
 import Indicator from "./Indicator";
 import React, { useEffect, useState } from "react";
+import useRandomString from "@/scripts/hooks/useRandomString";
 
 
 
@@ -85,19 +86,11 @@ function Next({ study }) {
     "We're just gettin' started",
   ]
 
-  const [chosen, setChosen] = useState(null);
-
-  useEffect(() => {
-    setChosen(captions[Math.floor(Math.random() * captions.length)]);
-  }, []);
-
-  if (!chosen) {
-    return null;
-  }
+  const nextStudyTitle = useRandomString(captions);
 
   return (
     <Section id="Closing--Next" type="passthrough" wrapperClassName={'pb-section-gap'} titled>
-      <Heading>{chosen}</Heading>
+      <Heading>{nextStudyTitle}</Heading>
       <NextStudies study={study} />
     </Section>
   );

@@ -10,9 +10,6 @@
     z-index: -1;
 
 
-    &__hidden{
-        opacity: 0;
-    }
 
 
 
@@ -23,6 +20,14 @@
         transform: translate(-50%, -50%);
         color: $col-background;
         text-align: left;
+
+        opacity: 1;
+        // transition:0.1s;
+
+        // &__hidden{
+        //     opacity: 0;
+        // }
+    
     }
 
 }

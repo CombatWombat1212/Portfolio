@@ -117,6 +117,17 @@
   }
 
 
+  &__background_darkest-primary {
+    --button-icon-size: 1.5rem;
+    --button-background: #{$col-background_darkest};
+    --button-color: #{$col-primary};
+    @include hover {
+      --button-background: #{darken($col-background_darkest, 4)};
+      --button-color: #{$col-primary_hovered};
+    }
+  }
+
+
 
 
 

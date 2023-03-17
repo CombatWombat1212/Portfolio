@@ -22,12 +22,15 @@
 }
 
 
-body, .base-page-size{
+body{
     background-color: $col-background;
 
     // p, li {
     //     @include body;
     // }
+}
+.base-page-size{
+    // background-color: $col-background;
 }
 
 

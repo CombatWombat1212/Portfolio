@@ -45,12 +45,12 @@ function Inner({ children, className, type, icon, animation, color, tag, ...prop
     <>
       {icon ? (
         <>
-          {iconSide == "left" || (iconSide == "alone" && <ButtonIcon img={iconName} type={iconType}></ButtonIcon>)}
-          {iconSide != "alone" && <ButtonCopy>{children}</ButtonCopy>}
+          {iconSide == "left" || (iconSide == "alone" || iconSide == "middle") && <ButtonIcon img={iconName} type={iconType}></ButtonIcon>}
+          {iconSide != "alone" && iconSide != "middle" && <ButtonCopy>{children}</ButtonCopy>}
           {iconSide == "right" && <ButtonIcon img={iconName} type={iconType}></ButtonIcon>}
         </>
       ) : (
-        <>{iconSide != "alone" && <ButtonCopy>{children}</ButtonCopy>}</>
+        <>{iconSide != "alone" && iconSide != "middle" && <ButtonCopy>{children}</ButtonCopy>}</>
       )}
     </>
   );
@@ -80,9 +80,7 @@ function Inner({ children, className, type, icon, animation, color, tag, ...prop
 //   );
 // }
 
-function Button({ children, className, type, icon, animation, color, tag, ...props }) {
-  const ButtonWrapper = tag === 'a' ? DLink : tag;
-
+function Button({ children, className, type, icon, animation, color, tag, reference, ...props }) {
   const [iconName, iconSide, iconType] = icon || [];
 
   const buttonClasses = ['button'];
@@ -94,8 +92,25 @@ function Button({ children, className, type, icon, animation, color, tag, ...pro
 
   var tabIndex = tag === 'a' ? 0 : null;
 
-  return (
-    <ButtonWrapper className={buttonClasses.join(' ')} tabIndex={tabIndex} {...props}>
+  const commonProps = {
+    className: buttonClasses.join(' '),
+    tabIndex: tabIndex,
+    reference: reference,
+    ...props
+  };
+
+
+
+  const ButtonWrapper = tag;
+
+  return tag === 'a' ? (
+    <DLink {...commonProps}>
+      <Inner className={className} type={type} icon={icon} animation={animation} color={color} tag={tag} {...props}>
+        {children}
+      </Inner>
+    </DLink>
+  ) : (
+    <ButtonWrapper {...commonProps} ref={reference}>
       <Inner className={className} type={type} icon={icon} animation={animation} color={color} tag={tag} {...props}>
         {children}
       </Inner>
@@ -114,7 +129,7 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
-  color: propTypes.oneOf(["primary", "secondary", "tertiary", "transparent-primary", "transparent-secondary", "transparent-tertiary", "transparent-background", "background-primary", "background-secondary"]),
+  color: propTypes.oneOf(["primary", "secondary", "tertiary", "transparent-primary", "transparent-secondary", "transparent-tertiary", "transparent-background", "background-primary", "background_darkest-primary", "background-secondary"]),
   type: propTypes.oneOf(["regular", "bottom"]),
   tag: propTypes.oneOf(["a", "div"]),
 };

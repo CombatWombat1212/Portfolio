@@ -13,7 +13,8 @@ import { KOALAKO_IMGS } from "@/data/KOALAKO_IMGS";
 import ICONS from "@/data/ICONS";
 import { MADE_IMGS } from "@/data/MADE_IMGS";
 import { STUDY_KOALAKO } from "@/data/CASE_STUDIES";
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
+import Findings from "@/components/global/Findings";
 
 function KoalaKo({ setPopup, onReady }) {
   const study = STUDY_KOALAKO;
@@ -197,23 +198,65 @@ function KoalaKo({ setPopup, onReady }) {
       </Chapter>
 
       <Chapter name="Plan" id="Plan">
-
-
-
         <Section id="Plan--Gantt" className="flex-col">
           <Title>Project Plan</Title>
           <Heading>
             Roadmapping research exercises, deadlines, <br />
             and team expectations
           </Heading>
-          <Gantt study="KoalaKo" className="mt-3"/>
+          <Gantt study="KoalaKo" className="mt-3" />
           <Description className="text-col-2 mt-4">
             <p>Our focus when designing this project plan was to ensure enough time to research our topic before developing ideas. From there we would distill concepts into those that were most promising.</p>
             <p>Before creating a rough prototype, to test and gather feedback from potential users. Repeating this process in cycles while addressing feedback, and refining our solution.</p>
           </Description>
         </Section>
+      </Chapter>
 
+      <Chapter name="Research" id="Research">
+        <Section id="Research--Intro" type="columns" titled="above" background="background darker">
+          <Title>Secondary Research</Title>
+          <Column>
+            <Heading>We began with secondary research, to gain footing within our topic</Heading>
+          </Column>
+          <Column>
+            <Description className="">
+              <p>The findings shown are those most relevant to the final project, not the entire scope of research. The full list of sources can be found at the end of the study. </p>
+            </Description>
+          </Column>
+        </Section>
 
+        <Section id="Research--Findings" type="columns" titled background="background darker" mainType="grid">
+          <Title>Findings</Title>
+          <Heading>
+            In exploring “creative play and development,” <br />
+            we discovered the importance of play-style breadth
+          </Heading>
+          <Column>
+            <Findings>
+              <div type="main">
+                <h3>Unique play experiences directly encourage different types of critical development.</h3>
+              </div>
+              
+              <div type="dropdown">
+                <p>“Be sure to offer children a wide range of creative materials and experiences...”</p>
+                <p>“...The more varied experiences children have in their lives, the wider the range of creative expression.”</p>
+                <p className="test">“Play fosters mental development and new ways of thinking and problem solving...”</p>
+                <h4>Creativity and Play: Fostering Creativity (PBS)</h4>
+              </div>
+            </Findings>
+          </Column>
+          <Column>
+            <Findings>
+              <div type="main">
+                <h3>Parents can further this development, and grow their child’s skills by encouraging new types of play.</h3>
+              </div>
+              <div type="dropdown">
+                <p>“Ask [them] to paint, draw, or tell a story, about how they’re feeling. [activities like these help your child to] learn how to express their feelings safely and creatively, allowing them to integrate into social settings and regulate their behavior more appropriately.”</p>
+                <h4>The Importance of Creative Play for Kids (The Little Gym)</h4>
+              </div>
+            </Findings>
+          </Column>
+        </Section>
       </Chapter>
 
       <Chapter name="Closing" id="Closing"></Chapter>

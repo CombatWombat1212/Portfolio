@@ -152,6 +152,7 @@ function phaseInit() {
 
 function phaseBackgroundClasslistToggle(phase) {
   var background = phase.elem.querySelector(".bar__background");
+
   phase.on = phase.elem.classList.contains("gantt--phase__open") ? true : false;
   
   if (phase.on) {
@@ -167,7 +168,9 @@ function phaseBackgroundClasslistToggle(phase) {
 
 function phaseBackgroundAnimate(elem) {
   var index = Array.from(document.querySelectorAll(".gantt--phase")).indexOf(elem);
+  if (allPhases[index] == undefined) return;
   var phase = allPhases[index];
+
   
   var trans = getComputedStyle(elem).getPropertyValue("--gant-phase-trans").split("s")[0] * 1000;
   var delay = getComputedStyle(elem).getPropertyValue("--gant-phase-delay").split("s")[0] * 1000;
