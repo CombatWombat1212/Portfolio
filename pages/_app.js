@@ -51,8 +51,6 @@ export default function App({ Component, pageProps }) {
   const secret = useSecret("password", 10000);
   const secret2 = useSecret("stop", 1000);
 
-  const colors = Array.from({ length: 360 }, (_, i) => generateRainbowColor(i));
-
   useEffect(() => {
     if (!secret) return;
 
@@ -61,7 +59,6 @@ export default function App({ Component, pageProps }) {
     const interval = setInterval(() => {
       const [waveText, ...styles] = generateWaveText("eat my ass", hue, translateY);
       console.log(waveText, ...styles);
-
       hue = (hue + Math.random() * 60) % 360;
       translateY.push(translateY.shift());
 
