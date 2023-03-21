@@ -8,11 +8,12 @@ const useOrganizeChildren = (children, searchTermArray) => {
 
     const elementProps = element.props;
     const elementType = element.type;
+    const elementTypeName = typeof elementType === 'function' ? elementType.name : elementType;
 
     const matchesSearchTerm = Object.entries(searchProps).every(
       ([searchKey, searchValue]) => {
         if (searchKey === 'elemType') {
-          return elementType === searchValue;
+          return elementTypeName === searchValue;
         }
         return elementProps[searchKey] === searchValue;
       }

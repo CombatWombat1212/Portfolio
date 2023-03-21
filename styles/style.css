@@ -1814,6 +1814,10 @@ body {
   margin-top: calc((var(--section_title-above-offset) * -1) + var(--font-margin-bottom-h4));
 }
 
+.section--main__title-below {
+  margin-top: 0rem;
+}
+
 .section .column {
   min-width: 0.1rem;
   position: relative;
@@ -3809,6 +3813,37 @@ body {
   translate: 0 -0.15rem;
 }
 
+.method {
+  --method-pad: 2.25rem;
+  padding: var(--method-pad);
+  background-color: #F3F3F7;
+  border-radius: var(--b-rad);
+  -webkit-border-radius: var(--b-rad);
+  -moz-border-radius: var(--b-rad);
+  -khtml-border-radius: var(--b-rad);
+  height: calc(100% - (var(--method-pad) * 2));
+}
+
+.method--title {
+  margin-bottom: 0.25rem;
+}
+
+.method--head {
+  display: flex;
+  flex-direction: row;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.method--mask {
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+}
+
+.method--body {
+  margin-top: 2.25rem;
+}
+
 .graph--wrapper {
   background-color: #F3F3F7;
   height: var(--graph-height);
@@ -4463,6 +4498,10 @@ body {
 
 .border-positive {
   border: 0.5rem rgba(8, 180, 48, 0.2) solid;
+}
+
+.border-tertiary {
+  border: 0.25rem #404064 solid;
 }
 
 .d-block {
@@ -5776,20 +5815,41 @@ body {
 }
 
 #Koalako #Plan--Gantt .gantt--phase {
-  --gantt-phase-height_max: calc(
-          
-          var(--gantt-phase-height) + 
-          (var(--gantt-stage-count) * var(--gantt-stage-top-margin))
-           + 
-           (var(--gantt-task-count) * var(--gantt-task-top-margin))
-            + 
-            (var(--gantt-task-count) * var(--gantt-label-height))
-            
-            )
-        ;
+  --gantt-phase-height_max: calc(var(--gantt-phase-height) + (var(--gantt-stage-count) * var(--gantt-stage-top-margin)) + (var(--gantt-task-count) * var(--gantt-task-top-margin)) + (var(--gantt-task-count) * var(--gantt-label-height)));
 }
 
 #Koalako #Research--Findings .section--main {
   grid-template-columns: repeat(2, 1fr);
+}
+
+#Koalako #Develop--Methods .section--main {
+  margin-top: 0;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+#Koalako #Develop--Methods .section .col-line {
+  background-color: #074391;
+  opacity: 1;
+}
+
+#Koalako #Prototyping--LowFi .section--copy__below {
+  margin-top: 2.35rem;
+}
+
+#Koalako #Prototyping--Testing .section--description .paragraph__background {
+  background-color: #F3F3F7;
+  border-radius: var(--b-rad);
+  -webkit-border-radius: var(--b-rad);
+  -moz-border-radius: var(--b-rad);
+  -khtml-border-radius: var(--b-rad);
+  padding: 1rem;
+}
+
+#Koalako #Prototyping--HiFi .section .graphic--panel {
+  height: auto;
+}
+
+#Koalako #Prototyping--Features-1 .section .graphic--panel {
+  height: auto;
 }
 /*# sourceMappingURL=style.css.map */

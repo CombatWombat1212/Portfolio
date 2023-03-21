@@ -15,6 +15,7 @@ import { MADE_IMGS } from "@/data/MADE_IMGS";
 import { STUDY_KOALAKO } from "@/data/CASE_STUDIES";
 import { Fragment, useEffect } from "react";
 import Findings from "@/components/global/Findings";
+import Method from "@/components/global/Method";
 
 function KoalaKo({ setPopup, onReady }) {
   const study = STUDY_KOALAKO;
@@ -225,7 +226,7 @@ function KoalaKo({ setPopup, onReady }) {
           </Column>
         </Section>
 
-        <Section id="Research--Findings" type="columns" titled background="background darker" mainType="grid">
+        <Section id="Research--Findings" type="columns" titled background="background darker" mainType="grid" mainClassName="mt-4">
           <Title>Findings</Title>
           <Heading>
             In exploring “creative play and development,” <br />
@@ -236,7 +237,7 @@ function KoalaKo({ setPopup, onReady }) {
               <div type="main">
                 <h3>Unique play experiences directly encourage different types of critical development.</h3>
               </div>
-              
+
               <div type="dropdown">
                 <p>“Be sure to offer children a wide range of creative materials and experiences...”</p>
                 <p>“...The more varied experiences children have in their lives, the wider the range of creative expression.”</p>
@@ -257,6 +258,230 @@ function KoalaKo({ setPopup, onReady }) {
             </Findings>
           </Column>
         </Section>
+
+        <Section id="Research--Summary">
+          <Heading>
+            With these findings in mind, we began searching <br />
+            for solutions that might encourage explorative play.
+          </Heading>
+        </Section>
+      </Chapter>
+
+      <Chapter name="Develop" id="Develop">
+        <Section id="Develop--Methods" mainType="grid" type="columns" background="background darker" titled line="method">
+          <Column>
+            <Method>
+              <Title>Excersize 1 - Brainstorming</Title>
+              <Heading type="h3">Brainstorming the core of our solution</Heading>
+              <p>Our team began with brainstorming to develop a range of potential solutions. We narrowed our ideas down into a combination of 2 promising concepts deemed stronger than the sum of their parts.</p>
+              <Graphic type="mask" img={KOALAKO_IMGS.exercise_brainstorming} />
+            </Method>
+          </Column>
+          <Column>
+            <Method>
+              <Title>Exercise 2 - Crazy 8s</Title>
+              <Heading type="h3">Exploring execution through sketches</Heading>
+              <p>Next we used the exercise ‘Crazy 8s’ to consider the UX of our solution. Is it a physical location? An app? Through what interaction do user’s receive the intended value? We combined our concepts into a rough framework of the service and its functionality.</p>
+              <Graphic type="mask" img={KOALAKO_IMGS.exercise_crazy_8s} />
+            </Method>
+          </Column>
+          <Column>
+            <Method>
+              <Title>Exercise 3 - Importance Vs. Difficulty Matrix</Title>
+              <Heading type="h3">Honing functionality by removing superfluous features</Heading>
+              <p>To refine the focus of our solution, we used an ‘Importance to User vs. Difficulty to Implement’ chart. Here we cut any features that didn’t directly support our goal of helping parents encourage creativity. Leaving a tight, cohesive feature-set. </p>
+              <Graphic type="mask" img={KOALAKO_IMGS.exercise_importance} />
+            </Method>
+          </Column>
+          <Column>
+            <Method>
+              <Title className="title">Exercise 4 - Experience Roadmap</Title>
+              <Heading type="h3">Solidifying scope with an Experience Based Roadmap</Heading>
+              <p>Using an experience-based roadmap we plotted 3 project delivery tiers from bare functionality to final service. To fit our tight timeline, we defined the target scope and featureset of our submission to be our service’s ‘minimum viable product’.</p>
+              <Graphic type="mask" img={KOALAKO_IMGS.exercise_roadmap} />
+            </Method>
+          </Column>
+        </Section>
+      </Chapter>
+
+      <Chapter name="Prototyping" id="Prototyping">
+        <Section id="Prototyping--LowFi" titled type="columns">
+          <Title>Low-Fi Prototypes</Title>
+          <Heading>Creating low-fi prototypes for user testing</Heading>
+
+          <Column caption="above">
+            <Heading type="p" className="graphic--caption__above color--tertiary">
+              <b>Onboarding</b>
+            </Heading>
+            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.prototype_low_onboarding} />
+          </Column>
+
+          <Column caption="above">
+            <Heading type="p" className="graphic--caption__above color--tertiary">
+              <b>Homepage</b>
+            </Heading>
+            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.prototype_low_homepage} />
+          </Column>
+
+          <Column caption="above">
+            <Heading type="p" className="graphic--caption__above color--tertiary">
+              <b>Activities</b>
+            </Heading>
+            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.prototype_low_activities} />
+          </Column>
+
+          <Column caption="above">
+            <Heading type="p" className="graphic--caption__above color--tertiary">
+              <b>Location Browse</b>
+            </Heading>
+            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.prototype_low_map} />
+          </Column>
+
+          <Column caption="above">
+            <Heading type="p" className="graphic--caption__above color--tertiary">
+              <b>Statistics</b>
+            </Heading>
+            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.prototype_low_statistics} />
+          </Column>
+
+          <Description className="text-col-2 text-gap-4" below>
+            <p>At this stage, my team defined the ‘KoalaKo’ identity. Chosen as it denotes a certain lighthearted curiosity or playfulness that we hoped to embody. Like that of a growing koala joey.</p>
+            <p>We also cemented our choice to develop from a mobile-first perspective. This offers users the flexibility to access the service at any time, from wherever play might occur.</p>
+          </Description>
+        </Section>
+
+        <Section id="Prototyping--Testing" type="columns" background="background darker" mainClassName="mt-4">
+          <Title>Testing</Title>
+          <Heading>Gauging reception and feedback from users</Heading>
+
+          <Column>
+            <Title>Methodology</Title>
+            <Heading type="h3" className="">
+              ‘Popcorn’ feedback, <br />
+              and prepared questions
+            </Heading>
+            <Description>
+              <p>We began with ‘popcorn feedback’ to get a general sense of users’ immediate pain points and impressions. Once we led testers through each screen, I asked prepared questions to drill deeper into their thoughts and feelings. </p>
+              <p>We tested with 4 classmates, unfamiliar with our project. We would’ve liked to test entirely with parents, or even parents-child pairs. However, navigating the ethics of testing with children, and/or finding parents available to test, didn’t fit our timeline. </p>
+            </Description>
+          </Column>
+
+          <Column>
+            <Title>Findings / Suggestions</Title>
+            <Description className="mt-1">
+              <p className="paragraph__background">With this feedback, we cemented the decision to keep the service parent-centered.  In doing so we cut the few planned features intended to be used by kids. This refocused our team back on our original goals, and helped us avoid the pitfall of creating yet another reason for children to use screens. </p>
+              <p className="paragraph__background">Make the location features work in two directions: Be able to browse both locations that match a desired activity, and activities that match a desired location. </p>
+              <p className="paragraph__background">Try your best to receive feedback from actual parents.</p>
+            </Description>
+          </Column>
+        </Section>
+
+
+
+
+
+        <Section id="Prototyping--Testing" type="columns" background="background darker">
+          <Title>Implimentation Plan</Title>
+          <Heading>Noting suggestions, and refocusing our goals</Heading>
+
+          <Column>
+            <Description>
+              <p>With this feedback, we cemented the decision to keep the service parent-centered.  In doing so we cut the few planned features intended to be used by kids. This refocused our team back on our original goals, and helped us avoid the pitfall of creating yet another reason for children to use screens.</p>
+            </Description>
+          </Column>
+
+          <Column>
+            <Description>
+              <p>Aside from this, we committed to making the suggested location feature a key part of the service’s functionality.  We had also made a point to gather feedback from parent users during the coming phases, to better understand our demographic’s feelings towards solution.</p>
+            </Description>
+          </Column>
+
+        </Section>
+
+
+
+
+
+
+
+        <Section id="Prototyping--HiFi" type="columns">
+          <Title>Hi-Fi Prototypes</Title>
+          <Heading>KoalaKo’s first hi-fi interactive prototype</Heading>
+
+          <Column className="col-8" caption="above">
+            <Heading type="p" className="graphic--caption__above color--tertiary">
+              <b>Userflow Map</b>
+            </Heading>
+            <Graphic type="image" background="background darker" img={KOALAKO_IMGS.prototypes_userflow_map} />
+          </Column>
+
+          <Column className="col-2" caption="above">
+            <Heading type="p" className="graphic--caption__above color--tertiary">
+              <b>Onboarding</b>
+            </Heading>
+            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.prototypes_userflow_splash_screen} />
+          </Column>
+
+          <Column className="col-2" caption="above">
+            <Heading type="p" className="graphic--caption__above color--tertiary">
+              <b>Play Statistics</b>
+            </Heading>
+            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.prototypes_userflow_statistics} />
+          </Column>
+
+
+        </Section>
+
+
+
+
+
+
+
+        <Section id="Prototyping--Features-1" type="columns" background="tertiary" mainClassName="gap-5 mt-4" wrapperClassName="mb-less">
+          <Heading>Features added at this stage include:</Heading>
+
+          <Column>
+            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.features_child_profiles} />
+            <Heading type="h3" className="graphic--caption">Optional child profiles</Heading>
+            <Description className="mt-1"><p>Parents with privacy concerns can choose not to provide their child’s age, disabling smart features.  Allowing these users to still use KoalaKo as an activity database; widening it’s reach, rather than turning these users away.</p></Description>
+          </Column>
+          <Column>
+            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.features_selecting_interests} />
+            <Heading type="h3" className="graphic--caption">Selecting interests</Heading>
+            <Description className="mt-1"><p>Select a handful of your kid’s favorite activities to receive suggestions based on their interests; helping parents to support their child’s passions.  </p></Description>
+          </Column>
+          <Column>
+            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.features_statistics_page} />
+            <Heading type="h3" className="graphic--caption">Refined statistics page</Heading>
+            <Description className="mt-1"><p>Helpful, dynamic infographics with adjustable timeframes that explore your child’s play-types, and any experiences they’re yet to try.  With a goal-setting system to encourage regular playtime.</p></Description>
+          </Column>
+
+
+        </Section>
+
+        <Section id="Prototyping--Features-2" type="columns" background="tertiary" mainClassName="gap-5">
+          <Column className="col-4">
+            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.features_community_feedback} />
+            <Heading type="h3" className="graphic--caption">Community feedback</Heading>
+            <Description className="mt-1"><p>User rating and feedback system for activities, to provide more accurate recommendations and bring poor activities to the attention of platform moderators.</p></Description>
+          </Column>
+          <Column className="col-8">
+            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.features_location_browsing} />
+            <Heading type="h3" className="graphic--caption">Location browsing</Heading>
+            <Description className="mt-1"><p>As suggested by our testers, users can now browse locations that match activities, and activities that match locations.</p></Description>
+          </Column>
+
+        </Section>
+
+
+
+
+
+
+
+
+
       </Chapter>
 
       <Chapter name="Closing" id="Closing"></Chapter>

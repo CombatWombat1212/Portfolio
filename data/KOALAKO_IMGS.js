@@ -119,6 +119,8 @@ const KOALAKO_IMGS = processImages({
     alt: "KoalaKo app screenshot showing a message asking if you'd like to proceed without setting up a child profile. This requires no personal information about your child, and enables the app to better reccomend activities and games while also tracking creative development.",
     width: 1256,
     height: 2048,
+    group: 'hifi_features',
+    index: 0,
   },
   features_community_feedback: {
     name: "features_community_feedback",
@@ -126,6 +128,8 @@ const KOALAKO_IMGS = processImages({
     alt: "KoalaKo app screenshot showing a comment section underneath an activity listing.",
     width: 1256,
     height: 1960,
+    group: 'hifi_features',
+    index: 3,
   },
   features_location_browsing: {
     name: "features_location_browsing",
@@ -133,6 +137,8 @@ const KOALAKO_IMGS = processImages({
     alt: "KoalaKo app screenshot showing a map of the local area with a number of child friendly locations marked which can be selected to view more information",
     width: 2912,
     height: 1960,
+    group: 'hifi_features',
+    index: 4,
   },
   features_selecting_interests: {
     name: "features_selecting_interests",
@@ -140,6 +146,8 @@ const KOALAKO_IMGS = processImages({
     alt: "KoalaKo app screenshot showing a list of interests that can be selected to help the app reccomend activities and games.",
     width: 1256,
     height: 2048,
+    group: 'hifi_features',
+    index: 1,
   },
   features_statistics_page: {
     name: "features_statistics_page",
@@ -147,6 +155,8 @@ const KOALAKO_IMGS = processImages({
     alt: "KoalaKo app screenshot showing the statistics screen.  This screen shows the number of activities that have been completed, the types of creative play within those activities such as physically active, or musical, and the number of hours spent on creative play.",
     width: 1256,
     height: 2048,
+    group: 'hifi_features',
+    index: 2,
   },
   findings_games: {
     name: "findings_games",
@@ -245,6 +255,8 @@ const KOALAKO_IMGS = processImages({
     alt: "A screenshot of the onboarding screen of the KoalaKo app, where the user is able to either sign up or log in to the app.",
     width: 1125,
     height: 2436,
+    group: 'userflow',
+    index: 0,
   },
   prototypes_userflow_statistics: {
     name: "prototypes_userflow_statistics",
@@ -252,6 +264,8 @@ const KOALAKO_IMGS = processImages({
     alt: "A screenshot of the statistics screen of the KoalaKo app, where the user is able to view their play history, statistics, and other data on creative development.",
     width: 1125,
     height: 2436,
+    group: 'userflow',
+    index: 1,
   },
   prototype_low_activities: {
     name: "prototype_low_activities",
@@ -259,6 +273,8 @@ const KOALAKO_IMGS = processImages({
     alt: "A low fidelity prototype of the activities screen of the KoalaKo app, where the user is able to view a list of activities and select one to play.",
     width: 1125,
     height: 2436,
+    group:"prototypes_lowfi",
+    index: 2,
   },
   prototype_low_homepage: {
     name: "prototype_low_homepage",
@@ -266,6 +282,8 @@ const KOALAKO_IMGS = processImages({
     alt: "A low fidelity prototype of the homepage of the KoalaKo app, where the user is able to view a list of activities, as well as navigate to other parts of the app.",
     width: 1125,
     height: 2436,
+    group:"prototypes_lowfi",
+    index: 1,
   },
   prototype_low_map: {
     name: "prototype_low_map",
@@ -273,6 +291,8 @@ const KOALAKO_IMGS = processImages({
     alt: "A low fidelity prototype of the map screen of the KoalaKo app, where the user is able to view a map of their local area and its child friendly locations.",
     width: 1125,
     height: 2436,
+    group:"prototypes_lowfi",
+    index: 3,
   },
   prototype_low_onboarding: {
     name: "prototype_low_onboarding",
@@ -280,6 +300,8 @@ const KOALAKO_IMGS = processImages({
     alt: "A low fidelity prototype of the onboarding screen of the KoalaKo app, where the user is able to either sign up or log in to the app.",
     width: 1125,
     height: 2436,
+    group:"prototypes_lowfi",
+    index: 0,
   },
   prototype_low_statistics: {
     name: "prototype_low_statistics",
@@ -287,6 +309,8 @@ const KOALAKO_IMGS = processImages({
     alt: "A low fidelity prototype of the statistics screen of the KoalaKo app, where the user is able to view their play statistics, and other data on creative development.",
     width: 1125,
     height: 2436,
+    group:"prototypes_lowfi",
+    index: 4,
   },
   prototypes_userflow_map: {
     name: "prototypes_userflow_map",

@@ -71,6 +71,10 @@
 
   &--copy {
     @include flex-col-center;
+
+    &__below{
+      
+    }
   }
 
   &--description {
@@ -127,6 +131,9 @@
 
     &__title-above {
       margin-top: calc((var(--section_title-above-offset) * -1) + var(--font-margin-bottom-h4));
+    }
+    &__title-below {
+      margin-top: 0rem;
     }
   }
 

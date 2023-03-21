@@ -28,15 +28,18 @@ function generateRainbowColor(hue) {
   return `hsl(${hue}, 100%, 50%)`;
 }
 
-function generateWaveText(text, hue, translateY) {
+function generateWaveText(text, hue) {
   const characters = text.split('');
   const styledText = characters.map((char, i) => `%c${char}`).join('');
   const styles = characters.map((char, i) => `color: ${generateRainbowColor((hue + i * 15) % 360)};` +
     `font-family: "Gira Sans"; font-size: 1.4375rem;` +
     `line-height:2rem;` +
-    `font-style:italic;` +
-    `font-weight: 400;` 
-    // +`transform: translateY(${translateY[i % translateY.length]}px);`
+    `font-style:italic;` 
+    // + `padding: 0.725rem 0.775rem 0.875rem 0.775rem;`
+    + `padding-top: 0.35rem;`
+    + `padding-bottom: 0.7525rem;`
+
+    +`font-weight: 400;` 
     );
   return [styledText, ...styles];
 }
@@ -48,28 +51,23 @@ function generateWaveText(text, hue, translateY) {
 export default function App({ Component, pageProps }) {
   // TODO: add an easy out for people on the case study pages.  either a next or back button, skip to bottom, something that will allow them to quickly bounce around case studies
 
-  const secret = useSecret("password", 10000);
+  const secret = useSecret("password", 1000);
   const secret2 = useSecret("stop", 1000);
 
   useEffect(() => {
     if (!secret) return;
-
+  
     let hue = 0;
-    const translateY = [0, 2, 4, 6, 4, 2];
     const interval = setInterval(() => {
-      const [waveText, ...styles] = generateWaveText("eat my ass", hue, translateY);
+      const text = !secret2 ? "eat my ass" : "no" ;
+      const [waveText, ...styles] = generateWaveText(text, hue);
       console.log(waveText, ...styles);
       hue = (hue + Math.random() * 60) % 360;
-      translateY.push(translateY.shift());
-
-      if (secret2) {
-        clearInterval(interval);
-      }
-    }, 25);
-
+    }, 40);
+  
     return () => clearInterval(interval);
   }, [secret, secret2]);
-
+  
 
   // I am not currently using this
   useMountEffect(() => {

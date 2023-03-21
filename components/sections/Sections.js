@@ -2,7 +2,7 @@ import { defaultProps, PropTypes } from "prop-types";
 import React from "react";
 import Background from "../utilities/Background";
 
-import { getElemClasses, getContainerMarginClass, getWrapperClasses, getMainClasses, getGapClasses, getBackgroundClasses, getColClassList, getGraphicClasses } from "./sections_utilities/GetClasses";
+import { getElemClasses, getContainerMarginClass, getWrapperClasses, getMainClasses, getGapClasses, getBackgroundClasses, getColClassList, getGraphicClasses, getCopyClasses, getCopyBelowClasses } from "./sections_utilities/GetClasses";
 import { getHasText, getHasGraphic, getHasBackground } from "./sections_utilities/IfHas";
 import { getSectionChildren } from "./sections_utilities/GetSectionChildren";
 
@@ -22,12 +22,6 @@ const SECTION_TYPE_A = ["default", "overview", "logo banner"];
 const SECTION_TYPE_B = ["columns"];
 const SECTION_TYPE_C = ["passthrough"];
 const SECTION_TYPES = [...SECTION_TYPE_A, ...SECTION_TYPE_B, ...SECTION_TYPE_C];
-
-
-
-
-
-
 
 function SectionBackground({ sec }) {
   var { attrs, chil, has, classes } = sec;
@@ -56,8 +50,7 @@ function SectionWrapper({ children, sec }) {
   var { attrs, chil, has, classes } = sec;
 
   return (
-    <div id={attrs.id} className={classes.wrapper + classes.background} ref={attrs.reference ? attrs.reference : null} 
-    {...(attrs.line ? { 'data-line': attrs.line } : {})}>
+    <div id={attrs.id} className={classes.wrapper + classes.background} ref={attrs.reference ? attrs.reference : null} {...(attrs.line ? { "data-line": attrs.line } : {})}>
       {children}
     </div>
   );
@@ -83,11 +76,11 @@ function SectionBody({ children, sec }) {
         </>
       ) : SECTION_TYPE_B.indexOf(attrs.type) != -1 ? (
         <>
-          {has.titled && (
+          {has.titled && attrs.titled != "below" && (
             <div className={`section--copy ${classes.copy} col-12`}>
               {chil.title && <>{chil.title}</>}
               {chil.heading && <>{chil.heading}</>}
-              {chil.description && <>{chil.description}</>}
+              {chil.description && !has.descBelow && <>{chil.description}</>}
             </div>
           )}
           {has.titled ? (
@@ -96,6 +89,18 @@ function SectionBody({ children, sec }) {
             </div>
           ) : (
             <ColumnGroup columns={chil.columns} arrows={attrs.arrows} line={attrs.line} mainType={attrs.mainType} />
+          )}
+          {has.titled && attrs.titled == "below" && (
+            <div className={`section--copy ${classes.copy} col-12`}>
+              {chil.title && <>{chil.title}</>}
+              {chil.heading && <>{chil.heading}</>}
+              {chil.description && <>{chil.description}</>}
+            </div>
+          )}
+          {has.descBelow && (
+            <>
+              <div className={`section--copy ${classes.copyBelow} col-12`}>{chil.description && <>{chil.description}</>}</div>
+            </>
           )}
           {chil.graphic && <>{chil.graphic}</>}
           {chil.other && <>{chil.other}</>}
@@ -107,9 +112,7 @@ function SectionBody({ children, sec }) {
   );
 }
 
-function Section({className, children, type, background, id, margin, titled, arrows, line, mainClassName, copyClassName, wrapperClassName, mainType, reference}) {
-  
-
+function Section({ className, children, type, background, id, margin, titled, arrows, line, mainClassName, copyClassName, wrapperClassName, mainType, reference }) {
   var sec = createSectionObject(className, children, type, background, id, margin, titled, arrows, line, mainClassName, copyClassName, wrapperClassName, mainType, reference);
 
   return (
@@ -124,13 +127,8 @@ function Section({className, children, type, background, id, margin, titled, arr
   );
 }
 
-
-
-
 function createSectionObject(className, children, type, background, id, margin, titled, arrows, line, mainClassName, copyClassName, wrapperClassName, mainType, reference) {
   var pref = "section";
-
-
 
   if (children == undefined) children = children ?? <></>;
   if (children.length == undefined) children = [children];
@@ -138,17 +136,31 @@ function createSectionObject(className, children, type, background, id, margin, 
   var { columns, description, title, heading, graphic, other } = getSectionChildren(children);
   titled = titled || false;
   var hasTitled = titled ? true : false;
+
+
+  // Fallback for when section has titles but it isn't explicitly set to true
+  var hasHeadingsOutsideOfColumns = {
+    elems: null,
+    has: false,
+  };
+  hasHeadingsOutsideOfColumns.elems = useOrganizeChildren(children, [
+    ["titles", { elemType: "Title" }],
+    ["headings", { elemType: "Heading" }],
+    ["columns", { elemType: "Column" }],
+  ]);
+  hasHeadingsOutsideOfColumns.has = (titled == true || titled == false) && (hasHeadingsOutsideOfColumns.elems.titles.length > 0 || hasHeadingsOutsideOfColumns.elems.headings.length > 0) && hasHeadingsOutsideOfColumns.elems.columns.length > 0 ? true : false;
+
+  if (hasHeadingsOutsideOfColumns.has) {
+    hasTitled = true;
+    titled = true;
+  }
+
+
+
   if (titled == "above") ({ columns, description, title, heading, graphic, other } = getAdditionalHeadingClassesFromParentProps({ columns, description, title, heading, graphic, other }, "titled above"));
 
   var hasGraphic = getHasGraphic(graphic);
-  
-  // var hasGraphics = getFlattenedChildren(children).filter((child) => {
-  //   return child.type.name == "Graphic"
-  // }).length > 0
-  
-  // console.log(hasGraphics)
-  // console.log(children)
-
+  var hasDescBelow = useOrganizeChildren(children, [["all", { elemType: "Description", below: true }]]).all.length > 0 ? true : false;
 
   var sec = {
     has: {
@@ -156,6 +168,7 @@ function createSectionObject(className, children, type, background, id, margin, 
       graphic: hasGraphic,
       background: getHasBackground(background),
       titled: hasTitled,
+      descBelow: hasDescBelow,
     },
     classes: {
       sec: className ? className : "",
@@ -166,7 +179,8 @@ function createSectionObject(className, children, type, background, id, margin, 
       gap: getGapClasses(type, arrows, mainClassName),
       background: getBackgroundClasses(pref, background),
       graphic: getGraphicClasses(type),
-      copy: copyClassName ? copyClassName : "",
+      copy: getCopyClasses(copyClassName),
+      copyBelow: getCopyBelowClasses(copyClassName, hasDescBelow),
     },
     chil: {
       columns,
@@ -188,9 +202,6 @@ function createSectionObject(className, children, type, background, id, margin, 
       reference: reference ? reference : null,
     },
   };
-
-
-
 
   return sec;
 }
@@ -217,6 +228,7 @@ import Chapter from "./Chapter";
 import getFlattenedChildren from "./sections_utilities/getFlattenedChildren";
 import { addClassToJsxObj } from "./sections_utilities/ClassUtilities";
 import { getGraphicChanges, getGraphicElem } from "./sections_utilities/GetConditionalElemAdditions";
+import useOrganizeChildren from "@/scripts/hooks/useOrganizedChildren";
 export { SECTION_DEFAULT_PROPS, SECTION_PROP_TYPES };
 
 export default Section;

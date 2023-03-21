@@ -50,9 +50,14 @@
 }
 
 
-@mixin my-auto {
-	margin-top: auto;
-	margin-bottom: auto;
+@mixin my-auto($important: false) {
+	@if $important {
+		margin-top: auto !important;
+		margin-bottom: auto !important;
+	} @else {
+		margin-top: auto;
+		margin-bottom: auto;
+	}
 }
 
 @mixin my-0 {

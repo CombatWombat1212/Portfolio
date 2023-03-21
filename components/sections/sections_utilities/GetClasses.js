@@ -17,6 +17,7 @@ function getMainClasses(mainClassName, mainType, titled) {
   if (mainClassName == undefined) mainClassName = "";
   // if (titled == true || titled == false) return mainClassName;
   if (titled == "above") mainClassName += " section--main__title-above";
+  if (titled == "below") mainClassName += " section--main__title-below";
   if (mainType == "grid") mainClassName += " section--main__grid";
 
   mainClassName = removeClassesOfPrefix(mainClassName, "gap-");
@@ -122,7 +123,6 @@ function getBackgroundClasses(pref, background) {
   let backgroundClasses = "";
 
   if (typeof background === "string") {
-
     if (BACKGROUND_COLORS.includes(background)) {
       if (["chapter", "section", "section--quote", "section--description"].includes(pref)) {
         backgroundClasses += ` ${pref}__color`;
@@ -137,12 +137,9 @@ function getBackgroundClasses(pref, background) {
     if (mappedClass) {
       backgroundClasses += ` ${mappedClass}`;
     }
-
-
   } else if (typeof background === "object") {
     backgroundClasses += ` ${pref}__image background__image`;
   }
-  
 
   return backgroundClasses;
 }
@@ -154,4 +151,14 @@ function getGraphicClasses(type) {
   return classes;
 }
 
-export { getElemClasses, getContainerMarginClass, getWrapperClasses, getMainClasses, getGapClasses, getBackgroundClasses, getColClassList, getGraphicClasses };
+function getCopyClasses(copyClassName) {
+  return copyClassName ? copyClassName : "";
+}
+
+function getCopyBelowClasses(copyClassName, hasDescBelow) {
+  var classes = copyClassName ? copyClassName : "";
+  if (hasDescBelow) classes += " section--copy__below";
+  return classes;
+}
+
+export { getElemClasses, getContainerMarginClass, getWrapperClasses, getMainClasses, getGapClasses, getBackgroundClasses, getColClassList, getGraphicClasses, getCopyClasses, getCopyBelowClasses };

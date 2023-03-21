@@ -2,9 +2,12 @@ import React, { useMemo } from 'react';
 
 function usePropModifier(jsxElement, modificationsArray, override = true) {
   function matchProps(element, searchProps) {
+    const elementType = element.type;
+    const elementTypeName = typeof elementType === 'function' ? elementType.name : elementType;
+
     return Object.entries(searchProps).every(([key, value]) => {
       if (key === 'elemType') {
-        return element.type === value;
+        return elementTypeName === value;
       } else {
         return element.props[key] === value;
       }
@@ -39,7 +42,9 @@ function usePropModifier(jsxElement, modificationsArray, override = true) {
     for (const [searchProps, modifyProps] of modificationsList) {
       if (matchProps(element, searchProps)) {
         const updatedProps = applyModifications(element, modifyProps, override);
-        const newType = modifyProps.elemType ? modifyProps.elemType : element.type;
+        const elementType = element.type;
+        const elementTypeName = typeof elementType === 'function' ? elementType.name : elementType;
+        const newType = modifyProps.elemType ? modifyProps.elemType : elementType;
         updatedElement = React.cloneElement(element, updatedProps, updatedElement.props.children);
         if (modifyProps.elemType) {
           updatedElement = React.createElement(newType, updatedProps, ...[updatedElement.props.children]);

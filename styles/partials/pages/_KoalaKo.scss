@@ -74,33 +74,82 @@
         --gantt-stage-top-margin: 0.35rem;
 
         &--phase {
-          --gantt-phase-height_max: calc(
-          
-          var(--gantt-phase-height) + 
-          (var(--gantt-stage-count) * var(--gantt-stage-top-margin))
-           + 
-           (var(--gantt-task-count) * var(--gantt-task-top-margin))
-            + 
-            (var(--gantt-task-count) * var(--gantt-label-height))
-            
-            )
+          --gantt-phase-height_max: calc(var(--gantt-phase-height) + (var(--gantt-stage-count) * var(--gantt-stage-top-margin)) + (var(--gantt-task-count) * var(--gantt-task-top-margin)) + (var(--gantt-task-count) * var(--gantt-label-height)));
         }
       }
     }
   }
 
-
-  #Research{
-
-    &--Findings{
-      .section{
-        &--main{
-          grid-template-columns:repeat(2,1fr);
+  #Research {
+    &--Findings {
+      .section {
+        &--main {
+          grid-template-columns: repeat(2, 1fr);
         }
       }
     }
   }
 
+  #Develop {
+    &--Methods {
+      .section {
+        &--main {
+          margin-top: 0;
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .col-line {
+          background-color: $col-primary;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  #Prototyping {
+    &--LowFi {
+      .section {
+        &--copy {
+          &__below {
+            margin-top: 2.35rem;
+          }
+        }
+      }
+    }
+
+    &--Testing {
+
+      .section {
+        &--description {
+          .paragraph__background{
+            background-color: $col-background;
+            @include b-rad;
+            padding: 1rem;
+          }
+        }
+      }
+    }
 
 
+    &--HiFi {
+
+      .section {
+        .graphic--panel {
+          height: auto;
+        }
+      }
+    }
+
+
+    &--Features-1 {
+
+      .section {
+        .graphic--panel {
+          height: auto;
+        }
+      }
+    }
+
+
+
+  }
 }

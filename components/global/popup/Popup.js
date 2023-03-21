@@ -10,6 +10,7 @@ import { RESIZE_TIMEOUT } from "@/scripts/GlobalUtilities";
 import { canvasDrawImage, canvasImageSizeInit, canvasInit, canvasOnResize, canvasSetSize, canvasZoom, setCanvasImageLoaded } from "./popup_utilities/CanvasUtilities";
 import { imgLoading, lightboxInit, seekHandler, setPopupGroup } from "./popup_utilities/LightboxUtilities";
 import { catchKeys, closePopup, setSetPopupGlobal } from "./popup_utilities/PopupUtilities";
+import { hiddenUIEnd } from "./popup_utilities/HiddenUIUtilities";
 
 
 var popupType;
@@ -134,6 +135,7 @@ function Popup({ popup, setPopup }) {
 
       setSetPopupGlobal(setPopup);
     } else {
+      hiddenUIEnd();
       window.removeEventListener("resize", popupResize, false);
       window.removeEventListener("keydown", catchKeys, false);
       setCanvasImageLoaded(false);

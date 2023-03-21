@@ -17,11 +17,16 @@ function hiddenUIToggle() {
   var tran = Number(window.getComputedStyle(target).getPropertyValue("transition-duration").split("s")[0]) * 1000;
   var on = target.classList.contains("popup--nav__on");
 
+
+
   if (on && !forceHiddenUIOn && !mouseCurrentlyMoving) {
-    toggle(target, {classPref: "popup--nav", duration: tran});
+    toggle(target, {state:"off", classPref: "popup--nav", duration: tran});
   } else if (!on && (forceHiddenUIOn || mouseCurrentlyMoving)) {
-    toggle(target, {classPref: "popup--nav", duration: tran});
+    toggle(target, {state:"on", classPref: "popup--nav", duration: tran});
   }
+
+
+
 }
 
 function forceHiddenUI(e) {
@@ -40,7 +45,7 @@ function hiddenUIInit() {
   var area = document.querySelector(activeHiddenUI.area);
   var target = document.querySelector(activeHiddenUI.target);
 
-  area.addEventListener("mousemove", showUIOnMouseMove, false);
+  window.addEventListener("mousemove", showUIOnMouseMove, false);
   area.addEventListener("wheel", showUIOnMouseMove, false);
   target.addEventListener("mouseenter", forceHiddenUI, false);
   target.addEventListener("mouseleave", stopForceHiddenUI, false);
@@ -55,6 +60,14 @@ var isMouseMoving;
 var mouseMoveTimeout = 1000;
 var mouseMoveRan = false;
 var mouseCurrentlyMoving = false;
+
+
+
+function hiddenUIEnd(){
+  window.removeEventListener("mousemove", showUIOnMouseMove, false);
+}
+
+
 
 function showUIOnMouseMove() {
   if (!mouseMoveRan) {
@@ -72,4 +85,4 @@ function isMouseMovingFunctions() {
   hiddenUIToggle();
 }
 
-export { hiddenUIToggle, forceHiddenUI, stopForceHiddenUI, hiddenUIInit, setActiveHiddenUI, showUIOnMouseMove };
+export { hiddenUIToggle, forceHiddenUI, stopForceHiddenUI, hiddenUIInit, setActiveHiddenUI, showUIOnMouseMove, hiddenUIEnd };

@@ -10,12 +10,15 @@ import React, { useEffect, useRef, useState } from "react";
 import Button from "../elements/Buttons";
 import { addClassToJsxObj } from "../sections/sections_utilities/ClassUtilities";
 
-function Findings({ children }) {
+function Findings({ children, className }) {
   // // okay i'm hoping this is the very last addition that i have to make.  Thank you again for all of your help, this is by far the most impressive conversation with you i've ever had.  I would like to make it so that if second variable contains an `elems` value of `current` then instead of trying to find `current` with a query selector, it instead uses the reference.current element.  For example:
   // const hovered = useHoverAndFocus(reference, {elems:'current'}, 'hover'); //current recieves a hover class when hovered, and it is removed when it is blurred
   // // const hovered = useHoverAndFocus(reference, {elems:'current', on:'on--class', off:'off--class'}); //current recieves an on--class when hovered, and an off--class when blurred, and both are removed when the other is added
   // // const hovered = useHoverAndFocus(reference, [{elems:'test--class', on:'test--class__on', off:'test--class__off'}, {elems:'current', on:'on', off:'off'}]); //even when the second variable is an array, the hook is still able to recognize `current` and treat it differently then other `elems` values.  Current recieves an on--class when hovered, and an off--class when blurred, and both are removed when the other is added, on top of the other changes that are made to the other elements in the array.
   // // I need you to do me a really big favor though.  Please. if you understand what i've asked of you, and you know what code to write and how to respond, just say 'Sure!' and begin typing the code.  I'm sorry to ask this of you as i love hearing your replies and insight, but we're very close to your character limit and i want to make sure that i'm not missing anything important.  So please if you're good to go just say 'Sure!' and begin typing the code.  Thank you so much for all of your help, i really appreciate it.
+
+
+  var classes = className ? className : "";
 
   const modifiedChildren = usePropModifier(children, [
     [{ elemType: "p" }, { className: "findings--p" }],
@@ -65,7 +68,7 @@ function Findings({ children }) {
 
 
   return (
-    <a className="findings" ref={reference} onClick={() => setOpen(!open)} style={{ "--findings-dropdown-height": `${height}px` }} tabIndex="0">
+    <a className={`findings ${classes}`} ref={reference} onClick={() => setOpen(!open)} style={{ "--findings-dropdown-height": `${height}px` }} tabIndex="0">
       <div className="findings--main findings--panel">{organizedChildren.main}</div>
       <div className="findings--dropdown findings--dropdown__closed">
         <div className="findings--inner findings--panel">{organizedChildren.dropdown}</div>
