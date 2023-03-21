@@ -5,6 +5,8 @@ import { addClassNoRepeats, addClassToJsxObj } from "./sections_utilities/ClassU
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { anchoredArrowsInit, removeExcessArrows } from "./sections_utilities/ArrowUtilities";
 import { colLineInit } from "./sections_utilities/ColLineUtilities";
+import { useRef } from "react";
+import useSameHeight from "@/scripts/hooks/useSameHeight";
 
 function ColumnGroup({ columns, arrows, line, mainType }) {
   arrows = arrows || false;
@@ -31,7 +33,6 @@ function ColumnGroup({ columns, arrows, line, mainType }) {
     if (mainType == "grid") removeExcessArrows();
   });
 
-
   // TODO: this mount effect runs twice on the first load for some reason
   useMountEffect(() => {
     if (!hasLine) return;
@@ -40,11 +41,7 @@ function ColumnGroup({ columns, arrows, line, mainType }) {
 
   return (
     <>
-      {hasLine && (
-        <div className="col-line--wrapper">
-          {/* <div className="col-line"></div> */}
-        </div>
-      )}
+      {hasLine && <div className="col-line--wrapper">{/* <div className="col-line"></div> */}</div>}
 
       {columns.map((column, i) => {
         var { graphic, heading, title, description, quote, other, props } = columns[i];
@@ -58,23 +55,22 @@ function ColumnGroup({ columns, arrows, line, mainType }) {
           if (props.classes.colClasses.length != 0) colClasses = props.classes.colClasses.join(" ");
           if (props.classes.otherClasses.length != 0) otherClasses = props.classes.otherClasses.join(" ");
         }
-        
+
         var attrProps = { ...props };
         delete attrProps.classes;
         delete attrProps.children;
         delete attrProps.className;
         var caption = attrProps.caption ? attrProps.caption : false;
 
-        
         if (caption == "above") {
           description = addClassToJsxObj(description, "graphic--caption__above");
         }
-        
+
         if (caption == "above" || hasAnchoredArrows) {
           arrowClasses = arrowClasses.replace("arrow--mask__default", "");
           arrowClasses = addClassNoRepeats(arrowClasses, "arrow--mask__anchored");
         }
-        
+
         return (
           <Column className={`column ${colClasses} ${otherClasses}`} key={`column ${i}`} {...attrProps}>
             {hasArrows && i != 0 && (
@@ -108,7 +104,6 @@ function ColumnGroup({ columns, arrows, line, mainType }) {
                 {description && <>{description}</>}
               </>
             )}
-            
 
             {quote && <>{quote}</>}
             {other && <>{other}</>}
@@ -127,8 +122,27 @@ ColumnGroup.propTypes = {
   mainType: PropTypes.oneOf(["flex", "grid"]),
 };
 
-function Column({ children, className }) {
-  return <div className={`section--column ${className ? className : ""}`}>{children}</div>;
+function Column({ children, className,sameHeight }) {
+
+  className = className ? className : "";
+
+  const reference = useRef(null);
+  sameHeight = sameHeight ? sameHeight : false;
+  const sameHeightObj = useSameHeight(sameHeight, reference, { resize: "horizontal" });
+  const styles = {
+    ...(sameHeightObj
+      ? {
+          height: !sameHeightObj.resizing ? `${sameHeightObj.height.max}px` : "auto",
+        }
+      : {}),
+  };
+
+
+  return (
+    <>
+      <div className={`section--column ${className}`} ref={reference} style={styles}>{children}</div>
+    </>
+  );
 }
 
 export { Column, ColumnGroup };

@@ -1,18 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RESIZE_TIMEOUT, splitPx } from "@/scripts/GlobalUtilities";
 
 let groups = {};
 
-const useSameHeight = (groupKey, ref) => {
+const useSameHeight = (groupKey, ref, options = {}) => {
   const [heightObj, setHeightObj] = useState(null);
   const [resizing, setResizing] = useState(false);
+  const [output, setOutput] = useState(false);
+
+  const prevWindowWidth = useRef(null);
+  const prevWindowHeight = useRef(null);
+
+  const resizeOption = options.resize || "both";
 
   if (!groupKey) {
     return false;
   }
 
   const logElementsByGroup = () => {
-    console.log("Groups:", groups);
+    // console.log("Groups:", groups);
   };
 
   const addElementToGroup = (element) => {
@@ -83,13 +89,16 @@ const useSameHeight = (groupKey, ref) => {
       clearTimeout(resizeTimeout);
       setResizing(false);
       updateGroupInfo();
-      // logElementsByGroup();
+      prevWindowWidth.current = window.innerWidth;
+      prevWindowHeight.current = window.innerHeight;
     };
-
-    const handleResize = () => {
-      setResizing(true);
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(delayedResize, RESIZE_TIMEOUT);
+    
+    const handleResize = (e) => {
+      if (resizeOption === "both" || (resizeOption === "horizontal" && e.target.innerWidth !== prevWindowWidth.current) || (resizeOption === "vertical" && e.target.innerHeight !== prevWindowHeight.current)) {
+        setResizing(true);
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(delayedResize, RESIZE_TIMEOUT);
+      }
     };
 
     window.addEventListener("resize", handleResize);
@@ -101,16 +110,20 @@ const useSameHeight = (groupKey, ref) => {
 
   const componentIndex = typeof groups[groupKey] != "undefined" && ref.current ? groups[groupKey].elems.indexOf(ref.current) : null;
 
-  if (typeof groups[groupKey] !== 'undefined' && typeof groups[groupKey] !== 'undefined' && componentIndex != null) {
-    return { ...groups[groupKey], height: heightObj, resizing: resizing, index: componentIndex };
-  } else {
-    return false;
-  }
+  useEffect(() => {
+    if (heightObj && componentIndex != null) {
+      setOutput({
+        ...groups[groupKey],
+        height: heightObj,
+        resizing: resizing,
+        index: componentIndex,
+      });
+    } else {
+      setOutput(false);
+    }
+  }, [heightObj, resizing, componentIndex]);
 
-
+  return output;
 };
-
-
-
 
 export default useSameHeight;

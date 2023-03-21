@@ -112,14 +112,16 @@
             margin-top: 2.35rem;
           }
         }
+        &--heading {
+          @include flex-col-end;
+        }
       }
     }
 
     &--Testing {
-
       .section {
         &--description {
-          .paragraph__background{
+          .paragraph__background {
             background-color: $col-background;
             @include b-rad;
             padding: 1rem;
@@ -128,9 +130,7 @@
       }
     }
 
-
     &--HiFi {
-
       .section {
         .graphic--panel {
           height: auto;
@@ -138,24 +138,91 @@
       }
     }
 
-
-    &--Features-1 {
-
+    &--Features {
       .section {
         &--main {
-          
           grid-template-columns: repeat(3, 1fr);
+          row-gap: 7rem;
         }
 
         &--column:last-child {
           grid-column: 2 / 4;
+          img {
+            object-fit: cover;
+          }
         }
-
-
       }
     }
 
+    &--Test-2 {
+      .section {
+      }
+    }
 
+    &--Methodology {
+      .section {
+      }
+    }
 
+    &--Findings-1 {
+      .section {
+        &--quote + .section--quote {
+          margin-top: 3rem;
+        }
+      }
+    }
+
+    &--Findings-2 {
+      .section {
+      }
+    }
+
+    &--Conclusion {
+      .section {
+      }
+    }
+  }
+
+  #Refine {
+    &--Stats {
+      .section {
+      }
+    }
+    &--Trophies {
+      .section {
+      }
+    }
+    &--Minor {
+      .section {
+      }
+    }
+  }
+
+  #Deliver {
+    &--Submission-Description-1 {
+      .section {
+      }
+    }
+    &--Submission-Graphics-1 {
+      .section {
+      }
+    }
+    &--Submission-Description-2 {
+      .section {
+      }
+    }
+    &--Submission-Graphics-2 {
+      .section {
+      }
+    }
+    &--Features {
+      .section {
+      }
+    }
+    &--Closing {
+      .background {
+        background-color: $col-background_darker;
+      }
+    }
   }
 }

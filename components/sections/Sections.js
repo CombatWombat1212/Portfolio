@@ -151,7 +151,6 @@ function createSectionObject(className, children, type, background, id, margin, 
     titled = true;
   }
 
-
   var mainNoHead = false;
   if (foundChildren.columns && !foundChildren.titles && !foundChildren.headings) {
     mainNoHead = true;
@@ -159,11 +158,15 @@ function createSectionObject(className, children, type, background, id, margin, 
   var hasMain = mainType == "grid" && (!titled || foundChildren.columns) ? true : false;
 
 
-
   if (titled == "above") ({ columns, description, title, heading, graphic, other } = getAdditionalHeadingClassesFromParentProps({ columns, description, title, heading, graphic, other }, "titled above"));
 
   var hasGraphic = getHasGraphic(graphic);
   var hasDescBelow = useOrganizeChildren(children, [["all", { elemType: "Description", below: true }]]).all.length > 0 ? true : false;
+
+
+  var hasColumns = foundChildren.columns ? true : false;
+  if(type == "default" && hasColumns) type = "columns";
+
 
   var sec = {
     has: {
@@ -229,8 +232,6 @@ Section.propTypes = {
 var SECTION_DEFAULT_PROPS = Section.defaultProps;
 var SECTION_PROP_TYPES = Section.propTypes;
 import Chapter from "./Chapter";
-import getFlattenedChildren from "./sections_utilities/getFlattenedChildren";
-import { addClassToJsxObj } from "./sections_utilities/ClassUtilities";
 import { getGraphicChanges, getGraphicElem } from "./sections_utilities/GetConditionalElemAdditions";
 import useOrganizeChildren from "@/scripts/hooks/useOrganizedChildren";
 import useFindChildren from "@/scripts/hooks/useFindChildren";

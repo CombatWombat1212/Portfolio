@@ -96,6 +96,9 @@ function Effect({ effect }) {
 function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup, width, height, effect, style, priority, onLoad, loop, muted, autoplay, controls, tabIndex, onClick, square, sync, innerStyle, sameHeight, ...props }) {
   // TODO: for mobile, add some kind of indication animation of the image being clicked on when its interactable or can be opened in a lightbox
 
+
+  if(!img) return;
+
   var pref = "section--graphic";
   var isImg = type == "image" || type == "img";
   var isMask = type == "mask";
@@ -178,28 +181,27 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
   var ap = typeof autoplay === "string" && autoplay.includes("scroll") ? false : autoplay ? true : false;
 
   sameHeight = sameHeight ? sameHeight : false;
-  const sameHeightObj = useSameHeight(sameHeight, reference, { hideDuringResize: true });
+  const sameHeightObj = useSameHeight(sameHeight, reference, {resize:'horizontal'});
 
-  useEffect(() => {
-    console.log(sameHeightObj);
-  }, [sameHeightObj]);
 
   return (
     <>
       {isImg && (
         <div
           className={`graphic--img ${allClasses}`}
-          style={{ ...styleVariables, ...style }}
+          style={{
+            ...styleVariables,
+            ...style,
+            ...(sameHeightObj ? { 
+              height: !sameHeightObj.resizing ? `${sameHeightObj.height.min}px` : 'auto',
+             } : {}),
+          }}
+  
           ref={reference}
           onClick={onClick}
+
           {...(tabIndex !== undefined ? { tabIndex } : {})}
-          {...(sameHeightObj
-            ? {
-                style: {
-                  height: sameHeightObj.resizing ? `${sameHeightObj.height.min}` : "auto",
-                },
-              }
-            : {})}
+                
 
           {...props}>
           {effect && <Effect effect={effect} />}

@@ -94,7 +94,7 @@ function MADE() {
 
           <Section id="Overview--Goal" background="tertiary" type={"columns"} titled>
             <Title>Outcome</Title>
-            <Heading>The final configurator</Heading>
+            <Heading>Final configurator</Heading>
 
             <Column>
               <Graphic type="video" img={MADE_IMGS.configurator_demo} className="b-rad" muted autoplay="scroll" controls loop />

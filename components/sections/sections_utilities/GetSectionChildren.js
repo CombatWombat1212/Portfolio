@@ -6,6 +6,8 @@ function organizeChildren(allChildren) {
   var arr = [];
 
   if (allChildren.length == undefined) allChildren = [allChildren];
+  allChildren = allChildren.filter(child => typeof child === "object");
+
 
   for (var i = 0; i < allTypes.length; i++) {
     arr.push({ type: allTypes[i].toLocaleLowerCase(), elems: [] });

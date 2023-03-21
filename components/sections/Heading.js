@@ -1,4 +1,6 @@
+import useSameHeight from "@/scripts/hooks/useSameHeight";
 import { defaultProps, PropTypes } from "prop-types";
+import { useRef } from "react";
 
 function getAdditionalHeadingClassesFromParentProps(childs, reason) {
   function addClass(obj) {
@@ -31,12 +33,25 @@ function getHeadingClasses(type) {
   return headingClasses;
 }
 
-function Heading({ children, type, className }) {
+function Heading({ children, type, className, sameHeight }) {
   var headingClasses = getHeadingClasses(type);
   const HeadingTag = type;
 
+  className = className ? className : "";
+
+  const reference = useRef(null);
+  sameHeight = sameHeight ? sameHeight : false;
+  const sameHeightObj = useSameHeight(sameHeight, reference, { resize: "horizontal" });
+  const styles = {
+    ...(sameHeightObj
+      ? {
+          height: !sameHeightObj.resizing ? `${sameHeightObj.height.max}px` : "auto",
+        }
+      : {}),
+  };
+
   return (
-    <div className={`section--heading ${headingClasses} ${className ? className : ""}`}>
+    <div className={`section--heading ${headingClasses} ${className}`} ref={reference} style={styles}>
       <HeadingTag>{children}</HeadingTag>
     </div>
   );
@@ -47,7 +62,7 @@ Heading.defaultProps = {
 };
 
 Heading.propTypes = {
-  type: PropTypes.oneOf(["h1", "h2", "h3", "h4","h5", "p"]),
+  type: PropTypes.oneOf(["h1", "h2", "h3", "h4", "h5", "p"]),
 };
 
 export default Heading;

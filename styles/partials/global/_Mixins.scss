@@ -76,6 +76,11 @@
 	flex-direction: column;
 	justify-content: space-between;
 }
+@mixin flex-col-end {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
 
 @mixin flex-col-center {
 	@include flex-col();
