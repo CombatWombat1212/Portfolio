@@ -94,7 +94,6 @@
     &--Methods {
       .section {
         &--main {
-          margin-top: 0;
           grid-template-columns: repeat(2, 1fr);
         }
         .col-line {
@@ -143,9 +142,16 @@
     &--Features-1 {
 
       .section {
-        .graphic--panel {
-          height: auto;
+        &--main {
+          
+          grid-template-columns: repeat(3, 1fr);
         }
+
+        &--column:last-child {
+          grid-column: 2 / 4;
+        }
+
+
       }
     }
 

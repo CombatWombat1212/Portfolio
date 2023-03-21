@@ -13,12 +13,13 @@ function getElemClasses(pref, type, titled) {
   return elemClasses;
 }
 
-function getMainClasses(mainClassName, mainType, titled) {
+function getMainClasses(mainClassName, mainType, titled, mainNoHead) {
   if (mainClassName == undefined) mainClassName = "";
   // if (titled == true || titled == false) return mainClassName;
   if (titled == "above") mainClassName += " section--main__title-above";
   if (titled == "below") mainClassName += " section--main__title-below";
   if (mainType == "grid") mainClassName += " section--main__grid";
+  if (mainNoHead) mainClassName += " section--main__no-head";
 
   mainClassName = removeClassesOfPrefix(mainClassName, "gap-");
 

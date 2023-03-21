@@ -438,36 +438,32 @@ function KoalaKo({ setPopup, onReady }) {
 
 
 
-        <Section id="Prototyping--Features-1" type="columns" background="tertiary" mainClassName="gap-5 mt-4" wrapperClassName="mb-less">
+        <Section id="Prototyping--Features-1" type="columns" background="tertiary" mainType="grid" mainClassName="gap-6 mt-4" wrapperClassName="mb-less">
           <Heading>Features added at this stage include:</Heading>
 
           <Column>
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.features_child_profiles} />
+            <Graphic className="b-rad" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.features_child_profiles} />
             <Heading type="h3" className="graphic--caption">Optional child profiles</Heading>
             <Description className="mt-1"><p>Parents with privacy concerns can choose not to provide their child’s age, disabling smart features.  Allowing these users to still use KoalaKo as an activity database; widening it’s reach, rather than turning these users away.</p></Description>
           </Column>
           <Column>
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.features_selecting_interests} />
+            <Graphic className="b-rad" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.features_selecting_interests} />
             <Heading type="h3" className="graphic--caption">Selecting interests</Heading>
             <Description className="mt-1"><p>Select a handful of your kid’s favorite activities to receive suggestions based on their interests; helping parents to support their child’s passions.  </p></Description>
           </Column>
           <Column>
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.features_statistics_page} />
+            <Graphic className="b-rad" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.features_statistics_page} />
             <Heading type="h3" className="graphic--caption">Refined statistics page</Heading>
             <Description className="mt-1"><p>Helpful, dynamic infographics with adjustable timeframes that explore your child’s play-types, and any experiences they’re yet to try.  With a goal-setting system to encourage regular playtime.</p></Description>
           </Column>
 
-
-        </Section>
-
-        <Section id="Prototyping--Features-2" type="columns" background="tertiary" mainClassName="gap-5">
           <Column className="col-4">
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.features_community_feedback} />
+            <Graphic className="b-rad" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.features_community_feedback} sameHeight="test"/>
             <Heading type="h3" className="graphic--caption">Community feedback</Heading>
             <Description className="mt-1"><p>User rating and feedback system for activities, to provide more accurate recommendations and bring poor activities to the attention of platform moderators.</p></Description>
           </Column>
           <Column className="col-8">
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.features_location_browsing} />
+            <Graphic className="b-rad" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.features_location_browsing} sameHeight="test"/>
             <Heading type="h3" className="graphic--caption">Location browsing</Heading>
             <Description className="mt-1"><p>As suggested by our testers, users can now browse locations that match activities, and activities that match locations.</p></Description>
           </Column>

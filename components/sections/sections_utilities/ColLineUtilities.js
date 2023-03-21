@@ -215,6 +215,8 @@ function colLineInit() {
   var isResizing;
   window.removeEventListener("resize", ran);
   window.addEventListener("resize", ran);
+
+  
 }
 
 export { colLineInit };

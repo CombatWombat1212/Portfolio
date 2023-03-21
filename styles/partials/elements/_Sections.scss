@@ -73,7 +73,7 @@
     @include flex-col-center;
 
     &__below{
-      
+
     }
   }
 
@@ -133,6 +133,9 @@
       margin-top: calc((var(--section_title-above-offset) * -1) + var(--font-margin-bottom-h4));
     }
     &__title-below {
+      margin-top: 0rem;
+    }
+    &__no-head {
       margin-top: 0rem;
     }
   }

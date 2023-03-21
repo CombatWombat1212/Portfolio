@@ -1818,6 +1818,10 @@ body {
   margin-top: 0rem;
 }
 
+.section--main__no-head {
+  margin-top: 0rem;
+}
+
 .section .column {
   min-width: 0.1rem;
   position: relative;
@@ -5823,7 +5827,6 @@ body {
 }
 
 #Koalako #Develop--Methods .section--main {
-  margin-top: 0;
   grid-template-columns: repeat(2, 1fr);
 }
 
@@ -5849,7 +5852,11 @@ body {
   height: auto;
 }
 
-#Koalako #Prototyping--Features-1 .section .graphic--panel {
-  height: auto;
+#Koalako #Prototyping--Features-1 .section--main {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+#Koalako #Prototyping--Features-1 .section--column:last-child {
+  grid-column: 2 / 4;
 }
 /*# sourceMappingURL=style.css.map */

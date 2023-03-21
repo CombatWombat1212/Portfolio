@@ -83,7 +83,7 @@ function SectionBody({ children, sec }) {
               {chil.description && !has.descBelow && <>{chil.description}</>}
             </div>
           )}
-          {has.titled ? (
+          {has.titled || has.main ? (
             <div className={`section--main ${classes.gap} ${classes.main}`}>
               <ColumnGroup columns={chil.columns} arrows={attrs.arrows} line={attrs.line} mainType={attrs.mainType} />
             </div>
@@ -137,23 +137,26 @@ function createSectionObject(className, children, type, background, id, margin, 
   titled = titled || false;
   var hasTitled = titled ? true : false;
 
-
   // Fallback for when section has titles but it isn't explicitly set to true
-  var hasHeadingsOutsideOfColumns = {
-    elems: null,
-    has: false,
-  };
-  hasHeadingsOutsideOfColumns.elems = useOrganizeChildren(children, [
+  var topLevelFoundChildren = false;
+  const foundChildren = useFindChildren(children, [
     ["titles", { elemType: "Title" }],
     ["headings", { elemType: "Heading" }],
     ["columns", { elemType: "Column" }],
   ]);
-  hasHeadingsOutsideOfColumns.has = (titled == true || titled == false) && (hasHeadingsOutsideOfColumns.elems.titles.length > 0 || hasHeadingsOutsideOfColumns.elems.headings.length > 0) && hasHeadingsOutsideOfColumns.elems.columns.length > 0 ? true : false;
+  topLevelFoundChildren = (titled === true || titled === false) && (foundChildren.titles || foundChildren.headings) && foundChildren.columns;
 
-  if (hasHeadingsOutsideOfColumns.has) {
+  if (topLevelFoundChildren) {
     hasTitled = true;
     titled = true;
   }
+
+
+  var mainNoHead = false;
+  if (foundChildren.columns && !foundChildren.titles && !foundChildren.headings) {
+    mainNoHead = true;
+  }
+  var hasMain = mainType == "grid" && (!titled || foundChildren.columns) ? true : false;
 
 
 
@@ -169,13 +172,14 @@ function createSectionObject(className, children, type, background, id, margin, 
       background: getHasBackground(background),
       titled: hasTitled,
       descBelow: hasDescBelow,
+      main: hasMain,
     },
     classes: {
       sec: className ? className : "",
       elem: getElemClasses(pref, type, titled),
       containerMargin: getContainerMarginClass(margin),
       wrapper: getWrapperClasses(wrapperClassName, pref),
-      main: getMainClasses(mainClassName, mainType, titled),
+      main: getMainClasses(mainClassName, mainType, titled, mainNoHead),
       gap: getGapClasses(type, arrows, mainClassName),
       background: getBackgroundClasses(pref, background),
       graphic: getGraphicClasses(type),
@@ -229,6 +233,7 @@ import getFlattenedChildren from "./sections_utilities/getFlattenedChildren";
 import { addClassToJsxObj } from "./sections_utilities/ClassUtilities";
 import { getGraphicChanges, getGraphicElem } from "./sections_utilities/GetConditionalElemAdditions";
 import useOrganizeChildren from "@/scripts/hooks/useOrganizedChildren";
+import useFindChildren from "@/scripts/hooks/useFindChildren";
 export { SECTION_DEFAULT_PROPS, SECTION_PROP_TYPES };
 
 export default Section;

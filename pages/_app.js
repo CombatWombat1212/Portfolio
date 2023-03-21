@@ -51,22 +51,22 @@ function generateWaveText(text, hue) {
 export default function App({ Component, pageProps }) {
   // TODO: add an easy out for people on the case study pages.  either a next or back button, skip to bottom, something that will allow them to quickly bounce around case studies
 
-  const secret = useSecret("password", 1000);
-  const secret2 = useSecret("stop", 1000);
+  // const secret = useSecret("password", 1000);
+  // const secret2 = useSecret("stop", 1000);
 
-  useEffect(() => {
-    if (!secret) return;
+  // useEffect(() => {
+  //   if (!secret) return;
   
-    let hue = 0;
-    const interval = setInterval(() => {
-      const text = !secret2 ? "eat my ass" : "no" ;
-      const [waveText, ...styles] = generateWaveText(text, hue);
-      console.log(waveText, ...styles);
-      hue = (hue + Math.random() * 60) % 360;
-    }, 40);
+  //   let hue = 0;
+  //   const interval = setInterval(() => {
+  //     const text = !secret2 ? "eat my ass" : "no" ;
+  //     const [waveText, ...styles] = generateWaveText(text, hue);
+  //     console.log(waveText, ...styles);
+  //     hue = (hue + Math.random() * 60) % 360;
+  //   }, 40);
   
-    return () => clearInterval(interval);
-  }, [secret, secret2]);
+  //   return () => clearInterval(interval);
+  // }, [secret, secret2]);
   
 
   // I am not currently using this

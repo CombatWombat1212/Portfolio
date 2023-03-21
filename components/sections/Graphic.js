@@ -1,5 +1,6 @@
 import { getColors, RESIZE_TIMEOUT, splitS } from "@/scripts/GlobalUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
+import useSameHeight from "@/scripts/hooks/useSameHeight";
 import Image from "next/image";
 import { defaultProps, PropTypes } from "prop-types";
 import React, { useEffect, useRef, useState } from "react";
@@ -92,7 +93,7 @@ function Effect({ effect }) {
   );
 }
 
-function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup, width, height, effect, style, priority, onLoad, loop, muted, autoplay, controls, tabIndex, onClick, square, sync, innerStyle, ...props }) {
+function Graphic({ className, innerClassName, type, img, background, color, children, lightbox, zoom, setPopup, width, height, effect, style, priority, onLoad, loop, muted, autoplay, controls, tabIndex, onClick, square, sync, innerStyle, sameHeight, ...props }) {
   // TODO: for mobile, add some kind of indication animation of the image being clicked on when its interactable or can be opened in a lightbox
 
   var pref = "section--graphic";
@@ -176,10 +177,31 @@ function Graphic({ className, innerClassName, type, img, background, color, chil
   // var ap = autoplay == "scroll" ? false : autoplay ? true : false;
   var ap = typeof autoplay === "string" && autoplay.includes("scroll") ? false : autoplay ? true : false;
 
+  sameHeight = sameHeight ? sameHeight : false;
+  const sameHeightObj = useSameHeight(sameHeight, reference, { hideDuringResize: true });
+
+  useEffect(() => {
+    console.log(sameHeightObj);
+  }, [sameHeightObj]);
+
   return (
     <>
       {isImg && (
-        <div className={`graphic--img ${allClasses}`} style={{ ...styleVariables, ...style }} ref={reference} onClick={onClick} {...(tabIndex !== undefined ? { tabIndex } : {})} {...props}>
+        <div
+          className={`graphic--img ${allClasses}`}
+          style={{ ...styleVariables, ...style }}
+          ref={reference}
+          onClick={onClick}
+          {...(tabIndex !== undefined ? { tabIndex } : {})}
+          {...(sameHeightObj
+            ? {
+                style: {
+                  height: sameHeightObj.resizing ? `${sameHeightObj.height.min}` : "auto",
+                },
+              }
+            : {})}
+
+          {...props}>
           {effect && <Effect effect={effect} />}
           <Image className={innerClassName} src={img.src} alt={img.alt} width={width} height={height} onClick={onClickHandler} priority={priority} onLoad={onLoad} style={innerStyle} />
           {children && children}
@@ -370,7 +392,6 @@ function graphicVideoInit(elem) {
               if (graphic.is.staggered) {
                 graphicVideoPlay(video);
                 video.addEventListener("ended", ended);
-
               } else {
                 setTimeout(() => {
                   inView.forEach((v, i) => {
@@ -382,7 +403,6 @@ function graphicVideoInit(elem) {
                 }, 200);
               }
             }
-
 
             function pauseOutOfViewVideos() {
               var outOfView = graphic.group.filter((g) => !g.is.inView);
