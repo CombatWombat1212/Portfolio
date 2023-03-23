@@ -50,7 +50,8 @@
         "partials/pages/_Home.scss",
         "partials/pages/_MakeRight.scss",
         "partials/pages/_MADE.scss",
-        "partials/pages/_KoalaKo.scss"
+        "partials/pages/_KoalaKo.scss",
+        "partials/pages/_Explorations.scss"
     ],
     "names": [],
     "file": "style.css"

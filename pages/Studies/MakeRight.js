@@ -654,6 +654,7 @@ function MakeRight({ setPopup }) {
 
           <Section type="passthrough" id="Delivery--Maker" background="tertiary" margin="none">
             {/* TODO: i think maybe these should be the non-tutorial versions :/ what do you think?? */}
+            {/* TODO: yeah i do think these should be the non-tutorial versions */}
 
             <Slideshow img={MAKERIGHT_IMGS.maker_screen_10}>
               <Heading>Maker user journey</Heading>
