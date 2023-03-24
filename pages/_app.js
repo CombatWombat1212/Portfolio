@@ -163,6 +163,7 @@ export default function App({ Component, pageProps }) {
             onTransitionEnd={handleTransitionEnd}> */}
 
         {/* TODO:delete this once you uncomment the rest */}
+        {/* TODO: To fix the loading screen issue you were having, go back to what you had before and set it so that it disapears when its not in use so that its not in the background.  Then to address the issue with it not showing up when its time to transition, go to DLINK or Button or something and make it so that when they are hovered the loading screen is shown for the next 2 or 3 seconds and then disappears again.  For mobile this wouldn't help though so ahh shoot */}
         <div className="base-page-size">
           <Component popup={popup} setPopup={setPopup} />
         </div>

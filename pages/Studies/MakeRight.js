@@ -655,6 +655,7 @@ function MakeRight({ setPopup }) {
           <Section type="passthrough" id="Delivery--Maker" background="tertiary" margin="none">
             {/* TODO: i think maybe these should be the non-tutorial versions :/ what do you think?? */}
             {/* TODO: yeah i do think these should be the non-tutorial versions */}
+            {/* TODO: Okay so the way you do it is none of them should have tutorials, except one that you think is a really good example of the tutorials.  For that one, show the non-tutorial first, then after it show the tutorial version and comment on what that is */}
 
             <Slideshow img={MAKERIGHT_IMGS.maker_screen_10}>
               <Heading>Maker user journey</Heading>
