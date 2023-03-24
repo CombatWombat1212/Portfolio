@@ -431,145 +431,10 @@ const MAKERIGHT_IMGS = processImages({
     height: 650,
   },
 
-  // maker_screen_01: {
-  //   name: "maker_screen_01",
-  //   src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_01.png",
-  //   width: 3840,
-  //   height: 2160,
-  //   group: "makeright_maker_final",
-  // },
-
-  // maker_screen_02: {
-  //   name: "maker_screen_02",
-  //   src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_02.png",
-  //   width: 3840,
-  //   height: 2160,
-  //   group: "makeright_maker_final",
-  // },
-
-  // maker_screen_03: {
-  //   name: "maker_screen_03",
-  //   src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_03.png",
-  //   width: 3840,
-  //   height: 3134,
-  //   group: "makeright_maker_final",
-  // },
-
-  // maker_screen_04: {
-  //   name: "maker_screen_04",
-  //   src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_04.png",
-  //   width: 3840,
-  //   height: 6818,
-  //   group: "makeright_maker_final",
-  // },
-
-  // maker_screen_05: {
-  //   name: "maker_screen_05",
-  //   src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_05.png",
-  //   width: 3840,
-  //   height: 6198,
-  //   group: "makeright_maker_final",
-  // },
-
-  // maker_screen_06: {
-  //   name: "maker_screen_06",
-  //   src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_06.png",
-  //   width: 3840,
-  //   height: 2160,
-  //   group: "makeright_maker_final",
-  // },
-
-  // maker_screen_07: {
-  //   name: "maker_screen_07",
-  //   src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_07.png",
-  //   width: 3840,
-  //   height: 2160,
-  //   group: "makeright_maker_final",
-  // },
-
-  // maker_screen_08: {
-  //   name: "maker_screen_08",
-  //   src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_08.png",
-  //   width: 3840,
-  //   height: 2160,
-  //   group: "makeright_maker_final",
-  // },
-
-  // maker_screen_09: {
-  //   name: "maker_screen_09",
-  //   src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_09.png",
-  //   width: 3840,
-  //   height: 2160,
-  //   group: "makeright_maker_final",
-  // },
-
-  // maker_screen_10: {
-  //   name: "maker_screen_10",
-  //   src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_10.png",
-  //   width: 3840,
-  //   height: 6600,
-  //   group: "makeright_maker_final",
-  // },
-
-  // maker_screen_11: {
-  //   name: "maker_screen_11",
-  //   src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_11.png",
-  //   width: 3840,
-  //   height: 2160,
-  //   group: "makeright_maker_final",
-  // },
-
-  // maker_screen_12: {
-  //   name: "maker_screen_12",
-  //   src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_12.png",
-  //   width: 3840,
-  //   height: 4518,
-  //   group: "makeright_maker_final",
-  // },
-
-  // maker_screen_13: {
-  //   name: "maker_screen_13",
-  //   src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_13.png",
-  //   width: 3840,
-  //   height: 2062,
-  //   group: "makeright_maker_final",
-  // },
-
-  // maker_screen_14: {
-  //   name: "maker_screen_14",
-  //   src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_14.png",
-  //   width: 3840,
-  //   height: 4538,
-  //   group: "makeright_maker_final",
-  // },
-
-  // maker_screen_15: {
-  //   name: "maker_screen_15",
-  //   src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_15.png",
-  //   width: 3840,
-  //   height: 2160,
-  //   group: "makeright_maker_final",
-  // },
-
-  // maker_screen_16: {
-  //   name: "maker_screen_16",
-  //   src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_16.png",
-  //   width: 3840,
-  //   height: 2160,
-  //   group: "makeright_maker_final",
-  // },
-
-  // maker_screen_17: {
-  //   name: "maker_screen_17",
-  //   src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_17.png",
-  //   width: 3840,
-  //   height: 5270,
-  //   group: "makeright_maker_final",
-  // },
 
   maker_screen_01: {
     name: "maker_screen_01",
-    src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_01.png",
+    src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_01.png",
     width: 3840,
     height: 2160,
     group: "makeright_maker_final",
@@ -584,7 +449,7 @@ const MAKERIGHT_IMGS = processImages({
 
   maker_screen_02: {
     name: "maker_screen_02",
-    src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_02.png",
+    src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_02.png",
     width: 3840,
     height: 2160,
     group: "makeright_maker_final",
@@ -599,7 +464,7 @@ const MAKERIGHT_IMGS = processImages({
 
   maker_screen_03: {
     name: "maker_screen_03",
-    src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_03.png",
+    src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_03.png",
     width: 3840,
     height: 3134,
     group: "makeright_maker_final",
@@ -615,7 +480,7 @@ const MAKERIGHT_IMGS = processImages({
 
   maker_screen_04: {
     name: "maker_screen_04",
-    src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_04.png",
+    src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_04.png",
     width: 3840,
     height: 6818,
     group: "makeright_maker_final",
@@ -630,7 +495,7 @@ const MAKERIGHT_IMGS = processImages({
 
   maker_screen_05: {
     name: "maker_screen_05",
-    src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_05.png",
+    src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_05.png",
     width: 3840,
     height: 6198,
     group: "makeright_maker_final",
@@ -645,7 +510,7 @@ const MAKERIGHT_IMGS = processImages({
 
   maker_screen_06: {
     name: "maker_screen_06",
-    src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_06.png",
+    src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_06.png",
     width: 3840,
     height: 2160,
     group: "makeright_maker_final",
@@ -660,7 +525,7 @@ const MAKERIGHT_IMGS = processImages({
 
   maker_screen_07: {
     name: "maker_screen_07",
-    src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_07.png",
+    src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_07.png",
     width: 3840,
     height: 2160,
     group: "makeright_maker_final",
@@ -675,7 +540,7 @@ const MAKERIGHT_IMGS = processImages({
 
   maker_screen_08: {
     name: "maker_screen_08",
-    src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_08.png",
+    src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_08.png",
     width: 3840,
     height: 2160,
     group: "makeright_maker_final",
@@ -690,7 +555,7 @@ const MAKERIGHT_IMGS = processImages({
 
   maker_screen_09: {
     name: "maker_screen_09",
-    src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_09.png",
+    src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_09.png",
     width: 3840,
     height: 2160,
     group: "makeright_maker_final",
@@ -698,7 +563,8 @@ const MAKERIGHT_IMGS = processImages({
     title: "Orders (awaiting acceptance)",
     phase: "2/3",
     description: ["A complete list of their past and present job orders."],
-    actions: ["Click through the provided tutorials, Select ‘Order Details’"],
+    // actions: ["Click through the provided tutorials, Select ‘Order Details’"],
+    actions: ["Select ‘Order Details’"],
     notes: ["Users are reminded with the heading in the top left of the screen that all of the following process is a part of the test. The maker test also includes an ‘Info Mode’ mentioned in the top left to provide optional tutorials throughout the process."],
     // TODO: (Include a way to disable or enable tutorials with a toggle)
     alt: "A screen showing a list of past and present job orders for makers.",
@@ -706,7 +572,7 @@ const MAKERIGHT_IMGS = processImages({
 
   maker_screen_10: {
     name: "maker_screen_10",
-    src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_10.png",
+    src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_10.png",
     width: 3840,
     height: 6600,
     group: "makeright_maker_final",
@@ -714,14 +580,15 @@ const MAKERIGHT_IMGS = processImages({
     title: "Order details",
     phase: "3/3",
     description: ["Provide the details of particular job order: the user’s chosen specifications, object info, a preview of the model, order timeline, and additional comments left by your customer."],
-    actions: ["Click through the provided tutorials, and accept or reject their incoming order."],
+    // actions: ["Click through the provided tutorials, and accept or reject their incoming order."],
+    actions: ["Accept or reject their incoming order."],
     notes: ["Users can accept the order at any time, however, once accepted they have 24hrs to complete the vetting process. This allows for some flexibility as to when to begin the practical test. In a real order, they would have 2hrs to accept or reject a new job."],
     alt: "A screen providing the details of a particular job order, with options to accept or reject it.",
   },
 
   maker_screen_11: {
     name: "maker_screen_11",
-    src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_11.png",
+    src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_11.png",
     width: 3840,
     height: 2160,
     group: "makeright_maker_final",
@@ -736,7 +603,7 @@ const MAKERIGHT_IMGS = processImages({
 
   maker_screen_12: {
     name: "maker_screen_12",
-    src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_12.png",
+    src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_12.png",
     width: 3840,
     height: 4518,
     group: "makeright_maker_final",
@@ -744,14 +611,15 @@ const MAKERIGHT_IMGS = processImages({
     title: "File vetting",
     phase: "2/2",
     description: ["Allow the user to download the file, and check to ensure that it is able to be printed via slicing software. This ensures makers are never expected to print a file that cannot be printed, and that they never have to modify models."],
-    actions: ["Click through the optional tutorials", "Review the steps and guidelines if needed, download the attached file, open it in their slicing software, and assess", "Select the result of their vetting process, and submit."],
+    // actions: ["Click through the optional tutorials", "Review the steps and guidelines if needed, download the attached file, open it in their slicing software, and assess", "Select the result of their vetting process, and submit."],
+    actions: ["Review the steps and guidelines if needed, download the attached file, open it in their slicing software, and assess", "Select the result of their vetting process, and submit."],
     notes: [],
     alt: "A screen for makers to download and vet a file to ensure it can be printed, with optional tutorials.",
   },
 
   maker_screen_13: {
     name: "maker_screen_13",
-    src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_13.png",
+    src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_13.png",
     width: 3840,
     height: 2160,
     group: "makeright_maker_final",
@@ -766,7 +634,7 @@ const MAKERIGHT_IMGS = processImages({
 
   maker_screen_14: {
     name: "maker_screen_14",
-    src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_14.png",
+    src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_14.png",
     width: 3840,
     height: 4538,
     group: "makeright_maker_final",
@@ -781,7 +649,7 @@ const MAKERIGHT_IMGS = processImages({
 
   maker_screen_15: {
     name: "maker_screen_15",
-    src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_15.png",
+    src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_15.png",
     width: 3840,
     height: 2160,
     group: "makeright_maker_final",
@@ -796,7 +664,7 @@ const MAKERIGHT_IMGS = processImages({
 
   maker_screen_16: {
     name: "maker_screen_16",
-    src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_16.png",
+    src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_16.png",
     width: 3840,
     height: 2160,
     group: "makeright_maker_final",
@@ -811,7 +679,7 @@ const MAKERIGHT_IMGS = processImages({
 
   maker_screen_17: {
     name: "maker_screen_17",
-    src: "./assets/images/case_studies/makeright/final_screens/maker/maker_screen_17.png",
+    src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_17.png",
     width: 3840,
     height: 5270,
     group: "makeright_maker_final",
