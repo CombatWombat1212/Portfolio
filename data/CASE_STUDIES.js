@@ -4,6 +4,7 @@ var CASE_STUDIES = [
   {
     name: "MakeRight",
     id: "Makeright",
+    type: "study",
     subtitle: {
       string: "Translating The Benefits of 3D Printing to Everyday Consumers",
       jsx: (
@@ -43,6 +44,7 @@ var CASE_STUDIES = [
   {
     name: "Made Clothing Co.",
     id: "Made",
+    type: "study",
     subtitle: {
       string: "Product Rendering for a Toronto-Based Men’s Fashion Brand",
       jsx: (
@@ -83,6 +85,7 @@ var CASE_STUDIES = [
   {
     name: "KoalaKo",
     id: "Koalako",
+    type: "study",
     subtitle: {
       string: "Supporting Parents in Fostering Adolescent Creative Development",
       jsx: (
@@ -121,6 +124,7 @@ var CASE_STUDIES = [
   {
     name: "Explorations",
     id: "Explorations",
+    type: "gallery",
     subtitle: {
       string: "Undeserving of a case study, but well-deserving of your attention",
       jsx: (
@@ -129,7 +133,6 @@ var CASE_STUDIES = [
         </>
       ),
     },
-
     imgs: {
       main: {
         src: "./assets/images/case_study_thumbnails/Explorations.png",
@@ -139,13 +142,12 @@ var CASE_STUDIES = [
       },
 
       alt: {
-        src: "./assets/images/case_study_thumbnails/Explorations.png",
-        alt: "3D rendering of a worn steel compass",
+        src: "./assets/images/case_study_thumbnails/Explorations_Alt.png",
+        alt: "3D rendering of a worn steel compass on its side",
         width: 730,
         height: 1626,
       },
     },
-
     link: "/Explorations",
   },
 ];
@@ -158,6 +160,9 @@ function addKey(arr) {
 }
 
 function caseStudiesInit(arr) {
+  if (!Array.isArray(arr)) arr = [arr];
+
+  
   arr.forEach((item) => {
     item.key = uuidv4();
     if (item.tags) item.tags = addKey(item.tags);
@@ -166,6 +171,7 @@ function caseStudiesInit(arr) {
     if (brief.tools) brief.tools = addKey(brief.tools);
     if (brief.deliverables) brief.deliverables = addKey(brief.deliverables);
     if (brief.roles) brief.roles = addKey(brief.roles);
+    if (brief.disciplines) brief.disciplines = addKey(brief.disciplines);
   });
 
   return arr;
@@ -183,3 +189,4 @@ const STUDY_EXPLORATIONS = CASE_STUDIES[3];
 
 export default CASE_STUDIES;
 export { STUDY_MAKERIGHT, STUDY_MADE, STUDY_KOALAKO, STUDY_EXPLORATIONS };
+export { caseStudiesInit, addKey };

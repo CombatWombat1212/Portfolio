@@ -1,102 +1,365 @@
+import { addKey, caseStudiesInit } from "@/data/CASE_STUDIES";
+import {
+  EXPLORATIONS_IMGS,
+  EXPLORATIONS_IMG_GROUPS,
+} from "@/data/EXPLORATIONS_IMGS";
 import toggle from "@/scripts/AnimationTools";
+import { toTitleCase } from "@/scripts/GlobalUtilities";
+import useElementWidth from "@/scripts/hooks/useElementWidth";
+import { combineUniqueProperties } from "@/scripts/ProcessImages";
 import { defaultProps, PropTypes } from "prop-types";
+import { useEffect, useRef } from "react";
 import Tag from "../elements/Tag";
+import Heading from "../sections/Heading";
 
-function BriefPoint({ items, type }) {
-  var title, pointClasses, itemClasses;
+const POINT_ORDER = [
+  "deliverables",
+  "roles",
+  "timeline",
+  "disciplines",
+  "tools",
+];
+const LIST_TYPES = ["roles", "deliverables", "tools", "disciplines"];
+const TAG_TYPES = ["tools", "disciplines"];
+const STRING_TYPES = ["timeline", "description"];
 
-  var LIST_TYPES = ["roles", "deliverables", "tools"];
-  var STRING_TYPES = ["timeline", "description"];
-  var isList = LIST_TYPES.includes(type);
-  var isTools = type == "tools";
+// Gallery only
+const DISCIPLINE_ORDER = [
+  "Frontend Development",
+  "3D Design",
+  "UI Design",
+  "UX Design",
+  "Photography",
+  "Motion Graphics",
+];
+const TOOLS_ORDER = [
+  "HTML/CSS/JS",
+  "Adobe XD / Figma",
+  "Blender 3D",
+  "Illustrator",
+  "Photoshop",
+  "Lightroom",
+];
 
-  title = type.toUpperCase();
-
-  if (type == "description") itemClasses = "text--h3";
-  pointClasses = " ";
-  if (type == "description") pointClasses += "brief--desc";
-  if (type == "description") itemClasses = "text--h3";
-  if (type != "description") pointClasses += "brief--point";
-  //   if (type == "description") pointClasses += "col-6";
-  //   if (type != "description") pointClasses += "col-3";
-
-
-
-  return (
-    <>
-      {items && <div className={pointClasses}>
-        <h4 className="brief--title">{title}</h4>
-
-        {isList ? (
-          <>
-            {isTools ? (
-              <div className="brief--list brief--tools">
-                {items.map((item) => {
-                  return (
-                    <Tag key={item.key} variant="tool">
-                      {item.name}
-                    </Tag>
-                  );
-                })}
-              </div>
-            ) : (
-              <ul className="brief--list">
-                {items.map((item) => {
-                  return (
-                    <li className={itemClasses} key={item.key}>
-                      {item.name}
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
-          </>
-        ) : (
-          <>
-            <p className={itemClasses}>{items}</p>
-          </>
-        )}
-      </div>}
-    </>
-  );
-}
-
-BriefPoint.propTypes = {
-  type: PropTypes.oneOf(["description", "roles", "deliverables", "timeline", "tools"]),
+const SPECIAL_CASES = {
+  disciplines: {
+    "UX Design": {
+      combineWith: "UI Design",
+      displayName: "UI / UX",
+      filterBy: ["UI Design", "UX Design"],
+    },
+    "Frontend Development": {
+      displayName: "Frontend",
+      filterBy: ["Frontend Development"],
+    },
+  },
+  tools: {
+    // "Photoshop": {
+    //   combineWith: "Lightroom",
+    //   displayName: "Photoshop / Lightroom",
+    //   filterBy: ["Photoshop", "Lightroom"],
+    // },
+    "Adobe XD": {
+      combineWith: "Figma",
+      displayName: "Figma / XD",
+      filterBy: ["Adobe XD", "Figma"],
+    },
+    "Blender": {
+      displayName: "Blender 3D",
+    },
+    "HTML/CSS/JS": {
+      displayName: "HTML / CSS / JS",
+    },
+    "Adobe Illustrator": {
+      displayName: "Illustrator",
+    },
+    "Adobe Dimension": {
+      remove: true,
+    },
+  },
 };
 
-function BriefList({ brief }) {
-  var order = ["deliverables", "roles", "timeline", "tools"];
-  //   var order = [
-  //     "deliverables",
-  //     "roles",
-  //     "timeline",
-  //     "tools",
-  // ];
+function handleSpecialCases(items, type) {
+  const mapping = SPECIAL_CASES[type];
+
+  const processedItems = items.map((item) => {
+    return {
+      displayName: mapping[item.name]?.hasOwnProperty("displayName")
+        ? mapping[item.name].displayName
+        : item.name,
+      combineWith: mapping[item.name]?.hasOwnProperty("combineWith")
+        ? mapping[item.name].combineWith
+        : null,
+      filterBy: mapping[item.name]?.hasOwnProperty("filterBy")
+        ? mapping[item.name].filterBy
+        : item.name,
+      remove: mapping[item.name]?.hasOwnProperty("remove")
+        ? mapping[item.name].remove
+        : false,
+
+      ...item,
+      // spread item adds:
+      // name: string,
+      // key: uuidv4(),
+    };
+  });
+
+  var removeItems = [];
+  for (var i = 0; i < processedItems.length; i++) {
+    var item = processedItems[i];
+    if (item.combineWith) {
+      var combineItem = processedItems.find(
+        (i) => i.name === item.combineWith
+      );
+      if (combineItem) {
+        removeItems.push(combineItem);
+      }
+    }
+    if (item.remove) {
+      removeItems.push(item);
+    }
+  }
+
+  const combinedItems = processedItems.filter((item) => {
+    return !removeItems.includes(item);
+  });
+
+  return combinedItems;
+}
+
+function orderArrayByList(array, orderList) {
+  // Items not in the order list
+  const remainingItems = array
+    .filter((item) => !orderList.includes(item))
+    .sort();
+
+  // Sort the items based on the orderList
+  const sortedArray = orderList
+    .filter((item) => array.includes(item))
+    .concat(remainingItems);
+
+  return sortedArray;
+}
+
+function filterByOccurrence(
+  array,
+  imgGroups,
+  propertyName,
+  minOccurrence
+) {
+  return array.filter((item) => {
+    const occurrences = countOccurrences(item, imgGroups, propertyName);
+    return occurrences >= minOccurrence;
+  });
+}
+
+function countOccurrences(value, imgGroups, propertyName) {
+  let count = 0;
+  for (const key in imgGroups) {
+    if (imgGroups.hasOwnProperty(key)) {
+      const group = imgGroups[key];
+      if (group[propertyName] && group[propertyName].includes(value)) {
+        count++;
+      }
+    }
+  }
+  return count;
+}
+
+function Brief({ study }) {
+  var brief = study.brief;
+  var hasDesc = "brief" in study && "description" in brief;
+
+
+
+  // const reference = useRef(null);
+  // const width = useElementWidth(reference);
+
+  // useEffect(() => {
+  //   console.log('Element width has changed:', width);
+  // }, [width]);
+
+
+
+  if (study.type == "gallery") {
+
+    // TODO: we need to find a way for this to work on first run
+    const IMGS = EXPLORATIONS_IMG_GROUPS;
+
+
+    var disciplines = orderArrayByList(
+      combineUniqueProperties(IMGS, "disciplines"),
+      DISCIPLINE_ORDER
+    );
+    var tools = orderArrayByList(
+      combineUniqueProperties(IMGS, "tools"),
+      TOOLS_ORDER
+    );
+
+    const minOccurrence = 2;
+
+    var reducedDisciplines = filterByOccurrence(
+      disciplines,
+      IMGS,
+      "disciplines",
+      minOccurrence
+    );
+    var reducedTools = filterByOccurrence(
+      tools,
+      IMGS,
+      "tools",
+      minOccurrence
+    );
+
+    reducedDisciplines = addKey(reducedDisciplines);
+    reducedTools = addKey(reducedTools);
+
+    var processedDisciplines = handleSpecialCases(
+      reducedDisciplines,
+      "disciplines"
+    );
+    var processedTools = handleSpecialCases(reducedTools, "tools");
+
+    study.brief = {
+      disciplines: processedDisciplines,
+      tools: processedTools,
+    };
+  }
+
+  var briefClasses = `brief--container ${
+    hasDesc
+      ? "brief--container__study"
+      : "brief--container__gallery"
+  }`;
+
+  return (
+    <div className="brief">
+      <div className={`container container__wide ${briefClasses}`}>
+        {hasDesc && <Desc study={study} />}
+        <Groups study={study} />
+      </div>
+    </div>
+  );
+}
+
+function Desc({ study }) {
+  var brief = study.brief;
+  return (
+    <div className="brief--group">
+      <Point type={"description"} items={brief["description"]} study={study} />
+    </div>
+  );
+}
+
+function Groups({ study }) {
+  var brief = study.brief;
+  var hasDesc = "brief" in study && "description" in brief;
+
+
+  var groupClasses = `brief--group ${
+    hasDesc
+      ? "brief--group__study"
+      : "brief--group__gallery"
+  }`;
+
+
+  return (
+    <div className={groupClasses}>
+      {POINT_ORDER.map((item) => {
+        var hasItem = brief && item in brief;
+        return (
+          hasItem && <Point key={item} type={item} items={brief[item]} study={study} />
+        );
+      })}
+    </div>
+  );
+}
+
+function Point({ items, type, study }) {
+  var pointClasses = " ";
+  var itemClasses;
+  
+  var isList = LIST_TYPES.includes(type);
+  var isTags = TAG_TYPES.includes(type);
+  var isStudy = study.type == "study";
+
+  if (type == "description") {
+    itemClasses = "text--h3";
+    pointClasses += "brief--desc";
+  }
+
+  if (type != "description") {
+    pointClasses += "brief--point";
+  }
+
+  var title, titleType, titleClasses;
+
+  if(isStudy){
+    title = type.toUpperCase();
+    titleType = "h4";
+    titleClasses = "brief--title__study";
+  } else{
+    title = toTitleCase(type);
+    titleType = "h3";
+    titleClasses = "brief--title__gallery mb-less";
+  }
 
 
   return (
     <>
-      <div className="brief--group">
-        <BriefPoint type={"description"} items={brief["description"]} />
-      </div>
+      {items && (
+        <div className={pointClasses}>
+          <Heading type={titleType} className={`brief--title ${titleClasses}`}>{title}</Heading>
 
-      <div className="brief--group brief--group__grid">
-        {order.map((item) => {
-          return <BriefPoint key={item} type={item} items={brief[item]} />;
-        })}
-      </div>
+          {isList ? (
+            <>
+              {isTags ? (
+                <Tags items={items} type={type} />
+              ) : (
+                <List items={items} itemClasses={itemClasses} />
+              )}
+            </>
+          ) : (
+            <p className={itemClasses}>{items}</p>
+          )}
+        </div>
+      )}
     </>
   );
 }
 
-function Brief({ brief }) {
+Point.propTypes = {
+  type: PropTypes.oneOf(POINT_ORDER),
+};
+
+function Tags({ items, type }) {
+  var variant =
+    type == "tools" ? "tool" : type == "disciplines" ? "regular" : "";
+
   return (
-    <div className="brief">
-      <div className="container container__wide brief--container">
-        <BriefList brief={brief} />
-      </div>
+    <div className="brief--list brief--tags">
+      {items.map((item, index) => {
+        return (
+          <Tag key={`${item.key} ${index}`} variant={variant}>
+            {item.displayName}
+          </Tag>
+        );
+      })}
     </div>
+  );
+}
+
+function List({ items, itemClasses }) {
+  return (
+    <ul className="brief--list">
+      {items.map((item, index) => {
+        return (
+          <li key={`${item.key} ${index}`} className={itemClasses}>
+            {item.name}
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 

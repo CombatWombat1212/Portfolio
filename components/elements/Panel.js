@@ -46,6 +46,9 @@ PanelImg.propTypes = {
 };
 
 function StudyPanel({ id, study, variant, button }) {
+
+
+
   var main, alt;
   main = study.imgs.main;
   if (study.imgs.alt) alt = study.imgs.alt;
@@ -59,6 +62,10 @@ function StudyPanel({ id, study, variant, button }) {
   }
 
   var btnStyle = button == "" ? { opacity: 0 } : { opacity: 1 };
+
+
+
+
 
   return (
     <>
@@ -82,9 +89,8 @@ function StudyPanel({ id, study, variant, button }) {
               </Button>
             </>
           ) : (
-            variant == "study" && (
+            variant == "study" && study.type != "gallery" && (
               <>
-                {/* TODO: link these buttons to the solution of each page's study */}
                 <Button className="panel--button" type="regular" icon={["arrow_down", "right", "mask"]} animation={"pulse-down"} href={"#Delivery"}>
                   Skip to Solution
                 </Button>

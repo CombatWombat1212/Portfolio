@@ -2,16 +2,35 @@
   background-color: $col-background_darkest;
   @include pad-y(5rem);
 
+
+
   &--container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    &__study{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    // &__gallery{
+    //   @include flex-row;
+    //   --gap:2rem;
+    //   @include gap;
+    // }
   }
 
+
+
+
   &--group {
-    &__grid {
+    &__study {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-gap: 3rem;
+    }
+    &__gallery {
+      display: flex;
+      @include flex-row;
+      --gap:5rem;
+      @include gap;
+      margin-top: -0.5rem;
     }
   }
 
@@ -25,6 +44,19 @@
 
   &--title{
     @include h4-margin;
+
+    &__study{
+
+    }
+
+    &__gallery{
+      
+      * {
+        font-weight: 500;
+        color: $col-secondary;
+      }
+    }
+
   }
 
   &--list {
@@ -33,7 +65,7 @@
     }
   }
 
-  &--tools {
+  &--tags {
     @include flex-row;
     flex-wrap: wrap;
 

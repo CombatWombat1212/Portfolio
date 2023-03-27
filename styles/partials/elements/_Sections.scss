@@ -6,6 +6,10 @@
   &.text--#{$m} + *.mt-less {
     margin-top: var(--font-margin-bottom-#{$m}_less);
   }
+
+  &.text--#{$m}.mb-less + *{
+    margin-top: var(--font-margin-bottom-#{$m}_less);
+  }
 }
 
 :root {

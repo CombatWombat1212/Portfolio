@@ -261,4 +261,13 @@ function getColors() {
   // });
 }
 
-export { addStyleNonDestructive, addAttrNonDestructive, postScreenSizeToRoot, overflowEllipsis, splitPx, splitRem, splitS,loadImgExternally, getSiblingStyle, clamp, map, arrayItemDoesExist,capFirstRemovePeriod, getElemWidth, getColors, RESIZE_TIMEOUT };
+
+function toTitleCase(str) {
+  if (!str) return "";
+  return str.toLowerCase().replace(/(?:^|\s)\w/g, function(match) {
+    return match.toUpperCase();
+  });
+}
+
+
+export { addStyleNonDestructive, addAttrNonDestructive, postScreenSizeToRoot, overflowEllipsis, splitPx, splitRem, splitS,loadImgExternally, getSiblingStyle, clamp, map, arrayItemDoesExist,capFirstRemovePeriod, getElemWidth, getColors, toTitleCase, RESIZE_TIMEOUT };
