@@ -108,7 +108,7 @@ function combineUniqueProperties(groupData, propertyName) {
 
     // Otherwise, process the images and accumulate property values
     group[propertyName] = [];
-    group.imgs.forEach((img) => {
+    group?.imgs?.forEach((img) => {
       if (img[propertyName]) {
         const propertyValues = Array.isArray(img[propertyName]) ? img[propertyName] : [img[propertyName]];
         propertyValues.forEach((value) => {

@@ -25,18 +25,18 @@ const STRING_TYPES = ["timeline", "description"];
 
 // Gallery only
 const DISCIPLINE_ORDER = [
-  "Frontend Development",
+  "UX Engineering",
   "3D Design",
   "UI Design",
   "UX Design",
-  "Photography",
   "Motion Graphics",
+  "Photography",
 ];
 const TOOLS_ORDER = [
   "HTML/CSS/JS",
-  "Adobe XD / Figma",
-  "Blender 3D",
-  "Illustrator",
+  "Adobe XD",
+  "Blender",
+  "Adobe Illustrator",
   "Photoshop",
   "Lightroom",
 ];
@@ -48,17 +48,24 @@ const SPECIAL_CASES = {
       displayName: "UI / UX",
       filterBy: ["UI Design", "UX Design"],
     },
-    "Frontend Development": {
-      displayName: "Frontend",
-      filterBy: ["Frontend Development"],
+    "UX Engineering": {
+      combineWith: "Frontend Development",
+      displayName: "UX Engineering",
+      filterBy: ["Frontend Development", "UX Engineering"],
     },
+    "User Research": {
+      remove: true,
+    },
+    // "UX Engineering": {
+    //   remove: true,
+    // },
   },
   tools: {
-    // "Photoshop": {
-    //   combineWith: "Lightroom",
-    //   displayName: "Photoshop / Lightroom",
-    //   filterBy: ["Photoshop", "Lightroom"],
-    // },
+    "Photoshop": {
+      combineWith: "Lightroom",
+      displayName: "Photoshop / Lightroom",
+      filterBy: ["Photoshop", "Lightroom"],
+    },
     "Adobe XD": {
       combineWith: "Figma",
       displayName: "Figma / XD",
@@ -74,6 +81,21 @@ const SPECIAL_CASES = {
       displayName: "Illustrator",
     },
     "Adobe Dimension": {
+      remove: true,
+    },
+    "Mural": {
+      remove: true,
+    },
+    "Python": {
+      remove: true,
+    },
+    "API": {
+      remove: true,
+    },
+    ".NET Environment": {
+      remove: true,
+    },
+    "After Effects": {
       remove: true,
     },
   },
@@ -130,12 +152,20 @@ function handleSpecialCases(items, type) {
 function orderArrayByList(array, orderList) {
   // Items not in the order list
   const remainingItems = array
-    .filter((item) => !orderList.includes(item))
-    .sort();
+    .filter((item) => {
+      const itemName = item.name || item;
+      return !orderList.includes(itemName);
+    })
+    .sort((a, b) => {
+      const aName = a.name || a;
+      const bName = b.name || b;
+      return aName.localeCompare(bName);
+    });
 
   // Sort the items based on the orderList
   const sortedArray = orderList
-    .filter((item) => array.includes(item))
+    .map((orderItem) => array.find((item) => (item.name || item) === orderItem))
+    .filter((item) => item !== undefined)
     .concat(remainingItems);
 
   return sortedArray;
@@ -184,7 +214,7 @@ function Brief({ study }) {
   if (study.type == "gallery") {
 
     // TODO: we need to find a way for this to work on first run
-    const IMGS = EXPLORATIONS_IMG_GROUPS;
+    const IMGS = EXPLORATIONS_IMGS;
 
 
     var disciplines = orderArrayByList(
@@ -219,6 +249,8 @@ function Brief({ study }) {
       "disciplines"
     );
     var processedTools = handleSpecialCases(reducedTools, "tools");
+
+
 
     study.brief = {
       disciplines: processedDisciplines,
@@ -340,7 +372,7 @@ function Tags({ items, type }) {
     <div className="brief--list brief--tags">
       {items.map((item, index) => {
         return (
-          <Tag key={`${item.key} ${index}`} variant={variant}>
+          <Tag key={`${item.key} ${index}`} variant={variant} filter={item.filterBy}>
             {item.displayName}
           </Tag>
         );
