@@ -1,3 +1,4 @@
+import {processGallery} from "@/scripts/processGallery";
 import { v4 as uuidv4 } from "uuid";
 
 var CASE_STUDIES = [
@@ -182,7 +183,7 @@ CASE_STUDIES = caseStudiesInit(CASE_STUDIES);
 const STUDY_MAKERIGHT = CASE_STUDIES[0];
 const STUDY_MADE = CASE_STUDIES[1];
 const STUDY_KOALAKO = CASE_STUDIES[2];
-const STUDY_EXPLORATIONS = CASE_STUDIES[3];
+const STUDY_EXPLORATIONS = processGallery(CASE_STUDIES[3]);
 
 
 

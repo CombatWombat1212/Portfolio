@@ -57,47 +57,6 @@ function updateGroupProperties(group, img, groupData) {
   groupData.imgs.sort((a, b) => a.index - b.index);
 }
 
-// function processGroups(images) {
-//   const groups = {};
-
-//   for (const key in images) {
-//     if (images.hasOwnProperty(key)) {
-//       const image = images[key];
-
-//       if (image.group) {
-//         if (!groups[image.group]) {
-//           groups[image.group] = {
-//             name: image.group,
-//             imgs: [],
-//             height: {
-//               min: Infinity,
-//               max: -Infinity,
-//               constant: true,
-//             },
-//             width: {
-//               min: Infinity,
-//               max: -Infinity,
-//               constant: true,
-//             },
-//           };
-//         }
-
-//         let index = image.index;
-
-//         if (typeof index === "undefined") {
-//           index = groups[image.group].imgs.length;
-//         } else {
-//           checkForOverlappingIndexes(image.group, index, image.name, groups[image.group].imgs);
-//         }
-
-//         image.index = index;
-//         updateGroupProperties(image.group, image, groups[image.group]);
-//       }
-//     }
-//   }
-
-//   return groups;
-// }
 
 function combineUniqueProperties(groupData, propertyName) {
   function run(group, propertyName) {
@@ -233,5 +192,6 @@ function processImages(images, study) {
   }
   return processedImages;
 }
+
 
 export { processGroups, processImages, combineUniqueProperties, collectPropertyValues };
