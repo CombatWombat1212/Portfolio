@@ -6,8 +6,7 @@ function organizeChildren(allChildren) {
   var arr = [];
 
   if (allChildren.length == undefined) allChildren = [allChildren];
-  allChildren = allChildren.filter(child => typeof child === "object");
-
+  allChildren = allChildren.filter((child) => typeof child === "object");
 
   for (var i = 0; i < allTypes.length; i++) {
     arr.push({ type: allTypes[i].toLocaleLowerCase(), elems: [] });
@@ -17,9 +16,25 @@ function organizeChildren(allChildren) {
     var type = arr[i].type;
 
     if (type != "other") {
-      arr[i].elems = allChildren.filter((child) => child.type.name == allTypes[i]);
+      arr[i].elems = allChildren.filter((child) => {
+        if (!child.type) return false; // Add this line to check if type is defined
+
+        // Check for both regular component type and mapped component type
+        const componentName =
+          child.type.name || (child.type.displayName || "").split(".")[0];
+        return componentName === allTypes[i];
+      });
     } else {
-      arr[i].elems = allChildren.filter((child) => DEFINED_CHILDREN.indexOf(child.type.name) == -1) || null;
+      arr[i].elems =
+        allChildren.filter((child) => {
+          if (!child.type) return false; // Add this line to check if type is defined
+
+          return (
+            DEFINED_CHILDREN.indexOf(
+              child.type.name || (child.type.displayName || "").split(".")[0]
+            ) === -1
+          );
+        }) || null;
     }
   }
   return arr;
