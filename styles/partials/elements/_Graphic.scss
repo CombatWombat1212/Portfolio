@@ -1,0 +1,192 @@
+
+.section {
+    --graphic-scale: 1;
+  
+    .graphic {
+      --img-panel-height: 12rem;
+  
+      // TODO: update all graphics to follow this syntax, and get rid of all the other clutter
+  
+      &--mask {
+        --w: calc(var(--mw) * var(--graphic-scale));
+        --h: calc(var(--mh) * var(--graphic-scale));
+  
+        .mask {
+          width: var(--w);
+          height: var(--h);
+          background-color: $col-tertiary;
+        }
+      }
+  
+      &--img {
+        display: flex;
+        position: relative;
+  
+        img {
+          @include img-contain;
+        }
+      }
+  
+      &--video {
+        display: flex;
+        position: relative;
+        transition: 0.2s;
+  
+        &[data-autoplay-hover="true"] {
+          cursor: pointer;
+          &.background__background {
+            &:hover,
+            &:focus,
+            &[data-playing="true"] {
+              background-color: $col-background_darker;
+            }
+            &[data-playing="false"] {
+              background-color: $col-background!important;
+            }
+          }
+          &.background__background-darker {
+            &:hover,
+            &:focus,
+            &[data-playing="true"] {
+              background-color: $col-background_darkest;
+            }
+            &[data-playing="false"] {
+              background-color: $col-background_darker!important;
+            }
+          }
+          &.background__background-darkest {
+            &:hover,
+            &:focus,
+            &[data-playing="true"] {
+              background-color: desaturate(darken($col-background_darker, 8),7);
+            }
+            &[data-playing="false"] {
+              background-color: $col-background_darkest!important;
+            }
+          }
+        }
+  
+        .video {
+          &--foreground {
+            @include img-contain;
+            z-index: 1;
+          }
+  
+          &--background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: calc(100% - (var(--section-graphic-panel-pad) * 2));
+            height: calc(100% - (var(--section-graphic-panel-pad) * 2));
+            z-index: 0;
+            transform: translate(-50%, -50%);
+          }
+  
+          &__hidden {
+            opacity: 0;
+          }
+        }
+      }
+  
+      &--panel {
+        height: var(--img-panel-height);
+        @include b-rad;
+        @include flex-row-center;
+        padding: var(--section-graphic-panel-pad);
+        align-items: center;
+  
+        &__flexible {
+          height: 100% !important;
+          padding: 0;
+        }
+      }
+  
+      &--caption {
+        margin-top: var(--section-text-spacing);
+  
+        &__above {
+          margin-top: 0;
+          margin-bottom: calc(var(--section-text-spacing) * 0.5);
+        }
+  
+        &__split {
+          @include flex-row-between;
+          align-items: flex-end;
+  
+          & > * + * {
+            margin: 0;
+          }
+        }
+  
+        &.mt-more {
+          margin-top: calc(var(--section-text-spacing) * 1.2);
+        }
+  
+        &.mt-less {
+          margin-top: calc(var(--section-text-spacing) * 0.65);
+        }
+      }
+  
+      &--effect {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+  
+        &__gradient {
+          // --color-11;
+          // --color-12;
+          // --direction;
+  
+          z-index: 2;
+          background-image: linear-gradient(var(--direction), var(--color-1) 0%, var(--color-2) 140%);
+        }
+  
+        @include trans;
+  
+        &__on.hover {
+          opacity: 0;
+        }
+  
+        &__off.hover {
+          opacity: 1;
+        }
+      }
+  
+      &__container {
+        padding: 0;
+  
+        img,
+        .mask {
+          margin: var(--section-graphic-panel-pad);
+        }
+      }
+  
+      &__lightbox {
+        cursor: zoom-in;
+  
+        img,video {
+          @include trans;
+          transform: scale(1);
+  
+          @include hover(".graphic__lightbox", "img, video") {
+            transform: scale(1.025);
+          }
+        }
+      }
+    }
+  }
+  
+  
+
+
+  // Type variants
+.section {
+    &__overview {  
+      .section--graphic {
+        opacity: 0.3;
+      }
+    }
+  }
+  

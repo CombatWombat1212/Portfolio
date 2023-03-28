@@ -1,11 +1,12 @@
 import MAKERIGHT_IMGS, { MAKERIGHT_IMG_GROUPS } from "@/data/MAKERIGHT_IMGS";
 
 import toggle from "@/scripts/AnimationTools";
-import { splitS } from "@/scripts/GlobalUtilities";
+import { IMAGE_TYPES, splitS, VIDEO_TYPES } from "@/scripts/GlobalUtilities";
 import { setWaitingToShowLoading, waitToLoad } from "../Popup";
 import { hiddenUIInit, setActiveHiddenUI } from "./HiddenUIUtilities";
 import { loadImgExternally } from "@/scripts/GlobalUtilities";
 import { KOALAKO_IMG_GROUPS } from "@/data/KOALAKO_IMGS";
+import { EXPLORATIONS_IMG_GROUPS } from "@/data/EXPLORATIONS_IMGS";
 
 var popupGroup = false;
 var popupIndex;
@@ -22,11 +23,10 @@ function checkForRelevantGroups(popup, setPopup) {
   var imgGroup = popup.img.group;
   var imgStudy = popup.img.study;
 
-  var IMG_GROUP; 
+  var IMG_GROUP;
   if (imgStudy == "koalako") IMG_GROUP = KOALAKO_IMG_GROUPS;
   if (imgStudy == "makeright") IMG_GROUP = MAKERIGHT_IMG_GROUPS;
-
-
+  if (imgStudy == "explorations") IMG_GROUP = EXPLORATIONS_IMG_GROUPS;
 
   if (!imgGroup) return;
   if (typeof IMG_GROUP[imgGroup] === "undefined") throw new Error(`No group with name ${imgGroup} found`);
@@ -108,28 +108,50 @@ function lightboxInit(popup, setPopup, setShowLoading) {
 
   var img = loadImgExternally(popup.img);
   var content = document.querySelector(".popup--content");
+  var media = document.querySelector(".popup--media");
 
   waitToLoad(setShowLoading);
 
-  img.onload = function () {
-    // transition = .popup--content transition-duration
+  var isImg = IMAGE_TYPES.includes(popup.img.type);
+  var isVid = VIDEO_TYPES.includes(popup.img.type);
 
+
+  if (isImg) {
+    media.classList.add("popup--img");
+    media.classList.remove("popup--video");
+    img.onload = function () {
+      run();
+    };
+  }
+  if (isVid) {
+    media.classList.add("popup--video");
+    media.classList.remove("popup--img");
+    run();
+  }
+
+  function run() {
     var transition = splitS(window.getComputedStyle(content).transitionDuration);
-
-    var wrapper = document.querySelector(".popup--img");
+  
+    var media = document.querySelector(".popup--media");
     var loader = document.querySelector(".popup--loading");
-    img.classList.add("popup--img__off");
-    wrapper.appendChild(img);
-
-    toggle(img, { classPref: "popup--img", duration: "transition" });
+  
+    // Remove the previous image or video
+    while (media.firstChild) {
+      media.removeChild(media.firstChild);
+    }
+  
+    img.classList.add("popup--media__off");
+    media.appendChild(img);
+  
+    toggle(img, { classPref: "popup--media", duration: "transition" });
     toggle(content, { classPref: "popup--content", duration: "transition" });
-
+  
     imgLoading = false; // indicate that the image has finished loading
-
+  
     setWaitingToShowLoading(false);
     setShowLoading(false);
-  };
-}
+  }
+  }
 
 export { lightboxInit, seekHandler, checkForRelevantGroups, setPopupGroup };
 

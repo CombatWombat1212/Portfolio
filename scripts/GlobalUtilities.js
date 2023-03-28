@@ -186,18 +186,45 @@ function throwLoadErrors(img) {
     throw new Error("No height attribute found on img element");
 }
 
+// function loadImgExternally(img) {
+//   var elem;
+//   throwLoadErrors(img);
+
+//   elem = document.createElement("img");
+//   elem.src = "." + img.src;
+//   elem.width = img.width;
+//   elem.height = img.height;
+//   elem.alt = img.alt;
+//   // elem.setAttribute("loading", "lazy"); // Use lazy loading to improve performance
+//   elem.setAttribute("decoding", "async"); // Use async decoding to improve performance
+
+//   return elem;
+// }
 function loadImgExternally(img) {
   var elem;
 
   throwLoadErrors(img);
 
-  elem = document.createElement("img");
-  elem.src = "." + img.src;
-  elem.width = img.width;
-  elem.height = img.height;
-  elem.alt = img.alt;
-  // elem.setAttribute("loading", "lazy"); // Use lazy loading to improve performance
-  elem.setAttribute("decoding", "async"); // Use async decoding to improve performance
+  if (IMAGE_TYPES.includes(img.type)) {
+    elem = document.createElement("img");
+    elem.src = "." + img.src;
+    elem.width = img.width;
+    elem.height = img.height;
+    elem.alt = img.alt;
+    // elem.setAttribute("loading", "lazy"); // Use lazy loading to improve performance
+    elem.setAttribute("decoding", "async"); // Use async decoding to improve performance
+  } else if (VIDEO_TYPES.includes(img.type)) {
+    elem = document.createElement("video");
+    elem.src = img.src;
+    elem.width = img.width;
+    elem.height = img.height;
+    elem.controls = true;
+    elem.setAttribute("preload", "metadata");
+    // elem.setAttribute("loading", "lazy"); // Use lazy loading to improve performance
+  } else {
+    console.error("Unsupported file type: " + img.type);
+    return null;
+  }
 
   return elem;
 }

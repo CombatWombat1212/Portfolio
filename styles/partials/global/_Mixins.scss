@@ -304,83 +304,219 @@
 
 
 
+  
+	
+// @mixin hover ($parent: (''), $child: (''), $transition:var(--transition)) {
+// 	@each $p in $parent {
+// 		@if $p == ('') and $child == ('') {
+// 			&{
+// 				transition: $transition;
+// 			}
+// 			&:hover,
+// 			&:focus,
+// 			&.focus,
+// 			&.hover
+// 			{
+// 				@content;
+// 			}
+// 		}
+// 		@else if $child==('') {
+// 			//if there is no child
+// 			@at-root {
+// 				#{$p} {
+// 					transition: $transition;
+// 				}
+// 				#{$p}:hover,
+// 				#{$p}:focus,
+// 				#{$p}.focus,
+// 				#{$p}.hover
+// 				{
+// 					@content;
+// 				}
+// 			}
+// 		}
+// 		@else {
+// 			@each $c in $child {
 
-@mixin hover ($parent: (''), $child: (''), $transition:var(--transition)) {
+// 				// use case for treating '&' correctly
+// 				@if $c=='&' {
+// 					@at-root {
+// 						#{$p} & {
+// 							transition: $transition;
+// 						}
+// 						#{$p}:hover &,
+// 						#{$p}:focus &,
+// 						#{$p}.focus 
+// 						#{$p}.hover 
+// 						{
+// 							@content;
+// 						}
+// 					}
+// 				}
+
+// 				@else {
+// 					@at-root {
+
+// 						// regular functionality
+// 						#{$p} #{$c} {
+// 							transition: $transition;
+// 						}
+// 						#{$p}:hover #{$c},
+// 						#{$p}:focus #{$c},
+// 						#{$p}.focus #{$c}
+// 						#{$p}.hover #{$c}
+// 						{
+// 							@content;
+// 						}
+// 					}
+// 				}
+// 			}
+
+// 		}
+// 	}
+// }
+
+
+// @use "sass:math";
+// @mixin hover($parent: (''), $child: (''), $transition: var(--transition)) {
+
+//   @each $p in $parent {
+//     @if $p == ('') and $child == ('') {
+//       & {
+//         transition: $transition;
+//       }
+//       &:hover,
+//       &:focus,
+//       &.focus,
+//       &.hover {
+//         @content;
+//       }
+//     } @else if $child == ('') {
+//       // if there is no child
+//       @at-root {
+//         #{$p} {
+//           transition: $transition;
+//         }
+//         #{$p}:hover,
+//         #{$p}:focus,
+//         #{$p}.focus,
+//         #{$p}.hover {
+//           @content;
+//         }
+//       }
+//     } @else {
+//       $splitChild: str-split($child, ',');
+//       @each $c in $splitChild {
+//         // use case for treating '&' correctly
+//         @if $c == '&' {
+//           @at-root {
+//             #{$p} & {
+//               transition: $transition;
+//             }
+//             #{$p}:hover &,
+//             #{$p}:focus &,
+//             #{$p}.focus &,
+//             #{$p}.hover & {
+//               @content;
+//             }
+//           }
+//         } @else {
+//           @at-root {
+//             // regular functionality
+//             #{$p} #{$c} {
+//               transition: $transition;
+//             }
+//             #{$p}:hover #{$c},
+//             #{$p}:focus #{$c},
+//             #{$p}.focus #{$c},
+//             #{$p}.hover #{$c} {
+//               @content;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+
+@function str-split($string, $separator) {
+    $split: ();
+    $index: str-index($string, $separator);
+    @while $index {
+      $split: append($split, str-slice($string, 1, $index - 1));
+      $string: str-slice($string, $index + 1);
+      $index: str-index($string, $separator);
+    }
+    $split: append($split, $string);
+    @return $split;
+  }
+
+  @function generate-child-selectors($parent, $splitChild, $suffixes) {
+	$selectors: ();
 	@each $p in $parent {
-		@if $p == ('') and $child == ('') {
-			&{
-				transition: $transition;
-			}
-			&:hover,
-			&:focus,
-			&.focus,
-			&.hover
-			{
-				@content;
-			}
+	  @each $c in $splitChild {
+		$processedChild: null;
+		@if $c == '&' {
+		  $processedChild: $p;
+		} @else {
+		  $processedChild: " #{$c}";
 		}
-		@else if $child==('') {
-			//if there is no child
-			@at-root {
-				#{$p} {
-					transition: $transition;
-				}
-				#{$p}:hover,
-				#{$p}:focus,
-				#{$p}.focus,
-				#{$p}.hover
-				{
-					@content;
-				}
-			}
+		@each $s in $suffixes {
+		  $selectors: append($selectors, "#{$p}#{$s}#{$processedChild}", comma);
 		}
-		@else {
-			@each $c in $child {
-
-				// use case for treating '&' correctly
-				@if $c=='&' {
-					@at-root {
-						#{$p} & {
-							transition: $transition;
-						}
-						#{$p}:hover &,
-						#{$p}:focus &,
-						#{$p}.focus 
-						#{$p}.hover 
-						{
-							@content;
-						}
-					}
-				}
-
-				@else {
-					@at-root {
-
-						// regular functionality
-						#{$p} #{$c} {
-							transition: $transition;
-						}
-						#{$p}:hover #{$c},
-						#{$p}:focus #{$c},
-						#{$p}.focus #{$c}
-						#{$p}.hover #{$c}
-						{
-							@content;
-						}
-					}
-				}
-			}
-
-		}
+	  }
 	}
-}
+	@return $selectors;
+  }
+		
+@use "sass:math";
+@mixin hover($parent: (''), $child: (''), $transition: var(--transition)) {
+	@each $p in $parent {
+	  @if $p == ('') and $child == ('') {
+		& {
+        transition: $transition;
+      }
+      &:hover,
+      &:focus,
+      &.focus,
+      &.hover {
+        @content;
+      }
+    } @else if $child == ('') {
+		// if there is no child
+      @at-root {
+        #{$p} {
+          transition: $transition;
+        }
+        #{$p}:hover,
+        #{$p}:focus,
+        #{$p}.focus,
+        #{$p}.hover {
+          @content;
+        }
+      }
+    } @else {
+		$splitChild: str-split($child, ',');
+		$suffixes: (':hover', ':focus', '.focus', '.hover');
+		$childSelectors: generate-child-selectors($parent, $splitChild, $suffixes);
+		@at-root {
+		  #{$childSelectors} {
+			@content;
+		  }
+		}
+		@at-root {
+		  #{$parent} #{$child} {
+			transition: $transition;
+		  }
+		}
+	  }
+	}
+  }
+  
 
-	
-	
-	
 
-
-
+  
 
 @mixin colgutter($col: var(--col), $gut: var(--gutter)) {
 	width: calc((100%/#{$col}) - ((#{$gut} * (#{$col} - 1)) / #{$col})) !important;

@@ -137,7 +137,7 @@ function Point({ items, type, study }) {
 }
 
 Point.propTypes = {
-  type: PropTypes.oneOf(POINT_ORDER),
+  type: PropTypes.oneOf(["description", ...POINT_ORDER]),
 };
 
 function Tags({ items, type }) {
@@ -152,7 +152,7 @@ function Tags({ items, type }) {
             key={`${item.key} ${index}`}
             variant={variant}
             filter={item.filterBy}>
-            {item.displayName}
+            {item.displayName || item.name}
           </Tag>
         );
       })}

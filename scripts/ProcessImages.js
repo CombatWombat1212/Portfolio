@@ -185,7 +185,7 @@ function processImages(images, study) {
     if (images.hasOwnProperty(key)) {
       const image = images[key];
       const fileExtension = image.src.split(".").pop();
-      image.type = fileExtension;
+      image.type = fileExtension.toLowerCase();
       image.study = study;
       processedImages[key] = image;
     }
