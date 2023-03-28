@@ -1,0 +1,17 @@
+
+
+.gallery{
+
+
+
+    &--graphic{
+        aspect-ratio: 1/1;
+        overflow:hidden;
+
+        *{
+            object-fit: cover!important;
+        }
+    }
+
+
+}

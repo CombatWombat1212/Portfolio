@@ -7,23 +7,27 @@ import React, { useEffect, useState } from "react";
 import Button from "../../elements/Buttons";
 import { loading } from "@/data/ICONS";
 import { RESIZE_TIMEOUT } from "@/scripts/GlobalUtilities";
-import { canvasDrawImage, canvasImageSizeInit, canvasInit, canvasOnResize, canvasSetSize, canvasZoom, setCanvasImageLoaded } from "./popup_utilities/CanvasUtilities";
+import {
+  canvasDrawImage,
+  canvasImageSizeInit,
+  canvasInit,
+  canvasOnResize,
+  canvasSetSize,
+  canvasZoom,
+  setCanvasImageLoaded,
+} from "./popup_utilities/CanvasUtilities";
 import { imgLoading, lightboxInit, seekHandler, setPopupGroup } from "./popup_utilities/LightboxUtilities";
 import { catchKeys, closePopup, setSetPopupGlobal } from "./popup_utilities/PopupUtilities";
 import { hiddenUIEnd } from "./popup_utilities/HiddenUIUtilities";
 
-
 var popupType;
-
 
 //no more than 2 decimals
 const startZoom = 0.95;
 const minZoom = 0.95;
 const maxZoom = 7.5;
 
-
 var lastPopup = null;
-
 
 function Scale({ className }) {
   var def = 10;
@@ -47,21 +51,16 @@ function Scale({ className }) {
   );
 }
 
-
-
-
 var waitingToShowLoading = false;
 
-
-function setWaitingToShowLoading(bool){
+function setWaitingToShowLoading(bool) {
   waitingToShowLoading = bool;
 }
 
-function waitToLoad(setShowLoading){
-
-  if(waitingToShowLoading) return;
+function waitToLoad(setShowLoading) {
+  if (waitingToShowLoading) return;
   waitingToShowLoading = true;
-  
+
   const timeout = setTimeout(() => {
     setShowLoading(true);
     waitingToShowLoading = false;
@@ -69,7 +68,6 @@ function waitToLoad(setShowLoading){
 
   return () => clearTimeout(timeout);
 }
-
 
 function Popup({ popup, setPopup }) {
   var type;
@@ -80,35 +78,26 @@ function Popup({ popup, setPopup }) {
   img = popup.img;
   zoom = popup.zoom ? popup.zoom : false;
 
+  var isInteractive = type == "interactive" ? true : false;
+  var isLightbox = type == "lightbox" ? true : false;
 
   popupType = type;
 
-
   const [showLoading, setShowLoading] = useState(false);
 
-
-  
   useEffect(() => {
+    if (typeof document == "undefined") return;
+    if (typeof document.querySelector(".popup--loading") == "undefined" || document.querySelector(".popup--loading") == null) return;
 
-    if(typeof document == 'undefined') return;
-    if(typeof document.querySelector('.popup--loading') == "undefined" || document.querySelector('.popup--loading') == null ) return;
-
-    var loader = document.querySelector('.popup--loading');
-    if(showLoading && imgLoading) {
-      loader.classList.add("popup--loading__on")
-      loader.classList.remove("popup--loading__off")
+    var loader = document.querySelector(".popup--loading");
+    if (showLoading && imgLoading) {
+      loader.classList.add("popup--loading__on");
+      loader.classList.remove("popup--loading__off");
+    } else {
+      loader.classList.add("popup--loading__off");
+      loader.classList.remove("popup--loading__on");
     }
-    else {
-      loader.classList.add("popup--loading__off")
-      loader.classList.remove("popup--loading__on")
-    }
-
-
   }, [showLoading]);
-
-
-
-
 
   useEffect(() => {
     if (popup) {
@@ -119,20 +108,17 @@ function Popup({ popup, setPopup }) {
 
         window.addEventListener("resize", popupResize, false);
         window.addEventListener("keydown", catchKeys, false);
-        if (type == "interactive") canvasInit(popup, setPopup);
-        if (type == "lightbox") lightboxInit(popup, setPopup, setShowLoading);
+        if (isInteractive) canvasInit(popup, setPopup);
+        if (isLightbox) lightboxInit(popup, setPopup, setShowLoading);
       }
 
-      
-      
       var popWrapper = document.querySelector(".popup--wrapper");
       var on = popWrapper.classList.contains("popup--wrapper__on") ? true : false;
-      if (!on) toggle(popWrapper, {classPref: "popup--wrapper", duration: "transition"});
+      if (!on) toggle(popWrapper, { classPref: "popup--wrapper", duration: "transition" });
 
       waitToLoad(setShowLoading);
 
-      if(on && document.querySelector('.popup--img *') != null) document.querySelector('.popup--img *').remove();
-
+      if (on && document.querySelector(".popup--img *") != null) document.querySelector(".popup--img *").remove();
       setSetPopupGlobal(setPopup);
     } else {
       hiddenUIEnd();
@@ -144,98 +130,89 @@ function Popup({ popup, setPopup }) {
     }
   }, [popup, setPopup]);
 
+  // var headerClasses = type == "lightbox" ? "popup--header__condensed popup--nav__on" : "popup--header__full";
+  // var contentClasses = `popup--content ${
+  //   type === "lightbox" ? (zoom ? "popup--content__lightbox-zoom" : "popup--content__lightbox") : "popup--content__interactive"
+  // } popup--content__on`;
+  // var popupContainerClasses = `${type === "lightbox" ? (zoom ? "popup__lightbox-zoom" : "popup__lightbox") : "popup__interactive"}`;
 
-  var headerClasses = type == "lightbox" ? "popup--header__condensed popup--nav__on" : "popup--header__full";
-  var contentClasses = `popup--content ${type === "lightbox" ? (zoom ? "popup--content__lightbox-zoom" : "popup--content__lightbox") : "popup--content__interactive"} popup--content__on`;
-  var popupContainerClasses = 
-  `${type === "lightbox" ? (zoom ? "popup__lightbox-zoom" : "popup__lightbox") : "popup__interactive"}`;
+  // Initialize arrays for class names
+  var headerClassesArray = [];
+  var contentClassesArray = [];
+  var popupImgClassesArray = [];
+  var popupContainerClassesArray = [];
+  var popupContainerStyle = {};
 
+  // Case 1: type is "lightbox"
+  if (type === "lightbox") {
+    headerClassesArray.push("popup--header__condensed", "popup--nav__on");
 
+    // Nested Case 1.1: zoom is true
+    if (zoom) {
+      popupImgClassesArray.push("popup--img__lightbox-zoom");
+      contentClassesArray.push("popup--content__lightbox-zoom");
+      popupContainerClassesArray.push("popup__lightbox-zoom");
+    }
+    // Nested Case 1.2: zoom is false
+    else {
+      contentClassesArray.push("popup--content__lightbox");
+      popupContainerClassesArray.push("popup__lightbox");
+    }
 
+    // Update popupContainerStyle for type "lightbox"
+    popupContainerStyle = { "--img-aspect-width": img.width, "--img-aspect-height": img.height };
+  }
+  // Case 2: type is "interactive"
+  else if (type == "interactive") {
+    headerClassesArray.push("popup--header__full");
 
+    contentClassesArray.push("popup--content__interactive");
+    popupContainerClassesArray.push("popup__interactive");
+  }
 
-
-
-
+  // Join the arrays to form final class strings
+  var headerClasses = headerClassesArray.join(" ");
+  var contentClasses = contentClassesArray.join(" ");
+  var popupContainerClasses = popupContainerClassesArray.join(" ");
+  var popupImgClasses = popupImgClassesArray.join(" ");
 
   return (
     <>
       {popup && (
         <div className="popup--wrapper popup--wrapper__off">
-          <div
-            className="popup--background"
-            onClick={() => {
-              closePopup(setPopup);
-            }}></div>
+          <Background />
 
-          <div className={`popup container ${popupContainerClasses}`} style={type == "lightbox" ? { "--img-aspect-width": img.width, "--img-aspect-height": img.height } : {}}>
+          <div className={`popup container ${popupContainerClasses}`} style={popupContainerStyle}>
             <div className="popup--inner">
-              {type == "lightbox" && (
+              {isLightbox && (
                 <div className="popup--seek popup--seek__left popup--seek__off">
-                  <Button
-                    icon={["chevron_left", "alone", "mask"]}
-                    animation="pulse-left"
-                    color="background-primary"
-                    onClick={(e) => {
-                      seekHandler(e, setPopup);
-                    }}
-                  />
+                  <LeftButton />
                 </div>
               )}
 
-              <div className={contentClasses}>
-                <div className={`popup--header ${headerClasses} popup--nav`}>
-                  {type == "interactive" && (
-                    <div className="popup--title">
-                      <h3>{popup.img.title}</h3>
-                    </div>
-                  )}
-                  <div className="popup--close">
-                    <Button
-                      icon={["close", "alone", "mask"]}
-                      animation="scale-in"
-                      color="transparent-primary"
-                      onClick={() => {
-                        closePopup(setPopup);
-                      }}
-                    />
-                  </div>
-                </div>
+              <div className={`popup--content popup--content__on ${contentClasses}`}>
+                <PopupHeader />
 
+                {isInteractive && <canvas className="popup--canvas popup--canvas__off" />}
 
-                {type == "interactive" && (
-                  <>
-                    <canvas className="popup--canvas popup--canvas__off"></canvas>
-                  </>
-                )}
-
-
-                {type == "lightbox" && (
-                  <div className={`popup--img ${zoom ? 'popup--img__lightbox-zoom' : ''}`} style={{ '--aspect-width': img.width, '--aspect-height': img.height}}>                      
-                  </div>
+                {isLightbox && (
+                  <div className={`popup--img ${popupImgClasses}`} style={{ "--aspect-width": img.width, "--aspect-height": img.height }}></div>
                 )}
 
                 <div className={`popup--loading popup--loading__off`}>
                   <img src={loading.src} alt={loading.alt} width={loading.width} height={loading.height} />
                 </div>
 
-                {type == "interactive" && (
+                {isInteractive && (
                   <div className="popup--footer popup--nav popup--nav__off">
                     <Scale className="popup--scale" />
                   </div>
                 )}
               </div>
 
-              {type == "lightbox" && (
+              {isLightbox && (
                 <div className="popup--seek popup--seek__right popup--seek__off">
-                  <Button
-                    icon={["chevron_right", "alone", "mask"]}
-                    animation="pulse-right"
-                    color="background-primary"
-                    onClick={(e) => {
-                      seekHandler(e, setPopup);
-                    }}
-                  />
+                  <RightButton />
                 </div>
               )}
             </div>
@@ -244,12 +221,69 @@ function Popup({ popup, setPopup }) {
       )}
     </>
   );
+
+  function PopupHeader() {
+    return (
+      <div className={`popup--header ${headerClasses} popup--nav`}>
+        {isInteractive && (
+          <div className="popup--title">
+            <h3>{popup.img.title}</h3>
+          </div>
+        )}
+        <div className="popup--close">
+          <CloseButton />
+        </div>
+      </div>
+    );
+  }
+
+  function RightButton() {
+    return (
+      <Button
+        icon={["chevron_right", "alone", "mask"]}
+        animation="pulse-right"
+        color="background-primary"
+        onClick={(e) => {
+          seekHandler(e, setPopup);
+        }}
+      />
+    );
+  }
+  function LeftButton() {
+    return (
+      <Button
+        icon={["chevron_left", "alone", "mask"]}
+        animation="pulse-left"
+        color="background-primary"
+        onClick={(e) => {
+          seekHandler(e, setPopup);
+        }}
+      />
+    );
+  }
+  function CloseButton() {
+    return (
+      <Button
+        icon={["close", "alone", "mask"]}
+        animation="scale-in"
+        color="transparent-primary"
+        onClick={() => {
+          closePopup(setPopup);
+        }}
+      />
+    );
+  }
+
+  function Background() {
+    return (
+      <div
+        className="popup--background"
+        onClick={() => {
+          closePopup(setPopup);
+        }}></div>
+    );
+  }
 }
-
-
-
-
-
 
 var isResizing;
 
@@ -262,12 +296,8 @@ function popupResizeFunctions() {
   if (popupType == "interactive") canvasOnResize();
 }
 
-
-
 export default Popup;
 
-export {waitToLoad, setWaitingToShowLoading}
+export { waitToLoad, setWaitingToShowLoading };
 
-export {startZoom,
-  minZoom,
-  maxZoom}
+export { startZoom, minZoom, maxZoom };

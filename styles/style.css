@@ -3385,6 +3385,7 @@ body {
   width: fit-content;
   height: var(--name-height);
   min-height: var(--name-height);
+  white-space: nowrap;
   padding-top: var(--name-pad-y);
   padding-bottom: var(--name-pad-y);
   transition: color 0.05s !important;
@@ -3896,6 +3897,15 @@ body {
 
 .method--body {
   margin-top: 2.25rem;
+}
+
+.gallery--graphic {
+  aspect-ratio: 1/1;
+  overflow: hidden;
+}
+
+.gallery--graphic * {
+  object-fit: cover !important;
 }
 
 .graph--wrapper {

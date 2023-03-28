@@ -10,26 +10,24 @@ import {
   EXPLORATIONS_IMGS,
   EXPLORATIONS_IMG_GROUPS,
 } from "@/data/EXPLORATIONS_IMGS";
-import { toTitleCase } from "@/scripts/GlobalUtilities";
+import { IMAGE_TYPES, VIDEO_TYPES } from "@/scripts/GlobalUtilities";
+
+// TODO: add panos to photography
 
 function Explorations({ setPopup }) {
   const study = STUDY_EXPLORATIONS;
 
   var disciplines = study.brief.disciplines;
 
-  // EXPLORATIONS_IMGS is an array of objects, each with one image, and a list of disciplines and tools, and some have a 'group' property.
-  // EXPLORATIONS_IMG_GROUPS is an object with keys that are the group names, and values that are arrays of image objects.
-  // I want gallery content to be a list which contains all of the groups of images, and all of the images that don't have a group.
-  // both images and groups have a 'disciplines', and 'tools' property, which is an array of strings.
-  //for groups it refers to all the disciplines and tools of the images in the group.
-  // const GALLERY_CONTENT =
-
   const ungroupedImages = Object.values(EXPLORATIONS_IMGS).filter(
     (img) => !img.group
   );
   const groupedImages = Object.values(EXPLORATIONS_IMG_GROUPS);
 
-  const GALLERY_CONTENT = [...ungroupedImages, ...groupedImages];
+  const GALLERY_CONTENT = [...ungroupedImages, ...groupedImages].map(item => ({
+    ...item,
+    drawn: false,
+  }));
 
   return (
     <>
@@ -49,16 +47,45 @@ function Explorations({ setPopup }) {
                 className="gallery--section"
                 mainType="grid">
                 <Heading>{discipline.displayName}</Heading>
-                {...itemsWithDiscipline.map((item) => (
+                {...itemsWithDiscipline.map((item) => {
                   // TODO: finish styling the brief tag and discipline header thing
                   // TODO: add cases for groups, images, videos, videos in groups with images that can be a thumbnail, and videos in groups without images.
                   // then obviously styling and adding the popup and etc etc
                   // then we'll also need cases for ways of easily ordering content
                   // then filtering
-                  <Column>
-                    <Graphic type="image" img={item.imgs ? item.imgs[0] : item}></Graphic>
-                  </Column>
-                ))}
+
+                  if (item.drawn) return;
+                  item.drawn = true;
+
+
+                  var isGroup = item.imgs ? true : false;
+
+                  if(isGroup)item.type = item.imgs[0].type;
+                  var popup = {lightbox:true, setPopup:setPopup};
+                  
+                  item.type = item.type.toLowerCase();
+                  var type = IMAGE_TYPES.includes(item.type) ? "image" : "video";
+
+
+                  var img = isGroup ? item.imgs[0] : item;
+
+                  return (
+                    <Column>
+
+                      <Graphic
+                      className="gallery--graphic"
+                        type={type}
+                        img={img}
+                        
+                        // {...popup}
+                        lightbox
+                        setPopup={setPopup}
+                         />
+
+
+                    </Column>
+                  );
+                })}
               </Section>
             </Chapter>
           );

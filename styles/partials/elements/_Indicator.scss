@@ -182,7 +182,7 @@
       width: fit-content;
       height: var(--name-height);
       min-height: var(--name-height);
-
+      white-space: nowrap;
       @include pad-y(var(--name-pad-y));
 
       transition: color 0.05s!important;

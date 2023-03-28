@@ -50,7 +50,10 @@ function addStyleNonDestructive(elem, prop, val) {
     var styleStr = "";
     if (existingStyle.includes(prop)) {
       var existingVal = existingStyle.split(prop + ":")[1].split(";")[0];
-      existingStyle = existingStyle.replace(prop + ":" + existingVal, prop + ":" + val);
+      existingStyle = existingStyle.replace(
+        prop + ":" + existingVal,
+        prop + ":" + val
+      );
     } else {
       existingStyle += prop + ":" + val + ";";
     }
@@ -78,7 +81,10 @@ function addAttrNonDestructive(elem, prop, val, sep) {
     if (existingAttrVal.includes(val)) {
       elem.setAttribute(prop, val);
     } else {
-      var newAttr = existingAttrVal.replace(existingAttrVal, existingAttrVal + val);
+      var newAttr = existingAttrVal.replace(
+        existingAttrVal,
+        existingAttrVal + val
+      );
       elem.setAttribute(prop, newAttr);
     }
   }
@@ -90,12 +96,24 @@ function postScreenSizeToRoot() {
   var height;
 
   function getScreenSize() {
-    width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    width =
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth;
 
-    height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    height =
+      window.innerHeight ||
+      document.documentElement.clientHeight ||
+      document.body.clientHeight;
 
-    window.document.documentElement.style.setProperty("--screen-width", width + "px");
-    window.document.documentElement.style.setProperty("--screen-height", height + "px");
+    window.document.documentElement.style.setProperty(
+      "--screen-width",
+      width + "px"
+    );
+    window.document.documentElement.style.setProperty(
+      "--screen-height",
+      height + "px"
+    );
   }
 
   getScreenSize();
@@ -115,14 +133,29 @@ function postScreenSizeToRoot() {
 
 function overflowEllipsis() {
   function run() {
-    var overflowEllipsisElems = document.getElementsByClassName("overflow__ellipsis");
+    var overflowEllipsisElems = document.getElementsByClassName(
+      "overflow__ellipsis"
+    );
     for (var i = 0; i < overflowEllipsisElems.length; i++) {
       var elem = overflowEllipsisElems[i];
-      var elemLineHeight = splitPx(window.getComputedStyle(elem, null).lineHeight);
-      var elemHeight = splitPx(window.getComputedStyle(elem.parentElement, null).height) - splitPx(window.getComputedStyle(elem.parentElement, null).paddingTop) - splitPx(window.getComputedStyle(elem.parentElement, null).paddingBottom);
+      var elemLineHeight = splitPx(
+        window.getComputedStyle(elem, null).lineHeight
+      );
+      var elemHeight =
+        splitPx(window.getComputedStyle(elem.parentElement, null).height) -
+        splitPx(
+          window.getComputedStyle(elem.parentElement, null).paddingTop
+        ) -
+        splitPx(
+          window.getComputedStyle(elem.parentElement, null).paddingBottom
+        );
       var lines = Math.round(elemHeight / elemLineHeight);
 
-      addStyleNonDestructive(elem, "--rounded-height", lines * elemLineHeight + "px");
+      addStyleNonDestructive(
+        elem,
+        "--rounded-height",
+        lines * elemLineHeight + "px"
+      );
       addStyleNonDestructive(elem, "--visible-lines", lines);
       addStyleNonDestructive(elem, "--line-height", elemLineHeight + "px");
     }
@@ -142,26 +175,21 @@ function overflowEllipsis() {
   );
 }
 
-
-
-
-
-function throwLoadErrors(img){
-  if(typeof img.src === "undefined") throw new Error("No src attribute found on img element");
-  if(typeof img.alt === "undefined") throw new Error("No alt attribute found on img element");
-  if(typeof img.width === "undefined") throw new Error("No width attribute found on img element");
-  if(typeof img.height === "undefined") throw new Error("No height attribute found on img element");
-
+function throwLoadErrors(img) {
+  if (typeof img.src === "undefined")
+    throw new Error("No src attribute found on img element");
+  if (typeof img.alt === "undefined")
+    throw new Error("No alt attribute found on img element");
+  if (typeof img.width === "undefined")
+    throw new Error("No width attribute found on img element");
+  if (typeof img.height === "undefined")
+    throw new Error("No height attribute found on img element");
 }
 
-
-
-function loadImgExternally(img){
-
+function loadImgExternally(img) {
   var elem;
 
   throwLoadErrors(img);
-
 
   elem = document.createElement("img");
   elem.src = "." + img.src;
@@ -171,9 +199,7 @@ function loadImgExternally(img){
   // elem.setAttribute("loading", "lazy"); // Use lazy loading to improve performance
   elem.setAttribute("decoding", "async"); // Use async decoding to improve performance
 
-
   return elem;
-
 }
 
 function getSiblingStyle(property, elem1, elem2 = null) {
@@ -181,20 +207,28 @@ function getSiblingStyle(property, elem1, elem2 = null) {
   const startIndex = elems.indexOf(elem1);
   const endIndex = elem2 ? elems.indexOf(elem2) : elems.length;
 
-  const beforeElemStyle = elems.slice(0, startIndex).reduce((acc, elem) => {
-    const value = splitPx(getComputedStyle(elem).getPropertyValue(property));
-    return acc + value;
-  }, 0);
+  const beforeElemStyle = elems
+    .slice(0, startIndex)
+    .reduce((acc, elem) => {
+      const value = splitPx(
+        getComputedStyle(elem).getPropertyValue(property)
+      );
+      return acc + value;
+    }, 0);
 
   let afterElemStyle = 0;
   if (elem2) {
     afterElemStyle = elems.slice(endIndex + 1).reduce((acc, elem) => {
-      const value = splitPx(getComputedStyle(elem).getPropertyValue(property));
+      const value = splitPx(
+        getComputedStyle(elem).getPropertyValue(property)
+      );
       return acc + value;
     }, 0);
   } else {
     afterElemStyle = elems.slice(startIndex + 1).reduce((acc, elem) => {
-      const value = splitPx(getComputedStyle(elem).getPropertyValue(property));
+      const value = splitPx(
+        getComputedStyle(elem).getPropertyValue(property)
+      );
       return acc + value;
     }, 0);
   }
@@ -202,20 +236,25 @@ function getSiblingStyle(property, elem1, elem2 = null) {
   return [beforeElemStyle, afterElemStyle];
 }
 
-
 function clamp(input, min, max) {
   return input < min ? min : input > max ? max : input;
 }
 
 function map(current, in_min, in_max, out_min, out_max) {
-  const mapped = ((current - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
+  const mapped =
+    ((current - in_min) * (out_max - out_min)) / (in_max - in_min) +
+    out_min;
   return clamp(mapped, out_min, out_max);
 }
 
-
-
 function arrayItemDoesExist(arr) {
-  return arr != null && arr != undefined && arr != [] && arr != "" && arr.length > 0;
+  return (
+    arr != null &&
+    arr != undefined &&
+    arr != [] &&
+    arr != "" &&
+    arr.length > 0
+  );
 }
 
 function capFirstRemovePeriod(val) {
@@ -235,9 +274,12 @@ function capFirstRemovePeriod(val) {
 }
 
 function getElemWidth(elem) {
-  return splitPx(getComputedStyle(elem).getPropertyValue("width")) + splitPx(getComputedStyle(elem).getPropertyValue("margin-left")) + splitPx(getComputedStyle(elem).getPropertyValue("margin-right"));
+  return (
+    splitPx(getComputedStyle(elem).getPropertyValue("width")) +
+    splitPx(getComputedStyle(elem).getPropertyValue("margin-left")) +
+    splitPx(getComputedStyle(elem).getPropertyValue("margin-right"))
+  );
 }
-
 
 function getColors() {
   // return new Promise((resolve) => {
@@ -247,27 +289,51 @@ function getColors() {
   //     window.addEventListener("load", resolve);
   //   }
   // }).then(() => {
-    var rootStyles = getComputedStyle(document.documentElement);
-    var colorsList = rootStyles.getPropertyValue("--colors").trim();
-    var colorNames = colorsList.split(",");
-    var colors = {};
+  var rootStyles = getComputedStyle(document.documentElement);
+  var colorsList = rootStyles.getPropertyValue("--colors").trim();
+  var colorNames = colorsList.split(",");
+  var colors = {};
 
-    for (let i = 0; i < colorNames.length; i++) {
-      var colorName = colorNames[i].trim();
-      var colorValue = rootStyles.getPropertyValue(colorName).trim();
-      colors[colorName] = { name: colorName, value: colorValue };
-    }
-    return colors;
+  for (let i = 0; i < colorNames.length; i++) {
+    var colorName = colorNames[i].trim();
+    var colorValue = rootStyles.getPropertyValue(colorName).trim();
+    colors[colorName] = { name: colorName, value: colorValue };
+  }
+  return colors;
   // });
 }
 
-
 function toTitleCase(str) {
   if (!str) return "";
-  return str.toLowerCase().replace(/(?:^|\s)\w/g, function(match) {
+  return str.toLowerCase().replace(/(?:^|\s)\w/g, function (match) {
     return match.toUpperCase();
   });
 }
 
+// Video file formats
+const VIDEO_TYPES = ["mp4", "avi", "mov", "wmv", "mkv", "flv", "webm"];
 
-export { addStyleNonDestructive, addAttrNonDestructive, postScreenSizeToRoot, overflowEllipsis, splitPx, splitRem, splitS,loadImgExternally, getSiblingStyle, clamp, map, arrayItemDoesExist,capFirstRemovePeriod, getElemWidth, getColors, toTitleCase, RESIZE_TIMEOUT };
+// Image file formats
+const IMAGE_TYPES = ["jpg", "jpeg", "png", "gif", "svg", "bmp", "webp"];
+
+export {
+  addStyleNonDestructive,
+  addAttrNonDestructive,
+  postScreenSizeToRoot,
+  overflowEllipsis,
+  splitPx,
+  splitRem,
+  splitS,
+  loadImgExternally,
+  getSiblingStyle,
+  clamp,
+  map,
+  arrayItemDoesExist,
+  capFirstRemovePeriod,
+  getElemWidth,
+  getColors,
+  toTitleCase,
+  RESIZE_TIMEOUT,
+  VIDEO_TYPES,
+  IMAGE_TYPES,
+};
