@@ -1,3 +1,5 @@
+import { IMAGE_TYPES, VIDEO_TYPES } from "./GlobalUtilities";
+
 function checkForOverlappingIndexes(group, index, name, currentGroup) {
   for (let i = 0; i < currentGroup.length; i++) {
     if (currentGroup[i].index === index) {
@@ -186,6 +188,9 @@ function processImages(images, study) {
       const image = images[key];
       const fileExtension = image.src.split(".").pop();
       image.type = fileExtension.toLowerCase();
+      image.media = VIDEO_TYPES.includes(image.type) ? "video" : IMAGE_TYPES.includes(image.type) ? "image" : "unknown";
+
+        
       image.study = study;
       processedImages[key] = image;
     }

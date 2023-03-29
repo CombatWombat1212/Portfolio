@@ -11,11 +11,35 @@ import { EXPLORATIONS_IMG_GROUPS } from "@/data/EXPLORATIONS_IMGS";
 var popupGroup = false;
 var popupIndex;
 
-function setPopupGroup(bool) {
-  popupGroup = bool;
+function updatePopupNav(popup, setPopup, group, setGroup, index, setIndex, nav) {
+
+  if (group && group.imgs.length != 0 && group.imgs.length != 1) {
+
+    if (index == 0) {
+      if (!nav.right.on) nav.right.setOn(true);
+      if (nav.left.on) nav.left.setOn(false);
+    }
+    if (index == group.imgs.length - 1) {
+      if (nav.right.on) nav.right.setOn(false);
+      if (!nav.left.on) nav.left.setOn(true);
+      
+    }
+    if (index > 0 && index < group.imgs.length - 1) {
+      if (!nav.right.on) nav.right.setOn(true);
+      if (!nav.left.on) nav.left.setOn(true);
+    }
+
+  } else {
+
+    if (nav.right.on) nav.right.setOn(false);
+    if (nav.left.on) nav.left.setOn(false);
+
+  }
+
+
 }
 
-function checkForRelevantGroups(popup, setPopup) {
+function getImgGroup(popup, setPopup, group, setGroup, index, setIndex) {
   // TODO: would it be better to always have the left and right buttons present rather than toggling them on and off depending on the index?
   // TODO: should we add Pagination Indicators? lil dots at the bottom of the popup that indicate which image you're on and how many there are in total?
   // TODO: this one is stupid optional, what about an animation between the image on the page and the image in the popup? like a zoom in or something?
@@ -28,136 +52,112 @@ function checkForRelevantGroups(popup, setPopup) {
   if (imgStudy == "makeright") IMG_GROUP = MAKERIGHT_IMG_GROUPS;
   if (imgStudy == "explorations") IMG_GROUP = EXPLORATIONS_IMG_GROUPS;
 
-  if (!imgGroup) return;
-  if (typeof IMG_GROUP[imgGroup] === "undefined") throw new Error(`No group with name ${imgGroup} found`);
-
-  var index = popup.img.index;
-  var group = IMG_GROUP[imgGroup];
-
-  popupGroup = group;
-  popupIndex = index;
-
-  if (popupGroup.imgs.length == 0 || popupGroup.imgs.length == 1) return;
-
-  var seekRight = document.querySelector(".popup--seek__right");
-  var seekLeft = document.querySelector(".popup--seek__left");
-
-  var seekRightOn = seekRight.classList.contains("popup--seek__on") ? true : false;
-  var seekLeftOn = seekLeft.classList.contains("popup--seek__on") ? true : false;
-
-  if (popupIndex == 0) {
-    if (!seekRightOn) toggle(seekRight, { classPref: "popup--seek", duration: "transition" });
-    if (seekLeftOn) toggle(seekLeft, { classPref: "popup--seek", duration: "transition" });
-  }
-  if (popupIndex == popupGroup.imgs.length - 1) {
-    if (seekRightOn) toggle(seekRight, { classPref: "popup--seek", duration: "transition" });
-    if (!seekLeftOn) toggle(seekLeft, { classPref: "popup--seek", duration: "transition" });
-  }
-  if (popupIndex > 0 && popupIndex < popupGroup.imgs.length - 1) {
-    if (!seekRightOn) toggle(seekRight, { classPref: "popup--seek", duration: "transition" });
-    if (!seekLeftOn) toggle(seekLeft, { classPref: "popup--seek", duration: "transition" });
-  }
-}
-
-function seekHandler(e, setPopup) {
-  var button;
-
-  if (e.type == "keydown") {
-    if (e.key == "ArrowRight") {
-      button = document.querySelector(".popup--seek__right");
-    }
-    if (e.key == "ArrowLeft") {
-      button = document.querySelector(".popup--seek__left");
-    }
+  if (imgGroup) {
+    if (typeof IMG_GROUP[imgGroup] === "undefined") throw new Error(`No group with name ${imgGroup} found`);
+    var index = popup.img.index;
+    setGroup(IMG_GROUP[imgGroup]);
+    setIndex(index);
   } else {
-    button = e.target;
-    while (!button.classList.contains("popup--seek")) {
-      button = button.parentElement;
-    }
+    setGroup(false);
+    setIndex(false);
   }
 
-  var direction = button.classList.contains("popup--seek__right") ? 1 : -1;
-
-  var length = popupGroup.imgs.length;
-
-  popupIndex += direction;
-
-  if (popupIndex >= length) popupIndex = 0;
-  if (popupIndex < 0) popupIndex = length - 1;
-
-  var img = popupGroup.imgs[popupIndex];
-
-  var zoom = img.zoom ? img.zoom : false;
-
-  setPopup({ type: "lightbox", img: img, zoom: zoom });
+  // popupGroup = group;
 }
 
-var imgLoading = false;
+// function checkForRelevantGroups(popup, setPopup) {
+//   // TODO: would it be better to always have the left and right buttons present rather than toggling them on and off depending on the index?
+//   // TODO: should we add Pagination Indicators? lil dots at the bottom of the popup that indicate which image you're on and how many there are in total?
+//   // TODO: this one is stupid optional, what about an animation between the image on the page and the image in the popup? like a zoom in or something?
+
+//   var imgGroup = popup.img.group;
+//   var imgStudy = popup.img.study;
+
+//   var IMG_GROUP;
+//   if (imgStudy == "koalako") IMG_GROUP = KOALAKO_IMG_GROUPS;
+//   if (imgStudy == "makeright") IMG_GROUP = MAKERIGHT_IMG_GROUPS;
+//   if (imgStudy == "explorations") IMG_GROUP = EXPLORATIONS_IMG_GROUPS;
+
+//   if (!imgGroup) return;
+//   if (typeof IMG_GROUP[imgGroup] === "undefined") throw new Error(`No group with name ${imgGroup} found`);
+
+//   var index = popup.img.index;
+//   var group = IMG_GROUP[imgGroup];
+
+//   popupGroup = group;
+//   popupIndex = index;
+
+// }
+
+
+// var imgLoading = false;
 
 // function lightboxInit(popup, setPopup, setShowLoading) {
-function lightboxInit(popup, setPopup) {
-  if (imgLoading) return; // cancel image loading if one is already in progress
+function lightboxInit(popup, setPopup, group, setGroup, index, setIndex) {
+  // if (imgLoading) return; // cancel image loading if one is already in progress
 
-  imgLoading = true;
+  // imgLoading = true;
 
-  checkForRelevantGroups(popup, setPopup);
+  getImgGroup(popup, setPopup, group, setGroup, index, setIndex);
+
   setActiveHiddenUI("lightbox");
 
   var popWrapper = document.querySelector(".popup--wrapper");
   var on = popWrapper.classList.contains("popup--wrapper__on") ? true : false;
   if (!on) hiddenUIInit();
 
-  var img = loadImgExternally(popup.img);
-  var content = document.querySelector(".popup--content");
-  var media = document.querySelector(".popup--media");
+  // var img = loadImgExternally(popup.img);
+  // var content = document.querySelector(".popup--content");
+  // var media = document.querySelector(".popup--media");
 
-  // waitToLoad(setShowLoading);
+  // var isImg = IMAGE_TYPES.includes(popup.img.type);
+  // var isVid = VIDEO_TYPES.includes(popup.img.type);
 
-  var isImg = IMAGE_TYPES.includes(popup.img.type);
-  var isVid = VIDEO_TYPES.includes(popup.img.type);
+  // if (isImg) {
+  //   media.classList.add("popup--img");
+  //   media.classList.remove("popup--video");
+  //   img.onload = function () {
+  //     run();
+  //   };
+  // }
+  // if (isVid) {
+  //   media.classList.add("popup--video");
+  //   media.classList.remove("popup--img");
+  //     run();
+  // }
 
-  if (isImg) {
-    media.classList.add("popup--img");
-    media.classList.remove("popup--video");
-    img.onload = function () {
-      run();
-    };
-  }
-  if (isVid) {
-    media.classList.add("popup--video");
-    media.classList.remove("popup--img");
-    run();
-  }
+  // function run() {
+  //   var transition = splitS(window.getComputedStyle(content).transitionDuration);
 
-  function run() {
-    var transition = splitS(window.getComputedStyle(content).transitionDuration);
+  //   var media = document.querySelector(".popup--media");
+  //   var loader = document.querySelector(".popup--loading");
 
-    var media = document.querySelector(".popup--media");
-    var loader = document.querySelector(".popup--loading");
+  //   // Remove the previous image or video
+  //   while (media.firstChild) {
+  //     media.removeChild(media.firstChild);
+  //   }
 
-    // Remove the previous image or video
-    while (media.firstChild) {
-      media.removeChild(media.firstChild);
-    }
+  //   img.classList.add("popup--media__off");
+  //   media.appendChild(img);
 
-    img.classList.add("popup--media__off");
-    media.appendChild(img);
+  //   toggle(img, { classPref: "popup--media", duration: "transition" });
+  //   toggle(content, { classPref: "popup--content", duration: "transition" });
 
-    toggle(img, { classPref: "popup--media", duration: "transition" });
-    toggle(content, { classPref: "popup--content", duration: "transition" });
+  //   imgLoading = false; // indicate that the image has finished loading
 
-    imgLoading = false; // indicate that the image has finished loading
-
-    // setWaitingToShowLoading(false);
-    // setShowLoading(false);
-  }
+  // }
 }
 
+export {
+  lightboxInit,
+  // seekHandler,
+  // checkForRelevantGroups,
+  // setPopupGroup
+  updatePopupNav,
+  getImgGroup,
+};
 
-
-
-
-
-export { lightboxInit, seekHandler, checkForRelevantGroups, setPopupGroup };
-
-export { popupGroup, imgLoading };
+export {
+  // popupGroup,
+  // imgLoading
+};

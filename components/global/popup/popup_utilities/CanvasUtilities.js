@@ -201,10 +201,10 @@ function canvasInit(popup) {
   canvas = document.querySelector(".popup--canvas");
   context = canvas.getContext("2d");
   canvasInput = document.querySelector(".scale--input");
-  // canvasImage = document.querySelector(".popup--img img");
-
+  
   if (!canvas) return;
-
+  
+  // canvasImage = document.querySelector(".popup--img img");
   // var loadingIcon = loading;
   // loadingIcon.src = "../../assets/loading/loading_spinner.svg";
   // console.log(loadingIcon);
@@ -226,8 +226,8 @@ function canvasInit(popup) {
     canvas.addEventListener("mouseup", canvasMouseUpHandler);
 
     setActiveHiddenUI("interactive");
-    hiddenUIInit();
 
+    hiddenUIInit();
     canvasDrawImage();
 
   };

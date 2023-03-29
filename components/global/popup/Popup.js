@@ -16,10 +16,14 @@ import {
   canvasZoom,
   setCanvasImageLoaded,
 } from "./popup_utilities/CanvasUtilities";
-import { imgLoading, lightboxInit, seekHandler, setPopupGroup } from "./popup_utilities/LightboxUtilities";
+import { getImgGroup, imgLoading, lightboxInit, seekHandler, setPopupGroup, updatePopupNav } from "./popup_utilities/LightboxUtilities";
 import { catchKeys, closePopup, setSetPopupGlobal } from "./popup_utilities/PopupUtilities";
 import { hiddenUIEnd } from "./popup_utilities/HiddenUIUtilities";
 import { Graphic } from "@/components/sections/Sections";
+import useBodyClass from "@/scripts/hooks/useBodyClass";
+import useListener from "@/scripts/hooks/useListener";
+import useToggle from "@/scripts/hooks/useToggle";
+import { AnimatePresence, motion } from "framer-motion";
 
 var popupType;
 
@@ -50,17 +54,6 @@ function Scale({ className }) {
       </div>
     </div>
   );
-}
-
-function popupStart() {
-  document.body.classList.add("noscroll");
-  window.addEventListener("resize", popupResize, false);
-  window.addEventListener("keydown", catchKeys, false);
-}
-function popupEnd() {
-  window.removeEventListener("resize", popupResize, false);
-  window.removeEventListener("keydown", catchKeys, false);
-  document.body.classList.remove("noscroll");
 }
 
 // var waitingToShowLoading = false;
@@ -150,41 +143,41 @@ function Popup({ popup, setPopup }) {
 
   popupType = type;
 
-  // const [showLoading, setShowLoading] = useState(false);
+  var { headerClasses, contentClasses, popupContainerClasses, popupImgClasses, popupContainerStyle } = getPopupClasses(type, zoom, img);
 
-  // useEffect(() => {
-  //   if (typeof document == "undefined") return;
-  //   if (typeof document.querySelector(".popup--loading") == "undefined" || document.querySelector(".popup--loading") == null) return;
-  //   handleLoading(showLoading, imgLoading);
-  // }, [showLoading]);
+  useBodyClass("noscroll", popup);
+  useListener("resize", popupResize, popup);
+  useListener("keydown", catchKeys, popup);
+
+  const [group, setGroup] = useState(false);
+  const [index, setIndex] = useState(false);
+
+  const nav = useNavControls(seekHandler);
 
   useEffect(() => {
     if (popup) {
-
-      popupStart();
       if (isInteractive) canvasInit(popup, setPopup);
-      if (isLightbox) lightboxInit(popup, setPopup);
 
-        // if (isLightbox) lightboxInit(popup, setPopup, setShowLoading);
-
-      var popWrapper = document.querySelector(".popup--wrapper");
-      var on = popWrapper.classList.contains("popup--wrapper__on") ? true : false;
-      if (!on) toggle(popWrapper, { classPref: "popup--wrapper", duration: "transition" });
-
-      // waitToLoad(setShowLoading);
+      if (isLightbox) lightboxInit(popup, setPopup, group, setGroup, index, setIndex);
 
       setSetPopupGlobal(setPopup);
 
+      toggle(document.querySelector(".popup--wrapper"), { state: "on", classPref: "popup--wrapper", duration: "transition" });
+
 
     } else {
-      popupEnd();
       hiddenUIEnd();
       setCanvasImageLoaded(false);
-      setPopupGroup(false);
+      setGroup(false);
     }
-  }, [popup, setPopup]);
+  }, [popup]);
 
-  var { headerClasses, contentClasses, popupContainerClasses, popupImgClasses, popupContainerStyle } = getPopupClasses(type, zoom, img);
+
+  useEffect(() => {
+    updatePopupNav(popup, setPopup, group, setGroup, index, setIndex, nav);
+  }, [group, index]);
+
+
 
   return (
     <>
@@ -194,11 +187,8 @@ function Popup({ popup, setPopup }) {
 
           <div className={`popup container ${popupContainerClasses}`} style={popupContainerStyle}>
             <div className="popup--inner">
-              {isLightbox && (
-                <div className="popup--seek popup--seek__left popup--seek__off">
-                  <LeftButton />
-                </div>
-              )}
+
+              {isLightbox && <SeekButton direction="left" nav={nav} />}
 
               <div className={`popup--content popup--content__on ${contentClasses}`}>
                 <PopupHeader />
@@ -206,7 +196,8 @@ function Popup({ popup, setPopup }) {
                 {isInteractive && <canvas className="popup--canvas popup--canvas__off" />}
 
                 {isLightbox && (
-                  <div className={`popup--media ${popupImgClasses}`} style={{ "--aspect-width": img.width, "--aspect-height": img.height }}></div>
+                  // <div className={`popup--media ${popupImgClasses}`} style={{ "--aspect-width": img.width, "--aspect-height": img.height }}></div>
+                  <Graphic className={`popup--media ${popupImgClasses}`} img={img} type={img.media} autoplay controls />
                 )}
 
                 <div className={`popup--loading popup--loading__off`}>
@@ -220,11 +211,7 @@ function Popup({ popup, setPopup }) {
                 )}
               </div>
 
-              {isLightbox && (
-                <div className="popup--seek popup--seek__right popup--seek__off">
-                  <RightButton />
-                </div>
-              )}
+              {isLightbox && <SeekButton direction="right" nav={nav} />}
             </div>
           </div>
         </div>
@@ -247,30 +234,6 @@ function Popup({ popup, setPopup }) {
     );
   }
 
-  function RightButton() {
-    return (
-      <Button
-        icon={["chevron_right", "alone", "mask"]}
-        animation="pulse-right"
-        color="background-primary"
-        onClick={(e) => {
-          seekHandler(e, setPopup);
-        }}
-      />
-    );
-  }
-  function LeftButton() {
-    return (
-      <Button
-        icon={["chevron_left", "alone", "mask"]}
-        animation="pulse-left"
-        color="background-primary"
-        onClick={(e) => {
-          seekHandler(e, setPopup);
-        }}
-      />
-    );
-  }
   function CloseButton() {
     return (
       <Button
@@ -293,7 +256,119 @@ function Popup({ popup, setPopup }) {
         }}></div>
     );
   }
+
+  function seekHandler(e) {
+    var button;
+
+    if (e.type == "keydown") {
+      if (e.key == "ArrowRight") {
+        button = document.querySelector(".popup--seek__right");
+      }
+      if (e.key == "ArrowLeft") {
+        button = document.querySelector(".popup--seek__left");
+      }
+    } else {
+      button = e.target;
+      while (!button.classList.contains("popup--seek")) {
+        button = button.parentElement;
+      }
+    }
+
+    var direction = button.classList.contains("popup--seek__right") ? 1 : -1;
+
+    var length = group.imgs.length;
+
+    var ind = index;
+    ind += direction;
+
+    if (ind >= length) ind = 0;
+    if (ind < 0) ind = length - 1;
+
+    setIndex(ind);
+    var img = group.imgs[ind];
+
+    var zoom = img.zoom ? img.zoom : false;
+
+    setPopup({ type: "lightbox", img: img, zoom: zoom });
+  }
 }
+
+
+function SeekButton({ direction, nav }) {
+  const btnIn = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    transition: { duration: 0.15 },
+  };
+
+  const btnOut = {
+    animate: { opacity: 0 },
+    exit: { opacity: 0 },
+    transition: { duration: 0.15 },
+  };
+
+  var btn = direction == "left" ? nav.left : nav.right;
+
+  return (
+    <div className={`popup--seek popup--seek__${direction} ${btn.classList}`} ref={btn.ref}>
+      <AnimatePresence>
+        {btn.on && (
+          <motion.div
+            key={`${direction}Button`}
+            initial={btnIn.initial}
+            animate={btnIn.animate}
+            exit={btnOut.exit}
+            transition={btnIn.transition}>
+            <Button
+              icon={[`chevron_${direction}`, "alone", "mask"]}
+              animation={`pulse-${direction}`}
+              color="background-primary"
+              onClick={btn.seekHandler}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+
+function useNavControls(seekHandler) {
+  const [navRightOn, setNavRightOn] = useState(false);
+  const [navLeftOn, setNavLeftOn] = useState(false);
+  const [navRightClasses, setNavRightClasses] = useState("popup--seek__on");
+  const [navLeftClasses, setNavLeftClasses] = useState("popup--seek__on");
+  const navRightRef = useRef(null);
+  const navLeftRef = useRef(null);
+
+  return {
+    left: {
+      on: navLeftOn,
+      setOn: setNavLeftOn,
+      ref: navLeftRef,
+      classList: navLeftClasses,
+      setClassList: setNavLeftClasses,
+      seekHandler: (e) => {
+        seekHandler(e);
+      },
+    },
+    right: {
+      on: navRightOn,
+      setOn: setNavRightOn,
+      ref: navRightRef,
+      classList: navRightClasses,
+      setClassList: setNavRightClasses,
+      seekHandler: (e) => {
+        seekHandler(e);
+      },
+    },
+  };
+}
+
+
+
+
+
 
 var isResizing;
 

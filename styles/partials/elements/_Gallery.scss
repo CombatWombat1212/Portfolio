@@ -8,8 +8,12 @@
         aspect-ratio: 1/1;
         overflow:hidden;
 
+        border-radius: 0.1875rem;
+
         *{
             object-fit: cover!important;
+            width:101%!important;
+            height:101%!important;
         }
     }
 

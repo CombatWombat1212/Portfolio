@@ -163,5 +163,9 @@ function toggle(elem, { classPref = "", duration = 0, animated = true, transitio
   }
 }
 
+
+
+
+
 export default toggle;
 export { simpleToggleOn, simpleToggleOff, dualTransitionToggleOn, dualTransitionToggleOff, toggle };
