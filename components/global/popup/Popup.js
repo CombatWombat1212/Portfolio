@@ -3,7 +3,7 @@
 
 import toggle, { simpleToggleOn } from "@/scripts/AnimationTools";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Button from "../../elements/Buttons";
 import { loading } from "@/data/ICONS";
 import { RESIZE_TIMEOUT } from "@/scripts/GlobalUtilities";
@@ -52,34 +52,45 @@ function Scale({ className }) {
   );
 }
 
-var waitingToShowLoading = false;
-
-function setWaitingToShowLoading(bool) {
-  waitingToShowLoading = bool;
+function popupStart() {
+  document.body.classList.add("noscroll");
+  window.addEventListener("resize", popupResize, false);
+  window.addEventListener("keydown", catchKeys, false);
+}
+function popupEnd() {
+  window.removeEventListener("resize", popupResize, false);
+  window.removeEventListener("keydown", catchKeys, false);
+  document.body.classList.remove("noscroll");
 }
 
-function waitToLoad(setShowLoading) {
-  if (waitingToShowLoading) return;
-  waitingToShowLoading = true;
+// var waitingToShowLoading = false;
 
-  const timeout = setTimeout(() => {
-    setShowLoading(true);
-    waitingToShowLoading = false;
-  }, 1000);
+// function setWaitingToShowLoading(bool) {
+//   waitingToShowLoading = bool;
+// }
 
-  return () => clearTimeout(timeout);
-}
+// function waitToLoad(setShowLoading) {
+//   if (waitingToShowLoading) return;
+//   waitingToShowLoading = true;
 
-function handleLoading(showLoading, imgLoading) {
-  var loader = document.querySelector(".popup--loading");
-  if (showLoading && imgLoading) {
-    loader.classList.add("popup--loading__on");
-    loader.classList.remove("popup--loading__off");
-  } else {
-    loader.classList.add("popup--loading__off");
-    loader.classList.remove("popup--loading__on");
-  }
-}
+//   const timeout = setTimeout(() => {
+//     setShowLoading(true);
+//     waitingToShowLoading = false;
+//   }, 1000);
+
+//   return () => clearTimeout(timeout);
+// }
+
+// function handleLoading(showLoading, imgLoading) {
+//   var loader = document.querySelector(".popup--loading");
+//   if (showLoading && imgLoading) {
+//     loader.classList.add("popup--loading__on");
+//     loader.classList.remove("popup--loading__off");
+//   } else {
+//     loader.classList.add("popup--loading__off");
+//     loader.classList.remove("popup--loading__on");
+//   }
+// }
 
 function getPopupClasses(type, zoom, img) {
   // Initialize arrays for class names
@@ -139,49 +150,41 @@ function Popup({ popup, setPopup }) {
 
   popupType = type;
 
-  const [showLoading, setShowLoading] = useState(false);
+  // const [showLoading, setShowLoading] = useState(false);
 
-  useEffect(() => {
-    if (typeof document == "undefined") return;
-    if (typeof document.querySelector(".popup--loading") == "undefined" || document.querySelector(".popup--loading") == null) return;
-    handleLoading(showLoading, imgLoading);
-  }, [showLoading]);
+  // useEffect(() => {
+  //   if (typeof document == "undefined") return;
+  //   if (typeof document.querySelector(".popup--loading") == "undefined" || document.querySelector(".popup--loading") == null) return;
+  //   handleLoading(showLoading, imgLoading);
+  // }, [showLoading]);
 
   useEffect(() => {
     if (popup) {
-      document.body.classList.add("noscroll");
 
-      if (lastPopup != popup || lastPopup != false) {
-        lastPopup = popup;
+      popupStart();
+      if (isInteractive) canvasInit(popup, setPopup);
+      if (isLightbox) lightboxInit(popup, setPopup);
 
-        window.addEventListener("resize", popupResize, false);
-        window.addEventListener("keydown", catchKeys, false);
-        if (isInteractive) canvasInit(popup, setPopup);
-        if (isLightbox) lightboxInit(popup, setPopup, setShowLoading);
-      }
+        // if (isLightbox) lightboxInit(popup, setPopup, setShowLoading);
 
       var popWrapper = document.querySelector(".popup--wrapper");
       var on = popWrapper.classList.contains("popup--wrapper__on") ? true : false;
       if (!on) toggle(popWrapper, { classPref: "popup--wrapper", duration: "transition" });
 
-      waitToLoad(setShowLoading);
+      // waitToLoad(setShowLoading);
 
-      if (on && document.querySelector(".popup--img *") != null) document.querySelector(".popup--img *").remove();
       setSetPopupGlobal(setPopup);
+
+
     } else {
+      popupEnd();
       hiddenUIEnd();
-      window.removeEventListener("resize", popupResize, false);
-      window.removeEventListener("keydown", catchKeys, false);
       setCanvasImageLoaded(false);
-      document.body.classList.remove("noscroll");
       setPopupGroup(false);
     }
   }, [popup, setPopup]);
 
   var { headerClasses, contentClasses, popupContainerClasses, popupImgClasses, popupContainerStyle } = getPopupClasses(type, zoom, img);
-
-
-  //TODO: update popup to be more react-y, it should be using Graphic as the img otherwise you wont have srcset
 
   return (
     <>
@@ -203,7 +206,7 @@ function Popup({ popup, setPopup }) {
                 {isInteractive && <canvas className="popup--canvas popup--canvas__off" />}
 
                 {isLightbox && (
-                    <div className={`popup--media ${popupImgClasses}`} style={{ "--aspect-width": img.width, "--aspect-height": img.height }}></div>
+                  <div className={`popup--media ${popupImgClasses}`} style={{ "--aspect-width": img.width, "--aspect-height": img.height }}></div>
                 )}
 
                 <div className={`popup--loading popup--loading__off`}>
@@ -305,6 +308,6 @@ function popupResizeFunctions() {
 
 export default Popup;
 
-export { waitToLoad, setWaitingToShowLoading };
+// export { waitToLoad, setWaitingToShowLoading };
 
 export { startZoom, minZoom, maxZoom };
