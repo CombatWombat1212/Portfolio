@@ -24,6 +24,8 @@ import useBodyClass from "@/scripts/hooks/useBodyClass";
 import useListener from "@/scripts/hooks/useListener";
 import useToggle from "@/scripts/hooks/useToggle";
 import { AnimatePresence, motion } from "framer-motion";
+import useMouseMoving from "@/scripts/hooks/useMouseMoving";
+import useHoverAndFocus from "@/scripts/hooks/useHoverAndFocus";
 
 var popupType;
 
@@ -130,126 +132,109 @@ function getPopupClasses(type, zoom, img) {
 }
 
 function Popup({ popup, setPopup }) {
-  var type;
-  var img;
-  var zoom;
 
-  type = popup.type;
-  img = popup.img;
-  zoom = popup.zoom ? popup.zoom : false;
+  // TODO: stop the redraw with every seek by creating a state just for the popup image
 
-  var isInteractive = type == "interactive" ? true : false;
-  var isLightbox = type == "lightbox" ? true : false;
+  return <>{popup && <Wrapper />}</>;
 
-  popupType = type;
+  function Wrapper() {
+    var type;
+    var img;
+    var zoom;
 
-  var { headerClasses, contentClasses, popupContainerClasses, popupImgClasses, popupContainerStyle } = getPopupClasses(type, zoom, img);
+    type = popup.type;
+    img = popup.img;
+    zoom = popup.zoom ? popup.zoom : false;
 
-  useBodyClass("noscroll", popup);
-  useListener("resize", popupResize, popup);
-  useListener("keydown", catchKeys, popup);
+    var isInteractive = type == "interactive" ? true : false;
+    var isLightbox = type == "lightbox" ? true : false;
 
-  const [group, setGroup] = useState(false);
-  const [index, setIndex] = useState(false);
+    popupType = type;
 
-  const nav = useNavControls(seekHandler);
+    var { headerClasses, contentClasses, popupContainerClasses, popupImgClasses, popupContainerStyle } = getPopupClasses(type, zoom, img);
 
-  useEffect(() => {
-    if (popup) {
-      if (isInteractive) canvasInit(popup, setPopup);
-      if (isLightbox) lightboxInit(popup, setPopup, group, setGroup, index, setIndex);
+    useBodyClass("noscroll", popup);
+    useListener("resize", popupResize, popup);
+    useListener("keydown", catchKeys, popup);
 
-      setSetPopupGlobal(setPopup);
+    const [group, setGroup] = useState(false);
+    const [index, setIndex] = useState(false);
 
-      toggle(document.querySelector(".popup--wrapper"), { state: "on", classPref: "popup--wrapper", duration: "transition" });
-    } else {
-      hiddenUIEnd();
-      setCanvasImageLoaded(false);
-      setGroup(false);
-    }
-  }, [popup]);
+    const nav = useNavControls(seekHandler);
 
-  useEffect(() => {
-    updatePopupNav(popup, setPopup, group, setGroup, index, setIndex, nav);
-  }, [group, index]);
+    const [uiVisible, setUIVisible] = useState(true);
 
-  return (
-    <>
-      {popup && (
-        <div className="popup--wrapper popup--wrapper__off">
-          <Background />
+    const mouseMoving = useMouseMoving(null, 0);
+    const closeHovered = useHoverAndFocus(nav.close.ref);
 
-          <div className={`popup container ${popupContainerClasses}`} style={popupContainerStyle}>
-            <div className="popup--inner">
-              {isLightbox && <SeekButton direction="left" nav={nav} />}
+    useEffect(() => {
+      if (mouseMoving || closeHovered) {
+        setUIVisible(true);
+      } else {
+        const timeoutId = setTimeout(() => {
+          setUIVisible(false);
+        }, 1000);
+        return () => clearTimeout(timeoutId);
+      }
+    }, [mouseMoving, closeHovered]);
 
-              <div className={`popup--content popup--content__on ${contentClasses}`}>
-                <PopupHeader />
+    useEffect(() => {
+      if (popup) {
+        if (isInteractive) canvasInit(popup, setPopup);
+        if (isLightbox) lightboxInit(popup, setPopup, group, setGroup, index, setIndex);
 
-                {isInteractive && <canvas className="popup--canvas popup--canvas__off" />}
+        setSetPopupGlobal(setPopup);
 
-                {isLightbox && (
-                  // <div className={`popup--media ${popupImgClasses}`} style={{ "--aspect-width": img.width, "--aspect-height": img.height }}></div>
-                  <Graphic className={`popup--media ${popupImgClasses}`} img={img} type={img.media} autoplay controls />
-                )}
+        toggle(document.querySelector(".popup--wrapper"), { state: "on", classPref: "popup--wrapper", duration: "transition" });
+      } else {
+        // hiddenUIEnd();
+        setCanvasImageLoaded(false);
+        setGroup(false);
+      }
+    }, [popup]);
 
-                <div className={`popup--loading popup--loading__off`}>
-                  <img src={loading.src} alt={loading.alt} width={loading.width} height={loading.height} />
-                </div>
+    useEffect(() => {
+      updatePopupNav(popup, setPopup, group, setGroup, index, setIndex, nav);
+    }, [group, index]);
 
-                {isInteractive && (
-                  <div className="popup--footer popup--nav popup--nav__off">
-                    <Scale className="popup--scale" />
-                  </div>
-                )}
+    return (
+      <div className="popup--wrapper popup--wrapper__off">
+        <Background />
+
+        <div className={`popup container ${popupContainerClasses}`} style={popupContainerStyle}>
+          <div className="popup--inner">
+            {isLightbox && <SeekButton direction="left" nav={nav} />}
+
+            <div className={`popup--content popup--content__on ${contentClasses}`}>
+              <Head uiVisible={uiVisible} nav={nav} headerClasses={headerClasses} isInteractive={isInteractive} />
+
+              {isInteractive && <canvas className="popup--canvas popup--canvas__off" />}
+
+              {isLightbox && (
+                // <div className={`popup--media ${popupImgClasses}`} style={{ "--aspect-width": img.width, "--aspect-height": img.height }}></div>
+                <Graphic className={`popup--media ${popupImgClasses}`} img={img} type={img.media} autoplay controls />
+              )}
+
+              <div className={`popup--loading popup--loading__off`}>
+                <img src={loading.src} alt={loading.alt} width={loading.width} height={loading.height} />
               </div>
 
-              {isLightbox && <SeekButton direction="right" nav={nav} />}
+              {isInteractive && (
+                <div className="popup--footer popup--nav popup--nav__off">
+                  <Scale className="popup--scale" />
+                </div>
+              )}
             </div>
-          </div>
-        </div>
-      )}
-    </>
-  );
 
-  function PopupHeader() {
-    return (
-      <div className={`popup--header ${headerClasses} popup--nav`}>
-        {isInteractive && (
-          <div className="popup--title">
-            <h3>{popup.img.title}</h3>
+            {isLightbox && <SeekButton direction="right" nav={nav} />}
           </div>
-        )}
-        <div className="popup--close">
-          <CloseButton />
         </div>
       </div>
     );
-  }
 
-  function CloseButton() {
-    return (
-      <Button
-        icon={["close", "alone", "mask"]}
-        animation="scale-in"
-        color="transparent-primary"
-        onClick={() => {
-          closePopup(setPopup);
-        }}
-      />
-    );
-  }
 
-  function Background() {
-    return (
-      <div
-        className="popup--background"
-        onClick={() => {
-          closePopup(setPopup);
-        }}></div>
-    );
-  }
-
+    
+  // TODO: fix the seek handler not having its dependencies, then fix wrapper redrawing every time you seek
   function seekHandler(e) {
     var button;
 
@@ -284,10 +269,56 @@ function Popup({ popup, setPopup }) {
 
     setPopup({ type: "lightbox", img: img, zoom: zoom });
   }
+
+  }
+
+  function Background() {
+    return <div className="popup--background" onClick={closeHandler}></div>;
+  }
+
+  function closeHandler() {
+    closePopup(setPopup);
+  }
+
+
+  function Head({ uiVisible, nav, headerClasses, isInteractive }) {
+    const btnIn = {
+      initial: { opacity: 0 },
+      animate: { opacity: 1 },
+      transition: { duration: 0.2 },
+    };
+
+    const btnOut = {
+      animate: { opacity: 0 },
+      exit: { opacity: 0 },
+      transition: { duration: 1.15 },
+    };
+
+    return (
+      <>
+        <div className={`popup--header ${headerClasses} popup--nav`}>
+          {isInteractive && (
+            <div className="popup--title">
+              <h3>{popup.img.title}</h3>
+            </div>
+          )}
+
+          <AnimatePresence>
+            {uiVisible && (
+              <motion.div initial={btnIn.initial} animate={btnIn.animate} exit={btnOut.exit} transition={btnIn.transition}>
+                <div className="popup--close" ref={nav.close.ref}>
+                  <Button icon={["close", "alone", "mask"]} animation="scale-in" color="transparent-primary" onClick={closeHandler} />
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </>
+    );
+  }
 }
 
 function SeekButton({ direction, nav }) {
-
   const dur = 0.15;
 
   const btnIn = {
@@ -330,6 +361,9 @@ function useNavControls(seekHandler) {
   const navRightRef = useRef(null);
   const navLeftRef = useRef(null);
 
+  const [navCloseOn, setNavCloseOn] = useState(false);
+  const navCloseRef = useRef(null);
+
   return {
     left: {
       on: navLeftOn,
@@ -350,6 +384,11 @@ function useNavControls(seekHandler) {
       seekHandler: (e) => {
         seekHandler(e);
       },
+    },
+    close: {
+      on: navCloseOn,
+      setOn: setNavCloseOn,
+      ref: navCloseRef,
     },
   };
 }

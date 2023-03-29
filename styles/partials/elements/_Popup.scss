@@ -167,14 +167,18 @@
     }
 
     &__condensed {
-      // padding: calc(var(--popup-inner-pad) / 2);
-      padding: calc(var(--popup-inner-pad) / 4);
-      background-color: $col-background;
-      // background-color: $col-primary;
-      border-radius: 0 0 0 var(--b-rad);
+      // background-color: $col-background;
+      // border-radius: 0 0 0 var(--b-rad);
       position: absolute;
       top: 0;
       right: 0;
+
+      &>*{
+        padding: calc(var(--popup-inner-pad) / 4);
+        background-color: $col-background;
+        border-radius: 0 0 0 var(--b-rad);
+  
+      }
 
       // .mask{
       //   background-color: $col-background;

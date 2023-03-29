@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 
-function useHoverAndFocus(refConfig, classConfig, overrideConfig) {
+function useHoverAndFocus(refConfig, classConfig = {}, overrideConfig = {}) {
   const [isHoveredOrFocused, setIsHoveredOrFocused] = useState(false);
   const hasMounted = useRef(false);
 
   const handleStateChange = (element, parentElement, config, state) => {
-    const applyClasses = (target) => {
+    const applyClasses = (target) => { 
+      if(Object.keys(classConfig).length === 0) return;
+
       const onClass = (typeof overrideConfig === 'object' && overrideConfig.on) || overrideConfig;
       const offClass = (typeof overrideConfig === 'object' && overrideConfig.off) || null;
 
@@ -73,7 +75,7 @@ function useHoverAndFocus(refConfig, classConfig, overrideConfig) {
 
     const handleMouseEnter = () => {
       setIsHoveredOrFocused(true);
-
+      
       if (typeof classConfig === 'string') {
         parentElement.classList.add(classConfig);
       } else if (Array.isArray(classConfig)) {

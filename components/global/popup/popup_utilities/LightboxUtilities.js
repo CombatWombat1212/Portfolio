@@ -97,11 +97,11 @@ function lightboxInit(popup, setPopup, group, setGroup, index, setIndex) {
 
   getImgGroup(popup, setPopup, group, setGroup, index, setIndex);
 
-  setActiveHiddenUI("lightbox");
+  // setActiveHiddenUI("lightbox");
 
   var popWrapper = document.querySelector(".popup--wrapper");
   var on = popWrapper.classList.contains("popup--wrapper__on") ? true : false;
-  if (!on) hiddenUIInit();
+  // if (!on) hiddenUIInit();
 
   
 }
