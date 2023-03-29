@@ -120,16 +120,35 @@
       --button-icon-scale: 1.1;
     }
 
-    &__off {
-      opacity: 0;
-      display: none;
-    }
-    &__on {
-      opacity: 1;
-    }
-    &__tran {
-      opacity: 0;
-    }
+    
+
+    // &__in {
+    //   transition: 0.2s;
+    //   opacity: 1;
+    // }
+    
+    // &__in-active {
+    //   transition: 0.2s;
+    //   opacity: 0;
+    //   // display: none;
+    // }
+
+    // &__out {
+    //   transition: 0.2s;
+    //   opacity: 0;
+    //   // display: none;
+    // }
+    
+    // &__out-active {
+    //   transition: 0.2s;
+    //   opacity: 1;
+    // }
+
+    
+
+
+
+
 
     // &__inactive{
     //   .mask{

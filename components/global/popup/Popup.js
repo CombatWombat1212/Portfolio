@@ -157,14 +157,11 @@ function Popup({ popup, setPopup }) {
   useEffect(() => {
     if (popup) {
       if (isInteractive) canvasInit(popup, setPopup);
-
       if (isLightbox) lightboxInit(popup, setPopup, group, setGroup, index, setIndex);
 
       setSetPopupGlobal(setPopup);
 
       toggle(document.querySelector(".popup--wrapper"), { state: "on", classPref: "popup--wrapper", duration: "transition" });
-
-
     } else {
       hiddenUIEnd();
       setCanvasImageLoaded(false);
@@ -172,12 +169,9 @@ function Popup({ popup, setPopup }) {
     }
   }, [popup]);
 
-
   useEffect(() => {
     updatePopupNav(popup, setPopup, group, setGroup, index, setIndex, nav);
   }, [group, index]);
-
-
 
   return (
     <>
@@ -187,7 +181,6 @@ function Popup({ popup, setPopup }) {
 
           <div className={`popup container ${popupContainerClasses}`} style={popupContainerStyle}>
             <div className="popup--inner">
-
               {isLightbox && <SeekButton direction="left" nav={nav} />}
 
               <div className={`popup--content popup--content__on ${contentClasses}`}>
@@ -285,26 +278,28 @@ function Popup({ popup, setPopup }) {
     if (ind < 0) ind = length - 1;
 
     setIndex(ind);
-    var img = group.imgs[ind];
 
+    var img = group.imgs[ind];
     var zoom = img.zoom ? img.zoom : false;
 
     setPopup({ type: "lightbox", img: img, zoom: zoom });
   }
 }
 
-
 function SeekButton({ direction, nav }) {
+
+  const dur = 0.15;
+
   const btnIn = {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
-    transition: { duration: 0.15 },
+    transition: { duration: dur },
   };
 
   const btnOut = {
     animate: { opacity: 0 },
     exit: { opacity: 0 },
-    transition: { duration: 0.15 },
+    transition: { duration: dur },
   };
 
   var btn = direction == "left" ? nav.left : nav.right;
@@ -313,12 +308,7 @@ function SeekButton({ direction, nav }) {
     <div className={`popup--seek popup--seek__${direction} ${btn.classList}`} ref={btn.ref}>
       <AnimatePresence>
         {btn.on && (
-          <motion.div
-            key={`${direction}Button`}
-            initial={btnIn.initial}
-            animate={btnIn.animate}
-            exit={btnOut.exit}
-            transition={btnIn.transition}>
+          <motion.div key={`${direction}Button`} initial={btnIn.initial} animate={btnIn.animate} exit={btnOut.exit} transition={btnIn.transition}>
             <Button
               icon={[`chevron_${direction}`, "alone", "mask"]}
               animation={`pulse-${direction}`}
@@ -331,7 +321,6 @@ function SeekButton({ direction, nav }) {
     </div>
   );
 }
-
 
 function useNavControls(seekHandler) {
   const [navRightOn, setNavRightOn] = useState(false);
@@ -364,11 +353,6 @@ function useNavControls(seekHandler) {
     },
   };
 }
-
-
-
-
-
 
 var isResizing;
 

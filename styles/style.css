@@ -2309,19 +2309,6 @@ body {
   --button-icon-scale: 1.1;
 }
 
-.popup--seek__off {
-  opacity: 0;
-  display: none;
-}
-
-.popup--seek__on {
-  opacity: 1;
-}
-
-.popup--seek__tran {
-  opacity: 0;
-}
-
 .popup--header {
   display: flex;
   flex-direction: row;

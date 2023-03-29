@@ -94,9 +94,6 @@ function getImgGroup(popup, setPopup, group, setGroup, index, setIndex) {
 
 // function lightboxInit(popup, setPopup, setShowLoading) {
 function lightboxInit(popup, setPopup, group, setGroup, index, setIndex) {
-  // if (imgLoading) return; // cancel image loading if one is already in progress
-
-  // imgLoading = true;
 
   getImgGroup(popup, setPopup, group, setGroup, index, setIndex);
 
@@ -106,53 +103,11 @@ function lightboxInit(popup, setPopup, group, setGroup, index, setIndex) {
   var on = popWrapper.classList.contains("popup--wrapper__on") ? true : false;
   if (!on) hiddenUIInit();
 
-  // var img = loadImgExternally(popup.img);
-  // var content = document.querySelector(".popup--content");
-  // var media = document.querySelector(".popup--media");
-
-  // var isImg = IMAGE_TYPES.includes(popup.img.type);
-  // var isVid = VIDEO_TYPES.includes(popup.img.type);
-
-  // if (isImg) {
-  //   media.classList.add("popup--img");
-  //   media.classList.remove("popup--video");
-  //   img.onload = function () {
-  //     run();
-  //   };
-  // }
-  // if (isVid) {
-  //   media.classList.add("popup--video");
-  //   media.classList.remove("popup--img");
-  //     run();
-  // }
-
-  // function run() {
-  //   var transition = splitS(window.getComputedStyle(content).transitionDuration);
-
-  //   var media = document.querySelector(".popup--media");
-  //   var loader = document.querySelector(".popup--loading");
-
-  //   // Remove the previous image or video
-  //   while (media.firstChild) {
-  //     media.removeChild(media.firstChild);
-  //   }
-
-  //   img.classList.add("popup--media__off");
-  //   media.appendChild(img);
-
-  //   toggle(img, { classPref: "popup--media", duration: "transition" });
-  //   toggle(content, { classPref: "popup--content", duration: "transition" });
-
-  //   imgLoading = false; // indicate that the image has finished loading
-
-  // }
+  
 }
 
 export {
   lightboxInit,
-  // seekHandler,
-  // checkForRelevantGroups,
-  // setPopupGroup
   updatePopupNav,
   getImgGroup,
 };
