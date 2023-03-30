@@ -214,8 +214,8 @@ function canvasInit(pop) {
     canvasImageLoaded = true;
     canvasImageSizeInit();
 
-    var loading = document.querySelector(".popup--loading");
-    removeLoading(loading, canvas);
+    // var loading = document.querySelector(".popup--loading");
+    // removeLoading(loading, canvas);
     canvas.addEventListener("wheel", canvasZoom);
     canvas.addEventListener("mousemove", canvasMouseMoveHandler);
     canvas.addEventListener("mousedown", canvasMouseDownHandler);

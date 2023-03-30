@@ -77,8 +77,61 @@ function getPopupClasses(pop) {
   return { headerClasses, contentClasses, popupContainerClasses, popupImgClasses, popupContainerStyle };
 }
 
+function Anim({ children, animation, condition, className }) {
+  return (
+    <AnimatePresence>
+      {condition && (
+        <>
+          <motion.div
+            initial={animation.in.initial}
+            animate={animation.in.animate}
+            exit={animation.out.exit}
+            transition={animation.in.transition}
+            className={className ? className : ""}>
+            {children}
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
+
 function Popup({ pop }) {
-  return <>{pop.on && <Wrapper pop={pop} />}</>;
+  const wrapperAnimation = {
+    in: {
+      initial: { opacity: 0 },
+      animate: { opacity: 1 },
+      transition: { duration: 0.25 },
+    },
+
+    out: {
+      animate: { opacity: 0 },
+      exit: { opacity: 0 },
+      transition: { duration: 0.25 },
+    },
+  };
+
+  return (
+    <>
+      <Anim animation={wrapperAnimation} condition={pop.on} className={"popup--wrapper"}>
+        <Wrapper pop={pop} />
+      </Anim>
+      {/* <AnimatePresence>
+        {pop.on && (
+          <>
+            <motion.div
+              initial={animate.in.initial}
+              animate={animate.in.animate}
+              exit={animate.out.exit}
+              transition={animate.in.transition}
+              className="popup--wrapper">
+              <Wrapper pop={pop} />
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence> */}
+    </>
+  );
 }
 
 function Wrapper({ pop }) {
@@ -120,9 +173,8 @@ function Wrapper({ pop }) {
   }, [pop.group, pop.index]);
 
   return (
-    <div className="popup--wrapper">
+    <>
       <Background closeHandler={closeHandler} />
-
       <div className={`popup container ${popupContainerClasses}`} style={popupContainerStyle}>
         <div className="popup--inner">
           {pop.type == "lightbox" && <Seek direction="left" nav={nav} />}
@@ -132,17 +184,18 @@ function Wrapper({ pop }) {
 
             {pop.type == "interactive" && <canvas className="popup--canvas popup--canvas__off" />}
             {pop.type == "lightbox" && <Graphic className={`popup--media ${popupImgClasses}`} img={pop.img} type={pop.img.media} autoplay controls />}
-            <div className={`popup--loading popup--loading__off`}>
-              <img src={loading.src} alt={loading.alt} width={loading.width} height={loading.height} />
-            </div>
 
+            {/* <div className={`popup--loading popup--loading__off`}>
+                <img src={loading.src} alt={loading.alt} width={loading.width} height={loading.height} />
+              </div>
+   */}
             {pop.type == "interactive" && <ScaleWrapper pop={pop} nav={nav} />}
           </div>
 
           {pop.type == "lightbox" && <Seek direction="right" nav={nav} />}
         </div>
       </div>
-    </div>
+    </>
   );
 
   function closeHandler() {
@@ -210,37 +263,69 @@ function Title({ pop }) {
   );
 }
 
+// function Seek({ direction, nav }) {
+//   const dur = 0.15;
+
+//   const btnIn = {
+//     initial: { opacity: 0 },
+//     animate: { opacity: 1 },
+//     transition: { duration: dur },
+//   };
+
+//   const btnOut = {
+//     animate: { opacity: 0 },
+//     exit: { opacity: 0 },
+//     transition: { duration: dur },
+//   };
+
+//   var btn = direction == "left" ? nav.left : nav.right;
+
+//   return (
+//     <div className={`popup--seek popup--seek__${direction} ${btn.classList}`} ref={btn.ref}>
+//       <AnimatePresence>
+//         {btn.on && (
+//           <motion.div key={`${direction}Button`} initial={btnIn.initial} animate={btnIn.animate} exit={btnOut.exit} transition={btnIn.transition}>
+//             <Button
+//               icon={[`chevron_${direction}`, "alone", "mask"]}
+//               animation={`pulse-${direction}`}
+//               color="background-primary"
+//               onClick={btn.seekHandler}
+//             />
+//           </motion.div>
+//         )}
+//       </AnimatePresence>
+//     </div>
+//   );
+// }
+
 function Seek({ direction, nav }) {
   const dur = 0.15;
 
-  const btnIn = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    transition: { duration: dur },
+  const btnAnimation = {
+    in: {
+      initial: { opacity: 0 },
+      animate: { opacity: 1 },
+      transition: { duration: dur },
+    },
+    out: {
+      animate: { opacity: 0 },
+      exit: { opacity: 0 },
+      transition: { duration: dur },
+    },
   };
 
-  const btnOut = {
-    animate: { opacity: 0 },
-    exit: { opacity: 0 },
-    transition: { duration: dur },
-  };
-
-  var btn = direction == "left" ? nav.left : nav.right;
+  var btn = direction === "left" ? nav.left : nav.right;
 
   return (
     <div className={`popup--seek popup--seek__${direction} ${btn.classList}`} ref={btn.ref}>
-      <AnimatePresence>
-        {btn.on && (
-          <motion.div key={`${direction}Button`} initial={btnIn.initial} animate={btnIn.animate} exit={btnOut.exit} transition={btnIn.transition}>
-            <Button
-              icon={[`chevron_${direction}`, "alone", "mask"]}
-              animation={`pulse-${direction}`}
-              color="background-primary"
-              onClick={btn.seekHandler}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <Anim animation={btnAnimation} condition={btn.on}>
+        <Button
+          icon={[`chevron_${direction}`, "alone", "mask"]}
+          animation={`pulse-${direction}`}
+          color="background-primary"
+          onClick={btn.seekHandler}
+        />
+      </Anim>
     </div>
   );
 }
@@ -259,34 +344,56 @@ function HiddenUi({ children, nav, className }) {
 }
 
 function Close({ pop, nav, closeHandler }) {
+  const condition = pop.ui.visible || pop.type === "interactive";
+
   return (
-    <>
-      <AnimatePresence>
-        {(pop.ui.visible || pop.type == "interactive") && (
-          <HiddenUi nav={nav}>
-            <div className="popup--close" ref={nav.close.ref}>
-              <Button icon={["close", "alone", "mask"]} animation="scale-in" color="transparent-primary" onClick={closeHandler} />
-            </div>
-          </HiddenUi>
-        )}
-      </AnimatePresence>
-    </>
+    <Anim animation={nav.animate.hideUI} condition={condition} className="">
+      <div className="popup--close" ref={nav.close.ref}>
+        <Button icon={["close", "alone", "mask"]} animation="scale-in" color="transparent-primary" onClick={closeHandler} />
+      </div>
+    </Anim>
   );
 }
 
+// function Close({ pop, nav, closeHandler }) {
+//   return (
+//     <>
+//       <AnimatePresence>
+//         {(pop.ui.visible || pop.type == "interactive") && (
+//           <HiddenUi nav={nav}>
+//             <div className="popup--close" ref={nav.close.ref}>
+//               <Button icon={["close", "alone", "mask"]} animation="scale-in" color="transparent-primary" onClick={closeHandler} />
+//             </div>
+//           </HiddenUi>
+//         )}
+//       </AnimatePresence>
+//     </>
+//   );
+// }
+
 function ScaleWrapper({ pop, nav }) {
+  const condition = pop.ui.visible;
+
   return (
-    <>
-      <AnimatePresence>
-        {pop.ui.visible && (
-          <HiddenUi nav={nav} className="popup--footer popup--nav">
-            <Scale className="popup--scale" pop={pop} nav={nav} />
-          </HiddenUi>
-        )}
-      </AnimatePresence>
-    </>
+    <Anim animation={nav.animate.hideUI} condition={condition} className="popup--footer popup--nav">
+      <Scale className="popup--scale" pop={pop} nav={nav} />
+    </Anim>
   );
 }
+
+// function ScaleWrapper({ pop, nav }) {
+//   return (
+//     <>
+//       <AnimatePresence>
+//         {pop.ui.visible && (
+//           <HiddenUi nav={nav} className="popup--footer popup--nav">
+//             <Scale className="popup--scale" pop={pop} nav={nav} />
+//           </HiddenUi>
+//         )}
+//       </AnimatePresence>
+//     </>
+//   );
+// }
 
 function Scale({ pop, nav, className }) {
   var def = 10;
