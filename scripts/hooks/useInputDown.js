@@ -1,7 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function useInputDown(inputs) {
-  const [inputDown, setInputDown] = useState(false);
+  const [inputStates, setInputStates] = useState(
+    Array.isArray(inputs) ? inputs.reduce((acc, input) => ({ ...acc, [input]: false }), {}) : { [inputs]: false }
+  );
+
+  const inputStatesRef = useRef(inputStates);
+
+  useEffect(() => {
+    inputStatesRef.current = inputStates;
+  }, [inputStates]);
 
   useEffect(() => {
     const inputNames = Array.isArray(inputs) ? inputs : [inputs];
@@ -14,37 +22,39 @@ function useInputDown(inputs) {
 
     const handleKeyDown = (e) => {
       if (inputNames.includes(e.key)) {
-        setInputDown(true);
+        setInputStates((prevState) => ({ ...prevState, [e.key]: true }));
       }
     };
 
     const handleKeyUp = (e) => {
       if (inputNames.includes(e.key)) {
-        setInputDown(false);
+        setInputStates((prevState) => ({ ...prevState, [e.key]: false }));
       }
     };
-
+  
     const handleMouseDown = (e) => {
       const buttonName = Object.keys(mouseButtonMap).find((key) => mouseButtonMap[key] === e.button);
       if (inputNames.includes(buttonName)) {
-        setInputDown(true);
+        setInputStates((prevState) => ({ ...prevState, [buttonName]: true }));
       }
     };
 
     const handleMouseUp = (e) => {
       const buttonName = Object.keys(mouseButtonMap).find((key) => mouseButtonMap[key] === e.button);
       if (inputNames.includes(buttonName)) {
-        setInputDown(false);
+        setInputStates((prevState) => ({ ...prevState, [buttonName]: false }));
       }
     };
-
+  
     const handleWheel = (e) => {
       if (inputNames.includes("Scroll")) {
-        setInputDown(true);
-        setTimeout(() => setInputDown(false), 100);
+        setInputStates((prevState) => ({ ...prevState, Scroll: true }));
+        setTimeout(() => {
+          setInputStates((prevState) => ({ ...prevState, Scroll: false }));
+        }, 100);
       }
     };
-
+  
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
     window.addEventListener("mousedown", handleMouseDown);
@@ -60,7 +70,9 @@ function useInputDown(inputs) {
     };
   }, [inputs]);
 
-  return inputDown;
+  const down = Object.values(inputStates).some((state) => state);
+
+  return down;
 }
 
 export default useInputDown;

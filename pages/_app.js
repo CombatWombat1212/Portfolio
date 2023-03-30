@@ -23,30 +23,26 @@ import useRandomString from "@/scripts/hooks/useRandomString";
 // // +`padding: 0.225rem 0.775rem 1.375rem 0.775rem;`;
 // `padding: 0.725rem 0.775rem 0.875rem 0.775rem;`;
 
-
 function generateRainbowColor(hue) {
   return `hsl(${hue}, 100%, 50%)`;
 }
 
 function generateWaveText(text, hue) {
-  const characters = text.split('');
-  const styledText = characters.map((char, i) => `%c${char}`).join('');
-  const styles = characters.map((char, i) => `color: ${generateRainbowColor((hue + i * 15) % 360)};` +
-    `font-family: "Gira Sans"; font-size: 1.4375rem;` +
-    `line-height:2rem;` +
-    `font-style:italic;` 
-    // + `padding: 0.725rem 0.775rem 0.875rem 0.775rem;`
-    + `padding-top: 0.35rem;`
-    + `padding-bottom: 0.7525rem;`
-
-    +`font-weight: 400;` 
-    );
+  const characters = text.split("");
+  const styledText = characters.map((char, i) => `%c${char}`).join("");
+  const styles = characters.map(
+    (char, i) =>
+      `color: ${generateRainbowColor((hue + i * 15) % 360)};` +
+      `font-family: "Gira Sans"; font-size: 1.4375rem;` +
+      `line-height:2rem;` +
+      `font-style:italic;` +
+      // + `padding: 0.725rem 0.775rem 0.875rem 0.775rem;`
+      `padding-top: 0.35rem;` +
+      `padding-bottom: 0.7525rem;` +
+      `font-weight: 400;`
+  );
   return [styledText, ...styles];
 }
-
-
-
-
 
 export default function App({ Component, pageProps }) {
   // TODO: add an easy out for people on the case study pages.  either a next or back button, skip to bottom, something that will allow them to quickly bounce around case studies
@@ -56,7 +52,7 @@ export default function App({ Component, pageProps }) {
 
   // useEffect(() => {
   //   if (!secret) return;
-  
+
   //   let hue = 0;
   //   const interval = setInterval(() => {
   //     const text = !secret2 ? "eat my ass" : "no" ;
@@ -64,16 +60,14 @@ export default function App({ Component, pageProps }) {
   //     console.log(waveText, ...styles);
   //     hue = (hue + Math.random() * 60) % 360;
   //   }, 40);
-  
+
   //   return () => clearInterval(interval);
   // }, [secret, secret2]);
-  
 
   // I am not currently using this
   useMountEffect(() => {
     postScreenSizeToRoot();
   });
-
 
   // const [popup, setPopup] = useState(false);
 
@@ -84,7 +78,6 @@ export default function App({ Component, pageProps }) {
   const [popupGroup, setPopupGroup] = useState(false);
   const [popupIndex, setPopupIndex] = useState(false);
   const [popupUiVisible, popupSetUIVisible] = useState(true);
-
 
   const pop = {
     type: popupType,
@@ -100,18 +93,11 @@ export default function App({ Component, pageProps }) {
     index: popupIndex,
     setIndex: setPopupIndex,
 
-    ui:{
+    ui: {
       visible: popupUiVisible,
       setVisible: popupSetUIVisible,
-    }
-  }
-
-
-
-
-
-
-
+    },
+  };
 
   const router = useRouter();
 
@@ -215,7 +201,26 @@ export default function App({ Component, pageProps }) {
   );
 }
 
-const loadingMessages = [`hol up...`, `<i>*elevator music*</i>`, `catch the game last night?`, `lemme grab that for ya`, `Ensure your Wii remote strap is tightly secured`, `Wanna do something after this?`, `We should do this more often`, `<i>shawty like a melody</i>`, `right this way`, `<i>*utz utz utz*</i>`, `lemme check the back...`, `who turned off the lights?`, `<i>*dial-up noises*</i>`, `bleep bloop`, `now where did i put that...`, `ouu good choice`, `niceee`, `<i>*crickets*</i>`];
+const loadingMessages = [
+  `hol up...`,
+  `<i>*elevator music*</i>`,
+  `catch the game last night?`,
+  `lemme grab that for ya`,
+  `Ensure your Wii remote strap is tightly secured`,
+  `Wanna do something after this?`,
+  `We should do this more often`,
+  `<i>shawty like a melody</i>`,
+  `right this way`,
+  `<i>*utz utz utz*</i>`,
+  `lemme check the back...`,
+  `who turned off the lights?`,
+  `<i>*dial-up noises*</i>`,
+  `bleep bloop`,
+  `now where did i put that...`,
+  `ouu good choice`,
+  `niceee`,
+  `<i>*crickets*</i>`,
+];
 
 const incomingVariants = {
   initialState: {
