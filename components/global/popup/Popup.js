@@ -3,7 +3,7 @@
 
 import toggle, { simpleToggleOn } from "@/scripts/AnimationTools";
 import Image from "next/image";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Button from "../../elements/Buttons";
 import { loading } from "@/data/ICONS";
 import { RESIZE_TIMEOUT } from "@/scripts/GlobalUtilities";
@@ -23,7 +23,7 @@ import { Graphic } from "@/components/sections/Sections";
 import useBodyClass from "@/scripts/hooks/useBodyClass";
 import useListener from "@/scripts/hooks/useListener";
 import useToggle from "@/scripts/hooks/useToggle";
-import { AnimatePresence, motion, useIsPresent } from "framer-motion";
+import { AnimatePresence, motion, useAnimation, useIsPresent } from "framer-motion";
 import useMouseMoving from "@/scripts/hooks/useMouseMoving";
 import useHoverAndFocus from "@/scripts/hooks/useHoverAndFocus";
 import useInputDown from "@/scripts/hooks/useInputDown";
@@ -75,28 +75,15 @@ const anims = {
     },
   },
 
-  hideBtns: {
-    in: {
-      initial: { opacity: 0 },
-      animate: { opacity: 1 },
-      transition: { duration: 0.15 },
-    },
-    out: {
-      animate: { opacity: 0 },
-      exit: { opacity: 0 },
-      transition: { duration: 0.15 },
-    },
-  },
-
   changeImg: {
     in: {
-      initial: { opacity: 0 },
-      animate: { opacity: 1 },
+      initial: { translateX: "1rem", opacity: 0 },
+      animate: { translateX: "0rem", opacity: 1 },
       transition: { duration: seekDuration, ease: "easeInOut" },
     },
     out: {
-      animate: { opacity: 1 },
-      exit: { opacity: 0 },
+      animate: { translateX: "0rem", opacity: 1 },
+      exit: { translateX: "-1rem", opacity: 0 },
       transition: { duration: seekDuration, ease: "easeInOut" },
     },
   },
@@ -112,6 +99,26 @@ const anims = {
       exit: { clipPath: "polygon(100% 0%, 100% 100%, 100% 100%, 100% 0%)" },
       transition: { duration: 0.15 },
     },
+  },
+
+  hideBtns: {
+    in: {
+      initial: { opacity: 0.5, cursor: "default" },
+      animate: { opacity: 1, cursor: "pointer" },
+      transition: { duration: 0.15 },
+    },
+    out: {
+      animate: { opacity: 0.5, cursor: "default" },
+      exit: { opacity: 0.5, cursor: "default" },
+      transition: { duration: 0.15 },
+    },
+  },
+};
+
+const classAnims = {
+  hideBtns: {
+    in: "popup--seek__on",
+    out: "popup--seek__off",
   },
 };
 
@@ -134,9 +141,18 @@ function getPopupClasses(pop) {
       popupContainerClassesArray.push("popup__lightbox-zoom");
     }
     // Nested Case 1.2: zoom is false
-    else {
+    if (!pop.zoom) {
       contentClassesArray.push("popup--content__lightbox");
       popupContainerClassesArray.push("popup__lightbox");
+    }
+
+    // Nested Case 1.3: group is true
+    if (pop.group) {
+      popupContainerClassesArray.push("popup__lightbox-group");
+      contentClassesArray.push("popup--content__lightbox-group");
+    }
+    // Nested Case 1.4: group is false
+    if (!pop.group) {
     }
 
     // Update popupContainerStyle for type "lightbox"
@@ -162,9 +178,9 @@ function getPopupClasses(pop) {
 function Popup({ pop }) {
   return (
     <>
-      <Anim animation={anims.popupFade} condition={pop.on} className={"popup--wrapper"}>
+      <AnimPres animation={anims.popupFade} condition={pop.on} className={"popup--wrapper"}>
         <Wrapper pop={pop} />
-      </Anim>
+      </AnimPres>
     </>
   );
 }
@@ -177,12 +193,16 @@ function Wrapper({ pop }) {
   useListener("keydown", seekHandlerWithKeydown, pop.on);
 
   const nav = useNavControls(seekHandler);
-  const mouseMoving = useMouseMoving(null, 0);
+  const mouseMoving = useMouseMoving(null, 1000);
   const closeHovered = useHoverAndFocus(nav.close.ref);
-  const interaction = useInputDown(["ArrowRight", "ArrowLeft", "LeftMouse", "RightMouse", "Scroll"]);
+  const input = useInputDown(["ArrowRight", "ArrowLeft", "LeftMouse", "RightMouse", "Scroll"]);
+
+  const interaction = useMemo(() => {
+    return mouseMoving || closeHovered || input;
+  }, [mouseMoving, closeHovered, input]);
 
   useEffect(() => {
-    if (mouseMoving || closeHovered || interaction) {
+    if (interaction) {
       pop.ui.setVisible(true);
     } else {
       const timeoutId = setTimeout(() => {
@@ -190,7 +210,7 @@ function Wrapper({ pop }) {
       }, 2000);
       return () => clearTimeout(timeoutId);
     }
-  }, [mouseMoving, closeHovered, interaction]);
+  }, [interaction]);
 
   useEffect(() => {
     if (pop.on) {
@@ -221,7 +241,6 @@ function Wrapper({ pop }) {
   //   });
   // }
 
-  // TODO: move the gallery buttons to the bottom of the popup, so they don't move when images have different aspect ratios
   // TODO: add pagination indicator to the bottom of the popup
   // TODO: add new popup type for explorations page
 
@@ -232,7 +251,6 @@ function Wrapper({ pop }) {
       <Background closeHandler={closeHandler} />
       <div className={`popup container ${popupContainerClasses}`} style={popupContainerStyle}>
         <div className="popup--inner">
-
           <div className={`popup--content popup--content__on ${contentClasses}`}>
             <Head pop={pop} nav={nav} headerClasses={headerClasses} closeHandler={closeHandler} />
 
@@ -251,13 +269,14 @@ function Wrapper({ pop }) {
             {pop.type == "interactive" && <ScaleWrapper pop={pop} nav={nav} />}
           </div>
 
-          <div className="popup--controls">
-            {pop.type == "lightbox" && <Seek direction="left" nav={nav} />}
-  
-            {pop.type == "lightbox" && <Seek direction="right" nav={nav} />}
-
-          </div>  
-
+          {/* TODO: whether or not group is there is gonna affect some classes that you gotta write */}
+          {pop.type == "lightbox" && pop.group && (
+            <div className="popup--controls">
+              <Seek direction="left" nav={nav} />
+              <Pagination pop={pop} />
+              <Seek direction="right" nav={nav} />
+            </div>
+          )}
         </div>
       </div>
     </>
@@ -378,7 +397,7 @@ function Seek({ direction, nav }) {
 
   return (
     <div className={`popup--seek popup--seek__${direction} ${btn.classList}`} ref={btn.ref}>
-      <Anim animation={anims.hideBtns} condition={btn.on}>
+      <Anim animation={classAnims.hideBtns} condition={btn.on}>
         <Button
           icon={[`chevron_${direction}`, "alone", "mask"]}
           animation={`pulse-${direction}`}
@@ -394,11 +413,11 @@ function Close({ pop, nav, closeHandler }) {
   const condition = pop.ui.visible || pop.type === "interactive";
 
   return (
-    <Anim animation={anims.hideUI} condition={condition} className="">
+    <AnimPres animation={anims.hideUI} condition={condition} className="">
       <div className="popup--close" ref={nav.close.ref}>
         <Button icon={["close", "alone", "mask"]} animation="scale-in" color="transparent-primary" onClick={closeHandler} />
       </div>
-    </Anim>
+    </AnimPres>
   );
 }
 
@@ -406,9 +425,9 @@ function ScaleWrapper({ pop, nav }) {
   const condition = pop.ui.visible;
 
   return (
-    <Anim animation={anims.hideUI} condition={condition} className="popup--footer popup--nav">
+    <AnimPres animation={anims.hideUI} condition={condition} className="popup--footer popup--nav">
       <Scale className="popup--scale" pop={pop} nav={nav} />
-    </Anim>
+    </AnimPres>
   );
 }
 
@@ -433,6 +452,46 @@ function Scale({ pop, nav, className }) {
     </div>
   );
 }
+
+const Pagination = React.memo(
+  function Pagination({ pop }) {
+    return (
+      <div className="popup--pagination">
+        {pop.group?.imgs?.map((img, i) => {
+          return (
+            <>
+              <Circle
+                active={i === pop.index}
+                key={i}
+                onClick={() => {
+                  pop.setIndex(i);
+                  pop.setImg(pop.group.imgs[i]);
+                  pop.setZoom(pop.img.zoom ? pop.img.zoom : false);
+                  pop.setType("lightbox");
+                }}
+              />
+            </>
+          );
+        })}
+      </div>
+    );
+
+    function Circle({ active, onClick }) {
+      const classes = active ? "popup--circle__active" : "popup--circle__inactive";
+      return (
+        <>
+          <a className={`popup--circle ${classes}`} onClick={onClick}>
+            <div className="popup--circle-inner"></div>
+          </a>
+        </>
+      );
+    }
+  },
+  (prevProps, nextProps) => {
+    // Only re-render if any of the specific properties we care about change
+    return !(prevProps.pop.group !== nextProps.pop.group || prevProps.pop.index !== nextProps.pop.index);
+  }
+);
 
 function useNavControls(seekHandler) {
   const [navRightOn, setNavRightOn] = useState(false);
@@ -468,7 +527,7 @@ function useNavControls(seekHandler) {
   };
 }
 
-function Anim({ children, animation, condition, className, style }) {
+function AnimPres({ children, animation, condition, className, style }) {
   return (
     <AnimatePresence>
       {condition && (
@@ -485,6 +544,56 @@ function Anim({ children, animation, condition, className, style }) {
         </>
       )}
     </AnimatePresence>
+  );
+}
+
+function Anim({ children, animation, condition, className, style }) {
+  const controls = useAnimation();
+
+  const [classList, setClassList] = useState((className ? className : "").split(" "));
+  const [classNames, setClassNames] = useState(className ? className : "");
+
+  const classes = {
+    list: classList,
+    setList: setClassList,
+    names: classNames,
+    setNames: setClassNames,
+  };
+
+  useEffect(() => {
+    if (condition) {
+      if (typeof animation.in === "string") {
+        addClass(animation.in, animation.out);
+      } else {
+        controls.start(animation.in.animate);
+      }
+    } else {
+      if (typeof animation.out === "string") {
+        addClass(animation.out, animation.in);
+      } else {
+        controls.start(animation.out.exit);
+      }
+    }
+  }, [condition, animation, controls]);
+
+  useEffect(() => {
+    classes.setNames(classes.list.join(" "));
+  }, [classes.list]);
+
+  function addClass(newClass, oppositeClass) {
+    classes.setList((prevClassList) => {
+      let updatedClassList = prevClassList.filter((cls) => cls !== oppositeClass);
+      if (!updatedClassList.includes(newClass)) {
+        updatedClassList.push(newClass);
+      }
+      return updatedClassList;
+    });
+  }
+
+  return (
+    <motion.div animate={controls} className={classNames} style={style ? style : {}}>
+      {children}
+    </motion.div>
   );
 }
 
