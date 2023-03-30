@@ -2256,6 +2256,7 @@ body {
   width: 100%;
   display: flex;
   position: relative;
+  flex-direction: column;
 }
 
 .popup--content {
@@ -2287,21 +2288,16 @@ body {
   position: unset;
 }
 
+.popup--controls {
+  display: flex;
+  flex-direction: row;
+}
+
 .popup--seek {
   --popup-seek-spacing: 2rem;
   position: absolute;
   z-index: 10;
   top: calc(50% - (var(--button-height) / 2));
-}
-
-.popup--seek__left {
-  left: 0;
-  transform: translateX(calc(-100% - var(--popup-seek-spacing)));
-}
-
-.popup--seek__right {
-  right: 0;
-  transform: translateX(calc(100% + var(--popup-seek-spacing)));
 }
 
 .popup--seek .mask {

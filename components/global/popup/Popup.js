@@ -33,8 +33,7 @@ const startZoom = 0.95;
 const minZoom = 0.95;
 const maxZoom = 7.5;
 
-
-const seekDuration = 0.15;
+const seekDuration = 0.165;
 
 const anims = {
   popupBounce: {
@@ -233,7 +232,6 @@ function Wrapper({ pop }) {
       <Background closeHandler={closeHandler} />
       <div className={`popup container ${popupContainerClasses}`} style={popupContainerStyle}>
         <div className="popup--inner">
-          {pop.type == "lightbox" && <Seek direction="left" nav={nav} />}
 
           <div className={`popup--content popup--content__on ${contentClasses}`}>
             <Head pop={pop} nav={nav} headerClasses={headerClasses} closeHandler={closeHandler} />
@@ -253,7 +251,13 @@ function Wrapper({ pop }) {
             {pop.type == "interactive" && <ScaleWrapper pop={pop} nav={nav} />}
           </div>
 
-          {pop.type == "lightbox" && <Seek direction="right" nav={nav} />}
+          <div className="popup--controls">
+            {pop.type == "lightbox" && <Seek direction="left" nav={nav} />}
+  
+            {pop.type == "lightbox" && <Seek direction="right" nav={nav} />}
+
+          </div>  
+
         </div>
       </div>
     </>
@@ -305,7 +309,18 @@ function Wrapper({ pop }) {
     // Set a timeout to remove the cooldown status after a specified duration
     setTimeout(() => {
       setSeekCooldown(false);
-    }, seekDuration*2*1000); // Adjust the cooldown time (in ms) as needed
+    }, seekDuration * 1.75 * 1000); // Adjust the cooldown time (in ms) as needed
+  }
+
+  var isResizing;
+
+  function popupResize() {
+    window.clearTimeout(isResizing);
+    isResizing = setTimeout(popupResizeFunctions, RESIZE_TIMEOUT);
+  }
+
+  function popupResizeFunctions() {
+    if (pop.type == "interactive") canvasOnResize();
   }
 }
 
@@ -471,17 +486,6 @@ function Anim({ children, animation, condition, className, style }) {
       )}
     </AnimatePresence>
   );
-}
-
-var isResizing;
-
-function popupResize() {
-  window.clearTimeout(isResizing);
-  isResizing = setTimeout(popupResizeFunctions, RESIZE_TIMEOUT);
-}
-
-function popupResizeFunctions() {
-  if (pop.type == "interactive") canvasOnResize();
 }
 
 export default Popup;
