@@ -17,7 +17,7 @@ import {
   setCanvasImageLoaded,
 } from "./popup_utilities/CanvasUtilities";
 import { getImgGroup, imgLoading, lightboxInit, seekHandler, setPopupGroup, updatePopupNav } from "./popup_utilities/LightboxUtilities";
-import { catchKeys, closePopup, setSetPopupGlobal } from "./popup_utilities/PopupUtilities";
+// import { catchKeys, closePopup, setSetPopupGlobal } from "./popup_utilities/PopupUtilities";
 import { hiddenUIEnd } from "./popup_utilities/HiddenUIUtilities";
 import { Graphic } from "@/components/sections/Sections";
 import useBodyClass from "@/scripts/hooks/useBodyClass";
@@ -26,68 +26,14 @@ import useToggle from "@/scripts/hooks/useToggle";
 import { AnimatePresence, motion } from "framer-motion";
 import useMouseMoving from "@/scripts/hooks/useMouseMoving";
 import useHoverAndFocus from "@/scripts/hooks/useHoverAndFocus";
-
-var popupType;
+import useInputDown from "@/scripts/hooks/useInputDown";
 
 //no more than 2 decimals
 const startZoom = 0.95;
 const minZoom = 0.95;
 const maxZoom = 7.5;
 
-var lastPopup = null;
-
-function Scale({ className }) {
-  var def = 10;
-
-  return (
-    <div className={`scale ${className ? className : ""}`}>
-      <div className="scale--zoom scale--minus">
-        <Button id="zoom-out" icon={["minus", "alone", "mask"]} animation="scale-out" color="transparent-primary" onClick={canvasZoom} />
-      </div>
-
-      <div className="scale--slider">
-        <div className="scale--end"></div>
-        <input type="range" min={minZoom * 100} max={maxZoom * 100} defaultValue={def} className="scale--input" id="popupZoom" onInput={canvasZoom} />
-        <div className="scale--end"></div>
-      </div>
-
-      <div className="scale--zoom scale--plus">
-        <Button id="zoom-in" icon={["plus", "alone", "mask"]} animation="scale-out" color="transparent-primary" onClick={canvasZoom} />
-      </div>
-    </div>
-  );
-}
-
-// var waitingToShowLoading = false;
-
-// function setWaitingToShowLoading(bool) {
-//   waitingToShowLoading = bool;
-// }
-
-// function waitToLoad(setShowLoading) {
-//   if (waitingToShowLoading) return;
-//   waitingToShowLoading = true;
-
-//   const timeout = setTimeout(() => {
-//     setShowLoading(true);
-//     waitingToShowLoading = false;
-//   }, 1000);
-
-//   return () => clearTimeout(timeout);
-// }
-
-// function handleLoading(showLoading, imgLoading) {
-//   var loader = document.querySelector(".popup--loading");
-//   if (showLoading && imgLoading) {
-//     loader.classList.add("popup--loading__on");
-//     loader.classList.remove("popup--loading__off");
-//   } else {
-//     loader.classList.add("popup--loading__off");
-//     loader.classList.remove("popup--loading__on");
-//   }
-// }
-
-function getPopupClasses(type, zoom, img) {
+function getPopupClasses(pop) {
   // Initialize arrays for class names
   var headerClassesArray = [];
   var contentClassesArray = [];
@@ -96,11 +42,11 @@ function getPopupClasses(type, zoom, img) {
   var popupContainerStyle = {};
 
   // Case 1: type is "lightbox"
-  if (type === "lightbox") {
+  if (pop.type === "lightbox") {
     headerClassesArray.push("popup--header__condensed", "popup--nav__on");
 
     // Nested Case 1.1: zoom is true
-    if (zoom) {
+    if (pop.zoom) {
       popupImgClassesArray.push("popup--img__lightbox-zoom");
       contentClassesArray.push("popup--content__lightbox-zoom");
       popupContainerClassesArray.push("popup__lightbox-zoom");
@@ -112,10 +58,10 @@ function getPopupClasses(type, zoom, img) {
     }
 
     // Update popupContainerStyle for type "lightbox"
-    popupContainerStyle = { "--img-aspect-width": img.width, "--img-aspect-height": img.height };
+    popupContainerStyle = { "--img-aspect-width": pop.img.width, "--img-aspect-height": pop.img.height };
   }
   // Case 2: type is "interactive"
-  else if (type == "interactive") {
+  else if (pop.type == "interactive") {
     headerClassesArray.push("popup--header__full");
 
     contentClassesArray.push("popup--content__interactive");
@@ -131,110 +77,78 @@ function getPopupClasses(type, zoom, img) {
   return { headerClasses, contentClasses, popupContainerClasses, popupImgClasses, popupContainerStyle };
 }
 
-function Popup({ popup, setPopup }) {
+function Popup({ pop }) {
+  return <>{pop.on && <Wrapper pop={pop} />}</>;
+}
 
-  // TODO: stop the redraw with every seek by creating a state just for the popup image
+function Wrapper({ pop }) {
+  var { headerClasses, contentClasses, popupContainerClasses, popupImgClasses, popupContainerStyle } = getPopupClasses(pop);
 
-  return <>{popup && <Wrapper />}</>;
+  useBodyClass("noscroll", pop.on);
+  useListener("resize", popupResize, pop.on);
+  // useListener("keydown", catchKeys, popup);
 
-  function Wrapper() {
-    var type;
-    var img;
-    var zoom;
+  const nav = useNavControls(seekHandler);
+  const mouseMoving = useMouseMoving(null, 0);
+  const closeHovered = useHoverAndFocus(nav.close.ref);
+  const interaction = useInputDown(["ArrowRight", "ArrowLeft", "LeftMouse", "RightMouse", "Scroll"]);
 
-    type = popup.type;
-    img = popup.img;
-    zoom = popup.zoom ? popup.zoom : false;
+  useEffect(() => {
+    if (mouseMoving || closeHovered || interaction) {
+      pop.ui.setVisible(true);
+    } else {
+      const timeoutId = setTimeout(() => {
+        pop.ui.setVisible(false);
+      }, 1000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [mouseMoving, closeHovered, interaction]);
 
-    var isInteractive = type == "interactive" ? true : false;
-    var isLightbox = type == "lightbox" ? true : false;
+  useEffect(() => {
+    if (pop.on) {
+      if (pop.type == "interactive") canvasInit(pop);
+      if (pop.type == "lightbox") lightboxInit(pop);
+    } else {
+      setCanvasImageLoaded(false);
+      pop.setGroup(false);
+      pop.setIndex(false);
+    }
+  }, [pop.on]);
 
-    popupType = type;
+  useEffect(() => {
+    updatePopupNav(pop, nav);
+  }, [pop.group, pop.index]);
 
-    var { headerClasses, contentClasses, popupContainerClasses, popupImgClasses, popupContainerStyle } = getPopupClasses(type, zoom, img);
+  return (
+    <div className="popup--wrapper">
+      <Background closeHandler={closeHandler} />
 
-    useBodyClass("noscroll", popup);
-    useListener("resize", popupResize, popup);
-    useListener("keydown", catchKeys, popup);
+      <div className={`popup container ${popupContainerClasses}`} style={popupContainerStyle}>
+        <div className="popup--inner">
+          {pop.type == "lightbox" && <Seek direction="left" nav={nav} />}
 
-    const [group, setGroup] = useState(false);
-    const [index, setIndex] = useState(false);
+          <div className={`popup--content popup--content__on ${contentClasses}`}>
+            <Head pop={pop} nav={nav} headerClasses={headerClasses} closeHandler={closeHandler} />
 
-    const nav = useNavControls(seekHandler);
-
-    const [uiVisible, setUIVisible] = useState(true);
-
-    const mouseMoving = useMouseMoving(null, 0);
-    const closeHovered = useHoverAndFocus(nav.close.ref);
-
-    useEffect(() => {
-      if (mouseMoving || closeHovered) {
-        setUIVisible(true);
-      } else {
-        const timeoutId = setTimeout(() => {
-          setUIVisible(false);
-        }, 1000);
-        return () => clearTimeout(timeoutId);
-      }
-    }, [mouseMoving, closeHovered]);
-
-    useEffect(() => {
-      if (popup) {
-        if (isInteractive) canvasInit(popup, setPopup);
-        if (isLightbox) lightboxInit(popup, setPopup, group, setGroup, index, setIndex);
-
-        setSetPopupGlobal(setPopup);
-
-        toggle(document.querySelector(".popup--wrapper"), { state: "on", classPref: "popup--wrapper", duration: "transition" });
-      } else {
-        // hiddenUIEnd();
-        setCanvasImageLoaded(false);
-        setGroup(false);
-      }
-    }, [popup]);
-
-    useEffect(() => {
-      updatePopupNav(popup, setPopup, group, setGroup, index, setIndex, nav);
-    }, [group, index]);
-
-    return (
-      <div className="popup--wrapper popup--wrapper__off">
-        <Background />
-
-        <div className={`popup container ${popupContainerClasses}`} style={popupContainerStyle}>
-          <div className="popup--inner">
-            {isLightbox && <SeekButton direction="left" nav={nav} />}
-
-            <div className={`popup--content popup--content__on ${contentClasses}`}>
-              <Head uiVisible={uiVisible} nav={nav} headerClasses={headerClasses} isInteractive={isInteractive} />
-
-              {isInteractive && <canvas className="popup--canvas popup--canvas__off" />}
-
-              {isLightbox && (
-                // <div className={`popup--media ${popupImgClasses}`} style={{ "--aspect-width": img.width, "--aspect-height": img.height }}></div>
-                <Graphic className={`popup--media ${popupImgClasses}`} img={img} type={img.media} autoplay controls />
-              )}
-
-              <div className={`popup--loading popup--loading__off`}>
-                <img src={loading.src} alt={loading.alt} width={loading.width} height={loading.height} />
-              </div>
-
-              {isInteractive && (
-                <div className="popup--footer popup--nav popup--nav__off">
-                  <Scale className="popup--scale" />
-                </div>
-              )}
+            {pop.type == "interactive" && <canvas className="popup--canvas popup--canvas__off" />}
+            {pop.type == "lightbox" && <Graphic className={`popup--media ${popupImgClasses}`} img={pop.img} type={pop.img.media} autoplay controls />}
+            <div className={`popup--loading popup--loading__off`}>
+              <img src={loading.src} alt={loading.alt} width={loading.width} height={loading.height} />
             </div>
 
-            {isLightbox && <SeekButton direction="right" nav={nav} />}
+            {pop.type == "interactive" && <ScaleWrapper pop={pop} nav={nav} />}
           </div>
+
+          {pop.type == "lightbox" && <Seek direction="right" nav={nav} />}
         </div>
       </div>
-    );
+    </div>
+  );
 
+  function closeHandler() {
+    pop.setOn(false);
+  }
 
-    
-  // TODO: fix the seek handler not having its dependencies, then fix wrapper redrawing every time you seek
   function seekHandler(e) {
     var button;
 
@@ -254,71 +168,49 @@ function Popup({ popup, setPopup }) {
 
     var direction = button.classList.contains("popup--seek__right") ? 1 : -1;
 
-    var length = group.imgs.length;
+    var length = pop.group.imgs.length;
 
-    var ind = index;
+    var ind = pop.index;
     ind += direction;
 
     if (ind >= length) ind = 0;
     if (ind < 0) ind = length - 1;
 
-    setIndex(ind);
-
-    var img = group.imgs[ind];
-    var zoom = img.zoom ? img.zoom : false;
-
-    setPopup({ type: "lightbox", img: img, zoom: zoom });
-  }
-
-  }
-
-  function Background() {
-    return <div className="popup--background" onClick={closeHandler}></div>;
-  }
-
-  function closeHandler() {
-    closePopup(setPopup);
-  }
-
-
-  function Head({ uiVisible, nav, headerClasses, isInteractive }) {
-    const btnIn = {
-      initial: { opacity: 0 },
-      animate: { opacity: 1 },
-      transition: { duration: 0.2 },
-    };
-
-    const btnOut = {
-      animate: { opacity: 0 },
-      exit: { opacity: 0 },
-      transition: { duration: 1.15 },
-    };
-
-    return (
-      <>
-        <div className={`popup--header ${headerClasses} popup--nav`}>
-          {isInteractive && (
-            <div className="popup--title">
-              <h3>{popup.img.title}</h3>
-            </div>
-          )}
-
-          <AnimatePresence>
-            {uiVisible && (
-              <motion.div initial={btnIn.initial} animate={btnIn.animate} exit={btnOut.exit} transition={btnIn.transition}>
-                <div className="popup--close" ref={nav.close.ref}>
-                  <Button icon={["close", "alone", "mask"]} animation="scale-in" color="transparent-primary" onClick={closeHandler} />
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </>
-    );
+    pop.setIndex(ind);
+    pop.setImg(pop.group.imgs[ind]);
+    pop.setZoom(pop.img.zoom ? pop.img.zoom : false);
+    pop.setType("lightbox");
   }
 }
 
-function SeekButton({ direction, nav }) {
+function Background({ closeHandler }) {
+  return <div className="popup--background" onClick={closeHandler}></div>;
+}
+
+function Head({ pop, nav, headerClasses, closeHandler }) {
+  return (
+    <>
+      <div className={`popup--header ${headerClasses} popup--nav`}>
+        <Title pop={pop} />
+        <Close pop={pop} nav={nav} closeHandler={closeHandler} />
+      </div>
+    </>
+  );
+}
+
+function Title({ pop }) {
+  return (
+    <>
+      {pop.type == "interactive" && (
+        <div className="popup--title">
+          <h3>{pop.img.title}</h3>
+        </div>
+      )}
+    </>
+  );
+}
+
+function Seek({ direction, nav }) {
   const dur = 0.15;
 
   const btnIn = {
@@ -353,6 +245,71 @@ function SeekButton({ direction, nav }) {
   );
 }
 
+function HiddenUi({ children, nav, className }) {
+  return (
+    <motion.div
+      className={className ? className : ""}
+      initial={nav.animate.hideUI.in.initial}
+      animate={nav.animate.hideUI.in.animate}
+      exit={nav.animate.hideUI.out.exit}
+      transition={nav.animate.hideUI.in.transition}>
+      {children}
+    </motion.div>
+  );
+}
+
+function Close({ pop, nav, closeHandler }) {
+  return (
+    <>
+      <AnimatePresence>
+        {(pop.ui.visible || pop.type == "interactive") && (
+          <HiddenUi nav={nav}>
+            <div className="popup--close" ref={nav.close.ref}>
+              <Button icon={["close", "alone", "mask"]} animation="scale-in" color="transparent-primary" onClick={closeHandler} />
+            </div>
+          </HiddenUi>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
+
+function ScaleWrapper({ pop, nav }) {
+  return (
+    <>
+      <AnimatePresence>
+        {pop.ui.visible && (
+          <HiddenUi nav={nav} className="popup--footer popup--nav">
+            <Scale className="popup--scale" pop={pop} nav={nav} />
+          </HiddenUi>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
+
+function Scale({ pop, nav, className }) {
+  var def = 10;
+
+  return (
+    <div className={`scale ${className ? className : ""}`} ref={nav.scale.ref}>
+      <div className="scale--zoom scale--minus">
+        <Button id="zoom-out" icon={["minus", "alone", "mask"]} animation="scale-out" color="transparent-primary" onClick={canvasZoom} />
+      </div>
+
+      <div className="scale--slider">
+        <div className="scale--end"></div>
+        <input type="range" min={minZoom * 100} max={maxZoom * 100} defaultValue={def} className="scale--input" id="popupZoom" onInput={canvasZoom} />
+        <div className="scale--end"></div>
+      </div>
+
+      <div className="scale--zoom scale--plus">
+        <Button id="zoom-in" icon={["plus", "alone", "mask"]} animation="scale-out" color="transparent-primary" onClick={canvasZoom} />
+      </div>
+    </div>
+  );
+}
+
 function useNavControls(seekHandler) {
   const [navRightOn, setNavRightOn] = useState(false);
   const [navLeftOn, setNavLeftOn] = useState(false);
@@ -363,6 +320,9 @@ function useNavControls(seekHandler) {
 
   const [navCloseOn, setNavCloseOn] = useState(false);
   const navCloseRef = useRef(null);
+
+  const [navScaleOn, setNavScaleOn] = useState(false);
+  const navScaleRef = useRef(null);
 
   return {
     left: {
@@ -390,6 +350,26 @@ function useNavControls(seekHandler) {
       setOn: setNavCloseOn,
       ref: navCloseRef,
     },
+    scale: {
+      on: navScaleOn,
+      setOn: setNavScaleOn,
+      ref: navScaleRef,
+    },
+    animate: {
+      hideUI: {
+        in: {
+          initial: { opacity: 0 },
+          animate: { opacity: 1 },
+          transition: { duration: 0.2 },
+        },
+
+        out: {
+          animate: { opacity: 0 },
+          exit: { opacity: 0 },
+          transition: { duration: 1.15 },
+        },
+      },
+    },
   };
 }
 
@@ -401,7 +381,7 @@ function popupResize() {
 }
 
 function popupResizeFunctions() {
-  if (popupType == "interactive") canvasOnResize();
+  if (pop.type == "interactive") canvasOnResize();
 }
 
 export default Popup;

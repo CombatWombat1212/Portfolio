@@ -1,8 +1,4 @@
-import {
-  getColors,
-  RESIZE_TIMEOUT,
-  splitS,
-} from "@/scripts/GlobalUtilities";
+import { getColors, RESIZE_TIMEOUT, splitS } from "@/scripts/GlobalUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import useSameHeight from "@/scripts/hooks/useSameHeight";
 import Image from "next/image";
@@ -88,15 +84,11 @@ function Effect({ effect }) {
           <div
             className={`graphic--effect graphic--effect__hover graphic--effect__off graphic--effect__${type}`}
             style={hoverStyle ? hoverStyle : {}}></div>
-          <div
-            className={`graphic--effect graphic--effect__default graphic--effect__on graphic--effect__${type}`}
-            style={style ? style : {}}></div>
+          <div className={`graphic--effect graphic--effect__default graphic--effect__on graphic--effect__${type}`} style={style ? style : {}}></div>
         </>
       ) : (
         <>
-          <div
-            className={`graphic--effect graphic--effect__${type}`}
-            style={style ? style : {}}></div>
+          <div className={`graphic--effect graphic--effect__${type}`} style={style ? style : {}}></div>
         </>
       )}
     </>
@@ -113,7 +105,8 @@ function Graphic({
   children,
   lightbox,
   zoom,
-  setPopup,
+  // setPopup,
+  pop,
   width,
   height,
   effect,
@@ -178,16 +171,18 @@ function Graphic({
     }
 
     // TODO: add loading indicator for lightbox images, and smoother transitions between non-zoomed images and zoomed images
+
     onClickHandler = () => {
-      setPopup({ type: "lightbox", img: lightboxImg, zoom: zoom });
+      pop.setImg(lightboxImg);
+      pop.setZoom(zoom);
+      pop.setOn(true);
+      pop.setType("lightbox");
     };
   }
 
   effect = effect ? effect : false;
 
-  var allClasses = `section--graphic graphic ${backgroundClasses} ${className} ${buttonClasses} ${
-    lightbox ? "graphic__lightbox" : ""
-  }`;
+  var allClasses = `section--graphic graphic ${backgroundClasses} ${className} ${buttonClasses} ${lightbox ? "graphic__lightbox" : ""}`;
 
   var typePref = isImg ? "img" : isMask ? "mask" : isVideo ? "video" : "";
 
@@ -217,12 +212,7 @@ function Graphic({
   }, [isMounted]);
 
   // var ap = autoplay == "scroll" ? false : autoplay ? true : false;
-  var ap =
-    typeof autoplay === "string" && autoplay.includes("scroll")
-      ? false
-      : autoplay
-      ? true
-      : false;
+  var ap = typeof autoplay === "string" && autoplay.includes("scroll") ? false : autoplay ? true : false;
 
   sameHeight = sameHeight ? sameHeight : false;
   const sameHeightObj = useSameHeight(sameHeight, reference, {
@@ -239,9 +229,7 @@ function Graphic({
             ...style,
             ...(sameHeightObj
               ? {
-                  height: !sameHeightObj.resizing
-                    ? `${sameHeightObj.height.min}px`
-                    : "auto",
+                  height: !sameHeightObj.resizing ? `${sameHeightObj.height.min}px` : "auto",
                 }
               : {}),
           }}
@@ -295,9 +283,7 @@ function Graphic({
           onClick={onClick}
           {...(tabIndex != undefined ? { tabIndex: tabIndex } : {})}
           {...(sync != undefined ? { "data-sync": sync } : {})}
-          {...(typeof autoplay === "string" && autoplay.includes("hover")
-            ? { "data-autoplay-hover": true }
-            : {})}
+          {...(typeof autoplay === "string" && autoplay.includes("hover") ? { "data-autoplay-hover": true } : {})}
           {...(autoplay ? { "data-autoplay": autoplay } : {})}
           {...props}>
           {effect && <Effect effect={effect} />}
@@ -313,20 +299,12 @@ function Graphic({
             muted={muted}
             autoPlay={ap}
             controls={controls}>
-            <source
-              src={`.${img.src}`}
-              type={`video/${img.type}`}></source>
+            <source src={`.${img.src}`} type={`video/${img.type}`}></source>
           </video>
 
           {typeof autoplay === "string" && autoplay.includes("hover") && (
-            <video
-              className={`${innerClassName} video--background`}
-              alt={img.alt}
-              width={width}
-              height={height}>
-              <source
-                src={`.${img.src}`}
-                type={`video/${img.type}`}></source>
+            <video className={`${innerClassName} video--background`} alt={img.alt} width={width} height={height}>
+              <source src={`.${img.src}`} type={`video/${img.type}`}></source>
             </video>
           )}
         </div>
@@ -366,23 +344,14 @@ function graphicKeepSquare(elem) {
   function graphicGetDimensions(graphic) {
     graphic.width = graphic.elem.offsetWidth;
     graphic.height = graphic.elem.offsetHeight;
-    graphic.padding.top = parseFloat(
-      getComputedStyle(graphic.elem).paddingTop
-    );
-    graphic.padding.right = parseFloat(
-      getComputedStyle(graphic.elem).paddingRight
-    );
-    graphic.padding.bottom = parseFloat(
-      getComputedStyle(graphic.elem).paddingBottom
-    );
-    graphic.padding.left = parseFloat(
-      getComputedStyle(graphic.elem).paddingLeft
-    );
+    graphic.padding.top = parseFloat(getComputedStyle(graphic.elem).paddingTop);
+    graphic.padding.right = parseFloat(getComputedStyle(graphic.elem).paddingRight);
+    graphic.padding.bottom = parseFloat(getComputedStyle(graphic.elem).paddingBottom);
+    graphic.padding.left = parseFloat(getComputedStyle(graphic.elem).paddingLeft);
   }
 
   function graphicSetDimensions(graphic) {
-    graphic.elem.style.height =
-      graphic.width - graphic.padding.left - graphic.padding.right + "px";
+    graphic.elem.style.height = graphic.width - graphic.padding.left - graphic.padding.right + "px";
   }
 
   function run(graphic) {
@@ -408,34 +377,19 @@ function graphicVideoInit(elem) {
     this.video = this.elem.querySelector("video");
 
     // Check if transition duration is set and not equal to 0s. Otherwise, use a default value from a CSS variable.
-    if (
-      getComputedStyle(this.elem).transitionDuration &&
-      getComputedStyle(this.elem).transitionDuration !== "0s"
-    ) {
-      this.transition = splitS(
-        getComputedStyle(this.elem).transitionDuration
-      );
+    if (getComputedStyle(this.elem).transitionDuration && getComputedStyle(this.elem).transitionDuration !== "0s") {
+      this.transition = splitS(getComputedStyle(this.elem).transitionDuration);
     } else {
-      this.transition = splitS(
-        getComputedStyle(document.documentElement)
-          .getPropertyValue("--transition")
-          .trim()
-      );
+      this.transition = splitS(getComputedStyle(document.documentElement).getPropertyValue("--transition").trim());
     }
 
     // Set autoplay and sync properties based on data attributes of the element.
-    this.autoplay = this.elem.getAttribute("data-autoplay")
-      ? this.elem.getAttribute("data-autoplay")
-      : false;
-    this.sync = this.elem.getAttribute("data-sync")
-      ? this.elem.getAttribute("data-sync")
-      : false;
+    this.autoplay = this.elem.getAttribute("data-autoplay") ? this.elem.getAttribute("data-autoplay") : false;
+    this.sync = this.elem.getAttribute("data-sync") ? this.elem.getAttribute("data-sync") : false;
 
     // If sync is set, group all elements with the same sync value together.
     if (typeof this.sync === "string") {
-      this.group = Array.from(
-        document.querySelectorAll(`[data-sync="${this.sync}"]`)
-      );
+      this.group = Array.from(document.querySelectorAll(`[data-sync="${this.sync}"]`));
     } else {
       this.group = [this.elem];
     }
@@ -446,9 +400,7 @@ function graphicVideoInit(elem) {
 
     // Set a boolean flag to indicate if autoplay is staggered or synchronized.
     this.is = {
-      staggered:
-        typeof this.autoplay === "string" &&
-        this.autoplay.includes("staggered"),
+      staggered: typeof this.autoplay === "string" && this.autoplay.includes("staggered"),
       sync: Boolean(this.sync),
       inView: false,
     };
@@ -462,17 +414,11 @@ function graphicVideoInit(elem) {
     graphic.group[i] = v;
   });
 
-  if (
-    typeof graphic.autoplay === "string" &&
-    graphic.autoplay.includes("scroll")
-  ) {
+  if (typeof graphic.autoplay === "string" && graphic.autoplay.includes("scroll")) {
     graphicCreateIntersectionObserver(graphic);
   }
 
-  if (
-    typeof graphic.autoplay === "string" &&
-    graphic.autoplay.includes("hover")
-  ) {
+  if (typeof graphic.autoplay === "string" && graphic.autoplay.includes("hover")) {
     graphicPlayOnHoverInit(graphic);
   }
 
@@ -491,10 +437,7 @@ function graphicVideoInit(elem) {
               const checkInViewHelper = () => {
                 inView = graphic.group
                   .filter((g) => g.is.inView)
-                  .sort(
-                    (a, b) =>
-                      graphic.group.indexOf(a) - graphic.group.indexOf(b)
-                  )
+                  .sort((a, b) => graphic.group.indexOf(a) - graphic.group.indexOf(b))
                   .map((g) => g.video);
 
                 if (inView.length === 0 && graphic.group.length > 0) {
@@ -502,10 +445,7 @@ function graphicVideoInit(elem) {
                   inView = [];
                 }
 
-                if (
-                  inView.length < graphic.group.length &&
-                  count < maxCount
-                ) {
+                if (inView.length < graphic.group.length && count < maxCount) {
                   count++;
                   setTimeout(checkInViewHelper, 50);
                 } else {
@@ -519,10 +459,7 @@ function graphicVideoInit(elem) {
             function playNextVideo() {
               function ended() {
                 graphicVideoPause(video);
-                if (
-                  graphic.is.staggered &&
-                  videoIndex < inView.length - 1
-                ) {
+                if (graphic.is.staggered && videoIndex < inView.length - 1) {
                   video.removeEventListener("ended", ended);
                   videoIndex++;
                   playNextVideo();
@@ -627,10 +564,7 @@ function graphicVideoInit(elem) {
   }
 
   function graphicVideoReset(graphic) {
-    graphic.video.style.setProperty(
-      "transition-duration",
-      `${graphic.transition}ms`
-    );
+    graphic.video.style.setProperty("transition-duration", `${graphic.transition}ms`);
 
     graphic.video.classList.add("video__hidden");
     graphic.elem.setAttribute("data-playing", "false");

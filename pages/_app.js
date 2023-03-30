@@ -74,7 +74,45 @@ export default function App({ Component, pageProps }) {
     postScreenSizeToRoot();
   });
 
-  const [popup, setPopup] = useState(false);
+
+  // const [popup, setPopup] = useState(false);
+
+  const [popupType, setPopupType] = useState(false);
+  const [popupImg, setPopupImg] = useState(false);
+  const [popupZoom, setPopupZoom] = useState(false);
+  const [popupOn, setPopupOn] = useState(false);
+  const [popupGroup, setPopupGroup] = useState(false);
+  const [popupIndex, setPopupIndex] = useState(false);
+  const [popupUiVisible, popupSetUIVisible] = useState(true);
+
+
+  const pop = {
+    type: popupType,
+    setType: setPopupType,
+    img: popupImg,
+    setImg: setPopupImg,
+    zoom: popupZoom,
+    setZoom: setPopupZoom,
+    on: popupOn,
+    setOn: setPopupOn,
+    group: popupGroup,
+    setGroup: setPopupGroup,
+    index: popupIndex,
+    setIndex: setPopupIndex,
+
+    ui:{
+      visible: popupUiVisible,
+      setVisible: popupSetUIVisible,
+    }
+  }
+
+
+
+
+
+
+
+
   const router = useRouter();
 
   // const [isReadyToAnimate, setIsReadyToAnimate] = useState(false);
@@ -136,7 +174,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Layout>
-        <Popup popup={popup} setPopup={setPopup} />
+        <Popup pop={pop} />
 
         {/* TODO: They break when you go back in the browser */}
         {/* <AnimatePresence
@@ -165,7 +203,7 @@ export default function App({ Component, pageProps }) {
         {/* TODO:delete this once you uncomment the rest */}
         {/* TODO: To fix the loading screen issue you were having, go back to what you had before and set it so that it disapears when its not in use so that its not in the background.  Then to address the issue with it not showing up when its time to transition, go to DLINK or Button or something and make it so that when they are hovered the loading screen is shown for the next 2 or 3 seconds and then disappears again.  For mobile this wouldn't help though so ahh shoot */}
         <div className="base-page-size">
-          <Component popup={popup} setPopup={setPopup} />
+          <Component pop={pop} />
         </div>
         <Footer />
         {/* </motion.div>

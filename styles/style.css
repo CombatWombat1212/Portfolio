@@ -2292,7 +2292,6 @@ body {
   position: absolute;
   z-index: 10;
   top: calc(50% - (var(--button-height) / 2));
-  transition: var(--transition);
 }
 
 .popup--seek__left {
@@ -2351,20 +2350,6 @@ body {
   z-index: 15;
 }
 
-.popup--nav__on {
-  display: flex;
-  opacity: 1;
-}
-
-.popup--nav__off {
-  display: none;
-  opacity: 0;
-}
-
-.popup--nav__tran {
-  opacity: 0;
-}
-
 .popup--title {
   display: flex;
   flex-direction: column;
@@ -2384,19 +2369,6 @@ body {
 
 .popup--canvas__grabbed {
   cursor: grabbing;
-}
-
-.popup--canvas__on {
-  opacity: 1;
-}
-
-.popup--canvas__off {
-  opacity: 0;
-  cursor: default;
-}
-
-.popup--canvas__tran {
-  opacity: 0;
 }
 
 .popup--loading {

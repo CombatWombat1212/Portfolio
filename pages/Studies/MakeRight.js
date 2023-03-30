@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 
 // TODO: add the interactive chapter selection thingy
 
-function MakeRight({ setPopup }) {
+function MakeRight({ pop }) {
   const study = STUDY_MAKERIGHT;
 
   return (
@@ -327,7 +327,16 @@ function MakeRight({ setPopup }) {
 
             <Column className="col-4">
               <Graphic className="flex-col h-auto" background="background" type="mask" img={MAKERIGHT_IMGS["brainstorming_chart"]}>
-                <Button color="primary" type="bottom" onClick={() => setPopup({ type: "interactive", img: MAKERIGHT_IMGS["brainstorming_chart_full"] })}>
+                <Button color="primary" type="bottom" onClick={
+                  () => {
+                    pop.setOn(true);
+                    pop.setType("interactive");
+                    pop.setImg(MAKERIGHT_IMGS["brainstorming_chart_full"]);
+                    // setPopup({ type: "interactive", img: MAKERIGHT_IMGS["brainstorming_chart_full"] })
+                  
+                  }
+                  
+                  }>
                   View full exercise
                 </Button>
               </Graphic>
@@ -543,14 +552,14 @@ function MakeRight({ setPopup }) {
                 <p>Customer Journey - Item Listing (Low-Fi)</p>
                 <p>Phase 1</p>
               </Description>
-              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_checkout_low_fi"]} lightbox setPopup={setPopup} />
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_checkout_low_fi"]} lightbox pop={pop} />
             </Column>
             <Column caption="above">
               <Description className="graphic--caption graphic--caption__split">
                 <p>Customer Journey - Item Listing (High-Fi)</p>
                 <p>Phase 2</p>
               </Description>
-              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_checkout_high_fi"]} lightbox setPopup={setPopup} />
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_checkout_high_fi"]} lightbox pop={pop} />
             </Column>
 
             <Column caption="above">
@@ -558,14 +567,14 @@ function MakeRight({ setPopup }) {
                 <p>Maker Journey - File Checking (Low-Fi)</p>
                 <p>Phase 1</p>
               </Description>
-              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_file_checking_low_fi"]} lightbox setPopup={setPopup} />
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_file_checking_low_fi"]} lightbox pop={pop} />
             </Column>
             <Column caption="above">
               <Description className="graphic--caption graphic--caption__split">
                 <p>Maker Journey - File Checking (High-Fi)</p>
                 <p>Phase 2</p>
               </Description>
-              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_file_checking_high_fi"]} lightbox setPopup={setPopup} />
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_file_checking_high_fi"]} lightbox pop={pop} />
             </Column>
           </Section>
 
@@ -585,13 +594,13 @@ function MakeRight({ setPopup }) {
             <Heading type="h3">The Manufacturer Overview</Heading>
 
             <Column>
-              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_overview_before"]} lightbox setPopup={setPopup} />
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_overview_before"]} lightbox pop={pop} />
               <Description className="mt-more graphic--caption graphic--caption__split">
                 <p>Aspiring makers need to understand the expectations of their new job. Originally, this was taught with an 8-page slideshow. But users found it droning, hard to retain, and too easy to skip.</p>
               </Description>
             </Column>
             <Column>
-              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_overview_after"]} lightbox={MAKERIGHT_IMGS["feedback_overview_after_full"]} zoom setPopup={setPopup} />
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_overview_after"]} lightbox={MAKERIGHT_IMGS["feedback_overview_after_full"]} zoom pop={pop} />
               <Description className="mt-more graphic--caption graphic--caption__split">
                 <p>Now, that info exists as a single inviting page. As well, I added a brief video chat at the end onboarding to ensure new Makers have read the overview, and can ask questions.</p>
               </Description>
@@ -602,26 +611,26 @@ function MakeRight({ setPopup }) {
             <Heading type="h3">Equipment verification</Heading>
 
             <Column>
-              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_printers_before"]} lightbox setPopup={setPopup} />
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_printers_before"]} lightbox pop={pop} />
               <Description className="mt-more graphic--caption graphic--caption__split">
                 <p>User’s noted: lack of parity between printer and filament inputs, and the inability to add multiple printers.</p>
               </Description>
             </Column>
             <Column>
-              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_printers_after"]} lightbox setPopup={setPopup} />
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_printers_after"]} lightbox pop={pop} />
               <Description className="mt-more graphic--caption graphic--caption__split">
                 <p>Redesign to match filament inputs, now with support for multiple printers, and integrated support via tooltips.</p>
               </Description>
             </Column>
 
             <Column>
-              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_filament_before"]} lightbox setPopup={setPopup} />
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_filament_before"]} lightbox pop={pop} />
               <Description className="mt-more graphic--caption graphic--caption__split">
                 <p>Makers may have entire shelves of filament, so it would be useful to have more distinction between each added material.</p>
               </Description>
             </Column>
             <Column>
-              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_filament_after"]} lightbox setPopup={setPopup} />
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_filament_after"]} lightbox pop={pop} />
               <Description className="mt-more graphic--caption graphic--caption__split">
                 <p>A stripe across the top of the cards match the real-world color of the inputted filament; making them much easier to differentiate.</p>
               </Description>

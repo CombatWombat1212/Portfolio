@@ -62,6 +62,8 @@ function canvasZoom(e) {
 
   var slider = document.querySelector(".scale--input");
 
+  if(!slider) return;
+
   if (e.type === "wheel") {
     zoom = e.deltaY < 0 ? zoomIn : zoomOut;
     currentTransformedCursor = getTransformedPoint(e.offsetX, e.offsetY);
@@ -197,20 +199,14 @@ function canvasImageSizeInit() {
   canvasImgTransform.middleY = height / 2;
 }
 
-function canvasInit(popup) {
+function canvasInit(pop) {
   canvas = document.querySelector(".popup--canvas");
   context = canvas.getContext("2d");
   canvasInput = document.querySelector(".scale--input");
   
   if (!canvas) return;
   
-  // canvasImage = document.querySelector(".popup--img img");
-  // var loadingIcon = loading;
-  // loadingIcon.src = "../../assets/loading/loading_spinner.svg";
-  // console.log(loadingIcon);
-  // var loadingImg = loadImgExternally(loadingIcon);
-
-  canvasImage = loadImgExternally(popup.img);
+  canvasImage = loadImgExternally(pop.img);
 
   canvasImage.onload = function () {
 
@@ -225,9 +221,9 @@ function canvasInit(popup) {
     canvas.addEventListener("mousedown", canvasMouseDownHandler);
     canvas.addEventListener("mouseup", canvasMouseUpHandler);
 
-    setActiveHiddenUI("interactive");
+    // setActiveHiddenUI("interactive");
 
-    hiddenUIInit();
+    // hiddenUIInit();
     canvasDrawImage();
 
   };

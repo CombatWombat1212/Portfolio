@@ -14,7 +14,7 @@ import { IMAGE_TYPES, VIDEO_TYPES } from "@/scripts/GlobalUtilities";
 
 // TODO: add panos to photography
 
-function Explorations({ setPopup }) {
+function Explorations({ pop }) {
   const study = STUDY_EXPLORATIONS;
 
   var disciplines = study.brief.disciplines;
@@ -61,7 +61,6 @@ function Explorations({ setPopup }) {
                   var isGroup = item.imgs ? true : false;
 
                   if(isGroup)item.type = item.imgs[0].type;
-                  var popup = {lightbox:true, setPopup:setPopup};
                   
                   item.type = item.type.toLowerCase();
                   var type = IMAGE_TYPES.includes(item.type) ? "image" : "video";
@@ -79,7 +78,7 @@ function Explorations({ setPopup }) {
                         
                         // {...popup}
                         lightbox
-                        setPopup={setPopup}
+                        pop={pop}
                          />
 
 

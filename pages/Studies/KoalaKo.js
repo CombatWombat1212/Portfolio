@@ -10,7 +10,7 @@ import { Fragment, useEffect } from "react";
 import Findings from "@/components/global/Findings";
 import Method from "@/components/global/Method";
 
-function KoalaKo({ setPopup, onReady }) {
+function KoalaKo({ pop, onReady }) {
   const study = STUDY_KOALAKO;
   useEffect(() => {
     const handleLoad = () => {
@@ -166,15 +166,15 @@ function KoalaKo({ setPopup, onReady }) {
           </Column>
 
           <Column className="solution--graphics">
-            <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_setup} lightbox setPopup={setPopup} />
-            <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_skip_signup} lightbox setPopup={setPopup} />
+            <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_setup} lightbox pop={pop} />
+            <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_skip_signup} lightbox pop={pop} />
           </Column>
         </Section>
 
         <Section id="Overview--Wordly" type="columns" background="tertiary">
           <Column className="solution--graphics">
-            <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_location} lightbox setPopup={setPopup} />
-            <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_map_item} lightbox setPopup={setPopup} />
+            <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_location} lightbox pop={pop} />
+            <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_map_item} lightbox pop={pop} />
           </Column>
           <Column className="solution--copy">
             <Graphic type="mask" img={KOALAKO_IMGS.solution_worldly_creativity} />
@@ -306,35 +306,35 @@ function KoalaKo({ setPopup, onReady }) {
             <Heading type="p" className="graphic--caption__above color--tertiary" sameHeight="lowfi_prototype_heading">
               <b>Onboarding</b>
             </Heading>
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.prototype_low_onboarding} />
+            <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.prototype_low_onboarding} />
           </Column>
 
           <Column caption="above">
             <Heading type="p" className="graphic--caption__above color--tertiary" sameHeight="lowfi_prototype_heading">
               <b>Homepage</b>
             </Heading>
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.prototype_low_homepage} />
+            <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.prototype_low_homepage} />
           </Column>
 
           <Column caption="above">
             <Heading type="p" className="graphic--caption__above color--tertiary" sameHeight="lowfi_prototype_heading">
               <b>Activities</b>
             </Heading>
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.prototype_low_activities} />
+            <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.prototype_low_activities} />
           </Column>
 
           <Column caption="above">
             <Heading type="p" className="graphic--caption__above color--tertiary" sameHeight="lowfi_prototype_heading">
               <b>Location Browse</b>
             </Heading>
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.prototype_low_map} />
+            <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.prototype_low_map} />
           </Column>
 
           <Column caption="above">
             <Heading type="p" className="graphic--caption__above color--tertiary" sameHeight="lowfi_prototype_heading">
               <b>Statistics</b>
             </Heading>
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.prototype_low_statistics} />
+            <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.prototype_low_statistics} />
           </Column>
 
           <Description className="text-col-2 text-gap-4" below>
@@ -401,14 +401,14 @@ function KoalaKo({ setPopup, onReady }) {
             <Heading type="p" className="graphic--caption__above color--tertiary">
               <b>Onboarding</b>
             </Heading>
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.prototypes_userflow_splash_screen} />
+            <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.prototypes_userflow_splash_screen} />
           </Column>
 
           <Column className="col-2" caption="above">
             <Heading type="p" className="graphic--caption__above color--tertiary">
               <b>Play Statistics</b>
             </Heading>
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.prototypes_userflow_statistics} />
+            <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.prototypes_userflow_statistics} />
           </Column>
         </Section>
 
@@ -416,7 +416,7 @@ function KoalaKo({ setPopup, onReady }) {
           <Heading>Features added at this stage include:</Heading>
 
           <Column>
-            <Graphic className="b-rad" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.features_child_profiles} />
+            <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_child_profiles} />
             <Heading type="h3" className="graphic--caption mt-more">
               Optional child profiles
             </Heading>
@@ -425,7 +425,7 @@ function KoalaKo({ setPopup, onReady }) {
             </Description>
           </Column>
           <Column>
-            <Graphic className="b-rad" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.features_selecting_interests} />
+            <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_selecting_interests} />
             <Heading type="h3" className="graphic--caption mt-more">
               Selecting interests
             </Heading>
@@ -434,7 +434,7 @@ function KoalaKo({ setPopup, onReady }) {
             </Description>
           </Column>
           <Column>
-            <Graphic className="b-rad" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.features_statistics_page} />
+            <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_statistics_page} />
             <Heading type="h3" className="graphic--caption mt-more">
               Refined statistics page
             </Heading>
@@ -444,7 +444,7 @@ function KoalaKo({ setPopup, onReady }) {
           </Column>
 
           <Column className="col-4">
-            <Graphic className="b-rad" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.features_community_feedback} sameHeight="features_last" />
+            <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_community_feedback} sameHeight="features_last" />
             <Heading type="h3" className="graphic--caption mt-more">
               Community feedback
             </Heading>
@@ -453,7 +453,7 @@ function KoalaKo({ setPopup, onReady }) {
             </Description>
           </Column>
           <Column className="col-8">
-            <Graphic className="b-rad" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.features_location_browsing} sameHeight="features_last" />
+            <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_location_browsing} sameHeight="features_last" />
             <Heading type="h3" className="graphic--caption mt-more">
               Location browsing
             </Heading>
@@ -575,11 +575,11 @@ function KoalaKo({ setPopup, onReady }) {
           </Column>
           <Column className="flex-row gap-4">
             <div className="col-6">
-              <Graphic type="image" className="b-rad border-tertiary" img={KOALAKO_IMGS.refine_stats_before} lightbox setPopup={setPopup} />
+              <Graphic type="image" className="b-rad border-tertiary" img={KOALAKO_IMGS.refine_stats_before} lightbox pop={pop} />
               <Title className="mt-1">Before</Title>
             </div>
             <div className="col-6">
-              <Graphic type="image" className="b-rad border-tertiary" img={KOALAKO_IMGS.refine_stats_after} lightbox setPopup={setPopup} />
+              <Graphic type="image" className="b-rad border-tertiary" img={KOALAKO_IMGS.refine_stats_after} lightbox pop={pop} />
               <Title className="mt-1">After</Title>
             </div>
           </Column>
@@ -594,8 +594,8 @@ function KoalaKo({ setPopup, onReady }) {
             </Description>
           </Column>
           <Column className="flex-row gap-4">
-            <Graphic type="image" className="b-rad border-tertiary" img={KOALAKO_IMGS.refine_trophies_location} lightbox setPopup={setPopup} />
-            <Graphic type="image" className="b-rad border-tertiary" img={KOALAKO_IMGS.refine_trophies_page} lightbox setPopup={setPopup} />
+            <Graphic type="image" className="b-rad border-tertiary" img={KOALAKO_IMGS.refine_trophies_location} lightbox pop={pop} />
+            <Graphic type="image" className="b-rad border-tertiary" img={KOALAKO_IMGS.refine_trophies_page} lightbox pop={pop} />
           </Column>
         </Section>
 
@@ -613,11 +613,11 @@ function KoalaKo({ setPopup, onReady }) {
           </Column>
           <Column className="flex-row gap-4">
             <div className="col-6">
-              <Graphic type="image" className="b-rad border-tertiary" img={KOALAKO_IMGS.refine_post_activity_before} lightbox setPopup={setPopup} />
+              <Graphic type="image" className="b-rad border-tertiary" img={KOALAKO_IMGS.refine_post_activity_before} lightbox pop={pop} />
               <Title className="mt-1">Before</Title>
             </div>
             <div className="col-6">
-              <Graphic type="image" className="b-rad border-tertiary" img={KOALAKO_IMGS.refine_post_activity_after} lightbox setPopup={setPopup} />
+              <Graphic type="image" className="b-rad border-tertiary" img={KOALAKO_IMGS.refine_post_activity_after} lightbox pop={pop} />
               <Title className="mt-1">After</Title>
             </div>
           </Column>
@@ -649,23 +649,23 @@ function KoalaKo({ setPopup, onReady }) {
 
         <Section id="Deliver--Submission-Graphics-1" wrapperClassName="mt-less">
           <Column>
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.delivery_login} />
+            <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_login} />
           </Column>
 
           <Column>
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.delivery_interests} />
+            <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_interests} />
           </Column>
 
           <Column>
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.delivery_activities} />
+            <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_activities} />
           </Column>
 
           <Column>
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.delivery_game_listing} />
+            <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_game_listing} />
           </Column>
 
           <Column>
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.delivery_map} />
+            <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_map} />
           </Column>
         </Section>
 
@@ -688,29 +688,29 @@ function KoalaKo({ setPopup, onReady }) {
 
         <Section id="Deliver--Submission-Graphics-2" wrapperClassName="mt-less">
           <Column>
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.delivery_post_activity} />
+            <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_post_activity} />
           </Column>
 
           <Column>
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.delivery_trophies} />
+            <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_trophies} />
           </Column>
 
           <Column>
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.delivery_profile_parent} />
+            <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_profile_parent} />
           </Column>
 
           <Column>
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.delivery_profile_child} />
+            <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_profile_child} />
           </Column>
 
           <Column>
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.delivery_statistics} />
+            <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_statistics} />
           </Column>
         </Section>
 
         <Section id="Deliver--Features">
           <Column caption="split">
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.delivery_location} />
+            <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_location} />
             <Heading type="h3" className="weight-reg">
               Fostering growth through <br />
               exploration and adventure
@@ -719,7 +719,7 @@ function KoalaKo({ setPopup, onReady }) {
           </Column>
 
           <Column caption="split">
-            <Graphic className="b-rad border-tertiary" lightbox setPopup={setPopup} type="image" img={KOALAKO_IMGS.delivery_games} />
+            <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_games} />
             <Heading type="h3" className="weight-reg">
               Accessible to parents of <br />
               any timeframe or budget
