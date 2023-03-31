@@ -334,6 +334,7 @@ const MAKERIGHT_IMGS = processImages({
     alt: "A snippet of a single scrolling page, the final version of the MakeRight Manufacturer Overview",
     width: 2084,
     height: 1283,
+    lightboxImg: "feedback_overview_after_full",
     // group: "feedback_overview",
   },
 

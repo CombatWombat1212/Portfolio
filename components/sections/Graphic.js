@@ -162,7 +162,6 @@ function Graphic({
 
   var onClickHandler;
   lightbox = lightbox ? lightbox : false;
-  zoom = zoom ? true : false;
   if (lightbox) {
     var lightboxImg = img;
 
@@ -172,9 +171,10 @@ function Graphic({
 
     // TODO: add loading indicator for lightbox images, and smoother transitions between non-zoomed images and zoomed images
 
+    console.log(lightboxImg);
     onClickHandler = () => {
       pop.setImg(lightboxImg);
-      pop.setZoom(zoom);
+      pop.setZoom(lightboxImg.zoom ? lightboxImg.zoom : false);
       pop.setOn(true);
       pop.setType("lightbox");
     };

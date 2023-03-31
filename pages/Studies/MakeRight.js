@@ -600,7 +600,7 @@ function MakeRight({ pop }) {
               </Description>
             </Column>
             <Column>
-              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_overview_after"]} lightbox={MAKERIGHT_IMGS["feedback_overview_after_full"]} zoom pop={pop} />
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_overview_after"]} lightbox={MAKERIGHT_IMGS["feedback_overview_after_full"]} pop={pop} />
               <Description className="mt-more graphic--caption graphic--caption__split">
                 <p>Now, that info exists as a single inviting page. As well, I added a brief video chat at the end onboarding to ensure new Makers have read the overview, and can ask questions.</p>
               </Description>

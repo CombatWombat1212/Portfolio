@@ -72,6 +72,8 @@
     display: flex;
     position: relative;
     flex-direction: column;
+    align-items: center;
+  
   }
 
   &--content {
@@ -84,6 +86,11 @@
     overflow: hidden;
     @include trans;
 
+    &__interactive {
+      height:100%;
+    }
+
+
     &__lightbox {
       @include no-select;
       --popup-background: #00000000;
@@ -92,23 +99,21 @@
       top: calc(var(--popup-controls-offset) * -1);
     }
 
-
-
-
     &__lightbox-zoom {
       overflow-y: scroll;
-      position: unset;
+      // position: unset;
     }
+
+
+
   }
 
   &--controls {
     @include flex-row;
     position: absolute;
-    top: calc(100%);
     justify-content: center;
-    width: 100%;
+    // width: 100%;
     top: calc(100% - var(--popup-controls-offset) + 1.85rem);
-
     --gap: 1.45rem;
     @include gap;
   }

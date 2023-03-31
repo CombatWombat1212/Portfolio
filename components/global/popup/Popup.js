@@ -175,6 +175,9 @@ function getPopupClasses(pop) {
   return { headerClasses, contentClasses, popupContainerClasses, popupImgClasses, popupContainerStyle };
 }
 
+
+
+
 function Popup({ pop }) {
   return (
     <>
@@ -227,6 +230,11 @@ function Wrapper({ pop }) {
     updatePopupNav(pop, nav);
   }, [pop.group, pop.index]);
 
+  useEffect(() => {
+    console.log(pop.zoom);
+
+  }, [pop.zoom]);
+
   // useEffect(() => {
   //   if (pop.on && pop.type === 'lightbox' && pop.group) {
   //     preloadImages(pop.group.imgs);
@@ -241,8 +249,9 @@ function Wrapper({ pop }) {
   //   });
   // }
 
-  // TODO: add pagination indicator to the bottom of the popup
+  // TODO: take a quick look at the interactive popup, make sure we're all good there, otherwise next thing
   // TODO: add new popup type for explorations page
+  // TODO: custom image ordering on the explorations page
 
   const [seekCooldown, setSeekCooldown] = useState(false);
 
@@ -258,7 +267,7 @@ function Wrapper({ pop }) {
 
             {pop.type == "lightbox" && (
               <>
-                <LightboxContent pop={pop} popupImgClasses={popupImgClasses} />
+                <LightboxElem pop={pop} popupImgClasses={popupImgClasses} />
               </>
             )}
 
@@ -269,7 +278,6 @@ function Wrapper({ pop }) {
             {pop.type == "interactive" && <ScaleWrapper pop={pop} nav={nav} />}
           </div>
 
-          {/* TODO: whether or not group is there is gonna affect some classes that you gotta write */}
           {pop.type == "lightbox" && pop.group && (
             <div className="popup--controls">
               <Seek direction="left" nav={nav} />
@@ -321,8 +329,13 @@ function Wrapper({ pop }) {
     if (ind < 0) ind = length - 1;
 
     pop.setIndex(ind);
-    pop.setImg(pop.group.imgs[ind]);
-    pop.setZoom(pop.img.zoom ? pop.img.zoom : false);
+
+    var img = pop.group.imgs[ind].lightboxImg ? pop.group.imgs[ind].lightboxImg : pop.group.imgs[ind];
+    pop.setImg(img);
+
+    pop.setZoom(img.zoom ? img.zoom : false);
+
+  
     pop.setType("lightbox");
 
     // Set a timeout to remove the cooldown status after a specified duration
@@ -343,7 +356,7 @@ function Wrapper({ pop }) {
   }
 }
 
-function LightboxContent({ pop, popupImgClasses }) {
+function LightboxElem({ pop, popupImgClasses }) {
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -459,18 +472,16 @@ const Pagination = React.memo(
       <div className="popup--pagination">
         {pop.group?.imgs?.map((img, i) => {
           return (
-            <>
               <Circle
                 active={i === pop.index}
-                key={i}
+                key={`circle ${img.src}`}
                 onClick={() => {
                   pop.setIndex(i);
                   pop.setImg(pop.group.imgs[i]);
-                  pop.setZoom(pop.img.zoom ? pop.img.zoom : false);
+                  pop.setZoom(img.zoom ? img.zoom : false);
                   pop.setType("lightbox");
                 }}
               />
-            </>
           );
         })}
       </div>
@@ -479,11 +490,9 @@ const Pagination = React.memo(
     function Circle({ active, onClick }) {
       const classes = active ? "popup--circle__active" : "popup--circle__inactive";
       return (
-        <>
           <a className={`popup--circle ${classes}`} onClick={onClick}>
             <div className="popup--circle-inner"></div>
           </a>
-        </>
       );
     }
   },
