@@ -337,6 +337,13 @@ function toTitleCase(str) {
   });
 }
 
+
+
+function ensureArray(input) {
+  return typeof input === "string" ? [input] : input;
+}
+
+
 // Video file formats
 const VIDEO_TYPES = ["mp4", "avi", "mov", "wmv", "mkv", "flv", "webm"];
 
@@ -360,6 +367,7 @@ export {
   getElemWidth,
   getColors,
   toTitleCase,
+  ensureArray,
   RESIZE_TIMEOUT,
   VIDEO_TYPES,
   IMAGE_TYPES,

@@ -22,7 +22,7 @@ function getColor(color, colors) {
 function Effect({ effect }) {
   if (typeof effect == "string") effect = effect.split(" ");
   var [type] = effect;
-  const reference = useRef(null);
+  const graphicref = useRef(null);
 
   const [colors, setColors] = useState(false);
   const [style, setStyle] = useState(false);
@@ -104,6 +104,7 @@ function Graphic({
   color,
   children,
   lightbox,
+  gallery,
   zoom,
   // setPopup,
   pop,
@@ -123,6 +124,7 @@ function Graphic({
   sync,
   innerStyle,
   sameHeight,
+  reference,
   ...props
 }) {
   // TODO: for mobile, add some kind of indication animation of the image being clicked on when its interactable or can be opened in a lightbox
@@ -162,27 +164,31 @@ function Graphic({
 
   var onClickHandler;
   lightbox = lightbox ? lightbox : false;
-  if (lightbox) {
-    var lightboxImg = img;
+  gallery = gallery ? gallery : false;
 
+  if(gallery && lightbox) console.error(`Img ${img.src} is both a lightbox and a gallery image. Please only use one or the other.`)
+
+  if (lightbox || gallery) {
+
+    var lightboxImg = img;
     if (typeof lightbox == "object") {
       lightboxImg = lightbox;
     }
 
     // TODO: add loading indicator for lightbox images, and smoother transitions between non-zoomed images and zoomed images
 
-    console.log(lightboxImg);
     onClickHandler = () => {
       pop.setImg(lightboxImg);
       pop.setZoom(lightboxImg.zoom ? lightboxImg.zoom : false);
       pop.setOn(true);
-      pop.setType("lightbox");
+      // pop.setType("lightbox");
+      pop.setType(lightbox ? "lightbox" : (gallery ? "gallery" : "lightbox"));
     };
   }
 
   effect = effect ? effect : false;
 
-  var allClasses = `section--graphic graphic ${backgroundClasses} ${className} ${buttonClasses} ${lightbox ? "graphic__lightbox" : ""}`;
+  var allClasses = `section--graphic graphic ${backgroundClasses} ${className} ${buttonClasses} ${lightbox ? "graphic__lightbox" : ""} ${gallery ? "graphic__gallery" : ""}`;
 
   var typePref = isImg ? "img" : isMask ? "mask" : isVideo ? "video" : "";
 
@@ -193,21 +199,24 @@ function Graphic({
     [`--${typePref[0]}h`]: `${height / 16}rem`,
   };
 
-  const reference = useRef(null);
+  const graphicref = useRef(null);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
-  }, [reference]);
+    if(reference){
+      reference.current = graphicref.current;
+    }
+  }, [graphicref]);
 
   useEffect(() => {
     if (!isMounted) return;
     if (isSquare) {
-      graphicKeepSquare(reference.current);
+      graphicKeepSquare(graphicref.current);
     }
 
     if (isVideo) {
-      graphicVideoInit(reference.current);
+      graphicVideoInit(graphicref.current);
     }
   }, [isMounted]);
 
@@ -215,7 +224,7 @@ function Graphic({
   var ap = typeof autoplay === "string" && autoplay.includes("scroll") ? false : autoplay ? true : false;
 
   sameHeight = sameHeight ? sameHeight : false;
-  const sameHeightObj = useSameHeight(sameHeight, reference, {
+  const sameHeightObj = useSameHeight(sameHeight, graphicref, {
     resize: "horizontal",
   });
 
@@ -233,7 +242,7 @@ function Graphic({
                 }
               : {}),
           }}
-          ref={reference}
+          ref={graphicref}
           onClick={onClick}
           {...(tabIndex !== undefined ? { tabIndex } : {})}
           {...props}>
@@ -256,7 +265,7 @@ function Graphic({
         <div
           className={`graphic--mask ${allClasses}`}
           style={{ ...styleVariables, ...style }}
-          ref={reference}
+          ref={graphicref}
           onClick={onClick}
           {...(tabIndex != undefined ? { tabIndex: tabIndex } : {})}
           {...props}>
@@ -279,7 +288,7 @@ function Graphic({
         <div
           className={`graphic--video ${allClasses}`}
           style={{ ...styleVariables, ...style }}
-          ref={reference}
+          ref={graphicref}
           onClick={onClick}
           {...(tabIndex != undefined ? { tabIndex: tabIndex } : {})}
           {...(sync != undefined ? { "data-sync": sync } : {})}

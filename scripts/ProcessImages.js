@@ -1,4 +1,4 @@
-import { IMAGE_TYPES, VIDEO_TYPES } from "./GlobalUtilities";
+import { IMAGE_TYPES, VIDEO_TYPES, ensureArray } from "./GlobalUtilities";
 
 function checkForOverlappingIndexes(group, index, name, currentGroup) {
   for (let i = 0; i < currentGroup.length; i++) {
@@ -189,6 +189,7 @@ function processImages(images, study) {
       const fileExtension = image.src.split(".").pop();
       image.type = fileExtension.toLowerCase();
       image.media = VIDEO_TYPES.includes(image.type) ? "video" : IMAGE_TYPES.includes(image.type) ? "image" : "unknown";
+      image.description = ensureArray(image.description || false) || false;
 
         
       image.study = study;

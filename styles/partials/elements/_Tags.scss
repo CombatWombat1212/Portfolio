@@ -32,6 +32,12 @@
     border-radius: 100rem;
   }
 
+  &__inverted{
+    border: 0.125rem solid $col-background;;
+    background-color: rgba(0,0,0,0);
+      color: $col-background!important;
+  }
+
   // &__filter{
   //   cursor: pointer;
   //   @include hover{

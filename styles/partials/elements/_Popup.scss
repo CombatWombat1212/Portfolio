@@ -1,3 +1,17 @@
+@mixin popup-scrollbar {
+  @include scrollbar {
+    width: 0.75rem;
+  }
+
+  @include scrollbar-track {
+    background-color: darken($col-tertiary, 5);
+  }
+
+  @include scrollbar-thumb {
+    background-color: lighten($col-tertiary-light, 10);
+  }
+}
+
 .popup {
   &--wrapper {
     position: fixed;
@@ -31,6 +45,10 @@
     height: 100%;
     // background-color: rgba($col-tertiary, 0.4);
     background-color: rgba($col-tertiary, 0.5);
+
+    &__gallery {
+      background-color: rgba($col-tertiary, 0.945);
+    }
   }
 
   // --popup-pad: 2.5rem;
@@ -49,7 +67,8 @@
     height: calc(100% - var(--nav-height) - var(--popup-pad));
   }
 
-  &__lightbox,&__lightbox-group {
+  &__lightbox,
+  &__lightbox-group {
     aspect-ratio: var(--img-aspect-width) / var(--img-aspect-height);
     // max-width: calc(var(--site-max-width) - var(--popup-pad));
     max-width: calc(var(--site-max-width));
@@ -67,13 +86,27 @@
     width: calc(var(--site-max-width) - var(--popup-pad));
   }
 
+  &__gallery {
+    // max-width: calc(var(--site-max-width));
+    --popup-gap: 3rem;
+    max-width: calc(var(--site-max-width_wide));
+    max-height: calc(100% - var(--nav-height) - var(--popup-pad) - 4rem);
+    width: auto;
+    height: auto;
+    pointer-events: none;
+    aspect-ratio: var(--popup-aspect-width) / var(--popup-aspect-height);
+  }
+
   &--inner {
     width: 100%;
     display: flex;
     position: relative;
     flex-direction: column;
     align-items: center;
-  
+
+    &__gallery {
+      pointer-events: none;
+    }
   }
 
   &--content {
@@ -87,134 +120,45 @@
     @include trans;
 
     &__interactive {
-      height:100%;
+      height: 100%;
     }
-
 
     &__lightbox {
       @include no-select;
       --popup-background: #00000000;
     }
+
     &__lightbox-group {
       top: calc(var(--popup-controls-offset) * -1);
     }
-
     &__lightbox-zoom {
       overflow-y: scroll;
-      // position: unset;
     }
 
-
-
-  }
-
-  &--controls {
-    @include flex-row;
-    position: absolute;
-    justify-content: center;
-    // width: 100%;
-    top: calc(100% - var(--popup-controls-offset) + 1.85rem);
-    --gap: 1.45rem;
-    @include gap;
-  }
-
-  &--seek {
-    --popup-seek-spacing: 2rem;
-    // position: absolute;
-    // z-index: 10;
-
-    a {
-      transition: 0.15s;
-    }
-
-    &__on {
-      a {
-        opacity: 1;
-        cursor: pointer;
-      }
-    }
-
-    &__off {
-      a {
-        opacity: 0.55;
-        cursor: default;
-        pointer-events: none;
-        --button-color: #{desaturate($col-primary, 35)};
-      }
-    }
-
-    .mask {
-      --button-icon-scale: 1.1;
+    &__gallery {
+      @include flex-row-center;
+      background-color: rgba(0, 0, 0, 0);
+      pointer-events: none;
+      border-radius: unset;
     }
   }
 
-  &--pagination {
-    @include flex-row;
-    align-items: center;
-    --gap: 0.75rem;
-    @include gap;
-  }
-
-  &--circle {
-    transition: 0.2s;
-    $px: 0.0625rem;
-
-    width: $px * 22;
-    height: $px * 22;
-    background-color: $col-background;
-    border-radius: 100rem;
-    @include flex-row-center;
-    align-items: center;
-    cursor: pointer;
-    position: relative;
-
-    &::before {
-      content: "";
-      width: $px * 34;
-      height: $px * 34;
-      border-radius: 100rem;
-      position: absolute;
-      transform: translate(-50%, -50%);
-      top: 50%;
-      left: 50%;
+  &--description {
+    // background-color: $col-background;
+    * {
+      color: $col-background;
     }
+    &__gallery {
+      pointer-events: all;
+      --w: calc(#{col-width(3.35)} - var(--popup-gap));
+      width: var(--w);
+      min-width: var(--w);
+      height: var(--gallery-img-height);
+      overflow-y: auto;
+      padding-right: calc(var(--popup-gap) / 2);
 
-    &__inactive {
-      @include hover {
-        background-color: $col-background_darkest;
-
-        & > * {
-          background-color: rgba($col-primary, 0.5);
-        }
-      }
-
-      & > * {
-        background-color: $col-background;
-      }
+      @include popup-scrollbar;
     }
-
-    &__active {
-      @include hover {
-        background-color: $col-background_darkest;
-
-        & > * {
-          background-color: $col-primary_hovered;
-        }
-      }
-
-      & > * {
-        background-color: $col-primary;
-      }
-    }
-  }
-
-  &--circle-inner {
-    transition: 0.2s;
-
-    $px: 0.0625rem;
-    width: $px * 14;
-    height: $px * 14;
-    border-radius: 100rem;
   }
 
   &--header {
@@ -312,6 +256,18 @@
     }
   }
 
+  &--media-wrapper {
+    &__gallery {
+      // width: col-width(8);
+      @include b-rad;
+      overflow: hidden;
+      // --w: calc(#{col-width(8)} - var(--popup-gap));
+      // width: var(--w);
+      // min-width: var(--w);
+      pointer-events: all;
+    }
+  }
+
   &--media {
     max-width: 100%;
     max-height: 100%;
@@ -336,6 +292,12 @@
         height: fit-content;
       }
     }
+
+    &__gallery {
+      display: flex;
+      width: auto;
+      // min-width: Min(fit-content,100%);
+    }
   }
 
   &--img {
@@ -347,77 +309,136 @@
   }
 }
 
-.scale {
-  --scale-line-width: 0.375rem;
-  --scale-end-height: 1.5rem;
-  --scale-handle-height: 2.5rem;
-  --scale-end-margin: calc((var(--scale-line-width)) * -1);
+.popup {
+  .gallery {
+    &--title {
+    }
+    &--subheading {
+      margin-top: 0.55rem !important;
+    }
 
-  --scale-color: #{$col-primary};
-  --scale-color_hovered: #{$col-primary_hovered};
+    &--description {
+      margin-top: 1.25rem;
+    }
+    &--paragraph {
+      margin-bottom: 1rem;
+    }
+    &--categories {
+      margin-top: 1.5rem;
+      @include flex-row;
+      flex-wrap: wrap;
+      column-gap: 0.95rem;
+      row-gap: 0.85rem;
 
-  @include flex-row;
-  @include gap(0.5rem);
+      &__no-desc {
+        margin-top: 0.95rem;
+      }
+    }
+  }
+}
 
-  &--zoom {
+// ui
+.popup {
+  &--controls {
+    @include flex-row;
+    position: absolute;
+    justify-content: center;
+    // width: 100%;
+    top: calc(100% - var(--popup-controls-offset) + 1.85rem);
+    --gap: 1.45rem;
+    @include gap;
+  }
+
+  &--seek {
+    --popup-seek-spacing: 2rem;
+    // position: absolute;
+    // z-index: 10;
+
+    a {
+      transition: 0.15s;
+    }
+
+    &__on a {
+      opacity: 1;
+      cursor: pointer;
+    }
+
+    &__off a {
+      opacity: 0.55;
+      cursor: default;
+      pointer-events: none;
+      --button-color: #{desaturate($col-primary, 35)};
+    }
+
     .mask {
-      --button-icon-scale: 1;
+      --button-icon-scale: 1.1;
     }
   }
 
-  &--plus {
-  }
-  &--minus {
+  &--pagination {
+    @include flex-row;
+    align-items: center;
+    --gap: 0.75rem;
+    @include gap;
   }
 
-  &--slider {
+  &--circle {
+    transition: 0.2s;
+    $px: 0.0625rem;
+
+    width: $px * 22;
+    height: $px * 22;
+    background-color: $col-background;
+    border-radius: 100rem;
     @include flex-row-center;
-    margin-left: -0.15rem;
-  }
-
-  &--input {
-    @include my-auto;
-    appearance: none;
-    width: 100%;
-    height: var(--scale-line-width);
-    @include b-rad;
-    background-color: var(--scale-color);
+    align-items: center;
     cursor: pointer;
-    z-index: 1;
-    outline: none;
+    position: relative;
 
-    @include slider-handle {
-      appearance: none;
-      width: var(--scale-line-width);
-      height: var(--scale-handle-height);
-      background-color: var(--scale-color);
-      @include b-rad;
+    &::before {
+      content: "";
+      width: $px * 34;
+      height: $px * 34;
+      border-radius: 100rem;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+    }
 
-      @include hover(".scale--slider", "&") {
-        --scale-handle-height: 2.65rem;
-        --scale-color: #{$col-secondary};
+    &__inactive {
+      @include hover {
+        background-color: $col-background_darkest;
+
+        & > * {
+          background-color: rgba($col-primary, 0.5);
+        }
+      }
+
+      & > * {
+        background-color: $col-background;
+      }
+    }
+
+    &__active {
+      @include hover {
+        background-color: $col-background_darkest;
+        & > * {
+          background-color: $col-primary_hovered;
+        }
+      }
+      & > * {
+        background-color: $col-primary;
       }
     }
   }
 
-  &--end {
-    width: var(--scale-line-width);
-    height: var(--scale-end-height);
-    background-color: var(--scale-color);
-    @include b-rad;
-    @include my-auto;
-    z-index: 0;
+  &--circle-inner {
+    transition: 0.2s;
 
-    @include hover(".scale--slider", "&") {
-      --scale-end-height: 1.35rem;
-    }
-
-    &:first-child {
-      margin-right: var(--scale-end-margin);
-    }
-
-    &:last-child {
-      margin-left: var(--scale-end-margin);
-    }
+    $px: 0.0625rem;
+    width: $px * 14;
+    height: $px * 14;
+    border-radius: 100rem;
   }
 }

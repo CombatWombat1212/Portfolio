@@ -440,18 +440,99 @@
 // }
 
 
-@function str-split($string, $separator) {
-    $split: ();
-    $index: str-index($string, $separator);
-    @while $index {
-      $split: append($split, str-slice($string, 1, $index - 1));
-      $string: str-slice($string, $index + 1);
-      $index: str-index($string, $separator);
-    }
-    $split: append($split, $string);
-    @return $split;
-  }
 
+
+
+
+
+// this one seems to be working perfectly but only supports a list of children, in the next version i'll be updating it to support a list of parents as well
+// @function str-split($string, $separator) {
+//     $split: ();
+//     $index: str-index($string, $separator);
+//     @while $index {
+//       $split: append($split, str-slice($string, 1, $index - 1));
+//       $string: str-slice($string, $index + 1);
+//       $index: str-index($string, $separator);
+//     }
+//     $split: append($split, $string);
+//     @return $split;
+//   }
+
+//   @function generate-child-selectors($parent, $splitChild, $suffixes) {
+// 	$selectors: ();
+// 	@each $p in $parent {
+// 	  @each $c in $splitChild {
+// 		$processedChild: null;
+// 		@if $c == '&' {
+// 		  $processedChild: $p;
+// 		} @else {
+// 		  $processedChild: " #{$c}";
+// 		}
+// 		@each $s in $suffixes {
+// 		  $selectors: append($selectors, "#{$p}#{$s}#{$processedChild}", comma);
+// 		}
+// 	  }
+// 	}
+// 	@return $selectors;
+//   }
+		
+// @use "sass:math";
+// @mixin hover($parent: (''), $child: (''), $transition: var(--transition)) {
+// 	@each $p in $parent {
+// 	  @if $p == ('') and $child == ('') {
+// 		& {
+//         transition: $transition;
+//       }
+//       &:hover,
+//       &:focus,
+//       &.focus,
+//       &.hover {
+//         @content;
+//       }
+//     } @else if $child == ('') {
+// 		// if there is no child
+//       @at-root {
+//         #{$p} {
+//           transition: $transition;
+//         }
+//         #{$p}:hover,
+//         #{$p}:focus,
+//         #{$p}.focus,
+//         #{$p}.hover {
+//           @content;
+//         }
+//       }
+//     } @else {
+// 		$splitChild: str-split($child, ',');
+// 		$suffixes: (':hover', ':focus', '.focus', '.hover');
+// 		$childSelectors: generate-child-selectors($parent, $splitChild, $suffixes);
+// 		@at-root {
+// 		  #{$childSelectors} {
+// 			@content;
+// 		  }
+// 		}
+// 		@at-root {
+// 		  #{$parent} #{$child} {
+// 			transition: $transition;
+// 		  }
+// 		}
+// 	  }
+// 	}
+//   }
+  
+
+@function str-split($string, $separator) {
+	$split: ();
+	$index: str-index($string, $separator);
+	@while $index {
+	  $split: append($split, str-slice($string, 1, $index - 1));
+	  $string: str-slice($string, $index + 1);
+	  $index: str-index($string, $separator);
+	}
+	$split: append($split, $string);
+	@return $split;
+  }
+  
   @function generate-child-selectors($parent, $splitChild, $suffixes) {
 	$selectors: ();
 	@each $p in $parent {
@@ -469,37 +550,38 @@
 	}
 	@return $selectors;
   }
-		
-@use "sass:math";
-@mixin hover($parent: (''), $child: (''), $transition: var(--transition)) {
-	@each $p in $parent {
-	  @if $p == ('') and $child == ('') {
+  
+  @use "sass:math";
+  @mixin hover($parent: (''), $child: (''), $transition: var(--transition)) {
+	$splitParent: str-split($parent, ',');
+	@each $p in $splitParent {
+	  @if $p == '' and $child == '' {
 		& {
-        transition: $transition;
-      }
-      &:hover,
-      &:focus,
-      &.focus,
-      &.hover {
-        @content;
-      }
-    } @else if $child == ('') {
+		  transition: $transition;
+		}
+		&:hover,
+		&:focus,
+		&.focus,
+		&.hover {
+		  @content;
+		}
+	  } @else if $child == '' {
 		// if there is no child
-      @at-root {
-        #{$p} {
-          transition: $transition;
-        }
-        #{$p}:hover,
-        #{$p}:focus,
-        #{$p}.focus,
-        #{$p}.hover {
-          @content;
-        }
-      }
-    } @else {
+		@at-root {
+		  #{$p} {
+			transition: $transition;
+		  }
+		  #{$p}:hover,
+		  #{$p}:focus,
+		  #{$p}.focus,
+		  #{$p}.hover {
+			@content;
+		  }
+		}
+	  } @else {
 		$splitChild: str-split($child, ',');
 		$suffixes: (':hover', ':focus', '.focus', '.hover');
-		$childSelectors: generate-child-selectors($parent, $splitChild, $suffixes);
+		$childSelectors: generate-child-selectors($splitParent, $splitChild, $suffixes);
 		@at-root {
 		  #{$childSelectors} {
 			@content;

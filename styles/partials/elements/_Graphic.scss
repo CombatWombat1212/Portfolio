@@ -163,18 +163,21 @@
         }
       }
   
-      &__lightbox {
+      &__lightbox, &__gallery {
         cursor: zoom-in;
   
         img,video {
           @include trans;
           transform: scale(1);
   
-          @include hover(".graphic__lightbox", "img, video") {
+          @include hover(".graphic__lightbox, .graphic__gallery", "img, video") {
             transform: scale(1.025);
           }
+
         }
       }
+
+
     }
   }
   

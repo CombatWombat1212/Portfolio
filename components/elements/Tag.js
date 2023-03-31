@@ -2,7 +2,7 @@ import { defaultProps, PropTypes } from "prop-types";
 
 // TODO: there should be a way to have a 'tool' variant vs the default 'category' varient, i.e. one thats round vs the default one
 
-function Tag({ children, variant, filter }) {
+function Tag({ children, variant, filter, color }) {
 
   var Elem = "div";
 
@@ -13,6 +13,9 @@ function Tag({ children, variant, filter }) {
   if (filter) {
     tagClasses.push("tag__filter");
     Elem = "a";
+  }
+  if (color == "inverted") {
+    tagClasses.push("tag__inverted");
   }
 
   tagClasses = tagClasses.join(" ");
@@ -26,10 +29,12 @@ function Tag({ children, variant, filter }) {
 
 Tag.defaultProps = {
   variant: "regular",
+  color: "regular",
 };
 
 Tag.propTypes = {
   variant: PropTypes.oneOf(["regular", "tool"]),
+  color: PropTypes.oneOf(["regular", "inverted"]),
 };
 
 export default Tag;

@@ -873,7 +873,7 @@ const EXPLORATIONS_IMGS = processImages(
         "UI Design",
       ],
       tools: ["HTML/CSS/JS"],
-      title: "",
+      title: "Virtual Pangea Website",
       description: [
         "As Virtual Pangea's UX Engineer, I was tasked with salvaging our outsourced website.  The product we were delivered was subpar, and left us well behind schedule.",
         "I implemented necessities like navigation, and responsivity. Content blocks and features that were missing or broken, were rebuilt.",
@@ -1397,6 +1397,7 @@ const EXPLORATIONS_IMGS = processImages(
       ],
       study: "koalako",
       group: "koalako_delivery",
+      project: "KoalaKo"
     },
     koalako_final_02: {
       name: "delivery_activities",
@@ -1409,6 +1410,7 @@ const EXPLORATIONS_IMGS = processImages(
       title: "Activities",
       study: "koalako",
       group: "koalako_delivery",
+      project: "KoalaKo"
     },
     koalako_final_03: {
       name: "delivery_game_listing",
@@ -1421,6 +1423,7 @@ const EXPLORATIONS_IMGS = processImages(
       title: "Activity Listing",
       study: "koalako",
       group: "koalako_delivery",
+      project: "KoalaKo"
     },
     koalako_final_04: {
       name: "delivery_map",
@@ -1433,6 +1436,7 @@ const EXPLORATIONS_IMGS = processImages(
       title: "Browse Locations",
       study: "koalako",
       group: "koalako_delivery",
+      project: "KoalaKo"
     },
     koalako_final_05: {
       name: "delivery_trophies",
@@ -1445,6 +1449,7 @@ const EXPLORATIONS_IMGS = processImages(
       title: "Trophy Case",
       study: "koalako",
       group: "koalako_delivery",
+      project: "KoalaKo"
     },
     koalako_final_06: {
       name: "delivery_post_activity",
@@ -1457,6 +1462,7 @@ const EXPLORATIONS_IMGS = processImages(
       title: "Post-Activity",
       study: "koalako",
       group: "koalako_delivery",
+      project: "KoalaKo"
     },
     koalako_final_07: {
       name: "delivery_profile_child",
@@ -1469,6 +1475,7 @@ const EXPLORATIONS_IMGS = processImages(
       title: "Child Profile",
       study: "koalako",
       group: "koalako_delivery",
+      project: "KoalaKo"
     },
 
     customer_screen_06: {
@@ -1487,6 +1494,7 @@ const EXPLORATIONS_IMGS = processImages(
       ],
       study: "makeright",
       group: "makeright_final",
+      project: "MakeRight",
     },
     customer_screen_07: {
       name: "customer_screen_07",
@@ -1499,6 +1507,7 @@ const EXPLORATIONS_IMGS = processImages(
       tools: ["Adobe XD"],
       study: "makeright",
       group: "makeright_final",
+      project: "MakeRight",
     },
     customer_screen_08: {
       name: "customer_screen_08",
@@ -1511,6 +1520,7 @@ const EXPLORATIONS_IMGS = processImages(
       tools: ["Adobe XD"],
       study: "makeright",
       group: "makeright_final",
+      project: "MakeRight",
     },
     customer_screen_13: {
       name: "customer_screen_13",
@@ -1523,6 +1533,7 @@ const EXPLORATIONS_IMGS = processImages(
       tools: ["Adobe XD"],
       study: "makeright",
       group: "makeright_final",
+      project: "MakeRight",
     },
     maker_screen_09_no_tutorial: {
       name: "maker_screen_09_no_tutorial",
@@ -1536,6 +1547,7 @@ const EXPLORATIONS_IMGS = processImages(
       tools: ["Adobe XD"],
       study: "makeright",
       group: "makeright_final",
+      project: "MakeRight",
     },
     // maker_screen_09_tutorial: {
     //   name: "maker_screen_09_tutorial",
@@ -1548,6 +1560,7 @@ const EXPLORATIONS_IMGS = processImages(
     //   tools: ["Adobe XD"],
     //   study: "makeright",
     //   group: "makeright_final",
+    // project: "MakeRight",
     // },
     maker_screen_10: {
       name: "maker_screen_10",
@@ -1561,6 +1574,7 @@ const EXPLORATIONS_IMGS = processImages(
       tools: ["Adobe XD"],
       study: "makeright",
       group: "makeright_final",
+      project: "MakeRight",
     },
     maker_screen_12_no_tutorial: {
       name: "maker_screen_12_no_tutorial",
@@ -1574,6 +1588,7 @@ const EXPLORATIONS_IMGS = processImages(
       tools: ["Adobe XD"],
       study: "makeright",
       group: "makeright_final",
+      project: "MakeRight",
     },
     // maker_screen_12_tutorial: {
     //   name: "maker_screen_12_tutorial",
@@ -1587,6 +1602,7 @@ const EXPLORATIONS_IMGS = processImages(
     //   tools: ["Adobe XD"],
     //   study: "makeright",
     //   group: "makeright_final",
+    // project: "MakeRight",
     // },
     maker_screen_14: {
       name: "maker_screen_14",
@@ -1599,6 +1615,7 @@ const EXPLORATIONS_IMGS = processImages(
       tools: ["Adobe XD"],
       study: "makeright",
       group: "makeright_final",
+      project: "MakeRight",
     },
 
 

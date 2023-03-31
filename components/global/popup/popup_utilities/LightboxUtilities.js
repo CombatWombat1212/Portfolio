@@ -58,13 +58,15 @@ function getImgGroup(pop) {
 
 
 function lightboxInit(pop) {
-
   getImgGroup(pop);
-  
+}
+function galleryInit(pop) {
+  getImgGroup(pop);
 }
 
 export {
   lightboxInit,
+  galleryInit,
   updatePopupNav,
   getImgGroup,
 };

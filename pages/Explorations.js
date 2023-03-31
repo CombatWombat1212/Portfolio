@@ -10,7 +10,7 @@ import {
   EXPLORATIONS_IMGS,
   EXPLORATIONS_IMG_GROUPS,
 } from "@/data/EXPLORATIONS_IMGS";
-import { IMAGE_TYPES, VIDEO_TYPES } from "@/scripts/GlobalUtilities";
+import { IMAGE_TYPES, VIDEO_TYPES, ensureArray } from "@/scripts/GlobalUtilities";
 
 // TODO: add panos to photography
 
@@ -28,6 +28,7 @@ function Explorations({ pop }) {
     ...item,
     drawn: false,
   }));
+
 
   return (
     <>
@@ -48,15 +49,10 @@ function Explorations({ pop }) {
                 mainType="grid">
                 <Heading>{discipline.displayName}</Heading>
                 {...itemsWithDiscipline.map((item) => {
-                  // TODO: finish styling the brief tag and discipline header thing
-                  // TODO: add cases for groups, images, videos, videos in groups with images that can be a thumbnail, and videos in groups without images.
-                  // then obviously styling and adding the popup and etc etc
-                  // then we'll also need cases for ways of easily ordering content
-                  // then filtering
+
 
                   if (item.drawn) return;
                   item.drawn = true;
-
 
                   var isGroup = item.imgs ? true : false;
 
@@ -65,8 +61,8 @@ function Explorations({ pop }) {
                   item.type = item.type.toLowerCase();
                   var type = IMAGE_TYPES.includes(item.type) ? "image" : "video";
 
-
                   var img = isGroup ? item.imgs[0] : item;
+
 
                   return (
                     <Column>
@@ -77,7 +73,7 @@ function Explorations({ pop }) {
                         img={img}
                         
                         // {...popup}
-                        lightbox
+                        gallery
                         pop={pop}
                          />
 
