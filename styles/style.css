@@ -2277,8 +2277,9 @@ body {
 
 .popup__gallery {
   --popup-gap: 3rem;
+  --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 4rem);
   max-width: calc(var(--site-max-width_wide));
-  max-height: calc(100% - var(--nav-height) - var(--popup-pad) - 4rem);
+  max-height: calc(100% - var(--popup-height-offset));
   width: auto;
   height: auto;
   pointer-events: none;
@@ -2432,41 +2433,6 @@ body {
   cursor: grabbing;
 }
 
-.popup--loading {
-  position: absolute;
-  --size: 15rem;
-  width: var(--size);
-  height: var(--size);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 0;
-  background-color: #F3F3F7;
-  border-radius: var(--b-rad);
-  -webkit-border-radius: var(--b-rad);
-  -moz-border-radius: var(--b-rad);
-  -khtml-border-radius: var(--b-rad);
-}
-
-.popup--loading img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.popup--loading__on {
-  opacity: 1;
-}
-
-.popup--loading__off {
-  opacity: 0;
-  display: none;
-}
-
-.popup--loading__tran {
-  opacity: 0;
-}
-
 .popup--media-wrapper__gallery {
   border-radius: var(--b-rad);
   -webkit-border-radius: var(--b-rad);
@@ -2481,7 +2447,7 @@ body {
   max-height: 100%;
   aspect-ratio: auto var(--aspect-width)/var(--aspect-height);
   width: 1000rem;
-  transition: var(--transition);
+  transition: 0.3s;
   z-index: 2;
 }
 
@@ -2500,6 +2466,10 @@ body {
 .popup--media__gallery {
   display: flex;
   width: auto;
+}
+
+.popup--media__loading {
+  opacity: 0;
 }
 
 .popup--img {
@@ -2643,6 +2613,41 @@ body {
   width: 0.875rem;
   height: 0.875rem;
   border-radius: 100rem;
+}
+
+.popup .loading--wrapper {
+  background-color: rgba(243, 243, 247, 0.075);
+  border-radius: var(--b-rad);
+  -webkit-border-radius: var(--b-rad);
+  -moz-border-radius: var(--b-rad);
+  -khtml-border-radius: var(--b-rad);
+  width: var(--img-max-width);
+  height: var(--img-max-height);
+  position: relative;
+  margin-top: calc(var(--img-max-height) * -1);
+  transition: opacity 0.3s;
+  opacity: 1;
+}
+
+.popup .loading--wrapper__hidden {
+  opacity: 0;
+}
+
+.popup .loading--img {
+  --size: 15rem;
+  width: var(--size);
+  height: var(--size);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.popup .loading--img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .scale {

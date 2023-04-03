@@ -78,6 +78,9 @@ export default function App({ Component, pageProps }) {
   const [popupGroup, setPopupGroup] = useState(false);
   const [popupIndex, setPopupIndex] = useState(false);
   const [popupUiVisible, popupSetUIVisible] = useState(true);
+  const [popupImgLoaded, setPopupImgLoaded] = useState(false);
+  const [infoDrawn, setInfoDrawn] = useState(false);
+  const [popupDrawn, setPopupDrawn] = useState(false);
 
   const pop = {
     type: popupType,
@@ -88,10 +91,17 @@ export default function App({ Component, pageProps }) {
     setZoom: setPopupZoom,
     on: popupOn,
     setOn: setPopupOn,
+    onRef: useRef(popupOn),
     group: popupGroup,
     setGroup: setPopupGroup,
     index: popupIndex,
     setIndex: setPopupIndex,
+    imgLoaded: popupImgLoaded,
+    setImgLoaded: setPopupImgLoaded,
+    infoDrawn: infoDrawn,
+    setInfoDrawn: setInfoDrawn,
+    drawn: popupDrawn,
+    setDrawn: setPopupDrawn,
 
     ui: {
       visible: popupUiVisible,

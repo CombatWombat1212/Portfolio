@@ -343,6 +343,22 @@ function ensureArray(input) {
   return typeof input === "string" ? [input] : input;
 }
 
+function cssVarToPixels(element, cssVar) {
+  var tempElem = document.createElement("div");
+  tempElem.style.position = "absolute";
+  tempElem.style.left = "-9999px";
+  
+  var cssVarValue = window.getComputedStyle(element).getPropertyValue(cssVar);
+  
+  tempElem.style.setProperty("margin-top", cssVarValue);
+  document.body.appendChild(tempElem);
+  var pixels = splitPx(window.getComputedStyle(tempElem).marginTop);
+  
+  document.body.removeChild(tempElem);
+
+  return pixels;
+}
+
 
 // Video file formats
 const VIDEO_TYPES = ["mp4", "avi", "mov", "wmv", "mkv", "flv", "webm"];
@@ -368,6 +384,7 @@ export {
   getColors,
   toTitleCase,
   ensureArray,
+  cssVarToPixels,
   RESIZE_TIMEOUT,
   VIDEO_TYPES,
   IMAGE_TYPES,

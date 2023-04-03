@@ -11,7 +11,7 @@ const useElementWidth = (ref, debounceTime = RESIZE_TIMEOUT) => {
         splitPx(window.getComputedStyle(inner).paddingRight)
       );
     }
-    return null;
+    return 0;
   };
 
   const [width, setWidth] = useState(getElementWidth);

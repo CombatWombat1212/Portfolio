@@ -105,6 +105,13 @@ const ICONS = {
     width: 100,
     height: 100,
   },
+  loading_white: {
+    name: 'loading_white',
+    src: "../assets/loading/loading_spinner_white.svg",
+    alt: "Spinning loading icon",
+    width: 100,
+    height: 100,
+  },
 
 
   checkmark: {
@@ -156,12 +163,13 @@ const instagram = new Icon(ICONS.instagram);
 const linkedin = new Icon(ICONS.linkedin);
 
 const loading = new Icon(ICONS.loading);
+const loading_white = new Icon(ICONS.loading_white);
 const checkmark = new Icon(ICONS.checkmark);
 const xmark = new Icon(ICONS.xmark);
 
 
 export default ICONS
-export { arrow_right, arrow_left, arrow_down, chevron_down, chevron_right,chevron_left, document, email, instagram, linkedin, loading, checkmark, xmark }
+export { arrow_right, arrow_left, arrow_down, chevron_down, chevron_right,chevron_left, document, email, instagram, linkedin, loading, loading_white, checkmark, xmark }
   
 
 

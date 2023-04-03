@@ -146,7 +146,7 @@ function Graphic({
   width = width ? width : img.width;
   height = height ? height : img.height;
   priority = priority ? true : false;
-  onLoad = onLoad ? onLoad : () => {};
+
 
   var hasButton = false;
   if (children) {
@@ -228,6 +228,22 @@ function Graphic({
     resize: "horizontal",
   });
 
+
+
+
+
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+  onLoad = onLoad ? onLoad : handleImageLoad;
+  useEffect(() => {
+    setImageLoaded(false);
+  }, []);
+
+
+
+
   return (
     <>
       {isImg && (
@@ -255,7 +271,7 @@ function Graphic({
             height={height}
             onClick={onClickHandler}
             priority={priority}
-            onLoad={onLoad}
+            onLoadingComplete={onLoad}
             style={innerStyle}
           />
           {children && children}
@@ -303,7 +319,7 @@ function Graphic({
             width={width}
             height={height}
             onClick={onClickHandler}
-            onLoad={onLoad}
+            onLoadedData={onLoad}
             loop={loop}
             muted={muted}
             autoPlay={ap}
