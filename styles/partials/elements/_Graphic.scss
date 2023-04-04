@@ -164,7 +164,8 @@
       }
   
       &__lightbox, &__gallery {
-        cursor: zoom-in;
+        // cursor: zoom-in;
+        cursor: pointer;
   
         img,video {
           @include trans;
