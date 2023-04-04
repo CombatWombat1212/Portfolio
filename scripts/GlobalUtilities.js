@@ -359,6 +359,28 @@ function cssVarToPixels(element, cssVar) {
   return pixels;
 }
 
+function ignoreUpdateConditions(propsToIgnore) {
+  return function updateConditions(prevProps, nextProps) {
+    const prevKeys = Object.keys(prevProps);
+    const nextKeys = Object.keys(nextProps);
+
+    if (prevKeys.length !== nextKeys.length) {
+      return false;
+    }
+
+    for (const key of prevKeys) {
+      if (propsToIgnore.includes(key)) {
+        continue;
+      }
+      if (prevProps[key] !== nextProps[key]) {
+        return false;
+      }
+    }
+    return true;
+  };
+}
+
+
 function createUpdateConditions(propsToCheck) {
   return function updateConditions(prevProps, nextProps) {
     for (const propName of propsToCheck) {
@@ -397,6 +419,7 @@ export {
   ensureArray,
   cssVarToPixels,
   createUpdateConditions,
+  ignoreUpdateConditions,
   RESIZE_TIMEOUT,
   VIDEO_TYPES,
   IMAGE_TYPES,

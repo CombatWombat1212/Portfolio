@@ -1,6 +1,10 @@
 // TODO: Do i want all popups to load when the page loads so they can open quickly? or do I want to save on the page load and only load the popup when it is needed? for right now i'm going to be loading it in on click
 // TODO: this should either be pre-fetched or otherwise loaded in before the user clicks on it
 
+// TODO: stop the flicker on the description when seeking
+// TODO: fix final issues with loading icon being in the wrong place
+// TODO: fix stretchy animation bug
+
 import toggle, { simpleToggleOn } from "@/scripts/AnimationTools";
 import Image from "next/image";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -205,6 +209,7 @@ function Wrapper({ pop }) {
       setCanvasImageLoaded(false);
       pop.setGroup(false);
       pop.setIndex(false);
+      pop.setImgLoaded(false);
     }
   }, [pop.on]);
 
@@ -244,11 +249,14 @@ function Wrapper({ pop }) {
     },
   };
 
-  function closeHandler() {
+  const closeHandler = useCallback(() => {
     pop.setOn(false);
     pop.setImgLoaded(false);
     pop.setDrawn(false);
-  }
+    pop.setImgDrawn(false);
+    pop.setImgReady(false);
+    pop.setFirstImgReady(false);
+  }, [pop]);
 
   // function seekHandlerWithKeydown(e) {
   //   if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
@@ -256,30 +264,36 @@ function Wrapper({ pop }) {
   //   }
   // }
 
-  function seekHandler(e, direction) {
-    var button;
+  const seekHandler = useCallback(
+    (e, direction) => {
+      var button;
 
-    if (e.type === "click") {
-      button = e.target;
-      while (!button.classList.contains("popup--seek")) {
-        button = button.parentElement;
+      if (e.type === "click") {
+        button = e.target;
+        while (!button.classList.contains("popup--seek")) {
+          button = button.parentElement;
+        }
+        direction = direction ? direction : button.classList.contains("popup--seek__right") ? 1 : -1;
       }
-      direction = direction ? direction : button.classList.contains("popup--seek__right") ? 1 : -1;
-    }
 
-    var length = pop.group.imgs.length;
+      var length = pop.group.imgs.length;
 
-    var ind = pop.index;
-    ind += direction;
+      var ind = pop.index;
+      ind += direction;
 
-    if (ind >= length) ind = 0;
-    if (ind < 0) ind = length - 1;
+      if (ind >= length) ind = 0;
+      if (ind < 0) ind = length - 1;
 
-    pop.setIndex(ind);
-    var img = pop.group.imgs[ind].lightboxImg ? pop.group.imgs[ind].lightboxImg : pop.group.imgs[ind];
-    pop.setImg(img);
-    pop.setZoom(img.zoom ? img.zoom : false);
-  }
+      pop.setIndex(ind);
+      var img = pop.group.imgs[ind].lightboxImg ? pop.group.imgs[ind].lightboxImg : pop.group.imgs[ind];
+      pop.setImg(img);
+      pop.setZoom(img.zoom ? img.zoom : false);
+      pop.setImgLoaded(false);
+      pop.setImgReady(false);
+      pop.setImgDrawn(false);
+    },
+    [pop]
+  );
 
   // function seekHandler(e, direction) {
 
@@ -324,8 +338,8 @@ function Wrapper({ pop }) {
 
   const handles = {
     close: closeHandler,
-    // seekKeydown: seekHandlerWithKeydown,
     seek: seekHandler,
+    // seekKeydown: seekHandlerWithKeydown,
   };
 
   return (
@@ -372,16 +386,6 @@ function Wrapper({ pop }) {
   }
 }
 
-const Controls = React.memo(function Controls({ pop, nav, handles, className }) {
-  return (
-    <div className={`popup--controls ${className ? className : ""}`}>
-      <Seek direction="left" nav={nav} handles={handles} />
-      <Pagination pop={pop} handles={handles} />
-      <Seek direction="right" nav={nav} handles={handles} />
-    </div>
-  );
-}, createUpdateConditions(["pop.img", "pop.group", "pop.index", "nav.left.on", "nav.right.on"]));
-
 function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
   const [maxHeight, setMaxHeight] = useState(false);
   const [maxWidth, setMaxWidth] = useState(false);
@@ -400,7 +404,7 @@ function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
   const handleImgLoad = () => {
     const id = setTimeout(() => {
       pop.setImgLoaded(true);
-    }, 0);
+    }, 2000);
     setTimeoutId(id); // Update the timeoutId state
   };
 
@@ -459,10 +463,18 @@ function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
       if (newMaxWidth !== maxWidth) {
         scale.setWidth(newMaxWidth);
       }
-    } else {
-      pop.setImgReady(true);
+    }
+
+    pop.setImgReady(true);
+
+    if (!pop.firstImgReady) {
+      pop.setFirstImgReady(true);
     }
   }, [elems.popup.height, elems.popup.width, pop.img, pop.drawn]);
+
+  useEffect(() => {
+    console.log(`maxHeight: ${maxHeight}, maxWidth: ${maxWidth}`);
+  }, [scale.height, scale.width]);
 
   return (
     <>
@@ -474,7 +486,10 @@ function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
            ${!pop.imgLoaded ? "popup--media-wrapper__loading" : ""}`}
         style={{ "--aspect-width": pop.img.width, "--aspect-height": pop.img.height }}
         elemkey={pop.img.src}
-        delay={delay ? delay : 0.375}>
+        delay={delay ? delay : 0.375}
+        onAnimationComplete={() => {
+          pop.setImgDrawn(true);
+        }}>
         <Graphic
           reference={elems.img.ref}
           className={`popup--media ${popclass.media} ${!pop.imgLoaded ? "popup--media__loading" : ""}`}
@@ -496,7 +511,11 @@ function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
         )}
       </AnimPres>
 
-      {pop.type == "gallery" && pop.imgReady && pop.group && <Controls className="popup--controls__gallery" pop={pop} nav={nav} handles={handles} />}
+      {pop.type == "gallery" && pop.group && pop.firstImgReady && (
+        <>
+          <Controls className="popup--controls__gallery" pop={pop} nav={nav} handles={handles} />
+        </>
+      )}
 
       {/* <AnimatePresence mode="wait">
         {true && (
@@ -576,8 +595,6 @@ function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
           </motion.div>
         </>
       </AnimatePresence> */}
-
-      {pop.type == "gallery" && pop.imgReady && pop.group && <Controls className="popup--controls__gallery" pop={pop} nav={nav} handles={handles} />}
     </>
   );
 }
@@ -609,9 +626,18 @@ function Title({ pop }) {
   );
 }
 
+const Controls = React.memo(function Controls({ pop, nav, handles, className }) {
+  return (
+    <AnimPres mode="wait" animation={popAnims.changeImg} condition={true} className={`popup--controls ${className ? className : ""}`} delay={0.1}>
+      <Seek direction="left" nav={nav} handles={handles} />
+      <Pagination pop={pop} handles={handles} />
+      <Seek direction="right" nav={nav} handles={handles} />
+    </AnimPres>
+  );
+}, createUpdateConditions(["pop.img", "pop.group", "nav.left.on", "nav.right.on"]));
+
 function Seek({ direction, nav, handles }) {
   var btn = direction === "left" ? nav.left : nav.right;
-
   return (
     <div className={`popup--seek popup--seek__${direction} ${btn.classList}`} ref={btn.ref}>
       <Anim animation={classAnims.hideBtns} condition={btn.on}>
@@ -620,6 +646,35 @@ function Seek({ direction, nav, handles }) {
     </div>
   );
 }
+
+const Pagination = React.memo(function Pagination({ pop }) {
+  return (
+    <div className="popup--pagination">
+      {pop.group?.imgs?.map((img, i) => {
+        return (
+          <Circle
+            active={i === pop.index}
+            key={`circle ${img.src}`}
+            onClick={() => {
+              pop.setIndex(i);
+              pop.setImg(pop.group.imgs[i]);
+              pop.setZoom(img.zoom ? img.zoom : false);
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+
+  function Circle({ active, onClick }) {
+    const classes = active ? "popup--circle__active" : "popup--circle__inactive";
+    return (
+      <a className={`popup--circle ${classes}`} onClick={onClick}>
+        <div className="popup--circle-inner"></div>
+      </a>
+    );
+  }
+}, createUpdateConditions(["pop.group", "pop.index"]));
 
 function Close({ pop, nav, closeHandler }) {
   const condition = pop.ui.visible || pop.type === "interactive";
@@ -664,41 +719,6 @@ function Scale({ pop, nav, className }) {
     </div>
   );
 }
-
-const Pagination = React.memo(
-  function Pagination({ pop }) {
-    return (
-      <div className="popup--pagination">
-        {pop.group?.imgs?.map((img, i) => {
-          return (
-            <Circle
-              active={i === pop.index}
-              key={`circle ${img.src}`}
-              onClick={() => {
-                pop.setIndex(i);
-                pop.setImg(pop.group.imgs[i]);
-                pop.setZoom(img.zoom ? img.zoom : false);
-              }}
-            />
-          );
-        })}
-      </div>
-    );
-
-    function Circle({ active, onClick }) {
-      const classes = active ? "popup--circle__active" : "popup--circle__inactive";
-      return (
-        <a className={`popup--circle ${classes}`} onClick={onClick}>
-          <div className="popup--circle-inner"></div>
-        </a>
-      );
-    }
-  },
-  (prevProps, nextProps) => {
-    // Only re-render if any of the specific properties we care about change
-    return !(prevProps.pop.group !== nextProps.pop.group || prevProps.pop.index !== nextProps.pop.index);
-  }
-);
 
 function useNavControls() {
   const [navRightOn, setNavRightOn] = useState(false);

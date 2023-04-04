@@ -2277,8 +2277,8 @@ body {
 
 .popup__gallery {
   --popup-gap: 3rem;
-  --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 8rem);
-  max-width: calc(var(--site-max-width_wide));
+  --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 10rem);
+  max-width: calc(var(--site-max-width_wide) - 8rem);
   max-height: calc(100% - var(--popup-height-offset));
   width: auto;
   height: auto;
@@ -2348,16 +2348,20 @@ body {
   top: -2rem;
 }
 
+.popup--info {
+  --w: calc(27.91667% - var(--popup-gap));
+  width: var(--w);
+  min-width: var(--w);
+}
+
 .popup--description * {
   color: #F3F3F7;
 }
 
 .popup--description__gallery {
   pointer-events: all;
-  --w: calc(27.91667% - var(--popup-gap));
-  width: var(--w);
-  min-width: var(--w);
   height: var(--gallery-img-height);
+  max-height: Max(100%, var(--gallery-img-height));
   overflow-y: auto;
   padding-right: calc(var(--popup-gap) / 2);
 }
@@ -2533,8 +2537,7 @@ body {
 }
 
 .popup--controls__gallery {
-  top: calc(100% + 1.85rem);
-  left: 50%;
+  top: calc(100% + 2rem);
   transform: translate(-50%, 0%);
   pointer-events: all;
 }

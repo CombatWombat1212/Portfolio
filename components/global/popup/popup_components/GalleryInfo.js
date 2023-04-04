@@ -1,9 +1,11 @@
+import { AnimatePresence, motion, useAnimation, useIsPresent } from "framer-motion";
+
 import Tag from "@/components/elements/Tag";
 import { createUpdateConditions } from "@/scripts/GlobalUtilities";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AnimPres from "../../AnimPres";
 import popAnims from "../popup_utilities/PopupAnimations";
-
+import useDelayedProps from "@/scripts/hooks/useDelayedProps";
 
 const GalInfo = React.memo(function GalInfo({ pop, popclass, elems }) {
   var title, subheading;
@@ -23,31 +25,82 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems }) {
   };
 
   var hasDesc = pop.img.description || (pop.group.description && pop.group.description[pop.index]);
+
+
+
+
+
+
+  // const [ready, setReady] = useState(false);
+
+  // useEffect(() => {
+  //   console.log("imgDrawn", pop.imgDrawn);
+  // }, [pop.imgDrawn]);
+
+
+
+  // const {imgDrawn} = pop;
   
+  // const delayedProps = useDelayedProps({ imgDrawn }, { prop:  });
+
+  // const delImgReady = delayedProps.imgReady;
+
+  // // useEffect(() => {
+  // //   console.log("delayedProps", delImgReady);
+  // // }, [delImgReady]);
+
+  // useEffect(() => {
+  //   console.log("imgDrawn", pop.imgDrawn);
+  // }, [pop.imgDrawn]);
+
+
+
+
+
+
+
+
+
+
   return (
     <>
-      <AnimPres
-        mode="wait"
-        animation={popAnims.changeImg}
-        delay={0.65}
-        condition={true}
-        reference={elems.desc.ref}
-        className={`popup--description ${popclass.desc}`}
-        style={styles.description}>
-        <h3 type="h3" className="gallery--title" dangerouslySetInnerHTML={{ __html: title }} />
-        {subheading && <h5 className="gallery--subheading">{subheading}</h5>}
+      <motion.div 
+      
+      layout 
+      animate={{ y: 0 }}
+       transition={{
+        y: { duration: 0.5 },
+      }} 
+       className="popup--info">
 
-        <div className="gallery--info">
-          {hasDesc && <GalDescription pop={pop} />}
-          <GalCategories pop={pop} hasDesc={hasDesc}/>
-        </div>
-      </AnimPres>
+
+        <AnimPres
+          mode="wait"
+          animation={popAnims.changeImg}
+          delay={0.7}
+          condition={true}
+          reference={elems.desc.ref}
+          className={`popup--description ${popclass.desc}`}
+          style={styles.description}>
+          <h3 type="h3" className="gallery--title" dangerouslySetInnerHTML={{ __html: title }} />
+          {subheading && <h5 className="gallery--subheading">{subheading}</h5>}
+
+          <div className="gallery--info">
+            {hasDesc && <GalDescription pop={pop} />}
+            <GalCategories pop={pop} hasDesc={hasDesc} />
+          </div>
+        </AnimPres>
+      </motion.div>
     </>
   );
 }, createUpdateConditions(["pop.index", "pop.img", "elems.img.height"]));
 
-const GalCategories = React.memo(function GalCategories({pop, hasDesc}) {
 
+
+
+
+
+const GalCategories = React.memo(function GalCategories({ pop, hasDesc }) {
   var catclasses = hasDesc ? "" : "gallery--categories__no-desc";
 
   return (
@@ -70,8 +123,6 @@ const GalCategories = React.memo(function GalCategories({pop, hasDesc}) {
   );
 }, createUpdateConditions(["pop.index", "pop.img"]));
 
-
-
 const GalDescription = React.memo(function GalDescription({ pop }) {
   var descs = pop.img.description ? pop.img.description : pop.group.description[pop.index];
   return (
@@ -89,5 +140,4 @@ const GalDescription = React.memo(function GalDescription({ pop }) {
   );
 }, createUpdateConditions(["pop.img", "pop.index"]));
 
-
-export { GalInfo, GalCategories, GalDescription}
+export { GalInfo, GalCategories, GalDescription };
