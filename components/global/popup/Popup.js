@@ -370,7 +370,7 @@ function Wrapper({ pop }) {
 
             {pop.type == "gallery" && (
               <>
-                <Lightbox pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} delay={0.35} />
+                <Lightbox pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} delay={0.3} />
                 <GalInfo pop={pop} popclass={popclass} elems={elems} />
               </>
             )}
@@ -559,7 +559,7 @@ function Title({ pop }) {
 
 const Controls = React.memo(function Controls({ pop, nav, handles, className }) {
   return (
-    <AnimPres mode="wait" animation={popAnims.changeImg} condition={true} className={`popup--controls ${className ? className : ""}`} delay={0.1}>
+    <AnimPres mode="wait" animation={popAnims.changeImg} condition={true} className={`popup--controls ${className ? className : ""}`} delay={0.525}>
       <Seek direction="left" nav={nav} handles={handles} />
       <Pagination pop={pop} handles={handles} />
       <Seek direction="right" nav={nav} handles={handles} />

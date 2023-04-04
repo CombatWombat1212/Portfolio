@@ -316,17 +316,17 @@
     &--title {
     }
     &--subheading {
-      margin-top: 0.55rem !important;
+      margin-top: 0.515rem !important;
     }
 
     &--description {
-      margin-top: 1.25rem;
+      margin-top: 1.375rem;
     }
     &--paragraph {
       margin-bottom: 1rem;
     }
     &--categories {
-      margin-top: 1.5rem;
+      margin-top: 1.7rem;
       @include flex-row;
       flex-wrap: wrap;
       column-gap: 0.95rem;

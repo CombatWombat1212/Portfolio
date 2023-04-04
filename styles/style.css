@@ -2500,11 +2500,11 @@ body {
 }
 
 .popup .gallery--subheading {
-  margin-top: 0.55rem !important;
+  margin-top: 0.515rem !important;
 }
 
 .popup .gallery--description {
-  margin-top: 1.25rem;
+  margin-top: 1.375rem;
 }
 
 .popup .gallery--paragraph {
@@ -2512,7 +2512,7 @@ body {
 }
 
 .popup .gallery--categories {
-  margin-top: 1.5rem;
+  margin-top: 1.7rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
