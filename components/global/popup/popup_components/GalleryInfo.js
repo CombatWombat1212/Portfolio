@@ -44,7 +44,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems }) {
       </AnimPres>
     </>
   );
-}, createUpdateConditions(["pop.index", "pop.img"]));
+}, createUpdateConditions(["pop.index", "pop.img", "elems.img.height"]));
 
 const GalCategories = React.memo(function GalCategories({pop, hasDesc}) {
 

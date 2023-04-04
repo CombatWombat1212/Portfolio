@@ -2277,13 +2277,12 @@ body {
 
 .popup__gallery {
   --popup-gap: 3rem;
-  --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 6rem);
+  --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 8rem);
   max-width: calc(var(--site-max-width_wide));
   max-height: calc(100% - var(--popup-height-offset));
   width: auto;
   height: auto;
   pointer-events: none;
-  aspect-ratio: var(--popup-aspect-width)/var(--popup-aspect-height);
 }
 
 .popup--inner {

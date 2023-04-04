@@ -210,7 +210,7 @@ function Wrapper({ pop }) {
 
   useEffect(() => {
     updatePopupNav(pop, nav);
-  }, [pop.img,pop.group, pop.index]);
+  }, [pop.img, pop.group, pop.index]);
 
   // TODO: finish the new popup type for explorations page
   // TODO: Seek has issues and is pretty inconsistent right now
@@ -256,10 +256,7 @@ function Wrapper({ pop }) {
   //   }
   // }
 
-
-
   function seekHandler(e, direction) {
-    
     var button;
 
     if (e.type === "click") {
@@ -282,12 +279,10 @@ function Wrapper({ pop }) {
     var img = pop.group.imgs[ind].lightboxImg ? pop.group.imgs[ind].lightboxImg : pop.group.imgs[ind];
     pop.setImg(img);
     pop.setZoom(img.zoom ? img.zoom : false);
-
-
   }
 
   // function seekHandler(e, direction) {
-    
+
   //   // Check if the handler is on cooldown
   //   if (pop.seekCooldown) {
   //     return;
@@ -343,11 +338,15 @@ function Wrapper({ pop }) {
 
             {pop.type == "interactive" && <canvas className="popup--canvas popup--canvas__off" />}
 
-            {pop.type == "lightbox" && <Lightbox pop={pop} nav={nav} handles={handles} popclass={popclass} elems={elems} delay={0.5} />}
+            {pop.type == "lightbox" && (
+              <>
+                <Lightbox pop={pop} nav={nav} handles={handles} popclass={popclass} elems={elems} delay={0.5} />
+              </>
+            )}
 
             {pop.type == "gallery" && (
               <>
-                <Lightbox pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} />
+                <Lightbox pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} delay={0.35} />
                 <GalInfo pop={pop} popclass={popclass} elems={elems} />
               </>
             )}
@@ -381,7 +380,7 @@ const Controls = React.memo(function Controls({ pop, nav, handles, className }) 
       <Seek direction="right" nav={nav} handles={handles} />
     </div>
   );
-}, createUpdateConditions(["pop.img","pop.group", "pop.index", "nav.left.on", "nav.right.on"]));
+}, createUpdateConditions(["pop.img", "pop.group", "pop.index", "nav.left.on", "nav.right.on"]));
 
 function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
   const [maxHeight, setMaxHeight] = useState(false);
@@ -401,7 +400,7 @@ function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
   const handleImgLoad = () => {
     const id = setTimeout(() => {
       pop.setImgLoaded(true);
-    }, 2000);
+    }, 0);
     setTimeoutId(id); // Update the timeoutId state
   };
 
@@ -415,54 +414,54 @@ function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
   }, [timeoutId]);
 
   useEffect(() => {
-    // if (!elems.popup.ref.current || !elems.desc.ref.current) return;
-    // if (elems.popup.height == 0 || elems.popup.width == 0) return;
-    // if (!pop.drawn) return;
-    // if (pop.imgLoaded) return;
+    if (!elems.popup.ref.current || !elems.desc.ref.current) return;
+    if (elems.popup.height == 0 || elems.popup.width == 0) return;
+    if (!pop.drawn) return;
+    if (!pop.imgLoaded) {
+      var popupElem = elems.popup.ref.current;
+      var descElem = elems.desc.ref.current;
 
-    var popupElem = elems.popup.ref.current;
-    var descElem = elems.desc.ref.current;
+      var gapWidth = splitRem(window.getComputedStyle(popupElem).getPropertyValue("--popup-gap"));
+      var scrollbarWidth = descElem.offsetWidth - descElem.clientWidth;
+      var descWidth =
+        splitPx(window.getComputedStyle(descElem).width) +
+        splitPx(window.getComputedStyle(descElem).paddingLeft) +
+        splitPx(window.getComputedStyle(descElem).paddingRight) +
+        scrollbarWidth;
 
-    var gapWidth = splitRem(window.getComputedStyle(popupElem).getPropertyValue("--popup-gap"));
-    var scrollbarWidth = descElem.offsetWidth - descElem.clientWidth;
-    var descWidth =
-      splitPx(window.getComputedStyle(descElem).width) +
-      splitPx(window.getComputedStyle(descElem).paddingLeft) +
-      splitPx(window.getComputedStyle(descElem).paddingRight) +
-      scrollbarWidth;
+      // var availHeight = window.innerHeight - cssVarToPixels(popupElem, "--popup-height-offset");
+      var availHeight = splitPx(window.getComputedStyle(popupElem.querySelector(".popup--inner")).height);
+      var availWidth = splitPx(window.getComputedStyle(popupElem.querySelector(".popup--inner")).width) - gapWidth - descWidth;
 
-    // var availHeight = window.innerHeight - cssVarToPixels(popupElem, "--popup-height-offset");
-    var availHeight = splitPx(window.getComputedStyle(popupElem.querySelector(".popup--inner")).height);
-    var availWidth = splitPx(window.getComputedStyle(popupElem.querySelector(".popup--inner")).width) - gapWidth - descWidth;
+      var aspectWidth = pop.img.width;
+      var aspectHeight = pop.img.height;
 
-    var aspectWidth = pop.img.width;
-    var aspectHeight = pop.img.height;
+      // Calculate aspect ratio
+      var aspectRatio = aspectWidth / aspectHeight;
 
-    // Calculate aspect ratio
-    var aspectRatio = aspectWidth / aspectHeight;
+      // Calculate scaled dimensions based on aspect ratio
+      var scaledWidth = availHeight * aspectRatio;
+      var scaledHeight = availWidth / aspectRatio;
 
-    // Calculate scaled dimensions based on aspect ratio
-    var scaledWidth = availHeight * aspectRatio;
-    var scaledHeight = availWidth / aspectRatio;
+      // Check which dimension should be adjusted based on available dimensions
+      if (scaledWidth <= availWidth) {
+        var newMaxHeight = availHeight;
+        var newMaxWidth = scaledWidth;
+      } else {
+        var newMaxHeight = scaledHeight;
+        var newMaxWidth = availWidth;
+      }
 
-    // Check which dimension should be adjusted based on available dimensions
-    if (scaledWidth <= availWidth) {
-      var newMaxHeight = availHeight;
-      var newMaxWidth = scaledWidth;
+      // Update maxHeight and maxWidth state only if their values have changed
+      if (newMaxHeight !== maxHeight) {
+        scale.setHeight(newMaxHeight);
+      }
+      if (newMaxWidth !== maxWidth) {
+        scale.setWidth(newMaxWidth);
+      }
     } else {
-      var newMaxHeight = scaledHeight;
-      var newMaxWidth = availWidth;
+      pop.setImgReady(true);
     }
-
-    // Update maxHeight and maxWidth state only if their values have changed
-    if (newMaxHeight !== maxHeight) {
-      scale.setHeight(newMaxHeight);
-    }
-    if (newMaxWidth !== maxWidth) {
-      scale.setWidth(newMaxWidth);
-    }
-
-    pop.setImgReady(true);
   }, [elems.popup.height, elems.popup.width, pop.img, pop.drawn]);
 
   return (
@@ -472,7 +471,7 @@ function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
         animation={popAnims.changeImg}
         condition={true}
         className={`popup--media-wrapper ${popclass.mediaWrapper}
-         ${!pop.imgLoaded ? "popup--media-wrapper__loading" : ""}`}
+           ${!pop.imgLoaded ? "popup--media-wrapper__loading" : ""}`}
         style={{ "--aspect-width": pop.img.width, "--aspect-height": pop.img.height }}
         elemkey={pop.img.src}
         delay={delay ? delay : 0.375}>
@@ -496,6 +495,88 @@ function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
           </div>
         )}
       </AnimPres>
+
+      {pop.type == "gallery" && pop.imgReady && pop.group && <Controls className="popup--controls__gallery" pop={pop} nav={nav} handles={handles} />}
+
+      {/* <AnimatePresence mode="wait">
+        {true && (
+          <>
+            <motion.div
+              key={pop.img.src}
+              initial={popAnims.changeImg.in.initial}
+              animate={popAnims.changeImg.in.animate}
+              exit={popAnims.changeImg.out.exit}
+              transition={{
+                ...popAnims.changeImg.in.transition,
+                duration: popAnims.changeImg.in.transition.duration !== undefined ? popAnims.changeImg.in.transition.duration : 0,
+                delay: 0.375,
+              }}
+              className={`popup--media-wrapper ${popclass.mediaWrapper} ${!pop.imgLoaded ? "popup--media-wrapper__loading" : ""}`}
+              style={{
+                "--aspect-width": pop.img.width,
+                "--aspect-height": pop.img.height,
+              }}>
+              <Graphic
+                reference={elems.img.ref}
+                className={`popup--media ${popclass.media} ${!pop.imgLoaded ? "popup--media__loading" : ""}`}
+                img={pop.img}
+                type={pop.img.media}
+                autoplay
+                controls
+                onLoad={handleImgLoad}
+              />
+
+              {pop.imgReady && (
+                <div
+                  className={`loading--wrapper ${!pop.imgReady || pop.imgLoaded ? "loading--wrapper__hidden" : ""}`}
+                  style={{ "--img-max-width": `${scale.width}px`, "--img-max-height": `${scale.height}px` }}>
+                  <div className={`loading--img`}>
+                    <img src={loading_white.src} alt={loading_white.alt} width={loading_white.width} height={loading_white.height} />
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence> */}
+
+      {/* <AnimatePresence mode={"wait"}>
+        <>  
+          
+          <motion.div
+            key={pop.img.src}
+            initial={popAnims.changeImg.in.initial}
+            animate={popAnims.changeImg.in.animate}
+            exit={popAnims.changeImg.out.exit}
+            transition={{
+              ...popAnims.changeImg.in.transition,
+              delay: delay ? delay : 0.375,
+            }}
+            className={`popup--media-wrapper ${popclass.mediaWrapper}
+              ${!pop.imgLoaded ? "popup--media-wrapper__loading" : ""}`}
+            style={{ "--aspect-width": pop.img.width, "--aspect-height": pop.img.height }}>
+            <Graphic
+              reference={elems.img.ref}
+              className={`popup--media ${popclass.media} ${!pop.imgLoaded ? "popup--media__loading" : ""}`}
+              img={pop.img}
+              type={pop.img.media}
+              autoplay
+              controls
+              onLoad={handleImgLoad}
+            />
+            {pop.imgReady && (
+              <div
+                className={`loading--wrapper ${!pop.imgReady || pop.imgLoaded ? "loading--wrapper__hidden" : ""}`}
+                style={{ "--img-max-width": `${scale.width}px`, "--img-max-height": `${scale.height}px` }}>
+                <div className={`loading--img`}>
+                  <img src={loading_white.src} alt={loading_white.alt} width={loading_white.width} height={loading_white.height} />
+                </div>
+              </div>
+            )}
+          </motion.div>
+        </>
+      </AnimatePresence> */}
+
       {pop.type == "gallery" && pop.imgReady && pop.group && <Controls className="popup--controls__gallery" pop={pop} nav={nav} handles={handles} />}
     </>
   );
