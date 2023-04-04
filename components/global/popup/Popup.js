@@ -3,11 +3,10 @@
 
 // TODO: stop the flicker on the description when seeking
 // TODO: fix final issues with loading icon being in the wrong place
-// TODO: fix stretchy animation bug
 
 import toggle, { simpleToggleOn } from "@/scripts/AnimationTools";
 import Image from "next/image";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Button from "../../elements/Buttons";
 import { loading_white } from "@/data/ICONS";
 import { RESIZE_TIMEOUT, createUpdateConditions, cssVarToPixels, splitPx, splitRem } from "@/scripts/GlobalUtilities";
@@ -218,8 +217,6 @@ function Wrapper({ pop }) {
   }, [pop.img, pop.group, pop.index]);
 
   // TODO: finish the new popup type for explorations page
-  // TODO: Seek has issues and is pretty inconsistent right now
-  // TODO: Seek has issues and is pretty inconsistent right now
   //  - add pagination to new popup type
   //  - okay honestly, i don't know if pagining between projects is that necessary, it would be nice but clicking between projects is pretty darn fluid anyways
   //  - add seek arrows, and modify seek handler to stop setting type unnecessarily
@@ -295,6 +292,18 @@ function Wrapper({ pop }) {
     [pop]
   );
 
+  const paginationHandler = useCallback(
+    (img, i) => {
+      pop.setIndex(i);
+      pop.setImg(pop.group.imgs[i]);
+      pop.setZoom(img.zoom ? img.zoom : false);
+      pop.setImgLoaded(false);
+      pop.setImgReady(false);
+      pop.setImgDrawn(false);
+    },
+    [pop]
+  );
+
   // function seekHandler(e, direction) {
 
   //   // Check if the handler is on cooldown
@@ -339,6 +348,7 @@ function Wrapper({ pop }) {
   const handles = {
     close: closeHandler,
     seek: seekHandler,
+    pagination: paginationHandler,
     // seekKeydown: seekHandlerWithKeydown,
   };
 
@@ -404,7 +414,7 @@ function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
   const handleImgLoad = () => {
     const id = setTimeout(() => {
       pop.setImgLoaded(true);
-    }, 2000);
+    }, 0);
     setTimeoutId(id); // Update the timeoutId state
   };
 
@@ -417,7 +427,7 @@ function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
     };
   }, [timeoutId]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!elems.popup.ref.current || !elems.desc.ref.current) return;
     if (elems.popup.height == 0 || elems.popup.width == 0) return;
     if (!pop.drawn) return;
@@ -472,9 +482,9 @@ function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
     }
   }, [elems.popup.height, elems.popup.width, pop.img, pop.drawn]);
 
-  useEffect(() => {
-    console.log(`maxHeight: ${maxHeight}, maxWidth: ${maxWidth}`);
-  }, [scale.height, scale.width]);
+  // useEffect(() => {
+  //   console.log(`maxHeight: ${maxHeight}, maxWidth: ${maxWidth}`);
+  // }, [scale.height, scale.width]);
 
   return (
     <>
@@ -516,85 +526,6 @@ function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
           <Controls className="popup--controls__gallery" pop={pop} nav={nav} handles={handles} />
         </>
       )}
-
-      {/* <AnimatePresence mode="wait">
-        {true && (
-          <>
-            <motion.div
-              key={pop.img.src}
-              initial={popAnims.changeImg.in.initial}
-              animate={popAnims.changeImg.in.animate}
-              exit={popAnims.changeImg.out.exit}
-              transition={{
-                ...popAnims.changeImg.in.transition,
-                duration: popAnims.changeImg.in.transition.duration !== undefined ? popAnims.changeImg.in.transition.duration : 0,
-                delay: 0.375,
-              }}
-              className={`popup--media-wrapper ${popclass.mediaWrapper} ${!pop.imgLoaded ? "popup--media-wrapper__loading" : ""}`}
-              style={{
-                "--aspect-width": pop.img.width,
-                "--aspect-height": pop.img.height,
-              }}>
-              <Graphic
-                reference={elems.img.ref}
-                className={`popup--media ${popclass.media} ${!pop.imgLoaded ? "popup--media__loading" : ""}`}
-                img={pop.img}
-                type={pop.img.media}
-                autoplay
-                controls
-                onLoad={handleImgLoad}
-              />
-
-              {pop.imgReady && (
-                <div
-                  className={`loading--wrapper ${!pop.imgReady || pop.imgLoaded ? "loading--wrapper__hidden" : ""}`}
-                  style={{ "--img-max-width": `${scale.width}px`, "--img-max-height": `${scale.height}px` }}>
-                  <div className={`loading--img`}>
-                    <img src={loading_white.src} alt={loading_white.alt} width={loading_white.width} height={loading_white.height} />
-                  </div>
-                </div>
-              )}
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence> */}
-
-      {/* <AnimatePresence mode={"wait"}>
-        <>  
-          
-          <motion.div
-            key={pop.img.src}
-            initial={popAnims.changeImg.in.initial}
-            animate={popAnims.changeImg.in.animate}
-            exit={popAnims.changeImg.out.exit}
-            transition={{
-              ...popAnims.changeImg.in.transition,
-              delay: delay ? delay : 0.375,
-            }}
-            className={`popup--media-wrapper ${popclass.mediaWrapper}
-              ${!pop.imgLoaded ? "popup--media-wrapper__loading" : ""}`}
-            style={{ "--aspect-width": pop.img.width, "--aspect-height": pop.img.height }}>
-            <Graphic
-              reference={elems.img.ref}
-              className={`popup--media ${popclass.media} ${!pop.imgLoaded ? "popup--media__loading" : ""}`}
-              img={pop.img}
-              type={pop.img.media}
-              autoplay
-              controls
-              onLoad={handleImgLoad}
-            />
-            {pop.imgReady && (
-              <div
-                className={`loading--wrapper ${!pop.imgReady || pop.imgLoaded ? "loading--wrapper__hidden" : ""}`}
-                style={{ "--img-max-width": `${scale.width}px`, "--img-max-height": `${scale.height}px` }}>
-                <div className={`loading--img`}>
-                  <img src={loading_white.src} alt={loading_white.alt} width={loading_white.width} height={loading_white.height} />
-                </div>
-              </div>
-            )}
-          </motion.div>
-        </>
-      </AnimatePresence> */}
     </>
   );
 }
@@ -647,7 +578,7 @@ function Seek({ direction, nav, handles }) {
   );
 }
 
-const Pagination = React.memo(function Pagination({ pop }) {
+const Pagination = React.memo(function Pagination({ pop, handles }) {
   return (
     <div className="popup--pagination">
       {pop.group?.imgs?.map((img, i) => {
@@ -656,9 +587,7 @@ const Pagination = React.memo(function Pagination({ pop }) {
             active={i === pop.index}
             key={`circle ${img.src}`}
             onClick={() => {
-              pop.setIndex(i);
-              pop.setImg(pop.group.imgs[i]);
-              pop.setZoom(img.zoom ? img.zoom : false);
+              handles.pagination(img, i);
             }}
           />
         );

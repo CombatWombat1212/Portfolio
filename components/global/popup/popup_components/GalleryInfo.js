@@ -24,56 +24,21 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems }) {
     },
   };
 
-  var hasDesc = pop.img.description || (pop.group.description && pop.group.description[pop.index]);
 
-
-
-
-
-
-  // const [ready, setReady] = useState(false);
-
-  // useEffect(() => {
-  //   console.log("imgDrawn", pop.imgDrawn);
-  // }, [pop.imgDrawn]);
-
-
-
-  // const {imgDrawn} = pop;
   
-  // const delayedProps = useDelayedProps({ imgDrawn }, { prop:  });
 
-  // const delImgReady = delayedProps.imgReady;
-
-  // // useEffect(() => {
-  // //   console.log("delayedProps", delImgReady);
-  // // }, [delImgReady]);
-
-  // useEffect(() => {
-  //   console.log("imgDrawn", pop.imgDrawn);
-  // }, [pop.imgDrawn]);
-
-
-
-
-
-
-
-
+  var hasDesc = pop.img.description || (pop.group.description && pop.group.description[pop.index]);
 
 
   return (
     <>
-      <motion.div 
-      
-      layout 
-      animate={{ y: 0 }}
-       transition={{
-        y: { duration: 0.5 },
-      }} 
-       className="popup--info">
-
-
+      <motion.div
+        layout="position"
+        animate={{ y: 0 }}
+        transition={{
+          y: { duration: 0.5 },
+        }}
+        className="popup--info">
         <AnimPres
           mode="wait"
           animation={popAnims.changeImg}
@@ -94,11 +59,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems }) {
     </>
   );
 }, createUpdateConditions(["pop.index", "pop.img", "elems.img.height"]));
-
-
-
-
-
+// }, createUpdateConditions(["pop.index", "pop.img", "elems.img.height"]));
 
 const GalCategories = React.memo(function GalCategories({ pop, hasDesc }) {
   var catclasses = hasDesc ? "" : "gallery--categories__no-desc";
