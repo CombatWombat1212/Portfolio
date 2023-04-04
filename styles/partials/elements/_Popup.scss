@@ -89,7 +89,7 @@
   &__gallery {
     // max-width: calc(var(--site-max-width));
     --popup-gap: 3rem;
-    --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 4rem);
+    --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 6rem);
     max-width: calc(var(--site-max-width_wide));
     max-height: calc(100% - var(--popup-height-offset));
     width: auto;
@@ -141,7 +141,17 @@
       background-color: rgba(0, 0, 0, 0);
       pointer-events: none;
       border-radius: unset;
+      overflow: visible;
+      max-height: 100%;
     }
+
+    &__gallery-group {
+      top: -2rem;
+    }
+
+
+
+
   }
 
   &--description {
@@ -226,13 +236,20 @@
 
   &--media-wrapper {
     &__gallery {
-      // width: col-width(8);
+      background-color: rgba($col-background, 0.075);
       @include b-rad;
-      overflow: hidden;
+
+      // width: col-width(8);
+      // overflow: hidden;
       // --w: calc(#{col-width(8)} - var(--popup-gap));
       // width: var(--w);
       // min-width: var(--w);
       pointer-events: all;
+      overflow: hidden;
+    }
+    
+    &__gallery-group {
+      overflow: visible;
     }
   }
 
@@ -246,7 +263,8 @@
     // @include trans;
     transition: 0.3s;
     z-index: 2;
-
+    @include b-rad;
+    overflow: hidden;
     // pointer-events: none;
 
     img,
@@ -320,6 +338,15 @@
     top: calc(100% - var(--popup-controls-offset) + 1.85rem);
     --gap: 1.45rem;
     @include gap;
+
+    &__gallery {
+      top: calc(100% + 1.85rem);
+      left: 50%;
+      transform: translate(-50%, 0%);
+      pointer-events: all;
+    }
+
+
   }
 
   &--seek {
@@ -452,7 +479,7 @@
     // }
 
     &--wrapper {
-      background-color: rgba($col-background,0.075);
+      // background-color: rgba($col-background, 0.075);
       @include b-rad;
 
       width: var(--img-max-width);
