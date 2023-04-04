@@ -443,9 +443,17 @@ function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
         splitPx(window.getComputedStyle(descElem).paddingRight) +
         scrollbarWidth;
 
-      // var availHeight = window.innerHeight - cssVarToPixels(popupElem, "--popup-height-offset");
-      var availHeight = splitPx(window.getComputedStyle(popupElem.querySelector(".popup--inner")).height);
-      var availWidth = splitPx(window.getComputedStyle(popupElem.querySelector(".popup--inner")).width) - gapWidth - descWidth;
+      // var availHeight = cssVarToPixels(popupElem, "--popup-height-offset");
+
+
+      var availHeight = popupElem.offsetHeight
+      var availWidth = popupElem.offsetWidth - gapWidth - descWidth;
+
+      // var availHeight = splitPx(window.getComputedStyle(popupElem.querySelector(".popup--inner")).height);
+      // var availWidth = splitPx(window.getComputedStyle(popupElem.querySelector(".popup--inner")).width) - gapWidth - descWidth;
+
+      console.log(`availHeight: ${availHeight} availWidth: ${availWidth}`)
+      console.log(popupElem);
 
       var aspectWidth = pop.img.width;
       var aspectHeight = pop.img.height;

@@ -343,22 +343,50 @@ function ensureArray(input) {
   return typeof input === "string" ? [input] : input;
 }
 
-function cssVarToPixels(element, cssVar) {
-  var tempElem = document.createElement("div");
-  tempElem.style.position = "absolute";
-  tempElem.style.left = "-9999px";
-  
-  var cssVarValue = window.getComputedStyle(element).getPropertyValue(cssVar);
-  
-  tempElem.style.setProperty("margin-top", cssVarValue);
-  document.body.appendChild(tempElem);
-  var pixels = splitPx(window.getComputedStyle(tempElem).marginTop);
-  
-  document.body.removeChild(tempElem);
+function cssVarToPixels(element, cssProperty) {
+  // Create a hidden element to inherit the CSS properties
+  const hiddenElement = document.createElement('div');
+  hiddenElement.style.cssText = `
+    position: absolute;
+    visibility: hidden;
+    pointer-events: none;
+    width: 0;
+    height: 0;
+  `;
+
+  // Add the hidden element to the DOM
+  element.appendChild(hiddenElement);
+
+  // Get the value of the specified CSS property on the target element
+  const cssValue = getComputedStyle(element)[cssProperty];
+
+  // Check if the input is a CSS variable
+  const isCssVariable = cssValue.startsWith('--');
+
+  // Set the specified CSS property of the hidden element to the value of the CSS property or variable
+  hiddenElement.style[cssProperty] = isCssVariable ? `var(${cssValue})` : cssValue;
+
+  // Get the computed style of the hidden element
+  const computedStyle = getComputedStyle(hiddenElement);
+
+  // Read the computed value of the specified CSS property
+  const computedValue = computedStyle[cssProperty];
+
+  // Calculate the pixel value based on the dimensions of the target element
+  let pixels;
+  if (computedValue.endsWith('%')) {
+    const percentage = parseFloat(computedValue) / 100;
+    const parentDimension = cssProperty === 'max-height' || cssProperty === 'height' || cssProperty === 'min-height' ? element.offsetHeight : element.offsetWidth;
+    pixels = parentDimension * percentage;
+  } else {
+    pixels = parseFloat(computedValue);
+  }
+
+  // Remove the hidden element from the DOM
+  element.removeChild(hiddenElement);
 
   return pixels;
-}
-
+}    
 function ignoreUpdateConditions(propsToIgnore) {
   return function updateConditions(prevProps, nextProps) {
     const prevKeys = Object.keys(prevProps);

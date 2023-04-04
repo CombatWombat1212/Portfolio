@@ -2280,9 +2280,10 @@ body {
   --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 10rem);
   max-width: calc(var(--site-max-width_wide) - 8rem);
   max-height: calc(100% - var(--popup-height-offset));
-  width: auto;
-  height: auto;
+  width: Min(100%, calc(var(--site-max-width_wide) - 8rem));
+  height: Min(100%, calc(100% - var(--popup-height-offset)));
   pointer-events: none;
+  position: relative;
 }
 
 .popup--inner {

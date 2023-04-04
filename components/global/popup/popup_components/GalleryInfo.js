@@ -47,7 +47,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems }) {
           reference={elems.desc.ref}
           className={`popup--description ${popclass.desc}`}
           style={styles.description}>
-          <h3 type="h3" className="gallery--title weight-reg" dangerouslySetInnerHTML={{ __html: title }} />
+          <h3 type="h3" className="gallery--title" dangerouslySetInnerHTML={{ __html: title }} />
           {subheading && <h5 className="gallery--subheading">{subheading}</h5>}
 
           <div className="gallery--info">

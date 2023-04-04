@@ -319,7 +319,7 @@ function Graphic({
             width={width}
             height={height}
             onClick={onClickHandler}
-            onLoadedData={onLoad}
+            onCanPlayThrough={onLoad}
             loop={loop}
             muted={muted}
             autoPlay={ap}
