@@ -6,7 +6,7 @@ import Image from "next/image";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Button from "../../elements/Buttons";
 import { loading_white } from "@/data/ICONS";
-import { RESIZE_TIMEOUT, cssVarToPixels, splitPx, splitRem } from "@/scripts/GlobalUtilities";
+import { RESIZE_TIMEOUT, createUpdateConditions, cssVarToPixels, splitPx, splitRem } from "@/scripts/GlobalUtilities";
 import {
   canvasDrawImage,
   canvasImageSizeInit,
@@ -31,93 +31,14 @@ import useElementWidth from "@/scripts/hooks/useElementWidth";
 import useResize from "@/scripts/hooks/useResize";
 import useElementHeight from "@/scripts/hooks/useElementHeight";
 import Tag from "@/components/elements/Tag";
+import AnimPres from "../AnimPres";
+import { GalInfo } from "./popup_components/GalleryInfo";
+import popAnims, { popSeekDuration } from "./popup_utilities/PopupAnimations";
 
 //no more than 2 decimals
 const startZoom = 0.95;
 const minZoom = 0.95;
 const maxZoom = 7.5;
-
-const seekDuration = 0.175;
-
-const anims = {
-  popupBounce: {
-    in: {
-      initial: { opacity: 0, scale: 0.95 },
-      animate: { opacity: 1, scale: 1 },
-      transition: { duration: 0.25 },
-    },
-
-    out: {
-      animate: { opacity: 0, scale: 0.95 },
-      exit: { opacity: 0, scale: 0.95 },
-      transition: { duration: 0.25 },
-    },
-  },
-  popupFade: {
-    in: {
-      initial: { opacity: 0 },
-      animate: { opacity: 1 },
-      transition: { duration: 0.15 },
-    },
-
-    out: {
-      animate: { opacity: 0 },
-      exit: { opacity: 0 },
-      transition: { duration: 0.15 },
-    },
-  },
-  hideUI: {
-    in: {
-      initial: { opacity: 0 },
-      animate: { opacity: 1 },
-      transition: { duration: 0.2 },
-    },
-    out: {
-      animate: { opacity: 0 },
-      exit: { opacity: 0 },
-      transition: { duration: 1.15 },
-    },
-  },
-
-  changeImg: {
-    in: {
-      initial: { translateX: "1rem", opacity: 0 },
-      animate: { translateX: "0rem", opacity: 1 },
-      transition: { duration: seekDuration, ease: "easeInOut" },
-    },
-    out: {
-      animate: { translateX: "0rem", opacity: 1 },
-      exit: { translateX: "-1rem", opacity: 0 },
-      transition: { duration: seekDuration, ease: "easeInOut" },
-    },
-  },
-
-  wipe: {
-    in: {
-      initial: { clipPath: "polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%)" },
-      animate: { clipPath: "polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%)" },
-      transition: { duration: 0.15 },
-    },
-    out: {
-      animate: { clipPath: "polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%)" },
-      exit: { clipPath: "polygon(100% 0%, 100% 100%, 100% 100%, 100% 0%)" },
-      transition: { duration: 0.15 },
-    },
-  },
-
-  hideBtns: {
-    in: {
-      initial: { opacity: 0.5, cursor: "default" },
-      animate: { opacity: 1, cursor: "pointer" },
-      transition: { duration: 0.15 },
-    },
-    out: {
-      animate: { opacity: 0.5, cursor: "default" },
-      exit: { opacity: 0.5, cursor: "default" },
-      transition: { duration: 0.15 },
-    },
-  },
-};
 
 const classAnims = {
   hideBtns: {
@@ -237,7 +158,7 @@ function Popup({ pop }) {
   return (
     <>
       <AnimPres
-        animation={anims.popupFade}
+        animation={popAnims.popupFade}
         duration={poptransition}
         condition={pop.on}
         className={"popup--wrapper"}
@@ -253,7 +174,7 @@ function Wrapper({ pop }) {
 
   useBodyClass("noscroll", pop.on);
   useListener("resize", popupResize, pop.on);
-  useListener("keydown", seekHandlerWithKeydown, pop.on);
+  // useListener("keydown", seekHandlerWithKeydown, pop.on);
 
   const nav = useNavControls();
   const mouseMoving = useMouseMoving(null, 1000);
@@ -289,7 +210,7 @@ function Wrapper({ pop }) {
 
   useEffect(() => {
     updatePopupNav(pop, nav);
-  }, [pop.group, pop.index]);
+  }, [pop.img,pop.group, pop.index]);
 
   // TODO: finish the new popup type for explorations page
   // TODO: Seek has issues and is pretty inconsistent right now
@@ -324,28 +245,21 @@ function Wrapper({ pop }) {
   };
 
   function closeHandler() {
-    console.log("close");
     pop.setOn(false);
     pop.setImgLoaded(false);
     pop.setDrawn(false);
   }
 
-  function seekHandlerWithKeydown(e) {
-    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
-      seekHandler(e, e.key === "ArrowRight" ? 1 : -1);
-    }
-  }
+  // function seekHandlerWithKeydown(e) {
+  //   if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+  //     seekHandler(e, e.key === "ArrowRight" ? 1 : -1);
+  //   }
+  // }
+
+
 
   function seekHandler(e, direction) {
-    console.log("cooldown");
-    // Check if the handler is on cooldown
-    if (pop.seekCooldown) {
-      return;
-    }
-    // Set the handler on cooldown
-    pop.setSeekCooldown(true);
-
-    // Implement the original seekHandler logic
+    
     var button;
 
     if (e.type === "click") {
@@ -365,23 +279,57 @@ function Wrapper({ pop }) {
     if (ind < 0) ind = length - 1;
 
     pop.setIndex(ind);
-
     var img = pop.group.imgs[ind].lightboxImg ? pop.group.imgs[ind].lightboxImg : pop.group.imgs[ind];
-    console.log(img);
     pop.setImg(img);
     pop.setZoom(img.zoom ? img.zoom : false);
-    // pop.setType("lightbox");
 
-    // Set a timeout to remove the cooldown status after a specified duration
-    setTimeout(() => {
-      pop.setSeekCooldown(false);
-      console.log("Cooldown cleared:", pop.seekCooldown);
-    }, seekDuration * 1.75 * 1000);
+
   }
+
+  // function seekHandler(e, direction) {
+    
+  //   // Check if the handler is on cooldown
+  //   if (pop.seekCooldown) {
+  //     return;
+  //   }
+  //   // Set the handler on cooldown
+  //   pop.setSeekCooldown(true);
+
+  //   // Implement the original seekHandler logic
+  //   var button;
+
+  //   if (e.type === "click") {
+  //     button = e.target;
+  //     while (!button.classList.contains("popup--seek")) {
+  //       button = button.parentElement;
+  //     }
+  //     direction = direction ? direction : button.classList.contains("popup--seek__right") ? 1 : -1;
+  //   }
+
+  //   var length = pop.group.imgs.length;
+
+  //   var ind = pop.index;
+  //   ind += direction;
+
+  //   if (ind >= length) ind = 0;
+  //   if (ind < 0) ind = length - 1;
+
+  //   pop.setIndex(ind);
+
+  //   var img = pop.group.imgs[ind].lightboxImg ? pop.group.imgs[ind].lightboxImg : pop.group.imgs[ind];
+  //   pop.setImg(img);
+  //   pop.setZoom(img.zoom ? img.zoom : false);
+  //   // pop.setType("lightbox");
+
+  //   // Set a timeout to remove the cooldown status after a specified duration
+  //   setTimeout(() => {
+  //     pop.setSeekCooldown(false);
+  //   }, popSeekDuration * 1.75 * 1000);
+  // }
 
   const handles = {
     close: closeHandler,
-    seekKeydown: seekHandlerWithKeydown,
+    // seekKeydown: seekHandlerWithKeydown,
     seek: seekHandler,
   };
 
@@ -395,12 +343,12 @@ function Wrapper({ pop }) {
 
             {pop.type == "interactive" && <canvas className="popup--canvas popup--canvas__off" />}
 
-            {pop.type == "lightbox" && <LightboxElem pop={pop} nav={nav} handles={handles} popclass={popclass} elems={elems} delay={0.5} />}
+            {pop.type == "lightbox" && <Lightbox pop={pop} nav={nav} handles={handles} popclass={popclass} elems={elems} delay={0.5} />}
 
             {pop.type == "gallery" && (
               <>
-                <LightboxElem pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} />
-                <Info pop={pop} popclass={popclass} elems={elems} />
+                <Lightbox pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} />
+                <GalInfo pop={pop} popclass={popclass} elems={elems} />
               </>
             )}
 
@@ -433,13 +381,13 @@ const Controls = React.memo(function Controls({ pop, nav, handles, className }) 
       <Seek direction="right" nav={nav} handles={handles} />
     </div>
   );
-}, createUpdateConditions(["pop.group", "pop.index", "pop.seekCooldown"]));
+}, createUpdateConditions(["pop.img","pop.group", "pop.index", "nav.left.on", "nav.right.on"]));
 
-function LightboxElem({ children, pop, nav, handles, popclass, elems, delay }) {
+function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
   const [maxHeight, setMaxHeight] = useState(false);
   const [maxWidth, setMaxWidth] = useState(false);
 
-  const [ready, setReady] = useState(false);
+  // const [ready, setReady] = useState(false);
 
   const scale = {
     setHeight: setMaxHeight,
@@ -453,7 +401,7 @@ function LightboxElem({ children, pop, nav, handles, popclass, elems, delay }) {
   const handleImgLoad = () => {
     const id = setTimeout(() => {
       pop.setImgLoaded(true);
-    }, 1000);
+    }, 2000);
     setTimeoutId(id); // Update the timeoutId state
   };
 
@@ -467,10 +415,10 @@ function LightboxElem({ children, pop, nav, handles, popclass, elems, delay }) {
   }, [timeoutId]);
 
   useEffect(() => {
-    if (!elems.popup.ref.current || !elems.desc.ref.current) return;
-    if (elems.popup.height == 0 || elems.popup.width == 0) return;
-    if (!pop.drawn) return;
-    if (pop.imgLoaded) return;
+    // if (!elems.popup.ref.current || !elems.desc.ref.current) return;
+    // if (elems.popup.height == 0 || elems.popup.width == 0) return;
+    // if (!pop.drawn) return;
+    // if (pop.imgLoaded) return;
 
     var popupElem = elems.popup.ref.current;
     var descElem = elems.desc.ref.current;
@@ -514,19 +462,19 @@ function LightboxElem({ children, pop, nav, handles, popclass, elems, delay }) {
       scale.setWidth(newMaxWidth);
     }
 
-    setReady(true);
+    pop.setImgReady(true);
   }, [elems.popup.height, elems.popup.width, pop.img, pop.drawn]);
 
   return (
     <>
       <AnimPres
         mode="wait"
-        animation={anims.changeImg}
+        animation={popAnims.changeImg}
         condition={true}
         className={`popup--media-wrapper ${popclass.mediaWrapper}
          ${!pop.imgLoaded ? "popup--media-wrapper__loading" : ""}`}
         style={{ "--aspect-width": pop.img.width, "--aspect-height": pop.img.height }}
-        key={pop.img.src}
+        elemkey={pop.img.src}
         delay={delay ? delay : 0.375}>
         <Graphic
           reference={elems.img.ref}
@@ -538,143 +486,19 @@ function LightboxElem({ children, pop, nav, handles, popclass, elems, delay }) {
           onLoad={handleImgLoad}
         />
 
-        {ready && (
+        {pop.imgReady && (
           <div
-            className={`loading--wrapper ${!ready || pop.imgLoaded ? "loading--wrapper__hidden" : ""}`}
+            className={`loading--wrapper ${!pop.imgReady || pop.imgLoaded ? "loading--wrapper__hidden" : ""}`}
             style={{ "--img-max-width": `${scale.width}px`, "--img-max-height": `${scale.height}px` }}>
             <div className={`loading--img`}>
               <img src={loading_white.src} alt={loading_white.alt} width={loading_white.width} height={loading_white.height} />
             </div>
           </div>
         )}
-
       </AnimPres>
-        {pop.type == "gallery" && ready && pop.group && <Controls className="popup--controls__gallery" pop={pop} nav={nav} handles={handles} />}
+      {pop.type == "gallery" && pop.imgReady && pop.group && <Controls className="popup--controls__gallery" pop={pop} nav={nav} handles={handles} />}
     </>
   );
-}
-
-// function LightboxElem({ children, pop, popclass, elems }) {
-//   return (
-//     <AnimatePresence mode="wait">
-//       <motion.div
-//         className={`popup--media-wrapper ${popclass.mediaWrapper}`}
-//         key={pop.img.src}
-//         initial={anims.changeImg.in.initial}
-//         animate={anims.changeImg.in.animate}
-//         exit={anims.changeImg.out.exit}
-//         transition={anims.changeImg.in.transition}>
-//         <Graphic
-//           reference={elems.img.ref}
-//           className={`popup--media ${popclass.media}`}
-//           img={pop.img}
-//           type={pop.img.media}
-//           autoplay
-//           controls
-//           style={{ "--aspect-width": pop.img.width, "--aspect-height": pop.img.height }}
-//         />
-//         {children}
-//       </motion.div>
-//     </AnimatePresence>
-//   );
-// }
-
-const Info = React.memo(function Info({ pop, popclass, elems }) {
-  const Categories = React.memo(function Categories() {
-    var catclasses = pop.img.description ? "" : "gallery--categories__no-desc";
-    return (
-      <div className={`gallery--categories ${catclasses}`}>
-        {pop.img.disciplines.map((item, i) => {
-          return (
-            <Tag key={`${item.key} ${i}`} color={"inverted"}>
-              {item}
-            </Tag>
-          );
-        })}
-        {pop.img.tools.map((item, i) => {
-          return (
-            <Tag key={`${item.key} ${i}`} color={"inverted"} variant={"tool"}>
-              {item}
-            </Tag>
-          );
-        })}
-      </div>
-    );
-  }, updateInfo);
-
-  var title, subheading;
-  // if there is a project title
-  if (pop.img.project) {
-    title = pop.img.project;
-    subheading = pop.img.title;
-  } else if (pop.img.title) {
-    title = pop.img.title;
-  } else {
-    title = false;
-  }
-
-  const styles = {
-    description: {
-      "--gallery-img-height": `${elems.img.height != 0 && elems.img.height}px`,
-    },
-  };
-
-  return (
-    <>
-      <AnimPres
-        mode="wait"
-        animation={anims.changeImg}
-        delay={0.65}
-        condition={true}
-        reference={elems.desc.ref}
-        className={`popup--description ${popclass.desc}`}
-        style={styles.description}>
-        <h3 type="h3" className="gallery--title" dangerouslySetInnerHTML={{ __html: title }} />
-        {subheading && <h5 className="gallery--subheading">{subheading}</h5>}
-
-        <div className="gallery--info">
-          {pop.img.description && <Desc />}
-          <Categories />
-        </div>
-      </AnimPres>
-    </>
-  );
-
-  function Desc() {
-    return (
-      <>
-        <div className="gallery--description">
-          {pop.img.description.map((desc, i) => {
-            return (
-              <p key={i} className="gallery--paragraph">
-                {desc}
-              </p>
-            );
-          })}
-        </div>
-      </>
-    );
-  }
-}, updateInfo);
-
-function updateInfo(prevProps, nextProps) {
-  return !(
-    prevProps.pop.index != nextProps.pop.index ||
-    prevProps.pop.img != nextProps.pop.img ||
-    prevProps.elems.img.height != nextProps.elems.img.height
-  );
-}
-
-function createUpdateConditions(propsToCheck) {
-  return function updateConditions(prevProps, nextProps) {
-    for (const propName of propsToCheck) {
-      const [objName, key] = propName.split(".");
-      if (prevProps[objName][key] !== nextProps[objName][key]) {
-        return false;
-      }
-    }
-    return true;
-  };
 }
 
 function Background({ closeHandler, popclass }) {
@@ -720,7 +544,7 @@ function Close({ pop, nav, closeHandler }) {
   const condition = pop.ui.visible || pop.type === "interactive";
 
   return (
-    <AnimPres animation={anims.hideUI} condition={condition} className="">
+    <AnimPres animation={popAnims.hideUI} condition={condition} className="">
       <div className="popup--close" ref={nav.close.ref}>
         <Button icon={["close", "alone", "mask"]} animation="scale-in" color="transparent-primary" onClick={closeHandler} />
       </div>
@@ -732,7 +556,7 @@ function ScaleWrapper({ pop, nav }) {
   const condition = pop.ui.visible;
 
   return (
-    <AnimPres animation={anims.hideUI} condition={condition} className="popup--footer popup--nav">
+    <AnimPres animation={popAnims.hideUI} condition={condition} className="popup--footer popup--nav">
       <Scale className="popup--scale" pop={pop} nav={nav} />
     </AnimPres>
   );
@@ -821,41 +645,6 @@ function useNavControls() {
     },
     scale: {},
   };
-}
-
-function AnimPres({ children, animation, condition, className, mode, delay, style, key, onAnimationComplete, duration, reference, trigger }) {
-  const [shouldAnimate, setShouldAnimate] = useState(trigger === undefined);
-
-  useEffect(() => {
-    if (trigger !== undefined && trigger) {
-      setShouldAnimate(true);
-    }
-  }, [trigger]);
-
-  return (
-    <AnimatePresence mode={mode ? mode : "sync"}>
-      {condition && (
-        <>
-          <motion.div
-            key={key ? key : "anim"}
-            initial={shouldAnimate ? animation.in.initial : animation.in.initial}
-            animate={shouldAnimate ? animation.in.animate : animation.in.initial}
-            exit={animation.out.exit}
-            transition={{
-              ...animation.in.transition,
-              duration: duration !== undefined ? duration : animation.in.transition.duration !== undefined ? animation.in.transition.duration : 0,
-              delay: animation.in.transition.delay !== undefined ? animation.in.transition.delay : delay ? delay : 0,
-            }}
-            className={className ? className : ""}
-            style={style ? style : {}}
-            ref={reference}
-            onAnimationComplete={onAnimationComplete ? onAnimationComplete : () => {}}>
-            {children}
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
-  );
 }
 
 function Anim({ children, animation, condition, className, style }) {

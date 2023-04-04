@@ -10,6 +10,7 @@ import { EXPLORATIONS_IMG_GROUPS } from "@/data/EXPLORATIONS_IMGS";
 
 function updatePopupNav(pop, nav) {
 
+
   if (pop.group && pop.group.imgs.length != 0 && pop.group.imgs.length != 1) {
     if (pop.index == 0) {
       if (!nav.right.on) nav.right.setOn(true);
@@ -36,6 +37,7 @@ function getImgGroup(pop) {
   // TODO: should we add Pagination Indicators? lil dots at the bottom of the popup that indicate which image you're on and how many there are in total?
   // TODO: this one is stupid optional, what about an animation between the image on the page and the image in the popup? like a zoom in or something?
 
+
   var imgGroup = pop.img.group;
   var imgStudy = pop.img.study;
 
@@ -43,6 +45,7 @@ function getImgGroup(pop) {
   if (imgStudy == "koalako") IMG_GROUP = KOALAKO_IMG_GROUPS;
   if (imgStudy == "makeright") IMG_GROUP = MAKERIGHT_IMG_GROUPS;
   if (imgStudy == "explorations") IMG_GROUP = EXPLORATIONS_IMG_GROUPS;
+
 
   if (imgGroup) {
     if (typeof IMG_GROUP[imgGroup] === "undefined") throw new Error(`No group with name ${imgGroup} found`);

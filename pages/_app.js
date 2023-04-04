@@ -82,7 +82,7 @@ export default function App({ Component, pageProps }) {
   const [popupDrawn, setPopupDrawn] = useState(false);
   const [popupSeekCooldown, setPopupSeekCooldown] = useState(false);
 
-  // const [imgReady, setImgReady] = useState(false);
+  const [imgReady, setImgReady] = useState(false);
 
 
   const pop = {
@@ -105,8 +105,8 @@ export default function App({ Component, pageProps }) {
     setDrawn: setPopupDrawn,
     seekCooldown: popupSeekCooldown,
     setSeekCooldown: setPopupSeekCooldown,
-    // imgReady: imgReady,
-    // setImgReady: setImgReady,
+    imgReady: imgReady,
+    setImgReady: setImgReady,
 
     ui: {
       visible: popupUiVisible,

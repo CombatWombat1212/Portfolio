@@ -359,6 +359,17 @@ function cssVarToPixels(element, cssVar) {
   return pixels;
 }
 
+function createUpdateConditions(propsToCheck) {
+  return function updateConditions(prevProps, nextProps) {
+    for (const propName of propsToCheck) {
+      const [objName, key] = propName.split(".");
+      if (prevProps[objName][key] !== nextProps[objName][key]) {
+        return false;
+      }
+    }
+    return true;
+  };
+}
 
 // Video file formats
 const VIDEO_TYPES = ["mp4", "avi", "mov", "wmv", "mkv", "flv", "webm"];
@@ -385,6 +396,7 @@ export {
   toTitleCase,
   ensureArray,
   cssVarToPixels,
+  createUpdateConditions,
   RESIZE_TIMEOUT,
   VIDEO_TYPES,
   IMAGE_TYPES,
