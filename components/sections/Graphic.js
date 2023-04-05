@@ -263,6 +263,7 @@ function Graphic({
           {...(tabIndex !== undefined ? { tabIndex } : {})}
           {...props}>
           {effect && <Effect effect={effect} />}
+
           <Image
             className={innerClassName}
             src={img.src}
@@ -274,6 +275,7 @@ function Graphic({
             onLoadingComplete={onLoad}
             style={innerStyle}
           />
+
           {children && children}
         </div>
       )}

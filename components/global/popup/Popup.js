@@ -2,10 +2,14 @@
 // TODO: this should either be pre-fetched or otherwise loaded in before the user clicks on it
 
 
-// TODO: keyboard navigation
-//  - polish up new popup type, call it done
+
+  // TODO: create a zoom variant of the gallery popup
+  
   // TODO: custom image ordering on the explorations page
+  // TODO: video thumbnails and in general custom thumbnails for the explorations page
   // TODO: thats it, thats all for explorations!!
+
+
 
 import toggle, { simpleToggleOn } from "@/scripts/AnimationTools";
 import Image from "next/image";
@@ -239,6 +243,10 @@ function Wrapper({ pop }) {
     img: {
       ref: imgRef,
       height: imgHeight,
+      setMaxHeight: setDescMaxHeight,
+      setMaxWidth: setDescMaxWidth,
+      maxHeight: descMaxHeight,
+      maxWidth: descMaxWidth,  
     },
     popup: {
       ref: popRef,
@@ -247,10 +255,6 @@ function Wrapper({ pop }) {
     },
     desc: {
       ref: descRef,
-      setMaxHeight: setDescMaxHeight,
-      setMaxWidth: setDescMaxWidth,
-      maxHeight: descMaxHeight,
-      maxWidth: descMaxWidth,  
     },
   };
 
@@ -439,11 +443,11 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
       }
 
       // Update maxHeight and maxWidth state only if their values have changed
-      if (newMaxHeight !== elems.desc.maxHeight) {
-        elems.desc.setMaxHeight(newMaxHeight);
+      if (newMaxHeight !== elems.img.maxHeight) {
+        elems.img.setMaxHeight(newMaxHeight);
       }
-      if (newMaxWidth !== elems.desc.maxWidth) {
-        elems.desc.setMaxWidth(newMaxWidth);
+      if (newMaxWidth !== elems.img.maxWidth) {
+        elems.img.setMaxWidth(newMaxWidth);
       }
     }
 
@@ -454,9 +458,6 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
     }
   }, [elems.popup.height, elems.popup.width, pop.img, pop.drawn]);
 
-  // useEffect(() => {
-  //   console.log(`maxHeight: ${maxHeight}, maxWidth: ${maxWidth}`);
-  // }, [scale.height, scale.width]);
 
   return (
     <>
@@ -486,7 +487,7 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
         {pop.imgReady && (
           <div
             className={`loading--wrapper ${!pop.imgReady || pop.imgLoaded ? "loading--wrapper__hidden" : ""}`}
-            style={{ "--img-max-width": `${elems.desc.maxWidth}px`, "--img-max-height": `${elems.desc.maxHeight}px` }}>
+            style={{ "--img-max-width": `${elems.img.maxWidth}px`, "--img-max-height": `${elems.img.maxHeight}px` }}>
             <div className={`loading--img`}>
               <img src={loading_white.src} alt={loading_white.alt} width={loading_white.width} height={loading_white.height} />
             </div>

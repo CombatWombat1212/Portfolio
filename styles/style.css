@@ -2365,7 +2365,7 @@ body {
   pointer-events: all;
   overflow-y: auto;
   height: var(--gallery-img-height);
-  max-height: Max(100%, var(--gallery-img-height));
+  max-height: Min(var(--gallery-img-max-height), var(--gallery-img-height));
   width: fit-content;
 }
 

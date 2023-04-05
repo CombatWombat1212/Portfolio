@@ -25,9 +25,12 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
     title = false;
   }
 
+
+  // might have to add elems.img.maxHeight to dependencies idk
   const styles = {
     description: {
       "--gallery-img-height": `${elems.img.height != 0 && elems.img.height}px`,
+      "--gallery-img-max-height": `${elems.img.maxHeight != 0 && elems.img.maxHeight}px`,
     },
   };
 

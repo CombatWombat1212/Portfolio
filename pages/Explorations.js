@@ -12,7 +12,8 @@ import {
 } from "@/data/EXPLORATIONS_IMGS";
 import { IMAGE_TYPES, VIDEO_TYPES, ensureArray } from "@/scripts/GlobalUtilities";
 
-// TODO: add panos to photography
+
+
 
 function Explorations({ pop }) {
   const study = STUDY_EXPLORATIONS;
