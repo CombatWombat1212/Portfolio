@@ -14,12 +14,15 @@ function AnimPres({
   duration,
   reference,
   layout,
+  initial: initialProp,
   fragment = false,
+    transition: transitionProp = {},
+
 }) {
   const hasInOutAnimation = animation.in && animation.out;
   const hasHiddenVisibleAnimation = animation.hidden && animation.visible;
 
-  const initial = hasInOutAnimation ? animation.in.initial : "hidden";
+  const initial = initialProp !== undefined ? initialProp : hasInOutAnimation ? animation.in.initial : "hidden";
   const animate = hasInOutAnimation ? animation.in.animate : "visible";
   const exit = hasInOutAnimation ? animation.out.exit : "exit";
 
@@ -35,6 +38,7 @@ function AnimPres({
       ...animType,
       transition: {
         ...animType.transition,
+        ...(transitionProp ? transitionProp : {}),
         duration:
           duration !== undefined ? duration : animType.transition.duration !== undefined ? animType.transition.duration : defaultTransition.duration,
         delay: delay !== undefined ? delay : animType.transition.delay !== undefined ? animType.transition.delay : defaultTransition.delay,
@@ -53,6 +57,7 @@ function AnimPres({
   const transition = hasInOutAnimation
     ? {
         ...animation.in.transition,
+        ...(transitionProp ? transitionProp : {}),
         duration:
           duration !== undefined
             ? duration

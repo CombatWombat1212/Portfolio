@@ -445,7 +445,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
     &__gallery {
       // top: calc(100% + 1.85rem);
       top: calc(100% + 2rem);
-      left: 50%;
+      // left: 50%;
       transform: translate(-50%, 0%);
       pointer-events: all;
     }

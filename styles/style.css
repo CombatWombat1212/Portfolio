@@ -2572,7 +2572,6 @@ body {
 
 .popup--controls__gallery {
   top: calc(100% + 2rem);
-  left: 50%;
   transform: translate(-50%, 0%);
   pointer-events: all;
 }

@@ -1,9 +1,12 @@
 // TODO: Do i want all popups to load when the page loads so they can open quickly? or do I want to save on the page load and only load the popup when it is needed? for right now i'm going to be loading it in on click
 // TODO: this should either be pre-fetched or otherwise loaded in before the user clicks on it
 
-// TODO: create a zoom variant of the gallery popup
 
+// TODO: Fix broken titles on the explorations page listings
+// TODO: Go through exploration images and add zoom:true as needed
+// TODO: Double check other popups make sure they're good
 // TODO: custom image ordering on the explorations page
+// TODO: add icons for videos and groups of images to explorations page listings
 // TODO: video thumbnails and in general custom thumbnails for the explorations page
 // TODO: thats it, thats all for explorations!!
 
@@ -35,7 +38,7 @@ import useElementWidth from "@/scripts/hooks/useElementWidth";
 import useElementHeight from "@/scripts/hooks/useElementHeight";
 import AnimPres from "../AnimPres";
 import { GalInfo } from "./popup_components/GalleryInfo";
-import popAnims, { popSeekDuration } from "./popup_utilities/PopupAnimations";
+import popAnims, { popLayoutTransition, popSeekDuration } from "./popup_utilities/PopupAnimations";
 
 //no more than 2 decimals
 const startZoom = 0.95;
@@ -258,7 +261,7 @@ function Wrapper({ pop }) {
     canInteract.current = false;
     setTimeout(() => {
       canInteract.current = true;
-    }, 300);
+    }, (popSeekDuration*1000*2)*1.15);
   
     return true;
   };
@@ -647,7 +650,14 @@ function Title({ pop }) {
 
 const Controls = React.memo(function Controls({ pop, nav, handles, className }) {
   return (
-    <AnimPres mode="wait" animation={popAnims.fade} condition={true} className={`popup--controls ${className ? className : ""}`} delay={0}>
+
+    <AnimPres mode="wait" animation={popAnims.fade} condition={true} className={`popup--controls ${className ? className : ""}`} delay={0}
+    layout="position"
+    initial={{ transform: "none", transformOrigin: "50% 50% 0px" }}
+    transition={{
+      layout: {duration: popLayoutTransition},
+    }}
+    >
       <Seek direction="left" nav={nav} handles={handles} />
       <Pagination pop={pop} handles={handles} />
       <Seek direction="right" nav={nav} handles={handles} />

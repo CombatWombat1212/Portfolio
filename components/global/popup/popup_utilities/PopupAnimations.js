@@ -1,4 +1,5 @@
 const popSeekDuration = 0.175;
+const popLayoutTransition = 0.45;
 // const popSeekDuration = 0.315;
 
 
@@ -105,4 +106,4 @@ const popAnims = {
 
   export default popAnims;
 
-  export { popSeekDuration };
+  export { popSeekDuration, popLayoutTransition };

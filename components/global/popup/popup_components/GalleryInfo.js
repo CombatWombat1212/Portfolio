@@ -4,7 +4,7 @@ import Tag from "@/components/elements/Tag";
 import { createUpdateConditions } from "@/scripts/GlobalUtilities";
 import React, { useEffect, useState } from "react";
 import AnimPres from "../../AnimPres";
-import popAnims from "../popup_utilities/PopupAnimations";
+import popAnims, { popLayoutTransition } from "../popup_utilities/PopupAnimations";
 import useDelayedProps from "@/scripts/hooks/useDelayedProps";
 import { Close } from "../Popup";
 import useHasScrollbar from "@/scripts/hooks/useHasScrollbar";
@@ -48,7 +48,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
         layout="position"
         transition={{
           // y: { duration: 0.5 },
-          layout: { duration: 0.45 },
+          layout: { duration: popLayoutTransition },
         }}
         className="popup--info">
         {pop.firstImgDrawn && (
