@@ -231,6 +231,19 @@ function Wrapper({ pop }) {
   const popHeight = useElementHeight(popRef);
   const popWidth = useElementWidth(popRef);
   const descRef = useRef(null);
+
+
+  const [descMaxHeight, setDescMaxHeight] = useState(false);
+  const [descMaxWidth, setDescMaxWidth] = useState(false);
+
+  // const scale = {
+    // setHeight: setMaxHeight,
+    // setWidth: setMaxWidth,
+    // height: maxHeight,
+    // width: maxWidth,
+  // };
+
+
   const elems = {
     img: {
       ref: imgRef,
@@ -243,6 +256,10 @@ function Wrapper({ pop }) {
     },
     desc: {
       ref: descRef,
+      setMaxHeight: setDescMaxHeight,
+      setMaxWidth: setDescMaxWidth,
+      maxHeight: descMaxHeight,
+      maxWidth: descMaxWidth,  
     },
   };
 
@@ -317,7 +334,8 @@ function Wrapper({ pop }) {
     <>
       <Background handles={handles} popclass={popclass} />
       <div className={`popup container ${popclass.container}`} style={popclass.containerStyle} ref={popRef}>
-        <div className={`popup--inner ${popclass.inner}`}>
+        <div className={`popup--inner ${popclass.inner}`}
+        >
           <div className={`popup--content popup--content__on ${popclass.content}`}>
             {pop.type != "gallery" && <Head pop={pop} nav={nav} popclass={popclass} handles={handles} />}
 
@@ -332,7 +350,7 @@ function Wrapper({ pop }) {
             {pop.type == "gallery" && (
               <>
                 <Lightbox pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles}/>
-                <GalInfo pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles}/>
+                 <GalInfo pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles}/>
               </>
             )}
 
@@ -358,17 +376,15 @@ function Wrapper({ pop }) {
 }
 
 function Lightbox({ pop, nav, handles, popclass, elems }) {
-  const [maxHeight, setMaxHeight] = useState(false);
-  const [maxWidth, setMaxWidth] = useState(false);
+  // const [maxHeight, setMaxHeight] = useState(false);
+  // const [maxWidth, setMaxWidth] = useState(false);
 
-  // const [ready, setReady] = useState(false);
-
-  const scale = {
-    setHeight: setMaxHeight,
-    setWidth: setMaxWidth,
-    height: maxHeight,
-    width: maxWidth,
-  };
+  // const scale = {
+  //   setHeight: setMaxHeight,
+  //   setWidth: setMaxWidth,
+  //   height: maxHeight,
+  //   width: maxWidth,
+  // };
 
   const [timeoutId, setTimeoutId] = useState(null); // Add this state variable
 
@@ -432,11 +448,11 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
       }
 
       // Update maxHeight and maxWidth state only if their values have changed
-      if (newMaxHeight !== maxHeight) {
-        scale.setHeight(newMaxHeight);
+      if (newMaxHeight !== elems.desc.maxHeight) {
+        elems.desc.setMaxHeight(newMaxHeight);
       }
-      if (newMaxWidth !== maxWidth) {
-        scale.setWidth(newMaxWidth);
+      if (newMaxWidth !== elems.desc.maxWidth) {
+        elems.desc.setMaxWidth(newMaxWidth);
       }
     }
 
@@ -479,7 +495,7 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
         {pop.imgReady && (
           <div
             className={`loading--wrapper ${!pop.imgReady || pop.imgLoaded ? "loading--wrapper__hidden" : ""}`}
-            style={{ "--img-max-width": `${scale.width}px`, "--img-max-height": `${scale.height}px` }}>
+            style={{ "--img-max-width": `${elems.desc.maxWidth}px`, "--img-max-height": `${elems.desc.maxHeight}px` }}>
             <div className={`loading--img`}>
               <img src={loading_white.src} alt={loading_white.alt} width={loading_white.width} height={loading_white.height} />
             </div>

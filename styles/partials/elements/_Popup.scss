@@ -114,6 +114,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
     &__gallery {
       pointer-events: none;
+      justify-content: center;
       // @include my-auto;
       // height:fit-content;
     }
@@ -155,7 +156,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
     }
 
     &__gallery-group {
-      top: -2%;
+      top: -1.25rem;
     }
 
 

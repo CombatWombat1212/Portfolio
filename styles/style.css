@@ -2296,6 +2296,7 @@ body {
 
 .popup--inner__gallery {
   pointer-events: none;
+  justify-content: center;
 }
 
 .popup--content {
@@ -2346,7 +2347,7 @@ body {
 }
 
 .popup--content__gallery-group {
-  top: -2%;
+  top: -1.25rem;
 }
 
 .popup--info {

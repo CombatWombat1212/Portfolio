@@ -35,12 +35,8 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
   var hasDesc = pop.img.description || (pop.group.description && pop.group.description[pop.index]);
 
 
-  const scrollbar = useHasScrollbar(elems.desc.ref, {observer:true, debounceTime: 50});
+  const scrollbar = useHasScrollbar(elems.desc.ref, {observer:true, debounceTime: 0});
   const scrollbarClasses = scrollbar ? "popup--description__gallery-scrollbar" : "";
-
-  useEffect(() => {
-    console.log(scrollbar);
-  }, [scrollbar])
 
 
   return (
