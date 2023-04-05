@@ -1,8 +1,11 @@
 // TODO: Do i want all popups to load when the page loads so they can open quickly? or do I want to save on the page load and only load the popup when it is needed? for right now i'm going to be loading it in on click
 // TODO: this should either be pre-fetched or otherwise loaded in before the user clicks on it
 
-// TODO: stop the flicker on the description when seeking
-// TODO: fix final issues with loading icon being in the wrong place
+
+// TODO: keyboard navigation
+//  - polish up new popup type, call it done
+  // TODO: custom image ordering on the explorations page
+  // TODO: thats it, thats all for explorations!!
 
 import toggle, { simpleToggleOn } from "@/scripts/AnimationTools";
 import Image from "next/image";
@@ -177,7 +180,8 @@ function Wrapper({ pop }) {
 
   useBodyClass("noscroll", pop.on);
   useListener("resize", popupResize, pop.on);
-  // useListener("keydown", seekHandlerWithKeydown, pop.on);
+  useListener("keydown", seekHandlerWithKeydown, pop.on);
+  useListener("keydown", closeHandlerWithKeydown, pop.on);
 
   const nav = useNavControls();
   const mouseMoving = useMouseMoving(null, 1000);
@@ -216,14 +220,8 @@ function Wrapper({ pop }) {
     updatePopupNav(pop, nav);
   }, [pop.img, pop.group, pop.index]);
 
-  // TODO: finish the new popup type for explorations page
-  //  - add pagination to new popup type
-  //  - okay honestly, i don't know if pagining between projects is that necessary, it would be nice but clicking between projects is pretty darn fluid anyways
-  //  - add seek arrows, and modify seek handler to stop setting type unnecessarily
-  //  - finish styling touches
-  //  - polish up new popup type, call it done
-  // TODO: custom image ordering on the explorations page
-  // TODO: thats it, thats all for explorations!!
+
+
 
   const imgRef = useRef(null);
   const imgHeight = useElementHeight(imgRef, { observer: true });
@@ -235,13 +233,6 @@ function Wrapper({ pop }) {
 
   const [descMaxHeight, setDescMaxHeight] = useState(false);
   const [descMaxWidth, setDescMaxWidth] = useState(false);
-
-  // const scale = {
-    // setHeight: setMaxHeight,
-    // setWidth: setMaxWidth,
-    // height: maxHeight,
-    // width: maxWidth,
-  // };
 
 
   const elems = {
@@ -274,16 +265,24 @@ function Wrapper({ pop }) {
     pop.setFirstImgDrawn(false);
   }, [pop]);
 
-  // function seekHandlerWithKeydown(e) {
-  //   if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
-  //     seekHandler(e, e.key === "ArrowRight" ? 1 : -1);
-  //   }
-  // }
+  function seekHandlerWithKeydown(e) {
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+      seekHandler(e, e.key === "ArrowRight" ? 1 : -1);
+    }
+  }
+
+  function closeHandlerWithKeydown(e) {
+    if (e.key === "Escape" || e.key === " ") {
+      closeHandler();
+    }
+  }
 
   const seekHandler = useCallback(
     (e, direction) => {
       var button;
 
+      if(!pop.group) return;
+      
       if (e.type === "click") {
         button = e.target;
         while (!button.classList.contains("popup--seek")) {
@@ -327,7 +326,8 @@ function Wrapper({ pop }) {
     close: closeHandler,
     seek: seekHandler,
     pagination: paginationHandler,
-    // seekKeydown: seekHandlerWithKeydown,
+    seekKeydown: seekHandlerWithKeydown,
+    closeKeydown: closeHandlerWithKeydown,
   };
 
   return (
@@ -376,15 +376,6 @@ function Wrapper({ pop }) {
 }
 
 function Lightbox({ pop, nav, handles, popclass, elems }) {
-  // const [maxHeight, setMaxHeight] = useState(false);
-  // const [maxWidth, setMaxWidth] = useState(false);
-
-  // const scale = {
-  //   setHeight: setMaxHeight,
-  //   setWidth: setMaxWidth,
-  //   height: maxHeight,
-  //   width: maxWidth,
-  // };
 
   const [timeoutId, setTimeoutId] = useState(null); // Add this state variable
 
@@ -477,7 +468,7 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
            ${!pop.imgLoaded ? "popup--media-wrapper__loading" : ""}`}
         style={{ "--aspect-width": pop.img.width, "--aspect-height": pop.img.height }}
         elemkey={pop.img.src}
-        delay={0.3}
+        delay={pop.firstImgDrawn ? 0 : 0.3}
         onAnimationComplete={() => {
           pop.setImgDrawn(true);
           if(!pop.firstImgDrawn) pop.setFirstImgDrawn(true);
