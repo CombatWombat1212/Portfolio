@@ -860,6 +860,7 @@ const EXPLORATIONS_IMGS = processImages(
       group: "obsessive_seas",
       project: "Navigating <i>Obsessive Seas</i>",
       index: 10,
+      zoom: true,
     },
     virtual_pangea_temp: {
       name: "virtual_pangea_temp",
@@ -1496,6 +1497,7 @@ const EXPLORATIONS_IMGS = processImages(
       study: "makeright",
       group: "makeright_final",
       project: "MakeRight",
+      zoom:true,
     },
     customer_screen_07: {
       name: "customer_screen_07",
@@ -1509,6 +1511,8 @@ const EXPLORATIONS_IMGS = processImages(
       study: "makeright",
       group: "makeright_final",
       project: "MakeRight",
+      zoom:true,
+
     },
     customer_screen_08: {
       name: "customer_screen_08",
@@ -1522,6 +1526,8 @@ const EXPLORATIONS_IMGS = processImages(
       study: "makeright",
       group: "makeright_final",
       project: "MakeRight",
+      zoom:true,
+
     },
     customer_screen_13: {
       name: "customer_screen_13",
@@ -1535,6 +1541,7 @@ const EXPLORATIONS_IMGS = processImages(
       study: "makeright",
       group: "makeright_final",
       project: "MakeRight",
+      zoom:true,
     },
     maker_screen_09_no_tutorial: {
       name: "maker_screen_09_no_tutorial",
@@ -1576,6 +1583,7 @@ const EXPLORATIONS_IMGS = processImages(
       study: "makeright",
       group: "makeright_final",
       project: "MakeRight",
+      zoom:true,
     },
     maker_screen_12_no_tutorial: {
       name: "maker_screen_12_no_tutorial",
@@ -1590,6 +1598,7 @@ const EXPLORATIONS_IMGS = processImages(
       study: "makeright",
       group: "makeright_final",
       project: "MakeRight",
+      zoom:true,
     },
     // maker_screen_12_tutorial: {
     //   name: "maker_screen_12_tutorial",
@@ -1617,6 +1626,7 @@ const EXPLORATIONS_IMGS = processImages(
       study: "makeright",
       group: "makeright_final",
       project: "MakeRight",
+      zoom:true,
     },
 
 

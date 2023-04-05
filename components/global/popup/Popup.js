@@ -1,15 +1,11 @@
 // TODO: Do i want all popups to load when the page loads so they can open quickly? or do I want to save on the page load and only load the popup when it is needed? for right now i'm going to be loading it in on click
 // TODO: this should either be pre-fetched or otherwise loaded in before the user clicks on it
 
+// TODO: create a zoom variant of the gallery popup
 
-
-  // TODO: create a zoom variant of the gallery popup
-  
-  // TODO: custom image ordering on the explorations page
-  // TODO: video thumbnails and in general custom thumbnails for the explorations page
-  // TODO: thats it, thats all for explorations!!
-
-
+// TODO: custom image ordering on the explorations page
+// TODO: video thumbnails and in general custom thumbnails for the explorations page
+// TODO: thats it, thats all for explorations!!
 
 import toggle, { simpleToggleOn } from "@/scripts/AnimationTools";
 import Image from "next/image";
@@ -28,19 +24,15 @@ import {
 } from "./popup_utilities/CanvasUtilities";
 import { galleryInit, getImgGroup, imgLoading, lightboxInit, seekHandler, setPopupGroup, updatePopupNav } from "./popup_utilities/LightboxUtilities";
 // import { catchKeys, closePopup, setSetPopupGlobal } from "./popup_utilities/PopupUtilities";
-import { hiddenUIEnd } from "./popup_utilities/HiddenUIUtilities";
 import { Graphic, Heading } from "@/components/sections/Sections";
 import useBodyClass from "@/scripts/hooks/useBodyClass";
 import useListener from "@/scripts/hooks/useListener";
-import useToggle from "@/scripts/hooks/useToggle";
 import { AnimatePresence, motion, useAnimation, useIsPresent } from "framer-motion";
 import useMouseMoving from "@/scripts/hooks/useMouseMoving";
 import useHoverAndFocus from "@/scripts/hooks/useHoverAndFocus";
 import useInputDown from "@/scripts/hooks/useInputDown";
 import useElementWidth from "@/scripts/hooks/useElementWidth";
-import useResize from "@/scripts/hooks/useResize";
 import useElementHeight from "@/scripts/hooks/useElementHeight";
-import Tag from "@/components/elements/Tag";
 import AnimPres from "../AnimPres";
 import { GalInfo } from "./popup_components/GalleryInfo";
 import popAnims, { popSeekDuration } from "./popup_utilities/PopupAnimations";
@@ -106,24 +98,22 @@ function getPopupClasses(pop) {
   if (pop.type === "gallery") {
     popclass.content.push("popup--content__gallery");
     popclass.container.push("popup__gallery");
-    popclass.media.push("popup--media__gallery");
-    popclass.mediaWrapper.push("popup--media-wrapper__gallery");
     popclass.desc.push("popup--description__gallery");
     popclass.background.push("popup--background__gallery");
     popclass.inner.push("popup--inner__gallery");
     popclass.close.push("popup--close__gallery");
 
-    // // Nested Case 2.1: zoom is true
-    // if (pop.zoom) {
-    //   popclass.media.push("popup--img__lightbox-zoom");
-    //   popclass.content.push("popup--content__lightbox-zoom");
-    //   popclass.container.push("popup__lightbox-zoom");
-    // }
-    // // Nested Case 2.2: zoom is false
-    // if (!pop.zoom) {
-    //   popclass.content.push("popup--content__lightbox");
-    //   popclass.container.push("popup__lightbox");
-    // }
+    // Nested Case 2.1: zoom is true
+    if (pop.zoom) {
+      popclass.media.push("popup--media__gallery-zoom");
+      popclass.mediaWrapper.push("popup--media-wrapper__gallery-zoom");
+    }
+    // Nested Case 2.2: zoom is false
+    if (!pop.zoom) {
+      popclass.mediaWrapper.push("popup--media-wrapper__gallery");
+      popclass.media.push("popup--media__gallery");
+      // popclass.container.push("popup__lightbox");
+    }
     // Nested Case 2.3: group is true
     if (pop.group) {
       popclass.content.push("popup--content__gallery-group");
@@ -224,9 +214,6 @@ function Wrapper({ pop }) {
     updatePopupNav(pop, nav);
   }, [pop.img, pop.group, pop.index]);
 
-
-
-
   const imgRef = useRef(null);
   const imgHeight = useElementHeight(imgRef, { observer: true });
   const popRef = useRef(null);
@@ -234,19 +221,23 @@ function Wrapper({ pop }) {
   const popWidth = useElementWidth(popRef);
   const descRef = useRef(null);
 
-
-  const [descMaxHeight, setDescMaxHeight] = useState(false);
-  const [descMaxWidth, setDescMaxWidth] = useState(false);
-
+  const [lightboxImgMaxHeight, setLightboxImgMaxHeight] = useState(false);
+  const [lightboxImgMaxWidth, setLightboxImgMaxWidth] = useState(false);
+  const [lightboxImgAvailHeight, setLightboxImgAvailHeight] = useState(false);
+  const [lightboxImgAvailWidth, setLightboxImgAvailWidth] = useState(false);
 
   const elems = {
     img: {
       ref: imgRef,
       height: imgHeight,
-      setMaxHeight: setDescMaxHeight,
-      setMaxWidth: setDescMaxWidth,
-      maxHeight: descMaxHeight,
-      maxWidth: descMaxWidth,  
+      setMaxHeight: setLightboxImgMaxHeight,
+      setMaxWidth: setLightboxImgMaxWidth,
+      maxHeight: lightboxImgMaxHeight,
+      maxWidth: lightboxImgMaxWidth,
+      setAvailHeight: setLightboxImgAvailHeight,
+      setAvailWidth: setLightboxImgAvailWidth,
+      availHeight: lightboxImgAvailHeight,
+      availWidth: lightboxImgAvailWidth,
     },
     popup: {
       ref: popRef,
@@ -258,7 +249,23 @@ function Wrapper({ pop }) {
     },
   };
 
+
+  const canInteract = useRef(true);
+
+  const debounceInteraction = () => {
+    if (!canInteract.current) return false;
+  
+    canInteract.current = false;
+    setTimeout(() => {
+      canInteract.current = true;
+    }, 300);
+  
+    return true;
+  };
+  
   const closeHandler = useCallback(() => {
+    if (!debounceInteraction()) return;
+
     pop.setOn(false);
     pop.setImgLoaded(false);
     pop.setDrawn(false);
@@ -269,24 +276,14 @@ function Wrapper({ pop }) {
     pop.setFirstImgDrawn(false);
   }, [pop]);
 
-  function seekHandlerWithKeydown(e) {
-    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
-      seekHandler(e, e.key === "ArrowRight" ? 1 : -1);
-    }
-  }
-
-  function closeHandlerWithKeydown(e) {
-    if (e.key === "Escape" || e.key === " ") {
-      closeHandler();
-    }
-  }
-
   const seekHandler = useCallback(
     (e, direction) => {
+      if (!debounceInteraction()) return;
+
       var button;
 
-      if(!pop.group) return;
-      
+      if (!pop.group) return;
+
       if (e.type === "click") {
         button = e.target;
         while (!button.classList.contains("popup--seek")) {
@@ -316,6 +313,8 @@ function Wrapper({ pop }) {
 
   const paginationHandler = useCallback(
     (img, i) => {
+      if (!debounceInteraction()) return;
+
       pop.setIndex(i);
       pop.setImg(pop.group.imgs[i]);
       pop.setZoom(img.zoom ? img.zoom : false);
@@ -325,6 +324,18 @@ function Wrapper({ pop }) {
     },
     [pop]
   );
+
+  function seekHandlerWithKeydown(e) {
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+      seekHandler(e, e.key === "ArrowRight" ? 1 : -1);
+    }
+  }
+
+  function closeHandlerWithKeydown(e) {
+    if (e.key === "Escape" || e.key === " ") {
+      closeHandler();
+    }
+  }
 
   const handles = {
     close: closeHandler,
@@ -338,8 +349,7 @@ function Wrapper({ pop }) {
     <>
       <Background handles={handles} popclass={popclass} />
       <div className={`popup container ${popclass.container}`} style={popclass.containerStyle} ref={popRef}>
-        <div className={`popup--inner ${popclass.inner}`}
-        >
+        <div className={`popup--inner ${popclass.inner}`}>
           <div className={`popup--content popup--content__on ${popclass.content}`}>
             {pop.type != "gallery" && <Head pop={pop} nav={nav} popclass={popclass} handles={handles} />}
 
@@ -347,21 +357,21 @@ function Wrapper({ pop }) {
 
             {pop.type == "lightbox" && (
               <>
-                <Lightbox pop={pop} nav={nav} handles={handles} popclass={popclass} elems={elems}/>
+                <Lightbox pop={pop} nav={nav} handles={handles} popclass={popclass} elems={elems} />
               </>
             )}
 
             {pop.type == "gallery" && (
               <>
-                <Lightbox pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles}/>
-                 <GalInfo pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles}/>
+                <Lightbox pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} />
+                <GalInfo pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} />
               </>
             )}
 
             {pop.type == "interactive" && <ScaleWrapper pop={pop} nav={nav} />}
           </div>
 
-          {pop.type == "lightbox" && pop.group && pop.firstImgDrawn &&  <Controls pop={pop} nav={nav} handles={handles} />}
+          {pop.type == "lightbox" && pop.group && pop.firstImgDrawn && <Controls pop={pop} nav={nav} handles={handles} />}
         </div>
       </div>
     </>
@@ -380,7 +390,6 @@ function Wrapper({ pop }) {
 }
 
 function Lightbox({ pop, nav, handles, popclass, elems }) {
-
   const [timeoutId, setTimeoutId] = useState(null); // Add this state variable
 
   const handleImgLoad = () => {
@@ -399,56 +408,83 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
     };
   }, [timeoutId]);
 
+  function updateAvailHeightAndWidth() {
+    var popupElem = elems.popup.ref.current;
+    var descElem = elems.desc.ref.current;
+
+    var gapWidth = splitRem(window.getComputedStyle(popupElem).getPropertyValue("--popup-gap"));
+    var scrollbarWidth = descElem.offsetWidth - descElem.clientWidth;
+    var descWidth =
+      splitPx(window.getComputedStyle(descElem).width) +
+      splitPx(window.getComputedStyle(descElem).paddingLeft) +
+      splitPx(window.getComputedStyle(descElem).paddingRight) +
+      scrollbarWidth;
+
+    // var availHeight = cssVarToPixels(popupElem, "--popup-height-offset");
+    // var availHeight = splitPx(window.getComputedStyle(popupElem.querySelector(".popup--inner")).height);
+    // var availWidth = splitPx(window.getComputedStyle(popupElem.querySelector(".popup--inner")).width) - gapWidth - descWidth;
+
+    var availHeight = popupElem.offsetHeight;
+    var availWidth = popupElem.offsetWidth - gapWidth - descWidth;
+
+    if (availHeight !== elems.img.availHeight) {
+      elems.img.setAvailHeight(availHeight);
+    }
+    if (availWidth !== elems.img.availWidth) {
+      elems.img.setAvailWidth(availWidth);
+    }
+
+    return { availHeight, availWidth };
+  }
+
+  function updateMaxHeightAndWidth(availHeight, availWidth) {
+    var aspectWidth = pop.img.width;
+    var aspectHeight = pop.img.height;
+
+    // Calculate aspect ratio
+    var aspectRatio = aspectWidth / aspectHeight;
+
+    // Calculate scaled dimensions based on aspect ratio
+    var scaledWidth = availHeight * aspectRatio;
+    var scaledHeight = availWidth / aspectRatio;
+
+    // Check which dimension should be adjusted based on available dimensions
+    if (scaledWidth <= availWidth) {
+      var maxHeight = availHeight;
+      var maxWidth = scaledWidth;
+    } else {
+      var maxHeight = scaledHeight;
+      var maxWidth = availWidth;
+    }
+
+    // Update maxHeight and maxWidth state only if their values have changed
+    if (maxHeight !== elems.img.maxHeight) {
+      elems.img.setMaxHeight(maxHeight);
+    }
+    if (maxWidth !== elems.img.maxWidth) {
+      elems.img.setMaxWidth(maxWidth);
+    }
+
+    if (availHeight !== elems.img.availHeight) {
+      elems.img.setAvailHeight(availHeight);
+    }
+    if (availWidth !== elems.img.availWidth) {
+      elems.img.setAvailWidth(availWidth);
+    }
+
+    return { maxHeight, maxWidth };
+  }
+
   useLayoutEffect(() => {
     if (!elems.popup.ref.current || !elems.desc.ref.current) return;
     if (elems.popup.height == 0 || elems.popup.width == 0) return;
     if (!pop.drawn) return;
+
+    // used by gallery zoom images but also when the pop.imgLoaded is false, so instead of doing it conditionally we just do it every time cause life is too short
+    var { availHeight, availWidth } = updateAvailHeightAndWidth();
+
     if (!pop.imgLoaded) {
-      var popupElem = elems.popup.ref.current;
-      var descElem = elems.desc.ref.current;
-
-      var gapWidth = splitRem(window.getComputedStyle(popupElem).getPropertyValue("--popup-gap"));
-      var scrollbarWidth = descElem.offsetWidth - descElem.clientWidth;
-      var descWidth =
-        splitPx(window.getComputedStyle(descElem).width) +
-        splitPx(window.getComputedStyle(descElem).paddingLeft) +
-        splitPx(window.getComputedStyle(descElem).paddingRight) +
-        scrollbarWidth;
-
-      // var availHeight = cssVarToPixels(popupElem, "--popup-height-offset");
-
-      var availHeight = popupElem.offsetHeight;
-      var availWidth = popupElem.offsetWidth - gapWidth - descWidth;
-
-      // var availHeight = splitPx(window.getComputedStyle(popupElem.querySelector(".popup--inner")).height);
-      // var availWidth = splitPx(window.getComputedStyle(popupElem.querySelector(".popup--inner")).width) - gapWidth - descWidth;
-
-      var aspectWidth = pop.img.width;
-      var aspectHeight = pop.img.height;
-
-      // Calculate aspect ratio
-      var aspectRatio = aspectWidth / aspectHeight;
-
-      // Calculate scaled dimensions based on aspect ratio
-      var scaledWidth = availHeight * aspectRatio;
-      var scaledHeight = availWidth / aspectRatio;
-
-      // Check which dimension should be adjusted based on available dimensions
-      if (scaledWidth <= availWidth) {
-        var newMaxHeight = availHeight;
-        var newMaxWidth = scaledWidth;
-      } else {
-        var newMaxHeight = scaledHeight;
-        var newMaxWidth = availWidth;
-      }
-
-      // Update maxHeight and maxWidth state only if their values have changed
-      if (newMaxHeight !== elems.img.maxHeight) {
-        elems.img.setMaxHeight(newMaxHeight);
-      }
-      if (newMaxWidth !== elems.img.maxWidth) {
-        elems.img.setMaxWidth(newMaxWidth);
-      }
+      var { maxHeight, maxWidth } = updateMaxHeightAndWidth(availHeight, availWidth);
     }
 
     pop.setImgReady(true);
@@ -458,6 +494,71 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
     }
   }, [elems.popup.height, elems.popup.width, pop.img, pop.drawn]);
 
+  // useLayoutEffect(() => {
+  //   if (!elems.popup.ref.current || !elems.desc.ref.current) return;
+  //   if (elems.popup.height == 0 || elems.popup.width == 0) return;
+  //   if (!pop.drawn) return;
+  //   if (!pop.imgLoaded) {
+  //     var popupElem = elems.popup.ref.current;
+  //     var descElem = elems.desc.ref.current;
+
+  //     var gapWidth = splitRem(window.getComputedStyle(popupElem).getPropertyValue("--popup-gap"));
+  //     var scrollbarWidth = descElem.offsetWidth - descElem.clientWidth;
+  //     var descWidth =
+  //       splitPx(window.getComputedStyle(descElem).width) +
+  //       splitPx(window.getComputedStyle(descElem).paddingLeft) +
+  //       splitPx(window.getComputedStyle(descElem).paddingRight) +
+  //       scrollbarWidth;
+
+  //     // var availHeight = cssVarToPixels(popupElem, "--popup-height-offset");
+
+  //     var availHeight = popupElem.offsetHeight;
+  //     var availWidth = popupElem.offsetWidth - gapWidth - descWidth;
+
+  //     // var availHeight = splitPx(window.getComputedStyle(popupElem.querySelector(".popup--inner")).height);
+  //     // var availWidth = splitPx(window.getComputedStyle(popupElem.querySelector(".popup--inner")).width) - gapWidth - descWidth;
+
+  //     var aspectWidth = pop.img.width;
+  //     var aspectHeight = pop.img.height;
+
+  //     // Calculate aspect ratio
+  //     var aspectRatio = aspectWidth / aspectHeight;
+
+  //     // Calculate scaled dimensions based on aspect ratio
+  //     var scaledWidth = availHeight * aspectRatio;
+  //     var scaledHeight = availWidth / aspectRatio;
+
+  //     // Check which dimension should be adjusted based on available dimensions
+  //     if (scaledWidth <= availWidth) {
+  //       var newMaxHeight = availHeight;
+  //       var newMaxWidth = scaledWidth;
+  //     } else {
+  //       var newMaxHeight = scaledHeight;
+  //       var newMaxWidth = availWidth;
+  //     }
+
+  //     // Update maxHeight and maxWidth state only if their values have changed
+  //     if (newMaxHeight !== elems.img.maxHeight) {
+  //       elems.img.setMaxHeight(newMaxHeight);
+  //     }
+  //     if (newMaxWidth !== elems.img.maxWidth) {
+  //       elems.img.setMaxWidth(newMaxWidth);
+  //     }
+
+  //     if (availHeight !== elems.img.availHeight) {
+  //       elems.img.setAvailHeight(availHeight);
+  //     }
+  //     if (availWidth !== elems.img.availWidth) {
+  //       elems.img.setAvailWidth(availWidth);
+  //     }
+  //   }
+
+  //   pop.setImgReady(true);
+
+  //   if (!pop.firstImgReady) {
+  //     pop.setFirstImgReady(true);
+  //   }
+  // }, [elems.popup.height, elems.popup.width, pop.img, pop.drawn, pop.zoom]);
 
   return (
     <>
@@ -469,10 +570,11 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
            ${!pop.imgLoaded ? "popup--media-wrapper__loading" : ""}`}
         style={{ "--aspect-width": pop.img.width, "--aspect-height": pop.img.height }}
         elemkey={pop.img.src}
+        duration={popSeekDuration}
         delay={pop.firstImgDrawn ? 0 : 0.3}
         onAnimationComplete={() => {
           pop.setImgDrawn(true);
-          if(!pop.firstImgDrawn) pop.setFirstImgDrawn(true);
+          if (!pop.firstImgDrawn) pop.setFirstImgDrawn(true);
         }}>
         <Graphic
           reference={elems.img.ref}
@@ -482,12 +584,24 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
           autoplay
           controls
           onLoad={handleImgLoad}
+          style={{
+            "--img-avail-width": `${elems.img.availWidth}px`,
+            "--img-avail-height": `${elems.img.availHeight}px`,
+          }}
         />
 
         {pop.imgReady && (
           <div
-            className={`loading--wrapper ${!pop.imgReady || pop.imgLoaded ? "loading--wrapper__hidden" : ""}`}
-            style={{ "--img-max-width": `${elems.img.maxWidth}px`, "--img-max-height": `${elems.img.maxHeight}px` }}>
+            className={`loading--wrapper 
+            ${!pop.imgReady || pop.imgLoaded ? "loading--wrapper__hidden" : ""}
+            ${pop.zoom ? "loading--wrapper__zoom" : ""}
+            `}
+            style={{
+              "--img-max-width": `${elems.img.maxWidth}px`,
+              "--img-max-height": `${elems.img.maxHeight}px`,
+              "--img-avail-width": `${elems.img.availWidth}px`,
+              "--img-avail-height": `${elems.img.availHeight}px`,
+            }}>
             <div className={`loading--img`}>
               <img src={loading_white.src} alt={loading_white.alt} width={loading_white.width} height={loading_white.height} />
             </div>
@@ -495,7 +609,7 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
         )}
       </AnimPres>
 
-      {pop.type == "gallery" && pop.firstImgReady && pop.infoDrawn && pop.group && (
+      {pop.type == "gallery" && pop.group && pop.firstImgDrawn && pop.infoDrawn && (
         <>
           <Controls className="popup--controls__gallery" pop={pop} nav={nav} handles={handles} />
         </>
@@ -541,9 +655,6 @@ const Controls = React.memo(function Controls({ pop, nav, handles, className }) 
   );
 }, createUpdateConditions(["pop.img", "pop.group", "nav.left.on", "nav.right.on"]));
 
-
-
-
 function Seek({ direction, nav, handles }) {
   var btn = direction === "left" ? nav.left : nav.right;
   return (
@@ -582,9 +693,8 @@ const Pagination = React.memo(function Pagination({ pop, handles }) {
   }
 }, createUpdateConditions(["pop.group", "pop.index"]));
 
-
-function Close({ pop, nav, popclass, handles, type="lightbox" }) {
-  const condition = (pop.ui.visible || pop.type === "interactive") || pop.type == "gallery";
+function Close({ pop, nav, popclass, handles, type = "lightbox" }) {
+  const condition = pop.ui.visible || pop.type === "interactive" || pop.type == "gallery";
   const col = (() => {
     if (type === "lightbox") {
       return "transparent-primary";
@@ -594,12 +704,10 @@ function Close({ pop, nav, popclass, handles, type="lightbox" }) {
       return "transparent-primary";
     }
   })();
-  
+
   return (
-    <AnimPres animation={popAnims.hideUI} condition={condition} 
-    className={`popup--close ${popclass.close}`} reference={nav.close.ref}
-    >
-        <Button icon={["close", "alone", "mask"]} animation="scale-in" color={col} onClick={handles.close} />
+    <AnimPres animation={popAnims.hideUI} condition={condition} className={`popup--close ${popclass.close}`} reference={nav.close.ref}>
+      <Button icon={["close", "alone", "mask"]} animation="scale-in" color={col} onClick={handles.close} />
     </AnimPres>
   );
 }

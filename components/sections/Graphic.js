@@ -200,17 +200,17 @@ function Graphic({
   };
 
   const graphicref = useRef(null);
-  const [isMounted, setIsMounted] = useState(false);
+  const [isPresent, setIsPresent] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
+    setIsPresent(true);
     if(reference){
       reference.current = graphicref.current;
     }
   }, [graphicref]);
 
   useEffect(() => {
-    if (!isMounted) return;
+    if (!isPresent) return;
     if (isSquare) {
       graphicKeepSquare(graphicref.current);
     }
@@ -218,7 +218,7 @@ function Graphic({
     if (isVideo) {
       graphicVideoInit(graphicref.current);
     }
-  }, [isMounted]);
+  }, [isPresent]);
 
   // var ap = autoplay == "scroll" ? false : autoplay ? true : false;
   var ap = typeof autoplay === "string" && autoplay.includes("scroll") ? false : autoplay ? true : false;
@@ -240,6 +240,7 @@ function Graphic({
   useEffect(() => {
     setImageLoaded(false);
   }, []);
+
 
 
 

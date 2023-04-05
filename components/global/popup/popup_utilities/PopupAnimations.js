@@ -1,4 +1,5 @@
 const popSeekDuration = 0.175;
+// const popSeekDuration = 0.315;
 
 
 const popAnims = {
@@ -41,19 +42,38 @@ const popAnims = {
       },
     },
   
-    slideFade: {
-      in: {
-        initial: { translateX: "1rem", opacity: 0 },
-        animate: { translateX: "0rem", opacity: 1 },
+    // slideFade: {
+    //   in: {
+    //     initial: { translateX: "1rem", opacity: 0 },
+    //     animate: { translateX: "0rem", opacity: 1 },
+    //     transition: { duration: popSeekDuration, ease: "easeInOut" },
+    //   },
+    //   out: {
+    //     animate: { translateX: "0rem", opacity: 1 },
+    //     exit: { translateX: "-1rem", opacity: 0 },
+    //     transition: { duration: popSeekDuration, ease: "easeInOut" },
+    //   },
+    // },
+  
+    slideFade :{
+      hidden: {
+        translateX: "1rem",
+        opacity: 0,
+      },
+      visible: {
+        translateX: "0rem",
+        opacity: 1,
         transition: { duration: popSeekDuration, ease: "easeInOut" },
       },
-      out: {
-        animate: { translateX: "0rem", opacity: 1 },
-        exit: { translateX: "-1rem", opacity: 0 },
+      exit: {
+        translateX: "-1rem",
+        opacity: 0,
         transition: { duration: popSeekDuration, ease: "easeInOut" },
       },
     },
-  
+            
+        
+
     wipe: {
       in: {
         initial: { clipPath: "polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%)" },

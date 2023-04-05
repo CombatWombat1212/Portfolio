@@ -2,7 +2,15 @@ import { useState, useEffect, useCallback } from 'react';
 import { RESIZE_TIMEOUT } from '../GlobalUtilities';
 
 const useHasScrollbar = (ref, options = {}) => {
-  const { debounceTime = RESIZE_TIMEOUT, observer = false } = options;
+  const {
+    debounceTime = RESIZE_TIMEOUT,
+    observer = false,
+    repeatChecks = 0, // Add the new parameter here
+  } = options;
+
+  const repeatCheckDebounceTime = options.repeatCheckDebounceTime !== undefined
+    ? options.repeatCheckDebounceTime
+    : repeatChecks > 0 ? 100 : 0; // Update the logic here
 
   const hasScrollbar = () => {
     if (ref.current) {
@@ -15,11 +23,26 @@ const useHasScrollbar = (ref, options = {}) => {
   const [scrollbar, setScrollbar] = useState(hasScrollbar);
 
   const handleResize = useCallback(() => {
-    const newScrollbar = hasScrollbar();
-    if (newScrollbar !== scrollbar) {
-      setScrollbar(newScrollbar);
+    const checkAndUpdateScrollbar = () => {
+      const currentScrollbar = hasScrollbar();
+      if (currentScrollbar !== scrollbar) {
+        setScrollbar(currentScrollbar);
+      }
+    };
+
+    checkAndUpdateScrollbar();
+
+    // Repeatedly check for the scrollbar with the specified interval
+    if (repeatChecks > 0) {
+      const intervalId = setInterval(() => {
+        checkAndUpdateScrollbar();
+      }, repeatCheckDebounceTime);
+
+      return () => {
+        clearInterval(intervalId);
+      };
     }
-  }, [scrollbar, ref]);
+  }, [scrollbar, ref, repeatChecks, repeatCheckDebounceTime]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -64,6 +87,7 @@ const useHasScrollbar = (ref, options = {}) => {
       subtree: true,
       attributes: true,
       characterData: true,
+      attributeFilter: ['style'], // Add the attributeFilter option here
     });
 
     return () => {

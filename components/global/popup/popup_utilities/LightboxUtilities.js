@@ -3,7 +3,6 @@ import MAKERIGHT_IMGS, { MAKERIGHT_IMG_GROUPS } from "@/data/MAKERIGHT_IMGS";
 import toggle from "@/scripts/AnimationTools";
 import { IMAGE_TYPES, splitS, VIDEO_TYPES } from "@/scripts/GlobalUtilities";
 import { setWaitingToShowLoading, waitToLoad } from "../Popup";
-import { hiddenUIInit, setActiveHiddenUI } from "./HiddenUIUtilities";
 import { loadImgExternally } from "@/scripts/GlobalUtilities";
 import { KOALAKO_IMG_GROUPS } from "@/data/KOALAKO_IMGS";
 import { EXPLORATIONS_IMG_GROUPS } from "@/data/EXPLORATIONS_IMGS";

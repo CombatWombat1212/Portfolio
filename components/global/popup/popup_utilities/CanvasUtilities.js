@@ -1,5 +1,4 @@
 import { maxZoom, minZoom, popupResizeFunctions, startZoom } from "../Popup";
-import { hiddenUIInit, setActiveHiddenUI } from "./HiddenUIUtilities";
 import { removeLoading } from "./LoadingImageUtilities";
 import { loadImgExternally } from "@/scripts/GlobalUtilities";
 import { loading } from "@/data/ICONS";
