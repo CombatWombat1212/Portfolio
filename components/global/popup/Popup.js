@@ -251,6 +251,7 @@ function Wrapper({ pop }) {
     pop.setImgLoaded(false);
     pop.setDrawn(false);
     pop.setImgDrawn(false);
+    pop.setInfoDrawn(false);
     pop.setImgReady(false);
     pop.setFirstImgReady(false);
   }, [pop]);
@@ -304,46 +305,6 @@ function Wrapper({ pop }) {
     [pop]
   );
 
-  // function seekHandler(e, direction) {
-
-  //   // Check if the handler is on cooldown
-  //   if (pop.seekCooldown) {
-  //     return;
-  //   }
-  //   // Set the handler on cooldown
-  //   pop.setSeekCooldown(true);
-
-  //   // Implement the original seekHandler logic
-  //   var button;
-
-  //   if (e.type === "click") {
-  //     button = e.target;
-  //     while (!button.classList.contains("popup--seek")) {
-  //       button = button.parentElement;
-  //     }
-  //     direction = direction ? direction : button.classList.contains("popup--seek__right") ? 1 : -1;
-  //   }
-
-  //   var length = pop.group.imgs.length;
-
-  //   var ind = pop.index;
-  //   ind += direction;
-
-  //   if (ind >= length) ind = 0;
-  //   if (ind < 0) ind = length - 1;
-
-  //   pop.setIndex(ind);
-
-  //   var img = pop.group.imgs[ind].lightboxImg ? pop.group.imgs[ind].lightboxImg : pop.group.imgs[ind];
-  //   pop.setImg(img);
-  //   pop.setZoom(img.zoom ? img.zoom : false);
-  //   // pop.setType("lightbox");
-
-  //   // Set a timeout to remove the cooldown status after a specified duration
-  //   setTimeout(() => {
-  //     pop.setSeekCooldown(false);
-  //   }, popSeekDuration * 1.75 * 1000);
-  // }
 
   const handles = {
     close: closeHandler,
@@ -451,9 +412,6 @@ function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
 
       // var availHeight = splitPx(window.getComputedStyle(popupElem.querySelector(".popup--inner")).height);
       // var availWidth = splitPx(window.getComputedStyle(popupElem.querySelector(".popup--inner")).width) - gapWidth - descWidth;
-
-      console.log(`availHeight: ${availHeight} availWidth: ${availWidth}`)
-      console.log(popupElem);
 
       var aspectWidth = pop.img.width;
       var aspectHeight = pop.img.height;
