@@ -12,6 +12,11 @@
   }
 }
 
+
+
+$col-media-wrapper: rgba($col-background, 0.075);
+
+
 .popup {
   &--wrapper {
     position: fixed;
@@ -96,7 +101,8 @@
     width: Min(100%, calc(var(--site-max-width_wide) - 8rem));
     height: Min(100%, calc(100% - var(--popup-height-offset)));
     pointer-events: none;
-    position:relative
+    position:relative;
+    // align-items: center;
   }
 
   &--inner {
@@ -108,6 +114,8 @@
 
     &__gallery {
       pointer-events: none;
+      // @include my-auto;
+      // height:fit-content;
     }
   }
 
@@ -147,7 +155,7 @@
     }
 
     &__gallery-group {
-      top: -2rem;
+      top: -2%;
     }
 
 
@@ -157,9 +165,26 @@
 
 
   &--info{
-    --w: calc(#{col-width(3.35)} - var(--popup-gap));
+    // --w: calc(#{col-width(3.35)} - var(--popup-gap));
+    --w: calc(#{col-width(3.55)} - var(--popup-gap));
     width: var(--w);
     min-width: var(--w);
+    position:relative;
+
+
+    // &::before {
+    //   content: "";
+    //   position: absolute;
+    //   top: -1rem;
+    //   left: -1rem;
+    //   right: -1rem;
+    //   bottom: -1rem;
+    //   @include b-rad;
+    //   background-color: $col-media-wrapper;
+    // }
+
+
+  
   }
 
   &--description {
@@ -168,21 +193,49 @@
       color: $col-background;
     }
     &__gallery {
-
-      // comment this later
-      // --w: calc(#{col-width(3.35)} - var(--popup-gap));
-      // width: var(--w);
-      // min-width: var(--w);
   
 
       pointer-events: all;
+      overflow-y: auto;
       height: var(--gallery-img-height);
       max-height: Max(100%, var(--gallery-img-height));
-      overflow-y: auto;
-      padding-right: calc(var(--popup-gap) / 2);
+      // padding-right: calc(var(--popup-gap) / 2);
 
       @include popup-scrollbar;
+      
+      width:fit-content;
+
+      // these also included changes to the width of the description
+      
+
+      // $desc-pad: 1.5rem;
+      // @include b-rad;
+      // background-color: rgba($col-media-wrapper,0.05);
+      // padding: $desc-pad;
+      // --h: calc(var(--gallery-img-height) - #{$desc-pad * 2});
+      // max-height: var(--h);
+      // padding-right: calc(var(--popup-gap) / 2);
+
+
+      // $desc-pad: 1.5rem;
+      // border-radius: var(--b-rad) 0 0 var(--b-rad);
+      // border: $col-media-wrapper 0.0625rem solid;
+      // padding: $desc-pad;
+      // --h: calc(var(--gallery-img-height) - #{$desc-pad * 2});
+      // max-height: var(--h);
+      // padding-right: calc(var(--popup-gap) / 2);
+
+
+
+
     }
+
+
+    &__gallery-scrollbar{
+      padding-right: calc(var(--popup-gap) / 1.45);
+    }
+
+
   }
 
   &--header {
@@ -249,7 +302,7 @@
 
   &--media-wrapper {
     &__gallery {
-      background-color: rgba($col-background, 0.075);
+      background-color: $col-media-wrapper;
       @include b-rad;
 
       // width: col-width(8);
@@ -343,6 +396,26 @@
 
 // ui
 .popup {
+
+
+  &--close{
+
+    &__gallery {
+      position: absolute;
+      pointer-events: all;
+      // bottom: calc(100% + 1.5rem);
+      // right: -0.75rem;
+      bottom: calc(100% + 1.5rem);
+      right: -0.75rem;
+      // top: -0.55rem;
+      // left: calc(100% + 1rem);
+
+    }
+  }
+
+
+
+
   &--controls {
     @include flex-row;
     position: absolute;
@@ -355,7 +428,7 @@
     &__gallery {
       // top: calc(100% + 1.85rem);
       top: calc(100% + 2rem);
-      // left: 50%;
+      left: 50%;
       transform: translate(-50%, 0%);
       pointer-events: all;
     }
@@ -459,38 +532,6 @@
 
 .popup {
   .loading {
-    // &--loading {
-    //   position: absolute;
-    //   // @include trans;
-
-    //   --size: 15rem;
-    //   @include s;
-    //   top: 50%;
-    //   left: 50%;
-    //   transform: translate(-50%, -50%);
-    //   // z-index:1;
-    //   z-index: 0;
-
-    //   background-color: $col-background;
-    //   @include b-rad;
-
-    //   img {
-    //     @include img-contain;
-    //   }
-
-    //   &__on {
-    //     opacity: 1;
-    //   }
-
-    //   &__off {
-    //     opacity: 0;
-    //     display: none;
-    //   }
-
-    //   &__tran {
-    //     opacity: 0;
-    //   }
-    // }
 
     &--wrapper {
       // background-color: rgba($col-background, 0.075);

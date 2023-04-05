@@ -62,12 +62,14 @@ function getPopupClasses(pop) {
     desc: [],
     inner: [],
     background: [],
+    close: [],
     containerStyle: {},
   };
 
   // Case 1: type is "lightbox"
   if (pop.type === "lightbox") {
     popclass.header.push("popup--header__condensed", "popup--nav__on");
+    popclass.close.push("popup--close__lightbox");
 
     // Nested Case 1.1: zoom is true
     if (pop.zoom) {
@@ -102,6 +104,7 @@ function getPopupClasses(pop) {
     popclass.desc.push("popup--description__gallery");
     popclass.background.push("popup--background__gallery");
     popclass.inner.push("popup--inner__gallery");
+    popclass.close.push("popup--close__gallery");
 
     // // Nested Case 2.1: zoom is true
     // if (pop.zoom) {
@@ -135,14 +138,11 @@ function getPopupClasses(pop) {
   }
 
   // Join the arrays to form final class strings
-  popclass.header = popclass.header.join(" ");
-  popclass.content = popclass.content.join(" ");
-  popclass.container = popclass.container.join(" ");
-  popclass.media = popclass.media.join(" ");
-  popclass.mediaWrapper = popclass.mediaWrapper.join(" ");
-  popclass.desc = popclass.desc.join(" ");
-  popclass.background = popclass.background.join(" ");
-  popclass.inner = popclass.inner.join(" ");
+  for (var key in popclass) {
+    if (Array.isArray(popclass[key])) {
+      popclass[key] = popclass[key].join(" ");
+    }
+  }
 
   return popclass;
 }
@@ -161,7 +161,7 @@ function Popup({ pop }) {
   return (
     <>
       <AnimPres
-        animation={popAnims.popupFade}
+        animation={popAnims.fade}
         duration={poptransition}
         condition={pop.on}
         className={"popup--wrapper"}
@@ -254,6 +254,7 @@ function Wrapper({ pop }) {
     pop.setInfoDrawn(false);
     pop.setImgReady(false);
     pop.setFirstImgReady(false);
+    pop.setFirstImgDrawn(false);
   }, [pop]);
 
   // function seekHandlerWithKeydown(e) {
@@ -305,7 +306,6 @@ function Wrapper({ pop }) {
     [pop]
   );
 
-
   const handles = {
     close: closeHandler,
     seek: seekHandler,
@@ -315,31 +315,31 @@ function Wrapper({ pop }) {
 
   return (
     <>
-      <Background closeHandler={closeHandler} popclass={popclass} />
+      <Background handles={handles} popclass={popclass} />
       <div className={`popup container ${popclass.container}`} style={popclass.containerStyle} ref={popRef}>
         <div className={`popup--inner ${popclass.inner}`}>
           <div className={`popup--content popup--content__on ${popclass.content}`}>
-            {pop.type != "gallery" && <Head pop={pop} nav={nav} popclass={popclass} closeHandler={closeHandler} />}
+            {pop.type != "gallery" && <Head pop={pop} nav={nav} popclass={popclass} handles={handles} />}
 
             {pop.type == "interactive" && <canvas className="popup--canvas popup--canvas__off" />}
 
             {pop.type == "lightbox" && (
               <>
-                <Lightbox pop={pop} nav={nav} handles={handles} popclass={popclass} elems={elems} delay={0.5} />
+                <Lightbox pop={pop} nav={nav} handles={handles} popclass={popclass} elems={elems}/>
               </>
             )}
 
             {pop.type == "gallery" && (
               <>
-                <Lightbox pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} delay={0.3} />
-                <GalInfo pop={pop} popclass={popclass} elems={elems} />
+                <Lightbox pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles}/>
+                <GalInfo pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles}/>
               </>
             )}
 
             {pop.type == "interactive" && <ScaleWrapper pop={pop} nav={nav} />}
           </div>
 
-          {pop.type == "lightbox" && pop.group && <Controls pop={pop} nav={nav} handles={handles} />}
+          {pop.type == "lightbox" && pop.group && pop.firstImgDrawn &&  <Controls pop={pop} nav={nav} handles={handles} />}
         </div>
       </div>
     </>
@@ -357,7 +357,7 @@ function Wrapper({ pop }) {
   }
 }
 
-function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
+function Lightbox({ pop, nav, handles, popclass, elems }) {
   const [maxHeight, setMaxHeight] = useState(false);
   const [maxWidth, setMaxWidth] = useState(false);
 
@@ -406,8 +406,7 @@ function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
 
       // var availHeight = cssVarToPixels(popupElem, "--popup-height-offset");
 
-
-      var availHeight = popupElem.offsetHeight
+      var availHeight = popupElem.offsetHeight;
       var availWidth = popupElem.offsetWidth - gapWidth - descWidth;
 
       // var availHeight = splitPx(window.getComputedStyle(popupElem.querySelector(".popup--inner")).height);
@@ -456,15 +455,16 @@ function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
     <>
       <AnimPres
         mode="wait"
-        animation={popAnims.changeImg}
+        animation={popAnims.slideFade}
         condition={true}
         className={`popup--media-wrapper ${popclass.mediaWrapper}
            ${!pop.imgLoaded ? "popup--media-wrapper__loading" : ""}`}
         style={{ "--aspect-width": pop.img.width, "--aspect-height": pop.img.height }}
         elemkey={pop.img.src}
-        delay={delay ? delay : 0.375}
+        delay={0.3}
         onAnimationComplete={() => {
           pop.setImgDrawn(true);
+          if(!pop.firstImgDrawn) pop.setFirstImgDrawn(true);
         }}>
         <Graphic
           reference={elems.img.ref}
@@ -487,7 +487,7 @@ function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
         )}
       </AnimPres>
 
-      {pop.type == "gallery" && pop.group && pop.firstImgReady && (
+      {pop.type == "gallery" && pop.firstImgReady && pop.infoDrawn && pop.group && (
         <>
           <Controls className="popup--controls__gallery" pop={pop} nav={nav} handles={handles} />
         </>
@@ -496,16 +496,16 @@ function Lightbox({ children, pop, nav, handles, popclass, elems, delay }) {
   );
 }
 
-function Background({ closeHandler, popclass }) {
-  return <div className={`popup--background ${popclass.background}`} onClick={closeHandler}></div>;
+function Background({ handles, popclass }) {
+  return <div className={`popup--background ${popclass.background}`} onClick={handles.close}></div>;
 }
 
-function Head({ pop, nav, popclass, closeHandler }) {
+function Head({ pop, nav, popclass, handles }) {
   return (
     <>
       <div className={`popup--header ${popclass.header} popup--nav`}>
         <Title pop={pop} />
-        <Close pop={pop} nav={nav} closeHandler={closeHandler} />
+        <Close pop={pop} nav={nav} handles={handles} popclass={popclass} />
       </div>
     </>
   );
@@ -525,13 +525,16 @@ function Title({ pop }) {
 
 const Controls = React.memo(function Controls({ pop, nav, handles, className }) {
   return (
-    <AnimPres mode="wait" animation={popAnims.changeImg} condition={true} className={`popup--controls ${className ? className : ""}`} delay={0.525}>
+    <AnimPres mode="wait" animation={popAnims.fade} condition={true} className={`popup--controls ${className ? className : ""}`} delay={0}>
       <Seek direction="left" nav={nav} handles={handles} />
       <Pagination pop={pop} handles={handles} />
       <Seek direction="right" nav={nav} handles={handles} />
     </AnimPres>
   );
 }, createUpdateConditions(["pop.img", "pop.group", "nav.left.on", "nav.right.on"]));
+
+
+
 
 function Seek({ direction, nav, handles }) {
   var btn = direction === "left" ? nav.left : nav.right;
@@ -571,14 +574,24 @@ const Pagination = React.memo(function Pagination({ pop, handles }) {
   }
 }, createUpdateConditions(["pop.group", "pop.index"]));
 
-function Close({ pop, nav, closeHandler }) {
-  const condition = pop.ui.visible || pop.type === "interactive";
 
+function Close({ pop, nav, popclass, handles, type="lightbox" }) {
+  const condition = (pop.ui.visible || pop.type === "interactive") || pop.type == "gallery";
+  const col = (() => {
+    if (type === "lightbox") {
+      return "transparent-primary";
+    } else if (type === "gallery") {
+      return "transparent-background";
+    } else {
+      return "transparent-primary";
+    }
+  })();
+  
   return (
-    <AnimPres animation={popAnims.hideUI} condition={condition} className="">
-      <div className="popup--close" ref={nav.close.ref}>
-        <Button icon={["close", "alone", "mask"]} animation="scale-in" color="transparent-primary" onClick={closeHandler} />
-      </div>
+    <AnimPres animation={popAnims.hideUI} condition={condition} 
+    className={`popup--close ${popclass.close}`} reference={nav.close.ref}
+    >
+        <Button icon={["close", "alone", "mask"]} animation="scale-in" color={col} onClick={handles.close} />
     </AnimPres>
   );
 }
@@ -698,3 +711,4 @@ export default Popup;
 // export { waitToLoad, setWaitingToShowLoading };
 
 export { startZoom, minZoom, maxZoom };
+export { Close };

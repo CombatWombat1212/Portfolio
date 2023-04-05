@@ -6,8 +6,15 @@ import React, { useEffect, useState } from "react";
 import AnimPres from "../../AnimPres";
 import popAnims from "../popup_utilities/PopupAnimations";
 import useDelayedProps from "@/scripts/hooks/useDelayedProps";
+import { Close } from "../Popup";
+import useHasScrollbar from "@/scripts/hooks/useHasScrollbar";
 
-const GalInfo = React.memo(function GalInfo({ pop, popclass, elems }) {
+const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles }) {
+  
+  
+
+  
+  
   var title, subheading;
   if (pop.img.project) {
     title = pop.img.project;
@@ -28,6 +35,14 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems }) {
   var hasDesc = pop.img.description || (pop.group.description && pop.group.description[pop.index]);
 
 
+  const scrollbar = useHasScrollbar(elems.desc.ref, {observer:true, debounceTime: 50});
+  const scrollbarClasses = scrollbar ? "popup--description__gallery-scrollbar" : "";
+
+  useEffect(() => {
+    console.log(scrollbar);
+  }, [scrollbar])
+
+
   return (
     <>
       <motion.div
@@ -39,11 +54,11 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems }) {
         className="popup--info">
         <AnimPres
           mode="wait"
-          animation={popAnims.changeImg}
+          animation={popAnims.slideFade}
           delay={0.55}
           condition={true}
           reference={elems.desc.ref}
-          className={`popup--description ${popclass.desc}`}
+          className={`popup--description ${popclass.desc} ${scrollbarClasses}`}
           style={styles.description}
           onAnimationComplete={() => {
             pop.setInfoDrawn(true);
@@ -57,6 +72,9 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems }) {
             <GalCategories pop={pop} hasDesc={hasDesc} />
           </div>
         </AnimPres>
+
+        {pop.firstImgDrawn &&   pop.infoDrawn &&<Close pop={pop} nav={nav} handles={handles} popclass={popclass} type="gallery" />}
+
       </motion.div>
     </>
   );

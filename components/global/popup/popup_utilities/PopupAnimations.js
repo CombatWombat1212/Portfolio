@@ -2,7 +2,7 @@ const popSeekDuration = 0.175;
 
 
 const popAnims = {
-    popupBounce: {
+    bounceFade: {
       in: {
         initial: { opacity: 0, scale: 0.95 },
         animate: { opacity: 1, scale: 1 },
@@ -15,7 +15,7 @@ const popAnims = {
         transition: { duration: 0.25 },
       },
     },
-    popupFade: {
+    fade: {
       in: {
         initial: { opacity: 0 },
         animate: { opacity: 1 },
@@ -41,7 +41,7 @@ const popAnims = {
       },
     },
   
-    changeImg: {
+    slideFade: {
       in: {
         initial: { translateX: "1rem", opacity: 0 },
         animate: { translateX: "0rem", opacity: 1 },

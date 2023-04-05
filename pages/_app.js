@@ -86,6 +86,7 @@ export default function App({ Component, pageProps }) {
 
   const [imgReady, setImgReady] = useState(false);
   const [firstImgReady, setFirstImgReady] = useState(false);
+  const [firstImgDrawn, setFirstImgDrawn] = useState(false);
 
 
   const pop = {
@@ -112,6 +113,8 @@ export default function App({ Component, pageProps }) {
     setImgReady: setImgReady,
     firstImgReady: firstImgReady,
     setFirstImgReady: setFirstImgReady,
+    firstImgDrawn: firstImgDrawn,
+    setFirstImgDrawn: setFirstImgDrawn,
     imgDrawn: popupImgDrawn,
     setImgDrawn: setPopupImgDrawn,
     infoDrawn: popupInfoDrawn,
