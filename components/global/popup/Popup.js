@@ -2,9 +2,7 @@
 // TODO: this should either be pre-fetched or otherwise loaded in before the user clicks on it
 
 
-// TODO: Fix broken titles on the explorations page listings
-// TODO: Go through exploration images and add zoom:true as needed
-// TODO: Double check other popups make sure they're good
+// TODO: Fix interactive popup's zoom, the close button isn't sticky, and it needs the styled scrollbar
 // TODO: custom image ordering on the explorations page
 // TODO: add icons for videos and groups of images to explorations page listings
 // TODO: video thumbnails and in general custom thumbnails for the explorations page
@@ -195,7 +193,7 @@ function Wrapper({ pop }) {
     } else {
       const timeoutId = setTimeout(() => {
         pop.ui.setVisible(false);
-      }, 2000);
+      }, 80000);
       return () => clearTimeout(timeoutId);
     }
   }, [interaction]);
@@ -651,9 +649,9 @@ function Title({ pop }) {
 const Controls = React.memo(function Controls({ pop, nav, handles, className }) {
   return (
 
-    <AnimPres mode="wait" animation={popAnims.fade} condition={true} className={`popup--controls ${className ? className : ""}`} delay={0}
+    <AnimPres mode="wait" animation={popAnims.fade} condition={true} className={`popup--controls ${className ? className : ""}`}
     layout="position"
-    initial={{ transform: "none", transformOrigin: "50% 50% 0px" }}
+    style={{ transform: "none", transformOrigin: "50% 50% 0px" }}
     transition={{
       layout: {duration: popLayoutTransition},
     }}

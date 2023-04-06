@@ -180,14 +180,13 @@ function caseStudiesInit(arr) {
 
 
 CASE_STUDIES = caseStudiesInit(CASE_STUDIES);
+const STUDY_LINKS = CASE_STUDIES.map((study) => study.link);
 const STUDY_MAKERIGHT = CASE_STUDIES[0];
 const STUDY_MADE = CASE_STUDIES[1];
 const STUDY_KOALAKO = CASE_STUDIES[2];
 const STUDY_EXPLORATIONS = processGallery(CASE_STUDIES[3]);
 
-
-
-
 export default CASE_STUDIES;
 export { STUDY_MAKERIGHT, STUDY_MADE, STUDY_KOALAKO, STUDY_EXPLORATIONS };
+export { STUDY_LINKS };
 export { caseStudiesInit, addKey };
