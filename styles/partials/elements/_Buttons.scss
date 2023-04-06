@@ -128,6 +128,17 @@
   }
 
 
+  &__background-tertiary {
+    --button-icon-size: 1.5rem;
+    --button-background: #{$col-background};
+    --button-color: #{$col-tertiary};
+    @include hover {
+      --button-background: #{$col-background_darkest};
+      // --button-color: #{$col-tertiary_light};
+    }
+  }
+
+
 
 
 

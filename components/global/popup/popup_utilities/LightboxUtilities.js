@@ -38,12 +38,12 @@ function getImgGroup(pop) {
 
 
   var imgGroup = pop.img.group;
-  var imgStudy = pop.img.study;
+  var imgCollection = pop.img.collection;
 
   var IMG_GROUP;
-  if (imgStudy == "koalako") IMG_GROUP = KOALAKO_IMG_GROUPS;
-  if (imgStudy == "makeright") IMG_GROUP = MAKERIGHT_IMG_GROUPS;
-  if (imgStudy == "explorations") IMG_GROUP = EXPLORATIONS_IMG_GROUPS;
+  if (imgCollection == "koalako") IMG_GROUP = KOALAKO_IMG_GROUPS;
+  if (imgCollection == "makeright") IMG_GROUP = MAKERIGHT_IMG_GROUPS;
+  if (imgCollection == "explorations") IMG_GROUP = EXPLORATIONS_IMG_GROUPS;
 
 
   if (imgGroup) {

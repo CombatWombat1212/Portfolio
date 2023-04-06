@@ -1,23 +1,28 @@
 import { useState, useEffect, useCallback } from 'react';
 import { RESIZE_TIMEOUT, splitPx } from "@/scripts/GlobalUtilities";
 
-const useElementHeight = (ref, { debounceTime = RESIZE_TIMEOUT, observer = false } = {}) => {
+const useElementHeight = (ref, { debounceTime = RESIZE_TIMEOUT, observer = false, border = false, padding = true } = {}) => {
 
-  
   const getElementHeight = () => {
     if (ref.current) {
       const inner = ref.current;
-      return (
-        splitPx(window.getComputedStyle(inner).height) +
-        splitPx(window.getComputedStyle(inner).paddingTop) +
-        splitPx(window.getComputedStyle(inner).paddingBottom)
-      );
+      const computedStyle = window.getComputedStyle(inner);
+      let height = splitPx(computedStyle.height);
+
+      if (padding) {
+        height += splitPx(computedStyle.paddingTop) + splitPx(computedStyle.paddingBottom);
+      }
+
+      if (border) {
+        height += splitPx(computedStyle.borderTopWidth) + splitPx(computedStyle.borderBottomWidth);
+      }
+
+      return height;
     }
     return 0;
   };
 
   const [height, setHeight] = useState(getElementHeight);
-
 
   const handleResize = useCallback(() => {
     const newHeight = getElementHeight();

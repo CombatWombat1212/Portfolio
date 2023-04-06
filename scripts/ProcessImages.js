@@ -180,9 +180,9 @@ function processGroups(images) {
   return groups;
 }
 
-function processImages(images, study) {
+function processImages(images, collection) {
   const processedImages = {};
-  study = study || "";
+  collection = collection || "";
   for (const key in images) {
     if (images.hasOwnProperty(key)) {
       const image = images[key];
@@ -192,7 +192,7 @@ function processImages(images, study) {
       image.description = ensureArray(image.description || false) || false;
 
         
-      image.study = study;
+      image.collection = collection;
       processedImages[key] = image;
     }
   }

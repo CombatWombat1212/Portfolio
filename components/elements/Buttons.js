@@ -56,30 +56,6 @@ function Inner({ children, className, type, icon, animation, color, tag, ...prop
   );
 }
 
-// function Button({ children, className, type, icon, animation, color, tag, ...props }) {
-//   if (icon) var [iconName, iconSide, iconType] = icon;
-
-//   const isA = tag == "a" ? true : false;
-
-//   return (
-//     <>
-//       {isA ? (
-//         <DLink className={"button" + (className ? ` ${className}` : "") + (type ? ` button__${type}` : "") + (color ? ` button__${color}` : "") + (iconSide ? ` button__${iconSide}` : "") + (animation ? ` button__${animation}` : "")} tabIndex="0" {...props}>
-//           <Inner className={className} type={type} icon={icon} animation={animation} color={color} tag={tag} {...props}>
-//             {children}
-//           </Inner>
-//         </DLink>
-//       ) : (
-//         <div className={"button" + (className ? ` ${className}` : "") + (type ? ` button__${type}` : "") + (color ? ` button__${color}` : "") + (iconSide ? ` button__${iconSide}` : "") + (animation ? ` button__${animation}` : "")} tabIndex="0" {...props}>
-//           <Inner className={className} type={type} icon={icon} animation={animation} color={color} tag={tag} {...props}>
-//             {children}
-//           </Inner>
-//         </div>
-//       )}
-//     </>
-//   );
-// }
-
 function Button({ children, className, type, icon, animation, color, tag, reference, ...props }) {
   const [iconName, iconSide, iconType] = icon || [];
 
@@ -129,7 +105,7 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
-  color: propTypes.oneOf(["primary", "secondary", "tertiary", "transparent-primary", "transparent-secondary", "transparent-tertiary", "transparent-background", "background-primary", "background_darkest-primary", "background-secondary"]),
+  color: propTypes.oneOf(["primary", "secondary", "tertiary", "transparent-primary", "transparent-secondary", "transparent-tertiary", "transparent-background", "background-primary", "background_darkest-primary", "background-secondary", "background-tertiary"]),
   type: propTypes.oneOf(["regular", "bottom"]),
   tag: propTypes.oneOf(["a", "div"]),
 };

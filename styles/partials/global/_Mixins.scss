@@ -1000,3 +1000,17 @@
 	}
   }
   
+
+@mixin before-panel($pad: 0, $background: var(--col-before)) {
+	position: relative;
+	&::before {
+		content: "";
+		position: absolute;
+		top: $pad * -1;
+		left: $pad * -1;
+		right: $pad * -1;
+		bottom: $pad * -1;
+		@include b-rad;
+		background-color: $background;
+    }
+}
