@@ -8,21 +8,19 @@
     }
   }
 
-
-  .section{
-    &--main{
-        grid-template-columns: repeat(3, 1fr);
+  .section {
+    &--wrapper {
+      &.pb-section-gap {
+        padding-bottom: 0;
+      }
+    }
+    &--main {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
-
-  .gallery{
-    &--section{
-
+  .gallery {
+    &--section {
     }
   }
-
-
-
-
 }

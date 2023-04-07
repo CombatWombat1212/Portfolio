@@ -188,15 +188,11 @@ const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle
   const controls = useAnimation();
 
   const [animationCompleted, setAnimationCompleted] = useState(true);
-  const [calculatedX, setCalculatedX] = useState(0);
+  const [calculatedX, setCalculatedX] = useState(null);
 
-  const handleMouseEnter = () => {
-    setAnimationCompleted(false);
 
-    // const width = cat.ref.current.offsetWidth;
-    // const scrollWidth = cat.ref.current.scrollWidth;
-    // const duration = (scrollWidth - width) * 0.0075; // Adjust the multiplier to control speed
 
+  const getScrollDetails = (cat) => {
     const width = cat.ref.current.offsetWidth;
     const scrollWidth = cat.ref.current.scrollWidth;
     const scrollPosition = (() => {
@@ -210,20 +206,41 @@ const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle
       }
       return 0;
     })();
-    
+  
     const remainingScroll = scrollWidth - width - scrollPosition;
+  
+    return {
+      width,
+      scrollWidth,
+      scrollPosition,
+      remainingScroll,
+    };
+  };
+  
+
+
+
+
+
+  const handleMouseEnter = () => {
+    setAnimationCompleted(false);
+  
+    const { width, scrollWidth, scrollPosition, remainingScroll } = getScrollDetails(cat);
+  
     const duration = remainingScroll * 0.0075; // Adjust the multiplier to control speed
-
-    if (animationCompleted) {
-      setCalculatedX(-scrollWidth + width - scrollPosition);
+  
+    let updatedCalculatedX = calculatedX;
+    if (animationCompleted || calculatedX === null) {
+      updatedCalculatedX = -scrollWidth + width - scrollPosition;
+      setCalculatedX(updatedCalculatedX);
     }
-
+  
     controls.start({
-      x: calculatedX,
+      x: updatedCalculatedX,
       transition: { duration, ease: "linear" },
     });
   };
-
+      
   const handleMouseLeave = () => {
     const width = cat.ref.current.offsetWidth;
     const scrollWidth = cat.ref.current.scrollWidth;

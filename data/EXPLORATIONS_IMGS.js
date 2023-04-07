@@ -109,8 +109,7 @@ const EXPLORATIONS_IMGS = processImages(
       disciplines: ["3D Design", "Motion Graphics"],
       tools: ["Blender", "Meshroom", "Photoshop"],
       title: "Grafitti Alley",
-      description:
-        "Photogrammetry study of a grafitti covered alleyway in downtown Toronto.",
+      description: "Photogrammetry study of a grafitti covered alleyway in downtown Toronto.",
       //   study: '',
       //   group: '',
       //   index: 0,
@@ -122,12 +121,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1024,
       height: 1270,
       disciplines: ["3D Design"],
-      tools: [
-        "Blender",
-        "Photoshop",
-        "Adobe Dimension",
-        "Adobe Illustrator",
-      ],
+      tools: ["Blender", "Photoshop", "Adobe Dimension", "Adobe Illustrator"],
       title: "Bottle #1",
       description:
         "3D rendering of a bottle of foundation created for Jabbar & Co. as part of a project to create product renderings for their online store. This bottle is one of 110 different shades of foundation that were included in the project scope.",
@@ -143,12 +137,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1024,
       height: 1270,
       disciplines: ["3D Design"],
-      tools: [
-        "Blender",
-        "Photoshop",
-        "Adobe Dimension",
-        "Adobe Illustrator",
-      ],
+      tools: ["Blender", "Photoshop", "Adobe Dimension", "Adobe Illustrator"],
       title: "Bottle #2",
       description:
         "3D rendering of a bottle of foundation created for Jabbar & Co. as part of a project to create product renderings for their online store. This bottle is one of 110 different shades of foundation that were included in the project scope.",
@@ -164,12 +153,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1024,
       height: 1270,
       disciplines: ["3D Design"],
-      tools: [
-        "Blender",
-        "Photoshop",
-        "Adobe Dimension",
-        "Adobe Illustrator",
-      ],
+      tools: ["Blender", "Photoshop", "Adobe Dimension", "Adobe Illustrator"],
       title: "Bottle #3",
       description:
         "3D rendering of a bottle of foundation created for Jabbar & Co. as part of a project to create product renderings for their online store. This bottle is one of 110 different shades of foundation that were included in the project scope.",
@@ -183,12 +167,7 @@ const EXPLORATIONS_IMGS = processImages(
       src: "./assets/images/case_studies/made/limitations/limitations_bottle.mp4",
       alt: "A 3D rendering of a foundation makeup bottle product shot.  The bottle's label reads 'Jabbar & Co.'. The bottle cycles through a series of different skin tone colors to demonstrate how the previously described system was scaleable and was able to be reused in a later project of mine.",
       disciplines: ["3D Design"],
-      tools: [
-        "Blender",
-        "Photoshop",
-        "Adobe Dimension",
-        "Adobe Illustrator",
-      ],
+      tools: ["Blender", "Photoshop", "Adobe Dimension", "Adobe Illustrator"],
       title: "Random Bottles",
       description:
         "3D rendering of a bottle of foundation created for Jabbar & Co. as part of a project to create product renderings for their online store. This bottle is one of 110 different shades of foundation that were included in the project scope.",
@@ -204,12 +183,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1024,
       height: 1270,
       disciplines: ["3D Design"],
-      tools: [
-        "Blender",
-        "Photoshop",
-        "Adobe Dimension",
-        "Adobe Illustrator",
-      ],
+      tools: ["Blender", "Photoshop", "Adobe Dimension", "Adobe Illustrator"],
       title: "Makeup Brush",
       description:
         "3D product rendering of a makeup brush created for Jabbar & Co. as part of a project to create images for their online storefront.",
@@ -225,12 +199,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1024,
       height: 1270,
       disciplines: ["3D Design"],
-      tools: [
-        "Blender",
-        "Photoshop",
-        "Adobe Dimension",
-        "Adobe Illustrator",
-      ],
+      tools: ["Blender", "Photoshop", "Adobe Dimension", "Adobe Illustrator"],
       title: "Cleanse",
       description:
         "3D product rendering of a tube of Botanical Cleansing Lotion created for Jabbar & Co. as part of a project to create images for their online storefront.",
@@ -246,12 +215,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1024,
       height: 1270,
       disciplines: ["3D Design"],
-      tools: [
-        "Blender",
-        "Photoshop",
-        "Adobe Dimension",
-        "Adobe Illustrator",
-      ],
+      tools: ["Blender", "Photoshop", "Adobe Dimension", "Adobe Illustrator"],
       title: "Tone",
       description:
         "3D product rendering of Botanical Firming Toner created for Jabbar & Co. as part of a project to create images for their online storefront.",
@@ -267,12 +231,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1024,
       height: 1270,
       disciplines: ["3D Design"],
-      tools: [
-        "Blender",
-        "Photoshop",
-        "Adobe Dimension",
-        "Adobe Illustrator",
-      ],
+      tools: ["Blender", "Photoshop", "Adobe Dimension", "Adobe Illustrator"],
       title: "Firm",
       description:
         "3D product rendering of Firming Face And Eye Serum created for Jabbar & Co. as part of a project to create images for their online storefront.",
@@ -288,12 +247,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1024,
       height: 1270,
       disciplines: ["3D Design"],
-      tools: [
-        "Blender",
-        "Photoshop",
-        "Adobe Dimension",
-        "Adobe Illustrator",
-      ],
+      tools: ["Blender", "Photoshop", "Adobe Dimension", "Adobe Illustrator"],
       title: "Hydrate",
       description:
         "3D product rendering of Hydrating Mango Face Cream created for Jabbar & Co. as part of a project to create images for their online storefront.",
@@ -309,12 +263,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1024,
       height: 1270,
       disciplines: ["3D Design"],
-      tools: [
-        "Blender",
-        "Photoshop",
-        "Adobe Dimension",
-        "Adobe Illustrator",
-      ],
+      tools: ["Blender", "Photoshop", "Adobe Dimension", "Adobe Illustrator"],
       title: "Setting Spray",
       description:
         "3D product rendering of Setting Spray created for Jabbar & Co. as part of a project to create images for their online storefront.",
@@ -330,12 +279,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1024,
       height: 1270,
       disciplines: ["3D Design"],
-      tools: [
-        "Blender",
-        "Photoshop",
-        "Adobe Dimension",
-        "Adobe Illustrator",
-      ],
+      tools: ["Blender", "Photoshop", "Adobe Dimension", "Adobe Illustrator"],
       title: "Anti-Aging",
       description:
         "3D product rendering of Anti-Aging Cream created for Jabbar & Co. as part of a project to create images for their online storefront.",
@@ -351,12 +295,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1024,
       height: 1270,
       disciplines: ["3D Design"],
-      tools: [
-        "Blender",
-        "Photoshop",
-        "Adobe Dimension",
-        "Adobe Illustrator",
-      ],
+      tools: ["Blender", "Photoshop", "Adobe Dimension", "Adobe Illustrator"],
       title: "Anti-Aging",
       description:
         "3D product rendering of Anti-Aging Cream created for Jabbar & Co. as part of a project to create images for their online storefront.",
@@ -372,12 +311,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1024,
       height: 1270,
       disciplines: ["3D Design"],
-      tools: [
-        "Blender",
-        "Photoshop",
-        "Adobe Dimension",
-        "Adobe Illustrator",
-      ],
+      tools: ["Blender", "Photoshop", "Adobe Dimension", "Adobe Illustrator"],
       title: "Intense",
       description:
         "3D product rendering of Hyaluronic Moisturizer created for Jabbar & Co. as part of a project to create images for their online storefront.",
@@ -393,12 +327,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1024,
       height: 1270,
       disciplines: ["3D Design"],
-      tools: [
-        "Blender",
-        "Photoshop",
-        "Adobe Dimension",
-        "Adobe Illustrator",
-      ],
+      tools: ["Blender", "Photoshop", "Adobe Dimension", "Adobe Illustrator"],
       title: "Intense",
       description:
         "3D product rendering of Hyaluronic Moisturizer created for Jabbar & Co. as part of a project to create images for their online storefront.",
@@ -414,15 +343,9 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1024,
       height: 1270,
       disciplines: ["3D Design"],
-      tools: [
-        "Blender",
-        "Photoshop",
-        "Adobe Dimension",
-        "Adobe Illustrator",
-      ],
+      tools: ["Blender", "Photoshop", "Adobe Dimension", "Adobe Illustrator"],
       title: "Baby Buki",
-      description:
-        "3D product rendering of a Buki Brush created for Jabbar & Co. as part of a project to create images for their online storefront.",
+      description: "3D product rendering of a Buki Brush created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
       project: "Jabbar & Co.'s Core Product Line",
@@ -435,12 +358,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1024,
       height: 1270,
       disciplines: ["3D Design"],
-      tools: [
-        "Blender",
-        "Photoshop",
-        "Adobe Dimension",
-        "Adobe Illustrator",
-      ],
+      tools: ["Blender", "Photoshop", "Adobe Dimension", "Adobe Illustrator"],
       title: "Blotting Powder",
       description:
         "3D product rendering of Blotting Powder created for Jabbar & Co. as part of a project to create images for their online storefront.",
@@ -456,12 +374,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1024,
       height: 1270,
       disciplines: ["3D Design"],
-      tools: [
-        "Blender",
-        "Photoshop",
-        "Adobe Dimension",
-        "Adobe Illustrator",
-      ],
+      tools: ["Blender", "Photoshop", "Adobe Dimension", "Adobe Illustrator"],
       title: "Blotting Powder",
       description:
         "3D product rendering of Blotting Powder created for Jabbar & Co. as part of a project to create images for their online storefront.",
@@ -477,12 +390,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1024,
       height: 1270,
       disciplines: ["3D Design"],
-      tools: [
-        "Blender",
-        "Photoshop",
-        "Adobe Dimension",
-        "Adobe Illustrator",
-      ],
+      tools: ["Blender", "Photoshop", "Adobe Dimension", "Adobe Illustrator"],
       title: "Setting Powder",
       description:
         "3D product rendering of Setting Powder created for Jabbar & Co. as part of a project to create images for their online storefront.",
@@ -498,12 +406,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1024,
       height: 1270,
       disciplines: ["3D Design"],
-      tools: [
-        "Blender",
-        "Photoshop",
-        "Adobe Dimension",
-        "Adobe Illustrator",
-      ],
+      tools: ["Blender", "Photoshop", "Adobe Dimension", "Adobe Illustrator"],
       title: "Setting Powder",
       description:
         "3D product rendering of Setting Powder created for Jabbar & Co. as part of a project to create images for their online storefront.",
@@ -519,12 +422,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1024,
       height: 1270,
       disciplines: ["3D Design"],
-      tools: [
-        "Blender",
-        "Photoshop",
-        "Adobe Dimension",
-        "Adobe Illustrator",
-      ],
+      tools: ["Blender", "Photoshop", "Adobe Dimension", "Adobe Illustrator"],
       title: "Primer",
       description:
         "3D product rendering of 'Camera Ready Primer' created for Jabbar & Co. as part of a project to create images for their online storefront.",
@@ -670,8 +568,7 @@ const EXPLORATIONS_IMGS = processImages(
       disciplines: ["3D Design"],
       tools: ["Blender"],
       //   title: "",
-      description:
-        "A promotional / concept art 3D rendering created for Virtual Pangea.",
+      description: "A promotional / concept art 3D rendering created for Virtual Pangea.",
       //   study: "",
       group: "nft_dome",
       project: "The Dome",
@@ -686,8 +583,7 @@ const EXPLORATIONS_IMGS = processImages(
       disciplines: ["3D Design"],
       tools: ["Blender"],
       //   title: "",
-      description:
-        "A promotional / concept art 3D rendering created for Virtual Pangea.",
+      description: "A promotional / concept art 3D rendering created for Virtual Pangea.",
       //   study: "",
       group: "nft_dome",
       project: "The Dome",
@@ -764,11 +660,10 @@ const EXPLORATIONS_IMGS = processImages(
       alt: "A tightly focused 3D rendering of the latter of the two groups of framed artworks on the wall across from each other in the Obsessive Seas art gallery, with annotated measurements",
       width: 1920,
       height: 1401,
-      title:
-        "Annotated Render of Barbara Ellmann's Work in Digital Gallery",
-        disciplines: ["3D Design", "UX Design"],
-        tools: ["Blender", "Photoshop"],
-        group: "obsessive_seas",
+      title: "Annotated Render of Barbara Ellmann's Work in Digital Gallery",
+      disciplines: ["3D Design", "UX Design"],
+      tools: ["Blender", "Photoshop"],
+      group: "obsessive_seas",
       project: "Navigating <i>Obsessive Seas</i>",
       index: 4,
     },
@@ -838,11 +733,10 @@ const EXPLORATIONS_IMGS = processImages(
       alt: "A more tightly focused 3D rendering of one of the two groups of framed artworks on the wall across from each other in the Obsessive Seas art gallery, with annotated measurements",
       width: 1920,
       height: 1401,
-      title:
-        "Annotated Render of Barbara Ellmann's Work in Digital Gallery",
-        disciplines: ["3D Design", "UX Design"],
-        tools: ["Blender", "Photoshop"],
-        group: "obsessive_seas",
+      title: "Annotated Render of Barbara Ellmann's Work in Digital Gallery",
+      disciplines: ["3D Design", "UX Design"],
+      tools: ["Blender", "Photoshop"],
+      group: "obsessive_seas",
       project: "Navigating <i>Obsessive Seas</i>",
       index: 9,
     },
@@ -868,12 +762,7 @@ const EXPLORATIONS_IMGS = processImages(
       alt: "A screen-recorded video showing the Virtual Pangea website in action",
       width: 1920,
       height: 1080,
-      disciplines: [
-        "UX Engineering",
-        "Frontend Development",
-        "UX Design",
-        "UI Design",
-      ],
+      disciplines: ["UX Engineering", "Frontend Development", "UX Design", "UI Design"],
       tools: ["HTML/CSS/JS"],
       title: "Virtual Pangea Website",
       description: [
@@ -1144,12 +1033,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1920,
       height: 1080,
       disciplines: ["Motion Graphics"],
-      tools: [
-        "After Effects",
-        "Ableton Live",
-        "Adobe Illustrator",
-        "Photoshop",
-      ],
+      tools: ["After Effects", "Ableton Live", "Adobe Illustrator", "Photoshop"],
       title: "MakeRight Presentation",
       description: [
         "For my undergraduate capstone, I designed a service that connects owners of 3D printers, to customers in need. ",
@@ -1206,7 +1090,7 @@ const EXPLORATIONS_IMGS = processImages(
       height: 2521,
       disciplines: ["Photography"],
       tools: ["Lightroom"],
-      title:"Heli",
+      title: "Heli",
       // study: "",
       //   group: '',
       //   index: 0,
@@ -1219,7 +1103,7 @@ const EXPLORATIONS_IMGS = processImages(
       height: 3456,
       disciplines: ["Photography"],
       tools: ["Lightroom"],
-      title:"Eclipse",
+      title: "Eclipse",
 
       // study: "",
       //   group: '',
@@ -1233,7 +1117,7 @@ const EXPLORATIONS_IMGS = processImages(
       height: 5184,
       disciplines: ["Photography"],
       tools: ["Lightroom"],
-      title:"Boat",
+      title: "Boat",
       // study: "",
       //   group: '',
       //   index: 0,
@@ -1246,7 +1130,7 @@ const EXPLORATIONS_IMGS = processImages(
       height: 3840,
       disciplines: ["Photography"],
       tools: ["Lightroom"],
-      title:"Hamilton",
+      title: "Hamilton",
       // study: "",
       //   group: '',
       //   index: 0,
@@ -1260,7 +1144,7 @@ const EXPLORATIONS_IMGS = processImages(
       disciplines: ["Photography"],
       tools: ["Lightroom"],
       study: "",
-      title:"Hill",
+      title: "Hill",
       //   group: '',
       //   index: 0,
     },
@@ -1273,7 +1157,7 @@ const EXPLORATIONS_IMGS = processImages(
       disciplines: ["Photography"],
       tools: ["Lightroom"],
       study: "",
-      title:"Lush",
+      title: "Lush",
       //   group: '',
       //   index: 0,
     },
@@ -1286,7 +1170,7 @@ const EXPLORATIONS_IMGS = processImages(
       disciplines: ["Photography"],
       tools: ["Lightroom", "Photoshop"],
       study: "",
-      title:"Sunshine",
+      title: "Sunshine",
       //   group: '',
       //   index: 0,
     },
@@ -1299,7 +1183,7 @@ const EXPLORATIONS_IMGS = processImages(
       disciplines: ["Photography"],
       tools: ["Lightroom"],
       study: "",
-      title:"Fall"
+      title: "Fall",
       //   group: '',
       //   index: 0,
     },
@@ -1312,7 +1196,7 @@ const EXPLORATIONS_IMGS = processImages(
       disciplines: ["Photography"],
       tools: ["Lightroom"],
       group: "nathan_and_ellie",
-      project:"Beach",
+      project: "Beach",
       //   index: 0,
     },
     nathan_and_ellie_02: {
@@ -1324,7 +1208,7 @@ const EXPLORATIONS_IMGS = processImages(
       disciplines: ["Photography"],
       tools: ["Lightroom"],
       group: "nathan_and_ellie",
-      project:"Beach",
+      project: "Beach",
       //   index: 0,
     },
     nathan_and_ellie_03: {
@@ -1336,7 +1220,7 @@ const EXPLORATIONS_IMGS = processImages(
       disciplines: ["Photography"],
       tools: ["Lightroom"],
       group: "nathan_and_ellie",
-      project:"Beach",
+      project: "Beach",
       //   index: 0,
     },
     //   koalako_final_01: {
@@ -1412,7 +1296,7 @@ const EXPLORATIONS_IMGS = processImages(
       ],
       study: "koalako",
       group: "koalako_delivery",
-      project: "KoalaKo"
+      project: "KoalaKo",
     },
     koalako_final_02: {
       name: "delivery_activities",
@@ -1425,7 +1309,7 @@ const EXPLORATIONS_IMGS = processImages(
       title: "Activities",
       study: "koalako",
       group: "koalako_delivery",
-      project: "KoalaKo"
+      project: "KoalaKo",
     },
     koalako_final_03: {
       name: "delivery_game_listing",
@@ -1438,7 +1322,7 @@ const EXPLORATIONS_IMGS = processImages(
       title: "Activity Listing",
       study: "koalako",
       group: "koalako_delivery",
-      project: "KoalaKo"
+      project: "KoalaKo",
     },
     koalako_final_04: {
       name: "delivery_map",
@@ -1451,7 +1335,7 @@ const EXPLORATIONS_IMGS = processImages(
       title: "Browse Locations",
       study: "koalako",
       group: "koalako_delivery",
-      project: "KoalaKo"
+      project: "KoalaKo",
     },
     koalako_final_05: {
       name: "delivery_trophies",
@@ -1464,7 +1348,7 @@ const EXPLORATIONS_IMGS = processImages(
       title: "Trophy Case",
       study: "koalako",
       group: "koalako_delivery",
-      project: "KoalaKo"
+      project: "KoalaKo",
     },
     koalako_final_06: {
       name: "delivery_post_activity",
@@ -1477,7 +1361,7 @@ const EXPLORATIONS_IMGS = processImages(
       title: "Post-Activity",
       study: "koalako",
       group: "koalako_delivery",
-      project: "KoalaKo"
+      project: "KoalaKo",
     },
     koalako_final_07: {
       name: "delivery_profile_child",
@@ -1490,7 +1374,7 @@ const EXPLORATIONS_IMGS = processImages(
       title: "Child Profile",
       study: "koalako",
       group: "koalako_delivery",
-      project: "KoalaKo"
+      project: "KoalaKo",
     },
 
     customer_screen_06: {
@@ -1510,7 +1394,7 @@ const EXPLORATIONS_IMGS = processImages(
       study: "makeright",
       group: "makeright_final",
       project: "MakeRight",
-      zoom:true,
+      zoom: true,
     },
     customer_screen_07: {
       name: "customer_screen_07",
@@ -1524,8 +1408,7 @@ const EXPLORATIONS_IMGS = processImages(
       study: "makeright",
       group: "makeright_final",
       project: "MakeRight",
-      zoom:true,
-
+      zoom: true,
     },
     customer_screen_08: {
       name: "customer_screen_08",
@@ -1539,8 +1422,7 @@ const EXPLORATIONS_IMGS = processImages(
       study: "makeright",
       group: "makeright_final",
       project: "MakeRight",
-      zoom:true,
-
+      zoom: true,
     },
     customer_screen_13: {
       name: "customer_screen_13",
@@ -1554,7 +1436,7 @@ const EXPLORATIONS_IMGS = processImages(
       study: "makeright",
       group: "makeright_final",
       project: "MakeRight",
-      zoom:true,
+      zoom: true,
     },
     maker_screen_09_no_tutorial: {
       name: "maker_screen_09_no_tutorial",
@@ -1596,7 +1478,7 @@ const EXPLORATIONS_IMGS = processImages(
       study: "makeright",
       group: "makeright_final",
       project: "MakeRight",
-      zoom:true,
+      zoom: true,
     },
     maker_screen_12_no_tutorial: {
       name: "maker_screen_12_no_tutorial",
@@ -1611,7 +1493,7 @@ const EXPLORATIONS_IMGS = processImages(
       study: "makeright",
       group: "makeright_final",
       project: "MakeRight",
-      zoom:true,
+      zoom: true,
     },
     // maker_screen_12_tutorial: {
     //   name: "maker_screen_12_tutorial",
@@ -1639,9 +1521,8 @@ const EXPLORATIONS_IMGS = processImages(
       study: "makeright",
       group: "makeright_final",
       project: "MakeRight",
-      zoom:true,
+      zoom: true,
     },
-
 
     // TODO: uncomment once we're compressing
     // pano_01_house: {
@@ -1684,4 +1565,64 @@ const EXPLORATIONS_IMGS = processImages(
 
 const EXPLORATIONS_IMG_GROUPS = processGroups(EXPLORATIONS_IMGS);
 
+
+const EXPLORATIONS_ORDER = {
+  "UX Engineering": {
+    projects: [
+      "cryptic_pixel",
+      "virtual_pangea_temp",
+    ],
+  },
+  "UX Design": {
+    projects: [
+      "discog_calc",
+      "koalako_delivery",
+      "makeright_final",
+    ],
+  },
+
+  "3D Design": {
+    projects: [
+      "appa",
+      "cinema",
+      "finn",
+      "headphones",
+      "pops",
+      "modern_room",
+      "submarine",
+      "to_alleyway",
+      "foundation_bottles",
+      "jabbar_and_co_products",
+      "made_shirts",
+      "nft_dome",
+      "obsessive_seas",
+    ],
+  },
+  "Motion Graphics": {
+    projects: [
+      "killer_mike_motion_graphic",
+      "makeright_presentation_video",
+    ],
+  },
+  "Photography": {
+    projects: [
+      "abandoned_railroad",
+      "boat_eli_nate",
+      "dad_and_the_heli",
+      "eclipse",
+      "foggy_boat",
+      "hamilton",
+      "ju",
+      "lush_waterfall",
+      "mountain",
+      "prism",
+      "nathan_and_ellie",
+    ],
+  },
+};
+
+
+
+
 export { EXPLORATIONS_IMGS, EXPLORATIONS_IMG_GROUPS };
+export { EXPLORATIONS_ORDER };
