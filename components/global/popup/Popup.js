@@ -1,7 +1,6 @@
 // TODO: Do i want all popups to load when the page loads so they can open quickly? or do I want to save on the page load and only load the popup when it is needed? for right now i'm going to be loading it in on click
 // TODO: this should either be pre-fetched or otherwise loaded in before the user clicks on it
 
-// TODO: Fix interactive popup's zoom, the close button isn't sticky, and it needs the styled scrollbar
 // TODO: custom image ordering on the explorations page
 // TODO: add icons for videos and groups of images to explorations page listings
 // TODO: video thumbnails and in general custom thumbnails for the explorations page
@@ -72,9 +71,10 @@ function getPopupClasses(pop) {
 
     // Nested Case 1.1: zoom is true
     if (pop.zoom) {
-      popclass.media.push("popup--img__lightbox-zoom");
+      popclass.media.push("popup--media__lightbox-zoom");
       popclass.content.push("popup--content__lightbox-zoom");
       popclass.container.push("popup__lightbox-zoom");
+      popclass.header.push("popup--header__lightbox-zoom");
     }
     // Nested Case 1.2: zoom is false
     if (!pop.zoom) {
@@ -194,7 +194,7 @@ function Wrapper({ pop }) {
     } else {
       const timeoutId = setTimeout(() => {
         pop.ui.setVisible(false);
-      },2000);
+      },1000);
       return () => clearTimeout(timeoutId);
     }
   }, [interaction]);
@@ -346,6 +346,16 @@ function Wrapper({ pop }) {
     closeKeydown: closeHandlerWithKeydown,
   };
 
+
+
+useEffect(() => {
+  console.log(pop.imgReady);
+}, [pop.imgReady]);
+
+
+
+
+
   return (
     <>
       <Background handles={handles} popclass={popclass} />
@@ -414,20 +424,21 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
     var popupElem = elems.popup.ref.current;
     var descElem = elems.desc.ref.current;
 
-    var gapWidth = splitRem(window.getComputedStyle(popupElem).getPropertyValue("--popup-gap"));
-    var scrollbarWidth = descElem.offsetWidth - descElem.clientWidth;
-    var descWidth =
+
+    if(descElem){
+      var gapWidth = splitRem(window.getComputedStyle(popupElem).getPropertyValue("--popup-gap"));
+      var scrollbarWidth = descElem.offsetWidth - descElem.clientWidth;
+      var descWidth =
       splitPx(window.getComputedStyle(descElem).width) +
       splitPx(window.getComputedStyle(descElem).paddingLeft) +
       splitPx(window.getComputedStyle(descElem).paddingRight) +
       scrollbarWidth;
-
-    // var availHeight = cssVarToPixels(popupElem, "--popup-height-offset");
-    // var availHeight = splitPx(window.getComputedStyle(popupElem.querySelector(".popup--inner")).height);
-    // var availWidth = splitPx(window.getComputedStyle(popupElem.querySelector(".popup--inner")).width) - gapWidth - descWidth;
-
-    var availHeight = popupElem.offsetHeight;
-    var availWidth = popupElem.offsetWidth - gapWidth - descWidth;
+      var availHeight = popupElem.offsetHeight;
+      var availWidth = popupElem.offsetWidth - gapWidth - descWidth;
+    } else{
+      var availHeight = popupElem.offsetHeight;
+      var availWidth = popupElem.offsetWidth;
+    }
 
     if (availHeight !== elems.img.availHeight) {
       elems.img.setAvailHeight(availHeight);
@@ -459,6 +470,7 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
       var maxWidth = availWidth;
     }
 
+
     // Update maxHeight and maxWidth state only if their values have changed
     if (maxHeight !== elems.img.maxHeight) {
       elems.img.setMaxHeight(maxHeight);
@@ -478,7 +490,13 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
   }
 
   useLayoutEffect(() => {
-    if (!elems.popup.ref.current || !elems.desc.ref.current) return;
+
+    if(pop.type == "gallery"){
+      if (!elems.popup.ref.current || !elems.desc.ref.current) return;
+    }
+    if(pop.type == "lightbox"){
+      if (!elems.popup.ref.current) return;
+    }
     if (elems.popup.height == 0 || elems.popup.width == 0) return;
     if (!pop.drawn) return;
 
@@ -532,6 +550,7 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
             className={`loading--wrapper 
             ${!pop.imgReady || pop.imgLoaded ? "loading--wrapper__hidden" : ""}
             ${pop.zoom ? "loading--wrapper__zoom" : ""}
+            ${pop.zoom && pop.type=="lightbox" ? "loading--wrapper__lightbox-zoom" : ""}
             `}
             style={{
               "--img-max-width": `${elems.img.maxWidth}px`,

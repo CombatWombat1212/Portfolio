@@ -1,6 +1,6 @@
 @mixin popup-scrollbar {
   @include scrollbar {
-    width: 0.75rem;
+    width: var(--popup-scrollbar-width);
   }
 
   @include scrollbar-track {
@@ -61,6 +61,8 @@ $col-media-wrapper: rgba($col-background, 0.075);
   --popup-controls-offset: calc(var(--button-height) / 1.125);
   --lightbox-group-top: calc(var(--popup-controls-offset) * -1);
 
+  --popup-scrollbar-width: 0.75rem;
+
   z-index: 10;
   display: flex;
 
@@ -119,7 +121,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
   &--content {
     @include b-rad;
-    background-color: var(--popup-background);
+    // background-color: var(--popup-background);
     width: 100%;
     @include flex-col-between;
     @include gap(var(--popup-gap));
@@ -142,6 +144,8 @@ $col-media-wrapper: rgba($col-background, 0.075);
     }
     &__lightbox-zoom {
       overflow-y: scroll;
+      @include popup-scrollbar;
+
     }
 
     &__gallery {
@@ -254,6 +258,10 @@ $col-media-wrapper: rgba($col-background, 0.075);
       top: var(--lightbox-group-top);
     }
 
+    &__lightbox-zoom{
+      right: var(--popup-scrollbar-width);
+    }
+
 
 
   }
@@ -336,6 +344,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
     }
 
     &__lightbox-zoom {
+      border-radius: var(--b-rad) 0 0 var(--b-rad);
       img {
         height: fit-content;
       }
@@ -654,6 +663,12 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
       &__zoom {
         width: var(--img-avail-width);
+      }
+
+      &__lightbox-zoom {
+         position:absolute;
+         top:0;
+         margin: unset;
       }
 
       &__hidden {
