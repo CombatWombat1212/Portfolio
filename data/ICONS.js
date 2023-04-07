@@ -137,6 +137,20 @@ const ICONS = {
     height: 512,
   },
 
+  play: {
+    name: "play",
+    src: "/assets/icons/play.svg",
+    alt: "Play icon",
+    width: 384,
+    height: 512,
+  },
+  stack: {
+    name: "stack",
+    src: "/assets/icons/stack.svg",
+    alt: "Stack icon",
+    width: 576,
+    height: 512,
+  },
 
 
 };
@@ -167,9 +181,12 @@ const loading_white = new Icon(ICONS.loading_white);
 const checkmark = new Icon(ICONS.checkmark);
 const xmark = new Icon(ICONS.xmark);
 
+const stack = new Icon(ICONS.stack);
+const play = new Icon(ICONS.play);
+
 
 export default ICONS
-export { arrow_right, arrow_left, arrow_down, chevron_down, chevron_right,chevron_left, document, email, instagram, linkedin, loading, loading_white, checkmark, xmark }
+export { arrow_right, arrow_left, arrow_down, chevron_down, chevron_right,chevron_left, document, email, instagram, linkedin, loading, loading_white, checkmark, xmark, stack, play }
   
 
 

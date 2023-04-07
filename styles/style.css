@@ -2225,6 +2225,7 @@ body {
   --popup-gap: calc(var(--popup-inner-pad) * 0.8);
   --popup-background: #F3F3F7;
   --popup-controls-offset: calc(var(--button-height) / 1.125);
+  --lightbox-group-top: calc(var(--popup-controls-offset) * -1);
   z-index: 10;
   display: flex;
 }
@@ -2342,7 +2343,7 @@ body {
 }
 
 .popup--content__lightbox-group {
-  top: calc(var(--popup-controls-offset) * -1);
+  top: var(--lightbox-group-top);
 }
 
 .popup--content__lightbox-zoom {
@@ -2426,6 +2427,14 @@ body {
   padding: calc(var(--popup-inner-pad) / 4);
   background-color: #F3F3F7;
   border-radius: 0 0 0 var(--b-rad);
+}
+
+.popup--header__lightbox {
+  top: 0;
+}
+
+.popup--header__lightbox-group {
+  top: var(--lightbox-group-top);
 }
 
 .popup--footer {

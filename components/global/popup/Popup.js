@@ -1,7 +1,6 @@
 // TODO: Do i want all popups to load when the page loads so they can open quickly? or do I want to save on the page load and only load the popup when it is needed? for right now i'm going to be loading it in on click
 // TODO: this should either be pre-fetched or otherwise loaded in before the user clicks on it
 
-
 // TODO: Fix interactive popup's zoom, the close button isn't sticky, and it needs the styled scrollbar
 // TODO: custom image ordering on the explorations page
 // TODO: add icons for videos and groups of images to explorations page listings
@@ -87,9 +86,11 @@ function getPopupClasses(pop) {
     if (pop.group) {
       popclass.container.push("popup__lightbox-group");
       popclass.content.push("popup--content__lightbox-group");
+      popclass.header.push("popup--header__lightbox-group");
     }
     // Nested Case 1.4: group is false
     if (!pop.group) {
+      popclass.header.push("popup--header__lightbox");
     }
 
     // Update popclass.containerStyle for type "lightbox"
@@ -193,7 +194,7 @@ function Wrapper({ pop }) {
     } else {
       const timeoutId = setTimeout(() => {
         pop.ui.setVisible(false);
-      }, 80000);
+      },2000);
       return () => clearTimeout(timeoutId);
     }
   }, [interaction]);
@@ -250,20 +251,19 @@ function Wrapper({ pop }) {
     },
   };
 
-
   const canInteract = useRef(true);
 
   const debounceInteraction = () => {
     if (!canInteract.current) return false;
-  
+
     canInteract.current = false;
     setTimeout(() => {
       canInteract.current = true;
-    }, (popSeekDuration*1000*2)*1.15);
-  
+    }, popSeekDuration * 1000 * 2 * 1.15);
+
     return true;
   };
-  
+
   const closeHandler = useCallback(() => {
     if (!debounceInteraction()) return;
 
@@ -351,8 +351,9 @@ function Wrapper({ pop }) {
       <Background handles={handles} popclass={popclass} />
       <div className={`popup container ${popclass.container}`} style={popclass.containerStyle} ref={popRef}>
         <div className={`popup--inner ${popclass.inner}`}>
+          {pop.type == "lightbox" && <Head pop={pop} nav={nav} popclass={popclass} handles={handles} />}
           <div className={`popup--content popup--content__on ${popclass.content}`}>
-            {pop.type != "gallery" && <Head pop={pop} nav={nav} popclass={popclass} handles={handles} />}
+            {pop.type == "interactive" && <Head pop={pop} nav={nav} popclass={popclass} handles={handles} />}
 
             {pop.type == "interactive" && <canvas className="popup--canvas popup--canvas__off" />}
 
@@ -495,71 +496,6 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
     }
   }, [elems.popup.height, elems.popup.width, pop.img, pop.drawn]);
 
-  // useLayoutEffect(() => {
-  //   if (!elems.popup.ref.current || !elems.desc.ref.current) return;
-  //   if (elems.popup.height == 0 || elems.popup.width == 0) return;
-  //   if (!pop.drawn) return;
-  //   if (!pop.imgLoaded) {
-  //     var popupElem = elems.popup.ref.current;
-  //     var descElem = elems.desc.ref.current;
-
-  //     var gapWidth = splitRem(window.getComputedStyle(popupElem).getPropertyValue("--popup-gap"));
-  //     var scrollbarWidth = descElem.offsetWidth - descElem.clientWidth;
-  //     var descWidth =
-  //       splitPx(window.getComputedStyle(descElem).width) +
-  //       splitPx(window.getComputedStyle(descElem).paddingLeft) +
-  //       splitPx(window.getComputedStyle(descElem).paddingRight) +
-  //       scrollbarWidth;
-
-  //     // var availHeight = cssVarToPixels(popupElem, "--popup-height-offset");
-
-  //     var availHeight = popupElem.offsetHeight;
-  //     var availWidth = popupElem.offsetWidth - gapWidth - descWidth;
-
-  //     // var availHeight = splitPx(window.getComputedStyle(popupElem.querySelector(".popup--inner")).height);
-  //     // var availWidth = splitPx(window.getComputedStyle(popupElem.querySelector(".popup--inner")).width) - gapWidth - descWidth;
-
-  //     var aspectWidth = pop.img.width;
-  //     var aspectHeight = pop.img.height;
-
-  //     // Calculate aspect ratio
-  //     var aspectRatio = aspectWidth / aspectHeight;
-
-  //     // Calculate scaled dimensions based on aspect ratio
-  //     var scaledWidth = availHeight * aspectRatio;
-  //     var scaledHeight = availWidth / aspectRatio;
-
-  //     // Check which dimension should be adjusted based on available dimensions
-  //     if (scaledWidth <= availWidth) {
-  //       var newMaxHeight = availHeight;
-  //       var newMaxWidth = scaledWidth;
-  //     } else {
-  //       var newMaxHeight = scaledHeight;
-  //       var newMaxWidth = availWidth;
-  //     }
-
-  //     // Update maxHeight and maxWidth state only if their values have changed
-  //     if (newMaxHeight !== elems.img.maxHeight) {
-  //       elems.img.setMaxHeight(newMaxHeight);
-  //     }
-  //     if (newMaxWidth !== elems.img.maxWidth) {
-  //       elems.img.setMaxWidth(newMaxWidth);
-  //     }
-
-  //     if (availHeight !== elems.img.availHeight) {
-  //       elems.img.setAvailHeight(availHeight);
-  //     }
-  //     if (availWidth !== elems.img.availWidth) {
-  //       elems.img.setAvailWidth(availWidth);
-  //     }
-  //   }
-
-  //   pop.setImgReady(true);
-
-  //   if (!pop.firstImgReady) {
-  //     pop.setFirstImgReady(true);
-  //   }
-  // }, [elems.popup.height, elems.popup.width, pop.img, pop.drawn, pop.zoom]);
 
   return (
     <>
@@ -648,14 +584,16 @@ function Title({ pop }) {
 
 const Controls = React.memo(function Controls({ pop, nav, handles, className }) {
   return (
-
-    <AnimPres mode="wait" animation={popAnims.fade} condition={true} className={`popup--controls ${className ? className : ""}`}
-    layout="position"
-    style={{ transform: "none", transformOrigin: "50% 50% 0px" }}
-    transition={{
-      layout: {duration: popLayoutTransition},
-    }}
-    >
+    <AnimPres
+      mode="wait"
+      animation={popAnims.fade}
+      condition={true}
+      className={`popup--controls ${className ? className : ""}`}
+      layout="position"
+      style={{ transform: "none", transformOrigin: "50% 50% 0px" }}
+      transition={{
+        layout: { duration: popLayoutTransition },
+      }}>
       <Seek direction="left" nav={nav} handles={handles} />
       <Pagination pop={pop} handles={handles} />
       <Seek direction="right" nav={nav} handles={handles} />
