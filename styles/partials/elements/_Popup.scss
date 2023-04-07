@@ -388,8 +388,8 @@ $col-media-wrapper: rgba($col-background, 0.075);
     &--categories-background {
       // --categories-top
       @include b-rad;
-      background-color: $col-media-wrapper;
       position: absolute;
+      transition:0.3s;
 
       --categories-background-offset: 0.5rem;
       --categories-background-offset_negative: calc(var(--categories-background-offset) * -1);
@@ -401,6 +401,10 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
       &__scrollbar{
         width: calc(100% - var(--popup-scrollbar-pad) + var(--categories-background-offset));
+      }
+
+      &__hovered{
+        background-color: $col-media-wrapper;
       }
 
     }

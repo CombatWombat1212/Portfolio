@@ -2587,8 +2587,8 @@ body {
   -webkit-border-radius: var(--b-rad);
   -moz-border-radius: var(--b-rad);
   -khtml-border-radius: var(--b-rad);
-  background-color: rgba(243, 243, 247, 0.075);
   position: absolute;
+  transition: 0.3s;
   --categories-background-offset: 0.5rem;
   --categories-background-offset_negative: calc(var(--categories-background-offset) * -1);
   left: var(--categories-background-offset_negative);
@@ -2599,6 +2599,10 @@ body {
 
 .popup .gallery--categories-background__scrollbar {
   width: calc(100% - var(--popup-scrollbar-pad) + var(--categories-background-offset));
+}
+
+.popup .gallery--categories-background__hovered {
+  background-color: rgba(243, 243, 247, 0.075);
 }
 
 .popup .gallery--categories-wrapper {

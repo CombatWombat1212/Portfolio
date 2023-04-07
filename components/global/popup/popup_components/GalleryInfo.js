@@ -49,22 +49,28 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
 
   const scrollbarClasses = scrollbar ? "popup--description__gallery-scrollbar scrollbar" : "";
 
+  const [catData, setCatData] = useState({});
 
-  const [catWrapperTop, setCatWrapperTop] = useState(0);
-  const [catTagHeight, setCatTagHeight] = useState(0);
-  
-
-  const catLifted = {
-    wrapper: {
-      top: catWrapperTop,
-      setTop: setCatWrapperTop,
-    },
-    tag: {
-      height: catTagHeight,
-      setHeight: setCatTagHeight,
-    },
+  const handleCatDataChange = (key, value) => {
+    const keyParts = key.split(".");
+    setCatData((prevCatData) => {
+      if (keyParts.length === 2) {
+        const [parentKey, childKey] = keyParts;
+        return {
+          ...prevCatData,
+          [parentKey]: {
+            ...prevCatData[parentKey],
+            [childKey]: value,
+          },
+        };
+      } else {
+        return {
+          ...prevCatData,
+          [key]: value,
+        };
+      }
+    });
   };
-
 
 
   return (
@@ -93,7 +99,9 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
             {subheading && <h5 className="gallery--subheading">{subheading}</h5>}
 
             <div className="gallery--info">
-              {(pop.img.disciplines || pop.img.tools) && <GalCategories pop={pop} hasDesc={hasDesc} hasTitle={hasTitle}     catLifted={catLifted} />}
+              {(pop.img.disciplines || pop.img.tools) && (
+                <GalCategories pop={pop} hasDesc={hasDesc} hasTitle={hasTitle} onCatDataChange={handleCatDataChange} />
+              )}
               {pop.img.study && (
                 <Button
                   icon={["arrow_right", "right", "mask"]}
@@ -112,28 +120,24 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
 
         {pop.firstImgDrawn && pop.infoDrawn && <Close pop={pop} nav={nav} handles={handles} popclass={popclass} type="gallery" />}
 
-        {(pop.img.disciplines || pop.img.tools) && 
-        
-        <div className={`gallery--categories-background
-        ${scrollbar ? "gallery--categories-background__scrollbar" : ""}`}
-        style={{
-          '--categories-top': `${catLifted.wrapper.top}px`,
-          '--tag-height': `${catLifted.tag.height}px`,
-        }}
-        >
-          
-        </div>
-          }
-        
+        {(pop.img.disciplines || pop.img.tools) && (
+          <div
+            className={`gallery--categories-background
+        ${scrollbar ? "gallery--categories-background__scrollbar" : ""}
+        ${catData?.hovered || catData.ellipse?.hovered ? "gallery--categories-background__hovered" : ""}
+        `}
+            style={{
+              "--categories-top": `${catData.wrapper?.top}px`,
+              "--tag-height": `${catData.tag?.height}px`,
+            }}></div>
+        )}
       </motion.div>
-
-
     </>
   );
 }, createUpdateConditions(["pop.index", "pop.img", "elems.img.height", "pop.firstImgDrawn", "pop.infoDrawn"]));
 // }, createUpdateConditions(["pop.index", "pop.img", "elems.img.height"]));
 
-const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle, catLifted }) {
+const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle, onCatDataChange }) {
   const catRef = useRef(null);
   const wrapperRef = useRef(null);
   const firstTagRef = useRef(null);
@@ -143,7 +147,6 @@ const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle
 
   const cat = {
     ref: catRef,
-
     hovered: catRefHovered,
     wrapper: {
       ref: wrapperRef,
@@ -154,35 +157,69 @@ const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle
       ref: firstTagRef,
       height: useElementHeight(firstTagRef, { border: true }),
     },
-    ellipse:{
+    ellipse: {
       ref: ellipseRef,
       hovered: ellipseHovered,
-    }
+    },
   };
 
-
-
   useEffect(() => {
-    catLifted.wrapper.setTop(cat.wrapper.top);
+    if (onCatDataChange) {
+      onCatDataChange("wrapper.top", cat.wrapper.top);
+    }
   }, [cat.wrapper.top]);
 
   useEffect(() => {
-    catLifted.tag.setHeight(cat.tag.height);
+    if (onCatDataChange) {
+      onCatDataChange("tag.height", cat.tag.height);
+    }
   }, [cat.tag.height]);
-
-
-  
-
+  useEffect(() => {
+    if (onCatDataChange) {
+      onCatDataChange("hovered", cat.hovered);
+    }
+  }, [cat.hovered]);
+  useEffect(() => {
+    if (onCatDataChange) {
+      onCatDataChange("ellipse.hovered", cat.ellipse.hovered);
+    }
+  }, [cat.ellipse.hovered]);
 
   const controls = useAnimation();
 
+  const [animationCompleted, setAnimationCompleted] = useState(true);
+  const [calculatedX, setCalculatedX] = useState(0);
+
   const handleMouseEnter = () => {
+    setAnimationCompleted(false);
+
+    // const width = cat.ref.current.offsetWidth;
+    // const scrollWidth = cat.ref.current.scrollWidth;
+    // const duration = (scrollWidth - width) * 0.0075; // Adjust the multiplier to control speed
+
     const width = cat.ref.current.offsetWidth;
     const scrollWidth = cat.ref.current.scrollWidth;
-    const duration = (scrollWidth - width) * 0.0075; // Adjust the multiplier to control speed
+    const scrollPosition = (() => {
+      var trans = window.getComputedStyle(cat.ref.current).getPropertyValue("transform");
+      if (trans == "none" || trans == "matrix(1, 0, 0, 1, 0, 0)" || trans == "" || trans == undefined) {
+        return 0;
+      }
+      if (trans.includes("matrix")) {
+        trans = Math.abs(parseFloat(trans.split(",")[4].trim()));
+        return trans;
+      }
+      return 0;
+    })();
+    
+    const remainingScroll = scrollWidth - width - scrollPosition;
+    const duration = remainingScroll * 0.0075; // Adjust the multiplier to control speed
+
+    if (animationCompleted) {
+      setCalculatedX(-scrollWidth + width - scrollPosition);
+    }
 
     controls.start({
-      x: -scrollWidth + width,
+      x: calculatedX,
       transition: { duration, ease: "linear" },
     });
   };
@@ -191,9 +228,14 @@ const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle
     const width = cat.ref.current.offsetWidth;
     const scrollWidth = cat.ref.current.scrollWidth;
     const duration = (scrollWidth - width) * 0.0075 * 0.5; // Adjust the multiplier to control speed
+
     controls.start({
       x: 0,
-      transition: { duration: duration, ease: "easeOut" }, // Adjust the duration for the transition
+      transition: {
+        duration: duration,
+        ease: "easeOut",
+        onComplete: () => setAnimationCompleted(true),
+      }, // Adjust the duration for the transition
     });
   };
 
