@@ -6,23 +6,17 @@
 // TODO: video thumbnails and in general custom thumbnails for the explorations page
 // TODO: thats it, thats all for explorations!!
 
-import toggle, { simpleToggleOn } from "@/scripts/AnimationTools";
-import Image from "next/image";
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Button from "../../elements/Buttons";
 import { loading_white } from "@/data/ICONS";
-import { RESIZE_TIMEOUT, createUpdateConditions, cssVarToPixels, splitPx, splitRem } from "@/scripts/GlobalUtilities";
+import { RESIZE_TIMEOUT, createUpdateConditions, splitPx, splitRem } from "@/scripts/GlobalUtilities";
 import {
-  canvasDrawImage,
-  canvasImageSizeInit,
   canvasInit,
   canvasOnResize,
-  canvasSetSize,
   canvasZoom,
   setCanvasImageLoaded,
 } from "./popup_utilities/CanvasUtilities";
-import { galleryInit, getImgGroup, imgLoading, lightboxInit, seekHandler, setPopupGroup, updatePopupNav } from "./popup_utilities/LightboxUtilities";
-// import { catchKeys, closePopup, setSetPopupGlobal } from "./popup_utilities/PopupUtilities";
+import { galleryInit, lightboxInit, seekHandler, setPopupGroup, updatePopupNav } from "./popup_utilities/LightboxUtilities";
 import { Graphic, Heading } from "@/components/sections/Sections";
 import useBodyClass from "@/scripts/hooks/useBodyClass";
 import useListener from "@/scripts/hooks/useListener";
@@ -346,11 +340,6 @@ function Wrapper({ pop }) {
     closeKeydown: closeHandlerWithKeydown,
   };
 
-
-
-useEffect(() => {
-  console.log(pop.imgReady);
-}, [pop.imgReady]);
 
 
 

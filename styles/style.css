@@ -2227,6 +2227,7 @@ body {
   --popup-controls-offset: calc(var(--button-height) / 1.125);
   --lightbox-group-top: calc(var(--popup-controls-offset) * -1);
   --popup-scrollbar-width: 0.75rem;
+  --popup-scrollbar-pad: calc(var(--popup-gap) / 1.45);
   z-index: 10;
   display: flex;
 }
@@ -2334,6 +2335,7 @@ body {
 
 .popup--content__interactive {
   height: 100%;
+  background-color: var(--popup-background);
 }
 
 .popup--content__lightbox {
@@ -2382,10 +2384,6 @@ body {
   width: var(--w);
   min-width: var(--w);
   position: relative;
-}
-
-.popup--description {
-  --popup-scrollbar-pad: calc(var(--popup-gap) / 1.45);
 }
 
 .popup--description * {
@@ -2584,6 +2582,25 @@ body {
   margin-bottom: 1rem;
 }
 
+.popup .gallery--categories-background {
+  border-radius: var(--b-rad);
+  -webkit-border-radius: var(--b-rad);
+  -moz-border-radius: var(--b-rad);
+  -khtml-border-radius: var(--b-rad);
+  background-color: rgba(243, 243, 247, 0.075);
+  position: absolute;
+  --categories-background-offset: 0.5rem;
+  --categories-background-offset_negative: calc(var(--categories-background-offset) * -1);
+  left: var(--categories-background-offset_negative);
+  top: calc(var(--categories-top) - var(--categories-background-offset));
+  width: 100%;
+  height: calc(var(--tag-height) + (var(--categories-background-offset) * 2));
+}
+
+.popup .gallery--categories-background__scrollbar {
+  width: calc(100% - var(--popup-scrollbar-pad) + var(--categories-background-offset));
+}
+
 .popup .gallery--categories-wrapper {
   overflow: hidden;
   cursor: pointer;
@@ -2606,6 +2623,7 @@ body {
 
 .popup .gallery--categories-wrapper__no-overflow {
   cursor: default;
+  pointer-events: none;
 }
 
 .popup .gallery--categories-wrapper__no-desc {
@@ -2632,6 +2650,14 @@ body {
 
 .popup .gallery--categories-inner__no-overflow {
   cursor: default;
+}
+
+.gallery--categories-wrapper:hover .gallery--categories, .gallery--categories-wrapper:focus .gallery--categories, .gallery--categories-wrapper.focus .gallery--categories, .gallery--categories-wrapper.hover .gallery--categories {
+  width: calc(100% + var(--ellipse-width));
+}
+
+.gallery--categories-wrapper .gallery--categories {
+  transition: var(--transition);
 }
 
 .popup .gallery--categories .tag {

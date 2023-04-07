@@ -47,34 +47,25 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
     repeatChecksDebounceTime: 4,
   });
 
-  // const [scrollbar, setScrollbar] = useState(false);
-  // const [debouncedScrollbar, setDebouncedScrollbar] = useState(false);
-
-  // // Replace this with your useHasScrollbar implementation
-  // const newScrollbarValue = useHasScrollbar(elems.desc.ref, {
-  //   observer: true,
-  //   debounceTime: 10,
-  //   repeatChecks: 20,
-  //   repeatChecksDebounceTime: 4,
-  // });
-
-  // useEffect(() => {
-  //   setScrollbar(newScrollbarValue);
-  // }, [newScrollbarValue]);
-
-  // useEffect(() => {
-  //   const debounceTimeout = setTimeout(() => {
-  //     setDebouncedScrollbar(scrollbar);
-  //   }, 500);
-
-  //   return () => {
-  //     clearTimeout(debounceTimeout);
-  //   };
-  // }, [scrollbar]);
-
   const scrollbarClasses = scrollbar ? "popup--description__gallery-scrollbar scrollbar" : "";
 
-  const [study, setStudy] = useState("test");
+
+  const [catWrapperTop, setCatWrapperTop] = useState(0);
+  const [catTagHeight, setCatTagHeight] = useState(0);
+  
+
+  const catLifted = {
+    wrapper: {
+      top: catWrapperTop,
+      setTop: setCatWrapperTop,
+    },
+    tag: {
+      height: catTagHeight,
+      setHeight: setCatTagHeight,
+    },
+  };
+
+
 
   return (
     <>
@@ -102,30 +93,47 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
             {subheading && <h5 className="gallery--subheading">{subheading}</h5>}
 
             <div className="gallery--info">
-              {(pop.img.disciplines || pop.img.tools) && <GalCategories pop={pop} hasDesc={hasDesc} hasTitle={hasTitle} />}
-              {pop.img.study && <Button
-                icon={["arrow_right", "right", "mask"]}
-                color={"background-tertiary"}
-                animation={"pulse-right"}
-                className="gallery--button"
-                href={STUDY_LINKS.find((link) => link.toLowerCase().includes(pop.img.study.toLowerCase()))}
-                onClick={handles.close}
-                >
-                View Study
-              </Button>}
+              {(pop.img.disciplines || pop.img.tools) && <GalCategories pop={pop} hasDesc={hasDesc} hasTitle={hasTitle}     catLifted={catLifted} />}
+              {pop.img.study && (
+                <Button
+                  icon={["arrow_right", "right", "mask"]}
+                  color={"background-tertiary"}
+                  animation={"pulse-right"}
+                  className="gallery--button"
+                  href={STUDY_LINKS.find((link) => link.toLowerCase().includes(pop.img.study.toLowerCase()))}
+                  onClick={handles.close}>
+                  View Study
+                </Button>
+              )}
               {hasDesc && <GalDescription pop={pop} />}
             </div>
           </AnimPres>
         )}
 
         {pop.firstImgDrawn && pop.infoDrawn && <Close pop={pop} nav={nav} handles={handles} popclass={popclass} type="gallery" />}
+
+        {(pop.img.disciplines || pop.img.tools) && 
+        
+        <div className={`gallery--categories-background
+        ${scrollbar ? "gallery--categories-background__scrollbar" : ""}`}
+        style={{
+          '--categories-top': `${catLifted.wrapper.top}px`,
+          '--tag-height': `${catLifted.tag.height}px`,
+        }}
+        >
+          
+        </div>
+          }
+        
       </motion.div>
+
+
     </>
   );
 }, createUpdateConditions(["pop.index", "pop.img", "elems.img.height", "pop.firstImgDrawn", "pop.infoDrawn"]));
 // }, createUpdateConditions(["pop.index", "pop.img", "elems.img.height"]));
 
-const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle }) {
+const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle, catLifted }) {
   const catRef = useRef(null);
   const wrapperRef = useRef(null);
   const firstTagRef = useRef(null);
@@ -146,7 +154,25 @@ const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle
       ref: firstTagRef,
       height: useElementHeight(firstTagRef, { border: true }),
     },
+    ellipse:{
+      ref: ellipseRef,
+      hovered: ellipseHovered,
+    }
   };
+
+
+
+  useEffect(() => {
+    catLifted.wrapper.setTop(cat.wrapper.top);
+  }, [cat.wrapper.top]);
+
+  useEffect(() => {
+    catLifted.tag.setHeight(cat.tag.height);
+  }, [cat.tag.height]);
+
+
+  
+
 
   const controls = useAnimation();
 
@@ -194,10 +220,10 @@ const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle
   const [lockedOverflow, setLockedOverflow] = useState(false);
 
   useEffect(() => {
-    if (ellipseHovered || catRefHovered) {
-      setLockedOverflow(ellipseHovered || catRefHovered);
+    if (cat.ellipse.hovered || cat.hovered) {
+      setLockedOverflow(cat.ellipse.hovered || cat.hovered);
     }
-  }, [ellipseHovered, catRefHovered]);
+  }, [cat.ellipse.hovered, cat.hovered]);
 
   var j = 0;
 
@@ -213,10 +239,8 @@ const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle
       }}>
       <motion.div className={`gallery--categories`} ref={cat.ref} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} animate={controls}>
         <div
-          className={`gallery--categories-inner
-
-${cat.wrapper.overflow || lockedOverflow ? "gallery--categories-inner__overflow" : "gallery--categories-inner__no-overflow"}
-`}>
+          className={`gallery--categories-inner 
+          ${cat.wrapper.overflow || lockedOverflow ? "gallery--categories-inner__overflow" : "gallery--categories-inner__no-overflow"}`}>
           {pop.img.disciplines.map((item, i) => {
             j++;
             return (
