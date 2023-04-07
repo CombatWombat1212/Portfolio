@@ -5,6 +5,12 @@ import { EXPLORATIONS_IMGS, EXPLORATIONS_IMG_GROUPS, EXPLORATIONS_ORDER } from "
 import { IMAGE_TYPES, VIDEO_TYPES, ensureArray } from "@/scripts/GlobalUtilities";
 import { useEffect, useMemo, useState } from "react";
 
+
+// TODO: add icons for videos and groups of images to explorations page listings
+// TODO: create custom thumbnails and add them with thumbnail:true for a couple of the videos and swipe posts
+// TODO: thats it, thats all for explorations!!
+
+
 function Explorations({ pop }) {
   const study = STUDY_EXPLORATIONS;
 
@@ -19,21 +25,23 @@ function Explorations({ pop }) {
   }));
 
   const orderedDisciplines = useOrderedDisciplines(disciplines, EXPLORATIONS_ORDER);
-
-
+  const orderedItems = useOrderedItems(GALLERY_CONTENT, orderedDisciplines, EXPLORATIONS_ORDER);
 
   return (
     <>
       <CaseStudyPage id={study.id} study={study}>
         {orderedDisciplines.map((discipline) => {
 
-          const orderedItems = useOrderedItems(GALLERY_CONTENT, discipline.name, EXPLORATIONS_ORDER);
+          // const orderedItems = useOrderedItems(GALLERY_CONTENT, discipline.name, EXPLORATIONS_ORDER);
+          const disciplineItems = orderedItems[discipline.name];
 
           return (
             <Chapter key={discipline.name} id={discipline.name} name={discipline.name}>
               <Section id={`${discipline.name}--Section`} className="gallery--section" mainType="grid">
                 <Heading>{discipline.displayName}</Heading>
-                {...orderedItems.map((item) => {
+                {...disciplineItems.map((item) => {
+
+
                   if (item.drawn) return;
                   item.drawn = true;
 
@@ -44,18 +52,26 @@ function Explorations({ pop }) {
                   item.type = item.type.toLowerCase();
                   var type = IMAGE_TYPES.includes(item.type) ? "image" : "video";
 
+                  var thumb = (function() {
+                    if (!isGroup) {
+                      return item;
+                    } else {
+                      const thumbnailImg = item.imgs.find((img) => img.thumbnail === true);
+                      return thumbnailImg || item.imgs[0];
+                    }
+                  })();
+
                   var img = isGroup ? item.imgs[0] : item;
 
-                  // console.log(item);
 
                   return (
                     <Column>
                       <Graphic
                         className="gallery--graphic"
                         type={type}
-                        img={img}
+                        img={thumb}
                         // {...popup}
-                        gallery
+                        gallery={img}
                         pop={pop}
                       />
                     </Column>
@@ -94,38 +110,58 @@ function useOrderedDisciplines(disciplines, explorationsOrder) {
   }, [disciplines, explorationsOrder]);
 }
 
-function useOrderedItems(items, disciplineName, explorationsOrder) {
+function useOrderedItems(items, disciplines, explorationsOrder) {
   return useMemo(() => {
-    const itemsWithDiscipline = items.filter((item) => item.disciplines.includes(disciplineName));
+    const disciplinesState = {};
 
-    const orderItems = (items, order) => {
+    disciplines.forEach((discipline) => {
+      const disciplineName = discipline.name;
+
+      const itemsWithDiscipline = items.filter((item) => {
+        if (!item.disciplines.includes(disciplineName)) {
+          return false;
+        }
+
+        // If an item is under multiple disciplines, prioritize the one specified in EXPLORATIONS_ORDER
+        for (const [otherDiscipline, disciplineInfo] of Object.entries(explorationsOrder)) {
+          if (otherDiscipline === disciplineName) {
+            continue;
+          }
+
+          if (item.disciplines.includes(otherDiscipline) && disciplineInfo.projects.includes(item.name)) {
+            return false;
+          }
+        }
+
+        return true;
+      });
+
+      disciplinesState[disciplineName] = orderItems(itemsWithDiscipline, explorationsOrder[disciplineName]);
+    });
+
+    return disciplinesState;
+
+    function orderItems(items, disciplineInfo) {
       const orderedItems = [];
       const unorderedItems = [];
 
-      Object.entries(order).forEach(([discipline, disciplineInfo]) => {
-        const { projects } = disciplineInfo;
-        const disciplineItems = [];
-
-        projects.forEach((project) => {
+      if (disciplineInfo && disciplineInfo.projects) {
+        disciplineInfo.projects.forEach((project) => {
           const foundItem = items.find((item) => item.name === project);
 
           if (foundItem) {
-            disciplineItems.push(foundItem);
+            orderedItems.push(foundItem);
           }
         });
 
-        const notMatchedItems = items.filter((item) => item.disciplines.includes(discipline) && !disciplineItems.includes(item));
-        unorderedItems.push(...notMatchedItems);
-        orderedItems.push(...disciplineItems);
-      });
+        unorderedItems.push(...items.filter((item) => !orderedItems.includes(item)));
+      } else {
+        unorderedItems.push(...items);
+      }
 
       return [...orderedItems, ...unorderedItems];
-    };
-
-    return orderItems(itemsWithDiscipline, explorationsOrder);
-  }, [items, disciplineName, explorationsOrder]);
+    }
+  }, [items, disciplines, explorationsOrder]);
 }
-
-
 
 export default Explorations;

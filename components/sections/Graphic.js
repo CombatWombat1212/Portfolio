@@ -174,6 +174,10 @@ function Graphic({
     if (typeof lightbox == "object") {
       lightboxImg = lightbox;
     }
+    if (typeof gallery == "object") {
+      lightboxImg = gallery;
+    }
+
 
     // TODO: add loading indicator for lightbox images, and smoother transitions between non-zoomed images and zoomed images
 

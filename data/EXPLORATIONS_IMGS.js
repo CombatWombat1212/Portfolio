@@ -58,20 +58,16 @@ const EXPLORATIONS_IMGS = processImages(
       //   group: '',
       //   index: 0,
     },
-    headphones: {
-      name: "headphones",
-      src: "./assets/images/case_studies/explorations/3d_design/headphones.png",
-      alt: "A photorealistic rendering of a pair of headphones hanging on a wall",
-      width: 2000,
-      height: 2000,
-      disciplines: ["3D Design"],
-      tools: ["Blender", "Photoshop"],
-      title: "Headphones",
-      //   description: '',
-      //   study: '',
-      //   group: '',
-      //   index: 0,
-    },
+    // headphones: {
+    //   name: "headphones",
+    //   src: "./assets/images/case_studies/explorations/3d_design/headphones.png",
+    //   alt: "A photorealistic rendering of a pair of headphones hanging on a wall",
+    //   width: 2000,
+    //   height: 2000,
+    //   disciplines: ["3D Design"],
+    //   tools: ["Blender", "Photoshop"],
+    //   title: "Headphones",
+    // },
     pops: {
       name: "pops",
       src: "./assets/images/case_studies/explorations/3d_design/pops.png",
@@ -302,6 +298,8 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: '',
       group: "jabbar_and_co_products",
       project: "Jabbar & Co.'s Core Product Line",
+      thumbnail:true,
+
       //   index: 0,
     },
     jabbar_and_co_products_09: {
@@ -318,6 +316,8 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: '',
       group: "jabbar_and_co_products",
       project: "Jabbar & Co.'s Core Product Line",
+
+
       //   index: 0,
     },
     jabbar_and_co_products_10: {
@@ -334,6 +334,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: '',
       group: "jabbar_and_co_products",
       project: "Jabbar & Co.'s Core Product Line",
+
       //   index: 0,
     },
     jabbar_and_co_products_11: {
@@ -397,6 +398,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: '',
       group: "jabbar_and_co_products",
       project: "Jabbar & Co.'s Core Product Line",
+
       //   index: 0,
     },
     jabbar_and_co_products_15: {
@@ -429,6 +431,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: '',
       group: "jabbar_and_co_products",
       project: "Jabbar & Co.'s Core Product Line",
+
       //   index: 0,
     },
     made_shirts_01: {
@@ -1023,9 +1026,34 @@ const EXPLORATIONS_IMGS = processImages(
         "I refined the visual style through iteration, storyboarding, and embracing feedback. Each shot features engaging graphics that complement the tone and words spoken.",
         "This project pushed my skills in After Effects at every turn.  Thankfully, my passion for the subject and medium kept me motivated throughout.",
       ],
-      //   group: '',
+        group: 'km',
       //   index: 0,
     },
+
+    killer_mike_motion_graphic1: {
+      name: "killer_mike_motion_graphic1",
+      src: "./assets/images/case_studies/explorations/motion_graphics/killer_mike_motion_graphic.mp4",
+      alt: "A kinetic typography motion graphic for a soundbite from Killer Mike on the Stephen Colbert show",
+      width: 1920,
+      height: 1080,
+      disciplines: ["Motion Graphics"],
+      tools: ["After Effects", "Adobe Illustrator", "Photoshop"],
+      title: "Kinetic Typography",
+      description: [
+        "I set out to create a kinetic typography animation that enhanced an audio clip without overshadowing its core message.",
+        "I refined the visual style through iteration, storyboarding, and embracing feedback. Each shot features engaging graphics that complement the tone and words spoken.",
+        "This project pushed my skills in After Effects at every turn.  Thankfully, my passion for the subject and medium kept me motivated throughout.",
+      ],
+        group: 'km',
+        hidden:true,
+      //   index: 0,
+    },
+
+
+
+
+
+
     makeright_presentation_video: {
       name: "makeright_presentation_video",
       src: "./assets/images/case_studies/explorations/motion_graphics/makeright_presentation_video.mp4",
@@ -1058,17 +1086,17 @@ const EXPLORATIONS_IMGS = processImages(
     //   //   group: '',
     //   //   index: 0,
     // },
-    abandoned_railroad: {
-      name: "abandoned_railroad",
-      src: "./assets/images/case_studies/explorations/photography/abandoned_railroad.jpg",
-      alt: "A photograph of an old abandoned building",
-      width: 5027,
-      height: 3351,
-      title: "Railroad",
-      disciplines: ["Photography"],
+    // abandoned_railroad: {
+    //   name: "abandoned_railroad",
+    //   src: "./assets/images/case_studies/explorations/photography/abandoned_railroad.jpg",
+    //   alt: "A photograph of an old abandoned building",
+    //   width: 5027,
+    //   height: 3351,
+    //   title: "Railroad",
+    //   disciplines: ["Photography"],
       //   group: '',
       //   index: 0,
-    },
+    // },
     boat_eli_nate: {
       name: "boat_eli_nate",
       src: "./assets/images/case_studies/explorations/photography/boat_eli_nate.jpg",
@@ -1095,20 +1123,20 @@ const EXPLORATIONS_IMGS = processImages(
       //   group: '',
       //   index: 0,
     },
-    eclipse: {
-      name: "eclipse",
-      src: "./assets/images/case_studies/explorations/photography/eclipse.JPG",
-      alt: "A photograph of the sun during an eclipse",
-      width: 5184,
-      height: 3456,
-      disciplines: ["Photography"],
-      tools: ["Lightroom"],
-      title: "Eclipse",
+    // eclipse: {
+    //   name: "eclipse",
+    //   src: "./assets/images/case_studies/explorations/photography/eclipse.JPG",
+    //   alt: "A photograph of the sun during an eclipse",
+    //   width: 5184,
+    //   height: 3456,
+    //   disciplines: ["Photography"],
+    //   tools: ["Lightroom"],
+    //   title: "Eclipse",
 
-      // study: "",
-      //   group: '',
-      //   index: 0,
-    },
+    //   // study: "",
+    //   //   group: '',
+    //   //   index: 0,
+    // },
     foggy_boat: {
       name: "foggy_boat",
       src: "./assets/images/case_studies/explorations/photography/foggy_boat.jpg",
@@ -1575,48 +1603,48 @@ const EXPLORATIONS_ORDER = {
   },
   "UX Design": {
     projects: [
-      "discog_calc",
-      "koalako_delivery",
       "makeright_final",
+      "koalako_delivery",
+      "discog_calc",
     ],
   },
 
   "3D Design": {
     projects: [
-      "appa",
+      "obsessive_seas",
       "cinema",
-      "finn",
-      "headphones",
-      "pops",
+      "nft_dome",
+      "foundation_bottles",
+      "made_shirts",
+      "jabbar_and_co_products",
       "modern_room",
+      // "headphones",
       "submarine",
       "to_alleyway",
-      "foundation_bottles",
-      "jabbar_and_co_products",
-      "made_shirts",
-      "nft_dome",
-      "obsessive_seas",
+      "appa",
+      "finn",
+      "pops",
     ],
   },
   "Motion Graphics": {
     projects: [
-      "killer_mike_motion_graphic",
       "makeright_presentation_video",
+      "killer_mike_motion_graphic",
     ],
   },
   "Photography": {
     projects: [
-      "abandoned_railroad",
-      "boat_eli_nate",
       "dad_and_the_heli",
-      "eclipse",
-      "foggy_boat",
-      "hamilton",
-      "ju",
-      "lush_waterfall",
-      "mountain",
-      "prism",
+      "boat_eli_nate",
       "nathan_and_ellie",
+      // "abandoned_railroad",
+      "foggy_boat",
+      // "eclipse",
+      "lush_waterfall",
+      "hamilton",
+      "mountain",
+      "ju",
+      "prism",
     ],
   },
 };

@@ -8,6 +8,15 @@ function checkForOverlappingIndexes(group, index, name, currentGroup) {
   }
 }
 
+function checkForMultipleThumbnails(groupData) {
+  const thumbnails = groupData.imgs.filter((img) => img.thumbnail === true);
+
+  if (thumbnails.length > 1) {
+    console.error(`Group "${groupData.name}" has multiple images with thumbnail=true`);
+  }
+}
+
+
 function addSectionsToGroup(group, groupImages) {
   const allHaveSection = groupImages.every((img) => img.section !== undefined);
 
@@ -172,10 +181,12 @@ function processGroups(images) {
 
   for (const key in groups) {
     const group = groups[key];
+    checkForMultipleThumbnails(group);
     combineUniqueProperties(group, "tools");
     combineUniqueProperties(group, "disciplines");
     collectPropertyValues(group, "description");
   }
+
 
   return groups;
 }

@@ -1,11 +1,3 @@
-// TODO: Do i want all popups to load when the page loads so they can open quickly? or do I want to save on the page load and only load the popup when it is needed? for right now i'm going to be loading it in on click
-// TODO: this should either be pre-fetched or otherwise loaded in before the user clicks on it
-
-// TODO: custom image ordering on the explorations page
-// TODO: add icons for videos and groups of images to explorations page listings
-// TODO: video thumbnails and in general custom thumbnails for the explorations page
-// TODO: thats it, thats all for explorations!!
-
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Button from "../../elements/Buttons";
 import { loading_white } from "@/data/ICONS";
@@ -271,14 +263,49 @@ function Wrapper({ pop }) {
     pop.setFirstImgDrawn(false);
   }, [pop]);
 
+  // const seekHandler = useCallback(
+  //   (e, direction) => {
+  //     if (!debounceInteraction()) return;
+
+  //     var button;
+
+  //     if (!pop.group) return;
+
+  //     if (e.type === "click") {
+  //       button = e.target;
+  //       while (!button.classList.contains("popup--seek")) {
+  //         button = button.parentElement;
+  //       }
+  //       direction = direction ? direction : button.classList.contains("popup--seek__right") ? 1 : -1;
+  //     }
+
+  //     var length = pop.group.imgs.length;
+
+  //     var ind = pop.index;
+  //     ind += direction;
+
+  //     if (ind >= length) ind = 0;
+  //     if (ind < 0) ind = length - 1;
+
+  //     pop.setIndex(ind);
+  //     var img = pop.group.imgs[ind].lightboxImg ? pop.group.imgs[ind].lightboxImg : pop.group.imgs[ind];
+  //     pop.setImg(img);
+  //     pop.setZoom(img.zoom ? img.zoom : false);
+  //     pop.setImgLoaded(false);
+  //     pop.setImgReady(false);
+  //     pop.setImgDrawn(false);
+  //   },
+  //   [pop]
+  // );
+  
   const seekHandler = useCallback(
     (e, direction) => {
       if (!debounceInteraction()) return;
-
+  
       var button;
-
+  
       if (!pop.group) return;
-
+  
       if (e.type === "click") {
         button = e.target;
         while (!button.classList.contains("popup--seek")) {
@@ -286,22 +313,29 @@ function Wrapper({ pop }) {
         }
         direction = direction ? direction : button.classList.contains("popup--seek__right") ? 1 : -1;
       }
-
+  
       var length = pop.group.imgs.length;
-
+  
       var ind = pop.index;
-      ind += direction;
-
-      if (ind >= length) ind = 0;
-      if (ind < 0) ind = length - 1;
-
-      pop.setIndex(ind);
-      var img = pop.group.imgs[ind].lightboxImg ? pop.group.imgs[ind].lightboxImg : pop.group.imgs[ind];
-      pop.setImg(img);
-      pop.setZoom(img.zoom ? img.zoom : false);
-      pop.setImgLoaded(false);
-      pop.setImgReady(false);
-      pop.setImgDrawn(false);
+  
+      do {
+        ind += direction;
+  
+        if (ind >= length) ind = 0;
+        if (ind < 0) ind = length - 1;
+  
+        if (pop.group.imgs[ind].hidden) continue;
+  
+        pop.setIndex(ind);
+        var img = pop.group.imgs[ind].lightboxImg ? pop.group.imgs[ind].lightboxImg : pop.group.imgs[ind];
+        pop.setImg(img);
+        pop.setZoom(img.zoom ? img.zoom : false);
+        pop.setImgLoaded(false);
+        pop.setImgReady(false);
+        pop.setImgDrawn(false);
+  
+        break;
+      } while (pop.group.imgs[ind].hidden);
     },
     [pop]
   );
@@ -309,7 +343,8 @@ function Wrapper({ pop }) {
   const paginationHandler = useCallback(
     (img, i) => {
       if (!debounceInteraction()) return;
-
+      if (pop.group.imgs[i].hidden) return;
+  
       pop.setIndex(i);
       pop.setImg(pop.group.imgs[i]);
       pop.setZoom(img.zoom ? img.zoom : false);
@@ -319,6 +354,20 @@ function Wrapper({ pop }) {
     },
     [pop]
   );
+  
+  // const paginationHandler = useCallback(
+  //   (img, i) => {
+  //     if (!debounceInteraction()) return;
+
+  //     pop.setIndex(i);
+  //     pop.setImg(pop.group.imgs[i]);
+  //     pop.setZoom(img.zoom ? img.zoom : false);
+  //     pop.setImgLoaded(false);
+  //     pop.setImgReady(false);
+  //     pop.setImgDrawn(false);
+  //   },
+  //   [pop]
+  // );
 
   function seekHandlerWithKeydown(e) {
     if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
@@ -624,6 +673,9 @@ const Pagination = React.memo(function Pagination({ pop, handles }) {
   return (
     <div className="popup--pagination">
       {pop.group?.imgs?.map((img, i) => {
+
+if (img.hidden) return null;
+
         return (
           <Circle
             active={i === pop.index}
