@@ -107,8 +107,8 @@ const EXPLORATIONS_IMGS = processImages(
       title: "Grafitti Alley",
       description: "Photogrammetry study of a grafitti covered alleyway in downtown Toronto.",
       group: "to_alleyway",
-      hidden:true,
-      thumbnail:true,
+      hidden: true,
+      thumbnail: true,
     },
     to_alleyway_video: {
       name: "to_alleyway_video",
@@ -122,10 +122,6 @@ const EXPLORATIONS_IMGS = processImages(
       description: "Photogrammetry study of a grafitti covered alleyway in downtown Toronto.",
       group: "to_alleyway",
     },
-  
-
-
-
 
     jabbar_and_co_foundation_01: {
       name: "jabbar_and_co_foundation_01",
@@ -315,7 +311,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: '',
       group: "jabbar_and_co_products",
       project: "Jabbar & Co.'s Core Product Line",
-      thumbnail:true,
+      thumbnail: true,
 
       //   index: 0,
     },
@@ -333,7 +329,6 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: '',
       group: "jabbar_and_co_products",
       project: "Jabbar & Co.'s Core Product Line",
-
 
       //   index: 0,
     },
@@ -776,9 +771,27 @@ const EXPLORATIONS_IMGS = processImages(
       index: 10,
       zoom: true,
     },
-    virtual_pangea_temp: {
-      name: "virtual_pangea_temp",
-      src: "./assets/images/case_studies/explorations/frontend/virtual_pangea_temp.mp4",
+    // virtual_pangea_temp: {
+    //   name: "virtual_pangea_temp",
+    //   src: "./assets/images/case_studies/explorations/frontend/virtual_pangea_temp.mp4",
+    //   //   group: '',
+    //   //   index: 0,
+    // },
+
+
+    virtual_pangea_temp_thumbnail: {
+      name: "virtual_pangea_temp_thumbnail",
+      src: "./assets/images/case_studies/explorations/frontend/virtual_pangea_temp/virtual_pangea_temp_thumbnail.png",
+      alt: "A thumbnail for a screen-recorded video showing the Virtual Pangea website in action",
+      width: 861,
+      height: 861,
+      group: "virtual_pangea_temp",
+      thumbnail: true,
+      hidden: true,
+    },
+    virtual_pangea_temp_video: {
+      name: "virtual_pangea_temp_video",
+      src: "./assets/images/case_studies/explorations/frontend/virtual_pangea_temp/virtual_pangea_temp_video.mp4",
       alt: "A screen-recorded video showing the Virtual Pangea website in action",
       width: 1920,
       height: 1080,
@@ -790,10 +803,16 @@ const EXPLORATIONS_IMGS = processImages(
         "I implemented necessities like navigation, and responsivity. Content blocks and features that were missing or broken, were rebuilt.",
         "To the eye of the user, I added animations and passed over styling and typesetting.  Making a far more digestible experience. While under the hood, I added proper SEO, and optimized performance.",
       ],
-      study: "",
-      //   group: '',
-      //   index: 0,
+      group: "virtual_pangea_temp",
     },
+  
+
+
+
+
+
+
+
     crypic_pixel_video_01: {
       name: "crypic_pixel_video_01",
       src: "./assets/images/case_studies/explorations/frontend/cryptic_pixel/crypic_pixel_video_01.mp4",
@@ -926,6 +945,16 @@ const EXPLORATIONS_IMGS = processImages(
       project: "Cryptic Pixel",
       //   index: 0,
     },
+    crypic_pixel_thumbnail: {
+      name: "crypic_pixel_thumbnail",
+      src: "./assets/images/case_studies/explorations/frontend/cryptic_pixel/crypic_pixel_thumbnail.png",
+      alt: "A thumbnail for a screen-recorded video showing the Cryptic Pixel website in action",
+      width: 1024,
+      height: 1024,
+      group: "cryptic_pixel",
+      thumbnail:true,
+      hidden:true,
+    },
     discog_calc_video_01_example_brockhampton: {
       name: "discog_calc_video_01_example_brockhampton",
       src: "./assets/images/case_studies/explorations/frontend/discog_calc/discog_calc_video_01_example_brockhampton.mp4",
@@ -1028,9 +1057,20 @@ const EXPLORATIONS_IMGS = processImages(
       project: "Discography Calculator",
       //   index: 0,
     },
-    discog_calc_thumbnail: {
-      name: "discog_calc_thumbnail",
-      src: "./assets/images/case_studies/explorations/frontend/discog_calc/discog_calc_thumbnail.png",
+    discog_calc_thumbnail_01: {
+      name: "discog_calc_thumbnail_01",
+      src: "./assets/images/case_studies/explorations/frontend/discog_calc/discog_calc_thumbnail_01.png",
+      alt: "A thumbnail image of a screen-recorded video showing the Discogs-API powered website in action, searching for BROCKHAMPTON and returning their discography",
+      width: 658,
+      height: 658,
+      group: "discog_calc",
+      project: "Discography Calculator",
+      thumbnail: true,
+      hidden: true,
+    },
+    discog_calc_thumbnail_02: {
+      name: "discog_calc_thumbnail_02",
+      src: "./assets/images/case_studies/explorations/frontend/discog_calc/discog_calc_thumbnail_02.png",
       alt: "A thumbnail image of a screen-recorded video showing the Discogs-API powered website in action, searching for BROCKHAMPTON and returning their discography",
       width: 1920,
       height: 1080,
@@ -1038,30 +1078,27 @@ const EXPLORATIONS_IMGS = processImages(
       tools: ["HTML/CSS/JS", "API", "Adobe XD"],
       group: "discog_calc",
       project: "Discography Calculator",
-      thumbnail:true,
       hidden: true,
     },
-
-    
 
     killer_mike_motion_graphic_thumbnail_01: {
       name: "killer_mike_motion_graphic_thumbnail_01",
       src: "./assets/images/case_studies/explorations/motion_graphics/killer_mike/killer_mike_motion_graphic_thumbnail_01.png",
       alt: "Thumbnail image for a motion graphic for a soundbite from Killer Mike on the Stephen Colbert show",
       width: 1920,
-      height: 1080,        
-      group: 'killer_mike',
-      hidden:true,
-      thumbnail:true,
+      height: 1080,
+      group: "killer_mike",
+      hidden: true,
+      thumbnail: true,
     },
     killer_mike_motion_graphic_thumbnail_02: {
       name: "killer_mike_motion_graphic_thumbnail_02",
       src: "./assets/images/case_studies/explorations/motion_graphics/killer_mike/killer_mike_motion_graphic_thumbnail_02.png",
       alt: "Thumbnail image for a motion graphic for a soundbite from Killer Mike on the Stephen Colbert show",
       width: 1920,
-      height: 1080,        
-      group: 'killer_mike',
-      hidden:true,
+      height: 1080,
+      group: "killer_mike",
+      hidden: true,
     },
     killer_mike_motion_graphic_video: {
       name: "killer_mike_motion_graphic_video",
@@ -1077,7 +1114,7 @@ const EXPLORATIONS_IMGS = processImages(
         "I refined the visual style through iteration, storyboarding, and embracing feedback. Each shot features engaging graphics that complement the tone and words spoken.",
         "This project pushed my skills in After Effects at every turn.  Thankfully, my passion for the subject and medium kept me motivated throughout.",
       ],
-        group: 'killer_mike',
+      group: "killer_mike",
     },
     makeright_presentation_thumbnail: {
       name: "makeright_presentation_thumbnail",
@@ -1085,9 +1122,9 @@ const EXPLORATIONS_IMGS = processImages(
       alt: "Thumbnail for a narrated, and scored motion graphic presentation for a fictional company, MakeRight, created for my undergrad thesis",
       width: 1920,
       height: 1080,
-      group: "makeright_presentation",      
-      hidden:true,
-      thumbnail:true,
+      group: "makeright_presentation",
+      hidden: true,
+      thumbnail: true,
     },
     makeright_presentation_video: {
       name: "makeright_presentation_video",
@@ -1104,16 +1141,13 @@ const EXPLORATIONS_IMGS = processImages(
         "Check out my MakeRight case study for an in-depth look at the design process, and final product.",
       ],
       study: "makeright",
-      group: "makeright_presentation",      
+      group: "makeright_presentation",
     },
-  
 
     // makeright_presentation_video: {
     //   name: "makeright_presentation_video",
     //   src: "./assets/images/case_studies/explorations/motion_graphics/makeright_presentation_video.mp4",
     // },
-
-
 
     // prepr_project_leadership: {
     //   name: "prepr_project_leadership",
@@ -1137,8 +1171,8 @@ const EXPLORATIONS_IMGS = processImages(
     //   height: 3351,
     //   title: "Railroad",
     //   disciplines: ["Photography"],
-      //   group: '',
-      //   index: 0,
+    //   group: '',
+    //   index: 0,
     // },
     boat_eli_nate: {
       name: "boat_eli_nate",
@@ -1447,7 +1481,21 @@ const EXPLORATIONS_IMGS = processImages(
       group: "koalako_delivery",
       project: "KoalaKo",
     },
-
+    koalako_thumbnail: {
+      name: "koalako_thumbnail",
+      src: "./assets/images/case_studies/explorations/ui_ux/koalako/koalako_thumbnail.png",
+      alt: "Thumbnail graphic for the gallery listing of the KoalaKo project",
+      width: 1392,
+      height: 1392,
+      disciplines: ["UX Design", "UI Design", "User Research"],
+      tools: ["Adobe XD", "Mural"],
+      title: "Child Profile",
+      study: "koalako",
+      group: "koalako_delivery",
+      project: "KoalaKo",
+      hidden: true,
+      thumbnail: true,
+    },
     customer_screen_06: {
       name: "customer_screen_06",
       src: "./assets/images/case_studies/explorations/ui_ux/makeright/customer_screen_06.png",
@@ -1595,6 +1643,16 @@ const EXPLORATIONS_IMGS = processImages(
       zoom: true,
     },
 
+    makeright_thumbnail_04: {
+      name: "makeright_thumbnail_04",
+      src: "./assets/images/case_studies/explorations/ui_ux/makeright/makeright_thumbnail_04.png",
+      alt: "A thumbnail for the MakeRight case study",
+      width: 857,
+      height: 857,
+      group: "makeright_final",
+      hidden: true,
+      thumbnail: true,
+    },
     // TODO: uncomment once we're compressing
     // pano_01_house: {
     //   name: "pano_01_house",
@@ -1636,20 +1694,12 @@ const EXPLORATIONS_IMGS = processImages(
 
 const EXPLORATIONS_IMG_GROUPS = processGroups(EXPLORATIONS_IMGS);
 
-
 const EXPLORATIONS_ORDER = {
   "UX Engineering": {
-    projects: [
-      "cryptic_pixel",
-      "virtual_pangea_temp",
-    ],
+    projects: ["cryptic_pixel", "virtual_pangea_temp"],
   },
   "UX Design": {
-    projects: [
-      "makeright_final",
-      "koalako_delivery",
-      "discog_calc",
-    ],
+    projects: ["makeright_final", "koalako_delivery", "discog_calc"],
   },
 
   "3D Design": {
@@ -1670,12 +1720,9 @@ const EXPLORATIONS_ORDER = {
     ],
   },
   "Motion Graphics": {
-    projects: [
-      "makeright_presentation",
-      "killer_mike_motion_graphic",
-    ],
+    projects: ["makeright_presentation", "killer_mike_motion_graphic"],
   },
-  "Photography": {
+  Photography: {
     projects: [
       "dad_and_the_heli",
       "boat_eli_nate",
@@ -1691,9 +1738,6 @@ const EXPLORATIONS_ORDER = {
     ],
   },
 };
-
-
-
 
 export { EXPLORATIONS_IMGS, EXPLORATIONS_IMG_GROUPS };
 export { EXPLORATIONS_ORDER };

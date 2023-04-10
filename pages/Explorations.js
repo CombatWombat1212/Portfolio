@@ -2,14 +2,13 @@ import Section, { Chapter, Column, Graphic, Heading } from "@/components/section
 import CaseStudyPage from "@/components/studies/CaseStudyPage";
 import { STUDY_EXPLORATIONS } from "@/data/CASE_STUDIES";
 import { EXPLORATIONS_IMGS, EXPLORATIONS_IMG_GROUPS, EXPLORATIONS_ORDER } from "@/data/EXPLORATIONS_IMGS";
+import { play, stack } from "@/data/ICONS";
 import { IMAGE_TYPES, VIDEO_TYPES, ensureArray } from "@/scripts/GlobalUtilities";
 import { useEffect, useMemo, useState } from "react";
-
 
 // TODO: add icons for videos and groups of images to explorations page listings
 // TODO: create custom thumbnails and add them with thumbnail:true for a couple of the videos and swipe posts
 // TODO: thats it, thats all for explorations!!
-
 
 function Explorations({ pop }) {
   const study = STUDY_EXPLORATIONS;
@@ -31,7 +30,6 @@ function Explorations({ pop }) {
     <>
       <CaseStudyPage id={study.id} study={study}>
         {orderedDisciplines.map((discipline) => {
-
           // const orderedItems = useOrderedItems(GALLERY_CONTENT, discipline.name, EXPLORATIONS_ORDER);
           const disciplineItems = orderedItems[discipline.name];
 
@@ -40,56 +38,13 @@ function Explorations({ pop }) {
               <Section id={`${discipline.name}--Section`} className="gallery--section" mainType="grid" background="none">
                 <Heading>{discipline.displayName}</Heading>
                 {...disciplineItems.map((item) => {
-
-
                   if (item.drawn) return;
                   item.drawn = true;
 
-                  var isGroup = item.imgs ? true : false;
-
-                  item.type = (function() {
-                    if (isGroup) {
-                      const thumbnailImg = item.imgs.find((img) => img.thumbnail === true);
-                      return thumbnailImg ? thumbnailImg.type : item.imgs[0].type;
-                    } else {
-                      return item.type;
-                    }
-                  })();
-                  
-                  item.type = item.type.toLowerCase();
-                  // refers to the type of the first image, not necessarily the type of what the user sees upon clicking
-                  var type = IMAGE_TYPES.includes(item.type) ? "image" : "video";
-
-                  // var thumb = (function() {
-                  //   if (!isGroup) {
-                  //     return item;
-                  //   } else {
-                  //     const thumbnailImg = item.imgs.find((img) => img.thumbnail === true);
-                  //     return thumbnailImg || item.imgs[0];
-                  //   }
-                  // })();
-
-                  // var img;
-                  // if (isGroup) {
-                  //   for (var i = 0; i < item.imgs.length; i++) {
-                  //     if (!item.imgs[i].hidden) {
-                  //       img = item.imgs[i];
-                  //       break;
-                  //     }
-                  //   }
-                  // }
-                  // img = img || item;
-                  
-                  
-
-                  const {isVideo, isStack, img, thumb} = getMediaDetails({isGroup, type, item}, {onlyFirst: true});
-
-
-
+                  const { isGroup, type, isVideo, isStack, img, thumb } = getMediaDetails({ item }, { onlyFirst: true });
 
                   return (
                     <Column>
-
                       <Graphic
                         className="gallery--graphic"
                         type={type}
@@ -97,14 +52,16 @@ function Explorations({ pop }) {
                         // {...popup}
                         gallery={img}
                         pop={pop}
-                      /> 
+                      />
 
-                      <div className="gallery--icons">
-                        {isStack ? "stack" : "single"}
-                      </div>
-                                          
-
-
+                      {(isVideo || isStack) && (
+                        <>
+                          <div className="gallery--icons">
+                            {isVideo && <Graphic type="mask" img={play} className="gallery--icon" />}
+                            {isStack && <Graphic type="mask" img={stack} className="gallery--icon" />}
+                          </div>
+                        </>
+                      )}
                     </Column>
                   );
                 })}
@@ -194,6 +151,19 @@ function useOrderedItems(items, disciplines, explorationsOrder) {
     }
   }, [items, disciplines, explorationsOrder]);
 }
+
+function getIsGroup(item) {
+  return item.imgs ? true : false;
+}
+
+function setItemType(item, isGroup) {
+  if (isGroup) {
+    const thumbnailImg = item.imgs.find((img) => img.thumbnail === true);
+    item.type = thumbnailImg ? thumbnailImg.type : item.imgs[0].type;
+  }
+  item.type = item.type.toLowerCase();
+}
+
 function getThumbnail(item, isGroup) {
   if (!isGroup) {
     return item;
@@ -215,7 +185,7 @@ function getImg(item, isGroup) {
 }
 
 function getIsVideo(isGroup, type, item, options) {
-  if (!isGroup && type === 'video') {
+  if (!isGroup && type === "video") {
     return true;
   }
   if (isGroup) {
@@ -238,14 +208,21 @@ function getIsStack(isGroup, item) {
   return false;
 }
 
-function getMediaDetails({ isGroup, type, item }, options = { onlyFirst: false }) {
+function getMediaType(item) {
+  return IMAGE_TYPES.includes(item.type) ? "image" : "video";
+}
+
+function getMediaDetails({ item }, options = { onlyFirst: false }) {
+  const isGroup = getIsGroup(item);
+  setItemType(item, isGroup);
+
+  const type = getMediaType(item);
   const isVideo = getIsVideo(isGroup, type, item, options);
   const isStack = getIsStack(isGroup, item);
   const thumb = getThumbnail(item, isGroup);
   const img = getImg(item, isGroup);
 
-  return { isVideo, isStack, img, thumb };
+  return { isGroup, type, isVideo, isStack, img, thumb };
 }
-
 
 export default Explorations;
