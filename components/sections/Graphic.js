@@ -190,6 +190,9 @@ function Graphic({
     };
   }
 
+
+  
+
   effect = effect ? effect : false;
 
   var allClasses = `section--graphic graphic ${backgroundClasses} ${className} ${buttonClasses} ${lightbox ? "graphic__lightbox" : ""} ${gallery ? "graphic__gallery" : ""}`;
@@ -251,7 +254,7 @@ function Graphic({
 
   return (
     <>
-      {isImg && (
+      {isImg  && (
         <div
           className={`graphic--img ${allClasses}`}
           style={{

@@ -45,10 +45,19 @@ function Explorations({ pop }) {
                   if (item.drawn) return;
                   item.drawn = true;
 
+                  console.log(disciplineItems.filter((item) => item.name === "discog_calc"));
+
                   var isGroup = item.imgs ? true : false;
 
-                  if (isGroup) item.type = item.imgs[0].type;
-
+                  item.type = (function() {
+                    if (isGroup) {
+                      const thumbnailImg = item.imgs.find((img) => img.thumbnail === true);
+                      return thumbnailImg ? thumbnailImg.type : item.imgs[0].type;
+                    } else {
+                      return item.type;
+                    }
+                  })();
+                  
                   item.type = item.type.toLowerCase();
                   var type = IMAGE_TYPES.includes(item.type) ? "image" : "video";
 
@@ -61,8 +70,17 @@ function Explorations({ pop }) {
                     }
                   })();
 
-                  var img = isGroup ? item.imgs[0] : item;
-
+                  var img;
+                  if (isGroup) {
+                    for (var i = 0; i < item.imgs.length; i++) {
+                      if (!item.imgs[i].hidden) {
+                        img = item.imgs[i];
+                        break;
+                      }
+                    }
+                  }
+                  img = img || item;
+                  
 
                   return (
                     <Column>

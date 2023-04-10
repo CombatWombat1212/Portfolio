@@ -96,9 +96,23 @@ const EXPLORATIONS_IMGS = processImages(
       //   group: '',
       //   index: 0,
     },
-    to_alleyway: {
-      name: "to_alleyway",
-      src: "./assets/images/case_studies/explorations/3d_design/to_alleyway.mp4",
+    to_alleyway_thumbnail: {
+      name: "to_alleyway_thumbnail",
+      src: "./assets/images/case_studies/explorations/3d_design/to_alleyway/to_alleyway_thumbnail.png",
+      alt: "Thumbnail for a video of a garage door opening to reveal a pair of eyes underneath",
+      width: 1920,
+      height: 1200,
+      disciplines: ["3D Design", "Motion Graphics"],
+      tools: ["Blender", "Meshroom", "Photoshop"],
+      title: "Grafitti Alley",
+      description: "Photogrammetry study of a grafitti covered alleyway in downtown Toronto.",
+      group: "to_alleyway",
+      hidden:true,
+      thumbnail:true,
+    },
+    to_alleyway_video: {
+      name: "to_alleyway_video",
+      src: "./assets/images/case_studies/explorations/3d_design/to_alleyway/to_alleyway_video.mp4",
       alt: "An animated video of a garage door opening to reveal a pair of eyes underneath",
       width: 1920,
       height: 1200,
@@ -106,10 +120,13 @@ const EXPLORATIONS_IMGS = processImages(
       tools: ["Blender", "Meshroom", "Photoshop"],
       title: "Grafitti Alley",
       description: "Photogrammetry study of a grafitti covered alleyway in downtown Toronto.",
-      //   study: '',
-      //   group: '',
-      //   index: 0,
+      group: "to_alleyway",
     },
+  
+
+
+
+
     jabbar_and_co_foundation_01: {
       name: "jabbar_and_co_foundation_01",
       src: "./assets/images/case_studies/explorations/3d_design/jabbar_and_co/jabbar_and_co_foundation_01.png",
@@ -925,7 +942,6 @@ const EXPLORATIONS_IMGS = processImages(
       ],
       group: "discog_calc",
       project: "Discography Calculator",
-      //   index: 0,
     },
     discog_calc_video_02_example_simz: {
       name: "discog_calc_video_02_example_simz",
@@ -1012,9 +1028,44 @@ const EXPLORATIONS_IMGS = processImages(
       project: "Discography Calculator",
       //   index: 0,
     },
-    killer_mike_motion_graphic: {
-      name: "killer_mike_motion_graphic",
-      src: "./assets/images/case_studies/explorations/motion_graphics/killer_mike_motion_graphic.mp4",
+    discog_calc_thumbnail: {
+      name: "discog_calc_thumbnail",
+      src: "./assets/images/case_studies/explorations/frontend/discog_calc/discog_calc_thumbnail.png",
+      alt: "A thumbnail image of a screen-recorded video showing the Discogs-API powered website in action, searching for BROCKHAMPTON and returning their discography",
+      width: 1920,
+      height: 1080,
+      disciplines: ["Frontend Development", "UX Design", "UI Design"],
+      tools: ["HTML/CSS/JS", "API", "Adobe XD"],
+      group: "discog_calc",
+      project: "Discography Calculator",
+      thumbnail:true,
+      hidden: true,
+    },
+
+    
+
+    killer_mike_motion_graphic_thumbnail_01: {
+      name: "killer_mike_motion_graphic_thumbnail_01",
+      src: "./assets/images/case_studies/explorations/motion_graphics/killer_mike/killer_mike_motion_graphic_thumbnail_01.png",
+      alt: "Thumbnail image for a motion graphic for a soundbite from Killer Mike on the Stephen Colbert show",
+      width: 1920,
+      height: 1080,        
+      group: 'killer_mike',
+      hidden:true,
+      thumbnail:true,
+    },
+    killer_mike_motion_graphic_thumbnail_02: {
+      name: "killer_mike_motion_graphic_thumbnail_02",
+      src: "./assets/images/case_studies/explorations/motion_graphics/killer_mike/killer_mike_motion_graphic_thumbnail_02.png",
+      alt: "Thumbnail image for a motion graphic for a soundbite from Killer Mike on the Stephen Colbert show",
+      width: 1920,
+      height: 1080,        
+      group: 'killer_mike',
+      hidden:true,
+    },
+    killer_mike_motion_graphic_video: {
+      name: "killer_mike_motion_graphic_video",
+      src: "./assets/images/case_studies/explorations/motion_graphics/killer_mike/killer_mike_motion_graphic_video.mp4",
       alt: "A kinetic typography motion graphic for a soundbite from Killer Mike on the Stephen Colbert show",
       width: 1920,
       height: 1080,
@@ -1026,37 +1077,21 @@ const EXPLORATIONS_IMGS = processImages(
         "I refined the visual style through iteration, storyboarding, and embracing feedback. Each shot features engaging graphics that complement the tone and words spoken.",
         "This project pushed my skills in After Effects at every turn.  Thankfully, my passion for the subject and medium kept me motivated throughout.",
       ],
-        group: 'km',
-      //   index: 0,
+        group: 'killer_mike',
     },
-
-    killer_mike_motion_graphic1: {
-      name: "killer_mike_motion_graphic1",
-      src: "./assets/images/case_studies/explorations/motion_graphics/killer_mike_motion_graphic.mp4",
-      alt: "A kinetic typography motion graphic for a soundbite from Killer Mike on the Stephen Colbert show",
+    makeright_presentation_thumbnail: {
+      name: "makeright_presentation_thumbnail",
+      src: "./assets/images/case_studies/explorations/motion_graphics/makeright_presentation/makeright_presentation_thumbnail.png",
+      alt: "Thumbnail for a narrated, and scored motion graphic presentation for a fictional company, MakeRight, created for my undergrad thesis",
       width: 1920,
       height: 1080,
-      disciplines: ["Motion Graphics"],
-      tools: ["After Effects", "Adobe Illustrator", "Photoshop"],
-      title: "Kinetic Typography",
-      description: [
-        "I set out to create a kinetic typography animation that enhanced an audio clip without overshadowing its core message.",
-        "I refined the visual style through iteration, storyboarding, and embracing feedback. Each shot features engaging graphics that complement the tone and words spoken.",
-        "This project pushed my skills in After Effects at every turn.  Thankfully, my passion for the subject and medium kept me motivated throughout.",
-      ],
-        group: 'km',
-        hidden:true,
-      //   index: 0,
+      group: "makeright_presentation",      
+      hidden:true,
+      thumbnail:true,
     },
-
-
-
-
-
-
     makeright_presentation_video: {
       name: "makeright_presentation_video",
-      src: "./assets/images/case_studies/explorations/motion_graphics/makeright_presentation_video.mp4",
+      src: "./assets/images/case_studies/explorations/motion_graphics/makeright_presentation/makeright_presentation_video.mp4",
       alt: "A narrated, and scored motion graphic presentation for a fictional company, MakeRight, created for my undergrad thesis",
       width: 1920,
       height: 1080,
@@ -1069,9 +1104,17 @@ const EXPLORATIONS_IMGS = processImages(
         "Check out my MakeRight case study for an in-depth look at the design process, and final product.",
       ],
       study: "makeright",
-      //   group: '',
-      //   index: 0,
+      group: "makeright_presentation",      
     },
+  
+
+    // makeright_presentation_video: {
+    //   name: "makeright_presentation_video",
+    //   src: "./assets/images/case_studies/explorations/motion_graphics/makeright_presentation_video.mp4",
+    // },
+
+
+
     // prepr_project_leadership: {
     //   name: "prepr_project_leadership",
     //   src: "./assets/images/case_studies/explorations/motion_graphics/prepr_project_leadership.mp4",
@@ -1628,7 +1671,7 @@ const EXPLORATIONS_ORDER = {
   },
   "Motion Graphics": {
     projects: [
-      "makeright_presentation_video",
+      "makeright_presentation",
       "killer_mike_motion_graphic",
     ],
   },
