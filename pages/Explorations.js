@@ -6,10 +6,6 @@ import { play, stack } from "@/data/ICONS";
 import { IMAGE_TYPES, VIDEO_TYPES, ensureArray } from "@/scripts/GlobalUtilities";
 import { useEffect, useMemo, useState } from "react";
 
-// TODO: add icons for videos and groups of images to explorations page listings
-// TODO: create custom thumbnails and add them with thumbnail:true for a couple of the videos and swipe posts
-// TODO: thats it, thats all for explorations!!
-
 function Explorations({ pop }) {
   const study = STUDY_EXPLORATIONS;
 
