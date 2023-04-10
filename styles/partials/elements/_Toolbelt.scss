@@ -1,0 +1,37 @@
+.toolbelt {
+  @include flex-col;
+  width: 100%;
+
+  --toolbelt-pad: 1.75rem;
+
+  &--inner {
+    @include b-rad;
+    background-color: $col-background_darker;
+}
+
+&--section {
+    @include flex-row;
+   padding: (var(--toolbelt-pad));
+  }
+
+  &--body {
+    margin-top: 0 !important;
+  }
+
+  &--list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 1.5rem;
+  }
+
+  &--divider {
+    height: 0.25rem;
+    width: 100%;
+    background-color: $col-background;
+  }
+}
+
+
+

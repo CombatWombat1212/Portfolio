@@ -4319,6 +4319,71 @@ body {
   background-color: #F3F3F7 !important;
 }
 
+.focus {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.focus--head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.focus--card {
+  border-radius: var(--b-rad);
+  -webkit-border-radius: var(--b-rad);
+  -moz-border-radius: var(--b-rad);
+  -khtml-border-radius: var(--b-rad);
+  background-color: #E9E9F2;
+  padding: 1.75rem;
+  margin-top: 0.75rem;
+}
+
+.focus--description {
+  margin-top: 0.55rem;
+}
+
+.toolbelt {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  --toolbelt-pad: 1.75rem;
+}
+
+.toolbelt--inner {
+  border-radius: var(--b-rad);
+  -webkit-border-radius: var(--b-rad);
+  -moz-border-radius: var(--b-rad);
+  -khtml-border-radius: var(--b-rad);
+  background-color: #E9E9F2;
+}
+
+.toolbelt--section {
+  display: flex;
+  flex-direction: row;
+  padding: var(--toolbelt-pad);
+}
+
+.toolbelt--body {
+  margin-top: 0 !important;
+}
+
+.toolbelt--list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.toolbelt--divider {
+  height: 0.25rem;
+  width: 100%;
+  background-color: #F3F3F7;
+}
+
 .graph--wrapper {
   background-color: #F3F3F7;
   height: var(--graph-height);
@@ -6362,5 +6427,11 @@ body {
 
 #Explorations .section--main {
   grid-template-columns: repeat(3, 1fr);
+}
+
+#About #Intro--Hero .intro--heading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 /*# sourceMappingURL=style.css.map */

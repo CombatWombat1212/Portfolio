@@ -1,0 +1,26 @@
+#About{
+
+
+
+    #Intro{
+
+        &--Hero{
+
+            .section{
+            }
+
+
+            .intro{
+                &--heading{
+                    @include flex-col-center;
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+}
