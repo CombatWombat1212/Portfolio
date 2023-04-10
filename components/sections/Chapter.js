@@ -39,12 +39,40 @@ function Chapter({ children, type, wrapperClassName, background, id, name, margi
     return child;
   });
     
+
+
   newChildren = newChildren.map((child, i) => {
+    if (newChildren.length === 1) return child; // Do not add wrapperClassName if there's only one child
     if (i != newChildren.length - 1) return child;
     if (!child.props.background || child.props.background != "none") return child;
     const wrapperClassName = child.props.wrapperClassName ? `${child.props.wrapperClassName} pb-section-gap` : 'pb-section-gap';
     return React.cloneElement(child, { wrapperClassName });
   });
+
+  // Old
+  // newChildren = newChildren.map((child, i) => {
+  //   if (i != newChildren.length - 1) return child;
+  //   if (!child.props.background || child.props.background != "none") return child;
+  //   const wrapperClassName = child.props.wrapperClassName ? `${child.props.wrapperClassName} pb-section-gap` : 'pb-section-gap';
+  //   return React.cloneElement(child, { wrapperClassName });
+  // });
+
+
+  // bug testing
+  // newChildren = newChildren.map((child, i) => {
+  //   if (i != newChildren.length - 1) {
+  //     console.log(`Not last child. Returning ${child}`);
+  //     return child;
+  //   }
+  //   if (!child.props.background || child.props.background != "none") {
+  //     console.log(`Last child doesn't meet criteria. Returning ${child}`);
+  //     return child;
+  //   }
+  //   const wrapperClassName = child.props.wrapperClassName ? `${child.props.wrapperClassName} pb-section-gap` : 'pb-section-gap';
+  //   console.log(`wrapperClassName for last child: ${wrapperClassName}`);
+  //   return React.cloneElement(child, { wrapperClassName });
+  // });
+  
     
 
   return (

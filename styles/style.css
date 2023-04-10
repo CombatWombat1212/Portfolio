@@ -6334,10 +6334,6 @@ body {
   margin-bottom: 4.5rem;
 }
 
-#Explorations .section--wrapper.pb-section-gap {
-  padding-bottom: 0;
-}
-
 #Explorations .section--main {
   grid-template-columns: repeat(3, 1fr);
 }

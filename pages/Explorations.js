@@ -37,15 +37,13 @@ function Explorations({ pop }) {
 
           return (
             <Chapter key={discipline.name} id={discipline.name} name={discipline.name}>
-              <Section id={`${discipline.name}--Section`} className="gallery--section" mainType="grid">
+              <Section id={`${discipline.name}--Section`} className="gallery--section" mainType="grid" background="none">
                 <Heading>{discipline.displayName}</Heading>
                 {...disciplineItems.map((item) => {
 
 
                   if (item.drawn) return;
                   item.drawn = true;
-
-                  console.log(disciplineItems.filter((item) => item.name === "discog_calc"));
 
                   var isGroup = item.imgs ? true : false;
 
