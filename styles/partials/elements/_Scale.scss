@@ -33,7 +33,9 @@
       width: 100%;
       height: var(--scale-line-width);
       @include b-rad;
-      background-color: var(--scale-color);
+      // background-color: var(--scale-color);
+      background-color: $col-primary;
+
       cursor: pointer;
       z-index: 1;
       outline: none;
@@ -43,6 +45,7 @@
         width: var(--scale-line-width);
         height: var(--scale-handle-height);
         background-color: var(--scale-color);
+
         @include b-rad;
   
         @include hover(".scale--slider", "&") {
@@ -55,7 +58,8 @@
     &--end {
       width: var(--scale-line-width);
       height: var(--scale-end-height);
-      background-color: var(--scale-color);
+      // background-color: var(--scale-color);
+      background-color: $col-primary;
       @include b-rad;
       @include my-auto;
       z-index: 0;

@@ -4,7 +4,7 @@ import { STUDY_EXPLORATIONS } from "@/data/CASE_STUDIES";
 import { EXPLORATIONS_IMGS, EXPLORATIONS_IMG_GROUPS, EXPLORATIONS_ORDER } from "@/data/EXPLORATIONS_IMGS";
 import { play, stack } from "@/data/ICONS";
 import { IMAGE_TYPES, VIDEO_TYPES, ensureArray } from "@/scripts/GlobalUtilities";
-import { useEffect, useMemo, useState } from "react";
+import {useMemo } from "react";
 
 function Explorations({ pop }) {
   const study = STUDY_EXPLORATIONS;

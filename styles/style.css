@@ -2909,7 +2909,7 @@ body {
   -webkit-border-radius: var(--b-rad);
   -moz-border-radius: var(--b-rad);
   -khtml-border-radius: var(--b-rad);
-  background-color: var(--scale-color);
+  background-color: #074391;
   cursor: pointer;
   z-index: 1;
   outline: none;
@@ -2958,7 +2958,7 @@ body {
 .scale--end {
   width: var(--scale-line-width);
   height: var(--scale-end-height);
-  background-color: var(--scale-color);
+  background-color: #074391;
   border-radius: var(--b-rad);
   -webkit-border-radius: var(--b-rad);
   -moz-border-radius: var(--b-rad);
