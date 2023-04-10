@@ -57,31 +57,39 @@ function Explorations({ pop }) {
                   })();
                   
                   item.type = item.type.toLowerCase();
+                  // refers to the type of the first image, not necessarily the type of what the user sees upon clicking
                   var type = IMAGE_TYPES.includes(item.type) ? "image" : "video";
 
-                  var thumb = (function() {
-                    if (!isGroup) {
-                      return item;
-                    } else {
-                      const thumbnailImg = item.imgs.find((img) => img.thumbnail === true);
-                      return thumbnailImg || item.imgs[0];
-                    }
-                  })();
+                  // var thumb = (function() {
+                  //   if (!isGroup) {
+                  //     return item;
+                  //   } else {
+                  //     const thumbnailImg = item.imgs.find((img) => img.thumbnail === true);
+                  //     return thumbnailImg || item.imgs[0];
+                  //   }
+                  // })();
 
-                  var img;
-                  if (isGroup) {
-                    for (var i = 0; i < item.imgs.length; i++) {
-                      if (!item.imgs[i].hidden) {
-                        img = item.imgs[i];
-                        break;
-                      }
-                    }
-                  }
-                  img = img || item;
+                  // var img;
+                  // if (isGroup) {
+                  //   for (var i = 0; i < item.imgs.length; i++) {
+                  //     if (!item.imgs[i].hidden) {
+                  //       img = item.imgs[i];
+                  //       break;
+                  //     }
+                  //   }
+                  // }
+                  // img = img || item;
                   
+                  
+
+                  const {isVideo, isStack, img, thumb} = getMediaDetails({isGroup, type, item}, {onlyFirst: true});
+
+
+
 
                   return (
                     <Column>
+
                       <Graphic
                         className="gallery--graphic"
                         type={type}
@@ -89,7 +97,14 @@ function Explorations({ pop }) {
                         // {...popup}
                         gallery={img}
                         pop={pop}
-                      />
+                      /> 
+
+                      <div className="gallery--icons">
+                        {isStack ? "stack" : "single"}
+                      </div>
+                                          
+
+
                     </Column>
                   );
                 })}
@@ -179,5 +194,58 @@ function useOrderedItems(items, disciplines, explorationsOrder) {
     }
   }, [items, disciplines, explorationsOrder]);
 }
+function getThumbnail(item, isGroup) {
+  if (!isGroup) {
+    return item;
+  } else {
+    const thumbnailImg = item.imgs.find((img) => img.thumbnail === true);
+    return thumbnailImg || item.imgs[0];
+  }
+}
+
+function getImg(item, isGroup) {
+  if (isGroup) {
+    for (let i = 0; i < item.imgs.length; i++) {
+      if (!item.imgs[i].hidden) {
+        return item.imgs[i];
+      }
+    }
+  }
+  return item;
+}
+
+function getIsVideo(isGroup, type, item, options) {
+  if (!isGroup && type === 'video') {
+    return true;
+  }
+  if (isGroup) {
+    if (options.onlyFirst) {
+      const firstNonHiddenImg = item.imgs.find((img) => !img.hidden);
+      return firstNonHiddenImg && VIDEO_TYPES.includes(firstNonHiddenImg.type.toLowerCase());
+    } else {
+      const videoItem = item.imgs.find((img) => !img.hidden && VIDEO_TYPES.includes(img.type.toLowerCase()));
+      return videoItem !== undefined;
+    }
+  }
+  return false;
+}
+
+function getIsStack(isGroup, item) {
+  if (isGroup) {
+    const visibleImgs = item.imgs.filter((img) => !img.hidden);
+    return visibleImgs.length > 1;
+  }
+  return false;
+}
+
+function getMediaDetails({ isGroup, type, item }, options = { onlyFirst: false }) {
+  const isVideo = getIsVideo(isGroup, type, item, options);
+  const isStack = getIsStack(isGroup, item);
+  const thumb = getThumbnail(item, isGroup);
+  const img = getImg(item, isGroup);
+
+  return { isVideo, isStack, img, thumb };
+}
+
 
 export default Explorations;

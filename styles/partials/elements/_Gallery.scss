@@ -4,6 +4,8 @@
 
 
 
+
+
     &--graphic{
         aspect-ratio: 1/1;
         overflow:hidden;
@@ -15,6 +17,19 @@
             width:101%!important;
             height:101%!important;
         }
+    }
+
+
+
+    &--icons{
+        --gallery-icon-pad: 1rem;
+        --gallery-icon-pad_negative: calc(var(--gallery-icon-pad) * -1);
+    
+        position:absolute;
+        background-color:#000;
+        bottom: var(--gallery-icon-pad);
+        left: var(--gallery-icon-pad);
+        z-index:2;
     }
 
 

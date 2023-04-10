@@ -4293,6 +4293,16 @@ body {
   height: 101% !important;
 }
 
+.gallery--icons {
+  --gallery-icon-pad: 1rem;
+  --gallery-icon-pad_negative: calc(var(--gallery-icon-pad) * -1);
+  position: absolute;
+  background-color: #000;
+  bottom: var(--gallery-icon-pad);
+  left: var(--gallery-icon-pad);
+  z-index: 2;
+}
+
 .graph--wrapper {
   background-color: #F3F3F7;
   height: var(--graph-height);

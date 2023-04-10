@@ -337,6 +337,7 @@ function Graphic({
             <source src={`.${img.src}`} type={`video/${img.type}`}></source>
           </video>
 
+
           {typeof autoplay === "string" && autoplay.includes("hover") && (
             <video className={`${innerClassName} video--background`} alt={img.alt} width={width} height={height}>
               <source src={`.${img.src}`} type={`video/${img.type}`}></source>
