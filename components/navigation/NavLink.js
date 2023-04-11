@@ -33,11 +33,6 @@ function Dropdown({ item }) {
       on: "nav--drop-item__active",
       off: "nav--drop-item__inactive",
     },
-    // {
-    //   elems: "parent",
-    //   on: "nav--dropdown__active",
-    //   off: "nav--dropdown__inactive",
-    // },
   ]);
   const dropContainerHov = useHoverAndFocus(dropContainerRef, [
     {
@@ -45,11 +40,6 @@ function Dropdown({ item }) {
       on: "nav--drop-item__active",
       off: "nav--drop-item__inactive",
     },
-    // {
-    //   elems: "current",
-    //   on: "nav--dropdown__active",
-    //   off: "nav--dropdown__inactive",
-    // },
   ]);
 
   const drop = {
