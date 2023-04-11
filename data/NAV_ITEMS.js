@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import CASE_STUDIES from "./CASE_STUDIES";
 
 var NAV_ITEMS = [
   {
@@ -14,6 +15,7 @@ var NAV_ITEMS = [
     link: "/",
     type: "Link",
     ariaLabel: "View case studies",
+    dropdown: CASE_STUDIES.filter((item) => item.id !== "Explorations"),
   },
   {
     name: "Explorations",

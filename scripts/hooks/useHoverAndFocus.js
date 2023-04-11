@@ -8,8 +8,8 @@ function useHoverAndFocus(refConfig, classConfig = {}, overrideConfig = {}) {
     const applyClasses = (target) => { 
       if(Object.keys(classConfig).length === 0) return;
 
-      const onClass = (typeof overrideConfig === 'object' && overrideConfig.on) || overrideConfig;
-      const offClass = (typeof overrideConfig === 'object' && overrideConfig.off) || null;
+      const onClass = (typeof overrideConfig === 'object' && overrideConfig.on) || (typeof overrideConfig === 'string' && overrideConfig) || classConfig.on || null;
+      const offClass = (typeof overrideConfig === 'object' && overrideConfig.off) || (typeof overrideConfig === 'string' && null ) || classConfig.off || null;
 
       if (state) {
         if (offClass) {
@@ -41,7 +41,9 @@ function useHoverAndFocus(refConfig, classConfig = {}, overrideConfig = {}) {
     if (config.elems) {
       if (config.elems === 'current') {
         applyClasses(element);
-      } else {
+      } else if (config.elems === 'parent') {
+        applyClasses(parentElement);
+      }else {
         const targets = parentElement.querySelectorAll(config.elems);
         targets.forEach((target) => applyClasses(target));
       }

@@ -1,12 +1,8 @@
-
-:root{
+:root {
   --nav-height: 3.75rem;
 
   scroll-padding-top: var(--nav-height);
-  
 }
-
-
 
 .nav {
   --nav-color: #{$col-primary};
@@ -24,10 +20,10 @@
     @include flex-row-between;
     height: 100%;
     align-items: center;
-}
+  }
 
-&--group {
-      @include flex-row-between;
+  &--group {
+    @include flex-row-between;
   }
 
   &--logo {
@@ -54,31 +50,71 @@
 
     height: var(--font-size);
     @include flex-col-center;
-    
+
     --nav-button-pad-y: calc((var(--nav-height) - var(--font-size)) / 2);
     --nav-button-pad-x: calc(var(--nav-button-pad-y) * var(--nav-button-padding-multiplier));
     @include pad-y(var(--nav-button-pad-y));
     @include pad-x(var(--nav-button-pad-x));
 
-    
-
     & + & {
       margin-left: Max(calc(var(--nav-button-spacing) - (var(--nav-button-pad-x) * 2)), 0rem);
     }
 
-    &:first-child{
-        margin-left: calc(var(--nav-button-pad-x) * -1);
+    &:first-child {
+      margin-left: calc(var(--nav-button-pad-x) * -1);
     }
 
-    &:last-child{
-        margin-right: calc(var(--nav-button-pad-x) * -1);
+    &:last-child {
+      margin-right: calc(var(--nav-button-pad-x) * -1);
     }
-
 
     @include hover {
       background-color: $col-background_darkest;
       color: var(--nav-color);
     }
 
+    z-index: 1;
+
+    &__drop {
+      cursor:pointer;
+      @include no-select;
+      @include hover {
+        background-color: $col-primary_hovered;
+        color: $col-background;
+      }
+    }
+  }
+
+  &--dropdown {
+    position: absolute;
+    margin-top: var(--nav-height);
+    @include flex-col;
+    // z-index: -1;
+    transition: 0.5s;
+
+    &__active {
+      margin-top: var(--nav-height);
+    }
+
+    &__inactive {
+      margin-top: calc(((var(--dropdown-items-total) - 1) * var(--nav-height)) * -1);
+    }
+  }
+
+  &--drop-item {
+    z-index: 0;
+    margin-left: calc(var(--nav-button-pad-x) * -1) !important;
+    white-space: nowrap;
+    top: 0;
+    width: 100%;
+
+    &__active {
+      margin-top: 0;
+    }
+
+    &__inactive {
+      pointer-events: none;
+      transition-delay: 0s;
+    }
   }
 }
