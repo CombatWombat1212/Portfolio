@@ -1,5 +1,5 @@
-/** @type {import('next').NextConfig} */
-const withVideos = require('next-videos')
+const path = require('path');
+const withVideos = require('next-videos');
 
 const nextConfig = {
   reactStrictMode: true,
@@ -19,6 +19,14 @@ const nextConfig = {
   //   ];
   // },
 
-}
+  webpack(config) {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname, './'),
+    };
 
-module.exports = withVideos(nextConfig)
+    return config;
+  },
+};
+
+module.exports = withVideos(nextConfig);
