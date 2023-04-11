@@ -7,7 +7,7 @@
 
     &--head{
         @include flex-row-between;
-        align-items: end;
+        align-items: flex-end;
     }
 
 
