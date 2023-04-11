@@ -1,45 +1,47 @@
 #About {
-  #Intro {
-    &--Hero {
-      @include pad-y(calc(var(--section-gap) * 0.85));
-
-      .section {
-      }
-
-      .intro {
-        &--heading {
-          @include flex-col-center;
-        }
-      }
-    }
-
-    &--Quote {
-      .section {
-        &--title {
-          margin-top: 0.25rem !important;
-        }
-      }
-    }
-
-    &--Interests {
-      @include section-mask-color($col-tertiary);
-
-      .section {
-        &--graphic {
-          --img-panel-height: 10rem;
-        }
-
-        &--main {
-          grid-template-columns: repeat(4, 1fr);
-        }
-      }
-    }
-
-    &--WhatIm {
-        @include pad-y(calc(var(--section-gap) * 0.75));
-    }
+    #Intro {
+      &--Hero {
+        @include pad-y(calc(var(--section-gap) * 0.85));
   
-
-
+        .section {
+        }
+  
+        .intro {
+          &--heading {
+            @include flex-col-center;
+          }
+        }
+      }
+  
+      &--Quote {
+        .section {
+          &--heading {
+            order:0;
+          }
+          &--title {
+            margin-top: 0.25rem !important;
+            order: 1;
+          }
+        }
+      }
+  
+      &--Interests {
+        @include section-mask-color($col-tertiary);
+  
+        .section {
+          &--graphic {
+            --img-panel-height: 10rem;
+          }
+  
+          &--main {
+            grid-template-columns: repeat(4, 1fr);
+          }
+        }
+      }
+  
+      &--WhatIm {
+        @include pad-y(calc(var(--section-gap) * 0.75));
+      }
+    }
   }
-}
+  

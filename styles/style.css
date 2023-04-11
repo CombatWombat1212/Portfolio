@@ -6634,8 +6634,13 @@ body {
   justify-content: center;
 }
 
+#About #Intro--Quote .section--heading {
+  order: 0;
+}
+
 #About #Intro--Quote .section--title {
   margin-top: 0.25rem !important;
+  order: 1;
 }
 
 #About #Intro--Interests .section--graphic .mask {

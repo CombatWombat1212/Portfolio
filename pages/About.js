@@ -5,6 +5,7 @@ import CaseStudyPage from "@/components/studies/CaseStudyPage";
 import { ABOUT_IMGS } from "@/data/ABOUT_IMGS";
 import { STUDY_EXPLORATIONS } from "@/data/CASE_STUDIES";
 import MAKERIGHT_IMGS from "@/data/MAKERIGHT_IMGS";
+import { Fragment } from "react";
 
 const MULTIDISCIPLINARY = [
   {
@@ -153,7 +154,7 @@ function About() {
 
             <div className="toolbelt--inner">
               {MULTIDISCIPLINARY.map(({ name, items }, index) => (
-                <>
+                <Fragment key={index}>
                   {index > 0 && <div className="toolbelt--divider"></div>}
                   <div className="toolbelt--section" key={name}>
                     <Heading type="h3" className="weight-med toolbelt--title col-4">
@@ -168,7 +169,7 @@ function About() {
                       </ul>
                     </div>
                   </div>
-                </>
+                </Fragment>
               ))}
             </div>
           </div>
@@ -236,6 +237,9 @@ function About() {
             with digital-world solutions.
           </Heading>
         </Section>
+
+
+        
       </Chapter>
     </div>
   );

@@ -16,16 +16,25 @@ function NavLink({ item }) {
   );
 }
 
+
+function useDropItems(length) {
+  const dropItems = Array.from({ length }, (_, i) => {
+    const ref = useRef(null);
+    const hovered = useHoverAndFocus(ref);
+    return { ref, hovered };
+  });
+
+  return dropItems;
+}
+
+
 function Dropdown({ item }) {
   const dropBtnRef = useRef(null);
   const dropContainerRef = useRef(null);
   const [active, setActive] = useState(false);
 
-  const dropItems = Array.from({ length: item.dropdown.length }, () => {
-    const ref = useRef(null);
-    const hovered = useHoverAndFocus(ref);
-    return { ref, hovered };
-  });
+  const dropItems = useDropItems(item.dropdown.length);
+
 
   const dropBtnHov = useHoverAndFocus({ hovered: dropBtnRef, parent: dropContainerRef }, [
     {

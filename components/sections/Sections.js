@@ -89,10 +89,9 @@ function SectionBody({ children, sec }) {
         <>
           {has.text && (
             <div className={`section--copy ${classes.copy}`}>
-              {conditionalOrder(attrs.titled === "below", [
-                chil.title && <>{chil.title}</>, 
-                chil.heading && <>{chil.heading}</>
-              ])}
+              
+                {chil.title && <>{chil.title}</>}
+                {chil.heading && <>{chil.heading}</>}
               {chil.other && <>{chil.other}</>}
               {chil.description && <>{chil.description}</>}
             </div>

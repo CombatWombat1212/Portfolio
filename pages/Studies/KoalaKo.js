@@ -44,8 +44,14 @@ function KoalaKo({ pop, onReady }) {
   const colors = ["#07418d", "#a91055", "#0a6e4e", "#b56e05"];
 
   return (
+
     <CaseStudyPage id={study.id} study={study}>
+
+
       <Chapter id="Overview" name="Overview">
+
+
+        
         <Section id="Overview--Team" type="columns" titled mainClassName="mt-1 gap-5">
           <Title>The Team</Title>
           <Column>
@@ -100,15 +106,19 @@ function KoalaKo({ pop, onReady }) {
           </Column>
         </Section>
 
-        <Section id="Overview--Background" type="overview">
+        
+ <Section id="Overview--Background" type="overview">
           <Title>Background</Title>
-          <Heading>“Creativity is in crisis” - LEGO & AKQA</Heading>
-          <Description>
-            <p>International design agency AKQA hosts an annual innovation competition called ‘Future Lions’. Partnering with LEGO in 2021, their challenge targeted the growing problem of play being seen as a ‘nice to have.’ Rather than a critical part of a child’s development.</p>
+        <Heading>"Creativity is in crisis" - LEGO & AKQA</Heading>
+        <Description>
+            <p>International design agency AKQA hosts an annual innovation competition called 'Future Lions'. Partnering with LEGO in 2021, their challenge targeted the growing problem of play being seen as a 'nice to have.' Rather than a critical part of a child's development.</p>
           </Description>
 
           <Graphic type="mask" img={KOALAKO_IMGS.background_bulb} />
-        </Section>
+        </Section> 
+
+
+
 
         <Section id="Overview--Challenge" type="overview">
           <Title>Background</Title>
@@ -136,6 +146,9 @@ function KoalaKo({ pop, onReady }) {
           </Heading>
         </Section>
 
+
+
+
         <Section id="Overview--Client" type="columns" titled>
           <Title>Solution</Title>
           <Heading>
@@ -150,7 +163,9 @@ function KoalaKo({ pop, onReady }) {
             </Description>
             <Graphic type="image" className="b-rad" img={KOALAKO_IMGS.banner_intro} />
           </Column>
-        </Section>
+        </Section> 
+
+
 
         <Section id="Overview--Privacy" type="columns" background="tertiary">
           <Column className="solution--copy">
@@ -189,8 +204,16 @@ function KoalaKo({ pop, onReady }) {
         <Section id="Overview--Banner" background={KOALAKO_IMGS.banner_building}>
           <Heading>Building KoalaKo</Heading>
         </Section>
+
+
+
+        
       </Chapter>
 
+
+
+
+ 
       <Chapter name="Plan" id="Plan">
         <Section id="Plan--Gantt" className="flex-col">
           <Title>Project Plan</Title>
@@ -259,6 +282,8 @@ function KoalaKo({ pop, onReady }) {
           </Heading>
         </Section>
       </Chapter>
+
+
 
       <Chapter name="Develop" id="Develop">
         <Section id="Develop--Methods" mainType="grid" type="columns" background="background darker" titled line="method">
@@ -565,6 +590,7 @@ function KoalaKo({ pop, onReady }) {
         </Section>
       </Chapter>
 
+
       <Chapter name="Refine" id="Refine">
         <Section id="Refine--Stats" className="gap-6" background="background darker">
           <Column className="">
@@ -731,6 +757,11 @@ function KoalaKo({ pop, onReady }) {
         <Section id="Deliver--Closing" background={KOALAKO_IMGS.banner_closing} />
       </Chapter>
 
+
+
+
+
+
       <Chapter name="Closing" id="Closing">
         <Section id="Closing--Copy" type="columns" titled mainClassName="gap-6 mt-6">
           <Title>Areas Of Growth</Title>
@@ -738,7 +769,7 @@ function KoalaKo({ pop, onReady }) {
             Addressing security concerns, <br /> and improving the first impression
           </Heading>
           <Description className="text-col-2 text-gap-6">
-            <p>During testing, some users voiced concerns about personal information being saved in the app. Which, later tests proved we had solved by making child profile setup optional. These concerns could be further addressed by making the initial account setup optional as well. Currently, we require an email and password to store user data to an account. But, if we save data locally to the user’s device, an account wouldn’t be needed. Going forward, this ability to skip account setup will be an important addition. Creating lower friction by not requiring sign-up, and giving privacy concerned users greater flexibility. <div style={{'margin-bottom':'8rem'}}></div></p>
+            <p>During testing, some users voiced concerns about personal information being saved in the app. Which, later tests proved we had solved by making child profile setup optional. These concerns could be further addressed by making the initial account setup optional as well. Currently, we require an email and password to store user data to an account. But, if we save data locally to the user’s device, an account wouldn’t be needed. Going forward, this ability to skip account setup will be an important addition. Creating lower friction by not requiring sign-up, and giving privacy concerned users greater flexibility. <span style={{'margin-bottom':'8rem'}}></span></p>
             
             <p>Furthermore, the initial login page is a first-impression that can be better utilized to hook user attention. Prefacing the login screen, I plan to add a series of captioned graphics to convey the service’s value. This would be a more effective start to the experience, as it captures user attention, pushing them through the friction of getting started.</p>
           </Description>
@@ -760,7 +791,10 @@ function KoalaKo({ pop, onReady }) {
           </Column>
         </Section>
       </Chapter>
-    </CaseStudyPage>
+
+
+
+    </CaseStudyPage> 
   );
 }
 

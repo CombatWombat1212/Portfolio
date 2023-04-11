@@ -28,7 +28,7 @@ function Experience({data}) {
           });
 
           return (
-            <div className={`experience--wrapper ${classes.wrapper}`}>
+            <div className={`experience--wrapper ${classes.wrapper}`} key={title}>
               <div className="experience--subheading">
                 <Heading type="h4" innerClassName="color--primary">
                   {timeframe}
