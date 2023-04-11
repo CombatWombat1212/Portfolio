@@ -1,0 +1,56 @@
+.whatim {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  &--group {
+  }
+
+  &--heading {
+  }
+
+  &--list {
+    list-style: none;
+    margin-top: 0.75rem !important;
+  }
+
+  &--li {
+    & + & {
+      margin-top: 0.75rem;
+    }
+  }
+
+  &--item {
+    text-decoration: none;
+    color: $col-primary;
+  }
+
+  &--link {
+    position: relative;
+    z-index: 1;
+    transition: 0.2s;
+
+    &::before {
+      --pad: 0rem;
+      position: absolute;
+      background-color: $col-background_darker;
+      border-radius: var(--b-rad_less);
+      top: var(--pad);
+      left: var(--pad);
+      right: var(--pad);
+      bottom: var(--pad);
+      content: "";
+      z-index: -1;
+      transition: 0.2s;
+    }
+
+    @include hover {
+      color: $col-background;
+
+      &::before {
+        --pad: -0.4rem;
+        background-color: $col-primary;
+      }
+    }
+  }
+}

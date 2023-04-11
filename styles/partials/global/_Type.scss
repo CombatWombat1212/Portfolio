@@ -193,6 +193,18 @@ li, span{
   }
 }
 
+
+.text {
+  &--italic {
+    @include italic;
+  }
+  &--center {
+    text-align: center;
+  }
+}
+
+
+
 // .text--body {
 //   font-size: var(--font-size-h4);
 //   line-height: 1.25rem;

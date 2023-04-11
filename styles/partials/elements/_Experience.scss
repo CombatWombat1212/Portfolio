@@ -1,0 +1,84 @@
+.experience {
+  --experience-pad: 2rem;
+
+  &--header {
+  }
+
+  &--group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    column-gap: 2.5rem;
+    row-gap: 2.5rem;
+  }
+
+  &--wrapper {
+    &__long {
+      grid-column: 1/4;
+    }
+
+    &__short {
+      @include flex-col;
+    }
+  }
+
+  &--subheading {
+    margin-bottom: 0.35rem;
+  }
+
+  &--card {
+    @include b-rad;
+    background-color: $col-background_darker;
+    // padding:1.75rem;
+    padding: var(--experience-pad);
+
+    &__long {
+      @include flex-row-center;
+    }
+    &__short {
+      @include flex-col;
+      height: 100%;
+    }
+  }
+
+  &--inner {
+    &__long {
+      @include flex-col-center;
+      flex: 1;
+      --w: 70%;
+      width: var(--w);
+      max-width: var(--w);
+      margin-top: -0.35rem;
+      margin-right:-1rem;
+    }
+    &__short {
+    }
+  }
+
+  &--graphic {
+    --graphic-add-y-pad: calc(var(--experience-pad) * 0.55);
+    --graphic-add-x-pad: calc(var(--experience-pad) * 0.75);
+
+    padding: var(--graphic-add-y-pad);
+
+    width: calc(var(--iw) * 0.925);
+    height: 10rem;
+
+    &__long {
+        padding-right: calc(var(--experience-pad) + var(--graphic-add-x-pad));
+    }
+    &__short {
+      padding-top: var(--graphic-add-y-pad);
+      padding-bottom: calc(var(--experience-pad) + var(--graphic-add-y-pad));
+      @include mx-auto;
+    }
+  }
+
+  &--title {
+    margin-top: 0rem !important;
+  }
+
+  &--description {
+    margin-top: 0.65rem !important;
+  }
+}

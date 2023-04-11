@@ -421,6 +421,14 @@ function createUpdateConditions(propsToCheck) {
   };
 }
 
+
+function conditionalOrder(condition, elements) {
+  return condition
+    ? elements.filter(Boolean)
+    : elements.slice(1).concat(elements.slice(0, 1)).filter(Boolean);
+}
+
+
 // Video file formats
 const VIDEO_TYPES = ["mp4", "avi", "mov", "wmv", "mkv", "flv", "webm"];
 
@@ -448,6 +456,7 @@ export {
   cssVarToPixels,
   createUpdateConditions,
   ignoreUpdateConditions,
+  conditionalOrder,
   RESIZE_TIMEOUT,
   VIDEO_TYPES,
   IMAGE_TYPES,

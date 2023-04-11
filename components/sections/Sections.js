@@ -2,7 +2,18 @@ import { defaultProps, PropTypes } from "prop-types";
 import React from "react";
 import Background from "../utilities/Background";
 
-import { getElemClasses, getContainerMarginClass, getWrapperClasses, getMainClasses, getGapClasses, getBackgroundClasses, getColClassList, getGraphicClasses, getCopyClasses, getCopyBelowClasses } from "./sections_utilities/GetClasses";
+import {
+  getElemClasses,
+  getContainerMarginClass,
+  getWrapperClasses,
+  getMainClasses,
+  getGapClasses,
+  getBackgroundClasses,
+  getColClassList,
+  getGraphicClasses,
+  getCopyClasses,
+  getCopyBelowClasses,
+} from "./sections_utilities/GetClasses";
 import { getHasText, getHasGraphic, getHasBackground } from "./sections_utilities/IfHas";
 import { getSectionChildren } from "./sections_utilities/GetSectionChildren";
 
@@ -14,7 +25,16 @@ import Description from "./Description";
 import { Column, ColumnGroup } from "./Columns";
 
 const DEFINED_CHILDREN = ["Column", "Description", "Title", "Heading", "Graphic", "Quote"];
-const BACKGROUND_COLORS = ["background", "background darker", "background darkest", "primary", "secondary", "tertiary", "tertiary light", "makeright tertiary"];
+const BACKGROUND_COLORS = [
+  "background",
+  "background darker",
+  "background darkest",
+  "primary",
+  "secondary",
+  "tertiary",
+  "tertiary light",
+  "makeright tertiary",
+];
 
 // TODO: at some point these should be re-ordered in a way that's more logical, maybe that would include more descriptive names but they're really hard to think of for something as abstract as this
 // and background should really be renammed to something else because in this case it means a literal section describing background information, but everywhere else in this file it refers to the background color
@@ -50,7 +70,11 @@ function SectionWrapper({ children, sec }) {
   var { attrs, chil, has, classes } = sec;
 
   return (
-    <div id={attrs.id} className={classes.wrapper + classes.background} ref={attrs.reference ? attrs.reference : null} {...(attrs.line ? { "data-line": attrs.line } : {})}>
+    <div
+      id={attrs.id}
+      className={classes.wrapper + classes.background}
+      ref={attrs.reference ? attrs.reference : null}
+      {...(attrs.line ? { "data-line": attrs.line } : {})}>
       {children}
     </div>
   );
@@ -65,8 +89,10 @@ function SectionBody({ children, sec }) {
         <>
           {has.text && (
             <div className={`section--copy ${classes.copy}`}>
-              {chil.title && <>{chil.title}</>}
-              {chil.heading && <>{chil.heading}</>}
+              {conditionalOrder(attrs.titled === "below", [
+                chil.title && <>{chil.title}</>, 
+                chil.heading && <>{chil.heading}</>
+              ])}
               {chil.other && <>{chil.other}</>}
               {chil.description && <>{chil.description}</>}
             </div>
@@ -112,8 +138,38 @@ function SectionBody({ children, sec }) {
   );
 }
 
-function Section({ className, children, type, background, id, margin, titled, arrows, line, mainClassName, copyClassName, wrapperClassName, mainType, reference }) {
-  var sec = createSectionObject(className, children, type, background, id, margin, titled, arrows, line, mainClassName, copyClassName, wrapperClassName, mainType, reference);
+function Section({
+  className,
+  children,
+  type,
+  background,
+  id,
+  margin,
+  titled,
+  arrows,
+  line,
+  mainClassName,
+  copyClassName,
+  wrapperClassName,
+  mainType,
+  reference,
+}) {
+  var sec = createSectionObject(
+    className,
+    children,
+    type,
+    background,
+    id,
+    margin,
+    titled,
+    arrows,
+    line,
+    mainClassName,
+    copyClassName,
+    wrapperClassName,
+    mainType,
+    reference
+  );
 
   return (
     <>
@@ -127,7 +183,22 @@ function Section({ className, children, type, background, id, margin, titled, ar
   );
 }
 
-function createSectionObject(className, children, type, background, id, margin, titled, arrows, line, mainClassName, copyClassName, wrapperClassName, mainType, reference) {
+function createSectionObject(
+  className,
+  children,
+  type,
+  background,
+  id,
+  margin,
+  titled,
+  arrows,
+  line,
+  mainClassName,
+  copyClassName,
+  wrapperClassName,
+  mainType,
+  reference
+) {
   var pref = "section";
 
   if (children == undefined) children = children ?? <></>;
@@ -157,16 +228,17 @@ function createSectionObject(className, children, type, background, id, margin, 
   }
   var hasMain = mainType == "grid" && (!titled || foundChildren.columns) ? true : false;
 
-
-  if (titled == "above") ({ columns, description, title, heading, graphic, other } = getAdditionalHeadingClassesFromParentProps({ columns, description, title, heading, graphic, other }, "titled above"));
+  if (titled == "above")
+    ({ columns, description, title, heading, graphic, other } = getAdditionalHeadingClassesFromParentProps(
+      { columns, description, title, heading, graphic, other },
+      "titled above"
+    ));
 
   var hasGraphic = getHasGraphic(graphic);
   var hasDescBelow = useOrganizeChildren(children, [["all", { elemType: "Description", below: true }]]).all.length > 0 ? true : false;
 
-
   var hasColumns = foundChildren.columns ? true : false;
-  if(type == "default" && hasColumns) type = "columns";
-
+  if (type == "default" && hasColumns) type = "columns";
 
   var sec = {
     has: {
@@ -235,6 +307,7 @@ import Chapter from "./Chapter";
 import { getGraphicChanges, getGraphicElem } from "./sections_utilities/GetConditionalElemAdditions";
 import useOrganizeChildren from "@/scripts/hooks/useOrganizedChildren";
 import useFindChildren from "@/scripts/hooks/useFindChildren";
+import { conditionalOrder } from "@/scripts/GlobalUtilities";
 export { SECTION_DEFAULT_PROPS, SECTION_PROP_TYPES };
 
 export default Section;

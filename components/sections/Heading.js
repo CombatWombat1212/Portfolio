@@ -33,11 +33,12 @@ function getHeadingClasses(type) {
   return headingClasses;
 }
 
-function Heading({ children, type, className, sameHeight }) {
+function Heading({ children, type, className, innerClassName, italic, sameHeight }) {
   var headingClasses = getHeadingClasses(type);
   const HeadingTag = type;
 
   className = className ? className : "";
+  innerClassName = innerClassName ? innerClassName : "";
 
   const reference = useRef(null);
   sameHeight = sameHeight ? sameHeight : false;
@@ -50,9 +51,13 @@ function Heading({ children, type, className, sameHeight }) {
       : {}),
   };
 
+  if (italic) {
+    innerClassName += " text--italic";
+  }
+
   return (
     <div className={`section--heading ${headingClasses} ${className}`} ref={reference} style={styles}>
-      <HeadingTag>{children}</HeadingTag>
+      <HeadingTag className={innerClassName}>{children}</HeadingTag>
     </div>
   );
 }

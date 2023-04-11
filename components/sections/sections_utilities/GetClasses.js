@@ -80,34 +80,6 @@ function getColClassList(classList) {
   return { colClasses: columnClasses, otherClasses: otherClasses };
 }
 
-// function getBackgroundClasses(pref, background) {
-//   var backgroundClasses = ``;
-//   if (background == undefined) return backgroundClasses;
-
-//   if (typeof background == "string") {
-
-//     if (BACKGROUND_COLORS.indexOf(background) != -1) {
-//       if (pref == "chapter" && background != "background") backgroundClasses += ` ${pref}__color`;
-//       else if (pref == "section") backgroundClasses += ` ${pref}__color`;
-//       else if (pref == "section--quote") backgroundClasses += ` ${pref}__color`;
-//       else if (pref == "section--description") backgroundClasses += ` ${pref}__color`;
-//     }
-
-//     if (pref == "section--graphic") backgroundClasses += ` graphic--panel`;
-
-//     if (background == "primary") backgroundClasses += ` background__primary`;
-//     if (background == "makeright tertiary") backgroundClasses += ` background__tertiary-makeright`;
-//     if (background == "tertiary") backgroundClasses += ` background__tertiary`;
-//     if (background == "tertiary light") backgroundClasses += ` background__tertiary-light`;
-//     if (background == "background") backgroundClasses += ` background__background`;
-//     if (background == "background darker") backgroundClasses += ` background__background background__background-darker`;
-//     if (background == "background darkest") backgroundClasses += ` background__background background__background-darkest`;
-//   } else if (typeof background == "object") {
-//     backgroundClasses += ` ${pref}__image background__image`;
-//   }
-//   return backgroundClasses;
-// }
-
 function getBackgroundClasses(pref, background) {
   if (background === undefined) return "";
 
@@ -162,4 +134,15 @@ function getCopyBelowClasses(copyClassName, hasDescBelow) {
   return classes;
 }
 
-export { getElemClasses, getContainerMarginClass, getWrapperClasses, getMainClasses, getGapClasses, getBackgroundClasses, getColClassList, getGraphicClasses, getCopyClasses, getCopyBelowClasses };
+export {
+  getElemClasses,
+  getContainerMarginClass,
+  getWrapperClasses,
+  getMainClasses,
+  getGapClasses,
+  getBackgroundClasses,
+  getColClassList,
+  getGraphicClasses,
+  getCopyClasses,
+  getCopyBelowClasses,
+};

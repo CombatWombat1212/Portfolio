@@ -1,7 +1,7 @@
 
 
 
-function Title({ children, className, innerClassName, caps=true }) {
+function Title({ children, className, innerClassName, caps=true, italic=false }) {
     var title = children;
 
 
@@ -12,6 +12,10 @@ function Title({ children, className, innerClassName, caps=true }) {
 
     className = className ? className : "";
     innerClassName = innerClassName ? innerClassName : "";
+
+    if (italic){
+      innerClassName += " text--italic";
+    }
   
     return (
       <div className={`section--title ${className}`}>
