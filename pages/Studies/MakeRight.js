@@ -31,7 +31,7 @@ function MakeRight({ pop }) {
                 <br />
                 3D printing has a vast potential to benefit everyday consumers.
               </p>
-              <p>In the early 2010s, we were told they would be found in every home; giving consumer’s the power to create anything. But its barriers were too great to reach these expectations, and this reality fell flat. Now, 3D printing hardly has any impact on the average consumer’s life.</p>
+              <p>In the early 2010s, we were told they would be found in every home; giving consumer&rsquo;s the power to create anything. But its barriers were too great to reach these expectations, and this reality fell flat. Now, 3D printing hardly has any impact on the average consumer&rsquo;s life.</p>
             </Description>
 
             <Graphic type="mask" img={MAKERIGHT_IMGS["full_potential"]} />
@@ -169,7 +169,7 @@ function MakeRight({ pop }) {
             <Column>
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["interviews"]} />
               <Description type="h3" className="graphic--caption">
-                {/* <b>Interviews & surveys</b> to understand peoples’ experiences at a lower level */}
+                {/* <b>Interviews & surveys</b> to understand peoples&rsquo; experiences at a lower level */}
                 <b>Interviews & surveys</b> to understand users&apos; experiences at a lower level
               </Description>
             </Column>
@@ -235,15 +235,15 @@ function MakeRight({ pop }) {
 
             <Column>
               <Quote background="background">
-                “...In architecture, some calculations are easier when <br />
-                you have a real model vs. digital...” - Layperson #6
+                &ldquo;...In architecture, some calculations are easier when <br />
+                you have a real model vs. digital...&rdquo; - Layperson #6
               </Quote>
             </Column>
 
             <Column>
               <Quote background="background">
-                “But I never use [3D printing] because I don’t know <br />
-                how to work the machines.” - Layperson #4
+                &ldquo;But I never use [3D printing] because I don&rsquo;t know <br />
+                how to work the machines.&rdquo; - Layperson #4
               </Quote>
             </Column>
           </Section>
@@ -258,11 +258,11 @@ function MakeRight({ pop }) {
             </Description>
 
             <Column>
-              <Quote background="background">“How often do you use your printer?” - Me</Quote>
+              <Quote background="background">&ldquo;How often do you use your printer?&rdquo; - Me</Quote>
             </Column>
 
             <Column>
-              <Quote background="background">“Not enough” - Owners #1-4, unanimously</Quote>
+              <Quote background="background">&ldquo;Not enough&rdquo; - Owners #1-4, unanimously</Quote>
             </Column>
           </Section>
 
@@ -373,7 +373,7 @@ function MakeRight({ pop }) {
               </div>
 
               <div className="quote-table--cell quote-table__primary">
-                <span>Provide clear benefit and value to those who wouldn’t otherwise use 3D printing to solve their issues.</span>
+                <span>Provide clear benefit and value to those who wouldn&rsquo;t otherwise use 3D printing to solve their issues.</span>
               </div>
               <div className="quote-table--cell quote-table__secondary">
                 <span>Strong messaging, and UX, suited for those unfamiliar with 3D printing.</span>
@@ -397,7 +397,7 @@ function MakeRight({ pop }) {
                 <span>What would get everyday consumers to use this service over alternatives?</span>
               </div>
               <div className="quote-table--cell quote-table__secondary">
-                <span>Cheap customizability. Encourage ‘window-shopping’ within the service, show examples of what printing can offer.</span>
+                <span>Cheap customizability. Encourage ‘window-shopping&rsquo; within the service, show examples of what printing can offer.</span>
               </div>
 
               <div className="quote-table--cell quote-table__primary">
@@ -438,7 +438,7 @@ function MakeRight({ pop }) {
               <Quote background="background">Laypersons commented ideas for what they would print, while makers showed excitement towards profiting off their equipment. </Quote>
             </Column>
             <Column>
-              <Quote background="background">“I would definitely use that service. Not having to set up and use a printer myself? I would print so much stuff!” - Layperson #4</Quote>
+              <Quote background="background">&ldquo;I would definitely use that service. Not having to set up and use a printer myself? I would print so much stuff!&rdquo; - Layperson #4</Quote>
             </Column>
           </Section>
 
@@ -453,7 +453,7 @@ function MakeRight({ pop }) {
                 <p>Draw a line separating the responsibilities of makers, and customers.</p>
               </div>
               <Quote background="background" className="quote-table--cell quote-table__secondary">
-                “It’s a question of distributing responsibility. There’s 2 types of problems: maker problems, and customer problems.” - Layperson #3
+                &ldquo;It&rsquo;s a question of distributing responsibility. There&rsquo;s 2 types of problems: maker problems, and customer problems.&rdquo; - Layperson #3
               </Quote>
 
               <div className="quote-table--cell quote-table__primary">
@@ -461,7 +461,7 @@ function MakeRight({ pop }) {
                 <p>Appropriate deadlines for printers, with some kind of flexibility.</p>
               </div>
               <Quote background="background" className="quote-table--cell quote-table__secondary">
-                “There’s a lot of little steps and things that go into making the print that can take time.” - Maker #3
+                &ldquo;There&rsquo;s a lot of little steps and things that go into making the print that can take time.&rdquo; - Maker #3
               </Quote>
 
               <div className="quote-table--cell quote-table__primary">
@@ -469,7 +469,7 @@ function MakeRight({ pop }) {
                 <p>Model creation and design is whole service in itself; including it in the service would drastically affect scope.</p>
               </div>
               <Quote background="background" className="quote-table--cell quote-table__secondary">
-                “I can't model things for people, so I’m not very interested in that side of the service.” - Maker #3
+                &ldquo;I can&rsquo;t model things for people, so I&rsquo;m not very interested in that side of the service.&rdquo; - Maker #3
               </Quote>
             </div>
           </Section>
@@ -583,7 +583,7 @@ function MakeRight({ pop }) {
             <Heading>Significant issues addressed during testing and revision:</Heading>
             <Description>
               <p>
-                Some changes were a structural shift in the service's rules and mechanics, others were simply UI and UX improvements.
+                Some changes were a structural shift in the service&rsquo;s rules and mechanics, others were simply UI and UX improvements.
                 <br />
                 Here is a smattering of the most notable issues addressed along the way.
               </p>
@@ -613,7 +613,7 @@ function MakeRight({ pop }) {
             <Column>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_printers_before"]} lightbox pop={pop} />
               <Description className="mt-more graphic--caption graphic--caption__split">
-                <p>User’s noted: lack of parity between printer and filament inputs, and the inability to add multiple printers.</p>
+                <p>User&rsquo;s noted: lack of parity between printer and filament inputs, and the inability to add multiple printers.</p>
               </Description>
             </Column>
             <Column>
@@ -644,7 +644,7 @@ function MakeRight({ pop }) {
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_tutorials"]} />
               <Description className="mt-more graphic--caption gap-4 graphic--caption__split">
                 <p>Testers of the Maker journey were navigating much more fluidly halfway through each test. It was taking a few pages of exploration before the terminology, and flow finally clicked.</p>
-                <p>To ease the friction of a user’s first order fulfillment, I added an optional tutorial system. Boxes appear one by one describing important elements, and directing the user through their task.</p>
+                <p>To ease the friction of a user&rsquo;s first order fulfillment, I added an optional tutorial system. Boxes appear one by one describing important elements, and directing the user through their task.</p>
               </Description>
             </Column>
           </Section>
@@ -760,11 +760,11 @@ function MakeRight({ pop }) {
               makes for far better UI than individual features
             </Heading>
             <Description className="text-col-2 text-gap-6">
-              <p>When I began planning my approach to prototyping, I chose a number of the service’s most important features. From there, I intended to create mockups of each. Eventually, I reached the question of how the service would verify that makers were capable and trustworthy. My solution was to have them create a mock customer order. But to prototype this, I would need to mock up the entire order fulfillment process. Only having a few select screens would be too disjointed.</p>
+              <p>When I began planning my approach to prototyping, I chose a number of the service&rsquo;s most important features. From there, I intended to create mockups of each. Eventually, I reached the question of how the service would verify that makers were capable and trustworthy. My solution was to have them create a mock customer order. But to prototype this, I would need to mock up the entire order fulfillment process. Only having a few select screens would be too disjointed.</p>
 
               <p>At this moment, I decided the only way to consider all aspects of the service would be to build the 2 entire user flows. This caused a massive shift in my project approach. It allowed me to encounter numerous issues that would have gone unaddressed if I had only created separate feature screens.</p>
 
-              <p>This moment reminds me to always focus on the entire context of a user’s journey and experience. I need to avoid fixating on individual features without remembering the greater context of the system in which I’m working. Good UX design isn’t separated features in a vacuum, it's the creation of an entire experience.</p>
+              <p>This moment reminds me to always focus on the entire context of a user&rsquo;s journey and experience. I need to avoid fixating on individual features without remembering the greater context of the system in which I&rsquo;m working. Good UX design isn&rsquo;t separated features in a vacuum, it&rsquo;s the creation of an entire experience.</p>
             </Description>
 
             <Column>
@@ -773,7 +773,7 @@ function MakeRight({ pop }) {
               <Description>
                 <p>In this project, I spoke with 10 potential users, in two separate groups before becoming invested in any concept or solution. This gave me important background information from which to build ideas. But equally valuable was my decision to involve this group once again after I had developed an idea. This allowed me to gather feedback on my concept, before having created any semblance of a prototype. Providing tangible validation that my ideas were worth pursuing, and a foundation of user feedback from which to expand and build.</p>
 
-                <p>This moment reminded me to always involve users as early and as often as possible. Often, designers forgo interviewing users in a project's early stages. This is usually done in favour of instead testing before ideation, or after a prototype has been actualized. But, by keeping users close to my project at every stage, my solution became tailor fitted to the exact problem that I had observed in the 3D printing space.</p>
+                <p>This moment reminded me to always involve users as early and as often as possible. Often, designers forgo interviewing users in a project&rsquo;s early stages. This is usually done in favour of instead testing before ideation, or after a prototype has been actualized. But, by keeping users close to my project at every stage, my solution became tailor fitted to the exact problem that I had observed in the 3D printing space.</p>
               </Description>
             </Column>
 

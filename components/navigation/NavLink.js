@@ -16,25 +16,16 @@ function NavLink({ item }) {
   );
 }
 
-
-function useDropItems(length) {
-  const dropItems = Array.from({ length }, (_, i) => {
-    const ref = useRef(null);
-    const hovered = useHoverAndFocus(ref);
-    return { ref, hovered };
-  });
-
-  return dropItems;
-}
-
-
 function Dropdown({ item }) {
   const dropBtnRef = useRef(null);
   const dropContainerRef = useRef(null);
   const [active, setActive] = useState(false);
-
-  const dropItems = useDropItems(item.dropdown.length);
-
+  const [items, setItems] = useState(
+    Array.from({ length: item.dropdown.length }, () => ({
+      ref: null,
+      hovered: false,
+    }))
+  );
 
   const dropBtnHov = useHoverAndFocus({ hovered: dropBtnRef, parent: dropContainerRef }, [
     {
@@ -60,7 +51,8 @@ function Dropdown({ item }) {
       ref: dropContainerRef,
       hover: dropContainerHov,
     },
-    items: dropItems,
+    items: items,
+    setItems: setItems,
     active: active,
     setActive: setActive,
   };
@@ -92,22 +84,36 @@ function Dropdown({ item }) {
           "--dropdown-items-total": `${item.dropdown.length}`,
         }}>
         {item.dropdown.map((study, i) => {
-          return (
-            <DLink
-              key={i}
-              reference={drop.items[i].ref}
-              className="nav--item nav--drop-item nav--drop-item__inactive "
-              href={study.link}
-              style={{
-                "--dropdown-index": `${i}`,
-                "--dropdown-delay": `${(i + 1) * 0.3}s`,
-              }}>
-              {study.name}
-            </DLink>
-          );
+          return <DropdownItem key={i} study={{ ...study, index: i }} drop={drop} />;
         })}
       </div>
     </>
+  );
+}
+
+function DropdownItem({ study, drop }) {
+  const ref = useRef(null);
+  const hovered = useHoverAndFocus(ref);
+
+  useEffect(() => {
+    drop.setItems((prev) => {
+      const newItems = [...prev];
+      newItems[study.index] = { ref, hovered };
+      return newItems;
+    });
+  }, [ref, hovered]);
+
+  return (
+    <DLink
+      reference={ref}
+      className="nav--item nav--drop-item nav--drop-item__inactive"
+      href={study.link}
+      style={{
+        "--dropdown-index": `${study.index}`,
+        "--dropdown-delay": `${(study.index + 1) * 0.3}s`,
+      }}>
+      {study.name}
+    </DLink>
   );
 }
 

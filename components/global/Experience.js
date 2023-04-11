@@ -7,7 +7,7 @@ function Experience({data}) {
       <Heading className="color--secondary experience--heading">
         And the
         <br />
-        'Education & Experience' in 'Education & Experience'
+        &lsquo;Education & Experience&rsquo; in &lsquo;Education & Experience&rsquo;
       </Heading>
 
       <div className="experience--group">

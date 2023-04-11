@@ -106,7 +106,7 @@
     margin-left: calc(var(--nav-button-pad-x) * -1) !important;
     white-space: nowrap;
     top: 0;
-    width: 100%;
+    width: calc(100% - var(--nav-button-pad-x));
 
     &__active {
       margin-top: 0;

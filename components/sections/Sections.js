@@ -89,9 +89,8 @@ function SectionBody({ children, sec }) {
         <>
           {has.text && (
             <div className={`section--copy ${classes.copy}`}>
-              
-                {chil.title && <>{chil.title}</>}
-                {chil.heading && <>{chil.heading}</>}
+              {chil.title && <>{chil.title}</>}
+              {chil.heading && <>{chil.heading}</>}
               {chil.other && <>{chil.other}</>}
               {chil.description && <>{chil.description}</>}
             </div>
@@ -153,7 +152,7 @@ function Section({
   mainType,
   reference,
 }) {
-  var sec = createSectionObject(
+  var sec = useCreateSectionObject(
     className,
     children,
     type,
@@ -182,7 +181,7 @@ function Section({
   );
 }
 
-function createSectionObject(
+function useCreateSectionObject(
   className,
   children,
   type,
@@ -214,6 +213,8 @@ function createSectionObject(
     ["headings", { elemType: "Heading" }],
     ["columns", { elemType: "Column" }],
   ]);
+
+  
   topLevelFoundChildren = (titled === true || titled === false) && (foundChildren.titles || foundChildren.headings) && foundChildren.columns;
 
   if (topLevelFoundChildren) {

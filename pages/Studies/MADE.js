@@ -28,7 +28,8 @@ function MADE() {
             <Column>
               <Description className={"text-col-2 mt-3"}>
                 <p>
-                  An offering central to MADE’s image and reputation is having an <b>on-site stylist to support customers</b> in finding their best-suited look. However, at the time, <b>they didn’t feel their webstore reflected these offerings</b>.
+                  An offering central to MADE’s image and reputation is having an <b>on-site stylist to support customers</b> in finding their
+                  best-suited look. However, at the time, <b>they didn’t feel their webstore reflected these offerings</b>.
                 </p>
               </Description>
               <Graphic className="b-rad" img={MADE_IMGS.banner_client} />
@@ -40,9 +41,13 @@ function MADE() {
             <Heading>Provide online customers with the same flexibility as in-store clientele with a dress shirt configurator</Heading>
             <Description>
               <p>
-                <b>MADE needed identical images of their offerings to slot into their software</b>. These images would also become product thumbnails for their webstore, allowing customers to browse their catalogue <b>without MADE individually photographing each shirt</b>.
+                <b>MADE needed identical images of their offerings to slot into their software</b>. These images would also become product thumbnails
+                for their webstore, allowing customers to browse their catalogue <b>without MADE individually photographing each shirt</b>.
               </p>
-              <p>With 3D renders being the most efficient way to complete this goal, MADE reached out to me to work together in creating this customization utility.</p>
+              <p>
+                With 3D renders being the most efficient way to complete this goal, MADE reached out to me to work together in creating this
+                customization utility.
+              </p>
             </Description>
             <Graphic type="mask" img={MADE_IMGS.configurator_graphic} />
           </Section>
@@ -179,7 +184,9 @@ function MADE() {
           <Section id="Approach--Considerations" type="columns" titled>
             <Title>Considerations</Title>
             <Heading>Understanding shirt anatomy to create accurate models</Heading>
-            <Description className="mt-less">A few key considerations when designing the shirt models that needed to be just right in order to accurately reflect MADE’s products:</Description>
+            <Description className="mt-less">
+              A few key considerations when designing the shirt models that needed to be just right in order to accurately reflect MADE’s products:
+            </Description>
 
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_seam_positions} />
@@ -193,21 +200,27 @@ function MADE() {
               <Heading type="h3" className="graphic--caption weight-reg">
                 Seam indents
               </Heading>
-              <Description className="graphic--caption mt-less">Making the object feel like real cloth, indented by the seams holding it together</Description>
+              <Description className="graphic--caption mt-less">
+                Making the object feel like real cloth, indented by the seams holding it together
+              </Description>
             </Column>
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_button_positions} />
               <Heading type="h3" className="graphic--caption weight-reg">
                 Button positions
               </Heading>
-              <Description className="graphic--caption mt-less">Which components have or don’t have buttons, and where those buttons are placed</Description>
+              <Description className="graphic--caption mt-less">
+                Which components have or don’t have buttons, and where those buttons are placed
+              </Description>
             </Column>
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_collar_shape} />
               <Heading type="h3" className="graphic--caption weight-reg">
                 Collar shape
               </Heading>
-              <Description className="graphic--caption mt-less">Ensuring that all the collars match the contours and shape of the base shirt</Description>
+              <Description className="graphic--caption mt-less">
+                Ensuring that all the collars match the contours and shape of the base shirt
+              </Description>
             </Column>
           </Section>
 
@@ -245,9 +258,15 @@ function MADE() {
                 is just messy
               </Heading>
               <Description>
-                <p>With MADE’s goal of photorealism, the shirts needed an accurate ruffle to their appearance, without losing their high-fashion image. Too few wrinkles, and the shirts looked starched to death. Too many imperfections and they looked straight out of the hamper.</p>
+                <p>
+                  With MADE’s goal of photorealism, the shirts needed an accurate ruffle to their appearance, without losing their high-fashion image.
+                  Too few wrinkles, and the shirts looked starched to death. Too many imperfections and they looked straight out of the hamper.
+                </p>
 
-                <p>They needed just a light touch of wrinkles, which varied across components due to their construction. Ex. Some collars had stiffer reinforcements than others.</p>
+                <p>
+                  They needed just a light touch of wrinkles, which varied across components due to their construction. Ex. Some collars had stiffer
+                  reinforcements than others.
+                </p>
               </Description>
             </Column>
           </Section>
@@ -275,13 +294,27 @@ function MADE() {
                 <p>
                   <b>In order for the models to reflect actual products, they needed to be textured with over 40 scans of MADE’s custom fabrics.</b>
                 </p>
-                <p>Working closely together, I tested several workflows for converting fabric scans to 3D textures. This allowed me to determine which was the most time-efficient, best looking, and scalable; as MADE needed the capability to rapidly add fabrics in the future.</p>
-                <p>I used a combination of Blender and Photoshop to undistort the scans, and create the repeatable textures. Chosen for its efficiency, and compatibility with MADE’s scanning hardware.</p>
+                <p>
+                  Working closely together, I tested several workflows for converting fabric scans to 3D textures. This allowed me to determine which
+                  was the most time-efficient, best looking, and scalable; as MADE needed the capability to rapidly add fabrics in the future.
+                </p>
+                <p>
+                  I used a combination of Blender and Photoshop to undistort the scans, and create the repeatable textures. Chosen for its efficiency,
+                  and compatibility with MADE’s scanning hardware.
+                </p>
               </Description>
             </Column>
           </Section>
 
-          <Section id="Texturing--Stages" type="columns" wrapperClassName="mt-less" titled arrows mainClassName="gap-6" mainType="grid" background="background darker">
+          <Section
+            id="Texturing--Stages"
+            type="columns"
+            wrapperClassName="mt-less"
+            titled
+            arrows
+            mainClassName="gap-6"
+            mainType="grid"
+            background="background darker">
             <Column caption="above">
               <Description type="h3" className="graphic--caption weight-reg">
                 Fabric Scan
@@ -331,28 +364,66 @@ function MADE() {
             </Column>
             <Column>
               <Description>
-                ‘Contrast areas’ are the parts of the dress shirt which accent the garment with an alternate fabric pallet. They were a <b>critical project requirement</b> as the online tool needed to represent the full scope of the customization available, which includes personalized accent areas.
+                ‘Contrast areas’ are the parts of the dress shirt which accent the garment with an alternate fabric pallet. They were a{" "}
+                <b>critical project requirement</b> as the online tool needed to represent the full scope of the customization available, which
+                includes personalized accent areas.
               </Description>
             </Column>
           </Section>
 
           <Section id="Texturing--Contrast-Areas" type="columns" background="background darker">
             <Column>
-              <Graphic type="video" className="b-rad" img={MADE_IMGS.contrast_glow_mini_wide_fabric_video} background="background darkest" autoplay="scroll staggered hover" muted sync="Texturing--Contrast-Areas" />
+              <Graphic
+                type="video"
+                className="b-rad"
+                img={MADE_IMGS.contrast_glow_mini_wide_fabric_video}
+                background="background darkest"
+                autoplay="scroll staggered hover"
+                muted
+                sync="Texturing--Contrast-Areas"
+              />
             </Column>
             <Column>
-              <Graphic type="video" className="b-rad" img={MADE_IMGS.contrast_glow_wide_fabric_video} background="background darkest" autoplay="scroll staggered hover" muted sync="Texturing--Contrast-Areas" />
+              <Graphic
+                type="video"
+                className="b-rad"
+                img={MADE_IMGS.contrast_glow_wide_fabric_video}
+                background="background darkest"
+                autoplay="scroll staggered hover"
+                muted
+                sync="Texturing--Contrast-Areas"
+              />
             </Column>
           </Section>
 
           <Section id="Texturing--Contrast-Split" type="columns" background="background darker">
             <Column>
-              <Graphic type="video" className="b-rad" img={MADE_IMGS.contrast_split_mini_wide_video} background="background darkest" autoplay="scroll staggered hover" muted sync="Texturing--Contrast-Split" />
-              <Description className="graphic--caption">Our goal was to give shoppers the ability to alter their shirt's accent fabric, with 50+ available materials.</Description>
+              <Graphic
+                type="video"
+                className="b-rad"
+                img={MADE_IMGS.contrast_split_mini_wide_video}
+                background="background darkest"
+                autoplay="scroll staggered hover"
+                muted
+                sync="Texturing--Contrast-Split"
+              />
+              <Description className="graphic--caption">
+                Our goal was to give shoppers the ability to alter their shirt&rsquo;s accent fabric, with 50+ available materials.
+              </Description>
             </Column>
             <Column>
-              <Graphic type="video" className="b-rad" img={MADE_IMGS.contrast_split_wide_video} background="background darkest" autoplay="scroll staggered hover" muted sync="Texturing--Contrast-Split" />
-              <Description className="graphic--caption">To enable this, the inner lining of all 3 collars, and 1 cuff, needed to be isolated, and rendered as separate images.</Description>
+              <Graphic
+                type="video"
+                className="b-rad"
+                img={MADE_IMGS.contrast_split_wide_video}
+                background="background darkest"
+                autoplay="scroll staggered hover"
+                muted
+                sync="Texturing--Contrast-Split"
+              />
+              <Description className="graphic--caption">
+                To enable this, the inner lining of all 3 collars, and 1 cuff, needed to be isolated, and rendered as separate images.
+              </Description>
             </Column>
           </Section>
 
@@ -365,7 +436,10 @@ function MADE() {
               </Heading>
             </Column>
             <Column>
-              <Description>Lastly, the following details were added to increase the accuracy of the objects in relation to the real world products, and the subtleties of their design.</Description>
+              <Description>
+                Lastly, the following details were added to increase the accuracy of the objects in relation to the real world products, and the
+                subtleties of their design.
+              </Description>
             </Column>
           </Section>
 
@@ -375,21 +449,29 @@ function MADE() {
               <Heading type="h3" className="graphic--caption weight-reg">
                 Color-matched threading
               </Heading>
-              <Description className="graphic--caption mt-less">I manually approximated matching thread colors for each shirt material. A simple task for solid-colors, occasionally tricky with complex patterns.</Description>
+              <Description className="graphic--caption mt-less">
+                I manually approximated matching thread colors for each shirt material. A simple task for solid-colors, occasionally tricky with
+                complex patterns.
+              </Description>
             </Column>
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.details_holes} />
               <Heading type="h3" className="graphic--caption weight-reg">
                 Color-matched button holes
               </Heading>
-              <Description className="graphic--caption mt-less">Buttonhole colors for each material were done separately, in a similar way to the threading. Requiring their own fine-tuning to better match the threads in the final renders.</Description>
+              <Description className="graphic--caption mt-less">
+                Buttonhole colors for each material were done separately, in a similar way to the threading. Requiring their own fine-tuning to better
+                match the threads in the final renders.
+              </Description>
             </Column>
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.details_button} />
               <Heading type="h3" className="graphic--caption weight-reg">
                 Button color
               </Heading>
-              <Description className="graphic--caption mt-less">Either a dark or light button was assigned to each shirt material respective of its colour.</Description>
+              <Description className="graphic--caption mt-less">
+                Either a dark or light button was assigned to each shirt material respective of its colour.
+              </Description>
             </Column>
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.details_logo} />
@@ -425,7 +507,10 @@ function MADE() {
                 the final composition
               </Heading>
               <Description>
-                <p>At this stage, MADE’s design goals were on soft, consistent lighting, without it being so flat that shirts appear bland or even artificial. Gentle shadows, with nothing distracting from the product.</p>
+                <p>
+                  At this stage, MADE’s design goals were on soft, consistent lighting, without it being so flat that shirts appear bland or even
+                  artificial. Gentle shadows, with nothing distracting from the product.
+                </p>
               </Description>
             </Column>
           </Section>
@@ -437,9 +522,17 @@ function MADE() {
             </Column>
             <Column>
               <Description className={"mt-less"}>
-                <p>Our goal was to create separate images of shirt components that could be stacked into one life-like photo. I knew that to do this realistically, each image would have to be a combination of the object, and a rendered shadow behind it. Allowing the shirt pieces to accurately sit atop each other without looking flat, or uncanny.</p>
+                <p>
+                  Our goal was to create separate images of shirt components that could be stacked into one life-like photo. I knew that to do this
+                  realistically, each image would have to be a combination of the object, and a rendered shadow behind it. Allowing the shirt pieces
+                  to accurately sit atop each other without looking flat, or uncanny.
+                </p>
 
-                <p>Adding generic ‘drop-shadows’ could quickly achieve this outcome, but it would sacrifice photorealism. To do this without compromise, I created isolated renderings of each shadow, and combined the images in post. This is the difference between each method:</p>
+                <p>
+                  Adding generic ‘drop-shadows’ could quickly achieve this outcome, but it would sacrifice photorealism. To do this without
+                  compromise, I created isolated renderings of each shadow, and combined the images in post. This is the difference between each
+                  method:
+                </p>
               </Description>
             </Column>
           </Section>
@@ -459,7 +552,14 @@ function MADE() {
             </Column>
           </Section>
 
-          <Section id="Rendering--Post" type="columns" titled arrows="anchored primary" mainClassName="gap-6" mainType="grid" background="background darkest">
+          <Section
+            id="Rendering--Post"
+            type="columns"
+            titled
+            arrows="anchored primary"
+            mainClassName="gap-6"
+            mainType="grid"
+            background="background darkest">
             <Title>Post-Processing</Title>
             <Heading>Creating isolated, physically accurate shadows</Heading>
 
@@ -509,15 +609,18 @@ function MADE() {
             <Column>
               <Description className={"mt-less"}>
                 <p>
-                  With my <b>incredibly underpowered PC</b>, I was unable to complete the rendering for the entire project in a reasonable amount of time. To solve this, I used an online render farm service.
+                  With my <b>incredibly underpowered PC</b>, I was unable to complete the rendering for the entire project in a reasonable amount of
+                  time. To solve this, I used an online render farm service.
                 </p>
 
                 <p>
-                  This required me to build my 3D project file in such a way that it could <b>produce the hundreds of images in one continuous session</b>, so as to not waste time starting and stopping render jobs.
+                  This required me to build my 3D project file in such a way that it could{" "}
+                  <b>produce the hundreds of images in one continuous session</b>, so as to not waste time starting and stopping render jobs.
                 </p>
 
                 <p>
-                  However, the <b>rendering service I used had strict file size limitations</b>. This greatly impacted my available options when trying to build a file which could render all the images continuously.
+                  However, the <b>rendering service I used had strict file size limitations</b>. This greatly impacted my available options when
+                  trying to build a file which could render all the images continuously.
                 </p>
 
                 <p>Possible approaches to creating a continuous render sequence:</p>
@@ -531,7 +634,15 @@ function MADE() {
                 Move the virtual camera
                 <br /> across multiple objects
               </Heading>
-              <Graphic type="video" className="b-rad border-negative" img={MADE_IMGS.limitations_multiple_objects} background="background darkest" autoplay="scroll staggered hover" muted sync="Rendering--Roadblocks-Graphics" />
+              <Graphic
+                type="video"
+                className="b-rad border-negative"
+                img={MADE_IMGS.limitations_multiple_objects}
+                background="background darkest"
+                autoplay="scroll staggered hover"
+                muted
+                sync="Rendering--Roadblocks-Graphics"
+              />
               <Description className="graphic--caption">
                 <ProsCons>
                   <Con>Huge file size due to number of objects</Con>
@@ -547,7 +658,15 @@ function MADE() {
                 <br />
                 that changes materials
               </Heading>
-              <Graphic type="video" className="b-rad border-positive" img={MADE_IMGS.limitations_single_object} background="background darkest" autoplay="scroll staggered hover" muted sync="Rendering--Roadblocks-Graphics" />
+              <Graphic
+                type="video"
+                className="b-rad border-positive"
+                img={MADE_IMGS.limitations_single_object}
+                background="background darkest"
+                autoplay="scroll staggered hover"
+                muted
+                sync="Rendering--Roadblocks-Graphics"
+              />
               <Description className="graphic--caption">
                 <ProsCons>
                   <Pro>Tiny file size</Pro>
@@ -565,21 +684,41 @@ function MADE() {
             </Column>
             <Column>
               <Description className={"mt-less"}>
-                <p>Pursuing the latter solution, I wrote a python script which created a single 3D material containing all 41 fabrics, and had the ability to easily switch between them. </p>
-                <p>From there, I could then render a single “video” who’s frames contained every combination of object and fabric. This allowed me to push through the limits of my hardware and completed all of the rendering at no added cost to the project timeline.</p>
+                <p>
+                  Pursuing the latter solution, I wrote a python script which created a single 3D material containing all 41 fabrics, and had the
+                  ability to easily switch between them.{" "}
+                </p>
+                <p>
+                  From there, I could then render a single “video” who’s frames contained every combination of object and fabric. This allowed me to
+                  push through the limits of my hardware and completed all of the rendering at no added cost to the project timeline.
+                </p>
               </Description>
             </Column>
           </Section>
 
           <Section id="Rendering--Python-Graphic" type="columns" titled="above" background="background darker" wrapperClassName="mb-less">
             <Column>
-              <Graphic type="video" className="b-rad" img={MADE_IMGS.limitations_switcher} background="background darkest" autoplay="scroll hover" muted />
+              <Graphic
+                type="video"
+                className="b-rad"
+                img={MADE_IMGS.limitations_switcher}
+                background="background darkest"
+                autoplay="scroll hover"
+                muted
+              />
             </Column>
           </Section>
 
           <Section id="Rendering--Scalable" type="columns" titled background="background darker">
             <Column>
-              <Graphic type="video" className="b-rad" img={MADE_IMGS.limitations_bottle} background="background darkest" autoplay="scroll hover" muted />
+              <Graphic
+                type="video"
+                className="b-rad"
+                img={MADE_IMGS.limitations_bottle}
+                background="background darkest"
+                autoplay="scroll hover"
+                muted
+              />
             </Column>
             <Column>
               <Heading>
@@ -588,7 +727,10 @@ function MADE() {
               </Heading>
               <Description>
                 <p>I’ve been able to tweak and reuse this same script numerous times since developing it for this project.</p>
-                <p>Many of my product rendering tasks employ this same workflow of having one object cycle through X materials. As such, choosing to create a strong, future-proof solution to this issue has since saved me countless hours.</p>
+                <p>
+                  Many of my product rendering tasks employ this same workflow of having one object cycle through X materials. As such, choosing to
+                  create a strong, future-proof solution to this issue has since saved me countless hours.
+                </p>
               </Description>
             </Column>
           </Section>
@@ -641,29 +783,45 @@ function MADE() {
           </Section>
 
           <Section id="Deliver--Closing" background={MADE_IMGS.banner_final_blue} />
-
-
         </Chapter>
 
         <Chapter id="Closing" name="Closing">
-
-        <Section id="Closing--Copy" type="columns" titled mainClassName="gap-6 mt-6">
+          <Section id="Closing--Copy" type="columns" titled mainClassName="gap-6 mt-6">
             <Title>Successes</Title>
-            <Heading>
-            Foresight, and planning around project requirements
-            </Heading>
+            <Heading>Foresight, and planning around project requirements</Heading>
             <Description className="text-col-2 text-gap-6">
-              <p>During this project's early stages, I identified many requirements for my images.  Ones that I needed to meet if they were to suit my client's needs.  An example of this was when we first discussed creating a single shirt from stacked image layers.  With this goal understood, I was able to discern the steps necessary to match the use-case.  I knew each image needed their object's shadows placed in the background.  Otherwise, they wouldn't combine realistically.</p>
+              <p>
+                During this project&rsquo;s early stages, I identified many requirements for my images. Ones that I needed to meet if they were to suit my
+                client&rsquo;s needs. An example of this was when we first discussed creating a single shirt from stacked image layers. With this goal
+                understood, I was able to discern the steps necessary to match the use-case. I knew each image needed their object&rsquo;s shadows placed in
+                the background. Otherwise, they wouldn&rsquo;t combine realistically.
+              </p>
 
-              <p>This gave me significant time to plan ahead.  I conducted tests using the first few models, and determined the best approach to creating realistic shadows.  Allowing me to then build the project from the ground-up with the eventuality of this challenge in mind.  Then, when the time came to create the objects' shadows, I was fully prepared to traverse the issue.  With this, and other similar moments, the greatest success of this project was my foresight and planning.</p>
+              <p>
+                This gave me significant time to plan ahead. I conducted tests using the first few models, and determined the best approach to
+                creating realistic shadows. Allowing me to then build the project from the ground-up with the eventuality of this challenge in mind.
+                Then, when the time came to create the objects&rsquo; shadows, I was fully prepared to traverse the issue. With this, and other similar
+                moments, the greatest success of this project was my foresight and planning.
+              </p>
             </Description>
 
             <Column>
               <Title>Learning</Title>
               <Heading>Scalable, future-proof foundations, over band-aid solutions</Heading>
               <Description>
-                <p>This was a relatively long-term project with big plans for future expansion.  As such, I often had to make critical decisions on how to best spend my resources.  At the center of these decisions was usually a common internal question.  Should I take the time to craft a lasting foundation to address an issue, or use a more temporary solution? The latter allots more time to other important tasks.  But, the former is more likely to increase efficiency throughout the project.  </p>
-                <p>As the project went on, time and again I felt vindicated in choosing the former.  These solutions included working non-destructively when possible, and writing flexible, responsive scripts. Long-term fixes consistently saved me more time than hasty band-aid solutions.  As a result, this project serves as an important learning experience.  During long-term projects, especially in a 3D space, a strong foundation is incredibly important.  They almost always save more resources in the end, and may even apply to future projects.</p>
+                <p>
+                  This was a relatively long-term project with big plans for future expansion. As such, I often had to make critical decisions on how
+                  to best spend my resources. At the center of these decisions was usually a common internal question. Should I take the time to craft
+                  a lasting foundation to address an issue, or use a more temporary solution? The latter allots more time to other important tasks.
+                  But, the former is more likely to increase efficiency throughout the project.{" "}
+                </p>
+                <p>
+                  As the project went on, time and again I felt vindicated in choosing the former. These solutions included working non-destructively
+                  when possible, and writing flexible, responsive scripts. Long-term fixes consistently saved me more time than hasty band-aid
+                  solutions. As a result, this project serves as an important learning experience. During long-term projects, especially in a 3D
+                  space, a strong foundation is incredibly important. They almost always save more resources in the end, and may even apply to future
+                  projects.
+                </p>
               </Description>
             </Column>
 
@@ -671,14 +829,21 @@ function MADE() {
               <Title>Areas Of Growth</Title>
               <Heading>Over fixation on a single aspect of a task</Heading>
               <Description>
-                <p>After modelling, my objects needed to be UV-unwrapped so I could add their fabric textures.  As I was working on the shirt collars, I made the mistake of fixating on how they appeared in a small sampling of fabrics.  Rather than checking each texture, and comparing them to my references.  This caused me to think that the models were ready to be rendered, so I sent them off.  When the images arrived, I finally realized the mistake.  Some of the fabrics appeared distorted, and needed revision.  Thankfully, I was able to correct them, re-render, and meet the intended deadline.</p>
-                <p>This teachable moment reminded me of what is possible when you lose sight of a project's full scope.  Going forward, I aim to address this by regularly checking my project outline with every working session. Thereby reminding myself of the bigger picture, and to look ahead to the next steps towards which I’m building.</p>
+                <p>
+                  After modelling, my objects needed to be UV-unwrapped so I could add their fabric textures. As I was working on the shirt collars, I
+                  made the mistake of fixating on how they appeared in a small sampling of fabrics. Rather than checking each texture, and comparing
+                  them to my references. This caused me to think that the models were ready to be rendered, so I sent them off. When the images
+                  arrived, I finally realized the mistake. Some of the fabrics appeared distorted, and needed revision. Thankfully, I was able to
+                  correct them, re-render, and meet the intended deadline.
+                </p>
+                <p>
+                  This teachable moment reminded me of what is possible when you lose sight of a project&rsquo;s full scope. Going forward, I aim to address
+                  this by regularly checking my project outline with every working session. Thereby reminding myself of the bigger picture, and to
+                  look ahead to the next steps towards which I&rsquo;m building.
+                </p>
               </Description>
             </Column>
           </Section>
-
-
-
         </Chapter>
       </CaseStudyPage>
     </>

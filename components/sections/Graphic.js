@@ -129,7 +129,10 @@ function Graphic({
 }) {
   // TODO: for mobile, add some kind of indication animation of the image being clicked on when its interactable or can be opened in a lightbox
 
-  if (!img) return;
+  // if (!img) {
+  //   img = {};
+  //   console.log('me');
+  // }
 
   var pref = "section--graphic";
   var isImg = type == "image" || type == "img";

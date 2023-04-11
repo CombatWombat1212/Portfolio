@@ -67,15 +67,15 @@ const EXPERIENCE = [
 
 const WHATIM = [
   {
-    category: "What I'm Watching",
+    category: "What I&rsquo;m Watching",
     items: ["Joe Pera Talks With You", "Regular Show", "Superstore", "Gravity Falls"],
   },
   {
-    category: "What I'm Doing",
-    items: ["Biking", "Meditating", "Searching Out New Music", "Hangin' with friends"],
+    category: "What I&rsquo;m Doing",
+    items: ["Biking", "Meditating", "Searching Out New Music", "Hangin&rsquo; with friends"],
   },
   {
-    category: "What I'm Making",
+    category: "What I&rsquo;m Making",
     items: [
       {
         name: "Producing music / songwriting",
@@ -89,7 +89,7 @@ const WHATIM = [
     ],
   },
   {
-    category: "Who I'm Following",
+    category: "Who I&rsquo;m Following",
     items: [
       {
         name: "@JPAugurusa",
@@ -150,7 +150,7 @@ function About() {
 
         <Section id="Intro--Toolbelt" type="passthrough">
           <div className="toolbelt">
-            <Heading className="color--secondary">I Put the 'Discipline' in 'Multidisciplinary'</Heading>
+            <Heading className="color--secondary">I Put the &lsquo;Discipline&rsquo; in &lsquo;Multidisciplinary&rsquo;</Heading>
 
             <div className="toolbelt--inner">
               {MULTIDISCIPLINARY.map(({ name, items }, index) => (
@@ -181,7 +181,7 @@ function About() {
 
         <Section id="Intro--Quote" title="below">
           <Heading type="h2" className="color--secondary weight-reg" italic>
-            "Human-centered designs from a human-centered human"
+          “Human-centered designs from a human-centered human”
           </Heading>
           <Title innerClassName={"color--primary"} caps={false}>
             - Me, on me
@@ -232,7 +232,7 @@ function About() {
 
         <Section id="Intro--Closer">
           <Heading type="h2" className="color--secondary weight-reg" italic>
-            Let's work together and solve real-world problems
+            Let&rsquo;s work together and solve real-world problems
             <br />
             with digital-world solutions.
           </Heading>

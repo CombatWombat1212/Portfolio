@@ -33,7 +33,7 @@ function getHeadingClasses(type) {
   return headingClasses;
 }
 
-function Heading({ children, type, className, innerClassName, italic, sameHeight }) {
+function Heading({ children, type, className, innerClassName, italic, sameHeight, innerhtml }) {
   var headingClasses = getHeadingClasses(type);
   const HeadingTag = type;
 
@@ -57,7 +57,9 @@ function Heading({ children, type, className, innerClassName, italic, sameHeight
 
   return (
     <div className={`section--heading ${headingClasses} ${className}`} ref={reference} style={styles}>
-      <HeadingTag className={innerClassName}>{children}</HeadingTag>
+      <HeadingTag className={innerClassName} {...(innerhtml !== undefined ? { dangerouslySetInnerHTML: { __html: innerhtml } } : {})}>
+        {children}
+      </HeadingTag>
     </div>
   );
 }
