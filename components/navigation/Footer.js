@@ -7,6 +7,9 @@ import FOOTER_SITEMAP_ITEMS from "@/data/FOOTER_SITEMAP_ITEMS";
 
 //TODO: Add links to footer, including the sitemap links inside the /data/ object
 
+
+// TODO: visual bug when you click on things.
+
 function Footer() {
   useMountEffect(() => {
     if (!document) return;
@@ -48,7 +51,6 @@ function Footer() {
         </PanelDesc>
 
 
-{/* TODO: this is optional as all hell, but would it be cool if the text 'Sam Giustizia' animated to say 'Home' on mouseover? yes but feel free to say no this is very minor */}
         <div className="footer--sitemap col-6">
           <div className="sitemap">
             {FOOTER_SITEMAP_ITEMS.map((group) => {

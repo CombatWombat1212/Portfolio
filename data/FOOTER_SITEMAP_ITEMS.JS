@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 
 // TODO: Figure out the final list of elements under the 'explorations' section, its a max of 3, but should there be some way of showing the ones that arent included? should they rotate or change page by page? or if thats too complicated they can just be the three
 
-var FOOTER_SITEMAP_ITEMS = [
+var footer_sitemap_items = [
 
   {
     name: "Sam Giustizia",
@@ -108,4 +108,7 @@ function footerSitemapItemsInit(arr){
   return arr;
 }
 
-export default footerSitemapItemsInit(FOOTER_SITEMAP_ITEMS);
+
+const FOOTER_SITEMAP_ITEMS = footerSitemapItemsInit(footer_sitemap_items);
+
+export default FOOTER_SITEMAP_ITEMS;
