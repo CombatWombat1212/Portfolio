@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Section, { SECTION_DEFAULT_PROPS, SECTION_PROP_TYPES } from "./Sections";
 import { getWrapperClasses, getBackgroundClasses, getElemClasses } from "./sections_utilities/GetClasses";
 
 // TODO: Chapter backgrounds are depreciated and can be removed
+
 
 function Chapter({ children, type, wrapperClassName, background, id, name, margin }) {
   var pref = "chapter";
@@ -41,6 +42,24 @@ function Chapter({ children, type, wrapperClassName, background, id, name, margi
     
 
 
+
+
+  function getSectionBackground(children, index) {
+    const child = children[index];
+    if (child && typeof child.props?.background === "object") {
+      return "image";
+    }
+    const result = (children.length > 0 && child?.props?.background) || "none";
+    return result;
+  }
+
+
+  const chapBackgrounds = {
+    first: getSectionBackground(newChildren, 0),
+    last: getSectionBackground(newChildren, newChildren.length - 1),
+  }
+  
+  // TODO: update the logic surrounding this so that it is able to check the first and last sections of other chapters and use that to determine when the background needs padding
   newChildren = newChildren.map((child, i) => {
     if (newChildren.length === 1) return child; // Do not add wrapperClassName if there's only one child
     if (i != newChildren.length - 1) return child;
@@ -49,7 +68,11 @@ function Chapter({ children, type, wrapperClassName, background, id, name, margi
     return React.cloneElement(child, { wrapperClassName });
   });
 
-  // Old
+
+
+
+
+  // // Old
   // newChildren = newChildren.map((child, i) => {
   //   if (i != newChildren.length - 1) return child;
   //   if (!child.props.background || child.props.background != "none") return child;
@@ -76,7 +99,12 @@ function Chapter({ children, type, wrapperClassName, background, id, name, margi
     
 
   return (
-    <div id={id} className={`${wrapperClasses} ${backgroundClasses} ${lastChildHasBackground ? "pb-0" : ""}`} name={name ? name : ""}>
+    <div id={id} className={`${wrapperClasses} ${backgroundClasses} ${lastChildHasBackground ? "pb-0" : ""}`} name={name ? name : ""}
+    
+    last-section-background={chapBackgrounds.last}
+    first-section-background={chapBackgrounds.first}
+
+    >
       <div className={elemClasses}>{newChildren}</div>
     </div>
   );

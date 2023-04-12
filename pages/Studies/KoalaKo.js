@@ -210,7 +210,7 @@ function KoalaKo({ pop, onReady }) {
         </Section>
       </Chapter>
 
-      <Chapter name="Plan" id="Plan">
+      <Chapter name="Plan" id="Plan" wrapperClassName="pb-section-gap">
         <Section id="Plan--Gantt" className="flex-col">
           <Title>Project Plan</Title>
           <Heading>

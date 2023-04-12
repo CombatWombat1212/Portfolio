@@ -14,23 +14,63 @@
 
 $enable-grid-classes: true;
 
+
+
+// $container-max-width: (
+//   xs: 100%,
+//   sm: 23.75em,
+//   md: 31.85em,
+//   lg: 42.25em,
+//   xl: 51.15em,
+//   xxl: 70.75rem,
+// ) !default;
+
+
+
+// $container_wide-max-width: (
+//   xs: 100%,
+//   sm: 32em,
+//   md: 43em,
+//   lg: 57em,
+//   xl: 69em,
+//   xxl: 95.375rem,
+// ) !default;
+
+
+
+// $container-max-width: (
+//   xs: 90vw,
+//   sm: 34rem,
+//   md: 36rem,
+//   lg: 48rem,
+//   xl: 62rem,
+//   xxl: 68.75rem,
+// ) !default;
+
 $container-max-width: (
-  xs: 100%,
-  sm: 23.75em,
-  md: 31.85em,
-  lg: 42.25em,
-  xl: 51.15em,
-  xxl: 70.75rem,
+xs: 90vw,
+sm: 90vw,
+md: 45.5rem,
+lg: 57.5rem,
+xl: 62rem,
+xxl: 66rem,
 ) !default;
 
+
+
 $container_wide-max-width: (
-  xs: 100%,
-  sm: 32em,
-  md: 43em,
-  lg: 57em,
-  xl: 69em,
-  xxl: 95.375rem,
-) !default;
+  xs: 90vw,
+  sm: 90vw,
+  md: 90vw,
+  lg: 90vw,
+  xl: 88vw,
+  xxl: 86vw,
+  ) !default;
+
+
+
+
+
 
 
 // $container-max-width: (
