@@ -55,7 +55,7 @@ $font-body: "Tenon";
       --font-size-body: 1.05rem;
       --font-size-quote: 0.90625rem;
 
-      --font-size-logo: 1.1875rem;
+      --font-size-logo: 1.265rem;
 
       --font-leading-h1: 3.5625rem;
       --font-leading-h2: 2.85rem;
@@ -104,7 +104,7 @@ $font-body: "Tenon";
   //   --font-leading-body: 1.465rem;
   //   --font-leading-quote: 1.4375rem;
   // }
-
+  
 
   @include md-down {
     --font-size-h1: 2.5rem;
