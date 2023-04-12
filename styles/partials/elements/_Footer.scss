@@ -114,7 +114,6 @@ $sitemap-item-spacing: 0.9rem;
 
   &--item {
 
-    //TODO: are you happy with the current footer animation? I think the animated underline idea might be better but it would take a while so i'm leaving it for now
 
     @include footer-animation;
     

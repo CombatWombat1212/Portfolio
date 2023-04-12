@@ -4376,20 +4376,20 @@ body {
   background-color: #F3F3F7 !important;
 }
 
-.focus {
+.myfocus {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.focus--head {
+.myfocus--head {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
 }
 
-.focus--card {
+.myfocus--card {
   border-radius: var(--b-rad);
   -webkit-border-radius: var(--b-rad);
   -moz-border-radius: var(--b-rad);
@@ -4399,7 +4399,7 @@ body {
   margin-top: 0.75rem;
 }
 
-.focus--description {
+.myfocus--description {
   margin-top: 0.35rem;
 }
 

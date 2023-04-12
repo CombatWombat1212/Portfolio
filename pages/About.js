@@ -129,19 +129,19 @@ function About() {
         </Section>
 
         <Section id="Intro--Focus" type="passthrough">
-          <div className="focus">
-            <div className="focus--head">
+          <div className="myfocus">
+            <div className="myfocus--head">
               <Heading type="h3">My Current Focus</Heading>
               <Title caps={false} innerClassName="color--primary">
                 Began August 15th, 2021
               </Title>
             </div>
 
-            <div className="focus--card">
-              <Heading type="h5" className="focus--subtitle">
+            <div className="myfocus--card">
+              <Heading type="h5" className="myfocus--subtitle">
                 Creating This Portfolio Site
               </Heading>
-              <Description className="focus--description">
+              <Description className="myfocus--description">
                 <p>Intermittent development started way back in 2021. All graphics, content, and code was made by me. A labor of love.</p>
               </Description>
             </div>
