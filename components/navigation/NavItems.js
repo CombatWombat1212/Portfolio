@@ -1,6 +1,10 @@
 import useHoverAndFocus from "@/scripts/hooks/useHoverAndFocus";
 import DLink from "../utilities/DynamicLink";
 import { createRef, useEffect, useRef, useState } from "react";
+import { menu } from "@/data/ICONS";
+import { Graphic } from "../sections/Sections";
+import AnimPres from "../global/AnimPres";
+import navAnims from "./NavAnims";
 
 function NavLink({ item }) {
   return (
@@ -12,6 +16,40 @@ function NavLink({ item }) {
       ) : (
         <Dropdown item={item} />
       )}
+    </>
+  );
+}
+
+function NavItems({ filter = "Link", nav, flatten = false }) {
+  const { items } = nav;
+
+  const modified_items = (() => {
+    if (flatten) {
+      return items.reduce((acc, item) => {
+        if (item.dropdown && Array.isArray(item.dropdown)) {
+          const dropdownItems = item.dropdown.map(dropdownItem => ({
+            ...dropdownItem,
+            type: "Link",
+            text: dropdownItem.name,
+            key: dropdownItem.key,
+          }));
+          return [...acc, ...dropdownItems];
+        } else {
+          return [...acc, item];
+        }
+      }, []);
+    } else {
+      return items;
+    }
+  })();
+  
+  return (
+    <>
+      {modified_items
+        .filter((item) => item.type == filter)
+        .map((item) => {
+          return <NavLink key={item.key} item={item} />;
+        })}
     </>
   );
 }
@@ -117,4 +155,47 @@ function DropdownItem({ study, drop }) {
   );
 }
 
-export default NavLink;
+function NavMenu({ nav }) {
+  const { open, setOpen, items } = nav;
+
+  return (
+    <div className="nav--popup-wrapper">
+      <AnimPres className="nav--popup" animation={navAnims.slide} condition={open}>
+        <NavItems filter={"Link"} flatten nav={nav} />
+      </AnimPres>
+    </div>
+  );
+}
+
+function NavMenuButton({ nav }) {
+  const { open, setOpen } = nav;
+
+  const classes = {
+    menu: [],
+    "menu-icon": [],
+    "menu-mask": [],
+  };
+
+  Object.keys(classes).forEach((key) => {
+    classes[key].push(`nav--${key}__${open ? "open" : "closed"}`);
+  });
+
+  Object.keys(classes).forEach((key) => {
+    classes[key] = classes[key].join(" ");
+  });
+
+  return (
+    <>
+      <DLink className={`nav--item nav--menu ${classes.menu}`} onClick={() => setOpen(!open)} aria-label="Open Menu">
+        <Graphic
+          type="mask"
+          className={`nav--menu-icon ${classes["menu-icon"]}`}
+          innerClassName={`nav--menu-mask ${classes["menu-mask"]}`}
+          img={menu}
+        />
+      </DLink>
+    </>
+  );
+}
+
+export { NavItems, NavLink, NavMenuButton, NavMenu };

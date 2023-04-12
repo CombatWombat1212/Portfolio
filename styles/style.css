@@ -1627,6 +1627,59 @@ body {
   transition-delay: 0s;
 }
 
+.nav--menu {
+  cursor: pointer;
+}
+
+.nav--menu__open {
+  background-color: #E0E0EA;
+  color: var(--nav-color);
+}
+
+.nav--menu-icon {
+  width: 1.4rem;
+  transition: 0.3s;
+  transform: rotate(0deg);
+}
+
+.nav--menu-icon__open {
+  transform: rotate(90deg);
+}
+
+.nav--menu-mask {
+  background-color: #F3F3F7;
+}
+
+.nav--menu:hover .mask, .nav--menu:focus .mask, .nav--menu.focus .mask, .nav--menu.hover .mask {
+  background-color: #074391 !important;
+}
+
+.nav--menu .mask {
+  transition: var(--transition);
+}
+
+.nav--menu-mask__open {
+  background-color: #074391 !important;
+}
+
+.nav--popup-wrapper {
+  position: absolute;
+  top: var(--nav-height);
+  left: 0;
+  width: 100%;
+  height: calc(100% - var(--nav-height));
+  z-index: 10;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nav--popup {
+  pointer-events: all;
+  width: 100%;
+  height: 100%;
+  background-color: #E0E0EA;
+}
+
 .mask {
   mask-image: var(--mask-img);
   -webkit-mask-size: contain;

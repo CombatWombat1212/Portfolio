@@ -151,7 +151,13 @@ const ICONS = {
     width: 576,
     height: 512,
   },
-
+  menu: {
+    name: "menu",
+    src: "/assets/icons/menu.svg",
+    alt: "Burger icon (menu)",
+    width: 448,
+    height: 512,
+  },
 
 };
 
@@ -181,12 +187,14 @@ const loading_white = new Icon(ICONS.loading_white);
 const checkmark = new Icon(ICONS.checkmark);
 const xmark = new Icon(ICONS.xmark);
 
+const menu = new Icon(ICONS.menu);
+
 const stack = new Icon(ICONS.stack);
 const play = new Icon(ICONS.play);
 
 
 export default ICONS
-export { arrow_right, arrow_left, arrow_down, chevron_down, chevron_right,chevron_left, document, email, instagram, linkedin, loading, loading_white, checkmark, xmark, stack, play }
+export { arrow_right, arrow_left, arrow_down, chevron_down, chevron_right,chevron_left, document, email, instagram, linkedin, loading, loading_white, checkmark, xmark, stack, play,menu }
   
 
 
