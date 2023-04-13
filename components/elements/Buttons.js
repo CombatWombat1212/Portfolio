@@ -56,7 +56,7 @@ function Inner({ children, className, type, icon, animation, color, tag, ...prop
   );
 }
 
-function Button({ children, className, type, icon, animation, color, tag, reference, ...props }) {
+function Button({ children, className, type, icon, animation, color, tag, reference,copy, ...props }) {
   const [iconName, iconSide, iconType] = icon || [];
 
   const buttonClasses = ['button'];
@@ -68,16 +68,35 @@ function Button({ children, className, type, icon, animation, color, tag, refere
 
   var tabIndex = tag === 'a' ? 0 : null;
 
+
+  const copyHandler = async () => {
+    if (copy) {
+      try {
+        await navigator.clipboard.writeText(copy);
+        console.log('Text copied to clipboard');
+      } catch (err) {
+        console.error('Failed to copy text: ', err);
+      }
+    }
+  };
+
   const commonProps = {
     className: buttonClasses.join(' '),
     tabIndex: tabIndex,
     reference: reference,
-    ...props
+    ...props,
+
+    ...(copy !== undefined ? { onClick: copyHandler } : {}),
   };
 
 
 
   const ButtonWrapper = tag;
+
+
+
+
+
 
   return tag === 'a' ? (
     <DLink {...commonProps}>

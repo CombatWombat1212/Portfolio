@@ -1011,6 +1011,11 @@
 			bottom: nth($pad, 1) * -1;
 			left: nth($pad, 2) * -1;
 			right: nth($pad, 2) * -1;
+		} @else if type-of($pad) == 'list' and length($pad) == 4 {
+			top: nth($pad, 1) * -1;
+			right: nth($pad, 2) * -1;
+			bottom: nth($pad, 3) * -1;
+			left: nth($pad, 4) * -1;
 		} @else {
 			top: $pad * -1;
 			left: $pad * -1;

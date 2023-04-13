@@ -2,7 +2,17 @@
   --nav-height: 3.75rem;
 
   scroll-padding-top: var(--nav-height);
+
+
+  @include md-down{
+    --nav-height: 3.25rem;
+
+  }
+
+
+
 }
+
 
 .nav {
   --nav-color: #{$col-primary};
@@ -175,35 +185,27 @@
   &--menu-item-wrapper {
     @include flex-row-center;
 
-    &+&{
-      margin-top:1.65rem;
+    & + & {
+      margin-top: 1.65rem;
     }
   }
 
   &--menu-item {
-
     @include h2;
-    font-weight:500;
+    font-weight: 500;
     color: $col-primary;
-    transition:0.2s;
+    transition: 0.2s;
 
-
-    @include before-panel((0.35rem 0.55rem), rgba($col-primary,0)){
-      transition:0.2s;
+    @include before-panel((0.35rem 0.55rem), rgba($col-primary, 0)) {
+      transition: 0.2s;
     }
-    
 
-    @include hover{
+    @include hover {
       color: $col-background;
 
-      &::before{
-        background-color: rgba($col-primary,1);
+      &::before {
+        background-color: rgba($col-primary, 1);
       }
     }
-
-
   }
-
-
-
 }

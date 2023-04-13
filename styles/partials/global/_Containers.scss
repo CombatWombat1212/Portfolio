@@ -59,12 +59,12 @@ xxl: 66rem,
 
 
 $container_wide-max-width: (
-  xs: 90vw,
-  sm: 90vw,
-  md: 90vw,
-  lg: 90vw,
-  xl: 88vw,
-  xxl: 86vw,
+  xs: calc(100% - 3rem),
+  sm: 90%,
+  md: 90%,
+  lg: 90%,
+  xl: 88%,
+  xxl: 86%,
   ) !default;
 
 

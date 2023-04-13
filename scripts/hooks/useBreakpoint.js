@@ -176,9 +176,9 @@ const getBreakpointNames = () => {
 };
 
 
-// doesnt work at all tbh
 const useBreakpointUtils = ({debounceTime = RESIZE_TIMEOUT} = {}) => {
 
+  const currentBreakpoint = useBreakpoint({debounceTime});
 
   const breakpointNames = useMemo(() => {
     return getBreakpointNames();
@@ -234,42 +234,96 @@ const useBreakpointUtils = ({debounceTime = RESIZE_TIMEOUT} = {}) => {
 
 
 
+// const useResponsiveUtils = ({ debounceTime = RESIZE_TIMEOUT } = {}) => {
+//   const bp = useBreakpoint({ debounceTime });
+//   const breakpointNames = useMemo(() => {
+//     return getBreakpointNames();
+//   }, []);
+
+//   const isBp = useMemo(() => (targetBreakpoint) => {
+//     return bp === targetBreakpoint;
+//   }, [bp]);
+
+//   const isntBp = useMemo(() => (targetBreakpoint) => {
+//     return bp !== targetBreakpoint;
+//   }, [bp]);
+
+//   const isBpOrDown = useMemo(() => (targetBreakpoint) => {
+//     const currentIndex = breakpointNames.indexOf(bp);
+//     const targetIndex = breakpointNames.indexOf(targetBreakpoint);
+
+//     return currentIndex <= targetIndex;
+//   }, [breakpointNames, bp]);
+
+//   const isBpOrUp = useMemo(() => (targetBreakpoint) => {
+//     const currentIndex = breakpointNames.indexOf(bp);
+//     const targetIndex = breakpointNames.indexOf(targetBreakpoint);
+
+//     return currentIndex >= targetIndex;
+//   }, [breakpointNames, bp]);
+
+//   const isBpAndDown = useMemo(() => (targetBreakpoint) => {
+//     const currentIndex = breakpointNames.indexOf(bp);
+//     const targetIndex = breakpointNames.indexOf(targetBreakpoint);
+
+//     return currentIndex < targetIndex;
+//   }, [breakpointNames, bp]);
+
+//   const isBpAndUp = useMemo(() => (targetBreakpoint) => {
+//     const currentIndex = breakpointNames.indexOf(bp);
+//     const targetIndex = breakpointNames.indexOf(targetBreakpoint);
+
+//     return currentIndex > targetIndex;
+//   }, [breakpointNames, bp]);
+
+//   return {
+//     bp,
+//     isBp,
+//     isntBp,
+//     isBpOrDown,
+//     isBpOrUp,
+//     isBpAndDown,
+//     isBpAndUp,
+//   };
+// };
+
+
 const useResponsiveUtils = ({ debounceTime = RESIZE_TIMEOUT } = {}) => {
   const bp = useBreakpoint({ debounceTime });
   const breakpointNames = useMemo(() => {
     return getBreakpointNames();
   }, []);
 
-  const isBp = useMemo(() => (targetBreakpoint) => {
+  const isBp = useCallback((targetBreakpoint) => {
     return bp === targetBreakpoint;
   }, [bp]);
 
-  const isntBp = useMemo(() => (targetBreakpoint) => {
+  const isntBp = useCallback((targetBreakpoint) => {
     return bp !== targetBreakpoint;
   }, [bp]);
 
-  const isBpOrDown = useMemo(() => (targetBreakpoint) => {
+  const isBpOrDown = useCallback((targetBreakpoint) => {
     const currentIndex = breakpointNames.indexOf(bp);
     const targetIndex = breakpointNames.indexOf(targetBreakpoint);
 
     return currentIndex <= targetIndex;
   }, [breakpointNames, bp]);
 
-  const isBpOrUp = useMemo(() => (targetBreakpoint) => {
+  const isBpOrUp = useCallback((targetBreakpoint) => {
     const currentIndex = breakpointNames.indexOf(bp);
     const targetIndex = breakpointNames.indexOf(targetBreakpoint);
 
     return currentIndex >= targetIndex;
   }, [breakpointNames, bp]);
 
-  const isBpAndDown = useMemo(() => (targetBreakpoint) => {
+  const isBpAndDown = useCallback((targetBreakpoint) => {
     const currentIndex = breakpointNames.indexOf(bp);
     const targetIndex = breakpointNames.indexOf(targetBreakpoint);
 
     return currentIndex < targetIndex;
   }, [breakpointNames, bp]);
 
-  const isBpAndUp = useMemo(() => (targetBreakpoint) => {
+  const isBpAndUp = useCallback((targetBreakpoint) => {
     const currentIndex = breakpointNames.indexOf(bp);
     const targetIndex = breakpointNames.indexOf(targetBreakpoint);
 
@@ -286,6 +340,7 @@ const useResponsiveUtils = ({ debounceTime = RESIZE_TIMEOUT } = {}) => {
     isBpAndUp,
   };
 };
+
 
 
 export { useBreakpoint, useBreakpointUtils, useResponsiveUtils, getBreakpointNames}
