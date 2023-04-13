@@ -1627,11 +1627,11 @@ body {
   transition-delay: 0s;
 }
 
-.nav--menu {
+.nav--menu-btn {
   cursor: pointer;
 }
 
-.nav--menu__open {
+.nav--menu-btn__open {
   background-color: #E0E0EA;
   color: var(--nav-color);
 }
@@ -1650,11 +1650,11 @@ body {
   background-color: #F3F3F7;
 }
 
-.nav--menu:hover .mask, .nav--menu:focus .mask, .nav--menu.focus .mask, .nav--menu.hover .mask {
+.nav--menu-btn:hover .mask, .nav--menu-btn:focus .mask, .nav--menu-btn.focus .mask, .nav--menu-btn.hover .mask {
   background-color: #074391 !important;
 }
 
-.nav--menu .mask {
+.nav--menu-btn .mask {
   transition: var(--transition);
 }
 
@@ -1662,8 +1662,8 @@ body {
   background-color: #074391 !important;
 }
 
-.nav--popup-wrapper {
-  position: absolute;
+.nav--menu-wrapper {
+  position: fixed;
   top: var(--nav-height);
   left: 0;
   width: 100%;
@@ -1673,11 +1673,59 @@ body {
   pointer-events: none;
 }
 
-.nav--popup {
+.nav--menu {
   pointer-events: all;
   width: 100%;
   height: 100%;
   background-color: #E0E0EA;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nav--menu-item-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.nav--menu-item-wrapper + .nav--menu-item-wrapper {
+  margin-top: 1.65rem;
+}
+
+.nav--menu-item {
+  font-family: "Gira Sans";
+  font-size: var(--font-size-h2);
+  line-height: var(--font-leading-h2);
+  font-weight: 500;
+  color: #074391;
+  transition: 0.2s;
+  position: relative;
+}
+
+.nav--menu-item::before {
+  content: "";
+  position: absolute;
+  top: -0.35rem;
+  bottom: -0.35rem;
+  left: -0.55rem;
+  right: -0.55rem;
+  border-radius: var(--b-rad_less);
+  background-color: rgba(7, 67, 145, 0);
+  z-index: -1;
+  transition: 0.2s;
+}
+
+.nav--menu-item {
+  transition: var(--transition);
+}
+
+.nav--menu-item:hover, .nav--menu-item:focus, .nav--menu-item.focus, .nav--menu-item.hover {
+  color: #F3F3F7;
+}
+
+.nav--menu-item:hover::before, .nav--menu-item:focus::before, .nav--menu-item.focus::before, .nav--menu-item.hover::before {
+  background-color: #074391;
 }
 
 .mask {

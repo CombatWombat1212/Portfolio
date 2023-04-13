@@ -118,15 +118,14 @@
     }
   }
 
-  &--menu {
+  &--menu-btn {
     cursor: pointer;
 
-    &__open{
+    &__open {
       background-color: $col-background_darkest;
       color: var(--nav-color);
     }
-
-    }
+  }
 
   &--menu-icon {
     width: 1.4rem;
@@ -145,36 +144,65 @@
 
     background-color: $col-background;
 
-    @include hover(".nav--menu", ".mask") {
+    @include hover(".nav--menu-btn", ".mask") {
       @include menu-mask-active;
     }
-    &__open{
+    &__open {
       @include menu-mask-active;
     }
-
-
   }
 
-  &--popup-wrapper {
-    position: absolute;
+  &--menu-wrapper {
+    position: fixed;
     top: var(--nav-height);
     left: 0;
     width: 100%;
     height: calc(100% - var(--nav-height));
     z-index: 10;
-    overflow:hidden;
+    overflow: hidden;
     pointer-events: none;
   }
-  
-  &--popup {
-    
+
+  &--menu {
     pointer-events: all;
     width: 100%;
     height: 100%;
     background-color: $col-background_darkest;
+
+    @include flex-col-center;
   }
 
+  &--menu-item-wrapper {
+    @include flex-row-center;
 
+    &+&{
+      margin-top:1.65rem;
+    }
+  }
+
+  &--menu-item {
+
+    @include h2;
+    font-weight:500;
+    color: $col-primary;
+    transition:0.2s;
+
+
+    @include before-panel((0.35rem 0.55rem), rgba($col-primary,0)){
+      transition:0.2s;
+    }
+    
+
+    @include hover{
+      color: $col-background;
+
+      &::before{
+        background-color: rgba($col-primary,1);
+      }
+    }
+
+
+  }
 
 
 

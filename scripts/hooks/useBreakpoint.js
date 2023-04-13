@@ -71,7 +71,7 @@ import { RESIZE_TIMEOUT } from '../GlobalUtilities';
 
 const useBreakpoint = ({ debounceTime = RESIZE_TIMEOUT } = {}) => {
   const getBreakpoint = () => {
-    console.log('getBreakpoint called');
+    // console.log('getBreakpoint called');
     const breakpoints = getBreakpointNames();
 
     const breakpointValues = breakpoints.map(bp => ({
@@ -83,7 +83,7 @@ const useBreakpoint = ({ debounceTime = RESIZE_TIMEOUT } = {}) => {
 
     for (let i = breakpointValues.length - 1; i >= 0; i--) {
       if (windowWidthInEm >= breakpointValues[i].value) {
-        console.log('Breakpoint found:', breakpointValues[i].name);
+        // console.log('Breakpoint found:', breakpointValues[i].name);
         return breakpointValues[i].name;
       }
     }
@@ -93,23 +93,23 @@ const useBreakpoint = ({ debounceTime = RESIZE_TIMEOUT } = {}) => {
   const hasExecuted = useRef(false);
 
   const handleBreakpointChange = useCallback(() => {
-    console.log('handleBreakpointChange called');
+    // console.log('handleBreakpointChange called');
     const newBreakpoint = getBreakpoint();
     if (newBreakpoint !== currentBreakpoint) {
-      console.log('Setting currentBreakpoint:', newBreakpoint);
+      // console.log('Setting currentBreakpoint:', newBreakpoint);
       setCurrentBreakpoint(newBreakpoint);
     }
   }, [currentBreakpoint]);
 
   useEffect(() => {
-    console.log('useEffect (handleLoad) called');
+    // console.log('useEffect (handleLoad) called');
     if (typeof window === 'undefined' || typeof document === 'undefined') {
       return;
     }
 
     if (typeof window !== 'undefined' && !hasExecuted.current) {
       const handleLoad = () => {
-        console.log('handleLoad called');
+        // console.log('handleLoad called');
         handleBreakpointChange();
         hasExecuted.current = true;
       };
@@ -119,7 +119,7 @@ const useBreakpoint = ({ debounceTime = RESIZE_TIMEOUT } = {}) => {
       } else {
         window.addEventListener('load', handleLoad);
         return () => {
-          console.log('Removing event listener for handleLoad');
+          // console.log('Removing event listener for handleLoad');
           window.removeEventListener('load', handleLoad);
         };
       }
@@ -127,7 +127,7 @@ const useBreakpoint = ({ debounceTime = RESIZE_TIMEOUT } = {}) => {
   }, [handleBreakpointChange]);
 
   useEffect(() => {
-    console.log('useEffect (resize) called');
+    // console.log('useEffect (resize) called');
     if (typeof window === 'undefined' || typeof document === 'undefined') {
       return;
     }
@@ -136,12 +136,12 @@ const useBreakpoint = ({ debounceTime = RESIZE_TIMEOUT } = {}) => {
 
     window.addEventListener('resize', debouncedHandleBreakpointChange);
     return () => {
-      console.log('Removing event listener for debouncedHandleBreakpointChange');
+      // console.log('Removing event listener for debouncedHandleBreakpointChange');
       window.removeEventListener('resize', debouncedHandleBreakpointChange);
     };
   }, [handleBreakpointChange, debounceTime]);
 
-  console.log('Returning currentBreakpoint:', currentBreakpoint);
+  // console.log('Returning currentBreakpoint:', currentBreakpoint);
   return currentBreakpoint;
 };
 
@@ -176,47 +176,49 @@ const getBreakpointNames = () => {
 };
 
 
+// doesnt work at all tbh
+const useBreakpointUtils = ({debounceTime = RESIZE_TIMEOUT} = {}) => {
 
-const useBreakpointUtils = () => {
+
   const breakpointNames = useMemo(() => {
     return getBreakpointNames();
   }, []);
 
   const isBp = useMemo(() => (currentBreakpoint, targetBreakpoint) => {
     return currentBreakpoint === targetBreakpoint;
-  }, []);
+  }, [currentBreakpoint]);
 
   const isntBp = useMemo(() => (currentBreakpoint, targetBreakpoint) => {
     return currentBreakpoint !== targetBreakpoint;
-  }, []);
+  }, [currentBreakpoint]);
 
   const isBpOrDown = useMemo(() => (currentBreakpoint, targetBreakpoint) => {
     const currentIndex = breakpointNames.indexOf(currentBreakpoint);
     const targetIndex = breakpointNames.indexOf(targetBreakpoint);
 
     return currentIndex <= targetIndex;
-  }, [breakpointNames]);
+  }, [breakpointNames, currentBreakpoint]);
 
   const isBpOrUp = useMemo(() => (currentBreakpoint, targetBreakpoint) => {
     const currentIndex = breakpointNames.indexOf(currentBreakpoint);
     const targetIndex = breakpointNames.indexOf(targetBreakpoint);
 
     return currentIndex >= targetIndex;
-  }, [breakpointNames]);
+  }, [breakpointNames, currentBreakpoint]);
 
   const isBpAndDown = useMemo(() => (currentBreakpoint, targetBreakpoint) => {
     const currentIndex = breakpointNames.indexOf(currentBreakpoint);
     const targetIndex = breakpointNames.indexOf(targetBreakpoint);
 
     return currentIndex < targetIndex;
-  }, [breakpointNames]);
+  }, [breakpointNames, currentBreakpoint]);
 
   const isBpAndUp = useMemo(() => (currentBreakpoint, targetBreakpoint) => {
     const currentIndex = breakpointNames.indexOf(currentBreakpoint);
     const targetIndex = breakpointNames.indexOf(targetBreakpoint);
 
     return currentIndex > targetIndex;
-  }, [breakpointNames]);
+  }, [breakpointNames, currentBreakpoint]);
 
   return {
     isBp,

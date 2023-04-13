@@ -1001,16 +1001,25 @@
   }
   
 
-@mixin before-panel($pad: 0, $background: var(--col-before)) {
+  @mixin before-panel($pad: 0, $background: var(--col-before)) {
 	position: relative;
 	&::before {
 		content: "";
 		position: absolute;
-		top: $pad * -1;
-		left: $pad * -1;
-		right: $pad * -1;
-		bottom: $pad * -1;
-		@include b-rad;
+		@if type-of($pad) == 'list' and length($pad) == 2 {
+			top: nth($pad, 1) * -1;
+			bottom: nth($pad, 1) * -1;
+			left: nth($pad, 2) * -1;
+			right: nth($pad, 2) * -1;
+		} @else {
+			top: $pad * -1;
+			left: $pad * -1;
+			right: $pad * -1;
+			bottom: $pad * -1;
+		}
+		border-radius: var(--b-rad_less);
 		background-color: $background;
+		z-index:-1;
+		@content;
     }
 }

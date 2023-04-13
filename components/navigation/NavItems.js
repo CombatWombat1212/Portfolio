@@ -5,14 +5,30 @@ import { menu } from "@/data/ICONS";
 import { Graphic } from "../sections/Sections";
 import AnimPres from "../global/AnimPres";
 import navAnims from "./NavAnims";
+import useBodyClass from "@/scripts/hooks/useBodyClass";
+import { useBreakpoint, useBreakpointUtils } from "@/scripts/hooks/useBreakpoint";
 
-function NavLink({ item }) {
+function NavLink({ item, nav, className, type }) {
+  const { setOpen } = nav;
+
+  function renderItem() {
+    return (
+      <DLink
+        className={`nav--item ${className ? className : ""}`}
+        href={item.link}
+        aria-label={item.ariaLabel}
+        onClick={() => {
+          setOpen(false);
+        }}>
+        {item.text}
+      </DLink>
+    );
+  }
+
   return (
     <>
       {!item.dropdown ? (
-        <DLink className="nav--item" href={item.link} aria-label={item.ariaLabel}>
-          {item.text}
-        </DLink>
+        <>{type == "menu" ? <div className="nav--menu-item-wrapper"> {renderItem()} </div> : renderItem()}</>
       ) : (
         <Dropdown item={item} />
       )}
@@ -20,36 +36,21 @@ function NavLink({ item }) {
   );
 }
 
-function NavItems({ filter = "Link", nav, flatten = false }) {
+function NavItems({ filter, nav, flatten = false, className = "", type = "default" }) {
   const { items } = nav;
 
-  const modified_items = (() => {
-    if (flatten) {
-      return items.reduce((acc, item) => {
-        if (item.dropdown && Array.isArray(item.dropdown)) {
-          const dropdownItems = item.dropdown.map(dropdownItem => ({
-            ...dropdownItem,
-            type: "Link",
-            text: dropdownItem.name,
-            key: dropdownItem.key,
-          }));
-          return [...acc, ...dropdownItems];
-        } else {
-          return [...acc, item];
-        }
-      }, []);
-    } else {
-      return items;
-    }
-  })();
-  
+  const modified_items = ((items, flatten, filter, type) => {
+    const flattenedItems = flattenItems(items, flatten);
+    const filteredItems = filterItems(flattenedItems, filter);
+    const updatedItems = updateItems(filteredItems, type);
+    return updatedItems;
+  })(items, flatten, filter, type);
+
   return (
     <>
-      {modified_items
-        .filter((item) => item.type == filter)
-        .map((item) => {
-          return <NavLink key={item.key} item={item} />;
-        })}
+      {modified_items.map((item) => {
+        return <NavLink nav={nav} type={type} key={item.key} item={item} className={className || ""} />;
+      })}
     </>
   );
 }
@@ -105,13 +106,7 @@ function Dropdown({ item }) {
 
   return (
     <>
-      <a
-        className={`nav--item nav--item__drop
-      ${drop.active ? "hover" : ""}
-   `}
-        aria-label={item.ariaLabel}
-        ref={drop.btn.ref}
-        tabIndex={0}>
+      <a className={`nav--item nav--item__drop ${drop.active ? "hover" : ""}`} aria-label={item.ariaLabel} ref={drop.btn.ref} tabIndex={0}>
         {item.text}
       </a>
 
@@ -158,10 +153,12 @@ function DropdownItem({ study, drop }) {
 function NavMenu({ nav }) {
   const { open, setOpen, items } = nav;
 
+  useBodyClass("noscroll", open);
+
   return (
-    <div className="nav--popup-wrapper">
-      <AnimPres className="nav--popup" animation={navAnims.slide} condition={open}>
-        <NavItems filter={"Link"} flatten nav={nav} />
+    <div className="nav--menu-wrapper">
+      <AnimPres className="nav--menu" animation={navAnims.slide} condition={open}>
+        <NavItems className="nav--menu-item" type="menu" filter={["Link", "Logo"]} flatten nav={nav} />
       </AnimPres>
     </div>
   );
@@ -171,7 +168,7 @@ function NavMenuButton({ nav }) {
   const { open, setOpen } = nav;
 
   const classes = {
-    menu: [],
+    "menu-btn": [],
     "menu-icon": [],
     "menu-mask": [],
   };
@@ -186,7 +183,7 @@ function NavMenuButton({ nav }) {
 
   return (
     <>
-      <DLink className={`nav--item nav--menu ${classes.menu}`} onClick={() => setOpen(!open)} aria-label="Open Menu">
+      <DLink className={`nav--item nav--menu-btn ${classes["menu-btn"]}`} onClick={() => setOpen(!open)} aria-label="Open Menu">
         <Graphic
           type="mask"
           className={`nav--menu-icon ${classes["menu-icon"]}`}
@@ -196,6 +193,50 @@ function NavMenuButton({ nav }) {
       </DLink>
     </>
   );
+}
+
+function flattenItems(items, flatten) {
+  if (flatten) {
+    return items.reduce((acc, item) => {
+      if (item.dropdown && Array.isArray(item.dropdown)) {
+        const dropdownItems = item.dropdown.map((dropdownItem) => ({
+          ...dropdownItem,
+          type: "Link",
+          text: dropdownItem.name,
+          key: dropdownItem.key,
+        }));
+        return [...acc, ...dropdownItems];
+      } else {
+        return [...acc, item];
+      }
+    }, []);
+  } else {
+    return items;
+  }
+}
+
+function filterItems(items, filter) {
+  if (!filter) {
+    return items;
+  } else if (Array.isArray(filter)) {
+    return items.filter((item) => filter.includes(item.type));
+  } else {
+    return items.filter((item) => item.type === filter);
+  }
+}
+
+function updateItems(items, type) {
+  if (type === "menu" && items.some((item) => item.type === "Logo")) {
+    return items.map((item) => {
+      if (item.type === "Logo") {
+        return { ...item, text: "Home" };
+      } else {
+        return item;
+      }
+    });
+  } else {
+    return items;
+  }
 }
 
 export { NavItems, NavLink, NavMenuButton, NavMenu };
