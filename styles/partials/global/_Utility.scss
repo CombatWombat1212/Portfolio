@@ -40,6 +40,7 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
         // // scss-docs-end utils-overflow
         // // scss-docs-start utils-display
         "display": (responsive: true,
+            important: true,
             property: display,
             class: d,
             values: block grid flex none),

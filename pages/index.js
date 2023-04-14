@@ -11,26 +11,31 @@ import { PanelWrapper, PanelDesc, PanelImg, Panel, StudyPanel } from "@/componen
 import Mask from "/components/utilities/Mask";
 import { useEffect, useState } from "react";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
+import useRandomCaptions from "@/scripts/hooks/useRandomCaptions";
 
 function Index() {
   // TODO: Randomize the text on the buttons with a few funny different ones, like take a gander, have a look-see check it out, or just check-it, etc.
 
   const captions = ["Have a look-see", "Take a gander", "Check it", "I must know", "Gimme", "Go on..."];
 
-  const [chosen, setChosen] = useState([]);
+  const chosen = useRandomCaptions(captions, CASE_STUDIES.length);
+  
+  // const [chosen, setChosen] = useState([]);
+  // const getRandomUniqueCaptions = (captions, obj) => {
+  //   var count = obj.length;
+  //   if (count > captions.length) {
+  //     throw new Error("count should be less than or equal to the number of captions");
+  //   }
+  //   const shuffledCaptions = [...captions].sort(() => 0.5 - Math.random());
+  //   return shuffledCaptions.slice(0, count);
+  // };
 
-  const getRandomUniqueCaptions = (captions, obj) => {
-    var count = obj.length;
-    if (count > captions.length) {
-      throw new Error("count should be less than or equal to the number of captions");
-    }
-    const shuffledCaptions = [...captions].sort(() => 0.5 - Math.random());
-    return shuffledCaptions.slice(0, count);
-  };
+  // useMountEffect(() => {
+  //   setChosen(getRandomUniqueCaptions(captions, CASE_STUDIES));
+  // }, []);
 
-  useMountEffect(() => {
-    setChosen(getRandomUniqueCaptions(captions, CASE_STUDIES));
-  }, []);
+
+
 
   return (
     <>

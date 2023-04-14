@@ -9,15 +9,21 @@
   }
 
   .section {
-    // &--wrapper {
-    //   &.pb-section-gap {
-    //     padding-bottom: 0;
-    //   }
-    // }
 
     
     &--main {
       grid-template-columns: repeat(3, 1fr);
+
+
+      @include lg-down {
+        grid-template-columns: repeat(2, 1fr);
+        gap:2rem!important
+      }
+
+      @include sm-down {
+        grid-template-columns: repeat(1, 1fr);
+      }
+
     }
   }
 

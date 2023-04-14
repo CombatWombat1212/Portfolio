@@ -50,6 +50,9 @@
       @include xl-down {
         @include panel-mt(0.935);
       }
+      @include md-down {
+        @include panel-mt(1.05);
+      }
     }
     h2 + & {
       @include panel-mt(0.95);
@@ -79,8 +82,8 @@
       @include xl-down {
         @include panel-mt(1.35);
       }
-      @include xl-down {
-        @include panel-mt(1.15);
+      @include md-down {
+        @include panel-mt(1.35);
       }
     }
   }
@@ -116,6 +119,10 @@
   &--description {
     @include flex-col-center;
 
+    &__study{
+      width: col-width(6);
+    }
+
     &__home {
       width: col-width(6);
       @include xxl-down {
@@ -143,6 +150,11 @@
 
   &--graphic {
     @include flex-col-center;
+
+    &__study {
+      width: col-width(6);
+    }
+
 
     &__home {
       width: col-width(6);
@@ -177,7 +189,8 @@
     }
 
     &__study {
-      height: Min(var(--studypanel-img-height), calc(var(--studypanel-img-height) * (var(--img-aspect-height) / var(--img-aspect-width))));
+      // height: Min(var(--studypanel-img-height), calc(var(--studypanel-img-height) * (var(--img-aspect-height) / var(--img-aspect-width))));
+
     }
 
     &__home {
