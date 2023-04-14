@@ -129,14 +129,14 @@
 
 .footer {
   .contact {
-    --column-wrapper-pl: calc(((((100 * (var(--column-grid-max) / var(--column-width))) * 1%) - var(--site-max-width_wide)) / 2));
+    // --column-wrapper-pl: calc(((((100 * (var(--column-grid-max) / var(--column-width))) * 1%) - var(--site-max-width_wide)) / 2));
 
     height: var(--footer-height);
     background-color: $col-background_darkest;
     @include flex-col-center;
 
     &--wrapper {
-      padding-left: var(--column-wrapper-pl);
+      padding-left: var(--contact-wrapper-pl);
 
       @include xl-down {
         padding-left: 0;

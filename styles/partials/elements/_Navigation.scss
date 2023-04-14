@@ -3,16 +3,10 @@
 
   scroll-padding-top: var(--nav-height);
 
-
-  @include md-down{
-    --nav-height: 3.25rem;
-
+  @include md-down {
+    --nav-height: 3.45rem;
   }
-
-
-
 }
-
 
 .nav {
   --nav-color: #{$col-primary};
@@ -25,11 +19,17 @@
   position: sticky;
   top: 0;
   z-index: 10;
+  @include md-down {
+    overflow:hidden;
+  }
+
 
   &--container {
     @include flex-row-between;
     height: 100%;
     align-items: center;
+
+  
   }
 
   &--group {
@@ -57,7 +57,7 @@
     text-decoration: none;
     color: $col-background;
     background-color: var(--nav-color);
-
+    z-index: 1;
     height: var(--font-size);
     @include flex-col-center;
 
@@ -72,18 +72,24 @@
 
     &:first-child {
       margin-left: calc(var(--nav-button-pad-x) * -1);
+
+      @include md-down {
+        margin-left: calc(var(--nav-button-pad-x) * -1);
+      }
     }
 
     &:last-child {
       margin-right: calc(var(--nav-button-pad-x) * -1);
+
+      @include md-down {
+        margin-right: calc(var(--site-margin-x_wide) * -1);
+      }
     }
 
     @include hover {
       background-color: $col-background_darkest;
       color: var(--nav-color);
     }
-
-    z-index: 1;
 
     &__drop {
       cursor: pointer;

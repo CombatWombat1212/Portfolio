@@ -14,6 +14,9 @@ import Footer from "@/components/navigation/Footer";
 import LoadingScreen from "@/components/navigation/LoadingScreen";
 import useSecret from "@/scripts/hooks/useSecret";
 import useRandomString from "@/scripts/hooks/useRandomString";
+import { useBreakpoint } from "@/scripts/hooks/useBreakpoint";
+import { splitPx } from "@/scripts/GlobalUtilities";
+import useScreenWidth from "@/scripts/hooks/useScreenWidth";
 // const style =
 // `font-family: "Gira Sans"; font-size: 1.4375rem;` +
 // // +`line-height:2rem;`
@@ -65,9 +68,9 @@ export default function App({ Component, pageProps }) {
   // }, [secret, secret2]);
 
   // I am not currently using this
-  useMountEffect(() => {
-    postScreenSizeToRoot();
-  });
+  // useMountEffect(() => {
+  //   postScreenSizeToRoot();
+  // });
 
   // const [popup, setPopup] = useState(false);
 
@@ -184,8 +187,40 @@ export default function App({ Component, pageProps }) {
 
   // TODO right now if you scroll down a page really fast on a laggy machine you can see the scroll page behind it, so we should update this so that theres actually an element in between the two pages rather than just the background behind them
 
+
+
+
+  const bp = useBreakpoint();
+  useEffect(() => {
+    console.log(bp);
+  }, [bp]);
+
+
+
+
+
+
+
+  // const navConRef = useRef(null);
+  // const width = useScreenWidth({ debounceTime: 200});
+  // const [siteMarginWide, setSiteMarginWide] = useState(0);
+
+
+  // const global = {
+  //   margin:{
+  //     wide: siteMarginWide,
+  //     setWide: setSiteMarginWide,
+  //   },
+  //   refs: {
+  //     navCon: navConRef,
+  //   }
+  // }
+
+
+
   return (
-    <>
+    <div className="site">
+
       <Layout>
         <Popup pop={pop} />
 
@@ -224,7 +259,7 @@ export default function App({ Component, pageProps }) {
 
         {/* <LoadingScreen showLoading={showLoading} chosen={chosen} /> */}
       </Layout>
-    </>
+    </div>
   );
 }
 

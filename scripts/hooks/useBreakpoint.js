@@ -288,59 +288,73 @@ const useBreakpointUtils = ({debounceTime = RESIZE_TIMEOUT} = {}) => {
 // };
 
 
-const useResponsiveUtils = ({ debounceTime = RESIZE_TIMEOUT } = {}) => {
-  const bp = useBreakpoint({ debounceTime });
-  const breakpointNames = useMemo(() => {
-    return getBreakpointNames();
-  }, []);
+// const useResponsiveUtils = ({ debounceTime = RESIZE_TIMEOUT } = {}) => {
+//   const bp = useBreakpoint({ debounceTime });
+//   const breakpointNames = useMemo(() => {
+//     return getBreakpointNames();
+//   }, []);
 
-  const isBp = useCallback((targetBreakpoint) => {
-    return bp === targetBreakpoint;
-  }, [bp]);
+//   const isBp = useCallback((targetBreakpoint) => {
+//     return bp === targetBreakpoint;
+//   }, [bp]);
 
-  const isntBp = useCallback((targetBreakpoint) => {
-    return bp !== targetBreakpoint;
-  }, [bp]);
+//   const isntBp = useCallback((targetBreakpoint) => {
+//     return bp !== targetBreakpoint;
+//   }, [bp]);
 
-  const isBpOrDown = useCallback((targetBreakpoint) => {
-    const currentIndex = breakpointNames.indexOf(bp);
-    const targetIndex = breakpointNames.indexOf(targetBreakpoint);
+//   const isBpOrDown = useCallback((targetBreakpoint) => {
+//     const currentIndex = breakpointNames.indexOf(bp);
+//     const targetIndex = breakpointNames.indexOf(targetBreakpoint);
 
-    return currentIndex <= targetIndex;
-  }, [breakpointNames, bp]);
+//     return currentIndex <= targetIndex;
+//   }, [breakpointNames, bp]);
 
-  const isBpOrUp = useCallback((targetBreakpoint) => {
-    const currentIndex = breakpointNames.indexOf(bp);
-    const targetIndex = breakpointNames.indexOf(targetBreakpoint);
+//   const isBpOrUp = useCallback((targetBreakpoint) => {
+//     const currentIndex = breakpointNames.indexOf(bp);
+//     const targetIndex = breakpointNames.indexOf(targetBreakpoint);
 
-    return currentIndex >= targetIndex;
-  }, [breakpointNames, bp]);
+//     return currentIndex >= targetIndex;
+//   }, [breakpointNames, bp]);
 
-  const isBpAndDown = useCallback((targetBreakpoint) => {
-    const currentIndex = breakpointNames.indexOf(bp);
-    const targetIndex = breakpointNames.indexOf(targetBreakpoint);
+//   const isBpAndDown = useCallback((targetBreakpoint) => {
+//     const currentIndex = breakpointNames.indexOf(bp);
+//     const targetIndex = breakpointNames.indexOf(targetBreakpoint);
 
-    return currentIndex < targetIndex;
-  }, [breakpointNames, bp]);
+//     return currentIndex < targetIndex;
+//   }, [breakpointNames, bp]);
 
-  const isBpAndUp = useCallback((targetBreakpoint) => {
-    const currentIndex = breakpointNames.indexOf(bp);
-    const targetIndex = breakpointNames.indexOf(targetBreakpoint);
+//   const isBpAndUp = useCallback((targetBreakpoint) => {
+//     const currentIndex = breakpointNames.indexOf(bp);
+//     const targetIndex = breakpointNames.indexOf(targetBreakpoint);
 
-    return currentIndex > targetIndex;
-  }, [breakpointNames, bp]);
+//     return currentIndex > targetIndex;
+//   }, [breakpointNames, bp]);
 
-  return {
-    bp,
-    isBp,
-    isntBp,
-    isBpOrDown,
-    isBpOrUp,
-    isBpAndDown,
-    isBpAndUp,
-  };
+//   return {
+//     bp,
+//     isBp,
+//     isntBp,
+//     isBpOrDown,
+//     isBpOrUp,
+//     isBpAndDown,
+//     isBpAndUp,
+//   };
+// };
+
+const useResponsiveUtils = ({debounceTime=RESIZE_TIMEOUT} = {}) => {
+  const currentBreakpoint = useBreakpoint({debounceTime});
+  const breakpointUtils = useBreakpointUtils({debounceTime});
+
+  const responsiveUtils = useMemo(() => {
+    const utils = {};
+    for (const [key, value] of Object.entries(breakpointUtils)) {
+      utils[key] = (targetBreakpoint) => value(currentBreakpoint, targetBreakpoint);
+    }
+    return utils;
+  }, [currentBreakpoint, breakpointUtils]);
+
+  return responsiveUtils;
 };
-
 
 
 export { useBreakpoint, useBreakpointUtils, useResponsiveUtils, getBreakpointNames}

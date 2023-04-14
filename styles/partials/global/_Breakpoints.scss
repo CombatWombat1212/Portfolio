@@ -4,12 +4,14 @@
 // 	lg: 62em,
 // 	xl: 75em,
 // 	xxl: 87.5em);
-$grid-breakpoints: (xs: 0em,
-	sm: 36em,
-	md: 48em,
+$grid-breakpoints: (
+	xs: 0em,
+	sm: 37em,
+	md: 50em,
 	lg: 62em,
-	xl: 78em,
-	xxl: 92em);
+	xl: 80em,
+	xxl: 92em
+	);
 
 
 // $grid-breakpoints: (xs: 0,

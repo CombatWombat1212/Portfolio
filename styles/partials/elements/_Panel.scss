@@ -1,70 +1,229 @@
-
-
 .panel {
-  @include flex-row-between;
+}
 
+.studypanel {
+  // TODO: Overall, even in the jsx and everthing, it might be more organized to replace 'studypanel' with 'panel__study' make it a variant of the panel element.
+
+  @include flex-row-between;
+  --studypanel-img-height: 43rem;
   --panel-description-spacing: 1rem;
 
-  &--desc {
+  @mixin panel-mt($mt) {
+    margin-top: calc(var(--panel-description-spacing) * #{$mt});
+  }
 
-    &>*+* {
-      margin-top: var(--panel-description-spacing);
-    }
-
+  &--wrapper {
     @include flex-col-center;
-    
-  }
 
-  &--graphic{
-    @include flex-col-center;
-  }
 
-  &--img {
-    position: relative; 
-    img {
-      @include img-contain;
+      height: 92vh;
+
+    @include xl-down {
+      height: 100% !important;
+      margin-top: 18rem;
+      margin-bottom: 18rem;
+    }
+
+    @include lg-down {
+      margin-top: 14rem;
+      margin-bottom: 14rem;
+    }
+
+    @include md-down {
+      margin-top: 14rem;
+      margin-bottom: 14rem;
     }
   }
 
-
-  &--title{
-
-    &, &>span{
-      @include h1;
-    }
-
+  &--title {
+    @include h1;
   }
 
-  &--tags{
-    margin-top: calc(var(--panel-description-spacing) * 1.75);
+  &--subheading {
+    h1 + & {
+      @include panel-mt(1.35);
+
+      @include xxl-down {
+        @include panel-mt(1.15);
+      }
+
+      @include xl-down {
+        @include panel-mt(0.935);
+      }
+    }
+    h2 + & {
+      @include panel-mt(0.95);
+
+      @include xxl-down {
+        @include panel-mt(0.825);
+      }
+
+      @include xl-down {
+        @include panel-mt(0.795);
+      }
+      @include md-down {
+        // width:90%;
+        @include panel-mt(0.55);
+      }
+    }
+  }
+
+  &--paragraph {
+    h3 + & {
+      @include panel-mt(1.8);
+
+      @include xxl-down {
+        @include panel-mt(1.65);
+      }
+
+      @include xl-down {
+        @include panel-mt(1.35);
+      }
+      @include xl-down {
+        @include panel-mt(1.15);
+      }
+    }
+  }
+
+  &--tags {
+    @include panel-mt(1.55);
+
+    @include xxl-down {
+      @include panel-mt(1.45);
+    }
+    @include xl-down {
+      @include panel-mt(1.35);
+    }
+    @include md-down {
+      @include panel-mt(1.175);
+    }
   }
 
   &--button {
-    margin-top: calc(var(--panel-description-spacing) * 4);
+    @include panel-mt(3.35);
+
+    @include xxl-down {
+      @include panel-mt(2.85);
+    }
+    @include xl-down {
+      @include panel-mt(2.75);
+    }
+    @include md-down {
+      @include panel-mt(2.35);
+    }
   }
 
+  &--description {
+    @include flex-col-center;
 
+    &__home {
+      width: col-width(6);
+      @include xxl-down {
+        width: col-width(4.5);
+      }
+      @include xl-down {
+        width: col-width(4.5);
+      }
+      @include lg-down {
+        width: col-width(5);
+      }
 
-}
+      @include md-down {
+        order: 1;
+        @include mx-auto;
+        margin-top: 2.45rem;
+        width: col-width(7.45);
+      }
 
+      @include sm-down {
+        width: col-width(10.75);
+      }
+    }
+  }
 
+  &--graphic {
+    @include flex-col-center;
 
+    &__home {
+      width: col-width(6);
+      @include xxl-down {
+        width: col-width(6.25);
+      }
 
+      @include xl-down {
+        width: col-width(6.25);
+      }
 
-.studypanel {
+      @include lg-down {
+        width: col-width(6.35);
+      }
 
-  // TODO: Overall, even in the jsx and everthing, it might be more organized to replace 'studypanel' with 'panel__study' make it a variant of the panel element.
+      @include md-down {
+        order: 0;
+        width: col-width(7.45);
+        @include mx-auto;
+      }
+      @include sm-down {
+        width: col-width(11);
+      }
+    }
+  }
 
-  --studypanel-img-height: 43rem;
+  &--img {
+    position: relative;
 
-&--img {
-  height: Min(var(--studypanel-img-height), calc(var(--studypanel-img-height) * (var(--img-aspect-height) / var(--img-aspect-width))));
-}
+    img {
+      @include img-contain;
+    }
 
+    &__study {
+      height: Min(var(--studypanel-img-height), calc(var(--studypanel-img-height) * (var(--img-aspect-height) / var(--img-aspect-width))));
+    }
 
-&__study{
-  @include marg-y(8.5rem);
-}
+    &__home {
+      height: var(--studypanel-img-height);
 
+      @include md-down {
+        height: auto;
+        display: flex;
+        img {
+          max-height: var(--studypanel-img-height);
+        }
+      }
+    }
+  }
 
+  &--tags {
+    @include xl-down {
+      & > * + * {
+        margin: 0 !important;
+      }
+      gap: var(--tag-spacing);
+      flex-wrap: wrap;
+    }
+    @include lg-down {
+      --tag-spacing: 0.85rem!important;
+    }
+    @include md-down {
+      --tag-spacing: 0.55rem!important;
+    }
+  }
+
+  &__study {
+    @include marg-y(8.5rem);
+  }
+
+  &__home {
+    @include xl-down {
+      --studypanel-img-height: 38rem;
+    }
+    @include lg-down {
+      --studypanel-img-height: 30rem;
+    }
+
+    @include md-down {
+      @include flex-col-center;
+      --studypanel-img-height: 39vh;
+    }
+  }
 }

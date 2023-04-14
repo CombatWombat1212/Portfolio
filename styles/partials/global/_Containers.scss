@@ -27,7 +27,7 @@ $enable-grid-classes: true;
 
 
 
-// $container_wide-max-width: (
+// $container-max-width_wide: (
 //   xs: 100%,
 //   sm: 32em,
 //   md: 43em,
@@ -47,9 +47,12 @@ $enable-grid-classes: true;
 //   xxl: 68.75rem,
 // ) !default;
 
+
+
+
 $container-max-width: (
-xs: 90vw,
-sm: 90vw,
+xs: calc(100% - 2rem),
+sm: calc(100% - 2rem),
 md: 45.5rem,
 lg: 57.5rem,
 xl: 62rem,
@@ -58,9 +61,9 @@ xxl: 66rem,
 
 
 
-$container_wide-max-width: (
-  xs: calc(100% - 3rem),
-  sm: 90%,
+$container-max-width_wide: (
+  xs: calc(100% - 2rem),
+  sm: calc(100% - 2rem),
   md: 90%,
   lg: 90%,
   xl: 88%,
@@ -83,7 +86,7 @@ $container_wide-max-width: (
 // ) !default;
 
 $container-max-widths_inverted: mapReverse($container-max-width);
-$container_wide-max-widths_inverted: mapReverse($container_wide-max-width);
+$container-max-widths_wide_inverted: mapReverse($container-max-width_wide);
 
 @function container-width($w: 100%) {
   //   @return calc(#{$w} - var(--sidebar-width));
@@ -100,6 +103,7 @@ $container_wide-max-widths_inverted: mapReverse($container_wide-max-width);
   @at-root {
     :root {
       --site-max-width: #{$w};
+      // --site-pad-x: calc((100% - var(--site-max-width)) / 2)
     }
   }
 }
@@ -108,6 +112,7 @@ $container_wide-max-widths_inverted: mapReverse($container_wide-max-width);
   @at-root {
     :root {
       --site-max-width_wide: #{$w};
+      // --site-pad-x: calc((100% - var(--site-max-width)) / 2)
     }
   }
 }
@@ -139,7 +144,7 @@ $container_wide-max-widths_inverted: mapReverse($container_wide-max-width);
   @for $i from 1 through length($container-max-widths_inverted) - 1 {
     $breakpoint: nth(map-keys($container-max-widths_inverted), $i);
     $container-max-width: nth(map-values($container-max-widths_inverted), $i);
-    $container_wide-max-width: nth(map-values($container_wide-max-widths_inverted), $i);
+    $container-max-width_wide: nth(map-values($container-max-widths_wide_inverted), $i);
     
 
     //apply the correct container max-width to the correct breakpoint
@@ -157,9 +162,9 @@ $container_wide-max-widths_inverted: mapReverse($container_wide-max-width);
       }
 
       .container__wide {
-        $width: nth(map-values($container_wide-max-widths_inverted), $i + 1);
-        max-width: container-width($container_wide-max-width);
-        @include maxWidthWideToRoot(#{container-width($container_wide-max-width)});
+        $width: nth(map-values($container-max-widths_wide_inverted), $i + 1);
+        max-width: container-width($container-max-width_wide);
+        @include maxWidthWideToRoot(#{container-width($container-max-width_wide)});
         @include media-breakpoint-down($breakpoint) {
           max-width: container-width($width);
           @include maxWidthWideToRoot(#{container-width($width)});
@@ -181,7 +186,7 @@ $container_wide-max-widths_inverted: mapReverse($container_wide-max-width);
       }
 
       .container__wide {
-        $width: nth(map-values($container_wide-max-widths_inverted), $i + 1);
+        $width: nth(map-values($container-max-widths_wide_inverted), $i + 1);
         @include media-breakpoint-down($breakpoint) {
           max-width: container-width($width);
           @include maxWidthWideToRoot(#{container-width($width)});

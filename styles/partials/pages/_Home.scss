@@ -1,33 +1,98 @@
 #Home {
   // &--Hero {
-    .panel {
-      &--img {
-        @include mx-auto;
-        width: 9.5rem;
+  .studypanel {
 
-        .mask {
-          background-color: $col-secondary;
-        }
-      }
+    @at-root #Home.studypanel--wrapper{
+      height: calc(100vh - var(--nav-height))!important;
+      margin:0!important;
 
-      &--desc {
-        .text--body {
-          margin-top: calc(var(--panel-description-spacing) * 1.3);
-        }
+      @include md-down{
+        height: calc(91vh - var(--nav-height))!important;
       }
     }
+
+
+    &--img {
+
+      @include mx-auto;
+      width: 9.5rem;
+
+      .mask {
+        background-color: $col-secondary;
+      }
+
+      height: unset;
+      @include xl-down {
+        width: 7rem;
+      }
+      @include lg-down {
+        width: 5.75rem;
+      }
+
+      @include lg {
+        margin-left: 7.5%;
+      }
+
+      @include md-down {
+        display: block;
+        margin-top: 6rem;
+        width: 5rem;
+      }
+
+      @include sm-down {
+        margin-top: Min(8vh, 4rem);
+      }
+      
+    }
+
+    &--description {
+      @include xxl-down {
+        width: col-width(6.75);
+      }
+      @include xl-down {
+        width: col-width(8);
+      }
+
+      @include md-down {
+        margin-top: 0rem;
+        width: col-width(8);
+      }
+      @include sm-down {
+        width: col-width(11);
+      }
+    }
+    &--graphic {
+      @include md-down {
+        order: 1;
+      }
+
+      @include xl-down {
+        margin-left: -3.25rem;
+      }
+
+      @include lg {
+        width: col-width(4);
+        margin-top: 1rem;
+        justify-content: end;
+      }
+
+      @include md-down {
+        @include mx-auto;
+      }
+    }
+  }
   // }
 
   // Moved to _StudyPanel.scss
 
-  &--Makeright,
-  &--Made,
-  &--Koalako,
-  &--Explorations {
-    .panel--img {
-      height: 43rem;
-    }
-  }
+  // &--Makeright,
+  // &--Made,
+  // &--Koalako,
+  // &--Explorations {
+  //   .panel--img {
+  //     height: 43rem;
+  //   }
+  // }
 
   //   &--Makeright {
   //     .panel--img {

@@ -10,7 +10,7 @@ var CASE_STUDIES = [
       string: "Translating The Benefits of 3D Printing to Everyday Consumers",
       jsx: (
         <>
-          Translating The Benefits of 3D Printing<br></br>to Everyday Consumers
+          Translating The Benefits of 3D Printing<br className="d-xxl-none" /> to Everyday Consumers
         </>
       ),
     },
@@ -50,7 +50,7 @@ var CASE_STUDIES = [
       string: "Product Rendering for a Toronto-Based Men’s Fashion Brand",
       jsx: (
         <>
-          Product Rendering for a Toronto-Based<br></br>Men’s Fashion Brand
+          Product Rendering for a Toronto-Based<br className="d-xxl-none" /> Men’s Fashion Brand
         </>
       ),
     },
@@ -91,7 +91,7 @@ var CASE_STUDIES = [
       string: "Supporting Parents in Fostering Adolescent Creative Development",
       jsx: (
         <>
-          Supporting Parents in Fostering<br></br>Adolescent Creative Development
+          Supporting Parents in Fostering<br className="d-lg-none" /> Adolescent Creative Development
         </>
       ),
     },
@@ -130,7 +130,7 @@ var CASE_STUDIES = [
       string: "Undeserving of a case study, but well-deserving of your attention",
       jsx: (
         <>
-          Undeserving of a case study,<br></br>but well-deserving of your attention
+          Undeserving of a case study,<br className="d-lg-none" /> but well-deserving of your attention
         </>
       ),
     },

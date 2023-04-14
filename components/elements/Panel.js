@@ -2,21 +2,30 @@ import Image from "next/image";
 import PropTypes from "prop-types";
 import Button from "../elements/Buttons";
 import Tag from "../elements/Tag";
+import { useResponsiveUtils } from "@/scripts/hooks/useBreakpoint";
+
+function PanelWrapper({ children, id }) {
+  return (
+    <div className="studypanel--wrapper" {...(id != undefined ? { id: id } : {})}>
+      {children}
+    </div>
+  );
+}
 
 function Panel({ children, id, className, reference, ...props }) {
   return (
     <>
-      <div id={id} className={"container container__wide panel" + (className ? ` ${className}` : "")} ref={reference} {...props}>
+      <div id={id} className={`container container__wide studypanel ${className || ""}`} ref={reference} {...props}>
         {children}
       </div>
     </>
   );
 }
 
-function PanelDesc({ children, className, reference, ...props }) {
+function PanelDesc({ children, className, variant, reference, ...props }) {
   return (
     <>
-      <div className={"panel--desc" + (className ? ` ${className}` : "")} ref={reference} {...props}>
+      <div className={`studypanel--description studypanel--description__${variant} ${className || ""}`} ref={reference} {...props}>
         {children}
       </div>
     </>
@@ -26,9 +35,9 @@ function PanelDesc({ children, className, reference, ...props }) {
 function PanelImg({ children, className, variant, effect, ...props }) {
   return (
     <>
-      <div className={"panel--graphic" + (className ? ` ${className}` : "")}>
-        <div className={"panel--img" + (variant == "study" ? ` studypanel--img` : "")} {...props}>
-          {/* {effect == 'gradient-white' && <div className="img--gradient img--gradient__white "></div>} */}
+      <div className={`studypanel--graphic studypanel--graphic__${variant} ${className || ""}`}>
+        {/* <div className={`studypanel--img ${variant == "study" ? " studypanel--img" : ""}`} {...props}> */}
+        <div className={`studypanel--img studypanel--img__${variant}`} {...props}>
           {children}
         </div>
       </div>
@@ -46,9 +55,6 @@ PanelImg.propTypes = {
 };
 
 function StudyPanel({ id, study, variant, button }) {
-
-
-
   var main, alt;
   main = study.imgs.main;
   if (study.imgs.alt) alt = study.imgs.alt;
@@ -63,19 +69,17 @@ function StudyPanel({ id, study, variant, button }) {
 
   var btnStyle = button == "" ? { opacity: 0 } : { opacity: 1 };
 
-
-
-
+  // const {isBpOrDown} = useResponsiveUtils();
 
   return (
     <>
-      <Panel id={id} className={"studypanel" + ` studypanel__${variant}`}>
-        <PanelDesc>
-          <h2 className="color--secondary">{study.name}</h2>
-          <h3>{study.subtitle.jsx}</h3>
+      <Panel id={id} className={`studypanel studypanel__${variant}`}>
+        <PanelDesc className={``} variant={variant}>
+          <h2 className="studypanel--heading color--secondary">{study.name}</h2>
+          <h3 className="studypanel--subheading">{study.subtitle.jsx}</h3>
 
           {study.tags && (
-            <div className="panel--tags tag--group">
+            <div className="studypanel--tags tag--group">
               {study.tags.map((tag) => {
                 return <Tag key={tag.key}>{tag.name}</Tag>;
               })}
@@ -84,14 +88,26 @@ function StudyPanel({ id, study, variant, button }) {
 
           {variant == "home" ? (
             <>
-              <Button className="panel--button" type="regular" icon={["arrow_right", "right", "mask"]} animation={"pulse-right"} href={study.link} style={btnStyle}>
+              <Button
+                className="studypanel--button"
+                type="regular"
+                icon={["arrow_right", "right", "mask"]}
+                animation={"pulse-right"}
+                href={study.link}
+                style={btnStyle}>
                 {button}
               </Button>
             </>
           ) : (
-            variant == "study" && study.type != "gallery" && (
+            variant == "study" &&
+            study.type != "gallery" && (
               <>
-                <Button className="panel--button" type="regular" icon={["arrow_down", "right", "mask"]} animation={"pulse-down"} href={"#Delivery"}>
+                <Button
+                  className="studypanel--button"
+                  type="regular"
+                  icon={["arrow_down", "right", "mask"]}
+                  animation={"pulse-down"}
+                  href={"#Delivery"}>
                   Skip to Solution
                 </Button>
               </>
@@ -100,7 +116,6 @@ function StudyPanel({ id, study, variant, button }) {
         </PanelDesc>
 
         <PanelImg
-          className="col-6"
           variant={variant}
           style={{
             "--img-aspect-width": img.width,
@@ -124,4 +139,4 @@ StudyPanel.propTypes = {
   variant: PropTypes.oneOf(["home", "study"]),
 };
 
-export { Panel, PanelDesc, PanelImg, StudyPanel };
+export { PanelWrapper, Panel, PanelDesc, PanelImg, StudyPanel };

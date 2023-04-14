@@ -181,9 +181,36 @@ function NavMenuButton({ nav }) {
     classes[key] = classes[key].join(" ");
   });
 
+
+  const menuBtnRef = useRef(null);
+  const [focused, setFocused] = useState(false);
+
+  const menuOnClickHandler = () => {
+    setOpen(!open);
+      setFocused(false);
+  }
+
+  useEffect(() => {
+    if (!focused && menuBtnRef.current) {
+      menuBtnRef.current.blur();
+    }
+  }, [focused]);
+  const handleFocus = () => {
+  setFocused(true);
+};
+
+
+
   return (
     <>
-      <DLink className={`nav--item nav--menu-btn ${classes["menu-btn"]}`} onClick={() => setOpen(!open)} aria-label="Open Menu">
+      <DLink className={`nav--item nav--menu-btn ${classes["menu-btn"]}`}
+      
+      reference={menuBtnRef}  
+      onClick={menuOnClickHandler}
+      onFocus={handleFocus}
+
+      
+      aria-label="Open Menu">
         <Graphic
           type="mask"
           className={`nav--menu-icon ${classes["menu-icon"]}`}
