@@ -200,7 +200,7 @@ input, button, textarea, select {
     --font-size-body: 1.025rem;
     --font-size-quote: 0.9rem;
     --font-size-logo: 1.3125rem;
-    --font-leading-h1: 2.875rem;
+    --font-leading-h1: 2.775rem;
     --font-leading-h2: 2.375rem;
     --font-leading-h3: 1.7rem;
     --font-leading-h4: 1.125rem;
@@ -1322,7 +1322,7 @@ h3 + .studypanel--paragraph {
     order: 1;
     margin-right: auto;
     margin-left: auto;
-    margin-top: 2.45rem;
+    margin-top: 2.65rem;
     width: 62.08333%;
   }
 }
@@ -6848,7 +6848,7 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 36.9375em) {
   #Home .studypanel--description {
-    width: 91.66667%;
+    width: 95.83333%;
   }
 }
 

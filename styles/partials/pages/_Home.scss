@@ -58,7 +58,7 @@
         width: col-width(8);
       }
       @include sm-down {
-        width: col-width(11);
+        width: col-width(11.5);
       }
     }
     &--graphic {
