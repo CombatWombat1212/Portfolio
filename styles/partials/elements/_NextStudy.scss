@@ -5,15 +5,18 @@
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: 1fr;
 
+    --gap: 3rem;
+    gap: var(--gap);
+
     @include lg-down {
-      --gap: 2rem !important;
-      gap: var(--gap) !important;
+      --gap: 2rem;
+      gap: var(--gap);
     }
     @include md-down {
-      --gap: 1rem !important;
+      --gap: 1rem;
     }
     @include sm-down {
-      --gap: 1rem !important;
+      --gap: 1rem;
     }
   }
 
@@ -29,12 +32,10 @@
   color: $col-primary;
 
   @include sm-down {
-    --next-study-pad: 1.35rem;
+    --next-study-pad: 1.15rem;
   }
 
-
-
-@include hover {
+  @include hover {
     background-color: $col-background_darkest;
     color: $col-primary_hovered;
   }
@@ -52,7 +53,6 @@
     @include md-down {
       display: none !important;
     }
-
   }
 
   &--graphic {
@@ -76,17 +76,16 @@
     }
 
     &__mobile {
-      margin-top:1rem;
+      margin-top: 1rem;
 
-      @include md-down{
-        margin-top:0rem;
+      @include md-down {
+        margin-top: 0rem;
         height: 12rem;
       }
 
-      @include sm-down{
-        height: 6.75rem;
-        margin-top:0rem;
-        // @include pad-x(1rem);
+      @include sm-down {
+        height: 8.35rem;
+        margin-top: 0rem;
       }
     }
 
@@ -97,16 +96,18 @@
   &--inner {
     @include flex-col;
     z-index: 1;
-    width:100%;
+    width: 100%;
   }
 
   &--body {
     padding: var(--next-study-pad);
 
     @include sm-down {
-      padding-bottom: calc(var(--next-study-pad) * 0.75);
+      // padding-top: calc(var(--next-study-pad) * 1.15);
+      // padding-bottom: calc(var(--next-study-pad) * 0.65);
+      @include pad-y(calc(var(--next-study-pad) * 1.25));
+      @include pad-x(calc(var(--next-study-pad) * 1.25));
     }
-
   }
 
   &--description {
@@ -131,6 +132,9 @@
     @include md-down {
       margin-top: var(--next-study-pad);
     }
+    @include sm-down {
+      display:none;
+    }
   }
 
   &--button {
@@ -141,11 +145,12 @@
 
     @include flex-row-between;
 
-
     @include sm-down {
-      // --next-study-pad: 0.925rem;
-      // --button-height:2rem;
+      &__left{
+        justify-content: flex-start;
+      }
     }
+
 
   }
 

@@ -45,7 +45,8 @@ function Inner({ children, className, type, icon, animation, color, tag, ...prop
     <>
       {icon ? (
         <>
-          {iconSide == "left" || (iconSide == "alone" || iconSide == "middle") && <ButtonIcon img={iconName} type={iconType}></ButtonIcon>}
+          {(iconSide == "alone" || iconSide == "middle") && <ButtonIcon img={iconName} type={iconType}></ButtonIcon>}
+          {iconSide == "left" && <ButtonIcon img={iconName} type={iconType}></ButtonIcon>}
           {iconSide != "alone" && iconSide != "middle" && <ButtonCopy>{children}</ButtonCopy>}
           {iconSide == "right" && <ButtonIcon img={iconName} type={iconType}></ButtonIcon>}
         </>

@@ -341,20 +341,45 @@ const useBreakpointUtils = ({debounceTime = RESIZE_TIMEOUT} = {}) => {
 //   };
 // };
 
-const useResponsiveUtils = ({debounceTime=RESIZE_TIMEOUT} = {}) => {
-  const currentBreakpoint = useBreakpoint({debounceTime});
-  const breakpointUtils = useBreakpointUtils({debounceTime});
+
+
+// const useResponsiveUtils = ({debounceTime=RESIZE_TIMEOUT} = {}) => {
+//   const currentBreakpoint = useBreakpoint({debounceTime});
+//   const breakpointUtils = useBreakpointUtils({debounceTime});
+
+//   const responsiveUtils = useMemo(() => {
+//     const utils = {};
+//     for (const [key, value] of Object.entries(breakpointUtils)) {
+//       utils[key] = (targetBreakpoint) => value(currentBreakpoint, targetBreakpoint);
+//     }
+//     return utils;
+//   }, [currentBreakpoint, breakpointUtils]);
+
+//   return responsiveUtils;
+// };
+
+const useResponsiveUtils = ({ debounceTime = RESIZE_TIMEOUT } = {}) => {
+  const currentBreakpoint = useBreakpoint({ debounceTime });
+  const breakpointUtils = useBreakpointUtils({ debounceTime });
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (currentBreakpoint) {
+      setLoading(false);
+    }
+  }, [currentBreakpoint]);
 
   const responsiveUtils = useMemo(() => {
     const utils = {};
     for (const [key, value] of Object.entries(breakpointUtils)) {
-      utils[key] = (targetBreakpoint) => value(currentBreakpoint, targetBreakpoint);
+      utils[key] = (targetBreakpoint) =>
+        value(currentBreakpoint, targetBreakpoint);
     }
     return utils;
   }, [currentBreakpoint, breakpointUtils]);
 
-  return responsiveUtils;
+  return { ...responsiveUtils, loading };
 };
-
 
 export { useBreakpoint, useBreakpointUtils, useResponsiveUtils, getBreakpointNames}

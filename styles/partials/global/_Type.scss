@@ -176,10 +176,12 @@ $font-body: "Tenon";
   margin-bottom: var(--font-margin-bottom-h4);
 }
 
-@mixin body-text {
-  font-family: $font-body;
-  font-size: var(--font-size-body);
-  line-height: var(--font-leading-body);
+@mixin body-text($important: false) {
+  $importance: if($important, !important, null);
+  
+  font-family: $font-body $importance;
+  font-size: var(--font-size-body) $importance;
+  line-height: var(--font-leading-body) $importance;
 }
 
 @mixin body {

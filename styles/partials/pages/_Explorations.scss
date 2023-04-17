@@ -1,4 +1,13 @@
 #Explorations {
+
+
+
+  .indicator {
+    @include md-down{
+      display:none;
+    }
+  }
+
   .studypanel {
     --studypanel-img-height: 26rem;
 

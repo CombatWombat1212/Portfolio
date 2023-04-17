@@ -10,6 +10,8 @@ import Description from "../sections/Description";
 import Graphic from "../sections/Graphic";
 import Heading from "../sections/Heading";
 import useRandomCaptions from "@/scripts/hooks/useRandomCaptions";
+import { useResponsiveUtils } from "@/scripts/hooks/useBreakpoint";
+import { arrow_left, arrow_right } from "@/data/ICONS";
 
 const STUDY_HOVER_AFFECTED = ["next-study", "next-study--button", "graphic--effect__default", "graphic--effect__hover", "next-study--graphic", "tag"];
 
@@ -71,7 +73,7 @@ function Copy({ study }) {
   );
 }
 
-function Study({ study, button }) {
+function Study({ study, button, index }) {
   const reference = useRef(null);
 
   const handleMouseEnter = (e) => {
@@ -83,7 +85,34 @@ function Study({ study, button }) {
   };
 
 
+  const { isBpAndDown, loading } = useResponsiveUtils();
 
+  const btnIcon = (() => {
+    let direction = "arrow_right";
+    if (!loading && isBpAndDown("sm") && index === 0) {
+      direction = "arrow_left";
+    }
+    return direction;
+  })();
+
+  const btnIconSide = (() => {
+    let direction = "right";
+    if (!loading && isBpAndDown("sm")) {
+      direction = index === 0 ? "left" : "right";
+    }
+    return direction;
+  })();
+  
+
+  const btnText = (() => {
+    let text = button;
+    if (!loading && isBpAndDown("sm")) {
+      text = study.name == "Made Clothing Co." ? "Made" : study.name;
+    }
+    return text;
+  })();
+
+  console.log(btnIcon);
 
   return (
     <Link
@@ -106,11 +135,20 @@ function Study({ study, button }) {
       <div className="next-study--inner">
         <div className="next-study--body">
           <Copy study={study} />
-          <Tags study={study} />
+          {/* <Tags study={study} /> */}
         </div>
 
-        <Button tag="div" type="bottom" className="next-study--button link" icon={["arrow_right", "right", "mask"]} animation="pulse-right">
-          {button}
+        <Button tag="div" type="bottom" className={`next-study--button next-study--button__${btnIconSide} link`} 
+          
+          icon={[
+            btnIcon,
+            btnIconSide,
+            "mask"
+          ]
+                    
+          
+          } animation="pulse-right">
+          {btnText}
         </Button>
         
 
@@ -129,12 +167,10 @@ function NextStudies({ study }) {
   const captions = ["Check it", "Tell me", "Gimme", "Go on..."];
   const chosen = useRandomCaptions(captions, 2);
 
-  // i dunno if this two panel look will work, sorry my guy
-
   return (
-    <div className="next-study--group gap-4 ">
+    <div className="next-study--group">
       {adjacentStudies.map((study, index) => (
-        <Study study={study} key={study.key} button={chosen[index]} />
+        <Study study={study} key={study.key} button={chosen[index]} index={index} />
       ))}
     </div>
   );
