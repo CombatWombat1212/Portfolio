@@ -112,8 +112,6 @@ function Study({ study, button, index }) {
     return text;
   })();
 
-  console.log(btnIcon);
-
   return (
     <Link
       ref={reference}

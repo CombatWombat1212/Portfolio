@@ -2,12 +2,7 @@ import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useSta
 import Button from "../../elements/Buttons";
 import { loading_white } from "@/data/ICONS";
 import { RESIZE_TIMEOUT, createUpdateConditions, splitPx, splitRem } from "@/scripts/GlobalUtilities";
-import {
-  canvasInit,
-  canvasOnResize,
-  canvasZoom,
-  setCanvasImageLoaded,
-} from "./popup_utilities/CanvasUtilities";
+import { canvasInit, canvasOnResize, canvasZoom, setCanvasImageLoaded } from "./popup_utilities/CanvasUtilities";
 import { galleryInit, lightboxInit, seekHandler, setPopupGroup, updatePopupNav } from "./popup_utilities/LightboxUtilities";
 import { Graphic, Heading } from "@/components/sections/Sections";
 import useBodyClass from "@/scripts/hooks/useBodyClass";
@@ -21,6 +16,10 @@ import useElementHeight from "@/scripts/hooks/useElementHeight";
 import AnimPres from "../AnimPres";
 import { GalInfo } from "./popup_components/GalleryInfo";
 import popAnims, { popLayoutTransition, popSeekDuration } from "./popup_utilities/PopupAnimations";
+import { useResponsiveUtils } from "@/scripts/hooks/useBreakpoint";
+
+// TODO: update controls so that the seek buttons have a dedicated state for when they're overflowing.  or like a max number of them
+// TODO: Stop calculations that don't need to run on mobile
 
 //no more than 2 decimals
 const startZoom = 0.95;
@@ -180,7 +179,7 @@ function Wrapper({ pop }) {
     } else {
       const timeoutId = setTimeout(() => {
         pop.ui.setVisible(false);
-      },1000);
+      }, 1000);
       return () => clearTimeout(timeoutId);
     }
   }, [interaction]);
@@ -297,15 +296,15 @@ function Wrapper({ pop }) {
   //   },
   //   [pop]
   // );
-  
+
   const seekHandler = useCallback(
     (e, direction) => {
       if (!debounceInteraction()) return;
-  
+
       var button;
-  
+
       if (!pop.group) return;
-  
+
       if (e.type === "click") {
         button = e.target;
         while (!button.classList.contains("popup--seek")) {
@@ -313,19 +312,19 @@ function Wrapper({ pop }) {
         }
         direction = direction ? direction : button.classList.contains("popup--seek__right") ? 1 : -1;
       }
-  
+
       var length = pop.group.imgs.length;
-  
+
       var ind = pop.index;
-  
+
       do {
         ind += direction;
-  
+
         if (ind >= length) ind = 0;
         if (ind < 0) ind = length - 1;
-  
+
         if (pop.group.imgs[ind].hidden) continue;
-  
+
         pop.setIndex(ind);
         var img = pop.group.imgs[ind].lightboxImg ? pop.group.imgs[ind].lightboxImg : pop.group.imgs[ind];
         pop.setImg(img);
@@ -333,7 +332,7 @@ function Wrapper({ pop }) {
         pop.setImgLoaded(false);
         pop.setImgReady(false);
         pop.setImgDrawn(false);
-  
+
         break;
       } while (pop.group.imgs[ind].hidden);
     },
@@ -344,7 +343,7 @@ function Wrapper({ pop }) {
     (img, i) => {
       if (!debounceInteraction()) return;
       if (pop.group.imgs[i].hidden) return;
-  
+
       pop.setIndex(i);
       pop.setImg(pop.group.imgs[i]);
       pop.setZoom(img.zoom ? img.zoom : false);
@@ -354,7 +353,7 @@ function Wrapper({ pop }) {
     },
     [pop]
   );
-  
+
   // const paginationHandler = useCallback(
   //   (img, i) => {
   //     if (!debounceInteraction()) return;
@@ -389,10 +388,17 @@ function Wrapper({ pop }) {
     closeKeydown: closeHandlerWithKeydown,
   };
 
+  const { isBpAndDown, loading } = useResponsiveUtils();
 
-
-
-
+  const stateDesktop = !isBpAndDown("md") && !loading ? true : false;
+  const stateMobile = isBpAndDown("md") && !loading ? true : false;
+  const stateGallery = pop.type == "gallery";
+  const stateMobileGallery = stateMobile && stateGallery;
+  const state = {
+    mobile: stateMobile,
+    gallery: stateGallery,
+    mobileGallery: stateMobileGallery,
+  };
 
   return (
     <>
@@ -407,14 +413,14 @@ function Wrapper({ pop }) {
 
             {pop.type == "lightbox" && (
               <>
-                <Lightbox pop={pop} nav={nav} handles={handles} popclass={popclass} elems={elems} />
+                <Lightbox pop={pop} nav={nav} handles={handles} popclass={popclass} elems={elems} state={state} />
               </>
             )}
 
             {pop.type == "gallery" && (
               <>
-                <Lightbox pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} />
-                <GalInfo pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} />
+                <Lightbox pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} state={state} />
+                <GalInfo pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} state={state} />
               </>
             )}
 
@@ -439,7 +445,7 @@ function Wrapper({ pop }) {
   }
 }
 
-function Lightbox({ pop, nav, handles, popclass, elems }) {
+function Lightbox({ pop, nav, handles, popclass, elems, state }) {
   const [timeoutId, setTimeoutId] = useState(null); // Add this state variable
 
   const handleImgLoad = () => {
@@ -462,20 +468,26 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
     var popupElem = elems.popup.ref.current;
     var descElem = elems.desc.ref.current;
 
-
-    if(descElem){
+    if (descElem) {
       var gapWidth = splitRem(window.getComputedStyle(popupElem).getPropertyValue("--popup-gap"));
       var scrollbarWidth = descElem.offsetWidth - descElem.clientWidth;
       var descWidth =
-      splitPx(window.getComputedStyle(descElem).width) +
-      splitPx(window.getComputedStyle(descElem).paddingLeft) +
-      splitPx(window.getComputedStyle(descElem).paddingRight) +
-      scrollbarWidth;
+        splitPx(window.getComputedStyle(descElem).width) +
+        splitPx(window.getComputedStyle(descElem).paddingLeft) +
+        splitPx(window.getComputedStyle(descElem).paddingRight) +
+        scrollbarWidth;
       var availHeight = popupElem.offsetHeight;
       var availWidth = popupElem.offsetWidth - gapWidth - descWidth;
-    } else{
+    } else {
       var availHeight = popupElem.offsetHeight;
       var availWidth = popupElem.offsetWidth;
+    }
+
+    if (state.mobileGallery) {
+      var availHeight = popupElem.offsetHeight;
+      var availWidth = popupElem.offsetWidth;
+
+      console.log(`availHeight: ${availHeight}, availWidth: ${availWidth}`);
     }
 
     if (availHeight !== elems.img.availHeight) {
@@ -508,7 +520,6 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
       var maxWidth = availWidth;
     }
 
-
     // Update maxHeight and maxWidth state only if their values have changed
     if (maxHeight !== elems.img.maxHeight) {
       elems.img.setMaxHeight(maxHeight);
@@ -528,11 +539,10 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
   }
 
   useLayoutEffect(() => {
-
-    if(pop.type == "gallery"){
+    if (pop.type == "gallery") {
       if (!elems.popup.ref.current || !elems.desc.ref.current) return;
     }
-    if(pop.type == "lightbox"){
+    if (pop.type == "lightbox") {
       if (!elems.popup.ref.current) return;
     }
     if (elems.popup.height == 0 || elems.popup.width == 0) return;
@@ -552,9 +562,9 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
     }
   }, [elems.popup.height, elems.popup.width, pop.img, pop.drawn]);
 
-
   return (
     <>
+      {state.mobileGallery && <Close pop={pop} nav={nav} handles={handles} popclass={popclass} type="gallery" />}
       <AnimPres
         mode="wait"
         animation={popAnims.slideFade}
@@ -588,7 +598,7 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
             className={`loading--wrapper 
             ${!pop.imgReady || pop.imgLoaded ? "loading--wrapper__hidden" : ""}
             ${pop.zoom ? "loading--wrapper__zoom" : ""}
-            ${pop.zoom && pop.type=="lightbox" ? "loading--wrapper__lightbox-zoom" : ""}
+            ${pop.zoom && pop.type == "lightbox" ? "loading--wrapper__lightbox-zoom" : ""}
             `}
             style={{
               "--img-max-width": `${elems.img.maxWidth}px`,
@@ -605,7 +615,7 @@ function Lightbox({ pop, nav, handles, popclass, elems }) {
 
       {pop.type == "gallery" && pop.group && pop.firstImgDrawn && pop.infoDrawn && (
         <>
-          <Controls className="popup--controls__gallery" pop={pop} nav={nav} handles={handles} />
+          <Controls className="popup--controls__gallery" pop={pop} nav={nav} handles={handles} state={state} />
         </>
       )}
     </>
@@ -616,7 +626,7 @@ function Background({ handles, popclass }) {
   return <div className={`popup--background ${popclass.background}`} onClick={handles.close}></div>;
 }
 
-function Head({ pop, nav, popclass, handles }) {
+function Head({ pop, nav, popclass, handles, state }) {
   return (
     <>
       <div className={`popup--header ${popclass.header} popup--nav`}>
@@ -669,31 +679,60 @@ function Seek({ direction, nav, handles }) {
   );
 }
 
+function shouldDisplayCircle(currentIndex, totalImages, circleIndex) {
+  const maxCircles = 7;
+
+  const circleRange = Math.floor(maxCircles / 2);
+  const startIndexToShowAll = maxCircles - circleRange - 1;
+  const endIndexToShowAll = maxCircles - circleRange - 1;
+
+  if (totalImages <= maxCircles) {
+    return { display: true, end: false };
+  }
+  if (currentIndex <= startIndexToShowAll) {
+    return { display: circleIndex < maxCircles, end: circleIndex === maxCircles - 1 };
+  }
+  if (currentIndex >= totalImages - endIndexToShowAll) {
+    return { display: circleIndex >= totalImages - maxCircles, end: circleIndex === totalImages - maxCircles };
+  }
+  const end = circleIndex === currentIndex + circleRange || circleIndex === currentIndex - circleRange;
+  return { display: circleIndex >= currentIndex - circleRange && circleIndex <= currentIndex + circleRange, end };
+}
+
 const Pagination = React.memo(function Pagination({ pop, handles }) {
+  const currentIndex = pop.index;
+  const totalImgCount = pop.group?.imgs?.filter((img) => !img.hidden).length || 0;
+
   return (
     <div className="popup--pagination">
       {pop.group?.imgs?.map((img, i) => {
-
-if (img.hidden) return null;
+        const { display, end } = shouldDisplayCircle(currentIndex, totalImgCount, i);
+        if (img.hidden || !display) return null;
 
         return (
           <Circle
             active={i === pop.index}
             key={`circle ${img.src}`}
+            end={end}
+            display={display}
+            index={i}
             onClick={() => {
               handles.pagination(img, i);
             }}
           />
         );
       })}
+
+      
     </div>
   );
 
-  function Circle({ active, onClick }) {
-    const classes = active ? "popup--circle__active" : "popup--circle__inactive";
+  function Circle({ active, end, onClick, display, index }) {
+    const classes = `${active ? "popup--circle__active" : "popup--circle__inactive"}${end ? " popup--circle__end" : ""}`;
+
     return (
       <a className={`popup--circle ${classes}`} onClick={onClick}>
-        <div className="popup--circle-inner"></div>
+        <div className={`popup--circle-inner ${end ? "popup--circle-inner__end" : ""}`}></div>
       </a>
     );
   }

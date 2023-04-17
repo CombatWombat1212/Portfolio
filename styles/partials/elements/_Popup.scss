@@ -94,14 +94,43 @@ $col-media-wrapper: rgba($col-background, 0.075);
     // max-width: calc(var(--site-max-width));
     --popup-gap: 3rem;
     --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 10rem);
-    max-width: calc(var(--site-max-width_wide) - 8rem);
+    --popup-width-offset: calc(var(--site-max-width_wide) - 8rem);
+
+    max-width: var(--popup-width-offset);
     max-height: calc(100% - var(--popup-height-offset));
 
-    width: Min(100%, calc(var(--site-max-width_wide) - 8rem));
+    width: Min(100%, var(--popup-width-offset));
     height: Min(100%, calc(100% - var(--popup-height-offset)));
     pointer-events: none;
     position: relative;
-    // align-items: center;
+
+    @include xxl-down {
+      --popup-gap: 2rem;
+      --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 9rem);
+      --popup-width-offset: calc(var(--site-max-width_wide) - 6rem);
+    }
+    @include xl-down {
+      --popup-gap: 2rem;
+      --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 8rem);
+      --popup-width-offset: calc(var(--site-max-width_wide) - 1rem);
+      --popup-scrollbar-pad: calc(var(--popup-gap) / 1.65);
+    }
+
+    @include lg-down {
+      --popup-gap: 2rem;
+      --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 8rem);
+      --popup-width-offset: calc(var(--site-max-width_wide) - 0rem);
+      --popup-scrollbar-pad: calc(var(--popup-gap) / 1.65);
+    }
+
+    @include md-down {
+      --popup-gap: 2rem;
+      --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 14rem);
+      --popup-width-offset: calc(var(--site-max-width_wide) - 14rem);
+      --popup-scrollbar-pad: calc(var(--popup-gap) / 1.65);
+
+      --popup-controls-offset: calc(var(--button-height) / 1.25);
+    }
   }
 
   &--inner {
@@ -152,6 +181,10 @@ $col-media-wrapper: rgba($col-background, 0.075);
       border-radius: unset;
       overflow: visible;
       max-height: 100%;
+
+      @include md-down {
+        flex-direction: column;
+      }
     }
 
     &__gallery-group {
@@ -160,22 +193,30 @@ $col-media-wrapper: rgba($col-background, 0.075);
   }
 
   &--info {
-    // --w: calc(#{col-width(3.35)} - var(--popup-gap));
-    --w: calc(#{col-width(3.55)} - var(--popup-gap));
+    --w: calc(#{col-width(3.65)} - var(--popup-gap));
     width: var(--w);
     min-width: var(--w);
     position: relative;
 
-    // &::before {
-    //   content: "";
-    //   position: absolute;
-    //   top: -1rem;
-    //   left: -1rem;
-    //   right: -1rem;
-    //   bottom: -1rem;
-    //   @include b-rad;
-    //   background-color: $col-media-wrapper;
-    // }
+    @include xxl-down {
+      --w: calc(#{col-width(4.25)} - var(--popup-gap));
+    }
+    @include xl-down {
+      --w: calc(#{col-width(4.25)} - var(--popup-gap));
+    }
+    @include lg-down {
+      --w: calc(#{col-width(5)} - var(--popup-gap));
+    }
+
+    @include md-down {
+      --w: #{col-width(12)};
+      @include popup-scrollbar;
+      height: auto;
+      max-height: calc(#{col-width(6)} - var(--popup-gap));
+      overflow-y: auto;
+      overflow-x: hidden;
+      pointer-events: all;
+    }
   }
 
   &--description {
@@ -187,32 +228,13 @@ $col-media-wrapper: rgba($col-background, 0.075);
       pointer-events: all;
       overflow-y: auto;
       height: var(--gallery-img-height);
-      // max-height: Max(100%, var(--gallery-img-height));
-      // max-height: Min(var(--gallery-img-max-height), var(--gallery-img-height));
       max-height: var(--gallery-img-max-height);
-      // padding-right: calc(var(--popup-gap) / 2);
-
       @include popup-scrollbar;
 
-      // width:fit-content;
-
-      // these also included changes to the width of the description
-
-      // $desc-pad: 1.5rem;
-      // @include b-rad;
-      // background-color: rgba($col-media-wrapper,0.05);
-      // padding: $desc-pad;
-      // --h: calc(var(--gallery-img-height) - #{$desc-pad * 2});
-      // max-height: var(--h);
-      // padding-right: calc(var(--popup-gap) / 2);
-
-      // $desc-pad: 1.5rem;
-      // border-radius: var(--b-rad) 0 0 var(--b-rad);
-      // border: $col-media-wrapper 0.0625rem solid;
-      // padding: $desc-pad;
-      // --h: calc(var(--gallery-img-height) - #{$desc-pad * 2});
-      // max-height: var(--h);
-      // padding-right: calc(var(--popup-gap) / 2);
+      @include md-down {
+        max-height: none;
+        height: auto;
+      }
     }
 
     &__gallery-scrollbar {
@@ -294,13 +316,12 @@ $col-media-wrapper: rgba($col-background, 0.075);
       background-color: $col-media-wrapper;
       @include b-rad;
 
-      // width: col-width(8);
-      // overflow: hidden;
-      // --w: calc(#{col-width(8)} - var(--popup-gap));
-      // width: var(--w);
-      // min-width: var(--w);
       pointer-events: all;
       overflow: hidden;
+
+      @include md-down {
+        // height: calc(#{col-width(6)} - var(--popup-gap));
+      }
     }
 
     &__gallery-zoom {
@@ -309,6 +330,10 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
     &__gallery-group {
       overflow: visible;
+
+      @include md-down {
+        overflow: hidden;
+      }
     }
   }
 
@@ -343,6 +368,10 @@ $col-media-wrapper: rgba($col-background, 0.075);
     &__gallery {
       display: flex;
       width: auto;
+
+      @include md-down {
+        @include mx-auto;
+      }
     }
 
     &__gallery-zoom {
@@ -380,6 +409,10 @@ $col-media-wrapper: rgba($col-background, 0.075);
     &--description {
       // margin-top: 1.375rem;
       margin-top: 1.5rem;
+
+      @include md-down {
+        margin-top: 1.05rem;
+      }
     }
     &--paragraph {
       margin-bottom: 1rem;
@@ -389,7 +422,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
       // --categories-top
       @include b-rad;
       position: absolute;
-      transition:0.3s;
+      transition: 0.3s;
 
       --categories-background-offset: 0.5rem;
       --categories-background-offset_negative: calc(var(--categories-background-offset) * -1);
@@ -397,17 +430,20 @@ $col-media-wrapper: rgba($col-background, 0.075);
       left: var(--categories-background-offset_negative);
       top: calc(var(--categories-top) - var(--categories-background-offset));
       // width: 100%;
-      width: calc(100% + (var(--categories-background-offset)*2));
+      width: calc(100% + (var(--categories-background-offset) * 2));
       height: calc(var(--tag-height) + (var(--categories-background-offset) * 2));
 
-      &__scrollbar{
+      &__scrollbar {
         width: calc(100% - var(--popup-scrollbar-pad) + var(--categories-background-offset));
       }
 
-      &__hovered{
+      &__hovered {
         background-color: $col-media-wrapper;
       }
 
+      @include md-down {
+        display: none;
+      }
     }
 
     &--categories-wrapper {
@@ -440,6 +476,10 @@ $col-media-wrapper: rgba($col-background, 0.075);
       &__no-title {
         margin-top: 0rem;
       }
+
+      @include md-down {
+        margin-top: 1.35rem;
+      }
     }
 
     &--categories {
@@ -460,14 +500,13 @@ $col-media-wrapper: rgba($col-background, 0.075);
           cursor: default;
         }
 
-
-        @include hover('.gallery--categories-wrapper', '.gallery--categories'){
+        @include hover(".gallery--categories-wrapper", ".gallery--categories") {
           width: calc(100% + var(--ellipse-width));
         }
 
-
-
-
+        @include md-down {
+          flex-wrap: wrap;
+        }
       }
 
       .tag {
@@ -498,6 +537,10 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
       @at-root .scrollbar .gallery--ellipse {
         right: var(--popup-scrollbar-pad);
+      }
+
+      @include md-down {
+        display: none;
       }
     }
 
@@ -536,11 +579,15 @@ $col-media-wrapper: rgba($col-background, 0.075);
     @include gap;
 
     &__gallery {
-      // top: calc(100% + 1.85rem);
       top: calc(100% + 2rem);
-      // left: 50%;
       transform: translate(-50%, 0%);
       pointer-events: all;
+
+      @include md-down {
+        width: 100%;
+        z-index: 10;
+        top: calc(100% + var(--popup-controls-offset));
+      }
     }
   }
 
@@ -601,6 +648,13 @@ $col-media-wrapper: rgba($col-background, 0.075);
       left: 50%;
     }
 
+    &__end {
+      width: $px * 16;
+      height: $px * 16;
+
+    }
+
+
     &__inactive {
       @include hover {
         background-color: $col-background_darkest;
@@ -635,6 +689,12 @@ $col-media-wrapper: rgba($col-background, 0.075);
     width: $px * 14;
     height: $px * 14;
     border-radius: 100rem;
+
+    &__end {
+      width: $px * 10;
+      height: $px * 10;
+    }
+    
   }
 }
 

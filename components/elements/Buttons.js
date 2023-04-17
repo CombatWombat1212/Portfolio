@@ -74,7 +74,7 @@ function Button({ children, className, type, icon, animation, color, tag, refere
     if (copy) {
       try {
         await navigator.clipboard.writeText(copy);
-        console.log('Text copied to clipboard');
+        // console.log('Text copied to clipboard');
       } catch (err) {
         console.error('Failed to copy text: ', err);
       }

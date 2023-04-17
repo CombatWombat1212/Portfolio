@@ -9,17 +9,18 @@ import { EXPLORATIONS_IMG_GROUPS } from "@/data/EXPLORATIONS_IMGS";
 
 function updatePopupNav(pop, nav) {
 
+  const totalImgCount = pop.group?.imgs?.filter(img => !img.hidden).length || 0;
 
-  if (pop.group && pop.group.imgs.length != 0 && pop.group.imgs.length != 1) {
+  if (pop.group && totalImgCount != 0 && totalImgCount != 1) {
     if (pop.index == 0) {
       if (!nav.right.on) nav.right.setOn(true);
       if (nav.left.on) nav.left.setOn(false);
     }
-    if (pop.index == pop.group.imgs.length - 1) {
+    if (pop.index == totalImgCount - 1) {
       if (nav.right.on) nav.right.setOn(false);
       if (!nav.left.on) nav.left.setOn(true);
     }
-    if (pop.index > 0 && pop.index < pop.group.imgs.length - 1) {
+    if (pop.index > 0 && pop.index < totalImgCount - 1) {
       if (!nav.right.on) nav.right.setOn(true);
       if (!nav.left.on) nav.left.setOn(true);
     }
@@ -27,7 +28,6 @@ function updatePopupNav(pop, nav) {
     if (nav.right.on) nav.right.setOn(false);
     if (nav.left.on) nav.left.setOn(false);
   }
-
 
 }
 

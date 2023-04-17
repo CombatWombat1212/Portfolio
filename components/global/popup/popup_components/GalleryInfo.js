@@ -18,7 +18,7 @@ import useElementStyle from "@/scripts/hooks/useElementStyle";
 import useOffsetTop from "@/scripts/hooks/useOffsetTop";
 import { STUDY_LINKS } from "@/data/CASE_STUDIES";
 
-const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles }) {
+const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles, state }) {
   var title, subheading;
   if (pop.img.project) {
     title = pop.img.project;
@@ -72,17 +72,19 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
     });
   };
 
-
   return (
     <>
       <motion.div
+        // layout={state.mobileGallery && pop.firstImgDrawn "position"}
+
+        // {...((state.mobileGallery && pop.infoDrawn) ?  {layout: "position"} : {} )}
         layout="position"
         transition={{
           // y: { duration: 0.5 },
           layout: { duration: popLayoutTransition },
         }}
         className="popup--info">
-        {pop.firstImgDrawn && (
+        {(pop.firstImgDrawn || state.mobileGallery) && (
           <AnimPres
             mode="wait"
             fragment
@@ -99,9 +101,10 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
             {subheading && <h5 className="gallery--subheading">{subheading}</h5>}
 
             <div className="gallery--info">
-              {(pop.img.disciplines || pop.img.tools) && (
+              {(pop.img.disciplines || pop.img.tools) && state.desktop && (
                 <GalCategories pop={pop} hasDesc={hasDesc} hasTitle={hasTitle} onCatDataChange={handleCatDataChange} />
               )}
+
               {pop.img.study && (
                 <Button
                   icon={["arrow_right", "right", "mask"]}
@@ -114,11 +117,17 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
                 </Button>
               )}
               {hasDesc && <GalDescription pop={pop} />}
+
+              {(pop.img.disciplines || pop.img.tools) && state.mobile && (
+                <GalCategories pop={pop} hasDesc={hasDesc} hasTitle={hasTitle} onCatDataChange={handleCatDataChange} />
+              )}
             </div>
           </AnimPres>
         )}
 
-        {pop.firstImgDrawn && pop.infoDrawn && <Close pop={pop} nav={nav} handles={handles} popclass={popclass} type="gallery" />}
+        {pop.firstImgDrawn && pop.infoDrawn && !state.mobileGallery && (
+          <Close pop={pop} nav={nav} handles={handles} popclass={popclass} type="gallery" />
+        )}
 
         {(pop.img.disciplines || pop.img.tools) && (
           <div
@@ -134,7 +143,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
       </motion.div>
     </>
   );
-}, createUpdateConditions(["pop.index", "pop.img", "elems.img.height", "pop.firstImgDrawn", "pop.infoDrawn"]));
+}, createUpdateConditions(["pop.index", "pop.img", "elems.img.height", "pop.firstImgDrawn", "pop.infoDrawn", "state.mobile"]));
 // }, createUpdateConditions(["pop.index", "pop.img", "elems.img.height"]));
 
 const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle, onCatDataChange }) {
@@ -190,8 +199,6 @@ const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle
   const [animationCompleted, setAnimationCompleted] = useState(true);
   const [calculatedX, setCalculatedX] = useState(null);
 
-
-
   const getScrollDetails = (cat) => {
     const width = cat.ref.current.offsetWidth;
     const scrollWidth = cat.ref.current.scrollWidth;
@@ -206,9 +213,9 @@ const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle
       }
       return 0;
     })();
-  
+
     const remainingScroll = scrollWidth - width - scrollPosition;
-  
+
     return {
       width,
       scrollWidth,
@@ -216,31 +223,26 @@ const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle
       remainingScroll,
     };
   };
-  
-
-
-
-
 
   const handleMouseEnter = () => {
     setAnimationCompleted(false);
-  
+
     const { width, scrollWidth, scrollPosition, remainingScroll } = getScrollDetails(cat);
-  
+
     const duration = remainingScroll * 0.0075; // Adjust the multiplier to control speed
-  
+
     let updatedCalculatedX = calculatedX;
     if (animationCompleted || calculatedX === null) {
       updatedCalculatedX = -scrollWidth + width - scrollPosition;
       setCalculatedX(updatedCalculatedX);
     }
-  
+
     controls.start({
       x: updatedCalculatedX,
       transition: { duration, ease: "linear" },
     });
   };
-      
+
   const handleMouseLeave = () => {
     const width = cat.ref.current.offsetWidth;
     const scrollWidth = cat.ref.current.scrollWidth;
