@@ -3116,6 +3116,7 @@ h3 + .studypanel--paragraph {
     overflow-y: auto;
     overflow-x: hidden;
     pointer-events: all;
+    padding-right: 0;
   }
   .popup--info::-webkit-scrollbar {
     width: var(--popup-scrollbar-width);
@@ -3126,6 +3127,11 @@ h3 + .studypanel--paragraph {
   .popup--info::-webkit-scrollbar-thumb {
     background-color: #757599;
   }
+}
+
+.popup--info__gallery-scrollbar {
+  padding-right: var(--popup-scrollbar-pad);
+  --w: calc(100% - var(--popup-scrollbar-pad));
 }
 
 .popup--description * {
@@ -3160,6 +3166,12 @@ h3 + .studypanel--paragraph {
 
 .popup--description__gallery-scrollbar {
   padding-right: var(--popup-scrollbar-pad);
+}
+
+@media screen and (max-width: 49.9375em) {
+  .popup--description__gallery-scrollbar {
+    padding-right: 0rem;
+  }
 }
 
 .popup--header {
@@ -7556,10 +7568,8 @@ h3 + .studypanel--paragraph {
   background-color: #E9E9F2;
 }
 
-@media screen and (max-width: 49.9375em) {
-  #Explorations .indicator {
-    display: none;
-  }
+#Explorations .indicator {
+  display: none;
 }
 
 #Explorations .studypanel {

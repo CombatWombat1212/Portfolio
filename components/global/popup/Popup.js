@@ -207,6 +207,7 @@ function Wrapper({ pop }) {
   const popHeight = useElementHeight(popRef);
   const popWidth = useElementWidth(popRef);
   const descRef = useRef(null);
+  const infoRef = useRef(null);
 
   const [lightboxImgMaxHeight, setLightboxImgMaxHeight] = useState(false);
   const [lightboxImgMaxWidth, setLightboxImgMaxWidth] = useState(false);
@@ -233,6 +234,9 @@ function Wrapper({ pop }) {
     },
     desc: {
       ref: descRef,
+    },
+    info: {
+      ref: infoRef,
     },
   };
 
@@ -419,8 +423,9 @@ function Wrapper({ pop }) {
 
             {pop.type == "gallery" && (
               <>
+                <GalInfo pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} state={state}>
                 <Lightbox pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} state={state} />
-                <GalInfo pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} state={state} />
+                </GalInfo>
               </>
             )}
 
@@ -731,7 +736,9 @@ const Pagination = React.memo(function Pagination({ pop, handles }) {
           condition={display}
             duration={0.4}
             elemkey={i}
-            styl
+            style={{
+              opacity:1,
+            }}
           >
             <Circle
               active={i === pop.index}

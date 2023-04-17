@@ -216,7 +216,16 @@ $col-media-wrapper: rgba($col-background, 0.075);
       overflow-y: auto;
       overflow-x: hidden;
       pointer-events: all;
+      padding-right:0;
     }
+
+
+    &__gallery-scrollbar{
+      padding-right: var(--popup-scrollbar-pad);
+      --w: calc(100% - var(--popup-scrollbar-pad));
+    }
+
+
   }
 
   &--description {
@@ -239,7 +248,11 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
     &__gallery-scrollbar {
       padding-right: var(--popup-scrollbar-pad);
+      @include md-down{
+        padding-right: 0rem;
+      }
     }
+
   }
 
   &--header {

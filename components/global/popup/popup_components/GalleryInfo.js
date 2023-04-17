@@ -18,7 +18,7 @@ import useElementStyle from "@/scripts/hooks/useElementStyle";
 import useOffsetTop from "@/scripts/hooks/useOffsetTop";
 import { STUDY_LINKS } from "@/data/CASE_STUDIES";
 
-const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles, state }) {
+const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles, state, children }) {
   var title, subheading;
   if (pop.img.project) {
     title = pop.img.project;
@@ -40,14 +40,24 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
   var hasDesc = pop.img.description || (pop.group.description && pop.group.description[pop.index]);
   var hasTitle = title ? true : false;
 
-  const scrollbar = useHasScrollbar(elems.desc.ref, {
+  const descScrollbar = useHasScrollbar(elems.desc.ref, {
     observer: true,
     debounceTime: 10,
     repeatChecks: 10,
     repeatChecksDebounceTime: 4,
   });
 
-  const scrollbarClasses = scrollbar ? "popup--description__gallery-scrollbar scrollbar" : "";
+  const infoScrollbar = useHasScrollbar(elems.info.ref, {
+    observer: true,
+    debounceTime: 10,
+    repeatChecks: 10,
+    repeatChecksDebounceTime: 4,
+  });
+
+  const scrollbarClasses = {
+    desc: descScrollbar ? "popup--description__gallery-scrollbar scrollbar" : "",
+    info: infoScrollbar ? "popup--info__gallery-scrollbar scrollbar" : "",
+  };
 
   const [catData, setCatData] = useState({});
 
@@ -74,16 +84,15 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
 
   return (
     <>
-      <motion.div
-        // layout={state.mobileGallery && pop.firstImgDrawn "position"}
+      {children}
 
-        // {...((state.mobileGallery && pop.infoDrawn) ?  {layout: "position"} : {} )}
+      <motion.div
         layout="position"
         transition={{
-          // y: { duration: 0.5 },
           layout: { duration: popLayoutTransition },
         }}
-        className="popup--info">
+        className={`popup--info ${scrollbarClasses.info}`}
+        ref={elems.info.ref}>
         {(pop.firstImgDrawn || state.mobileGallery) && (
           <AnimPres
             mode="wait"
@@ -92,7 +101,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
             // delay={0.55}
             condition={true}
             reference={elems.desc.ref}
-            className={`popup--description ${popclass.desc} ${scrollbarClasses}`}
+            className={`popup--description ${popclass.desc} ${scrollbarClasses.desc}`}
             style={styles.description}
             onAnimationComplete={() => {
               pop.setInfoDrawn(true);
@@ -132,7 +141,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
         {(pop.img.disciplines || pop.img.tools) && (
           <div
             className={`gallery--categories-background
-        ${scrollbar ? "gallery--categories-background__scrollbar" : ""}
+        ${descScrollbar ? "gallery--categories-background__scrollbar" : ""}
         ${catData?.hovered || catData.ellipse?.hovered ? "gallery--categories-background__hovered" : ""}
         `}
             style={{
