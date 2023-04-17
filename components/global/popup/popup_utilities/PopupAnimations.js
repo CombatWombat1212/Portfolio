@@ -72,6 +72,21 @@ const popAnims = {
         transition: { duration: popSeekDuration, ease: "easeInOut" },
       },
     },
+              
+    move :{
+      hidden: {
+        x: "100%",
+        transition: { duration: 0.3 },
+      },
+      visible: {
+        x: "0%",
+        transition: { duration: 0.3 },
+      },
+      exit: {
+        x: "-100%",
+        transition: { duration: 0.3 },
+      },
+    },
             
         
 

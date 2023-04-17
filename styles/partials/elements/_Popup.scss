@@ -622,25 +622,36 @@ $col-media-wrapper: rgba($col-background, 0.075);
     align-items: center;
     --gap: 0.75rem;
     @include gap;
+
+    position:relative;
+
+
+    $px: 0.0625rem;
+    --circle-width: #{$px * 22};
+    --circle-width_end: #{$px * 16};
+    --circle-width_before: #{$px * 34};
+    
+    --circle-inner-width: #{$px * 14};
+    --circle-inner-width_end: #{$px * 10};
   }
 
   &--circle {
     transition: 0.2s;
-    $px: 0.0625rem;
 
-    width: $px * 22;
-    height: $px * 22;
+
+    width: var(--circle-width);
+    height: var(--circle-width);
     background-color: $col-background;
     border-radius: 100rem;
     @include flex-row-center;
     align-items: center;
     cursor: pointer;
-    position: relative;
+    // position: relative;
 
     &::before {
       content: "";
-      width: $px * 34;
-      height: $px * 34;
+      width: var(--circle-width_before);
+      height: var(--circle-width_before);
       border-radius: 100rem;
       position: absolute;
       transform: translate(-50%, -50%);
@@ -649,10 +660,12 @@ $col-media-wrapper: rgba($col-background, 0.075);
     }
 
     &__end {
-      width: $px * 16;
-      height: $px * 16;
-
+      // width:  var(--circle-width_end);  
+      // height: var(--circle-width_end);  
+      transform: scale(0.75);
     }
+
+
 
 
     &__inactive {
@@ -680,21 +693,38 @@ $col-media-wrapper: rgba($col-background, 0.075);
         background-color: $col-primary;
       }
     }
+
+
   }
 
   &--circle-inner {
     transition: 0.2s;
 
-    $px: 0.0625rem;
-    width: $px * 14;
-    height: $px * 14;
+    width: var(--circle-inner-width);
+    height: var(--circle-inner-width);
     border-radius: 100rem;
 
     &__end {
-      width: $px * 10;
-      height: $px * 10;
+      // width: var(--circle-inner-width_end);
+      // height: var(--circle-inner-width_end);
     }
-    
+
+    // background-color: $col-primary;
+    position: absolute;
+    z-index: 10;
+
+
+    left: calc(
+      ((var(--circle-width) - var(--circle-inner-width)) / 2)
+      
+      + (var(--current) * var(--circle-width))
+      + (var(--current) * var(--gap))
+      
+      )
+      
+      
+      ;
+
   }
 }
 

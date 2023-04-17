@@ -680,59 +680,85 @@ function Seek({ direction, nav, handles }) {
 }
 
 function shouldDisplayCircle(currentIndex, totalImages, circleIndex) {
-  const maxCircles = 7;
+  const maxCircles = 5;
 
   const circleRange = Math.floor(maxCircles / 2);
   const startIndexToShowAll = maxCircles - circleRange - 1;
   const endIndexToShowAll = maxCircles - circleRange - 1;
 
+  let display, end, paginationIndex;
+
   if (totalImages <= maxCircles) {
-    return { display: true, end: false };
+    display = true;
+    end = false;
+    paginationIndex = circleIndex;
+  } else if (currentIndex <= startIndexToShowAll) {
+    display = circleIndex < maxCircles;
+    end = circleIndex === maxCircles - 1;
+    paginationIndex = circleIndex;
+  } else if (currentIndex >= totalImages - endIndexToShowAll) {
+    display = circleIndex >= totalImages - maxCircles;
+    end = circleIndex === totalImages - maxCircles;
+    paginationIndex = circleIndex - (totalImages - maxCircles);
+  } else {
+    display = circleIndex >= currentIndex - circleRange && circleIndex <= currentIndex + circleRange;
+    end = circleIndex === currentIndex + circleRange || circleIndex === currentIndex - circleRange;
+    paginationIndex = circleIndex - (currentIndex - circleRange);
   }
-  if (currentIndex <= startIndexToShowAll) {
-    return { display: circleIndex < maxCircles, end: circleIndex === maxCircles - 1 };
-  }
-  if (currentIndex >= totalImages - endIndexToShowAll) {
-    return { display: circleIndex >= totalImages - maxCircles, end: circleIndex === totalImages - maxCircles };
-  }
-  const end = circleIndex === currentIndex + circleRange || circleIndex === currentIndex - circleRange;
-  return { display: circleIndex >= currentIndex - circleRange && circleIndex <= currentIndex + circleRange, end };
+
+  return { display, end, paginationIndex };
 }
 
 const Pagination = React.memo(function Pagination({ pop, handles }) {
   const currentIndex = pop.index;
   const totalImgCount = pop.group?.imgs?.filter((img) => !img.hidden).length || 0;
 
+
+
   return (
-    <div className="popup--pagination">
+    <div className="popup--pagination"
+    >
       {pop.group?.imgs?.map((img, i) => {
         const { display, end } = shouldDisplayCircle(currentIndex, totalImgCount, i);
         if (img.hidden || !display) return null;
 
+    
+
         return (
-          <Circle
-            active={i === pop.index}
-            key={`circle ${img.src}`}
-            end={end}
-            display={display}
-            index={i}
-            onClick={() => {
-              handles.pagination(img, i);
-            }}
-          />
+          <AnimPres
+          layout
+          animation={popAnims.fade}
+          condition={display}
+            duration={0.4}
+            elemkey={i}
+            styl
+          >
+            <Circle
+              active={i === pop.index}
+              key={`circle ${img.src}`}
+              end={end}
+              display={display}
+              index={i}
+              current={pop.index}
+              onClick={() => {
+                handles.pagination(img, i);
+              }}
+            />
+
+          </AnimPres>
         );
       })}
-
-      
     </div>
   );
 
-  function Circle({ active, end, onClick, display, index }) {
+  function Circle({ active, end, onClick, index, current }) {
     const classes = `${active ? "popup--circle__active" : "popup--circle__inactive"}${end ? " popup--circle__end" : ""}`;
 
     return (
-      <a className={`popup--circle ${classes}`} onClick={onClick}>
+      <a className={`popup--circle ${classes}`} onClick={onClick}
+      >
         <div className={`popup--circle-inner ${end ? "popup--circle-inner__end" : ""}`}></div>
+
       </a>
     );
   }

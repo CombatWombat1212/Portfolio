@@ -14,6 +14,7 @@ function AnimPres({
   duration,
   reference,
   layout,
+  tag,
   initial: initialProp,
   fragment = false,
     transition: transitionProp = {},
@@ -51,7 +52,7 @@ function AnimPres({
     animation.visible = applyTransitionOverrides(animation.visible);
     animation.exit = applyTransitionOverrides(animation.exit);
   }
-
+ 
   const variants = hasHiddenVisibleAnimation ? animation : undefined;
 
   const transition = hasInOutAnimation
@@ -82,8 +83,11 @@ function AnimPres({
 
 
   function renderMotionDiv() {
+
+    const MotionElement = tag ? motion[tag] : motion.div;
+
     return (
-      <motion.div
+      <MotionElement
         key={elemkey ? elemkey : "anim"}
         initial={initial}
         animate={animate}
@@ -96,7 +100,7 @@ function AnimPres({
         onAnimationComplete={onAnimationComplete ? onAnimationComplete : () => {}}
         {...(layout !== undefined ? { layout: layout } : {})}>
         {children}
-      </motion.div>
+      </MotionElement>
     );
   }
   
