@@ -1,7 +1,7 @@
 import { AnimatePresence, motion, useAnimation, useIsPresent, wrap } from "framer-motion";
 
 import Tag from "@/components/elements/Tag";
-import { createUpdateConditions } from "@/scripts/GlobalUtilities";
+import { createUpdateConditions, splitPx, splitRem } from "@/scripts/GlobalUtilities";
 import React, { useEffect, useRef, useState } from "react";
 import AnimPres from "../../AnimPres";
 import popAnims, { popLayoutTransition } from "../popup_utilities/PopupAnimations";
@@ -18,23 +18,26 @@ import useElementStyle from "@/scripts/hooks/useElementStyle";
 import useOffsetTop from "@/scripts/hooks/useOffsetTop";
 import { STUDY_LINKS } from "@/data/CASE_STUDIES";
 
-function GalInfoMotionWrapper({ elems, scrollbar, children, type = "default" }) {
-  const scroll = type != "above" && scrollbar.info.classes ? scrollbar.info.classes : '';
-  
+function GalInfoMotionWrapper({ elems, scrollbar, children, styles, type = "default" }) {
+  const scroll = type != "above" && scrollbar.info.classes ? scrollbar.info.classes : "";
+
   return (
-    <motion.div
-      layout="position"
-      transition={{
-        layout: { duration: popLayoutTransition },
-      }}
+    // <motion.div
+    <div
+      // layout="position"
+      // transition={{
+      //   layout: { duration: popLayoutTransition },
+      // }}
       className={`popup--info ${scroll} popup--info__${type}`}
-      ref={elems.info.ref}>
+      ref={elems.info.ref}
+      style={styles.description}
+      >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
-function GalInfoAnimPres({ elems, pop, styles, state, popclass, scrollbar, children, type="default" }) {
+function GalInfoAnimPres({ elems, pop, styles, state, popclass, scrollbar, children, type = "default" }) {
   return (
     <>
       {(pop.firstImgDrawn || state.mobileGallery) && (
@@ -52,7 +55,7 @@ function GalInfoAnimPres({ elems, pop, styles, state, popclass, scrollbar, child
           }}>
           {children}
         </AnimPres>
-      )} 
+      )}
     </>
   );
 }
@@ -77,11 +80,75 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
     title = false;
   }
 
-  // might have to add elems.img.maxHeight to dependencies idk
+  const galImgHeight = (() => {
+    if (state.desktop) {
+      if (elems.img.height != 0) return elems.img.height;
+    } else {
+      if (!elems.info.ref.current) return 0;
+      if (!elems.popup.ref.current) return 0;
+
+      var infoElem = elems.info.ref.current;
+      var popupElem = elems.popup.ref.current;
+
+      var contentChildren = Array.from(infoElem.parentElement.children).filter((elem) => {
+        return getComputedStyle(elem).position !== "absolute";
+      });
+      var contentRows = contentChildren.length;
+
+      var gapWidth = splitRem(window.getComputedStyle(popupElem).getPropertyValue("--popup-gap"));
+      gapWidth = gapWidth * (contentRows - 1);
+
+      var notMe = contentChildren.filter((elem) => {
+        return elem != infoElem;
+      });      
+
+      var result = 0;
+      for (var i = 0; i < notMe.length; i++) {
+        result +=
+          splitPx(window.getComputedStyle(notMe[i]).height) +
+          splitPx(window.getComputedStyle(notMe[i]).paddingTop) +
+          splitPx(window.getComputedStyle(notMe[i]).paddingBottom);
+          console.log(splitPx(window.getComputedStyle(notMe[i]).height) +
+          splitPx(window.getComputedStyle(notMe[i]).paddingTop) +
+          splitPx(window.getComputedStyle(notMe[i]).paddingBottom));
+      }
+
+
+      return popupElem.offsetHeight - result - gapWidth;
+
+    }
+  })();
+
+
+
+  const galDescHeight = (() => {
+    if (state.desktop) return 0;
+    if (!elems.info.ref.current) return 0;
+    if (!elems.popup.ref.current) return 0;
+    if (!elems.info.ref.current.querySelector('.gallery--info')) return 0;
+
+    var infoElem = elems.info.ref.current;
+    var popupElem = elems.popup.ref.current;
+    var galInfo = infoElem.querySelector('.gallery--info')
+
+
+    var descHeight = splitPx(window.getComputedStyle(galInfo).height) +
+    splitPx(window.getComputedStyle(galInfo).paddingTop) +
+    splitPx(window.getComputedStyle(galInfo).paddingBottom);
+
+      return descHeight;
+
+  
+  })();
+
+
+
+  
   const styles = {
     description: {
-      "--gallery-img-height": `${elems.img.height != 0 && elems.img.height}px`,
-      "--gallery-img-max-height": `${elems.img.maxHeight != 0 && elems.img.maxHeight}px`,
+      "--gallery-info-height": `${galImgHeight}px`,
+      "--gallery-info-max-height": `${elems.img.maxHeight != 0 && elems.img.maxHeight}px`,
+      "--gallery-description-height": `${galDescHeight}px`,
     },
   };
 
@@ -96,13 +163,12 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
   });
 
   const infoScrollbar = useHasScrollbar(elems.info.ref, {
-        debounceTime: 100,
+    debounceTime: 100,
     repeatChecks: 10,
     repeatChecksDebounceTime: 10,
   });
 
   const scrollbar = {
-    
     desc: {
       has: descScrollbar,
       classes: true ? "popup--description__gallery-scrollbar scrollbar" : "",
@@ -110,9 +176,8 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
     info: {
       has: infoScrollbar,
       classes: true ? "popup--info__gallery-scrollbar scrollbar" : "",
-    }
+    },
   };
-
 
   const [catData, setCatData] = useState({});
 
@@ -146,7 +211,6 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
           <GalInfoAnimPres {...wrapperProps} type="above">
             <GalHeading title={title} subheading={subheading} {...wrapperProps} />
             {state.mobileGallery && <Close pop={pop} nav={nav} handles={handles} popclass={popclass} type="gallery" />}
-
           </GalInfoAnimPres>
         </GalInfoMotionWrapper>
       )}
@@ -157,7 +221,8 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
         <GalInfoAnimPres {...wrapperProps}>
           {state.desktop && <GalHeading title={title} subheading={subheading} />}
 
-          <div className="gallery--info">
+          <div className="gallery--info"
+          >
             {(pop.img.disciplines || pop.img.tools) && state.desktop && (
               <GalCategories pop={pop} hasDesc={hasDesc} hasTitle={hasTitle} onCatDataChange={handleCatDataChange} />
             )}

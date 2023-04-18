@@ -143,6 +143,8 @@ function Popup({ pop }) {
     pop.setDrawn(pop.onRef.current ? true : false);
   }, []);
 
+  const bp = useResponsiveUtils();
+
   return (
     <>
       <AnimPres
@@ -151,13 +153,13 @@ function Popup({ pop }) {
         condition={pop.on}
         className={"popup--wrapper"}
         onAnimationComplete={popAnimCompleteHandler}>
-        <Wrapper pop={pop} />
+        <Wrapper pop={pop} bp={bp} />
       </AnimPres>
     </>
   );
 }
 
-function Wrapper({ pop }) {
+function Wrapper({ pop, bp }) {
   var popclass = getPopupClasses(pop);
 
   useBodyClass("noscroll", pop.on);
@@ -344,7 +346,7 @@ function Wrapper({ pop }) {
     closeKeydown: closeHandlerWithKeydown,
   };
 
-  const { isBpAndDown, loading } = useResponsiveUtils();
+  const { isBpAndDown, loading } = bp;
 
   const stateDesktop = !isBpAndDown("md") && !loading ? true : false;
   const stateMobile = isBpAndDown("md") && !loading ? true : false;
@@ -370,14 +372,14 @@ function Wrapper({ pop }) {
 
             {pop.type == "lightbox" && (
               <>
-                <Lightbox pop={pop} nav={nav} handles={handles} popclass={popclass} elems={elems} state={state} />
+                <Lightbox pop={pop} nav={nav} handles={handles} popclass={popclass} elems={elems} state={state} bp={bp} />
               </>
             )}
 
             {pop.type == "gallery" && (
               <>
                 <GalInfo pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} state={state}>
-                  <Lightbox pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} state={state} />
+                  <Lightbox pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} state={state} bp={bp} />
                 </GalInfo>
               </>
             )}
@@ -403,17 +405,18 @@ function Wrapper({ pop }) {
   }
 }
 
-function Lightbox({ pop, nav, handles, popclass, elems, state }) {
-  const [timeoutId, setTimeoutId] = useState(null); // Add this state variable
+function Lightbox({ pop, nav, handles, popclass, elems, state, bp }) {
+  const [timeoutId, setTimeoutId] = useState(null);
+
+  const { isBpAndDown, loading } = bp;
 
   const handleImgLoad = () => {
     const id = setTimeout(() => {
       pop.setImgLoaded(true);
     }, 0);
-    setTimeoutId(id); // Update the timeoutId state
+    setTimeoutId(id);
   };
 
-  // Add this useEffect to clear the timeout on unmount
   useEffect(() => {
     return () => {
       if (timeoutId) {
@@ -427,24 +430,54 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
     var infoElem = elems.info.ref.current;
 
     if (infoElem) {
-      var gapWidth = splitRem(window.getComputedStyle(popupElem).getPropertyValue("--popup-gap"));
-      var scrollbarWidth = infoElem.offsetWidth - infoElem.clientWidth;
-      var descWidth =
-        splitPx(window.getComputedStyle(infoElem).width) +
-        splitPx(window.getComputedStyle(infoElem).paddingLeft) +
-        splitPx(window.getComputedStyle(infoElem).paddingRight) +
-        scrollbarWidth;
-      var availHeight = popupElem.offsetHeight;
-      var availWidth = popupElem.offsetWidth - gapWidth - descWidth;
+      if (state.desktop) {
+        var gapWidth = splitRem(window.getComputedStyle(popupElem).getPropertyValue("--popup-gap"));
+        var scrollbarWidth = infoElem.offsetWidth - infoElem.clientWidth;
+        var infoWidth =
+          splitPx(window.getComputedStyle(infoElem).width) +
+          splitPx(window.getComputedStyle(infoElem).paddingLeft) +
+          splitPx(window.getComputedStyle(infoElem).paddingRight) +
+          scrollbarWidth;
+        var availHeight = popupElem.offsetHeight;
+        var availWidth = popupElem.offsetWidth - gapWidth - infoWidth;
+      } else {
+        
+        var contentChildren = Array.from(infoElem.parentElement.children).filter((elem) => {
+          return getComputedStyle(elem).position !== "absolute";
+        });
+        var contentRows = contentChildren.length;
+        
+        
+        var gapWidth = splitRem(window.getComputedStyle(popupElem).getPropertyValue("--popup-gap"));
+        gapWidth = gapWidth * (contentRows - 1);
+
+
+        var infoHeight = (() => {
+
+          var infos = contentChildren.filter((elem) => {
+            return elem.classList.contains('popup--info');
+          });
+
+          var result = 0;
+          for (var i =0; i< infos.length; i++){
+            result += splitPx(window.getComputedStyle(infos[i]).height) +
+            splitPx(window.getComputedStyle(infos[i]).paddingTop) +
+            splitPx(window.getComputedStyle(infos[i]).paddingBottom)
+          }
+          return result;
+        })();
+
+
+        var availHeight = popupElem.offsetHeight - infoHeight - gapWidth;
+        var availWidth = popupElem.offsetWidth;
+
+      }
     } else {
       var availHeight = popupElem.offsetHeight;
       var availWidth = popupElem.offsetWidth;
     }
 
-    if (state.mobileGallery) {
-      var availHeight = popupElem.offsetHeight;
-      var availWidth = popupElem.offsetWidth;
-    }
+  
 
     if (availHeight !== elems.img.availHeight) {
       elems.img.setAvailHeight(availHeight);
@@ -494,35 +527,10 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
     return { maxHeight, maxWidth };
   }
 
-  // useLayoutEffect(() => {
-  //   if (pop.type == "gallery") {
-  //     if (!elems.popup.ref.current || !elems.desc.ref.current) return;
-  //   }
-  //   if (pop.type == "lightbox") {
-  //     if (!elems.popup.ref.current) return;
-  //   }
-  //   if (elems.popup.height == 0 || elems.popup.width == 0) return;
-  //   if (!pop.drawn) return;
-
-  //   // used by gallery zoom images but also when the pop.imgLoaded is false, so instead of doing it conditionally we just do it every time cause life is too short
-  //   var { availHeight, availWidth } = updateAvailHeightAndWidth();
-
-  //   if (!pop.imgLoaded) {
-  //     var { maxHeight, maxWidth } = updateMaxHeightAndWidth(availHeight, availWidth);
-  //   }
-
-  //   pop.setImgReady(true);
-
-  //   if (!pop.firstImgReady) {
-  //     pop.setFirstImgReady(true);
-  //   }
-  // }, [elems.popup.height, elems.popup.width, pop.img, pop.drawn]);
-
   useLayoutEffect(() => {
     const ensurePopAndInfoRef = () =>
       new Promise((resolve) => {
         if (pop.type === "gallery") {
-
           if (!elems.popup.ref.current || !elems.info.ref.current) {
             setTimeout(() => resolve(ensurePopAndInfoRef()), 100);
           } else {
@@ -577,27 +585,21 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
     };
 
     mainFunction();
-  }, [elems.popup.height, elems.popup.width, pop.img, pop.drawn]);
+  }, [elems.popup.height, elems.popup.width, pop.img, pop.drawn, state.desktop, pop.infoDrawn]);
 
-
-const [go, setGo] = useState(false);
+  const [drawLightbox, setDrawLightbox] = useState(false);
   useEffect(() => {
-    if(elems.img.availWidth && elems.img.availHeight && elems.img.maxWidth && elems.img.maxHeight){
-      if(!go) setGo(true);
+    if (elems.img.availWidth && elems.img.availHeight && elems.img.maxWidth && elems.img.maxHeight) {
+      if (!drawLightbox) setDrawLightbox(true);
     }
-
-  }, [elems.img.availWidth,elems.img.availHeight,elems.img.maxWidth,elems.img.maxHeight]);
-
-
+  }, [elems.img.availWidth, elems.img.availHeight, elems.img.maxWidth, elems.img.maxHeight,  bp]);
 
   return (
     <>
       <AnimPres
         mode="wait"
         animation={popAnims.slideFade}
-
-        condition={go}
-
+        condition={drawLightbox}
         className={`popup--media-wrapper ${popclass.mediaWrapper}
            ${!pop.imgLoaded ? "popup--media-wrapper__loading" : ""}`}
         style={{

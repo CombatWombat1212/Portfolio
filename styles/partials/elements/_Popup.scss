@@ -226,12 +226,15 @@ $col-media-wrapper: rgba($col-background, 0.075);
       --w: #{col-width(12)};
       @include popup-scrollbar;
       height: auto;
-      max-height: calc(#{col-width(4.25)} - var(--popup-gap));
-      min-height: 2rem;
       overflow-y: auto;
       overflow-x: hidden;
       pointer-events: all;
       padding-right: 0;
+      
+      max-height: Min(calc(#{col-width(4.75)} - var(--popup-gap)), var(--gallery-info-height));
+
+      min-height: Min(calc(#{col-width(4.75)} - var(--popup-gap)), var(--gallery-description-height));
+
     }
 
     &__gallery-scrollbar {
@@ -255,21 +258,28 @@ $col-media-wrapper: rgba($col-background, 0.075);
     * {
       color: $col-background;
     }
+
     &__gallery {
       pointer-events: all;
       overflow-y: auto;
-      height: var(--gallery-img-height);
-      max-height: var(--gallery-img-max-height);
+      height: var(--gallery-info-height);
+      max-height: var(--gallery-info-max-height);
       @include popup-scrollbar;
 
       @include md-down {
+        padding:none!important;
         max-height: none;
-        height: auto;
+        overflow-y: visible;
+        height:100%;
+        // height: auto;
       }
     }
 
     &__above{
       overflow:visible;
+
+              height: auto;
+
     }
 
     &__gallery-scrollbar {
@@ -358,14 +368,15 @@ $col-media-wrapper: rgba($col-background, 0.075);
       overflow: hidden;
 
       @include md-down {
-        // max-height: calc(#{col-width(9)} - (var(--popup-gap) * 1));
+        background-color: #00000000;
       }
     }
 
     &__gallery-zoom {
       background-color: $col-media-wrapper;
-
-      // not being used right now but was added to in the JS because media-wrapper needed to not have pointer-events:all
+      @include md-down {
+        background-color: #00000000;
+      }
     }
 
     &__gallery-group {
@@ -412,9 +423,14 @@ $col-media-wrapper: rgba($col-background, 0.075);
       display: flex;
       // width: auto;
       width: var(--img-max-width);
+      // width:fit-content;
 
       @include md-down {
         @include mx-auto;
+
+        background-color: $col-media-wrapper;
+        @include b-rad;
+  
       }
     }
 
@@ -816,6 +832,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
       @include md-down{
         z-index:-1;
+        @include mx-auto;
       }
 
 
