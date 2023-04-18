@@ -2,7 +2,7 @@ import { AnimatePresence, motion, useAnimation, useIsPresent, wrap } from "frame
 
 import Tag from "@/components/elements/Tag";
 import { createUpdateConditions, splitPx, splitRem } from "@/scripts/GlobalUtilities";
-import React, { useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import AnimPres from "../../AnimPres";
 import popAnims, { popLayoutTransition } from "../popup_utilities/PopupAnimations";
 import useDelayedProps from "@/scripts/hooks/useDelayedProps";
@@ -30,8 +30,7 @@ function GalInfoMotionWrapper({ elems, scrollbar, children, styles, type = "defa
       // }}
       className={`popup--info ${scroll} popup--info__${type}`}
       ref={elems.info.ref}
-      style={styles.description}
-      >
+      style={styles.description}>
       {children}
     </div>
   );
@@ -60,11 +59,14 @@ function GalInfoAnimPres({ elems, pop, styles, state, popclass, scrollbar, child
   );
 }
 
-function GalHeading({ title, subheading }) {
+function GalHeading({ title, subheading, state }) {
+  // const TitleTag = state.desktop ? "h3" : "h5";
+  const TitleTag = "h3";
+  const SubheadingTag = state.desktop ? "h5" : "h4";
   return (
     <>
-      {title && <h3 type="h3" className="gallery--title" dangerouslySetInnerHTML={{ __html: title }} />}
-      {subheading && <h5 className="gallery--subheading">{subheading}</h5>}
+      {title && <TitleTag type="h3" className="gallery--title" dangerouslySetInnerHTML={{ __html: title }} />}
+      {subheading && <SubheadingTag className="gallery--subheading">{subheading}</SubheadingTag>}
     </>
   );
 }
@@ -100,7 +102,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
 
       var notMe = contentChildren.filter((elem) => {
         return elem != infoElem;
-      });      
+      });
 
       var result = 0;
       for (var i = 0; i < notMe.length; i++) {
@@ -110,37 +112,28 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
           splitPx(window.getComputedStyle(notMe[i]).paddingBottom);
       }
 
-
       return popupElem.offsetHeight - result - gapWidth;
-
     }
   })();
-
-
 
   const galDescHeight = (() => {
     if (state.desktop) return 0;
     if (!elems.info.ref.current) return 0;
     if (!elems.popup.ref.current) return 0;
-    if (!elems.info.ref.current.querySelector('.gallery--info')) return 0;
+    if (!elems.info.ref.current.querySelector(".gallery--info")) return 0;
 
     var infoElem = elems.info.ref.current;
     var popupElem = elems.popup.ref.current;
-    var galInfo = infoElem.querySelector('.gallery--info')
+    var galInfo = infoElem.querySelector(".gallery--info");
 
+    var descHeight =
+      splitPx(window.getComputedStyle(galInfo).height) +
+      splitPx(window.getComputedStyle(galInfo).paddingTop) +
+      splitPx(window.getComputedStyle(galInfo).paddingBottom);
 
-    var descHeight = splitPx(window.getComputedStyle(galInfo).height) +
-    splitPx(window.getComputedStyle(galInfo).paddingTop) +
-    splitPx(window.getComputedStyle(galInfo).paddingBottom);
-
-      return descHeight;
-
-  
+    return descHeight;
   })();
 
-
-
-  
   const styles = {
     description: {
       "--gallery-info-height": `${galImgHeight}px`,
@@ -216,12 +209,11 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
 
       <GalInfoMotionWrapper {...wrapperProps}>
         <GalInfoAnimPres {...wrapperProps}>
-          {state.desktop && <GalHeading title={title} subheading={subheading} />}
+          {state.desktop && <GalHeading title={title} subheading={subheading} {...wrapperProps} />}
 
-          <div className="gallery--info"
-          >
+          <div className="gallery--info">
             {(pop.img.disciplines || pop.img.tools) && state.desktop && (
-              <GalCategories pop={pop} hasDesc={hasDesc} hasTitle={hasTitle} onCatDataChange={handleCatDataChange} />
+              <GalCategories pop={pop} hasDesc={hasDesc} hasTitle={hasTitle} onCatDataChange={handleCatDataChange} state={state} />
             )}
 
             {pop.img.study && (
@@ -238,7 +230,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
             {hasDesc && <GalDescription pop={pop} />}
 
             {(pop.img.disciplines || pop.img.tools) && state.mobile && (
-              <GalCategories pop={pop} hasDesc={hasDesc} hasTitle={hasTitle} onCatDataChange={handleCatDataChange} />
+              <GalCategories pop={pop} hasDesc={hasDesc} hasTitle={hasTitle} onCatDataChange={handleCatDataChange} state={state} />
             )}
           </div>
         </GalInfoAnimPres>
@@ -261,10 +253,10 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
       </GalInfoMotionWrapper>
     </>
   );
-}, createUpdateConditions(["pop.index", "pop.img", "elems.img.height", "pop.firstImgDrawn", "pop.infoDrawn", "state.mobile"]));
+}, createUpdateConditions(["pop.index", "pop.img", "elems.img.height", "pop.firstImgDrawn", "pop.infoDrawn", "state.mobile", "state.desktop"]));
 // }, createUpdateConditions(["pop.index", "pop.img", "elems.img.height"]));
 
-const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle, onCatDataChange }) {
+const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle, onCatDataChange, state }) {
   const catRef = useRef(null);
   const wrapperRef = useRef(null);
   const firstTagRef = useRef(null);
@@ -406,42 +398,78 @@ const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle
 
   var j = 0;
 
+
+
+
+  const renderTags = ({ isSimple } = {}) => {
+    const tagProps = (item, index, isSimple) => {
+      return {
+        ...(index === 0 && !isSimple ? { reference: cat.tag.ref } : {}),
+        ...(!isSimple ? { color: "inverted" } : {}),
+        ...(!isSimple ? { variant: "tool" } : {}),
+        key: `${item.key} ${index}`,
+      };
+    };
+  
+    const inner = (item) => {
+      if (isSimple) {
+        return j !== pop.img.disciplines.length + pop.img.tools.length ?  `${item}, ` : `${item}.`;
+      }
+      return item;
+    };
+  
+    const renderItems = (items) => {
+      return items.map((item, i) => {
+        const TagComponent = isSimple ? Fragment : Tag;
+        j++;
+        return (
+          <TagComponent {...tagProps(item, i, isSimple)}>{inner(item)}</TagComponent>
+        );
+      });
+    };
+  
+    return (
+      <>
+        {renderItems(pop.img.disciplines)}
+        {renderItems(pop.img.tools)}
+      </>
+    );
+  };
+
+
+  
   return (
     <div
-      className={`gallery--categories-wrapper  ${catclasses}
-    ${cat.wrapper.overflow || lockedOverflow ? "gallery--categories-wrapper__overflow" : "gallery--categories-wrapper__no-overflow"}
-    `}
+      className={`gallery--categories-wrapper ${catclasses}
+      ${cat.wrapper.overflow || lockedOverflow ? "gallery--categories-wrapper__overflow" : "gallery--categories-wrapper__no-overflow"}
+      `}
       ref={cat.wrapper.ref}
       style={{
         "--categories-top": `${cat.wrapper.top}px`,
         "--tag-height": `${cat.tag.height}px`,
       }}>
-      <motion.div className={`gallery--categories`} ref={cat.ref} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} animate={controls}>
-        <div
-          className={`gallery--categories-inner 
-          ${cat.wrapper.overflow || lockedOverflow ? "gallery--categories-inner__overflow" : "gallery--categories-inner__no-overflow"}`}>
-          {pop.img.disciplines.map((item, i) => {
-            j++;
-            return (
-              <Tag key={`${item.key} ${i}`} color={"inverted"} {...(j == 1 ? { reference: cat.tag.ref } : {})}>
-                {item}
-              </Tag>
-            );
-          })}
-          {pop.img.tools.map((item, i) => {
-            j++;
-            return (
-              <Tag key={`${item.key} ${i}`} color={"inverted"} variant={"tool"} {...(j == 1 ? { reference: cat.tag.ref } : {})}>
-                {item}
-              </Tag>
-            );
-          })}
-        </div>
-      </motion.div>
-      {(cat.wrapper.overflow || lockedOverflow) && (
-        <div className={`gallery--ellipse`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} ref={ellipseRef}>
-          <span>...</span>
-        </div>
+      {state.desktop || !hasDesc ? (
+        <>
+          <motion.div
+            className={`gallery--categories`}
+            ref={cat.ref}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            animate={controls}>
+            <div
+              className={`gallery--categories-inner 
+              ${cat.wrapper.overflow || lockedOverflow ? "gallery--categories-inner__overflow" : "gallery--categories-inner__no-overflow"}`}>
+              {renderTags({ isSimple: false })}
+            </div>
+          </motion.div>
+          {(cat.wrapper.overflow || lockedOverflow) && (
+            <div className={`gallery--ellipse`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} ref={ellipseRef}>
+              <span>...</span>
+            </div>
+          )}
+        </>
+      ) : (
+        <p>{renderTags({ isSimple: true })} </p>
       )}
     </div>
   );

@@ -133,7 +133,7 @@
       margin-top: var(--next-study-pad);
     }
     @include sm-down {
-      display:none;
+      display: none;
     }
   }
 
@@ -146,6 +146,7 @@
     @include flex-row-between;
 
     @include sm-down {
+      --button-height:2.95rem;
       &__left{
         justify-content: flex-start;
       }
