@@ -108,9 +108,6 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
           splitPx(window.getComputedStyle(notMe[i]).height) +
           splitPx(window.getComputedStyle(notMe[i]).paddingTop) +
           splitPx(window.getComputedStyle(notMe[i]).paddingBottom);
-          console.log(splitPx(window.getComputedStyle(notMe[i]).height) +
-          splitPx(window.getComputedStyle(notMe[i]).paddingTop) +
-          splitPx(window.getComputedStyle(notMe[i]).paddingBottom));
       }
 
 

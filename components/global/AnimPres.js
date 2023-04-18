@@ -1,3 +1,4 @@
+import swipeEventsInit from "@/scripts/SwipeEvents";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -19,7 +20,7 @@ function AnimPres({
   initial: initialProp,
   fragment = false,
     transition: transitionProp = {},
-
+  
 }) {
   const hasInOutAnimation = animation.in && animation.out;
   const hasHiddenVisibleAnimation = animation.hidden && animation.visible;
@@ -32,6 +33,8 @@ function AnimPres({
     duration: 0,
     delay: 0,
   };
+
+
 
   const applyTransitionOverrides = (animType) => {
     if (!animType || !animType.transition) return animType;
@@ -82,7 +85,6 @@ function AnimPres({
   );
 
 
-
   function renderMotionDiv() {
 
     const MotionElement = tag ? motion[tag] : motion.div;
@@ -99,7 +101,10 @@ function AnimPres({
         style={style ? style : {}}
         ref={reference}
         onAnimationComplete={onAnimationComplete ? onAnimationComplete : () => {}}
-        {...(layout !== undefined ? { layout: layout } : {})}>
+        {...(layout !== undefined ? { layout: layout } : {})}
+        
+  
+        >
 
         {secondaryCondition && children}
 

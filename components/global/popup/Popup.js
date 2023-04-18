@@ -17,6 +17,7 @@ import AnimPres from "../AnimPres";
 import { GalInfo } from "./popup_components/GalleryInfo";
 import popAnims, { popLayoutTransition, popSeekDuration } from "./popup_utilities/PopupAnimations";
 import { useResponsiveUtils } from "@/scripts/hooks/useBreakpoint";
+import swipeEventsInit from "@/scripts/SwipeEvents";
 
 // TODO: update controls so that the seek buttons have a dedicated state for when they're overflowing.  or like a max number of them
 // TODO: Stop calculations that don't need to run on mobile
@@ -273,6 +274,8 @@ function Wrapper({ pop, bp }) {
     (e, direction) => {
       if (!debounceInteraction()) return;
 
+
+
       var button;
 
       if (!pop.group) return;
@@ -338,12 +341,22 @@ function Wrapper({ pop, bp }) {
     }
   }
 
+  function handleSwipeLeft(e) {
+    seekHandler(e, 1);
+  }
+
+  function handleSwipeRight(e) {
+    seekHandler(e, -1);
+  }
+
   const handles = {
     close: closeHandler,
     seek: seekHandler,
     pagination: paginationHandler,
     seekKeydown: seekHandlerWithKeydown,
     closeKeydown: closeHandlerWithKeydown,
+    swipeLeft: handleSwipeLeft,
+    swipeRight: handleSwipeRight,
   };
 
   const { isBpAndDown, loading } = bp;
@@ -359,10 +372,20 @@ function Wrapper({ pop, bp }) {
     mobileGallery: stateMobileGallery,
   };
 
+
+  
+  useEffect(() => {
+    swipeEventsInit();
+  }, []);
+
+
+
   return (
     <>
       <Background handles={handles} popclass={popclass} />
-      <div className={`popup container ${popclass.container}`} style={popclass.containerStyle} ref={popRef}>
+      <div className={`popup container ${popclass.container}`} style={popclass.containerStyle} ref={popRef}
+
+      >
         <div className={`popup--inner ${popclass.inner}`}>
           {pop.type == "lightbox" && <Head pop={pop} nav={nav} popclass={popclass} handles={handles} />}
           <div className={`popup--content popup--content__on ${popclass.content}`}>
@@ -372,14 +395,14 @@ function Wrapper({ pop, bp }) {
 
             {pop.type == "lightbox" && (
               <>
-                <Lightbox pop={pop} nav={nav} handles={handles} popclass={popclass} elems={elems} state={state} bp={bp} />
+                <Lightbox pop={pop} nav={nav} handles={handles} popclass={popclass} elems={elems} state={state}/>
               </>
             )}
 
             {pop.type == "gallery" && (
               <>
                 <GalInfo pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} state={state}>
-                  <Lightbox pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} state={state} bp={bp} />
+                  <Lightbox pop={pop} popclass={popclass} elems={elems} nav={nav} handles={handles} state={state} />
                 </GalInfo>
               </>
             )}
@@ -405,10 +428,8 @@ function Wrapper({ pop, bp }) {
   }
 }
 
-function Lightbox({ pop, nav, handles, popclass, elems, state, bp }) {
+function Lightbox({ pop, nav, handles, popclass, elems, state }) {
   const [timeoutId, setTimeoutId] = useState(null);
-
-  const { isBpAndDown, loading } = bp;
 
   const handleImgLoad = () => {
     const id = setTimeout(() => {
@@ -592,7 +613,18 @@ function Lightbox({ pop, nav, handles, popclass, elems, state, bp }) {
     if (elems.img.availWidth && elems.img.availHeight && elems.img.maxWidth && elems.img.maxHeight) {
       if (!drawLightbox) setDrawLightbox(true);
     }
-  }, [elems.img.availWidth, elems.img.availHeight, elems.img.maxWidth, elems.img.maxHeight,  bp]);
+  }, [elems.img.availWidth, elems.img.availHeight, elems.img.maxWidth, elems.img.maxHeight]);
+
+
+  useEffect(() => {
+    swipeEventsInit();
+  }, []);
+
+
+  const mediaWrapperRef = useRef(null);
+  useListener("swiped-left", handles.swipeLeft, true, mediaWrapperRef);
+  useListener("swiped-right", handles.swipeRight, true, mediaWrapperRef);
+  
 
   return (
     <>
@@ -612,7 +644,11 @@ function Lightbox({ pop, nav, handles, popclass, elems, state, bp }) {
         onAnimationComplete={() => {
           pop.setImgDrawn(true);
           if (!pop.firstImgDrawn) pop.setFirstImgDrawn(true);
-        }}>
+        }}
+
+        reference={mediaWrapperRef}
+
+        >
         <Graphic
           reference={elems.img.ref}
           className={`popup--media ${popclass.media} ${!pop.imgLoaded ? "popup--media__loading" : ""}`}
