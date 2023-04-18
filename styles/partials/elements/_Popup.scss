@@ -363,6 +363,8 @@ $col-media-wrapper: rgba($col-background, 0.075);
     }
 
     &__gallery-zoom {
+      background-color: $col-media-wrapper;
+
       // not being used right now but was added to in the JS because media-wrapper needed to not have pointer-events:all
     }
 

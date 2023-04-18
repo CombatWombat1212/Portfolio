@@ -3291,6 +3291,10 @@ h3 + .studypanel--paragraph {
   overflow: hidden;
 }
 
+.popup--media-wrapper__gallery-zoom {
+  background-color: rgba(243, 243, 247, 0.075);
+}
+
 .popup--media-wrapper__gallery-group {
   overflow: visible;
 }

@@ -754,10 +754,8 @@ const Pagination = React.memo(function Pagination({ pop, handles }) {
         if (img.hidden || !display) return null;
 
         return (
-          <AnimPres
-            layout
-            animation={popAnims.fade}
-            condition={display}
+          <motion.div
+            layout="position"
             duration={0.4}
             key={i}
             style={{
@@ -774,7 +772,7 @@ const Pagination = React.memo(function Pagination({ pop, handles }) {
                 handles.pagination(img, i);
               }}
             />
-          </AnimPres>
+          </motion.div>
         );
       })}
     </div>
