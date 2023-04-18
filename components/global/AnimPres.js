@@ -5,6 +5,7 @@ function AnimPres({
   children,
   animation,
   condition,
+  secondaryCondition = true,
   className,
   mode,
   delay,
@@ -99,7 +100,9 @@ function AnimPres({
         ref={reference}
         onAnimationComplete={onAnimationComplete ? onAnimationComplete : () => {}}
         {...(layout !== undefined ? { layout: layout } : {})}>
-        {children}
+
+        {secondaryCondition && children}
+
       </MotionElement>
     );
   }

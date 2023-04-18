@@ -136,7 +136,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D rendering of a bottle of foundation created for Jabbar & Co. as part of a project to create product renderings for their online store. This bottle is one of 110 different shades of foundation that were included in the project scope.",
       //   study: '',
       group: "foundation_bottles",
-      project: "Jabbar & Co.'s 110 Shades Line",
+      project: "Jabbar & Co. 110 Shades Line",
       //   index: 0,
     },
     jabbar_and_co_foundation_02: {
@@ -152,7 +152,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D rendering of a bottle of foundation created for Jabbar & Co. as part of a project to create product renderings for their online store. This bottle is one of 110 different shades of foundation that were included in the project scope.",
       //   study: '',
       group: "foundation_bottles",
-      project: "Jabbar & Co.'s 110 Shades Line",
+      project: "Jabbar & Co. 110 Shades Line",
       //   index: 0,
     },
     jabbar_and_co_foundation_03: {
@@ -168,7 +168,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D rendering of a bottle of foundation created for Jabbar & Co. as part of a project to create product renderings for their online store. This bottle is one of 110 different shades of foundation that were included in the project scope.",
       //   study: '',
       group: "foundation_bottles",
-      project: "Jabbar & Co.'s 110 Shades Line",
+      project: "Jabbar & Co. 110 Shades Line",
       //   index: 0,
     },
     jabbar_and_co_foundation_video_01: {
@@ -183,7 +183,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1200,
       height: 1200,
       group: "foundation_bottles",
-      project: "Jabbar & Co.'s 110 Shades Line",
+      project: "Jabbar & Co. 110 Shades Line",
     },
     jabbar_and_co_products_01: {
       name: "jabbar_and_co_products_01",
@@ -198,7 +198,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of a makeup brush created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: '',
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co.'s Core Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_02: {
@@ -214,7 +214,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of a tube of Botanical Cleansing Lotion created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: '',
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co.'s Core Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_03: {
@@ -230,7 +230,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Botanical Firming Toner created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: '',
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co.'s Core Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_04: {
@@ -246,7 +246,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Firming Face And Eye Serum created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: '',
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co.'s Core Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_05: {
@@ -262,7 +262,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Hydrating Mango Face Cream created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: '',
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co.'s Core Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_06: {
@@ -278,7 +278,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Setting Spray created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: '',
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co.'s Core Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_07: {
@@ -294,7 +294,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Anti-Aging Cream created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: '',
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co.'s Core Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_08: {
@@ -310,7 +310,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Anti-Aging Cream created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: '',
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co.'s Core Product Line",
+      project: "Jabbar & Co. Product Line",
       thumbnail: true,
 
       //   index: 0,
@@ -328,7 +328,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Hyaluronic Moisturizer created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: '',
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co.'s Core Product Line",
+      project: "Jabbar & Co. Product Line",
 
       //   index: 0,
     },
@@ -345,7 +345,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Hyaluronic Moisturizer created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: '',
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co.'s Core Product Line",
+      project: "Jabbar & Co. Product Line",
 
       //   index: 0,
     },
@@ -361,7 +361,7 @@ const EXPLORATIONS_IMGS = processImages(
       description: "3D product rendering of a Buki Brush created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co.'s Core Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_12: {
@@ -377,7 +377,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Blotting Powder created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: '',
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co.'s Core Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_13: {
@@ -393,7 +393,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Blotting Powder created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: '',
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co.'s Core Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_14: {
@@ -409,7 +409,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Setting Powder created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: '',
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co.'s Core Product Line",
+      project: "Jabbar & Co. Product Line",
 
       //   index: 0,
     },
@@ -426,7 +426,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Setting Powder created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: '',
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co.'s Core Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_16: {
@@ -442,7 +442,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of 'Camera Ready Primer' created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: '',
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co.'s Core Product Line",
+      project: "Jabbar & Co. Product Line",
 
       //   index: 0,
     },
@@ -456,7 +456,7 @@ const EXPLORATIONS_IMGS = processImages(
       tools: ["Blender", "Photoshop", "Python"],
       title: "Random Dress Shirt #1",
       description:
-        "3D rendering of one of the completed dress shirts created for MADE Clothing Co.'s online dress shirt configurator. Each shirt piece was rendered in 40+ real-world fabrics. The final outcome was isolated images of shirt bodies, collars, cuffs, and plackets, that can be easily stacked to create a variety of different shirts, like the one shown here.",
+        "One of many 3D renderings created for MADE Clothing Co.'s online dress shirt configurator. Each shirt piece was rendered in 40+ real-world fabrics. The final outcome was isolated images of shirt bodies, collars, cuffs, and plackets, that can be easily stacked to create a variety of different shirts, like the one shown here.",
       study: "MADE",
       group: "made_shirts",
       project: "Made Clothing Co. Products",
@@ -470,7 +470,7 @@ const EXPLORATIONS_IMGS = processImages(
       height: 1200,
       disciplines: ["3D Design"],
       tools: ["Blender", "Photoshop", "Python"],
-      title: "Made Clothing Co. Products: Randomized Dress Shirt",
+      title: "Randomized Dress Shirt",
       description:
         "3D rendering of one of the completed dress shirts created for MADE Clothing Co.'s online dress shirt configurator. Each shirt piece was rendered in 40+ real-world fabrics. The final outcome was isolated images of shirt bodies, collars, cuffs, and plackets, that can be easily stacked to create a variety of different shirts, like the one shown here.",
       study: "MADE",
@@ -486,7 +486,7 @@ const EXPLORATIONS_IMGS = processImages(
       height: 1200,
       disciplines: ["3D Design"],
       tools: ["Blender", "Photoshop", "Python"],
-      title: "Made Clothing Co. Products: Randomized Dress Shirt",
+      title: "Randomized Dress Shirt",
       description:
         "3D rendering of one of the completed dress shirts created for MADE Clothing Co.'s online dress shirt configurator. Each shirt piece was rendered in 40+ real-world fabrics. The final outcome was isolated images of shirt bodies, collars, cuffs, and plackets, that can be easily stacked to create a variety of different shirts, like the one shown here.",
       study: "MADE",
@@ -502,7 +502,7 @@ const EXPLORATIONS_IMGS = processImages(
       height: 1200,
       disciplines: ["3D Design"],
       tools: ["Blender", "Photoshop", "Python"],
-      title: "Made Clothing Co. Products: Randomized Dress Shirt",
+      title: "Randomized Dress Shirt",
       description:
         "3D rendering of one of the completed dress shirts created for MADE Clothing Co.'s online dress shirt configurator. Each shirt piece was rendered in 40+ real-world fabrics. The final outcome was isolated images of shirt bodies, collars, cuffs, and plackets, that can be easily stacked to create a variety of different shirts, like the one shown here.",
       study: "MADE",
@@ -518,7 +518,7 @@ const EXPLORATIONS_IMGS = processImages(
       height: 1200,
       disciplines: ["3D Design"],
       tools: ["Blender", "Photoshop", "Python"],
-      title: "Made Clothing Co. Products: Randomized Dress Shirt",
+      title: "Randomized Dress Shirt",
       description:
         "3D rendering of one of the completed dress shirts created for MADE Clothing Co.'s online dress shirt configurator. Each shirt piece was rendered in 40+ real-world fabrics. The final outcome was isolated images of shirt bodies, collars, cuffs, and plackets, that can be easily stacked to create a variety of different shirts, like the one shown here.",
       study: "MADE",
@@ -534,7 +534,7 @@ const EXPLORATIONS_IMGS = processImages(
       height: 1200,
       disciplines: ["3D Design"],
       tools: ["Blender", "Photoshop", "Python"],
-      title: "Made Clothing Co. Products: Randomized Dress Shirt",
+      title: "Randomized Dress Shirt",
       description:
         "3D rendering of one of the completed dress shirts created for MADE Clothing Co.'s online dress shirt configurator. Each shirt piece was rendered in 40+ real-world fabrics. The final outcome was isolated images of shirt bodies, collars, cuffs, and plackets, that can be easily stacked to create a variety of different shirts, like the one shown here.",
       study: "MADE",
@@ -550,7 +550,7 @@ const EXPLORATIONS_IMGS = processImages(
       height: 1200,
       disciplines: ["3D Design"],
       tools: ["Blender", "Photoshop", "Python"],
-      title: "Made Clothing Co. Products: Randomized Dress Shirt",
+      title: "Randomized Dress Shirt",
       description:
         "3D rendering of one of the completed dress shirts created for MADE Clothing Co.'s online dress shirt configurator. Each shirt piece was rendered in 40+ real-world fabrics. The final outcome was isolated images of shirt bodies, collars, cuffs, and plackets, that can be easily stacked to create a variety of different shirts, like the one shown here.",
       study: "MADE",
@@ -566,7 +566,7 @@ const EXPLORATIONS_IMGS = processImages(
       height: 1200,
       disciplines: ["3D Design"],
       tools: ["Blender", "Photoshop", "Python"],
-      title: "Made Clothing Co. Products: Randomized Dress Shirt",
+      title: "Randomized Dress Shirt",
       description:
         "3D rendering of one of the completed dress shirts created for MADE Clothing Co.'s online dress shirt configurator. Each shirt piece was rendered in 40+ real-world fabrics. The final outcome was isolated images of shirt bodies, collars, cuffs, and plackets, that can be easily stacked to create a variety of different shirts, like the one shown here.",
       study: "MADE",
@@ -770,6 +770,7 @@ const EXPLORATIONS_IMGS = processImages(
       project: "Navigating <i>Obsessive Seas</i>",
       index: 10,
       zoom: true,
+      aspect: "16/9",
     },
     // virtual_pangea_temp: {
     //   name: "virtual_pangea_temp",
@@ -1514,6 +1515,7 @@ const EXPLORATIONS_IMGS = processImages(
       group: "makeright_final",
       project: "MakeRight",
       zoom: true,
+      aspect: "16/9",
     },
     customer_screen_07: {
       name: "customer_screen_07",
@@ -1528,6 +1530,7 @@ const EXPLORATIONS_IMGS = processImages(
       group: "makeright_final",
       project: "MakeRight",
       zoom: true,
+      aspect: "16/9",
     },
     customer_screen_08: {
       name: "customer_screen_08",
@@ -1542,6 +1545,7 @@ const EXPLORATIONS_IMGS = processImages(
       group: "makeright_final",
       project: "MakeRight",
       zoom: true,
+      aspect: "16/9",
     },
     customer_screen_13: {
       name: "customer_screen_13",
@@ -1556,6 +1560,7 @@ const EXPLORATIONS_IMGS = processImages(
       group: "makeright_final",
       project: "MakeRight",
       zoom: true,
+      aspect: "16/9",
     },
     maker_screen_09_no_tutorial: {
       name: "maker_screen_09_no_tutorial",
@@ -1598,6 +1603,7 @@ const EXPLORATIONS_IMGS = processImages(
       group: "makeright_final",
       project: "MakeRight",
       zoom: true,
+      aspect: "16/9",
     },
     maker_screen_12_no_tutorial: {
       name: "maker_screen_12_no_tutorial",
@@ -1613,6 +1619,7 @@ const EXPLORATIONS_IMGS = processImages(
       group: "makeright_final",
       project: "MakeRight",
       zoom: true,
+      aspect: "16/9",
     },
     // maker_screen_12_tutorial: {
     //   name: "maker_screen_12_tutorial",
@@ -1641,6 +1648,7 @@ const EXPLORATIONS_IMGS = processImages(
       group: "makeright_final",
       project: "MakeRight",
       zoom: true,
+      aspect: "16/9",
     },
 
     makeright_thumbnail_04: {

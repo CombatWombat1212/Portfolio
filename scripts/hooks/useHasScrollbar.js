@@ -12,13 +12,27 @@ const useHasScrollbar = (ref, options = {}) => {
     ? options.repeatCheckDebounceTime
     : repeatChecks > 0 ? 100 : 0; // Update the logic here
 
+  // const hasScrollbar = () => {
+  //   if (ref.current) {
+  //     const element = ref.current;
+  //     return element.scrollHeight > element.clientHeight;
+  //   }
+  //   return false;
+  // };
+
   const hasScrollbar = () => {
     if (ref.current) {
       const element = ref.current;
-      return element.scrollHeight > element.clientHeight;
+      const computedStyle = window.getComputedStyle(element);
+      const height = parseFloat(computedStyle.height);
+      const maxHeight = parseFloat(computedStyle.maxHeight);
+  
+      const effectiveHeight = maxHeight > 0 && maxHeight < height ? maxHeight : height;
+      return element.scrollHeight > effectiveHeight;
     }
     return false;
   };
+    
 
   const [scrollbar, setScrollbar] = useState(hasScrollbar);
 

@@ -18,6 +18,54 @@ import useElementStyle from "@/scripts/hooks/useElementStyle";
 import useOffsetTop from "@/scripts/hooks/useOffsetTop";
 import { STUDY_LINKS } from "@/data/CASE_STUDIES";
 
+function GalInfoMotionWrapper({ elems, scrollbar, children, type = "default" }) {
+  const scroll = type != "above" && scrollbar.info.classes ? scrollbar.info.classes : '';
+  
+  return (
+    <motion.div
+      layout="position"
+      transition={{
+        layout: { duration: popLayoutTransition },
+      }}
+      className={`popup--info ${scroll} popup--info__${type}`}
+      ref={elems.info.ref}>
+      {children}
+    </motion.div>
+  );
+}
+
+function GalInfoAnimPres({ elems, pop, styles, state, popclass, scrollbar, children, type="default" }) {
+  return (
+    <>
+      {(pop.firstImgDrawn || state.mobileGallery) && (
+        <AnimPres
+          mode="wait"
+          fragment
+          animation={popAnims.slideFade}
+          // delay={0.25}
+          condition={true}
+          reference={elems.desc.ref}
+          className={`popup--description ${popclass.desc} ${scrollbar.desc.classes} popup--description__${type}`}
+          style={styles.description}
+          onAnimationComplete={() => {
+            pop.setInfoDrawn(true);
+          }}>
+          {children}
+        </AnimPres>
+      )} 
+    </>
+  );
+}
+
+function GalHeading({ title, subheading }) {
+  return (
+    <>
+      {title && <h3 type="h3" className="gallery--title" dangerouslySetInnerHTML={{ __html: title }} />}
+      {subheading && <h5 className="gallery--subheading">{subheading}</h5>}
+    </>
+  );
+}
+
 const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles, state, children }) {
   var title, subheading;
   if (pop.img.project) {
@@ -48,16 +96,23 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
   });
 
   const infoScrollbar = useHasScrollbar(elems.info.ref, {
-    observer: true,
-    debounceTime: 10,
+        debounceTime: 100,
     repeatChecks: 10,
-    repeatChecksDebounceTime: 4,
+    repeatChecksDebounceTime: 10,
   });
 
-  const scrollbarClasses = {
-    desc: descScrollbar ? "popup--description__gallery-scrollbar scrollbar" : "",
-    info: infoScrollbar ? "popup--info__gallery-scrollbar scrollbar" : "",
+  const scrollbar = {
+    
+    desc: {
+      has: descScrollbar,
+      classes: true ? "popup--description__gallery-scrollbar scrollbar" : "",
+    },
+    info: {
+      has: infoScrollbar,
+      classes: true ? "popup--info__gallery-scrollbar scrollbar" : "",
+    }
   };
+
 
   const [catData, setCatData] = useState({});
 
@@ -82,57 +137,49 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
     });
   };
 
+  const wrapperProps = { elems: elems, pop: pop, styles: styles, state: state, popclass: popclass, scrollbar: scrollbar, handles: handles };
+
   return (
     <>
+      {state.mobile && (
+        <GalInfoMotionWrapper {...wrapperProps} type="above">
+          <GalInfoAnimPres {...wrapperProps} type="above">
+            <GalHeading title={title} subheading={subheading} {...wrapperProps} />
+            {state.mobileGallery && <Close pop={pop} nav={nav} handles={handles} popclass={popclass} type="gallery" />}
+
+          </GalInfoAnimPres>
+        </GalInfoMotionWrapper>
+      )}
+
       {children}
 
-      <motion.div
-        layout="position"
-        transition={{
-          layout: { duration: popLayoutTransition },
-        }}
-        className={`popup--info ${scrollbarClasses.info}`}
-        ref={elems.info.ref}>
-        {(pop.firstImgDrawn || state.mobileGallery) && (
-          <AnimPres
-            mode="wait"
-            fragment
-            animation={popAnims.slideFade}
-            // delay={0.55}
-            condition={true}
-            reference={elems.desc.ref}
-            className={`popup--description ${popclass.desc} ${scrollbarClasses.desc}`}
-            style={styles.description}
-            onAnimationComplete={() => {
-              pop.setInfoDrawn(true);
-            }}>
-            {title && <h3 type="h3" className="gallery--title" dangerouslySetInnerHTML={{ __html: title }} />}
-            {subheading && <h5 className="gallery--subheading">{subheading}</h5>}
+      <GalInfoMotionWrapper {...wrapperProps}>
+        <GalInfoAnimPres {...wrapperProps}>
+          {state.desktop && <GalHeading title={title} subheading={subheading} />}
 
-            <div className="gallery--info">
-              {(pop.img.disciplines || pop.img.tools) && state.desktop && (
-                <GalCategories pop={pop} hasDesc={hasDesc} hasTitle={hasTitle} onCatDataChange={handleCatDataChange} />
-              )}
+          <div className="gallery--info">
+            {(pop.img.disciplines || pop.img.tools) && state.desktop && (
+              <GalCategories pop={pop} hasDesc={hasDesc} hasTitle={hasTitle} onCatDataChange={handleCatDataChange} />
+            )}
 
-              {pop.img.study && (
-                <Button
-                  icon={["arrow_right", "right", "mask"]}
-                  color={"background-tertiary"}
-                  animation={"pulse-right"}
-                  className="gallery--button"
-                  href={STUDY_LINKS.find((link) => link.toLowerCase().includes(pop.img.study.toLowerCase()))}
-                  onClick={handles.close}>
-                  View Study
-                </Button>
-              )}
-              {hasDesc && <GalDescription pop={pop} />}
+            {pop.img.study && (
+              <Button
+                icon={["arrow_right", "right", "mask"]}
+                color={"background-tertiary"}
+                animation={"pulse-right"}
+                className="gallery--button"
+                href={STUDY_LINKS.find((link) => link.toLowerCase().includes(pop.img.study.toLowerCase()))}
+                onClick={handles.close}>
+                View Study
+              </Button>
+            )}
+            {hasDesc && <GalDescription pop={pop} />}
 
-              {(pop.img.disciplines || pop.img.tools) && state.mobile && (
-                <GalCategories pop={pop} hasDesc={hasDesc} hasTitle={hasTitle} onCatDataChange={handleCatDataChange} />
-              )}
-            </div>
-          </AnimPres>
-        )}
+            {(pop.img.disciplines || pop.img.tools) && state.mobile && (
+              <GalCategories pop={pop} hasDesc={hasDesc} hasTitle={hasTitle} onCatDataChange={handleCatDataChange} />
+            )}
+          </div>
+        </GalInfoAnimPres>
 
         {pop.firstImgDrawn && pop.infoDrawn && !state.mobileGallery && (
           <Close pop={pop} nav={nav} handles={handles} popclass={popclass} type="gallery" />
@@ -141,7 +188,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
         {(pop.img.disciplines || pop.img.tools) && (
           <div
             className={`gallery--categories-background
-        ${descScrollbar ? "gallery--categories-background__scrollbar" : ""}
+        ${scrollbar.desc.has ? "gallery--categories-background__scrollbar" : ""}
         ${catData?.hovered || catData.ellipse?.hovered ? "gallery--categories-background__hovered" : ""}
         `}
             style={{
@@ -149,7 +196,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
               "--tag-height": `${catData.tag?.height}px`,
             }}></div>
         )}
-      </motion.div>
+      </GalInfoMotionWrapper>
     </>
   );
 }, createUpdateConditions(["pop.index", "pop.img", "elems.img.height", "pop.firstImgDrawn", "pop.infoDrawn", "state.mobile"]));

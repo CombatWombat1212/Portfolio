@@ -125,12 +125,22 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
     @include md-down {
       --popup-gap: 2rem;
-      --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 14rem);
-      --popup-width-offset: calc(var(--site-max-width_wide) - 14rem);
+      --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 6.25rem);
+      --popup-width-offset: calc(var(--site-max-width_wide) - 9rem);
       --popup-scrollbar-pad: calc(var(--popup-gap) / 1.65);
-
       --popup-controls-offset: calc(var(--button-height) / 1.25);
     }
+
+    @include sm-down {
+      --popup-gap: 2rem;
+      --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + var(--popup-gap) + var(--button-height) );
+      --popup-width-offset: calc(var(--site-max-width_wide) - 0rem);
+      --popup-scrollbar-pad: calc(var(--popup-gap) / 1.65);
+      --popup-controls-offset: calc(var(--button-height) / 1.25);
+    }
+
+
+
   }
 
   &--inner {
@@ -189,6 +199,10 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
     &__gallery-group {
       top: -1.25rem;
+
+      @include md-down {
+        top: -2.25rem;
+      }
     }
   }
 
@@ -212,20 +226,28 @@ $col-media-wrapper: rgba($col-background, 0.075);
       --w: #{col-width(12)};
       @include popup-scrollbar;
       height: auto;
-      max-height: calc(#{col-width(6)} - var(--popup-gap));
+      max-height: calc(#{col-width(4.25)} - var(--popup-gap));
+      min-height: 2rem;
       overflow-y: auto;
       overflow-x: hidden;
       pointer-events: all;
-      padding-right:0;
+      padding-right: 0;
     }
 
-
-    &__gallery-scrollbar{
-      padding-right: var(--popup-scrollbar-pad);
-      --w: calc(100% - var(--popup-scrollbar-pad));
+    &__gallery-scrollbar {
+      @include md-down{
+        padding-right: var(--popup-scrollbar-pad);
+        --w: calc(100% - var(--popup-scrollbar-pad));
+      }
     }
 
-
+    &__above {
+      max-height: unset;
+      height: auto;
+      overflow: visible;
+      margin-bottom: -0.25rem;
+      min-height:fit-content;
+    }
   }
 
   &--description {
@@ -246,13 +268,16 @@ $col-media-wrapper: rgba($col-background, 0.075);
       }
     }
 
+    &__above{
+      overflow:visible;
+    }
+
     &__gallery-scrollbar {
       padding-right: var(--popup-scrollbar-pad);
-      @include md-down{
+      @include md-down {
         padding-right: 0rem;
       }
     }
-
   }
 
   &--header {
@@ -333,7 +358,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
       overflow: hidden;
 
       @include md-down {
-        // height: calc(#{col-width(6)} - var(--popup-gap));
+        // max-height: calc(#{col-width(9)} - (var(--popup-gap) * 1));
       }
     }
 
@@ -346,6 +371,9 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
       @include md-down {
         overflow: hidden;
+        // flex:1;
+        // max-height: calc(#{col-width(9)} - (var(--popup-gap) * 1));
+
       }
     }
   }
@@ -380,7 +408,8 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
     &__gallery {
       display: flex;
-      width: auto;
+      // width: auto;
+      width: var(--img-max-width);
 
       @include md-down {
         @include mx-auto;
@@ -390,7 +419,11 @@ $col-media-wrapper: rgba($col-background, 0.075);
     &__gallery-zoom {
       display: flex;
       width: var(--img-avail-width);
-      // height: var(--img-avail-height);
+
+      --img-max-height:10rem;
+      max-height: Max(calc((var(--img-avail-width) / var(--aspect-width)) * var(--aspect-height)), var(--img-max-height));
+ 
+
       aspect-ratio: unset;
       overflow-y: auto;
       @include popup-scrollbar;
@@ -413,10 +446,23 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
 .popup {
   .gallery {
+    &--info {
+      @include md-down {
+        & > *:first-child {
+          margin-top: 0rem;
+        }
+      }
+    }
     &--title {
+      @include md-down{
+        width:90%;
+      }
     }
     &--subheading {
       margin-top: 0.265rem !important;
+      @include md-down{
+        width:90%;
+      }
     }
 
     &--description {
@@ -579,6 +625,13 @@ $col-media-wrapper: rgba($col-background, 0.075);
       right: -0.75rem;
       // top: -0.55rem;
       // left: calc(100% + 1rem);
+
+      @include md-down {
+        bottom: unset;
+        right: calc( (var(--button-padding) / 1.25) * -1);
+        transform: translate(0%, -50%);
+        top: calc( 50% - 0.25rem);
+      }
     }
   }
 
@@ -636,21 +689,19 @@ $col-media-wrapper: rgba($col-background, 0.075);
     --gap: 0.75rem;
     @include gap;
 
-    position:relative;
-
+    position: relative;
 
     $px: 0.0625rem;
     --circle-width: #{$px * 22};
     --circle-width_end: #{$px * 16};
     --circle-width_before: #{$px * 34};
-    
+
     --circle-inner-width: #{$px * 14};
     --circle-inner-width_end: #{$px * 10};
   }
 
   &--circle {
     transition: 0.2s;
-
 
     width: var(--circle-width);
     height: var(--circle-width);
@@ -673,13 +724,10 @@ $col-media-wrapper: rgba($col-background, 0.075);
     }
 
     &__end {
-      // width:  var(--circle-width_end);  
-      // height: var(--circle-width_end);  
+      // width:  var(--circle-width_end);
+      // height: var(--circle-width_end);
       transform: scale(0.75);
     }
-
-
-
 
     &__inactive {
       @include hover {
@@ -706,8 +754,6 @@ $col-media-wrapper: rgba($col-background, 0.075);
         background-color: $col-primary;
       }
     }
-
-
   }
 
   &--circle-inner {
@@ -726,18 +772,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
     position: absolute;
     z-index: 10;
 
-
-    left: calc(
-      ((var(--circle-width) - var(--circle-inner-width)) / 2)
-      
-      + (var(--current) * var(--circle-width))
-      + (var(--current) * var(--gap))
-      
-      )
-      
-      
-      ;
-
+    left: calc(((var(--circle-width) - var(--circle-inner-width)) / 2) + (var(--current) * var(--circle-width)) + (var(--current) * var(--gap)));
   }
 }
 
@@ -756,9 +791,14 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
       transition: opacity 0.3s;
       opacity: 1;
+      
 
       &__zoom {
         width: var(--img-avail-width);
+
+        --img-max-height:10rem;
+        max-height: Max(calc((var(--img-avail-width) / var(--aspect-width)) * var(--aspect-height)), var(--img-max-height));
+  
       }
 
       &__lightbox-zoom {
@@ -770,6 +810,13 @@ $col-media-wrapper: rgba($col-background, 0.075);
       &__hidden {
         opacity: 0;
       }
+      
+
+      @include md-down{
+        z-index:-1;
+      }
+
+
     }
 
     &--img {
