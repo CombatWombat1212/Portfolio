@@ -200,9 +200,9 @@ input, button, textarea, select {
     --font-size-body: 0.955rem;
     --font-size-quote: 0.9rem;
     --font-size-logo: 1.2125rem;
-    --font-leading-h1: 2.775rem;
+    --font-leading-h1: 2.675rem;
     --font-leading-h2: 2.375rem;
-    --font-leading-h3: 1.8rem;
+    --font-leading-h3: 1.745rem;
     --font-leading-h4: 1.125rem;
     --font-leading-body: 1.335rem;
     --font-leading-quote: 1.3rem;
@@ -1941,7 +1941,7 @@ h3 + .studypanel--paragraph {
   left: 0;
   width: 100%;
   height: calc(100% - var(--nav-height));
-  z-index: 10;
+  z-index: 100;
   overflow: hidden;
   pointer-events: none;
 }
