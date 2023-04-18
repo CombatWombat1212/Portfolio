@@ -5,8 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import useScreenWidth from "@/scripts/hooks/useScreenWidth";
 import { splitPx } from "@/scripts/GlobalUtilities";
 
-// TODO: make nav change colors when scrolling over sections that match its color
-// TODO: make the case study item a dropdown
 
 function Navigation({ globalStyle }) {
   const [open, setOpen] = useState(false);
