@@ -2,7 +2,6 @@ import Image from "next/image";
 import PropTypes from "prop-types";
 import Button from "../elements/Buttons";
 import Tag from "../elements/Tag";
-import { useResponsiveUtils } from "@/scripts/hooks/useBreakpoint";
 
 function PanelWrapper({ children, id }) {
   return (

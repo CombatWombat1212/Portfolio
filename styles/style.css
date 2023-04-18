@@ -2333,6 +2333,13 @@ h3 + .studypanel--paragraph {
   padding-bottom: 5rem;
 }
 
+@media screen and (max-width: 61.9375em) {
+  .brief {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+}
+
 .brief--container__study {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -2355,6 +2362,13 @@ h3 + .studypanel--paragraph {
   margin-top: -0.5rem;
 }
 
+@media screen and (max-width: 61.9375em) {
+  .brief--group__gallery {
+    --gap: 2.85rem;
+    flex-wrap: wrap;
+  }
+}
+
 .brief--desc {
   width: 80%;
 }
@@ -2370,6 +2384,12 @@ h3 + .studypanel--paragraph {
 .brief--title__gallery * {
   font-weight: 500;
   color: #C41263;
+}
+
+@media screen and (max-width: 61.9375em) {
+  .brief--title__gallery {
+    margin-bottom: -0.15rem;
+  }
 }
 
 .brief--list li {
@@ -7712,6 +7732,10 @@ h3 + .studypanel--paragraph {
 #Explorations .studypanel__study {
   margin-top: 4.5rem;
   margin-bottom: 4.5rem;
+}
+
+#Explorations .section--heading * {
+  color: #074391;
 }
 
 #Explorations .section--main {

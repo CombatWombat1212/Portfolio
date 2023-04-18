@@ -19,6 +19,10 @@
 
   .section {
 
+    &--heading *{
+      color: $col-primary;
+    }
+
     
     &--main {
       grid-template-columns: repeat(3, 1fr);
