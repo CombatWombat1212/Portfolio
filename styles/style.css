@@ -202,7 +202,7 @@ input, button, textarea, select {
     --font-size-logo: 1.2125rem;
     --font-leading-h1: 2.675rem;
     --font-leading-h2: 2.375rem;
-    --font-leading-h3: 1.745rem;
+    --font-leading-h3: 1.825rem;
     --font-leading-h4: 1.125rem;
     --font-leading-body: 1.335rem;
     --font-leading-quote: 1.3rem;
@@ -1203,7 +1203,7 @@ h1 + .studypanel--subheading {
 
 @media screen and (max-width: 49.9375em) {
   h1 + .studypanel--subheading {
-    margin-top: calc(var(--panel-description-spacing) * 1.05);
+    margin-top: calc(var(--panel-description-spacing) * 1.25);
   }
 }
 
@@ -1247,7 +1247,7 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 49.9375em) {
   h3 + .studypanel--paragraph {
-    margin-top: calc(var(--panel-description-spacing) * 1.35);
+    margin-top: calc(var(--panel-description-spacing) * 1.575);
   }
 }
 
@@ -1763,7 +1763,7 @@ h3 + .studypanel--paragraph {
   z-index: 10;
 }
 
-@media screen and (max-width: 49.9375em) {
+@media screen and (max-width: 36.9375em) {
   .nav {
     overflow: hidden;
   }
@@ -2333,7 +2333,7 @@ h3 + .studypanel--paragraph {
   padding-bottom: 5rem;
 }
 
-@media screen and (max-width: 61.9375em) {
+@media screen and (max-width: 79.9375em) {
   .brief {
     padding-top: 3.5rem;
     padding-bottom: 3.5rem;
@@ -2345,10 +2345,25 @@ h3 + .studypanel--paragraph {
   grid-template-columns: repeat(2, 1fr);
 }
 
+@media screen and (max-width: 79.9375em) {
+  .brief--container__study {
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 4rem;
+  }
+}
+
 .brief--group__study {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 3rem;
+}
+
+@media screen and (max-width: 79.9375em) {
+  .brief--group__study {
+    grid-template-columns: repeat(var(--brief-items_non-tags), 1fr);
+    grid-gap: 2rem;
+    column-gap: 7rem;
+  }
 }
 
 .brief--group__gallery {
@@ -2362,7 +2377,7 @@ h3 + .studypanel--paragraph {
   margin-top: -0.5rem;
 }
 
-@media screen and (max-width: 61.9375em) {
+@media screen and (max-width: 79.9375em) {
   .brief--group__gallery {
     --gap: 2.85rem;
     flex-wrap: wrap;
@@ -2373,8 +2388,20 @@ h3 + .studypanel--paragraph {
   width: 80%;
 }
 
+@media screen and (max-width: 79.9375em) {
+  .brief--desc {
+    width: 100%;
+  }
+}
+
 .brief--point {
   grid-column: span 1;
+}
+
+@media screen and (max-width: 79.9375em) {
+  .brief--point {
+    grid-column: span calc(var(--brief-items_non-tags) * var(--point-is-tag) + 1 * (1 - var(--point-is-tag)));
+  }
 }
 
 .brief--title {
@@ -2386,7 +2413,7 @@ h3 + .studypanel--paragraph {
   color: #C41263;
 }
 
-@media screen and (max-width: 61.9375em) {
+@media screen and (max-width: 79.9375em) {
   .brief--title__gallery {
     margin-bottom: -0.15rem;
   }

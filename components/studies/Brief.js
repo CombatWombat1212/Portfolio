@@ -61,8 +61,23 @@ function Groups({ study }) {
     hasDesc ? "brief--group__study" : "brief--group__gallery"
   }`;
 
+  var briefItems = Object.keys(brief).filter((item) => {
+    return (brief && item in brief) && item != "description";
+  });
+
+  var notTagItems = briefItems.filter((item) => {
+    return !TAG_TYPES.includes(item);
+  });
+
+  console.log(notTagItems);
+
   return (
-    <div className={groupClasses}>
+    <div className={groupClasses}
+    style={{
+      '--brief-items': briefItems.length,
+      '--brief-items_non-tags': notTagItems.length,
+    }}
+    >
       {POINT_ORDER.map((item) => {
         var hasItem = brief && item in brief;
         return (
@@ -112,7 +127,11 @@ function Point({ items, type, study }) {
   return (
     <>
       {items && (
-        <div className={pointClasses}>
+        <div className={pointClasses}
+        style={{
+          '--point-is-tag': isTags ? 1 : 0,
+        }}
+        >
           <Heading
             type={titleType}
             className={`brief--title ${titleClasses}`}>

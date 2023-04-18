@@ -53,10 +53,11 @@ function StudyWrapper({ id, study, children }) {
     insertNextElementAfterLastSection(newChildren, lastChapterIndex, lastChapterChildren);
   }
   
+
   return (
     <div id={id} className="casestudy">
       <Indicator />
-      <StudyPanel variant="study" study={study} />
+      <StudyPanel variant={"study"} study={study} />
       <Brief study={study} />
       {newChildren}
     </div>

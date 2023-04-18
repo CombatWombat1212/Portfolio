@@ -2,7 +2,7 @@
   background-color: $col-background_darkest;
   @include pad-y(5rem);
 
-  @include lg-down{
+  @include xl-down{
     @include pad-y(3.5rem);
   }
 
@@ -13,6 +13,11 @@
     &__study{
       display: grid;
       grid-template-columns: repeat(2, 1fr);
+      
+      @include xl-down{
+        grid-template-columns: repeat(1, 1fr);
+        row-gap: 4rem;
+      }
     }
 
   }
@@ -21,10 +26,19 @@
 
 
   &--group {
+
     &__study {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-gap: 3rem;
+      
+      @include xl-down{
+        grid-template-columns: repeat(var(--brief-items_non-tags), 1fr);
+        grid-gap: 2rem;
+        column-gap: 7rem;
+
+      }
+
     }
 
 
@@ -36,8 +50,9 @@
       margin-top: -0.5rem;
 
 
-      @include lg-down{
+      @include xl-down{
         --gap: 2.85rem;
+
         flex-wrap: wrap;
       }
     }
@@ -49,10 +64,19 @@
 
   &--desc {
     width: 80%;
+    @include xl-down{
+      width: 100%;
+    }
   }
 
   &--point {
     grid-column: span 1;
+
+    @include xl-down{
+
+      grid-column: span #{weighted-average(var(--brief-items_non-tags), 1, var(--point-is-tag))};
+      
+    }
   }
 
   &--title{
@@ -70,7 +94,7 @@
       }
 
 
-      @include lg-down{
+      @include xl-down{
         margin-bottom: -0.15rem;
       }
 

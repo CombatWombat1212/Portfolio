@@ -1,5 +1,5 @@
-.panel {
-}
+
+// study variant applies to all studies + explorations, there's no gallery variant for studypanels cause they were similar enough to not need it
 
 .studypanel {
   // TODO: Overall, even in the jsx and everthing, it might be more organized to replace 'studypanel' with 'panel__study' make it a variant of the panel element.
@@ -51,7 +51,7 @@
         @include panel-mt(0.935);
       }
       @include md-down {
-        @include panel-mt(1.05);
+        @include panel-mt(1.25);
       }
     }
     h2 + & {
@@ -83,7 +83,7 @@
         @include panel-mt(1.35);
       }
       @include md-down {
-        @include panel-mt(1.35);
+        @include panel-mt(1.575);
       }
     }
   }
