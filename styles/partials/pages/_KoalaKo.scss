@@ -1,4 +1,57 @@
 #Koalako {
+  .brief {
+
+    &--group {
+      &__study {
+        @include xl-down {
+          @include flex-row;
+        }
+        @include md-down {
+          flex-wrap: wrap;
+        }
+      }
+
+    }
+
+    &--point {
+      @include xl-down {
+        &#deliverables {
+          order: 0;
+        }
+        &#timeline {
+          order: 1;
+        }
+        &#tools {
+          order: 2;
+        }
+      }
+      @include md-down {
+
+        &#deliverables {
+          order: 0;
+        }
+        &#timeline {
+          order: 1;
+        }
+        &#tools {
+          order: 2;
+        }
+
+      }
+    }
+
+    &--tags {
+      @at-root #Koalako #tools .brief--tags {
+        @include xxl {
+          flex-wrap: nowrap;
+        }
+      }
+    }
+  }
+
+
+  
+
   #Overview {
     &--Team {
       .mask {
@@ -74,7 +127,10 @@
         --gantt-stage-top-margin: 0.35rem;
 
         &--phase {
-          --gantt-phase-height_max: calc(var(--gantt-phase-height) + (var(--gantt-stage-count) * var(--gantt-stage-top-margin)) + (var(--gantt-task-count) * var(--gantt-task-top-margin)) + (var(--gantt-task-count) * var(--gantt-label-height)));
+          --gantt-phase-height_max: calc(
+            var(--gantt-phase-height) + (var(--gantt-stage-count) * var(--gantt-stage-top-margin)) +
+              (var(--gantt-task-count) * var(--gantt-task-top-margin)) + (var(--gantt-task-count) * var(--gantt-label-height))
+          );
         }
       }
     }

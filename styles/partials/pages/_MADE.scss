@@ -23,6 +23,40 @@
 }
 
 #Made {
+  .brief {
+    &--group {
+      &__study {
+        @include xl-down {
+          width: 80%;
+        }
+        @include lg-down {
+          width: 90%;
+        }
+        @include md-down {
+          width: 100%;
+          column-gap: 2rem;
+        }
+      }
+    }
+
+    &--point {
+      @include xl-down {
+        &#deliverables {
+          order: 0;
+        }
+        &#roles {
+          order: 3;
+        }
+        &#timeline {
+          order: 2;
+        }
+        &#tools {
+          order: 1;
+        }
+      }
+    }
+  }
+
   #Overview {
     &--Goal {
       @include section-mask-color($col-tertiary);
@@ -229,18 +263,10 @@
       }
     }
 
-
     &--Closing {
-
-      .background{
+      .background {
         background-color: $col-background_darker;
       }
-
-
-    
     }
-
-
-
   }
 }

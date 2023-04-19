@@ -4,7 +4,7 @@
   // TODO: Overall, even in the jsx and everthing, it might be more organized to replace 'studypanel' with 'panel__study' make it a variant of the panel element.
 
   @include flex-row-between;
-  --studypanel-img-height: 43rem;
+  --studypanel-img-height: 42rem;
   --panel-description-spacing: 1rem;
 
   @mixin panel-mt($mt) {
@@ -31,8 +31,6 @@
         margin-top: 12rem;
         margin-bottom: 12rem;
       }
-
-
     }
   }
 
@@ -67,7 +65,7 @@
       }
       @include md-down {
         // width:90%;
-        @include panel-mt(0.55);
+        @include panel-mt(0.565);
       }
     }
   }
@@ -99,27 +97,43 @@
       @include panel-mt(1.35);
     }
     @include md-down {
-      @include panel-mt(1.175);
+      @include panel-mt(1.205);
     }
   }
 
   &--button {
-    @include panel-mt(3.35);
+    &__home {
+      @include panel-mt(3.35);
 
-    @include xxl-down {
-      @include panel-mt(2.85);
+      @include xxl-down {
+        @include panel-mt(2.85);
+      }
+      @include xl-down {
+        @include panel-mt(2.75);
+      }
+
+      @include md-down {
+        @include panel-mt(1.825);
+
+        --button-height: 2.95rem;
+        width: stretch !important;
+        justify-content: center;
+      }
     }
-    @include xl-down {
-      @include panel-mt(2.75);
-    }
 
+    &__study {
+      @include panel-mt(3.35);
 
-    @include md-down {
-      @include panel-mt(2.35);
+      @include xxl-down {
+        @include panel-mt(2.85);
+      }
+      @include xl-down {
+        @include panel-mt(2.75);
+      }
 
-      --button-height:2.95rem;
-      width: stretch!important;
-      justify-content: center;
+      @include md-down {
+        @include panel-mt(2.35);
+      }
     }
 
 
@@ -197,7 +211,7 @@
     }
 
     &__study {
-      // height: Min(var(--studypanel-img-height), calc(var(--studypanel-img-height) * (var(--img-aspect-height) / var(--img-aspect-width))));
+      height: var(--studypanel-img-height);
     }
 
     &__home {
@@ -231,6 +245,17 @@
 
   &__study {
     @include marg-y(8.5rem);
+
+    @include xl-down {
+      --studypanel-img-height: 38rem;
+    }
+    @include lg-down {
+      --studypanel-img-height: 30rem;
+    }
+
+    @include md-down {
+      --studypanel-img-height: 39vh;
+    }
   }
 
   &__home {

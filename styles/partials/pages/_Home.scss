@@ -7,8 +7,8 @@
       margin:0!important;
 
       @include md-down{
-        height: calc(91vh - var(--nav-height))!important;
-        margin-bottom: -6.5rem!important;
+        height: calc(95vh - var(--nav-height))!important;
+        margin-bottom: -7.5rem!important;
       }
     }
 

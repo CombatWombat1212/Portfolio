@@ -219,13 +219,13 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
 
 
 //Generate Utilities
-
+// Testing, i added inverted to this to see if it corrected a bug with the cascade
 // Loop over each breakpoint
-@each $breakpoint in map-keys($grid-breakpoints) {
+@each $breakpoint in map-keys($grid-breakpoints_inverted) {
 
     // Generate media query if needed
     @include media-breakpoint-down($breakpoint) {
-        $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+        $infix: breakpoint-infix($breakpoint, $grid-breakpoints_inverted);
 
         // Loop over each utility property
         @each $key,

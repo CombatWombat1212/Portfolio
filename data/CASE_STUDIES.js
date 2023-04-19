@@ -1,4 +1,4 @@
-import {processGallery} from "@/scripts/processGallery";
+import { processGallery } from "@/scripts/processGallery";
 import { v4 as uuidv4 } from "uuid";
 
 var CASE_STUDIES = [
@@ -10,16 +10,26 @@ var CASE_STUDIES = [
       string: "Translating The Benefits of 3D Printing to Everyday Consumers",
       jsx: (
         <>
-          Translating The Benefits of 3D Printing<br className="d-xxl-none" /> to Everyday Consumers
+          Translating The Benefits of 3D Printing
+          <br className="d-xxl-none" /> to Everyday Consumers
         </>
       ),
     },
     tags: ["Thesis", "UX/UI Design", "User Research"],
 
     brief: {
-      description: "For my undergraduate capstone, I created a service that directly connects owners of 3D printers to customers in need.  Based on a gig-economy model, like Uber or DoorDash, this service enables access to 3D printing without the barriers of cost, and know-how.",
+      description:
+        "For my undergraduate capstone, I created a service that directly connects owners of 3D printers to customers in need.  Based on a gig-economy model, like Uber or DoorDash, this service enables access to 3D printing without the barriers of cost, and know-how.",
       tools: ["Adobe XD / Figma", "Illustrator", "Mural", "HTML/CSS/JS", "After Effects", "InDesign"],
-      deliverables: ["Hi-fidelity prototypes, of 2 user flows", "30+ Unique screens"],
+      deliverables: [{
+        string: "Hi-fidelity prototypes, of 2 user flows",
+        jsx: (
+          <>
+            Hi-fidelity prototypes, <br className=" d-md-block d-xl-none d-block" /> of 2 user flows
+          </>
+        ),
+
+      }, "30+ Unique screens"],
       timeline: "6 Months",
       roles: ["UX/UI Designer", "UX Researcher", "Frontend Dev", "Graphic Design"],
     },
@@ -50,7 +60,8 @@ var CASE_STUDIES = [
       string: "Product Rendering for a Toronto-Based Men’s Fashion Brand",
       jsx: (
         <>
-          Product Rendering for a Toronto-Based<br className="d-xxl-none" /> Men’s Fashion Brand
+          Product Rendering for a Toronto-Based
+          <br className="d-xxl-none" /> Men’s Fashion Brand
         </>
       ),
     },
@@ -58,10 +69,20 @@ var CASE_STUDIES = [
     tags: ["Client", "3D Design", "Product Rendering"],
 
     brief: {
-      description: "MADE Clothing Co. reached out to me to work together in creating a dress shirt customization tool for their webstore.  With the software already built, they needed an artist to create realistic renderings of their shirt components, and fabrics.",
+      description:
+        "MADE Clothing Co. reached out to me to work together in creating a dress shirt customization tool for their webstore.  With the software already built, they needed an artist to create realistic renderings of their shirt components, and fabrics.",
       tools: ["Blender 3D", "Photoshop", "Python"],
       deliverables: ["10 object models", "50+ custom textures", "600+ unique images"],
-      timeline: "3 active months of a 6 month partnership",
+
+      timeline: {
+        string: "3 active months of a 6 month partnership",
+        jsx: (
+          <>
+            3 active months <br className="d-block d-sm-none" />of a 6 month partnership
+          </>
+        ),
+      },
+
       roles: ["3D Designer / Generalist"],
     },
 
@@ -91,14 +112,16 @@ var CASE_STUDIES = [
       string: "Supporting Parents in Fostering Adolescent Creative Development",
       jsx: (
         <>
-          Supporting Parents in Fostering<br className="d-lg-none" /> Adolescent Creative Development
+          Supporting Parents in Fostering
+          <br className="d-lg-none" /> Adolescent Creative Development
         </>
       ),
     },
     tags: ["UX/UI Design", "User Research", "Team Project"],
 
     brief: {
-      description: "Supporting parents by providing a curated stream of unique, age-appropriate activities, and locations for play.  Easing the strain of fostering creative development by helping to fill gaps in a child’s exploration.",
+      description:
+        "Supporting parents by providing a curated stream of unique, age-appropriate activities, and locations for play.  Easing the strain of fostering creative development by helping to fill gaps in a child’s exploration.",
       tools: ["Adobe XD / Figma", "Mural", "InDesign"],
       deliverables: ["Interactive prototype", "Video presentation & pitch"],
       timeline: "9 Weeks",
@@ -111,13 +134,6 @@ var CASE_STUDIES = [
         width: 738,
         height: 842,
       },
-
-      // alt: {
-      //   src: "./assets/images/case_study_thumbnails/KoalaKo.png",
-      //   alt: "3D rendering of a phone with an app called 'KoalaKo' open on the screen",
-      //   width: 738,
-      //   height: 842,
-      // },
     },
 
     link: "/Studies/KoalaKo",
@@ -130,7 +146,8 @@ var CASE_STUDIES = [
       string: "Undeserving of a case study, but well-deserving of your attention",
       jsx: (
         <>
-          Undeserving of a case study,<br className="d-lg-none" /> but well-deserving of your attention
+          Undeserving of a case study,
+          <br className="d-lg-none" /> but well-deserving of your attention
         </>
       ),
     },
@@ -163,7 +180,6 @@ function addKey(arr) {
 function caseStudiesInit(arr) {
   if (!Array.isArray(arr)) arr = [arr];
 
-  
   arr.forEach((item) => {
     item.key = uuidv4();
     if (item.tags) item.tags = addKey(item.tags);
@@ -177,7 +193,6 @@ function caseStudiesInit(arr) {
 
   return arr;
 }
-
 
 CASE_STUDIES = caseStudiesInit(CASE_STUDIES);
 const STUDY_LINKS = CASE_STUDIES.map((study) => study.link);

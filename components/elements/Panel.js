@@ -89,7 +89,7 @@ function StudyPanel({ id, study, variant, button }) {
             {variant == "home" ? (
               <>
                 <Button
-                  className="studypanel--button"
+                  className={`studypanel--button studypanel--button__${variant}`}
                   type="regular"
                   icon={["arrow_right", "right", "mask"]}
                   animation={"pulse-right"}
@@ -103,8 +103,8 @@ function StudyPanel({ id, study, variant, button }) {
               study.type != "gallery" && (
                 <>
                   <Button
-                    className="studypanel--button"
-                    type="regular"
+                  className={`studypanel--button studypanel--button__${variant}`}
+                  type="regular"
                     icon={["arrow_down", "right", "mask"]}
                     animation={"pulse-down"}
                     href={"#Delivery"}>

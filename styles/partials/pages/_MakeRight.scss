@@ -1,13 +1,126 @@
 #Makeright {
   --background-info-gap: 6rem;
 
+  .brief {
+    &--group {
+      &__study {
+        column-gap: 5rem;
+
+
+        @include xl-down {
+          grid-template-columns: repeat(3, 1fr);
+          width: 90%;
+        }
+
+        @include lg-down {
+          width: 100%;
+        }
+
+        @include md-down {
+          grid-template-columns: repeat(2, 1fr);
+          column-gap: 2.5rem;
+        }
+      }
+    }
+
+    &--point {
+
+
+
+      @include xl-up {
+
+        $amt: 4rem;
+        &#deliverables {
+          order: 0;
+          margin-right: -$amt;
+        }
+
+        &#roles {
+          order: 1;            
+          margin-left: $amt;
+          margin-right: -$amt;
+        }
+
+        &#tools {
+          order: 2;
+          margin-right: -$amt;
+        }
+
+        &#timeline {
+          order: 3;
+          margin-left: $amt;
+          margin-right: -$amt;
+
+        }
+      }
+
+      @include xl {
+        &#deliverables {
+          margin-right: -5rem;
+        }
+        &#roles {
+          margin-left: 5.15rem;
+          margin-right: -5.15rem;
+        }
+        &#tools {
+          grid-column: span 3;
+        }
+      }
+
+      @include lg {
+        &#deliverables {
+          margin-right: -7rem;
+        }
+        &#roles {
+          margin-left: 4.95rem;
+          margin-right: -4.95rem;
+        }
+        &#tools {
+          grid-column: span 3;
+        }
+      }
+
+      @include md {
+        &#roles {
+          margin-left: -1.85rem;
+          margin-right: 1.85rem;
+        }
+        &#timeline {
+          margin-left: -6.45rem;
+          margin-right: 6.45rem;
+        }
+        &#tools {
+          grid-column: span 3;
+        }
+      }
+
+      @include sm-down {
+        &#deliverables {
+          order: 0;
+        }
+
+        &#roles {
+          order: 1;
+        }
+
+        &#tools {
+          order: 2;
+          grid-column: span 2;
+        }
+
+        &#timeline {
+          order: 3;
+        }
+      }
+    }
+  }
+
   #Overview {
     &--Background {
       .section {
         @include gap(var(--background-info-gap));
 
         --graphic-scale: 0.95;
-
       }
     }
 
@@ -16,7 +129,6 @@
         @include gap(var(--background-info-gap));
 
         --graphic-scale: 0.95;
-
       }
     }
 
@@ -76,7 +188,6 @@
 
     &--Methodology {
       .section {
-
         .mask {
           background-color: $col-background;
         }
@@ -85,16 +196,13 @@
           grid-template-columns: repeat(4, 1fr);
         }
 
-
         &--graphic {
           --img-panel-height: 7rem;
 
-          $imgs-sel: #{nth-children('#{trim-id(#{&})} .section--column', '', 1, 2) };
+          $imgs-sel: #{nth-children("#{trim-id(#{&})} .section--column", "", 1, 2)};
           @at-root #{$imgs-sel} {
-              --graphic-scale: 0.1;
+            --graphic-scale: 0.1;
           }
-
-
         }
       }
     }

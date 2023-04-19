@@ -40,7 +40,8 @@ $grid-breakpoint-max_key: nth(map-keys($grid-breakpoints), -1);
 $grid-breakpoint-max_value: nth(map-values($grid-breakpoints), -1);
 
 
-$grid-breakpoints_inverted: mapReverse($grid-breakpoints);
+// $grid-breakpoints_inverted: mapReverse($grid-breakpoints);
+$grid-breakpoints_inverted: mapReverseLastOnTop($grid-breakpoints);
 
 
 

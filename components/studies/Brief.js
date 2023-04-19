@@ -130,6 +130,7 @@ function Point({ items, type, study }) {
         style={{
           '--point-is-tag': isTags ? 1 : 0,
         }}
+        id={type}
         >
           <Heading
             type={titleType}
@@ -146,7 +147,7 @@ function Point({ items, type, study }) {
               )}
             </>
           ) : (
-            <p className={itemClasses}>{items}</p>
+            <p className={itemClasses}>{items.jsx || items}</p>
           )}
         </div>
       )}
@@ -184,7 +185,7 @@ function List({ items, itemClasses }) {
       {items.map((item, index) => {
         return (
           <li key={`${item.key} ${index}`} className={itemClasses}>
-            {item.name}
+            {item.name.jsx || item.name}
           </li>
         );
       })}

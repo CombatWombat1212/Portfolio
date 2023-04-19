@@ -2,6 +2,7 @@
   background-color: $col-background_darkest;
   @include pad-y(5rem);
 
+
   @include xl-down{
     @include pad-y(3.5rem);
   }
@@ -18,6 +19,9 @@
         grid-template-columns: repeat(1, 1fr);
         row-gap: 4rem;
       }
+      @include md-down{
+        row-gap: 3.75rem;
+      }
     }
 
   }
@@ -33,10 +37,11 @@
       grid-gap: 3rem;
       
       @include xl-down{
-        grid-template-columns: repeat(var(--brief-items_non-tags), 1fr);
-        grid-gap: 2rem;
-        column-gap: 7rem;
-
+        // grid-template-columns: repeat(var(--brief-items), 1fr);
+        // grid-gap: 2rem;
+        // column-gap: 7rem;
+        row-gap: 3rem;
+        column-gap: 6rem;
       }
 
     }
@@ -52,7 +57,6 @@
 
       @include xl-down{
         --gap: 2.85rem;
-
         flex-wrap: wrap;
       }
     }
@@ -73,9 +77,7 @@
     grid-column: span 1;
 
     @include xl-down{
-
-      grid-column: span #{weighted-average(var(--brief-items_non-tags), 1, var(--point-is-tag))};
-      
+      // grid-column: span #{weighted-average(var(--brief-items_non-tags), 1, var(--point-is-tag))};
     }
   }
 
