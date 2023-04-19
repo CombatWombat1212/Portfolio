@@ -10,38 +10,9 @@ import { Fragment, useEffect } from "react";
 import Findings from "@/components/global/Findings";
 import Method from "@/components/global/Method";
 
-function KoalaKo({ pop, onReady }) {
+function KoalaKo({ pop }) {
   const study = STUDY_KOALAKO;
-  useEffect(() => {
-    const handleLoad = () => {
-      if (onReady) {
-        onReady();
-      }
-    };
 
-    if (document.readyState === "complete") {
-      handleLoad();
-    } else {
-      document.addEventListener("readystatechange", () => {
-        if (document.readyState === "complete") {
-          handleLoad();
-        }
-      });
-    }
-
-    return () => {
-      document.removeEventListener("readystatechange", handleLoad);
-    };
-  }, []);
-
-  // const colors = [
-  //   "#074391",
-  //   "#C41263",
-  //   "#0A6C4D",
-  //   "#CB7C05",
-  // ]
-
-  const colors = ["#07418d", "#a91055", "#0a6e4e", "#b56e05"];
 
   return (
     <CaseStudyPage id={study.id} study={study}>
@@ -636,7 +607,7 @@ function KoalaKo({ pop, onReady }) {
               <br />- User #1 (Parent)
             </Quote>
             <Quote className="b-rad" background="background">
-            &ldquo;Digital achievements may help the activities feel more optional, and less like you must do them to develop your child&rsquo;s
+              &ldquo;Digital achievements may help the activities feel more optional, and less like you must do them to develop your child&rsquo;s
               creativity&rdquo;
               <br />
               <br />- User #3
@@ -650,7 +621,7 @@ function KoalaKo({ pop, onReady }) {
           </Column>
           <Column className="col-8" sameHeight="test">
             <Quote className="b-rad" background="background">
-            &ldquo;It would be great to see a filter for one-on-one activities or team activities, or budget to play the games&rdquo;
+              &ldquo;It would be great to see a filter for one-on-one activities or team activities, or budget to play the games&rdquo;
               <br />
               <br />- User #2
             </Quote>

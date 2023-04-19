@@ -1028,3 +1028,9 @@
 		@content;
     }
 }
+
+@function floor-round($value) {
+	@return unquote("calc(#{$value} * var(--sfh) / var(--sfh))");
+}
+
+  

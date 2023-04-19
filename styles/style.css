@@ -317,6 +317,7 @@ span {
   --b-rad_less: 0.3125rem;
   --font-height-body: Max(var(--font-size-body), var(--font-leading-body));
   scroll-behavior: smooth;
+  --sfh:4.9406564584124654e-324;
 }
 
 body {
@@ -494,6 +495,15 @@ body {
   }
 }
 
+.e-col-0 {
+  --col-width: Min(
+        calc(0% - var(--gap)),
+        0%);
+  min-width: var(--col-width);
+  max-width: var(--col-width);
+  flex: 1 0;
+}
+
 @media screen and (max-width: 91.9375em) {
   .col-1 {
     width: 8.33333%;
@@ -506,6 +516,15 @@ body {
     width: 8.33333%;
     --column-width: 1;
   }
+}
+
+.e-col-1 {
+  --col-width: Min(
+        calc(8.33333% - var(--gap)),
+        8.33333%);
+  min-width: var(--col-width);
+  max-width: var(--col-width);
+  flex: 1 0;
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -522,6 +541,15 @@ body {
   }
 }
 
+.e-col-2 {
+  --col-width: Min(
+        calc(16.66667% - var(--gap)),
+        16.66667%);
+  min-width: var(--col-width);
+  max-width: var(--col-width);
+  flex: 1 0;
+}
+
 @media screen and (max-width: 91.9375em) {
   .col-3 {
     width: 25%;
@@ -534,6 +562,15 @@ body {
     width: 25%;
     --column-width: 3;
   }
+}
+
+.e-col-3 {
+  --col-width: Min(
+        calc(25% - var(--gap)),
+        25%);
+  min-width: var(--col-width);
+  max-width: var(--col-width);
+  flex: 1 0;
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -550,6 +587,15 @@ body {
   }
 }
 
+.e-col-4 {
+  --col-width: Min(
+        calc(33.33333% - var(--gap)),
+        33.33333%);
+  min-width: var(--col-width);
+  max-width: var(--col-width);
+  flex: 1 0;
+}
+
 @media screen and (max-width: 91.9375em) {
   .col-5 {
     width: 41.66667%;
@@ -562,6 +608,15 @@ body {
     width: 41.66667%;
     --column-width: 5;
   }
+}
+
+.e-col-5 {
+  --col-width: Min(
+        calc(41.66667% - var(--gap)),
+        41.66667%);
+  min-width: var(--col-width);
+  max-width: var(--col-width);
+  flex: 1 0;
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -578,6 +633,15 @@ body {
   }
 }
 
+.e-col-6 {
+  --col-width: Min(
+        calc(50% - var(--gap)),
+        50%);
+  min-width: var(--col-width);
+  max-width: var(--col-width);
+  flex: 1 0;
+}
+
 @media screen and (max-width: 91.9375em) {
   .col-7 {
     width: 58.33333%;
@@ -590,6 +654,15 @@ body {
     width: 58.33333%;
     --column-width: 7;
   }
+}
+
+.e-col-7 {
+  --col-width: Min(
+        calc(58.33333% - var(--gap)),
+        58.33333%);
+  min-width: var(--col-width);
+  max-width: var(--col-width);
+  flex: 1 0;
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -606,6 +679,15 @@ body {
   }
 }
 
+.e-col-8 {
+  --col-width: Min(
+        calc(66.66667% - var(--gap)),
+        66.66667%);
+  min-width: var(--col-width);
+  max-width: var(--col-width);
+  flex: 1 0;
+}
+
 @media screen and (max-width: 91.9375em) {
   .col-9 {
     width: 75%;
@@ -618,6 +700,15 @@ body {
     width: 75%;
     --column-width: 9;
   }
+}
+
+.e-col-9 {
+  --col-width: Min(
+        calc(75% - var(--gap)),
+        75%);
+  min-width: var(--col-width);
+  max-width: var(--col-width);
+  flex: 1 0;
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -634,6 +725,15 @@ body {
   }
 }
 
+.e-col-10 {
+  --col-width: Min(
+        calc(83.33333% - var(--gap)),
+        83.33333%);
+  min-width: var(--col-width);
+  max-width: var(--col-width);
+  flex: 1 0;
+}
+
 @media screen and (max-width: 91.9375em) {
   .col-11 {
     width: 91.66667%;
@@ -648,6 +748,15 @@ body {
   }
 }
 
+.e-col-11 {
+  --col-width: Min(
+        calc(91.66667% - var(--gap)),
+        91.66667%);
+  min-width: var(--col-width);
+  max-width: var(--col-width);
+  flex: 1 0;
+}
+
 @media screen and (max-width: 91.9375em) {
   .col-12 {
     width: 100%;
@@ -660,6 +769,15 @@ body {
     width: 100%;
     --column-width: 12;
   }
+}
+
+.e-col-12 {
+  --col-width: Min(
+        calc(100% - var(--gap)),
+        100%);
+  min-width: var(--col-width);
+  max-width: var(--col-width);
+  flex: 1 0;
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -2705,7 +2823,6 @@ h3 + .studypanel--paragraph {
 }
 
 .section .column {
-  min-width: 0.1rem;
   position: relative;
 }
 

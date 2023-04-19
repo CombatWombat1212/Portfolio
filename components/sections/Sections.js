@@ -152,7 +152,7 @@ function Section({
   mainType,
   reference,
 }) {
-  var sec = useCreateSectionObject(
+  var sec = useSectionObject(
     className,
     children,
     type,
@@ -181,7 +181,7 @@ function Section({
   );
 }
 
-function useCreateSectionObject(
+function useSectionObject(
   className,
   children,
   type,

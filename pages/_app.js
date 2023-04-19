@@ -14,9 +14,10 @@ import Footer from "@/components/navigation/Footer";
 import LoadingScreen from "@/components/navigation/LoadingScreen";
 import useSecret from "@/scripts/hooks/useSecret";
 import useRandomString from "@/scripts/hooks/useRandomString";
-import { useBreakpoint } from "@/scripts/hooks/useBreakpoint";
+import { useBreakpoint, useResponsiveUtils } from "@/scripts/hooks/useBreakpoint";
 import { splitPx } from "@/scripts/GlobalUtilities";
 import useScreenWidth from "@/scripts/hooks/useScreenWidth";
+import { ResponsiveProvider } from "@/scripts/contexts/ResponsiveContext";
 // const style =
 // `font-family: "Gira Sans"; font-size: 1.4375rem;` +
 // // +`line-height:2rem;`
@@ -196,21 +197,19 @@ export default function App({ Component, pageProps }) {
   }, [bp]);
 
 
+  // useEffect(() => {
+  //   const handleRouteChange = () => {
+  //     window.scrollTo(0, 0);
+  //   };
 
-  
-  useEffect(() => {
-    const handleRouteChange = () => {
-      window.scrollTo(0, 0);
-    };
+  //   router.events.on('routeChangeComplete', handleRouteChange);
 
-    router.events.on('routeChangeComplete', handleRouteChange);
-
-    // If the component is unmounted, unsubscribe
-    // from the event with the `off` method
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
-    };
-  }, [router.events]);
+  //   // If the component is unmounted, unsubscribe
+  //   // from the event with the `off` method
+  //   return () => {
+  //     router.events.off('routeChangeComplete', handleRouteChange);
+  //   };
+  // }, [router.events]);
 
 
 
@@ -232,6 +231,8 @@ export default function App({ Component, pageProps }) {
 
 
   return (
+    <ResponsiveProvider>
+
     <div className="site">
 
       <Layout>
@@ -273,6 +274,7 @@ export default function App({ Component, pageProps }) {
         {/* <LoadingScreen showLoading={showLoading} chosen={chosen} /> */}
       </Layout>
     </div>
+    </ResponsiveProvider>
   );
 }
 
@@ -285,13 +287,15 @@ const loadingMessages = [
   `Wanna do something after this?`,
   `We should do this more often`,
   `<i>shawty like a melody</i>`,
+  `sicko mode <i>bwaaaa</i>`,
   `right this way`,
   `<i>*utz utz utz*</i>`,
+  `<i>*boots n cats n boots n cats*</i>`,
   `lemme check the back...`,
   `who turned off the lights?`,
   `<i>*dial-up noises*</i>`,
   `bleep bloop`,
-  `now where did i put that...`,
+  `where did i put that...`,
   `ouu good choice`,
   `niceee`,
   `<i>*crickets*</i>`,

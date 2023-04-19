@@ -146,7 +146,7 @@
 
   .column {
     // When you add a min width of any value to a column, preferably a value that it wont ever reach cause its such a small number, then the column's width appears to lock at the width it should be, i.e. 2 columns at 50% width, 3 columns at 33.3333%, and so on. not sure why! but it works!
-    min-width: 0.1rem;
+    // min-width: 0.1rem;
     position: relative;
   }
 }

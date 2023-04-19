@@ -5,8 +5,9 @@ import { addClassNoRepeats, addClassToJsxObj } from "./sections_utilities/ClassU
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { anchoredArrowsInit, removeExcessArrows } from "./sections_utilities/ArrowUtilities";
 import { colLineInit } from "./sections_utilities/ColLineUtilities";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import useSameHeight from "@/scripts/hooks/useSameHeight";
+import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 
 function ColumnGroup({ columns, arrows, line, mainType }) {
   arrows = arrows || false;
@@ -17,24 +18,26 @@ function ColumnGroup({ columns, arrows, line, mainType }) {
   if (hasAnchoredArrows) arrows = arrows.replace("anchored", "").trim();
   var arrowClasses = `arrow--mask arrow--mask__default mask__${arrows}`;
 
-  var hasAboveCaptions = false;
-  for (var i = 0; i < columns.length; i++) {
-    if (columns[i].props.caption == "above") {
-      hasAboveCaptions = true;
-      break;
-    }
-  }
+  // var hasAboveCaptions = false;
+  // for (var i = 0; i < columns.length; i++) {
+  //   if (columns[i].props.caption == "above") {
+  //     hasAboveCaptions = true;
+  //     break;
+  //   }
+  // }
 
   var hasLine = line;
-
-
-
 
   // TODO: this mount effect runs twice on the first load for some reason
   useMountEffect(() => {
     if (!hasLine) return;
     colLineInit();
   });
+
+
+  const {desktop} = useResponsive();
+
+
 
   return (
     <>
@@ -47,7 +50,15 @@ function ColumnGroup({ columns, arrows, line, mainType }) {
         var otherClasses = "";
 
         if (mainType == "flex") {
-          colClasses = `col-${Math.floor(12 / columns.length)}`;
+
+          colClasses = (()=>{
+            if(desktop){
+              return `col-${Math.floor(12 / columns.length)}`;
+            }else{
+              return `col-${Math.floor(12 / (columns.length/2) )}`;
+            }
+          })();
+
           otherClasses = "";
           if (props.classes.colClasses.length != 0) colClasses = props.classes.colClasses.join(" ");
           if (props.classes.otherClasses.length != 0) otherClasses = props.classes.otherClasses.join(" ");
@@ -119,8 +130,7 @@ ColumnGroup.propTypes = {
   mainType: PropTypes.oneOf(["flex", "grid"]),
 };
 
-function Column({ children, className,sameHeight }) {
-
+function Column({ children, className, sameHeight }) {
   className = className ? className : "";
 
   const reference = useRef(null);
@@ -134,10 +144,11 @@ function Column({ children, className,sameHeight }) {
       : {}),
   };
 
-
   return (
     <>
-      <div className={`section--column ${className}`} ref={reference} style={styles}>{children}</div>
+      <div className={`section--column ${className}`} ref={reference} style={styles}>
+        {children}
+      </div>
     </>
   );
 }

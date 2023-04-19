@@ -18,6 +18,24 @@ width: ($b/$column-grid-max) * 100#{'%'};
   //TODO: this isn't used in many places, at the time of writing its only utilized in the footer, and it adds about 100 lines of css just for that.  You may want to find a new way of approaching the footer styling unless this proves useful elsewhere.
     --column-width: #{$b};
 
+
+    // --expected-cols: #{floor-round(calc((12 / $column-grid-max)))};
+    // width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+
+
+    // max-width: ($b/$column-grid-max) * 100#{'%'};
+
+}
+
+@mixin col-width-e($b, $i:0) {
+ 
+    --col-width: Min(
+        calc(#{($b/$column-grid-max) * 100#{'%'}} - var(--gap)),
+        #{($b/$column-grid-max) * 100#{'%'}});
+    min-width: var(--col-width);
+    max-width: var(--col-width);
+        flex: 1 0;
+
 }
 
 
@@ -41,6 +59,10 @@ width: ($b/$column-grid-max) * 100#{'%'};
         @media screen and (min-width: map-get($grid-breakpoints, $grid-breakpoint-max_key)) {
             @include col-width($b, var(--flexChildren));
         }
+    }
+
+    .e-col-#{$b} {
+            @include col-width-e($b, var(--flexChildren));
     }
 }
 

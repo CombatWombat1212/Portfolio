@@ -1,6 +1,5 @@
 #Koalako {
   .brief {
-
     &--group {
       &__study {
         @include xl-down {
@@ -10,7 +9,6 @@
           flex-wrap: wrap;
         }
       }
-
     }
 
     &--point {
@@ -26,7 +24,6 @@
         }
       }
       @include md-down {
-
         &#deliverables {
           order: 0;
         }
@@ -36,7 +33,6 @@
         &#tools {
           order: 2;
         }
-
       }
     }
 
@@ -48,9 +44,6 @@
       }
     }
   }
-
-
-  
 
   #Overview {
     &--Team {
@@ -170,6 +163,17 @@
         }
         &--heading {
           @include flex-col-end;
+        }
+
+        &--main {
+          
+        }
+        &--column {
+
+          // magic
+          // --expected-cols: #{floor-round(calc((12 / var(--column-width))))};
+          // width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+
         }
       }
     }
