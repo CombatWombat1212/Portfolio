@@ -18,6 +18,7 @@ import { GalInfo } from "./popup_components/GalleryInfo";
 import popAnims, { popLayoutTransition, popSeekDuration } from "./popup_utilities/PopupAnimations";
 import { useResponsiveUtils } from "@/scripts/hooks/useBreakpoint";
 import swipeEventsInit from "@/scripts/SwipeEvents";
+import { useRouter } from "next/router";
 
 // TODO: update controls so that the seek buttons have a dedicated state for when they're overflowing.  or like a max number of them
 // TODO: Stop calculations that don't need to run on mobile
@@ -274,8 +275,6 @@ function Wrapper({ pop, bp }) {
     (e, direction) => {
       if (!debounceInteraction()) return;
 
-
-
       var button;
 
       if (!pop.group) return;
@@ -372,20 +371,10 @@ function Wrapper({ pop, bp }) {
     mobileGallery: stateMobileGallery,
   };
 
-
-  
-  useEffect(() => {
-    swipeEventsInit();
-  }, []);
-
-
-
   return (
     <>
       <Background handles={handles} popclass={popclass} />
-      <div className={`popup container ${popclass.container}`} style={popclass.containerStyle} ref={popRef}
-
-      >
+      <div className={`popup container ${popclass.container}`} style={popclass.containerStyle} ref={popRef}>
         <div className={`popup--inner ${popclass.inner}`}>
           {pop.type == "lightbox" && <Head pop={pop} nav={nav} popclass={popclass} handles={handles} />}
           <div className={`popup--content popup--content__on ${popclass.content}`}>
@@ -395,7 +384,7 @@ function Wrapper({ pop, bp }) {
 
             {pop.type == "lightbox" && (
               <>
-                <Lightbox pop={pop} nav={nav} handles={handles} popclass={popclass} elems={elems} state={state}/>
+                <Lightbox pop={pop} nav={nav} handles={handles} popclass={popclass} elems={elems} state={state} />
               </>
             )}
 
@@ -462,43 +451,36 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
         var availHeight = popupElem.offsetHeight;
         var availWidth = popupElem.offsetWidth - gapWidth - infoWidth;
       } else {
-        
         var contentChildren = Array.from(infoElem.parentElement.children).filter((elem) => {
           return getComputedStyle(elem).position !== "absolute";
         });
         var contentRows = contentChildren.length;
-        
-        
+
         var gapWidth = splitRem(window.getComputedStyle(popupElem).getPropertyValue("--popup-gap"));
         gapWidth = gapWidth * (contentRows - 1);
 
-
         var infoHeight = (() => {
-
           var infos = contentChildren.filter((elem) => {
-            return elem.classList.contains('popup--info');
+            return elem.classList.contains("popup--info");
           });
 
           var result = 0;
-          for (var i =0; i< infos.length; i++){
-            result += splitPx(window.getComputedStyle(infos[i]).height) +
-            splitPx(window.getComputedStyle(infos[i]).paddingTop) +
-            splitPx(window.getComputedStyle(infos[i]).paddingBottom)
+          for (var i = 0; i < infos.length; i++) {
+            result +=
+              splitPx(window.getComputedStyle(infos[i]).height) +
+              splitPx(window.getComputedStyle(infos[i]).paddingTop) +
+              splitPx(window.getComputedStyle(infos[i]).paddingBottom);
           }
           return result;
         })();
 
-
         var availHeight = popupElem.offsetHeight - infoHeight - gapWidth;
         var availWidth = popupElem.offsetWidth;
-
       }
     } else {
       var availHeight = popupElem.offsetHeight;
       var availWidth = popupElem.offsetWidth;
     }
-
-  
 
     if (availHeight !== elems.img.availHeight) {
       elems.img.setAvailHeight(availHeight);
@@ -549,11 +531,16 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
   }
 
   useLayoutEffect(() => {
+
+    let isMounted = true;
+
     const ensurePopAndInfoRef = () =>
       new Promise((resolve) => {
         if (pop.type === "gallery") {
           if (!elems.popup.ref.current || !elems.info.ref.current) {
-            setTimeout(() => resolve(ensurePopAndInfoRef()), 100);
+            if (isMounted){
+              setTimeout(() => resolve(ensurePopAndInfoRef()), 100);
+            }
           } else {
             resolve();
           }
@@ -562,33 +549,39 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
         }
       });
 
-    const ensurePopupScale = () =>
+      const ensurePopupScale = () =>
       new Promise((resolve) => {
         if (elems.popup.height === 0 || elems.popup.width === 0) {
-          setTimeout(() => resolve(ensurePopupScale()), 100);
+          if (isMounted) {
+            setTimeout(() => resolve(ensurePopupScale()), 100);
+          }
         } else {
           resolve();
         }
       });
-
-    const ensurePopDrawn = () =>
+  
+      const ensurePopDrawn = () =>
       new Promise((resolve) => {
         if (!pop.drawn) {
-          setTimeout(() => resolve(ensurePopDrawn()), 100);
+          if (isMounted) {
+            setTimeout(() => resolve(ensurePopDrawn()), 100);
+          }
         } else {
           resolve();
         }
       });
-
-    const ensureImgLoaded = () =>
+  
+      const ensureImgLoaded = () =>
       new Promise((resolve) => {
         if (!pop.imgLoaded) {
-          setTimeout(() => resolve(ensureImgLoaded()), 100);
+          if (isMounted) {
+            setTimeout(() => resolve(ensureImgLoaded()), 100);
+          }
         } else {
           resolve();
         }
       });
-
+  
     const mainFunction = async () => {
       await ensurePopAndInfoRef();
       if (pop.type === "lightbox" && !elems.popup.ref.current) return;
@@ -606,7 +599,14 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
     };
 
     mainFunction();
+
+    return () => {
+      isMounted = false;
+    };
+  
+
   }, [elems.popup.height, elems.popup.width, pop.img, pop.drawn, state.desktop, pop.infoDrawn]);
+
 
   const [drawLightbox, setDrawLightbox] = useState(false);
   useEffect(() => {
@@ -615,16 +615,13 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
     }
   }, [elems.img.availWidth, elems.img.availHeight, elems.img.maxWidth, elems.img.maxHeight]);
 
-
   useEffect(() => {
     swipeEventsInit();
   }, []);
 
-
   const mediaWrapperRef = useRef(null);
   useListener("swiped-left", handles.swipeLeft, true, mediaWrapperRef);
   useListener("swiped-right", handles.swipeRight, true, mediaWrapperRef);
-  
 
   return (
     <>
@@ -645,10 +642,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
           pop.setImgDrawn(true);
           if (!pop.firstImgDrawn) pop.setFirstImgDrawn(true);
         }}
-
-        reference={mediaWrapperRef}
-
-        >
+        reference={mediaWrapperRef}>
         <Graphic
           reference={elems.img.ref}
           className={`popup--media ${popclass.media} ${!pop.imgLoaded ? "popup--media__loading" : ""}`}

@@ -1,6 +1,9 @@
 #Explorations {
 
 
+  @include md-down{
+    --section-gap: 8rem;
+  }
 
   .indicator {
     // @include md-down{
@@ -30,7 +33,8 @@
 
       @include lg-down {
         grid-template-columns: repeat(2, 1fr);
-        gap:2rem!important
+        gap:2rem!important;
+        margin-top: calc(var(--section-text-spacing) * 1.35)
       }
 
       @include sm-down {

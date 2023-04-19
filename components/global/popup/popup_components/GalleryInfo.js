@@ -20,7 +20,7 @@ import { STUDY_LINKS } from "@/data/CASE_STUDIES";
 
 function GalInfoMotionWrapper({ elems, scrollbar, children, styles, type = "default" }) {
   const scroll = type != "above" && scrollbar.info.classes ? scrollbar.info.classes : "";
-
+  
   return (
     // <motion.div
     <div
@@ -29,7 +29,11 @@ function GalInfoMotionWrapper({ elems, scrollbar, children, styles, type = "defa
       //   layout: { duration: popLayoutTransition },
       // }}
       className={`popup--info ${scroll} popup--info__${type}`}
-      ref={elems.info.ref}
+
+      // ref={elems.info.ref}
+
+      {...(type != "above" ? { ref:elems.info.ref  } : {})}
+
       style={styles.description}>
       {children}
     </div>
@@ -37,6 +41,7 @@ function GalInfoMotionWrapper({ elems, scrollbar, children, styles, type = "defa
 }
 
 function GalInfoAnimPres({ elems, pop, styles, state, popclass, scrollbar, children, type = "default" }) {
+
   return (
     <>
       {(pop.firstImgDrawn || state.mobileGallery) && (
@@ -82,7 +87,10 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
     title = false;
   }
 
-  const galImgHeight = (() => {
+
+
+
+  const galInfoHeight = (() => {
     if (state.desktop) {
       if (elems.img.height != 0) return elems.img.height;
     } else {
@@ -116,6 +124,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
     }
   })();
 
+
   const galDescHeight = (() => {
     if (state.desktop) return 0;
     if (!elems.info.ref.current) return 0;
@@ -134,9 +143,13 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
     return descHeight;
   })();
 
+
+
+
+
   const styles = {
     description: {
-      "--gallery-info-height": `${galImgHeight}px`,
+      "--gallery-info-height": `${galInfoHeight}px`,
       "--gallery-info-max-height": `${elems.img.maxHeight != 0 && elems.img.maxHeight}px`,
       "--gallery-description-height": `${galDescHeight}px`,
     },
@@ -193,6 +206,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
   };
 
   const wrapperProps = { elems: elems, pop: pop, styles: styles, state: state, popclass: popclass, scrollbar: scrollbar, handles: handles };
+
 
   return (
     <>
@@ -492,8 +506,5 @@ const GalDescription = React.memo(function GalDescription({ pop }) {
   );
 }, createUpdateConditions(["pop.img", "pop.index"]));
 
-function GalStudy({ pop }) {
-  return <></>;
-}
 
 export { GalInfo, GalCategories, GalDescription };

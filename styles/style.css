@@ -7748,6 +7748,12 @@ h3 + .studypanel--paragraph {
   background-color: #E9E9F2;
 }
 
+@media screen and (max-width: 49.9375em) {
+  #Explorations {
+    --section-gap: 8rem;
+  }
+}
+
 #Explorations .indicator {
   display: none;
 }
@@ -7773,6 +7779,7 @@ h3 + .studypanel--paragraph {
   #Explorations .section--main {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem !important;
+    margin-top: calc(var(--section-text-spacing) * 1.35);
   }
 }
 
