@@ -69,7 +69,6 @@ function Groups({ study }) {
     return !TAG_TYPES.includes(item);
   });
 
-  // console.log(notTagItems);
 
   return (
     <div className={groupClasses}

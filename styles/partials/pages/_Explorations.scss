@@ -6,9 +6,10 @@
   }
 
   .indicator {
-    // @include md-down{
       display:none;
-    // }
+  }
+  .brief {
+      display:none;
   }
 
   .studypanel {

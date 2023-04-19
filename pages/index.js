@@ -39,7 +39,7 @@ function Index() {
 
   return (
     <>
-      <PanelWrapper id="Home">
+      <PanelWrapper id="Home" variant="home">
         <Panel id="Home--Hero" type="img-desc" className={`studypanel studypanel__home`}>
           <PanelDesc variant={"home"}>
             <h1 className="studypanel--heading">
@@ -74,9 +74,7 @@ function Index() {
       {CASE_STUDIES.map((item) => {
         var caption = chosen[CASE_STUDIES.indexOf(item)];
         return (
-          <PanelWrapper key={item.key}>
             <StudyPanel id={`Home--${item.id}`} key={item.key} variant="home" study={item} button={caption} />
-          </PanelWrapper>
         );
       })}
     </>

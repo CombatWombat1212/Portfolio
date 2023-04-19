@@ -3,15 +3,15 @@ import PropTypes from "prop-types";
 import Button from "../elements/Buttons";
 import Tag from "../elements/Tag";
 
-function PanelWrapper({ children, id }) {
+function PanelWrapper({ children, id, variant }) {
   return (
-    <div className="studypanel--wrapper" {...(id != undefined ? { id: id } : {})}>
+    <div className={`studypanel--wrapper studypanel--wrapper__${variant}`} {...(id != undefined ? { id: id } : {})}>
       {children}
     </div>
   );
 }
 
-function Panel({ children, id, className, reference, ...props }) {
+function Panel({ children, id, className, reference, variant, ...props }) {
   return (
     <>
       <div id={id} className={`container container__wide studypanel ${className || ""}`} ref={reference} {...props}>
@@ -72,59 +72,61 @@ function StudyPanel({ id, study, variant, button }) {
 
   return (
     <>
-      <Panel id={id} className={`studypanel studypanel__${variant}`}>
-        <PanelDesc className={``} variant={variant}>
-          <h2 className="studypanel--heading color--secondary">{study.name}</h2>
-          <h3 className="studypanel--subheading">{study.subtitle.jsx}</h3>
+      <PanelWrapper variant={variant}>
+        <Panel id={id} className={`studypanel studypanel__${variant}`} variant={variant}>
+          <PanelDesc className={``} variant={variant}>
+            <h2 className="studypanel--heading color--secondary">{study.name}</h2>
+            <h3 className="studypanel--subheading">{study.subtitle.jsx}</h3>
 
-          {study.tags && (
-            <div className="studypanel--tags tag--group">
-              {study.tags.map((tag) => {
-                return <Tag key={tag.key}>{tag.name}</Tag>;
-              })}
-            </div>
-          )}
+            {study.tags && (
+              <div className="studypanel--tags tag--group">
+                {study.tags.map((tag) => {
+                  return <Tag key={tag.key}>{tag.name}</Tag>;
+                })}
+              </div>
+            )}
 
-          {variant == "home" ? (
-            <>
-              <Button
-                className="studypanel--button"
-                type="regular"
-                icon={["arrow_right", "right", "mask"]}
-                animation={"pulse-right"}
-                href={study.link}
-                style={btnStyle}>
-                {button}
-              </Button>
-            </>
-          ) : (
-            variant == "study" &&
-            study.type != "gallery" && (
+            {variant == "home" ? (
               <>
                 <Button
                   className="studypanel--button"
                   type="regular"
-                  icon={["arrow_down", "right", "mask"]}
-                  animation={"pulse-down"}
-                  href={"#Delivery"}>
-                  Skip to Solution
+                  icon={["arrow_right", "right", "mask"]}
+                  animation={"pulse-right"}
+                  href={study.link}
+                  style={btnStyle}>
+                  {button}
                 </Button>
               </>
-            )
-          )}
-        </PanelDesc>
+            ) : (
+              variant == "study" &&
+              study.type != "gallery" && (
+                <>
+                  <Button
+                    className="studypanel--button"
+                    type="regular"
+                    icon={["arrow_down", "right", "mask"]}
+                    animation={"pulse-down"}
+                    href={"#Delivery"}>
+                    Skip to Solution
+                  </Button>
+                </>
+              )
+            )}
+          </PanelDesc>
 
-        <PanelImg
-          variant={variant}
-          style={{
-            "--img-aspect-width": img.width,
-            "--img-aspect-height": img.height,
-          }}
-          /*effect="gradient-white"*/
-        >
-          <Image priority src={img.src} alt={img.alt} width={img.width} height={img.height} />
-        </PanelImg>
-      </Panel>
+          <PanelImg
+            variant={variant}
+            style={{
+              "--img-aspect-width": img.width,
+              "--img-aspect-height": img.height,
+            }}
+            /*effect="gradient-white"*/
+          >
+            <Image priority src={img.src} alt={img.alt} width={img.width} height={img.height} />
+          </PanelImg>
+        </Panel>
+      </PanelWrapper>
     </>
   );
 }

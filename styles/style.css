@@ -1145,7 +1145,7 @@ body {
   --panel-description-spacing: 1rem;
 }
 
-.studypanel--wrapper {
+.studypanel--wrapper__home {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1153,7 +1153,7 @@ body {
 }
 
 @media screen and (max-width: 79.9375em) {
-  .studypanel--wrapper {
+  .studypanel--wrapper__home {
     height: 100% !important;
     margin-top: 18rem;
     margin-bottom: 18rem;
@@ -1161,16 +1161,16 @@ body {
 }
 
 @media screen and (max-width: 61.9375em) {
-  .studypanel--wrapper {
+  .studypanel--wrapper__home {
     margin-top: 14rem;
     margin-bottom: 14rem;
   }
 }
 
 @media screen and (max-width: 49.9375em) {
-  .studypanel--wrapper {
-    margin-top: 14rem;
-    margin-bottom: 14rem;
+  .studypanel--wrapper__home {
+    margin-top: 12rem;
+    margin-bottom: 12rem;
   }
 }
 
@@ -1292,6 +1292,9 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 49.9375em) {
   .studypanel--button {
     margin-top: calc(var(--panel-description-spacing) * 2.35);
+    --button-height:2.95rem;
+    width: stretch !important;
+    justify-content: center;
   }
 }
 
@@ -1426,13 +1429,13 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 61.9375em) {
   .studypanel--tags {
-    --tag-spacing: 0.85rem!important;
+    --tag-spacing: 0.85rem !important;
   }
 }
 
 @media screen and (max-width: 49.9375em) {
   .studypanel--tags {
-    --tag-spacing: 0.55rem!important;
+    --tag-spacing: 0.55rem !important;
   }
 }
 
@@ -7237,6 +7240,7 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 49.9375em) {
   #Home.studypanel--wrapper {
     height: calc(91vh - var(--nav-height)) !important;
+    margin-bottom: -6.5rem !important;
   }
 }
 
@@ -7755,6 +7759,10 @@ h3 + .studypanel--paragraph {
 }
 
 #Explorations .indicator {
+  display: none;
+}
+
+#Explorations .brief {
   display: none;
 }
 

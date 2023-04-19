@@ -1,4 +1,3 @@
-
 // study variant applies to all studies + explorations, there's no gallery variant for studypanels cause they were similar enough to not need it
 
 .studypanel {
@@ -13,25 +12,27 @@
   }
 
   &--wrapper {
-    @include flex-col-center;
-
-
+    &__home {
+      @include flex-col-center;
       height: 92vh;
 
-    @include xl-down {
-      height: 100% !important;
-      margin-top: 18rem;
-      margin-bottom: 18rem;
-    }
+      @include xl-down {
+        height: 100% !important;
+        margin-top: 18rem;
+        margin-bottom: 18rem;
+      }
 
-    @include lg-down {
-      margin-top: 14rem;
-      margin-bottom: 14rem;
-    }
+      @include lg-down {
+        margin-top: 14rem;
+        margin-bottom: 14rem;
+      }
 
-    @include md-down {
-      margin-top: 14rem;
-      margin-bottom: 14rem;
+      @include md-down {
+        margin-top: 12rem;
+        margin-bottom: 12rem;
+      }
+
+
     }
   }
 
@@ -111,15 +112,23 @@
     @include xl-down {
       @include panel-mt(2.75);
     }
+
+
     @include md-down {
       @include panel-mt(2.35);
+
+      --button-height:2.95rem;
+      width: stretch!important;
+      justify-content: center;
     }
+
+
   }
 
   &--description {
     @include flex-col-center;
 
-    &__study{
+    &__study {
       width: col-width(6);
     }
 
@@ -155,7 +164,6 @@
       width: col-width(6);
     }
 
-
     &__home {
       width: col-width(6);
       @include xxl-down {
@@ -190,7 +198,6 @@
 
     &__study {
       // height: Min(var(--studypanel-img-height), calc(var(--studypanel-img-height) * (var(--img-aspect-height) / var(--img-aspect-width))));
-
     }
 
     &__home {
@@ -215,10 +222,10 @@
       flex-wrap: wrap;
     }
     @include lg-down {
-      --tag-spacing: 0.85rem!important;
+      --tag-spacing: 0.85rem !important;
     }
     @include md-down {
-      --tag-spacing: 0.55rem!important;
+      --tag-spacing: 0.55rem !important;
     }
   }
 
