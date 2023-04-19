@@ -13,18 +13,33 @@ function getElemClasses(pref, type, titled) {
   return elemClasses;
 }
 
-function getMainClasses(mainClassName, mainType, titled, mainNoHead) {
+function getMainClasses(mainClassName, mainType, titled, mainNoHead, hasEvenCol) {
   if (mainClassName == undefined) mainClassName = "";
   // if (titled == true || titled == false) return mainClassName;
   if (titled == "above") mainClassName += " section--main__title-above";
   if (titled == "below") mainClassName += " section--main__title-below";
   if (mainType == "grid") mainClassName += " section--main__grid";
   if (mainNoHead) mainClassName += " section--main__no-head";
+  if (hasEvenCol && mainType == "flex") mainClassName += " section--main__has-e-col";
 
   mainClassName = removeClassesOfPrefix(mainClassName, "gap-");
 
   return mainClassName;
 }
+
+
+function getSectionClasses({className: sectionClassName}, hasEvenCol,
+  hasMain)  {
+
+  sectionClassName = sectionClassName ? sectionClassName : ""
+
+  if(hasEvenCol && !hasMain) sectionClassName += " section__has-e-col";
+
+  return sectionClassName;
+}
+
+
+
 
 function getGapClasses(type, arrows, mainClassName) {
   var gapClasses = "";
@@ -145,4 +160,5 @@ export {
   getGraphicClasses,
   getCopyClasses,
   getCopyBelowClasses,
+  getSectionClasses,
 };

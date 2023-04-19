@@ -13,6 +13,7 @@ import {
   getGraphicClasses,
   getCopyClasses,
   getCopyBelowClasses,
+  getSectionClasses,
 } from "./sections_utilities/GetClasses";
 import { getHasText, getHasGraphic, getHasBackground } from "./sections_utilities/IfHas";
 import { getSectionChildren } from "./sections_utilities/GetSectionChildren";
@@ -214,7 +215,6 @@ function useSectionObject(
     ["columns", { elemType: "Column" }],
   ]);
 
-  
   topLevelFoundChildren = (titled === true || titled === false) && (foundChildren.titles || foundChildren.headings) && foundChildren.columns;
 
   if (topLevelFoundChildren) {
@@ -240,6 +240,29 @@ function useSectionObject(
   var hasColumns = foundChildren.columns ? true : false;
   if (type == "default" && hasColumns) type = "columns";
 
+
+
+  const { columns: organizedColumns } = useOrganizeChildren(children, [["columns", { elemType: "Column" }]]);
+
+
+  const hasEvenCol = (() => {
+
+      if (!(organizedColumns.length > 0)) return false;
+      const colClasses = organizedColumns.map((col) => {
+        const { className } = col.props;
+        if (className == undefined) return null;
+        if (!className.split(" ").some((c) => c.startsWith("col-"))) return null;
+        const colClass =  className.split(" ").filter((c) => c.startsWith("col-")).sort((a, b) => a.length - b.length)[0];
+        return colClass;
+      });
+      // added a check for at least more than one column
+      if (organizedColumns.length > 1 && colClasses.every((c) => c == colClasses[0])) return true;
+      return false;
+  })();
+
+
+  console.log(`section: ${id}, hasMain: ${(hasMain || hasTitled)}`); 
+
   var sec = {
     has: {
       text: getHasText({ columns, description, title, heading, graphic, other }),
@@ -248,13 +271,14 @@ function useSectionObject(
       titled: hasTitled,
       descBelow: hasDescBelow,
       main: hasMain,
+      evenCol: hasEvenCol,
     },
     classes: {
-      sec: className ? className : "",
+      sec: getSectionClasses({className}, hasEvenCol, (hasMain || hasTitled) ),
       elem: getElemClasses(pref, type, titled),
       containerMargin: getContainerMarginClass(margin),
       wrapper: getWrapperClasses(wrapperClassName, pref),
-      main: getMainClasses(mainClassName, mainType, titled, mainNoHead),
+      main: getMainClasses(mainClassName, mainType, titled, mainNoHead, hasEvenCol),
       gap: getGapClasses(type, arrows, mainClassName),
       background: getBackgroundClasses(pref, background),
       graphic: getGraphicClasses(type),

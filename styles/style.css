@@ -496,12 +496,9 @@ body {
 }
 
 .e-col-0 {
-  --col-width: Min(
-        calc(0% - var(--gap)),
-        0%);
-  min-width: var(--col-width);
-  max-width: var(--col-width);
-  flex: 1 0;
+  --expected-cols: calc(calc((12 / 0)) * var(--sfh) / var(--sfh));
+  min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+  max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -519,12 +516,9 @@ body {
 }
 
 .e-col-1 {
-  --col-width: Min(
-        calc(8.33333% - var(--gap)),
-        8.33333%);
-  min-width: var(--col-width);
-  max-width: var(--col-width);
-  flex: 1 0;
+  --expected-cols: calc(calc((12 / 1)) * var(--sfh) / var(--sfh));
+  min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+  max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -542,12 +536,9 @@ body {
 }
 
 .e-col-2 {
-  --col-width: Min(
-        calc(16.66667% - var(--gap)),
-        16.66667%);
-  min-width: var(--col-width);
-  max-width: var(--col-width);
-  flex: 1 0;
+  --expected-cols: calc(calc((12 / 2)) * var(--sfh) / var(--sfh));
+  min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+  max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -565,12 +556,9 @@ body {
 }
 
 .e-col-3 {
-  --col-width: Min(
-        calc(25% - var(--gap)),
-        25%);
-  min-width: var(--col-width);
-  max-width: var(--col-width);
-  flex: 1 0;
+  --expected-cols: calc(calc((12 / 3)) * var(--sfh) / var(--sfh));
+  min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+  max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -588,12 +576,9 @@ body {
 }
 
 .e-col-4 {
-  --col-width: Min(
-        calc(33.33333% - var(--gap)),
-        33.33333%);
-  min-width: var(--col-width);
-  max-width: var(--col-width);
-  flex: 1 0;
+  --expected-cols: calc(calc((12 / 4)) * var(--sfh) / var(--sfh));
+  min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+  max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -611,12 +596,9 @@ body {
 }
 
 .e-col-5 {
-  --col-width: Min(
-        calc(41.66667% - var(--gap)),
-        41.66667%);
-  min-width: var(--col-width);
-  max-width: var(--col-width);
-  flex: 1 0;
+  --expected-cols: calc(calc((12 / 5)) * var(--sfh) / var(--sfh));
+  min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+  max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -634,12 +616,9 @@ body {
 }
 
 .e-col-6 {
-  --col-width: Min(
-        calc(50% - var(--gap)),
-        50%);
-  min-width: var(--col-width);
-  max-width: var(--col-width);
-  flex: 1 0;
+  --expected-cols: calc(calc((12 / 6)) * var(--sfh) / var(--sfh));
+  min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+  max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -657,12 +636,9 @@ body {
 }
 
 .e-col-7 {
-  --col-width: Min(
-        calc(58.33333% - var(--gap)),
-        58.33333%);
-  min-width: var(--col-width);
-  max-width: var(--col-width);
-  flex: 1 0;
+  --expected-cols: calc(calc((12 / 7)) * var(--sfh) / var(--sfh));
+  min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+  max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -680,12 +656,9 @@ body {
 }
 
 .e-col-8 {
-  --col-width: Min(
-        calc(66.66667% - var(--gap)),
-        66.66667%);
-  min-width: var(--col-width);
-  max-width: var(--col-width);
-  flex: 1 0;
+  --expected-cols: calc(calc((12 / 8)) * var(--sfh) / var(--sfh));
+  min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+  max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -703,12 +676,9 @@ body {
 }
 
 .e-col-9 {
-  --col-width: Min(
-        calc(75% - var(--gap)),
-        75%);
-  min-width: var(--col-width);
-  max-width: var(--col-width);
-  flex: 1 0;
+  --expected-cols: calc(calc((12 / 9)) * var(--sfh) / var(--sfh));
+  min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+  max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -726,12 +696,9 @@ body {
 }
 
 .e-col-10 {
-  --col-width: Min(
-        calc(83.33333% - var(--gap)),
-        83.33333%);
-  min-width: var(--col-width);
-  max-width: var(--col-width);
-  flex: 1 0;
+  --expected-cols: calc(calc((12 / 10)) * var(--sfh) / var(--sfh));
+  min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+  max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -749,12 +716,9 @@ body {
 }
 
 .e-col-11 {
-  --col-width: Min(
-        calc(91.66667% - var(--gap)),
-        91.66667%);
-  min-width: var(--col-width);
-  max-width: var(--col-width);
-  flex: 1 0;
+  --expected-cols: calc(calc((12 / 11)) * var(--sfh) / var(--sfh));
+  min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+  max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -772,12 +736,9 @@ body {
 }
 
 .e-col-12 {
-  --col-width: Min(
-        calc(100% - var(--gap)),
-        100%);
-  min-width: var(--col-width);
-  max-width: var(--col-width);
-  flex: 1 0;
+  --expected-cols: calc(calc((12 / 12)) * var(--sfh) / var(--sfh));
+  min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+  max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -2822,8 +2783,16 @@ h3 + .studypanel--paragraph {
   margin-top: 0rem;
 }
 
+.section--main__has-e-col {
+  flex-wrap: wrap;
+}
+
 .section .column {
   position: relative;
+}
+
+.section__has-e-col {
+  flex-wrap: wrap;
 }
 
 .section__overview {
@@ -8018,6 +7987,12 @@ h3 + .studypanel--paragraph {
   #Koalako #tools .brief--tags {
     flex-wrap: nowrap;
   }
+}
+
+#Koalako #Overview--Team .section--graphic {
+  height: auto;
+  aspect-ratio: 1/1;
+  width: calc( 100% - (var(--section-graphic-panel-pad)*2));
 }
 
 #Koalako #Overview--Team .mask {

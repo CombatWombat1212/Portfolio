@@ -20,7 +20,7 @@ function KoalaKo({ pop }) {
         <Section id="Overview--Team" type="columns" titled mainClassName="mt-1 gap-5">
           <Title>The Team</Title>
           <Column>
-            <Graphic type="mask" className="b-round" img={ICONS.user} background="background darker" square />
+            <Graphic type="mask" className="b-round" img={ICONS.user} background="background darker" />
             <Heading type="h3" className="text-align-center graphic--caption">
               Me
             </Heading>
@@ -33,7 +33,7 @@ function KoalaKo({ pop }) {
             </Description>
           </Column>
           <Column>
-            <Graphic type="mask" className="b-round" img={ICONS.user} background="background darker" square />
+            <Graphic type="mask" className="b-round" img={ICONS.user} background="background darker" />
             <Heading type="h3" className="text-align-center graphic--caption">
               Jianing Li
             </Heading>
@@ -46,7 +46,7 @@ function KoalaKo({ pop }) {
           </Column>
 
           <Column>
-            <Graphic type="mask" className="b-round" img={ICONS.user} background="background darker" square />
+            <Graphic type="mask" className="b-round" img={ICONS.user} background="background darker" />
             <Heading type="h3" className="text-align-center graphic--caption">
               Marko Prodanovic
             </Heading>
@@ -58,7 +58,7 @@ function KoalaKo({ pop }) {
             </Description>
           </Column>
           <Column>
-            <Graphic type="mask" className="b-round" img={ICONS.user} background="background darker" square />
+            <Graphic type="mask" className="b-round" img={ICONS.user} background="background darker" />
             <Heading type="h3" className="text-align-center graphic--caption">
               Zhiyi Liu
             </Heading>

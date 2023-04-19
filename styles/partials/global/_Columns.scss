@@ -28,13 +28,19 @@ width: ($b/$column-grid-max) * 100#{'%'};
 }
 
 @mixin col-width-e($b, $i:0) {
- 
-    --col-width: Min(
-        calc(#{($b/$column-grid-max) * 100#{'%'}} - var(--gap)),
-        #{($b/$column-grid-max) * 100#{'%'}});
-    min-width: var(--col-width);
-    max-width: var(--col-width);
-        flex: 1 0;
+
+
+     --expected-cols: #{floor-round(calc((12 / #{$b})))};
+    min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+    max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+
+
+    // --col-width: Min(
+    //     calc(#{($b/$column-grid-max) * 100#{'%'}} - var(--gap)),
+    //     #{($b/$column-grid-max) * 100#{'%'}});
+    // min-width: var(--col-width);
+    // max-width: var(--col-width);
+        // flex: 1 0;
 
 }
 

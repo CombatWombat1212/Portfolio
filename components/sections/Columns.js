@@ -34,10 +34,7 @@ function ColumnGroup({ columns, arrows, line, mainType }) {
     colLineInit();
   });
 
-
-  const {desktop} = useResponsive();
-
-
+  const { desktop } = useResponsive();
 
   return (
     <>
@@ -50,12 +47,16 @@ function ColumnGroup({ columns, arrows, line, mainType }) {
         var otherClasses = "";
 
         if (mainType == "flex") {
+          colClasses = (() => {
+            var pref = "e-col-";
+            // if(!Number.isInteger(12 / columns.length)){
+            //   pref = "col-"
+            // }
 
-          colClasses = (()=>{
-            if(desktop){
-              return `col-${Math.floor(12 / columns.length)}`;
-            }else{
-              return `col-${Math.floor(12 / (columns.length/2) )}`;
+            if (desktop) {
+              return `${pref}${Math.floor(12 / columns.length)}`;
+            } else {
+              return `${pref}${Math.min(12, Math.floor(12 / (columns.length / 2)))}`;
             }
           })();
 

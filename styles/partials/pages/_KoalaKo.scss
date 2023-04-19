@@ -47,11 +47,23 @@
 
   #Overview {
     &--Team {
+
+
+      .section{
+        &--graphic{
+          height:auto;
+          aspect-ratio: 1/1;
+        width: calc( 100% - (var(--section-graphic-panel-pad)*2) );
+        }
+      }
+
+
       .mask {
         background-color: $col-primary;
         opacity: 0.8;
         width: 65%;
         height: 65%;
+        
       }
     }
     &--Challenge {

@@ -142,6 +142,9 @@
     &__no-head {
       margin-top: 0rem;
     }
+    &__has-e-col {
+      flex-wrap:wrap;
+    }
   }
 
   .column {
@@ -149,6 +152,11 @@
     // min-width: 0.1rem;
     position: relative;
   }
+
+  &__has-e-col {
+    flex-wrap:wrap;
+  }
+
 }
 
 // Type variants
