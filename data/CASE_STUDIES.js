@@ -21,15 +21,17 @@ var CASE_STUDIES = [
       description:
         "For my undergraduate capstone, I created a service that directly connects owners of 3D printers to customers in need.  Based on a gig-economy model, like Uber or DoorDash, this service enables access to 3D printing without the barriers of cost, and know-how.",
       tools: ["Adobe XD / Figma", "Illustrator", "Mural", "HTML/CSS/JS", "After Effects", "InDesign"],
-      deliverables: [{
-        string: "Hi-fidelity prototypes, of 2 user flows",
-        jsx: (
-          <>
-            Hi-fidelity prototypes, <br className=" d-md-block d-xl-none d-block" /> of 2 user flows
-          </>
-        ),
-
-      }, "30+ Unique screens"],
+      deliverables: [
+        {
+          string: "Hi-fidelity prototypes, of 2 user flows",
+          jsx: (
+            <>
+              Hi-fidelity prototypes, <br className=" d-md-block d-xl-none d-block" /> of 2 user flows
+            </>
+          ),
+        },
+        "30+ Unique screens",
+      ],
       timeline: "6 Months",
       roles: ["UX/UI Designer", "UX Researcher", "Frontend Dev", "Graphic Design"],
     },
@@ -78,7 +80,8 @@ var CASE_STUDIES = [
         string: "3 active months of a 6 month partnership",
         jsx: (
           <>
-            3 active months <br className="d-block d-sm-none" />of a 6 month partnership
+            3 active months <br className="d-block d-sm-none" />
+            of a 6 month partnership
           </>
         ),
       },

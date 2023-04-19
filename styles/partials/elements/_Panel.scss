@@ -12,6 +12,11 @@
   }
 
   &--wrapper {
+    &__study {
+      display: flex;
+      // background-color: rgba($col-background_darker, 0.6);
+    }
+
     &__home {
       @include flex-col-center;
       height: 92vh;
@@ -97,12 +102,13 @@
       @include panel-mt(1.35);
     }
     @include md-down {
-      @include panel-mt(1.205);
+      @include panel-mt(1.305);
     }
   }
 
   &--button {
-    &__home {
+    &__home,
+    &__study {
       @include panel-mt(3.35);
 
       @include xxl-down {
@@ -113,7 +119,7 @@
       }
 
       @include md-down {
-        @include panel-mt(1.825);
+        @include panel-mt(1.905);
 
         --button-height: 2.95rem;
         width: stretch !important;
@@ -121,30 +127,50 @@
       }
     }
 
-    &__study {
-      @include panel-mt(3.35);
+    // &__study {
+    //   @include panel-mt(3.35);
 
-      @include xxl-down {
-        @include panel-mt(2.85);
-      }
-      @include xl-down {
-        @include panel-mt(2.75);
-      }
+    //   @include xxl-down {
+    //     @include panel-mt(2.85);
+    //   }
+    //   @include xl-down {
+    //     @include panel-mt(2.75);
+    //   }
 
-      @include md-down {
-        @include panel-mt(2.35);
-      }
-    }
-
-
+    //   @include md-down {
+    //     @include panel-mt(2.35);
+    //   }
+    // }
   }
 
   &--description {
     @include flex-col-center;
 
+
     &__study {
       width: col-width(6);
+      @include xxl-down {
+        width: col-width(4.5);
+      }
+      @include xl-down {
+        width: col-width(5);
+      }
+      @include lg-down {
+        width: col-width(5);
+      }
+
+      @include md-down {
+        order: 1;
+        @include mx-auto;
+        margin-top: 2.65rem;
+        width: col-width(7.45);
+      }
+
+      @include sm-down {
+        width: col-width(10.75);
+      }
     }
+
 
     &__home {
       width: col-width(6);
@@ -169,6 +195,7 @@
         width: col-width(10.75);
       }
     }
+
   }
 
   &--graphic {
@@ -176,7 +203,30 @@
 
     &__study {
       width: col-width(6);
+      @include xxl-down {
+        width: col-width(6.5);
+      }
+
+      @include xl-down {
+        width: col-width(6.5);
+      }
+
+      @include lg-down {
+        width: col-width(6.35);
+      }
+
+      @include md-down {
+        order: 0;
+        width: col-width(7.45);
+        @include mx-auto;
+      }
+      @include sm-down {
+        width: col-width(11);
+      }
     }
+
+
+    
 
     &__home {
       width: col-width(6);
@@ -214,7 +264,8 @@
       height: var(--studypanel-img-height);
     }
 
-    &__home {
+    &__home,
+    &__study {
       height: var(--studypanel-img-height);
 
       @include md-down {
@@ -244,17 +295,25 @@
   }
 
   &__study {
-    @include marg-y(8.5rem);
+    margin-top: 4.5rem;
+    margin-bottom: 5.5rem;
+  --studypanel-img-height: 32rem;
 
     @include xl-down {
-      --studypanel-img-height: 38rem;
+      margin-top: 4.5rem;
+      margin-bottom: 5.5rem;
+      --studypanel-img-height: 26rem;
     }
     @include lg-down {
-      --studypanel-img-height: 30rem;
+      margin-top: 3.5rem;
+      margin-bottom: 4.5rem;
+
+      --studypanel-img-height: 22rem;
     }
 
     @include md-down {
-      --studypanel-img-height: 39vh;
+      @include flex-col-center;
+      --studypanel-img-height: 28vh;
     }
   }
 

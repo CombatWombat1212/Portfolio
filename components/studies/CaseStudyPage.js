@@ -5,6 +5,8 @@ import NextStudies from "./NextStudies";
 import Indicator from "./Indicator";
 import React, { useEffect, useState } from "react";
 import useRandomString from "@/scripts/hooks/useRandomString";
+import { useMountEffect } from "@/scripts/hooks/useMountEffect";
+import { anchoredArrowsInit, removeExcessArrows } from "../sections/sections_utilities/ArrowUtilities";
 
 
 
@@ -52,6 +54,36 @@ function StudyWrapper({ id, study, children }) {
     const lastChapterChildren = Array.isArray(lastChapter.props.children) ? lastChapter.props.children : [lastChapter.props.children];
     insertNextElementAfterLastSection(newChildren, lastChapterIndex, lastChapterChildren);
   }
+
+
+
+
+  const hasDynamicArrows = newChildren.some(child => {
+    if (child.type.name === "Chapter") {
+      const chapterChildren = Array.isArray(child.props.children)
+        ? child.props.children
+        : [child.props.children];
+      return chapterChildren.some(
+        chapterChild =>
+          chapterChild.type.name === "Section" && chapterChild.props.arrows
+      );
+    }
+    return false;
+  });
+
+
+
+
+  // TODO: it would be ideal to refactor this as something more reacty and run it in the section component
+  useMountEffect(() => {
+    if (hasDynamicArrows) {
+      anchoredArrowsInit();
+      removeExcessArrows();
+    }
+  });
+
+
+
   
 
   return (

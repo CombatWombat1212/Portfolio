@@ -14,7 +14,6 @@ import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import useRandomCaptions from "@/scripts/hooks/useRandomCaptions";
 
 function Index() {
-  // TODO: Randomize the text on the buttons with a few funny different ones, like take a gander, have a look-see check it out, or just check-it, etc.
 
   const captions = ["Have a look-see", "Take a gander", "Check it", "I must know", "Gimme", "Go on..."];
 

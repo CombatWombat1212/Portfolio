@@ -27,11 +27,8 @@ function ColumnGroup({ columns, arrows, line, mainType }) {
 
   var hasLine = line;
 
-  // TODO: these are firing every time a section mounts when they should only fire once after the page has loaded if there are components that satisfy their conditions
-  useMountEffect(() => {
-    if (!hasAboveCaptions) anchoredArrowsInit();
-    if (mainType == "grid") removeExcessArrows();
-  });
+
+
 
   // TODO: this mount effect runs twice on the first load for some reason
   useMountEffect(() => {

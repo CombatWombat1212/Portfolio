@@ -15,6 +15,11 @@
   .studypanel {
     --studypanel-img-height: 26rem;
 
+      &--wrapper {
+        background-color: $col-background_darker;
+      }
+
+
     &__study {
       margin-top: 4.5rem;
       margin-bottom: 4.5rem;

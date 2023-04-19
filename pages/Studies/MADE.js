@@ -364,7 +364,7 @@ function MADE() {
             </Column>
             <Column>
               <Description>
-                ‘Contrast areas’ are the parts of the dress shirt which accent the garment with an alternate fabric pallet. They were a{" "}
+                ‘Contrast areas’ are the parts of the dress shirt which accent the garment with an alternate fabric pallet. They were a
                 <b>critical project requirement</b> as the online tool needed to represent the full scope of the customization available, which
                 includes personalized accent areas.
               </Description>
@@ -614,7 +614,7 @@ function MADE() {
                 </p>
 
                 <p>
-                  This required me to build my 3D project file in such a way that it could{" "}
+                  This required me to build my 3D project file in such a way that it could
                   <b>produce the hundreds of images in one continuous session</b>, so as to not waste time starting and stopping render jobs.
                 </p>
 
@@ -686,7 +686,7 @@ function MADE() {
               <Description className={"mt-less"}>
                 <p>
                   Pursuing the latter solution, I wrote a python script which created a single 3D material containing all 41 fabrics, and had the
-                  ability to easily switch between them.{" "}
+                  ability to easily switch between them.
                 </p>
                 <p>
                   From there, I could then render a single “video” who’s frames contained every combination of object and fabric. This allowed me to
@@ -813,7 +813,7 @@ function MADE() {
                   This was a relatively long-term project with big plans for future expansion. As such, I often had to make critical decisions on how
                   to best spend my resources. At the center of these decisions was usually a common internal question. Should I take the time to craft
                   a lasting foundation to address an issue, or use a more temporary solution? The latter allots more time to other important tasks.
-                  But, the former is more likely to increase efficiency throughout the project.{" "}
+                  But, the former is more likely to increase efficiency throughout the project.
                 </p>
                 <p>
                   As the project went on, time and again I felt vindicated in choosing the former. These solutions included working non-destructively
