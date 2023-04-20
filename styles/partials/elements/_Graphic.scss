@@ -1,3 +1,14 @@
+:root{
+--graphic-overview-opacity: 0.245;
+
+@include md-down{
+  
+  --graphic-overview-opacity: 0.0825;
+}
+
+}
+
+
 
 .section {
     --graphic-scale: 1;
@@ -189,7 +200,7 @@
 .section {
     &__overview {  
       .section--graphic {
-        opacity: 0.3;
+        opacity: var(--graphic-overview-opacity);
       }
     }
   }

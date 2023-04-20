@@ -26,9 +26,8 @@
     --name-pad-y: calc((var(--set-indicator-height) - var(--name-height)) / 2);
     --name-margin-top: -0.03125rem;
 
-    // --section-background_col-background: col-tertiary;
-    // --section-background_dark: col-background;
 
+  
     display: flex;
     height: var(--set-indicator-height);
     position: sticky;
@@ -47,10 +46,14 @@
     }
 
 
-    // transition: 1s!important;
-    // @include hover{
-      // --set-indicator-height: 10rem;
-    // }
+    @include lg-down{
+      --temp-buffer: calc(var(--nav-height) * 1.25);
+    }
+
+    @include md-down{
+      --temp-buffer: calc(var(--nav-height) * 0.75);
+    }
+
 
 
   }

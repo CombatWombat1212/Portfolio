@@ -46,7 +46,8 @@ function ColumnGroup({ columns, arrows, line, mainType }) {
         var colClasses = "";
         var otherClasses = "";
 
-        if (mainType == "flex") {
+
+        if (mainType == "flex" && !props.nocol) {
           colClasses = (() => {
             var pref = "e-col-";
             // if(!Number.isInteger(12 / columns.length)){
@@ -60,11 +61,15 @@ function ColumnGroup({ columns, arrows, line, mainType }) {
             }
           })();
 
-          otherClasses = "";
-          if (props.classes.colClasses.length != 0) colClasses = props.classes.colClasses.join(" ");
-          if (props.classes.otherClasses.length != 0) otherClasses = props.classes.otherClasses.join(" ");
-        }
+          // otherClasses = "";
 
+          // if (props.classes.colClasses.length != 0) colClasses = props.classes.colClasses.join(" ");
+          // if (props.classes.otherClasses.length != 0) otherClasses = props.classes.otherClasses.join(" ");
+        }
+        if (props.classes.colClasses.length != 0) colClasses = props.classes.colClasses.join(" ");
+        if (props.classes.otherClasses.length != 0) otherClasses = props.classes.otherClasses.join(" ");
+
+        
         var attrProps = { ...props };
         delete attrProps.classes;
         delete attrProps.children;

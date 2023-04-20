@@ -7,9 +7,15 @@
     margin-top: var(--font-margin-bottom-#{$m}_less);
   }
 
-  &.text--#{$m}.mb-less + *{
+  &.text--#{$m}.mb-less + * {
     margin-top: var(--font-margin-bottom-#{$m}_less);
   }
+}
+
+
+@mixin overview-graphic-scale{
+  --w: calc(var(--mw) * var(--overview-graphic-scale)) !important;
+  --h: calc(var(--mh) * var(--overview-graphic-scale)) !important;
 }
 
 :root {
@@ -76,8 +82,7 @@
   &--copy {
     @include flex-col-center;
 
-    &__below{
-
+    &__below {
     }
   }
 
@@ -143,7 +148,7 @@
       margin-top: 0rem;
     }
     &__has-e-col {
-      flex-wrap:wrap;
+      flex-wrap: wrap;
     }
   }
 
@@ -154,9 +159,8 @@
   }
 
   &__has-e-col {
-    flex-wrap:wrap;
+    flex-wrap: wrap;
   }
-
 }
 
 // Type variants
@@ -166,6 +170,28 @@
 
     --gap: 6rem;
     @include gap;
+
+    @include lg-down {
+      --gap: 4rem;
+    }
+
+    @at-root :root {
+      --overview-graphic-scale: 1;
+
+      @include xl-down {
+        --overview-graphic-scale: 0.9;
+      }
+      @include lg-down {
+        --overview-graphic-scale: 0.75;
+      }
+      @include md-down {
+        --overview-graphic-scale: 0.65;
+      }
+    }
+
+    @at-root .section__overview .section--graphic {
+      @include overview-graphic-scale;
+    }
 
   }
 }

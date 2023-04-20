@@ -16,13 +16,13 @@ export const ResponsiveProvider = ({ children }) => {
   }, [isBpAndDown("md"), loading]);
 
 
-  // const value = {
-  //   ...useResponsiveUtils(),
-  //   desktop,
-  //   setDesktop,
-  // };
+  const value = {
+    ...useResponsiveUtils(),
+    loading, 
+    desktop,
+  };
 
-  const value = {desktop};
+  // const value = {desktop};
 
   return (
     <ResponsiveContext.Provider value={value}>

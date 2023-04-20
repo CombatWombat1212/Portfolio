@@ -9,10 +9,12 @@ import { STUDY_KOALAKO } from "@/data/CASE_STUDIES";
 import { Fragment, useEffect } from "react";
 import Findings from "@/components/global/Findings";
 import Method from "@/components/global/Method";
+import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 
 function KoalaKo({ pop }) {
   const study = STUDY_KOALAKO;
 
+  const { desktop, isBpAndDown, loading } = useResponsive();
 
   return (
     <CaseStudyPage id={study.id} study={study}>
@@ -73,7 +75,10 @@ function KoalaKo({ pop }) {
 
         <Section id="Overview--Background" type="overview">
           <Title>Background</Title>
-          <Heading>&ldquo;Creativity is in crisis&rdquo; - LEGO & AKQA</Heading>
+          <Heading>
+            &ldquo;Creativity is in crisis&rdquo;
+            <br className="d-none d-lg-block d-md-none d-sm-block" /> - LEGO & AKQA
+          </Heading>
           <Description>
             <p>
               International design agency AKQA hosts an annual innovation competition called &lsquo;Future Lions&rsquo;. Partnering with LEGO in 2021,
@@ -85,23 +90,48 @@ function KoalaKo({ pop }) {
           <Graphic type="mask" img={KOALAKO_IMGS.background_bulb} />
         </Section>
 
-        <Section id="Overview--Challenge" type="overview">
-          <Title>Background</Title>
-          <Heading>
-            Create a digital-age solution that reinforces <br /> the importance of creativity, and play
-          </Heading>
-          <Description>
-            <h3 className="weight-reg mt-2">“No open social platforms. ” - LEGO & AKQA</h3>
-            <p className="mt-1">
-              Child-focused social media raises many security concerns. <br />
-              As well, children already spend countless hours a day on existing platforms.
-            </p>
-            <h3 className="weight-reg mt-3">Bring play back into the real world</h3>
-            <p className="mt-1">Emphasize physical, explorative play</p>
-          </Description>
+        {!isBpAndDown("lg") || loading ? (
+          <Section id="Overview--Challenge" type="overview" loading={loading}>
+            <Title>Background</Title>
+            <Heading>
+              Create a digital-age solution that reinforces <br className="d-block d-xxl-none" /> the importance of creativity, and play
+            </Heading>
+            <Description>
+              <h3 className="weight-reg mt-1">“No open social platforms. ” - LEGO & AKQA</h3>
+              <p className="mt-1">
+                Child-focused social media raises many security concerns. <br className="d-block d-md-none" />
+                As well, children already spend countless hours a day on existing platforms.
+              </p>
+              <h3 className="weight-reg mt-3">Bring play back into the real world</h3>
+              <p className="mt-1">Emphasize physical, explorative play</p>
+            </Description>
 
-          <Graphic type="mask" img={KOALAKO_IMGS.background_kids} />
-        </Section>
+            <Graphic type="mask" img={KOALAKO_IMGS.background_kids} />
+          </Section>
+        ) : (
+          <Section id="Overview--Challenge" type="columns" loading={loading}>
+            <Title>Background</Title>
+            <Heading>
+              Create a digital-age solution that reinforces <br className="d-block d-xxl-none" /> the importance of creativity, and play
+            </Heading>
+            <Column nocol className={"column-1"}>
+              <Description>
+                <h3 className="weight-reg mt-1">
+                  “No open social platforms. ”<br className="d-none d-sm-block" />- LEGO & AKQA
+                </h3>
+                <p className="mt-1">
+                  Child-focused social media raises many security concerns. <br className="d-block d-md-none" />
+                  As well, children already spend countless hours a day on existing platforms.
+                </p>
+                <h3 className="weight-reg mt-3">Bring play back into the real world</h3>
+                <p className="mt-1">Emphasize physical, explorative play</p>
+              </Description>
+            </Column>
+            <Column nocol className={"column-2"}>
+              <Graphic type="mask" img={KOALAKO_IMGS.background_kids} />
+            </Column>
+          </Section>
+        )}
 
         <Section id="Overview--Opporunity">
           <Title>Opportunity</Title>

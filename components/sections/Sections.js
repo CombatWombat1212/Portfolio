@@ -75,7 +75,10 @@ function SectionWrapper({ children, sec }) {
       id={attrs.id}
       className={classes.wrapper + classes.background}
       ref={attrs.reference ? attrs.reference : null}
-      {...(attrs.line ? { "data-line": attrs.line } : {})}>
+      {...(attrs.line ? { "data-line": attrs.line } : {})}
+      {...(attrs.loading ? { style: {opacity:0} } : {})}
+      
+      >
       {children}
     </div>
   );
@@ -152,6 +155,7 @@ function Section({
   wrapperClassName,
   mainType,
   reference,
+  loading,
 }) {
   var sec = useSectionObject(
     className,
@@ -167,7 +171,8 @@ function Section({
     copyClassName,
     wrapperClassName,
     mainType,
-    reference
+    reference,
+    loading,
   );
 
   return (
@@ -196,7 +201,8 @@ function useSectionObject(
   copyClassName,
   wrapperClassName,
   mainType,
-  reference
+  reference,
+  loading,
 ) {
   var pref = "section";
 
@@ -256,12 +262,21 @@ function useSectionObject(
         return colClass;
       });
       // added a check for at least more than one column
-      if (organizedColumns.length > 1 && colClasses.every((c) => c == colClasses[0])) return true;
+      
+      const noCol = organizedColumns.map((col) => {
+        const { nocol } = col.props;
+        return nocol;
+      });
+      if (
+        organizedColumns.length > 1 && 
+        colClasses.every((c) => c == colClasses[0]) &&
+        noCol.every((c) => c == false || c == undefined)
+        ) return true;
       return false;
   })();
 
 
-  console.log(`section: ${id}, hasMain: ${(hasMain || hasTitled)}`); 
+  // console.log(`section: ${id}, hasMain: ${(hasMain || hasTitled)}`); 
 
   var sec = {
     has: {
@@ -303,6 +318,7 @@ function useSectionObject(
       type,
       background,
       reference: reference ? reference : null,
+      loading,
     },
   };
 

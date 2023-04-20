@@ -47,34 +47,177 @@
 
   #Overview {
     &--Team {
+      .section {
+        &--title {
+          @include md-down {
+            text-align: center;
+            margin-bottom: 1rem;
+          }
+          @include sm-down {
+            text-align: left;
+          }
+        }
 
-
-      .section{
-        &--graphic{
-          height:auto;
+        &--graphic {
+          height: auto;
           aspect-ratio: 1/1;
-        width: calc( 100% - (var(--section-graphic-panel-pad)*2) );
+          width: calc(100% - (var(--section-graphic-panel-pad) * 2));
+        }
+
+        &--main {
+          @include xxl-down {
+            --gap: 3rem;
+            @include gap;
+          }
+
+          @include xl-down {
+            --gap: 2.5rem;
+          }
+          @include lg-down {
+            --gap: 2rem;
+          }
+          @include md-down {
+            --gap: 2.5rem;
+          }
+          @include sm-down {
+            --gap: 2rem;
+          }
+        }
+
+        @include md {
+          max-width: 65%;
         }
       }
-
 
       .mask {
         background-color: $col-primary;
         opacity: 0.8;
-        width: 65%;
-        height: 65%;
-        
-      }
-    }
-    &--Challenge {
-      .section {
-        &--copy {
-          margin-right: -6rem;
+        --size: 65%;
+        @include s;
+
+        @include xl-down {
+          --size: 70%;
+        }
+        @include xxl-down {
+          --size: 75%;
+        }
+        @include lg-down {
+          --size: 90%;
+        }
+        @include md-down {
+          --size: 80%;
+        }
+        @include sm-down {
+          --size: 80%;
         }
       }
+    }
+
+    &--Background {
+      .section {
+        &--copy {
+          @include md-down {
+            min-width: 100%;
+            max-width: 100%;
+          }
+        }
+
+        &--graphic {
+          @include md-down {
+            margin-left: -100%;
+            @include flex-col-center;
+          }
+        }
+      }
+
       .mask {
-        margin-top: 1.5rem;
-        margin-bottom: -1.5rem;
+
+        @include md-down {
+          margin-top: -2.65rem;
+          margin-bottom: 2.65rem;
+
+        }
+
+
+      }
+    }
+
+    &--Challenge {
+      .section {
+
+        @include md-down {
+          position:relative;
+        }
+
+        &--copy {
+          margin-right: -14rem;
+        }
+
+        &--main {
+          @include flex-row;
+
+          @include md-down {
+            gap: 0rem;
+            justify-content: space-between;
+          }
+
+
+        }
+
+        &--description {
+          @include lg-down {
+            margin-right: -2rem;
+          }
+          @include md-down {
+            margin-right: 0rem;
+          }
+        }
+      }
+
+      .column-1 {
+        @include md-down {
+          position: unset;
+        }
+      }
+      .column-2 {
+        @include md-down {
+          position: unset;
+        }
+      }
+
+      .mask {
+        margin-top: 2rem;
+        margin-bottom: -2rem;
+        margin-left: 4.75rem;
+        margin-right: -4.75rem;
+
+        @include xl-down {
+          margin-left: 1.5rem;
+          margin-right: -1.5rem;
+        }
+
+        @include lg-down {
+          opacity: var(--graphic-overview-opacity);
+          @include overview-graphic-scale;
+          margin-top: 0.5rem;
+          margin-bottom: -0.5rem;
+          margin-left: 0rem;
+          margin-right: 0rem;
+          --overview-graphic-scale: 0.65;
+        }
+        @include md-down {
+          --overview-graphic-scale: 0.7;
+          // // margin-top: -14.5rem;
+          // // margin-bottom: 14.5rem;
+          // --amt: 125%;
+          // margin-top: calc( var(--amt) * -1);
+          // margin-bottom: var(--amt);
+          position:absolute;
+          right:0;
+          top: -25%;
+          transform: translateY(25%);
+      
+        }
       }
     }
 
@@ -178,14 +321,11 @@
         }
 
         &--main {
-          
         }
         &--column {
-
           // magic
           // --expected-cols: #{floor-round(calc((12 / var(--column-width))))};
           // width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
-
         }
       }
     }
