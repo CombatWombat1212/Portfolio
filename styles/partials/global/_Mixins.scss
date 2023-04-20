@@ -1033,4 +1033,11 @@
 	@return unquote("calc(#{$value} * var(--sfh) / var(--sfh))");
 }
 
-  
+  @mixin root {
+
+
+	@at-root :root {
+		@content;
+	}
+
+  }

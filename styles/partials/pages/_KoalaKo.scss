@@ -1,3 +1,7 @@
+.section--wrapper {
+  overflow: hidden;
+}
+
 #Koalako {
   .brief {
     &--group {
@@ -54,7 +58,7 @@
             margin-bottom: 1rem;
           }
           @include sm-down {
-            text-align: left;
+            // text-align: left;
           }
         }
 
@@ -62,7 +66,12 @@
           height: auto;
           aspect-ratio: 1/1;
           width: calc(100% - (var(--section-graphic-panel-pad) * 2));
+
+          @include sm-down {
+            --section-graphic-panel-pad: 1rem;
+          }
         }
+
 
         &--main {
           @include xxl-down {
@@ -84,10 +93,15 @@
           }
         }
 
-        @include md {
+        @include md-down {
           max-width: 65%;
         }
+        @include sm-down {
+          max-width: 75%;
+        }
       }
+
+
 
       .mask {
         background-color: $col-primary;
@@ -108,45 +122,19 @@
           --size: 80%;
         }
         @include sm-down {
-          --size: 80%;
+          --size: 60%;
         }
       }
     }
 
+
     &--Background {
-      .section {
-        &--copy {
-          @include md-down {
-            min-width: 100%;
-            max-width: 100%;
-          }
-        }
-
-        &--graphic {
-          @include md-down {
-            margin-left: -100%;
-            @include flex-col-center;
-          }
-        }
-      }
-
-      .mask {
-
-        @include md-down {
-          margin-top: -2.65rem;
-          margin-bottom: 2.65rem;
-
-        }
-
-
-      }
     }
 
     &--Challenge {
       .section {
-
         @include md-down {
-          position:relative;
+          position: relative;
         }
 
         &--copy {
@@ -160,8 +148,6 @@
             gap: 0rem;
             justify-content: space-between;
           }
-
-
         }
 
         &--description {
@@ -197,26 +183,21 @@
         }
 
         @include lg-down {
-          opacity: var(--graphic-overview-opacity);
           @include overview-graphic-scale;
           margin-top: 0.5rem;
           margin-bottom: -0.5rem;
           margin-left: 0rem;
           margin-right: 0rem;
-          --overview-graphic-scale: 0.65;
         }
+        @include lg {
+          opacity: var(--graphic-overview-opacity);
+        }
+
         @include md-down {
-          --overview-graphic-scale: 0.7;
-          // // margin-top: -14.5rem;
-          // // margin-bottom: 14.5rem;
-          // --amt: 125%;
-          // margin-top: calc( var(--amt) * -1);
-          // margin-bottom: var(--amt);
-          position:absolute;
-          right:0;
-          top: -25%;
-          transform: translateY(25%);
-      
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
         }
       }
     }

@@ -2803,12 +2803,6 @@ h3 + .studypanel--paragraph {
   row-gap: var(--gap);
 }
 
-@media screen and (max-width: 61.9375em) {
-  .section__overview {
-    --gap: 4rem;
-  }
-}
-
 :root {
   --overview-graphic-scale: 1;
 }
@@ -2827,13 +2821,41 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 49.9375em) {
   :root {
-    --overview-graphic-scale: 0.65;
+    --overview-graphic-scale: 0.85;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  .section__overview {
+    --gap: 4rem;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  .section__overview {
+    position: relative;
   }
 }
 
 .section__overview .section--graphic {
   --w: calc(var(--mw) * var(--overview-graphic-scale)) !important;
   --h: calc(var(--mh) * var(--overview-graphic-scale)) !important;
+}
+
+@media screen and (max-width: 49.9375em) {
+  .section__overview .section--graphic .mask {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  .section__overview .section--copy {
+    min-width: 100%;
+    max-width: 100%;
+  }
 }
 
 .section__color, .section__image {
@@ -8001,6 +8023,10 @@ h3 + .studypanel--paragraph {
   background-color: #E9E9F2;
 }
 
+.section--wrapper {
+  overflow: hidden;
+}
+
 @media screen and (max-width: 79.9375em) {
   #Koalako .brief--group__study {
     display: flex;
@@ -8051,16 +8077,16 @@ h3 + .studypanel--paragraph {
   }
 }
 
-@media screen and (max-width: 36.9375em) {
-  #Koalako #Overview--Team .section--title {
-    text-align: left;
-  }
-}
-
 #Koalako #Overview--Team .section--graphic {
   height: auto;
   aspect-ratio: 1/1;
   width: calc(100% - (var(--section-graphic-panel-pad) * 2));
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Koalako #Overview--Team .section--graphic {
+    --section-graphic-panel-pad: 1rem;
+  }
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -8096,9 +8122,15 @@ h3 + .studypanel--paragraph {
   }
 }
 
-@media screen and (max-width: 49.9375em) and (min-width: 37em) {
+@media screen and (max-width: 49.9375em) {
   #Koalako #Overview--Team .section {
     max-width: 65%;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Koalako #Overview--Team .section {
+    max-width: 75%;
   }
 }
 
@@ -8136,30 +8168,7 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 36.9375em) {
   #Koalako #Overview--Team .mask {
-    --size: 80%;
-  }
-}
-
-@media screen and (max-width: 49.9375em) {
-  #Koalako #Overview--Background .section--copy {
-    min-width: 100%;
-    max-width: 100%;
-  }
-}
-
-@media screen and (max-width: 49.9375em) {
-  #Koalako #Overview--Background .section--graphic {
-    margin-left: -100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-}
-
-@media screen and (max-width: 49.9375em) {
-  #Koalako #Overview--Background .mask {
-    margin-top: -2.65rem;
-    margin-bottom: 2.65rem;
+    --size: 60%;
   }
 }
 
@@ -8225,24 +8234,27 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 61.9375em) {
   #Koalako #Overview--Challenge .mask {
-    opacity: var(--graphic-overview-opacity);
     --w: calc(var(--mw) * var(--overview-graphic-scale)) !important;
     --h: calc(var(--mh) * var(--overview-graphic-scale)) !important;
     margin-top: 0.5rem;
     margin-bottom: -0.5rem;
     margin-left: 0rem;
     margin-right: 0rem;
-    --overview-graphic-scale: 0.65;
+  }
+}
+
+@media screen and (max-width: 61.9375em) and (min-width: 50em) {
+  #Koalako #Overview--Challenge .mask {
+    opacity: var(--graphic-overview-opacity);
   }
 }
 
 @media screen and (max-width: 49.9375em) {
   #Koalako #Overview--Challenge .mask {
-    --overview-graphic-scale: 0.7;
     position: absolute;
     right: 0;
-    top: -25%;
-    transform: translateY(25%);
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
 

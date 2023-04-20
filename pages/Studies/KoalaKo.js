@@ -14,7 +14,11 @@ import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 function KoalaKo({ pop }) {
   const study = STUDY_KOALAKO;
 
-  const { desktop, isBpAndDown, loading } = useResponsive();
+  const { desktop, isBpAndDown, isBp, loading } = useResponsive();
+
+
+  const isntMd = (!isBp("md") || loading);
+
 
   return (
     <CaseStudyPage id={study.id} study={study}>
@@ -90,14 +94,16 @@ function KoalaKo({ pop }) {
           <Graphic type="mask" img={KOALAKO_IMGS.background_bulb} />
         </Section>
 
-        {!isBpAndDown("lg") || loading ? (
+        {isntMd ? (
           <Section id="Overview--Challenge" type="overview" loading={loading}>
             <Title>Background</Title>
             <Heading>
               Create a digital-age solution that reinforces <br className="d-block d-xxl-none" /> the importance of creativity, and play
             </Heading>
             <Description>
-              <h3 className="weight-reg mt-1">“No open social platforms. ” - LEGO & AKQA</h3>
+              <h3 className="weight-reg mt-1">
+                “No open social platforms. ”<br className="d-none d-sm-block" />- LEGO & AKQA
+              </h3>
               <p className="mt-1">
                 Child-focused social media raises many security concerns. <br className="d-block d-md-none" />
                 As well, children already spend countless hours a day on existing platforms.
@@ -132,6 +138,8 @@ function KoalaKo({ pop }) {
             </Column>
           </Section>
         )}
+
+        
 
         <Section id="Overview--Opporunity">
           <Title>Opportunity</Title>

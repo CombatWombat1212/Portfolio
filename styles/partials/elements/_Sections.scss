@@ -12,8 +12,7 @@
   }
 }
 
-
-@mixin overview-graphic-scale{
+@mixin overview-graphic-scale {
   --w: calc(var(--mw) * var(--overview-graphic-scale)) !important;
   --h: calc(var(--mh) * var(--overview-graphic-scale)) !important;
 }
@@ -164,18 +163,16 @@
 }
 
 // Type variants
+
+@mixin overview-section($sel) {
+  @at-root .section__overview .section--#{$sel} {
+    @content;
+  }
+}
+
 .section {
   &__overview {
-    justify-content: space-between;
-
-    --gap: 6rem;
-    @include gap;
-
-    @include lg-down {
-      --gap: 4rem;
-    }
-
-    @at-root :root {
+    @include root {
       --overview-graphic-scale: 1;
 
       @include xl-down {
@@ -185,14 +182,40 @@
         --overview-graphic-scale: 0.75;
       }
       @include md-down {
-        --overview-graphic-scale: 0.65;
+        --overview-graphic-scale: 0.85;
       }
     }
 
-    @at-root .section__overview .section--graphic {
+    justify-content: space-between;
+    --gap: 6rem;
+    @include gap;
+
+    @include lg-down {
+      --gap: 4rem;
+    }
+    @include md-down {
+      position: relative;
+    }
+
+    @include overview-section(graphic) {
       @include overview-graphic-scale;
     }
 
+    @include overview-section("graphic .mask") {
+      @include md-down {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+    @include overview-section(copy) {
+      @include md-down {
+        min-width: 100%;
+        max-width: 100%;
+      }
+    }
   }
 }
 
