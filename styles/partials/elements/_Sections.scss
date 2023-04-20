@@ -17,9 +17,23 @@
   --h: calc(var(--mh) * var(--overview-graphic-scale)) !important;
 }
 
+@mixin has-e-col {
+  flex-wrap: wrap;
+  // @include md-down{
+  // }
+}
+
 :root {
   --section-gap: 12.5rem;
   --section-gap_half: calc(var(--section-gap) / 2);
+
+  @include xl-down {
+    // --section-gap: 10rem;
+  }
+
+  @include md-down {
+    --section-gap: 9rem;
+  }
 }
 
 .pb-section-gap {
@@ -147,7 +161,7 @@
       margin-top: 0rem;
     }
     &__has-e-col {
-      flex-wrap: wrap;
+      @include has-e-col;
     }
   }
 
@@ -158,7 +172,7 @@
   }
 
   &__has-e-col {
-    flex-wrap: wrap;
+    @include has-e-col;
   }
 }
 
@@ -174,15 +188,18 @@
   &__overview {
     @include root {
       --overview-graphic-scale: 1;
+      --graphic-overview-opacity: 0.245;
 
       @include xl-down {
         --overview-graphic-scale: 0.9;
       }
       @include lg-down {
-        --overview-graphic-scale: 0.75;
+        --overview-graphic-scale: 0.85;
+        --graphic-overview-opacity: 0.125;
       }
       @include md-down {
-        --overview-graphic-scale: 0.85;
+        --overview-graphic-scale: 0.95;
+        --graphic-overview-opacity: 0.05;
       }
     }
 
@@ -193,7 +210,7 @@
     @include lg-down {
       --gap: 4rem;
     }
-    @include md-down {
+    @include lg-down {
       position: relative;
     }
 
@@ -202,16 +219,17 @@
     }
 
     @include overview-section("graphic .mask") {
-      @include md-down {
+      @include lg-down {
         position: absolute;
         right: 0;
-        top: 50%;
-        transform: translateY(-50%);
+        $amt: 60%;
+        top: $amt;
+        transform: translateY(-$amt);
       }
     }
 
     @include overview-section(copy) {
-      @include md-down {
+      @include lg-down {
         min-width: 100%;
         max-width: 100%;
       }

@@ -127,6 +127,7 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
 
             ),
         "text-col": (
+            responsive:true,
             property: column-count,
             class: text-col,
             values: (

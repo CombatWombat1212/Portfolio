@@ -1,5 +1,5 @@
 #Home {
-  // &--Hero {
+
   .studypanel {
 
     @at-root #Home.studypanel--wrapper{
@@ -82,39 +82,5 @@
       }
     }
   }
-  // }
 
-  // Moved to _StudyPanel.scss
-
-  // &--Makeright,
-  // &--Made,
-  // &--Koalako,
-  // &--Explorations {
-  //   .panel--img {
-  //     height: 43rem;
-  //   }
-  // }
-
-  //   &--Makeright {
-  //     .panel--img {
-  //       height: 43rem;
-  //     }
-  //   }
-
-  //   &--Made {
-  //     .panel--img {
-  //       height: 43rem;
-  //     }
-  //   }
-
-  //   &--Koalako {
-  //     .panel--img {
-  //       height: 43rem;
-  //     }
-  //   }
-
-  //   &--Explorations {
-  //     .panel--img {
-  //       height: 43rem;
-  //     }
 }

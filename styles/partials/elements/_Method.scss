@@ -13,14 +13,74 @@
     @include flex-row;
     gap: 3.5rem;
     align-items: center;
+
+    @include xl-down {
+      gap: 2rem;
+    }
+    @include lg-down {
+      justify-content: space-between;
+    }
   }
 
   &--mask {
     @include my-auto(true);
+
+    @include xl{
+      .mask{
+        margin-top: -0.35rem!important;
+      }
+    }
+    
+    @include lg{
+      margin-right:0.75rem;
+    }
+    
+    @include md-down{
+      .mask{
+        // margin-top: -0.25rem!important;
+        @include mx-auto;
+        margin-top:1.25rem;
+        margin-bottom:2.65rem;
+      }
+    }
+
+
   }
 
   &--body {
     margin-top: 2.25rem;
+    @include xl-down {
+      margin-top:1.15rem;
+    }
+    @include lg-down {
+      margin-top:1rem;
+    }
+    @include md-down {
+      margin-top:1.35rem;
+    }
   }
+
+  --graphic-scale: 0.95;
+  @include xxl-down {
+    --graphic-scale: 0.75;
+  }
+  @include xl-down {
+    --graphic-scale: 0.65;
+  }
+  @include lg-down {
+    --graphic-scale: 1;
+    --method-pad: 1.5rem;
+
+    @include flex-row;
+    gap: 3.5rem;
+  }
+
+  @include md-down {
+    --graphic-scale: 1.35;
+    gap: 2rem;
+  }
+  // @include sm-down {
+  //   --graphic-scale: 1.45;
+  // }
 
 }

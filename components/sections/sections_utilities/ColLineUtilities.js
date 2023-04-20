@@ -27,6 +27,15 @@ function Target(elem) {
   this.midpoint = 0;
 }
 
+
+function updateRows(lines) {
+  lines.forEach((line) => {
+    line.rows = []; // Clear previous rows
+    colLineGetRows(line); // Recalculate rows
+  });
+}
+
+
 function colLineGetRows(line) {
   var parent = line.section.querySelector(`.${line.data.parent}`);
 
@@ -195,28 +204,43 @@ function colLineInit() {
   if (typeof window == "undefined") return;
 
   var lines = [];
+  var previousWidth = window.innerWidth;
 
   colLineGet(lines);
   run();
 
   function run() {
+    updateRows(lines); 
     lines.forEach((line) => {
       colLineDraw(line);
     });
+
   }
 
   function ran() {
     window.clearTimeout(isResizing);
     isResizing = setTimeout(function () {
-      run();
+      var currentWidth = window.innerWidth;
+      if (currentWidth !== previousWidth) {
+        run();
+        previousWidth = currentWidth;
+      }
     }, RESIZE_TIMEOUT);
   }
 
-  var isResizing;
-  window.removeEventListener("resize", ran);
-  window.addEventListener("resize", ran);
+  function isHorizontalResize(event) {
+    return event.target.innerWidth !== previousWidth;
+  }
 
-  
+  function handleResize(event) {
+    if (isHorizontalResize(event)) {
+      ran();
+    }
+  }
+
+  var isResizing;
+  window.removeEventListener("resize", handleResize);
+  window.addEventListener("resize", handleResize);
 }
 
 export { colLineInit };

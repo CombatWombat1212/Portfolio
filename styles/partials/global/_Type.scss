@@ -25,8 +25,17 @@ $font-body: "Tenon";
   --font-margin-bottom-h3_less: 0.75rem;
   --font-margin-bottom-h4: 0.25rem;
 
+  
   font-family: $font-body;
   color: $col-primary;
+
+
+  
+
+
+
+
+
 
   @include xxl-down {
     --font-size-h1: 3.235rem;
@@ -45,6 +54,13 @@ $font-body: "Tenon";
 
     --font-leading-body: 1.53125rem;
     --font-leading-quote: 1.46875rem;
+
+
+    // --font-margin-bottom-h2: 1.25rem;
+    // --font-margin-bottom-h2_less: 0.5rem;
+    // --font-margin-bottom-h3: 0.875rem;
+    // --font-margin-bottom-h3_less: 0.625rem;
+    // --font-margin-bottom-h4: 0.125rem;
   }
 
   @include xl-down {
@@ -64,6 +80,13 @@ $font-body: "Tenon";
 
     --font-leading-body: 1.475rem;
     --font-leading-quote: 1.4375rem;
+
+
+    // --font-margin-bottom-h2: 1.125rem;
+    // --font-margin-bottom-h2_less: 0.4rem;
+    // --font-margin-bottom-h3: 0.75rem;
+    // --font-margin-bottom-h3_less: 0.5rem;
+    // --font-margin-bottom-h4: 0.1rem;
   }
 
   @include lg-down {
@@ -77,34 +100,46 @@ $font-body: "Tenon";
     --font-size-logo: 1.2125rem;
 
     --font-leading-h1: 3.15rem;
-    --font-leading-h2: 2.575rem;
+    --font-leading-h2: 2.635rem;
     --font-leading-h3: 1.95rem;
     --font-leading-h4: 1.125rem;
 
     --font-leading-body: 1.475rem;
     --font-leading-quote: 1.375rem;
+
+
+    // --font-margin-bottom-h2: 1rem;
+    // --font-margin-bottom-h2_less: 0.3rem;
+    // --font-margin-bottom-h3: 0.625rem;
+    // --font-margin-bottom-h3_less: 0.375rem;
+    --font-margin-bottom-h4: 0.35rem;
   }
 
   @include md-down {
     --font-size-h1: 2.575rem;
-    --font-size-h2: 1.875rem;
-    // --font-size-h3: 1.335rem;
+    --font-size-h2: 1.775rem;
     --font-size-h3: 1.295rem;
     --font-size-h4: 0.8125rem;
-    --font-size-body: 0.955rem;
+    --font-size-body: 0.975rem;
     --font-size-quote: 0.9rem;
 
     --font-size-logo: 1.2125rem;
 
     --font-leading-h1: 2.795rem;
-    --font-leading-h2: 2.375rem;
-    // --font-leading-h3: 1.775rem;
+    --font-leading-h2: 2.285rem;
     --font-leading-h3: 1.765rem;
     --font-leading-h4: 1.125rem;
 
 
-    --font-leading-body: 1.335rem;
+    --font-leading-body: 1.3075rem;
     --font-leading-quote: 1.3rem;
+
+
+    // --font-margin-bottom-h2: 0.875rem;
+    // --font-margin-bottom-h2_less: 0.2rem;
+    // --font-margin-bottom-h3: 0.5rem;
+    // --font-margin-bottom-h3_less: 0.25rem;
+    // --font-margin-bottom-h4: 0.05rem;
   } 
   
 

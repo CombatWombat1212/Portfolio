@@ -72,7 +72,6 @@
           }
         }
 
-
         &--main {
           @include xxl-down {
             --gap: 3rem;
@@ -101,8 +100,6 @@
         }
       }
 
-
-
       .mask {
         background-color: $col-primary;
         opacity: 0.8;
@@ -127,78 +124,23 @@
       }
     }
 
-
     &--Background {
     }
 
     &--Challenge {
       .section {
-        @include md-down {
-          position: relative;
-        }
-
         &--copy {
           margin-right: -14rem;
         }
 
         &--main {
-          @include flex-row;
-
-          @include md-down {
-            gap: 0rem;
-            justify-content: space-between;
-          }
         }
 
         &--description {
-          @include lg-down {
-            margin-right: -2rem;
-          }
-          @include md-down {
-            margin-right: 0rem;
-          }
-        }
-      }
-
-      .column-1 {
-        @include md-down {
-          position: unset;
-        }
-      }
-      .column-2 {
-        @include md-down {
-          position: unset;
         }
       }
 
       .mask {
-        margin-top: 2rem;
-        margin-bottom: -2rem;
-        margin-left: 4.75rem;
-        margin-right: -4.75rem;
-
-        @include xl-down {
-          margin-left: 1.5rem;
-          margin-right: -1.5rem;
-        }
-
-        @include lg-down {
-          @include overview-graphic-scale;
-          margin-top: 0.5rem;
-          margin-bottom: -0.5rem;
-          margin-left: 0rem;
-          margin-right: 0rem;
-        }
-        @include lg {
-          opacity: var(--graphic-overview-opacity);
-        }
-
-        @include md-down {
-          position: absolute;
-          right: 0;
-          top: 50%;
-          transform: translateY(-50%);
-        }
       }
     }
 
@@ -210,6 +152,23 @@
       }
 
       .section {
+        --gap: 4rem !important;
+        gap: var(--gap) !important;
+
+        @include lg {
+          @include flex-col;
+          & > * {
+            max-width: unset;
+          }
+        }
+
+        @include lg {
+          max-width: 60%;
+        }
+        @include md {
+          max-width: 70%;
+        }
+
         &--graphic {
           margin-top: 0rem;
 
@@ -234,13 +193,21 @@
       .solution {
         &--copy {
           @include flex-col-center;
+
+          @include lg-down {
+            order: 0;
+          }
         }
 
         &--graphics {
           @include flex-row-between;
-          --gap: 2rem;
-          @include gap;
+          gap: 2rem;
+
           align-items: center;
+
+          @include lg-down {
+            order: 1;
+          }
         }
       }
     }
@@ -261,15 +228,34 @@
               (var(--gantt-task-count) * var(--gantt-task-top-margin)) + (var(--gantt-task-count) * var(--gantt-label-height))
           );
         }
+
+        @include xl-down {
+          --gantt-label-width: 14rem;
+        }
+        @include lg-down {
+          --gantt-label-width: 12rem;
+        }
+        @include md-down {
+          --gantt-label-width: 9rem;
+        }
+        @include sm-down {
+          --gantt-label-width: 8rem;
+        }
+
+        .label--unit:nth-child(odd) {
+          & > * {
+            display: none;
+          }
+        }
       }
     }
   }
 
   #Research {
     &--Findings {
-      .section {
-        &--main {
-          grid-template-columns: repeat(2, 1fr);
+      .findings {
+        @include lg-down {
+          --findings-pad: 1.75rem;
         }
       }
     }
@@ -278,14 +264,45 @@
   #Develop {
     &--Methods {
       .section {
+
+
+        @include lg-down {
+          $amt: 80%;
+          max-width: $amt;
+          .col-line--wrapper {
+            --container-max-width: #{$amt};
+          }
+        }
+
+        
+        @include md-down {
+          $amt: calc(100% - 4rem);
+          max-width: $amt;
+          .col-line--wrapper {
+            --container-max-width: #{$amt};
+          }
+        }
+
         &--main {
           grid-template-columns: repeat(2, 1fr);
+          gap: 3rem;
+          @include lg-down {
+            gap: 2rem;
+            grid-template-columns: repeat(1, 1fr);
+          }
+          @include md-down {
+          }
         }
+
+
         .col-line {
           background-color: $col-primary;
           opacity: 1;
         }
+
+
       }
+
     }
   }
 

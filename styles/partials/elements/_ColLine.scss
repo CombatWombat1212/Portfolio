@@ -1,6 +1,10 @@
 .col-line {
   &--wrapper {
-    --site-x-margin: calc((100% - var(--site-max-width)) / 2);
+
+    --container-max-width: var(--site-max-width);
+    --site-x-margin: Max(calc((100% - var(--site-max-width)) / 2), calc((100% - var(--container-max-width)) / 2));
+
+
     --col-line-height: 0.5rem;
 
     position: absolute;

@@ -16,9 +16,7 @@ function KoalaKo({ pop }) {
 
   const { desktop, isBpAndDown, isBp, loading } = useResponsive();
 
-
-  const isntMd = (!isBp("md") || loading);
-
+  const isntMd = !isBp("md") || loading;
 
   return (
     <CaseStudyPage id={study.id} study={study}>
@@ -81,7 +79,7 @@ function KoalaKo({ pop }) {
           <Title>Background</Title>
           <Heading>
             &ldquo;Creativity is in crisis&rdquo;
-            <br className="d-none d-lg-block d-md-none d-sm-block" /> - LEGO & AKQA
+            <br className="d-none d-xl-block d-lg-none d-sm-block" /> - LEGO & AKQA
           </Heading>
           <Description>
             <p>
@@ -94,57 +92,33 @@ function KoalaKo({ pop }) {
           <Graphic type="mask" img={KOALAKO_IMGS.background_bulb} />
         </Section>
 
-        {isntMd ? (
-          <Section id="Overview--Challenge" type="overview" loading={loading}>
-            <Title>Background</Title>
-            <Heading>
-              Create a digital-age solution that reinforces <br className="d-block d-xxl-none" /> the importance of creativity, and play
+        <Section id="Overview--Challenge" type="overview" loading={loading}>
+          <Title>Background</Title>
+          <Heading>
+            Create a digital-age solution that reinforces <br className="d-block d-xxl-none" />
+            the importance of creativity, and play
+          </Heading>
+          <Description>
+            <Heading type={`${desktop ? "h3" : "h5"}`} className={`mt-1 ${desktop ? "weight-reg" : ""}`}>
+              “No open social platforms. ” - LEGO & AKQA
             </Heading>
-            <Description>
-              <h3 className="weight-reg mt-1">
-                “No open social platforms. ”<br className="d-none d-sm-block" />- LEGO & AKQA
-              </h3>
-              <p className="mt-1">
-                Child-focused social media raises many security concerns. <br className="d-block d-md-none" />
-                As well, children already spend countless hours a day on existing platforms.
-              </p>
-              <h3 className="weight-reg mt-3">Bring play back into the real world</h3>
-              <p className="mt-1">Emphasize physical, explorative play</p>
-            </Description>
-
-            <Graphic type="mask" img={KOALAKO_IMGS.background_kids} />
-          </Section>
-        ) : (
-          <Section id="Overview--Challenge" type="columns" loading={loading}>
-            <Title>Background</Title>
-            <Heading>
-              Create a digital-age solution that reinforces <br className="d-block d-xxl-none" /> the importance of creativity, and play
+            <p className="mt-1">
+              Child-focused social media raises many security concerns.
+              <br className="d-block d-sm-none" /> As well, children already spend countless hours a day on existing platforms.
+            </p>
+            <Heading type={`${desktop ? "h3" : "h5"}`} className={`mt-3 ${desktop ? "weight-reg" : ""}`}>
+              Bring play back into the real world
             </Heading>
-            <Column nocol className={"column-1"}>
-              <Description>
-                <h3 className="weight-reg mt-1">
-                  “No open social platforms. ”<br className="d-none d-sm-block" />- LEGO & AKQA
-                </h3>
-                <p className="mt-1">
-                  Child-focused social media raises many security concerns. <br className="d-block d-md-none" />
-                  As well, children already spend countless hours a day on existing platforms.
-                </p>
-                <h3 className="weight-reg mt-3">Bring play back into the real world</h3>
-                <p className="mt-1">Emphasize physical, explorative play</p>
-              </Description>
-            </Column>
-            <Column nocol className={"column-2"}>
-              <Graphic type="mask" img={KOALAKO_IMGS.background_kids} />
-            </Column>
-          </Section>
-        )}
+            <p className="mt-1">Emphasize physical, explorative play</p>
+          </Description>
 
-        
+          <Graphic type="mask" img={KOALAKO_IMGS.background_kids} />
+        </Section>
 
         <Section id="Overview--Opporunity">
           <Title>Opportunity</Title>
           <Heading>
-            How might my team encourage explorative play <br />
+            How might my team encourage explorative play <br className="d-block d-lg-none" />
             while following these considerations?
           </Heading>
         </Section>
@@ -152,12 +126,12 @@ function KoalaKo({ pop }) {
         <Section id="Overview--Client" type="columns" titled>
           <Title>Solution</Title>
           <Heading>
-            KoalaKo, the smart activity database, <br />
+            KoalaKo, the smart activity database, <br className="d-block d-md-none" />
             built to help parents help kids
           </Heading>
 
           <Column>
-            <Description className={"text-col-2 mt-3"}>
+            <Description className={"text-col-2 text-col-lg-1 gap-3 gap-xl-4 mt-3"}>
               <p>
                 This tool offers parents a curated stream of activities for kids of all ages and interests. Thereby easing the parental strain of
                 regularly having to invent new games and types of play.
@@ -175,7 +149,7 @@ function KoalaKo({ pop }) {
           <Column className="solution--copy">
             <Graphic type="mask" img={KOALAKO_IMGS.solution_personal_info} />
             <Heading>
-              No personal information <br />
+              No personal information <br className="d-block d-sm-none" />
               about the child
             </Heading>
             <Description>
@@ -227,7 +201,7 @@ function KoalaKo({ pop }) {
             and team expectations
           </Heading>
           <Gantt study="KoalaKo" className="mt-3" />
-          <Description className="text-col-2 mt-4">
+          <Description className="text-col-2 text-col-lg-1 gap-3 gap-xl-4 mt-4">
             <p>
               Our focus when designing this project plan was to ensure enough time to research our topic before developing ideas. From there we would
               distill concepts into those that were most promising.
@@ -241,7 +215,7 @@ function KoalaKo({ pop }) {
       </Chapter>
 
       <Chapter name="Research" id="Research">
-        <Section id="Research--Intro" type="columns" titled="above" background="background darker">
+        <Section id="Research--Intro" type="columns" titled="above" background="background darker" mainClassName="gap-4 gap-md-2">
           <Title>Secondary Research</Title>
           <Column>
             <Heading>We began with secondary research, to gain footing within our topic</Heading>
@@ -256,16 +230,16 @@ function KoalaKo({ pop }) {
           </Column>
         </Section>
 
-        <Section id="Research--Findings" type="columns" titled background="background darker" mainType="grid" mainClassName="mt-4">
+        <Section id="Research--Findings" type="columns" titled background="background darker" mainType="flex" mainClassName="mt-4">
           <Title>Findings</Title>
           <Heading>
-            In exploring “creative play and development,” <br />
+            In exploring “creative play and development,” <br className="d-block d-lg-none" />
             we discovered the importance of play-style breadth
           </Heading>
           <Column>
             <Findings>
               <div type="main">
-                <h3>Unique play experiences directly encourage different types of critical development.</h3>
+                <Heading type={"h3"}>Unique play experiences directly encourage different types of critical development.</Heading>
               </div>
 
               <div type="dropdown">
@@ -279,7 +253,9 @@ function KoalaKo({ pop }) {
           <Column>
             <Findings>
               <div type="main">
-                <h3>Parents can further this development, and grow their child&rsquo;s skills by encouraging new types of play.</h3>
+                <Heading type={"h3"}>
+                  Parents can further this development, and grow their child&rsquo;s skills by encouraging new types of play.
+                </Heading>
               </div>
               <div type="dropdown">
                 <p>
@@ -295,7 +271,7 @@ function KoalaKo({ pop }) {
 
         <Section id="Research--Summary">
           <Heading>
-            With these findings in mind, we began searching <br />
+            With these findings in mind, we began searching <br className="d-block d-lg-none" />
             for solutions that might encourage explorative play.
           </Heading>
         </Section>
@@ -306,7 +282,7 @@ function KoalaKo({ pop }) {
           <Column>
             <Method>
               <Title>Excersize 1 - Brainstorming</Title>
-              <Heading type="h3">Brainstorming the core of our solution</Heading>
+              <Heading type={`h3`}>Brainstorming the core of our solution</Heading>
               <p>
                 Our team began with brainstorming to develop a range of potential solutions. We narrowed our ideas down into a combination of 2
                 promising concepts deemed stronger than the sum of their parts.
@@ -317,7 +293,7 @@ function KoalaKo({ pop }) {
           <Column>
             <Method>
               <Title>Exercise 2 - Crazy 8s</Title>
-              <Heading type="h3">Exploring execution through sketches</Heading>
+              <Heading type={`h3`}>Exploring execution through sketches</Heading>
               <p>
                 Next we used the exercise &lsquo;Crazy 8s&rsquo; to consider the UX of our solution. Is it a physical location? An app? Through what
                 interaction do user&rsquo;s receive the intended value? We combined our concepts into a rough framework of the service and its
@@ -329,7 +305,7 @@ function KoalaKo({ pop }) {
           <Column>
             <Method>
               <Title>Exercise 3 - Importance Vs. Difficulty Matrix</Title>
-              <Heading type="h3">Honing functionality by removing superfluous features</Heading>
+              <Heading type={`h3`}>Honing functionality by removing superfluous features</Heading>
               <p>
                 To refine the focus of our solution, we used an &lsquo;Importance to User vs. Difficulty to Implement&rsquo; chart. Here we cut any
                 features that didn&rsquo;t directly support our goal of helping parents encourage creativity. Leaving a tight, cohesive feature-set.
@@ -340,7 +316,7 @@ function KoalaKo({ pop }) {
           <Column>
             <Method>
               <Title className="title">Exercise 4 - Experience Roadmap</Title>
-              <Heading type="h3">Solidifying scope with an Experience Based Roadmap</Heading>
+              <Heading type={`h3`}>Solidifying scope with an Experience Based Roadmap</Heading>
               <p>
                 Using an experience-based roadmap we plotted 3 project delivery tiers from bare functionality to final service. To fit our tight
                 timeline, we defined the target scope and featureset of our submission to be our service&rsquo;s &lsquo;minimum viable product&rsquo;.

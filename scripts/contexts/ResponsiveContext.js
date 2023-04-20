@@ -4,8 +4,10 @@ import { useResponsiveUtils } from '../hooks/useBreakpoint';
 const ResponsiveContext = createContext();
 
 export const ResponsiveProvider = ({ children }) => {
-  const { isBpAndDown, loading } = useResponsiveUtils();
+  const { isBpAndDown, loading, currentBreakpoint } = useResponsiveUtils();
   const [desktop, setDesktop] = useState(true);
+
+  const bp = currentBreakpoint;
 
   useEffect(() => {
     if (!isBpAndDown("md") || loading) {

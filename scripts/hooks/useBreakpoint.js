@@ -379,7 +379,7 @@ const useResponsiveUtils = ({ debounceTime = RESIZE_TIMEOUT } = {}) => {
     return utils;
   }, [currentBreakpoint, breakpointUtils]);
 
-  return { ...responsiveUtils, loading };
+  return { ...responsiveUtils, currentBreakpoint, loading };
 };
 
 export { useBreakpoint, useBreakpointUtils, useResponsiveUtils, getBreakpointNames}

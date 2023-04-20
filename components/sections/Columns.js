@@ -29,12 +29,13 @@ function ColumnGroup({ columns, arrows, line, mainType }) {
   var hasLine = line;
 
   // TODO: this mount effect runs twice on the first load for some reason
-  useMountEffect(() => {
+  const { desktop, loading } = useResponsive();
+
+  useEffect(() => {
     if (!hasLine) return;
     colLineInit();
-  });
+  }, [loading]);
 
-  const { desktop } = useResponsive();
 
   return (
     <>
@@ -69,7 +70,7 @@ function ColumnGroup({ columns, arrows, line, mainType }) {
         if (props.classes.colClasses.length != 0) colClasses = props.classes.colClasses.join(" ");
         if (props.classes.otherClasses.length != 0) otherClasses = props.classes.otherClasses.join(" ");
 
-        
+
         var attrProps = { ...props };
         delete attrProps.classes;
         delete attrProps.children;

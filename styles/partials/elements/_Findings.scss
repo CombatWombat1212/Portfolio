@@ -1,8 +1,10 @@
 .findings {
   @include b-rad;
   background-color: $col-background;
-  cursor:pointer;
-  overflow:hidden;
+  cursor: pointer;
+  overflow: hidden;
+
+  --findings-pad: 2rem;
 
   &--h3 {
   }
@@ -19,19 +21,18 @@
   }
 
   &--panel {
-    padding: 2rem;
+    padding: var(--findings-pad);
   }
 
   &--main {
-    border-radius: var(--b-rad) var(--b-rad) 0 0 ;
+    border-radius: var(--b-rad) var(--b-rad) 0 0;
     background-color: $col-background;
   }
 
-  &--inner{
-    border-radius: var(--b-rad) var(--b-rad) 0 0 ;
-    padding-top:0;
-}
-
+  &--inner {
+    border-radius: var(--b-rad) var(--b-rad) 0 0;
+    padding-top: 0;
+  }
 
   &--dropdown {
     background-color: $col-background;
@@ -39,15 +40,13 @@
 
     transition: 0.5s;
 
-    &__open{
-        height: var(--findings-dropdown-height);
+    &__open {
+      height: var(--findings-dropdown-height);
     }
-    &__closed{
-        height: 0rem;
+    &__closed {
+      height: 0rem;
     }
-
   }
-
 
   &--button {
     transition: background-color 0.5s;
@@ -74,10 +73,6 @@
         rotate: 180deg;
         translate: 0 -0.15rem;
       }
-
-
-
-
     }
   }
 }
