@@ -2769,17 +2769,17 @@ h3 + .studypanel--paragraph {
 .section--main {
   display: flex;
   flex-direction: row;
-  margin-top: calc(var(--section-text-spacing) * 1.75);
+  margin-top: calc(var(--section-text-spacing) * 1.5);
 }
 
 .section--main.gap-main {
-  --section-main-gap: calc(var(--section-text-spacing) * 2.15);
-  gap: var(--section-main-gap);
+  --gap: calc(var(--section-text-spacing) * 2.15);
+  gap: var(--gap);
 }
 
 @media screen and (max-width: 61.9375em) {
   .section--main.gap-main {
-    --section-main-gap: calc(var(--section-text-spacing) * 1.95);
+    --gap: calc(var(--section-text-spacing) * 1.85);
   }
 }
 
@@ -7035,27 +7035,27 @@ h3 + .studypanel--paragraph {
 }
 
 .mts-1 {
-  margin-top: calc(var(--section-text-spacing) * 0.5) !important;
+  margin-top: calc(var(--section-text-spacing) * 0.57143) !important;
 }
 
 .mts-2 {
-  margin-top: calc(var(--section-text-spacing) * 0.6666) !important;
-}
-
-.mts-3 {
   margin-top: calc(var(--section-text-spacing) * 1) !important;
 }
 
+.mts-3 {
+  margin-top: calc(var(--section-text-spacing) * 1.75) !important;
+}
+
 .mts-4 {
-  margin-top: calc(var(--section-text-spacing) * 1.5) !important;
+  margin-top: calc(var(--section-text-spacing) * 2.25) !important;
 }
 
 .mts-5 {
-  margin-top: calc(var(--section-text-spacing) * 2) !important;
+  margin-top: calc(var(--section-text-spacing) * 2.75) !important;
 }
 
 .mts-6 {
-  margin-top: calc(var(--section-text-spacing) * 3) !important;
+  margin-top: calc(var(--section-text-spacing) * 3.25) !important;
 }
 
 .mts-auto {
@@ -7191,22 +7191,22 @@ h3 + .studypanel--paragraph {
     margin-top: 0 !important;
   }
   .mts-xxl-1 {
-    margin-top: calc(var(--section-text-spacing) * 0.5) !important;
+    margin-top: calc(var(--section-text-spacing) * 0.57143) !important;
   }
   .mts-xxl-2 {
-    margin-top: calc(var(--section-text-spacing) * 0.6666) !important;
-  }
-  .mts-xxl-3 {
     margin-top: calc(var(--section-text-spacing) * 1) !important;
   }
+  .mts-xxl-3 {
+    margin-top: calc(var(--section-text-spacing) * 1.75) !important;
+  }
   .mts-xxl-4 {
-    margin-top: calc(var(--section-text-spacing) * 1.5) !important;
+    margin-top: calc(var(--section-text-spacing) * 2.25) !important;
   }
   .mts-xxl-5 {
-    margin-top: calc(var(--section-text-spacing) * 2) !important;
+    margin-top: calc(var(--section-text-spacing) * 2.75) !important;
   }
   .mts-xxl-6 {
-    margin-top: calc(var(--section-text-spacing) * 3) !important;
+    margin-top: calc(var(--section-text-spacing) * 3.25) !important;
   }
   .mts-xxl-auto {
     margin-top: auto !important;
@@ -7342,22 +7342,22 @@ h3 + .studypanel--paragraph {
     margin-top: 0 !important;
   }
   .mts-xl-1 {
-    margin-top: calc(var(--section-text-spacing) * 0.5) !important;
+    margin-top: calc(var(--section-text-spacing) * 0.57143) !important;
   }
   .mts-xl-2 {
-    margin-top: calc(var(--section-text-spacing) * 0.6666) !important;
-  }
-  .mts-xl-3 {
     margin-top: calc(var(--section-text-spacing) * 1) !important;
   }
+  .mts-xl-3 {
+    margin-top: calc(var(--section-text-spacing) * 1.75) !important;
+  }
   .mts-xl-4 {
-    margin-top: calc(var(--section-text-spacing) * 1.5) !important;
+    margin-top: calc(var(--section-text-spacing) * 2.25) !important;
   }
   .mts-xl-5 {
-    margin-top: calc(var(--section-text-spacing) * 2) !important;
+    margin-top: calc(var(--section-text-spacing) * 2.75) !important;
   }
   .mts-xl-6 {
-    margin-top: calc(var(--section-text-spacing) * 3) !important;
+    margin-top: calc(var(--section-text-spacing) * 3.25) !important;
   }
   .mts-xl-auto {
     margin-top: auto !important;
@@ -7493,22 +7493,22 @@ h3 + .studypanel--paragraph {
     margin-top: 0 !important;
   }
   .mts-lg-1 {
-    margin-top: calc(var(--section-text-spacing) * 0.5) !important;
+    margin-top: calc(var(--section-text-spacing) * 0.57143) !important;
   }
   .mts-lg-2 {
-    margin-top: calc(var(--section-text-spacing) * 0.6666) !important;
-  }
-  .mts-lg-3 {
     margin-top: calc(var(--section-text-spacing) * 1) !important;
   }
+  .mts-lg-3 {
+    margin-top: calc(var(--section-text-spacing) * 1.75) !important;
+  }
   .mts-lg-4 {
-    margin-top: calc(var(--section-text-spacing) * 1.5) !important;
+    margin-top: calc(var(--section-text-spacing) * 2.25) !important;
   }
   .mts-lg-5 {
-    margin-top: calc(var(--section-text-spacing) * 2) !important;
+    margin-top: calc(var(--section-text-spacing) * 2.75) !important;
   }
   .mts-lg-6 {
-    margin-top: calc(var(--section-text-spacing) * 3) !important;
+    margin-top: calc(var(--section-text-spacing) * 3.25) !important;
   }
   .mts-lg-auto {
     margin-top: auto !important;
@@ -7644,22 +7644,22 @@ h3 + .studypanel--paragraph {
     margin-top: 0 !important;
   }
   .mts-md-1 {
-    margin-top: calc(var(--section-text-spacing) * 0.5) !important;
+    margin-top: calc(var(--section-text-spacing) * 0.57143) !important;
   }
   .mts-md-2 {
-    margin-top: calc(var(--section-text-spacing) * 0.6666) !important;
-  }
-  .mts-md-3 {
     margin-top: calc(var(--section-text-spacing) * 1) !important;
   }
+  .mts-md-3 {
+    margin-top: calc(var(--section-text-spacing) * 1.75) !important;
+  }
   .mts-md-4 {
-    margin-top: calc(var(--section-text-spacing) * 1.5) !important;
+    margin-top: calc(var(--section-text-spacing) * 2.25) !important;
   }
   .mts-md-5 {
-    margin-top: calc(var(--section-text-spacing) * 2) !important;
+    margin-top: calc(var(--section-text-spacing) * 2.75) !important;
   }
   .mts-md-6 {
-    margin-top: calc(var(--section-text-spacing) * 3) !important;
+    margin-top: calc(var(--section-text-spacing) * 3.25) !important;
   }
   .mts-md-auto {
     margin-top: auto !important;
@@ -7795,22 +7795,22 @@ h3 + .studypanel--paragraph {
     margin-top: 0 !important;
   }
   .mts-sm-1 {
-    margin-top: calc(var(--section-text-spacing) * 0.5) !important;
+    margin-top: calc(var(--section-text-spacing) * 0.57143) !important;
   }
   .mts-sm-2 {
-    margin-top: calc(var(--section-text-spacing) * 0.6666) !important;
-  }
-  .mts-sm-3 {
     margin-top: calc(var(--section-text-spacing) * 1) !important;
   }
+  .mts-sm-3 {
+    margin-top: calc(var(--section-text-spacing) * 1.75) !important;
+  }
   .mts-sm-4 {
-    margin-top: calc(var(--section-text-spacing) * 1.5) !important;
+    margin-top: calc(var(--section-text-spacing) * 2.25) !important;
   }
   .mts-sm-5 {
-    margin-top: calc(var(--section-text-spacing) * 2) !important;
+    margin-top: calc(var(--section-text-spacing) * 2.75) !important;
   }
   .mts-sm-6 {
-    margin-top: calc(var(--section-text-spacing) * 3) !important;
+    margin-top: calc(var(--section-text-spacing) * 3.25) !important;
   }
   .mts-sm-auto {
     margin-top: auto !important;

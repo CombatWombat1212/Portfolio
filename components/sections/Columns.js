@@ -59,6 +59,7 @@ function ColumnGroup({ columns, arrows, line, mainType }) {
           // if (props.classes.colClasses.length != 0) colClasses = props.classes.colClasses.join(" ");
           // if (props.classes.otherClasses.length != 0) otherClasses = props.classes.otherClasses.join(" ");
         }
+        
         if (props.classes.colClasses.length != 0) colClasses = props.classes.colClasses.join(" ");
         if (props.classes.otherClasses.length != 0) otherClasses = props.classes.otherClasses.join(" ");
 

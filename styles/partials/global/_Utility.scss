@@ -12,12 +12,12 @@ $spacers: (0: 0,
     6: $spacer * 3,
 ) !default;
 $spacers_section: (0: 0,
-    1: calc(var(--section-text-spacing) * 0.5),
-    2: calc(var(--section-text-spacing) * 0.6666),
-    3: calc(var(--section-text-spacing) * 1),
-    4: calc(var(--section-text-spacing) * 1.5),
-    5: calc(var(--section-text-spacing) * 2),
-    6: calc(var(--section-text-spacing) * 3),
+1:calc(var(--section-text-spacing) * #{(1/1.75)}),
+2:calc(var(--section-text-spacing) * #{(1/1)}),
+3:calc(var(--section-text-spacing) * #{(1*1.75)}),
+4:calc(var(--section-text-spacing) * #{(1*2.25)}),
+5:calc(var(--section-text-spacing) * #{(1*2.75)}),
+6:calc(var(--section-text-spacing) * #{(1*3.25)}),
 ) !default;
 
 
@@ -83,6 +83,7 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
             property: --column-gap --row-gap --gap column-gap row-gap gap,
             class: gap,
             values: $spacers),
+            
         "margin-bottom": (
             property: margin-bottom,
             class: mb,

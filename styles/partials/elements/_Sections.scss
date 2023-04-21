@@ -140,16 +140,16 @@
 
   &--main {
     &.gap-main {
-      --section-main-gap: calc(var(--section-text-spacing) * 2.15);
-      gap: var(--section-main-gap);
+      --gap: calc(var(--section-text-spacing) * 2.15);
+      gap: var(--gap);
 
       @include lg-down {
-        --section-main-gap: calc(var(--section-text-spacing) * 1.95);
+        --gap: calc(var(--section-text-spacing) * 1.85);
       }
     }
 
     @include flex-row;
-    margin-top: calc(var(--section-text-spacing) * 1.75);
+    margin-top: calc(var(--section-text-spacing) * 1.5);
     @include lg-down {
       margin-top: calc(var(--section-text-spacing) * 1.35);
     }
