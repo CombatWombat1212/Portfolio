@@ -285,7 +285,7 @@ const KOALAKO_IMGS = processImages(
       width: 1125,
       height: 2436,
       group: "userflow",
-      index: 0,
+      index: 1,
     },
     prototypes_userflow_statistics: {
       name: "prototypes_userflow_statistics",
@@ -294,7 +294,7 @@ const KOALAKO_IMGS = processImages(
       width: 1125,
       height: 2436,
       group: "userflow",
-      index: 1,
+      index: 2,
     },
     prototype_low_activities: {
       name: "prototype_low_activities",
@@ -348,6 +348,16 @@ const KOALAKO_IMGS = processImages(
       width: 592,
       height: 310,
     },
+    prototypes_userflow_map_background: {
+      name: "prototypes_userflow_map_background",
+      src: "./assets/images/case_studies/koalako/prototypes/prototypes_userflow_map_background.svg",
+      alt: "An illustrated userflow map of the KoalaKo app, showing all the different branching paths a user can take through the app. With opaque background.",
+      width: 692,
+      height: 410,
+      group: "userflow",
+      index:0,
+
+      },
     refine_post_activity_after: {
       name: "refine_post_activity_after",
       src: "./assets/images/case_studies/koalako/refine/refine_post_activity_after.png",

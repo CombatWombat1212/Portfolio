@@ -417,44 +417,50 @@ function KoalaKo({ pop }) {
           </Column>
         </Section>
 
-        <Section id="Prototyping--Implimentation"  background="background darker">
+        <Section id="Prototyping--Implimentation" background="background darker">
           <Title>Implimentation Plan</Title>
           <Heading>Noting suggestions, and refocusing our goals</Heading>
 
-            <Description className={'text-col-2 text-col-lg-1 gap-3 gap-xl-4'}>
-              <p>
-                With this feedback, we cemented the decision to keep the service parent-centered. In doing so we cut the few planned features intended
-                to be used by kids. This refocused our team back on our original goals, and helped us avoid the pitfall of creating yet another reason
-                for children to use screens.
-              </p>
+          <Description className={"text-col-2 text-col-lg-1 gap-3 gap-xl-4"}>
+            <p>
+              With this feedback, we cemented the decision to keep the service parent-centered. In doing so we cut the few planned features intended
+              to be used by kids. This refocused our team back on our original goals, and helped us avoid the pitfall of creating yet another reason
+              for children to use screens.
+            </p>
 
-              <p>
-                Aside from this, we committed to making the suggested location feature a key part of the service&rsquo;s functionality. We had also
-                made a point to gather feedback from parent users during the coming phases, to better understand our demographic&rsquo;s feelings
-                towards solution.
-              </p>
-            </Description>
+            <p>
+              Aside from this, we committed to making the suggested location feature a key part of the service&rsquo;s functionality. We had also made
+              a point to gather feedback from parent users during the coming phases, to better understand our demographic&rsquo;s feelings towards
+              solution.
+            </p>
+          </Description>
         </Section>
 
         <Section id="Prototyping--HiFi" type="columns">
           <Title>Hi-Fi Prototypes</Title>
           <Heading>KoalaKo&rsquo;s first hi-fi interactive prototype</Heading>
 
-          <Column className="col-8" caption="above">
+          <Column className={`${desktop ? "col-8" : "e-col-12"}`} caption="above">
             <Heading type="p" className="graphic--caption__above color--tertiary">
               <b>Userflow Map</b>
             </Heading>
-            <Graphic type="image" background="background darker" img={KOALAKO_IMGS.prototypes_userflow_map} />
+            <Graphic
+              type="image"
+              background="background darker"
+              img={KOALAKO_IMGS.prototypes_userflow_map}
+              lightbox={KOALAKO_IMGS.prototypes_userflow_map_background}
+              pop={pop}
+            />
           </Column>
 
-          <Column className="col-2" caption="above">
+          <Column className={`${desktop ? "col-2" : ""}`} caption="above">
             <Heading type="p" className="graphic--caption__above color--tertiary">
               <b>Onboarding</b>
             </Heading>
             <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.prototypes_userflow_splash_screen} />
           </Column>
 
-          <Column className="col-2" caption="above">
+          <Column className={`${desktop ? "col-2" : ""}`} caption="above">
             <Heading type="p" className="graphic--caption__above color--tertiary">
               <b>Play Statistics</b>
             </Heading>
@@ -467,13 +473,13 @@ function KoalaKo({ pop }) {
           type="columns"
           background="tertiary"
           mainType="grid"
-          mainClassName="gap-6 mts-4"
+          mainClassName="gap- mts-4"
           wrapperClassName="mb-less">
           <Heading>Features added at this stage include:</Heading>
 
           <Column>
             <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_child_profiles} />
-            <Heading type="h3" className="graphic--caption mts-more">
+            <Heading type="h3" className="graphic--caption mt-more">
               Optional child profiles
             </Heading>
             <Description className="mts-1">
@@ -485,7 +491,7 @@ function KoalaKo({ pop }) {
           </Column>
           <Column>
             <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_selecting_interests} />
-            <Heading type="h3" className="graphic--caption mts-more">
+            <Heading type="h3" className="graphic--caption mt-more">
               Selecting interests
             </Heading>
             <Description className="mts-1">
@@ -497,7 +503,7 @@ function KoalaKo({ pop }) {
           </Column>
           <Column>
             <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_statistics_page} />
-            <Heading type="h3" className="graphic--caption mts-more">
+            <Heading type="h3" className="graphic--caption mt-more">
               Refined statistics page
             </Heading>
             <Description className="mts-1">
@@ -510,7 +516,7 @@ function KoalaKo({ pop }) {
 
           <Column>
             <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_community_feedback} sameHeight="features_last" />
-            <Heading type="h3" className="graphic--caption mts-more">
+            <Heading type="h3" className="graphic--caption mt-more">
               Community feedback
             </Heading>
             <Description className="mts-1">
@@ -522,10 +528,10 @@ function KoalaKo({ pop }) {
           </Column>
           <Column>
             <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_location_browsing} sameHeight="features_last" />
-            <Heading type="h3" className="graphic--caption mts-more">
+            <Heading type="h3" className="graphic--caption mt-more">
               Location browsing
             </Heading>
-            <Description className="mts-1 col-9">
+            <Description className="mts-1 col-9 col-xxl-12">
               <p>As suggested by our testers, users can now browse locations that match activities, and activities that match locations.</p>
             </Description>
           </Column>
@@ -552,7 +558,7 @@ function KoalaKo({ pop }) {
 
           <Column>
             <Graphic type="mask" img={KOALAKO_IMGS.testing_usability} background="background" />
-            <Heading type="h3" className="graphic--caption mts-more">
+            <Heading type="h3" className="graphic--caption mt-more">
               Usability Tasks
             </Heading>
             <Description className="mts-1">
@@ -562,7 +568,7 @@ function KoalaKo({ pop }) {
 
           <Column>
             <Graphic type="mask" img={KOALAKO_IMGS.testing_questions} background="background" />
-            <Heading type="h3" className="graphic--caption mts-more">
+            <Heading type="h3" className="graphic--caption mt-more">
               Pre-written questions
             </Heading>
             <Description className="mts-1">
@@ -572,7 +578,7 @@ function KoalaKo({ pop }) {
 
           <Column>
             <Graphic type="mask" img={KOALAKO_IMGS.testing_popcorn} background="background" />
-            <Heading type="h3" className="graphic--caption mts-more">
+            <Heading type="h3" className="graphic--caption mt-more">
               Popcorn feedback
             </Heading>
             <Description className="mts-1">
@@ -742,7 +748,7 @@ function KoalaKo({ pop }) {
           </Column>
         </Section>
 
-        <Section id="Deliver--Submission-Graphics-1" wrapperClassName="mts-less">
+        <Section id="Deliver--Submission-Graphics-1" wrapperClassName="mt-less">
           <Column>
             <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_login} />
           </Column>
@@ -781,7 +787,7 @@ function KoalaKo({ pop }) {
           </Column>
         </Section>
 
-        <Section id="Deliver--Submission-Graphics-2" wrapperClassName="mts-less">
+        <Section id="Deliver--Submission-Graphics-2" wrapperClassName="mt-less">
           <Column>
             <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_post_activity} />
           </Column>

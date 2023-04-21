@@ -389,26 +389,80 @@
     }
 
     &--HiFi {
+      @mixin hifi-col($sel, $child...) {
+        @at-root #Koalako #Prototyping--HiFi .section--column {
+          @include nth-children($child...) {
+            & #{$sel} {
+              @content;
+            }
+          }
+        }
+      }
+
       .section {
-        .graphic--panel {
+        &--main {
+          @include md-down {
+            flex-wrap: wrap;
+            justify-content: center;
+          }
+        }
+
+        @include hifi-col(".section--graphic", 1) {
           height: auto;
+          padding: 0;
+
+          img {
+            transform: scale(0.8);
+          }
+        }
+
+        @include hifi-col("", 2, 3) {
+          @include md-down {
+            width: #{col-width(3)};
+          }
+          @include sm-down {
+            width: calc(#{col-width(6)} - var(--gap) / 2);
+          }
         }
       }
     }
 
     &--Features {
       .section {
+
         &--main {
           grid-template-columns: repeat(3, 1fr);
           row-gap: 7rem;
-        }
 
+          --gap:6rem;
+          @include gap;
+
+          @include xxl-down{
+            --gap: 5rem;
+          }
+          @include xl-down{
+            --gap: 4rem;
+          }
+          @include lg-down{
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+        
         &--column:last-child {
           grid-column: 2 / 4;
+          @include lg-down{
+            grid-column: span 2;
+          }
+        }
+        
+
+        &--graphic{
+
           img {
             object-fit: cover;
           }
         }
+
       }
     }
 
