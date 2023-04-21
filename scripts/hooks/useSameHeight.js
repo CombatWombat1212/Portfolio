@@ -4,6 +4,8 @@ import { RESIZE_TIMEOUT, splitPx } from "@/scripts/GlobalUtilities";
 let groups = {};
 
 const useSameHeight = (groupKey, ref, options = {}) => {
+  const actualGroupKey = typeof groupKey === "object" ? groupKey.key : groupKey;
+
   const [heightObj, setHeightObj] = useState(null);
   const [resizing, setResizing] = useState(false);
   const [output, setOutput] = useState(false);
@@ -12,9 +14,9 @@ const useSameHeight = (groupKey, ref, options = {}) => {
   const prevWindowHeight = useRef(null);
 
   const resizeOption = options.resize || "both";
-  const update = options.update || null; // Add this line
+  const update = options.update || null;
 
-  if (!groupKey) {
+  if (!actualGroupKey) {
     return false;
   }
 
@@ -23,8 +25,8 @@ const useSameHeight = (groupKey, ref, options = {}) => {
   };
 
   const addElementToGroup = (element) => {
-    if (!groups[groupKey]) {
-      groups[groupKey] = {
+    if (!groups[actualGroupKey]) {
+      groups[actualGroupKey] = {
         elems: [],
         height: {
           all: [],
@@ -36,61 +38,74 @@ const useSameHeight = (groupKey, ref, options = {}) => {
       };
     }
 
-    groups[groupKey].elems.push(element);
-    groups[groupKey].height.index.push(groups[groupKey].elems.length - 1);
+    groups[actualGroupKey].elems.push(element);
+    groups[actualGroupKey].height.index.push(groups[actualGroupKey].elems.length - 1);
   };
 
   const updateGroupInfo = () => {
-    let changed = false;
-    groups[groupKey].height.all = [];
-    groups[groupKey].height.max = 0;
-    groups[groupKey].height.min = Number.MAX_VALUE;
+    if (typeof groupKey === "object" && groupKey.remove && groups[groupKey.remove]) {
+      groups = delete groups[groupKey.remove];
+      if (!groups[actualGroupKey]) return;
+    }
 
-    groups[groupKey].elems.forEach((element) => {
+    // console.log(groups);
+
+    let changed = false;
+    groups[actualGroupKey].height.all = [];
+    groups[actualGroupKey].height.max = 0;
+    groups[actualGroupKey].height.min = Number.MAX_VALUE;
+
+    groups[actualGroupKey].elems.forEach((element) => {
       const height =
         splitPx(window.getComputedStyle(element).height) +
         splitPx(window.getComputedStyle(element).paddingTop) +
         splitPx(window.getComputedStyle(element).paddingBottom);
 
-      groups[groupKey].height.all.push(height);
-      groups[groupKey].height.max = Math.max(groups[groupKey].height.max, height);
-      groups[groupKey].height.min = Math.min(groups[groupKey].height.min, height);
+      groups[actualGroupKey].height.all.push(height);
+      groups[actualGroupKey].height.max = Math.max(groups[actualGroupKey].height.max, height);
+      groups[actualGroupKey].height.min = Math.min(groups[actualGroupKey].height.min, height);
 
       if (
         heightObj &&
-        (heightObj.all !== groups[groupKey].height.all ||
-          heightObj.max !== groups[groupKey].height.max ||
-          heightObj.min !== groups[groupKey].height.min)
+        (heightObj.all !== groups[actualGroupKey].height.all ||
+          heightObj.max !== groups[actualGroupKey].height.max ||
+          heightObj.min !== groups[actualGroupKey].height.min)
       ) {
         changed = true;
       }
     });
 
     if (!heightObj || changed) {
-      setHeightObj(groups[groupKey].height);
+      setHeightObj(groups[actualGroupKey].height);
     }
   };
 
   useEffect(() => {
     const element = ref.current;
+
+    // If groupKey is an object and has a remove property, delete the specified group
+    if (typeof groupKey === "object" && groupKey.remove && groups[groupKey.remove]) {
+      delete groups[groupKey.remove];
+    }
+
     if (element) {
       addElementToGroup(element);
       updateGroupInfo();
-      // logElementsByGroup();
+      logElementsByGroup();
     }
 
     return () => {
       if (element) {
-        const index = groups[groupKey].elems.indexOf(element);
+        const index = groups[actualGroupKey].elems.indexOf(element);
         if (index !== -1) {
-          groups[groupKey].elems.splice(index, 1);
-          groups[groupKey].height.all.splice(index, 1);
-          groups[groupKey].height.index.splice(index, 1);
+          groups[actualGroupKey].elems.splice(index, 1);
+          groups[actualGroupKey].height.all.splice(index, 1);
+          groups[actualGroupKey].height.index.splice(index, 1);
         }
       }
     };
-  }, [ref, groupKey]);
-  // }, [ref, groupKey, ...(Array.isArray(update) ? update : [update])]);
+  }, [ref, actualGroupKey]);
+  // }, [ref, actualGroupKey, ...(Array.isArray(update) ? update : [update])]);
 
   useEffect(() => {
     if (update) {
@@ -132,12 +147,12 @@ const useSameHeight = (groupKey, ref, options = {}) => {
     };
   }, []);
 
-  const componentIndex = typeof groups[groupKey] != "undefined" && ref.current ? groups[groupKey].elems.indexOf(ref.current) : null;
+  const componentIndex = typeof groups[actualGroupKey] != "undefined" && ref.current ? groups[actualGroupKey].elems.indexOf(ref.current) : null;
 
   useEffect(() => {
     if (heightObj && componentIndex != null) {
       setOutput({
-        ...groups[groupKey],
+        ...groups[actualGroupKey],
         height: heightObj,
         resizing: resizing,
         index: componentIndex,

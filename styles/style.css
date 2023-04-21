@@ -2644,6 +2644,17 @@ h3 + .studypanel--paragraph {
   flex-direction: row;
 }
 
+.section.gap-main {
+  --gap: calc(var(--section-text-spacing) * 2.15);
+  gap: var(--gap);
+}
+
+@media screen and (max-width: 61.9375em) {
+  .section.gap-main {
+    --gap: calc(var(--section-text-spacing) * 1.85);
+  }
+}
+
 .section--wrapper {
   padding-top: var(--section-gap);
   position: relative;
@@ -8766,6 +8777,14 @@ h3 + .studypanel--paragraph {
   transform: scale(0.8);
 }
 
+#Koalako #Prototyping--HiFi .section--column:nth-child(1) .section--graphic img {
+  transition: var(--transition);
+}
+
+#Koalako #Prototyping--HiFi .section--column:nth-child(1) .section--graphic img:hover, #Koalako #Prototyping--HiFi .section--column:nth-child(1) .section--graphic img:focus, #Koalako #Prototyping--HiFi .section--column:nth-child(1) .section--graphic img.focus, #Koalako #Prototyping--HiFi .section--column:nth-child(1) .section--graphic img.hover {
+  transform: scale(0.81);
+}
+
 @media screen and (max-width: 49.9375em) {
   #Koalako #Prototyping--HiFi .section--column:nth-child(2) {
     width: 25%;
@@ -8787,13 +8806,21 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 36.9375em) {
   #Koalako #Prototyping--HiFi .section--column:nth-child(3) {
     width: calc(50% - var(--gap) / 2);
+  }
+}
+
+@media screen and (max-width: 49.9375em) and (min-width: 37em) {
+  #Koalako #Prototyping--Features .section--inner {
+    max-width: calc(100% - 6rem);
+    margin-right: auto;
+    margin-left: auto;
   }
 }
 
 #Koalako #Prototyping--Features .section--main {
   grid-template-columns: repeat(3, 1fr);
   row-gap: 7rem;
-  --gap:6rem;
+  --gap: 6rem;
   gap: var(--gap);
   column-gap: var(--gap);
   row-gap: var(--gap);
@@ -8807,28 +8834,58 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 79.9375em) {
   #Koalako #Prototyping--Features .section--main {
-    --gap: 4rem;
+    --gap: 4.5rem;
   }
 }
 
 @media screen and (max-width: 61.9375em) {
   #Koalako #Prototyping--Features .section--main {
+    --gap: 3.5rem;
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-#Koalako #Prototyping--Features .section--column:last-child {
+@media screen and (max-width: 49.9375em) {
+  #Koalako #Prototyping--Features .section--main {
+    --gap: 2rem;
+    row-gap: 3.5rem;
+  }
+}
+
+#Koalako #Prototyping--Features .section--column:nth-child(5) {
   grid-column: 2 / 4;
 }
 
 @media screen and (max-width: 61.9375em) {
-  #Koalako #Prototyping--Features .section--column:last-child {
+  #Koalako #Prototyping--Features .section--column:nth-child(5) {
     grid-column: span 2;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Koalako #Prototyping--Features .section--column:nth-child(3) .section--graphic {
+    height: 37vh !important;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Koalako #Prototyping--Features .section--column:nth-child(4) .section--graphic {
+    height: 37vh !important;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Koalako #Prototyping--Features .section--column {
+    grid-column: span 1;
   }
 }
 
 #Koalako #Prototyping--Features .section--graphic img {
   object-fit: cover;
+}
+
+#Koalako #Prototyping .Prototyping--Features .section--wrapper {
+  max-width: 80%;
 }
 
 #Koalako #Prototyping--Findings-1 .section--quote + .section--quote {

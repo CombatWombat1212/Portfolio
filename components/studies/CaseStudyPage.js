@@ -9,6 +9,7 @@ import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { anchoredArrowsInit, removeExcessArrows } from "../sections/sections_utilities/ArrowUtilities";
 import { useColLine } from "../sections/sections_utilities/ColLineUtilities";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
+import useMatchHeight from "@/scripts/hooks/useMatchHeight";
 
 
 
@@ -87,7 +88,7 @@ function StudyWrapper({ id, study, children }) {
     return false;
   });
 
-
+  
 
   // TODO: it would be ideal to refactor this as something more reacty and run it in the section component
   useMountEffect(() => {

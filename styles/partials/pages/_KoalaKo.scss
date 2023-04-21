@@ -2,6 +2,16 @@
   overflow: hidden;
 }
 
+@mixin koala-col($id, $sel, $child...) {
+  @at-root #Koalako ##{$id} .section--column {
+    @include nth-children($child...) {
+      & #{$sel} {
+        @content;
+      }
+    }
+  }
+}
+
 #Koalako {
   .brief {
     &--group {
@@ -389,16 +399,6 @@
     }
 
     &--HiFi {
-      @mixin hifi-col($sel, $child...) {
-        @at-root #Koalako #Prototyping--HiFi .section--column {
-          @include nth-children($child...) {
-            & #{$sel} {
-              @content;
-            }
-          }
-        }
-      }
-
       .section {
         &--main {
           @include md-down {
@@ -407,16 +407,19 @@
           }
         }
 
-        @include hifi-col(".section--graphic", 1) {
+        @include koala-col("Prototyping--HiFi", ".section--graphic", 1) {
           height: auto;
           padding: 0;
 
           img {
             transform: scale(0.8);
+            @include hover {
+              transform: scale(0.81);
+            }
           }
         }
 
-        @include hifi-col("", 2, 3) {
+        @include koala-col("Prototyping--HiFi", "", 2, 3) {
           @include md-down {
             width: #{col-width(3)};
           }
@@ -429,40 +432,73 @@
 
     &--Features {
       .section {
+        &--inner {
+          @include md {
+            max-width: calc(100% - 6rem);
+            @include mx-auto;
+          }
+        }
 
         &--main {
           grid-template-columns: repeat(3, 1fr);
           row-gap: 7rem;
 
-          --gap:6rem;
+          --gap: 6rem;
           @include gap;
 
-          @include xxl-down{
+          @include xxl-down {
             --gap: 5rem;
           }
-          @include xl-down{
-            --gap: 4rem;
+          @include xl-down {
+            --gap: 4.5rem;
           }
-          @include lg-down{
+          @include lg-down {
+            --gap: 3.5rem;
             grid-template-columns: repeat(2, 1fr);
           }
+
+          @include md-down {
+            --gap: 2rem;
+            row-gap: 3.5rem;
+          }
         }
-        
-        &--column:last-child {
+
+        @include koala-col("Prototyping--Features", "", 5) {
           grid-column: 2 / 4;
-          @include lg-down{
+          @include lg-down {
             grid-column: span 2;
           }
         }
-        
 
-        &--graphic{
+        @include koala-col("Prototyping--Features", ".section--graphic", 3, 4) {
+          @include lg-down {
+            height: 37vh !important;
+          }
+        }
 
+        &--column {
+          @include md-down {
+            grid-column: span 1;
+          }
+        }
+
+        &--graphic {
           img {
             object-fit: cover;
           }
         }
+      }
+    }
 
+    .Prototyping--Features {
+      .section {
+        &--wrapper {
+          max-width: 80%;
+        }
+
+        &--description {
+          // @include flex-col-center;
+        }
       }
     }
 

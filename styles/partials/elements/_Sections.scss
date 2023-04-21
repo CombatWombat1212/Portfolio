@@ -12,6 +12,8 @@
   }
 }
 
+
+
 @mixin overview-graphic-scale {
   --w: calc(var(--mw) * var(--overview-graphic-scale)) !important;
   --h: calc(var(--mh) * var(--overview-graphic-scale)) !important;
@@ -21,6 +23,18 @@
   flex-wrap: wrap;
   // @include md-down{
   // }
+}
+
+
+@mixin gap-main{
+
+  --gap: calc(var(--section-text-spacing) * 2.15);
+  gap: var(--gap);
+  
+  @include lg-down {
+    --gap: calc(var(--section-text-spacing) * 1.85);
+  }
+  
 }
 
 :root {
@@ -54,6 +68,10 @@
 
   --section_title-above-offset: -0.425rem;
   // --section-column-arrow-height: 1.7rem;
+
+  &.gap-main{
+    @include gap-main()
+  }
 
   &--wrapper {
     padding-top: var(--section-gap);
@@ -140,12 +158,8 @@
 
   &--main {
     &.gap-main {
-      --gap: calc(var(--section-text-spacing) * 2.15);
-      gap: var(--gap);
 
-      @include lg-down {
-        --gap: calc(var(--section-text-spacing) * 1.85);
-      }
+      @include gap-main;
     }
 
     @include flex-row;

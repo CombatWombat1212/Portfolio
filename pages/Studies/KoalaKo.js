@@ -453,14 +453,14 @@ function KoalaKo({ pop }) {
             />
           </Column>
 
-          <Column className={`${desktop ? "col-2" : ""}`} caption="above">
+          <Column className={`${desktop ? "col-2" : "col-"}`} caption="above">
             <Heading type="p" className="graphic--caption__above color--tertiary">
               <b>Onboarding</b>
             </Heading>
             <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.prototypes_userflow_splash_screen} />
           </Column>
 
-          <Column className={`${desktop ? "col-2" : ""}`} caption="above">
+          <Column className={`${desktop ? "col-2" : "col-"}`} caption="above">
             <Heading type="p" className="graphic--caption__above color--tertiary">
               <b>Play Statistics</b>
             </Heading>
@@ -468,89 +468,111 @@ function KoalaKo({ pop }) {
           </Column>
         </Section>
 
-        <Section
-          id="Prototyping--Features"
-          type="columns"
-          background="tertiary"
-          mainType="grid"
-          mainClassName="gap- mts-4"
-          wrapperClassName="mb-less">
-          <Heading>Features added at this stage include:</Heading>
+          <Section
+            id="Prototyping--Features"
+            type="columns"
+            background="tertiary"
+            mainType="grid"
+            mainClassName="gap- mts-4 mts-md-3 mts-sm-2"
+            wrapperClassName="mb-less">
+            <Heading>Features added at this stage include:</Heading>
 
-          <Column>
-            <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_child_profiles} />
-            <Heading type="h3" className="graphic--caption mt-more">
-              Optional child profiles
-            </Heading>
-            <Description className="mts-1">
-              <p>
-                Parents with privacy concerns can choose not to provide their child&rsquo;s age, disabling smart features. Allowing these users to
-                still use KoalaKo as an activity database; widening it&rsquo;s reach, rather than turning these users away.
-              </p>
-            </Description>
-          </Column>
-          <Column>
-            <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_selecting_interests} />
-            <Heading type="h3" className="graphic--caption mt-more">
-              Selecting interests
-            </Heading>
-            <Description className="mts-1">
-              <p>
-                Select a handful of your kid&rsquo;s favorite activities to receive suggestions based on their interests; helping parents to support
-                their child&rsquo;s passions.
-              </p>
-            </Description>
-          </Column>
-          <Column>
-            <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_statistics_page} />
-            <Heading type="h3" className="graphic--caption mt-more">
-              Refined statistics page
-            </Heading>
-            <Description className="mts-1">
-              <p>
-                Helpful, dynamic infographics with adjustable timeframes that explore your child&rsquo;s play-types, and any experiences they&rsquo;re
-                yet to try. With a goal-setting system to encourage regular playtime.
-              </p>
-            </Description>
-          </Column>
+            <Column>
+              <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_child_profiles} />
+              <Heading type={`${desktop ? "h3" : "h5"}`} className="graphic--caption mt-more">
+                Optional child profiles
+              </Heading>
+              <Description className="mts-1">
+                <p>
+                  Parents with privacy concerns can choose not to provide their child&rsquo;s age, disabling smart features. Allowing these users to
+                  still use KoalaKo as an activity database; widening it&rsquo;s reach, rather than turning these users away.
+                </p>
+              </Description>
+            </Column>
+            <Column>
+              <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_selecting_interests} />
+              <Heading type={`${desktop ? "h3" : "h5"}`} className="graphic--caption mt-more">
+                Selecting interests
+              </Heading>
+              <Description className="mts-1">
+                <p>
+                  Select a handful of your kid&rsquo;s favorite activities to receive suggestions based on their interests; helping parents to support
+                  their child&rsquo;s passions.
+                </p>
+              </Description>
+            </Column>
+            <Column>
+              <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_statistics_page} sameHeight={`stats_feedback`} />
+              <Heading type={`${desktop ? "h3" : "h5"}`} className="graphic--caption mt-more">
+                Refined statistics page
+              </Heading>
+              <Description className="mts-1">
+                <p>
+                  Helpful, dynamic infographics with adjustable timeframes that explore your child&rsquo;s play-types, and any experiences
+                  they&rsquo;re yet to try. With a goal-setting system to encourage regular playtime.
+                </p>
+              </Description>
+            </Column>
 
-          <Column>
-            <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_community_feedback} sameHeight="features_last" />
-            <Heading type="h3" className="graphic--caption mt-more">
-              Community feedback
-            </Heading>
-            <Description className="mts-1">
-              <p>
-                User rating and feedback system for activities, to provide more accurate recommendations and bring poor activities to the attention of
-                platform moderators.
-              </p>
-            </Description>
-          </Column>
-          <Column>
-            <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_location_browsing} sameHeight="features_last" />
-            <Heading type="h3" className="graphic--caption mt-more">
-              Location browsing
-            </Heading>
-            <Description className="mts-1 col-9 col-xxl-12">
-              <p>As suggested by our testers, users can now browse locations that match activities, and activities that match locations.</p>
-            </Description>
-          </Column>
-        </Section>
+            <Column>
+              <Graphic
+                className="b-rad"
+                lightbox
+                pop={pop}
+                type="image"
+                img={KOALAKO_IMGS.features_community_feedback}
+                sameHeight={`features_last`}
+              />
+              <Heading type={`${desktop ? "h3" : "h5"}`} className="graphic--caption mt-more">
+                Community feedback
+              </Heading>
+              <Description className="mts-1">
+                <p>
+                  User rating and feedback system for activities, to provide more accurate recommendations and bring poor activities to the attention
+                  of platform moderators.
+                </p>
+              </Description>
+            </Column>
+            <Column>
+              <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_location_browsing} sameHeight={`features_last`} />
+              <Heading type={`${desktop ? "h3" : "h5"}`} className="graphic--caption mt-more">
+                Location browsing
+              </Heading>
+              <Description className="mts-1 col-9 col-xxl-12">
+                <p>As suggested by our testers, users can now browse locations that match activities, and activities that match locations.</p>
+              </Description>
+            </Column>
+          </Section>
 
-        <Section id="Prototyping--Test-2" background="background darker" titled="above">
-          <Title>Testing 2</Title>
-          <Column>
+
+
+        {desktop ? (
+          <Section id="Prototyping--Test-2" background="background darker" titled="above">
+            <Title>Testing 2</Title>
+            <Column>
+              <Heading>Round 2. TEST.</Heading>
+            </Column>
+            <Column>
+              <Description>
+                <p>
+                  For this user test, we managed to include one parent in our group of 4 subjects. Scheduling and timeline restrictions prevented us
+                  from finding more than this, despite our best efforts. However, the feedback provided was invaluable.
+                </p>
+              </Description>
+            </Column>
+          </Section>
+        ) : (
+          <Section id="Prototyping--Test-2" background="background darker">
+            <Title>Testing 2</Title>
             <Heading>Round 2. TEST.</Heading>
-          </Column>
-          <Column>
             <Description>
               <p>
                 For this user test, we managed to include one parent in our group of 4 subjects. Scheduling and timeline restrictions prevented us
                 from finding more than this, despite our best efforts. However, the feedback provided was invaluable.
               </p>
             </Description>
-          </Column>
-        </Section>
+          </Section>
+        )}
 
         <Section id="Prototyping--Methodology" background="background darker" mainClassName="gap-6">
           <Title>Methodology</Title>
