@@ -20,6 +20,7 @@ export const ResponsiveProvider = ({ children }) => {
 
   const value = {
     ...useResponsiveUtils(),
+    bp,
     loading, 
     desktop,
   };

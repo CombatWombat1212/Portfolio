@@ -376,9 +376,9 @@ function Wrapper({ pop, bp }) {
       <Background handles={handles} popclass={popclass} />
       <div className={`popup container ${popclass.container}`} style={popclass.containerStyle} ref={popRef}>
         <div className={`popup--inner ${popclass.inner}`}>
-          {pop.type == "lightbox" && <Head pop={pop} nav={nav} popclass={popclass} handles={handles} />}
+          {pop.type == "lightbox" && <Head pop={pop} nav={nav} popclass={popclass} handles={handles} state={state}  />}
           <div className={`popup--content popup--content__on ${popclass.content}`}>
-            {pop.type == "interactive" && <Head pop={pop} nav={nav} popclass={popclass} handles={handles} />}
+            {pop.type == "interactive" && <Head pop={pop} nav={nav} popclass={popclass} handles={handles} state={state} />}
 
             {pop.type == "interactive" && <canvas className="popup--canvas popup--canvas__off" />}
 
@@ -396,7 +396,7 @@ function Wrapper({ pop, bp }) {
               </>
             )}
 
-            {pop.type == "interactive" && <ScaleWrapper pop={pop} nav={nav} />}
+            {pop.type == "interactive" && <ScaleWrapper pop={pop} nav={nav} state={state} />}
           </div>
 
           {pop.type == "lightbox" && pop.group && pop.firstImgDrawn && <Controls pop={pop} nav={nav} handles={handles} />}
@@ -610,10 +610,11 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
 
   const [drawLightbox, setDrawLightbox] = useState(false);
   useEffect(() => {
-    if (elems.img.availWidth && elems.img.availHeight && elems.img.maxWidth && elems.img.maxHeight) {
+    if ((elems.img.availWidth && elems.img.availHeight && elems.img.maxWidth && elems.img.maxHeight) || (pop.type === "lightbox")) {
       if (!drawLightbox) setDrawLightbox(true);
     }
-  }, [elems.img.availWidth, elems.img.availHeight, elems.img.maxWidth, elems.img.maxHeight]);
+  }, [elems.img.availWidth, elems.img.availHeight, elems.img.maxWidth, elems.img.maxHeight, pop.type]);
+
 
   useEffect(() => {
     swipeEventsInit();
@@ -697,7 +698,7 @@ function Head({ pop, nav, popclass, handles, state }) {
     <>
       <div className={`popup--header ${popclass.header} popup--nav`}>
         <Title pop={pop} />
-        <Close pop={pop} nav={nav} handles={handles} popclass={popclass} />
+        <Close pop={pop} nav={nav} handles={handles} popclass={popclass} state={state} />
       </div>
     </>
   );
@@ -821,8 +822,10 @@ const Pagination = React.memo(function Pagination({ pop, handles }) {
   }
 }, createUpdateConditions(["pop.group", "pop.index"]));
 
-function Close({ pop, nav, popclass, handles, type = "lightbox" }) {
-  const condition = pop.ui.visible || pop.type === "interactive" || pop.type == "gallery";
+function Close({ pop, nav, popclass, handles, type = "lightbox", state }) {
+
+  const condition = (pop.ui.visible || pop.type === "interactive" || pop.type == "gallery") || !state.desktop;
+
   const col = (() => {
     if (type === "lightbox") {
       return "transparent-primary";
@@ -840,8 +843,8 @@ function Close({ pop, nav, popclass, handles, type = "lightbox" }) {
   );
 }
 
-function ScaleWrapper({ pop, nav }) {
-  const condition = pop.ui.visible;
+function ScaleWrapper({ pop, nav, state }) {
+  const condition = (pop.ui.visible) || !state.desktop;
 
   return (
     <AnimPres animation={popAnims.hideUI} condition={condition} className="popup--footer popup--nav">

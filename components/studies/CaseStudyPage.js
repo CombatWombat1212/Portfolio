@@ -7,6 +7,8 @@ import React, { useEffect, useState } from "react";
 import useRandomString from "@/scripts/hooks/useRandomString";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { anchoredArrowsInit, removeExcessArrows } from "../sections/sections_utilities/ArrowUtilities";
+import { useColLine } from "../sections/sections_utilities/ColLineUtilities";
+import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 
 
 
@@ -72,6 +74,19 @@ function StudyWrapper({ id, study, children }) {
   });
 
 
+  const hasColLine = newChildren.some(child => {
+    if (child.type.name === "Chapter") {
+      const chapterChildren = Array.isArray(child.props.children)
+        ? child.props.children
+        : [child.props.children];
+      return chapterChildren.some(
+        chapterChild =>
+          chapterChild.type.name === "Section" && chapterChild.props.line
+      );
+    }
+    return false;
+  });
+
 
 
   // TODO: it would be ideal to refactor this as something more reacty and run it in the section component
@@ -82,7 +97,8 @@ function StudyWrapper({ id, study, children }) {
     }
   });
 
-
+  const { bp } = useResponsive();
+  useColLine(hasColLine, {update: [bp] });
 
   
 

@@ -1,4 +1,6 @@
 import { RESIZE_TIMEOUT } from "@/scripts/GlobalUtilities";
+import useListener from "@/scripts/hooks/useListener";
+import { useEffect, useLayoutEffect, useRef } from "react";
 
 function ColLine(elem) {
   this.elem = elem.querySelector(".col-line--wrapper");
@@ -27,14 +29,12 @@ function Target(elem) {
   this.midpoint = 0;
 }
 
-
 function updateRows(lines) {
   lines.forEach((line) => {
     line.rows = []; // Clear previous rows
     colLineGetRows(line); // Recalculate rows
   });
 }
-
 
 function colLineGetRows(line) {
   var parent = line.section.querySelector(`.${line.data.parent}`);
@@ -200,47 +200,64 @@ function colLineDraw(line) {
   colLineStyle(line);
 }
 
-function colLineInit() {
-  if (typeof window == "undefined") return;
+function useColLine(hasColLine, { update = null } = {}) {
+  const handleResizeRef = useRef(null);
 
-  var lines = [];
-  var previousWidth = window.innerWidth;
+  const colLineInit = () => {
+    if (typeof window == "undefined") return;
 
-  colLineGet(lines);
-  run();
+    var lines = [];
+    var previousWidth = window.innerWidth;
 
-  function run() {
-    updateRows(lines); 
-    lines.forEach((line) => {
-      colLineDraw(line);
-    });
+    colLineGet(lines);
+    run();
 
-  }
-
-  function ran() {
-    window.clearTimeout(isResizing);
-    isResizing = setTimeout(function () {
-      var currentWidth = window.innerWidth;
-      if (currentWidth !== previousWidth) {
-        run();
-        previousWidth = currentWidth;
-      }
-    }, RESIZE_TIMEOUT);
-  }
-
-  function isHorizontalResize(event) {
-    return event.target.innerWidth !== previousWidth;
-  }
-
-  function handleResize(event) {
-    if (isHorizontalResize(event)) {
-      ran();
+    function run() {
+      updateRows(lines);
+      lines.forEach((line) => {
+        colLineDraw(line);
+      });
     }
-  }
 
-  var isResizing;
-  window.removeEventListener("resize", handleResize);
-  window.addEventListener("resize", handleResize);
+    function ran() {
+      window.clearTimeout(isResizing);
+      isResizing = setTimeout(function () {
+        var currentWidth = window.innerWidth;
+        if (currentWidth !== previousWidth) {
+          run();
+          previousWidth = currentWidth;
+        }
+      }, RESIZE_TIMEOUT);
+    }
+
+    function isHorizontalResize(event) {
+      return event.target.innerWidth !== previousWidth;
+    }
+
+    function handleResize(event) {
+      if (isHorizontalResize(event)) {
+        ran();
+      }
+    }
+
+    handleResizeRef.current = handleResize;
+
+    var isResizing;
+  };
+
+  useLayoutEffect(() => {
+    if (hasColLine) {
+      colLineInit();
+    }
+  }, [hasColLine]);
+
+  useEffect(() => {
+    if (hasColLine) {
+      colLineInit();
+    }
+  }, [update]);
+
+  useListener("resize", handleResizeRef.current, hasColLine);
 }
 
-export { colLineInit };
+export { useColLine };

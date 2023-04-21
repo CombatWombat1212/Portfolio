@@ -11,6 +11,14 @@ $spacers: (0: 0,
     5: $spacer * 2,
     6: $spacer * 3,
 ) !default;
+$spacers_section: (0: 0,
+    1: calc(var(--section-text-spacing) * 0.5),
+    2: calc(var(--section-text-spacing) * 0.6666),
+    3: calc(var(--section-text-spacing) * 1),
+    4: calc(var(--section-text-spacing) * 1.5),
+    5: calc(var(--section-text-spacing) * 2),
+    6: calc(var(--section-text-spacing) * 3),
+) !default;
 
 
 
@@ -202,6 +210,12 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
             important: true,
             class: mt,
             values: map-merge($spacers, (auto: auto))),
+        "section-margin-top": (
+            responsive: true,
+            property: margin-top,
+            important: true,
+            class: mts,
+            values: map-merge($spacers_section, (auto: auto))),
         // "margin-bottom": (responsive: true,
         //     property: margin-bottom,
         //     class: mb,

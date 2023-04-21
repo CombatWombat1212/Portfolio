@@ -197,11 +197,11 @@ function KoalaKo({ pop }) {
         <Section id="Plan--Gantt" className="flex-col">
           <Title>Project Plan</Title>
           <Heading>
-            Roadmapping research exercises, deadlines, <br />
+            Roadmapping research exercises, deadlines, <br className="d-block d-md-none" />
             and team expectations
           </Heading>
           <Gantt study="KoalaKo" className="mt-3" />
-          <Description className="text-col-2 text-col-lg-1 gap-3 gap-xl-4 mt-4">
+          <Description className="text-col-2 text-col-lg-1 gap-3 gap-xl-4 mt-4 mt-md-3">
             <p>
               Our focus when designing this project plan was to ensure enough time to research our topic before developing ideas. From there we would
               distill concepts into those that were most promising.
@@ -333,41 +333,44 @@ function KoalaKo({ pop }) {
           <Heading>Creating low-fi prototypes for user testing</Heading>
 
           <Column caption="above">
-            <Heading type="p" className="graphic--caption__above color--tertiary" sameHeight="lowfi_prototype_heading">
+            <Heading type="p" className="graphic--caption__above color--tertiary" sameHeight={"lowfi_prototype_heading_desk"}>
               <b>Onboarding</b>
             </Heading>
             <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.prototype_low_onboarding} />
           </Column>
 
           <Column caption="above">
-            <Heading type="p" className="graphic--caption__above color--tertiary" sameHeight="lowfi_prototype_heading">
+            <Heading type="p" className="graphic--caption__above color--tertiary" sameHeight={"lowfi_prototype_heading_desk"}>
               <b>Homepage</b>
             </Heading>
             <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.prototype_low_homepage} />
           </Column>
 
           <Column caption="above">
-            <Heading type="p" className="graphic--caption__above color--tertiary" sameHeight="lowfi_prototype_heading">
+            <Heading type="p" className="graphic--caption__above color--tertiary" sameHeight={"lowfi_prototype_heading_desk"}>
               <b>Activities</b>
             </Heading>
             <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.prototype_low_activities} />
           </Column>
 
+
           <Column caption="above">
-            <Heading type="p" className="graphic--caption__above color--tertiary" sameHeight="lowfi_prototype_heading">
+            <Heading type="p" className="graphic--caption__above color--tertiary" sameHeight={"lowfi_prototype_heading_desk"}>
               <b>Location Browse</b>
             </Heading>
             <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.prototype_low_map} />
           </Column>
 
           <Column caption="above">
-            <Heading type="p" className="graphic--caption__above color--tertiary" sameHeight="lowfi_prototype_heading">
+            <Heading type="p" className="graphic--caption__above color--tertiary" sameHeight={"lowfi_prototype_heading_desk"}>
               <b>Statistics</b>
             </Heading>
             <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.prototype_low_statistics} />
           </Column>
 
-          <Description className="text-col-2 text-gap-4" below>
+
+
+          <Description className="text-col-2 text-col-lg-1 gap-3 gap-xl-4" below={desktop ? true : false}>
             <p>
               At this stage, my team defined the &lsquo;KoalaKo&rsquo; identity. Chosen as it denotes a certain lighthearted curiosity or playfulness
               that we hoped to embody. Like that of a growing koala joey.
@@ -379,14 +382,14 @@ function KoalaKo({ pop }) {
           </Description>
         </Section>
 
-        <Section id="Prototyping--Testing" type="columns" background="background darker" mainClassName="mt-4">
+        <Section id="Prototyping--Testing" type="columns" background="background darker" >
           <Title>Testing</Title>
           <Heading>Gauging reception and feedback from users</Heading>
 
           <Column>
             <Title>Methodology</Title>
             <Heading type="h3" className="">
-              &lsquo;Popcorn&rsquo; feedback, <br />
+              &lsquo;Popcorn&rsquo; feedback, <br className="d-block d-md-none" />
               and prepared questions
             </Heading>
             <Description>
@@ -419,7 +422,7 @@ function KoalaKo({ pop }) {
           </Column>
         </Section>
 
-        <Section id="Prototyping--Testing" type="columns" background="background darker">
+        <Section id="Prototyping--Implimentation" type="columns" background="background darker">
           <Title>Implimentation Plan</Title>
           <Heading>Noting suggestions, and refocusing our goals</Heading>
 

@@ -165,6 +165,9 @@
         @include lg {
           max-width: 60%;
         }
+        @include lg-down {
+          --gap: 2.15rem !important;
+        }
         @include md {
           max-width: 70%;
         }
@@ -264,8 +267,6 @@
   #Develop {
     &--Methods {
       .section {
-
-
         @include lg-down {
           $amt: 80%;
           max-width: $amt;
@@ -274,7 +275,6 @@
           }
         }
 
-        
         @include md-down {
           $amt: calc(100% - 4rem);
           max-width: $amt;
@@ -287,22 +287,16 @@
           grid-template-columns: repeat(2, 1fr);
           gap: 3rem;
           @include lg-down {
-            gap: 2rem;
+            gap: 2.5rem;
             grid-template-columns: repeat(1, 1fr);
           }
-          @include md-down {
-          }
         }
-
 
         .col-line {
           background-color: $col-primary;
           opacity: 1;
         }
-
-
       }
-
     }
   }
 
@@ -319,11 +313,54 @@
         }
 
         &--main {
+          --gap: 3.5rem;
+          @include gap;
+
+          @include xl-down {
+            --gap: 2.75rem;
+          }
+          @include lg-down {
+            --gap: 2rem;
+          }
+
+          @include md-down {
+            --gap: 2.5rem;
+            justify-content: center;
+            margin-top: 3rem;
+          }
+          @include sm-down {
+            --gap: 1.5rem;
+          }
         }
         &--column {
           // magic
           // --expected-cols: #{floor-round(calc((12 / var(--column-width))))};
           // width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+
+          @mixin ignore-max {
+            max-width: unset;
+            flex: 1 0;
+          }
+          @include xxl-up {
+            @include ignore-max;
+          }
+          @include xxl-md {
+            @include ignore-max;
+          }
+
+          @include md-down {
+            @include nth-children(1, 2, 3) {
+              .section--heading {
+                height: auto !important;
+              }
+            }
+          }
+        }
+
+        &--graphic {
+          @include md-down {
+            border: 0.2rem $col-tertiary solid;
+          }
         }
       }
     }
@@ -335,6 +372,17 @@
             background-color: $col-background;
             @include b-rad;
             padding: 1rem;
+          }
+        }
+      }
+    }
+
+    &--Implimentation {
+      .section {
+        &--main {
+          @include xl-down {
+            // --gap: 3rem;
+            // @include gap;
           }
         }
       }

@@ -43,7 +43,8 @@ function getSectionClasses({className: sectionClassName}, hasEvenCol,
 
 function getGapClasses(type, arrows, mainClassName) {
   var gapClasses = "";
-  if (SECTION_TYPE_B.indexOf(type) != -1) gapClasses = "gap-4";
+  // if (SECTION_TYPE_B.indexOf(type) != -1) gapClasses = "gap-4";
+  if (SECTION_TYPE_B.indexOf(type) != -1) gapClasses = "gap-main";
   if (arrows) gapClasses = "gap-6";
 
   if (!mainClassName) return gapClasses;

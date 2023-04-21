@@ -188,6 +188,8 @@ input, button, textarea, select {
     --font-leading-h4: 1.125rem;
     --font-leading-body: 1.475rem;
     --font-leading-quote: 1.375rem;
+    --font-margin-bottom-h2: 1.25rem;
+    --font-margin-bottom-h2_less: 0.5rem;
     --font-margin-bottom-h4: 0.35rem;
   }
 }
@@ -1621,7 +1623,7 @@ h3 + .studypanel--paragraph {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    --studypanel-img-height: 28vh;
+    --studypanel-img-height: 33vh;
   }
 }
 
@@ -2770,8 +2772,31 @@ h3 + .studypanel--paragraph {
   margin-top: calc(var(--section-text-spacing) * 1.75);
 }
 
+.section--main.gap-main {
+  --section-main-gap: calc(var(--section-text-spacing) * 2.15);
+  gap: var(--section-main-gap);
+}
+
+@media screen and (max-width: 61.9375em) {
+  .section--main.gap-main {
+    --section-main-gap: calc(var(--section-text-spacing) * 1.95);
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  .section--main {
+    margin-top: calc(var(--section-text-spacing) * 1.35);
+  }
+}
+
 .section--main.mt-less {
   margin-top: calc(var(--section-text-spacing) * 1.25);
+}
+
+@media screen and (max-width: 61.9375em) {
+  .section--main.mt-less {
+    margin-top: calc(var(--section-text-spacing) * 0.85);
+  }
 }
 
 .section--main__grid {
@@ -5689,7 +5714,7 @@ h3 + .studypanel--paragraph {
 }
 
 .method--body {
-  margin-top: 2.25rem;
+  margin-top: 1.75rem;
 }
 
 @media screen and (max-width: 79.9375em) {
@@ -7005,6 +7030,38 @@ h3 + .studypanel--paragraph {
   margin-top: auto !important;
 }
 
+.mts-0 {
+  margin-top: 0 !important;
+}
+
+.mts-1 {
+  margin-top: calc(var(--section-text-spacing) * 0.5) !important;
+}
+
+.mts-2 {
+  margin-top: calc(var(--section-text-spacing) * 0.6666) !important;
+}
+
+.mts-3 {
+  margin-top: calc(var(--section-text-spacing) * 1) !important;
+}
+
+.mts-4 {
+  margin-top: calc(var(--section-text-spacing) * 1.5) !important;
+}
+
+.mts-5 {
+  margin-top: calc(var(--section-text-spacing) * 2) !important;
+}
+
+.mts-6 {
+  margin-top: calc(var(--section-text-spacing) * 3) !important;
+}
+
+.mts-auto {
+  margin-top: auto !important;
+}
+
 @media (max-width: 91.9375em) {
   .d-xxl-block {
     display: block !important;
@@ -7128,6 +7185,30 @@ h3 + .studypanel--paragraph {
     margin-top: 6rem !important;
   }
   .mt-xxl-auto {
+    margin-top: auto !important;
+  }
+  .mts-xxl-0 {
+    margin-top: 0 !important;
+  }
+  .mts-xxl-1 {
+    margin-top: calc(var(--section-text-spacing) * 0.5) !important;
+  }
+  .mts-xxl-2 {
+    margin-top: calc(var(--section-text-spacing) * 0.6666) !important;
+  }
+  .mts-xxl-3 {
+    margin-top: calc(var(--section-text-spacing) * 1) !important;
+  }
+  .mts-xxl-4 {
+    margin-top: calc(var(--section-text-spacing) * 1.5) !important;
+  }
+  .mts-xxl-5 {
+    margin-top: calc(var(--section-text-spacing) * 2) !important;
+  }
+  .mts-xxl-6 {
+    margin-top: calc(var(--section-text-spacing) * 3) !important;
+  }
+  .mts-xxl-auto {
     margin-top: auto !important;
   }
 }
@@ -7257,6 +7338,30 @@ h3 + .studypanel--paragraph {
   .mt-xl-auto {
     margin-top: auto !important;
   }
+  .mts-xl-0 {
+    margin-top: 0 !important;
+  }
+  .mts-xl-1 {
+    margin-top: calc(var(--section-text-spacing) * 0.5) !important;
+  }
+  .mts-xl-2 {
+    margin-top: calc(var(--section-text-spacing) * 0.6666) !important;
+  }
+  .mts-xl-3 {
+    margin-top: calc(var(--section-text-spacing) * 1) !important;
+  }
+  .mts-xl-4 {
+    margin-top: calc(var(--section-text-spacing) * 1.5) !important;
+  }
+  .mts-xl-5 {
+    margin-top: calc(var(--section-text-spacing) * 2) !important;
+  }
+  .mts-xl-6 {
+    margin-top: calc(var(--section-text-spacing) * 3) !important;
+  }
+  .mts-xl-auto {
+    margin-top: auto !important;
+  }
 }
 
 @media (max-width: 61.9375em) {
@@ -7382,6 +7487,30 @@ h3 + .studypanel--paragraph {
     margin-top: 6rem !important;
   }
   .mt-lg-auto {
+    margin-top: auto !important;
+  }
+  .mts-lg-0 {
+    margin-top: 0 !important;
+  }
+  .mts-lg-1 {
+    margin-top: calc(var(--section-text-spacing) * 0.5) !important;
+  }
+  .mts-lg-2 {
+    margin-top: calc(var(--section-text-spacing) * 0.6666) !important;
+  }
+  .mts-lg-3 {
+    margin-top: calc(var(--section-text-spacing) * 1) !important;
+  }
+  .mts-lg-4 {
+    margin-top: calc(var(--section-text-spacing) * 1.5) !important;
+  }
+  .mts-lg-5 {
+    margin-top: calc(var(--section-text-spacing) * 2) !important;
+  }
+  .mts-lg-6 {
+    margin-top: calc(var(--section-text-spacing) * 3) !important;
+  }
+  .mts-lg-auto {
     margin-top: auto !important;
   }
 }
@@ -7511,6 +7640,30 @@ h3 + .studypanel--paragraph {
   .mt-md-auto {
     margin-top: auto !important;
   }
+  .mts-md-0 {
+    margin-top: 0 !important;
+  }
+  .mts-md-1 {
+    margin-top: calc(var(--section-text-spacing) * 0.5) !important;
+  }
+  .mts-md-2 {
+    margin-top: calc(var(--section-text-spacing) * 0.6666) !important;
+  }
+  .mts-md-3 {
+    margin-top: calc(var(--section-text-spacing) * 1) !important;
+  }
+  .mts-md-4 {
+    margin-top: calc(var(--section-text-spacing) * 1.5) !important;
+  }
+  .mts-md-5 {
+    margin-top: calc(var(--section-text-spacing) * 2) !important;
+  }
+  .mts-md-6 {
+    margin-top: calc(var(--section-text-spacing) * 3) !important;
+  }
+  .mts-md-auto {
+    margin-top: auto !important;
+  }
 }
 
 @media (max-width: 36.9375em) {
@@ -7636,6 +7789,30 @@ h3 + .studypanel--paragraph {
     margin-top: 6rem !important;
   }
   .mt-sm-auto {
+    margin-top: auto !important;
+  }
+  .mts-sm-0 {
+    margin-top: 0 !important;
+  }
+  .mts-sm-1 {
+    margin-top: calc(var(--section-text-spacing) * 0.5) !important;
+  }
+  .mts-sm-2 {
+    margin-top: calc(var(--section-text-spacing) * 0.6666) !important;
+  }
+  .mts-sm-3 {
+    margin-top: calc(var(--section-text-spacing) * 1) !important;
+  }
+  .mts-sm-4 {
+    margin-top: calc(var(--section-text-spacing) * 1.5) !important;
+  }
+  .mts-sm-5 {
+    margin-top: calc(var(--section-text-spacing) * 2) !important;
+  }
+  .mts-sm-6 {
+    margin-top: calc(var(--section-text-spacing) * 3) !important;
+  }
+  .mts-sm-auto {
     margin-top: auto !important;
   }
 }
@@ -8347,6 +8524,12 @@ h3 + .studypanel--paragraph {
   }
 }
 
+@media screen and (max-width: 61.9375em) {
+  #Koalako #Overview--Privacy .section, #Koalako #Overview--Wordly .section {
+    --gap: 2.15rem !important;
+  }
+}
+
 @media screen and (max-width: 49.9375em) and (min-width: 37em) {
   #Koalako #Overview--Privacy .section, #Koalako #Overview--Wordly .section {
     max-width: 70%;
@@ -8473,7 +8656,7 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 61.9375em) {
   #Koalako #Develop--Methods .section--main {
-    gap: 2rem;
+    gap: 2.5rem;
     grid-template-columns: repeat(1, 1fr);
   }
 }
@@ -8491,6 +8674,71 @@ h3 + .studypanel--paragraph {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+}
+
+#Koalako #Prototyping--LowFi .section--main {
+  --gap: 3.5rem;
+  gap: var(--gap);
+  column-gap: var(--gap);
+  row-gap: var(--gap);
+}
+
+@media screen and (max-width: 79.9375em) {
+  #Koalako #Prototyping--LowFi .section--main {
+    --gap: 2.75rem;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Koalako #Prototyping--LowFi .section--main {
+    --gap: 2rem;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Koalako #Prototyping--LowFi .section--main {
+    --gap: 2.5rem;
+    justify-content: center;
+    margin-top: 3rem;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Koalako #Prototyping--LowFi .section--main {
+    --gap: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 92em) {
+  #Koalako #Prototyping--LowFi .section--column {
+    max-width: unset;
+    flex: 1 0;
+  }
+}
+
+@media screen and (max-width: 91.9375em) and (min-width: 50em) {
+  #Koalako #Prototyping--LowFi .section--column {
+    max-width: unset;
+    flex: 1 0;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Koalako #Prototyping--LowFi .section--column:nth-child(1) .section--heading {
+    height: auto !important;
+  }
+  #Koalako #Prototyping--LowFi .section--column:nth-child(2) .section--heading {
+    height: auto !important;
+  }
+  #Koalako #Prototyping--LowFi .section--column:nth-child(3) .section--heading {
+    height: auto !important;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Koalako #Prototyping--LowFi .section--graphic {
+    border: 0.2rem #404064 solid;
+  }
 }
 
 #Koalako #Prototyping--Testing .section--description .paragraph__background {

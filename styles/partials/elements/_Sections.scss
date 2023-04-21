@@ -139,12 +139,27 @@
   }
 
   &--main {
+    &.gap-main {
+      --section-main-gap: calc(var(--section-text-spacing) * 2.15);
+      gap: var(--section-main-gap);
+
+      @include lg-down {
+        --section-main-gap: calc(var(--section-text-spacing) * 1.95);
+      }
+    }
+
     @include flex-row;
     margin-top: calc(var(--section-text-spacing) * 1.75);
-    // position: relative;
+    @include lg-down {
+      margin-top: calc(var(--section-text-spacing) * 1.35);
+    }
 
     &.mt-less {
       margin-top: calc(var(--section-text-spacing) * 1.25);
+
+      @include lg-down {
+        margin-top: calc(var(--section-text-spacing) * 0.85);
+      }
     }
 
     &__grid {

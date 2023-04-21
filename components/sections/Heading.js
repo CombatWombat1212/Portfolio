@@ -1,6 +1,7 @@
+import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import useSameHeight from "@/scripts/hooks/useSameHeight";
 import { defaultProps, PropTypes } from "prop-types";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function getAdditionalHeadingClassesFromParentProps(childs, reason) {
   function addClass(obj) {
@@ -40,16 +41,28 @@ function Heading({ children, type, className, innerClassName, italic, sameHeight
   className = className ? className : "";
   innerClassName = innerClassName ? innerClassName : "";
 
+  const { desktop } = useResponsive();
+
   const reference = useRef(null);
   sameHeight = sameHeight ? sameHeight : false;
-  const sameHeightObj = useSameHeight(sameHeight, reference, { resize: "horizontal" });
-  const styles = {
-    ...(sameHeightObj
-      ? {
-          height: !sameHeightObj.resizing ? `${sameHeightObj.height.max}px` : "auto",
-        }
-      : {}),
-  };
+  const sameHeightObj = useSameHeight(sameHeight, reference, { resize: "horizontal", update:[desktop] });
+
+
+  const [styles, setStyles] = useState({});
+
+  useEffect(() => {
+    const newStyles = {
+      ...(sameHeightObj
+        ? {
+            height: (!sameHeightObj.resizing) ? `${sameHeightObj.height.max}px` : 'auto',
+          }
+        : {}),
+    };
+
+    setStyles(newStyles);
+  }, [sameHeightObj, desktop]);
+
+
 
   if (italic) {
     innerClassName += " text--italic";
