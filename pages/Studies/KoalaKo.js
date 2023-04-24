@@ -194,8 +194,8 @@ function KoalaKo({ pop }) {
         </Section>
       </Chapter>
 
-      <Chapter name="Plan" id="Plan" wrapperClassName="pb-section-gap">
-        <Section id="Plan--Gantt" className="flex-col">
+      <Chapter name="Plan" id="Plan">
+        <Section id="Plan--Gantt" className="flex-col" wrapperClassName="pb-section-gap">
           <Title>Project Plan</Title>
           <Heading>
             Roadmapping research exercises, deadlines, <br className="d-block d-md-none" />
@@ -638,7 +638,7 @@ function KoalaKo({ pop }) {
           <Column className={"col-4 col-md-5 col-sm-7"}>
             <Graphic type="image" className="b-rad" img={KOALAKO_IMGS.findings_games} />
           </Column>
-          <Column className={"col-8 col-md-9 col-sm-12"} >
+          <Column className={"col-8 col-md-9 col-sm-12"}>
             <Quote className="b-rad" background="background">
               &ldquo;It would be great to see a filter for one-on-one activities or team activities, or budget to play the games&rdquo;
               <br />
@@ -845,7 +845,7 @@ function KoalaKo({ pop }) {
       </Chapter>
 
       <Chapter name="Closing" id="Closing">
-        <Section id="Closing--Copy" type="columns" titled mainClassName="gap-6 mts-6 gap-xl-4">
+        <Section id="Closing--Copy" type="columns" titled mainClassName="gap-6 mts-6 mts-xl-4 gap-xl-4">
           <Title>Areas Of Growth</Title>
           <Heading>
             Addressing security concerns, <br className="d-lg-none" /> and improving the first impression

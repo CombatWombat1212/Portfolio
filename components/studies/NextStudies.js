@@ -162,7 +162,8 @@ function NextStudies({ study }) {
   var adjacentStudies = [first, second];
 
   // const captions = ["Have a look-see", "Take a gander", "Check it", "I must know", "Gimme", "Go on..."];
-  const captions = ["Check it", "Tell me", "Gimme", "Go on..."];
+  const captions = ["Check it", "Tell me", "Gimme", "I'll bite", "Ouu", "Go on..."];
+
   const chosen = useRandomCaptions(captions, 2);
 
   return (

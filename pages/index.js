@@ -14,11 +14,10 @@ import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import useRandomCaptions from "@/scripts/hooks/useRandomCaptions";
 
 function Index() {
-
-  const captions = ["Have a look-see", "Take a gander", "Check it", "I must know", "Gimme", "Go on..."];
+  const captions = ["Have a look-see", "Take a gander", "Check it", "I must know", "Gimme", "Go on...", "I'll bite", "Ouu", "I'm all ears"];
 
   const chosen = useRandomCaptions(captions, CASE_STUDIES.length);
-  
+
   // const [chosen, setChosen] = useState([]);
   // const getRandomUniqueCaptions = (captions, obj) => {
   //   var count = obj.length;
@@ -33,20 +32,24 @@ function Index() {
   //   setChosen(getRandomUniqueCaptions(captions, CASE_STUDIES));
   // }, []);
 
-
-
-
   return (
     <>
       <PanelWrapper id="Home" variant="home">
         <Panel id="Home--Hero" type="img-desc" className={`studypanel studypanel__home`}>
           <PanelDesc variant={"home"}>
             <h1 className="studypanel--heading">
-              <span className="studypanel--title d-md-none">Hi,</span> 
-              
-              <span className="studypanel--title d-sm-block d-none">Hi I&apos;m&nbsp;<br className="d-sm-block d-none" /></span>
+              <span className="studypanel--title d-md-none">Hi,</span>
 
-              <span className="studypanel--title d-sm-none"> I&apos;m&nbsp;<br className="d-sm-block d-none" /></span>
+              <span className="studypanel--title d-sm-block d-none">
+                Hi I&apos;m&nbsp;
+                <br className="d-sm-block d-none" />
+              </span>
+
+              <span className="studypanel--title d-sm-none">
+                {" "}
+                I&apos;m&nbsp;
+                <br className="d-sm-block d-none" />
+              </span>
 
               <span className="studypanel--title color--secondary">Sam Giustizia</span>
               <span className="studypanel--title">
@@ -72,9 +75,7 @@ function Index() {
 
       {CASE_STUDIES.map((item) => {
         var caption = chosen[CASE_STUDIES.indexOf(item)];
-        return (
-            <StudyPanel id={`Home--${item.id}`} key={item.key} variant="home" study={item} button={caption} />
-        );
+        return <StudyPanel id={`Home--${item.id}`} key={item.key} variant="home" study={item} button={caption} />;
       })}
     </>
   );

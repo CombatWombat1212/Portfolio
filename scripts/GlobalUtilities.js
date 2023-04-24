@@ -429,6 +429,31 @@ function conditionalOrder(condition, elements) {
 }
 
 
+
+function isElementNearTop(el, threshold = 200) {
+  const rect = el.getBoundingClientRect();
+  return rect.top >= 0 && rect.top <= threshold;
+}
+
+function scrollToTarget(target, attempts = 0, maxAttempts = 10) {
+  target.scrollIntoView({ behavior: "smooth" });
+
+  if (attempts < maxAttempts) {
+    const timeoutId = setTimeout(() => {
+      const targetNearTop = isElementNearTop(target);
+
+      if (!targetNearTop) {
+        scrollToTarget(target, attempts + 1, maxAttempts);
+      } else {
+        clearTimeout(timeoutId);
+      }
+    }, 800);
+  }
+}
+
+
+
+
 // Video file formats
 const VIDEO_TYPES = ["mp4", "avi", "mov", "wmv", "mkv", "flv", "webm"];
 
@@ -457,6 +482,8 @@ export {
   createUpdateConditions,
   ignoreUpdateConditions,
   conditionalOrder,
+  isElementNearTop,
+scrollToTarget,
   RESIZE_TIMEOUT,
   VIDEO_TYPES,
   IMAGE_TYPES,

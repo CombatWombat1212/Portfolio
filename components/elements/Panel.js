@@ -2,6 +2,7 @@ import Image from "next/image";
 import PropTypes from "prop-types";
 import Button from "../elements/Buttons";
 import Tag from "../elements/Tag";
+import { scrollToTarget } from "@/scripts/GlobalUtilities";
 
 function PanelWrapper({ children, id, variant }) {
   return (
@@ -68,7 +69,10 @@ function StudyPanel({ id, study, variant, button }) {
 
   var btnStyle = button == "" ? { opacity: 0 } : { opacity: 1 };
 
-  // const {isBpOrDown} = useResponsiveUtils();
+  const skipHandler = () => {
+    const target = document.getElementById("Delivery");
+    scrollToTarget(target);
+  };
 
   return (
     <>
@@ -103,11 +107,12 @@ function StudyPanel({ id, study, variant, button }) {
               study.type != "gallery" && (
                 <>
                   <Button
-                  className={`studypanel--button studypanel--button__${variant}`}
-                  type="regular"
+                    className={`studypanel--button studypanel--button__${variant}`}
+                    type="regular"
                     icon={["arrow_down", "right", "mask"]}
                     animation={"pulse-down"}
-                    href={"#Delivery"}>
+                    // href={'#Delivery'}
+                    onClick={skipHandler}>
                     Skip to Solution
                   </Button>
                 </>
