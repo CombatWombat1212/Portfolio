@@ -469,99 +469,84 @@ function KoalaKo({ pop }) {
           </Column>
         </Section>
 
-          <Section
-            id="Prototyping--Features"
-            type="columns"
-            background="tertiary"
-            mainType="grid"
-            mainClassName="gap- mts-4 mts-md-3 mts-sm-2"
-            >
-            <Heading>Features added at this stage include:</Heading>
+        <Section id="Prototyping--Features" type="columns" background="tertiary" mainType="grid" mainClassName="gap- mts-4 mts-md-3 mts-sm-2">
+          <Heading>Features added at this stage include:</Heading>
 
-            <Column>
-              <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_child_profiles} />
-              <Heading type={`${desktop ? "h3" : "h5"}`} className="graphic--caption mt-more">
-                Optional child profiles
-              </Heading>
-              <Description className="mts-1">
-                <p>
-                  Parents with privacy concerns can choose not to provide their child&rsquo;s age, disabling smart features. Allowing these users to
-                  still use KoalaKo as an activity database; widening it&rsquo;s reach, rather than turning these users away.
-                </p>
-              </Description>
-            </Column>
-            <Column>
-              <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_selecting_interests} />
-              <Heading type={`${desktop ? "h3" : "h5"}`} className="graphic--caption mt-more">
-                Selecting interests
-              </Heading>
-              <Description className="mts-1">
-                <p>
-                  Select a handful of your kid&rsquo;s favorite activities to receive suggestions based on their interests; helping parents to support
-                  their child&rsquo;s passions.
-                </p>
-              </Description>
-            </Column>
-            <Column>
-              <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_statistics_page} sameHeight={`stats_feedback`} />
-              <Heading type={`${desktop ? "h3" : "h5"}`} className="graphic--caption mt-more">
-                Refined statistics page
-              </Heading>
-              <Description className="mts-1">
-                <p>
-                  Helpful, dynamic infographics with adjustable timeframes that explore your child&rsquo;s play-types, and any experiences
-                  they&rsquo;re yet to try. With a goal-setting system to encourage regular playtime.
-                </p>
-              </Description>
-            </Column>
+          <Column>
+            <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_child_profiles} />
+            <Heading type={`${desktop ? "h3" : "h5"}`} className="graphic--caption mt-more">
+              Optional child profiles
+            </Heading>
+            <Description className="mts-1">
+              <p>
+                Parents with privacy concerns can choose not to provide their child&rsquo;s age, disabling smart features. Allowing these users to
+                still use KoalaKo as an activity database; widening it&rsquo;s reach, rather than turning these users away.
+              </p>
+            </Description>
+          </Column>
+          <Column>
+            <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_selecting_interests} />
+            <Heading type={`${desktop ? "h3" : "h5"}`} className="graphic--caption mt-more">
+              Selecting interests
+            </Heading>
+            <Description className="mts-1">
+              <p>
+                Select a handful of your kid&rsquo;s favorite activities to receive suggestions based on their interests; helping parents to support
+                their child&rsquo;s passions.
+              </p>
+            </Description>
+          </Column>
+          <Column>
+            <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_statistics_page} sameHeight={`stats_feedback`} />
+            <Heading type={`${desktop ? "h3" : "h5"}`} className="graphic--caption mt-more">
+              Refined statistics page
+            </Heading>
+            <Description className="mts-1">
+              <p>
+                Helpful, dynamic infographics with adjustable timeframes that explore your child&rsquo;s play-types, and any experiences they&rsquo;re
+                yet to try. With a goal-setting system to encourage regular playtime.
+              </p>
+            </Description>
+          </Column>
 
-            <Column>
-              <Graphic
-                className="b-rad"
-                lightbox
-                pop={pop}
-                type="image"
-                img={KOALAKO_IMGS.features_community_feedback}
-                sameHeight={`features_last`}
-              />
-              <Heading type={`${desktop ? "h3" : "h5"}`} className="graphic--caption mt-more">
-                Community feedback
-              </Heading>
-              <Description className="mts-1">
-                <p>
-                  User rating and feedback system for activities, to provide more accurate recommendations and bring poor activities to the attention
-                  of platform moderators.
-                </p>
-              </Description>
-            </Column>
-            <Column>
-              <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_location_browsing} sameHeight={`features_last`} />
-              <Heading type={`${desktop ? "h3" : "h5"}`} className="graphic--caption mt-more">
-                Location browsing
-              </Heading>
-              <Description className="mts-1 col-9 col-xxl-12">
-                <p>As suggested by our testers, users can now browse locations that match activities, and activities that match locations.</p>
-              </Description>
-            </Column>
-          </Section>
-
-
+          <Column>
+            <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_community_feedback} sameHeight={`features_last`} />
+            <Heading type={`${desktop ? "h3" : "h5"}`} className="graphic--caption mt-more">
+              Community feedback
+            </Heading>
+            <Description className="mts-1">
+              <p>
+                User rating and feedback system for activities, to provide more accurate recommendations and bring poor activities to the attention of
+                platform moderators.
+              </p>
+            </Description>
+          </Column>
+          <Column>
+            <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_location_browsing} sameHeight={`features_last`} />
+            <Heading type={`${desktop ? "h3" : "h5"}`} className="graphic--caption mt-more">
+              Location browsing
+            </Heading>
+            <Description className="mts-1 col-9 col-xxl-12">
+              <p>As suggested by our testers, users can now browse locations that match activities, and activities that match locations.</p>
+            </Description>
+          </Column>
+        </Section>
 
         {/* {desktop ? ( */}
-          <Section id="Prototyping--Test-2" background="background darker" titled="above">
-            <Title>Testing 2</Title>
-            <Column>
-              <Heading>Round 2. TEST.</Heading>
-            </Column>
-            <Column>
-              <Description>
-                <p>
-                  For this user test, we managed to include one parent in our group of 4 subjects. Scheduling and timeline restrictions prevented us
-                  from finding more than this, despite our best efforts. However, the feedback provided was invaluable.
-                </p>
-              </Description>
-            </Column>
-          </Section>
+        <Section id="Prototyping--Test-2" background="background darker" titled="above">
+          <Title>Testing 2</Title>
+          <Column>
+            <Heading>Round 2. TEST.</Heading>
+          </Column>
+          <Column>
+            <Description>
+              <p>
+                For this user test, we managed to include one parent in our group of 4 subjects. Scheduling and timeline restrictions prevented us
+                from finding more than this, despite our best efforts. However, the feedback provided was invaluable.
+              </p>
+            </Description>
+          </Column>
+        </Section>
         {/* ) : (
           <Section id="Prototyping--Test-2" background="background darker">
             <Title>Testing 2</Title>
@@ -581,7 +566,7 @@ function KoalaKo({ pop }) {
 
           <Column>
             <Graphic type="mask" img={KOALAKO_IMGS.testing_usability} background="background" />
-            <Heading type={!isSm ? 'h3' : 'h5'} className="graphic--caption mt-more">
+            <Heading type={!isSm ? "h3" : "h5"} className="graphic--caption mt-more">
               Usability Tasks
             </Heading>
             <Description className="mts-1">
@@ -591,7 +576,7 @@ function KoalaKo({ pop }) {
 
           <Column>
             <Graphic type="mask" img={KOALAKO_IMGS.testing_questions} background="background" />
-            <Heading type={!isSm ? 'h3' : 'h5'} className="graphic--caption mt-more">
+            <Heading type={!isSm ? "h3" : "h5"} className="graphic--caption mt-more">
               Pre-written questions
             </Heading>
             <Description className="mts-1">
@@ -601,7 +586,7 @@ function KoalaKo({ pop }) {
 
           <Column>
             <Graphic type="mask" img={KOALAKO_IMGS.testing_popcorn} background="background" />
-            <Heading type={!isSm ? 'h3' : 'h5'} className="graphic--caption mt-more">
+            <Heading type={!isSm ? "h3" : "h5"} className="graphic--caption mt-more">
               Popcorn feedback
             </Heading>
             <Description className="mts-1">
@@ -609,40 +594,6 @@ function KoalaKo({ pop }) {
             </Description>
           </Column>
         </Section>
-
-
-
-
-
-        {/* {desktop ? (
-          <Section id="Prototyping--Test-2" background="background darker" titled="above">
-            <Title>Testing 2</Title>
-            <Column>
-              <Heading>Round 2. TEST.</Heading>
-            </Column>
-            <Column>
-              <Description>
-                <p>
-                  For this user test, we managed to include one parent in our group of 4 subjects. Scheduling and timeline restrictions prevented us
-                  from finding more than this, despite our best efforts. However, the feedback provided was invaluable.
-                </p>
-              </Description>
-            </Column>
-          </Section>
-        ) : (
-          <Section id="Prototyping--Test-2" background="background darker">
-            <Title>Testing 2</Title>
-            <Heading>Round 2. TEST.</Heading>
-            <Description>
-              <p>
-                For this user test, we managed to include one parent in our group of 4 subjects. Scheduling and timeline restrictions prevented us
-                from finding more than this, despite our best efforts. However, the feedback provided was invaluable.
-              </p>
-            </Description>
-          </Section>
-        )} */}
-
-
 
         <Section id="Prototyping--Findings" background="background darkest" titled="above" wrapperClassName="mb-less">
           <Title>Findings</Title>
@@ -663,39 +614,35 @@ function KoalaKo({ pop }) {
           </Column>
         </Section>
 
-
-
-
-
         <Section id="Prototyping--Findings-1" background="background darkest" wrapperClassName="mb-less">
-          <Column className="col-4">
+          <Column className={"col-4 col-md-5 col-sm-7"}>
             <Graphic type="image" className="b-rad" img={KOALAKO_IMGS.findings_stats} />
           </Column>
-          <Column className="col-8">
+          <Column className={"col-8 col-md-9 col-sm-12"}>
             <Quote className="b-rad" background="background">
               “I think the &lsquo;goal setting&rsquo; feature might make me feel pressured; like if I fail to reach a goal I&rsquo;ve set, then I
               haven&rsquo;t done enough for my child”
               <br />
-              <br />- User #1 (Parent)
+              <span style={{ display: "block" }} className="mts-1"></span>- User #1 (Parent)
             </Quote>
             <Quote className="b-rad" background="background">
               &ldquo;Digital achievements may help the activities feel more optional, and less like you must do them to develop your child&rsquo;s
               creativity&rdquo;
               <br />
-              <br />- User #3
+              <span style={{ display: "block" }} className="mts-1"></span>- User #3
             </Quote>
           </Column>
         </Section>
 
         <Section id="Prototyping--Findings-2" background="background darkest">
-          <Column className="col-4">
-            <Graphic type="image" className="b-rad" img={KOALAKO_IMGS.findings_games} sameHeight="test" />
+          <Column className={"col-4 col-md-5 col-sm-7"}>
+            <Graphic type="image" className="b-rad" img={KOALAKO_IMGS.findings_games} />
           </Column>
-          <Column className="col-8" sameHeight="test">
+          <Column className={"col-8 col-md-9 col-sm-12"} >
             <Quote className="b-rad" background="background">
               &ldquo;It would be great to see a filter for one-on-one activities or team activities, or budget to play the games&rdquo;
               <br />
-              <br />- User #2
+              <span style={{ display: "block" }} className="mts-1"></span>- User #2
             </Quote>
           </Column>
         </Section>
@@ -710,7 +657,7 @@ function KoalaKo({ pop }) {
 
       <Chapter name="Refine" id="Refine">
         <Section id="Refine--Stats" className="gap-6" background="background darker">
-          <Column className="">
+          <Column>
             <Heading>Reframing statistics by removing goal-setting</Heading>
             <Description>
               <p>
@@ -751,12 +698,11 @@ function KoalaKo({ pop }) {
           </Column>
         </Section>
 
-        <Section id="Refine--Trophies" className="gap-6" background="background darker">
+        <Section id="Refine--Minor" className="gap-6" background="background darker">
           <Column className="">
             <Heading>
               Many minor UX updates,
-              <br />
-              Ex. Post-activity screen
+              <br className="d-lg-none" /> Ex. Post-activity screen
             </Heading>
             <Description>
               <p>
@@ -791,7 +737,7 @@ function KoalaKo({ pop }) {
           <Title>Submission</Title>
           <Column>
             <Heading>
-              KoalaKo: helping parents <br />
+              KoalaKo: helping parents <br className="d-lg-none" />
               help kids grow.
             </Heading>
           </Column>
@@ -873,7 +819,7 @@ function KoalaKo({ pop }) {
           <Column caption="split">
             <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_location} />
             <Heading type="h3" className="weight-reg">
-              Fostering growth through <br />
+              Fostering growth through <br className="d-lg-none" />
               exploration and adventure
             </Heading>
             <Description className="graphic--caption">
@@ -885,7 +831,7 @@ function KoalaKo({ pop }) {
           <Column caption="split">
             <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_games} />
             <Heading type="h3" className="weight-reg">
-              Accessible to parents of <br />
+              Accessible to parents of <br className="d-lg-none" />
               any timeframe or budget
             </Heading>
             <Description className="graphic--caption">
@@ -899,12 +845,12 @@ function KoalaKo({ pop }) {
       </Chapter>
 
       <Chapter name="Closing" id="Closing">
-        <Section id="Closing--Copy" type="columns" titled mainClassName="gap-6 mts-6">
+        <Section id="Closing--Copy" type="columns" titled mainClassName="gap-6 mts-6 gap-xl-4">
           <Title>Areas Of Growth</Title>
           <Heading>
-            Addressing security concerns, <br /> and improving the first impression
+            Addressing security concerns, <br className="d-lg-none" /> and improving the first impression
           </Heading>
-          <Description className="text-col-2 text-gap-6">
+          <Description className="text-col-2 text-col-md-1 gap-6 gap-xl-4">
             <p>
               During testing, some users voiced concerns about personal information being saved in the app. Which, later tests proved we had solved by
               making child profile setup optional. These concerns could be further addressed by making the initial account setup optional as well.

@@ -13,10 +13,10 @@
       gap: var(--gap);
     }
     @include md-down {
-      --gap: 1rem;
+      --gap: 1.25rem;
     }
     @include sm-down {
-      --gap: 1rem;
+      --gap: 1.25rem;
     }
   }
 

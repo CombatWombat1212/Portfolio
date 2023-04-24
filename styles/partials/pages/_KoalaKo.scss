@@ -1,6 +1,6 @@
-.section--wrapper {
-  overflow: hidden;
-}
+// .section--wrapper {
+//   overflow: hidden;
+// }
 
 @mixin koala-col($id, $sel, $child...) {
   @at-root #Koalako ##{$id} .section--column {
@@ -9,6 +9,25 @@
         @content;
       }
     }
+  }
+}
+
+@mixin img-grid-gap {
+  --gap: 3.5rem;
+  @include gap;
+
+  @include xl-down {
+    --gap: 2.75rem;
+  }
+  @include lg-down {
+    --gap: 2rem;
+  }
+
+  @include md-down {
+    --gap: 2.5rem;
+  }
+  @include sm-down {
+    --gap: 1.5rem;
   }
 }
 
@@ -331,23 +350,11 @@
         }
 
         &--main {
-          --gap: 3.5rem;
-          @include gap;
-
-          @include xl-down {
-            --gap: 2.75rem;
-          }
-          @include lg-down {
-            --gap: 2rem;
-          }
+          @include img-grid-gap;
 
           @include md-down {
-            --gap: 2.5rem;
             justify-content: center;
             margin-top: 3rem;
-          }
-          @include sm-down {
-            --gap: 1.5rem;
           }
         }
         &--column {
@@ -531,8 +538,8 @@
         @include md {
           --graphic-scale: 0.625;
           --section-graphic-panel-pad: 1rem;
-        }          
-        
+        }
+
         @include md-down {
           --graphic-scale: 0.625;
           --section-graphic-panel-pad: 1.75rem;
@@ -542,14 +549,13 @@
           --section-graphic-panel-pad: 2rem;
         }
 
-
         &--main {
           @include sm-down {
-            max-width:80%;
+            max-width: 80%;
             @include mx-auto;
           }
         }
-        &--column{
+        &--column {
           @include md-down {
             @include e-col-width(4);
           }
@@ -564,8 +570,8 @@
           width: calc(100% - var(--section-graphic-panel-pad) * 2);
         }
 
-        .mask{
-          @include sm-down{
+        .mask {
+          @include sm-down {
             width: Min(Max(75%, var(--w)), 90%);
             height: Min(Max(75%, var(--h)), 90%);
           }
@@ -573,16 +579,17 @@
       }
     }
 
-    &--Findings-1 {
-      .section {
-        &--quote + .section--quote {
-          margin-top: 3rem;
-        }
-      }
-    }
-
+    &--Findings-1,
     &--Findings-2 {
       .section {
+        &--quote + .section--quote {
+          margin-top: var(--gap);
+        }
+
+        @include md-down {
+          @include flex-row-center;
+          flex-wrap: wrap;
+        }
       }
     }
 
@@ -595,14 +602,28 @@
   #Refine {
     &--Stats {
       .section {
+        &--column {
+          height: fit-content;
+          @include my-auto;
+        }
       }
     }
     &--Trophies {
       .section {
+        &--graphic {
+          height: fit-content;
+          @include my-auto;
+        }
       }
     }
     &--Minor {
       .section {
+        &--column {
+          @include lg-down {
+            height: fit-content;
+            @include my-auto;
+          }
+        }
       }
     }
   }
@@ -628,9 +649,48 @@
       .section {
       }
     }
+
+    &--Submission-Graphics-1,
+    &--Submission-Graphics-2 {
+      .section {
+        @include img-grid-gap;
+
+        @include lg-down {
+          justify-content: center;
+        }
+
+        &--column {
+          @include xxl-up {
+            flex: 1 0;
+            max-width: unset;
+          }
+
+          @include xxl-md {
+            flex: 1 0;
+            max-width: unset;
+          }
+        }
+      }
+    }
+
     &--Closing {
       .background {
         background-color: $col-background_darker;
+
+        &--img{
+
+          @include mx-auto; 
+
+          @include xxl-down{
+            width: 95vw;
+            height:auto;
+            overflow:hidden;
+            img{
+              transform: scale(1.1);
+            }
+          }
+
+        }
       }
     }
   }
