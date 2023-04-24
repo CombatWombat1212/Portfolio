@@ -1,4 +1,4 @@
-import useOrganizeChildren from "@/scripts/hooks/useOrganizedChildren";
+import organizeChildren from "@/scripts/organizeChildren";
 import usePropModifier from "@/scripts/hooks/usePropModifier";
 import { Graphic, Heading, Title } from "../sections/Sections";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
@@ -13,7 +13,7 @@ function Method({ children }) {
     [{ elemType: "Graphic" }, { className: "" }],
   ]);
 
-  const orgChilds = useOrganizeChildren(children, [
+  const orgChilds = organizeChildren(children, [
     ["title", { elemType: "Title" }, true],
     ["heading", { elemType: "Heading" }],
     ["p", { elemType: "p" }, true],

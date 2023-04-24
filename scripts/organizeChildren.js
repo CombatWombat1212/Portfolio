@@ -1,6 +1,6 @@
 import React from 'react';
 
-const useOrganizeChildren = (children, searchTermArray) => {
+const organizeChildren = (children, searchTermArray) => {
   const traverseAndOrganize = (element, searchProps, key, result, unwrapChildren) => {
     if (!React.isValidElement(element)) {
       return;
@@ -52,4 +52,4 @@ const useOrganizeChildren = (children, searchTermArray) => {
   return organizedChildren;
 };
 
-export default useOrganizeChildren;
+export default organizeChildren;

@@ -8509,6 +8509,20 @@ h3 + .studypanel--paragraph {
   margin-right: -14rem;
 }
 
+@media screen and (min-width: 92em) {
+  #Koalako #Overview--Challenge .mask {
+    margin-top: 2rem;
+    margin-bottom: -2rem;
+  }
+}
+
+@media screen and (max-width: 91.9375em) and (min-width: 62em) {
+  #Koalako #Overview--Challenge .mask {
+    margin-top: 2rem;
+    margin-bottom: -2rem;
+  }
+}
+
 #Koalako #Overview--Privacy .mask, #Koalako #Overview--Wordly .mask {
   margin-top: 1.1rem;
   background-color: #F3F3F7;
@@ -8847,7 +8861,14 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 49.9375em) {
   #Koalako #Prototyping--Features .section--main {
-    --gap: 2rem;
+    --gap: 3rem;
+    row-gap: 3.5rem;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Koalako #Prototyping--Features .section--main {
+    --gap: 2.5rem;
     row-gap: 3.5rem;
   }
 }
@@ -8886,6 +8907,75 @@ h3 + .studypanel--paragraph {
 
 #Koalako #Prototyping .Prototyping--Features .section--wrapper {
   max-width: 80%;
+}
+
+#Koalako #Prototyping--Methodology .section {
+  --graphic-scale: 0.925;
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Koalako #Prototyping--Methodology .section {
+    --graphic-scale: 0.755;
+    --section-graphic-panel-pad: 1.75rem;
+  }
+}
+
+@media screen and (max-width: 49.9375em) and (min-width: 37em) {
+  #Koalako #Prototyping--Methodology .section {
+    --graphic-scale: 0.625;
+    --section-graphic-panel-pad: 1rem;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Koalako #Prototyping--Methodology .section {
+    --graphic-scale: 0.625;
+    --section-graphic-panel-pad: 1.75rem;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Koalako #Prototyping--Methodology .section {
+    --graphic-scale: 0.915;
+    --section-graphic-panel-pad: 2rem;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Koalako #Prototyping--Methodology .section--main {
+    max-width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Koalako #Prototyping--Methodology .section--column {
+    --expected-cols: calc(calc((12 / 4)) * var(--sfh) / var(--sfh));
+    min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+    max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Koalako #Prototyping--Methodology .section--column {
+    --expected-cols: calc(calc((12 / 12)) * var(--sfh) / var(--sfh));
+    min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+    max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+  }
+}
+
+#Koalako #Prototyping--Methodology .section--graphic {
+  aspect-ratio: 1/1;
+  height: auto;
+  width: calc(100% - var(--section-graphic-panel-pad) * 2);
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Koalako #Prototyping--Methodology .section .mask {
+    width: Min(Max(75%, var(--w)), 90%);
+    height: Min(Max(75%, var(--h)), 90%);
+  }
 }
 
 #Koalako #Prototyping--Findings-1 .section--quote + .section--quote {

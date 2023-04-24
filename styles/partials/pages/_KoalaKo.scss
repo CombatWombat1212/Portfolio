@@ -151,6 +151,14 @@
       }
 
       .mask {
+        @include xxl-up {
+          margin-top: 2rem;
+          margin-bottom: -2rem;
+        }
+        @include xxl-lg {
+          margin-top: 2rem;
+          margin-bottom: -2rem;
+        }
       }
     }
 
@@ -458,7 +466,11 @@
           }
 
           @include md-down {
-            --gap: 2rem;
+            --gap: 3rem;
+            row-gap: 3.5rem;
+          }
+          @include sm-down {
+            --gap: 2.5rem;
             row-gap: 3.5rem;
           }
         }
@@ -509,6 +521,55 @@
 
     &--Methodology {
       .section {
+        --graphic-scale: 0.925;
+        // --section-graphic-panel-pad
+
+        @include lg-down {
+          --graphic-scale: 0.755;
+          --section-graphic-panel-pad: 1.75rem;
+        }
+        @include md {
+          --graphic-scale: 0.625;
+          --section-graphic-panel-pad: 1rem;
+        }          
+        
+        @include md-down {
+          --graphic-scale: 0.625;
+          --section-graphic-panel-pad: 1.75rem;
+        }
+        @include sm-down {
+          --graphic-scale: 0.915;
+          --section-graphic-panel-pad: 2rem;
+        }
+
+
+        &--main {
+          @include sm-down {
+            max-width:80%;
+            @include mx-auto;
+          }
+        }
+        &--column{
+          @include md-down {
+            @include e-col-width(4);
+          }
+          @include sm-down {
+            @include e-col-width(12);
+          }
+        }
+
+        &--graphic {
+          aspect-ratio: 1/1;
+          height: auto;
+          width: calc(100% - var(--section-graphic-panel-pad) * 2);
+        }
+
+        .mask{
+          @include sm-down{
+            width: Min(Max(75%, var(--w)), 90%);
+            height: Min(Max(75%, var(--h)), 90%);
+          }
+        }
       }
     }
 

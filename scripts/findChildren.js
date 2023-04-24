@@ -15,7 +15,7 @@ const flattenChildren = (children) => {
   return flattened;
 };
 
-const useFindChildren = (children, searchTermArray) => {
+const findChildren = (children, searchTermArray) => {
   const traverseAndOrganize = (element, searchProps, key, result) => {
     if (!React.isValidElement(element)) {
       return;
@@ -57,4 +57,4 @@ const useFindChildren = (children, searchTermArray) => {
   return foundChildren;
 };
 
-export default useFindChildren;
+export default findChildren;

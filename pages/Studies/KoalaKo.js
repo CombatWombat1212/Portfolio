@@ -17,6 +17,7 @@ function KoalaKo({ pop }) {
   const { desktop, isBpAndDown, isBp, loading } = useResponsive();
 
   const isntMd = !isBp("md") || loading;
+  const isSm = !(!isBp("sm") || loading);
 
   return (
     <CaseStudyPage id={study.id} study={study}>
@@ -215,7 +216,7 @@ function KoalaKo({ pop }) {
       </Chapter>
 
       <Chapter name="Research" id="Research">
-        <Section id="Research--Intro" type="columns" titled="above" background="background darker" mainClassName="gap-4 gap-md-2">
+        <Section id="Research--Intro" type="columns" titled="above" background="background darker">
           <Title>Secondary Research</Title>
           <Column>
             <Heading>We began with secondary research, to gain footing within our topic</Heading>
@@ -474,7 +475,7 @@ function KoalaKo({ pop }) {
             background="tertiary"
             mainType="grid"
             mainClassName="gap- mts-4 mts-md-3 mts-sm-2"
-            wrapperClassName="mb-less">
+            >
             <Heading>Features added at this stage include:</Heading>
 
             <Column>
@@ -546,7 +547,74 @@ function KoalaKo({ pop }) {
 
 
 
-        {desktop ? (
+        {/* {desktop ? ( */}
+          <Section id="Prototyping--Test-2" background="background darker" titled="above">
+            <Title>Testing 2</Title>
+            <Column>
+              <Heading>Round 2. TEST.</Heading>
+            </Column>
+            <Column>
+              <Description>
+                <p>
+                  For this user test, we managed to include one parent in our group of 4 subjects. Scheduling and timeline restrictions prevented us
+                  from finding more than this, despite our best efforts. However, the feedback provided was invaluable.
+                </p>
+              </Description>
+            </Column>
+          </Section>
+        {/* ) : (
+          <Section id="Prototyping--Test-2" background="background darker">
+            <Title>Testing 2</Title>
+            <Heading>Round 2. TEST.</Heading>
+            <Description>
+              <p>
+                For this user test, we managed to include one parent in our group of 4 subjects. Scheduling and timeline restrictions prevented us
+                from finding more than this, despite our best efforts. However, the feedback provided was invaluable.
+              </p>
+            </Description>
+          </Section>
+        )} */}
+
+        <Section id="Prototyping--Methodology" background="background darker" mainClassName="gap-6 gap-xxl-5 gap-xl-4 gap-lg-3 gap-sm-5">
+          <Title>Methodology</Title>
+          <Heading>User testing our first prototype involved:</Heading>
+
+          <Column>
+            <Graphic type="mask" img={KOALAKO_IMGS.testing_usability} background="background" />
+            <Heading type={!isSm ? 'h3' : 'h5'} className="graphic--caption mt-more">
+              Usability Tasks
+            </Heading>
+            <Description className="mts-1">
+              <p>Users were given tasks such as: locating a particular page, or feature in order to study the service&rsquo;s usability.</p>
+            </Description>
+          </Column>
+
+          <Column>
+            <Graphic type="mask" img={KOALAKO_IMGS.testing_questions} background="background" />
+            <Heading type={!isSm ? 'h3' : 'h5'} className="graphic--caption mt-more">
+              Pre-written questions
+            </Heading>
+            <Description className="mts-1">
+              <p>After the session was completed, testers were individually asked a set of questions, prepared by our team.</p>
+            </Description>
+          </Column>
+
+          <Column>
+            <Graphic type="mask" img={KOALAKO_IMGS.testing_popcorn} background="background" />
+            <Heading type={!isSm ? 'h3' : 'h5'} className="graphic--caption mt-more">
+              Popcorn feedback
+            </Heading>
+            <Description className="mts-1">
+              <p>Free-form, unstructured comments were encouraged throughout the test.</p>
+            </Description>
+          </Column>
+        </Section>
+
+
+
+
+
+        {/* {desktop ? (
           <Section id="Prototyping--Test-2" background="background darker" titled="above">
             <Title>Testing 2</Title>
             <Column>
@@ -572,50 +640,16 @@ function KoalaKo({ pop }) {
               </p>
             </Description>
           </Section>
-        )}
+        )} */}
 
-        <Section id="Prototyping--Methodology" background="background darker" mainClassName="gap-6">
-          <Title>Methodology</Title>
-          <Heading>User testing our first prototype involved:</Heading>
 
-          <Column>
-            <Graphic type="mask" img={KOALAKO_IMGS.testing_usability} background="background" />
-            <Heading type="h3" className="graphic--caption mt-more">
-              Usability Tasks
-            </Heading>
-            <Description className="mts-1">
-              <p>Users were given tasks such as: locating a particular page, or feature in order to study the service&rsquo;s usability.</p>
-            </Description>
-          </Column>
-
-          <Column>
-            <Graphic type="mask" img={KOALAKO_IMGS.testing_questions} background="background" />
-            <Heading type="h3" className="graphic--caption mt-more">
-              Pre-written questions
-            </Heading>
-            <Description className="mts-1">
-              <p>After the session was completed, testers were individually asked a set of questions, prepared by our team.</p>
-            </Description>
-          </Column>
-
-          <Column>
-            <Graphic type="mask" img={KOALAKO_IMGS.testing_popcorn} background="background" />
-            <Heading type="h3" className="graphic--caption mt-more">
-              Popcorn feedback
-            </Heading>
-            <Description className="mts-1">
-              <p>Free-form, unstructured comments were encouraged throughout the test.</p>
-            </Description>
-          </Column>
-        </Section>
 
         <Section id="Prototyping--Findings" background="background darkest" titled="above" wrapperClassName="mb-less">
           <Title>Findings</Title>
           <Column>
             <Heading>
               Testing revealed a need to reframe certain features,
-              <br />
-              and other minor changes
+              <br className="d-xxl-none d-block" /> and other minor changes
             </Heading>
           </Column>
           <Column>
@@ -628,6 +662,10 @@ function KoalaKo({ pop }) {
             </Description>
           </Column>
         </Section>
+
+
+
+
 
         <Section id="Prototyping--Findings-1" background="background darkest" wrapperClassName="mb-less">
           <Column className="col-4">
@@ -664,7 +702,7 @@ function KoalaKo({ pop }) {
 
         <Section id="Prototyping--Conclusion">
           <Heading>
-            We began implementing our fixes, <br />
+            We began implementing our fixes, <br className="d-sm-none" />
             and preparing the project for delivery
           </Heading>
         </Section>

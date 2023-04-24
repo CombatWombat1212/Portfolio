@@ -3,7 +3,7 @@ import { addAttrNonDestructive, RESIZE_TIMEOUT, splitPx } from "@/scripts/Global
 import useHorizontalResize from "@/scripts/hooks/useHorizontalResize";
 import useHoverAndFocus from "@/scripts/hooks/useHoverAndFocus";
 import useInView from "@/scripts/hooks/useInView";
-import useOrganizeChildren from "@/scripts/hooks/useOrganizedChildren";
+import organizeChildren from "@/scripts/organizeChildren";
 import usePropModifier from "@/scripts/hooks/usePropModifier";
 import useSecret from "@/scripts/hooks/useSecret";
 import React, { useEffect, useRef, useState } from "react";
@@ -27,7 +27,7 @@ function Findings({ children, className }) {
     [{ elemType: "h3" }, { className: "findings--h3" }],
   ]);
 
-  const organizedChildren = useOrganizeChildren(modifiedChildren, [
+  const organizedChildren = organizeChildren(modifiedChildren, [
     ["main", { type: "main" }, true],
     ["dropdown", { type: "dropdown" }, true],
   ]);

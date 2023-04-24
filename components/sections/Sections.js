@@ -76,9 +76,7 @@ function SectionWrapper({ children, sec }) {
       className={classes.wrapper + classes.background}
       ref={attrs.reference ? attrs.reference : null}
       {...(attrs.line ? { "data-line": attrs.line } : {})}
-      {...(attrs.loading ? { style: {opacity:0} } : {})}
-      
-      >
+      {...(attrs.loading ? { style: { opacity: 0 } } : {})}>
       {children}
     </div>
   );
@@ -111,7 +109,8 @@ function SectionBody({ children, sec }) {
               {chil.description && !has.descBelow && <>{chil.description}</>}
             </div>
           )}
-          {has.titled || has.main ? (
+          {/* {has.titled || has.main ? ( */}
+          {(has.titled && has.columns) || has.main ? (
             <div className={`section--main ${classes.gap} ${classes.main}`}>
               <ColumnGroup columns={chil.columns} arrows={attrs.arrows} line={attrs.line} mainType={attrs.mainType} />
             </div>
@@ -172,7 +171,7 @@ function Section({
     wrapperClassName,
     mainType,
     reference,
-    loading,
+    loading
   );
 
   return (
@@ -202,24 +201,44 @@ function useSectionObject(
   wrapperClassName,
   mainType,
   reference,
-  loading,
+  loading
 ) {
   var pref = "section";
+  titled = titled || false;
+  var hasTitled = titled ? true : false;
 
   if (children == undefined) children = children ?? <></>;
   if (children.length == undefined) children = [children];
 
-  var { columns, description, title, heading, graphic, other } = getSectionChildren(children);
-  titled = titled || false;
-  var hasTitled = titled ? true : false;
 
   // Fallback for when section has titles but it isn't explicitly set to true
   var topLevelFoundChildren = false;
-  const foundChildren = useFindChildren(children, [
+
+
+
+  var foundChildren = findChildren(children, [
     ["titles", { elemType: "Title" }],
     ["headings", { elemType: "Heading" }],
     ["columns", { elemType: "Column" }],
   ]);
+  
+  var { columns: organizedColumns } = organizeChildren(children, [["columns", { elemType: "Column" }]]);
+
+
+
+
+  const { desktop } = useResponsive();
+  const isSplitTitledAbove = getSplitTitledAbove(titled, foundChildren, organizedColumns);
+  const ISTA_RESULT = updateChildrenSplitTitled(children, titled,foundChildren, organizedColumns, isSplitTitledAbove, desktop);
+  children = ISTA_RESULT.children;
+  titled = ISTA_RESULT.titled;
+  foundChildren = ISTA_RESULT.foundChildren;
+  organizedColumns = ISTA_RESULT.organizedColumns;
+
+  var { columns, description, title, heading, graphic, other } = getSectionChildren(children);
+
+
+
 
   topLevelFoundChildren = (titled === true || titled === false) && (foundChildren.titles || foundChildren.headings) && foundChildren.columns;
 
@@ -234,6 +253,7 @@ function useSectionObject(
   }
   var hasMain = mainType == "grid" && (!titled || foundChildren.columns) ? true : false;
 
+
   if (titled == "above")
     ({ columns, description, title, heading, graphic, other } = getAdditionalHeadingClassesFromParentProps(
       { columns, description, title, heading, graphic, other },
@@ -241,42 +261,41 @@ function useSectionObject(
     ));
 
   var hasGraphic = getHasGraphic(graphic);
-  var hasDescBelow = useOrganizeChildren(children, [["all", { elemType: "Description", below: true }]]).all.length > 0 ? true : false;
+  var hasDescBelow = organizeChildren(children, [["all", { elemType: "Description", below: true }]]).all.length > 0 ? true : false;
 
+  
   var hasColumns = foundChildren.columns ? true : false;
   if (type == "default" && hasColumns) type = "columns";
 
 
-
-  const { columns: organizedColumns } = useOrganizeChildren(children, [["columns", { elemType: "Column" }]]);
-
-
   const hasEvenCol = (() => {
+    if (!(organizedColumns.length > 0)) return false;
+    const colClasses = organizedColumns.map((col) => {
+      const { className } = col.props;
+      if (className == undefined) return null;
+      if (!className.split(" ").some((c) => c.startsWith("col-"))) return null;
+      const colClass = className
+        .split(" ")
+        .filter((c) => c.startsWith("col-"))
+        .sort((a, b) => a.length - b.length)[0];
+      return colClass;
+    });
+    // added a check for at least more than one column
 
-      if (!(organizedColumns.length > 0)) return false;
-      const colClasses = organizedColumns.map((col) => {
-        const { className } = col.props;
-        if (className == undefined) return null;
-        if (!className.split(" ").some((c) => c.startsWith("col-"))) return null;
-        const colClass =  className.split(" ").filter((c) => c.startsWith("col-")).sort((a, b) => a.length - b.length)[0];
-        return colClass;
-      });
-      // added a check for at least more than one column
-      
-      const noCol = organizedColumns.map((col) => {
-        const { nocol } = col.props;
-        return nocol;
-      });
-      if (
-        organizedColumns.length > 1 && 
-        colClasses.every((c) => c == colClasses[0]) &&
-        noCol.every((c) => c == false || c == undefined)
-        ) return true;
-      return false;
+    const noCol = organizedColumns.map((col) => {
+      const { nocol } = col.props;
+      return nocol;
+    });
+    if (organizedColumns.length > 1 && colClasses.every((c) => c == colClasses[0]) && noCol.every((c) => c == false || c == undefined)) return true;
+    return false;
   })();
 
 
-  // console.log(`section: ${id}, hasMain: ${(hasMain || hasTitled)}`); 
+
+
+
+
+
 
   var sec = {
     has: {
@@ -285,11 +304,12 @@ function useSectionObject(
       background: getHasBackground(background),
       titled: hasTitled,
       descBelow: hasDescBelow,
+      columns: hasColumns,
       main: hasMain,
       evenCol: hasEvenCol,
     },
     classes: {
-      sec: getSectionClasses({className}, hasEvenCol, (hasMain || hasTitled) ),
+      sec: getSectionClasses({ className }, hasEvenCol, hasMain || hasTitled),
       elem: getElemClasses(pref, type, titled),
       containerMargin: getContainerMarginClass(margin),
       wrapper: getWrapperClasses(wrapperClassName, pref),
@@ -345,9 +365,11 @@ var SECTION_DEFAULT_PROPS = Section.defaultProps;
 var SECTION_PROP_TYPES = Section.propTypes;
 import Chapter from "./Chapter";
 import { getGraphicChanges, getGraphicElem } from "./sections_utilities/GetConditionalElemAdditions";
-import useOrganizeChildren from "@/scripts/hooks/useOrganizedChildren";
-import useFindChildren from "@/scripts/hooks/useFindChildren";
+import organizeChildren from "@/scripts/organizeChildren";
+import findChildren from "@/scripts/findChildren";
 import { conditionalOrder } from "@/scripts/GlobalUtilities";
+import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
+import { getSplitTitledAbove, updateChildrenSplitTitled } from "./sections_utilities/SplitTitledAbove";
 export { SECTION_DEFAULT_PROPS, SECTION_PROP_TYPES };
 
 export default Section;

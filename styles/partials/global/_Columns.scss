@@ -27,7 +27,7 @@ width: ($b/$column-grid-max) * 100#{'%'};
 
 }
 
-@mixin col-width-e($b, $i:0) {
+@mixin e-col-width($b) {
 
 
      --expected-cols: #{floor-round(calc((12 / #{$b})))};
@@ -68,7 +68,7 @@ width: ($b/$column-grid-max) * 100#{'%'};
     }
 
     .e-col-#{$b} {
-            @include col-width-e($b, var(--flexChildren));
+            @include e-col-width($b);
     }
 }
 
