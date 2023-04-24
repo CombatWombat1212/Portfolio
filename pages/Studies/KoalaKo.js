@@ -728,12 +728,12 @@ function KoalaKo({ pop }) {
         </Section>
       </Chapter>
 
-      <Chapter name="Deliver" id="Deliver">
-        <Section id="Deliver--Banner" background={KOALAKO_IMGS.banner_delivery}>
+      <Chapter name="Delivery" id="Delivery">
+        <Section id="Delivery--Banner" background={KOALAKO_IMGS.banner_delivery}>
           <Heading>Final Submission</Heading>
         </Section>
 
-        <Section id="Deliver--Submission-Description-1" titled="above">
+        <Section id="Delivery--Submission-Description-1" titled="above">
           <Title>Submission</Title>
           <Column>
             <Heading>
@@ -754,7 +754,7 @@ function KoalaKo({ pop }) {
           </Column>
         </Section>
 
-        <Section id="Deliver--Submission-Graphics-1" wrapperClassName="mt-less">
+        <Section id="Delivery--Submission-Graphics-1" wrapperClassName="mt-less">
           <Column>
             <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_login} />
           </Column>
@@ -776,7 +776,7 @@ function KoalaKo({ pop }) {
           </Column>
         </Section>
 
-        <Section id="Deliver--Submission-Description-2" titled="above">
+        <Section id="Delivery--Submission-Description-2" titled="above">
           <Title>Submission</Title>
           <Column>
             <Heading>
@@ -793,7 +793,7 @@ function KoalaKo({ pop }) {
           </Column>
         </Section>
 
-        <Section id="Deliver--Submission-Graphics-2" wrapperClassName="mt-less">
+        <Section id="Delivery--Submission-Graphics-2" wrapperClassName="mt-less">
           <Column>
             <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_post_activity} />
           </Column>
@@ -815,7 +815,7 @@ function KoalaKo({ pop }) {
           </Column>
         </Section>
 
-        <Section id="Deliver--Features">
+        <Section id="Delivery--Features">
           <Column caption="split">
             <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_location} />
             <Heading type="h3" className="weight-reg">
@@ -841,7 +841,7 @@ function KoalaKo({ pop }) {
           </Column>
         </Section>
 
-        <Section id="Deliver--Closing" background={KOALAKO_IMGS.banner_closing} />
+        <Section id="Delivery--Closing" background={KOALAKO_IMGS.banner_closing} />
       </Chapter>
 
       <Chapter name="Closing" id="Closing">
