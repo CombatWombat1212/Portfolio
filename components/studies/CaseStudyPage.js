@@ -10,6 +10,7 @@ import { anchoredArrowsInit, removeExcessArrows } from "../sections/sections_uti
 import { useColLine } from "../sections/sections_utilities/ColLineUtilities";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import useMatchHeight from "@/scripts/hooks/useMatchHeight";
+import useSameHeightChildren from "@/scripts/hooks/useMatchHeight";
 
 
 
@@ -88,6 +89,12 @@ function StudyWrapper({ id, study, children }) {
     return false;
   });
 
+
+  // const test = useSameHeightChildren(newChildren);
+
+  // useEffect(() => {
+  //   console.log(test);
+  // }, [test]);
   
 
   // TODO: it would be ideal to refactor this as something more reacty and run it in the section component
