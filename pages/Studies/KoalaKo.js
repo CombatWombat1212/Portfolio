@@ -666,7 +666,7 @@ function KoalaKo({ pop }) {
               </p>
             </Description>
           </Column>
-          <Column className="flex-row gap-4">
+          <Column className="flex-row gap-4 gap-md-3">
             <div className="col-6">
               <Graphic type="image" className="b-rad border-tertiary" img={KOALAKO_IMGS.refine_stats_before} lightbox pop={pop} />
               <Title className="mts-1">Before</Title>
@@ -692,7 +692,7 @@ function KoalaKo({ pop }) {
               </p>
             </Description>
           </Column>
-          <Column className="flex-row gap-4">
+          <Column className="flex-row gap-4 gap-md-3">
             <Graphic type="image" className="b-rad border-tertiary" img={KOALAKO_IMGS.refine_trophies_location} lightbox pop={pop} />
             <Graphic type="image" className="b-rad border-tertiary" img={KOALAKO_IMGS.refine_trophies_page} lightbox pop={pop} />
           </Column>
@@ -715,7 +715,7 @@ function KoalaKo({ pop }) {
               </p>
             </Description>
           </Column>
-          <Column className="flex-row gap-4">
+          <Column className="flex-row gap-4 gap-md-3">
             <div className="col-6">
               <Graphic type="image" className="b-rad border-tertiary" img={KOALAKO_IMGS.refine_post_activity_before} lightbox pop={pop} />
               <Title className="mts-1">Before</Title>

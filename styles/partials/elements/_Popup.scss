@@ -78,10 +78,23 @@ $col-media-wrapper: rgba($col-background, 0.075);
   &__lightbox-group {
     aspect-ratio: var(--img-aspect-width) / var(--img-aspect-height);
     // max-width: calc(var(--site-max-width) - var(--popup-pad));
-    max-width: calc(var(--site-max-width));
+    // max-width: calc(var(--site-max-width));
+    max-width: calc(var(--site-max-width) - 5rem);
     max-height: calc(100% - var(--nav-height) - var(--popup-pad));
     width: auto;
     height: auto;
+
+    
+    @include lg-down {
+      --popup-controls-offset: calc(var(--button-height) * 0.45);
+      max-width: calc(var(--site-max-width) - 4rem);
+      max-height: calc(100% - var(--nav-height) - var(--popup-pad) - 4rem);
+    }
+    @include md-down {
+      max-width: calc(var(--site-max-width));
+    }
+
+
   }
 
   &__lightbox-group {
@@ -141,7 +154,6 @@ $col-media-wrapper: rgba($col-background, 0.075);
       --popup-scrollbar-pad: calc(var(--popup-gap) / 1.65);
       // --popup-controls-offset: calc(var(--button-height) / 3);
       --popup-controls-offset: calc(var(--popup-gap) / 1.25);
-
     }
   }
 
@@ -645,20 +657,33 @@ $col-media-wrapper: rgba($col-background, 0.075);
     &__gallery {
       position: absolute;
       pointer-events: all;
-      // bottom: calc(100% + 1.5rem);
-      // right: -0.75rem;
       bottom: calc(100% + 1.5rem);
       right: -0.75rem;
-      // top: -0.55rem;
-      // left: calc(100% + 1rem);
 
       @include md-down {
         bottom: unset;
         right: calc((var(--button-padding) / 1.25) * -1);
         transform: translate(0%, -50%);
         top: calc(50% - 0.25rem);
-        .mask{
+        .mask {
           --button-icon-scale: 1;
+        }
+      }
+    }
+
+    &__lightbox {
+      position: absolute;
+      pointer-events: all;
+      top: 0;
+      right: -0.75rem;
+      transform: translate(100%, -100%);
+
+      @include lg-down {
+        top: 1rem;
+        transform: translate(0%, -200%);
+
+        .mask {
+          --button-icon-scale: 1.175;
         }
       }
     }
@@ -690,9 +715,9 @@ $col-media-wrapper: rgba($col-background, 0.075);
     --popup-seek-spacing: 2rem;
     // position: absolute;
     // z-index: 10;
-    @include md-down{
+    @include md-down {
       --button-height: 3rem;
-      --button-padding:0.85rem;
+      --button-padding: 0.85rem;
     }
 
     a {
@@ -713,12 +738,10 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
     .mask {
       --button-icon-scale: 1.1;
-      @include md-down{
+      @include md-down {
         --button-icon-scale: 1;
       }
     }
-
-
   }
 
   &--pagination {

@@ -1946,7 +1946,7 @@ h3 + .studypanel--paragraph {
   background-color: var(--nav-color);
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 100;
 }
 
 @media screen and (max-width: 36.9375em) {
@@ -3283,10 +3283,24 @@ h3 + .studypanel--paragraph {
 
 .popup__lightbox, .popup__lightbox-group {
   aspect-ratio: var(--img-aspect-width)/var(--img-aspect-height);
-  max-width: calc(var(--site-max-width));
+  max-width: calc(var(--site-max-width) - 5rem);
   max-height: calc(100% - var(--nav-height) - var(--popup-pad));
   width: auto;
   height: auto;
+}
+
+@media screen and (max-width: 61.9375em) {
+  .popup__lightbox, .popup__lightbox-group {
+    --popup-controls-offset: calc(var(--button-height) * 0.45);
+    max-width: calc(var(--site-max-width) - 4rem);
+    max-height: calc(100% - var(--nav-height) - var(--popup-pad) - 4rem);
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  .popup__lightbox, .popup__lightbox-group {
+    max-width: calc(var(--site-max-width));
+  }
 }
 
 .popup__lightbox-group {
@@ -3963,6 +3977,24 @@ h3 + .studypanel--paragraph {
   }
 }
 
+.popup--close__lightbox {
+  position: absolute;
+  pointer-events: all;
+  top: 0;
+  right: -0.75rem;
+  transform: translate(100%, -100%);
+}
+
+@media screen and (max-width: 61.9375em) {
+  .popup--close__lightbox {
+    top: 1rem;
+    transform: translate(0%, -200%);
+  }
+  .popup--close__lightbox .mask {
+    --button-icon-scale: 1.175;
+  }
+}
+
 .popup--controls {
   display: flex;
   flex-direction: row;
@@ -3996,7 +4028,7 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 49.9375em) {
   .popup--seek {
     --button-height: 3rem;
-    --button-padding:0.85rem;
+    --button-padding: 0.85rem;
   }
 }
 

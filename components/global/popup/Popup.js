@@ -184,7 +184,7 @@ function Wrapper({ pop, bp }) {
     } else {
       const timeoutId = setTimeout(() => {
         pop.ui.setVisible(false);
-      }, 1000);
+      }, 100000);
       return () => clearTimeout(timeoutId);
     }
   }, [interaction]);
@@ -371,12 +371,32 @@ function Wrapper({ pop, bp }) {
     mobileGallery: stateMobileGallery,
   };
 
+
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      handles.close();
+    };
+  
+    router.events.on('routeChangeStart', handleRouteChange);
+  
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange);
+    };
+  }, [handles.close, router]);
+  
+
+
+
+
   return (
     <>
       <Background handles={handles} popclass={popclass} />
       <div className={`popup container ${popclass.container}`} style={popclass.containerStyle} ref={popRef}>
         <div className={`popup--inner ${popclass.inner}`}>
-          {pop.type == "lightbox" && <Head pop={pop} nav={nav} popclass={popclass} handles={handles} state={state}  />}
+          {pop.type == "lightbox" && <Head pop={pop} nav={nav} popclass={popclass} handles={handles} state={state} />}
           <div className={`popup--content popup--content__on ${popclass.content}`}>
             {pop.type == "interactive" && <Head pop={pop} nav={nav} popclass={popclass} handles={handles} state={state} />}
 
@@ -531,36 +551,47 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
   }
 
   useLayoutEffect(() => {
-
     let isMounted = true;
 
-    const ensurePopAndInfoRef = () =>
+    const ensureElementReferences = () =>
       new Promise((resolve) => {
         if (pop.type === "gallery") {
           if (!elems.popup.ref.current || !elems.info.ref.current) {
-            if (isMounted){
-              setTimeout(() => resolve(ensurePopAndInfoRef()), 100);
+            if (isMounted) {
+              setTimeout(() => resolve(ensureElementReferences()), 100);
+            }
+          } else {
+            resolve();
+          }
+        } else if (pop.type === "lightbox") {
+          if (!elems.popup.ref.current) {
+            if (isMounted) {
+              setTimeout(() => resolve(ensureElementReferences()), 100);
             }
           } else {
             resolve();
           }
         } else {
+          return;
+        }
+      });
+
+    const ensurePopupScale = () =>
+      new Promise((resolve) => {
+        if (pop.type === "gallery") {
+          if (elems.popup.height === 0 || elems.popup.width === 0) {
+            if (isMounted) {
+              setTimeout(() => resolve(ensurePopupScale()), 100);
+            }
+          } else {
+            resolve();
+          }
+        } else if (pop.type === "lightbox") {
           resolve();
         }
       });
 
-      const ensurePopupScale = () =>
-      new Promise((resolve) => {
-        if (elems.popup.height === 0 || elems.popup.width === 0) {
-          if (isMounted) {
-            setTimeout(() => resolve(ensurePopupScale()), 100);
-          }
-        } else {
-          resolve();
-        }
-      });
-  
-      const ensurePopDrawn = () =>
+    const ensurePopDrawn = () =>
       new Promise((resolve) => {
         if (!pop.drawn) {
           if (isMounted) {
@@ -570,21 +601,21 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
           resolve();
         }
       });
-  
-      const ensureImgLoaded = () =>
-      new Promise((resolve) => {
-        if (!pop.imgLoaded) {
-          if (isMounted) {
-            setTimeout(() => resolve(ensureImgLoaded()), 100);
-          }
-        } else {
-          resolve();
-        }
-      });
-  
+
+    // const ensureImgLoaded = () =>
+    //   new Promise((resolve) => {
+    //     if (!pop.imgLoaded) {
+    //       if (isMounted) {
+    //         setTimeout(() => resolve(ensureImgLoaded()), 100);
+    //       }
+    //     } else {
+    //       resolve();
+    //     }
+    //   });
+
     const mainFunction = async () => {
-      await ensurePopAndInfoRef();
-      if (pop.type === "lightbox" && !elems.popup.ref.current) return;
+      await ensureElementReferences();
+      // if (!elems.popup.ref.current) return;
       await ensurePopupScale();
       await ensurePopDrawn();
 
@@ -603,18 +634,14 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
     return () => {
       isMounted = false;
     };
-  
-
   }, [elems.popup.height, elems.popup.width, pop.img, pop.drawn, state.desktop, pop.infoDrawn]);
-
 
   const [drawLightbox, setDrawLightbox] = useState(false);
   useEffect(() => {
-    if ((elems.img.availWidth && elems.img.availHeight && elems.img.maxWidth && elems.img.maxHeight) || (pop.type === "lightbox")) {
+    if ((elems.img.availWidth && elems.img.availHeight && elems.img.maxWidth && elems.img.maxHeight) || pop.type === "lightbox") {
       if (!drawLightbox) setDrawLightbox(true);
     }
   }, [elems.img.availWidth, elems.img.availHeight, elems.img.maxWidth, elems.img.maxHeight, pop.type]);
-
 
   useEffect(() => {
     swipeEventsInit();
@@ -662,10 +689,11 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
 
         {pop.imgReady && (
           <div
-            className={`loading--wrapper 
-            ${!pop.imgReady || pop.imgLoaded ? "loading--wrapper__hidden" : ""}
-            ${pop.zoom ? "loading--wrapper__zoom" : ""}
-            ${pop.zoom && pop.type == "lightbox" ? "loading--wrapper__lightbox-zoom" : ""}
+            className={`
+            loading--wrapper 
+            ${(!pop.imgReady || pop.imgLoaded) && "loading--wrapper__hidden"}
+            ${pop.zoom && "loading--wrapper__zoom"}
+            ${pop.zoom && pop.type == "lightbox" && "loading--wrapper__lightbox-zoom"}
             `}
             style={{
               "--img-max-width": `${elems.img.maxWidth}px`,
@@ -694,12 +722,19 @@ function Background({ handles, popclass }) {
 }
 
 function Head({ pop, nav, popclass, handles, state }) {
+  const type = pop.type;
+  const isLightbox = type == "lightbox";
+  const isInteractive = type == "interactive";
+  const isGallery = type == "gallery";
   return (
     <>
-      <div className={`popup--header ${popclass.header} popup--nav`}>
-        <Title pop={pop} />
-        <Close pop={pop} nav={nav} handles={handles} popclass={popclass} state={state} />
-      </div>
+      {isLightbox && pop.firstImgDrawn && <Close pop={pop} nav={nav} handles={handles} popclass={popclass} state={state} />}
+      {!isLightbox && (
+        <div className={`popup--header ${popclass.header} popup--nav`}>
+          <Title pop={pop} />
+          {isInteractive && <Close pop={pop} nav={nav} handles={handles} popclass={popclass} state={state} />}
+        </div>
+      )}
     </>
   );
 }
@@ -823,13 +858,18 @@ const Pagination = React.memo(function Pagination({ pop, handles }) {
 }, createUpdateConditions(["pop.group", "pop.index"]));
 
 function Close({ pop, nav, popclass, handles, type = "lightbox", state }) {
-
-  const condition = (pop.ui.visible || pop.type === "interactive" || pop.type == "gallery") || !state.desktop;
+  // const condition = pop.ui.visible || pop.type === "interactive" || pop.type == "gallery" || !state.desktop;
+  const condition = true;
 
   const col = (() => {
-    if (type === "lightbox") {
-      return "transparent-primary";
-    } else if (type === "gallery") {
+    // if (type === "lightbox") {
+    //   return "transparent-primary";
+    // } else if (type === "gallery") {
+    //   return "transparent-background";
+    // } else {
+    //   return "transparent-primary";
+    // }
+    if (type === "gallery" || type == "lightbox") {
       return "transparent-background";
     } else {
       return "transparent-primary";
@@ -844,7 +884,7 @@ function Close({ pop, nav, popclass, handles, type = "lightbox", state }) {
 }
 
 function ScaleWrapper({ pop, nav, state }) {
-  const condition = (pop.ui.visible) || !state.desktop;
+  const condition = pop.ui.visible || !state.desktop;
 
   return (
     <AnimPres animation={popAnims.hideUI} condition={condition} className="popup--footer popup--nav">
