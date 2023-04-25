@@ -34,8 +34,12 @@ const EXPERIENCE = [
     timeframe: "Graduated April 2021",
     position: "Sheridan College",
     // TODO: rewrite this
-    description:
-      "Graduated with Honours.  Learned the fundamentals of user-centric design, and how to become a Swiss Army knife of digital production. I studied a range of subjects, from UX Research, to 3D design, to web development, and countless other disciplines.  All while working with talented and supportive peers.",
+    description: {
+      long: "Graduated with Honours.  Learned the fundamentals of user-centric design, and how to become a Swiss Army knife of digital production. I studied a range of subjects, from UX Research, to 3D design, to web development, and countless other disciplines.  All while working with talented and supportive peers.",
+      short: "Graduated with Honours, developed skills in user-centric design and all-around digital production.",
+      // short: "Graduated with Honours.  I honed skills in user-centric design and all-around digital production; including UX, 3D design, and web development.",
+      // short: "Graduated with Honours.  I honed skills in user-centric design and all-around digital production; including UX Research, 3D design, and web development",
+    },
     card: "long",
     img: ABOUT_IMGS.experience_sheridan,
   },
@@ -72,13 +76,13 @@ const WHATIM = [
   },
   {
     category: "What I&rsquo;m Doing",
-    items: ["Biking", "Meditating", "Searching Out New Music", "Hangin&rsquo; with friends"],
+    items: ["Biking", "Meditating", "Finding New Music", "Hangin&rsquo; with friends"],
   },
   {
     category: "What I&rsquo;m Making",
     items: [
       {
-        name: "Producing music / songwriting",
+        name: "Music",
         link: "https://www.instagram.com/peanut.butter.and.sam/",
       },
       {
@@ -119,11 +123,10 @@ function About() {
           <Column className="intro--heading">
             <Heading className="color--secondary">
               I am Sam,
-              <br />
-              [Dr. Seuss Reference]
+              <br /> [Dr. Seuss Reference]
             </Heading>
           </Column>
-          <Column>
+          <Column className="column-1 gap-main">
             <Graphic img={ABOUT_IMGS.me} />
           </Column>
         </Section>
@@ -150,38 +153,59 @@ function About() {
 
         <Section id="Intro--Toolbelt" type="passthrough">
           <div className="toolbelt">
-            <Heading className="color--secondary">I Put the &lsquo;Discipline&rsquo; in &lsquo;Multidisciplinary&rsquo;</Heading>
+            <Heading className="color--secondary">
+              I Put the &lsquo;Discipline&rsquo; <br className="d-none d-md-flex d-sm-none" />
+              in &lsquo;Multidisciplinary&rsquo;
+            </Heading>
 
             <div className="toolbelt--inner">
-              {MULTIDISCIPLINARY.map(({ name, items }, index) => (
-                <Fragment key={index}>
-                  {index > 0 && <div className="toolbelt--divider"></div>}
-                  <div className="toolbelt--section" key={name}>
-                    <Heading type="h3" className="weight-med toolbelt--title col-4">
+              {MULTIDISCIPLINARY.map(({ name, items }, index) => {
+                function Head({ className }) {
+                  return (
+                    <Heading type="h3" className={`weight-med toolbelt--title col-4 ${className || ""}`}>
                       {name}
                     </Heading>
+                  );
+                }
 
-                    <div className="toolbelt--body col-8">
-                      <ul className="toolbelt--list">
-                        {items.map((item) => (
-                          <li key={item}>{item}</li>
-                        ))}
-                      </ul>
+                return (
+                  <Fragment key={index}>
+                    {index > 0 && <div className="toolbelt--divider"></div>}
+                    <div className="toolbelt--section" key={name}>
+                      <Head className={"d-block d-sm-none"} />
+
+                      <div className="toolbelt--body col-8  col-sm-12 ">
+                        <ul className="toolbelt--list">
+                          <li className="toolbelt--title d-none d-sm-block">
+                            <Head />
+                          </li>
+
+                          {items.map((item) => {
+                            return <li key={item}>{item}</li>;
+                          })}
+                        </ul>
+                      </div>
                     </div>
-                  </div>
-                </Fragment>
-              ))}
+                  </Fragment>
+                );
+              })}
             </div>
           </div>
         </Section>
 
-        <Section id="Intro--Experience" type="passthrough">
+        <Section id="Intro--Experience">
+          <Heading className="color--secondary experience--heading">
+            And the
+            <br className="d-block d-lg-none d-lg-block  d-sm-none" /> &lsquo;Education & Experience&rsquo; <br className="d-none d-lg-block  d-sm-none" />
+            in &lsquo;Education & Experience&rsquo;
+          </Heading>
+
           <Experience data={EXPERIENCE} />
         </Section>
 
         <Section id="Intro--Quote" title="below">
           <Heading type="h2" className="color--secondary weight-reg" italic>
-          “Human-centered designs from a human-centered human”
+            “Human-centered designs <br className="d-none d-xxl-block d-sm-none"/> from a human-centered human”
           </Heading>
           <Title innerClassName={"color--primary"} caps={false}>
             - Me, on me
@@ -233,13 +257,9 @@ function About() {
         <Section id="Intro--Closer">
           <Heading type="h2" className="color--secondary weight-reg" italic>
             Let&rsquo;s work together and solve real-world problems
-            <br />
-            with digital-world solutions.
+            <br className="d-block d-lg-none" /> with digital-world solutions.
           </Heading>
         </Section>
-
-
-        
       </Chapter>
     </div>
   );

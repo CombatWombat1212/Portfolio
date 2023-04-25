@@ -79,7 +79,7 @@ function ColumnGroup({ columns, arrows, line, mainType }) {
         }
 
         return (
-          <Column className={`column ${colClasses} ${otherClasses}`} key={`column ${i}`} {...attrProps}>
+          <Column className={`column ${colClasses} ${otherClasses} column-${i+1}`} key={`column ${i}`} {...attrProps}>
             {hasArrows && i != 0 && (
               <div className="arrow--column">
                 <Graphic className="arrow--wrapper" innerClassName={arrowClasses} type="mask" img={chevron_right}></Graphic>

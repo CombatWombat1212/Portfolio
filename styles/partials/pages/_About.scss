@@ -1,47 +1,133 @@
 #About {
-    #Intro {
-      &--Hero {
-        @include pad-y(calc(var(--section-gap) * 0.85));
-  
-        .section {
+  #Intro {
+    &--Hero {
+      @include pad-y(calc(var(--section-gap) * 0.85));
+
+      // @include lg-down {
+      //   @include pad-y(calc(var(--section-gap) * 0.65));
+      // }
+      .section {
+        @include lg {
+          --gap: 2rem;
+          @include gap;
         }
-  
-        .intro {
-          &--heading {
-            @include flex-col-center;
+
+        @include md {
+          max-width: 60%;
+        }
+
+        @include md-down {
+          --gap: 1.25rem;
+          @include gap;
+        }
+
+        .column-1 {
+          @include lg {
+            width: calc(#{col-width(6.5)} - (var(--gap) / 2));
+            max-width: unset;
+            min-width: unset;
+          }
+        }
+
+        .column-2 {
+          @include lg {
+            width: calc(#{col-width(5.5)} - (var(--gap) / 2));
+            max-width: unset;
+            min-width: unset;
+          }
+          @include md-down {
+            @include flex-col;
+            @include gap;
           }
         }
       }
-  
-      &--Quote {
-        .section {
-          &--heading {
-            order:0;
-          }
-          &--title {
-            margin-top: 0.25rem !important;
-            order: 1;
-          }
+
+      .intro {
+        &--heading {
+          @include flex-col-center;
         }
-      }
-  
-      &--Interests {
-        @include section-mask-color($col-tertiary);
-  
-        .section {
-          &--graphic {
-            --img-panel-height: 10rem;
-          }
-  
-          &--main {
-            grid-template-columns: repeat(4, 1fr);
-          }
-        }
-      }
-  
-      &--WhatIm {
-        @include pad-y(calc(var(--section-gap) * 0.75));
       }
     }
+
+    &--Quote {
+      .section {
+        @include xxl-down {
+          text-align: center;
+          justify-content: center;
+        }
+
+        &--heading {
+          order: 0;
+          @include lg-down {
+          }
+        }
+        &--title {
+          margin-top: 0.25rem !important;
+          order: 1;
+          @include xxl-down {
+            // text-align: center;
+            // justify-content: center;
+          }
+        }
+      }
+    }
+
+    &--Interests {
+      @include section-mask-color($col-tertiary);
+
+      // --graphic-scale:1;
+      .section {
+        &--graphic {
+          height: unset;
+          aspect-ratio: 1 / 1;
+          @include xl-down {
+            --graphic-scale: 0.85;
+          }
+          @include lg-down {
+            --graphic-scale: 1.15;
+          }
+          @include md-down {
+            --graphic-scale: 1;
+          }
+          @include sm-down {
+            --graphic-scale: 1.25;
+          }
+        }
+
+        &--main {
+          grid-template-columns: repeat(4, 1fr);
+          @include lg-down {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          @include sm-down {
+            grid-template-columns: repeat(1, 1fr);
+          }
+        }
+      }
+    }
+
+    &--WhatIm {
+      @include pad-y(calc(var(--section-gap) * 0.75));
+
+      .section{
+        @include xl-down{
+          max-width: fit-content;
+        }
+      }
+    }
+
+
+    &--Closer{
+      
+      @include xxl-down {
+        text-align: center;
+        justify-content: center;
+      }
+
+    }
+
+
+
+
   }
-  
+}

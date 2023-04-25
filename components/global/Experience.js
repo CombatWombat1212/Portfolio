@@ -1,15 +1,13 @@
+import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import Heading from "../sections/Heading";
 import { Description, Graphic } from "../sections/Sections";
 
-function Experience({data}) {
+function Experience({ data }) {
+  const { isBpAndDown, loading } = useResponsive();
+  const desk = (!isBpAndDown("lg") || loading);
+
   return (
     <div className="experience">
-      <Heading className="color--secondary experience--heading">
-        And the
-        <br />
-        &lsquo;Education & Experience&rsquo; in &lsquo;Education & Experience&rsquo;
-      </Heading>
-
       <div className="experience--group">
         {data.map(({ title, timeframe, position, description, card, img }) => {
           const classes = {
@@ -20,7 +18,7 @@ function Experience({data}) {
           };
 
           Object.keys(classes).forEach((key) => {
-            classes[key].push(`experience--${key}__${card}`);
+            classes[key].push(`experience--${key}__${desk ? card : "short"}`);
           });
 
           Object.keys(classes).forEach((key) => {
@@ -45,7 +43,7 @@ function Experience({data}) {
                     {title}
                   </Heading>
                   <Description className="experience--description">
-                    <p>{description}</p>
+                    <p>{desk ? description.long || description : description.short || description}</p>
                   </Description>
                 </div>
               </div>

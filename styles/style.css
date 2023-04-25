@@ -5892,6 +5892,12 @@ h3 + .studypanel--paragraph {
   --toolbelt-pad: 1.75rem;
 }
 
+@media screen and (max-width: 49.9375em) {
+  .toolbelt {
+    --toolbelt-pad: 1.25rem;
+  }
+}
+
 .toolbelt--inner {
   border-radius: var(--b-rad);
   -webkit-border-radius: var(--b-rad);
@@ -5917,6 +5923,25 @@ h3 + .studypanel--paragraph {
   gap: 1.5rem;
 }
 
+@media screen and (max-width: 61.9375em) {
+  .toolbelt--list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  .toolbelt--list {
+    gap: 0.85rem;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  .toolbelt--title {
+    grid-column: span 2;
+    margin-bottom: 0.095rem;
+  }
+}
+
 .toolbelt--divider {
   height: 0.25rem;
   width: 100%;
@@ -5934,8 +5959,20 @@ h3 + .studypanel--paragraph {
   row-gap: 2.5rem;
 }
 
+@media screen and (max-width: 61.9375em) {
+  .experience--group {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  .experience--group {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 .experience--wrapper__long {
-  grid-column: 1/4;
+  grid-column: span 3;
 }
 
 .experience--wrapper__short {
@@ -5988,6 +6025,18 @@ h3 + .studypanel--paragraph {
   height: 10rem;
 }
 
+@media screen and (max-width: 79.9375em) {
+  .experience--graphic {
+    width: calc(var(--iw) * 0.9);
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  .experience--graphic {
+    width: Min(calc(var(--iw) * 0.9), 100%);
+  }
+}
+
 .experience--graphic__long {
   padding-right: calc(var(--experience-pad) + var(--graphic-add-x-pad));
 }
@@ -6011,6 +6060,20 @@ h3 + .studypanel--paragraph {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+@media screen and (max-width: 79.9375em) {
+  .whatim {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4.5rem;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  .whatim {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 .whatim--list {
@@ -9182,10 +9245,67 @@ h3 + .studypanel--paragraph {
   padding-bottom: calc(var(--section-gap) * 0.85);
 }
 
+@media screen and (max-width: 61.9375em) and (min-width: 50em) {
+  #About #Intro--Hero .section {
+    --gap: 2rem;
+    gap: var(--gap);
+    column-gap: var(--gap);
+    row-gap: var(--gap);
+  }
+}
+
+@media screen and (max-width: 49.9375em) and (min-width: 37em) {
+  #About #Intro--Hero .section {
+    max-width: 60%;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #About #Intro--Hero .section {
+    --gap: 1.25rem;
+    gap: var(--gap);
+    column-gap: var(--gap);
+    row-gap: var(--gap);
+  }
+}
+
+@media screen and (max-width: 61.9375em) and (min-width: 50em) {
+  #About #Intro--Hero .section .column-1 {
+    width: calc(54.16667% - (var(--gap) / 2));
+    max-width: unset;
+    min-width: unset;
+  }
+}
+
+@media screen and (max-width: 61.9375em) and (min-width: 50em) {
+  #About #Intro--Hero .section .column-2 {
+    width: calc(45.83333% - (var(--gap) / 2));
+    max-width: unset;
+    min-width: unset;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #About #Intro--Hero .section .column-2 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+    column-gap: var(--gap);
+    row-gap: var(--gap);
+  }
+}
+
 #About #Intro--Hero .intro--heading {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+@media screen and (max-width: 91.9375em) {
+  #About #Intro--Quote .section {
+    text-align: center;
+    justify-content: center;
+  }
 }
 
 #About #Intro--Quote .section--heading {
@@ -9202,15 +9322,65 @@ h3 + .studypanel--paragraph {
 }
 
 #About #Intro--Interests .section--graphic {
-  --img-panel-height: 10rem;
+  height: unset;
+  aspect-ratio: 1 / 1;
+}
+
+@media screen and (max-width: 79.9375em) {
+  #About #Intro--Interests .section--graphic {
+    --graphic-scale: 0.85;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  #About #Intro--Interests .section--graphic {
+    --graphic-scale: 1.15;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #About #Intro--Interests .section--graphic {
+    --graphic-scale: 1;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #About #Intro--Interests .section--graphic {
+    --graphic-scale: 1.25;
+  }
 }
 
 #About #Intro--Interests .section--main {
   grid-template-columns: repeat(4, 1fr);
 }
 
+@media screen and (max-width: 61.9375em) {
+  #About #Intro--Interests .section--main {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #About #Intro--Interests .section--main {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 #About #Intro--WhatIm {
   padding-top: calc(var(--section-gap) * 0.75);
   padding-bottom: calc(var(--section-gap) * 0.75);
+}
+
+@media screen and (max-width: 79.9375em) {
+  #About #Intro--WhatIm .section {
+    max-width: fit-content;
+  }
+}
+
+@media screen and (max-width: 91.9375em) {
+  #About #Intro--Closer {
+    text-align: center;
+    justify-content: center;
+  }
 }
 /*# sourceMappingURL=style.css.map */
