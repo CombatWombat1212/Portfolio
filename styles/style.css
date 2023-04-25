@@ -5109,7 +5109,8 @@ h3 + .studypanel--paragraph {
   overflow: hidden;
   position: relative;
   width: var(--label-width);
-  transition: margin-left var(--indicator-transition), width 0.2s, opacity 0s;
+  transform: translate(0%);
+  transition: margin-left var(--indicator-transition), width 0.2s, opacity 0s, transform var(--indicator-transition);
 }
 
 .indicator--wrapper {
@@ -5124,7 +5125,7 @@ h3 + .studypanel--paragraph {
   position: sticky;
   z-index: 9;
   margin-top: calc(var(--set-indicator-height) * -1);
-  --indicator-transition: 0.6s;
+  --indicator-transition: 0.7s;
   top: calc(var(--nav-height) + var(--temp-buffer));
   pointer-events: none;
 }
@@ -5179,7 +5180,7 @@ h3 + .studypanel--paragraph {
 }
 
 .indicator__off {
-  margin-left: calc(var(--indicator-width) * -1);
+  transform: translate(-101%);
 }
 
 .indicator__on {
@@ -5768,13 +5769,13 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 61.9375em) {
   .method--body {
-    margin-top: 1rem;
+    margin-top: 0.35rem;
   }
 }
 
 @media screen and (max-width: 49.9375em) {
   .method--body {
-    margin-top: 1.35rem;
+    margin-top: 0.45rem;
   }
 }
 

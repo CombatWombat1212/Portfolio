@@ -1,5 +1,6 @@
 import toggle from "@/scripts/AnimationTools";
 import { getColors, RESIZE_TIMEOUT, splitPx, splitS } from "@/scripts/GlobalUtilities";
+import useListener from "@/scripts/hooks/useListener";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { useEffect, useRef, useState } from "react";
 
@@ -24,6 +25,8 @@ function IndicatorItem(indicator) {
   this.progress = { chapter: { current: null, previous: null }, section: { current: null, previous: null } };
   this.visible = { set: false, applied: false };
   this.init = false;
+  this.nearBorder = false;
+  this.previousNearBorder = false;
 }
 
 function Chapter(elem, index) {
@@ -72,8 +75,8 @@ function Name(elem) {
       namesGetSizes(this);
       indicators.forEach((indicator) => {
         indicatorNameWidthSet(indicator);
-        indicatorGetSize(indicator);
-        indicatorSetSize(indicator);
+        // indicatorGetSize(indicator);
+        // indicatorSetSize(indicator);
       });
     }, RESIZE_TIMEOUT);
   });
@@ -87,7 +90,8 @@ function namesGetSizes(name) {
 }
 
 function indicatorGetVisibility(indicator) {
-  indicator.visible.set = indicator.progress.chapter.current > 0;
+  // indicator.visible.set = indicator.progress.chapter.current > 0;
+  indicator.visible.set = indicator.progress.chapter.current > 0 && indicator.nearBorder;
 }
 
 function indicatorSetVisibility(indicator) {
@@ -289,6 +293,61 @@ function indicatorGetProgress(indicator) {
   }
 }
 
+function indicatorGetNearBorder(indicator) {
+  const INTRO_CHAPTER = !(indicator.progress.chapter.current > 0);
+  const BORDER_BUFFER = 600;
+  const MIN_VISIBILITY = 3000;
+  const TIMEOUT = 4000;
+  const targetElem = indicator.elem.querySelector(".indicator");
+  const targetRect = targetElem.getBoundingClientRect();
+  const targetTop = targetRect.top;
+  const targetBottom = targetRect.bottom;
+
+  const apply = () => {
+    const run = () => {
+      indicator.checkingNearBorder = false;
+      indicatorGetVisibility(indicator);
+      indicatorSetVisibility(indicator);
+    };
+
+    if (indicator.checkingNearBorder) return;
+    if ((indicator.nearBorder && !indicator.previousNearBorder) || INTRO_CHAPTER) {
+      indicator.checkingNearBorder = true;
+      run();
+    } else if (!indicator.nearBorder && indicator.previousNearBorder) {
+      setTimeout(() => {
+        indicator.checkingNearBorder = true;
+        run();
+      }, MIN_VISIBILITY);
+    }
+  };
+
+  const set = (bool) => {
+    indicator.previousNearBorder = indicator.nearBorder;
+    indicator.nearBorder = bool;
+    apply();
+  };
+
+  indicator.touching.chapters.forEach((chapterObj) => {
+    // chapter height from top of screen
+    const chapterElem = chapterObj.chapter.elem;
+    const chapterRect = chapterElem.getBoundingClientRect();
+    const chapterTop = chapterRect.top;
+    const chapterBottom = chapterRect.bottom;
+
+    const WITHIN_BUFFER = chapterTop - targetTop >= -BORDER_BUFFER || targetBottom - chapterBottom >= -BORDER_BUFFER;
+    if (WITHIN_BUFFER) {
+      set(true);
+    } else {
+      set(false);
+    }
+  });
+
+  if (INTRO_CHAPTER) {
+    set(false);
+  }
+}
+
 function sectionGetBackgroundColors(section) {
   var list = section.elem.classList.value;
   var background = list.match(/background\S*/g)?.join(" ");
@@ -308,20 +367,19 @@ function sectionGetBackgroundColors(section) {
 }
 
 function sectionGetColors(section) {
-
-  var colors = [  
-  ["primary", "theme-light"],
-  ["primary-hovered", "theme-light"],
-  ["secondary", "theme-light"],
-  ["secondary-hovered", "theme-light"],
-  ["tertiary-light", "theme-light"],
-  ["tertiary", "theme-light"],
-  ["tertiary-makeright", "theme-light"],
-  ["background", "theme-dark"],
-  ["background-darker", "theme-dark"],
-  ["background-darkest", "theme-dark"],
-  ["image", "theme-dark"],
-];
+  var colors = [
+    ["primary", "theme-light"],
+    ["primary-hovered", "theme-light"],
+    ["secondary", "theme-light"],
+    ["secondary-hovered", "theme-light"],
+    ["tertiary-light", "theme-light"],
+    ["tertiary", "theme-light"],
+    ["tertiary-makeright", "theme-light"],
+    ["background", "theme-dark"],
+    ["background-darker", "theme-dark"],
+    ["background-darkest", "theme-dark"],
+    ["image", "theme-dark"],
+  ];
 
   // var background = section.color.background;
   // for (var i = 0; i < colors.length; i++) {
@@ -334,9 +392,6 @@ function sectionGetColors(section) {
 
   const colorMapping = new Map(colors);
   section.color.theme = colorMapping.get(section.color.background) || "";
-
-
-  
 }
 
 function sectionsInit(indicator, sections, setSections) {
@@ -374,12 +429,6 @@ function chaptersInit(indicator) {
       indicator.chapters.push(newChapter);
     }
   });
-
-  // TODO: couldn't this just be in indicatorInit?
-  window.removeEventListener("scroll", indicatorOnScroll);
-  window.addEventListener("scroll", indicatorOnScroll);
-  window.removeEventListener("resize", indicatorOnResize);
-  window.addEventListener("resize", indicatorOnResize);
 }
 
 function indicatorNameWidthSet(indicator) {
@@ -398,17 +447,24 @@ function indicatorNameWidthSet(indicator) {
   }
 }
 
-function indicatorSetSize(indicator) {
-  indicator.elem.style.setProperty("--indicator-width", `${indicator.width}px`);
-  indicator.elem.style.setProperty("--indicator-height", `${indicator.height}px`);
-}
+// function indicatorSetSize(indicator) {
+//   indicator.elem.style.setProperty("--indicator-width", `${indicator.width}px`);
+//   indicator.elem.style.setProperty("--indicator-height", `${indicator.height}px`);
+// }
 
-function indicatorGetSize(indicator) {
-  var width = splitPx(window.getComputedStyle(indicator.elem.querySelector(".indicator")).width) + splitPx(window.getComputedStyle(indicator.elem.querySelector(".indicator")).paddingLeft) + splitPx(window.getComputedStyle(indicator.elem.querySelector(".indicator")).paddingRight);
-  var height = splitPx(window.getComputedStyle(indicator.elem.querySelector(".indicator")).height) + splitPx(window.getComputedStyle(indicator.elem.querySelector(".indicator")).paddingTop) + splitPx(window.getComputedStyle(indicator.elem.querySelector(".indicator")).paddingBottom);
-  indicator.width = width;
-  indicator.height = height;
-}
+// function indicatorGetSize(indicator) {
+//   var ind = indicator.elem.querySelector(".indicator");
+//   var width =
+//     splitPx(window.getComputedStyle(ind).width) +
+//     splitPx(window.getComputedStyle(ind).paddingLeft) +
+//     splitPx(window.getComputedStyle(ind).paddingRight);
+//   var height =
+//     splitPx(window.getComputedStyle(ind).height) +
+//     splitPx(window.getComputedStyle(ind).paddingTop) +
+//     splitPx(window.getComputedStyle(ind).paddingBottom);
+//   indicator.width = width;
+//   indicator.height = height;
+// }
 
 function chapterGetSize(chapter) {
   chapter.height = splitPx(window.getComputedStyle(chapter.elem).height);
@@ -424,8 +480,9 @@ function indicatorInit(indicator, sections, setSections) {
   setTimeout(() => {
     indicator.init = true;
     indicator.elem.classList.remove("indicator--wrapper__hidden");
-    indicatorGetVisibility(indicator);
-    indicatorSetVisibility(indicator);
+    indicatorGetNearBorder(indicator);
+    // indicatorGetVisibility(indicator);
+    // indicatorSetVisibility(indicator);
 
     indicatorOnScroll();
     indicatorOnResizeFunctions();
@@ -458,21 +515,15 @@ function Indicator({}) {
     });
   }, [names]);
 
-
-  // useEffect(() => {
-  //   if (sections.length < 1) return;
-  //   indicators.forEach((indicator) => {
-  //     indicator.elem.style.setProperty("--section-count", `${sections.length}`);
-
-  //   });
-
-  // }, [sections]);
+  useListener("scroll", indicatorOnScroll);
+  useListener("resize", indicatorOnResize);
 
   return (
     <div className="indicator--wrapper indicator--wrapper__hidden" ref={indicator}>
       <div className="indicator--inner">
-        <div className="indicator indicator__unloaded indicator__hidden indicator__off" 
-        // onMouseEnter={indicatorOnHover} onMouseLeave={indicatorOnMouseLeave}
+        <div
+          className="indicator indicator__unloaded indicator__hidden indicator__off"
+          // onMouseEnter={indicatorOnHover} onMouseLeave={indicatorOnMouseLeave}
         >
           <div className="indicator--back">
             {sections &&
@@ -532,14 +583,14 @@ function indicatorOnScroll() {
     var label = indicator.label;
     indicatorGetTouching(indicator);
     var changed = indicatorGetProgress(indicator);
+    indicatorGetNearBorder(indicator);
+    // indicatorGetVisibility(indicator);
+    // indicatorSetVisibility(indicator);
     if (!changed) return;
     indicatorNameWidthSet(indicator);
-    indicatorGetSize(indicator);
-    indicatorSetSize(indicator);
+    // indicatorGetSize(indicator);
+    // indicatorSetSize(indicator);
     labelStyleSet(indicator);
-
-    indicatorGetVisibility(indicator);
-    indicatorSetVisibility(indicator);
   });
 }
 
@@ -552,8 +603,8 @@ function indicatorOnResize() {
 
 function indicatorOnResizeFunctions() {
   indicators.forEach((indicator) => {
-    indicatorGetSize(indicator);
-    indicatorSetSize(indicator);
+    // indicatorGetSize(indicator);
+    // indicatorSetSize(indicator);
     indicator.names.forEach((name) => {
       namesGetSizes(name);
     });

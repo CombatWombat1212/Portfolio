@@ -33,7 +33,7 @@
     position: sticky;
     z-index: 9;
     margin-top: calc(var(--set-indicator-height) * -1);
-    --indicator-transition: 0.6s;
+    --indicator-transition: 0.7s;
 
 
     top: calc(var(--nav-height) + var(--temp-buffer));
@@ -74,7 +74,9 @@
   position: relative;
   // cursor: pointer;
   width: var(--label-width);
-  transition: margin-left var(--indicator-transition), width 0.2s, opacity 0s;
+  transform: translate(0%);
+  transition: margin-left var(--indicator-transition), width 0.2s, opacity 0s, transform var(--indicator-transition);
+
 
   &--background {
     background-color: var(--indicator-background-color);
@@ -119,7 +121,8 @@
   }
 
   &__off {
-    margin-left: calc(var(--indicator-width) * -1);
+    // margin-left: calc(var(--indicator-width) * -1);
+    transform: translate(-101%);
   }
 
   &__on {
