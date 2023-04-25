@@ -5110,12 +5110,12 @@ h3 + .studypanel--paragraph {
   position: relative;
   width: var(--label-width);
   transform: translate(0%);
-  transition: margin-left var(--indicator-transition), width 0.2s, opacity 0s, transform var(--indicator-transition);
+  transition: margin-left var(--indicator-transition), width 0.2s, opacity 0s, transform var(--indicator-transition), clip-path 0.6s;
 }
 
 .indicator--wrapper {
   --site-x-margin: calc((100% - var(--site-max-width_wide)) / 2);
-  --temp-buffer: 9rem;
+  --top-buffer: 9rem;
   --set-indicator-height: var(--button-height);
   --name-height: var(--font-height-body);
   --name-pad-y: calc((var(--set-indicator-height) - var(--name-height)) / 2);
@@ -5126,7 +5126,7 @@ h3 + .studypanel--paragraph {
   z-index: 9;
   margin-top: calc(var(--set-indicator-height) * -1);
   --indicator-transition: 0.7s;
-  top: calc(var(--nav-height) + var(--temp-buffer));
+  top: calc(var(--nav-height) + var(--top-buffer));
   pointer-events: none;
 }
 
@@ -5136,18 +5136,26 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 61.9375em) {
   .indicator--wrapper {
-    --temp-buffer: calc(var(--nav-height) * 1.25);
-  }
-}
-
-@media screen and (max-width: 49.9375em) {
-  .indicator--wrapper {
-    --temp-buffer: calc(var(--nav-height) * 0.75);
+    --top-buffer: calc(var(--nav-height) * 0.35);
+    --set-indicator-height: calc(var(--button-height) * 0.65);
   }
 }
 
 .indicator--inner {
   width: 100%;
+}
+
+@media screen and (max-width: 61.9375em) {
+  .indicator {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    border-radius: var(--b-rad_less);
+    margin-left: auto;
+    margin-right: var(--site-x-margin);
+    transition: margin-left var(--indicator-transition), width 0.2s, opacity 0s, transform var(--indicator-transition) 0.3s, clip-path 0.6s;
+  }
 }
 
 .indicator--background {
@@ -5179,12 +5187,16 @@ h3 + .studypanel--paragraph {
   transition: 0s !important;
 }
 
-.indicator__off {
-  transform: translate(-101%);
+@media screen and (min-width: 62em) {
+  .indicator__off {
+    transform: translate(-101%);
+  }
 }
 
-.indicator__on {
-  margin-left: 0;
+@media screen and (max-width: 61.9375em) {
+  .indicator__off {
+    transform: translate(0%, calc(-1 * (101% + var(--top-buffer))));
+  }
 }
 
 .indicator .label {

@@ -14,20 +14,16 @@
   }
 }
 
-
-
 .indicator {
   &--wrapper {
     --site-x-margin: calc((100% - var(--site-max-width_wide)) / 2);
-    --temp-buffer: 9rem;
+    --top-buffer: 9rem;
     --set-indicator-height: var(--button-height);
 
     --name-height: var(--font-height-body);
     --name-pad-y: calc((var(--set-indicator-height) - var(--name-height)) / 2);
     --name-margin-top: -0.03125rem;
 
-
-  
     display: flex;
     height: var(--set-indicator-height);
     position: sticky;
@@ -35,9 +31,7 @@
     margin-top: calc(var(--set-indicator-height) * -1);
     --indicator-transition: 0.7s;
 
-
-    top: calc(var(--nav-height) + var(--temp-buffer));
-
+    top: calc(var(--nav-height) + var(--top-buffer));
 
     pointer-events: none;
 
@@ -45,22 +39,20 @@
       opacity: 0;
     }
 
-
-    @include lg-down{
-      --temp-buffer: calc(var(--nav-height) * 1.25);
+    @include lg-down {
+      // --top-buffer: calc(var(--nav-height) * 1.25);
+      // transition: top 0.3s;
+      --top-buffer: calc(var(--nav-height) * 0.35);
+      --set-indicator-height: calc(var(--button-height) * 0.65);
     }
 
-    @include md-down{
-      --temp-buffer: calc(var(--nav-height) * 0.75);
+    @include md-down {
+      // --top-buffer: calc(var(--nav-height) * 0.75);
     }
-
-
-
   }
 
-
-  &--inner{
-    width:100%;
+  &--inner {
+    width: 100%;
   }
 
   height: 100%;
@@ -75,8 +67,23 @@
   // cursor: pointer;
   width: var(--label-width);
   transform: translate(0%);
-  transition: margin-left var(--indicator-transition), width 0.2s, opacity 0s, transform var(--indicator-transition);
+  transition: margin-left var(--indicator-transition), width 0.2s, opacity 0s, transform var(--indicator-transition), clip-path 0.6s;
 
+  @include lg-down {
+    // clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    // padding-left: calc(Min(var(--site-x-margin), 1.5625rem) * 0.75);
+    // padding-right: calc(1.5625rem * 0.7);
+    @include mx-auto;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    border-radius: var(--b-rad_less);
+
+    margin-left: auto;
+    margin-right: var(--site-x-margin);
+    
+    transition: margin-left var(--indicator-transition), width 0.2s, opacity 0s, transform var(--indicator-transition) 0.3s, clip-path 0.6s;
+
+  }
 
   &--background {
     background-color: var(--indicator-background-color);
@@ -89,17 +96,15 @@
     left: 0;
     top: calc(var(--margin-top) + (var(--offset) * var(--set-indicator-height)));
 
-
-
     &__theme-dark {
       background-color: $col-tertiary;
-      
+
       // @include hover('.indicator--wrapper', '&'){
       //   background-color: $col-tertiary_light;
       // }
       // transition: background-color 0.2s!important;
     }
-    
+
     &__theme-light {
       background-color: $col-background;
       // @include hover('.indicator--wrapper', '&'){
@@ -107,34 +112,36 @@
       // }
       // transition: background-color 0.2s!important;
     }
-
-
   }
 
   &__hidden {
     @include no-select;
   }
 
-
   &__unloaded {
-    transition:0s!important;
+    transition: 0s !important;
   }
 
   &__off {
     // margin-left: calc(var(--indicator-width) * -1);
-    transform: translate(-101%);
+    @include lg-up{
+      transform: translate(-101%);
+    }
+    @include lg-down{
+      transform: translate(0%, calc(-1 * (101% + var(--top-buffer))));
+      // clip-path: polygon(50% 0, 50% 0, 50% 100%, 50% 100%);
+    }
   }
 
   &__on {
-    margin-left: 0;
+    // margin-left: 0;
   }
 
   .label {
-    
     --empty-margin-top_real: calc((var(--chapter-progress) * -1) * var(--set-indicator-height));
     --empty-margin-top_min: calc(var(--set-indicator-height) * -1);
     --empty-margin-top: Min(var(--empty-margin-top_min), var(--empty-margin-top_real));
-    
+
     // margin-top: var(--name-margin-top);
     height: var(--set-indicator-height);
     @include flex-col;
@@ -143,17 +150,14 @@
     transition: left 0.2s;
     z-index: 1;
 
-    padding-top:0rem;
+    padding-top: 0rem;
     // transition: 1s!important;
     // @include hover('.indicator--wrapper', '&') {
-      // padding-top: calc(
-      // var(--name-height) + var(--name-pad-y) + (var(--set-indicator-height) * (var(--chapter-progress) - 1))
-      // + var(--name-margin-top)
-      // );
+    // padding-top: calc(
+    // var(--name-height) + var(--name-pad-y) + (var(--set-indicator-height) * (var(--chapter-progress) - 1))
+    // + var(--name-margin-top)
+    // );
     // }
-
-
-
 
     &--empty {
       transition-duration: 0.1s;
@@ -161,7 +165,6 @@
       min-height: var(--name-height);
       margin-top: var(--empty-margin-top);
       @include pad-y(var(--name-pad-y));
-
 
       // transition: 1s!important;
       // @include hover('.indicator--wrapper', '&'){
@@ -173,15 +176,14 @@
       //   margin-top:
       //   calc(
       //     var(--name-height) * (var(--chapter-progress) * -1) - var(--name-pad-y)
-          // )
+      // )
 
-        //   padding-bottom: calc(
-      //     var(--name-height) + 
+      //   padding-bottom: calc(
+      //     var(--name-height) +
       //     (var(--name-height) * (var(--chapter-progress) - 1) )
       // // + var(--name-margin-top)
       // );
       // }
-
     }
 
     &--name {
@@ -191,25 +193,20 @@
       white-space: nowrap;
       @include pad-y(var(--name-pad-y));
 
-      transition: color 0.05s!important;
+      transition: color 0.05s !important;
       // transition: 1s!important;
 
-      @include indicator-dark ('.label--name') {
+      @include indicator-dark(".label--name") {
         color: $col-background;
       }
 
-      @include indicator-light ('.label--name') {
+      @include indicator-light(".label--name") {
         color: $col-tertiary;
       }
-
 
       // @include hover('.indicator--wrapper', '&'){
       //   @include marg-y(calc(var(--name-pad-y) * -1));
       // }
-
-
-
-
     }
   }
 }

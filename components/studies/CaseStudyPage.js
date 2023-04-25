@@ -112,7 +112,7 @@ function StudyWrapper({ id, study, children }) {
 
   return (
     <div id={id} className="casestudy">
-      <Indicator />
+      <Indicator  />
       <StudyPanel variant={"study"} study={study} />
       <Brief study={study} />
       {newChildren}
