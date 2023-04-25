@@ -14,7 +14,7 @@ import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import useRandomCaptions from "@/scripts/hooks/useRandomCaptions";
 
 function Index() {
-  const captions = ["Have a look-see", "Take a gander", "Check it", "I must know", "Gimme", "Go on...", "I'll bite", "Ouu", "I'm all ears"];
+  const captions = ["Have a look-see", "Take a gander", "Check it", "I must know", "Gimme", "Go on...", "I'll bite", "Ouu", "Do tell", "I'm all ears"];
 
   const chosen = useRandomCaptions(captions, CASE_STUDIES.length);
 
