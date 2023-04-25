@@ -5931,7 +5931,7 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 49.9375em) {
   .toolbelt--list {
-    gap: 0.85rem;
+    gap: 1.25rem;
   }
 }
 
@@ -6034,6 +6034,12 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 61.9375em) {
   .experience--graphic {
     width: Min(calc(var(--iw) * 0.9), 100%);
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  .experience--graphic {
+    width: Min(calc(var(--iw) * 1.1), 100%);
   }
 }
 
@@ -9243,6 +9249,13 @@ h3 + .studypanel--paragraph {
 #About #Intro--Hero {
   padding-top: calc(var(--section-gap) * 0.85);
   padding-bottom: calc(var(--section-gap) * 0.85);
+}
+
+@media screen and (max-width: 61.9375em) {
+  #About #Intro--Hero {
+    padding-top: calc(var(--section-gap) * 0.55);
+    padding-bottom: calc(var(--section-gap) * 0.55);
+  }
 }
 
 @media screen and (max-width: 61.9375em) and (min-width: 50em) {

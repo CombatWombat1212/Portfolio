@@ -77,6 +77,9 @@
     @include lg-down{
       width: Min(calc(var(--iw) * 0.9), 100%);
     }
+    @include md-down{
+      width: Min(calc(var(--iw) * 1.1), 100%);
+    }
 
     &__long {
       padding-right: calc(var(--experience-pad) + var(--graphic-add-x-pad));

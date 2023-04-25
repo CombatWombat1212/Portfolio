@@ -33,7 +33,7 @@
       grid-template-columns: repeat(2, 1fr);
     }
     @include md-down{
-      gap: 0.85rem;
+      gap: 1.25rem;
     }
 
   }
