@@ -5938,7 +5938,6 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 49.9375em) {
   .toolbelt--title {
     grid-column: span 2;
-    margin-bottom: 0.095rem;
   }
 }
 
@@ -6039,7 +6038,7 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 49.9375em) {
   .experience--graphic {
-    width: Min(calc(var(--iw) * 1.1), 100%);
+    width: Min(calc(var(--iw) * 1), 100%);
   }
 }
 
@@ -9332,6 +9331,14 @@ h3 + .studypanel--paragraph {
 
 #About #Intro--Interests .section--graphic .mask {
   background-color: #404064;
+}
+
+@media screen and (max-width: 36.9375em) {
+  #About #Intro--Interests .section--main {
+    max-width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+  }
 }
 
 #About #Intro--Interests .section--graphic {

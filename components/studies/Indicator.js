@@ -26,8 +26,13 @@ function IndicatorItem(indicator) {
   this.progress = { chapter: { current: null, previous: null }, section: { current: null, previous: null } };
   this.visible = { set: false, applied: false };
   this.init = false;
-  this.nearBorder = false;
-  this.previousNearBorder = false;
+  // this.nearBorder = false;
+  // this.previousNearBorder = false;
+  this.border = {
+    current: false,
+    previous: false,
+    timeout: null,
+  };
 }
 
 function Chapter(elem, index) {
@@ -92,7 +97,7 @@ function namesGetSizes(name) {
 
 function indicatorGetVisibility(indicator) {
   // indicator.visible.set = indicator.progress.chapter.current > 0;
-  indicator.visible.set = indicator.progress.chapter.current > 0 && indicator.nearBorder;
+  indicator.visible.set = indicator.progress.chapter.current > 0 && indicator.border.current;
 }
 
 function indicatorSetVisibility(indicator) {
@@ -297,15 +302,14 @@ function indicatorGetProgress(indicator) {
 function indicatorGetNearBorder(indicator, desktop) {
   const INTRO_CHAPTER = !(indicator.progress.chapter.current > 0);
 
-  const BORDER_BUFFER = (()=>{
-    if(desktop) return 400;
-    else return 10;
+  const BORDER_BUFFER = (() => {
+    if (desktop) return 300;
+    else return 1;
   })();
-  const MIN_VISIBILITY = (()=>{
-    if(desktop) return 3000;
+  const MIN_VISIBILITY = (() => {
+    if (desktop) return 3000;
     else return 3000;
   })();
-
 
   const targetElem = indicator.elem.querySelector(".indicator");
   const targetRect = targetElem.getBoundingClientRect();
@@ -314,31 +318,23 @@ function indicatorGetNearBorder(indicator, desktop) {
 
   const apply = () => {
     const run = () => {
-      // indicator.checkingNearBorder = false;
       indicatorGetVisibility(indicator);
       indicatorSetVisibility(indicator);
     };
 
-    // if (indicator.checkingNearBorder) return;
-    if ((indicator.nearBorder && !indicator.previousNearBorder) || INTRO_CHAPTER) {
-      indicator.checkingNearBorder = true;
+    if ((indicator.border.current && !indicator.border.previous) || INTRO_CHAPTER) {
       run();
-    } else if (!indicator.nearBorder && indicator.previousNearBorder) {
-      setTimeout(() => {
-        // indicator.checkingNearBorder = true;
+    } else if (!indicator.border.current && indicator.border.previous) {
+      if (indicator.border.timeout) clearTimeout(indicator.border.timeout);
+      indicator.border.timeout = setTimeout(() => {
         run();
       }, MIN_VISIBILITY);
     }
   };
 
-  const set = (
-    bool
-    // , forced
-  ) => {
-    indicator.previousNearBorder = indicator.nearBorder;
-    // indicator.previousWithinForced = indicator.withinForced;
-    indicator.nearBorder = bool;
-    // indicator.withinForced = forced;
+  const set = (bool) => {
+    indicator.border.previous = indicator.border.current;
+    indicator.border.current = bool;
     apply();
   };
 
@@ -350,7 +346,6 @@ function indicatorGetNearBorder(indicator, desktop) {
     const chapterBottom = chapterRect.bottom;
 
     const WITHIN_BUFFER = chapterTop - targetTop >= -BORDER_BUFFER || targetBottom - chapterBottom >= -BORDER_BUFFER;
-    // const WITHIN_FORCED = chapterTop - targetTop >= -(BORDER_BUFFER / 4) || targetBottom - chapterBottom >= -(BORDER_BUFFER / 4);
     if (WITHIN_BUFFER) {
       set(true);
     } else {
@@ -380,10 +375,10 @@ function indicatorGetNearBorder(indicator, desktop) {
 //     };
 
 //     if (indicator.checkingNearBorder) return;
-//     if ((indicator.nearBorder && !indicator.previousNearBorder) || INTRO_CHAPTER) {
+//     if ((indicator.border.current && !indicator.border.previous) || INTRO_CHAPTER) {
 //       indicator.checkingNearBorder = true;
 //       run();
-//     } else if (!indicator.nearBorder && indicator.previousNearBorder) {
+//     } else if (!indicator.border.current && indicator.border.previous) {
 //       setTimeout(() => {
 //         indicator.checkingNearBorder = true;
 //         run();
@@ -392,8 +387,8 @@ function indicatorGetNearBorder(indicator, desktop) {
 //   };
 
 //   const set = (bool) => {
-//     indicator.previousNearBorder = indicator.nearBorder;
-//     indicator.nearBorder = bool;
+//     indicator.border.previous = indicator.border.current;
+//     indicator.border.current = bool;
 //     apply();
 //   };
 
@@ -563,9 +558,7 @@ function Indicator({}) {
   const [sections, setSections] = useState([]);
   var indicator = useRef(null);
 
-
   const { desktop } = useResponsive();
-
 
   useMountEffect(() => {
     var indicatorObj = new IndicatorItem(indicator);
@@ -591,18 +584,11 @@ function Indicator({}) {
   useListener("scroll", indicatorOnScroll);
   useListener("resize", indicatorOnResize);
 
-
-
-
-
-
-
-
   function indicatorOnScroll() {
     // TODO: These calculations are honestly so extra, you don't need to do this based on the exact position of the chapter, and whether or not its overlapping text, you could probably just do it based on the chapter's position on screen i think?  like the whole idea of it needing to be an exact float seems like much
-  
+
     if (!indicators) return;
-  
+
     indicators.forEach((indicator) => {
       var chapters = indicator.chapters;
       var label = indicator.label;
@@ -618,14 +604,14 @@ function Indicator({}) {
       labelStyleSet(indicator);
     });
   }
-  
+
   var indicatorIsResizing;
-  
+
   function indicatorOnResize() {
     window.clearTimeout(indicatorIsResizing);
     indicatorIsResizing = setTimeout(indicatorOnResizeFunctions, RESIZE_TIMEOUT);
   }
-  
+
   function indicatorOnResizeFunctions() {
     indicators.forEach((indicator) => {
       // indicatorGetSize(indicator);
@@ -638,10 +624,6 @@ function Indicator({}) {
       });
     });
   }
-  
-
-
-
 
   return (
     <div className="indicator--wrapper indicator--wrapper__hidden" ref={indicator}>
@@ -685,7 +667,5 @@ function Indicator({}) {
     </div>
   );
 }
-
-
 
 export default Indicator;

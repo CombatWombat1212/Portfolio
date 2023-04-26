@@ -78,7 +78,7 @@
       width: Min(calc(var(--iw) * 0.9), 100%);
     }
     @include md-down{
-      width: Min(calc(var(--iw) * 1.1), 100%);
+      width: Min(calc(var(--iw) * 1), 100%);
     }
 
     &__long {
