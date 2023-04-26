@@ -1,9 +1,7 @@
 .col-line {
   &--wrapper {
-
     --container-max-width: var(--site-max-width);
     --site-x-margin: Max(calc((100% - var(--site-max-width)) / 2), calc((100% - var(--container-max-width)) / 2));
-
 
     --col-line-height: 0.5rem;
 
@@ -11,7 +9,6 @@
     left: calc(var(--site-x-margin) * -1);
     width: 100%;
   }
-
 
   @include trans;
 
@@ -21,7 +18,69 @@
   opacity: 0.4;
   position: absolute;
 
-  width: calc(100% - (var(--site-x-margin) * var(--line-isnt-middle)) - (var(--buffer) * var(--line-isnt-middle)));
+  // width: calc(100% - (var(--site-x-margin) * var(--line-isnt-middle)) - (var(--buffer) * var(--line-isnt-middle)));
+
+
+
+
+  // --column-offset:  calc(
+
+
+  //    (100% / ( var(--columns-total) -  var(--columns-filled)))
+
+
+  //   * var(--row-is-incomplete)
+    
+  //   );
+
+
+  // container max width is also:
+  // (100% - (var(--site-x-margin) * 2) )
+
+
+
+  // --column-width-unit: (var(--container-max-width) / var(--columns-total));
+  // --column-width-unit: (var(--container-max-width) - (var(--column-gap) * (var(--columns-total) - 1))) / var(--columns-total);
+  
+  --column-width-unit: calc(
+    (
+      var(--container-max-width) -
+      (var(--column-gap) * (var(--columns-total) - 1))
+    ) 
+    / var(--columns-total)
+
+    );
+
+
+  --columns-in-row: calc(var(--columns-total) - var(--columns-filled));
+
+
+
+
+
+  --column-offset:  calc(
+
+     (
+      (var(--column-width-unit) * var(--columns-in-row) ) + (var(--column-gap) / var(--columns-in-row))
+     )
+
+
+    * var(--row-is-incomplete)
+    
+    );
+  
+
+
+
+  width: calc(
+    100% - 
+    (var(--site-x-margin) * var(--line-isnt-middle)) - 
+    (var(--buffer) * var(--line-isnt-middle))
+    - var(--column-offset)
+
+  );
+
+
 
   top: calc(var(--line-top) - (var(--col-line-height) / 2));
 

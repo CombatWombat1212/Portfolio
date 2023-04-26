@@ -58,12 +58,22 @@
   }
 
   #Overview {
+    &--Client {
+    }
+
     &--Goal {
       @include section-mask-color($col-tertiary);
 
-      .section--graphic {
-        height: 100%;
-        @include flex-col-center;
+      .section {
+        &--copy {
+          width: calc(#{col-width(6.5)} - (var(--gap) / 2));
+        }
+        &--graphic {
+          width: calc(#{col-width(5.5)} - (var(--gap) / 2));
+        }
+        .mask {
+          max-width: 100%;
+        }
       }
     }
 
@@ -71,41 +81,135 @@
       @include section-mask-color($col-tertiary);
 
       .section {
-        &--graphic {
-          --img-panel-height: 10rem;
+        @include lg {
+          max-width: 65%;
+          @include mx-auto;
+        }
+        @include sm-down {
+          max-width: 77.5%;
         }
 
         &--main {
           grid-template-columns: repeat(4, 1fr);
+
+          @include lg-down {
+            grid-template-columns: repeat(2, 1fr);
+            --gap: 3rem;
+          }
+          @include md-down {
+            --gap: 2.5rem;
+          }
+          @include sm-down {
+            grid-template-columns: repeat(1, 1fr);
+            --gap: 2.25rem;
+          }
+        }
+
+        &--graphic {
+          // --img-panel-height: 10rem;
+          height: unset;
+          aspect-ratio: 1 / 1;
+
+          --graphic-scale: 0.85;
+
+          @include xl-down {
+            --graphic-scale: 0.75;
+          }
+          @include lg-down {
+            --section-graphic-panel-pad: 1.75rem;
+            --graphic-scale: 0.925;
+          }
+          @include md-down {
+            --graphic-scale: 1;
+          }
+          @include sm-down {
+            --section-graphic-panel-pad: 0.25rem;
+            --graphic-scale: 1.25;
+          }
+        }
+
+        .mask {
+          @include sm-down {
+            width: calc(Max(Min(45%, var(--w)), 55%));
+          }
         }
       }
+    }
+
+    &--Outcome {
     }
   }
 
   #Approach {
+    &--Banner {
+    }
+
     &--Workflow {
       .section {
-        --sec-gap: 5.5rem;
-        --graphic-scale: 0.925;
-        --col: 4;
+        --section-graphic-panel-pad: 0rem;
+        --sec-gap: 4.5rem;
+        --col:4;
+        
+        --graphic-scale: 0.935;
+        @include xxl-down {
+          --graphic-scale: 0.875;
+        }
+        @include xl-down {
+          --sec-gap: 4.25rem;
+          --graphic-scale: 0.805;
+        }
+        @include lg-down {
+          --sec-gap: 3rem;
+          --graphic-scale: 0.805;
+          --col:3;
+        }
+        @include md {
+          --site-max-width:75%;
+          max-width: var(--site-max-width);
+          --sec-gap: 3.5rem;
+          --graphic-scale: 0.905;
+          --col:2;
+        }
+        @include sm-down {
+          --sec-gap: 2.15rem;
+          --site-max-width: calc(100% - (var(--sec-gap) * 2));
+          max-width: var(--site-max-width);
+          --col:2;
+          --graphic-scale: 0.75;
+        }
+
+
+        &--main {
+          margin-top: 4rem;
+          @include gap(var(--sec-gap));
+
+          grid-template-columns: repeat(var(--col), calc((100% - (var(--sec-gap) * (var(--col) - 1)) ) / var(--col)));
+
+        }
+
+        &--column{
+        }
 
         .graphic {
           &--panel {
-            --pw: calc(((var(--site-max-width) - (var(--sec-gap) * (var(--col) - 1))) / var(--col)) - (var(--section-graphic-panel-pad) * 2));
-            width: var(--pw);
-            height: var(--pw);
+            height:unset;
+            aspect-ratio: 1/1;
           }
           &--caption {
             white-space: nowrap;
           }
         }
 
-        &--main {
-          margin-top: 4rem;
-          grid-template-columns: repeat(4, 1fr);
-          @include gap(var(--sec-gap));
+        .mask {
+          // width: calc(Max(Min(20%, var(--w)), 65%));
+          // height: calc(Max(Min(20%, var(--h)), 65%));
         }
       }
+    }
+
+    &--Scope {
+    }
+    &--Considerations {
     }
 
     &--Models {
@@ -148,15 +252,24 @@
         }
       }
     }
+
+    &--Summary {
+    }
   }
 
   #Texturing {
+    &--Workflow {
+    }
+
     &--Stages {
       .section {
         &--main {
           grid-template-columns: repeat(3, 1fr);
         }
       }
+    }
+
+    &--Contrast-Desc {
     }
 
     &--Contrast-Areas {
@@ -171,7 +284,10 @@
       }
     }
 
-    &--Details {
+    &--Details-Description {
+    }
+
+    &--Details-Graphics {
       .section {
         &--main {
           grid-template-columns: repeat(4, 1fr);
@@ -199,15 +315,11 @@
       }
     }
 
+    &--Shadow-Description {
+    }
+
     &--Shadow-Graphics {
       .section {
-        // &--graphic {
-        //   --graphic-scale: 0.5;
-        //   img {
-        //     width: calc(var(--iw) * var(--graphic-scale));
-        //     height: calc(var(--ih) * var(--graphic-scale));
-        //   }
-        // }
       }
     }
 
@@ -229,11 +341,14 @@
         }
       }
     }
+    &--Roadblocks-Description {
+    }
 
     &--Roadblocks-Graphics {
       @include hoverable-graphic-panel-with-background;
     }
-
+    &--Python-Description {
+    }
     &--Python-Graphic {
       @include hoverable-graphic-panel-with-background;
     }
@@ -241,9 +356,14 @@
     &--Scalable {
       @include hoverable-graphic-panel-with-background(1.025);
     }
+    &--Closing {
+    }
   }
 
-  #Deliver {
+  #Delivery {
+    &--Banner {
+    }
+
     &--Config {
       .section {
         &--wrapper {
@@ -252,7 +372,9 @@
       }
     }
 
-    &--Images {
+    &--Images-1,
+    &--Images-2,
+    &--Images-3 {
       .image-row {
         --image-row-scale: 1.35;
         --image-row-offset: 0.5;
@@ -269,4 +391,76 @@
       }
     }
   }
+
+  #Closing {
+    &--Copy {
+    }
+  }
 }
+
+// #Approach {
+//   &--Workflow {
+//   }
+//   &--Models {
+//   }
+//   &--Imperfections {
+//   }
+// }
+// #Texturing {
+//   &--Stages {
+//   }
+
+//   &--Contrast-Desc {
+//   }
+//   &--Contrast-Areas {
+//   }
+//   &--Contrast-Split {
+//   }
+//   &--Details-Description {
+//   }
+//   &--Details-Graphics {
+//   }
+//   &--Transition {
+//   }
+// }
+
+// #Rendering {
+//   &--Lighting {
+//   }
+//   &--Shadow-Description {
+//   }
+//   &--Shadow-Graphics {
+//   }
+//   &--Post{
+//   }
+//   &--Roadblocks-Description {
+//   }
+//   &--Roadblocks-Graphics {
+//   }
+//   &--Python-Description {
+//   }
+//   &--Python-Graphic {
+//   }
+//   &--Scalable {
+//   }
+//   &--Closing {
+//   }
+// }
+
+// #Delivery {
+//   &--Banner {
+//   }
+//   &--Config {
+//   }
+//   &--Images-1,
+//   &--Images-2,
+//   &--Images-3 {
+//   }
+//   &--Closing {
+//   }
+// }
+
+// #Closing {
+//   &--Copy {
+//   }
+// }

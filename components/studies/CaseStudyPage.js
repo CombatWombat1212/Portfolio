@@ -12,35 +12,27 @@ import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import useMatchHeight from "@/scripts/hooks/useMatchHeight";
 import useSameHeightChildren from "@/scripts/hooks/useMatchHeight";
 
-
-
 function insertNextElementAfterLastSection(newChildren, lastChapterIndex, lastChapterChildren) {
+  if (lastChapterChildren[0] == undefined && lastChapterChildren.length == 1) lastChapterChildren = [<></>];
 
-  if(lastChapterChildren[0] == undefined && lastChapterChildren.length == 1) lastChapterChildren = [<></>];
-
-  var lastSectionIndex = lastChapterChildren.findIndex(child => child.type.name === "Section");
+  var lastSectionIndex = lastChapterChildren.findIndex((child) => child.type.name === "Section");
 
   // If a "Section" was found within the last chapter, insert the "Next" element after it
   if (lastSectionIndex !== -1) {
-    const nextElementIndex = newChildren.findIndex(child => child.type.name === "Next");
+    const nextElementIndex = newChildren.findIndex((child) => child.type.name === "Next");
     if (nextElementIndex !== -1) {
       const nextElement = newChildren.splice(nextElementIndex, 1)[0];
       const lastChapter = newChildren[lastChapterIndex];
-      const newLastChapter = {...lastChapter, props: {...lastChapter.props, children: lastChapterChildren}};
+      const newLastChapter = { ...lastChapter, props: { ...lastChapter.props, children: lastChapterChildren } };
       newLastChapter.props.children.splice(lastSectionIndex + 1, 0, nextElement);
       newChildren[lastChapterIndex] = newLastChapter;
     }
   }
 }
 
-
-
-
 function StudyWrapper({ id, study, children }) {
   var newChildren = React.Children.toArray(children);
   if (!Array.isArray(newChildren)) newChildren = [newChildren];
-
-
 
   // Find the index of the last chapter within newChildren
   var lastChapterIndex = -1;
@@ -50,7 +42,6 @@ function StudyWrapper({ id, study, children }) {
       break;
     }
   }
-  
 
   // If a chapter was found, check if the last child of the last chapter is a "Section"
   if (lastChapterIndex !== -1) {
@@ -59,43 +50,27 @@ function StudyWrapper({ id, study, children }) {
     insertNextElementAfterLastSection(newChildren, lastChapterIndex, lastChapterChildren);
   }
 
-
-
-
-  const hasDynamicArrows = newChildren.some(child => {
+  const hasDynamicArrows = newChildren.some((child) => {
     if (child.type.name === "Chapter") {
-      const chapterChildren = Array.isArray(child.props.children)
-        ? child.props.children
-        : [child.props.children];
-      return chapterChildren.some(
-        chapterChild =>
-          chapterChild.type.name === "Section" && chapterChild.props.arrows
-      );
+      const chapterChildren = Array.isArray(child.props.children) ? child.props.children : [child.props.children];
+      return chapterChildren.some((chapterChild) => chapterChild.type.name === "Section" && chapterChild.props.arrows);
     }
     return false;
   });
 
-
-  const hasColLine = newChildren.some(child => {
+  const hasColLine = newChildren.some((child) => {
     if (child.type.name === "Chapter") {
-      const chapterChildren = Array.isArray(child.props.children)
-        ? child.props.children
-        : [child.props.children];
-      return chapterChildren.some(
-        chapterChild =>
-          chapterChild.type.name === "Section" && chapterChild.props.line
-      );
+      const chapterChildren = Array.isArray(child.props.children) ? child.props.children : [child.props.children];
+      return chapterChildren.some((chapterChild) => chapterChild.type.name === "Section" && chapterChild.props.line);
     }
     return false;
   });
-
 
   // const test = useSameHeightChildren(newChildren);
 
   // useEffect(() => {
   //   console.log(test);
   // }, [test]);
-  
 
   // TODO: it would be ideal to refactor this as something more reacty and run it in the section component
   useMountEffect(() => {
@@ -105,14 +80,10 @@ function StudyWrapper({ id, study, children }) {
     }
   });
 
-  const { bp } = useResponsive();
-  useColLine(hasColLine, {update: [bp] });
-
-  
-
   return (
     <div id={id} className="casestudy">
-      <Indicator  />
+      <ColLineInit hasColLine={hasColLine} />
+      <Indicator />
       <StudyPanel variant={"study"} study={study} />
       <Brief study={study} />
       {newChildren}
@@ -129,9 +100,7 @@ function CaseStudyPage({ id, study, children }) {
   );
 }
 
-
 function Next({ study }) {
-
   const captions = [
     "Room for one more?",
     "Case studies, anyone?",
@@ -140,16 +109,21 @@ function Next({ study }) {
     "There's more where that came from",
     "Get 'em while they're hot",
     "We're just gettin' started",
-  ]
+  ];
 
   const nextStudyTitle = useRandomString(captions);
 
   return (
-    <Section id="Closing--Next" type="passthrough" wrapperClassName={'pb-section-gap'} titled>
+    <Section id="Closing--Next" type="passthrough" wrapperClassName={"pb-section-gap"} titled>
       <Heading>{nextStudyTitle}</Heading>
       <NextStudies study={study} />
     </Section>
   );
+}
+
+function ColLineInit({ hasColLine }) {
+  const { bp } = useResponsive();
+  useColLine(hasColLine, { update: [bp] });
 }
 
 export default CaseStudyPage;

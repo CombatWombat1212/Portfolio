@@ -383,3 +383,10 @@ $enable-important-utilities: false !default;
     @return calc(#{$value1} * #{$bool} + #{$value2} * (1 - #{$bool}));
   }
 
+
+
+  @function min-mid-max($min, $mid, $max) {
+    @return Min(Max($min, $mid), $max);
+    // width: Min(Max(75%, var(--w)), 90%);
+
+  }

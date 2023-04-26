@@ -1,4 +1,5 @@
-import { RESIZE_TIMEOUT } from "@/scripts/GlobalUtilities";
+import { RESIZE_TIMEOUT, splitPx } from "@/scripts/GlobalUtilities";
+import useHorizontalResize from "@/scripts/hooks/useHorizontalResize";
 import useListener from "@/scripts/hooks/useListener";
 import { useEffect, useLayoutEffect, useRef } from "react";
 
@@ -20,6 +21,10 @@ function Row(targets) {
   this.midpoint = 0;
   this.targets = targets;
   this.uniform = false;
+  this.columns = {
+    total: 0,
+    filled: 0,
+  };
 }
 
 function Target(elem) {
@@ -42,6 +47,7 @@ function colLineGetRows(line) {
   var rows = 0;
   var columns = 0;
   var children = 0;
+  var gap = 0;
 
   if (getComputedStyle(parent).getPropertyValue("display") == "grid") {
     columns = getComputedStyle(parent).getPropertyValue("grid-template-columns").split(" ").length;
@@ -52,6 +58,7 @@ function colLineGetRows(line) {
     });
     children = childs.length;
     rows = Math.ceil(children / columns);
+    gap = splitPx(getComputedStyle(parent).getPropertyValue("gap") || getComputedStyle(parent).getPropertyValue("column-gap") || "0px");
   } else {
     // TODO: support non-grids
     console.error("colLineGetRows: parent is not a grid, non-grids aren't supported yet :(");
@@ -59,8 +66,10 @@ function colLineGetRows(line) {
 
   for (var i = 0; i < rows; i++) {
     var row = line.targets.slice(i * columns, (i + 1) * columns);
-
     var rowObj = new Row(row);
+    rowObj.columns.total = columns;
+    rowObj.columns.filled = row.length;
+    rowObj.gap = gap;
     line.rows.push(rowObj);
   }
 }
@@ -176,7 +185,15 @@ function colLineStyle(line) {
     var lineElem = lines[j];
     var row = line.rows[j];
 
+    const isIncomplete = row.columns.filled == row.columns.total ? 0 : 1;
     lineElem.style.setProperty("--line-top", row.midpoint + "px");
+    lineElem.style.setProperty("--columns-total", row.columns.total);
+    lineElem.style.setProperty("--columns-filled", row.columns.filled);
+    lineElem.style.setProperty("--column-gap", row.gap + "px");
+    lineElem.style.setProperty("--row-is-incomplete", isIncomplete);
+
+    // avoids an error where calc tries to divide by 0
+    if (!isIncomplete) lineElem.style.setProperty("--columns-in-row", 1);
 
     if (j == 0) {
       lineElem.style.setProperty("--line-left-offset", 1);
@@ -247,13 +264,17 @@ function useColLine(hasColLine, { update = null } = {}) {
 
   useLayoutEffect(() => {
     if (hasColLine) {
-      colLineInit();
+        colLineInit();
     }
   }, [hasColLine]);
 
+
+  useHorizontalResize(colLineInit);
+
+
   useEffect(() => {
     if (hasColLine) {
-      colLineInit();
+        colLineInit();
     }
   }, [update]);
 

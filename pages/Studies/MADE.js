@@ -8,11 +8,14 @@ import ImageRow from "@/components/global/ImageRow";
 import ProsCons, { Con, Pro } from "@/components/global/ProsCons";
 import { STUDY_MADE } from "@/data/CASE_STUDIES";
 import { useEffect } from "react";
+import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 
 function MADE() {
   const study = STUDY_MADE;
 
-  // TODO: update intro image to match the mockups
+  const { desktop, isBpAndDown, bp, loading } = useResponsive();
+  const lgAndDown = !(!isBpAndDown("lg") || loading);
+  const smAndDown = !(!isBpAndDown("sm") || loading);
 
   return (
     <>
@@ -26,7 +29,7 @@ function MADE() {
             </Heading>
 
             <Column>
-              <Description className={"text-col-2 mt-3"}>
+              <Description className={"text-col-2 gap-3 mt-3"}>
                 <p>
                   An offering central to MADE’s image and reputation is having an <b>on-site stylist to support customers</b> in finding their
                   best-suited look. However, at the time, <b>they didn’t feel their webstore reflected these offerings</b>.
@@ -36,7 +39,7 @@ function MADE() {
             </Column>
           </Section>
 
-          <Section id="Overview--Goal" type="overview" mainClassName={"gap-6"}>
+          <Section id="Overview--Goal" type="overview">
             <Title>Goal</Title>
             <Heading>Provide online customers with the same flexibility as in-store clientele with a dress shirt configurator</Heading>
             <Description>
@@ -97,7 +100,7 @@ function MADE() {
             </Column>
           </Section>
 
-          <Section id="Overview--Goal" background="tertiary" type={"columns"} titled>
+          <Section id="Overview--Outcome" background="tertiary" type={"columns"} titled>
             <Title>Outcome</Title>
             <Heading>Final configurator</Heading>
 
@@ -116,58 +119,58 @@ function MADE() {
             <Title>Development Pipeline</Title>
             <Heading>Workflow overview</Heading>
 
-            <Column caption="above">
+            <Column caption={"above"}>
               <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_modeling} />
-              <Description type="h3" className="graphic--caption">
+              <Description type={!smAndDown ? "h3" : "h5" } className="graphic--caption">
                 <b>Modelling</b>
               </Description>
             </Column>
 
             <Column caption="above">
               <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_sculpting} />
-              <Description type="h3" className="graphic--caption">
+              <Description type={!smAndDown ? "h3" : "h5" } className="graphic--caption">
                 <b>Sculpting</b>
               </Description>
             </Column>
 
             <Column caption="above">
               <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_creating_textures} />
-              <Description type="h3" className="graphic--caption">
+              <Description type={!smAndDown ? "h3" : "h5" } className="graphic--caption">
                 <b>Creating Textures</b>
               </Description>
             </Column>
 
             <Column caption="above">
               <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_scripting} />
-              <Description type="h3" className="graphic--caption">
+              <Description type={!smAndDown ? "h3" : "h5" } className="graphic--caption">
                 <b>Scripting</b>
               </Description>
             </Column>
 
-            <Column>
+            <Column caption={lgAndDown ? "above" : ""}>
               <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_texturing} />
-              <Description type="h3" className="graphic--caption mt-less">
+              <Description type={!smAndDown ? "h3" : "h5" } className={`graphic--caption ${!lgAndDown && "mt-less"}`}>
                 <b>Texturing</b>
               </Description>
             </Column>
 
-            <Column>
+            <Column caption={lgAndDown ? "above" : ""}>
               <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_composing} />
-              <Description type="h3" className="graphic--caption mt-less">
+              <Description type={!smAndDown ? "h3" : "h5" } className={`graphic--caption ${!lgAndDown && "mt-less"}`}>
                 <b>Composing</b>
               </Description>
             </Column>
 
-            <Column>
+            <Column caption={lgAndDown ? "above" : ""}>
               <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_compositing} />
-              <Description type="h3" className="graphic--caption mt-less">
+              <Description type={!smAndDown ? "h3" : "h5" } className={`graphic--caption ${!lgAndDown && "mt-less"}`}>
                 <b>Compositing</b>
               </Description>
             </Column>
 
-            <Column>
+            <Column caption={lgAndDown ? "above" : ""}>
               <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_rendering} />
-              <Description type="h3" className="graphic--caption mt-less">
+              <Description type={!smAndDown ? "h3" : "h5" } className={`graphic--caption ${!lgAndDown && "mt-less"}`}>
                 <b>Rendering</b>
               </Description>
             </Column>
@@ -427,7 +430,7 @@ function MADE() {
             </Column>
           </Section>
 
-          <Section id="Texturing--Details" type="columns" titled="above" background="background darker" wrapperClassName="mb-less-2">
+          <Section id="Texturing--Details-Description" type="columns" titled="above" background="background darker" wrapperClassName="mb-less-2">
             <Title>Additional Details</Title>
             <Column>
               <Heading>
@@ -443,7 +446,7 @@ function MADE() {
             </Column>
           </Section>
 
-          <Section id="Texturing--Details" type="columns" titled mainType="grid" background="background darker" mainClassName="mt-0">
+          <Section id="Texturing--Details-Graphics" type="columns" titled mainType="grid" background="background darker" mainClassName="mt-0">
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.details_threading} />
               <Heading type="h3" className="graphic--caption weight-reg">
@@ -746,19 +749,19 @@ function MADE() {
           </Section>
         </Chapter>
 
-        <Chapter id="Deliver" name="Deliver">
-          <Section id="Deliver--Banner" background={MADE_IMGS.banner_delivery}>
+        <Chapter id="Delivery" name="Delivery">
+          <Section id="Delivery--Banner" background={MADE_IMGS.banner_delivery}>
             <Heading>Delivered Project</Heading>
           </Section>
 
-          <Section id="Deliver--Config" background="background darkest" type={"columns"} titled>
+          <Section id="Delivery--Config" background="background darkest" type={"columns"} titled>
             <Heading className="color--primary">Final configurator</Heading>
             <Column>
               <Graphic type="video" img={MADE_IMGS.configurator_demo} className="b-rad" muted autoplay="scroll" controls loop />
             </Column>
           </Section>
 
-          <Section id="Deliver--Images" background="background darkest" type="passthrough" margin="none">
+          <Section id="Delivery--Images-1" background="background darkest" type="passthrough" margin="none">
             <ImageRow col="3" direction="right">
               <Graphic type="image" img={MADE_IMGS.delivery_shirt_01} />
               <Graphic type="image" img={MADE_IMGS.delivery_shirt_02} />
@@ -766,7 +769,7 @@ function MADE() {
             </ImageRow>
           </Section>
 
-          <Section id="Deliver--Images" background="background darkest" type="passthrough" margin="none">
+          <Section id="Delivery--Images-2" background="background darkest" type="passthrough" margin="none">
             <ImageRow col="3" direction="left">
               <Graphic type="image" img={MADE_IMGS.delivery_shirt_04} />
               <Graphic type="image" img={MADE_IMGS.delivery_shirt_05} />
@@ -774,7 +777,7 @@ function MADE() {
             </ImageRow>
           </Section>
 
-          <Section id="Deliver--Images" background="background darkest" type="passthrough" margin="none">
+          <Section id="Delivery--Images-3" background="background darkest" type="passthrough" margin="none">
             <ImageRow col="3" direction="right">
               <Graphic type="image" img={MADE_IMGS.delivery_shirt_07} />
               <Graphic type="image" img={MADE_IMGS.delivery_shirt_08} />
@@ -782,7 +785,7 @@ function MADE() {
             </ImageRow>
           </Section>
 
-          <Section id="Deliver--Closing" background={MADE_IMGS.banner_final_blue} />
+          <Section id="Delivery--Closing" background={MADE_IMGS.banner_final_blue} />
         </Chapter>
 
         <Chapter id="Closing" name="Closing">
@@ -791,17 +794,17 @@ function MADE() {
             <Heading>Foresight, and planning around project requirements</Heading>
             <Description className="text-col-2 text-gap-6">
               <p>
-                During this project&rsquo;s early stages, I identified many requirements for my images. Ones that I needed to meet if they were to suit my
-                client&rsquo;s needs. An example of this was when we first discussed creating a single shirt from stacked image layers. With this goal
-                understood, I was able to discern the steps necessary to match the use-case. I knew each image needed their object&rsquo;s shadows placed in
-                the background. Otherwise, they wouldn&rsquo;t combine realistically.
+                During this project&rsquo;s early stages, I identified many requirements for my images. Ones that I needed to meet if they were to
+                suit my client&rsquo;s needs. An example of this was when we first discussed creating a single shirt from stacked image layers. With
+                this goal understood, I was able to discern the steps necessary to match the use-case. I knew each image needed their object&rsquo;s
+                shadows placed in the background. Otherwise, they wouldn&rsquo;t combine realistically.
               </p>
 
               <p>
                 This gave me significant time to plan ahead. I conducted tests using the first few models, and determined the best approach to
                 creating realistic shadows. Allowing me to then build the project from the ground-up with the eventuality of this challenge in mind.
-                Then, when the time came to create the objects&rsquo; shadows, I was fully prepared to traverse the issue. With this, and other similar
-                moments, the greatest success of this project was my foresight and planning.
+                Then, when the time came to create the objects&rsquo; shadows, I was fully prepared to traverse the issue. With this, and other
+                similar moments, the greatest success of this project was my foresight and planning.
               </p>
             </Description>
 
@@ -837,9 +840,9 @@ function MADE() {
                   correct them, re-render, and meet the intended deadline.
                 </p>
                 <p>
-                  This teachable moment reminded me of what is possible when you lose sight of a project&rsquo;s full scope. Going forward, I aim to address
-                  this by regularly checking my project outline with every working session. Thereby reminding myself of the bigger picture, and to
-                  look ahead to the next steps towards which I&rsquo;m building.
+                  This teachable moment reminded me of what is possible when you lose sight of a project&rsquo;s full scope. Going forward, I aim to
+                  address this by regularly checking my project outline with every working session. Thereby reminding myself of the bigger picture,
+                  and to look ahead to the next steps towards which I&rsquo;m building.
                 </p>
               </Description>
             </Column>
