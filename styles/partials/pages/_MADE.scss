@@ -1,3 +1,9 @@
+.section--wrapper {
+  overflow: hidden;
+}
+
+
+
 @mixin split-hover {
   &:hover,
   &:focus,
@@ -175,7 +181,7 @@
           --site-max-width: calc(100% - (var(--sec-gap) * 2));
           max-width: var(--site-max-width);
           --col:2;
-          --graphic-scale: 0.75;
+          --graphic-scale: 0.625;
         }
 
 
@@ -208,6 +214,56 @@
     }
 
     &--Scope {
+
+      .section{
+
+        --configurator-left-offset: 2rem;
+        --configurator-material-width: 2.75rem;
+        --left: calc(((var(--configurator-left-offset) + var(--configurator-material-width)) * -1)/2);
+        
+        &--copy, .viewer, .viewer--heading{
+          @include md{
+            $amt: 60%;
+            @include mx-auto;
+            max-width: $amt;
+            width: $amt;
+            transform: translate(var(--left));
+          }
+
+          @include sm-down{
+            --configurator-left-offset: 1.75rem;
+          }
+
+        }
+
+        .viewer, .viewer--heading{
+          @include sm-down{
+            $amt: 81.5%;
+            max-width: $amt;
+            width: $amt;
+          }
+        }
+        
+
+
+        .assets{
+          @include md-down{
+            $amt: 80%;
+            @include mx-auto;
+            max-width: $amt;
+            width: $amt;
+          }
+          @include sm-down{
+            $amt: 100%;
+            max-width: $amt;
+            width: $amt;
+          }
+
+        }
+
+
+
+      }
     }
     &--Considerations {
     }

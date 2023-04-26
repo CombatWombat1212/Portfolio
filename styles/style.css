@@ -484,6 +484,11 @@ body {
   }
 }
 
+:root {
+  --column-grid-min: 0;
+  --column-grid-max: 12;
+}
+
 @media screen and (max-width: 91.9375em) {
   .col-0 {
     width: 0%;
@@ -5281,7 +5286,8 @@ h3 + .studypanel--paragraph {
 }
 
 .configurator {
-  --outline-on: 0.25rem solid #404064;
+  --outline-width: 0.25rem;
+  --outline-on: var(--outline-width) solid #404064;
   --outline-off: 0rem solid #404064;
   --outline-partial: 0.125rem solid #404064;
   width: 100%;
@@ -5293,16 +5299,81 @@ h3 + .studypanel--paragraph {
   row-gap: var(--config-gap);
 }
 
+@media screen and (max-width: 79.9375em) {
+  .configurator {
+    --config-gap: 4.5rem;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  .configurator {
+    --config-gap: 3rem;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  .configurator {
+    display: flex;
+    flex-direction: column;
+    --config-gap: 1.5rem;
+  }
+}
+
 .configurator--panel {
   --config-panel-width: calc(((var(--site-max-width) - (var(--config-gap) * (2 - 1))) / 2) - 0rem);
   width: var(--config-panel-width);
 }
 
+@media screen and (max-width: 49.9375em) {
+  .configurator--panel {
+    --config-panel-width: 100%;
+  }
+}
+
 .configurator .assets {
   --assets-gap: 2rem;
+  --assets-col: 3;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+@media screen and (max-width: 79.9375em) {
+  .configurator .assets {
+    --assets-gap: 1.75rem;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  .configurator .assets {
+    --assets-gap: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  .configurator .assets {
+    order: 1;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: var(--assets-gap);
+    column-gap: var(--assets-gap);
+    row-gap: var(--assets-gap);
+    width: 100%;
+    padding: var(--assets-gap);
+    padding-top: 0rem;
+    margin-top: calc(var(--outline-width) * -1);
+  }
+  .configurator .assets::-webkit-scrollbar {
+    width: 0.25rem;
+  }
+  .configurator .assets::-webkit-scrollbar-track {
+    background-color: #E0E0EA;
+  }
+  .configurator .assets::-webkit-scrollbar-thumb {
+    background-color: #757599;
+  }
 }
 
 .configurator .assets--row {
@@ -5317,10 +5388,25 @@ h3 + .studypanel--paragraph {
   margin-top: calc(var(--config-gap) / 2);
 }
 
+@media screen and (max-width: 49.9375em) {
+  .configurator .assets--row + .assets--row {
+    margin-top: 0rem;
+  }
+}
+
 .configurator .assets--category {
   display: flex;
   flex-direction: column;
   flex: 1;
+}
+
+@media screen and (max-width: 49.9375em) {
+  .configurator .assets--category {
+    flex: unset;
+    --col: calc((12 / var(--assets-col)) * Max(1, (var(--assets-col) - var(--assets-options-count))));
+    width: calc(var(--column-grid-max) / var(--col) * 100%);
+    height: auto;
+  }
 }
 
 .configurator .assets--inner {
@@ -5329,6 +5415,18 @@ h3 + .studypanel--paragraph {
   gap: var(--assets-gap);
   column-gap: var(--assets-gap);
   row-gap: var(--assets-gap);
+}
+
+@media screen and (max-width: 49.9375em) {
+  .configurator .assets--inner {
+    margin-left: calc((var(--assets-gap) - var(--outline-width)) * -1);
+    padding-right: calc((var(--assets-gap) - var(--outline-width)));
+    margin-right: calc((var(--assets-gap) - var(--outline-width)));
+    margin-top: var(--outline-width);
+  }
+  .assets--row:not(:last-child) .assets--inner {
+    border-right: solid #E0E0EA 0.25rem;
+  }
 }
 
 .configurator .assets--panel {
@@ -5357,14 +5455,40 @@ h3 + .studypanel--paragraph {
   outline: var(--outline-off);
 }
 
-.configurator .viewer {
-  background-color: #F3F3F7;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+@media screen and (max-width: 91.9375em) {
+  .configurator .assets--panel {
+    --graphic-scale: 0.85;
+  }
 }
 
-.configurator .viewer--inner {
+@media screen and (max-width: 79.9375em) {
+  .configurator .assets--panel {
+    --graphic-scale: 0.825;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  .configurator .assets--panel {
+    --graphic-scale: 0.675;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  .configurator .assets--panel {
+    aspect-ratio: 1/1;
+    height: unset;
+    --graphic-scale: 0.775;
+    width: 7rem;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  .configurator .assets--heading {
+    display: none;
+  }
+}
+
+.configurator .viewer {
   border-radius: var(--b-rad);
   -webkit-border-radius: var(--b-rad);
   -moz-border-radius: var(--b-rad);
@@ -5375,6 +5499,34 @@ h3 + .studypanel--paragraph {
   flex-direction: column;
   justify-content: center;
   padding-top: 1rem;
+  position: relative;
+}
+
+.configurator .viewer--wrapper {
+  background-color: #F3F3F7;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+@media screen and (max-width: 49.9375em) {
+  .configurator .viewer {
+    order: 0;
+    width: 100%;
+    padding-top: 0rem;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  .configurator .viewer--preview {
+    transform: scale(0.95);
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  .configurator .viewer--preview {
+    transform: scale(0.925) translateY(-0.35rem);
+  }
 }
 
 .configurator .material {
@@ -5383,6 +5535,16 @@ h3 + .studypanel--paragraph {
   width: 100%;
   cursor: pointer;
   transition: 0.2s;
+}
+
+@media screen and (max-width: 49.9375em) {
+  .configurator .material--wrapper {
+    width: fit-content;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(calc(100% + var(--configurator-left-offset)), -50%);
+  }
 }
 
 .configurator .material--group {
@@ -5398,6 +5560,43 @@ h3 + .studypanel--paragraph {
   row-gap: var(--gap);
   margin-top: 0.25rem;
   margin-bottom: 3.25rem;
+}
+
+@media screen and (max-width: 91.9375em) {
+  .configurator .material--group {
+    margin-top: -0.45rem;
+  }
+}
+
+@media screen and (max-width: 79.9375em) {
+  .configurator .material--group {
+    margin-top: -0.65rem;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  .configurator .material--group {
+    width: 50%;
+    --gap: 0.95rem;
+    margin-top: -0.25rem;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  .configurator .material--group {
+    --gap: 1.35rem;
+    display: flex;
+    flex-direction: column;
+    width: var(--configurator-material-width);
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  .configurator .material {
+    aspect-ratio: 1/1;
+  }
 }
 
 .configurator .material__on {
@@ -8264,6 +8463,10 @@ h3 + .studypanel--paragraph {
   background-color: #E9E9F2;
 }
 
+.section--wrapper {
+  overflow: hidden;
+}
+
 @media screen and (max-width: 79.9375em) {
   #Made .brief--group__study {
     width: 80%;
@@ -8438,7 +8641,7 @@ h3 + .studypanel--paragraph {
     --site-max-width: calc(100% - (var(--sec-gap) * 2));
     max-width: var(--site-max-width);
     --col:2;
-    --graphic-scale: 0.75;
+    --graphic-scale: 0.625;
   }
 }
 
@@ -8457,6 +8660,51 @@ h3 + .studypanel--paragraph {
 
 #Made #Approach--Workflow .section .graphic--caption {
   white-space: nowrap;
+}
+
+#Made #Approach--Scope .section {
+  --configurator-left-offset: 2rem;
+  --configurator-material-width: 2.75rem;
+  --left: calc(((var(--configurator-left-offset) + var(--configurator-material-width)) * -1)/2);
+}
+
+@media screen and (max-width: 49.9375em) and (min-width: 37em) {
+  #Made #Approach--Scope .section--copy, #Made #Approach--Scope .section .viewer, #Made #Approach--Scope .section .viewer--heading {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 60%;
+    width: 60%;
+    transform: translate(var(--left));
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Made #Approach--Scope .section--copy, #Made #Approach--Scope .section .viewer, #Made #Approach--Scope .section .viewer--heading {
+    --configurator-left-offset: 1.75rem;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Made #Approach--Scope .section .viewer, #Made #Approach--Scope .section .viewer--heading {
+    max-width: 81.5%;
+    width: 81.5%;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Made #Approach--Scope .section .assets {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 80%;
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Made #Approach--Scope .section .assets {
+    max-width: 100%;
+    width: 100%;
+  }
 }
 
 #Made #Approach--Models .section--main {

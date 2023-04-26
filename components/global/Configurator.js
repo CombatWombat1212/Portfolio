@@ -20,7 +20,17 @@ const defaultConfig = {
   material: "canvas_5",
 };
 
-const components = ["base_shirt", "collar_band", "collar_mini_wide", "collar_wide", "cuff_regular", "cuff_french", "placket_hidden", "placket_regular", "placket_tuxedo"];
+const components = [
+  "base_shirt",
+  "collar_band",
+  "collar_mini_wide",
+  "collar_wide",
+  "cuff_regular",
+  "cuff_french",
+  "placket_hidden",
+  "placket_regular",
+  "placket_tuxedo",
+];
 
 function updateActiveState(index, length) {
   return Array.from({ length }, (_, i) => i === index);
@@ -119,39 +129,79 @@ function Configurator() {
     <>
       <div className="configurator">
         <div className="configurator--panel assets">
-          <div className="assets--row">
-            <div className="assets--category">
-              <Heading type="h3" className="configurator--title asset--heading">
+          <div
+            className="assets--row"
+            style={{
+              "--assets-categories-count": 1,
+            }}>
+            <div
+              className="assets--category"
+              style={{
+                "--assets-options-count": 3,
+                "--assets-columns-count": 1,
+              }}>
+              <Heading type="h3" className="configurator--title assets--heading">
                 <b>Collars</b>
               </Heading>
               <div className="assets--inner">
-                <Options imgs={[MADE_IMGS.component_collar_wide, MADE_IMGS.component_collar_mini_wide, MADE_IMGS.component_collar_band]} config={config} setConfig={setConfig} />
+                <Options
+                  imgs={[MADE_IMGS.component_collar_wide, MADE_IMGS.component_collar_mini_wide, MADE_IMGS.component_collar_band]}
+                  config={config}
+                  setConfig={setConfig}
+                />
               </div>
             </div>
           </div>
 
-          <div className="assets--row">
-            <div className="assets--category">
-              <Heading type="h3" className="configurator--title asset--heading">
+          <div
+            className="assets--row"
+            style={{
+              "--assets-categories-count": 1,
+            }}>
+            <div
+              className="assets--category"
+              style={{
+                "--assets-options-count": 3,
+                "--assets-columns-count": 1,
+              }}>
+              <Heading type="h3" className="configurator--title assets--heading">
                 <b>Plackets</b>
               </Heading>
               <div className="assets--inner">
-                <Options imgs={[MADE_IMGS.component_placket_regular, MADE_IMGS.component_placket_tuxedo, MADE_IMGS.component_placket_hidden]} config={config} setConfig={setConfig} />
+                <Options
+                  imgs={[MADE_IMGS.component_placket_regular, MADE_IMGS.component_placket_tuxedo, MADE_IMGS.component_placket_hidden]}
+                  config={config}
+                  setConfig={setConfig}
+                />
               </div>
             </div>
           </div>
 
-          <div className="assets--row">
-            <div className="assets--category">
-              <Heading type="h3" className="configurator--title asset--heading">
+          <div
+            className="assets--row"
+            style={{
+              "--assets-categories-count": 2,
+            }}>
+            <div
+              className="assets--category"
+              style={{
+                "--assets-options-count": 2,
+                "--assets-columns-count": 2,
+              }}>
+              <Heading type="h3" className="configurator--title assets--heading">
                 <b>Cuffs</b>
               </Heading>
               <div className="assets--inner">
                 <Options imgs={[MADE_IMGS.component_cuff_regular, MADE_IMGS.component_cuff_french]} config={config} setConfig={setConfig} />
               </div>
             </div>
-            <div className="assets--category">
-              <Heading type="h3" className="configurator--title asset--heading">
+            <div
+              className="assets--category d-md-none"
+              style={{
+                "--assets-options-count": 1,
+                "--assets-columns-count": 2,
+              }}>
+              <Heading type="h3" className="configurator--title assets--heading">
                 <b>Base</b>
               </Heading>
               <div className="assets--inner ">
@@ -161,18 +211,19 @@ function Configurator() {
           </div>
         </div>
 
-        <div className="configurator--panel viewer">
+        <div className="configurator--panel viewer--wrapper">
           <Heading type="h3" className="configurator--title viewer--heading">
             <b>Preview</b>
           </Heading>
-          <div className="viewer--inner">
-            <div className="viewer--preview">
-              <Preview imgs={imgs} />
-            </div>
-
-            <div className="viewer--materials">
-              <div className="material--group">
-                <Materials materials={supportedMaterials} config={config} setConfig={setConfig} />
+          <div className="viewer">
+            <div className="viewer--inner">
+              <div className="viewer--preview">
+                <Preview imgs={imgs} />
+              </div>
+              <div className="viewer--materials material--wrapper">
+                <div className="material--group">
+                  <Materials materials={supportedMaterials} config={config} setConfig={setConfig} />
+                </div>
               </div>
             </div>
           </div>
@@ -308,7 +359,6 @@ function configGetImgActives(processed, config) {
   }
   return processed;
 }
-
 
 function Materials({ materials, config, setConfig }) {
   var init = [];

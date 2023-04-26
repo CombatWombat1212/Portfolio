@@ -1,6 +1,11 @@
 $column-grid-min: 0;
 $column-grid-max: 12;
 
+:root{
+    --column-grid-min: #{$column-grid-min};
+    --column-grid-max: #{$column-grid-max};
+}
+
 @mixin col-width($b, $i:0) {
 //     $col:0;
 //     @if($b == 0){

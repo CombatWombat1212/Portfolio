@@ -1,6 +1,3 @@
-// .section--wrapper {
-//   overflow: hidden;
-// }
 
 @mixin koala-col($id, $sel, $child...) {
   @at-root #Koalako ##{$id} .section--column {

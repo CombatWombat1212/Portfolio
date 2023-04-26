@@ -176,6 +176,7 @@ function MADE() {
             </Column>
           </Section>
 
+
           <Section id="Approach--Scope" type="columns" titled>
             <Title>Scope</Title>
             <Heading>Required 3D assets</Heading>
