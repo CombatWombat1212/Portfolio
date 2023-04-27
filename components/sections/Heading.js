@@ -41,11 +41,11 @@ function Heading({ children, type, className, innerClassName, italic, sameHeight
   className = className ? className : "";
   innerClassName = innerClassName ? innerClassName : "";
 
-  const { desktop } = useResponsive();
+  const { desktop, loading } = useResponsive();
 
   const reference = useRef(null);
   sameHeight = sameHeight ? sameHeight : false;
-  const sameHeightObj = useSameHeight(sameHeight, reference, { resize: "horizontal", update:[desktop] });
+  const sameHeightObj = useSameHeight(sameHeight, reference, { resize: "horizontal", update:[desktop, loading] });
 
 
   const [styles, setStyles] = useState({});

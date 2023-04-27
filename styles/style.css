@@ -8565,13 +8565,15 @@ h3 + .studypanel--paragraph {
   }
 }
 
-#Made #Overview--Needs .section--description, #Made #Overview--Needs .section--description p {
-  margin-top: 0.35rem !important;
+#Made #Overview--Needs .section--description:not(.graphic--caption),
+#Made #Overview--Needs .section--description p:not(.graphic--caption) {
+  margin-top: 0.35rem;
 }
 
 @media screen and (max-width: 36.9375em) {
-  #Made #Overview--Needs .section--description, #Made #Overview--Needs .section--description p {
-    margin-top: 0.15rem !important;
+  #Made #Overview--Needs .section--description:not(.graphic--caption),
+  #Made #Overview--Needs .section--description p:not(.graphic--caption) {
+    margin-top: 0.15rem;
   }
 }
 
@@ -8728,13 +8730,15 @@ h3 + .studypanel--paragraph {
   }
 }
 
-#Made #Approach--Considerations .section--description, #Made #Approach--Considerations .section--description p {
-  margin-top: 0.35rem !important;
+#Made #Approach--Considerations .section--description:not(.graphic--caption),
+#Made #Approach--Considerations .section--description p:not(.graphic--caption) {
+  margin-top: 0.35rem;
 }
 
 @media screen and (max-width: 36.9375em) {
-  #Made #Approach--Considerations .section--description, #Made #Approach--Considerations .section--description p {
-    margin-top: 0.15rem !important;
+  #Made #Approach--Considerations .section--description:not(.graphic--caption),
+  #Made #Approach--Considerations .section--description p:not(.graphic--caption) {
+    margin-top: 0.15rem;
   }
 }
 
@@ -8815,18 +8819,51 @@ h3 + .studypanel--paragraph {
   --ch: calc(((var(--site-max-width) - (var(--gap) * (3 - 1))) / 3) - calc(var(--section-graphic-panel-pad) * 2));
 }
 
+@media screen and (max-width: 49.9375em) {
+  #Made #Approach--Models .section--main {
+    --section-graphic-panel-pad: 0rem;
+    --gap: 2rem;
+    --cw: calc(((100% - (var(--gap) * (2 - 1))) / 2) - 0rem);
+    --ch: calc(((100% - (var(--gap) * (2 - 1))) / 2) - calc(var(--section-graphic-panel-pad) * 2));
+  }
+}
+
 #Made #Approach--Models .section--column {
   width: var(--cw);
+  max-width: unset;
+  min-width: unset;
 }
 
 #Made #Approach--Models .section--graphic {
   --graphic-scale: 0.185;
-  height: var(--ch);
+  height: unset;
+  aspect-ratio: 1/1;
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Made #Approach--Models .section--graphic {
+    --graphic-scale: 0.115;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Made #Approach--Models .section--graphic {
+    --graphic-scale: 0.15;
+  }
 }
 
 #Made #Approach--Models .section--graphic img {
-  width: calc(var(--iw) * var(--graphic-scale));
-  height: calc(var(--ih) * var(--graphic-scale));
+  --w: calc(var(--iw) * var(--graphic-scale));
+  --h: calc(var(--ih) * var(--graphic-scale));
+  width: var(--w);
+  height: var(--h);
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Made #Approach--Models .section--graphic img {
+    width: calc(Max(Min(45%, var(--w)), 55%));
+    height: calc(Max(Min(45%, var(--h)), 55%));
+  }
 }
 
 #Made #Approach--Imperfections .split {
@@ -8839,8 +8876,60 @@ h3 + .studypanel--paragraph {
   --split-graphic-scale: 0.865;
 }
 
+@media screen and (max-width: 49.9375em) {
+  #Made #Approach--Imperfections .column-1 {
+    order: 1;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Made #Approach--Imperfections .column-2 {
+    order: 0;
+  }
+}
+
+#Made #Texturing--Stages .section--heading {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Made #Texturing--Stages .section--heading {
+    margin-top: 0rem;
+  }
+}
+
 #Made #Texturing--Stages .section--main {
   grid-template-columns: repeat(3, 1fr);
+}
+
+@media screen and (max-width: 79.9375em) {
+  #Made #Texturing--Stages .section--main {
+    --gap:5rem;
+    gap: var(--gap);
+    column-gap: var(--gap);
+    row-gap: var(--gap);
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Made #Texturing--Stages .section--main {
+    --gap:5.5rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Made #Texturing--Stages .section--main {
+    --gap: 4.5rem;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Made #Texturing--Stages .section--main {
+    --gap: 3.75rem;
+  }
 }
 
 #Made #Texturing--Contrast-Areas .graphic {

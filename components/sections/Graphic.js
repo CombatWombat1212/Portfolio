@@ -323,7 +323,8 @@ function Graphic({
           {...(sync != undefined ? { "data-sync": sync } : {})}
           {...(typeof autoplay === "string" && autoplay.includes("hover") ? { "data-autoplay-hover": true } : {})}
           {...(autoplay ? { "data-autoplay": autoplay } : {})}
-          {...props}>
+          {...props}
+          >
           {effect && <Effect effect={effect} />}
 
           <video
@@ -336,13 +337,18 @@ function Graphic({
             loop={loop}
             muted={muted}
             autoPlay={ap}
-            controls={controls}>
+            controls={controls}
+            disableRemotePlayback="true"
+
+            >
             <source src={`.${img.src}`} type={`video/${img.type}`}></source>
           </video>
 
 
           {typeof autoplay === "string" && autoplay.includes("hover") && (
-            <video className={`${innerClassName} video--background`} alt={img.alt} width={width} height={height}>
+            <video className={`${innerClassName} video--background`} alt={img.alt} width={width} height={height}
+            disableRemotePlayback="true"
+            >
               <source src={`.${img.src}`} type={`video/${img.type}`}></source>
             </video>
           )}

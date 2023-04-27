@@ -1,8 +1,8 @@
 import { RESIZE_TIMEOUT, splitPx } from "@/scripts/GlobalUtilities";
+import useHorizontalResize from "@/scripts/hooks/useHorizontalResize";
+import { useEffect, useState } from "react";
 
 var allAnchoredArrows = [];
-
-
 
 function refreshAnchorHeight() {
   if (allAnchoredArrows.length == 0) return;
@@ -23,29 +23,32 @@ function refreshAnchorHeight() {
     anchorNextSiblings = Array.from(anchorParent.children).slice(Array.from(anchorParent.children).indexOf(anchor) + 1, anchorParent.children.length);
 
     var arrowHeight = splitPx(window.getComputedStyle(arrow).height);
-    var anchorHeight = splitPx(window.getComputedStyle(anchor).height) + splitPx(window.getComputedStyle(anchor).paddingTop) + splitPx(window.getComputedStyle(anchor).paddingBottom);
+    var anchorHeight =
+      splitPx(window.getComputedStyle(anchor).height) +
+      splitPx(window.getComputedStyle(anchor).paddingTop) +
+      splitPx(window.getComputedStyle(anchor).paddingBottom);
 
     var anchorPreviousSiblingsHeight = 0,
       anchorNextSiblingsHeight = 0;
 
     for (var j = 0; j < anchorPreviousSiblings.length; j++) {
-      anchorPreviousSiblingsHeight += splitPx(window.getComputedStyle(anchorPreviousSiblings[j]).height) + splitPx(window.getComputedStyle(anchorPreviousSiblings[j]).marginBottom) + splitPx(window.getComputedStyle(anchorPreviousSiblings[j]).marginTop);
+      anchorPreviousSiblingsHeight +=
+        splitPx(window.getComputedStyle(anchorPreviousSiblings[j]).height) +
+        splitPx(window.getComputedStyle(anchorPreviousSiblings[j]).marginBottom) +
+        splitPx(window.getComputedStyle(anchorPreviousSiblings[j]).marginTop);
     }
+
+    anchorPreviousSiblingsHeight += splitPx(window.getComputedStyle(anchor).marginTop);
 
     for (var j = 0; j < anchorNextSiblings.length; j++) {
       anchorNextSiblingsHeight += splitPx(window.getComputedStyle(anchorNextSiblings[j]).height);
     }
 
-    var arrowMarginTop = anchorPreviousSiblingsHeight + (anchorHeight/2) - (arrowHeight/2) ;
+    var arrowMarginTop = anchorPreviousSiblingsHeight + anchorHeight / 2 - arrowHeight / 2;
 
     arrow.style.setProperty("--arrow-margin-top", `${arrowMarginTop}px`);
   }
 }
-
-
-
-
-
 
 function getAnchoredArrows() {
   var arrows = document.querySelectorAll(".arrow--mask__anchored");
@@ -56,6 +59,8 @@ function getAnchoredArrows() {
   for (var i = 0; i < arrows.length; i++) {
     var arrowElement = arrows[i];
     var arrow = arrows[i];
+    arrow.closest(".arrow--column").classList.remove("arrow--column__hidden");
+
     var anchor = null;
     while (!anchor) {
       let graphic = arrow.querySelector(`.${targetClassName}:not([class*="arrow"])`);
@@ -72,35 +77,69 @@ function getAnchoredArrows() {
 
     if (!anchor) continue;
 
-    allAnchoredArrows.push({ arrow: arrowElement, anchor: anchor });
+    if (!allAnchoredArrows.some((entry) => entry.arrow === arrowElement)) {
+      allAnchoredArrows.push({ arrow: arrowElement, anchor: anchor });
+    }
   }
 }
 
+function useAnchoredArrowsInit(children, options = {}) {
 
-
-
-function anchoredArrowsInit() {
-  if (typeof window == "undefined") return;
-
-  getAnchoredArrows();
-  refreshAnchorHeight();
-
-  
-  if(allAnchoredArrows.length == 0) return;
-  var isResizing;
-  window.addEventListener("resize", function (event) {
-    window.clearTimeout(isResizing);
-    isResizing = setTimeout(function () {
-      refreshAnchorHeight();
-    }, RESIZE_TIMEOUT);
+  const hasDynamicArrows = children.some((child) => {
+    if (child.type.name === "Chapter") {
+      const chapterChildren = Array.isArray(child.props.children) ? child.props.children : [child.props.children];
+      return chapterChildren.some((chapterChild) => chapterChild.type.name === "Section" && chapterChild.props.arrows);
+    }
+    return false;
   });
-  
+
+  useRunAnchoredArrows(hasDynamicArrows, options);
 }
 
+function useRunAnchoredArrows(hasDynamicArrows, options) {
+  const { update = null, timeout = 0 } = options;
 
+  const [mounted, setMounted] = useState(false);
 
+  useEffect(() => {
+    if (typeof document === "undefined" || typeof window === "undefined" || !hasDynamicArrows) {
+      return;
+    }
+    setMounted(true);
+  }, [hasDynamicArrows]);
 
-function removeExcessArrows(){
+  useEffect(() => {
+    if (!mounted) return;
+    run();
+  }, [mounted]);
+
+  useEffect(() => {
+    if (!mounted) return;
+    setTimeout(() => {
+    run();
+    }, timeout);
+  }, [update]);
+
+  function run() {
+    getAnchoredArrows();
+    refreshAnchorHeight();
+    removeExcessArrows();
+  }
+
+  var isResizing;
+
+  function ran() {
+    window.clearTimeout(isResizing);
+    isResizing = setTimeout(function () {
+      console.log(allAnchoredArrows);
+      run();
+    }, RESIZE_TIMEOUT);
+  }
+
+  useHorizontalResize(ran);
+}
+
+function removeExcessArrows() {
   var gridSections = document.querySelectorAll(".section--main__grid");
 
   gridSections = Array.from(gridSections).filter((section) => {
@@ -124,7 +163,4 @@ function removeExcessArrows(){
   });
 }
 
-
-
-
-export { anchoredArrowsInit, removeExcessArrows };
+export { useAnchoredArrowsInit, removeExcessArrows };

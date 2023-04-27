@@ -189,7 +189,9 @@ function MADE() {
             <Title>Considerations</Title>
             <Heading>Understanding shirt anatomy to create accurate models</Heading>
             <Description className="mt-less">
-              <p>A few key considerations when designing the shirt models that needed to be just right in order to accurately reflect MADE’s products:</p>
+              <p>
+                A few key considerations when designing the shirt models that needed to be just right in order to accurately reflect MADE’s products:
+              </p>
             </Description>
 
             <Column>
@@ -258,10 +260,8 @@ function MADE() {
               <Title>Imperfections</Title>
               <Heading>
                 Nothing real is perfect,
-                <br />
-                but too imperfect
-                <br />
-                is just messy
+                <br className="d-block d-lg-none d-sm-block" /> but too imperfect
+                <br className="d-block d-lg-none d-sm-block" /> is just messy
               </Heading>
               <Description>
                 <p>
@@ -279,8 +279,7 @@ function MADE() {
 
           <Section id="Approach--Summary" titled mainClassName={"gap-"}>
             <Heading>
-              The shirts now needed to be textured <br />
-              using MADE’s own fabric swatches.
+              The shirts now needed to be textured <br className="d-sm-none " /> using MADE’s own fabric swatches.
             </Heading>
           </Section>
         </Chapter>
@@ -290,13 +289,11 @@ function MADE() {
             <Title>Workflow</Title>
             <Column>
               <Heading>
-                Converting fabric swatches
-                <br />
-                to 3D textures
+                Converting <br className="d-block d-md-none " /> fabric swatches <br className="d-block d-md-none " /> to 3D textures
               </Heading>
             </Column>
             <Column>
-              <Description className={"mt-less"}>
+              <Description className={desktop && "mt-less" }>
                 <p>
                   <b>In order for the models to reflect actual products, they needed to be textured with over 40 scans of MADE’s custom fabrics.</b>
                 </p>
@@ -321,42 +318,46 @@ function MADE() {
             mainClassName="gap-6"
             mainType="grid"
             background="background darker">
+
+
             <Column caption="above">
-              <Description type="h3" className="graphic--caption weight-reg">
+              <Heading type="h3" className={`graphic--caption weight-reg`}>
                 Fabric Scan
-              </Description>
+              </Heading>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_1_scan} />
             </Column>
             <Column caption="above">
-              <Description type="h3" className="graphic--caption weight-reg">
+              <Heading type="h3" className={`graphic--caption weight-reg`}>
                 Cropped
-              </Description>
+              </Heading>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_2_cropped} />
             </Column>
             <Column caption="above">
-              <Description type="h3" className="graphic--caption weight-reg">
+              <Heading type="h3" className={`graphic--caption weight-reg`}>
                 Traced
-              </Description>
+              </Heading>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_3_traced} />
             </Column>
             <Column caption="above">
-              <Description type="h3" className="graphic--caption weight-reg">
+              <Heading type="h3" className={`graphic--caption weight-reg`}>
                 Straightened
-              </Description>
+              </Heading>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_4_straightened} />
             </Column>
             <Column caption="above">
-              <Description type="h3" className="graphic--caption weight-reg">
+              <Heading type="h3" className={`graphic--caption weight-reg`} sameHeight="repeatable_texture">
                 Repeatable texture
-              </Description>
+              </Heading>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_5_repeatable} />
             </Column>
             <Column caption="above">
-              <Description type="h3" className="graphic--caption weight-reg">
+              <Heading type="h3" className={`graphic--caption weight-reg`} sameHeight="repeatable_texture">
                 3D material
-              </Description>
+              </Heading>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_6_material} />
             </Column>
+
+
           </Section>
 
           <Section id="Texturing--Contrast-Desc" type="columns" titled="above" background="background darker" wrapperClassName="mb-less-2">

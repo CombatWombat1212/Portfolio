@@ -20,6 +20,8 @@ const useSameHeight = (groupKey, ref, options = {}) => {
     return false;
   }
 
+
+  
   const logElementsByGroup = () => {
     // console.log("Groups:", groups);
   };

@@ -35,18 +35,18 @@
       @include mx-auto;
     }
 
-
     &--description {
-      &, & p {
-        margin-top: 0.35rem!important;
+      &:not(.graphic--caption),
+      & p:not(.graphic--caption) {
+        margin-top: 0.35rem;
         @include sm-down {
-          margin-top: 0.15rem!important;
+          margin-top: 0.15rem;
         }
       }
     }
 
     &--main {
-      display:grid;
+      display: grid;
       grid-template-columns: repeat(4, 1fr);
 
       @include lg-down {
@@ -265,7 +265,7 @@
       }
     }
     &--Considerations {
-        @include section-grid-4_captions-headings;
+      @include section-grid-4_captions-headings;
     }
 
     &--Models {
@@ -280,19 +280,42 @@
           --section-graphic-panel-pad: 2rem;
           --cw: #{col-gap-width(var(--site-max-width), 3, var(--gap))};
           --ch: #{col-gap-width(var(--site-max-width), 3, var(--gap), calc(var(--section-graphic-panel-pad) * 2))};
+
+          @include md-down {
+            --section-graphic-panel-pad: 0rem;
+            --gap: 2rem;
+            --cw: #{col-gap-width(100%, 2, var(--gap))};
+            --ch: #{col-gap-width(100%, 2, var(--gap), calc(var(--section-graphic-panel-pad) * 2))};
+          }
         }
 
         &--column {
           width: var(--cw);
+          max-width: unset;
+          min-width: unset;
         }
 
         &--graphic {
           --graphic-scale: 0.185;
-          height: var(--ch);
+          height: unset;
+          aspect-ratio: 1/1;
+          @include lg-down {
+            --graphic-scale: 0.115;
+          }
+          @include md-down {
+            --graphic-scale: 0.15;
+          }
 
           img {
-            width: calc(var(--iw) * var(--graphic-scale));
-            height: calc(var(--ih) * var(--graphic-scale));
+            --w: calc(var(--iw) * var(--graphic-scale));
+            --h: calc(var(--ih) * var(--graphic-scale));
+            width: var(--w);
+            height: var(--h);
+
+            @include md-down {
+              width: calc(Max(Min(45%, var(--w)), 55%));
+              height: calc(Max(Min(45%, var(--h)), 55%));
+            }
           }
         }
       }
@@ -307,6 +330,10 @@
           --split-graphic-scale: 0.865;
         }
       }
+
+
+      .column-1{@include md-down{order:1}}
+      .column-2{@include md-down{order:0}}
     }
 
     &--Summary {
@@ -319,8 +346,29 @@
 
     &--Stages {
       .section {
+
+        &--heading{
+          @include flex-col-end;
+          @include lg-down{
+            margin-top:0rem;
+          }
+        }
         &--main {
           grid-template-columns: repeat(3, 1fr);
+          @include xl-down{
+            --gap:5rem;
+            @include gap;
+          }
+          @include lg-down{
+            --gap:5.5rem;
+            grid-template-columns: repeat(2, 1fr);
+          }
+          @include md-down{
+            --gap: 4.5rem;
+          }
+          @include sm-down{
+            --gap: 3.75rem;
+          }
         }
       }
     }
@@ -519,4 +567,16 @@
 // #Closing {
 //   &--Copy {
 //   }
+// }
+
+// html, body {
+//   height: 100%;
+//   margin: 0;
+//   padding: 0;
+//   overflow: hidden;
+// }
+// #__next {
+//   height: 100%;
+//   overflow-y: scroll;
+//   -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS Safari */
 // }
