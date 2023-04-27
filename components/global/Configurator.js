@@ -141,9 +141,35 @@ function Options({ imgs, config, setConfig }) {
   );
 }
 
+function useConfigImgPrefetch(configurator) {
+  const [mount, setMount] = useState(false);
+  const [ready, setReady] = useState(false);
+  const inView = useInView(configurator, { threshold: 0.5 });
+
+  useEffect(() => {
+    if (!inView) return;
+    setMount(true);
+  }, [inView]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setMount(true);
+    }, 6000);
+  }, []);
+
+  useEffect(() => {
+    if (!mount) return;
+    setReady(true);
+  }, [mount]);
+
+  useEffect(() => {
+    if (!ready) return;
+    configImgPrefetch();
+  }, [ready]);
+}
+
 function Configurator() {
   const [config, setConfig] = useState(defaultConfig);
-  const [mount, setMount] = useState(false);
 
   var materials = [];
   for (var key in SHIRT_COMPONENTS_GROUPS) {
@@ -170,17 +196,7 @@ function Configurator() {
     setConfig,
   };
 
-  const inView = useInView(configurator, { threshold: 0.5 });
-
-  useEffect(() => {
-    if (!inView) return;
-    setMount(true);
-  }, [inView]);
-
-  useEffect(() => {
-    if (!mount) return;
-    configImgPrefetch();
-  }, [mount]);
+  useConfigImgPrefetch(configurator);
 
   return (
     <>

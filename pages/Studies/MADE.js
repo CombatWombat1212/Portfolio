@@ -62,42 +62,45 @@ function MADE() {
             <Column>
               <Graphic type="mask" background="background darker" img={MADE_IMGS.requirements_photorealism} />
               <Description className="graphic--caption">
-                <h3>
+                <Heading type={!smAndDown ? `h3` : 'h5'}>
                   <b>Photorealism</b>
-                </h3>
-                <p className="mt-less">Images need to be 1 to 1 with product the customer receives</p>
+                </Heading>
+                <p>Images need to be 1 to 1 with product the customer receives</p>
               </Description>
             </Column>
 
             <Column>
               <Graphic type="mask" background="background darker" img={MADE_IMGS.requirements_consistency} />
               <Description className="graphic--caption">
-                <h3>
+                <Heading type={!smAndDown ? `h3` : 'h5'}>
                   <b>Consistency</b>
-                </h3>
-                <p className="mt-less">Shirt components cannot shift in position when their style or material is changed</p>
+                </Heading>
+                <p>Seamless switching between component styles and materials</p>
+                {/* <p>{!smAndDown ? `Shirt components cannot shift in position when their style or material is changed` : 'Seamless switching between component styles and materials'}</p> */}
               </Description>
             </Column>
 
             <Column>
               <Graphic type="mask" background="background darker" img={MADE_IMGS.requirements_scalability} />
               <Description className="graphic--caption">
-                <h3>
+                <Heading type={!smAndDown ? `h3` : 'h5'}>
                   <b>Scalability</b>
-                </h3>
-                <p className="mt-less">40+ fabric variations, with a scalable approach to add more materials down the road</p>
+                </Heading>
+                <p>40+ fabric variations, with a scalable approach to add more materials down the road</p>
               </Description>
             </Column>
 
             <Column>
               <Graphic type="mask" background="background darker" img={MADE_IMGS.requirements_experimentation} />
               <Description className="graphic--caption">
-                <h3>
+                <Heading type={!smAndDown ? `h3` : 'h5'}>
                   <b>Experimentation</b>
-                </h3>
-                <p className="mt-less">With the software still being ironed-out, room for testing was needed in the early stages</p>
+                </Heading>
+                <p>With the software still being ironed-out, room for testing was needed in the early stages</p>
               </Description>
             </Column>
+
+            
           </Section>
 
           <Section id="Overview--Outcome" background="tertiary" type={"columns"} titled>

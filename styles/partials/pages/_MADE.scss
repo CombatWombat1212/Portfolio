@@ -1,6 +1,6 @@
-// .section--wrapper {
-//   overflow: hidden;
-// }
+.section--wrapper {
+  overflow: hidden;
+}
 
 
 
@@ -92,7 +92,19 @@
           @include mx-auto;
         }
         @include sm-down {
-          max-width: 77.5%;
+          // max-width: 77.5%;
+          // max-width: 100%;
+        }
+
+        &--description{
+
+          p{
+            // margin-top: calc(var(--section-text-spacing) * 0.15)!important;
+            margin-top:0.35rem;
+            @include sm-down{
+              margin-top:0.15rem;
+            }
+          }
         }
 
         &--main {
@@ -106,8 +118,8 @@
             --gap: 2.5rem;
           }
           @include sm-down {
-            grid-template-columns: repeat(1, 1fr);
-            --gap: 2.25rem;
+            // grid-template-columns: repeat(1, 1fr);
+            --gap: 1.75rem;
           }
         }
 
@@ -130,7 +142,7 @@
           }
           @include sm-down {
             --section-graphic-panel-pad: 0.25rem;
-            --graphic-scale: 1.25;
+            --graphic-scale: 0.85;
           }
         }
 
