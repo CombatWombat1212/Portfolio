@@ -1,12 +1,15 @@
 import { MADE_IMGS } from "@/data/MADE_IMGS";
 import { SHIRT_COMPONENTS, SHIRT_COMPONENTS_GROUPS } from "@/data/SHIRT_COMPONENTS";
-import { RESIZE_TIMEOUT } from "@/scripts/GlobalUtilities";
+import { RESIZE_TIMEOUT, createUpdateConditions } from "@/scripts/GlobalUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { setConfig } from "next/config";
 import React, { Fragment, useRef } from "react";
 import { useEffect, useState } from "react";
 import Graphic from "../sections/Graphic";
 import Heading from "../sections/Heading";
+import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
+import useListener from "@/scripts/hooks/useListener";
+import useHorizontalResize from "@/scripts/hooks/useHorizontalResize";
 
 // TODO: keyboard input support for tab navigation
 
@@ -125,9 +128,21 @@ function Configurator() {
     setImgs(images);
   }, [config]);
 
+  const configurator = useRef(null);
+  const [mount, setMount] = useState(false);
+
+  const { isBpAndDown, loading } = useResponsive();
+  const smAndDown = !(!isBpAndDown("sm") || loading);
+
+  useEffect(() => {
+    if (!mount) return;
+    setMount(true);
+    console.log("configurator mounted");
+  }, [configurator]);
+
   return (
     <>
-      <div className="configurator">
+      <div className="configurator" ref={configurator}>
         <div className="configurator--panel assets">
           <div
             className="assets--row"
@@ -211,46 +226,104 @@ function Configurator() {
           </div>
         </div>
 
-        <div className="configurator--panel viewer--wrapper">
-          <Heading type="h3" className="configurator--title viewer--heading">
-            <b>Preview</b>
-          </Heading>
-          <div className="viewer">
-            <div className="viewer--inner">
-              <div className="viewer--preview">
-                <Preview imgs={imgs} />
-              </div>
-              <div className="viewer--materials material--wrapper">
-                <div className="material--group">
-                  <Materials materials={supportedMaterials} config={config} setConfig={setConfig} />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Viewer imgs={imgs} supportedMaterials={supportedMaterials} config={config} setConfig={setConfig} smAndDown={smAndDown} />
       </div>
     </>
   );
 }
 
-function Preview({ imgs }) {
-  var reference = useRef(null);
+const Viewer = React.memo(function Viewer({ imgs, supportedMaterials, config, setConfig, smAndDown }) {
+  return (
+    <>
+      <div className="configurator--panel viewer--wrapper">
+        {!smAndDown ? (
+          <ViewerBody />
+        ) : (
+          <div className="viewer--body">
+            <ViewerBody />
+          </div>
+        )}
+        {smAndDown && <MaterialWrapper />}
+      </div>
+    </>
+  );
 
-  useMountEffect(() => {
-    var preview = reference.current;
-    function previewCheck() {
-      if (preview.querySelector(".preview--component")) {
-        previewInit(preview);
-      } else if (new Date().getTime() - startTime < 5000) {
-        setTimeout(previewCheck, 100);
-      }
-    }
-    var startTime = new Date().getTime();
-    previewCheck();
-  });
+  function ViewerBody() {
+    return (
+      <>
+        <MaterialHead />
+        <div className="viewer">
+          <div className="viewer--inner">
+            <div className="viewer--preview">
+              <Preview imgs={imgs} />
+            </div>
+            {!smAndDown && <MaterialWrapper />}
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  function MaterialWrapper() {
+    return (
+      <div className="viewer--materials material--wrapper">
+        <div className="material--group">
+          <Materials materials={supportedMaterials} config={config} setConfig={setConfig} />
+        </div>
+      </div>
+    );
+  }
+
+  function MaterialHead() {
+    return (
+      <Heading type="h3" className="configurator--title viewer--heading">
+        <b>Preview</b>
+      </Heading>
+    );
+  }
+}, createUpdateConditions(["imgs", "config", "smAndDown"]));
+
+function Preview({ imgs }) {
+  const preview = {
+    refs: {
+      self: useRef(null),
+      component: useRef(null),
+    },
+    elem: null,
+    height: 0,
+    width: 0,
+    isResizing: null,
+  };
+
+  useEffect(() => {
+    if (!preview.refs.self.current) return;
+    if (!preview.refs.component.current) return;
+    preview.elem = preview.refs.self.current;
+    previewInit(preview);
+  }, [preview.refs.self, preview.refs.component]);
+
+  function previewInit(preview) {
+    preview.elem.classList.remove("preview__loading");
+    run();
+  }
+
+  function run() {
+    previewGetDimensions(preview);
+    previewSetDimensions(preview);
+  }
+
+  function ran() {
+    window.clearTimeout(preview.isResizing);
+    preview.isResizing = setTimeout(function () {
+      run();      
+    }, RESIZE_TIMEOUT);
+  }
+
+  // useListener("resize", ran);
+  useHorizontalResize(ran);
 
   return (
-    <div className="preview preview__loading" ref={reference}>
+    <div className="preview preview__loading" ref={preview.refs.self}>
       {Object.entries(imgs).map(([key, value]) => {
         return (
           <React.Fragment key={key}>
@@ -261,7 +334,7 @@ function Preview({ imgs }) {
               };
               var active = img.active ? "on" : "off";
 
-              return <Graphic key={index} img={img} className={`${pref} ${pref}__${active}`} style={imgStyle} />;
+              return <Graphic key={index} img={img} className={`${pref} ${pref}__${active}`} style={imgStyle} reference={preview.refs.component} />;
             })}
           </React.Fragment>
         );
@@ -271,44 +344,22 @@ function Preview({ imgs }) {
 }
 
 function previewSetDimensions(preview) {
-  preview.elem.style.setProperty("--image-width", preview.width + "px");
-  preview.elem.style.setProperty("--image-height", preview.height + "px");
+  if (!preview || !preview.refs || !preview.refs.self || !preview.refs.self.current) return;
+  const elem = preview.refs.self.current.closest(".configurator");
+  if (!elem) return;
+
+  elem.style.setProperty("--image-width", preview.width + "px");
+  elem.style.setProperty("--image-height", preview.height + "px");
 }
+
 
 function previewGetDimensions(preview) {
   var width, height;
-  var firstImage = preview.elem.querySelector(".preview--component");
-  width = firstImage.offsetWidth;
-  height = firstImage.offsetHeight;
+  var lastImg = preview.refs.component.current;
+  width = lastImg.offsetWidth;
+  height = lastImg.offsetHeight;
   preview.width = width;
   preview.height = height;
-}
-
-function previewInit(preview) {
-  preview = {
-    elem: preview,
-    height: 0,
-    width: 0,
-  };
-
-  preview.elem.classList.remove("preview__loading");
-  run();
-
-  function run() {
-    previewGetDimensions(preview);
-    previewSetDimensions(preview);
-  }
-
-  function ran() {
-    window.clearTimeout(isResizing);
-    isResizing = setTimeout(function () {
-      run();
-    }, RESIZE_TIMEOUT);
-  }
-
-  var isResizing;
-  window.removeEventListener("resize", ran);
-  window.addEventListener("resize", ran);
 }
 
 function configGetProcessedImages(config) {

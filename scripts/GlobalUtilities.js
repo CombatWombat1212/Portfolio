@@ -409,17 +409,38 @@ function ignoreUpdateConditions(propsToIgnore) {
 }
 
 
+
+// function createUpdateConditions(propsToCheck) {
+//   return function updateConditions(prevProps, nextProps) {
+//     for (const propName of propsToCheck) {
+//       const [objName, key] = propName.split(".");
+//       if (prevProps[objName][key] !== nextProps[objName][key]) {
+//         return false;
+//       }
+//     }
+//     return true;
+//   };
+// }
+
 function createUpdateConditions(propsToCheck) {
   return function updateConditions(prevProps, nextProps) {
     for (const propName of propsToCheck) {
-      const [objName, key] = propName.split(".");
-      if (prevProps[objName][key] !== nextProps[objName][key]) {
-        return false;
+      if (propName.includes('.')) {
+        const [objName, key] = propName.split(".");
+        if (prevProps[objName][key] !== nextProps[objName][key]) {
+          return false;
+        }
+      } else {
+        if (prevProps[propName] !== nextProps[propName]) {
+          return false;
+        }
       }
     }
     return true;
   };
 }
+
+
 
 
 function conditionalOrder(condition, elements) {

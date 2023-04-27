@@ -121,9 +121,7 @@
         margin-top: var(--outline-width);
 
         
-        
         @at-root .assets--row:not(:last-child) .assets--inner{
-          
           border-right: solid $col-background_darkest 0.25rem;
         }
 
@@ -180,10 +178,16 @@
   }
 
   .viewer {
+
     &--wrapper {
       background-color: $col-background;
       @include flex-col;
       height: 100%;
+
+      @include sm-down {
+        @include flex-row;
+        @include gap(var(--config-gap));
+      }
     }
 
     @include b-rad;
@@ -199,9 +203,16 @@
       padding-top: 0rem;
     }
 
+    &--body{
+      @include sm-down{
+        @include flex-col;
+        flex: 1 1;
+      }
+    }
+
     &--preview {
       @include lg-down {
-        transform: scale(0.95);
+        transform: scale(1) translateY(-0.15rem);
       }
       @include md-down {
         transform: scale(0.925) translateY(-0.35rem);
@@ -212,13 +223,26 @@
   .material {
 
     &--wrapper{
-      @include md-down{
+
+
+      @include md{
         width:fit-content;
         position:absolute;
         right:0;
         top:50%;
         transform: translate(calc(100% + var(--configurator-left-offset)), -50%);
       }
+
+      @include sm-down{
+        width: var(--configurator-material-width);
+        margin-top:auto;
+        height: var(--image-height);
+        @include flex-col;
+      }
+
+      
+
+
     }
     &--group {
       @include flex-row-between;
@@ -231,21 +255,21 @@
 
       @include xxl-down {
         margin-top: -0.45rem;
+        width: 55%;
       }
       @include xl-down {
         margin-top: -0.65rem;
       }
       @include lg-down {
-        width: 50%;
-        --gap: 0.95rem;
-        margin-top: -0.25rem;
+        width: 60%;
+        --gap: 1.15rem;
+        margin-top: 0.25rem;
       }
       @include md-down {
         --gap: 1.35rem;
         @include flex-col;
         width: var(--configurator-material-width);
         @include my-auto;
-
       }
     }
 

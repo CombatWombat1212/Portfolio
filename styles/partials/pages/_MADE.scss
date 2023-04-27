@@ -1,6 +1,6 @@
-.section--wrapper {
-  overflow: hidden;
-}
+// .section--wrapper {
+//   overflow: hidden;
+// }
 
 
 
@@ -238,9 +238,9 @@
 
         .viewer, .viewer--heading{
           @include sm-down{
-            $amt: 81.5%;
-            max-width: $amt;
-            width: $amt;
+            // $amt: 81.5%;
+            // max-width: $amt;
+            // width: $amt;
           }
         }
         
