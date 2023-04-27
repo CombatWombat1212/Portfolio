@@ -223,13 +223,12 @@
         
         &--copy, .viewer, .viewer--heading{
           @include md{
-            $amt: 60%;
-            @include mx-auto;
-            max-width: $amt;
-            width: $amt;
-            transform: translate(var(--left));
+            // $amt: 60%;
+            // @include mx-auto;
+            // max-width: $amt;
+            // width: $amt;
+            // transform: translate(var(--left));
           }
-
           @include sm-down{
             --configurator-left-offset: 1.75rem;
           }
@@ -247,17 +246,17 @@
 
 
         .assets{
-          @include md-down{
-            $amt: 80%;
-            @include mx-auto;
-            max-width: $amt;
-            width: $amt;
-          }
-          @include sm-down{
-            $amt: 100%;
-            max-width: $amt;
-            width: $amt;
-          }
+          // @include md-down{
+          //   $amt: 80%;
+          //   @include mx-auto;
+          //   max-width: $amt;
+          //   width: $amt;
+          // }
+          // @include sm-down{
+          //   $amt: 100%;
+          //   max-width: $amt;
+          //   width: $amt;
+          // }
 
         }
 

@@ -3,13 +3,15 @@ import { SHIRT_COMPONENTS, SHIRT_COMPONENTS_GROUPS } from "@/data/SHIRT_COMPONEN
 import { RESIZE_TIMEOUT, createUpdateConditions } from "@/scripts/GlobalUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { setConfig } from "next/config";
-import React, { Fragment, useRef } from "react";
+import React, { Fragment, useLayoutEffect, useRef } from "react";
 import { useEffect, useState } from "react";
 import Graphic from "../sections/Graphic";
 import Heading from "../sections/Heading";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import useListener from "@/scripts/hooks/useListener";
 import useHorizontalResize from "@/scripts/hooks/useHorizontalResize";
+import ReactDOM from "react-dom";
+import useInView from "@/scripts/hooks/useInView";
 
 // TODO: keyboard input support for tab navigation
 
@@ -35,6 +37,32 @@ const components = [
   "placket_tuxedo",
 ];
 
+function configImgPrefetch() {
+  const prefetchContainer = document.createElement("div");
+  prefetchContainer.style.display = "none";
+  document.body.appendChild(prefetchContainer);
+
+  var images = [];
+  for (var i = 0; i < components.length; i++) {
+    for (var j = 0; j < supportedMaterials.length; j++) {
+      var img = SHIRT_COMPONENTS[`${components[i]}_${supportedMaterials[j]}`];
+      if (!images.some((image) => image.src === img.src)) {
+        fetch(img);
+      }
+    }
+  }
+
+  function fetch(img) {
+    const prefetchImg = document.createElement("img");
+    prefetchImg.src = img.src.startsWith(".") ? img.src.substring(1) : img.src;
+    prefetchImg.alt = img.alt || "";
+    prefetchImg.width = img.width;
+    prefetchImg.height = img.height;
+
+    prefetchContainer.appendChild(prefetchImg);
+  }
+}
+
 function updateActiveState(index, length) {
   return Array.from({ length }, (_, i) => i === index);
 }
@@ -44,7 +72,7 @@ function updateConfigState(config, component, value) {
 }
 
 function configHandleClick(e, config, setConfig, active, setActive) {
-  var target = e.target.closest(".assets--panel, .material");
+  var target = e.target.closest(".assets--panel, .materials");
   var component = target.getAttribute("data-component");
   var type = target.getAttribute("data-type");
   var material = target.getAttribute("data-material");
@@ -56,7 +84,7 @@ function configHandleClick(e, config, setConfig, active, setActive) {
     setConfig(updateConfigState(config, component, type));
     setActive(updateActiveState(index, active.length));
   } else if (material) {
-    var group = Array.from(target.closest(".material--group").children);
+    var group = Array.from(target.closest(".materials--group").children);
     var index = group.indexOf(target);
 
     setConfig(updateConfigState(config, "material", material));
@@ -115,6 +143,7 @@ function Options({ imgs, config, setConfig }) {
 
 function Configurator() {
   const [config, setConfig] = useState(defaultConfig);
+  const [mount, setMount] = useState(false);
 
   var materials = [];
   for (var key in SHIRT_COMPONENTS_GROUPS) {
@@ -129,16 +158,29 @@ function Configurator() {
   }, [config]);
 
   const configurator = useRef(null);
-  const [mount, setMount] = useState(false);
 
   const { isBpAndDown, loading } = useResponsive();
-  const smAndDown = !(!isBpAndDown("sm") || loading);
+  const mdAndDown = !(!isBpAndDown("md") || loading);
+
+  const VIEWER_PROPS = {
+    imgs,
+    mdAndDown,
+    supportedMaterials,
+    config,
+    setConfig,
+  };
+
+  const inView = useInView(configurator, { threshold: 0.5 });
+
+  useEffect(() => {
+    if (!inView) return;
+    setMount(true);
+  }, [inView]);
 
   useEffect(() => {
     if (!mount) return;
-    setMount(true);
-    console.log("configurator mounted");
-  }, [configurator]);
+    configImgPrefetch();
+  }, [mount]);
 
   return (
     <>
@@ -226,69 +268,60 @@ function Configurator() {
           </div>
         </div>
 
-        <Viewer imgs={imgs} supportedMaterials={supportedMaterials} config={config} setConfig={setConfig} smAndDown={smAndDown} />
+        <div className="configurator--panel viewer--wrapper">
+          {!mdAndDown ? (
+            <ViewerBody props={VIEWER_PROPS} />
+          ) : (
+            <div className="viewer--body">
+              <ViewerBody props={VIEWER_PROPS} />
+            </div>
+          )}
+          {mdAndDown && <MaterialWrapper props={VIEWER_PROPS} />}
+        </div>
       </div>
     </>
   );
 }
 
-const Viewer = React.memo(function Viewer({ imgs, supportedMaterials, config, setConfig, smAndDown }) {
+function ViewerBody({ props }) {
+  var { imgs, mdAndDown } = props;
   return (
     <>
-      <div className="configurator--panel viewer--wrapper">
-        {!smAndDown ? (
-          <ViewerBody />
-        ) : (
-          <div className="viewer--body">
-            <ViewerBody />
-          </div>
-        )}
-        {smAndDown && <MaterialWrapper />}
-      </div>
-    </>
-  );
-
-  function ViewerBody() {
-    return (
-      <>
-        <MaterialHead />
-        <div className="viewer">
-          <div className="viewer--inner">
-            <div className="viewer--preview">
-              <Preview imgs={imgs} />
-            </div>
-            {!smAndDown && <MaterialWrapper />}
-          </div>
-        </div>
-      </>
-    );
-  }
-
-  function MaterialWrapper() {
-    return (
-      <div className="viewer--materials material--wrapper">
-        <div className="material--group">
-          <Materials materials={supportedMaterials} config={config} setConfig={setConfig} />
-        </div>
-      </div>
-    );
-  }
-
-  function MaterialHead() {
-    return (
       <Heading type="h3" className="configurator--title viewer--heading">
         <b>Preview</b>
       </Heading>
-    );
-  }
-}, createUpdateConditions(["imgs", "config", "smAndDown"]));
+      <div className="viewer">
+        <div className="viewer--inner">
+          <div className="viewer--preview">
+            <Preview imgs={imgs} />
+          </div>
+          {!mdAndDown && <MaterialWrapper props={props} />}
+        </div>
+      </div>
+    </>
+  );
+}
+
+function MaterialWrapper({ props: { supportedMaterials, config, setConfig } }) {
+  return (
+    <div className="viewer--materials materials--wrapper">
+      <div className="materials--group">
+        <Materials materials={supportedMaterials} config={config} setConfig={setConfig} />
+      </div>
+    </div>
+  );
+}
 
 function Preview({ imgs }) {
+  const [mounted, setMounted] = useState(false);
+
   const preview = {
     refs: {
       self: useRef(null),
       component: useRef(null),
     },
+    mounted,
+    setMounted,
     elem: null,
     height: 0,
     width: 0,
@@ -298,9 +331,16 @@ function Preview({ imgs }) {
   useEffect(() => {
     if (!preview.refs.self.current) return;
     if (!preview.refs.component.current) return;
+    if (!imgs || imgs == []) return;
+    if (preview.mounted) return;
+    preview.setMounted(true);
+  }, [preview.refs.self, preview.refs.component, imgs]);
+
+  useEffect(() => {
+    if (!preview.mounted) return;
     preview.elem = preview.refs.self.current;
     previewInit(preview);
-  }, [preview.refs.self, preview.refs.component]);
+  }, [preview.mounted]);
 
   function previewInit(preview) {
     preview.elem.classList.remove("preview__loading");
@@ -315,18 +355,17 @@ function Preview({ imgs }) {
   function ran() {
     window.clearTimeout(preview.isResizing);
     preview.isResizing = setTimeout(function () {
-      run();      
+      run();
     }, RESIZE_TIMEOUT);
   }
 
-  // useListener("resize", ran);
   useHorizontalResize(ran);
 
   return (
     <div className="preview preview__loading" ref={preview.refs.self}>
       {Object.entries(imgs).map(([key, value]) => {
         return (
-          <React.Fragment key={key}>
+          <Fragment key={key}>
             {value.map((img, index) => {
               var pref = "preview--component";
               var imgStyle = {
@@ -336,7 +375,7 @@ function Preview({ imgs }) {
 
               return <Graphic key={index} img={img} className={`${pref} ${pref}__${active}`} style={imgStyle} reference={preview.refs.component} />;
             })}
-          </React.Fragment>
+          </Fragment>
         );
       })}
     </div>
@@ -352,12 +391,13 @@ function previewSetDimensions(preview) {
   elem.style.setProperty("--image-height", preview.height + "px");
 }
 
-
 function previewGetDimensions(preview) {
-  var width, height;
-  var lastImg = preview.refs.component.current;
-  width = lastImg.offsetWidth;
-  height = lastImg.offsetHeight;
+  if (!preview || !preview.refs || !preview.refs.component || !preview.refs.component.current) return;
+
+  const lastImg = preview.refs.component.current;
+  const width = lastImg.offsetWidth;
+  const height = lastImg.offsetHeight;
+
   preview.width = width;
   preview.height = height;
 }
@@ -420,25 +460,22 @@ function Materials({ materials, config, setConfig }) {
 
   const [active, setActive] = useState(init);
 
+  const materialOnClick = (e) => {
+    configHandleClick(e, config, setConfig, active, setActive);
+  };
+
   return (
     <>
       {materials.map((material, index) => {
         var name = `thumbnail_${material}`.toLowerCase();
         var image = SHIRT_COMPONENTS[name];
 
-        var pref = "material";
+        var pref = "materials";
         var on = active[index] ? "on" : "off";
 
         return (
-          <a
-            className={`${pref} ${pref}__${on}`}
-            tabIndex={0}
-            key={index}
-            onClick={(e) => {
-              configHandleClick(e, config, setConfig, active, setActive);
-            }}
-            data-material={material}>
-            <Graphic type="image" className={`material--graphic`} img={image} />
+          <a className={`${pref} ${pref}__${on}`} tabIndex={0} key={index} onClick={materialOnClick} data-material={material}>
+            <Graphic type="image" className={`materials--graphic`} img={image} />
           </a>
         );
       })}

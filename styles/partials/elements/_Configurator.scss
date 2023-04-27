@@ -1,19 +1,16 @@
-@mixin assets-scrollbar{
-
+@mixin assets-scrollbar {
   @include scrollbar {
     width: 0.25rem;
   }
-  
+
   @include scrollbar-track {
     background-color: $col-background_darkest;
   }
-  
+
   @include scrollbar-thumb {
     background-color: lighten($col-tertiary-light, 10);
   }
-  
 }
-
 
 .configurator {
   //   &--wrapper {
@@ -72,12 +69,12 @@
       overflow-y: hidden;
       @include gap(var(--assets-gap));
       width: 100%;
-      padding: var(--assets-gap);
-      padding-top: 0rem;
       margin-top: calc(var(--outline-width) * -1);
+      // padding: var(--assets-gap);
+      // padding-top: 0rem;
 
       @include assets-scrollbar;
-   }
+    }
 
     &--row {
       @include flex-row;
@@ -88,7 +85,17 @@
       }
 
       @include md-down {
+        
+        padding-bottom: var(--assets-gap);
+        &:first-child{
+          padding-left: calc((var(--outline-width)*2) + var(--assets-gap));
+        }
+        &:last-child{
+          padding-right: var(--outline-width);
+        }
         // width: #{col-width(4) - (--assets-gap)/2};
+      // padding: var(--assets-gap);
+      // padding-top: 0rem;
 
         & + .assets--row {
           margin-top: 0rem;
@@ -115,16 +122,22 @@
       @include gap(var(--assets-gap));
 
       @include md-down {
-        margin-left: calc((var(--assets-gap) - var(--outline-width)) * -1);
-        padding-right: calc((var(--assets-gap) - var(--outline-width)));
-        margin-right: calc((var(--assets-gap) - var(--outline-width)));
+        $section-space: calc((var(--assets-gap) - var(--outline-width)) * 1.35);
+
+        margin-left: calc(#{$section-space} * -1);
+
+
+        padding-right: calc(#{$section-space});
+        margin-right: $section-space;
         margin-top: var(--outline-width);
 
-        
-        @at-root .assets--row:not(:last-child) .assets--inner{
+        @at-root .assets--row:not(:last-child) .assets--inner {
           border-right: solid $col-background_darkest 0.25rem;
         }
-
+        @at-root .assets--row:last-child .assets--inner {
+          margin-right: 0rem;
+          padding-right:0rem;
+        }
       }
     }
 
@@ -166,25 +179,23 @@
 
         // width: 10rem;
         width: 7rem;
-
       }
     }
 
-    &--heading{
-      @include md-down{
-        display:none;
+    &--heading {
+      @include md-down {
+        display: none;
       }
     }
   }
 
   .viewer {
-
     &--wrapper {
       background-color: $col-background;
       @include flex-col;
       height: 100%;
 
-      @include sm-down {
+      @include md-down {
         @include flex-row;
         @include gap(var(--config-gap));
       }
@@ -196,15 +207,15 @@
     @include flex-col-center;
     padding-top: 1rem;
     position: relative;
-    
+
     @include md-down {
       order: 0;
       width: 100%;
       padding-top: 0rem;
     }
 
-    &--body{
-      @include sm-down{
+    &--body {
+      @include md-down {
         @include flex-col;
         flex: 1 1;
       }
@@ -220,29 +231,22 @@
     }
   }
 
-  .material {
+  .materials {
+    &--wrapper {
+      // @include md{
+      //   width:fit-content;
+      //   position:absolute;
+      //   right:0;
+      //   top:50%;
+      //   transform: translate(calc(100% + var(--configurator-left-offset)), -50%);
+      // }
 
-    &--wrapper{
-
-
-      @include md{
-        width:fit-content;
-        position:absolute;
-        right:0;
-        top:50%;
-        transform: translate(calc(100% + var(--configurator-left-offset)), -50%);
-      }
-
-      @include sm-down{
+      @include md-down {
         width: var(--configurator-material-width);
-        margin-top:auto;
+        margin-top: auto;
         height: var(--image-height);
         @include flex-col;
       }
-
-      
-
-
     }
     &--group {
       @include flex-row-between;
@@ -254,22 +258,26 @@
       margin-bottom: 3.25rem;
 
       @include xxl-down {
-        margin-top: -0.45rem;
+        margin-top: 0rem;
         width: 55%;
       }
       @include xl-down {
-        margin-top: -0.65rem;
+        margin-top: 0rem;
       }
       @include lg-down {
         width: 60%;
         --gap: 1.15rem;
         margin-top: 0.25rem;
       }
+
       @include md-down {
-        --gap: 1.35rem;
+        --gap: 1.5rem;
         @include flex-col;
         width: var(--configurator-material-width);
         @include my-auto;
+      }
+      @include sm-down {
+        --gap: 1.5rem;
       }
     }
 
@@ -279,7 +287,7 @@
     cursor: pointer;
     transition: 0.2s;
 
-    @include md-down{
+    @include md-down {
       aspect-ratio: 1/1;
     }
 
