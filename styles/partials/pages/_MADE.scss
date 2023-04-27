@@ -2,8 +2,6 @@
   overflow: hidden;
 }
 
-
-
 @mixin split-hover {
   &:hover,
   &:focus,
@@ -23,6 +21,71 @@
       &.hover,
       &[data-playing="true"] {
         filter: brightness(#{$b});
+      }
+    }
+  }
+}
+
+@mixin section-grid-4_captions-headings {
+  @include section-mask-color($col-tertiary);
+
+  .section {
+    @include lg {
+      max-width: 65%;
+      @include mx-auto;
+    }
+
+
+    &--description {
+      &, & p {
+        margin-top: 0.35rem!important;
+        @include sm-down {
+          margin-top: 0.15rem!important;
+        }
+      }
+    }
+
+    &--main {
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+
+      @include lg-down {
+        grid-template-columns: repeat(2, 1fr);
+        --gap: 3rem;
+      }
+      @include md-down {
+        --gap: 2.5rem;
+      }
+      @include sm-down {
+        --gap: 1.75rem;
+      }
+    }
+
+    &--graphic {
+      height: unset;
+      aspect-ratio: 1 / 1;
+
+      --graphic-scale: 0.85;
+
+      @include xl-down {
+        --graphic-scale: 0.75;
+      }
+      @include lg-down {
+        --section-graphic-panel-pad: 1.75rem;
+        --graphic-scale: 0.925;
+      }
+      @include md-down {
+        --graphic-scale: 1;
+      }
+      @include sm-down {
+        --section-graphic-panel-pad: 0.25rem;
+        --graphic-scale: 0.85;
+      }
+    }
+
+    .mask {
+      @include sm-down {
+        width: calc(Max(Min(45%, var(--w)), 55%));
       }
     }
   }
@@ -84,74 +147,7 @@
     }
 
     &--Needs {
-      @include section-mask-color($col-tertiary);
-
-      .section {
-        @include lg {
-          max-width: 65%;
-          @include mx-auto;
-        }
-        @include sm-down {
-          // max-width: 77.5%;
-          // max-width: 100%;
-        }
-
-        &--description{
-
-          p{
-            // margin-top: calc(var(--section-text-spacing) * 0.15)!important;
-            margin-top:0.35rem;
-            @include sm-down{
-              margin-top:0.15rem;
-            }
-          }
-        }
-
-        &--main {
-          grid-template-columns: repeat(4, 1fr);
-
-          @include lg-down {
-            grid-template-columns: repeat(2, 1fr);
-            --gap: 3rem;
-          }
-          @include md-down {
-            --gap: 2.5rem;
-          }
-          @include sm-down {
-            // grid-template-columns: repeat(1, 1fr);
-            --gap: 1.75rem;
-          }
-        }
-
-        &--graphic {
-          // --img-panel-height: 10rem;
-          height: unset;
-          aspect-ratio: 1 / 1;
-
-          --graphic-scale: 0.85;
-
-          @include xl-down {
-            --graphic-scale: 0.75;
-          }
-          @include lg-down {
-            --section-graphic-panel-pad: 1.75rem;
-            --graphic-scale: 0.925;
-          }
-          @include md-down {
-            --graphic-scale: 1;
-          }
-          @include sm-down {
-            --section-graphic-panel-pad: 0.25rem;
-            --graphic-scale: 0.85;
-          }
-        }
-
-        .mask {
-          @include sm-down {
-            width: calc(Max(Min(45%, var(--w)), 55%));
-          }
-        }
-      }
+      @include section-grid-4_captions-headings;
     }
 
     &--Outcome {
@@ -166,8 +162,8 @@
       .section {
         --section-graphic-panel-pad: 0rem;
         --sec-gap: 4.5rem;
-        --col:4;
-        
+        --col: 4;
+
         --graphic-scale: 0.935;
         @include xxl-down {
           --graphic-scale: 0.875;
@@ -179,38 +175,36 @@
         @include lg-down {
           --sec-gap: 3rem;
           --graphic-scale: 0.805;
-          --col:3;
+          --col: 3;
         }
         @include md {
-          --site-max-width:75%;
+          --site-max-width: 75%;
           max-width: var(--site-max-width);
           --sec-gap: 3.5rem;
           --graphic-scale: 0.905;
-          --col:2;
+          --col: 2;
         }
         @include sm-down {
           --sec-gap: 2.15rem;
           --site-max-width: calc(100% - (var(--sec-gap) * 2));
           max-width: var(--site-max-width);
-          --col:2;
+          --col: 2;
           --graphic-scale: 0.625;
         }
-
 
         &--main {
           margin-top: 4rem;
           @include gap(var(--sec-gap));
 
-          grid-template-columns: repeat(var(--col), calc((100% - (var(--sec-gap) * (var(--col) - 1)) ) / var(--col)));
-
+          grid-template-columns: repeat(var(--col), calc((100% - (var(--sec-gap) * (var(--col) - 1))) / var(--col)));
         }
 
-        &--column{
+        &--column {
         }
 
         .graphic {
           &--panel {
-            height:unset;
+            height: unset;
             aspect-ratio: 1/1;
           }
           &--caption {
@@ -226,38 +220,36 @@
     }
 
     &--Scope {
-
-      .section{
-
+      .section {
         --configurator-left-offset: 2rem;
         --configurator-material-width: 2.75rem;
-        --left: calc(((var(--configurator-left-offset) + var(--configurator-material-width)) * -1)/2);
-        
-        &--copy, .viewer, .viewer--heading{
-          @include md{
+        --left: calc(((var(--configurator-left-offset) + var(--configurator-material-width)) * -1) / 2);
+
+        &--copy,
+        .viewer,
+        .viewer--heading {
+          @include md {
             // $amt: 60%;
             // @include mx-auto;
             // max-width: $amt;
             // width: $amt;
             // transform: translate(var(--left));
           }
-          @include sm-down{
+          @include sm-down {
             --configurator-left-offset: 1.75rem;
           }
-
         }
 
-        .viewer, .viewer--heading{
-          @include sm-down{
+        .viewer,
+        .viewer--heading {
+          @include sm-down {
             // $amt: 81.5%;
             // max-width: $amt;
             // width: $amt;
           }
         }
-        
 
-
-        .assets{
+        .assets {
           // @include md-down{
           //   $amt: 80%;
           //   @include mx-auto;
@@ -269,14 +261,11 @@
           //   max-width: $amt;
           //   width: $amt;
           // }
-
         }
-
-
-
       }
     }
     &--Considerations {
+        @include section-grid-4_captions-headings;
     }
 
     &--Models {

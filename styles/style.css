@@ -8565,17 +8565,18 @@ h3 + .studypanel--paragraph {
   }
 }
 
-#Made #Overview--Needs .section--description p {
-  margin-top: 0.35rem;
+#Made #Overview--Needs .section--description, #Made #Overview--Needs .section--description p {
+  margin-top: 0.35rem !important;
 }
 
 @media screen and (max-width: 36.9375em) {
-  #Made #Overview--Needs .section--description p {
-    margin-top: 0.15rem;
+  #Made #Overview--Needs .section--description, #Made #Overview--Needs .section--description p {
+    margin-top: 0.15rem !important;
   }
 }
 
 #Made #Overview--Needs .section--main {
+  display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
 
@@ -8639,7 +8640,7 @@ h3 + .studypanel--paragraph {
 #Made #Approach--Workflow .section {
   --section-graphic-panel-pad: 0rem;
   --sec-gap: 4.5rem;
-  --col:4;
+  --col: 4;
   --graphic-scale: 0.935;
 }
 
@@ -8660,17 +8661,17 @@ h3 + .studypanel--paragraph {
   #Made #Approach--Workflow .section {
     --sec-gap: 3rem;
     --graphic-scale: 0.805;
-    --col:3;
+    --col: 3;
   }
 }
 
 @media screen and (max-width: 49.9375em) and (min-width: 37em) {
   #Made #Approach--Workflow .section {
-    --site-max-width:75%;
+    --site-max-width: 75%;
     max-width: var(--site-max-width);
     --sec-gap: 3.5rem;
     --graphic-scale: 0.905;
-    --col:2;
+    --col: 2;
   }
 }
 
@@ -8679,7 +8680,7 @@ h3 + .studypanel--paragraph {
     --sec-gap: 2.15rem;
     --site-max-width: calc(100% - (var(--sec-gap) * 2));
     max-width: var(--site-max-width);
-    --col:2;
+    --col: 2;
     --graphic-scale: 0.625;
   }
 }
@@ -8689,7 +8690,7 @@ h3 + .studypanel--paragraph {
   gap: var(--sec-gap);
   column-gap: var(--sec-gap);
   row-gap: var(--sec-gap);
-  grid-template-columns: repeat(var(--col), calc((100% - (var(--sec-gap) * (var(--col) - 1)) ) / var(--col)));
+  grid-template-columns: repeat(var(--col), calc((100% - (var(--sec-gap) * (var(--col) - 1))) / var(--col)));
 }
 
 #Made #Approach--Workflow .section .graphic--panel {
@@ -8704,12 +8705,98 @@ h3 + .studypanel--paragraph {
 #Made #Approach--Scope .section {
   --configurator-left-offset: 2rem;
   --configurator-material-width: 2.75rem;
-  --left: calc(((var(--configurator-left-offset) + var(--configurator-material-width)) * -1)/2);
+  --left: calc(((var(--configurator-left-offset) + var(--configurator-material-width)) * -1) / 2);
 }
 
 @media screen and (max-width: 36.9375em) {
-  #Made #Approach--Scope .section--copy, #Made #Approach--Scope .section .viewer, #Made #Approach--Scope .section .viewer--heading {
+  #Made #Approach--Scope .section--copy,
+  #Made #Approach--Scope .section .viewer,
+  #Made #Approach--Scope .section .viewer--heading {
     --configurator-left-offset: 1.75rem;
+  }
+}
+
+#Made #Approach--Considerations .section--graphic .mask {
+  background-color: #404064;
+}
+
+@media screen and (max-width: 61.9375em) and (min-width: 50em) {
+  #Made #Approach--Considerations .section {
+    max-width: 65%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+#Made #Approach--Considerations .section--description, #Made #Approach--Considerations .section--description p {
+  margin-top: 0.35rem !important;
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Made #Approach--Considerations .section--description, #Made #Approach--Considerations .section--description p {
+    margin-top: 0.15rem !important;
+  }
+}
+
+#Made #Approach--Considerations .section--main {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Made #Approach--Considerations .section--main {
+    grid-template-columns: repeat(2, 1fr);
+    --gap: 3rem;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Made #Approach--Considerations .section--main {
+    --gap: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Made #Approach--Considerations .section--main {
+    --gap: 1.75rem;
+  }
+}
+
+#Made #Approach--Considerations .section--graphic {
+  height: unset;
+  aspect-ratio: 1 / 1;
+  --graphic-scale: 0.85;
+}
+
+@media screen and (max-width: 79.9375em) {
+  #Made #Approach--Considerations .section--graphic {
+    --graphic-scale: 0.75;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Made #Approach--Considerations .section--graphic {
+    --section-graphic-panel-pad: 1.75rem;
+    --graphic-scale: 0.925;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Made #Approach--Considerations .section--graphic {
+    --graphic-scale: 1;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Made #Approach--Considerations .section--graphic {
+    --section-graphic-panel-pad: 0.25rem;
+    --graphic-scale: 0.85;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Made #Approach--Considerations .section .mask {
+    width: calc(Max(Min(45%, var(--w)), 55%));
   }
 }
 

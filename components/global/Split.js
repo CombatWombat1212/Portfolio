@@ -115,6 +115,7 @@ function splitInit(split) {
       document.body.classList.add("cursor-ew-resize");
       split.elem.classList.add("hover");
     } else if (e.type == "touchstart") {
+      document.body.classList.add("noscroll");
       document.addEventListener("touchmove", splitMouseMove);
       document.addEventListener("touchend", splitMouseUp);
     }
@@ -145,6 +146,8 @@ function splitInit(split) {
 
   
   function splitMouseUp(e) {
+    document.body.classList.remove("noscroll");
+
     split.grabbed = 0;
     document.removeEventListener("mousemove", splitMouseMove);
     document.removeEventListener("mouseup", splitMouseUp);
@@ -158,6 +161,8 @@ function splitInit(split) {
     window.clearTimeout(isResizing);
     isResizing = setTimeout(function () {
       refresh();
+      console.log('refreshed');
+
     }, RESIZE_TIMEOUT);
   }
 

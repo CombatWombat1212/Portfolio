@@ -62,7 +62,7 @@ function MADE() {
             <Column>
               <Graphic type="mask" background="background darker" img={MADE_IMGS.requirements_photorealism} />
               <Description className="graphic--caption">
-                <Heading type={!smAndDown ? `h3` : 'h5'}>
+                <Heading type={!smAndDown ? `h3` : "h5"}>
                   <b>Photorealism</b>
                 </Heading>
                 <p>Images need to be 1 to 1 with product the customer receives</p>
@@ -72,7 +72,7 @@ function MADE() {
             <Column>
               <Graphic type="mask" background="background darker" img={MADE_IMGS.requirements_consistency} />
               <Description className="graphic--caption">
-                <Heading type={!smAndDown ? `h3` : 'h5'}>
+                <Heading type={!smAndDown ? `h3` : "h5"}>
                   <b>Consistency</b>
                 </Heading>
                 <p>Seamless switching between component styles and materials</p>
@@ -83,7 +83,7 @@ function MADE() {
             <Column>
               <Graphic type="mask" background="background darker" img={MADE_IMGS.requirements_scalability} />
               <Description className="graphic--caption">
-                <Heading type={!smAndDown ? `h3` : 'h5'}>
+                <Heading type={!smAndDown ? `h3` : "h5"}>
                   <b>Scalability</b>
                 </Heading>
                 <p>40+ fabric variations, with a scalable approach to add more materials down the road</p>
@@ -93,14 +93,12 @@ function MADE() {
             <Column>
               <Graphic type="mask" background="background darker" img={MADE_IMGS.requirements_experimentation} />
               <Description className="graphic--caption">
-                <Heading type={!smAndDown ? `h3` : 'h5'}>
+                <Heading type={!smAndDown ? `h3` : "h5"}>
                   <b>Experimentation</b>
                 </Heading>
                 <p>With the software still being ironed-out, room for testing was needed in the early stages</p>
               </Description>
             </Column>
-
-            
           </Section>
 
           <Section id="Overview--Outcome" background="tertiary" type={"columns"} titled>
@@ -124,61 +122,60 @@ function MADE() {
 
             <Column caption={"above"}>
               <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_modeling} />
-              <Description type={!smAndDown ? "h3" : "h5" } className="graphic--caption">
+              <Description type={!smAndDown ? "h3" : "h5"} className="graphic--caption">
                 <b>Modelling</b>
               </Description>
             </Column>
 
             <Column caption="above">
               <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_sculpting} />
-              <Description type={!smAndDown ? "h3" : "h5" } className="graphic--caption">
+              <Description type={!smAndDown ? "h3" : "h5"} className="graphic--caption">
                 <b>Sculpting</b>
               </Description>
             </Column>
 
             <Column caption="above">
               <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_creating_textures} />
-              <Description type={!smAndDown ? "h3" : "h5" } className="graphic--caption">
+              <Description type={!smAndDown ? "h3" : "h5"} className="graphic--caption">
                 <b>Creating Textures</b>
               </Description>
             </Column>
 
             <Column caption="above">
               <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_scripting} />
-              <Description type={!smAndDown ? "h3" : "h5" } className="graphic--caption">
+              <Description type={!smAndDown ? "h3" : "h5"} className="graphic--caption">
                 <b>Scripting</b>
               </Description>
             </Column>
 
             <Column caption={lgAndDown ? "above" : ""}>
               <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_texturing} />
-              <Description type={!smAndDown ? "h3" : "h5" } className={`graphic--caption ${!lgAndDown && "mt-less"}`}>
+              <Description type={!smAndDown ? "h3" : "h5"} className={`graphic--caption ${!lgAndDown && "mt-less"}`}>
                 <b>Texturing</b>
               </Description>
             </Column>
 
             <Column caption={lgAndDown ? "above" : ""}>
               <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_composing} />
-              <Description type={!smAndDown ? "h3" : "h5" } className={`graphic--caption ${!lgAndDown && "mt-less"}`}>
+              <Description type={!smAndDown ? "h3" : "h5"} className={`graphic--caption ${!lgAndDown && "mt-less"}`}>
                 <b>Composing</b>
               </Description>
             </Column>
 
             <Column caption={lgAndDown ? "above" : ""}>
               <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_compositing} />
-              <Description type={!smAndDown ? "h3" : "h5" } className={`graphic--caption ${!lgAndDown && "mt-less"}`}>
+              <Description type={!smAndDown ? "h3" : "h5"} className={`graphic--caption ${!lgAndDown && "mt-less"}`}>
                 <b>Compositing</b>
               </Description>
             </Column>
 
             <Column caption={lgAndDown ? "above" : ""}>
               <Graphic type="mask" background="background darker" img={MADE_IMGS.workflow_rendering} />
-              <Description type={!smAndDown ? "h3" : "h5" } className={`graphic--caption ${!lgAndDown && "mt-less"}`}>
+              <Description type={!smAndDown ? "h3" : "h5"} className={`graphic--caption ${!lgAndDown && "mt-less"}`}>
                 <b>Rendering</b>
               </Description>
             </Column>
           </Section>
-
 
           <Section id="Approach--Scope" type="columns" titled>
             <Title>Scope</Title>
@@ -188,45 +185,47 @@ function MADE() {
             </Column>
           </Section>
 
-          <Section id="Approach--Considerations" type="columns" titled>
+          <Section id="Approach--Considerations" type="columns" titled mainType="grid">
             <Title>Considerations</Title>
             <Heading>Understanding shirt anatomy to create accurate models</Heading>
             <Description className="mt-less">
-              A few key considerations when designing the shirt models that needed to be just right in order to accurately reflect MADE’s products:
+              <p>A few key considerations when designing the shirt models that needed to be just right in order to accurately reflect MADE’s products:</p>
             </Description>
 
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_seam_positions} />
-              <Heading type="h3" className="graphic--caption weight-reg">
+              <Heading type={!smAndDown ? `h3` : "h5"} className={`graphic--caption ${!smAndDown && `weight-reg`}`}>
                 Seam positions
               </Heading>
-              <Description className="graphic--caption mt-less">Shirt proportions, and placement of the main seams</Description>
+              <Description>
+                <p>Shirt proportions, and placement of the main seams</p>
+              </Description>
             </Column>
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_seam_indents} />
-              <Heading type="h3" className="graphic--caption weight-reg">
+              <Heading type={!smAndDown ? `h3` : "h5"} className={`graphic--caption ${!smAndDown && `weight-reg`}`}>
                 Seam indents
               </Heading>
-              <Description className="graphic--caption mt-less">
-                Making the object feel like real cloth, indented by the seams holding it together
+              <Description>
+                <p>Making the object feel like real cloth, indented by the seams holding it together</p>
               </Description>
             </Column>
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_button_positions} />
-              <Heading type="h3" className="graphic--caption weight-reg">
+              <Heading type={!smAndDown ? `h3` : "h5"} className={`graphic--caption ${!smAndDown && `weight-reg`}`}>
                 Button positions
               </Heading>
-              <Description className="graphic--caption mt-less">
-                Which components have or don’t have buttons, and where those buttons are placed
+              <Description>
+                <p>Which components have or don’t have buttons, and where those buttons are placed</p>
               </Description>
             </Column>
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_collar_shape} />
-              <Heading type="h3" className="graphic--caption weight-reg">
+              <Heading type={!smAndDown ? `h3` : "h5"} className={`graphic--caption ${!smAndDown && `weight-reg`}`}>
                 Collar shape
               </Heading>
-              <Description className="graphic--caption mt-less">
-                Ensuring that all the collars match the contours and shape of the base shirt
+              <Description>
+                <p>Ensuring that all the collars match the contours and shape of the base shirt</p>
               </Description>
             </Column>
           </Section>
