@@ -7,6 +7,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Mask from "../../utilities/Mask";
 import { getBackgroundClasses } from "../sections_utilities/GetClasses";
 import graphicVideoInit from "./VideoUtilities";
+import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 
 function getColor(color, colors) {
   return color.split("-to-").map((color) => {
@@ -96,45 +97,84 @@ function Effect({ effect }) {
   );
 }
 
-function Graphic({
-  className,
-  innerClassName,
-  type,
-  img,
-  background,
-  color,
-  children,
-  lightbox,
-  gallery,
-  zoom,
-  // setPopup,
-  pop,
-  width,
-  height,
-  effect,
-  style,
-  priority,
-  onLoad,
-  loop,
-  muted,
-  autoplay,
-  controls,
-  tabIndex,
-  onClick,
-  square,
-  sync,
-  innerStyle,
-  sameHeight,
-  reference,
-  ...props
-}) {
+function Graphic(props) {
+  var {
+    className,
+    innerClassName,
+    type,
+    img,
+    background,
+    color,
+    children,
+    lightbox,
+    gallery,
+    zoom,
+    // setPopup,
+    pop,
+    width,
+    height,
+    effect,
+    style,
+    priority,
+    onLoad,
+    loop,
+    muted,
+    autoplay,
+    controls,
+    tabIndex,
+    onClick,
+    square,
+    sync,
+    innerStyle,
+    // sameHeight,
+    reference,
+    ...restProps
+  } = props;
+
+
+  
+
+  const graphicref = useRef(null);
+  const [isPresent, setIsPresent] = useState(false);
+
+  useEffect(() => {
+    setIsPresent(true);
+    if (reference) {
+      reference.current = graphicref.current;
+    }
+  }, [graphicref]);
+
+  useEffect(() => {
+    if (!isPresent) return;
+    if (isSquare) {
+      graphicKeepSquare(graphicref.current);
+    }
+  }, [isPresent]);
+
+  // TODO: remake sameHeight in a completely different way cause the current implimentation sucks at every turn
+  // sameHeight = sameHeight ? sameHeight : false;
+  // const sameHeightObj = useSameHeight(sameHeight, graphicref, {
+  //   resize: "horizontal",
+  // });
+
+  const [imageLoaded, setImageLoaded] = useState(false);
+  useEffect(() => {
+    setImageLoaded(false);
+  }, []);
+
   // TODO: for mobile, add some kind of indication animation of the image being clicked on when its interactable or can be opened in a lightbox
 
-  // if (!img) {
-  //   img = {};
-  //   console.log('me');
-  // }
 
+
+
+
+
+
+
+
+
+
+  
   var pref = "section--graphic";
   var isImg = type == "image" || type == "img";
   var isMask = type == "mask";
@@ -145,64 +185,60 @@ function Graphic({
   innerStyle = innerStyle ? innerStyle : {};
   innerClassName = innerClassName ? innerClassName : "";
   className = className ? className : "";
-
   sync = sync ? sync : false;
   width = width ? width : img.width;
   height = height ? height : img.height;
   priority = priority ? true : false;
-
-
-  var hasButton = false;
-  if (children) {
-    var childrenArray = React.Children.toArray(children);
-    for (var i = 0; i < childrenArray.length; i++) {
-      if (childrenArray[i].type.name == "Button") {
-        hasButton = true;
-        break;
-      }
-    }
-  }
-  var buttonClasses = hasButton ? "graphic__container" : "";
-
-  // TODO: if you end up using this 'img-aspect-width' thing in multiple places then you should create a wrapper for Next/Image that automatically adds it to your image components, same as its done here and within the Mask component
-
-  var onClickHandler;
   lightbox = lightbox ? lightbox : false;
   gallery = gallery ? gallery : false;
-
-  if(gallery && lightbox) console.error(`Img ${img.src} is both a lightbox and a gallery image. Please only use one or the other.`)
-
-  if (lightbox || gallery) {
-
-    var lightboxImg = img;
-    if (typeof lightbox == "object") {
-      lightboxImg = lightbox;
-    }
-    if (typeof gallery == "object") {
-      lightboxImg = gallery;
-    }
-
-
-    // TODO: add loading indicator for lightbox images, and smoother transitions between non-zoomed images and zoomed images
-
-    onClickHandler = () => {
-      pop.setImg(lightboxImg);
-      pop.setZoom(lightboxImg.zoom ? lightboxImg.zoom : false);
-      pop.setOn(true);
-      // pop.setType("lightbox");
-      pop.setType(lightbox ? "lightbox" : (gallery ? "gallery" : "lightbox"));
-    };
-  }
-
-
-  
-
   effect = effect ? effect : false;
 
-  var allClasses = `section--graphic graphic ${backgroundClasses} ${className} ${buttonClasses} ${lightbox ? "graphic__lightbox" : ""} ${gallery ? "graphic__gallery" : ""}`;
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+  onLoad = onLoad ? onLoad : handleImageLoad;
+
+  if (gallery && lightbox) console.error(`Img ${img.src} is both a lightbox and a gallery image. Please only use one or the other.`);
+
+  var hasButton = (function (children) {
+    if (children) {
+      var childrenArray = React.Children.toArray(children);
+      for (var i = 0; i < childrenArray.length; i++) {
+        if (childrenArray[i].type.name == "Button") {
+          return true;
+        }
+      }
+    }
+    return false;
+  })(children);
+
+  var buttonClasses = hasButton ? "graphic__container" : "";
+
+  var onClickHandler = (() => {
+    if (lightbox || gallery) {
+      var lightboxImg = img;
+      if (typeof lightbox == "object") {
+        lightboxImg = lightbox;
+      }
+      if (typeof gallery == "object") {
+        lightboxImg = gallery;
+      }
+      // TODO: add loading indicator for lightbox images, and smoother transitions between non-zoomed images and zoomed images
+
+      return () => {
+        pop.setImg(lightboxImg);
+        pop.setZoom(lightboxImg.zoom ? lightboxImg.zoom : false);
+        pop.setOn(true);
+        pop.setType(lightbox ? "lightbox" : gallery ? "gallery" : "lightbox");
+      };
+    }
+  })();
+
+  var allClasses = `section--graphic graphic ${backgroundClasses} ${className} ${buttonClasses} ${lightbox ? "graphic__lightbox" : ""} ${
+    gallery ? "graphic__gallery" : ""
+  }`;
 
   var typePref = isImg ? "img" : isMask ? "mask" : isVideo ? "video" : "";
-
   var styleVariables = {
     [`--${typePref}-aspect-width`]: width,
     [`--${typePref}-aspect-height`]: height,
@@ -210,155 +246,143 @@ function Graphic({
     [`--${typePref[0]}h`]: `${height / 16}rem`,
   };
 
-  const graphicref = useRef(null);
-  const [isPresent, setIsPresent] = useState(false);
-
-  useEffect(() => {
-    setIsPresent(true);
-    if(reference){
-      reference.current = graphicref.current;
-    }
-  }, [graphicref]);
-
-  useEffect(() => {
-    if (!isPresent) return;
-    if (isSquare) {
-      graphicKeepSquare(graphicref.current);
-    }
-
-    if (isVideo) {
-      graphicVideoInit(graphicref.current);
-    }
-
-  }, [isPresent]);
-
-  // var ap = autoplay == "scroll" ? false : autoplay ? true : false;
   var ap = typeof autoplay === "string" && autoplay.includes("scroll") ? false : autoplay ? true : false;
 
-  sameHeight = sameHeight ? sameHeight : false;
-  const sameHeightObj = useSameHeight(sameHeight, graphicref, {
-    resize: "horizontal",
-  });
 
 
 
 
 
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const handleImageLoad = () => {
-    setImageLoaded(true);
+  const WRAPPER_STYLE = {
+    ...styleVariables,
+    ...style,
+    // ...(sameHeightObj && { height: !sameHeightObj.resizing ? `${sameHeightObj.height.min}px` : "auto" }),
   };
-  onLoad = onLoad ? onLoad : handleImageLoad;
-  useEffect(() => {
-    setImageLoaded(false);
-  }, []);
 
+  const WRAPPER_VIDEO_PROPS = {
+    ...(sync !== undefined && { "data-sync": sync }),
+    ...(typeof autoplay === "string" && autoplay.includes("hover") && { "data-autoplay-hover": true }),
+    ...(autoplay && { "data-autoplay": autoplay }),
+  };
 
+  const WRAPPER_PROPS = {
+    className: `graphic--${typePref} ${allClasses}`,
+    ref: graphicref,
+    onClick: onClick,
+    ...(tabIndex !== undefined && { tabIndex: tabIndex }),
+    style: WRAPPER_STYLE,
+    ...restProps,
+    ...(isVideo && WRAPPER_VIDEO_PROPS),
+  };
 
+  const INNER_VIDEO_PROPS = {
+    onCanPlayThrough: onLoad,
+    "data-loop": loop,
+    muted: muted,
+    autoplay: ap,
+    autoPlay: autoplay,
+    controls: controls,
+    innerClassName: innerClassName,
+    type: img.type,
+  };
 
+  const INNER_PROPS = {
+    className: `${innerClassName} ${isMask ? color : ""}`,
+    src: img.src,
+    alt: img.alt,
+    width: width,
+    height: height,
+    onClick: onClickHandler,
+    priority: priority,
+    style: innerStyle,
+    onLoadingComplete: onLoad,
+    ...(isVideo && INNER_VIDEO_PROPS),
+    reference: graphicref,
+  };
+
+  const renderContent = (Component, innerProps, includeChildren = false) => (
+    <Wrapper props={WRAPPER_PROPS} effect={effect}>
+      <Component {...innerProps} />
+      {includeChildren && children}
+    </Wrapper>
+  );
 
   return (
     <>
-      {isImg  && (
-        <div
-          className={`graphic--img ${allClasses}`}
-          style={{
-            ...styleVariables,
-            ...style,
-            ...(sameHeightObj
-              ? {
-                  height: !sameHeightObj.resizing ? `${sameHeightObj.height.min}px` : "auto",
-                }
-              : {}),
-          }}
-          ref={graphicref}
-          onClick={onClick}
-          {...(tabIndex !== undefined ? { tabIndex } : {})}
-          {...props}>
-          {effect && <Effect effect={effect} />}
-
-          <Image
-            className={innerClassName}
-            src={img.src}
-            alt={img.alt}
-            width={width}
-            height={height}
-            onClick={onClickHandler}
-            priority={priority}
-            onLoadingComplete={onLoad}
-            style={innerStyle}
-          />
-
-          {children && children}
-        </div>
-      )}
-      {isMask && (
-        <div
-          className={`graphic--mask ${allClasses}`}
-          style={{ ...styleVariables, ...style }}
-          ref={graphicref}
-          onClick={onClick}
-          {...(tabIndex != undefined ? { tabIndex: tabIndex } : {})}
-          {...props}>
-          {effect && <Effect effect={effect} />}
-          <Mask
-            className={`${innerClassName} ${color}`}
-            src={img.src}
-            alt={img.alt}
-            width={width}
-            height={height}
-            onClick={onClickHandler}
-            priority={priority}
-            onLoad={onLoad}
-            style={innerStyle}
-          />
-          {children && children}
-        </div>
-      )}
-      {isVideo && (
-        <div
-          className={`graphic--video ${allClasses}`}
-          style={{ ...styleVariables, ...style }}
-          ref={graphicref}
-          onClick={onClick}
-          {...(tabIndex != undefined ? { tabIndex: tabIndex } : {})}
-          {...(sync != undefined ? { "data-sync": sync } : {})}
-          {...(typeof autoplay === "string" && autoplay.includes("hover") ? { "data-autoplay-hover": true } : {})}
-          {...(autoplay ? { "data-autoplay": autoplay } : {})}
-          {...props}
-          >
-          {effect && <Effect effect={effect} />}
-
-          <video
-            className={`${innerClassName} video--foreground`}
-            alt={img.alt}
-            width={width}
-            height={height}
-            onClick={onClickHandler}
-            onCanPlayThrough={onLoad}
-            // loop={loop}
-            data-loop={loop}
-            muted={muted}
-            autoPlay={ap}
-            controls={controls}
-            disableRemotePlayback={true}
-
-            >
-            <source src={`.${img.src}`} type={`video/${img.type}`}></source>
-          </video>
-
-
-          {typeof autoplay === "string" && autoplay.includes("hover") && (
-            <video className={`${innerClassName} video--background`} alt={img.alt} width={width} height={height}
-            disableRemotePlayback={true}
-            >
-              <source src={`.${img.src}`} type={`video/${img.type}`}></source>
-            </video>
-          )}
-        </div>
-      )}
+      {isImg && renderContent(Image, INNER_PROPS, true)}
+      {isMask && renderContent(Mask, INNER_PROPS, true)}
+      {isVideo && renderContent(Video, INNER_PROPS)}
     </>
   );
+}
+
+function Wrapper({ props, children, effect }) {
+  return (
+    <div {...props}>
+      {effect && <Effect effect={effect} />}
+      {children}
+    </div>
+  );
+}
+
+function Video(props) {
+  const { autoPlay, className, reference } = props;
+  const { VIDEO_PROPS, SOURCE_PROPS, FOREGROUND_PROPS } = getVideoProps(props);
+  const isHoverAutoPlay = typeof autoPlay === "string" && autoPlay.includes("hover");
+
+  const [mounted, setMounted] = useState(false);
+  const { desktop, loading } = useResponsive();
+
+  useEffect(() => {
+    if (!reference) return;
+    if (loading) return;
+    setMounted(true);
+  }, [reference, loading]);
+
+  useEffect(() => {
+    if (!mounted) return;
+    graphicVideoInit(reference.current, desktop);
+  }, [mounted, desktop]);
+
+  const VidSource = (additionalClassName, additionalProps) => (
+    <video className={`${className} ${additionalClassName}`} {...VIDEO_PROPS} {...additionalProps}>
+      <source {...SOURCE_PROPS}></source>
+    </video>
+  );
+
+  return (
+    <>
+      {VidSource("video--foreground", FOREGROUND_PROPS)}
+      {isHoverAutoPlay && VidSource("video--background")}
+    </>
+  );
+}
+
+function getVideoProps(props) {
+  const { className, alt, width, height, onClick, onCanPlayThrough, ["data-loop"]: dataLoop, muted, autoPlay, controls, src, type } = props;
+
+  const FOREGROUND_PROPS = {
+    onClick,
+    onCanPlayThrough,
+    "data-loop": dataLoop,
+    muted,
+    autoPlay,
+    controls,
+  };
+
+  const VIDEO_PROPS = {
+    alt,
+    width,
+    height,
+    disableRemotePlayback: true,
+  };
+
+  const SOURCE_PROPS = {
+    src: `.${src}`,
+    type: `video/${type}`,
+  };
+
+  return { VIDEO_PROPS, SOURCE_PROPS, FOREGROUND_PROPS };
 }
 
 Graphic.defaultProps = {
@@ -418,7 +442,6 @@ function graphicKeepSquare(elem) {
   window.removeEventListener("resize", ran);
   window.addEventListener("resize", ran);
 }
-
 
 export default Graphic;
 

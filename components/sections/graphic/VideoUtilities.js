@@ -1,46 +1,12 @@
-import { splitS } from "@/scripts/GlobalUtilities";
+import VideoGraphic from "./VideoGraphicObj";
 
-function graphicVideoInit(elem) {
-  function Graphic(elem) {
-    this.elem = elem.closest(".graphic--video");
-    this.video = this.elem.querySelector("video");
 
-    // Check if transition duration is set and not equal to 0s. Otherwise, use a default value from a CSS variable.
-    if (getComputedStyle(this.elem).transitionDuration && getComputedStyle(this.elem).transitionDuration !== "0s") {
-      this.transition = splitS(getComputedStyle(this.elem).transitionDuration);
-    } else {
-      this.transition = splitS(getComputedStyle(document.documentElement).getPropertyValue("--transition").trim());
-    }
-
-    // Set autoplay and sync properties based on data attributes of the element.
-    this.autoplay = this.elem.getAttribute("data-autoplay") ? this.elem.getAttribute("data-autoplay") : false;
-    this.sync = this.elem.getAttribute("data-sync") ? this.elem.getAttribute("data-sync") : false;
-
-    // If sync is set, group all elements with the same sync value together.
-    if (typeof this.sync === "string") {
-      this.group = Array.from(document.querySelectorAll(`[data-sync="${this.sync}"]`));
-    } else {
-      this.group = [this.elem];
-    }
-
-    // Get the index of the element within its group.
-    this.index = this.group.indexOf(this.elem);
-    this.playObserver = null;
-
-    // Set a boolean flag to indicate if autoplay is staggered or synchronized.
-    this.is = {
-      staggered: typeof this.autoplay === "string" && this.autoplay.includes("staggered"),
-      sync: Boolean(this.sync),
-      inView: false,
-      loop: this.video.hasAttribute("data-loop") && this.video.getAttribute("data-loop") !== "false",
-    };
-  }
-
-  var graphic = new Graphic(elem);
+function graphicVideoInit(elem, desktop) {
+  var graphic = new VideoGraphic(elem);
   if (graphic.index != graphic.group.length - 1) return;
 
   graphic.group.forEach((v, i) => {
-    v = new Graphic(v);
+    v = new VideoGraphic(v);
     graphic.group[i] = v;
   });
 
@@ -55,29 +21,27 @@ function graphicVideoInit(elem) {
   }
 
   function graphicCreateIntersectionObserver(graphic) {
-    // Graphic contains a group of Graphic objects. `g` is a single Graphic object within the group, with their only difference being that `g.group` has a reference to the DOM element, rather than a circular reference to the Graphic object itself, whereas `graphic.group` has a a reference to the Graphic object.
+    // VideoGraphic contains a group of VideoGraphic objects. `g` is a single VideoGraphic object within the group, with their only difference being that `g.group` has a reference to the DOM element, rather than a circular reference to the VideoGraphic object itself, whereas `graphic.group` has a a reference to the VideoGraphic object.
 
     graphic.group.forEach((g) => {
-        // Disconnect the old observer if it exists
-        if (g.elem.playObserver) {
-          g.elem.playObserver.disconnect();
-          g.elem.playObserver = null;
-        }
-      
-        var observer = new IntersectionObserver(
-          (entries) => {
-            groupIntersectHandle({ entries, graphic, g });
-          },
-          { threshold: 1 }
-        );
-      
-        // Attach the new observer to the element
-        g.elem.playObserver = observer;
-        g.elem.setAttribute("data-observed", "true");
-        observer.observe(g.elem);
-      });
-      
+      // Disconnect the old observer if it exists
+      if (g.elem.playObserver) {
+        g.elem.playObserver.disconnect();
+        g.elem.playObserver = null;
+      }
 
+      var observer = new IntersectionObserver(
+        (entries) => {
+          groupIntersectHandle({ entries, graphic, g });
+        },
+        { threshold: 0.9 }
+      );
+
+      // Attach the new observer to the element
+      g.elem.playObserver = observer;
+      g.elem.setAttribute("data-observed", "true");
+      observer.observe(g.elem);
+    });
   }
 
   function graphicSetLoopingGroup(graphic) {
@@ -93,7 +57,6 @@ function graphicVideoInit(elem) {
       graphic.group.forEach((g) => {
         g.is.loopingGroup = false;
         var loop = g.video.getAttribute("data-loop") == "true";
-        console.log(loop);
         if (loop) g.video.setAttribute("loop", "true");
       });
     }
@@ -151,14 +114,15 @@ function graphicPlayOnHoverInit(graphic) {
 function graphicVideoReset(graphic) {
   graphic.video.style.setProperty("transition-duration", `${graphic.transition}ms`);
 
-  graphic.video.classList.add("video__hidden");
   graphic.elem.setAttribute("data-playing", "false");
+
+  if (graphic.is.hoverAutoPlay) graphic.video.classList.add("video__hidden");
 
   setTimeout(() => {
     graphicVideoPause(graphic.video);
     graphic.video.currentTime = 0;
     setTimeout(() => {
-      graphic.video.classList.remove("video__hidden");
+      if (graphic.is.hoverAutoPlay) graphic.video.classList.remove("video__hidden");
     }, 100);
   }, graphic.transition);
 }
@@ -172,6 +136,7 @@ function groupIntersectHandle({ entries, graphic: graphicObj, g: graphicInstance
       graphicInstance.is.inView = true;
       if (graphicObj.elem == graphicInstance.elem) graphicObj.is.inView = true;
 
+      console.log("handled");
       groupGetInView(
         () => {
           groupPlayNextInView(graphicObj, videoIndex, inView);
