@@ -7,7 +7,7 @@ import Button from "../elements/Buttons";
 import Tag from "../elements/Tag";
 import { Column } from "../sections/Columns";
 import Description from "../sections/Description";
-import Graphic from "../sections/Graphic";
+import Graphic from "../sections/graphic/Graphic";
 import Heading from "../sections/Heading";
 import useRandomCaptions from "@/scripts/hooks/useRandomCaptions";
 import { useResponsiveUtils } from "@/scripts/hooks/useBreakpoint";

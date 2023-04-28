@@ -5,7 +5,7 @@ import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { setConfig } from "next/config";
 import React, { Fragment, useLayoutEffect, useRef } from "react";
 import { useEffect, useState } from "react";
-import Graphic from "../sections/Graphic";
+import Graphic from "../sections/graphic/Graphic";
 import Heading from "../sections/Heading";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import useListener from "@/scripts/hooks/useListener";
@@ -154,7 +154,7 @@ function useConfigImgPrefetch(configurator) {
   useEffect(() => {
     setTimeout(() => {
       setMount(true);
-    }, 6000);
+    }, 5000);
   }, []);
 
   useEffect(() => {

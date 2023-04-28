@@ -75,9 +75,10 @@ function getAnchoredArrows() {
       }
     }
 
+
     if (!anchor) continue;
 
-    if (!allAnchoredArrows.some((entry) => entry.arrow === arrowElement)) {
+    if (!allAnchoredArrows.some((entry) => entry.arrow === arrowElement  && entry.anchor === anchor)) {
       allAnchoredArrows.push({ arrow: arrowElement, anchor: anchor });
     }
   }
@@ -131,13 +132,15 @@ function useRunAnchoredArrows(hasDynamicArrows, options) {
   function ran() {
     window.clearTimeout(isResizing);
     isResizing = setTimeout(function () {
-      console.log(allAnchoredArrows);
       run();
     }, RESIZE_TIMEOUT);
   }
 
   useHorizontalResize(ran);
 }
+
+
+
 
 function removeExcessArrows() {
   var gridSections = document.querySelectorAll(".section--main__grid");

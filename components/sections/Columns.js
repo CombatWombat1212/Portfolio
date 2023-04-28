@@ -1,5 +1,5 @@
 import { defaultProps, PropTypes } from "prop-types";
-import Graphic from "./Graphic";
+import Graphic from "./graphic/Graphic";
 import { chevron_right } from "@/data/ICONS";
 import { addClassNoRepeats, addClassToJsxObj } from "./sections_utilities/ClassUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";

@@ -1,6 +1,6 @@
 import { clamp, RESIZE_TIMEOUT } from "@/scripts/GlobalUtilities";
 import { useEffect, useRef, useState } from "react";
-import { graphicKeepSquare } from "../sections/Graphic";
+import { graphicKeepSquare } from "../sections/graphic/Graphic";
 import { Graphic } from "../sections/Sections";
 import useHorizontalResize from "@/scripts/hooks/useHorizontalResize";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";

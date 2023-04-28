@@ -4,8 +4,9 @@ import useSameHeight from "@/scripts/hooks/useSameHeight";
 import Image from "next/image";
 import { defaultProps, PropTypes } from "prop-types";
 import React, { useEffect, useRef, useState } from "react";
-import Mask from "../utilities/Mask";
-import { getBackgroundClasses } from "./sections_utilities/GetClasses";
+import Mask from "../../utilities/Mask";
+import { getBackgroundClasses } from "../sections_utilities/GetClasses";
+import graphicVideoInit from "./VideoUtilities";
 
 function getColor(color, colors) {
   return color.split("-to-").map((color) => {
@@ -228,6 +229,7 @@ function Graphic({
     if (isVideo) {
       graphicVideoInit(graphicref.current);
     }
+
   }, [isPresent]);
 
   // var ap = autoplay == "scroll" ? false : autoplay ? true : false;
@@ -334,11 +336,12 @@ function Graphic({
             height={height}
             onClick={onClickHandler}
             onCanPlayThrough={onLoad}
-            loop={loop}
+            // loop={loop}
+            data-loop={loop}
             muted={muted}
             autoPlay={ap}
             controls={controls}
-            disableRemotePlayback="true"
+            disableRemotePlayback={true}
 
             >
             <source src={`.${img.src}`} type={`video/${img.type}`}></source>
@@ -347,7 +350,7 @@ function Graphic({
 
           {typeof autoplay === "string" && autoplay.includes("hover") && (
             <video className={`${innerClassName} video--background`} alt={img.alt} width={width} height={height}
-            disableRemotePlayback="true"
+            disableRemotePlayback={true}
             >
               <source src={`.${img.src}`} type={`video/${img.type}`}></source>
             </video>
@@ -416,213 +419,6 @@ function graphicKeepSquare(elem) {
   window.addEventListener("resize", ran);
 }
 
-function graphicVideoInit(elem) {
-  function GraphicItem(elem) {
-    this.elem = elem.closest(".graphic--video");
-    this.video = this.elem.querySelector("video");
-
-    // Check if transition duration is set and not equal to 0s. Otherwise, use a default value from a CSS variable.
-    if (getComputedStyle(this.elem).transitionDuration && getComputedStyle(this.elem).transitionDuration !== "0s") {
-      this.transition = splitS(getComputedStyle(this.elem).transitionDuration);
-    } else {
-      this.transition = splitS(getComputedStyle(document.documentElement).getPropertyValue("--transition").trim());
-    }
-
-    // Set autoplay and sync properties based on data attributes of the element.
-    this.autoplay = this.elem.getAttribute("data-autoplay") ? this.elem.getAttribute("data-autoplay") : false;
-    this.sync = this.elem.getAttribute("data-sync") ? this.elem.getAttribute("data-sync") : false;
-
-    // If sync is set, group all elements with the same sync value together.
-    if (typeof this.sync === "string") {
-      this.group = Array.from(document.querySelectorAll(`[data-sync="${this.sync}"]`));
-    } else {
-      this.group = [this.elem];
-    }
-
-    // Get the index of the element within its group.
-    this.index = this.group.indexOf(this.elem);
-    this.playObserver = null;
-
-    // Set a boolean flag to indicate if autoplay is staggered or synchronized.
-    this.is = {
-      staggered: typeof this.autoplay === "string" && this.autoplay.includes("staggered"),
-      sync: Boolean(this.sync),
-      inView: false,
-    };
-  }
-
-  var graphic = new GraphicItem(elem);
-  if (graphic.index != graphic.group.length - 1) return;
-
-  graphic.group.forEach((v, i) => {
-    v = new GraphicItem(v);
-    graphic.group[i] = v;
-  });
-
-  if (typeof graphic.autoplay === "string" && graphic.autoplay.includes("scroll")) {
-    graphicCreateIntersectionObserver(graphic);
-  }
-
-  if (typeof graphic.autoplay === "string" && graphic.autoplay.includes("hover")) {
-    graphicPlayOnHoverInit(graphic);
-  }
-
-  function graphicCreateIntersectionObserver(graphic) {
-    graphic.group.forEach((g) => {
-      var observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            var inView = [];
-            let videoIndex = 0;
-
-            function checkInView(callback) {
-              const maxCount = 2;
-              let count = 0;
-
-              const checkInViewHelper = () => {
-                inView = graphic.group
-                  .filter((g) => g.is.inView)
-                  .sort((a, b) => graphic.group.indexOf(a) - graphic.group.indexOf(b))
-                  .map((g) => g.video);
-
-                if (inView.length === 0 && graphic.group.length > 0) {
-                  // No video element found in view, set inView to empty array
-                  inView = [];
-                }
-
-                if (inView.length < graphic.group.length && count < maxCount) {
-                  count++;
-                  setTimeout(checkInViewHelper, 50);
-                } else {
-                  callback();
-                }
-              };
-
-              checkInViewHelper();
-            }
-
-            function playNextVideo() {
-              function ended() {
-                graphicVideoPause(video);
-                if (graphic.is.staggered && videoIndex < inView.length - 1) {
-                  video.removeEventListener("ended", ended);
-                  videoIndex++;
-                  playNextVideo();
-                }
-              }
-
-              const video = inView[videoIndex];
-              if (!video) return;
-              video.currentTime = 0;
-              if (graphic.is.staggered) {
-                graphicVideoPlay(video);
-                video.addEventListener("ended", ended);
-              } else {
-                setTimeout(() => {
-                  inView.forEach((v, i) => {
-                    graphicVideoPlay(v);
-                    v.addEventListener("ended", () => {
-                      graphicVideoPause(v);
-                    });
-                  });
-                }, 200);
-              }
-            }
-
-            function pauseOutOfViewVideos() {
-              var outOfView = graphic.group.filter((g) => !g.is.inView);
-
-              outOfView.forEach((g) => {
-                if (!g.paused) {
-                  graphicVideoReset(g);
-                }
-              });
-            }
-
-            if (entry.isIntersecting) {
-              g.is.inView = true;
-              if (graphic.elem == g.elem) graphic.is.inView = true;
-              checkInView(playNextVideo);
-            } else {
-              g.is.inView = false;
-              if (graphic.elem == g.elem) graphic.is.inView = false;
-              checkInView(pauseOutOfViewVideos);
-            }
-          });
-        },
-        { threshold: 0.5 }
-      );
-
-      g.playObserver = observer;
-      g.elem.setAttribute("data-observed", "true");
-      observer.observe(g.elem);
-    });
-  }
-
-  function graphicVideoPlay(video) {
-    video.parentElement.setAttribute("data-playing", "true");
-    video.play();
-  }
-
-  function graphicVideoPause(video) {
-    video.parentElement.setAttribute("data-playing", "false");
-    video.pause();
-  }
-
-  function graphicPlayOnHoverInit(graphic) {
-    graphic.group.forEach((g) => {
-      g.elem.addEventListener("mouseenter", play);
-      g.elem.addEventListener("mouseleave", pause);
-      g.elem.addEventListener("touchstart", play);
-      g.elem.addEventListener("touchend", pause);
-    });
-
-    function loop(e) {
-      var target = e.target.closest(".graphic--video");
-      var g = graphic.group.find((g) => g.elem === target);
-      if (g.video.currentTime >= g.video.duration - 0.1) {
-        g.video.currentTime = 0;
-      }
-    }
-
-    function play(e) {
-      var target = e.target.closest(".graphic--video");
-      var g = graphic.group.find((g) => g.elem === target);
-      graphicVideoPlay(g.video);
-      g.video.addEventListener("timeupdate", loop);
-
-      // pause others
-      graphic.group.forEach((g) => {
-        if (g.elem !== target) {
-          g.video.removeEventListener("timeupdate", loop);
-          graphicVideoReset(g);
-        }
-      });
-    }
-
-    function pause(e) {
-      var target = e.target.closest(".graphic--video");
-      var g = graphic.group.find((g) => g.elem === target);
-      graphicVideoReset(g);
-      g.video.removeEventListener("timeupdate", loop);
-    }
-  }
-
-  function graphicVideoReset(graphic) {
-    graphic.video.style.setProperty("transition-duration", `${graphic.transition}ms`);
-
-    graphic.video.classList.add("video__hidden");
-    graphic.elem.setAttribute("data-playing", "false");
-
-    setTimeout(() => {
-      graphicVideoPause(graphic.video);
-      graphic.video.currentTime = 0;
-      setTimeout(() => {
-        graphic.video.classList.remove("video__hidden");
-      }, 100);
-    }, graphic.transition);
-  }
-}
 
 export default Graphic;
 

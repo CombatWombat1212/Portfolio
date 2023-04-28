@@ -1,4 +1,4 @@
-import Graphic from "./Graphic";
+import Graphic from "./graphic/Graphic";
 import { addClassToJsxObj } from "./sections_utilities/ClassUtilities";
 import { getSectionChildren } from "./sections_utilities/GetSectionChildren";
 import MAKERIGHT_IMGS from "@/data/MAKERIGHT_IMGS";

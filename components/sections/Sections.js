@@ -18,7 +18,7 @@ import {
 import { getHasText, getHasGraphic, getHasBackground } from "./sections_utilities/IfHas";
 import { getSectionChildren } from "./sections_utilities/GetSectionChildren";
 
-import Graphic from "./Graphic";
+import Graphic from "./graphic/Graphic";
 import Quote from "./Quote";
 import Heading, { getAdditionalHeadingClassesFromParentProps } from "./Heading";
 import Title from "./Title";
