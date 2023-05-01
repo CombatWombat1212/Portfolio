@@ -34,6 +34,7 @@
 
       &[data-autoplay-hover="true"] {
         cursor: pointer;
+      }
         &.background__background {
           &:hover,
           &:focus,
@@ -64,7 +65,7 @@
             background-color: $col-background_darkest !important;
           }
         }
-      }
+      
 
       .video {
         &--foreground {

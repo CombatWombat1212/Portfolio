@@ -371,8 +371,7 @@ function MADE() {
             </Column>
             <Column>
               <Description>
-                ‘Contrast areas’ are the parts of the dress shirt which accent the garment with an alternate fabric pallet. They were a
-                <b>critical project requirement</b> as the online tool needed to represent the full scope of the customization available, which
+                ‘Contrast areas’ are the parts of the dress shirt which accent the garment with an alternate fabric pallet. They were a <b>critical project requirement</b> as the online tool needed to represent the full scope of the customization available, which
                 includes personalized accent areas.
               </Description>
             </Column>

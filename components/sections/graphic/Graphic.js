@@ -3,11 +3,12 @@ import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import useSameHeight from "@/scripts/hooks/useSameHeight";
 import Image from "next/image";
 import { defaultProps, PropTypes } from "prop-types";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Mask from "../../utilities/Mask";
 import { getBackgroundClasses } from "../sections_utilities/GetClasses";
 import graphicVideoInit from "./VideoUtilities";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
+import Video from "./Video";
 
 function getColor(color, colors) {
   return color.split("-to-").map((color) => {
@@ -119,7 +120,7 @@ function Graphic(props) {
     onLoad,
     loop,
     muted,
-    autoplay,
+    autoplay: autoplayProp,
     controls,
     tabIndex,
     onClick,
@@ -130,9 +131,6 @@ function Graphic(props) {
     reference,
     ...restProps
   } = props;
-
-
-  
 
   const graphicref = useRef(null);
   const [isPresent, setIsPresent] = useState(false);
@@ -164,17 +162,6 @@ function Graphic(props) {
 
   // TODO: for mobile, add some kind of indication animation of the image being clicked on when its interactable or can be opened in a lightbox
 
-
-
-
-
-
-
-
-
-
-
-  
   var pref = "section--graphic";
   var isImg = type == "image" || type == "img";
   var isMask = type == "mask";
@@ -246,12 +233,8 @@ function Graphic(props) {
     [`--${typePref[0]}h`]: `${height / 16}rem`,
   };
 
-  var ap = typeof autoplay === "string" && autoplay.includes("scroll") ? false : autoplay ? true : false;
-
-
-
-
-
+  var autoplayHTML = typeof autoplayProp === "string" && autoplayProp.includes("scroll") ? false : autoplayProp ? true : false;
+  
 
   const WRAPPER_STYLE = {
     ...styleVariables,
@@ -259,10 +242,10 @@ function Graphic(props) {
     // ...(sameHeightObj && { height: !sameHeightObj.resizing ? `${sameHeightObj.height.min}px` : "auto" }),
   };
 
-  const WRAPPER_VIDEO_PROPS = {
+  const WRAPPER_COMMON_VIDEO_PROPS = {
     ...(sync !== undefined && { "data-sync": sync }),
-    ...(typeof autoplay === "string" && autoplay.includes("hover") && { "data-autoplay-hover": true }),
-    ...(autoplay && { "data-autoplay": autoplay }),
+    // ...(typeof autoplayProp === "string" && autoplayProp.includes("hover") && { "data-autoplay-hover": true }),
+    // ...(autoplayProp && { "data-autoplay": autoplayProp }),
   };
 
   const WRAPPER_PROPS = {
@@ -272,15 +255,15 @@ function Graphic(props) {
     ...(tabIndex !== undefined && { tabIndex: tabIndex }),
     style: WRAPPER_STYLE,
     ...restProps,
-    ...(isVideo && WRAPPER_VIDEO_PROPS),
+    ...(isVideo && WRAPPER_COMMON_VIDEO_PROPS),
   };
 
-  const INNER_VIDEO_PROPS = {
+  const INNER_COMMON_VIDEO_PROPS = {
     onCanPlayThrough: onLoad,
     "data-loop": loop,
     muted: muted,
-    autoplay: ap,
-    autoPlay: autoplay,
+    autoPlay: autoplayHTML,
+    "data-autoplay": autoplayProp,
     controls: controls,
     innerClassName: innerClassName,
     type: img.type,
@@ -296,7 +279,7 @@ function Graphic(props) {
     priority: priority,
     style: innerStyle,
     onLoadingComplete: onLoad,
-    ...(isVideo && INNER_VIDEO_PROPS),
+    ...(isVideo && INNER_COMMON_VIDEO_PROPS),
     reference: graphicref,
   };
 
@@ -323,66 +306,6 @@ function Wrapper({ props, children, effect }) {
       {children}
     </div>
   );
-}
-
-function Video(props) {
-  const { autoPlay, className, reference } = props;
-  const { VIDEO_PROPS, SOURCE_PROPS, FOREGROUND_PROPS } = getVideoProps(props);
-  const isHoverAutoPlay = typeof autoPlay === "string" && autoPlay.includes("hover");
-
-  const [mounted, setMounted] = useState(false);
-  const { desktop, loading } = useResponsive();
-
-  useEffect(() => {
-    if (!reference) return;
-    if (loading) return;
-    setMounted(true);
-  }, [reference, loading]);
-
-  useEffect(() => {
-    if (!mounted) return;
-    graphicVideoInit(reference.current, desktop);
-  }, [mounted, desktop]);
-
-  const VidSource = (additionalClassName, additionalProps) => (
-    <video className={`${className} ${additionalClassName}`} {...VIDEO_PROPS} {...additionalProps}>
-      <source {...SOURCE_PROPS}></source>
-    </video>
-  );
-
-  return (
-    <>
-      {VidSource("video--foreground", FOREGROUND_PROPS)}
-      {isHoverAutoPlay && VidSource("video--background")}
-    </>
-  );
-}
-
-function getVideoProps(props) {
-  const { className, alt, width, height, onClick, onCanPlayThrough, ["data-loop"]: dataLoop, muted, autoPlay, controls, src, type } = props;
-
-  const FOREGROUND_PROPS = {
-    onClick,
-    onCanPlayThrough,
-    "data-loop": dataLoop,
-    muted,
-    autoPlay,
-    controls,
-  };
-
-  const VIDEO_PROPS = {
-    alt,
-    width,
-    height,
-    disableRemotePlayback: true,
-  };
-
-  const SOURCE_PROPS = {
-    src: `.${src}`,
-    type: `video/${type}`,
-  };
-
-  return { VIDEO_PROPS, SOURCE_PROPS, FOREGROUND_PROPS };
 }
 
 Graphic.defaultProps = {

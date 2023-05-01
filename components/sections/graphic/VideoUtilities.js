@@ -1,35 +1,37 @@
 import VideoGraphic from "./VideoGraphicObj";
 
 
-function graphicVideoInit(elem, desktop) {
-  var graphic = new VideoGraphic(elem);
-  if (graphic.index != graphic.group.length - 1) return;
+function graphicVideoInit(ref) {
 
+  var graphic = new VideoGraphic(ref.current);
+
+  if (graphic.index != graphic.group.length - 1) return;
+  console.log('ran');
   graphic.group.forEach((v, i) => {
-    v = new VideoGraphic(v);
+    v = new VideoGraphic(v, graphic.group);
     graphic.group[i] = v;
   });
+    
 
   graphicSetLoopingGroup(graphic);
 
-  if (typeof graphic.autoplay === "string" && graphic.autoplay.includes("scroll")) {
+
+  if (graphic.is.scrollAutoPlay) {
     graphicCreateIntersectionObserver(graphic);
   }
 
-  if (typeof graphic.autoplay === "string" && graphic.autoplay.includes("hover")) {
-    graphicPlayOnHoverInit(graphic);
-  }
+  // whether or not it initializes is determined internally, rather than wrapping the whole thing in an if because it needs to be uninitialized if it goes from graphic.is.hoverAutoPlay to !graphic.is.hoverAutoPlay
+  graphicPlayOnHoverInit(graphic);
+
 
   function graphicCreateIntersectionObserver(graphic) {
     // VideoGraphic contains a group of VideoGraphic objects. `g` is a single VideoGraphic object within the group, with their only difference being that `g.group` has a reference to the DOM element, rather than a circular reference to the VideoGraphic object itself, whereas `graphic.group` has a a reference to the VideoGraphic object.
 
     graphic.group.forEach((g) => {
-      // Disconnect the old observer if it exists
-      if (g.elem.playObserver) {
-        g.elem.playObserver.disconnect();
-        g.elem.playObserver = null;
-      }
 
+      if(g.elem.getAttribute("data-observed") == "true") return;
+      
+      
       var observer = new IntersectionObserver(
         (entries) => {
           groupIntersectHandle({ entries, graphic, g });
@@ -46,11 +48,13 @@ function graphicVideoInit(elem, desktop) {
 
   function graphicSetLoopingGroup(graphic) {
     const isLoopingGroup = graphic.group.filter((g) => g.is.loop).length == graphic.group.length;
+
+
     if (isLoopingGroup) {
       graphic.is.loopingGroup = true;
       graphic.group.forEach((g) => {
         g.is.loopingGroup = true;
-        g.video.setAttribute("loop", "false");
+        g.video.removeAttribute("loop");
       });
     } else {
       graphic.is.loopingGroup = false;
@@ -58,6 +62,7 @@ function graphicVideoInit(elem, desktop) {
         g.is.loopingGroup = false;
         var loop = g.video.getAttribute("data-loop") == "true";
         if (loop) g.video.setAttribute("loop", "true");
+        if (!loop) g.video.removeAttribute("loop");
       });
     }
   }
@@ -74,12 +79,33 @@ function graphicVideoPause(video) {
 }
 
 function graphicPlayOnHoverInit(graphic) {
-  graphic.group.forEach((g) => {
-    g.elem.addEventListener("mouseenter", play);
-    g.elem.addEventListener("mouseleave", pause);
-    g.elem.addEventListener("touchstart", play);
-    g.elem.addEventListener("touchend", pause);
-  });
+
+
+  if (graphic.is.hoverAutoPlay) {
+    init();
+  } else {
+    uninit();
+  }
+
+
+  function init(){
+    graphic.group.forEach((g) => {
+      g.elem.addEventListener("mouseenter", play);
+      g.elem.addEventListener("mouseleave", pause);
+      g.elem.addEventListener("touchstart", play);
+      g.elem.addEventListener("touchend", pause);
+    });
+  }
+  function uninit(){
+    graphic.group.forEach((g) => {
+      g.elem.removeEventListener("mouseenter", play);
+      g.elem.removeEventListener("mouseleave", pause);
+      g.elem.removeEventListener("touchstart", play);
+      g.elem.removeEventListener("touchend", pause);
+      g.video.removeEventListener("timeupdate", loop);
+    });
+  }
+
 
   function loop(e) {
     var target = e.target.closest(".graphic--video");
@@ -116,7 +142,12 @@ function graphicVideoReset(graphic) {
 
   graphic.elem.setAttribute("data-playing", "false");
 
-  if (graphic.is.hoverAutoPlay) graphic.video.classList.add("video__hidden");
+  if (graphic.is.hoverAutoPlay) {
+    graphic.video.classList.add("video__hidden")
+    graphic.elem.setAttribute("data-autoplay-hover", "true");
+  } else{
+    graphic.elem.setAttribute("data-autoplay-hover", "false");
+  }
 
   setTimeout(() => {
     graphicVideoPause(graphic.video);
@@ -136,7 +167,6 @@ function groupIntersectHandle({ entries, graphic: graphicObj, g: graphicInstance
       graphicInstance.is.inView = true;
       if (graphicObj.elem == graphicInstance.elem) graphicObj.is.inView = true;
 
-      console.log("handled");
       groupGetInView(
         () => {
           groupPlayNextInView(graphicObj, videoIndex, inView);
@@ -188,14 +218,15 @@ function groupGetInView(callback, graphicObj, inView) {
 }
 
 function groupPlayNextInView(graphicObj, videoIndex, inView) {
+
   function ended() {
     graphicVideoPause(video);
-    if (graphicObj.is.staggered && videoIndex < inView.length - 1) {
-      if (graphicObj.is.loopingGroup) {
-        video.removeEventListener("ended", ended);
+    if (graphicObj.is.staggered){
+      video.removeEventListener("ended", ended);
+      if (graphicObj.is.loopingGroup && videoIndex == inView.length - 1) {
+        console.log(graphicObj.is.loopingGroup)
         videoIndex = 0;
       } else {
-        video.removeEventListener("ended", ended);
         videoIndex++;
       }
       groupPlayNextInView(graphicObj, videoIndex, inView);
