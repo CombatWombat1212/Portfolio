@@ -35,6 +35,13 @@
       &[data-autoplay-hover="true"] {
         cursor: pointer;
       }
+      &[data-autoplay-hover="false"] {
+        @include lg-down{
+          pointer-events: none;
+        }
+      }
+
+
         &.background__background {
           &:hover,
           &:focus,

@@ -1,5 +1,5 @@
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useLayoutEffect, useRef, useState } from "react";
 import graphicVideoInit from "./VideoUtilities";
 
 
@@ -23,7 +23,7 @@ function Video(props) {
     setMounted(true);
   }, [reference, loading]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!mounted) return;
     graphicVideoInit(reference);
     setRefreshKey(desktop);

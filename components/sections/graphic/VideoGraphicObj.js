@@ -15,19 +15,44 @@ function VideoGraphic(elem, group = null) {
     hoverAutoPlay: this.checkIfHoverAutoplay(),
     scrollAutoPlay: this.checkIfScrollAutoplay(),
   };
+  this.get = {
+    loopingGroup: () => {
+      const isLoopingGroup = this.group.filter((g) => g.is.loop).length == this.group.length;
+
+      if (isLoopingGroup) {
+        this.is.loopingGroup = true;
+        this.group.forEach((g) => {
+          g.is.loopingGroup = true;
+          g.getVideo().removeAttribute("loop");
+        });
+      } else {
+        this.is.loopingGroup = false;
+        this.group.forEach((g) => {
+          g.is.loopingGroup = false;
+          var loop = g.getVideo().getAttribute("data-loop") == "true";
+          if (loop) g.getVideo().setAttribute("loop", "true");
+          if (!loop) g.getVideo().removeAttribute("loop");
+        });
+      }
+    },
+    hoverAutoPlay: () => {
+      const isHoverAutoPlay = this.checkIfHoverAutoplay();
+      this.is.hoverAutoPlay = isHoverAutoPlay;
+    },
+  };
   this.set = {
     hoverAutoPlay: () => {
       if (this.is.hoverAutoPlay) {
-        console.log(this.is.hoverAutoPlay);
         this.elem.setAttribute("data-autoplay-hover", "true");
       } else {
         this.elem.setAttribute("data-autoplay-hover", "false");
       }
     },
   };
-
   this.group = this.getGroup(group);
   this.index = this.getIndex();
+
+  this.set.hoverAutoPlay();
 }
 
 VideoGraphic.prototype.getVideo = function () {
