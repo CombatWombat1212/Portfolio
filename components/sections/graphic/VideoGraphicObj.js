@@ -1,8 +1,8 @@
 import { splitS } from "@/scripts/GlobalUtilities";
 
-function VideoGraphic(elem, group=null) {
+function VideoGraphic(elem, group = null) {
   this.elem = elem.closest(".graphic--video");
-  this.video = this.elem.querySelector("video");
+  this.video = this.getVideo();
   this.transition = this.getTransitionDuration();
   this.autoplay = this.getAutoplayValue();
   this.sync = this.getSyncValue();
@@ -15,9 +15,25 @@ function VideoGraphic(elem, group=null) {
     hoverAutoPlay: this.checkIfHoverAutoplay(),
     scrollAutoPlay: this.checkIfScrollAutoplay(),
   };
+  this.set = {
+    hoverAutoPlay: () => {
+      if (this.is.hoverAutoPlay) {
+        console.log(this.is.hoverAutoPlay);
+        this.elem.setAttribute("data-autoplay-hover", "true");
+      } else {
+        this.elem.setAttribute("data-autoplay-hover", "false");
+      }
+    },
+  };
+
   this.group = this.getGroup(group);
   this.index = this.getIndex();
 }
+
+VideoGraphic.prototype.getVideo = function () {
+  const video = this.elem.querySelector("video");
+  return video;
+};
 
 VideoGraphic.prototype.getTransitionDuration = function () {
   const transitionDuration = getComputedStyle(this.elem).transitionDuration;
@@ -60,12 +76,8 @@ VideoGraphic.prototype.checkIfLoop = function () {
 
 VideoGraphic.prototype.checkIfHoverAutoplay = function () {
   const isHoverAutoPlay = typeof this.autoplay === "string" && this.autoplay.includes("hover");
-  // i try not to do this but this time it was necessary because otherwise i'd have to invoke desktop within the `Graphic` component which is exactly what i refactored it to avoid
-  if (isHoverAutoPlay) this.elem.setAttribute("data-autoplay-hover", "true");
-  else this.elem.setAttribute("data-autoplay-hover", "false");
   return isHoverAutoPlay;
 };
-
 
 VideoGraphic.prototype.checkIfScrollAutoplay = function () {
   return typeof this.autoplay === "string" && this.autoplay.includes("scroll");

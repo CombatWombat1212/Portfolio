@@ -1,5 +1,5 @@
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import graphicVideoInit from "./VideoUtilities";
 
 
@@ -30,17 +30,6 @@ function Video(props) {
   }, [mounted, desktop]);
 
 
-
-
-
-
-
-
-
-
-
-
-
   const VidSource = (additionalClassName, additionalProps) => (
     <video className={`${className} ${additionalClassName}`} {...COMMON_VIDEO_PROPS} {...additionalProps}>
       <source {...SOURCE_PROPS}></source>
@@ -48,10 +37,10 @@ function Video(props) {
   );
 
   return (
-    <>
+    <Fragment key={refreshKey}>
       {VidSource("video--foreground", FOREGROUND_PROPS)}
       {(isHoverAutoPlay || !desktop) && VidSource("video--background")}
-    </>
+    </Fragment>
   );
 }
 
