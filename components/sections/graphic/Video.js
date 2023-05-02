@@ -23,7 +23,7 @@ function Video(props) {
     setMounted(true);
   }, [reference, loading]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!mounted) return;
     graphicVideoInit(reference);
     setRefreshKey(desktop);

@@ -384,7 +384,7 @@ function MADE() {
                 className="b-rad"
                 img={MADE_IMGS.contrast_glow_mini_wide_fabric_video}
                 background="background darkest"
-                autoplay="scroll staggered hover"
+                autoplay="scroll hover"
                 muted
                 sync="Texturing--Contrast-Areas"
               />
@@ -395,7 +395,7 @@ function MADE() {
                 className="b-rad"
                 img={MADE_IMGS.contrast_glow_wide_fabric_video}
                 background="background darkest"
-                autoplay="scroll staggered hover"
+                autoplay="scroll hover"
                 muted
                 sync="Texturing--Contrast-Areas"
               />
@@ -409,7 +409,7 @@ function MADE() {
                 className="b-rad"
                 img={MADE_IMGS.contrast_split_mini_wide_video}
                 background="background darkest"
-                autoplay="scroll staggered hover"
+                autoplay="scroll hover"
                 muted
                 sync="Texturing--Contrast-Split"
               />
@@ -423,7 +423,7 @@ function MADE() {
                 className="b-rad"
                 img={MADE_IMGS.contrast_split_wide_video}
                 background="background darkest"
-                autoplay="scroll staggered hover"
+                autoplay="scroll hover"
                 muted
                 sync="Texturing--Contrast-Split"
               />

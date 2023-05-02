@@ -35,7 +35,7 @@ function VideoGraphic(elem, group = null) {
         });
       }
     },
-    hoverAutoPlay: getHoverAutoPlay.bind(this),
+    hoverAutoPlay: graphicGetHoverAutoPlay.bind(this),
   };
   this.set = {
     hoverAutoPlay: () => {
@@ -45,6 +45,7 @@ function VideoGraphic(elem, group = null) {
         this.elem.setAttribute("data-autoplay-hover", "false");
       }
     },
+    dataPlaying: graphicSetDataPlaying.bind(this),
   };
   this.group = this.getGroup(group);
   this.index = this.getIndex();
@@ -108,8 +109,12 @@ VideoGraphic.prototype.checkIfScrollAutoplay = function () {
 
 
 
-function getHoverAutoPlay() {
+function graphicGetHoverAutoPlay() {
   this.is.hoverAutoPlay = this.elem.getAttribute("data-autoplay-hover") === "true";
+}
+
+function graphicSetDataPlaying(bool) {
+  this.elem.setAttribute("data-playing", bool);
 }
 
 

@@ -1,4 +1,6 @@
 import VideoGraphic from "./VideoGraphicObj";
+import createEventListenerTracker from "@/scripts/EventListenerTracker";
+const { addEventListenerWithTracking, removeAllEventListeners } = createEventListenerTracker();
 
 function graphicVideoInit(ref) {
   var graphic = new VideoGraphic(ref.current);
@@ -10,9 +12,6 @@ function graphicVideoInit(ref) {
     graphic.group[i] = g;
   });
 
-  // graphicSetLoopingGroup(graphic);
-  // graphic.set.loopingGroup();
-  // console.log(graphic.is.loopingGroup);
 
   if (graphic.is.scrollAutoPlay) {
     graphicCreateIntersectionObserver(graphic);
@@ -67,15 +66,17 @@ function graphicVideoInit(ref) {
 
 function graphicVideoPlay(graphic) {
   if (!graphic || !graphic.elem || !graphic.getVideo()) return;
-  graphic.elem.setAttribute("data-playing", "true");
+  graphic.set.dataPlaying(true);
   graphic.getVideo().play();
 }
 
 function graphicVideoPause(graphic) {
   if (!graphic || !graphic.elem || !graphic.getVideo()) return;
-  graphic.elem.setAttribute("data-playing", "false");
+  graphic.set.dataPlaying(false);
   graphic.getVideo().pause();
 }
+
+
 
 function graphicPlayOnHoverInit(graphic) {
   if (graphic.is.hoverAutoPlay) {
@@ -86,39 +87,37 @@ function graphicPlayOnHoverInit(graphic) {
 
   function init(graphic) {
     graphic.group.forEach((g) => {
-      g.elem.addEventListener("mouseenter", play);
-      g.elem.addEventListener("mouseleave", pause);
-      g.elem.addEventListener("touchstart", play);
-      g.elem.addEventListener("touchend", pause);
+      addEventListenerWithTracking(g.elem, "mouseenter", play);
+      addEventListenerWithTracking(g.elem, "mouseleave", pause);
+      addEventListenerWithTracking(g.elem, "touchstart", play);
+      addEventListenerWithTracking(g.elem, "touchend", pause);
     });
   }
+
   function uninit(graphic) {
     graphic.group.forEach((g) => {
-      g.elem.removeEventListener("mouseenter", play);
-      g.elem.removeEventListener("mouseleave", pause);
-      g.elem.removeEventListener("touchstart", play);
-      g.elem.removeEventListener("touchend", pause);
+      removeAllEventListeners(g.elem);
       g.getVideo().removeEventListener("timeupdate", loop);
     });
   }
 
-  function checkIfHoverAutoplay(graphic) {
-    graphic.get.hoverAutoPlay();
-    if (!graphic.is.hoverAutoPlay) {
-      uninit(graphic);
+  function checkIfHoverAutoplay(graph) {
+    graph.get.hoverAutoPlay();
+    if (!graph.is.hoverAutoPlay) {
+      uninit(graph);
       return true;
     }
     return false;
   }
-  
+
   function getTarget(e) {
     const target = e.target.closest(".graphic--video");
     const graph = graphic.group.find((g) => g.elem === target);
-    return {target, graph};
+    return { target, graph };
   }
 
   function loop(e) {
-    var {target, graph} = getTarget(e);
+    var { target, graph } = getTarget(e);
     if (checkIfHoverAutoplay(graph)) return;
     if (graph.getVideo().currentTime >= graph.getVideo().duration - 0.1) {
       graph.getVideo().currentTime = 0;
@@ -126,12 +125,10 @@ function graphicPlayOnHoverInit(graphic) {
   }
 
   function play(e) {
-
-    var {target, graph} = getTarget(e);
+    var { target, graph } = getTarget(e);
     if (checkIfHoverAutoplay(graph)) return;
-  
     graphicVideoPlay(graph);
-    graph.getVideo().addEventListener("timeupdate", loop);
+    addEventListenerWithTracking(graph.getVideo(), "timeupdate", loop);
 
     graph.group.forEach((g) => {
       if (g.elem !== target) {
@@ -142,17 +139,19 @@ function graphicPlayOnHoverInit(graphic) {
   }
 
   function pause(e) {
-    var {target, graph} = getTarget(e);
+    var { target, graph } = getTarget(e);
     if (checkIfHoverAutoplay(graph)) return;
     graphicVideoReset(graph);
-    graph.getVideo().removeEventListener("timeupdate", loop);
+    removeAllEventListeners(graph.getVideo());
   }
 }
 
 function graphicVideoReset(graphic) {
+
   graphic.getVideo().style.setProperty("transition-duration", `${graphic.transition}ms`);
 
-  graphic.elem.setAttribute("data-playing", "false");
+  // graphic.elem.setAttribute("data-playing", "false");
+  graphic.set.dataPlaying(false);
 
   if (graphic.is.hoverAutoPlay) {
     graphic.getVideo().classList.add("video__hidden");
@@ -177,7 +176,6 @@ function groupIntersectHandle({ entries, graphic: graphicObj, g: graphicInstance
     if (entry.isIntersecting) {
       graphicInstance.is.inView = true;
       if (graphicObj.elem == graphicInstance.elem) graphicObj.is.inView = true;
-      console.log("play next in view");
       groupGetInView(
         () => {
           groupPlayNextInView(graphicObj, videoIndex, inView);
@@ -213,7 +211,6 @@ function groupGetInView(callback, graphicObj, inView) {
     const newInView = graphicObj.group
       .filter((graphicInstance) => graphicInstance.is.inView)
       .sort((a, b) => graphicObj.group.indexOf(a) - graphicObj.group.indexOf(b));
-    // .map((graphicInstance) => graphicInstance.video);
 
     if (newInView.length === 0 && graphicObj.group.length > 0) {
       inView.length = 0;
