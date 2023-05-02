@@ -5,6 +5,8 @@ const { addEventListenerWithTracking, removeAllEventListeners } = createEventLis
 function graphicVideoInit(ref) {
   var graphic = new VideoGraphic(ref.current);
 
+  
+  console.log(graphic)
   if (graphic.index != graphic.group.length - 1) return;
 
   graphic.group.forEach((g, i) => {
@@ -233,7 +235,7 @@ function groupPlayNextInView(graphicObj, videoIndex, inView) {
       });
     });
   }
-  
+
   const graphic = inView[videoIndex];
   if (!graphic) return;
   graphic.currentTime = 0;

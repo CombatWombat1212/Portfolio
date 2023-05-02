@@ -243,7 +243,7 @@ function Graphic(props) {
   };
 
   const WRAPPER_COMMON_VIDEO_PROPS = {
-    ...(sync !== undefined && { "data-sync": sync }),
+    ...(sync !== undefined && sync !== false && { "data-sync": sync }),
     // ...(typeof autoplayProp === "string" && autoplayProp.includes("hover") && { "data-autoplay-hover": true }),
     // ...(autoplayProp && { "data-autoplay": autoplayProp }),
   };

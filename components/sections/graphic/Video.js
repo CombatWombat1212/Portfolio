@@ -1,6 +1,11 @@
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import { Fragment, useEffect, useLayoutEffect, useRef, useState } from "react";
 import graphicVideoInit from "./VideoUtilities";
+import Mask from "@/components/utilities/Mask";
+import { play } from "@/data/ICONS";
+import Image from "next/image";
+import { Graphic } from "../Sections";
+import SVG from "@/components/utilities/SVG";
 
 
 function Video(props) {
@@ -38,6 +43,8 @@ function Video(props) {
 
   return (
     <Fragment key={refreshKey}>
+
+      {/* <SVG img={play} className="video--play" outline={{ fill: '--svg-stroke-fill', weight: '--svg-stroke-weight' }} /> */}
       {VidSource("video--foreground", FOREGROUND_PROPS)}
       {/* {(isHoverAutoPlay || !desktop) && VidSource("video--background")} */}
       { VidSource("video--background")}

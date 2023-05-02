@@ -385,7 +385,6 @@ function MADE() {
                 img={MADE_IMGS.contrast_glow_mini_wide_fabric_video}
                 background="background darkest"
                 autoplay="scroll staggered hover"
-                loop
                 muted
                 sync="Texturing--Contrast-Areas"
               />
@@ -397,7 +396,6 @@ function MADE() {
                 img={MADE_IMGS.contrast_glow_wide_fabric_video}
                 background="background darkest"
                 autoplay="scroll staggered hover"
-                loop
                 muted
                 sync="Texturing--Contrast-Areas"
               />
@@ -412,7 +410,6 @@ function MADE() {
                 img={MADE_IMGS.contrast_split_mini_wide_video}
                 background="background darkest"
                 autoplay="scroll staggered hover"
-                loop
                 muted
                 sync="Texturing--Contrast-Split"
               />
@@ -427,7 +424,6 @@ function MADE() {
                 img={MADE_IMGS.contrast_split_wide_video}
                 background="background darkest"
                 autoplay="scroll staggered hover"
-                loop
                 muted
                 sync="Texturing--Contrast-Split"
               />
@@ -552,13 +548,13 @@ function MADE() {
               <Heading type="h4" className="graphic--caption graphic--caption__above">
                 Drop-shadows:
               </Heading>
-              <Graphic type="image" className="b-rad border-negative" img={MADE_IMGS.lighting_drop} background="background darker" square />
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.lighting_drop} background="background darker" square />
             </Column>
             <Column caption="above">
               <Heading type="h4" className="graphic--caption graphic--caption__above">
                 Rendered shadows:
               </Heading>
-              <Graphic type="image" className="b-rad border-positive" img={MADE_IMGS.lighting_after} background="background darker" square />
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.lighting_after} background="background darker" square />
             </Column>
           </Section>
 
@@ -646,7 +642,7 @@ function MADE() {
               </Heading>
               <Graphic
                 type="video"
-                className="b-rad border-negative"
+                className="b-rad border border-negative"
                 img={MADE_IMGS.limitations_multiple_objects}
                 background="background darkest"
                 autoplay="scroll staggered hover"
@@ -670,7 +666,7 @@ function MADE() {
               </Heading>
               <Graphic
                 type="video"
-                className="b-rad border-positive"
+                className="b-rad border border-positive"
                 img={MADE_IMGS.limitations_single_object}
                 background="background darkest"
                 autoplay="scroll staggered hover"
@@ -764,7 +760,7 @@ function MADE() {
           <Section id="Delivery--Config" background="background darkest" type={"columns"} titled>
             <Heading className="color--primary">Final configurator</Heading>
             <Column>
-              <Graphic type="video" img={MADE_IMGS.configurator_demo} className="b-rad" muted autoplay="scroll" controls loop />
+              <Graphic type="video" img={MADE_IMGS.configurator_demo} className="b-rad" muted autoplay="scroll" controls/>
             </Column>
           </Section>
 

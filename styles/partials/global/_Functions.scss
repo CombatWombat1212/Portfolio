@@ -390,3 +390,13 @@ $enable-important-utilities: false !default;
     // width: Min(Max(75%, var(--w)), 90%);
 
   }
+
+
+  @function hex-to-rgba($hex-color, $opacity) {
+    @return rgba(
+      red($hex-color),
+      green($hex-color),
+      blue($hex-color),
+      $opacity
+    );
+  }

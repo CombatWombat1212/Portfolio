@@ -78,9 +78,9 @@ VideoGraphic.prototype.getSyncValue = function () {
 
 VideoGraphic.prototype.getGroup = function (group) {
   if (typeof this.sync === "string") {
-    return group || Array.from(document.querySelectorAll(`[data-sync="${this.sync}"]`));
+    return group || Array.from(document.querySelectorAll(`[data-sync="${this.sync}"]`)) || false;
   } else {
-    return group || [this.elem];
+    return group || [this.elem] || false;
   }
 };
 

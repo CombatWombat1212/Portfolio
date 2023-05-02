@@ -3023,27 +3023,63 @@ h3 + .studypanel--paragraph {
 }
 
 .section .graphic--video.background__background:hover, .section .graphic--video.background__background:focus, .section .graphic--video.background__background[data-playing="true"] {
-  background-color: #E9E9F2;
+  background-color: #074391;
+}
+
+.section .graphic--video.background__background:hover:not(.border), .section .graphic--video.background__background:focus:not(.border), .section .graphic--video.background__background[data-playing="true"]:not(.border) {
+  outline: 0.375rem rgba(64, 64, 100, 0.3) solid !important;
+}
+
+.section .graphic--video.background__background:hover.border, .section .graphic--video.background__background:focus.border, .section .graphic--video.background__background[data-playing="true"].border {
+  --border-opactiy: 0.6!important;
 }
 
 .section .graphic--video.background__background[data-playing="false"] {
   background-color: #F3F3F7 !important;
 }
 
+.section .graphic--video.background__background[data-playing="false"]:not(.border) {
+  outline: 0.375rem rgba(64, 64, 100, 0) solid;
+}
+
 .section .graphic--video.background__background-darker:hover, .section .graphic--video.background__background-darker:focus, .section .graphic--video.background__background-darker[data-playing="true"] {
   background-color: #E0E0EA;
+}
+
+.section .graphic--video.background__background-darker:hover:not(.border), .section .graphic--video.background__background-darker:focus:not(.border), .section .graphic--video.background__background-darker[data-playing="true"]:not(.border) {
+  outline: 0.375rem rgba(64, 64, 100, 0.3) solid !important;
+}
+
+.section .graphic--video.background__background-darker:hover.border, .section .graphic--video.background__background-darker:focus.border, .section .graphic--video.background__background-darker[data-playing="true"].border {
+  --border-opactiy: 0.6!important;
 }
 
 .section .graphic--video.background__background-darker[data-playing="false"] {
   background-color: #E9E9F2 !important;
 }
 
+.section .graphic--video.background__background-darker[data-playing="false"]:not(.border) {
+  outline: 0.375rem rgba(64, 64, 100, 0) solid;
+}
+
 .section .graphic--video.background__background-darkest:hover, .section .graphic--video.background__background-darkest:focus, .section .graphic--video.background__background-darkest[data-playing="true"] {
   background-color: #d2d2e0;
 }
 
+.section .graphic--video.background__background-darkest:hover:not(.border), .section .graphic--video.background__background-darkest:focus:not(.border), .section .graphic--video.background__background-darkest[data-playing="true"]:not(.border) {
+  outline: 0.375rem rgba(64, 64, 100, 0.3) solid !important;
+}
+
+.section .graphic--video.background__background-darkest:hover.border, .section .graphic--video.background__background-darkest:focus.border, .section .graphic--video.background__background-darkest[data-playing="true"].border {
+  --border-opactiy: 0.6!important;
+}
+
 .section .graphic--video.background__background-darkest[data-playing="false"] {
   background-color: #E0E0EA !important;
+}
+
+.section .graphic--video.background__background-darkest[data-playing="false"]:not(.border) {
+  outline: 0.375rem rgba(64, 64, 100, 0) solid;
 }
 
 .section .graphic--video .video--foreground {
@@ -7032,15 +7068,33 @@ h3 + .studypanel--paragraph {
 }
 
 .border-negative {
-  border: 0.5rem rgba(196, 18, 60, 0.2) solid;
+  --border-opactiy: 0.2;
+  border: 0.4375rem rgba(196, 18, 60, var(--border-opactiy)) solid;
 }
 
 .border-positive {
-  border: 0.5rem rgba(8, 180, 48, 0.2) solid;
+  --border-opactiy: 0.2;
+  border: 0.4375rem rgba(8, 180, 48, var(--border-opactiy)) solid;
 }
 
 .border-tertiary {
-  border: 0.25rem #404064 solid;
+  --border-opactiy: 1;
+  border: 0.4375rem rgba(64, 64, 100, var(--border-opactiy)) solid;
+}
+
+.background-negative {
+  --background-opacity: 1;
+  background-color: rgba(233, 212, 224, var(--background-opacity));
+}
+
+.background-positive {
+  --background-opacity: 1;
+  background-color: rgba(203, 228, 215, var(--background-opacity));
+}
+
+.background-tertiary {
+  --background-opacity: 1;
+  background-color: Rgba(#404064, var(--background-opacity));
 }
 
 .d-block {

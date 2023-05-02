@@ -1,14 +1,40 @@
-.border{
+.border {
+  &-negative {
+    --border-opactiy: 0.2;
+    border: 0.4375rem rgba($col-negative, var(--border-opactiy)) solid;
+  }
+  &-positive {
+    --border-opactiy: 0.2;
+    border: 0.4375rem rgba($col-positive, var(--border-opactiy)) solid;
+  }
+  &-tertiary {
+    --border-opactiy: 1;
+    border: 0.4375rem rgba($col-tertiary, var(--border-opactiy)) solid;
+  }
+}
 
+.background {
+  &-negative {
+    --background-opacity: 1;
 
+    // mix($col-negative, $col-background_darker, 12.15)
+    background-color: hex-to-rgba(
+      (mix(lighten(mix($col-negative, $col-background_darker, 55), 17), $col-background_darker, 40)),
+      var(--background-opacity)
+    );
+  }
 
-    &-negative{
-        border: 0.5rem rgba($col-negative, 0.2) solid;
-    }
-    &-positive{
-        border: 0.5rem rgba($col-positive, 0.2) solid;
-    }
-    &-tertiary{
-        border: 0.25rem rgba($col-tertiary, 1) solid;
-    }
+  &-positive {
+    --background-opacity: 1;
+
+    // mix($col-positive, $col-background_darker, 14.985)
+    background-color: hex-to-rgba(
+      (mix(lighten(mix($col-positive, $col-background_darker, 67.5), 17), $col-background_darker, 34.75)),
+      var(--background-opacity)
+    );
+  }
+  &-tertiary {
+    --background-opacity: 1;
+    background-color: Rgba($col-tertiary, var(--background-opacity));
+  }
 }
