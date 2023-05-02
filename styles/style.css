@@ -3022,12 +3022,6 @@ h3 + .studypanel--paragraph {
   cursor: pointer;
 }
 
-@media screen and (max-width: 61.9375em) {
-  .section .graphic--video[data-autoplay-hover="false"] {
-    pointer-events: none;
-  }
-}
-
 .section .graphic--video.background__background:hover, .section .graphic--video.background__background:focus, .section .graphic--video.background__background[data-playing="true"] {
   background-color: #E9E9F2;
 }

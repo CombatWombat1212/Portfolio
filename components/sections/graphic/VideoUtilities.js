@@ -78,17 +78,13 @@ function graphicVideoPause(graphic) {
 }
 
 function graphicPlayOnHoverInit(graphic) {
-
-  graphic.get.hoverAutoPlay();
-  graphic.set.hoverAutoPlay();
-
   if (graphic.is.hoverAutoPlay) {
-    init();
+    init(graphic);
   } else {
-    uninit();
+    uninit(graphic);
   }
 
-  function init() {
+  function init(graphic) {
     graphic.group.forEach((g) => {
       g.elem.addEventListener("mouseenter", play);
       g.elem.addEventListener("mouseleave", pause);
@@ -96,7 +92,7 @@ function graphicPlayOnHoverInit(graphic) {
       g.elem.addEventListener("touchend", pause);
     });
   }
-  function uninit() {
+  function uninit(graphic) {
     graphic.group.forEach((g) => {
       g.elem.removeEventListener("mouseenter", play);
       g.elem.removeEventListener("mouseleave", pause);
@@ -106,24 +102,38 @@ function graphicPlayOnHoverInit(graphic) {
     });
   }
 
+  function checkIfHoverAutoplay(graphic) {
+    graphic.get.hoverAutoPlay();
+    if (!graphic.is.hoverAutoPlay) {
+      uninit(graphic);
+      return true;
+    }
+    return false;
+  }
+  
+  function getTarget(e) {
+    const target = e.target.closest(".graphic--video");
+    const graph = graphic.group.find((g) => g.elem === target);
+    return {target, graph};
+  }
+
   function loop(e) {
-    
-    var target = e.target.closest(".graphic--video");
-    var g = graphic.group.find((g) => g.elem === target);
-    if (g.getVideo().currentTime >= g.getVideo().duration - 0.1) {
-      g.getVideo().currentTime = 0;
+    var {target, graph} = getTarget(e);
+    if (checkIfHoverAutoplay(graph)) return;
+    if (graph.getVideo().currentTime >= graph.getVideo().duration - 0.1) {
+      graph.getVideo().currentTime = 0;
     }
   }
 
   function play(e) {
-    
-    var target = e.target.closest(".graphic--video");
-    var g = graphic.group.find((g) => g.elem === target);
 
-    graphicVideoPlay(g);
-    g.getVideo().addEventListener("timeupdate", loop);
+    var {target, graph} = getTarget(e);
+    if (checkIfHoverAutoplay(graph)) return;
+  
+    graphicVideoPlay(graph);
+    graph.getVideo().addEventListener("timeupdate", loop);
 
-    graphic.group.forEach((g) => {
+    graph.group.forEach((g) => {
       if (g.elem !== target) {
         g.getVideo().removeEventListener("timeupdate", loop);
         graphicVideoReset(g);
@@ -132,11 +142,10 @@ function graphicPlayOnHoverInit(graphic) {
   }
 
   function pause(e) {
-    
-    var target = e.target.closest(".graphic--video");
-    var g = graphic.group.find((g) => g.elem === target);
-    graphicVideoReset(g);
-    g.getVideo().removeEventListener("timeupdate", loop);
+    var {target, graph} = getTarget(e);
+    if (checkIfHoverAutoplay(graph)) return;
+    graphicVideoReset(graph);
+    graph.getVideo().removeEventListener("timeupdate", loop);
   }
 }
 
@@ -147,7 +156,6 @@ function graphicVideoReset(graphic) {
 
   if (graphic.is.hoverAutoPlay) {
     graphic.getVideo().classList.add("video__hidden");
-  } else {
   }
 
   setTimeout(() => {

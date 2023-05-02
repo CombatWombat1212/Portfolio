@@ -35,10 +35,7 @@ function VideoGraphic(elem, group = null) {
         });
       }
     },
-    hoverAutoPlay: () => {
-      const isHoverAutoPlay = this.checkIfHoverAutoplay();
-      this.is.hoverAutoPlay = isHoverAutoPlay;
-    },
+    hoverAutoPlay: getHoverAutoPlay.bind(this),
   };
   this.set = {
     hoverAutoPlay: () => {
@@ -104,8 +101,16 @@ VideoGraphic.prototype.checkIfHoverAutoplay = function () {
   return isHoverAutoPlay;
 };
 
+
 VideoGraphic.prototype.checkIfScrollAutoplay = function () {
   return typeof this.autoplay === "string" && this.autoplay.includes("scroll");
 };
+
+
+
+function getHoverAutoPlay() {
+  this.is.hoverAutoPlay = this.elem.getAttribute("data-autoplay-hover") === "true";
+}
+
 
 export default VideoGraphic;

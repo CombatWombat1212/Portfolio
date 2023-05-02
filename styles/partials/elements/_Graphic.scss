@@ -36,9 +36,9 @@
         cursor: pointer;
       }
       &[data-autoplay-hover="false"] {
-        @include lg-down{
-          pointer-events: none;
-        }
+        // @include lg-down{
+        //   pointer-events: none;
+        // }
       }
 
 
