@@ -39,7 +39,8 @@ function Video(props) {
   return (
     <Fragment key={refreshKey}>
       {VidSource("video--foreground", FOREGROUND_PROPS)}
-      {(isHoverAutoPlay || !desktop) && VidSource("video--background")}
+      {/* {(isHoverAutoPlay || !desktop) && VidSource("video--background")} */}
+      { VidSource("video--background")}
     </Fragment>
   );
 }

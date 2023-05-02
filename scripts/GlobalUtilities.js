@@ -1,4 +1,4 @@
-const RESIZE_TIMEOUT = 200;
+const RESIZE_TIMEOUT = 300;
 
 function semicolonSuffix(str) {
   if (str[str.length - 1] != ";") {
