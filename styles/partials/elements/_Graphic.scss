@@ -177,7 +177,8 @@
 
       &__above {
         margin-top: 0;
-        margin-bottom: calc(var(--section-text-spacing) * 0.5);
+        // margin-bottom: calc(var(--section-text-spacing) * 0.5);
+        margin-bottom: calc(var(--section-text-spacing) * 0.6);
       }
 
       &__split {

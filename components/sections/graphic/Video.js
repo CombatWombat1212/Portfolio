@@ -1,10 +1,6 @@
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
-import { Fragment, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import graphicVideoInit from "./VideoUtilities";
-import Mask from "@/components/utilities/Mask";
-import { play } from "@/data/ICONS";
-import Image from "next/image";
-import { Graphic } from "../Sections";
 
 function Video(props) {
   const [mounted, setMounted] = useState(false);
@@ -40,11 +36,6 @@ function Video(props) {
   );
 }
 
-function getVideoAttrs(props) {
-  const { ["data-autoplay"]: dataAutoplay } = props;
-  const isHoverAutoPlay = typeof dataAutoplay === "string" && dataAutoplay.includes("hover");
-  return { isHoverAutoPlay };
-}
 
 function getUpdatedVideoProps(props, desktop) {
   var updatedProps = props;

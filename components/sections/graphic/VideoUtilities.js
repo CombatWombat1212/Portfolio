@@ -42,6 +42,7 @@ function graphicVideoInit(ref) {
 }
 
 function graphicVideoPlay(graphic) {
+  console.log(graphic)
   if (!graphic || !graphic.elem || !graphic.getVideo()) return;
   graphic.set.dataPlaying(true);
   graphic
@@ -114,11 +115,10 @@ function graphicPlayOnHoverInit(graphic) {
 
   function play(e) {
     var { target, graph } = getTarget(e);
-    graph.hovered = true;
+    graph.is.hovered = true;
     if (checkIfHoverAutoplay(graph)) return;
     addEventListenerWithTracking(graph.getVideo(), "timeupdate", loop);
     graphicVideoPlay(graph);
-
     graph.group.forEach((g) => {
       if (g.elem !== target) {
         removeEventListenerWithTracking(g.getVideo(), "timeupdate", loop);
@@ -129,7 +129,7 @@ function graphicPlayOnHoverInit(graphic) {
 
   function pause(e) {
     var { target, graph } = getTarget(e);
-    graph.hovered = false;
+    graph.is.hovered = false;
     if (checkIfHoverAutoplay(graph)) return;
 
     if (graph.is.clicked) {
@@ -146,6 +146,7 @@ function graphicPlayOnHoverInit(graphic) {
     if (checkIfHoverAutoplay(graph)) return;
     graph.is.clicked = true;
   }
+
   function handleClickedVideoEnd(e) {
     var { target, graph } = getTarget(e);
 
@@ -155,7 +156,7 @@ function graphicPlayOnHoverInit(graphic) {
       graph.is.clicked = false;
       removeEventListenerWithTracking(graph.getVideo(), "ended", handleClickedVideoEnd);
 
-      if (!graphic.hovered) {
+      if (!graphic.is.hovered) {
         graphicVideoReset(graph);
       }
     }
@@ -196,7 +197,7 @@ function graphicVideoReset(graphic) {
 }
 
 function graphicResetHandleHideTimeout(graphic) {
-  if (!graphic.hovered) {
+  if (!graphic.is.hovered) {
     graphicVideoPause(graphic);
     graphic.getVideo().currentTime = 0;
 
@@ -225,9 +226,9 @@ function groupIntersectHandle({ entries, graphic: graphicObj, g: graphicInstance
     let videoIndex = 0;
 
     if (entry.isIntersecting) {
-      updated(true || graphicInstance.hovered);
+      updated(true || graphicInstance.is.hovered);
     } else {
-      updated(false || graphicInstance.hovered);
+      updated(false || graphicInstance.is.hovered);
     }
 
     function updated(bool) {
@@ -287,7 +288,7 @@ function groupPlayNextInView(graphicObj, videoIndex, inView) {
     if (graphic.is.staggered) {
       graphic.getVideo().removeEventListener("ended", staggeredEndHandler);
 
-      if (graphic.hovered) {
+      if (graphic.is.hovered) {
         videoIndex = videoIndex;
       } else if (graphic.is.loopingGroup && videoIndex == inView.length - 1) {
         videoIndex = 0;
@@ -299,7 +300,8 @@ function groupPlayNextInView(graphicObj, videoIndex, inView) {
   }
 
   function nonStaggeredEndHandler(g) {
-    if (graphicObj.is.loopingGroup) {
+    g.get.hoverAutoPlay();
+    if ((graphicObj.is.loopingGroup) || (g.is.hoverAutoPlay && g.is.hovered)) {
       graphicVideoPlay(g);
     } else {
       graphicVideoPause(g);

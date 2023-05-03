@@ -7,7 +7,6 @@ function VideoGraphic(elem, group = null) {
   this.autoplay = this.getAutoplayValue();
   this.sync = this.getSyncValue();
   this.playObserver = null;
-  this.hovered = false;
   this.is = {
     staggered: this.checkIfStaggered(),
     sync: Boolean(this.sync),
@@ -16,6 +15,7 @@ function VideoGraphic(elem, group = null) {
     hoverAutoPlay: this.checkIfHoverAutoplay(),
     scrollAutoPlay: this.checkIfScrollAutoplay(),
     clicked: false,
+    hovered: false,
   };
   this.get = {
     loopingGroup: graphicGetLoopingGroup.bind(this),

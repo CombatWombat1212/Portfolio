@@ -3321,7 +3321,7 @@ h3 + .studypanel--paragraph {
 
 .section .graphic--caption__above {
   margin-top: 0;
-  margin-bottom: calc(var(--section-text-spacing) * 0.5);
+  margin-bottom: calc(var(--section-text-spacing) * 0.6);
 }
 
 .section .graphic--caption__split {

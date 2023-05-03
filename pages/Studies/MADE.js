@@ -15,6 +15,7 @@ function MADE() {
 
   const { desktop, isBpAndDown, bp, loading } = useResponsive();
   const lgAndDown = !(!isBpAndDown("lg") || loading);
+  const mdAndDown = !(!isBpAndDown("md") || loading);
   const smAndDown = !(!isBpAndDown("sm") || loading);
 
   return (
@@ -449,11 +450,7 @@ function MADE() {
           <Section id="Texturing--Details-Graphics" type="columns" titled mainType="grid" background="background darker" mainClassName="mt-0">
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.details_threading} />
-              <Heading type="h3" className="graphic--caption weight-reg"
-              
-              mirrorstyle={desktop && "test match height"}
-              
-              >
+              <Heading type="h3" className="graphic--caption weight-reg">
                 Color-matched threading
               </Heading>
               <Description className="graphic--caption mt-less">
@@ -463,11 +460,7 @@ function MADE() {
             </Column>
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.details_holes} />
-              <Heading type="h3" className="graphic--caption weight-reg"
-              
-              mirrorstyle={desktop && "test match height"}
-              
-              >
+              <Heading type="h3" className="graphic--caption weight-reg">
                 Color-matched button holes
               </Heading>
               <Description className="graphic--caption mt-less">
@@ -476,11 +469,7 @@ function MADE() {
             </Column>
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.details_button} />
-              <Heading type="h3" className="graphic--caption weight-reg"
-              
-              mirrorstyle={desktop && "test match height"}
-              
-              >
+              <Heading type="h3" className="graphic--caption weight-reg">
                 Button color
               </Heading>
               <Description className="graphic--caption mt-less">
@@ -489,11 +478,7 @@ function MADE() {
             </Column>
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.details_logo} />
-              <Heading type="h3" className="graphic--caption weight-reg"
-              
-              mirrorstyle={desktop && "test match height"}
-              
-              >
+              <Heading type="h3" className="graphic--caption weight-reg">
                 MADE Logo tag
               </Heading>
               <Description className="graphic--caption mt-less">Added with a focus on legibility, without being overbearing.</Description>
