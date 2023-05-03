@@ -11,6 +11,24 @@ function createEventListenerTracker() {
       elementListenersMap.get(element).push({ event, handler });
     }
   
+    function removeEventListenerWithTracking(element, event, handler) {
+      if (elementListenersMap.has(element)) {
+        const listeners = elementListenersMap.get(element);
+        const listenerIndex = listeners.findIndex(
+          (listener) => listener.event === event && listener.handler === handler
+        );
+  
+        if (listenerIndex !== -1) {
+          element.removeEventListener(event, handler);
+          listeners.splice(listenerIndex, 1);
+  
+          if (listeners.length === 0) {
+            elementListenersMap.delete(element);
+          }
+        }
+      }
+    }
+  
     function removeAllEventListeners(element) {
       if (elementListenersMap.has(element)) {
         const listeners = elementListenersMap.get(element);
@@ -25,6 +43,7 @@ function createEventListenerTracker() {
   
     return {
       addEventListenerWithTracking,
+      removeEventListenerWithTracking,
       removeAllEventListeners,
     };
   }

@@ -1,6 +1,6 @@
 import VideoGraphic from "./VideoGraphicObj";
 import createEventListenerTracker from "@/scripts/EventListenerTracker";
-const { addEventListenerWithTracking, removeAllEventListeners } = createEventListenerTracker();
+const { addEventListenerWithTracking, removeAllEventListeners, removeEventListenerWithTracking } = createEventListenerTracker();
 
 function graphicVideoInit(ref) {
   var graphic = new VideoGraphic(ref.current);
@@ -40,19 +40,27 @@ function graphicVideoInit(ref) {
 }
 
 function graphicVideoPlay(graphic) {
+  console.log("checking if inside graphicVideoPlay");
   if (!graphic || !graphic.elem || !graphic.getVideo()) return;
+  console.log("actually playing");
   graphic.set.dataPlaying(true);
-  graphic.getVideo().play().catch((error) => {
-    // console.error('Error playing the video:', error);
-  });
+  graphic
+    .getVideo()
+    .play()
+    .catch((error) => {
+      console.log(error);
+      // console.error('Error playing the video:', error);
+    });
 }
 
 function graphicVideoPause(graphic) {
+  console.log("checking if inside graphicVideoPause");
   if (!graphic || !graphic.elem || !graphic.getVideo()) return;
+  console.log("actually pausing", graphic);
   graphic.set.dataPlaying(false);
-  if (!graphic.getVideo().paused) {
-    graphic.getVideo().pause();
-  }
+  // if (!graphic.getVideo().paused) {
+  graphic.getVideo().pause();
+  // }
 }
 
 function graphicPlayOnHoverInit(graphic) {
@@ -75,6 +83,8 @@ function graphicPlayOnHoverInit(graphic) {
     graphic.group.forEach((g) => {
       removeAllEventListeners(g.elem);
       g.getVideo().removeEventListener("timeupdate", loop);
+      if (g.hideTimeout) clearTimeout(g.hideTimeout);
+      if (g.showTimeout) clearTimeout(g.showTimeout);
     });
   }
 
@@ -96,7 +106,6 @@ function graphicPlayOnHoverInit(graphic) {
 
   function loop(e) {
     var { target, graph } = getTarget(e);
-    console.log(checkIfHoverAutoplay(graph));
     if (checkIfHoverAutoplay(graph)) return;
 
     console.log("loop");
@@ -108,9 +117,10 @@ function graphicPlayOnHoverInit(graphic) {
 
   function play(e) {
     var { target, graph } = getTarget(e);
+    graph.hovered = true;
     if (checkIfHoverAutoplay(graph)) return;
-    graphicVideoPlay(graph);
     addEventListenerWithTracking(graph.getVideo(), "timeupdate", loop);
+    graphicVideoPlay(graph);
 
     console.log("play");
 
@@ -124,33 +134,74 @@ function graphicPlayOnHoverInit(graphic) {
 
   function pause(e) {
     var { target, graph } = getTarget(e);
+    graph.hovered = false;
     if (checkIfHoverAutoplay(graph)) return;
 
-    console.log("pause");
+    console.log("pause", graph);
 
     graphicVideoReset(graph);
     removeAllEventListeners(graph.getVideo());
   }
 }
 
+// function graphicVideoReset(graphic) {
+//   graphic.getVideo().style.setProperty("transition-duration", `${graphic.transition}ms`);
+
+//   console.log("reset", graphic);
+//   graphic.set.dataPlaying(false);
+
+//   graphic.getVideo().classList.add("video__hidden");
+
+//   setTimeout(() => {
+//     graphicVideoPause(graphic);
+//     graphic.getVideo().currentTime = 0;
+//     setTimeout(() => {
+//       graphic.getVideo().classList.remove("video__hidden");
+//     }, 100);
+//   }, graphic.transition);
+
+// }
+
 function graphicVideoReset(graphic) {
   graphic.getVideo().style.setProperty("transition-duration", `${graphic.transition}ms`);
 
-  // graphic.elem.setAttribute("data-playing", "false");
+  console.log("reset", graphic);
   graphic.set.dataPlaying(false);
 
-  // if (graphic.is.hoverAutoPlay) {
-    graphic.getVideo().classList.add("video__hidden");
-  // }
+  graphic.getVideo().classList.add("video__hidden");
 
-  setTimeout(() => {
+  const hideTimeout = setTimeout(() => {
+    graphicResetHandleHideTimeout(graphic);
+  }, graphic.transition);
+
+  // Store the hideTimeout id in the graphic object
+  graphic.hideTimeout = hideTimeout;
+}
+
+function graphicResetHandleHideTimeout(graphic) {
+  // Check if hovered state changed during timeout
+  if (!graphic.hovered) {
     graphicVideoPause(graphic);
     graphic.getVideo().currentTime = 0;
-    setTimeout(() => {
-      // if (graphic.is.hoverAutoPlay) 
-      graphic.getVideo().classList.remove("video__hidden");
+
+    const showTimeout = setTimeout(() => {
+      graphicResetHandleShowTimeout(graphic);
     }, 100);
-  }, graphic.transition);
+
+    // Store the showTimeout id in the graphic object
+    graphic.showTimeout = showTimeout;
+  } else {
+    // Cancel the showTimeout if it was set before
+    if (graphic.showTimeout) clearTimeout(graphic.showTimeout);
+    if (graphic.getVideo()) {
+      graphic.getVideo().classList.remove("video__hidden");
+      graphicVideoPlay(graphic);
+    }
+  }
+}
+
+function graphicResetHandleShowTimeout(graphic) {
+  graphic.getVideo().classList.remove("video__hidden");
 }
 
 function groupIntersectHandle({ entries, graphic: graphicObj, g: graphicInstance }) {
@@ -161,22 +212,16 @@ function groupIntersectHandle({ entries, graphic: graphicObj, g: graphicInstance
     let videoIndex = 0;
 
     if (entry.isIntersecting) {
-      graphicInstance.is.inView = true;
-      if (graphicObj.elem == graphicInstance.elem) graphicObj.is.inView = true;
-      groupGetInView(
-        () => {
-          groupPlayNextInView(graphicObj, videoIndex, inView);
-          groupPauseOutOfView(graphicObj);
-        },
-        graphicObj,
-        inView
-      );
+      updated(true);
     } else {
-      graphicInstance.is.inView = false;
+      updated(false);
+    }
 
-      if (graphicObj.elem == graphicInstance.elem) graphicObj.is.inView = false;
+    function updated(bool) {
+      graphicInstance.is.inView = bool;
+      if (graphicObj.elem == graphicInstance.elem) graphicObj.is.inView = bool;
       graphicObj.group.forEach((g) => {
-        if (g.elem == graphicInstance.elem) g.is.inView = false;
+        if (g.elem == graphicInstance.elem) g.is.inView = bool;
       });
 
       groupGetInView(
@@ -224,15 +269,18 @@ function groupPlayNextInView(graphicObj, videoIndex, inView) {
   }
 
   function staggeredEnd() {
-    graphicObj.get.loopingGroup();
+    graphic.get.loopingGroup();
     console.log("staggered end");
-    console.log(inView);
-    console.log(graphicObj.is.loopingGroup);
-    console.log(graphicObj.get.loop());
+    // console.log(inView);
+    // console.log(graphicObj.is.loopingGroup);
+    // console.log(graphicObj.get.loop());
     graphicVideoPause(graphic);
-    if (graphicObj.is.staggered) {
+    if (graphic.is.staggered) {
       graphic.getVideo().removeEventListener("ended", staggeredEndHandler);
-      if (graphicObj.is.loopingGroup && videoIndex == inView.length - 1) {
+
+      if (graphic.hovered) {
+        videoIndex = videoIndex;
+      } else if (graphic.is.loopingGroup && videoIndex == inView.length - 1) {
         videoIndex = 0;
       } else {
         videoIndex++;
@@ -271,7 +319,6 @@ function groupPlayNextInView(graphicObj, videoIndex, inView) {
   if (!graphic) return;
   graphic.currentTime = 0;
   if (graphicObj.is.staggered) {
-    
     const isAnotherGraphicPlaying = inView.some((g) => g.getVideo().paused === false && g !== graphic);
 
     if (!isAnotherGraphicPlaying) {
@@ -279,7 +326,6 @@ function groupPlayNextInView(graphicObj, videoIndex, inView) {
       graphic.getVideo().removeEventListener("ended", staggeredEndHandler);
       graphic.getVideo().addEventListener("ended", staggeredEndHandler);
     }
-
   } else {
     graphic.getVideo().removeEventListener("ended", staggeredEndHandler);
     const timeout = graphic.is.sync ? 200 : 0;

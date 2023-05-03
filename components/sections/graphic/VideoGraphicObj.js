@@ -7,6 +7,7 @@ function VideoGraphic(elem, group = null) {
   this.autoplay = this.getAutoplayValue();
   this.sync = this.getSyncValue();
   this.playObserver = null;
+  this.hovered = false;
   this.is = {
     staggered: this.checkIfStaggered(),
     sync: Boolean(this.sync),
@@ -19,15 +20,10 @@ function VideoGraphic(elem, group = null) {
     loopingGroup: graphicGetLoopingGroup.bind(this),
     hoverAutoPlay: graphicGetHoverAutoPlay.bind(this),
     loop: this.checkIfLoop.bind(this),
+    // hovered: graphicGetHovered.bind(this),
   };
   this.set = {
-    hoverAutoPlay: () => {
-      if (this.is.hoverAutoPlay) {
-        this.elem.setAttribute("data-autoplay-hover", "true");
-      } else {
-        this.elem.setAttribute("data-autoplay-hover", "false");
-      }
-    },
+    hoverAutoPlay: graphicSetHoverAutoPlay.bind(this),
     dataPlaying: graphicSetDataPlaying.bind(this),
   };
   this.group = this.getGroup(group);
@@ -93,7 +89,15 @@ VideoGraphic.prototype.checkIfScrollAutoplay = function () {
 
 
 function graphicGetHoverAutoPlay() {
-  this.is.hoverAutoPlay = this.elem.getAttribute("data-autoplay-hover") === "true";
+  this.is.hoverAutoPlay = this.elem.getAttribute("data-autoplay-hover") == "true";
+}
+
+function graphicSetHoverAutoPlay() {
+    if (this.is.hoverAutoPlay) {
+      this.elem.setAttribute("data-autoplay-hover", "true");
+    } else {
+      this.elem.setAttribute("data-autoplay-hover", "false");
+    }
 }
 
 function graphicGetLoopingGroup() {
@@ -117,6 +121,14 @@ function graphicGetLoopingGroup() {
     }
 
 }
+
+
+
+// function graphicGetHovered() {
+//   return this.elem.matches(':hover, :focus');
+// }
+
+
 
 function graphicSetDataPlaying(bool) {
   this.elem.setAttribute("data-playing", bool);
