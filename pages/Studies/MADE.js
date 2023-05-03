@@ -9,7 +9,6 @@ import ProsCons, { Con, Pro } from "@/components/global/ProsCons";
 import { STUDY_MADE } from "@/data/CASE_STUDIES";
 import { useEffect } from "react";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
-import useMirrorStyle from "@/scripts/useMirrorStyle";
 
 function MADE() {
   const study = STUDY_MADE;

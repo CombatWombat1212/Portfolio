@@ -8,7 +8,6 @@ import useRandomString from "@/scripts/hooks/useRandomString";
 import { useAnchoredArrowsInit, re, useAnchoredArrowsInitmoveExcessArrows } from "../sections/sections_utilities/ArrowUtilities";
 import { useColLine } from "../sections/sections_utilities/ColLineUtilities";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
-import useMatchHeight from "@/scripts/hooks/useMatchHeight";
 import useMirrorStyle from "@/scripts/useMirrorStyle";
 
 function insertNextElementAfterLastSection(newChildren, lastChapterIndex, lastChapterChildren) {
