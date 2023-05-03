@@ -18,6 +18,7 @@ function VideoGraphic(elem, group = null) {
   this.get = {
     loopingGroup: graphicGetLoopingGroup.bind(this),
     hoverAutoPlay: graphicGetHoverAutoPlay.bind(this),
+    loop: this.checkIfLoop.bind(this),
   };
   this.set = {
     hoverAutoPlay: () => {
@@ -96,7 +97,8 @@ function graphicGetHoverAutoPlay() {
 }
 
 function graphicGetLoopingGroup() {
-    const isLoopingGroup = this.group.filter((g) => g.is.loop).length == this.group.length;
+    // const isLoopingGroup = this.group.filter((g) => g.is.loop).length == this.group.length;
+    const isLoopingGroup = this.group.filter((g) => g.get.loop() ).length == this.group.length;
 
     if (isLoopingGroup) {
       this.is.loopingGroup = true;

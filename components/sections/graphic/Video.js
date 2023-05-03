@@ -7,7 +7,6 @@ import Image from "next/image";
 import { Graphic } from "../Sections";
 import SVG from "@/components/utilities/SVG";
 
-
 function Video(props) {
   const [mounted, setMounted] = useState(false);
   const { desktop, loading } = useResponsive();
@@ -17,10 +16,6 @@ function Video(props) {
   const updatedProps = getUpdatedVideoProps(props, desktop);
   const { COMMON_VIDEO_PROPS, SOURCE_PROPS, FOREGROUND_PROPS } = getOrganizedVideoProps(updatedProps, desktop);
   const { isHoverAutoPlay } = getVideoAttrs(updatedProps);
-
-
-
-
 
   useEffect(() => {
     if (!reference) return;
@@ -34,7 +29,6 @@ function Video(props) {
     setRefreshKey(desktop);
   }, [mounted, desktop]);
 
-
   const VidSource = (additionalClassName, additionalProps) => (
     <video className={`${className} ${additionalClassName}`} {...COMMON_VIDEO_PROPS} {...additionalProps}>
       <source {...SOURCE_PROPS}></source>
@@ -42,13 +36,14 @@ function Video(props) {
   );
 
   return (
-    <Fragment key={refreshKey}>
-
-      {/* <SVG img={play} className="video--play" outline={{ fill: '--svg-stroke-fill', weight: '--svg-stroke-weight' }} /> */}
-      {VidSource("video--foreground", FOREGROUND_PROPS)}
-      {/* {(isHoverAutoPlay || !desktop) && VidSource("video--background")} */}
-      { VidSource("video--background")}
-    </Fragment>
+    <>
+      {/* <Fragment key={refreshKey}> */}
+        {/* <SVG img={play} className="video--play" outline={{ fill: '--svg-stroke-fill', weight: '--svg-stroke-weight' }} /> */}
+        {VidSource("video--foreground", FOREGROUND_PROPS)}
+        {/* {(isHoverAutoPlay || !desktop) && VidSource("video--background")} */}
+        {VidSource("video--background")}
+      {/* </Fragment> */}
+    </>
   );
 }
 
