@@ -1,30 +1,8 @@
 import { clamp, RESIZE_TIMEOUT } from "@/scripts/GlobalUtilities";
 import { useEffect, useRef, useState } from "react";
-// import { graphicKeepSquare } from "../sections/graphic/Graphic";
 import { Graphic } from "../sections/Sections";
 import useHorizontalResize from "@/scripts/hooks/useHorizontalResize";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
-
-// TODO: before and after text labels on either side?
-
-// function SplitItem(split) {
-//   this.elem = split;
-//   this.width = 0;
-//   this.left = 0;
-//   this.progress = 0.5;
-//   this.division = split.querySelector(".split--division");
-//   (this.grabbed = 0),
-//     (this.line = {
-//       elem: split.querySelector(".split--line"),
-//       width: 0,
-//     });
-//   this.pos = {
-//     mouse: {
-//       start: { x: 0, y: 0 },
-//       current: { x: 0, y: 0 },
-//     },
-//   };
-// }
 
 function splitSetProgress(split) {
   split.elem.style.setProperty("--split-width", `${split.width}px`);
@@ -98,12 +76,8 @@ function Split({ before, after, square }) {
   useEffect(() => {
     if (!mounted) return;
     splitInit();
-    // if (isSquare) {
-      // graphicKeepSquare(split.elem);
-    // }
 
     split.resizeObserver = new ResizeObserver(refreshed);
-
     split.resizeObserver.observe(split.elem);
 
     return () => {

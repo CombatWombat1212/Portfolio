@@ -133,21 +133,12 @@ function Graphic(props) {
   } = props;
 
   const graphicref = useRef(null);
-  const [isPresent, setIsPresent] = useState(false);
 
   useEffect(() => {
-    setIsPresent(true);
     if (reference) {
       reference.current = graphicref.current;
     }
   }, [graphicref]);
-
-  useEffect(() => {
-    if (!isPresent) return;
-    // if (isSquare) {
-    //   graphicKeepSquare(graphicref.current);
-    // }
-  }, [isPresent]);
 
   // TODO: remake sameHeight in a completely different way cause the current implimentation sucks at every turn
   // sameHeight = sameHeight ? sameHeight : false;
@@ -221,9 +212,9 @@ function Graphic(props) {
     }
   })();
 
-  var allClasses = `section--graphic graphic ${backgroundClasses} ${className} ${buttonClasses} ${lightbox ? "graphic__lightbox" : ""} ${isSquare && "graphic__square"} ${
-    gallery ? "graphic__gallery" : ""
-  }`;
+  var allClasses = `section--graphic graphic ${backgroundClasses} ${className} ${buttonClasses} ${lightbox ? "graphic__lightbox" : ""} ${
+    isSquare && "graphic__square"
+  } ${gallery ? "graphic__gallery" : ""}`;
 
   var typePref = isImg ? "img" : isMask ? "mask" : isVideo ? "video" : "";
   var styleVariables = {
@@ -234,7 +225,6 @@ function Graphic(props) {
   };
 
   var autoplayHTML = typeof autoplayProp === "string" && autoplayProp.includes("scroll") ? false : autoplayProp ? true : false;
-  
 
   const WRAPPER_STYLE = {
     ...styleVariables,
@@ -321,51 +311,4 @@ Graphic.propTypes = {
   type: PropTypes.oneOf(["image", "img", "mask", "video"]),
 };
 
-// function graphicKeepSquare(elem) {
-//   var graphic = {
-//     elem: elem,
-//     height: 0,
-//     width: 0,
-//     padding: {
-//       top: 0,
-//       right: 0,
-//       bottom: 0,
-//       left: 0,
-//     },
-//   };
-
-//   run(graphic);
-
-//   function graphicGetDimensions(graphic) {
-//     graphic.width = graphic.elem.offsetWidth;
-//     graphic.height = graphic.elem.offsetHeight;
-//     graphic.padding.top = parseFloat(getComputedStyle(graphic.elem).paddingTop);
-//     graphic.padding.right = parseFloat(getComputedStyle(graphic.elem).paddingRight);
-//     graphic.padding.bottom = parseFloat(getComputedStyle(graphic.elem).paddingBottom);
-//     graphic.padding.left = parseFloat(getComputedStyle(graphic.elem).paddingLeft);
-//   }
-
-//   function graphicSetDimensions(graphic) {
-//     graphic.elem.style.height = graphic.width - graphic.padding.left - graphic.padding.right + "px";
-//   }
-
-//   function run(graphic) {
-//     graphicGetDimensions(graphic);
-//     graphicSetDimensions(graphic);
-//   }
-
-//   function ran() {
-//     window.clearTimeout(isResizing);
-//     isResizing = setTimeout(function () {
-//       run(graphic);
-//     }, RESIZE_TIMEOUT);
-//   }
-
-//   var isResizing;
-//   window.removeEventListener("resize", ran);
-//   window.addEventListener("resize", ran);
-// }
-
 export default Graphic;
-
-// export { graphicKeepSquare };
