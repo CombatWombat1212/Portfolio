@@ -16,25 +16,7 @@ function VideoGraphic(elem, group = null) {
     scrollAutoPlay: this.checkIfScrollAutoplay(),
   };
   this.get = {
-    loopingGroup: () => {
-      const isLoopingGroup = this.group.filter((g) => g.is.loop).length == this.group.length;
-
-      if (isLoopingGroup) {
-        this.is.loopingGroup = true;
-        this.group.forEach((g) => {
-          g.is.loopingGroup = true;
-          g.getVideo().removeAttribute("loop");
-        });
-      } else {
-        this.is.loopingGroup = false;
-        this.group.forEach((g) => {
-          g.is.loopingGroup = false;
-          var loop = g.getVideo().getAttribute("data-loop") == "true";
-          if (loop) g.getVideo().setAttribute("loop", "true");
-          if (!loop) g.getVideo().removeAttribute("loop");
-        });
-      }
-    },
+    loopingGroup: graphicGetLoopingGroup.bind(this),
     hoverAutoPlay: graphicGetHoverAutoPlay.bind(this),
   };
   this.set = {
@@ -111,6 +93,27 @@ VideoGraphic.prototype.checkIfScrollAutoplay = function () {
 
 function graphicGetHoverAutoPlay() {
   this.is.hoverAutoPlay = this.elem.getAttribute("data-autoplay-hover") === "true";
+}
+
+function graphicGetLoopingGroup() {
+    const isLoopingGroup = this.group.filter((g) => g.is.loop).length == this.group.length;
+
+    if (isLoopingGroup) {
+      this.is.loopingGroup = true;
+      this.group.forEach((g) => {
+        g.is.loopingGroup = true;
+        g.getVideo().removeAttribute("loop");
+      });
+    } else {
+      this.is.loopingGroup = false;
+      this.group.forEach((g) => {
+        g.is.loopingGroup = false;
+        var loop = g.getVideo().getAttribute("data-loop") == "true";
+        if (loop) g.getVideo().setAttribute("loop", "true");
+        if (!loop) g.getVideo().removeAttribute("loop");
+      });
+    }
+
 }
 
 function graphicSetDataPlaying(bool) {

@@ -364,8 +364,8 @@ function MADE() {
             <Title>Contrast Areas</Title>
             <Column>
               <Heading>
-                Adding customizable <br />
-                accent fabric to reflect <br />
+                Adding customizable <br className="d-lg-none" />
+                accent fabric to reflect <br className="d-lg-none" />
                 in-store offerings
               </Heading>
             </Column>

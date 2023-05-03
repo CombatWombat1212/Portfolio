@@ -3022,16 +3022,40 @@ h3 + .studypanel--paragraph {
   cursor: pointer;
 }
 
-.section .graphic--video.background__background:hover, .section .graphic--video.background__background:focus, .section .graphic--video.background__background[data-playing="true"] {
+.section .graphic--video.background__background:focus, .section .graphic--video.background__background[data-playing="true"] {
   background-color: #074391;
 }
 
-.section .graphic--video.background__background:hover:not(.border), .section .graphic--video.background__background:focus:not(.border), .section .graphic--video.background__background[data-playing="true"]:not(.border) {
+.section .graphic--video.background__background:focus:not(.border), .section .graphic--video.background__background[data-playing="true"]:not(.border) {
   outline: 0.375rem rgba(64, 64, 100, 0.3) solid !important;
 }
 
-.section .graphic--video.background__background:hover.border, .section .graphic--video.background__background:focus.border, .section .graphic--video.background__background[data-playing="true"].border {
+.section .graphic--video.background__background:focus.border, .section .graphic--video.background__background[data-playing="true"].border {
   --border-opactiy: 0.6!important;
+}
+
+@media screen and (min-width: 92em) {
+  .section .graphic--video.background__background:hover {
+    background-color: #074391;
+  }
+  .section .graphic--video.background__background:hover:not(.border) {
+    outline: 0.375rem rgba(64, 64, 100, 0.3) solid !important;
+  }
+  .section .graphic--video.background__background:hover.border {
+    --border-opactiy: 0.6!important;
+  }
+}
+
+@media screen and (max-width: 91.9375em) and (min-width: 62em) {
+  .section .graphic--video.background__background:hover {
+    background-color: #074391;
+  }
+  .section .graphic--video.background__background:hover:not(.border) {
+    outline: 0.375rem rgba(64, 64, 100, 0.3) solid !important;
+  }
+  .section .graphic--video.background__background:hover.border {
+    --border-opactiy: 0.6!important;
+  }
 }
 
 .section .graphic--video.background__background[data-playing="false"] {
@@ -3042,16 +3066,40 @@ h3 + .studypanel--paragraph {
   outline: 0.375rem rgba(64, 64, 100, 0) solid;
 }
 
-.section .graphic--video.background__background-darker:hover, .section .graphic--video.background__background-darker:focus, .section .graphic--video.background__background-darker[data-playing="true"] {
+.section .graphic--video.background__background-darker:focus, .section .graphic--video.background__background-darker[data-playing="true"] {
   background-color: #E0E0EA;
 }
 
-.section .graphic--video.background__background-darker:hover:not(.border), .section .graphic--video.background__background-darker:focus:not(.border), .section .graphic--video.background__background-darker[data-playing="true"]:not(.border) {
+.section .graphic--video.background__background-darker:focus:not(.border), .section .graphic--video.background__background-darker[data-playing="true"]:not(.border) {
   outline: 0.375rem rgba(64, 64, 100, 0.3) solid !important;
 }
 
-.section .graphic--video.background__background-darker:hover.border, .section .graphic--video.background__background-darker:focus.border, .section .graphic--video.background__background-darker[data-playing="true"].border {
+.section .graphic--video.background__background-darker:focus.border, .section .graphic--video.background__background-darker[data-playing="true"].border {
   --border-opactiy: 0.6!important;
+}
+
+@media screen and (min-width: 92em) {
+  .section .graphic--video.background__background-darker:hover {
+    background-color: #E0E0EA;
+  }
+  .section .graphic--video.background__background-darker:hover:not(.border) {
+    outline: 0.375rem rgba(64, 64, 100, 0.3) solid !important;
+  }
+  .section .graphic--video.background__background-darker:hover.border {
+    --border-opactiy: 0.6!important;
+  }
+}
+
+@media screen and (max-width: 91.9375em) and (min-width: 62em) {
+  .section .graphic--video.background__background-darker:hover {
+    background-color: #E0E0EA;
+  }
+  .section .graphic--video.background__background-darker:hover:not(.border) {
+    outline: 0.375rem rgba(64, 64, 100, 0.3) solid !important;
+  }
+  .section .graphic--video.background__background-darker:hover.border {
+    --border-opactiy: 0.6!important;
+  }
 }
 
 .section .graphic--video.background__background-darker[data-playing="false"] {
@@ -3062,16 +3110,40 @@ h3 + .studypanel--paragraph {
   outline: 0.375rem rgba(64, 64, 100, 0) solid;
 }
 
-.section .graphic--video.background__background-darkest:hover, .section .graphic--video.background__background-darkest:focus, .section .graphic--video.background__background-darkest[data-playing="true"] {
+.section .graphic--video.background__background-darkest:focus, .section .graphic--video.background__background-darkest[data-playing="true"] {
   background-color: #d2d2e0;
 }
 
-.section .graphic--video.background__background-darkest:hover:not(.border), .section .graphic--video.background__background-darkest:focus:not(.border), .section .graphic--video.background__background-darkest[data-playing="true"]:not(.border) {
+.section .graphic--video.background__background-darkest:focus:not(.border), .section .graphic--video.background__background-darkest[data-playing="true"]:not(.border) {
   outline: 0.375rem rgba(64, 64, 100, 0.3) solid !important;
 }
 
-.section .graphic--video.background__background-darkest:hover.border, .section .graphic--video.background__background-darkest:focus.border, .section .graphic--video.background__background-darkest[data-playing="true"].border {
+.section .graphic--video.background__background-darkest:focus.border, .section .graphic--video.background__background-darkest[data-playing="true"].border {
   --border-opactiy: 0.6!important;
+}
+
+@media screen and (min-width: 92em) {
+  .section .graphic--video.background__background-darkest:hover {
+    background-color: #d2d2e0;
+  }
+  .section .graphic--video.background__background-darkest:hover:not(.border) {
+    outline: 0.375rem rgba(64, 64, 100, 0.3) solid !important;
+  }
+  .section .graphic--video.background__background-darkest:hover.border {
+    --border-opactiy: 0.6!important;
+  }
+}
+
+@media screen and (max-width: 91.9375em) and (min-width: 62em) {
+  .section .graphic--video.background__background-darkest:hover {
+    background-color: #d2d2e0;
+  }
+  .section .graphic--video.background__background-darkest:hover:not(.border) {
+    outline: 0.375rem rgba(64, 64, 100, 0.3) solid !important;
+  }
+  .section .graphic--video.background__background-darkest:hover.border {
+    --border-opactiy: 0.6!important;
+  }
 }
 
 .section .graphic--video.background__background-darkest[data-playing="false"] {
@@ -8960,7 +9032,7 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 79.9375em) {
   #Made #Texturing--Stages .section--main {
-    --gap:5rem;
+    --gap: 5rem;
     gap: var(--gap);
     column-gap: var(--gap);
     row-gap: var(--gap);
@@ -8969,7 +9041,7 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 61.9375em) {
   #Made #Texturing--Stages .section--main {
-    --gap:5.5rem;
+    --gap: 5.5rem;
     grid-template-columns: repeat(2, 1fr);
   }
 }

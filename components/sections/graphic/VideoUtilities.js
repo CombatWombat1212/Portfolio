@@ -5,8 +5,6 @@ const { addEventListenerWithTracking, removeAllEventListeners } = createEventLis
 function graphicVideoInit(ref) {
   var graphic = new VideoGraphic(ref.current);
 
-  
-  console.log(graphic)
   if (graphic.index != graphic.group.length - 1) return;
 
   graphic.group.forEach((g, i) => {
@@ -77,6 +75,7 @@ function graphicPlayOnHoverInit(graphic) {
   }
 
   function checkIfHoverAutoplay(graph) {
+    if (!graph) return false;
     graph.get.hoverAutoPlay();
     if (!graph.is.hoverAutoPlay) {
       uninit(graph);
@@ -206,17 +205,23 @@ function groupGetInView(callback, graphicObj, inView) {
 }
 
 function groupPlayNextInView(graphicObj, videoIndex, inView) {
-  function ended() {
+  
+  function staggeredEnd() {
+    graphicObj.get.loopingGroup();
     graphicVideoPause(graphic);
     if (graphicObj.is.staggered) {
-      graphic.getVideo().removeEventListener("ended", ended);
-      if (graphicObj.is.loopingGroup && videoIndex == inView.length - 1) {
+      graphic.getVideo().removeEventListener("ended", staggeredEndHandler);
+      if (graphicObj.get.loopingGroup() && videoIndex == inView.length - 1) {
         videoIndex = 0;
       } else {
         videoIndex++;
       }
       groupPlayNextInView(graphicObj, videoIndex, inView);
     }
+  }
+
+  function staggeredEndHandler() {
+    groupGetInView(staggeredEnd, graphicObj, inView);
   }
 
   function nonStaggeredPlay() {
@@ -241,8 +246,10 @@ function groupPlayNextInView(graphicObj, videoIndex, inView) {
   graphic.currentTime = 0;
   if (graphicObj.is.staggered) {
     graphicVideoPlay(graphic);
-    graphic.getVideo().addEventListener("ended", ended);
+    graphic.getVideo().removeEventListener("ended", staggeredEndHandler);
+    graphic.getVideo().addEventListener("ended", staggeredEndHandler);
   } else {
+    graphic.getVideo().removeEventListener("ended", staggeredEndHandler);
     const timeout = graphic.is.sync ? 200 : 0;
     setTimeout(nonStaggeredPlay, timeout);
   }

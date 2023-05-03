@@ -331,9 +331,16 @@
         }
       }
 
-
-      .column-1{@include md-down{order:1}}
-      .column-2{@include md-down{order:0}}
+      .column-1 {
+        @include md-down {
+          order: 1;
+        }
+      }
+      .column-2 {
+        @include md-down {
+          order: 0;
+        }
+      }
     }
 
     &--Summary {
@@ -346,27 +353,26 @@
 
     &--Stages {
       .section {
-
-        &--heading{
+        &--heading {
           @include flex-col-end;
-          @include lg-down{
-            margin-top:0rem;
+          @include lg-down {
+            margin-top: 0rem;
           }
         }
         &--main {
           grid-template-columns: repeat(3, 1fr);
-          @include xl-down{
-            --gap:5rem;
+          @include xl-down {
+            --gap: 5rem;
             @include gap;
           }
-          @include lg-down{
-            --gap:5.5rem;
+          @include lg-down {
+            --gap: 5.5rem;
             grid-template-columns: repeat(2, 1fr);
           }
-          @include md-down{
+          @include md-down {
             --gap: 4.5rem;
           }
-          @include sm-down{
+          @include sm-down {
             --gap: 3.75rem;
           }
         }

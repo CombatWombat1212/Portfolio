@@ -66,11 +66,20 @@
 
 
       @mixin video-playing_true {
-        &:hover,
         &:focus,
         &[data-playing="true"] {
           @content;
           @include video-playing-border_on;
+        }
+        &:hover{
+          @include xxl-up{
+            @content;
+            @include video-playing-border_on;
+          }
+          @include xxl-lg{
+            @content;
+            @include video-playing-border_on;
+          }
         }
       }
 
