@@ -42,13 +42,17 @@ function graphicVideoInit(ref) {
 function graphicVideoPlay(graphic) {
   if (!graphic || !graphic.elem || !graphic.getVideo()) return;
   graphic.set.dataPlaying(true);
-  graphic.getVideo().play();
+  graphic.getVideo().play().catch((error) => {
+    // console.error('Error playing the video:', error);
+  });
 }
 
 function graphicVideoPause(graphic) {
   if (!graphic || !graphic.elem || !graphic.getVideo()) return;
   graphic.set.dataPlaying(false);
-  graphic.getVideo().pause();
+  if (!graphic.getVideo().paused) {
+    graphic.getVideo().pause();
+  }
 }
 
 function graphicPlayOnHoverInit(graphic) {
@@ -92,6 +96,7 @@ function graphicPlayOnHoverInit(graphic) {
 
   function loop(e) {
     var { target, graph } = getTarget(e);
+    console.log(checkIfHoverAutoplay(graph));
     if (checkIfHoverAutoplay(graph)) return;
 
     console.log("loop");
@@ -134,15 +139,16 @@ function graphicVideoReset(graphic) {
   // graphic.elem.setAttribute("data-playing", "false");
   graphic.set.dataPlaying(false);
 
-  if (graphic.is.hoverAutoPlay) {
+  // if (graphic.is.hoverAutoPlay) {
     graphic.getVideo().classList.add("video__hidden");
-  }
+  // }
 
   setTimeout(() => {
     graphicVideoPause(graphic);
     graphic.getVideo().currentTime = 0;
     setTimeout(() => {
-      if (graphic.is.hoverAutoPlay) graphic.getVideo().classList.remove("video__hidden");
+      // if (graphic.is.hoverAutoPlay) 
+      graphic.getVideo().classList.remove("video__hidden");
     }, 100);
   }, graphic.transition);
 }
