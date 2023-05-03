@@ -44,7 +44,7 @@
       @mixin video-playing-border_on {
 
         &:not(.border){
-          outline: 0.375rem rgba($col-tertiary, 0.3) solid!important;
+          outline: 0.375rem rgba($col-tertiary, 0.35) solid!important;
         }
         &.border{
           --border-opactiy: 0.6!important;
@@ -54,7 +54,7 @@
       
       @mixin video-playing-border_off {
         &:not(.border){
-          outline: 0.375rem rgba($col-tertiary, 0) solid;
+          outline: 0.375rem rgba($col-tertiary, 0.075) solid;
         }
         &.border{
 
@@ -66,11 +66,11 @@
 
 
       @mixin video-playing_true {
-        &:focus,
         &[data-playing="true"] {
           @content;
           @include video-playing-border_on;
         }
+        &:focus,
         &:hover{
           @include xxl-up{
             @content;

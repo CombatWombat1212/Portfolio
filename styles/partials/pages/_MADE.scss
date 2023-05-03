@@ -385,12 +385,18 @@
     &--Contrast-Areas {
       .graphic {
         height: unset;
+
+        @include lg-down{
+          --graphic-scale:2;
+        }
+
       }
     }
 
     &--Contrast-Split {
       .graphic {
         height: unset;
+
       }
     }
 
