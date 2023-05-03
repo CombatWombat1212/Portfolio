@@ -3024,134 +3024,254 @@ h3 + .studypanel--paragraph {
 
 .section .graphic--video.background__background[data-playing="true"] {
   background-color: #074391;
+  position: relative;
 }
 
-.section .graphic--video.background__background[data-playing="true"]:not(.border) {
-  outline: 0.375rem rgba(64, 64, 100, 0.35) solid !important;
+.section .graphic--video.background__background[data-playing="true"]:not(.border)::before {
+  transition: 0.2s;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 3;
+  box-shadow: inset 0 0 0 0.375rem rgba(64, 64, 100, 0.35);
 }
 
 .section .graphic--video.background__background[data-playing="true"].border {
-  --border-opactiy: 0.6!important;
+  --border-opactiy: 0.6 !important;
 }
 
 @media screen and (min-width: 92em) {
   .section .graphic--video.background__background:focus, .section .graphic--video.background__background:hover {
     background-color: #074391;
+    position: relative;
   }
-  .section .graphic--video.background__background:focus:not(.border), .section .graphic--video.background__background:hover:not(.border) {
-    outline: 0.375rem rgba(64, 64, 100, 0.35) solid !important;
+  .section .graphic--video.background__background:focus:not(.border)::before, .section .graphic--video.background__background:hover:not(.border)::before {
+    transition: 0.2s;
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 3;
+    box-shadow: inset 0 0 0 0.375rem rgba(64, 64, 100, 0.35);
   }
   .section .graphic--video.background__background:focus.border, .section .graphic--video.background__background:hover.border {
-    --border-opactiy: 0.6!important;
+    --border-opactiy: 0.6 !important;
   }
 }
 
 @media screen and (max-width: 91.9375em) and (min-width: 62em) {
   .section .graphic--video.background__background:focus, .section .graphic--video.background__background:hover {
     background-color: #074391;
+    position: relative;
   }
-  .section .graphic--video.background__background:focus:not(.border), .section .graphic--video.background__background:hover:not(.border) {
-    outline: 0.375rem rgba(64, 64, 100, 0.35) solid !important;
+  .section .graphic--video.background__background:focus:not(.border)::before, .section .graphic--video.background__background:hover:not(.border)::before {
+    transition: 0.2s;
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 3;
+    box-shadow: inset 0 0 0 0.375rem rgba(64, 64, 100, 0.35);
   }
   .section .graphic--video.background__background:focus.border, .section .graphic--video.background__background:hover.border {
-    --border-opactiy: 0.6!important;
+    --border-opactiy: 0.6 !important;
   }
 }
 
 .section .graphic--video.background__background[data-playing="false"] {
   background-color: #F3F3F7 !important;
+  position: relative;
 }
 
-.section .graphic--video.background__background[data-playing="false"]:not(.border) {
-  outline: 0.375rem rgba(64, 64, 100, 0.075) solid;
+.section .graphic--video.background__background[data-playing="false"]:not(.border)::before {
+  transition: 0.2s;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 3;
+  box-shadow: inset 0 0 0 0.375rem rgba(64, 64, 100, 0.075);
 }
 
 .section .graphic--video.background__background-darker[data-playing="true"] {
   background-color: #E0E0EA;
+  position: relative;
 }
 
-.section .graphic--video.background__background-darker[data-playing="true"]:not(.border) {
-  outline: 0.375rem rgba(64, 64, 100, 0.35) solid !important;
+.section .graphic--video.background__background-darker[data-playing="true"]:not(.border)::before {
+  transition: 0.2s;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 3;
+  box-shadow: inset 0 0 0 0.375rem rgba(64, 64, 100, 0.35);
 }
 
 .section .graphic--video.background__background-darker[data-playing="true"].border {
-  --border-opactiy: 0.6!important;
+  --border-opactiy: 0.6 !important;
 }
 
 @media screen and (min-width: 92em) {
   .section .graphic--video.background__background-darker:focus, .section .graphic--video.background__background-darker:hover {
     background-color: #E0E0EA;
+    position: relative;
   }
-  .section .graphic--video.background__background-darker:focus:not(.border), .section .graphic--video.background__background-darker:hover:not(.border) {
-    outline: 0.375rem rgba(64, 64, 100, 0.35) solid !important;
+  .section .graphic--video.background__background-darker:focus:not(.border)::before, .section .graphic--video.background__background-darker:hover:not(.border)::before {
+    transition: 0.2s;
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 3;
+    box-shadow: inset 0 0 0 0.375rem rgba(64, 64, 100, 0.35);
   }
   .section .graphic--video.background__background-darker:focus.border, .section .graphic--video.background__background-darker:hover.border {
-    --border-opactiy: 0.6!important;
+    --border-opactiy: 0.6 !important;
   }
 }
 
 @media screen and (max-width: 91.9375em) and (min-width: 62em) {
   .section .graphic--video.background__background-darker:focus, .section .graphic--video.background__background-darker:hover {
     background-color: #E0E0EA;
+    position: relative;
   }
-  .section .graphic--video.background__background-darker:focus:not(.border), .section .graphic--video.background__background-darker:hover:not(.border) {
-    outline: 0.375rem rgba(64, 64, 100, 0.35) solid !important;
+  .section .graphic--video.background__background-darker:focus:not(.border)::before, .section .graphic--video.background__background-darker:hover:not(.border)::before {
+    transition: 0.2s;
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 3;
+    box-shadow: inset 0 0 0 0.375rem rgba(64, 64, 100, 0.35);
   }
   .section .graphic--video.background__background-darker:focus.border, .section .graphic--video.background__background-darker:hover.border {
-    --border-opactiy: 0.6!important;
+    --border-opactiy: 0.6 !important;
   }
 }
 
 .section .graphic--video.background__background-darker[data-playing="false"] {
   background-color: #E9E9F2 !important;
+  position: relative;
 }
 
-.section .graphic--video.background__background-darker[data-playing="false"]:not(.border) {
-  outline: 0.375rem rgba(64, 64, 100, 0.075) solid;
+.section .graphic--video.background__background-darker[data-playing="false"]:not(.border)::before {
+  transition: 0.2s;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 3;
+  box-shadow: inset 0 0 0 0.375rem rgba(64, 64, 100, 0.075);
 }
 
 .section .graphic--video.background__background-darkest[data-playing="true"] {
   background-color: #d2d2e0;
+  position: relative;
 }
 
-.section .graphic--video.background__background-darkest[data-playing="true"]:not(.border) {
-  outline: 0.375rem rgba(64, 64, 100, 0.35) solid !important;
+.section .graphic--video.background__background-darkest[data-playing="true"]:not(.border)::before {
+  transition: 0.2s;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 3;
+  box-shadow: inset 0 0 0 0.375rem rgba(64, 64, 100, 0.35);
 }
 
 .section .graphic--video.background__background-darkest[data-playing="true"].border {
-  --border-opactiy: 0.6!important;
+  --border-opactiy: 0.6 !important;
 }
 
 @media screen and (min-width: 92em) {
   .section .graphic--video.background__background-darkest:focus, .section .graphic--video.background__background-darkest:hover {
     background-color: #d2d2e0;
+    position: relative;
   }
-  .section .graphic--video.background__background-darkest:focus:not(.border), .section .graphic--video.background__background-darkest:hover:not(.border) {
-    outline: 0.375rem rgba(64, 64, 100, 0.35) solid !important;
+  .section .graphic--video.background__background-darkest:focus:not(.border)::before, .section .graphic--video.background__background-darkest:hover:not(.border)::before {
+    transition: 0.2s;
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 3;
+    box-shadow: inset 0 0 0 0.375rem rgba(64, 64, 100, 0.35);
   }
   .section .graphic--video.background__background-darkest:focus.border, .section .graphic--video.background__background-darkest:hover.border {
-    --border-opactiy: 0.6!important;
+    --border-opactiy: 0.6 !important;
   }
 }
 
 @media screen and (max-width: 91.9375em) and (min-width: 62em) {
   .section .graphic--video.background__background-darkest:focus, .section .graphic--video.background__background-darkest:hover {
     background-color: #d2d2e0;
+    position: relative;
   }
-  .section .graphic--video.background__background-darkest:focus:not(.border), .section .graphic--video.background__background-darkest:hover:not(.border) {
-    outline: 0.375rem rgba(64, 64, 100, 0.35) solid !important;
+  .section .graphic--video.background__background-darkest:focus:not(.border)::before, .section .graphic--video.background__background-darkest:hover:not(.border)::before {
+    transition: 0.2s;
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 3;
+    box-shadow: inset 0 0 0 0.375rem rgba(64, 64, 100, 0.35);
   }
   .section .graphic--video.background__background-darkest:focus.border, .section .graphic--video.background__background-darkest:hover.border {
-    --border-opactiy: 0.6!important;
+    --border-opactiy: 0.6 !important;
   }
 }
 
 .section .graphic--video.background__background-darkest[data-playing="false"] {
   background-color: #E0E0EA !important;
+  position: relative;
 }
 
-.section .graphic--video.background__background-darkest[data-playing="false"]:not(.border) {
-  outline: 0.375rem rgba(64, 64, 100, 0.075) solid;
+.section .graphic--video.background__background-darkest[data-playing="false"]:not(.border)::before {
+  transition: 0.2s;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 3;
+  box-shadow: inset 0 0 0 0.375rem rgba(64, 64, 100, 0.075);
 }
 
 .section .graphic--video .video--foreground {
@@ -3159,16 +3279,18 @@ h3 + .studypanel--paragraph {
   height: 100%;
   object-fit: contain;
   z-index: 1;
+  transform: scale(var(--graphic-scale));
 }
 
 .section .graphic--video .video--background {
+  transition: transform 0.2s;
   position: absolute;
   top: 50%;
   left: 50%;
   width: calc(100% - (var(--section-graphic-panel-pad) * 2));
   height: calc(100% - (var(--section-graphic-panel-pad) * 2));
   z-index: 0;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(var(--graphic-scale));
 }
 
 .section .graphic--video .video__hidden {
@@ -3250,6 +3372,11 @@ h3 + .studypanel--paragraph {
 .section .graphic__container img,
 .section .graphic__container .mask {
   margin: var(--section-graphic-panel-pad);
+}
+
+.section .graphic__square {
+  height: unset;
+  aspect-ratio: 1 / 1;
 }
 
 .section .graphic__lightbox, .section .graphic__gallery {
@@ -5918,6 +6045,11 @@ h3 + .studypanel--paragraph {
 .split--label__after {
   right: 1rem;
   top: 1rem;
+}
+
+.split__square {
+  height: unset;
+  aspect-ratio: 1 / 1;
 }
 
 .image-row {
@@ -9060,20 +9192,154 @@ h3 + .studypanel--paragraph {
 
 #Made #Texturing--Contrast-Areas .graphic {
   height: unset;
+  --graphic-scale: 1;
+}
+
+@media screen and (max-width: 79.9375em) {
+  #Made #Texturing--Contrast-Areas .graphic {
+    --graphic-scale: 1.085;
+  }
 }
 
 @media screen and (max-width: 61.9375em) {
   #Made #Texturing--Contrast-Areas .graphic {
-    --graphic-scale:2;
+    --graphic-scale: 1.1;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Made #Texturing--Contrast-Areas .graphic {
+    --graphic-scale: 1;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Made #Texturing--Contrast-Areas .graphic {
+    --graphic-scale: 1.085;
   }
 }
 
 #Made #Texturing--Contrast-Split .graphic {
   height: unset;
+  --graphic-scale: 1;
+}
+
+@media screen and (max-width: 79.9375em) {
+  #Made #Texturing--Contrast-Split .graphic {
+    --graphic-scale: 1.085;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Made #Texturing--Contrast-Split .graphic {
+    --graphic-scale: 1.1;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Made #Texturing--Contrast-Split .graphic {
+    --graphic-scale: 1;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Made #Texturing--Contrast-Split .graphic {
+    --graphic-scale: 1.085;
+  }
+}
+
+@media screen and (max-width: 61.9375em) and (min-width: 50em) {
+  #Made #Texturing--Details-Description .section {
+    max-width: 65%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+#Made #Texturing--Details-Graphics .section--graphic .mask {
+  background-color: #404064;
+}
+
+@media screen and (max-width: 61.9375em) and (min-width: 50em) {
+  #Made #Texturing--Details-Graphics .section {
+    max-width: 65%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+#Made #Texturing--Details-Graphics .section--description:not(.graphic--caption),
+#Made #Texturing--Details-Graphics .section--description p:not(.graphic--caption) {
+  margin-top: 0.35rem;
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Made #Texturing--Details-Graphics .section--description:not(.graphic--caption),
+  #Made #Texturing--Details-Graphics .section--description p:not(.graphic--caption) {
+    margin-top: 0.15rem;
+  }
 }
 
 #Made #Texturing--Details-Graphics .section--main {
+  display: grid;
   grid-template-columns: repeat(4, 1fr);
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Made #Texturing--Details-Graphics .section--main {
+    grid-template-columns: repeat(2, 1fr);
+    --gap: 3rem;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Made #Texturing--Details-Graphics .section--main {
+    --gap: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Made #Texturing--Details-Graphics .section--main {
+    --gap: 1.75rem;
+  }
+}
+
+#Made #Texturing--Details-Graphics .section--graphic {
+  height: unset;
+  aspect-ratio: 1 / 1;
+  --graphic-scale: 0.85;
+}
+
+@media screen and (max-width: 79.9375em) {
+  #Made #Texturing--Details-Graphics .section--graphic {
+    --graphic-scale: 0.75;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Made #Texturing--Details-Graphics .section--graphic {
+    --section-graphic-panel-pad: 1.75rem;
+    --graphic-scale: 0.925;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Made #Texturing--Details-Graphics .section--graphic {
+    --graphic-scale: 1;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Made #Texturing--Details-Graphics .section--graphic {
+    --section-graphic-panel-pad: 0.25rem;
+    --graphic-scale: 0.85;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Made #Texturing--Details-Graphics .section .mask {
+    width: calc(Max(Min(45%, var(--w)), 55%));
+  }
 }
 
 #Made #Texturing--Transition .image-row {

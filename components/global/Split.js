@@ -1,6 +1,6 @@
 import { clamp, RESIZE_TIMEOUT } from "@/scripts/GlobalUtilities";
 import { useEffect, useRef, useState } from "react";
-import { graphicKeepSquare } from "../sections/graphic/Graphic";
+// import { graphicKeepSquare } from "../sections/graphic/Graphic";
 import { Graphic } from "../sections/Sections";
 import useHorizontalResize from "@/scripts/hooks/useHorizontalResize";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
@@ -98,9 +98,9 @@ function Split({ before, after, square }) {
   useEffect(() => {
     if (!mounted) return;
     splitInit();
-    if (isSquare) {
-      graphicKeepSquare(split.elem);
-    }
+    // if (isSquare) {
+      // graphicKeepSquare(split.elem);
+    // }
 
     split.resizeObserver = new ResizeObserver(refreshed);
 
@@ -218,7 +218,7 @@ function Split({ before, after, square }) {
 
 
   return (
-    <div className="split" ref={splitRef}>
+    <div className={`split ${isSquare && "split__square"}`} ref={splitRef}>
       <div className="split--viewer split--before">
         <Graphic type="image" className="split--graphic" img={before} />
         <div className="split--label split--label__before">

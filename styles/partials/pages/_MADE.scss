@@ -26,14 +26,26 @@
   }
 }
 
-@mixin section-grid-4_captions-headings {
-  @include section-mask-color($col-tertiary);
+@mixin section-grid-4_captions-headings_max-width {
 
   .section {
     @include lg {
       max-width: 65%;
       @include mx-auto;
     }
+  }
+}
+
+
+@mixin section-grid-4_captions-headings {
+  @include section-mask-color($col-tertiary);
+  @include section-grid-4_captions-headings_max-width;
+
+  .section {
+    // @include lg {
+    //   max-width: 65%;
+    //   @include mx-auto;
+    // }
 
     &--description {
       &:not(.graphic--caption),
@@ -382,33 +394,65 @@
     &--Contrast-Desc {
     }
 
+    @mixin shirt-video-scale {
+      --graphic-scale: 1;
+      @include xl-down {
+        --graphic-scale: 1.085;
+      }
+      @include lg-down {
+        --graphic-scale: 1.1;
+      }
+      @include md-down {
+        --graphic-scale: 1;
+      }
+      @include sm-down {
+        --graphic-scale: 1.085;
+      }
+    }
+
     &--Contrast-Areas {
       .graphic {
         height: unset;
 
-        @include lg-down{
-          --graphic-scale:2;
-        }
-
+        @include shirt-video-scale;
       }
     }
 
     &--Contrast-Split {
+      .section {
+        // &--column {
+        //   @include flex-col;
+        // }
+        // &--graphic {
+        //   @include md-down {
+        //     order: 1;
+        //   }
+        // }
+        // &--description {
+        //   @include md-down {
+        //     order: 0;
+        //   }
+        // }
+      }
+
       .graphic {
         height: unset;
-
+        @include shirt-video-scale;
       }
     }
 
     &--Details-Description {
+      @include section-grid-4_captions-headings_max-width;
     }
 
     &--Details-Graphics {
-      .section {
-        &--main {
-          grid-template-columns: repeat(4, 1fr);
-        }
-      }
+      @include section-grid-4_captions-headings;
+
+      // .section {
+      //   &--main {
+      //     grid-template-columns: repeat(4, 1fr);
+      //   }
+      // }
     }
 
     &--Transition {

@@ -529,9 +529,7 @@ function MADE() {
             <Column>
               <Description className={"mt-less"}>
                 <p>
-                  Our goal was to create separate images of shirt components that could be stacked into one life-like photo. I knew that to do this
-                  realistically, each image would have to be a combination of the object, and a rendered shadow behind it. Allowing the shirt pieces
-                  to accurately sit atop each other without looking flat, or uncanny.
+                Our goal was to create separate images of shirt components that could be stacked to form a complete product photo.  Therefore, to maintain realism, each image needed to be a combination of the shirt component, and its shadow behind it.  Thereby allowing the shirt pieces to accurately sit atop each other without looking flat, or uncanny.
                 </p>
 
                 <p>
