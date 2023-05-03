@@ -106,12 +106,16 @@ function graphicPlayOnHoverInit(graphic) {
 
   function loop(e) {
     var { target, graph } = getTarget(e);
+    console.log("check if hover autoplay");
     if (checkIfHoverAutoplay(graph)) return;
 
     console.log("loop");
 
+    
     if (graph.getVideo().currentTime >= graph.getVideo().duration - 0.1) {
       graph.getVideo().currentTime = 0;
+      graphicVideoPlay(graph);
+      console.log('loop playing');
     }
   }
 
@@ -179,7 +183,6 @@ function graphicVideoReset(graphic) {
 }
 
 function graphicResetHandleHideTimeout(graphic) {
-  // Check if hovered state changed during timeout
   if (!graphic.hovered) {
     graphicVideoPause(graphic);
     graphic.getVideo().currentTime = 0;
@@ -187,11 +190,8 @@ function graphicResetHandleHideTimeout(graphic) {
     const showTimeout = setTimeout(() => {
       graphicResetHandleShowTimeout(graphic);
     }, 100);
-
-    // Store the showTimeout id in the graphic object
     graphic.showTimeout = showTimeout;
   } else {
-    // Cancel the showTimeout if it was set before
     if (graphic.showTimeout) clearTimeout(graphic.showTimeout);
     if (graphic.getVideo()) {
       graphic.getVideo().classList.remove("video__hidden");

@@ -132,20 +132,6 @@
           transform: translate(-50%, -50%);
         }
 
-        // &--play {
-
-        //   position: absolute;
-        //   z-index: 2;
-        //   --graphic-scale:0.1;
-
-        //   top: 50%;
-        //   left: 50%;
-        //   transform: translate(-50%, -50%);
-
-        //   --svg-stroke-weight: 0.45rem;
-        //   --svg-stroke-fill: #{$col-primary};
-        // }
-
         &__hidden {
           opacity: 0;
         }
