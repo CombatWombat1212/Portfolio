@@ -5,12 +5,12 @@ import NextStudies from "./NextStudies";
 import Indicator from "./Indicator";
 import React, { useEffect, useState } from "react";
 import useRandomString from "@/scripts/hooks/useRandomString";
-import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { useAnchoredArrowsInit, re, useAnchoredArrowsInitmoveExcessArrows } from "../sections/sections_utilities/ArrowUtilities";
 import { useColLine } from "../sections/sections_utilities/ColLineUtilities";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import useMatchHeight from "@/scripts/hooks/useMatchHeight";
-import useSameHeightChildren from "@/scripts/hooks/useMatchHeight";
+// import useSameHeightChildren from "@/scripts/hooks/useMatchHeight";
+import useMirrorStyle from "@/scripts/useMirrorStyle";
 
 function insertNextElementAfterLastSection(newChildren, lastChapterIndex, lastChapterChildren) {
   if (lastChapterChildren[0] == undefined && lastChapterChildren.length == 1) lastChapterChildren = [<></>];
@@ -58,17 +58,11 @@ function StudyWrapper({ id, study, children }) {
     return false;
   });
 
-  // const test = useSameHeightChildren(newChildren);
-
-  // useEffect(() => {
-  //   console.log(test);
-  // }, [test]);
-
-  // TODO: it would be ideal to refactor this as something more reacty and run it in the section component
-
   const { bp, loading } = useResponsive();
 
   useAnchoredArrowsInit(newChildren, {update:[bp, loading], timeout: 500});
+
+  useMirrorStyle();
 
   return (
     <div id={id} className="casestudy">

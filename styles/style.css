@@ -7283,22 +7283,7 @@ h3 + .studypanel--paragraph {
 
 .border-tertiary {
   --border-opactiy: 1;
-  border: 0.4375rem rgba(64, 64, 100, var(--border-opactiy)) solid;
-}
-
-.background-negative {
-  --background-opacity: 1;
-  background-color: rgba(233, 212, 224, var(--background-opacity));
-}
-
-.background-positive {
-  --background-opacity: 1;
-  background-color: rgba(203, 228, 215, var(--background-opacity));
-}
-
-.background-tertiary {
-  --background-opacity: 1;
-  background-color: Rgba(#404064, var(--background-opacity));
+  border: 0.25rem rgba(64, 64, 100, var(--border-opactiy)) solid;
 }
 
 .d-block {

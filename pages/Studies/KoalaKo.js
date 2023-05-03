@@ -334,35 +334,35 @@ function KoalaKo({ pop }) {
           <Heading>Creating low-fi prototypes for user testing</Heading>
 
           <Column caption="above">
-            <Heading type="p" className="graphic--caption__above color--tertiary" sameHeight={"lowfi_prototype_heading_desk"}>
+            <Heading type="p" className="graphic--caption__above color--tertiary" mirrorstyle="lowfi_prototype_heading_desk match height">
               <b>Onboarding</b>
             </Heading>
             <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.prototype_low_onboarding} />
           </Column>
 
           <Column caption="above">
-            <Heading type="p" className="graphic--caption__above color--tertiary" sameHeight={"lowfi_prototype_heading_desk"}>
+            <Heading type="p" className="graphic--caption__above color--tertiary" mirrorstyle="lowfi_prototype_heading_desk match height">
               <b>Homepage</b>
             </Heading>
             <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.prototype_low_homepage} />
           </Column>
 
           <Column caption="above">
-            <Heading type="p" className="graphic--caption__above color--tertiary" sameHeight={"lowfi_prototype_heading_desk"}>
+            <Heading type="p" className="graphic--caption__above color--tertiary" mirrorstyle="lowfi_prototype_heading_desk match height">
               <b>Activities</b>
             </Heading>
             <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.prototype_low_activities} />
           </Column>
 
           <Column caption="above">
-            <Heading type="p" className="graphic--caption__above color--tertiary" sameHeight={"lowfi_prototype_heading_desk"}>
+            <Heading type="p" className="graphic--caption__above color--tertiary" mirrorstyle="lowfi_prototype_heading_desk match height">
               <b>Location Browse</b>
             </Heading>
             <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.prototype_low_map} />
           </Column>
 
           <Column caption="above">
-            <Heading type="p" className="graphic--caption__above color--tertiary" sameHeight={"lowfi_prototype_heading_desk"}>
+            <Heading type="p" className="graphic--caption__above color--tertiary" mirrorstyle="lowfi_prototype_heading_desk match height">
               <b>Statistics</b>
             </Heading>
             <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.prototype_low_statistics} />
@@ -497,7 +497,7 @@ function KoalaKo({ pop }) {
             </Description>
           </Column>
           <Column>
-            <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_statistics_page} sameHeight={`stats_feedback`} />
+            <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_statistics_page} />
             <Heading type={`${desktop ? "h3" : "h5"}`} className="graphic--caption mt-more">
               Refined statistics page
             </Heading>
@@ -510,7 +510,7 @@ function KoalaKo({ pop }) {
           </Column>
 
           <Column>
-            <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_community_feedback} sameHeight={`features_last`} />
+            <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_community_feedback} />
             <Heading type={`${desktop ? "h3" : "h5"}`} className="graphic--caption mt-more">
               Community feedback
             </Heading>
@@ -522,7 +522,7 @@ function KoalaKo({ pop }) {
             </Description>
           </Column>
           <Column>
-            <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_location_browsing} sameHeight={`features_last`} />
+            <Graphic className="b-rad" lightbox pop={pop} type="image" img={KOALAKO_IMGS.features_location_browsing} />
             <Heading type={`${desktop ? "h3" : "h5"}`} className="graphic--caption mt-more">
               Location browsing
             </Heading>

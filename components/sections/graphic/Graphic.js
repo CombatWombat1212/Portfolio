@@ -1,6 +1,6 @@
 import { getColors, RESIZE_TIMEOUT, splitS } from "@/scripts/GlobalUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
-import useSameHeight from "@/scripts/hooks/useSameHeight";
+// import useSameHeight from "@/scripts/hooks/useSameHeight";
 import Image from "next/image";
 import { defaultProps, PropTypes } from "prop-types";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";

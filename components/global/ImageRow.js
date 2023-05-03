@@ -68,8 +68,6 @@ function rowGetImageSize(row) {
   if (tempHeight > 0 && tempHeight < 10000) {
     row.images.height = tempHeight;
   }
-
-  console.log("Image Height:", row.images.height);
 }
 
 function rowSetHeight(row) {

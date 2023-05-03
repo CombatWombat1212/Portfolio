@@ -9,6 +9,7 @@ import ProsCons, { Con, Pro } from "@/components/global/ProsCons";
 import { STUDY_MADE } from "@/data/CASE_STUDIES";
 import { useEffect } from "react";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
+import useMirrorStyle from "@/scripts/useMirrorStyle";
 
 function MADE() {
   const study = STUDY_MADE;
@@ -449,7 +450,11 @@ function MADE() {
           <Section id="Texturing--Details-Graphics" type="columns" titled mainType="grid" background="background darker" mainClassName="mt-0">
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.details_threading} />
-              <Heading type="h3" className="graphic--caption weight-reg">
+              <Heading type="h3" className="graphic--caption weight-reg"
+              
+              mirrorstyle={desktop && "test match height"}
+              
+              >
                 Color-matched threading
               </Heading>
               <Description className="graphic--caption mt-less">
@@ -459,7 +464,11 @@ function MADE() {
             </Column>
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.details_holes} />
-              <Heading type="h3" className="graphic--caption weight-reg">
+              <Heading type="h3" className="graphic--caption weight-reg"
+              
+              mirrorstyle={desktop && "test match height"}
+              
+              >
                 Color-matched button holes
               </Heading>
               <Description className="graphic--caption mt-less">
@@ -468,7 +477,11 @@ function MADE() {
             </Column>
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.details_button} />
-              <Heading type="h3" className="graphic--caption weight-reg">
+              <Heading type="h3" className="graphic--caption weight-reg"
+              
+              mirrorstyle={desktop && "test match height"}
+              
+              >
                 Button color
               </Heading>
               <Description className="graphic--caption mt-less">
@@ -477,7 +490,11 @@ function MADE() {
             </Column>
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.details_logo} />
-              <Heading type="h3" className="graphic--caption weight-reg">
+              <Heading type="h3" className="graphic--caption weight-reg"
+              
+              mirrorstyle={desktop && "test match height"}
+              
+              >
                 MADE Logo tag
               </Heading>
               <Description className="graphic--caption mt-less">Added with a focus on legibility, without being overbearing.</Description>

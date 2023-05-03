@@ -1,5 +1,6 @@
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
-import useSameHeight from "@/scripts/hooks/useSameHeight";
+// import useSameHeight from "@/scripts/hooks/useSameHeight";
+import { getMirrorStyleProp } from "@/scripts/useMirrorStyle";
 import { defaultProps, PropTypes } from "prop-types";
 import { useEffect, useRef, useState } from "react";
 
@@ -34,7 +35,9 @@ function getHeadingClasses(type) {
   return headingClasses;
 }
 
-function Heading({ children, type, className, innerClassName, italic, sameHeight, innerhtml }) {
+function Heading({ children, type, className, innerClassName, italic, 
+  // sameHeight, 
+  innerhtml, ...props }) {
   var headingClasses = getHeadingClasses(type);
   const HeadingTag = type;
 
@@ -44,23 +47,23 @@ function Heading({ children, type, className, innerClassName, italic, sameHeight
   const { desktop, loading } = useResponsive();
 
   const reference = useRef(null);
-  sameHeight = sameHeight ? sameHeight : false;
-  const sameHeightObj = useSameHeight(sameHeight, reference, { resize: "horizontal", update:[desktop, loading] });
+  // sameHeight = sameHeight ? sameHeight : false;
+  // const sameHeightObj = useSameHeight(sameHeight, reference, { resize: "horizontal", update:[desktop, loading] });
 
 
   const [styles, setStyles] = useState({});
 
-  useEffect(() => {
-    const newStyles = {
-      ...(sameHeightObj
-        ? {
-            height: (!sameHeightObj.resizing) ? `${sameHeightObj.height.max}px` : 'auto',
-          }
-        : {}),
-    };
+  // useEffect(() => {
+  //   const newStyles = {
+  //     ...(sameHeightObj
+  //       ? {
+  //           height: (!sameHeightObj.resizing) ? `${sameHeightObj.height.max}px` : 'auto',
+  //         }
+  //       : {}),
+  //   };
 
-    setStyles(newStyles);
-  }, [sameHeightObj, desktop]);
+  //   setStyles(newStyles);
+  // }, [sameHeightObj, desktop]);
 
 
 
@@ -68,8 +71,16 @@ function Heading({ children, type, className, innerClassName, italic, sameHeight
     innerClassName += " text--italic";
   }
 
+
+  const mirrorstyle = getMirrorStyleProp(props);
+
   return (
-    <div className={`section--heading ${headingClasses} ${className}`} ref={reference} style={styles}>
+    <div className={`section--heading ${headingClasses} ${className}`} ref={reference} 
+    // style={styles}
+
+    {...(mirrorstyle ? { mirrorstyle } : {})}
+    
+    >
       <HeadingTag className={innerClassName} {...(innerhtml !== undefined ? { dangerouslySetInnerHTML: { __html: innerhtml } } : {})}>
         {children}
       </HeadingTag>
