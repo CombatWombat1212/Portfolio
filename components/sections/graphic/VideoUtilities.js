@@ -42,7 +42,6 @@ function graphicVideoInit(ref) {
 }
 
 function graphicVideoPlay(graphic) {
-  console.log(graphic)
   if (!graphic || !graphic.elem || !graphic.getVideo()) return;
   graphic.set.dataPlaying(true);
   graphic
