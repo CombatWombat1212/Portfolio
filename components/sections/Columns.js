@@ -6,7 +6,6 @@ import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { anchoredArrowsInit, removeExcessArrows } from "./sections_utilities/ArrowUtilities";
 import { colLineInit } from "./sections_utilities/ColLineUtilities";
 import { useEffect, useRef, useState } from "react";
-// import useSameHeight from "@/scripts/hooks/useSameHeight";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 
 function ColumnGroup({ columns, arrows, line, mainType }) {
@@ -59,7 +58,7 @@ function ColumnGroup({ columns, arrows, line, mainType }) {
           // if (props.classes.colClasses.length != 0) colClasses = props.classes.colClasses.join(" ");
           // if (props.classes.otherClasses.length != 0) otherClasses = props.classes.otherClasses.join(" ");
         }
-        
+
         if (props.classes.colClasses.length != 0) colClasses = props.classes.colClasses.join(" ");
         if (props.classes.otherClasses.length != 0) otherClasses = props.classes.otherClasses.join(" ");
 
@@ -79,7 +78,7 @@ function ColumnGroup({ columns, arrows, line, mainType }) {
         }
 
         return (
-          <Column className={`column ${colClasses} ${otherClasses} column-${i+1}`} key={`column ${i}`} {...attrProps}>
+          <Column className={`column ${colClasses} ${otherClasses} column-${i + 1}`} key={`column ${i}`} {...attrProps}>
             {hasArrows && i != 0 && (
               <div className="arrow--column">
                 <Graphic className="arrow--wrapper" innerClassName={arrowClasses} type="mask" img={chevron_right}></Graphic>
@@ -129,31 +128,16 @@ ColumnGroup.propTypes = {
   mainType: PropTypes.oneOf(["flex", "grid"]),
 };
 
-function Column({ children, className, 
-  // sameHeight 
-}) {
+function Column({ children, className }) {
   className = className ? className : "";
 
-
-  const {bp, loading} = useResponsive();
+  const { bp, loading } = useResponsive();
 
   const reference = useRef(null);
 
-  // sameHeight = sameHeight ? sameHeight : false;
-  // const sameHeightObj = useSameHeight(sameHeight, reference, { resize: "horizontal", update: [[bp][0], loading],  });
-  // const styles = {
-  //   ...(sameHeightObj
-  //     ? {
-  //         height: !sameHeightObj.resizing ? `${sameHeightObj.height.max}px` : "auto",
-  //       }
-  //     : {}),
-  // };
-
   return (
     <>
-      <div className={`section--column ${className}`} ref={reference} 
-      // style={styles}
-      >
+      <div className={`section--column ${className}`} ref={reference}>
         {children}
       </div>
     </>

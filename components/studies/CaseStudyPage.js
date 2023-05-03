@@ -9,7 +9,6 @@ import { useAnchoredArrowsInit, re, useAnchoredArrowsInitmoveExcessArrows } from
 import { useColLine } from "../sections/sections_utilities/ColLineUtilities";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import useMatchHeight from "@/scripts/hooks/useMatchHeight";
-// import useSameHeightChildren from "@/scripts/hooks/useMatchHeight";
 import useMirrorStyle from "@/scripts/useMirrorStyle";
 
 function insertNextElementAfterLastSection(newChildren, lastChapterIndex, lastChapterChildren) {

@@ -344,13 +344,13 @@ function MADE() {
               <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_4_straightened} />
             </Column>
             <Column caption="above">
-              <Heading type="h3" className={`graphic--caption weight-reg`} sameHeight="repeatable_texture">
+              <Heading type="h3" className={`graphic--caption weight-reg`} mirrorstyle="repeatable_texture match height">
                 Repeatable texture
               </Heading>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_5_repeatable} />
             </Column>
             <Column caption="above">
-              <Heading type="h3" className={`graphic--caption weight-reg`} sameHeight="repeatable_texture">
+              <Heading type="h3" className={`graphic--caption weight-reg`} mirrorstyle="repeatable_texture match height">
                 3D material
               </Heading>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_6_material} />

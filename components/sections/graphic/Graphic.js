@@ -1,6 +1,5 @@
 import { getColors, RESIZE_TIMEOUT, splitS } from "@/scripts/GlobalUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
-// import useSameHeight from "@/scripts/hooks/useSameHeight";
 import Image from "next/image";
 import { defaultProps, PropTypes } from "prop-types";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
@@ -127,7 +126,6 @@ function Graphic(props) {
     square,
     sync,
     innerStyle,
-    // sameHeight,
     reference,
     ...restProps
   } = props;
@@ -139,12 +137,6 @@ function Graphic(props) {
       reference.current = graphicref.current;
     }
   }, [graphicref]);
-
-  // TODO: remake sameHeight in a completely different way cause the current implimentation sucks at every turn
-  // sameHeight = sameHeight ? sameHeight : false;
-  // const sameHeightObj = useSameHeight(sameHeight, graphicref, {
-  //   resize: "horizontal",
-  // });
 
   const [imageLoaded, setImageLoaded] = useState(false);
   useEffect(() => {
@@ -243,7 +235,6 @@ function Graphic(props) {
   const WRAPPER_STYLE = {
     ...styleVariables,
     ...style,
-    // ...(sameHeightObj && { height: !sameHeightObj.resizing ? `${sameHeightObj.height.min}px` : "auto" }),
   };
 
   const WRAPPER_COMMON_VIDEO_PROPS = {
