@@ -26,8 +26,7 @@
   }
 }
 
-@mixin section-grid-4_captions-headings_max-width {
-
+@mixin section-grid-4_headings-captions_max-width {
   .section {
     @include lg {
       max-width: 65%;
@@ -36,10 +35,9 @@
   }
 }
 
-
-@mixin section-grid-4_captions-headings {
+@mixin section-grid-4_headings-captions {
   @include section-mask-color($col-tertiary);
-  @include section-grid-4_captions-headings_max-width;
+  @include section-grid-4_headings-captions_max-width;
 
   .section {
     // @include lg {
@@ -103,6 +101,39 @@
   }
 }
 
+
+
+@mixin section-grid-3_headings-arrows{
+  .section {
+    &--heading {
+      @include flex-col-end;
+      @include lg-down {
+        margin-top: 0rem;
+      }
+    }
+    &--main {
+      grid-template-columns: repeat(3, 1fr);
+      @include xl-down {
+        --gap: 5rem;
+        @include gap;
+      }
+      @include lg-down {
+        --gap: 5.5rem;
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @include md-down {
+        --gap: 4.5rem;
+      }
+      @include sm-down {
+        --gap: 3.75rem;
+      }
+    }
+  }
+}
+
+
+
+
 #Made {
   .brief {
     &--group {
@@ -159,7 +190,7 @@
     }
 
     &--Needs {
-      @include section-grid-4_captions-headings;
+      @include section-grid-4_headings-captions;
     }
 
     &--Outcome {
@@ -277,7 +308,7 @@
       }
     }
     &--Considerations {
-      @include section-grid-4_captions-headings;
+      @include section-grid-4_headings-captions;
     }
 
     &--Models {
@@ -364,31 +395,8 @@
     }
 
     &--Stages {
-      .section {
-        &--heading {
-          @include flex-col-end;
-          @include lg-down {
-            margin-top: 0rem;
-          }
-        }
-        &--main {
-          grid-template-columns: repeat(3, 1fr);
-          @include xl-down {
-            --gap: 5rem;
-            @include gap;
-          }
-          @include lg-down {
-            --gap: 5.5rem;
-            grid-template-columns: repeat(2, 1fr);
-          }
-          @include md-down {
-            --gap: 4.5rem;
-          }
-          @include sm-down {
-            --gap: 3.75rem;
-          }
-        }
-      }
+      @include section-grid-3_headings-arrows;
+    
     }
 
     &--Contrast-Desc {
@@ -442,23 +450,30 @@
     }
 
     &--Details-Description {
-      @include section-grid-4_captions-headings_max-width;
+      // @include section-grid-4_headings-captions_max-width;
     }
 
     &--Details-Graphics {
-      @include section-grid-4_captions-headings;
-
-      // .section {
-      //   &--main {
-      //     grid-template-columns: repeat(4, 1fr);
-      //   }
-      // }
+      @include section-grid-4_headings-captions;
     }
 
     &--Transition {
       .image-row {
         --image-row-scale: 1.15;
         --image-row-offset: 2;
+
+        @include xxl-down {
+          --image-row-scale: 1.35;
+        }
+        @include xl-down {
+          --image-row-col: 4 !important;
+          --image-row-offset: 1;
+        }
+        @include lg-down {
+          --image-row-col: 3 !important;
+          --image-row-scale: 1.35;
+          --image-row-offset: 1;
+        }
       }
     }
   }
@@ -473,6 +488,20 @@
           background-color: lighten($col-background_darker, 2.25);
         }
       }
+
+
+      .column-1 {
+        @include md-down {
+          order: 1;
+        }
+      }
+      .column-2 {
+        @include md-down {
+          order: 0;
+        }
+      }
+
+
     }
 
     &--Shadow-Description {
@@ -484,6 +513,9 @@
     }
 
     &--Post {
+
+      @include section-grid-3_headings-arrows;
+
       .section {
         --section-graphic-panel-pad: 0rem;
 
@@ -496,10 +528,13 @@
         }
 
         &--main {
-          row-gap: 3rem;
-          grid-template-columns: repeat(3, 1fr);
+          // row-gap: 3rem;
+          // grid-template-columns: repeat(3, 1fr);
         }
       }
+
+
+      
     }
     &--Roadblocks-Description {
     }

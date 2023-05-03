@@ -293,7 +293,7 @@ function MADE() {
               </Heading>
             </Column>
             <Column>
-              <Description className={desktop && "mt-less" }>
+              <Description className={desktop && "mt-less"}>
                 <p>
                   <b>In order for the models to reflect actual products, they needed to be textured with over 40 scans of MADE’s custom fabrics.</b>
                 </p>
@@ -318,8 +318,6 @@ function MADE() {
             mainClassName="gap-6"
             mainType="grid"
             background="background darker">
-
-
             <Column caption="above">
               <Heading type="h3" className={`graphic--caption weight-reg`}>
                 Fabric Scan
@@ -356,8 +354,6 @@ function MADE() {
               </Heading>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_6_material} />
             </Column>
-
-
           </Section>
 
           <Section id="Texturing--Contrast-Desc" type="columns" titled="above" background="background darker" wrapperClassName="mb-less-2">
@@ -371,7 +367,8 @@ function MADE() {
             </Column>
             <Column>
               <Description>
-                ‘Contrast areas’ are the parts of the dress shirt which accent the garment with an alternate fabric pallet. They were a <b>critical project requirement</b> as the online tool needed to represent the full scope of the customization available, which
+                ‘Contrast areas’ are the parts of the dress shirt which accent the garment with an alternate fabric pallet. They were a{" "}
+                <b>critical project requirement</b> as the online tool needed to represent the full scope of the customization available, which
                 includes personalized accent areas.
               </Description>
             </Column>
@@ -403,7 +400,7 @@ function MADE() {
           </Section>
 
           <Section id="Texturing--Contrast-Split" type="columns" background="background darker">
-            <Column>
+            <Column caption={!desktop && "above"}>
               <Graphic
                 type="video"
                 className="b-rad"
@@ -413,11 +410,11 @@ function MADE() {
                 muted
                 sync="Texturing--Contrast-Split"
               />
-              <Description className="graphic--caption">
+              <Description className={`graphic--caption`}>
                 Our goal was to give shoppers the ability to alter their shirt&rsquo;s accent fabric, with 50+ available materials.
               </Description>
             </Column>
-            <Column>
+            <Column caption={!desktop && "above"}>
               <Graphic
                 type="video"
                 className="b-rad"
@@ -437,8 +434,8 @@ function MADE() {
             <Title>Additional Details</Title>
             <Column>
               <Heading>
-                The devil is in the details / <br />
-                The realism is in the seams
+                The devil is in the details / <br className="d-none" />
+                the realism is in the seams
               </Heading>
             </Column>
             <Column>
@@ -456,8 +453,8 @@ function MADE() {
                 Color-matched threading
               </Heading>
               <Description className="graphic--caption mt-less">
-                I manually approximated matching thread colors for each shirt material. A simple task for solid-colors, occasionally tricky with
-                complex patterns.
+                I manually approximated fitting thread colors for each shirt material. Simple for solid-colors, occasionally tricky with complex
+                patterns.
               </Description>
             </Column>
             <Column>
@@ -466,8 +463,7 @@ function MADE() {
                 Color-matched button holes
               </Heading>
               <Description className="graphic--caption mt-less">
-                Buttonhole colors for each material were done separately, in a similar way to the threading. Requiring their own fine-tuning to better
-                match the threads in the final renders.
+                Buttonhole colors for each material were done separately, in a similar way to the threading. Requiring their own fine-tuning.
               </Description>
             </Column>
             <Column>
@@ -489,7 +485,7 @@ function MADE() {
           </Section>
 
           <Section id="Texturing--Transition" type="passthrough" margin="none">
-            <ImageRow col="6" direction="right">
+            <ImageRow col={`${desktop ? "6" : "2"}`} direction="right">
               <Graphic type="image" img={MADE_IMGS.shirt_row_04} />
               <Graphic type="image" img={MADE_IMGS.shirt_row_06} />
               <Graphic type="image" img={MADE_IMGS.shirt_row_02} />
@@ -508,11 +504,10 @@ function MADE() {
             <Column>
               <Title>Lighting</Title>
               <Heading>
-                Lighting
-                <br />
+                Lighting <br className=" d-md-none" />
                 the final composition
               </Heading>
-              <Description>
+              <Description className={lgAndDown && "mts-1"}>
                 <p>
                   At this stage, MADE’s design goals were on soft, consistent lighting, without it being so flat that shirts appear bland or even
                   artificial. Gentle shadows, with nothing distracting from the product.
@@ -527,9 +522,11 @@ function MADE() {
               <Heading>Supporting the final use-case by embedding shadows within each component image.</Heading>
             </Column>
             <Column>
-              <Description className={"mt-less"}>
+              <Description className={desktop && "mt-less"}>
                 <p>
-                Our goal was to create separate images of shirt components that could be stacked to form a complete product photo.  Therefore, to maintain realism, each image needed to be a combination of the shirt component, and its shadow behind it.  Thereby allowing the shirt pieces to accurately sit atop each other without looking flat, or uncanny.
+                  Our goal was to create separate images of shirt components that could be stacked to form a complete product photo. Therefore, to
+                  maintain realism, each image needed to be a combination of the shirt component, and its shadow behind it. Thereby allowing the shirt
+                  pieces to accurately sit atop each other without looking flat, or uncanny.
                 </p>
 
                 <p>
@@ -758,7 +755,7 @@ function MADE() {
           <Section id="Delivery--Config" background="background darkest" type={"columns"} titled>
             <Heading className="color--primary">Final configurator</Heading>
             <Column>
-              <Graphic type="video" img={MADE_IMGS.configurator_demo} className="b-rad" muted autoplay="scroll" controls/>
+              <Graphic type="video" img={MADE_IMGS.configurator_demo} className="b-rad" muted autoplay="scroll" controls />
             </Column>
           </Section>
 

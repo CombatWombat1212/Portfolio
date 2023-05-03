@@ -1,11 +1,10 @@
 import { clamp, map, RESIZE_TIMEOUT, splitPx } from "@/scripts/GlobalUtilities";
-import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { useEffect, useRef, useState } from "react";
 import { addClassToJsxObj, addStyleToJsxObj } from "../sections/sections_utilities/ClassUtilities";
-import { defaultProps, PropTypes } from "prop-types";
 
 function ImageRow({ children,className, col, direction }) {
   const [mounted, setMounted] = useState(false);
+  const [currentCol, setCurrentCol] = useState(col);
 
   const reference = useRef(null);
 
@@ -13,12 +12,17 @@ function ImageRow({ children,className, col, direction }) {
     setMounted(true);
   }, [reference]);
 
+
   useEffect(() => {
     if (!mounted) return;
-
     var row = reference.current;
     rowInit(row);
   }, [mounted]);
+
+  useEffect(() => {
+    setCurrentCol(col);
+  }, [col]);
+  
 
   var childs = children.map((child, index) => {
     var el = addClassToJsxObj(child, "image-row--image");
@@ -36,9 +40,9 @@ function ImageRow({ children,className, col, direction }) {
 
   return (
     <div
-      className={`image-row ${className}`}
+      className={`image-row ${className || ""}`}
       style={{
-        "--image-row-col": col,
+        "--image-row-col": currentCol,
         "--image-row-direction": dir.value,
       }}
       ref={reference}>
@@ -59,7 +63,13 @@ function rowGetImages(row) {
 
 function rowGetImageSize(row) {
   row.images.width = splitPx(getComputedStyle(row.images.elems[0]).getPropertyValue("width"));
-  row.images.height = splitPx(getComputedStyle(row.images.elems[0]).getPropertyValue("height"));
+  const tempHeight = splitPx(getComputedStyle(row.images.elems[0]).getPropertyValue("height"));
+
+  if (tempHeight > 0 && tempHeight < 10000) {
+    row.images.height = tempHeight;
+  }
+
+  console.log("Image Height:", row.images.height);
 }
 
 function rowSetHeight(row) {
@@ -109,6 +119,11 @@ function rowInit(elem) {
   };
 
   run();
+
+  if (row.observer) {
+    row.observer.disconnect();
+    row.observer = null;
+  }
 
   row.observer = new IntersectionObserver(
     (entries) => {
