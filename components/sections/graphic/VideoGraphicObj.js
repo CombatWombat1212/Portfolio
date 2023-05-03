@@ -15,6 +15,7 @@ function VideoGraphic(elem, group = null) {
     loop: this.checkIfLoop(),
     hoverAutoPlay: this.checkIfHoverAutoplay(),
     scrollAutoPlay: this.checkIfScrollAutoplay(),
+    clicked: false,
   };
   this.get = {
     loopingGroup: graphicGetLoopingGroup.bind(this),

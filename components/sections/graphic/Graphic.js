@@ -212,9 +212,23 @@ function Graphic(props) {
     }
   })();
 
-  var allClasses = `section--graphic graphic ${backgroundClasses} ${className} ${buttonClasses} ${lightbox ? "graphic__lightbox" : ""} ${
-    isSquare && "graphic__square"
-  } ${gallery ? "graphic__gallery" : ""}`;
+  // var allClasses = `section--graphic graphic ${backgroundClasses} ${className} ${buttonClasses} ${lightbox ? "graphic__lightbox" : ""} ${
+  //   isSquare && "graphic__square"
+  // } ${gallery ? "graphic__gallery" : ""}`;
+
+  const allClasses = (() => {
+    let classes = ["section--graphic", "graphic"];
+
+    classes.push(backgroundClasses);
+    classes.push(className);
+    classes.push(buttonClasses);
+
+    if (isSquare) classes.push("graphic__square");
+    if (lightbox) classes.push("graphic__lightbox");
+    if (gallery) classes.push("graphic__gallery");
+
+    return classes.join(" ");
+  })();
 
   var typePref = isImg ? "img" : isMask ? "mask" : isVideo ? "video" : "";
   var styleVariables = {
