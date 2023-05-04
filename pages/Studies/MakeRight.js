@@ -74,19 +74,17 @@ function MakeRight({ pop }) {
           <Section id="Overview--Solution" background="background">
             <Title>Solution</Title>
             <Heading>
-              Directly connect consumers with owners of 3D printers <br className="d-lg-none" /> for stress-free, low-cost production.
+              Directly connect consumers with owners of 3D printers <br className="d-xxl-none" /> for stress-free, low-cost production.
             </Heading>
           </Section>
 
           <Section id="Overview--Pitch" type="passthrough" margin="wide" wrapperClassName={"mt-0 py-0"} background="makeright tertiary">
             <Pitch>
               <>
-                <Heading>Choose</Heading>
+                <Heading  >Choose</Heading>
                 <Description>
                   <p>
-                    from our collection <br />
-                    of sourced 3D models,
-                    <br /> or upload your own
+                    from a storefront of sourced 3D models, or upload your own
                   </p>
                 </Description>
                 <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_choose"]} />
@@ -94,12 +92,10 @@ function MakeRight({ pop }) {
               </>
 
               <>
-                <Heading>Tweak</Heading>
+                <Heading  >Tweak</Heading>
                 <Description>
                   <p>
-                    and personalize
-                    <br />
-                    to suit your needs
+                    and personalize <br className="d-xl-none" /> to suit your needs
                   </p>
                 </Description>
                 <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_tweak"]} />
@@ -107,11 +103,10 @@ function MakeRight({ pop }) {
               </>
 
               <>
-                <Heading>Order</Heading>
+                <Heading  >Order</Heading>
                 <Description>
                   <p>
-                    your model, assigning it <br />
-                    to one of our verified makers
+                    your item, automatically assigning it to one of our verified makers
                   </p>
                 </Description>
                 <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_order"]} />
@@ -119,9 +114,9 @@ function MakeRight({ pop }) {
               </>
 
               <>
-                <Heading>Recieve</Heading>
+                <Heading  >Recieve</Heading>
                 <Description>
-                  <p>right at your front door</p>
+                  <p>the purchased item right at your front door</p>
                 </Description>
                 <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_recieve"]} />
                 <Graphic type="image" img={MAKERIGHT_IMGS["pitch_mockup_recieve"]} />

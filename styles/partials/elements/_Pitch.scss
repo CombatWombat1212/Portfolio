@@ -11,12 +11,19 @@
   --pitch-overflow-buffer-x: 5%;
   --pitch-overflow-buffer-y: 20%;
 
-  --pitch-transition: 0.75s;
+  --pitch-transition: 0.85s;
 
   --pitch-progress-transition: 0.25s;
-  --pitch-progress-distance: 2rem;
+  --pitch-progress-distance: 2.5rem;
 
   @include pad-y(var(--section-gap_half));
+
+  @include xxl-down {
+    --gap: 4rem;
+  }
+
+  // increasing this number makes the scrolling slower, like you have to scroll further before the next switch
+  --pitch-additional-height: 20rem;
 
   .pitch {
     &--row {
@@ -24,11 +31,17 @@
       height: var(--pitch-row-height);
       @include flex-col-center;
     }
+    &--placeholder {
+      height: calc(var(--pitch-row-height) + var(--pitch-additional-height))!important;
+    }
 
     &--heading {
       margin-top: calc(var(--section-text-spacing) * 1.75);
       & + * {
         margin-top: 0;
+      }
+
+      @include xl-down {
       }
     }
 
@@ -38,13 +51,31 @@
       * {
         @include h3;
         @include weight-reg;
+
+        // @include xl-down{
+        //   @include h5;
+        // }
       }
     }
 
-    // &--vector {
-    //   --mask-size: 7.5rem;
-    //   @include mask-width(var(--mask-size));
-    // }
+    &--graphics-wrapper {
+      width: calc(#{col-width(8)} - (var(--gap) / 2));
+      @include xxl-down {
+        width: calc(#{col-width(8.5)} - (var(--gap) / 2));
+      }
+      @include xl-down {
+        width: calc(#{col-width(7.5)} - (var(--gap) / 2));
+      }
+    }
+    &--captions-wrapper {
+      width: calc(#{col-width(4)} - (var(--gap) / 2));
+      @include xxl-down {
+        width: calc(#{col-width(3.5)} - (var(--gap) / 2));
+      }
+      @include xl-down {
+        width: calc(#{col-width(4.5)} - (var(--gap) / 2));
+      }
+    }
 
     &--graphics {
       position: sticky;
@@ -52,8 +83,7 @@
       // top: calc(var(--nav-height) + var(--sticky-buffer));
       --graphics-top: calc(var(--nav-height) + var(--sticky-buffer));
       top: calc(var(--graphics-top) + ((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
-      transition: var(--pitch-progress-transition);
-
+            transition: var(--pitch-progress-transition);
     }
 
     &--laptop {
@@ -70,7 +100,6 @@
       background-color: #eaf0f8;
       left: calc((var(--pitch-overflow-buffer-y-percent) / 2));
       top: calc(var(--section-gap_half) + (var(--pitch-overflow-buffer-x-percent) / 2));
-
     }
 
     &--mockup {
@@ -96,12 +125,16 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
+      // width: 100%;
       transition-duration: var(--pitch-transition);
 
       --mockup-margin-top: calc(var(--pitch-row-index) * var(--pitch-row-height));
 
       margin-top: calc(var(--mockup-margin-top) - (var(--pitch-current-row) * var(--pitch-row-height)));
+      width: 90%;
+      @include xxl-down {
+        width: 100%;
+      }
     }
 
     &--captions {
@@ -117,6 +150,5 @@
     &--empties {
       margin-top: calc((var(--pitch-row-height) + var(--section-gap_half)) * -1);
     }
-
   }
 }

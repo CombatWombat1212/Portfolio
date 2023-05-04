@@ -5,7 +5,9 @@ import MAKERIGHT_IMGS from "@/data/MAKERIGHT_IMGS";
 import Section from "./Sections";
 import React, { useRef, useState } from "react";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
-import { clamp, RESIZE_TIMEOUT, splitPx } from "@/scripts/GlobalUtilities";
+import { clamp, RESIZE_TIMEOUT, splitPx, splitRem } from "@/scripts/GlobalUtilities";
+import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
+import usePropModifier from "@/scripts/hooks/usePropModifier";
 const laptop_frame = MAKERIGHT_IMGS.pitch_laptop_frame;
 
 // TODO: i think you should do the same animation on the description side to make it have smooth scrolling transitions too? Or maybe something to lock it in place better next to the screen? might not be priority though
@@ -57,6 +59,8 @@ function pitchSetRowProgress(pitch) {
 }
 
 function pitchGetRowProgress(pitch) {
+  const additionalHeight = splitRem(getComputedStyle(pitch.elem).getPropertyValue('--pitch-additional-height'));
+
   const captions = pitch.elem.querySelector(".pitch--captions");
   const captionsRect = captions.getBoundingClientRect();
   const captionsCenterY = (captionsRect.top + captionsRect.bottom) / 2;
@@ -64,7 +68,7 @@ function pitchGetRowProgress(pitch) {
   const currentRowRect = currentRow.getBoundingClientRect();
   const currentRowCenterY = (currentRowRect.top + currentRowRect.bottom) / 2;
 
-  const distance = (captionsCenterY - currentRowCenterY) / (pitch.frame.height / 2);
+  const distance = (captionsCenterY - currentRowCenterY) / ((pitch.frame.height / 2) + additionalHeight);
 
   if (distance > 1) {
     pitch.rows.progress = 1;
@@ -97,14 +101,21 @@ function pitchGetCurrentRow(pitch) {
     }
     pitch.rows.current = maxIndex;
   }
+
+  // Check if the viewport is underneath the whole element and set the current row to the last row
+  const lastRowRect = elems[elems.length - 1].getBoundingClientRect();
+  if (lastRowRect.bottom < 0) {
+    pitch.rows.current = elems.length - 1;
+  }
 }
 
 function pitchGetInView(pitch) {
   var elem = pitch.elem;
   var rect = elem.getBoundingClientRect();
   var inView = rect.top < window.innerHeight && rect.bottom > 0;
-  if (inView) pitch.inView = true;
-  else pitch.inView = false;
+  pitch.inView = inView;
+  // if (inView) pitch.inView = true;
+  // else pitch.inView = false;
 }
 
 function pitchSetRowSize(pitch) {
@@ -133,8 +144,10 @@ function pitchGetRowSize(pitch) {
 
   // get width and height of the screens
   var screens = pitch.screens.elem;
+
   var screensHeight = splitPx(window.getComputedStyle(screens).height);
   var screensWidth = splitPx(window.getComputedStyle(screens).width);
+
   pitch.screens.height = screensHeight;
   pitch.screens.width = screensWidth;
 }
@@ -163,11 +176,13 @@ function Laptop({ rows }) {
 
         <div className="pitch--screens">
           {rows.map((row, i) => {
-            var { description, title, heading, graphic, other, vector, mockup } = formatRow(row);
+            var { mockup } = formatRow(row);
             var mockupProps = mockup.props;
             var graphicClassName = mockupProps.className ? mockupProps.className : "";
 
-            return <Graphic key={i} {...mockupProps} className={`pitch--row pitch--image pitch--mockup`} style={{ "--pitch-row-index": i }} />;
+            return (
+              <Graphic key={i} {...mockupProps} className={`pitch--row pitch--image pitch--mockup`} style={{ "--pitch-row-index": i }} lazy={false} />
+            );
           })}
         </div>
       </div>
@@ -194,17 +209,14 @@ function Pitch({ children }) {
     //   indicators.push(indicatorObj);
     // }
     // I fixed it like this in indicator
-
-
   });
-
   return (
     <>
       <div className="pitch" ref={pitch}>
-        <div className="pitch--column col-8">
+        <div className="pitch--column pitch--graphics-wrapper">
           <Laptop rows={rows} />
         </div>
-        <div className="pitch--column col-3">
+        <div className="pitch--column pitch--captions-wrapper">
           <div className="pitch--captions">
             {rows.map((row, i) => {
               var { description, title, heading, graphic, other, vector, mockup } = formatRow(row);
@@ -221,7 +233,6 @@ function Pitch({ children }) {
           </div>
           <div className="pitch--empties">
             {rows.map((row, i) => {
-              var { description, title, heading, graphic, other, vector, mockup } = formatRow(row);
               return <div key={i} className="pitch--row pitch--placeholder"></div>;
             })}
           </div>
@@ -251,10 +262,10 @@ function formatRow(row) {
 }
 
 var scrolls = 0;
-function pitchScroll(e,force) {
+function pitchScroll(e, force) {
   scrolls++;
   force = force ? force : false;
-  if (scrolls < 5) force = true;
+  if (scrolls < 20) force = true;
 
   // detect if pitch.elem is in view and console log it
   pitches.forEach((pitch) => {

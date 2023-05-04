@@ -5108,11 +5108,18 @@ h3 + .studypanel--paragraph {
   --pitch-overflow-buffer-y-percent: 20%;
   --pitch-overflow-buffer-x: 5%;
   --pitch-overflow-buffer-y: 20%;
-  --pitch-transition: 0.75s;
+  --pitch-transition: 0.85s;
   --pitch-progress-transition: 0.25s;
-  --pitch-progress-distance: 2rem;
+  --pitch-progress-distance: 2.5rem;
   padding-top: var(--section-gap_half);
   padding-bottom: var(--section-gap_half);
+  --pitch-additional-height: 20rem;
+}
+
+@media screen and (max-width: 91.9375em) {
+  .pitch {
+    --gap: 4rem;
+  }
 }
 
 .pitch .pitch--row {
@@ -5122,6 +5129,10 @@ h3 + .studypanel--paragraph {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.pitch .pitch--placeholder {
+  height: calc(var(--pitch-row-height) + var(--pitch-additional-height)) !important;
 }
 
 .pitch .pitch--heading {
@@ -5146,6 +5157,38 @@ h3 + .studypanel--paragraph {
 
 .pitch .pitch--description * > * {
   font-weight: 400 !important;
+}
+
+.pitch .pitch--graphics-wrapper {
+  width: calc(66.66667% - (var(--gap) / 2));
+}
+
+@media screen and (max-width: 91.9375em) {
+  .pitch .pitch--graphics-wrapper {
+    width: calc(70.83333% - (var(--gap) / 2));
+  }
+}
+
+@media screen and (max-width: 79.9375em) {
+  .pitch .pitch--graphics-wrapper {
+    width: calc(62.5% - (var(--gap) / 2));
+  }
+}
+
+.pitch .pitch--captions-wrapper {
+  width: calc(33.33333% - (var(--gap) / 2));
+}
+
+@media screen and (max-width: 91.9375em) {
+  .pitch .pitch--captions-wrapper {
+    width: calc(29.16667% - (var(--gap) / 2));
+  }
+}
+
+@media screen and (max-width: 79.9375em) {
+  .pitch .pitch--captions-wrapper {
+    width: calc(37.5% - (var(--gap) / 2));
+  }
 }
 
 .pitch .pitch--graphics {
@@ -5191,10 +5234,16 @@ h3 + .studypanel--paragraph {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
   transition-duration: var(--pitch-transition);
   --mockup-margin-top: calc(var(--pitch-row-index) * var(--pitch-row-height));
   margin-top: calc(var(--mockup-margin-top) - (var(--pitch-current-row) * var(--pitch-row-height)));
+  width: 90%;
+}
+
+@media screen and (max-width: 91.9375em) {
+  .pitch .pitch--body {
+    width: 100%;
+  }
 }
 
 .pitch .pitch--captions {
@@ -8424,10 +8473,6 @@ h3 + .studypanel--paragraph {
     margin-right: auto;
     margin-left: auto;
   }
-}
-
-.section--wrapper {
-  overflow: hidden;
 }
 
 #Makeright {

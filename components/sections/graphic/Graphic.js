@@ -128,6 +128,7 @@ function Graphic(props) {
     innerStyle,
     reference,
     playbackRate,
+    lazy = true,
     ...restProps
   } = props;
 
@@ -164,6 +165,12 @@ function Graphic(props) {
   gallery = gallery ? gallery : false;
   effect = effect ? effect : false;
   playbackRate = playbackRate ? playbackRate : 1;
+
+
+  const loading = lazy ? "lazy" : "eager";
+
+
+
 
   const handleImageLoad = () => {
     setImageLoaded(true);
@@ -278,6 +285,7 @@ function Graphic(props) {
     style: innerStyle,
     onLoadingComplete: onLoad,
     ...(isVideo && INNER_COMMON_VIDEO_PROPS),
+    ...((isImg && lazy == false ) && { loading: loading }),
     reference: graphicref,
   };
 
@@ -287,6 +295,7 @@ function Graphic(props) {
       {includeChildren && children}
     </Wrapper>
   );
+
 
   return (
     <>

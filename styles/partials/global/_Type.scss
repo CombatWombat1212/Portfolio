@@ -209,6 +209,12 @@ $font-body: "Tenon";
   color: $col-secondary;
   @include weight-reg;
 }
+@mixin h5 {
+  font-family: $font-body;
+  font-size: var(--font-size-body);
+  line-height: var(--font-leading-body);
+  @include weight-bold;
+}
 
 @mixin h4-margin {
   margin-bottom: var(--font-margin-bottom-h4);
