@@ -1,7 +1,3 @@
-.section--wrapper {
-  overflow: hidden;
-}
-
 @mixin split-hover {
   &:hover,
   &:focus,
@@ -595,15 +591,25 @@
     &--Images-1,
     &--Images-2,
     &--Images-3 {
+      padding-bottom: 13%;
+
       .image-row {
         --image-row-scale: 1.35;
         --image-row-offset: 0.5;
+        @include lg-down{
+          
+          --image-row-scale: 1.3;
+        }
       }
 
-      & {
-        padding-bottom: 13%;
+    }
+
+    &--Images-3 {
+      @include lg-down{
+        padding-bottom: calc(var(--section-gap) * 1.15);
       }
     }
+
 
     &--Closing {
       @include closing-banner-section_small;
