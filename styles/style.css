@@ -3044,50 +3044,6 @@ h3 + .studypanel--paragraph {
   --border-opactiy: 0.6 !important;
 }
 
-@media screen and (min-width: 92em) {
-  .section .graphic--video.background__background:focus, .section .graphic--video.background__background:hover {
-    background-color: #074391;
-    position: relative;
-  }
-  .section .graphic--video.background__background:focus:not(.border)::before, .section .graphic--video.background__background:hover:not(.border)::before {
-    transition: 0.2s;
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 3;
-    box-shadow: inset 0 0 0 0.375rem rgba(64, 64, 100, 0.35);
-  }
-  .section .graphic--video.background__background:focus.border, .section .graphic--video.background__background:hover.border {
-    --border-opactiy: 0.6 !important;
-  }
-}
-
-@media screen and (max-width: 91.9375em) and (min-width: 62em) {
-  .section .graphic--video.background__background:focus, .section .graphic--video.background__background:hover {
-    background-color: #074391;
-    position: relative;
-  }
-  .section .graphic--video.background__background:focus:not(.border)::before, .section .graphic--video.background__background:hover:not(.border)::before {
-    transition: 0.2s;
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 3;
-    box-shadow: inset 0 0 0 0.375rem rgba(64, 64, 100, 0.35);
-  }
-  .section .graphic--video.background__background:focus.border, .section .graphic--video.background__background:hover.border {
-    --border-opactiy: 0.6 !important;
-  }
-}
-
 .section .graphic--video.background__background[data-playing="false"] {
   background-color: #F3F3F7 !important;
   position: relative;
@@ -3126,50 +3082,6 @@ h3 + .studypanel--paragraph {
 
 .section .graphic--video.background__background-darker[data-playing="true"].border {
   --border-opactiy: 0.6 !important;
-}
-
-@media screen and (min-width: 92em) {
-  .section .graphic--video.background__background-darker:focus, .section .graphic--video.background__background-darker:hover {
-    background-color: #E0E0EA;
-    position: relative;
-  }
-  .section .graphic--video.background__background-darker:focus:not(.border)::before, .section .graphic--video.background__background-darker:hover:not(.border)::before {
-    transition: 0.2s;
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 3;
-    box-shadow: inset 0 0 0 0.375rem rgba(64, 64, 100, 0.35);
-  }
-  .section .graphic--video.background__background-darker:focus.border, .section .graphic--video.background__background-darker:hover.border {
-    --border-opactiy: 0.6 !important;
-  }
-}
-
-@media screen and (max-width: 91.9375em) and (min-width: 62em) {
-  .section .graphic--video.background__background-darker:focus, .section .graphic--video.background__background-darker:hover {
-    background-color: #E0E0EA;
-    position: relative;
-  }
-  .section .graphic--video.background__background-darker:focus:not(.border)::before, .section .graphic--video.background__background-darker:hover:not(.border)::before {
-    transition: 0.2s;
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 3;
-    box-shadow: inset 0 0 0 0.375rem rgba(64, 64, 100, 0.35);
-  }
-  .section .graphic--video.background__background-darker:focus.border, .section .graphic--video.background__background-darker:hover.border {
-    --border-opactiy: 0.6 !important;
-  }
 }
 
 .section .graphic--video.background__background-darker[data-playing="false"] {
@@ -3212,50 +3124,6 @@ h3 + .studypanel--paragraph {
   --border-opactiy: 0.6 !important;
 }
 
-@media screen and (min-width: 92em) {
-  .section .graphic--video.background__background-darkest:focus, .section .graphic--video.background__background-darkest:hover {
-    background-color: #d2d2e0;
-    position: relative;
-  }
-  .section .graphic--video.background__background-darkest:focus:not(.border)::before, .section .graphic--video.background__background-darkest:hover:not(.border)::before {
-    transition: 0.2s;
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 3;
-    box-shadow: inset 0 0 0 0.375rem rgba(64, 64, 100, 0.35);
-  }
-  .section .graphic--video.background__background-darkest:focus.border, .section .graphic--video.background__background-darkest:hover.border {
-    --border-opactiy: 0.6 !important;
-  }
-}
-
-@media screen and (max-width: 91.9375em) and (min-width: 62em) {
-  .section .graphic--video.background__background-darkest:focus, .section .graphic--video.background__background-darkest:hover {
-    background-color: #d2d2e0;
-    position: relative;
-  }
-  .section .graphic--video.background__background-darkest:focus:not(.border)::before, .section .graphic--video.background__background-darkest:hover:not(.border)::before {
-    transition: 0.2s;
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 3;
-    box-shadow: inset 0 0 0 0.375rem rgba(64, 64, 100, 0.35);
-  }
-  .section .graphic--video.background__background-darkest:focus.border, .section .graphic--video.background__background-darkest:hover.border {
-    --border-opactiy: 0.6 !important;
-  }
-}
-
 .section .graphic--video.background__background-darkest[data-playing="false"] {
   background-color: #E0E0EA !important;
   position: relative;
@@ -3287,10 +3155,18 @@ h3 + .studypanel--paragraph {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: calc(100% - (var(--section-graphic-panel-pad) * 2));
-  height: calc(100% - (var(--section-graphic-panel-pad) * 2));
   z-index: 0;
   transform: translate(-50%, -50%) scale(var(--graphic-scale));
+}
+
+.section--graphic.graphic--panel .video--background {
+  width: calc(100% - (var(--section-graphic-panel-pad) * 2));
+  height: calc(100% - (var(--section-graphic-panel-pad) * 2));
+}
+
+.section--graphic:not(.graphic--panel) .video--background {
+  width: 100%;
+  height: 100%;
 }
 
 .section .graphic--video .video__hidden {
@@ -6085,6 +5961,11 @@ h3 + .studypanel--paragraph {
   left: calc((var(--image-row-index) * var(--col-width)) + var(--image-row-left));
 }
 
+.pro-con {
+  --icon-width: 1.75rem;
+  --dash-width: 1rem;
+}
+
 .pro-con--item {
   display: flex;
   flex-direction: row;
@@ -6101,7 +5982,7 @@ h3 + .studypanel--paragraph {
   justify-content: center;
   align-items: center;
   --graphic-scale: 0.975;
-  width: 1.75rem;
+  width: var(--icon-width);
 }
 
 .pro-con--dash {
@@ -9432,7 +9313,7 @@ h3 + .studypanel--paragraph {
   filter: brightness(1);
 }
 
-#Made #Rendering--Roadblocks-Graphics .section--graphic:not(.pro-con--icon):hover, #Made #Rendering--Roadblocks-Graphics .section--graphic:not(.pro-con--icon):focus, #Made #Rendering--Roadblocks-Graphics .section--graphic:not(.pro-con--icon).hover, #Made #Rendering--Roadblocks-Graphics .section--graphic:not(.pro-con--icon)[data-playing="true"] {
+#Made #Rendering--Roadblocks-Graphics .section--graphic:not(.pro-con--icon)[data-playing="true"] {
   filter: brightness(1.075);
 }
 
@@ -9445,7 +9326,7 @@ h3 + .studypanel--paragraph {
   filter: brightness(1);
 }
 
-#Made #Rendering--Python-Graphic .section--graphic:not(.pro-con--icon):hover, #Made #Rendering--Python-Graphic .section--graphic:not(.pro-con--icon):focus, #Made #Rendering--Python-Graphic .section--graphic:not(.pro-con--icon).hover, #Made #Rendering--Python-Graphic .section--graphic:not(.pro-con--icon)[data-playing="true"] {
+#Made #Rendering--Python-Graphic .section--graphic:not(.pro-con--icon)[data-playing="true"] {
   filter: brightness(1.075);
 }
 
@@ -9458,7 +9339,7 @@ h3 + .studypanel--paragraph {
   filter: brightness(1);
 }
 
-#Made #Rendering--Scalable .section--graphic:not(.pro-con--icon):hover, #Made #Rendering--Scalable .section--graphic:not(.pro-con--icon):focus, #Made #Rendering--Scalable .section--graphic:not(.pro-con--icon).hover, #Made #Rendering--Scalable .section--graphic:not(.pro-con--icon)[data-playing="true"] {
+#Made #Rendering--Scalable .section--graphic:not(.pro-con--icon)[data-playing="true"] {
   filter: brightness(1.025);
 }
 

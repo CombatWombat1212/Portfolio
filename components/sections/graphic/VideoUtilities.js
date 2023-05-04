@@ -3,6 +3,8 @@ import createEventListenerTracker from "@/scripts/EventListenerTracker";
 const { addEventListenerWithTracking, removeAllEventListeners, removeEventListenerWithTracking } = createEventListenerTracker();
 
 const CLICKED_VIDEOS_LOOP = false;
+// TODO: make this permanent
+const VIDEOS_FORCE_PLAY_ONCE = true;
 
 function graphicVideoInit(ref) {
   var graphic = new VideoGraphic(ref.current);
@@ -57,6 +59,7 @@ function graphicVideoPause(graphic) {
   graphic.set.dataPlaying(false);
   if (!graphic.getVideo().paused) {
     graphic.getVideo().pause();
+    graphic.is.autoPlaying = false;
   }
 }
 
@@ -74,6 +77,8 @@ function graphicPlayOnHoverInit(graphic) {
       addEventListenerWithTracking(g.elem, "touchstart", play);
       addEventListenerWithTracking(g.elem, "touchend", pause);
       addEventListenerWithTracking(g.elem, "click", handleClick);
+
+      if (VIDEOS_FORCE_PLAY_ONCE) g.set.playedOnce(false);
     });
   }
 
@@ -83,11 +88,14 @@ function graphicPlayOnHoverInit(graphic) {
       removeEventListenerWithTracking(g.getVideo(), "timeupdate", loop);
       if (g.hideTimeout) clearTimeout(g.hideTimeout);
       if (g.showTimeout) clearTimeout(g.showTimeout);
+
+      if (VIDEOS_FORCE_PLAY_ONCE) g.set.playedOnce(true);
     });
   }
 
   function checkIfHoverAutoplay(graph) {
     if (!graph) return false;
+    if (VIDEOS_FORCE_PLAY_ONCE && !graph.get.playedOnce()) return true;
     graph.get.hoverAutoPlay();
     if (!graph.is.hoverAutoPlay) {
       uninit(graph);
@@ -114,6 +122,7 @@ function graphicPlayOnHoverInit(graphic) {
 
   function play(e) {
     var { target, graph } = getTarget(e);
+    if(graph.group.some((g) => g.get.clicked())) return;
     graph.is.hovered = true;
     if (checkIfHoverAutoplay(graph)) return;
     addEventListenerWithTracking(graph.getVideo(), "timeupdate", loop);
@@ -130,20 +139,33 @@ function graphicPlayOnHoverInit(graphic) {
     var { target, graph } = getTarget(e);
     graph.is.hovered = false;
     if (checkIfHoverAutoplay(graph)) return;
-
-    if (graph.is.clicked) {
+    if (graph.get.clicked()) {
       removeAllEventListeners(graph.getVideo());
       addEventListenerWithTracking(graph.getVideo(), "ended", handleClickedVideoEnd);
     } else {
       graphicVideoReset(graph);
       removeAllEventListeners(graph.getVideo());
+      graph.is.autoPlaying = false;
     }
   }
 
   function handleClick(e) {
     var { target, graph } = getTarget(e);
+    if (VIDEOS_FORCE_PLAY_ONCE) {
+      graph.group.forEach((g) => g.set.playedOnce(true));
+      play(e);
+    }
     if (checkIfHoverAutoplay(graph)) return;
-    graph.is.clicked = true;
+    graph.set.clicked(true);
+    graphicVideoPlay(graph);
+    graph.group.forEach((g) => {
+      if(g.elem !== target) {
+        g.set.clicked(false);
+        graphicVideoReset(g);
+        removeEventListenerWithTracking(g.getVideo(), "ended", handleClickedVideoEnd);
+      }
+      g.is.autoPlaying = false;
+    });
   }
 
   function handleClickedVideoEnd(e) {
@@ -152,7 +174,7 @@ function graphicPlayOnHoverInit(graphic) {
     if (CLICKED_VIDEOS_LOOP) {
       graphicVideoPlay(graph);
     } else {
-      graph.is.clicked = false;
+      graph.set.clicked(false);
       removeEventListenerWithTracking(graph.getVideo(), "ended", handleClickedVideoEnd);
 
       if (!graphic.is.hovered) {
@@ -160,30 +182,16 @@ function graphicPlayOnHoverInit(graphic) {
       }
     }
   }
+
 }
 
-// function graphicVideoReset(graphic) {
-//   graphic.getVideo().style.setProperty("transition-duration", `${graphic.transition}ms`);
 
-//   graphic.set.dataPlaying(false);
-
-//   graphic.getVideo().classList.add("video__hidden");
-
-//   setTimeout(() => {
-//     graphicVideoPause(graphic);
-//     graphic.getVideo().currentTime = 0;
-//     setTimeout(() => {
-//       graphic.getVideo().classList.remove("video__hidden");
-//     }, 100);
-//   }, graphic.transition);
-
-// }
 
 function graphicVideoReset(graphic) {
   graphic.getVideo().style.setProperty("transition-duration", `${graphic.transition}ms`);
 
   graphic.set.dataPlaying(false);
-  graphic.is.clicked = false;
+  // graphic.set.clicked(false);
 
   graphic.getVideo().classList.add("video__hidden");
 
@@ -195,15 +203,23 @@ function graphicVideoReset(graphic) {
   graphic.hideTimeout = hideTimeout;
 }
 
+
+
+
 function graphicResetHandleHideTimeout(graphic) {
-  if (!graphic.is.hovered) {
+
+  console.log(graphic.shouldBePlaying());
+
+  if (!graphic.shouldBePlaying()) {
     graphicVideoPause(graphic);
     graphic.getVideo().currentTime = 0;
+    graphic.is.autoPlaying = false;
 
     const showTimeout = setTimeout(() => {
       graphicResetHandleShowTimeout(graphic);
     }, 100);
     graphic.showTimeout = showTimeout;
+
   } else {
     if (graphic.showTimeout) clearTimeout(graphic.showTimeout);
     if (graphic.getVideo()) {
@@ -224,12 +240,19 @@ function groupIntersectHandle({ entries, graphic: graphicObj, g: graphicInstance
     var inView = [];
     let videoIndex = 0;
 
-    if (entry.isIntersecting) {
-      updated(true || graphicInstance.is.hovered);
-    } else {
-      updated(false || graphicInstance.is.hovered);
-    }
+    const hov = graphicInstance.is.hoverAutoPlay && graphicInstance.is.hovered;
 
+
+    if (entry.isIntersecting) {
+      updated(true || hov);
+    } else {
+      updated(false || hov);
+      graphicVideoReset(graphicInstance);
+    }
+    updatedPlayedOnce();
+
+
+    
     function updated(bool) {
       graphicInstance.is.inView = bool;
       if (graphicObj.elem == graphicInstance.elem) graphicObj.is.inView = bool;
@@ -246,6 +269,16 @@ function groupIntersectHandle({ entries, graphic: graphicObj, g: graphicInstance
         inView
       );
     }
+
+    function updatedPlayedOnce(bool){
+      if (!VIDEOS_FORCE_PLAY_ONCE) return;
+      // graphicInstance.set.playedOnce(!bool);
+      graphicInstance.set.playedOnce(false);
+      graphicInstance.set.clicked(false);
+    }
+
+
+
   });
 }
 
@@ -287,6 +320,14 @@ function groupPlayNextInView(graphicObj, videoIndex, inView) {
     if (graphic.is.staggered) {
       graphic.getVideo().removeEventListener("ended", staggeredEndHandler);
 
+      if (VIDEOS_FORCE_PLAY_ONCE) {
+        if (videoIndex == inView.length - 1 && inView.some((g) => !g.get.playedOnce())) {
+          inView.forEach((g) => {
+            g.set.playedOnce(true);
+          });
+        }
+      }
+
       if (graphic.is.hovered) {
         videoIndex = videoIndex;
       } else if (graphic.is.loopingGroup && videoIndex == inView.length - 1) {
@@ -294,13 +335,16 @@ function groupPlayNextInView(graphicObj, videoIndex, inView) {
       } else {
         videoIndex++;
       }
+
+      if(graphic.get.clicked()) return;
       groupPlayNextInView(graphicObj, videoIndex, inView);
     }
   }
 
   function nonStaggeredEndHandler(g) {
+    g.set.playedOnce(true);
     g.get.hoverAutoPlay();
-    if ((graphicObj.is.loopingGroup) || (g.is.hoverAutoPlay && g.is.hovered)) {
+    if (graphicObj.is.loopingGroup || (g.is.hoverAutoPlay && g.is.hovered)) {
       graphicVideoPlay(g);
     } else {
       graphicVideoPause(g);
@@ -332,10 +376,12 @@ function groupPlayNextInView(graphicObj, videoIndex, inView) {
 
     if (!isAnotherGraphicPlaying) {
       graphicVideoPlay(graphic);
+      graphic.is.autoPlaying = true;
       graphic.getVideo().removeEventListener("ended", staggeredEndHandler);
       graphic.getVideo().addEventListener("ended", staggeredEndHandler);
     }
   } else {
+    graphic.is.autoPlaying = true;
     graphic.getVideo().removeEventListener("ended", staggeredEndHandler);
     const timeout = graphic.is.sync ? 200 : 0;
     setTimeout(nonStaggeredPlay, timeout);

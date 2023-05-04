@@ -11,7 +11,7 @@ function Item({ children, type }) {
   return (
     <div className={`pro-con--item pro-con--${type}`}>
       <Graphic className="pro-con--icon" type="mask" img={icon} />
-      <span className="pro-con--copy"><span className="pro-con--dash">-</span>{children}</span>
+      <span className="pro-con--dash">-</span><span className="pro-con--copy">{children}</span>
     </div>
   );
 }

@@ -616,8 +616,7 @@ function MADE() {
                 </p>
 
                 <p>
-                  This required me to build my 3D project file in such a way that it could
-                  <b>produce the hundreds of images in one continuous session</b>, so as to not waste time starting and stopping render jobs.
+                  This required me to build my 3D project file in such a way that it could <b>produce the hundreds of images in one continuous session</b>, so as to not waste time starting and stopping render jobs.
                 </p>
 
                 <p>
@@ -657,8 +656,7 @@ function MADE() {
             <Column caption="split">
               <Heading className="graphic--caption graphic--caption__above weight-reg" type="h3">
                 Stationary camera, with one object
-                <br />
-                that changes materials
+                <br className="d-lg-none" /> that changes materials
               </Heading>
               <Graphic
                 type="video"
@@ -672,7 +670,7 @@ function MADE() {
               <Description className="graphic--caption">
                 <ProsCons>
                   <Pro>Tiny file size</Pro>
-                  <Pro>Future-proof, scalable, easy to manipulated</Pro>
+                  <Pro>Future-proof, scalable, easy to manipulate</Pro>
                   <Con>More involved set-up process</Con>
                 </ProsCons>
               </Description>

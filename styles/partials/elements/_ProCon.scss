@@ -5,6 +5,9 @@
 .pro-con{
 
 
+    --icon-width: 1.75rem;
+    --dash-width: 1rem;
+
     &--item{
         @include flex-row;
         align-items: center;
@@ -19,7 +22,7 @@
         @include flex-row-center;
         align-items: center;
         --graphic-scale: 0.975;
-        width: 1.75rem;
+        width: var(--icon-width);
     }
 
     &--dash{

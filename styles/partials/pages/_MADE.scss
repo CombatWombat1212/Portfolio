@@ -16,9 +16,9 @@
     &--graphic:not(.pro-con--icon) {
       height: unset;
       filter: brightness(1);
-      &:hover,
-      &:focus,
-      &.hover,
+      // &:hover,
+      // &:focus,
+      // &.hover,
       &[data-playing="true"] {
         filter: brightness(#{$b});
       }
