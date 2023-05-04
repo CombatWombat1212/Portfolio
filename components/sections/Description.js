@@ -1,5 +1,6 @@
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import { getBackgroundClasses } from "./sections_utilities/GetClasses";
+import { getMirrorStyleProp } from "@/scripts/useMirrorStyle";
 function getDescriptionClasses(type) {
   var descriptionClasses = "";
   if (type == "h1") descriptionClasses += " text--h1";
@@ -8,7 +9,6 @@ function getDescriptionClasses(type) {
   if (type == "h4") descriptionClasses += " text--h4";
   return descriptionClasses;
 }
-
 
 function updateTextCol(className, desktop) {
   const hasTextCol = (() => {
@@ -30,22 +30,24 @@ function updateTextCol(className, desktop) {
   return className;
 }
 
-
-function Description({ className, children, type, background, below }) {
+function Description({ className, children, type, background, below, ...props }) {
   below = below ? true : false;
 
   var descriptionClasses = getDescriptionClasses(type);
   var backgroundClasses = getBackgroundClasses("section--description", background);
-
 
   const { desktop } = useResponsive();
 
   className = className || "";
   className = updateTextCol(className, desktop);
 
-
-
-  return <div className={`section--description ${className} ${descriptionClasses} ${backgroundClasses ? backgroundClasses : ""}`}>{children}</div>;
+  return (
+    <div
+      className={`section--description ${className} ${descriptionClasses} ${backgroundClasses ? backgroundClasses : ""}`}
+      {...getMirrorStyleProp(props)}>
+      {children}
+    </div>
+  );
 }
 
 export default Description;

@@ -122,7 +122,7 @@ function graphicPlayOnHoverInit(graphic) {
 
   function play(e) {
     var { target, graph } = getTarget(e);
-    if(graph.group.some((g) => g.get.clicked())) return;
+    if (graph.group.some((g) => g.get.clicked())) return;
     graph.is.hovered = true;
     if (checkIfHoverAutoplay(graph)) return;
     addEventListenerWithTracking(graph.getVideo(), "timeupdate", loop);
@@ -159,7 +159,7 @@ function graphicPlayOnHoverInit(graphic) {
     graph.set.clicked(true);
     graphicVideoPlay(graph);
     graph.group.forEach((g) => {
-      if(g.elem !== target) {
+      if (g.elem !== target) {
         g.set.clicked(false);
         graphicVideoReset(g);
         removeEventListenerWithTracking(g.getVideo(), "ended", handleClickedVideoEnd);
@@ -182,10 +182,7 @@ function graphicPlayOnHoverInit(graphic) {
       }
     }
   }
-
 }
-
-
 
 function graphicVideoReset(graphic) {
   graphic.getVideo().style.setProperty("transition-duration", `${graphic.transition}ms`);
@@ -203,13 +200,7 @@ function graphicVideoReset(graphic) {
   graphic.hideTimeout = hideTimeout;
 }
 
-
-
-
 function graphicResetHandleHideTimeout(graphic) {
-
-  console.log(graphic.shouldBePlaying());
-
   if (!graphic.shouldBePlaying()) {
     graphicVideoPause(graphic);
     graphic.getVideo().currentTime = 0;
@@ -219,7 +210,6 @@ function graphicResetHandleHideTimeout(graphic) {
       graphicResetHandleShowTimeout(graphic);
     }, 100);
     graphic.showTimeout = showTimeout;
-
   } else {
     if (graphic.showTimeout) clearTimeout(graphic.showTimeout);
     if (graphic.getVideo()) {
@@ -242,7 +232,6 @@ function groupIntersectHandle({ entries, graphic: graphicObj, g: graphicInstance
 
     const hov = graphicInstance.is.hoverAutoPlay && graphicInstance.is.hovered;
 
-
     if (entry.isIntersecting) {
       updated(true || hov);
     } else {
@@ -251,8 +240,6 @@ function groupIntersectHandle({ entries, graphic: graphicObj, g: graphicInstance
     }
     updatedPlayedOnce();
 
-
-    
     function updated(bool) {
       graphicInstance.is.inView = bool;
       if (graphicObj.elem == graphicInstance.elem) graphicObj.is.inView = bool;
@@ -270,15 +257,12 @@ function groupIntersectHandle({ entries, graphic: graphicObj, g: graphicInstance
       );
     }
 
-    function updatedPlayedOnce(bool){
+    function updatedPlayedOnce(bool) {
       if (!VIDEOS_FORCE_PLAY_ONCE) return;
       // graphicInstance.set.playedOnce(!bool);
       graphicInstance.set.playedOnce(false);
       graphicInstance.set.clicked(false);
     }
-
-
-
   });
 }
 
@@ -336,7 +320,7 @@ function groupPlayNextInView(graphicObj, videoIndex, inView) {
         videoIndex++;
       }
 
-      if(graphic.get.clicked()) return;
+      if (graphic.get.clicked()) return;
       groupPlayNextInView(graphicObj, videoIndex, inView);
     }
   }

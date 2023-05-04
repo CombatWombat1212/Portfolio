@@ -566,21 +566,31 @@ function MADE() {
             <Heading>Creating isolated, physically accurate shadows</Heading>
 
             <Column caption="above">
-              <Description className="graphic--caption weight-reg">
+              <Description className="graphic--caption weight-reg"
+                            mirrorstyle={smAndDown && "post_processing match height"}
+
+              >
                 <h3>Target component</h3>
               </Description>
               <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_1_target} />
             </Column>
             <Column caption="above">
-              <Description className="graphic--caption weight-reg">
+
+              <Description className="graphic--caption weight-reg"
+              mirrorstyle={smAndDown && "post_processing match height"}
+              >
                 <h3>Hidden from render</h3>
               </Description>
+
               <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_2_hidden} />
             </Column>
             <Column caption="above">
-              <Description className="graphic--caption weight-reg">
+
+              <Description className="graphic--caption weight-reg"
+              >
                 <h3> Isolated shadow</h3>
               </Description>
+
               <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_3_isolated} />
             </Column>
             <Column caption="above">
@@ -609,7 +619,7 @@ function MADE() {
               <Heading>Working around my hardware limitations</Heading>
             </Column>
             <Column>
-              <Description className={"mt-less"}>
+              <Description className={!mdAndDown && "mt-less"}>
                 <p>
                   With my <b>incredibly underpowered PC</b>, I was unable to complete the rendering for the entire project in a reasonable amount of
                   time. To solve this, I used an online render farm service.
@@ -632,8 +642,7 @@ function MADE() {
           <Section id="Rendering--Roadblocks-Graphics" type="columns" background="background darker">
             <Column caption="split">
               <Heading className="graphic--caption graphic--caption__above weight-reg" type="h3">
-                Move the virtual camera
-                <br /> across multiple objects
+                Move the virtual camera <br className="d-md-none" /> across multiple objects
               </Heading>
               <Graphic
                 type="video"
@@ -655,8 +664,7 @@ function MADE() {
 
             <Column caption="split">
               <Heading className="graphic--caption graphic--caption__above weight-reg" type="h3">
-                Stationary camera, with one object
-                <br className="d-lg-none" /> that changes materials
+                Stationary camera, with one object <br className="d-lg-none" /> that changes materials
               </Heading>
               <Graphic
                 type="video"
@@ -683,7 +691,7 @@ function MADE() {
               <Heading>Using Python to create a dynamic texture that could change fabrics every frame</Heading>
             </Column>
             <Column>
-              <Description className={"mt-less"}>
+              <Description className={!mdAndDown && "mt-less"}>
                 <p>
                   Pursuing the latter solution, I wrote a python script which created a single 3D material containing all 41 fabrics, and had the
                   ability to easily switch between them.
@@ -696,7 +704,7 @@ function MADE() {
             </Column>
           </Section>
 
-          <Section id="Rendering--Python-Graphic" type="columns" titled="above" background="background darker" wrapperClassName="mb-less">
+          <Section id="Rendering--Python-Graphic" type="columns" titled="above" background="background darker">
             <Column>
               <Graphic
                 type="video"
@@ -718,12 +726,12 @@ function MADE() {
                 background="background darkest"
                 autoplay="scroll hover"
                 muted
+                playbackRate={4}
               />
             </Column>
             <Column>
               <Heading>
-                Benefits of a <br />
-                scalable approach
+                Benefits of a <br className="d-lg-none" /> scalable approach
               </Heading>
               <Description>
                 <p>I’ve been able to tweak and reuse this same script numerous times since developing it for this project.</p>
@@ -737,12 +745,7 @@ function MADE() {
 
           <Section id="Rendering--Closing">
             <Heading>
-              With rendering now complete, the final images
-              <br />
-              were delivered, and placed into the webstore’s
-              <br />
-              new dress-shirt customization tool.
-            </Heading>
+              With rendering now complete, the final images <br className="d-lg-none" /> were delivered, and placed into the webstore’s <br className="d-lg-none" /> new dress-shirt customization tool. </Heading>
           </Section>
         </Chapter>
 

@@ -9304,6 +9304,12 @@ h3 + .studypanel--paragraph {
   height: unset;
 }
 
+#Made #Rendering--Post .graphic--caption {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
 #Made #Rendering--Roadblocks-Graphics .section {
   --section-graphic-panel-pad: 0rem;
 }
@@ -9315,6 +9321,12 @@ h3 + .studypanel--paragraph {
 
 #Made #Rendering--Roadblocks-Graphics .section--graphic:not(.pro-con--icon)[data-playing="true"] {
   filter: brightness(1.075);
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Made #Rendering--Roadblocks-Graphics .section {
+    --gap:3rem;
+  }
 }
 
 #Made #Rendering--Python-Graphic .section {
@@ -9343,6 +9355,18 @@ h3 + .studypanel--paragraph {
   filter: brightness(1.025);
 }
 
+@media screen and (max-width: 49.9375em) {
+  #Made #Rendering--Scalable .column-1 {
+    order: 1;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Made #Rendering--Scalable .column-2 {
+    order: 0;
+  }
+}
+
 #Made #Delivery--Config .section--wrapper {
   padding-bottom: calc(var(--section-gap) * 1.25);
 }
@@ -9358,6 +9382,28 @@ h3 + .studypanel--paragraph {
 
 #Made #Delivery--Closing .background {
   background-color: #E9E9F2;
+}
+
+#Made #Delivery--Closing .background--img {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media screen and (max-width: 91.9375em) {
+  #Made #Delivery--Closing .background--img {
+    width: 95vw;
+    height: auto;
+    overflow: hidden;
+  }
+  #Made #Delivery--Closing .background--img img {
+    transform: scale(1.2);
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Made #Delivery--Closing .background--img img {
+    transform: scale(1.5);
+  }
 }
 
 @media screen and (max-width: 79.9375em) {

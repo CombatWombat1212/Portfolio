@@ -6,7 +6,7 @@ function Video(props) {
   const [mounted, setMounted] = useState(false);
   const { desktop, loading } = useResponsive();
 
-  const { className, reference } = props;
+  const { className, reference, playbackRate } = props;
   const updatedProps = getUpdatedVideoProps(props, desktop);
   const { COMMON_VIDEO_PROPS, SOURCE_PROPS, FOREGROUND_PROPS } = getOrganizedVideoProps(updatedProps, desktop);
 
@@ -20,6 +20,16 @@ function Video(props) {
     if (!mounted) return;
     graphicVideoInit(reference);
   }, [mounted, desktop]);
+
+
+  useEffect(() => {
+    if (!mounted) return;
+    if(playbackRate == 1 || !playbackRate || playbackRate == undefined) return;
+    reference.current.querySelector(".video--foreground").playbackRate = playbackRate;
+  }, [mounted]);
+
+
+  
 
   const VidSource = (additionalClassName, additionalProps) => (
     <video className={`${className} ${additionalClassName}`} {...COMMON_VIDEO_PROPS} {...additionalProps}>

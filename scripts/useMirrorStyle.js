@@ -116,7 +116,7 @@ const useMirrorStyle = () => {
 function getMirrorStyleProp(props) {
   var mirrorstyle = props.mirrorstyle;
   if (mirrorstyle == false || mirrorstyle == undefined || mirrorstyle == null) mirrorstyle = false;
-  return mirrorstyle;
+  return mirrorstyle ? { mirrorstyle } : {};
 }
 
 export default useMirrorStyle;

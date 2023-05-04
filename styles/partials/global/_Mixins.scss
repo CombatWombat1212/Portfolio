@@ -1043,4 +1043,52 @@
   }
 
 
-  
+
+
+
+@mixin closing-banner-section {
+
+	.background {
+		background-color: $col-background_darker;
+
+		&--img {
+
+			@include mx-auto;
+
+			@include xxl-down {
+				width: 95vw;
+				height: auto;
+				overflow: hidden;
+
+				img {
+					transform: scale(1.1);
+				}
+			}
+
+		}
+	}
+}
+
+@mixin closing-banner-section_small {
+
+	.background {
+		background-color: $col-background_darker;
+
+		&--img {
+			@include mx-auto;
+			@include xxl-down {
+				width: 95vw;
+				height: auto;
+				overflow: hidden;
+				img {
+					transform: scale(1.2);
+				}
+			}
+			@include lg-down {
+				img {
+					transform: scale(1.5);
+				}
+			}
+		}
+	}
+}

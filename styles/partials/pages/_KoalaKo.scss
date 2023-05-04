@@ -1,4 +1,3 @@
-
 @mixin koala-col($id, $sel, $child...) {
   @at-root #Koalako ##{$id} .section--column {
     @include nth-children($child...) {
@@ -671,24 +670,7 @@
     }
 
     &--Closing {
-      .background {
-        background-color: $col-background_darker;
-
-        &--img{
-
-          @include mx-auto; 
-
-          @include xxl-down{
-            width: 95vw;
-            height:auto;
-            overflow:hidden;
-            img{
-              transform: scale(1.1);
-            }
-          }
-
-        }
-      }
+      @include closing-banner-section;
     }
   }
 }

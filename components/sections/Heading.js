@@ -47,10 +47,10 @@ function Heading({ children, type, className, innerClassName, italic, innerhtml,
     innerClassName += " text--italic";
   }
 
-  const mirrorstyle = getMirrorStyleProp(props);
-
   return (
-    <div className={`section--heading ${headingClasses} ${className}`} ref={reference} {...(mirrorstyle ? { mirrorstyle } : {})}>
+    <div className={`section--heading ${headingClasses} ${className}`} ref={reference}
+    {...getMirrorStyleProp(props)}
+    >
       <HeadingTag className={innerClassName} {...(innerhtml !== undefined ? { dangerouslySetInnerHTML: { __html: innerhtml } } : {})}>
         {children}
       </HeadingTag>

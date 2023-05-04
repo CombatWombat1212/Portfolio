@@ -127,6 +127,7 @@ function Graphic(props) {
     sync,
     innerStyle,
     reference,
+    playbackRate,
     ...restProps
   } = props;
 
@@ -162,6 +163,7 @@ function Graphic(props) {
   lightbox = lightbox ? lightbox : false;
   gallery = gallery ? gallery : false;
   effect = effect ? effect : false;
+  playbackRate = playbackRate ? playbackRate : 1;
 
   const handleImageLoad = () => {
     setImageLoaded(true);
@@ -262,6 +264,7 @@ function Graphic(props) {
     controls: controls,
     innerClassName: innerClassName,
     type: img.type,
+    playbackRate: playbackRate,
   };
 
   const INNER_PROPS = {
