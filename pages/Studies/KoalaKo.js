@@ -1,14 +1,16 @@
-import { getStudy } from "@/scripts/GetStudy";
+// Imports - Components
 import CaseStudyPage from "@/components/studies/CaseStudyPage";
 import { Section, Chapter, Title, Column, Heading, Description, Graphic, Quote } from "@/components/sections/Sections";
 import Gantt from "@/components/charts/Gantt";
-import { KOALAKO_IMGS } from "@/data/KOALAKO_IMGS";
-import ICONS from "@/data/ICONS";
-import { MADE_IMGS } from "@/data/MADE_IMGS";
-import { STUDY_KOALAKO } from "@/data/CASE_STUDIES";
-import { Fragment, useEffect } from "react";
 import Findings from "@/components/global/Findings";
 import Method from "@/components/global/Method";
+
+// Imports - Data
+import { KOALAKO_IMGS } from "@/data/KOALAKO_IMGS";
+import ICONS from "@/data/ICONS";
+import { STUDY_KOALAKO } from "@/data/CASE_STUDIES";
+
+// Imports - Scripts
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 
 function KoalaKo({ pop }) {

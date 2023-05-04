@@ -8549,13 +8549,13 @@ h3 + .studypanel--paragraph {
   --graphic-scale: 0.95;
 }
 
-#Makeright #Overview--Pitch .mask {
-  background-color: #F3F3F7;
-}
-
 #Makeright #Overview--Hero-Logo {
   padding-top: 5rem;
   padding-bottom: 5.5rem;
+}
+
+#Makeright #Overview--Hero-Logo .section {
+  overflow: hidden;
 }
 
 #Makeright #Overview--Hero-Logo .section--graphic {
@@ -8565,9 +8565,20 @@ h3 + .studypanel--paragraph {
   width: 100%;
 }
 
+@media screen and (max-width: 61.9375em) {
+  #Makeright #Overview--Hero-Logo .section--graphic {
+    transform: scale(1.25);
+    margin-left: -0.225rem;
+  }
+}
+
 #Makeright #Overview--Hero-Logo .section--graphic > * {
   background-color: #F3F3F7;
   width: 70%;
+}
+
+#Makeright #Overview--Pitch .mask {
+  background-color: #F3F3F7;
 }
 
 #Makeright #Plan, #Makeright #Plan--Banner {
@@ -8607,7 +8618,7 @@ h3 + .studypanel--paragraph {
   margin-top: 0;
 }
 
-#Makeright #Delivery--Banner {
+#Makeright #Delivery--Banner-Intro {
   margin-top: 0;
 }
 
@@ -8623,8 +8634,28 @@ h3 + .studypanel--paragraph {
   margin-top: calc(0.6875rem * 0.5);
 }
 
-#Makeright #Delivery--Banner .background {
+#Makeright #Delivery--Banner-Closing {
+  margin-top: 0;
+}
+
+#Makeright #Delivery--Banner-Closing .background {
   background-color: #E9E9F2;
+}
+
+#Makeright #Delivery--Banner-Closing .background--img {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media screen and (max-width: 91.9375em) {
+  #Makeright #Delivery--Banner-Closing .background--img {
+    width: 95vw;
+    height: auto;
+    overflow: hidden;
+  }
+  #Makeright #Delivery--Banner-Closing .background--img img {
+    transform: scale(1.1);
+  }
 }
 
 @media screen and (max-width: 79.9375em) {
@@ -9325,7 +9356,7 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 49.9375em) {
   #Made #Rendering--Roadblocks-Graphics .section {
-    --gap:3rem;
+    --gap: 3rem;
   }
 }
 

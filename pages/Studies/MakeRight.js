@@ -1,4 +1,3 @@
-import { getStudy } from "@/scripts/GetStudy";
 import CaseStudyPage from "@/components/studies/CaseStudyPage";
 import { Section, Chapter, Title, Column, Heading, Description, Graphic, Quote } from "@/components/sections/Sections";
 import MAKERIGHT_IMGS from "/data/MAKERIGHT_IMGS";
@@ -10,13 +9,16 @@ import Button from "@/components/elements/Buttons";
 import Slideshow from "@/components/global/slideshow/Slideshow";
 import Pitch from "@/components/sections/Pitch";
 import { STUDY_MAKERIGHT } from "@/data/CASE_STUDIES";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 
-// TODO: add the interactive chapter selection thingy
 
 function MakeRight({ pop }) {
   const study = STUDY_MAKERIGHT;
+
+  const { desktop, isBpAndDown, bp, loading } = useResponsive();
+  const lgAndDown = !(!isBpAndDown("lg") || loading);
+  const mdAndDown = !(!isBpAndDown("md") || loading);
+  const smAndDown = !(!isBpAndDown("sm") || loading);
 
   return (
     <>
@@ -31,7 +33,11 @@ function MakeRight({ pop }) {
                 <br />
                 3D printing has a vast potential to benefit everyday consumers.
               </p>
-              <p>In the early 2010s, we were told they would be found in every home; giving consumer&rsquo;s the power to create anything. But its barriers were too great to reach these expectations, and this reality fell flat. Now, 3D printing hardly has any impact on the average consumer&rsquo;s life.</p>
+              <p>
+                In the early 2010s, we were told they would be found in every home; giving consumer&rsquo;s the power to create anything. But its
+                barriers were too great to reach these expectations, and this reality fell flat. Now, 3D printing hardly has any impact on the average
+                consumer&rsquo;s life.
+              </p>
             </Description>
 
             <Graphic type="mask" img={MAKERIGHT_IMGS["full_potential"]} />
@@ -40,13 +46,17 @@ function MakeRight({ pop }) {
           <Section id="Overview--Challenge" type="overview">
             <Title>Challenge</Title>
             <Heading>
-              Cost, and technical knowledge
-              <br />
-              stand in the way of mass adoption
+              Cost, and technical knowledge <br className="d-md-none" /> stand in the way of mass adoption
             </Heading>
             <Description>
-              <p>Owning a 3D printer is a steep upfront investment, and learning to use it is a massive time sink. Even then, users without 3D modelling experience will still be restricted to making premade objects.</p>
-              <p>There needs to be a way to eliminate these barriers so that 3D printing can reach its full potential. Allowing average consumers to access the benefits of the technology.</p>
+              <p>
+                Owning a 3D printer is a steep upfront investment, and learning to use it is a massive time sink. Even then, users without 3D
+                modelling experience will still be restricted to making premade objects.
+              </p>
+              <p>
+                There needs to be a way to eliminate these barriers so that 3D printing can reach its full potential. Allowing average consumers to
+                access the benefits of the technology.
+              </p>
             </Description>
 
             <Graphic type="mask" img={MAKERIGHT_IMGS["barriers_to_entry"]} />
@@ -64,9 +74,7 @@ function MakeRight({ pop }) {
           <Section id="Overview--Solution" background="background">
             <Title>Solution</Title>
             <Heading>
-              Directly connect consumers with owners of 3D printers
-              <br />
-              for stress-free, low-cost production.
+              Directly connect consumers with owners of 3D printers <br className="d-lg-none" /> for stress-free, low-cost production.
             </Heading>
           </Section>
 
@@ -125,8 +133,14 @@ function MakeRight({ pop }) {
             <Column>
               <Heading type="h3">Slashing the overhead of competitors</Heading>
               <Description>
-                <p>Competing services ruin the low-cost benefits of 3D printing by charging steep overhead fees. Created by having countless technicians and printers operating under one roof.</p>
-                <p>MakeRight undercuts this overhead by connecting customers directly to makers. Only charging them for the work of one technician, paid to run their own equipment.</p>
+                <p>
+                  Competing services ruin the low-cost benefits of 3D printing by charging steep overhead fees. Created by having countless
+                  technicians and printers operating under one roof.
+                </p>
+                <p>
+                  MakeRight undercuts this overhead by connecting customers directly to makers. Only charging them for the work of one technician,
+                  paid to run their own equipment.
+                </p>
               </Description>
             </Column>
             <Column>
@@ -136,7 +150,10 @@ function MakeRight({ pop }) {
                 for 3D prints from local makers.
               </Heading>
               <Description>
-                <p>Giving customers access to 3D printing&apos;s low-cost, customizable production, without owning or operating the technology. While also enabling hobbyist makers to profit off their skills and equipment. </p>
+                <p>
+                  Giving customers access to 3D printing&apos;s low-cost, customizable production, without owning or operating the technology. While
+                  also enabling hobbyist makers to profit off their skills and equipment.
+                </p>
               </Description>
             </Column>
           </Section>
@@ -327,16 +344,14 @@ function MakeRight({ pop }) {
 
             <Column className="col-4">
               <Graphic className="flex-col h-auto" background="background" type="mask" img={MAKERIGHT_IMGS["brainstorming_chart"]}>
-                <Button color="primary" type="bottom" onClick={
-                  () => {
+                <Button
+                  color="primary"
+                  type="bottom"
+                  onClick={() => {
                     pop.setOn(true);
                     pop.setType("interactive");
                     pop.setImg(MAKERIGHT_IMGS["brainstorming_chart_full"]);
-                    // setPopup({ type: "interactive", img: MAKERIGHT_IMGS["brainstorming_chart_full"] })
-                  
-                  }
-                  
-                  }>
+                  }}>
                   View full exercise
                 </Button>
               </Graphic>
@@ -425,20 +440,30 @@ function MakeRight({ pop }) {
             <Column>
               <Description>
                 <p>I gathered 6 laypersons, and 4 printer owners, and asked each group questions surrounding my proposed service.</p>
-                <p>At the end of the test, I revealed the concept. I then asked more specific questions, collected feedback, and supported their discussion with prompts and clarification.</p>
+                <p>
+                  At the end of the test, I revealed the concept. I then asked more specific questions, collected feedback, and supported their
+                  discussion with prompts and clarification.
+                </p>
               </Description>
             </Column>
           </Section>
 
           <Section id="Develop--Reception" type="columns" titled background="background darkest">
             <Heading type="h3">Reception was quite positive among both groups:</Heading>
-            <Description className="mt-less">Laypersons commented ideas for what they would print, while makers showed excitement towards profiting off their equipment.</Description>
+            <Description className="mt-less">
+              Laypersons commented ideas for what they would print, while makers showed excitement towards profiting off their equipment.
+            </Description>
 
             <Column>
-              <Quote background="background">Laypersons commented ideas for what they would print, while makers showed excitement towards profiting off their equipment. </Quote>
+              <Quote background="background">
+                Laypersons commented ideas for what they would print, while makers showed excitement towards profiting off their equipment.
+              </Quote>
             </Column>
             <Column>
-              <Quote background="background">&ldquo;I would definitely use that service. Not having to set up and use a printer myself? I would print so much stuff!&rdquo; - Layperson #4</Quote>
+              <Quote background="background">
+                &ldquo;I would definitely use that service. Not having to set up and use a printer myself? I would print so much stuff!&rdquo; -
+                Layperson #4
+              </Quote>
             </Column>
           </Section>
 
@@ -453,7 +478,8 @@ function MakeRight({ pop }) {
                 <p>Draw a line separating the responsibilities of makers, and customers.</p>
               </div>
               <Quote background="background" className="quote-table--cell quote-table__secondary">
-                &ldquo;It&rsquo;s a question of distributing responsibility. There&rsquo;s 2 types of problems: maker problems, and customer problems.&rdquo; - Layperson #3
+                &ldquo;It&rsquo;s a question of distributing responsibility. There&rsquo;s 2 types of problems: maker problems, and customer
+                problems.&rdquo; - Layperson #3
               </Quote>
 
               <div className="quote-table--cell quote-table__primary">
@@ -491,13 +517,23 @@ function MakeRight({ pop }) {
             </Column>
             <Column className="col-5">
               <Description>
-                <p>The two journeys included all the main touch-points from sign-up to order fulfillment. This development goal would allow me to establish the foundation and core interactions of the service.</p>
+                <p>
+                  The two journeys included all the main touch-points from sign-up to order fulfillment. This development goal would allow me to
+                  establish the foundation and core interactions of the service.
+                </p>
               </Description>
             </Column>
             <Graphic type="image" background="tertiary" img={MAKERIGHT_IMGS["journey_map"]} />
           </Section>
 
-          <Section id="Prototyping--Methodology" type="columns" titled arrows="background" background="tertiary light" mainClassName="gap-5" mainType="grid">
+          <Section
+            id="Prototyping--Methodology"
+            type="columns"
+            titled
+            arrows="background"
+            background="tertiary light"
+            mainClassName="gap-5"
+            mainType="grid">
             <Title>Methodology</Title>
             <Heading>The workload was divided across 4 project phases</Heading>
             <Description className="mt-1">
@@ -596,13 +632,25 @@ function MakeRight({ pop }) {
             <Column>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_overview_before"]} lightbox pop={pop} />
               <Description className="mt-more graphic--caption graphic--caption__split">
-                <p>Aspiring makers need to understand the expectations of their new job. Originally, this was taught with an 8-page slideshow. But users found it droning, hard to retain, and too easy to skip.</p>
+                <p>
+                  Aspiring makers need to understand the expectations of their new job. Originally, this was taught with an 8-page slideshow. But
+                  users found it droning, hard to retain, and too easy to skip.
+                </p>
               </Description>
             </Column>
             <Column>
-              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_overview_after"]} lightbox={MAKERIGHT_IMGS["feedback_overview_after_full"]} pop={pop} />
+              <Graphic
+                className="b-rad"
+                type="image"
+                img={MAKERIGHT_IMGS["feedback_overview_after"]}
+                lightbox={MAKERIGHT_IMGS["feedback_overview_after_full"]}
+                pop={pop}
+              />
               <Description className="mt-more graphic--caption graphic--caption__split">
-                <p>Now, that info exists as a single inviting page. As well, I added a brief video chat at the end onboarding to ensure new Makers have read the overview, and can ask questions.</p>
+                <p>
+                  Now, that info exists as a single inviting page. As well, I added a brief video chat at the end onboarding to ensure new Makers have
+                  read the overview, and can ask questions.
+                </p>
               </Description>
             </Column>
           </Section>
@@ -632,7 +680,9 @@ function MakeRight({ pop }) {
             <Column>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_filament_after"]} lightbox pop={pop} />
               <Description className="mt-more graphic--caption graphic--caption__split">
-                <p>A stripe across the top of the cards match the real-world color of the inputted filament; making them much easier to differentiate.</p>
+                <p>
+                  A stripe across the top of the cards match the real-world color of the inputted filament; making them much easier to differentiate.
+                </p>
               </Description>
             </Column>
           </Section>
@@ -643,8 +693,14 @@ function MakeRight({ pop }) {
             <Column>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_tutorials"]} />
               <Description className="mt-more graphic--caption gap-4 graphic--caption__split">
-                <p>Testers of the Maker journey were navigating much more fluidly halfway through each test. It was taking a few pages of exploration before the terminology, and flow finally clicked.</p>
-                <p>To ease the friction of a user&rsquo;s first order fulfillment, I added an optional tutorial system. Boxes appear one by one describing important elements, and directing the user through their task.</p>
+                <p>
+                  Testers of the Maker journey were navigating much more fluidly halfway through each test. It was taking a few pages of exploration
+                  before the terminology, and flow finally clicked.
+                </p>
+                <p>
+                  To ease the friction of a user&rsquo;s first order fulfillment, I added an optional tutorial system. Boxes appear one by one
+                  describing important elements, and directing the user through their task.
+                </p>
               </Description>
             </Column>
           </Section>
@@ -657,7 +713,7 @@ function MakeRight({ pop }) {
         </Chapter>
 
         <Chapter name="Delivery" id="Delivery">
-          <Section id="Delivery--Banner" background={MAKERIGHT_IMGS.delivered_project_banner}>
+          <Section id="Delivery--Banner-Intro" background={MAKERIGHT_IMGS.delivered_project_banner}>
             <Heading>Delivered Project</Heading>
           </Section>
 
@@ -708,7 +764,10 @@ function MakeRight({ pop }) {
 
             <Column>
               <Description>
-                <p>This project has only just begun. With every feature added, countless more had to be sidelined for the sake of scope. Some of the planned future additions to the project include:</p>
+                <p>
+                  This project has only just begun. With every feature added, countless more had to be sidelined for the sake of scope. Some of the
+                  planned future additions to the project include:
+                </p>
                 <ul>
                   <li>
                     <span>A full branding refresh (the logo and name are temporary)</span>
@@ -730,7 +789,10 @@ function MakeRight({ pop }) {
             </Column>
             <Column>
               <Description>
-                <p>Several team members would need to be added in order to become a dedicated company. Like algorithm engineers to help design the systems that assign orders to makers, and determine how much they get paid per job. Other additions include:</p>
+                <p>
+                  Several team members would need to be added in order to become a dedicated company. Like algorithm engineers to help design the
+                  systems that assign orders to makers, and determine how much they get paid per job. Other additions include:
+                </p>
                 <ul>
                   <li>
                     <span>More UX designers</span>
@@ -749,7 +811,7 @@ function MakeRight({ pop }) {
             </Column>
           </Section>
 
-          <Section id="Delivery--Banner" background={MAKERIGHT_IMGS["closing_banner"]}></Section>
+          <Section id="Delivery--Banner-Closing" background={MAKERIGHT_IMGS["closing_banner"]}></Section>
         </Chapter>
 
         <Chapter name="Closing" id="Closing">
@@ -760,20 +822,44 @@ function MakeRight({ pop }) {
               makes for far better UI than individual features
             </Heading>
             <Description className="text-col-2 text-gap-6">
-              <p>When I began planning my approach to prototyping, I chose a number of the service&rsquo;s most important features. From there, I intended to create mockups of each. Eventually, I reached the question of how the service would verify that makers were capable and trustworthy. My solution was to have them create a mock customer order. But to prototype this, I would need to mock up the entire order fulfillment process. Only having a few select screens would be too disjointed.</p>
+              <p>
+                When I began planning my approach to prototyping, I chose a number of the service&rsquo;s most important features. From there, I
+                intended to create mockups of each. Eventually, I reached the question of how the service would verify that makers were capable and
+                trustworthy. My solution was to have them create a mock customer order. But to prototype this, I would need to mock up the entire
+                order fulfillment process. Only having a few select screens would be too disjointed.
+              </p>
 
-              <p>At this moment, I decided the only way to consider all aspects of the service would be to build the 2 entire user flows. This caused a massive shift in my project approach. It allowed me to encounter numerous issues that would have gone unaddressed if I had only created separate feature screens.</p>
+              <p>
+                At this moment, I decided the only way to consider all aspects of the service would be to build the 2 entire user flows. This caused a
+                massive shift in my project approach. It allowed me to encounter numerous issues that would have gone unaddressed if I had only
+                created separate feature screens.
+              </p>
 
-              <p>This moment reminds me to always focus on the entire context of a user&rsquo;s journey and experience. I need to avoid fixating on individual features without remembering the greater context of the system in which I&rsquo;m working. Good UX design isn&rsquo;t separated features in a vacuum, it&rsquo;s the creation of an entire experience.</p>
+              <p>
+                This moment reminds me to always focus on the entire context of a user&rsquo;s journey and experience. I need to avoid fixating on
+                individual features without remembering the greater context of the system in which I&rsquo;m working. Good UX design isn&rsquo;t
+                separated features in a vacuum, it&rsquo;s the creation of an entire experience.
+              </p>
             </Description>
 
             <Column>
               <Title>Learning</Title>
               <Heading>The importance of involving users as early, and as often as possible</Heading>
               <Description>
-                <p>In this project, I spoke with 10 potential users, in two separate groups before becoming invested in any concept or solution. This gave me important background information from which to build ideas. But equally valuable was my decision to involve this group once again after I had developed an idea. This allowed me to gather feedback on my concept, before having created any semblance of a prototype. Providing tangible validation that my ideas were worth pursuing, and a foundation of user feedback from which to expand and build.</p>
+                <p>
+                  In this project, I spoke with 10 potential users, in two separate groups before becoming invested in any concept or solution. This
+                  gave me important background information from which to build ideas. But equally valuable was my decision to involve this group once
+                  again after I had developed an idea. This allowed me to gather feedback on my concept, before having created any semblance of a
+                  prototype. Providing tangible validation that my ideas were worth pursuing, and a foundation of user feedback from which to expand
+                  and build.
+                </p>
 
-                <p>This moment reminded me to always involve users as early and as often as possible. Often, designers forgo interviewing users in a project&rsquo;s early stages. This is usually done in favour of instead testing before ideation, or after a prototype has been actualized. But, by keeping users close to my project at every stage, my solution became tailor fitted to the exact problem that I had observed in the 3D printing space.</p>
+                <p>
+                  This moment reminded me to always involve users as early and as often as possible. Often, designers forgo interviewing users in a
+                  project&rsquo;s early stages. This is usually done in favour of instead testing before ideation, or after a prototype has been
+                  actualized. But, by keeping users close to my project at every stage, my solution became tailor fitted to the exact problem that I
+                  had observed in the 3D printing space.
+                </p>
               </Description>
             </Column>
 
@@ -781,9 +867,19 @@ function MakeRight({ pop }) {
               <Title>Sucesses</Title>
               <Heading>Creating actionable steps to achieving the core functionality of the service</Heading>
               <Description>
-                <p>I often questioned what the final outcome of this project should be. I felt strongly about this concept, and I needed to do it justice. Around the end of the first month, after much planning and revision, I had defined my goal of creating 2 user journey prototypes. With this finally established, I quickly fell into the groove of cycling through iterations week by week. I made screens, found testers, gathered feedback, implemented changes, and repeated. In the end, all the pieces fell together. Resulting in a polished, cohesive execution of my idea.</p>
+                <p>
+                  I often questioned what the final outcome of this project should be. I felt strongly about this concept, and I needed to do it
+                  justice. Around the end of the first month, after much planning and revision, I had defined my goal of creating 2 user journey
+                  prototypes. With this finally established, I quickly fell into the groove of cycling through iterations week by week. I made
+                  screens, found testers, gathered feedback, implemented changes, and repeated. In the end, all the pieces fell together. Resulting in
+                  a polished, cohesive execution of my idea.
+                </p>
 
-                <p>Despite many challenging time crunches during development, I steadily moved through each phase without any major snags. Working with a clear end goal, and defining actionable steps to reach it, is what brought this project to life. For this reason, the planning and organization of this project was its greatest success.</p>
+                <p>
+                  Despite many challenging time crunches during development, I steadily moved through each phase without any major snags. Working with
+                  a clear end goal, and defining actionable steps to reach it, is what brought this project to life. For this reason, the planning and
+                  organization of this project was its greatest success.
+                </p>
               </Description>
             </Column>
           </Section>

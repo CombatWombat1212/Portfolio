@@ -97,9 +97,7 @@
   }
 }
 
-
-
-@mixin section-grid-3_headings-arrows{
+@mixin section-grid-3_headings-arrows {
   .section {
     &--heading {
       @include flex-col-end;
@@ -126,9 +124,6 @@
     }
   }
 }
-
-
-
 
 #Made {
   .brief {
@@ -392,7 +387,6 @@
 
     &--Stages {
       @include section-grid-3_headings-arrows;
-    
     }
 
     &--Contrast-Desc {
@@ -485,7 +479,6 @@
         }
       }
 
-
       .column-1 {
         @include md-down {
           order: 1;
@@ -496,8 +489,6 @@
           order: 0;
         }
       }
-
-
     }
 
     &--Shadow-Description {
@@ -509,7 +500,6 @@
     }
 
     &--Post {
-
       @include section-grid-3_headings-arrows;
 
       .section {
@@ -529,12 +519,9 @@
         }
       }
 
-      .graphic--caption{
+      .graphic--caption {
         @include flex-col-end;
       }
-
-
-      
     }
     &--Roadblocks-Description {
     }
@@ -542,9 +529,9 @@
     &--Roadblocks-Graphics {
       @include hoverable-graphic-panel-with-background;
 
-      .section{
-        @include md-down{
-          --gap:3rem;
+      .section {
+        @include md-down {
+          --gap: 3rem;
         }
       }
     }
@@ -557,9 +544,6 @@
     &--Scalable {
       @include hoverable-graphic-panel-with-background(1.025);
 
-
-
-      
       .column-1 {
         @include md-down {
           order: 1;
@@ -570,7 +554,6 @@
           order: 0;
         }
       }
-
     }
     &--Closing {
     }
@@ -596,20 +579,17 @@
       .image-row {
         --image-row-scale: 1.35;
         --image-row-offset: 0.5;
-        @include lg-down{
-          
+        @include lg-down {
           --image-row-scale: 1.3;
         }
       }
-
     }
 
     &--Images-3 {
-      @include lg-down{
+      @include lg-down {
         padding-bottom: calc(var(--section-gap) * 1.15);
       }
     }
-
 
     &--Closing {
       @include closing-banner-section_small;
@@ -622,81 +602,3 @@
   }
 }
 
-// #Approach {
-//   &--Workflow {
-//   }
-//   &--Models {
-//   }
-//   &--Imperfections {
-//   }
-// }
-// #Texturing {
-//   &--Stages {
-//   }
-
-//   &--Contrast-Desc {
-//   }
-//   &--Contrast-Areas {
-//   }
-//   &--Contrast-Split {
-//   }
-//   &--Details-Description {
-//   }
-//   &--Details-Graphics {
-//   }
-//   &--Transition {
-//   }
-// }
-
-// #Rendering {
-//   &--Lighting {
-//   }
-//   &--Shadow-Description {
-//   }
-//   &--Shadow-Graphics {
-//   }
-//   &--Post{
-//   }
-//   &--Roadblocks-Description {
-//   }
-//   &--Roadblocks-Graphics {
-//   }
-//   &--Python-Description {
-//   }
-//   &--Python-Graphic {
-//   }
-//   &--Scalable {
-//   }
-//   &--Closing {
-//   }
-// }
-
-// #Delivery {
-//   &--Banner {
-//   }
-//   &--Config {
-//   }
-//   &--Images-1,
-//   &--Images-2,
-//   &--Images-3 {
-//   }
-//   &--Closing {
-//   }
-// }
-
-// #Closing {
-//   &--Copy {
-//   }
-// }
-
-// html, body {
-//   height: 100%;
-//   margin: 0;
-//   padding: 0;
-//   overflow: hidden;
-// }
-// #__next {
-//   height: 100%;
-//   overflow-y: scroll;
-//   -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS Safari */
-// }

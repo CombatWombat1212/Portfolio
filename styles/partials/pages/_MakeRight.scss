@@ -1,9 +1,6 @@
-
 .section--wrapper {
   overflow: hidden;
 }
-
-
 
 #Makeright {
   --background-info-gap: 6rem;
@@ -12,7 +9,6 @@
     &--group {
       &__study {
         column-gap: 5rem;
-
 
         @include xl-down {
           grid-template-columns: repeat(3, 1fr);
@@ -31,11 +27,7 @@
     }
 
     &--point {
-
-
-
       @include xl-up {
-
         $amt: 4rem;
         &#deliverables {
           order: 0;
@@ -43,7 +35,7 @@
         }
 
         &#roles {
-          order: 1;            
+          order: 1;
           margin-left: $amt;
           margin-right: -$amt;
         }
@@ -57,7 +49,6 @@
           order: 3;
           margin-left: $amt;
           margin-right: -$amt;
-
         }
       }
 
@@ -126,7 +117,6 @@
     &--Background {
       .section {
         @include gap(var(--background-info-gap));
-
         --graphic-scale: 0.95;
       }
     }
@@ -139,21 +129,24 @@
       }
     }
 
-    &--Pitch {
-      .mask {
-        background-color: $col-background;
-      }
+    &--Opportunity {
     }
-
     &--Hero-Logo {
       $pad: 5rem;
       padding-top: $pad;
       padding-bottom: $pad * 1.1;
 
       .section {
+        overflow: hidden;
+
         &--graphic {
           @include flex-row-center;
           width: 100%;
+
+          @include lg-down {
+            transform: scale(1.25);
+            margin-left: -0.225rem;
+          }
 
           & > * {
             background-color: $col-background;
@@ -161,6 +154,18 @@
           }
         }
       }
+    }
+    
+    &--Solution {
+    }
+
+    &--Pitch {
+      .mask {
+        background-color: $col-background;
+      }
+    }
+
+    &--Summary {
     }
   }
 
@@ -170,18 +175,45 @@
       // TODO: not sure why this is needed, could be good to look at the edge case that's missing that necessitates this
       margin-top: 0;
     }
+    &--Gantt {
+    }
   }
 
   #Research {
     &--Approach {
     }
-
+    &--Limits {
+    }
+    &--Factors {
+    }
+    &--Hobbyists {
+    }
+    &--Primary {
+    }
+    &--Non-Owners {
+    }
+    &--Owners {
+    }
     &--Aha-Moment {
     }
   }
 
   #Develop {
+    &--Methodology {
+    }
     &--Brainstorming {
+    }
+    &--Refine {
+    }
+    &--Focus-Intro {
+    }
+    &--Focus {
+    }
+    &--Reception {
+    }
+    &--Concerns {
+    }
+    &--Conclusion {
     }
   }
 
@@ -221,6 +253,10 @@
         }
       }
     }
+    &--Feedback {
+    }
+    &--Overview {
+    }
 
     &--Equipment {
       .section {
@@ -229,12 +265,20 @@
         }
       }
     }
+    &--Tutorial {
+    }
+    &--Closing {
+    }
   }
 
   #Delivery {
     margin-top: 0;
-    &--Banner {
+    &--Banner-Intro {
       margin-top: 0;
+    }
+    &--Maker {
+    }
+    &--Customer {
     }
 
     &--Conclusion {
@@ -248,10 +292,76 @@
       @include section-list-spacing(0.6875rem);
     }
 
-    &--Banner {
-      .background {
-        background-color: $col-background_darker;
-      }
+    &--Banner-Closing {
+      margin-top: 0;
+
+      @include closing-banner-section;
+    }
+  }
+
+  #Closing {
+    &--Copy {
     }
   }
 }
+
+// #Overview {
+//   &--Background {}
+//   &--Challenge {}
+//   &--Opportunity {}
+//   &--Hero-Logo {}
+//   &--Solution {}
+//   &--Pitch {}
+//   &--Summary {}
+// }
+
+// #Plan {
+//   &--Banner {}
+//   &--Gantt {}
+// }
+
+// #Research {
+//   &--Approach {}
+//   &--Limits {}
+//   &--Factors {}
+//   &--Hobbyists {}
+//   &--Primary {}
+//   &--Non-Owners {}
+//   &--Owners {}
+//   &--Aha-Moment {}
+// }
+
+// #Develop {
+//   &--Methodology {}
+//   &--Brainstorming {}
+//   &--Refine {}
+//   &--Focus-Intro {}
+//   &--Focus {}
+//   &--Reception {}
+//   &--Concerns {}
+//   &--Conclusion {}
+// }
+
+// #Prototyping {
+//   &--Journey-Map {}
+//   &--Methodology {}
+//   &--Progression {}
+//   &--Feedback {}
+//   &--Overview {}
+//   &--Equipment {}
+//   &--Tutorial {}
+//   &--Closing {}
+// }
+
+// #Delivery {
+//   &--Banner-Intro {}
+//   &--Maker {}
+//   &--Customer {}
+//   &--Conclusion {}
+//   &--Forward {}
+//   &--Banner-Closing {}
+// }
+
+// #Closing {
+//   &--Copy {}
+// }
