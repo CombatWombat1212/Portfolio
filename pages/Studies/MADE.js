@@ -454,7 +454,7 @@ function MADE() {
                 Color-matched threading
               </Heading>
               <Description className="graphic--caption mt-less">
-                I manually approximated fitting thread colors for each shirt material. Simple for solid-colors, occasionally tricky with complex
+                I manually approximated fitting thread colors for each shirt material. Simple for solid-colors, trickier with complex
                 patterns.
               </Description>
             </Column>

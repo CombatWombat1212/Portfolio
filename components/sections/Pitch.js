@@ -32,12 +32,51 @@ function PitchItem(pitch) {
     elem: this.elem.querySelector(".pitch--screens"),
   };
   this.rows = {
-    elems: Array.from(this.elem.querySelectorAll(".pitch--placeholder")),
+    elems: Array.from(this.ref.current.querySelectorAll(".pitch--placeholder")),
     current: 0,
     progress: 0,
     previous: null,
   };
+  this.captions = {
+    elems: Array.from(this.ref.current.querySelectorAll(".pitch--body")),
+    sizes: [],
+  };
 }
+
+
+
+
+function pitchGetCaptionSize(pitch){
+  for (var i = 0; i < pitch.captions.elems.length; i++) {
+    var caption = pitch.captions.elems[i];
+    var captionHeight = 0;
+    var captionChildren = caption.children;
+    for (var j = 0; j < captionChildren.length; j++) {
+      var captionChild = captionChildren[j];
+      var height = splitPx(window.getComputedStyle(captionChild).height);
+      var marginTop = splitPx(window.getComputedStyle(captionChild).marginTop);
+      var marginBottom = splitPx(window.getComputedStyle(captionChild).marginBottom);
+      var totalHeight = height + marginTop + marginBottom;
+      captionHeight += totalHeight;
+    }
+    pitch.captions.sizes[i] = captionHeight;
+  }
+}
+
+
+
+function pitchSetCaptionSize(pitch){
+
+  // take the greatest pitch caption height and set it as --pitch-caption-height on pitch .elem
+  var captionHeight = Math.max(...pitch.captions.sizes);
+  pitch.elem.style.setProperty("--pitch-caption-height", captionHeight + "px");
+  
+
+
+}
+
+
+
 
 function pitchSetCurrentRow(pitch) {
   var { current, previous } = pitch.rows;
@@ -199,10 +238,18 @@ function Pitch({ children }) {
 
   const pitch = useRef(null);
 
+  const { desktop, isBpAndDown, bp, loading } = useResponsive();
+  const lgAndDown = !(!isBpAndDown("lg") || loading);
+  const mdAndDown = !(!isBpAndDown("md") || loading);
+  const smAndDown = !(!isBpAndDown("sm") || loading);
+
+
   useMountEffect(() => {
     var pitchObj = new PitchItem(pitch);
     pitches.push(pitchObj);
     pitchInit(pitchObj);
+
+
 
     // TODO: there are 2 pitch items inside pitches after mount so certain things must be running twice.
     // if (indicators.length == 0 || indicators[indicators.length - 1].elem != indicatorObj.elem) {
@@ -215,11 +262,12 @@ function Pitch({ children }) {
       <div className="pitch" ref={pitch}>
         <div className="pitch--column pitch--graphics-wrapper">
           <Laptop rows={rows} />
+
         </div>
         <div className="pitch--column pitch--captions-wrapper">
           <div className="pitch--captions">
             {rows.map((row, i) => {
-              var { description, title, heading, graphic, other, vector, mockup } = formatRow(row);
+              var { description, heading, vector } = formatRow(row);
               var vectorProps = vector.props;
 
               return (
@@ -231,16 +279,30 @@ function Pitch({ children }) {
               );
             })}
           </div>
+
           <div className="pitch--empties">
             {rows.map((row, i) => {
               return <div key={i} className="pitch--row pitch--placeholder"></div>;
             })}
           </div>
+
         </div>
+
       </div>
     </>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
 
 function formatRow(row) {
   var { description, title, heading, graphic, other } = row.childs;
@@ -290,6 +352,8 @@ function pitchResizeFunctions() {
   pitches.forEach((pitch) => {
     pitchGetRowSize(pitch);
     pitchSetRowSize(pitch);
+    pitchGetCaptionSize(pitch);
+    pitchSetCaptionSize(pitch);
   });
 }
 

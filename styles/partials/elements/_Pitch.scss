@@ -1,154 +1,238 @@
 .pitch {
-  @include flex-row-between;
-  --gap: 10rem;
-  @include gap;
-  width: 100%;
-
-  --sticky-buffer: calc(var(--section-gap_half) / 2);
-  --pitch-overflow-buffer-x-percent: 5%;
-  --pitch-overflow-buffer-y-percent: 20%;
-  //   dont set these, its JS
-  --pitch-overflow-buffer-x: 5%;
-  --pitch-overflow-buffer-y: 20%;
-
-  --pitch-transition: 0.85s;
-
-  --pitch-progress-transition: 0.25s;
-  --pitch-progress-distance: 2.5rem;
-
-  @include pad-y(var(--section-gap_half));
-
-  @include xxl-down {
-    --gap: 4rem;
-  }
-
-  // increasing this number makes the scrolling slower, like you have to scroll further before the next switch
-  --pitch-additional-height: 20rem;
-
-  .pitch {
-    &--row {
-      @include marg-y(var(--section-gap_half));
-      height: var(--pitch-row-height);
+    @include flex-row-between;
+    --gap: 9rem;
+    @include gap;
+    width: 100%;
+  
+    --pitch-overflow-buffer-x-percent: 5%;
+    --pitch-overflow-buffer-y-percent: 20%;
+    //   dont set these, its JS
+    --pitch-overflow-buffer-x: 5%;
+    --pitch-overflow-buffer-y: 20%;
+  
+    --pitch-transition: 0.85s;
+  
+    --pitch-progress-transition: 0.25s;
+    --pitch-progress-distance:2.5rem;
+  
+    --pitch-row-margin: var(--section-gap_half);
+  
+    
+    --sticky-buffer-offset: 2rem;
+    // --sticky-buffer: calc(var(--section-gap_half) / 2);
+    --sticky-buffer: calc((((100vh - var(--nav-height)) - (var(--pitch-row-margin) * 2) - var(--pitch-row-height)) / 2) - var(--sticky-buffer-offset));
+  
+    // increasing this number makes the scrolling slower, like you have to scroll further before the next switch
+    --pitch-additional-height: 20rem;
+  
+    --pitch-caption-height: 13rem; // set with JS
+  
+  
+    @include pad-y(var(--section-gap_half));
+  
+    @include xxl-down {
+      --gap: 5rem;
+    }
+  
+    @include lg-down {
       @include flex-col-center;
+      --gap: 3rem;
     }
-    &--placeholder {
-      height: calc(var(--pitch-row-height) + var(--pitch-additional-height))!important;
-    }
-
-    &--heading {
-      margin-top: calc(var(--section-text-spacing) * 1.75);
-      & + * {
-        margin-top: 0;
+  
+  
+  
+    .pitch {
+      &--row {
+        @include marg-y(var(--pitch-row-margin));
+        height: var(--pitch-row-height);
+        @include flex-col-center;
       }
-
-      @include xl-down {
+      &--placeholder {
+        height: calc(var(--pitch-row-height) + var(--pitch-additional-height)) !important;
       }
-    }
-
-    &--description {
-      margin-top: 0.5rem;
-
-      * {
-        @include h3;
-        @include weight-reg;
-
-        // @include xl-down{
-        //   @include h5;
+  
+      &--heading {
+        margin-top: calc(var(--section-text-spacing) * 1.75);
+        & + * {
+          margin-top: 0;
+        }
+  
+        @include xxl-down {
+          margin-top: calc(var(--section-text-spacing) * 1.5);
+        }
+  
+        @include xl-down {
+          margin-top: calc(var(--section-text-spacing));
+        }
+      }
+  
+      &--description {
+        margin-top: 0.5rem;
+  
+        * {
+          @include h3;
+          @include weight-reg;
+  
+          // @include xl-down{
+          //   @include h5;
+          // }
+        }
+      }
+  
+      &--graphics-wrapper {
+        --graphics-top: calc(var(--sticky-buffer) + var(--nav-height));
+  
+  
+        width: calc(#{col-width(8)} - (var(--gap) / 2));
+        @include xl-down {
+          width: calc(#{col-width(7.5)} - (var(--gap) / 2));
+        }
+  
+        
+        @include lg-down {
+          position:sticky;
+          top: calc(var(--nav-height));
+  
+          --m: calc(var(--pitch-row-height) + var(--pitch-row-margin));
+          // margin-top: calc(var(--m) * -1);
+          // margin-bottom: calc(var(--m) );
+          top: calc(var(--graphics-top) + ((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
+          transition: var(--pitch-progress-transition);
+  
+  
+          // height: calc( var(--pitch-row-height) + var(--gap) + var(--pitch-caption-height));
+        }
+  
+  
+  
+      }
+      &--captions-wrapper {
+        width: calc(#{col-width(4)} - (var(--gap) / 2));
+        @include xl-down {
+          width: calc(#{col-width(4.5)} - (var(--gap) / 2));
+        }
+      }
+  
+      &--column{
+        // &>*{
+          @include lg-down{
+            width: 80%;
+            @include mx-auto;
+            // height:min-content;
+          }
+  
         // }
       }
-    }
-
-    &--graphics-wrapper {
-      width: calc(#{col-width(8)} - (var(--gap) / 2));
-      @include xxl-down {
-        width: calc(#{col-width(8.5)} - (var(--gap) / 2));
+  
+      &--graphics {
+        position: sticky;
+        display: flex;
+        top: calc(var(--graphics-top) + ((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
+        transition: var(--pitch-progress-transition);
+        
+        @include lg-down{
+          
+          position: relative;
+  
+          --my: calc(var(--pitch-row-margin) * -1);
+          margin-top: calc(var(--my));
+          margin-bottom: calc(var(--my));
+          // @include marg-y(0rem);
+          top:0rem;
+          // top: calc(var(--graphics-top) + ((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)) + 20rem);
+          transition: none;
+  
+        }
       }
-      @include xl-down {
-        width: calc(#{col-width(7.5)} - (var(--gap) / 2));
+  
+      &--laptop {
+        z-index: 1;
+        position: sticky;
+        height: auto !important;
       }
-    }
-    &--captions-wrapper {
-      width: calc(#{col-width(4)} - (var(--gap) / 2));
-      @include xxl-down {
-        width: calc(#{col-width(3.5)} - (var(--gap) / 2));
+  
+      &--screens {
+        position: absolute;
+        width: calc(100% - var(--pitch-overflow-buffer-y-percent));
+        height: calc(100% - var(--section-gap) - var(--pitch-overflow-buffer-x-percent));
+        overflow: hidden;
+        background-color: #eaf0f8;
+        left: calc((var(--pitch-overflow-buffer-y-percent) / 2));
+        top: calc(var(--section-gap_half) + (var(--pitch-overflow-buffer-x-percent) / 2));
       }
-      @include xl-down {
-        width: calc(#{col-width(4.5)} - (var(--gap) / 2));
+  
+      &--mockup {
+        --mockup-margin-top: calc(var(--pitch-row-index) * var(--pitch-row-height));
+  
+        transition-duration: var(--pitch-transition);
+  
+        @include marg-y(0);
+  
+        position: absolute;
+        z-index: 0;
+        width: var(--pitch-row-width);
+        height: var(--pitch-row-height);
+        left: calc((var(--pitch-overflow-buffer-y) / 2) * -1);
+        top: calc((var(--pitch-overflow-buffer-x) / 2) * -1);
+  
+        margin-top: calc(var(--mockup-margin-top) - (var(--pitch-current-row) * var(--pitch-row-height)));
       }
-    }
-
-    &--graphics {
-      position: sticky;
-      display: flex;
-      // top: calc(var(--nav-height) + var(--sticky-buffer));
-      --graphics-top: calc(var(--nav-height) + var(--sticky-buffer));
-      top: calc(var(--graphics-top) + ((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
-            transition: var(--pitch-progress-transition);
-    }
-
-    &--laptop {
-      z-index: 1;
-      position: sticky;
-      height: auto !important;
-    }
-
-    &--screens {
-      position: absolute;
-      width: calc(100% - var(--pitch-overflow-buffer-y-percent));
-      height: calc(100% - var(--section-gap) - var(--pitch-overflow-buffer-x-percent));
-      overflow: hidden;
-      background-color: #eaf0f8;
-      left: calc((var(--pitch-overflow-buffer-y-percent) / 2));
-      top: calc(var(--section-gap_half) + (var(--pitch-overflow-buffer-x-percent) / 2));
-    }
-
-    &--mockup {
-      --mockup-margin-top: calc(var(--pitch-row-index) * var(--pitch-row-height));
-
-      transition-duration: var(--pitch-transition);
-
-      @include marg-y(0);
-
-      position: absolute;
-      z-index: 0;
-      width: var(--pitch-row-width);
-      height: var(--pitch-row-height);
-      left: calc((var(--pitch-overflow-buffer-y) / 2) * -1);
-      top: calc((var(--pitch-overflow-buffer-x) / 2) * -1);
-
-      margin-top: calc(var(--mockup-margin-top) - (var(--pitch-current-row) * var(--pitch-row-height)));
-    }
-
-    &--body {
-      height: var(--pitch-row-height);
-
-      position: absolute;
-      top: 0;
-      left: 0;
-      // width: 100%;
-      transition-duration: var(--pitch-transition);
-
-      --mockup-margin-top: calc(var(--pitch-row-index) * var(--pitch-row-height));
-
-      margin-top: calc(var(--mockup-margin-top) - (var(--pitch-current-row) * var(--pitch-row-height)));
-      width: 90%;
-      @include xxl-down {
+  
+      &--body {
+        height: var(--pitch-row-height);
+  
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
+        transition-duration: var(--pitch-transition);
+  
+        --mockup-margin-top: calc(var(--pitch-row-index) * var(--pitch-row-height));
+  
+        margin-top: calc(var(--mockup-margin-top) - (var(--pitch-current-row) * var(--pitch-row-height)));
+        
+        @include lg-down{
+          height: var(--pitch-caption-height);
+          margin-top: calc( var(--pitch-row-index) * var(--pitch-caption-height) - (var(--pitch-current-row) * var(--pitch-caption-height) ));
+        }
+  
+  
       }
-    }
-
-    &--captions {
-      height: var(--pitch-row-height);
-      position: sticky;
-      --captions-top: calc(var(--nav-height) + var(--sticky-buffer) + var(--section-gap_half));
-      @include marg-y(var(--section-gap_half));
-      overflow: hidden;
-      top: calc(var(--captions-top) + ((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
-      transition: var(--pitch-progress-transition);
-    }
-
-    &--empties {
-      margin-top: calc((var(--pitch-row-height) + var(--section-gap_half)) * -1);
+  
+      &--captions {
+        height: var(--pitch-row-height);
+        position: sticky;
+        --captions-top: calc(var(--nav-height) + var(--sticky-buffer) + var(--section-gap_half));
+        @include marg-y(var(--section-gap_half));
+        overflow: hidden;
+        top: calc(var(--captions-top) + ((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
+        transition: var(--pitch-progress-transition);
+  
+        @include lg-down{
+          // height: var(--pitch-caption-height);
+          height: var(--pitch-caption-height);
+          margin-top: 0rem;
+          margin-bottom: 0rem;
+          --captions-top: calc( var(--nav-height) + var(--pitch-row-height) + var(--pitch-row-height) + var(--gap));
+        }
+  
+  
+  
+  
+      }
+  
+      &--vector {
+        @include xxl-down {
+          --graphic-scale: 0.925;
+        }
+        @include xl-down {
+          --graphic-scale: 0.85;
+        }
+      }
+  
+      &--empties {
+        margin-top: calc((var(--pitch-row-height) + var(--section-gap_half)) * -1);
+      }
     }
   }
-}
+  
