@@ -43,40 +43,40 @@ function PitchItem(pitch) {
   };
 }
 
-
-
-
-function pitchGetCaptionSize(pitch){
+function pitchGetCaptionSize(pitch) {
   for (var i = 0; i < pitch.captions.elems.length; i++) {
     var caption = pitch.captions.elems[i];
     var captionHeight = 0;
     var captionChildren = caption.children;
+    var captionComputedStyle = window.getComputedStyle(caption);
+
     for (var j = 0; j < captionChildren.length; j++) {
       var captionChild = captionChildren[j];
-      var height = splitPx(window.getComputedStyle(captionChild).height);
-      var marginTop = splitPx(window.getComputedStyle(captionChild).marginTop);
-      var marginBottom = splitPx(window.getComputedStyle(captionChild).marginBottom);
+      var computedStyle = window.getComputedStyle(captionChild);
+
+      // Skip the child if its display is set to "none"
+      if (computedStyle.display === "none") continue;
+
+      var height = splitPx(computedStyle.height);
+      var marginTop = splitPx(computedStyle.marginTop);
+      var marginBottom = splitPx(computedStyle.marginBottom);
       var totalHeight = height + marginTop + marginBottom;
-      captionHeight += totalHeight;
+
+      if (captionComputedStyle.flexDirection === "column") {
+        captionHeight += totalHeight;
+      } else if (captionComputedStyle.flexDirection === "row") {
+        captionHeight = Math.max(captionHeight, totalHeight);
+      }
     }
     pitch.captions.sizes[i] = captionHeight;
   }
 }
 
-
-
-function pitchSetCaptionSize(pitch){
-
+function pitchSetCaptionSize(pitch) {
   // take the greatest pitch caption height and set it as --pitch-caption-height on pitch .elem
   var captionHeight = Math.max(...pitch.captions.sizes);
   pitch.elem.style.setProperty("--pitch-caption-height", captionHeight + "px");
-  
-
-
 }
-
-
-
 
 function pitchSetCurrentRow(pitch) {
   var { current, previous } = pitch.rows;
@@ -98,7 +98,7 @@ function pitchSetRowProgress(pitch) {
 }
 
 function pitchGetRowProgress(pitch) {
-  const additionalHeight = splitRem(getComputedStyle(pitch.elem).getPropertyValue('--pitch-additional-height'));
+  const additionalHeight = splitRem(getComputedStyle(pitch.elem).getPropertyValue("--pitch-additional-height"));
 
   const captions = pitch.elem.querySelector(".pitch--captions");
   const captionsRect = captions.getBoundingClientRect();
@@ -107,7 +107,7 @@ function pitchGetRowProgress(pitch) {
   const currentRowRect = currentRow.getBoundingClientRect();
   const currentRowCenterY = (currentRowRect.top + currentRowRect.bottom) / 2;
 
-  const distance = (captionsCenterY - currentRowCenterY) / ((pitch.frame.height / 2) + additionalHeight);
+  const distance = (captionsCenterY - currentRowCenterY) / (pitch.frame.height / 2 + additionalHeight);
 
   if (distance > 1) {
     pitch.rows.progress = 1;
@@ -238,18 +238,15 @@ function Pitch({ children }) {
 
   const pitch = useRef(null);
 
-  const { desktop, isBpAndDown, bp, loading } = useResponsive();
-  const lgAndDown = !(!isBpAndDown("lg") || loading);
-  const mdAndDown = !(!isBpAndDown("md") || loading);
-  const smAndDown = !(!isBpAndDown("sm") || loading);
-
+  // const { desktop, isBpAndDown, bp, loading } = useResponsive();
+  // const lgAndDown = !(!isBpAndDown("lg") || loading);
+  // const mdAndDown = !(!isBpAndDown("md") || loading);
+  // const smAndDown = !(!isBpAndDown("sm") || loading);
 
   useMountEffect(() => {
     var pitchObj = new PitchItem(pitch);
     pitches.push(pitchObj);
     pitchInit(pitchObj);
-
-
 
     // TODO: there are 2 pitch items inside pitches after mount so certain things must be running twice.
     // if (indicators.length == 0 || indicators[indicators.length - 1].elem != indicatorObj.elem) {
@@ -262,7 +259,6 @@ function Pitch({ children }) {
       <div className="pitch" ref={pitch}>
         <div className="pitch--column pitch--graphics-wrapper">
           <Laptop rows={rows} />
-
         </div>
         <div className="pitch--column pitch--captions-wrapper">
           <div className="pitch--captions">
@@ -270,13 +266,7 @@ function Pitch({ children }) {
               var { description, heading, vector } = formatRow(row);
               var vectorProps = vector.props;
 
-              return (
-                <div className="pitch--row pitch--body" key={i} style={{ "--pitch-row-index": i }}>
-                  <Graphic {...vectorProps} />
-                  {heading && <>{heading}</>}
-                  {description && <>{description}</>}
-                </div>
-              );
+              return <PitchBody index={i} vectorProps={vectorProps} heading={heading} description={description} />;
             })}
           </div>
 
@@ -285,24 +275,27 @@ function Pitch({ children }) {
               return <div key={i} className="pitch--row pitch--placeholder"></div>;
             })}
           </div>
-
         </div>
-
       </div>
     </>
   );
 }
 
+const PitchBody = ({ index, vectorProps, heading, description }) => {
+  return (
+    <div className="pitch--row pitch--body" key={index} style={{ "--pitch-row-index": index }}>
+      <Graphic {...vectorProps} />
 
+      {heading && <>{addClassToJsxObj(heading, "d-block d-lg-none")}</>}
+      {description && <>{addClassToJsxObj(description, "d-block d-lg-none")}</>}
 
-
-
-
-
-
-
-
-
+      <div className="pitch--body-inner d-none d-lg-block">
+        {heading && <>{heading}</>}
+        {description && <>{description}</>}
+      </div>
+    </div>
+  );
+};
 
 function formatRow(row) {
   var { description, title, heading, graphic, other } = row.childs;
