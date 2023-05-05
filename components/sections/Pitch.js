@@ -40,8 +40,33 @@ function PitchItem(pitch) {
   this.captions = {
     elems: Array.from(this.ref.current.querySelectorAll(".pitch--body")),
     sizes: [],
+    vectorSizes: [],
+
   };
 }
+
+function pitchGetVectorSize(pitch) {
+
+  for (var i = 0; i < pitch.captions.elems.length; i++) {
+    var caption = pitch.captions.elems[i];
+
+    var vector = caption.querySelector(".mask");
+    var computedStyle = window.getComputedStyle(vector);
+    var width = splitPx(computedStyle.width);
+    var marginRight = splitPx(computedStyle.marginRight);
+    var marginLeft = splitPx(computedStyle.marginLeft);
+    var totalWidth = width + marginRight + marginLeft;
+
+    pitch.captions.vectorSizes[i] = totalWidth;
+  }
+}
+
+function pitchSetVectorSize(pitch) {
+  var vectorWidth = Math.max(...pitch.captions.vectorSizes);
+  pitch.elem.style.setProperty("--pitch-vector-width", vectorWidth + "px");
+}
+
+
 
 function pitchGetCaptionSize(pitch) {
   for (var i = 0; i < pitch.captions.elems.length; i++) {
@@ -169,6 +194,8 @@ function pitchSetRowSize(pitch) {
   // Set the row overflow buffer
   elem.style.setProperty("--pitch-overflow-buffer-x", height - pitch.screens.height + "px");
   elem.style.setProperty("--pitch-overflow-buffer-y", width - pitch.screens.width + "px");
+
+  elem.style.setProperty("--pitch-screen-width", pitch.screens.width + "px");
 }
 
 function pitchGetRowSize(pitch) {
@@ -286,10 +313,10 @@ const PitchBody = ({ index, vectorProps, heading, description }) => {
     <div className="pitch--row pitch--body" key={index} style={{ "--pitch-row-index": index }}>
       <Graphic {...vectorProps} />
 
-      {heading && <>{addClassToJsxObj(heading, "d-block d-lg-none")}</>}
-      {description && <>{addClassToJsxObj(description, "d-block d-lg-none")}</>}
+      {heading && <>{addClassToJsxObj(heading, "d-block d-lg-none d-sm-block")}</>}
+      {description && <>{addClassToJsxObj(description, "d-block d-lg-none d-sm-block")}</>}
 
-      <div className="pitch--body-inner d-none d-lg-block">
+      <div className="pitch--body-inner d-none d-lg-block d-sm-none">
         {heading && <>{heading}</>}
         {description && <>{description}</>}
       </div>
@@ -347,6 +374,8 @@ function pitchResizeFunctions() {
     pitchSetRowSize(pitch);
     pitchGetCaptionSize(pitch);
     pitchSetCaptionSize(pitch);
+    pitchGetVectorSize(pitch);
+    pitchSetVectorSize(pitch);
   });
 }
 

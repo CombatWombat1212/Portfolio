@@ -26,7 +26,7 @@
   --pitch-additional-height: 20rem;
 
   --pitch-caption-height: 13rem; // set with JS
-  --pitch-caption-height-multiplier: 2rem; // used to add greater margins above and below the body elements within the caption so that they're more spaced out when they transition. 
+  --pitch-caption-height-margin: 8rem; // used to add greater margins above and below the body elements within the caption so that they're more spaced out when they transition.
 
   @include pad-y(var(--section-gap_half));
 
@@ -36,8 +36,15 @@
 
   @include lg-down {
     @include flex-col-center;
-    --gap: 3rem;
-    --sticky-buffer-offset: 6vh;
+    --gap: 3.35rem;
+    --sticky-buffer-offset: 2vh;
+    --pitch-additional-height: 14rem;
+  }
+  @include md-down {
+    --gap: 3.15rem;
+    --sticky-buffer-offset: 9vh;
+    --pitch-caption-height-margin: 4rem;
+    --pitch-additional-height: 20rem;
   }
 
   .pitch {
@@ -66,6 +73,10 @@
       @include lg-down {
         margin-top: 0rem;
       }
+      //   @include md-down {
+      //     // margin-top: calc(var(--section-text-spacing) * 1.75);
+      //     margin-top: var(--gap);
+      //   }
     }
 
     &--description {
@@ -108,14 +119,16 @@
     }
 
     &--column {
-      // &>*{
       @include lg-down {
         width: 80%;
         @include mx-auto;
-        // height:min-content;
       }
-
-      // }
+      @include md-down {
+        width: 90%;
+      }
+      @include sm-down {
+        width: 100%;
+      }
     }
 
     &--graphics {
@@ -186,18 +199,27 @@
       @include lg-down {
         height: var(--pitch-caption-height);
 
-        --pitch-caption-height_increased: calc(var(--pitch-caption-height) + var(--pitch-caption-height-multiplier));
-        margin-top: calc(var(--pitch-row-index) * var(--pitch-caption-height_increased) - (var(--pitch-current-row) * var(--pitch-caption-height_increased)));
+        --pitch-caption-height_increased: calc(var(--pitch-caption-height) + var(--pitch-caption-height-margin));
+        margin-top: calc(
+          var(--pitch-row-index) * var(--pitch-caption-height_increased) - (var(--pitch-current-row) * var(--pitch-caption-height_increased))
+        );
 
         @include flex-row;
-        justify-content: start;
+        justify-content: flex-start;
         align-items: center;
-        gap:2.25rem;
+        gap: 2.25rem;
+      }
+
+      @include md-down {
+        @include flex-col;
+        // align-items: unset;
+        gap: 0rem;
+        text-align: center;
       }
     }
 
     &--body-inner {
-        height: min-content;
+      height: min-content;
       & > * {
         height: min-content;
       }
@@ -218,6 +240,12 @@
         margin-top: calc((var(--pitch-caption-height) + var(--gap)) * -1);
         margin-bottom: 0rem;
         --captions-top: calc(var(--graphics-top) + var(--pitch-row-height) + var(--gap));
+
+        width: calc(var(--pitch-screen-width) - 1rem);
+        @include mx-auto;
+      }
+      @include sm-down {
+        width: 80%;
       }
     }
 
@@ -229,8 +257,19 @@
         --graphic-scale: 0.85;
       }
       @include lg-down {
-        --graphic-scale: 0.85;
-        height:min-content;
+        --graphic-scale: 1;
+        height: min-content;
+        width: var(--pitch-vector-width);
+        min-width: var(--pitch-vector-width);
+        @include flex-row-center;
+      }
+      @include md-down {
+        --graphic-scale: 0.875;
+        width: 100%;
+        min-width: 100%;
+        order: 3;
+        margin-top: calc(var(--gap) * 1.125);
+        opacity: 0.2575;
       }
     }
 

@@ -84,7 +84,7 @@ function MakeRight({ pop }) {
                 <Heading  >Choose</Heading>
                 <Description>
                   <p>
-                    from a storefront of <br className="d-lg-none" />sourced 3D models, <br className="d-lg-none" />or upload your own
+                    from a storefront of <br className="d-lg-none" />sourced 3D models, <br className="d-lg-none d-md-block d-sm-none" />or upload your own
                   </p>
                 </Description>
                 <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_choose"]} />
@@ -95,7 +95,7 @@ function MakeRight({ pop }) {
                 <Heading  >Tweak</Heading>
                 <Description>
                   <p>
-                    and personalize <br className="d-lg-none" /> to suit your needs
+                    and personalize <br className="d-lg-none d-sm-block" /> to suit  your needs
                   </p>
                 </Description>
                 <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_tweak"]} />
@@ -106,7 +106,7 @@ function MakeRight({ pop }) {
                 <Heading  >Order</Heading>
                 <Description>
                   <p>
-                    your print, automatically <br className="d-lg-none" /> assigning it  to one of <br className="d-lg-none" />our verified makers
+                    your print, automatically <br className="d-lg-none" /> assigning it  to one of our <br className="d-lg-none d-xs-block" />verified makers
                   </p>
                 </Description>
                 <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_order"]} />
@@ -116,7 +116,7 @@ function MakeRight({ pop }) {
               <>
                 <Heading  >Recieve</Heading>
                 <Description>
-                  <p>the purchased item <br className="d-lg-none" />right at your front door</p>
+                  <p>the purchased item <br className="d-lg-none d-sm-block" />right at your front door</p>
                 </Description>
                 <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_recieve"]} />
                 <Graphic type="image" img={MAKERIGHT_IMGS["pitch_mockup_recieve"]} />
