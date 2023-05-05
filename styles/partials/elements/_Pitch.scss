@@ -20,8 +20,9 @@
     
     --sticky-buffer-offset: 2rem;
     // --sticky-buffer: calc(var(--section-gap_half) / 2);
-    --sticky-buffer: calc((((100vh - var(--nav-height)) - (var(--pitch-row-margin) * 2) - var(--pitch-row-height)) / 2) - var(--sticky-buffer-offset));
-  
+    --sticky-buffer: calc(((100vh - var(--nav-height)) - (var(--pitch-row-margin) * 2) - var(--pitch-row-height)) / 2);
+    --graphics-top: calc(var(--sticky-buffer) + var(--nav-height));
+
     // increasing this number makes the scrolling slower, like you have to scroll further before the next switch
     --pitch-additional-height: 20rem;
   
@@ -80,7 +81,6 @@
       }
   
       &--graphics-wrapper {
-        --graphics-top: calc(var(--sticky-buffer) + var(--nav-height));
   
   
         width: calc(#{col-width(8)} - (var(--gap) / 2));
@@ -213,7 +213,7 @@
           height: var(--pitch-caption-height);
           margin-top: 0rem;
           margin-bottom: 0rem;
-          --captions-top: calc( var(--nav-height) + var(--pitch-row-height) + var(--pitch-row-height) + var(--gap));
+          --captions-top: calc( var(--graphics-top) + var(--pitch-row-height) + var(--gap));
         }
   
   
