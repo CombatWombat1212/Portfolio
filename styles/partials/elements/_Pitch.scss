@@ -41,11 +41,18 @@
     --pitch-additional-height: 14rem;
   }
   @include md-down {
-    --gap: 3.15rem;
+    --gap: 3rem;
     --sticky-buffer-offset: 9vh;
-    --pitch-caption-height-margin: 4rem;
+    --pitch-progress-distance: 1rem;
+    --pitch-caption-height-margin: 2rem;
     --pitch-additional-height: 20rem;
   }
+  @include sm-down {
+    --pitch-additional-height: 32rem;
+    --sticky-buffer-offset: 13vh;
+  }
+
+
 
   .pitch {
     &--row {
@@ -53,8 +60,14 @@
       height: var(--pitch-row-height);
       @include flex-col-center;
     }
+
     &--placeholder {
       height: calc(var(--pitch-row-height) + var(--pitch-additional-height)) !important;
+
+
+      &:last-child {
+        height: calc((var(--pitch-row-height) * 2.25) + var(--pitch-additional-height)) !important;
+      }
     }
 
     &--heading {
@@ -275,6 +288,7 @@
 
     &--empties {
       margin-top: calc((var(--pitch-row-height) + var(--section-gap_half)) * -1);
+
     }
   }
 }

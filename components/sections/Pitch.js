@@ -3,11 +3,16 @@ import { addClassToJsxObj } from "./sections_utilities/ClassUtilities";
 import { getSectionChildren } from "./sections_utilities/GetSectionChildren";
 import MAKERIGHT_IMGS from "@/data/MAKERIGHT_IMGS";
 import Section from "./Sections";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
-import { clamp, RESIZE_TIMEOUT, splitPx, splitRem } from "@/scripts/GlobalUtilities";
+import { clamp, cooldown, RESIZE_TIMEOUT, splitPx, splitRem } from "@/scripts/GlobalUtilities";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import usePropModifier from "@/scripts/hooks/usePropModifier";
+import swipeEventsInit from "@/scripts/SwipeEvents";
+import useListener from "@/scripts/hooks/useListener";
+import useScrollDirection from "@/scripts/hooks/useScrollDirection";
+import useScrollType from "@/scripts/useScrollType";
+
 const laptop_frame = MAKERIGHT_IMGS.pitch_laptop_frame;
 
 // TODO: i think you should do the same animation on the description side to make it have smooth scrolling transitions too? Or maybe something to lock it in place better next to the screen? might not be priority though
@@ -35,18 +40,19 @@ function PitchItem(pitch) {
     elems: Array.from(this.ref.current.querySelectorAll(".pitch--placeholder")),
     current: 0,
     progress: 0,
-    previous: null,
   };
   this.captions = {
     elems: Array.from(this.ref.current.querySelectorAll(".pitch--body")),
     sizes: [],
     vectorSizes: [],
-
+  };
+  this.starting = {
+    row: 0,
+    set: 0,
   };
 }
 
 function pitchGetVectorSize(pitch) {
-
   for (var i = 0; i < pitch.captions.elems.length; i++) {
     var caption = pitch.captions.elems[i];
 
@@ -65,8 +71,6 @@ function pitchSetVectorSize(pitch) {
   var vectorWidth = Math.max(...pitch.captions.vectorSizes);
   pitch.elem.style.setProperty("--pitch-vector-width", vectorWidth + "px");
 }
-
-
 
 function pitchGetCaptionSize(pitch) {
   for (var i = 0; i < pitch.captions.elems.length; i++) {
@@ -178,8 +182,15 @@ function pitchGetInView(pitch) {
   var rect = elem.getBoundingClientRect();
   var inView = rect.top < window.innerHeight && rect.bottom > 0;
   pitch.inView = inView;
-  // if (inView) pitch.inView = true;
-  // else pitch.inView = false;
+
+  if (inView && pitch.starting.set == 0) {
+    pitch.starting.set++;
+    pitch.starting.row = pitch.rows.current;
+  }
+
+  if (!inView) {
+    pitch.starting.set = 0;
+  }
 }
 
 function pitchSetRowSize(pitch) {
@@ -223,11 +234,6 @@ function pitchInit(pitch) {
 
   pitchResize(pitch);
   pitchScroll(null, true);
-
-  window.removeEventListener("resize", pitchResize, false);
-  window.addEventListener("resize", pitchResize, false);
-  window.removeEventListener("scroll", pitchScroll, false);
-  window.addEventListener("scroll", pitchScroll, false);
 }
 
 // TODO: is giving the laptop the onLoad thing working well in practice? The other option is giving it priority.  Or both.
@@ -257,6 +263,15 @@ function Laptop({ rows }) {
 }
 
 function Pitch({ children }) {
+  const [withinPitch, setWithinPitch] = useState(false);
+  const [lockScroll, setLockScroll] = useState(false);
+  const [lastTouchY, setLastTouchY] = useState(null);
+  const [leavingPitch, setLeavingPitch] = useState(false);
+
+  useEffect(() => {
+    swipeEventsInit();
+  }, []);
+
   var rows = [];
 
   for (var i = 0; i < children.length; i++) {
@@ -265,10 +280,10 @@ function Pitch({ children }) {
 
   const pitch = useRef(null);
 
-  // const { desktop, isBpAndDown, bp, loading } = useResponsive();
-  // const lgAndDown = !(!isBpAndDown("lg") || loading);
-  // const mdAndDown = !(!isBpAndDown("md") || loading);
-  // const smAndDown = !(!isBpAndDown("sm") || loading);
+  const { desktop, isBpAndDown, bp, loading } = useResponsive();
+  const lgAndDown = !(!isBpAndDown("lg") || loading);
+  const mdAndDown = !(!isBpAndDown("md") || loading);
+  const smAndDown = !(!isBpAndDown("sm") || loading);
 
   useMountEffect(() => {
     var pitchObj = new PitchItem(pitch);
@@ -281,6 +296,109 @@ function Pitch({ children }) {
     // }
     // I fixed it like this in indicator
   });
+
+  useListener("resize", pitchResize, { passive: true });
+  useListener("scroll", pitchScroll, { passive: true });
+  useListener("scroll", handleScroll);
+  // useListener("scroll", atTopOfNextSection);
+  useListener("touchmove", handleScroll);
+  useListener("scroll", preventScroll, { passive: false, enabled: lockScroll });
+  useListener("touchstart", preventScroll, { passive: false, enabled: lockScroll });
+  useListener("swiped-down", swipedDownHandler, { ref: pitch, enabled: lockScroll });
+  useListener("swiped-up", swipedUpHandler, { ref: pitch, enabled: lockScroll });
+  useListener("touchend", () => setLastTouchY(null));
+
+  // if mdAndDown is true do the following:
+  // cancel all scrolling once the top of .pitch (including its padding-top) has reached the top of the screen, from there listen for swipes and with every swipe up, scroll to the top of the next .pitch--placeholder, you know which one is the current placeholder based on pitch.rows.current that is set on scroll and resize
+
+  const scrollDir = useScrollDirection();
+  const scrollType = useScrollType();
+
+  function handleScroll(e) {
+    if (!(mdAndDown && pitches.find((pitch) => pitch.inView))) {
+      setLockScroll(false);
+      return;
+    }
+
+    const pitchObj = pitches.find((p) => p.elem == pitch.current);
+    const pitchRect = pitchObj.elem.getBoundingClientRect();
+    const topOffset = pitchObj.frame.height;
+
+    const atFirstRow = pitchObj.rows.current == 0;
+    const atLastRow = pitchObj.rows.current == pitchObj.rows.elems.length - 1;
+    const withinFirstOrLastRow = atFirstRow || atLastRow;
+
+    const pastPitchTop = pitchRect.top <= 0;
+    const beforePitchBottom = pitchRect.bottom >= window.innerHeight;
+    const withinPitch = pastPitchTop && beforePitchBottom;
+
+    setWithinPitch(withinPitch);
+
+    const scrollTouch = scrollType == "touch";
+    const withinTopOffset = pitchRect.top >= -topOffset && pitchRect.top <= topOffset;
+    const set = withinPitch && scrollTouch && !(atFirstRow || atLastRow);
+    setLockScroll(set);
+  }
+
+  // function atTopOfNextSection(e) {
+  //   if (!(mdAndDown && pitches.find((p) => p.elem == pitch.current))) return;
+  //   const pitchObj = pitches.find((p) => p.elem == pitch.current);
+
+  //   var parentSection = pitchObj.elem.closest(".section--wrapper");
+  //   var nextSection = parentSection.nextElementSibling;
+  //   var prevSection = parentSection.previousElementSibling;
+
+  //   if (scrollType == "touch") {
+
+  //     console.log(nextSection);
+
+  //     if (nextSection) {
+  //       var nextSectionRect = nextSection.getBoundingClientRect();
+  //       var nextSectionTop = nextSectionRect.top;
+  //       console.log(nextSectionTop)
+  //       if(nextSectionTop < 0){
+  //         setLeavingPitch(true);
+  //       }
+
+  //     }
+
+  //   }
+  // }
+
+  function preventScroll(e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  useEffect(() => {
+    if (lockScroll || withinPitch 
+      // || leavingPitch
+      ) {
+      stopMomentum();
+    }
+  }, [lockScroll, withinPitch
+    // , leavingPitch
+  ]);
+
+  function swipedUpHandlerRun(e) {
+    pitchSkipToRow(1);
+  }
+
+  function swipedDownHandlerRun(e) {
+    pitchSkipToRow(-1);
+  }
+
+  const swipedUpHandlerThrottled = cooldown(swipedUpHandlerRun, 100);
+  const swipedDownHandlerThrottled = cooldown(swipedDownHandlerRun, 100);
+
+  function swipedUpHandler(e) {
+    swipedUpHandlerThrottled(e);
+  }
+
+  function swipedDownHandler(e) {
+    swipedDownHandlerThrottled(e);
+  }
+
   return (
     <>
       <div className="pitch" ref={pitch}>
@@ -293,7 +411,7 @@ function Pitch({ children }) {
               var { description, heading, vector } = formatRow(row);
               var vectorProps = vector.props;
 
-              return <PitchBody index={i} vectorProps={vectorProps} heading={heading} description={description} />;
+              return <PitchBody key={i} index={i} vectorProps={vectorProps} heading={heading} description={description} />;
             })}
           </div>
 
@@ -341,6 +459,42 @@ function formatRow(row) {
     vector,
     mockup,
   };
+}
+
+function stopMomentum() {
+  document.body.classList.add("noscroll");
+  setTimeout(() => {
+    document.body.classList.remove("noscroll");
+  }, 100);
+}
+
+function pitchSkipToRow(delta) {
+  const pitchObj = pitches.find((pitch) => pitch.inView);
+  if (!pitchObj) return;
+
+  const newRow = pitchObj.rows.current + delta;
+  if (newRow < 0 || newRow >= pitchObj.rows.elems.length) return;
+
+  const targetRow = pitchObj.rows.elems[newRow];
+  const targetTop = targetRow.getBoundingClientRect().top + window.scrollY;
+  window.scrollTo({ top: targetTop, behavior: "smooth" });
+  pitchObj.rows.current = newRow;
+}
+
+function isScrollUp(e, lastTouchY, setLastTouchY) {
+  // if (scrollDir === "up") {
+  // if (scrollType === "touch") {
+  if (e.type === "touchmove" && e.touches.length > 0) {
+    const touch = e.touches[0];
+    const isSwipingDown = lastTouchY !== null && touch.clientY > lastTouchY;
+    setLastTouchY(touch.clientY);
+    return isSwipingDown;
+  }
+  // } else {
+  // return true;
+  // }
+  // }
+  return false;
 }
 
 var scrolls = 0;

@@ -5140,10 +5140,18 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 49.9375em) {
   .pitch {
-    --gap: 3.15rem;
+    --gap: 3rem;
     --sticky-buffer-offset: 9vh;
-    --pitch-caption-height-margin: 4rem;
+    --pitch-progress-distance: 1rem;
+    --pitch-caption-height-margin: 2rem;
     --pitch-additional-height: 20rem;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  .pitch {
+    --pitch-additional-height: 32rem;
+    --sticky-buffer-offset: 13vh;
   }
 }
 
@@ -5158,6 +5166,10 @@ h3 + .studypanel--paragraph {
 
 .pitch .pitch--placeholder {
   height: calc(var(--pitch-row-height) + var(--pitch-additional-height)) !important;
+}
+
+.pitch .pitch--placeholder:last-child {
+  height: calc((var(--pitch-row-height) * 2.25) + var(--pitch-additional-height)) !important;
 }
 
 .pitch .pitch--heading {
@@ -8623,6 +8635,10 @@ h3 + .studypanel--paragraph {
   }
 }
 
+.section--wrapper:not(#Overview--Pitch) {
+  overflow: hidden;
+}
+
 #Makeright {
   --background-info-gap: 6rem;
 }
@@ -8743,8 +8759,15 @@ h3 + .studypanel--paragraph {
 }
 
 #Makeright #Overview--Hero-Logo {
-  padding-top: 5rem;
-  padding-bottom: 5.5rem;
+  --pad-y: 5rem;
+  padding-top: var(--pad-y);
+  padding-bottom: calc(var(--pad-y) * 1.1);
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Makeright #Overview--Hero-Logo {
+    --pad-y: 3rem;
+  }
 }
 
 #Makeright #Overview--Hero-Logo .section {
@@ -9444,9 +9467,9 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 61.9375em) {
   #Made #Texturing--Transition .image-row {
-    --image-row-col: 3 !important;
-    --image-row-scale: 1.35;
-    --image-row-offset: 1;
+    --image-row-col: 5 !important;
+    --image-row-scale: 1.45;
+    --image-row-offset: 3;
   }
 }
 
@@ -9599,14 +9622,20 @@ h3 + .studypanel--paragraph {
   padding-bottom: 13%;
 }
 
+@media screen and (max-width: 61.9375em) {
+  #Made #Delivery--Images-1, #Made #Delivery--Images-2, #Made #Delivery--Images-3 {
+    padding-bottom: 18%;
+  }
+}
+
 #Made #Delivery--Images-1 .image-row, #Made #Delivery--Images-2 .image-row, #Made #Delivery--Images-3 .image-row {
   --image-row-scale: 1.35;
-  --image-row-offset: 0.5;
+  --image-row-offset: 1;
 }
 
 @media screen and (max-width: 61.9375em) {
   #Made #Delivery--Images-1 .image-row, #Made #Delivery--Images-2 .image-row, #Made #Delivery--Images-3 .image-row {
-    --image-row-scale: 1.3;
+    --image-row-scale: 1.475;
   }
 }
 

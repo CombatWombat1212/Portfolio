@@ -155,9 +155,14 @@
 	padding-right: $val;
 }
 
-@mixin pad-y($val) {
-	padding-top: $val;
-	padding-bottom: $val;
+@mixin pad-y($val1, $val2: null) {
+  @if $val2 == null {
+    padding-top: $val1;
+    padding-bottom: $val1;
+  } @else {
+    padding-top: $val1;
+    padding-bottom: $val2;
+  }
 }
 
 

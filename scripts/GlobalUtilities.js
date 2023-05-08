@@ -474,12 +474,35 @@ function scrollToTarget(target, attempts = 0, maxAttempts = 10) {
 
 
 
+function cooldown(fn, delay) {
+  let lastExecution = 0;
+  
+  return function(...args) {
+    const currentTime = Date.now();
+    if (currentTime - lastExecution >= delay) {
+      fn(...args);
+      lastExecution = currentTime;
+    }
+  };
+}
+
+
+
+
 
 // Video file formats
 const VIDEO_TYPES = ["mp4", "avi", "mov", "wmv", "mkv", "flv", "webm"];
 
 // Image file formats
 const IMAGE_TYPES = ["jpg", "jpeg", "png", "gif", "svg", "bmp", "webp"];
+
+
+
+
+
+
+
+
 
 export {
   addStyleNonDestructive,
@@ -505,6 +528,7 @@ export {
   conditionalOrder,
   isElementNearTop,
 scrollToTarget,
+cooldown,
   RESIZE_TIMEOUT,
   VIDEO_TYPES,
   IMAGE_TYPES,

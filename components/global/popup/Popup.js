@@ -165,9 +165,9 @@ function Wrapper({ pop, bp }) {
   var popclass = getPopupClasses(pop);
 
   useBodyClass("noscroll", pop.on);
-  useListener("resize", popupResize, pop.on);
-  useListener("keydown", seekHandlerWithKeydown, pop.on);
-  useListener("keydown", closeHandlerWithKeydown, pop.on);
+  useListener("resize", popupResize, {enabled: pop.on});
+  useListener("keydown", seekHandlerWithKeydown, {enabled: pop.on});
+  useListener("keydown", closeHandlerWithKeydown, {enabled: pop.on});
 
   const nav = useNavControls();
   const mouseMoving = useMouseMoving(null, 1000);
@@ -648,8 +648,8 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
   }, []);
 
   const mediaWrapperRef = useRef(null);
-  useListener("swiped-left", handles.swipeLeft, true, mediaWrapperRef);
-  useListener("swiped-right", handles.swipeRight, true, mediaWrapperRef);
+  useListener("swiped-left", handles.swipeLeft, {ref: mediaWrapperRef});
+  useListener("swiped-right", handles.swipeRight, {ref: mediaWrapperRef});
 
   return (
     <>

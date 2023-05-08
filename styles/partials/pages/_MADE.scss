@@ -460,9 +460,9 @@
           --image-row-offset: 1;
         }
         @include lg-down {
-          --image-row-col: 3 !important;
-          --image-row-scale: 1.35;
-          --image-row-offset: 1;
+          --image-row-col: 5 !important;
+          --image-row-scale: 1.45;
+          --image-row-offset: 3;
         }
       }
     }
@@ -576,11 +576,14 @@
     &--Images-3 {
       padding-bottom: 13%;
 
+      @include lg-down {
+        padding-bottom: 18%;
+      }
       .image-row {
         --image-row-scale: 1.35;
-        --image-row-offset: 0.5;
+        --image-row-offset: 1;
         @include lg-down {
-          --image-row-scale: 1.3;
+          --image-row-scale: 1.475;
         }
       }
     }
@@ -601,4 +604,3 @@
     }
   }
 }
-

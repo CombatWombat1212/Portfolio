@@ -278,7 +278,7 @@ function useColLine(hasColLine, { update = null } = {}) {
     }
   }, [update]);
 
-  useListener("resize", handleResizeRef.current, hasColLine);
+  useListener("resize", handleResizeRef.current, {enabled: hasColLine});
 }
 
 export { useColLine };

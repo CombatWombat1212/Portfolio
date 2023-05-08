@@ -26,7 +26,7 @@ function MakeRight({ pop }) {
         <Chapter id="Overview" name="Overview">
           <Section id="Overview--Background" type="overview">
             <Title>Background</Title>
-            <Heading>3D printing is yet to reach its full potential</Heading>
+            <Heading>3D printing is yet to reach <br className="d-lg-none"/> its full potential</Heading>
             <Description>
               <p>
                 Offering endless customization, cheap manufacturing, and fast production speeds.
@@ -46,7 +46,7 @@ function MakeRight({ pop }) {
           <Section id="Overview--Challenge" type="overview">
             <Title>Challenge</Title>
             <Heading>
-              Cost, and technical knowledge <br className="d-md-none" /> stand in the way of mass adoption
+              Cost, and technical knowledge <br className="d-lg-none" />stand in the way <br className="d-lg-none" /> of mass adoption
             </Heading>
             <Description>
               <p>

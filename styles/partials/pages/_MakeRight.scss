@@ -1,6 +1,6 @@
-// .section--wrapper {
-//   overflow: hidden;
-// }
+.section--wrapper:not(#Overview--Pitch) {
+  overflow: hidden;
+}
 
 #Makeright {
   --background-info-gap: 6rem;
@@ -113,9 +113,12 @@
     }
   }
 
+
+
   #Overview {
     &--Background {
-      .section {
+      .section {        
+
         @include gap(var(--background-info-gap));
         --graphic-scale: 0.95;
       }
@@ -132,9 +135,13 @@
     &--Opportunity {
     }
     &--Hero-Logo {
-      $pad: 5rem;
-      padding-top: $pad;
-      padding-bottom: $pad * 1.1;
+      --pad-y: 5rem;
+      
+      @include pad-y(var(--pad-y), calc(var(--pad-y) * 1.1));
+      
+      @include lg-down{
+        --pad-y: 3rem;
+      }
 
       .section {
         overflow: hidden;
