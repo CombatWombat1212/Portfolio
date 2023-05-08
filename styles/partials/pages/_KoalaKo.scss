@@ -273,15 +273,15 @@
         }
         @include md-down {
           --gantt-label-width: 9rem;
+
+          .label--unit:nth-child(odd) {
+            & > * {
+              display: none;
+            }
+          }
         }
         @include sm-down {
           --gantt-label-width: 8rem;
-        }
-
-        .label--unit:nth-child(odd) {
-          & > * {
-            display: none;
-          }
         }
       }
     }

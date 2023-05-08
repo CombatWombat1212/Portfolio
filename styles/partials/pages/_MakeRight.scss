@@ -113,12 +113,9 @@
     }
   }
 
-
-
   #Overview {
     &--Background {
-      .section {        
-
+      .section {
         @include gap(var(--background-info-gap));
         --graphic-scale: 0.95;
       }
@@ -136,10 +133,10 @@
     }
     &--Hero-Logo {
       --pad-y: 5rem;
-      
+
       @include pad-y(var(--pad-y), calc(var(--pad-y) * 1.1));
-      
-      @include lg-down{
+
+      @include lg-down {
         --pad-y: 3rem;
       }
 
@@ -183,6 +180,38 @@
       margin-top: 0;
     }
     &--Gantt {
+      .gantt {
+        --gantt-label-width: 16rem;
+        @include xl-down {
+          --gantt-label-width: 14rem;
+        }
+        @include lg-down {
+          --gantt-label-width: 12rem;
+        }
+        @include md-down {
+          --gantt-label-width: 9rem;
+        }
+        @include sm-down {
+          --gantt-label-width: 10rem;
+        }
+
+        .label--unit {
+          @include md {
+            &:nth-child(2n) > * {
+              display: none;
+            }
+          }
+
+          @include sm-down {
+            & > * {
+              overflow: visible;
+            }
+            &:nth-child(2n + 1) > * {
+              display: none;
+            }
+          }
+        }
+      }
     }
   }
 
