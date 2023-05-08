@@ -50,6 +50,11 @@ function PitchItem(pitch) {
     row: 0,
     set: 0,
   };
+
+  this.scrollStatus = {
+    above: 0,
+    below: 0,
+  };
 }
 
 function pitchGetVectorSize(pitch) {
@@ -238,8 +243,6 @@ function pitchInit(pitch) {
 
 // TODO: is giving the laptop the onLoad thing working well in practice? The other option is giving it priority.  Or both.
 
-// TODO: The closer you are to completeing the scroll to the next row, add a lil push up or down to help feel like progress is being made.  So as the person scrolls have a value called progress to the next row or something like that then map it to just a lil movement up or down on the main elements in the css.  Then once you scroll to the next one it springs back to where it was
-
 function Laptop({ rows }) {
   return (
     <>
@@ -266,7 +269,6 @@ function Pitch({ children }) {
   const [withinPitch, setWithinPitch] = useState(false);
   const [lockScroll, setLockScroll] = useState(false);
   const [lastTouchY, setLastTouchY] = useState(null);
-  const [leavingPitch, setLeavingPitch] = useState(false);
 
   useEffect(() => {
     swipeEventsInit();
@@ -299,11 +301,12 @@ function Pitch({ children }) {
 
   useListener("resize", pitchResize, { passive: true });
   useListener("scroll", pitchScroll, { passive: true });
-  useListener("scroll", handleScroll);
-  // useListener("scroll", atTopOfNextSection);
-  useListener("touchmove", handleScroll);
-  useListener("scroll", preventScroll, { passive: false, enabled: lockScroll });
-  useListener("touchstart", preventScroll, { passive: false, enabled: lockScroll });
+  useListener("scroll", handleScroll, { passive: true });
+  useListener("scroll", atTopOfNextSection, { passive: true });
+  useListener("touchmove", handleScroll, { passive: true });
+
+  useListener("scroll", preventScroll, { enabled: lockScroll });
+  useListener("touchstart", preventScroll, { enabled: lockScroll });
   useListener("swiped-down", swipedDownHandler, { ref: pitch, enabled: lockScroll });
   useListener("swiped-up", swipedUpHandler, { ref: pitch, enabled: lockScroll });
   useListener("touchend", () => setLastTouchY(null));
@@ -340,45 +343,48 @@ function Pitch({ children }) {
     setLockScroll(set);
   }
 
-  // function atTopOfNextSection(e) {
-  //   if (!(mdAndDown && pitches.find((p) => p.elem == pitch.current))) return;
-  //   const pitchObj = pitches.find((p) => p.elem == pitch.current);
+  function atTopOfNextSection(e) {
+    if (scrollType != "touch") return;
+    if (!(mdAndDown && pitches.find((p) => p.elem == pitch.current))) return;
+    const pitchObj = pitches.find((p) => p.elem == pitch.current);
 
-  //   var parentSection = pitchObj.elem.closest(".section--wrapper");
-  //   var nextSection = parentSection.nextElementSibling;
-  //   var prevSection = parentSection.previousElementSibling;
+    const navHeight = splitRem(getComputedStyle(document.documentElement).getPropertyValue("--nav-height"));
 
-  //   if (scrollType == "touch") {
+    var parentSection = pitchObj.elem.closest(".section--wrapper");
+    var nextSection = parentSection.nextElementSibling;
+    var prevSection = parentSection.previousElementSibling;
 
-  //     console.log(nextSection);
+    if (!nextSection || !prevSection) return;
 
-  //     if (nextSection) {
-  //       var nextSectionRect = nextSection.getBoundingClientRect();
-  //       var nextSectionTop = nextSectionRect.top;
-  //       console.log(nextSectionTop)
-  //       if(nextSectionTop < 0){
-  //         setLeavingPitch(true);
-  //       }
+    var nextSectionRect = nextSection.getBoundingClientRect();
+    var prevSectionRect = prevSection.getBoundingClientRect();
+    var nextSectionTop = nextSectionRect.top;
+    var prevSectionTop = prevSectionRect.top;
 
-  //     }
+    if (nextSectionTop < navHeight && pitchObj.scrollStatus.below == 0) {
+      pitchObj.scrollStatus.below++;
+      stopMomentum();
+    }
 
-  //   }
-  // }
-
-  function preventScroll(e) {
-    e.preventDefault();
-    e.stopPropagation();
+    if (prevSectionTop > navHeight && pitchObj.scrollStatus.above == 0) {
+      pitchObj.scrollStatus.above++;
+      stopMomentum();
+    }
   }
 
   useEffect(() => {
-    if (lockScroll || withinPitch 
-      // || leavingPitch
-      ) {
+    if (lockScroll || withinPitch) {
       stopMomentum();
     }
-  }, [lockScroll, withinPitch
-    // , leavingPitch
-  ]);
+  }, [lockScroll, withinPitch]);
+
+  useEffect(() => {
+    if (lockScroll) {
+      const pitchObj = pitches.find((p) => p.elem == pitch.current);
+      pitchObj.scrollStatus.below = 0;
+      pitchObj.scrollStatus.above = 0;
+    }
+  }, [lockScroll]);
 
   function swipedUpHandlerRun(e) {
     pitchSkipToRow(1);
@@ -459,6 +465,11 @@ function formatRow(row) {
     vector,
     mockup,
   };
+}
+
+function preventScroll(e) {
+  e.preventDefault();
+  e.stopPropagation();
 }
 
 function stopMomentum() {
