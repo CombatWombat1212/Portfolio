@@ -190,7 +190,7 @@ function MakeRight({ pop }) {
           <Section id="Research--Limits" background="background darkest" className="flex-col">
             <Title>Secondary Research</Title>
             <Heading>
-              Cost and knowledge gaps prevent adoption and use, <br />
+              Cost and knowledge gaps prevent adoption and use, <br className="d-lg-none" />
               while hobbyist printers sit idle
             </Heading>
           </Section>

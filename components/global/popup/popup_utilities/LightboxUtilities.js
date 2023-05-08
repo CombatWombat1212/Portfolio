@@ -6,6 +6,7 @@ import { setWaitingToShowLoading, waitToLoad } from "../Popup";
 import { loadImgExternally } from "@/scripts/GlobalUtilities";
 import { KOALAKO_IMG_GROUPS } from "@/data/KOALAKO_IMGS";
 import { EXPLORATIONS_IMG_GROUPS } from "@/data/EXPLORATIONS_IMGS";
+import { MADE_IMG_GROUPS } from "@/data/MADE_IMGS";
 
 function updatePopupNav(pop, nav) {
 
@@ -42,6 +43,7 @@ function getImgGroup(pop) {
     var IMG_GROUP;
     if (imgCollection == "koalako") IMG_GROUP = KOALAKO_IMG_GROUPS;
     if (imgCollection == "makeright") IMG_GROUP = MAKERIGHT_IMG_GROUPS;
+    if (imgCollection == "made") IMG_GROUP = MADE_IMG_GROUPS;
     if (imgCollection == "explorations") IMG_GROUP = EXPLORATIONS_IMG_GROUPS;
   
     if (imgGroup) {

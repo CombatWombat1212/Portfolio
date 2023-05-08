@@ -1101,3 +1101,25 @@
 		}
 	}
 }
+
+
+
+// @mixin graph-animation(){
+// 	transition-duration: 0.95s;
+//     transition-timing-function: cubic-bezier(0.52, 0.01, 0.17, 0.92);
+//     transition-delay: 0.21s;
+// }
+
+@mixin graph-animation($custom-property: null, $custom-duration: null, $custom-timing-function: null, $custom-delay: null) {
+    $default-property: all;
+    $default-duration: 0.95s;
+    $default-timing-function: cubic-bezier(0.52, 0.01, 0.17, 0.92);
+    $default-delay: 0.21s;
+    
+    $property: if($custom-property != null, $custom-property, $default-property);
+    $duration: if($custom-duration != null, $custom-duration, $default-duration);
+    $timing-function: if($custom-timing-function != null, $custom-timing-function, $default-timing-function);
+    $delay: if($custom-delay != null, $custom-delay, $default-delay);
+
+    transition: $default-property $default-duration $default-timing-function $default-delay, $property $duration $timing-function $delay;
+}

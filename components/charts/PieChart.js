@@ -1,8 +1,20 @@
-import GRAPHS from "/data/charts/GRAPHS";
+import useInView from "@/scripts/hooks/useInView";
+import GRAPHS from "@/data/charts/GRAPHS";
+import { useEffect, useRef } from "react";
 
 function Circle({ item }) {
+
+  const circleRef= useRef(null)
+  const inView = useInView(circleRef);
+
+  useEffect(() => {
+  console.log(inView);
+  }, [inView]);
+
   return (
-    <div className="circle--wrapper">
+    <div className="circle--wrapper"
+    ref={circleRef}
+    >
       <div className="circle--inner">
         <div className={`circle--label ${item.highlighted ? "circle--label__highlighted" : "circle--label__default"}`}>
           <span>{item.value + "%"}</span>
@@ -10,7 +22,7 @@ function Circle({ item }) {
         <svg
           className="circle--svg"
           style={{
-            "--circle-value": item.value,
+            "--circle-value": inView ? item.value : 0,
           }}>
           <circle className="circle circle--empty" />
           <circle className={`circle circle--filled ${item.highlighted ? "circle--filled__highlighted" : "circle--filled__default"}`} />

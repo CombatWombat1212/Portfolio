@@ -77,7 +77,12 @@
     @include b-rad(100rem);
 
     &__filled {
-      grid-column: span var(--sep-graph-value);
+      @include graph-animation(opacity, 0.21s, ease-in-out, 0s);
+      opacity: var(--in-view);
+      // grid-column: span var(--sep-graph-value);
+      grid-column: span 100;
+      width: var(--sep-graph-value);
+
     }
 
     &__empty {

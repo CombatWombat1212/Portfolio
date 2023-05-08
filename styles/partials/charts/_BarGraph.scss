@@ -1,5 +1,3 @@
-
-
 @mixin bar-graph-y-grid() {
   width: 100%;
   height: 100%;
@@ -8,8 +6,6 @@
   //   grid-template-rows: repeat(var(--bar-graph-rows), 1fr);
   grid-template-rows: repeat(var(--bar-graph-rows), var(--bar-graph-cell-height));
 }
-
-
 
 // $col-bar-graph-line: #bcbcca;
 
@@ -26,7 +22,6 @@
     --bar-graph-bar-spacing: 3.75rem;
     --bar-graph-bar-label-pad: 0.5rem;
     --bar-graph-bar-label-height: Min(var(--font-size-body), var(--font-leading-body));
-
   }
 
   display: grid;
@@ -36,7 +31,7 @@
   &--y {
     display: grid;
     grid-template-columns: var(--bar-graph-y-width) 1fr;
-    padding: var(--bar-graph-pad) ;
+    padding: var(--bar-graph-pad);
     padding-top: var(--bar-graph-pad-top);
     padding-bottom: var(--bar-graph-pad-bottom);
     --gap: calc(var(--bar-graph-pad) * 0.5);
@@ -83,10 +78,12 @@
     width: var(--bar-graph-bar-width);
     height: var(--bar-graph-bar-value);
 
-    &+&{
+    @include graph-animation;
+
+    & + & {
       margin-left: var(--bar-graph-bar-spacing);
     }
-    
+
     &__highlighted {
       background-color: $col-secondary;
     }
@@ -95,32 +92,27 @@
       background-color: $col-primary;
     }
 
-    
-    &__highlighted+&__default {
+    &__highlighted + &__default {
       margin-left: calc(var(--bar-graph-bar-spacing) * 1.75);
     }
-
   }
 
   &--bar-label {
     width: 100%;
     text-align: center;
     height: var(--bar-graph-bar-label-height);
-    
+
     &__highlighted {
       color: $col-secondary;
       margin-top: calc((var(--bar-graph-bar-label-height) + var(--bar-graph-bar-label-pad)) * -1);
     }
 
-    
     &__default {
       color: $col-background;
       margin-top: var(--bar-graph-bar-label-pad);
       margin-bottom: calc((var(--bar-graph-bar-label-height) + var(--bar-graph-bar-label-pad)) * -1);
     }
   }
-
-
 
   &--bar-name {
     position: relative;
@@ -129,16 +121,14 @@
     text-align: center;
     @include flex-row-center;
 
-    span{
+    span {
       position: absolute;
       bottom: 0;
       transform: translate(0%, calc(100% + var(--bar-graph-bar-label-pad)));
     }
 
-
-
     // height: var(--bar-graph-bar-label-height);
-    
+
     &__highlighted {
       margin-top: var(--bar-graph-bar-label-pad);
       color: $col-secondary;
@@ -148,13 +138,4 @@
       color: $col-primary;
     }
   }
-
-
-
-
-
-
-
-
-
 }

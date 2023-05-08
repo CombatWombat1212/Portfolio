@@ -10,7 +10,7 @@ import { STUDY_MADE } from "@/data/CASE_STUDIES";
 import { useEffect } from "react";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 
-function MADE() {
+function MADE({ pop }) {
   const study = STUDY_MADE;
 
   const { desktop, isBpAndDown, bp, loading } = useResponsive();
@@ -188,7 +188,9 @@ function MADE() {
 
           <Section id="Approach--Considerations" type="columns" titled mainType="grid">
             <Title>Considerations</Title>
-            <Heading>Understanding shirt anatomy to create accurate models</Heading>
+            <Heading>
+              Understanding shirt anatomy to create <br className="d-lg-none" /> accurate models
+            </Heading>
             <Description className="mt-less">
               <p>
                 A few key considerations when designing the shirt models that needed to be just right in order to accurately reflect MADE’s products:
@@ -196,7 +198,7 @@ function MADE() {
             </Description>
 
             <Column>
-              <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_seam_positions} />
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_seam_positions} lightbox pop={pop} />
               <Heading type={!smAndDown ? `h3` : "h5"} className={`graphic--caption ${!smAndDown && `weight-reg`}`}>
                 Seam positions
               </Heading>
@@ -205,7 +207,7 @@ function MADE() {
               </Description>
             </Column>
             <Column>
-              <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_seam_indents} />
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_seam_indents} lightbox pop={pop} />
               <Heading type={!smAndDown ? `h3` : "h5"} className={`graphic--caption ${!smAndDown && `weight-reg`}`}>
                 Seam indents
               </Heading>
@@ -214,7 +216,7 @@ function MADE() {
               </Description>
             </Column>
             <Column>
-              <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_button_positions} />
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_button_positions} lightbox pop={pop} />
               <Heading type={!smAndDown ? `h3` : "h5"} className={`graphic--caption ${!smAndDown && `weight-reg`}`}>
                 Button positions
               </Heading>
@@ -223,7 +225,7 @@ function MADE() {
               </Description>
             </Column>
             <Column>
-              <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_collar_shape} />
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_collar_shape} lightbox pop={pop} />
               <Heading type={!smAndDown ? `h3` : "h5"} className={`graphic--caption ${!smAndDown && `weight-reg`}`}>
                 Collar shape
               </Heading>
@@ -237,19 +239,19 @@ function MADE() {
             <Title>Models</Title>
 
             <Column>
-              <Graphic type="image" background="background darker" className="b-rad" img={MADE_IMGS.completed_collar_wide} />
+              <Graphic type="image" background="background darker" className="b-rad" img={MADE_IMGS.completed_collar_wide} lightbox pop={pop} />
             </Column>
             <Column>
-              <Graphic type="image" background="background darker" className="b-rad" img={MADE_IMGS.completed_collar_mini_wide} />
+              <Graphic type="image" background="background darker" className="b-rad" img={MADE_IMGS.completed_collar_mini_wide} lightbox pop={pop} />
             </Column>
             <Column>
-              <Graphic type="image" background="background darker" className="b-rad" img={MADE_IMGS.completed_collar_band} />
+              <Graphic type="image" background="background darker" className="b-rad" img={MADE_IMGS.completed_collar_band} lightbox pop={pop} />
             </Column>
             <Column>
-              <Graphic type="image" background="background darker" className="b-rad" img={MADE_IMGS.completed_cuff_regular} />
+              <Graphic type="image" background="background darker" className="b-rad" img={MADE_IMGS.completed_cuff_regular} lightbox pop={pop} />
             </Column>
             <Column>
-              <Graphic type="image" background="background darker" className="b-rad" img={MADE_IMGS.completed_cuff_french} />
+              <Graphic type="image" background="background darker" className="b-rad" img={MADE_IMGS.completed_cuff_french} lightbox pop={pop} />
             </Column>
           </Section>
 
@@ -323,37 +325,37 @@ function MADE() {
               <Heading type="h3" className={`graphic--caption weight-reg`}>
                 Fabric Scan
               </Heading>
-              <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_1_scan} />
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_1_scan} lightbox pop={pop} />
             </Column>
             <Column caption="above">
               <Heading type="h3" className={`graphic--caption weight-reg`}>
                 Cropped
               </Heading>
-              <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_2_cropped} />
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_2_cropped} lightbox pop={pop} />
             </Column>
             <Column caption="above">
               <Heading type="h3" className={`graphic--caption weight-reg`}>
                 Traced
               </Heading>
-              <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_3_traced} />
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_3_traced} lightbox pop={pop} />
             </Column>
             <Column caption="above">
               <Heading type="h3" className={`graphic--caption weight-reg`}>
                 Straightened
               </Heading>
-              <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_4_straightened} />
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_4_straightened} lightbox pop={pop} />
             </Column>
             <Column caption="above">
               <Heading type="h3" className={`graphic--caption weight-reg`} mirrorstyle="repeatable_texture match height">
                 Repeatable texture
               </Heading>
-              <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_5_repeatable} />
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_5_repeatable} lightbox pop={pop} />
             </Column>
             <Column caption="above">
               <Heading type="h3" className={`graphic--caption weight-reg`} mirrorstyle="repeatable_texture match height">
                 3D material
               </Heading>
-              <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_6_material} />
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.texture_creation_6_material} lightbox pop={pop} />
             </Column>
           </Section>
 
@@ -449,17 +451,16 @@ function MADE() {
 
           <Section id="Texturing--Details-Graphics" type="columns" titled mainType="grid" background="background darker" mainClassName="mt-0">
             <Column>
-              <Graphic type="image" className="b-rad" img={MADE_IMGS.details_threading} />
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.details_threading} lightbox pop={pop} />
               <Heading type="h3" className="graphic--caption weight-reg">
                 Color-matched threading
               </Heading>
               <Description className="graphic--caption mt-less">
-                I manually approximated fitting thread colors for each shirt material. Simple for solid-colors, trickier with complex
-                patterns.
+                I manually approximated fitting thread colors for each shirt material. Simple for solid-colors, trickier with complex patterns.
               </Description>
             </Column>
             <Column>
-              <Graphic type="image" className="b-rad" img={MADE_IMGS.details_holes} />
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.details_holes} lightbox pop={pop} />
               <Heading type="h3" className="graphic--caption weight-reg">
                 Color-matched button holes
               </Heading>
@@ -468,7 +469,7 @@ function MADE() {
               </Description>
             </Column>
             <Column>
-              <Graphic type="image" className="b-rad" img={MADE_IMGS.details_button} />
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.details_button} lightbox pop={pop} />
               <Heading type="h3" className="graphic--caption weight-reg">
                 Button color
               </Heading>
@@ -477,7 +478,7 @@ function MADE() {
               </Description>
             </Column>
             <Column>
-              <Graphic type="image" className="b-rad" img={MADE_IMGS.details_logo} />
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.details_logo} lightbox pop={pop} />
               <Heading type="h3" className="graphic--caption weight-reg">
                 MADE Logo tag
               </Heading>
@@ -544,13 +545,13 @@ function MADE() {
               <Heading type="h4" className="graphic--caption graphic--caption__above">
                 Drop-shadows:
               </Heading>
-              <Graphic type="image" className="b-rad" img={MADE_IMGS.lighting_drop} background="background darker" square />
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.lighting_drop} background="background darker" square lightbox pop={pop} />
             </Column>
             <Column caption="above">
               <Heading type="h4" className="graphic--caption graphic--caption__above">
                 Rendered shadows:
               </Heading>
-              <Graphic type="image" className="b-rad" img={MADE_IMGS.lighting_after} background="background darker" square />
+              <Graphic type="image" className="b-rad" img={MADE_IMGS.lighting_after} background="background darker" square lightbox pop={pop} />
             </Column>
           </Section>
 
@@ -566,50 +567,42 @@ function MADE() {
             <Heading>Creating isolated, physically accurate shadows</Heading>
 
             <Column caption="above">
-              <Description className="graphic--caption weight-reg"
-                            mirrorstyle={smAndDown && "post_processing match height"}
-
-              >
+              <Description className="graphic--caption weight-reg" mirrorstyle={smAndDown && "post_processing match height"}>
                 <h3>Target component</h3>
               </Description>
-              <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_1_target} />
+              <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_1_target} lightbox pop={pop} />
             </Column>
             <Column caption="above">
-
-              <Description className="graphic--caption weight-reg"
-              mirrorstyle={smAndDown && "post_processing match height"}
-              >
+              <Description className="graphic--caption weight-reg" mirrorstyle={smAndDown && "post_processing match height"}>
                 <h3>Hidden from render</h3>
               </Description>
 
-              <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_2_hidden} />
+              <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_2_hidden} lightbox pop={pop} />
             </Column>
             <Column caption="above">
-
-              <Description className="graphic--caption weight-reg"
-              >
+              <Description className="graphic--caption weight-reg">
                 <h3> Isolated shadow</h3>
               </Description>
 
-              <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_3_isolated} />
+              <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_3_isolated} lightbox pop={pop} />
             </Column>
             <Column caption="above">
               <Description className="graphic--caption weight-reg">
                 <h3>Edited</h3>
               </Description>
-              <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_4_edited} />
+              <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_4_edited} lightbox pop={pop} />
             </Column>
             <Column caption="above">
               <Description className="graphic--caption weight-reg">
                 <h3>Combined</h3>
               </Description>
-              <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_5_combined} />
+              <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_5_combined} lightbox pop={pop} />
             </Column>
             <Column caption="above">
               <Description className="graphic--caption graphic--caption__above weight-reg">
                 <h3>Final</h3>
               </Description>
-              <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_6_final} />
+              <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_6_final} lightbox pop={pop} />
             </Column>
           </Section>
 
@@ -626,7 +619,8 @@ function MADE() {
                 </p>
 
                 <p>
-                  This required me to build my 3D project file in such a way that it could <b>produce the hundreds of images in one continuous session</b>, so as to not waste time starting and stopping render jobs.
+                  This required me to build my 3D project file in such a way that it could{" "}
+                  <b>produce the hundreds of images in one continuous session</b>, so as to not waste time starting and stopping render jobs.
                 </p>
 
                 <p>
@@ -745,7 +739,9 @@ function MADE() {
 
           <Section id="Rendering--Closing">
             <Heading>
-              With rendering now complete, the final images <br className="d-lg-none" /> were delivered, and placed into the webstore’s <br className="d-lg-none" /> new dress-shirt customization tool. </Heading>
+              With rendering now complete, the final images <br className="d-lg-none" /> were delivered, and placed into the webstore’s{" "}
+              <br className="d-lg-none" /> new dress-shirt customization tool.{" "}
+            </Heading>
           </Section>
         </Chapter>
 

@@ -7078,6 +7078,7 @@ h3 + .studypanel--paragraph {
   margin-top: auto;
   width: var(--bar-graph-bar-width);
   height: var(--bar-graph-bar-value);
+  transition: all 0.95s cubic-bezier(0.52, 0.01, 0.17, 0.92) 0.21s, all 0.95s cubic-bezier(0.52, 0.01, 0.17, 0.92) 0.21s;
 }
 
 .bar-graph--bar + .bar-graph--bar {
@@ -7166,6 +7167,7 @@ h3 + .studypanel--paragraph {
 }
 
 .pie .circle {
+  transition: all 0.95s cubic-bezier(0.52, 0.01, 0.17, 0.92) 0.21s, all 0.95s cubic-bezier(0.52, 0.01, 0.17, 0.92) 0.21s;
   fill: none;
   stroke-width: var(--circle-stroke);
   r: var(--circle-r_real);
@@ -7345,7 +7347,10 @@ h3 + .studypanel--paragraph {
 }
 
 .sep-graph .bar__filled {
-  grid-column: span var(--sep-graph-value);
+  transition: all 0.95s cubic-bezier(0.52, 0.01, 0.17, 0.92) 0.21s, opacity 0.21s ease-in-out 0s;
+  opacity: var(--in-view);
+  grid-column: span 100;
+  width: var(--sep-graph-value);
 }
 
 .sep-graph .bar__empty {
