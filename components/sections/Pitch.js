@@ -52,8 +52,8 @@ function PitchItem(pitch) {
   };
 
   this.scrollStatus = {
-    above: 0,
-    below: 0,
+    above: 1,
+    below: 1,
   };
 }
 
@@ -339,7 +339,7 @@ function Pitch({ children }) {
 
     const scrollTouch = scrollType == "touch";
     const withinTopOffset = pitchRect.top >= -topOffset && pitchRect.top <= topOffset;
-    const set = withinPitch && scrollTouch && !(atFirstRow || atLastRow);
+    const set = withinPitch && scrollTouch && !(withinFirstOrLastRow);
     setLockScroll(set);
   }
 
