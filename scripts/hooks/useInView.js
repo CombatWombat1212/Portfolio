@@ -1,8 +1,24 @@
 import { useState, useEffect, useRef } from 'react';
 
-const useInView = (ref) => {
+const useInView = (ref, options = {}) => {
   const [inView, setInView] = useState(false);
   const observer = useRef(null);
+
+  let thresholds = [];
+  let entryThreshold = 0;
+  let exitThreshold = 0;
+
+  if (options.threshold !== undefined) {
+    if (typeof options.threshold === 'number') {
+      thresholds = [options.threshold];
+      entryThreshold = options.threshold;
+      exitThreshold = options.threshold;
+    } else if (typeof options.threshold === 'object') {
+      entryThreshold = options.threshold.entry || 0;
+      exitThreshold = options.threshold.exit || 0;
+      thresholds = [exitThreshold, entryThreshold];
+    }
+  }
 
   useEffect(() => {
     if (typeof window === 'undefined' || !ref.current) {
@@ -11,11 +27,19 @@ const useInView = (ref) => {
 
     const handleIntersect = (entries) => {
       entries.forEach((entry) => {
-        setInView(entry.isIntersecting);
+        if (entry.isIntersecting && entry.intersectionRatio >= entryThreshold) {
+          setInView(true);
+        } else if (!entry.isIntersecting || entry.intersectionRatio <= exitThreshold) {
+          setInView(false);
+        }
       });
     };
 
-    observer.current = new IntersectionObserver(handleIntersect);
+    const observerOptions = {
+      threshold: thresholds,
+    };
+
+    observer.current = new IntersectionObserver(handleIntersect, observerOptions);
 
     observer.current.observe(ref.current);
 
@@ -24,7 +48,7 @@ const useInView = (ref) => {
         observer.current.disconnect();
       }
     };
-  }, [ref]);
+  }, [ref, ...thresholds]);
 
   return inView;
 };

@@ -14,7 +14,7 @@ $font-body: "Tenon";
   --font-leading-h1: 4rem;
   --font-leading-h2: 3.125rem;
   --font-leading-h3: 2.305rem;
-  --font-leading-h4: 1.25rem;
+  --font-leading-h4: 1.15rem;
 
   --font-leading-body: 1.5625rem;
   --font-leading-quote: 1.555rem;
@@ -111,9 +111,9 @@ $font-body: "Tenon";
 
     --font-margin-bottom-h2: 1.25rem;
     --font-margin-bottom-h2_less: 0.5rem;
-    // --font-margin-bottom-h3: 0.625rem;
-    // --font-margin-bottom-h3_less: 0.375rem;
-    --font-margin-bottom-h4: 0.35rem;
+    --font-margin-bottom-h3: 0.875rem;
+    // --font-margin-bottom-h3_less: 0.55rem;
+      --font-margin-bottom-h4: 0.35rem;
   }
 
   @include md-down {

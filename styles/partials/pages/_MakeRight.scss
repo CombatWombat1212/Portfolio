@@ -170,6 +170,13 @@
     }
 
     &--Summary {
+
+      .section{
+        @include lg-down{
+          --gap:2.5rem
+        }
+
+      }
     }
   }
 
@@ -190,19 +197,11 @@
         }
         @include md-down {
           --gantt-label-width: 9rem;
-        }
-        @include sm-down {
-          --gantt-label-width: 10rem;
+          margin-top:2rem;
         }
 
         .label--unit {
-          @include md {
-            &:nth-child(2n) > * {
-              display: none;
-            }
-          }
-
-          @include sm-down {
+          @include md-down {
             & > * {
               overflow: visible;
             }
@@ -216,12 +215,169 @@
   }
 
   #Research {
+
     &--Approach {
+
+
+
+
+      .section {
+
+        @include sm-down{
+          max-width: 80%;
+          @include mx-auto;
+        }
+
+
+        &--main {
+          @include md{
+            @include flex-row;
+            --gap: 4.75rem;
+            @include gap;
+          }
+          @include sm-down{
+            --gap: 3.65rem;
+            @include gap;
+          }
+
+        }
+        &--column{
+          @include md{
+            @include e-col-width(6);
+          }
+        }
+
+        &--graphic {
+          @include xl-down{
+            --graphic-scale: 0.95;
+          }
+          @include md{
+            --img-panel-height:10rem;
+            --graphic-scale: 0.815;
+          }
+          @include sm-down{
+            --graphic-scale: 0.85;
+          }
+        }
+      }
+
+
+      .arrow--column{
+        @include sm-down{
+          display:none
+
+        }
+
+      }
+
+
     }
+
+
     &--Limits {
     }
+
+
     &--Factors {
+
+
+      @mixin bar-graph-y-grid() {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        //   grid-template-rows: repeat(var(--bar-graph-rows), calc(100% / var(--bar-graph-rows)));
+        //   grid-template-rows: repeat(var(--bar-graph-rows), 1fr);
+        grid-template-rows: repeat(var(--bar-graph-rows), var(--bar-graph-cell-height));
+      }
+      
+      // $col-bar-graph-line: #bcbcca;
+      
+      .bar-graph {
+        // &--wrapper {
+
+        //   @include xl-down{
+
+        //     --bar-graph-y-width: 2rem;
+        //     --bar-graph-pad: 3.5rem;
+        //     --bar-graph-pad-top: 3.25rem;
+        //     --bar-graph-pad-bottom: 4.75rem;
+        //     --bar-graph-y-line-height: 0.0625rem;
+        //   --bar-graph-bar-width: 3.65rem;
+        //   --bar-graph-cell-height: calc((var(--graph-height) - (var(--bar-graph-pad-top) + var(--bar-graph-pad-bottom))) / var(--bar-graph-rows));
+        //   --bar-graph-line-top-margin: calc((var(--bar-graph-cell-height) - var(--bar-graph-y-line-height)) / 2);
+        //   --bar-graph-bar-spacing: 3.75rem;
+        //   --bar-graph-bar-label-pad: 0.5rem;
+        //   --bar-graph-bar-label-height: Min(var(--font-size-body), var(--font-leading-body));
+          
+        // }
+          
+        }
+        
+      
+        &--y {
+        }
+      
+        &--grid {
+        }
+      
+        &--cell {
+          * {
+          }
+        }
+      
+        &--table {
+          position: relative;
+      
+        &--data {
+        }
+      
+        &--line {
+        }
+      
+        &--bar {
+      
+          & + & {
+          }
+      
+          &__highlighted {
+          }
+      
+          &__default {
+          }
+      
+          &__highlighted + &__default {
+          }
+        }
+      
+        &--bar-label {
+      
+          &__highlighted {
+          }
+      
+          &__default {
+          }
+        }
+      
+        &--bar-name {
+      
+          span {
+          }
+      
+      
+          &__highlighted {
+          }
+      
+          &__default {
+          }
+        }
+      }
+      
+
+
     }
+
+
+
     &--Hobbyists {
     }
     &--Primary {

@@ -78,7 +78,8 @@
     width: var(--bar-graph-bar-width);
     height: var(--bar-graph-bar-value);
 
-    @include graph-animation;
+    @include graph-animation(opacity, 0.21s, ease-in-out, 0s);
+    opacity: var(--in-view);
 
     & + & {
       margin-left: var(--bar-graph-bar-spacing);

@@ -175,13 +175,11 @@ function MakeRight({ pop }) {
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["secondary_research"]} />
               <Description type="h3" className="graphic--caption">
                 <b>Secondary research</b> for high-level context of the 3D printing world
-                {/* <b>Secondary research</b> to understand a high level context of the 3D printing world */}
               </Description>
             </Column>
             <Column>
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["interviews"]} />
               <Description type="h3" className="graphic--caption">
-                {/* <b>Interviews & surveys</b> to understand peoples&rsquo; experiences at a lower level */}
                 <b>Interviews & surveys</b> to understand users&apos; experiences at a lower level
               </Description>
             </Column>

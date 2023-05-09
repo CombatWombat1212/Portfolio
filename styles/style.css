@@ -125,7 +125,7 @@ input, button, textarea, select {
   --font-leading-h1: 4rem;
   --font-leading-h2: 3.125rem;
   --font-leading-h3: 2.305rem;
-  --font-leading-h4: 1.25rem;
+  --font-leading-h4: 1.15rem;
   --font-leading-body: 1.5625rem;
   --font-leading-quote: 1.555rem;
   --font-margin-bottom-h2: 1.4rem;
@@ -190,6 +190,7 @@ input, button, textarea, select {
     --font-leading-quote: 1.4rem;
     --font-margin-bottom-h2: 1.25rem;
     --font-margin-bottom-h2_less: 0.5rem;
+    --font-margin-bottom-h3: 0.875rem;
     --font-margin-bottom-h4: 0.35rem;
   }
 }
@@ -7078,7 +7079,12 @@ h3 + .studypanel--paragraph {
   margin-top: auto;
   width: var(--bar-graph-bar-width);
   height: var(--bar-graph-bar-value);
-  transition: all 0.95s cubic-bezier(0.52, 0.01, 0.17, 0.92) 0.21s, all 0.95s cubic-bezier(0.52, 0.01, 0.17, 0.92) 0.21s;
+  transition: all 0.95s cubic-bezier(0.52, 0.01, 0.17, 0.92) 0.21s, opacity 0.21s ease-in-out 0s;
+  opacity: var(--in-view);
+}
+
+.bar-graph--bar__out-of-view {
+  transition: 0s !important;
 }
 
 .bar-graph--bar + .bar-graph--bar {
@@ -7242,6 +7248,10 @@ h3 + .studypanel--paragraph {
   transform: rotate(-90deg);
 }
 
+.pie .circle__out-of-view {
+  transition: 0s !important;
+}
+
 .pie .circle--empty {
   stroke: #CFCFD8;
 }
@@ -7351,6 +7361,10 @@ h3 + .studypanel--paragraph {
   opacity: var(--in-view);
   grid-column: span 100;
   width: var(--sep-graph-value);
+}
+
+.sep-graph .bar__filled__out-of-view {
+  transition: 0s !important;
 }
 
 .sep-graph .bar__empty {
@@ -8802,6 +8816,13 @@ h3 + .studypanel--paragraph {
   background-color: #F3F3F7;
 }
 
+@media screen and (max-width: 61.9375em) {
+  #Makeright #Overview--Summary .section {
+    --gap:2.5rem
+        ;
+  }
+}
+
 #Makeright #Plan, #Makeright #Plan--Banner {
   margin-top: 0;
 }
@@ -8825,28 +8846,82 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 49.9375em) {
   #Makeright #Plan--Gantt .gantt {
     --gantt-label-width: 9rem;
+    margin-top: 2rem;
   }
 }
 
-@media screen and (max-width: 36.9375em) {
-  #Makeright #Plan--Gantt .gantt {
-    --gantt-label-width: 10rem;
-  }
-}
-
-@media screen and (max-width: 49.9375em) and (min-width: 37em) {
-  #Makeright #Plan--Gantt .gantt .label--unit:nth-child(2n) > * {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 36.9375em) {
+@media screen and (max-width: 49.9375em) {
   #Makeright #Plan--Gantt .gantt .label--unit > * {
     overflow: visible;
   }
   #Makeright #Plan--Gantt .gantt .label--unit:nth-child(2n + 1) > * {
     display: none;
   }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Makeright #Research--Approach .section {
+    max-width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media screen and (max-width: 49.9375em) and (min-width: 37em) {
+  #Makeright #Research--Approach .section--main {
+    display: flex;
+    flex-direction: row;
+    --gap: 4.75rem;
+    gap: var(--gap);
+    column-gap: var(--gap);
+    row-gap: var(--gap);
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Makeright #Research--Approach .section--main {
+    --gap: 3.65rem;
+    gap: var(--gap);
+    column-gap: var(--gap);
+    row-gap: var(--gap);
+  }
+}
+
+@media screen and (max-width: 49.9375em) and (min-width: 37em) {
+  #Makeright #Research--Approach .section--column {
+    --expected-cols: calc(calc((12 / 6)) * var(--sfh) / var(--sfh));
+    min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+    max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+  }
+}
+
+@media screen and (max-width: 79.9375em) {
+  #Makeright #Research--Approach .section--graphic {
+    --graphic-scale: 0.95;
+  }
+}
+
+@media screen and (max-width: 49.9375em) and (min-width: 37em) {
+  #Makeright #Research--Approach .section--graphic {
+    --img-panel-height:10rem;
+    --graphic-scale: 0.815;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Makeright #Research--Approach .section--graphic {
+    --graphic-scale: 0.85;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Makeright #Research--Approach .arrow--column {
+    display: none;
+  }
+}
+
+#Makeright #Research--Factors--table {
+  position: relative;
 }
 
 #Makeright #Prototyping--Journey-Map .section--graphic {
