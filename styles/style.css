@@ -123,8 +123,8 @@ input, button, textarea, select {
   --font-size-quote: 0.9875rem;
   --font-size-logo: 1.375rem;
   --font-leading-h1: 4rem;
-  --font-leading-h2: 3.125rem;
-  --font-leading-h3: 2.305rem;
+  --font-leading-h2: 3.165rem;
+  --font-leading-h3: 2.225rem;
   --font-leading-h4: 1.15rem;
   --font-leading-body: 1.575rem;
   --font-leading-quote: 1.51rem;
@@ -148,7 +148,7 @@ input, button, textarea, select {
     --font-size-logo: 1.3125rem;
     --font-leading-h1: 3.875rem;
     --font-leading-h2: 3.125rem;
-    --font-leading-h3: 2.215rem;
+    --font-leading-h3: 2.1rem;
     --font-leading-h4: 1.21875rem;
     --font-leading-body: 1.53125rem;
     --font-leading-quote: 1.495rem;
@@ -165,8 +165,8 @@ input, button, textarea, select {
     --font-size-quote: 0.975rem;
     --font-size-logo: 1.3125rem;
     --font-leading-h1: 3.3825rem;
-    --font-leading-h2: 2.85rem;
-    --font-leading-h3: 2.125rem;
+    --font-leading-h2: 2.725rem;
+    --font-leading-h3: 2rem;
     --font-leading-h4: 1.125rem;
     --font-leading-body: 1.475rem;
     --font-leading-quote: 1.435rem;
@@ -184,9 +184,9 @@ input, button, textarea, select {
     --font-size-logo: 1.3125rem;
     --font-leading-h1: 3.15rem;
     --font-leading-h2: 2.635rem;
-    --font-leading-h3: 1.95rem;
+    --font-leading-h3: 1.825rem;
     --font-leading-h4: 1.125rem;
-    --font-leading-body: 1.37rem;
+    --font-leading-body: 1.345rem;
     --font-leading-quote: 1.3565rem;
     --font-margin-bottom-h2: 1.25rem;
     --font-margin-bottom-h2_less: 0.5rem;
@@ -205,8 +205,8 @@ input, button, textarea, select {
     --font-size-quote: 0.895rem;
     --font-size-logo: 1.3125rem;
     --font-leading-h1: 2.795rem;
-    --font-leading-h2: 2.285rem;
-    --font-leading-h3: 1.795rem;
+    --font-leading-h2: 2.315rem;
+    --font-leading-h3: 1.785rem;
     --font-leading-h4: 1.105rem;
     --font-leading-body: 1.3535rem;
     --font-leading-quote: 1.31rem;
