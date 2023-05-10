@@ -16,9 +16,29 @@
 
   @include flex-row-between;
 
+  @include xxl {
+    --pie-pad-x: 3rem;
+  }
+
+  @include xl {
+    --pie-pad-x: 2.5rem;
+  }
+  @include lg-md {
+    --pie-pad-x: 1.25rem;
+  }
+  @include md-down {
+    --pie-pad-x: 1.25rem;
+    @include flex-row-center;
+    --gap: 0.15rem;
+    @include gap;
+  }
+
   .circle {
     &--wrapper {
       @include flex-col-center;
+      @include lg-md {
+        margin-bottom: -0.225rem;
+      }
     }
     &--inner {
       position: relative;
@@ -74,6 +94,16 @@
       width: var(--circle-r);
       height: var(--circle-r);
       transform: rotate(-90deg);
+
+      @include xl-down {
+        --circle-r: 6rem;
+      }
+      @include lg-down {
+        --circle-r: 5.5rem;
+      }
+      @include md-down {
+        --circle-r: 5.25rem;
+      }
     }
 
     @include graph-animation;

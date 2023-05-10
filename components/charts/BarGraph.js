@@ -1,7 +1,8 @@
 import useInView from "@/scripts/hooks/useInView";
-import GRAPHS from "/data/charts/GRAPHS";
+import GRAPHS from "@/data/charts/GRAPHS";
 import { defaultProps, PropTypes } from "prop-types";
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
+import ResponsiveText from "../global/ResponsiveText";
 
 function BarGraph({ study, graph, type, small }) {
   study = GRAPHS.find((item) => item.study == study);
@@ -13,10 +14,6 @@ function BarGraph({ study, graph, type, small }) {
 
   const barRef = useRef(null);
   const inView = useInView(barRef, { threshold: { entry: 0.8, exit: 0.0 } });
-
-  useEffect(() => {
-    console.log(inView);
-  }, [inView]);
 
   return (
     <>
@@ -81,7 +78,7 @@ function BarGraph({ study, graph, type, small }) {
 
                         <div
                           className={`bar-graph--bar-name ${item.highlighted ? "bar-graph--bar-name__highlighted" : "bar-graph--bar-name__default"}`}>
-                          <span>{item.name}</span>
+                          <ResponsiveText data={item.name} />
                         </div>
                       </div>
                     );
@@ -126,7 +123,8 @@ function BarGraph({ study, graph, type, small }) {
                       </div>
 
                       <div className="bar--wrapper">
-                        <div className={`bar bar__filled ${item.highlighted ? "highlighted" : "default"}
+                        <div
+                          className={`bar bar__filled ${item.highlighted ? "highlighted" : "default"}
                         bar__filled__${inView ? "in-view" : "out-of-view"}
                         `}></div>
                       </div>
@@ -152,7 +150,9 @@ function BarGraph({ study, graph, type, small }) {
       )}
     </>
   );
+
 }
+
 
 BarGraph.defaultProps = {
   type: "default",

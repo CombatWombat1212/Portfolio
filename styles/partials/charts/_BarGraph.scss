@@ -12,21 +12,61 @@
 .bar-graph {
   &--wrapper {
     --bar-graph-y-width: 2rem;
-    --bar-graph-pad: 3.5rem;
-    --bar-graph-pad-top: 3.25rem;
+    // --bar-graph-pad: 3.5rem;
+    --bar-graph-pad: 2.95rem;
+    --bar-graph-pad-top: 3.225rem;
     --bar-graph-pad-bottom: 4.75rem;
     --bar-graph-y-line-height: 0.0625rem;
-    --bar-graph-bar-width: 3.65rem;
+    // --bar-graph-bar-width: 3.65rem;
+    --bar-graph-bar-width: 3.8rem;
     --bar-graph-cell-height: calc((var(--graph-height) - (var(--bar-graph-pad-top) + var(--bar-graph-pad-bottom))) / var(--bar-graph-rows));
     --bar-graph-line-top-margin: calc((var(--bar-graph-cell-height) - var(--bar-graph-y-line-height)) / 2);
-    --bar-graph-bar-spacing: 3.75rem;
-    --bar-graph-bar-label-pad: 0.5rem;
+    // --bar-graph-bar-spacing: 3.75rem;
+    --bar-graph-bar-spacing: 3.25rem;
+    --bar-graph-bar-label-pad: 0.65rem;
     --bar-graph-bar-label-height: Min(var(--font-size-body), var(--font-leading-body));
+
+    @include xl-down {
+      --bar-graph-pad: 2.25rem;
+      --bar-graph-pad-top: 2.5rem;
+      --bar-graph-pad-bottom: 4.35rem;
+      --bar-graph-bar-spacing: 2.85rem;
+      --bar-graph-bar-width: 3.5rem;
+    }
+
+    @include md-down {
+      --bar-graph-pad: 0.95rem;
+      --bar-graph-pad-top: 2.45rem;
+      --bar-graph-pad-bottom: 3.85rem;
+      --bar-graph-bar-spacing: 2.6rem;
+      --bar-graph-bar-width: 3rem;
+      --graph-height: 16rem;
+      --gap: 1rem;
+      --bar-graph-bar-label-height: Min(var(--font-size-h4), var(--font-leading-h4));
+      --bar-graph-bar-label-pad: 0.45rem;
+
+
+      & span {
+        @include h4-text;
+        font-weight: 400;
+      }
+    
+    }
+
+    @include sm-down {
+      --bar-graph-bar-spacing: 2.25rem;
+      --bar-graph-bar-width: 2.65rem;
+    }
+    
+
+
+
   }
 
   display: grid;
   --size: 100%;
   @include s;
+
 
   &--y {
     display: grid;
@@ -36,6 +76,11 @@
     padding-bottom: var(--bar-graph-pad-bottom);
     --gap: calc(var(--bar-graph-pad) * 0.5);
     @include gap;
+
+    @include md-down{
+      padding-right:1.65rem;
+      --gap: 1.175rem;
+    }
   }
 
   &--grid {
@@ -78,24 +123,42 @@
     width: var(--bar-graph-bar-width);
     height: var(--bar-graph-bar-value);
 
-    @include graph-animation(opacity, 0.21s, ease-in-out, 0s);
-    opacity: var(--in-view);
+    @include graph-animation(background-color, 0.21s, ease-in-out, 0s);
 
     & + & {
       margin-left: var(--bar-graph-bar-spacing);
     }
 
     &__highlighted {
-      background-color: $col-secondary;
+      background-color: rgba($col-secondary, var(--in-view));
     }
 
     &__default {
-      background-color: $col-primary;
+      background-color: rgba($col-primary, var(--in-view));
     }
 
     &__highlighted + &__default {
       margin-left: calc(var(--bar-graph-bar-spacing) * 1.75);
+      @include md-down{
+        margin-left: var(--bar-graph-bar-spacing);
+      }
     }
+
+    @include lg-down {
+      &:nth-last-child(1),
+      &:nth-last-child(2)
+       {
+        display: none;
+      }
+    }
+
+    @include sm-down {
+      &:nth-last-child(4){
+        display: none;
+      }
+    }
+
+
   }
 
   &--bar-label {

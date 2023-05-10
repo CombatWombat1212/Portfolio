@@ -11,7 +11,6 @@ import Pitch from "@/components/sections/Pitch";
 import { STUDY_MAKERIGHT } from "@/data/CASE_STUDIES";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 
-
 function MakeRight({ pop }) {
   const study = STUDY_MAKERIGHT;
 
@@ -26,7 +25,9 @@ function MakeRight({ pop }) {
         <Chapter id="Overview" name="Overview">
           <Section id="Overview--Background" type="overview">
             <Title>Background</Title>
-            <Heading>3D printing is yet to reach <br className="d-lg-none"/> its full potential</Heading>
+            <Heading>
+              3D printing is yet to reach <br className="d-lg-none" /> its full potential
+            </Heading>
             <Description>
               <p>
                 Offering endless customization, cheap manufacturing, and fast production speeds.
@@ -46,7 +47,8 @@ function MakeRight({ pop }) {
           <Section id="Overview--Challenge" type="overview">
             <Title>Challenge</Title>
             <Heading>
-              Cost, and technical knowledge <br className="d-lg-none" />stand in the way <br className="d-lg-none" /> of mass adoption
+              Cost, and technical knowledge <br className="d-lg-none" />
+              stand in the way <br className="d-lg-none" /> of mass adoption
             </Heading>
             <Description>
               <p>
@@ -81,10 +83,12 @@ function MakeRight({ pop }) {
           <Section id="Overview--Pitch" type="passthrough" margin="wide" wrapperClassName={"mt-0 py-0"} background="makeright tertiary">
             <Pitch>
               <>
-                <Heading  >Choose</Heading>
+                <Heading>Choose</Heading>
                 <Description>
                   <p>
-                    from a storefront of <br className="d-lg-none" />sourced 3D models, <br className="d-lg-none d-md-block d-sm-none" />or upload your own
+                    from a storefront of <br className="d-lg-none" />
+                    sourced 3D models, <br className="d-lg-none d-md-block d-sm-none" />
+                    or upload your own
                   </p>
                 </Description>
                 <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_choose"]} />
@@ -92,10 +96,10 @@ function MakeRight({ pop }) {
               </>
 
               <>
-                <Heading  >Tweak</Heading>
+                <Heading>Tweak</Heading>
                 <Description>
                   <p>
-                    and personalize <br className="d-lg-none d-sm-block" /> to suit  your needs
+                    and personalize <br className="d-lg-none d-sm-block" /> to suit your needs
                   </p>
                 </Description>
                 <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_tweak"]} />
@@ -103,10 +107,11 @@ function MakeRight({ pop }) {
               </>
 
               <>
-                <Heading  >Order</Heading>
+                <Heading>Order</Heading>
                 <Description>
                   <p>
-                    your print, automatically <br className="d-lg-none" /> assigning it  to one of our <br className="d-lg-none d-xs-block" />verified makers
+                    your print, automatically <br className="d-lg-none" /> assigning it to one of our <br className="d-lg-none d-xs-block" />
+                    verified makers
                   </p>
                 </Description>
                 <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_order"]} />
@@ -114,9 +119,12 @@ function MakeRight({ pop }) {
               </>
 
               <>
-                <Heading  >Recieve</Heading>
+                <Heading>Recieve</Heading>
                 <Description>
-                  <p>the purchased item <br className="d-lg-none d-sm-block" />right at your front door</p>
+                  <p>
+                    the purchased item <br className="d-lg-none d-sm-block" />
+                    right at your front door
+                  </p>
                 </Description>
                 <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_recieve"]} />
                 <Graphic type="image" img={MAKERIGHT_IMGS["pitch_mockup_recieve"]} />
@@ -196,10 +204,11 @@ function MakeRight({ pop }) {
           <Section id="Research--Factors" className="flex-col" background="background darkest">
             <Heading type="h3">What factors limit the adoption of 3D printing?</Heading>
             <BarGraph study="MakeRight" graph="Limiting Factors" type="default" />
-            {/* TODO: link to source */}
             <Description>
               <p>
-                <DLink>Source, Sculpteo, 2020</DLink>
+                <DLink href="https://www.sculpteo.com/en/ebooks/state-of-3d-printing-report-2020/" target="_blank" color="primary">
+                  Source, Sculpteo, 2020
+                </DLink>
               </p>
             </Description>
           </Section>
@@ -207,18 +216,14 @@ function MakeRight({ pop }) {
           <Section id="Research--Hobbyists" type="columns" className="gap-6" background="background darkest">
             <Column>
               <Heading type="h3">
-                Hobbyists often surpass
-                <br />
-                these barriers out of passion
+                Hobbyists often surpass <br className="d-sm-none" /> these barriers out of passion
               </Heading>
               <PieChart study="MakeRight" graph="Printer Uses" />
             </Column>
 
             <Column>
               <Heading type="h3">
-                Only to have their printer sit idle
-                <br />
-                most of the time
+                Only to have their printer sit idle <br className="d-sm-none" /> most of the time
               </Heading>
               <BarGraph study="MakeRight" graph="Printer Usage" type="seperated" small />
             </Column>
@@ -227,52 +232,51 @@ function MakeRight({ pop }) {
           <Section id="Research--Primary" background="background darkest">
             <Title>Primary Research</Title>
             <Heading>
-              Interviews with 4 makers, and 6 laypersons corroborated
-              <br />
-              these statistics
+              Interviews with 4 makers, and 6 laypersons <br className="d-md-none" />
+              corroborated these statistics
             </Heading>
           </Section>
 
-          <Section id="Research--Non-Owners" type="columns" titled mainClassName="mt-less" background="background darkest">
-            <Heading type="h3">Non-printer owners have interest in the tech, and barriers to accessing it</Heading>
-            <Description className="mt-less">
+          <Section id="Research--Non-Owners" type="columns" titled mainClassName={desktop ? "mt-less" : ""} background="background darkest">
+            <Heading type="h3">
+              Non-printer owners have interest in the tech, and barriers <br className="d-none d-lg-block d-md-none" /> to accessing it
+            </Heading>
+            <Description className={desktop ? "mt-less" : ""}>
               <p>
                 Despite identifying benefits to using 3D printing, these architecture students avoided it due to intimidation.
-                <br />
-                Even with open access to printers through their schools.
+                <br className="d-lg-none" /> Even with open access to printers through their schools.
               </p>
             </Description>
 
             <Column>
               <Quote background="background">
-                &ldquo;...In architecture, some calculations are easier when <br />
-                you have a real model vs. digital...&rdquo; - Layperson #6
+                &ldquo;...In architecture, some calculations are easier when <br className="d-lg-none" /> you have a real model vs. digital...&rdquo;
+                - Layperson #6
               </Quote>
             </Column>
 
             <Column>
               <Quote background="background">
-                &ldquo;But I never use [3D printing] because I don&rsquo;t know <br />
-                how to work the machines.&rdquo; - Layperson #4
+                &ldquo;But I never use [3D printing] because I don&rsquo;t know <br className="d-lg-none" /> how to work the machines.&rdquo; <br className="d-none d-lg-block d-md-none" /> - Layperson #4
               </Quote>
             </Column>
           </Section>
 
-          <Section id="Research--Owners" type="columns" titled mainClassName="mt-less" background="background darkest">
+          <Section id="Research--Owners" type="columns" titled mainClassName={desktop ? `mt-less` : ""} background="background darkest">
             <Heading type="h3">While many owners of 3D printers have idle machines, and free time</Heading>
-            <Description className="mt-less">
+            <Description className={desktop ? "mt-less" : ""}>
               <p>
-                Owners&apos; usage depended partially on free time, but mostly on current needs and projects. <br />
+                Owners&apos; usage depended partially on free time, but mostly on current needs and projects. <br className="d-md-none" />
                 Meaning there was frequent overlap between their idle printer, and free time, due to a lack of printable ideas.
               </p>
             </Description>
 
             <Column>
-              <Quote background="background">&ldquo;How often do you use your printer?&rdquo; - Me</Quote>
+              <Quote background="background">&ldquo;How often do you use your printer?&rdquo;<br className="d-none d-lg-block d-md-none d-sm-block" /> - Me</Quote>
             </Column>
 
             <Column>
-              <Quote background="background">&ldquo;Not enough&rdquo; - Owners #1-4, unanimously</Quote>
+              <Quote background="background">&ldquo;Not enough&rdquo;<br className="d-none d-lg-block d-md-none d-sm-block" /> - Owners #1-4, unanimously</Quote>
             </Column>
           </Section>
 

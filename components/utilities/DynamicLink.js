@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { useMountEffect } from "../../scripts/hooks/useMountEffect";
 import { addAttrNonDestructive } from "/scripts/GlobalUtilities";
 
-function DLink({reference, ...props}) {
+function DLink({ reference, color, ...props }) {
   // var props = { ...props };
 
   const internalRef = useRef();
@@ -16,19 +16,17 @@ function DLink({reference, ...props}) {
   });
 
 
+  const classes = `link ${color ? `link__${color}` : ''} ${props.className || ""}`;
+
+
   return (
     <>
-    {props.href && props.href.length > 0 && !props.href.startsWith('#') ? (
-        <Link {...props} href={props.href} ref={actualRef} className={"link" + (props.className ? ` ${props.className}` : '')} 
-        scroll={false}
-        >
+      {props.href && props.href.length > 0 && !props.href.startsWith("#") ? (
+        <Link {...props} href={props.href} ref={actualRef} className={classes} scroll={false}>
           {props.children}
         </Link>
-        // <Link {...props} href={props.href} ref={reference} className={"link" + (props.className ? ` ${props.className}` : '')} >
-        //   {props.children}
-        // </Link>
       ) : (
-        <a {...props} ref={actualRef} className={"link" + (props.className ? ` ${props.className}` : '')}>
+        <a {...props} ref={actualRef} className={classes}>
           {props.children}
         </a>
       )}

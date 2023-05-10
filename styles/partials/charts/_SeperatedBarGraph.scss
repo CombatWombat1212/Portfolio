@@ -5,6 +5,13 @@
     --sep-graph-y: 3.25rem;
     --sep-graph-x: 4rem;
     --sep-graph-bar-height: 0.5rem;
+
+    @include xl-down {
+      --sep-graph-y: 1.25rem;
+    }
+    @include md-down {
+      --sep-graph-y: 2.85rem;
+    }
   }
 
   @include pad-x(var(--sep-graph-x));
@@ -12,11 +19,21 @@
   @include flex-row-center;
   height: calc(100% - (var(--sep-graph-y) * 2));
   @include gap(1rem);
+  @include md-down {
+    @include gap(1.25rem);
+  }
 
   &--column {
     @include flex-col-center;
     margin-top: -0.25rem;
     margin-right: -0.25rem;
+
+    @include xl-md {
+      margin-top: -0.05rem;
+    }
+    @include md-down{
+      @include gap(0.35rem);
+    }
   }
 
   &--item {
@@ -36,11 +53,10 @@
     text-align: right;
   }
 
-//   &--name {
-//   }
+  //   &--name {
+  //   }
 
   &--text {
-
     white-space: nowrap;
 
     &.highlighted {
@@ -82,7 +98,6 @@
       // grid-column: span var(--sep-graph-value);
       grid-column: span 100;
       width: var(--sep-graph-value);
-
     }
 
     &__empty {

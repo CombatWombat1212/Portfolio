@@ -13,7 +13,10 @@ var GRAPHS = [
         labels: [],
         data: [
           {
-            name: "Cost of Entry",
+            name: {
+              xxl: "Cost of Entry",
+              sm: "Entry Cost",
+            },
             value: 59,
             highlighted: true,
           },
@@ -33,7 +36,10 @@ var GRAPHS = [
             highlighted: false,
           },
           {
-            name: "Material Availability",
+            name: {
+              xxl: "Material Availability",
+              sm: "Available Materials",
+            },
             value: 30,
             highlighted: false,
           },
@@ -43,7 +49,8 @@ var GRAPHS = [
             highlighted: false,
           },
           {
-            name: "Environmental Impact",
+            // name: "Environmental Impact",
+            name: "Enviro. Impact",
             value: 17,
             highlighted: false,
           },

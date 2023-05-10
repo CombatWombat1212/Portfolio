@@ -1,5 +1,21 @@
 .link {
   @include no-select;
+
+  &__primary {
+    color: $col-primary;
+    text-decoration: none;
+    z-index: 1;
+
+    @include before-panel(0rem, rgba($col-primary, 0)) {
+      transition: 0.2s;
+      // z-index:0;
+    }
+
+    @include hover {
+      color: $col-background;
+      @include before-panel(0.3rem, rgba($col-primary, 1));
+    }
+  }
 }
 
 :root {
@@ -11,7 +27,6 @@
   --button-padding-bottom: calc(var(--button-padding) + 0.25rem);
   --button-height: calc(var(--button-icon-size) + var(--button-padding-top) + var(--button-padding-bottom));
 }
-
 
 .button {
   @include flex-row;
@@ -40,7 +55,7 @@
   }
 
   &--copy {
-    color: var(--button-color)!important;
+    color: var(--button-color) !important;
     @include flex-col-center;
   }
 
@@ -76,10 +91,9 @@
     }
   }
 
-
   &__transparent-primary {
     --button-icon-size: 1.5rem;
-    --button-background: rgba(0,0,0,0);
+    --button-background: rgba(0, 0, 0, 0);
     --button-color: #{$col-primary};
     @include hover {
       --button-color: #{$col-primary_hovered};
@@ -88,13 +102,12 @@
 
   &__transparent-background {
     --button-icon-size: 1.5rem;
-    --button-background: rgba(0,0,0,0);
+    --button-background: rgba(0, 0, 0, 0);
     --button-color: #{$col-background};
     @include hover {
       --button-color: #{$col-background_darkest};
     }
   }
-
 
   &__background-primary {
     --button-icon-size: 1.5rem;
@@ -116,7 +129,6 @@
     }
   }
 
-
   &__background_darkest-primary {
     --button-icon-size: 1.5rem;
     --button-background: #{$col-background_darkest};
@@ -127,7 +139,6 @@
     }
   }
 
-
   &__background-tertiary {
     --button-icon-size: 1.5rem;
     --button-background: #{$col-background};
@@ -137,11 +148,6 @@
       // --button-color: #{$col-tertiary_light};
     }
   }
-
-
-
-
-
 }
 
 // Button modifiers
@@ -170,7 +176,7 @@
     text-align: center;
     padding: 0;
     justify-content: center;
-    border-radius: 0 0 var(--b-rad) var(--b-rad) ;
+    border-radius: 0 0 var(--b-rad) var(--b-rad);
   }
 }
 

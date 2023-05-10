@@ -1,4 +1,4 @@
-$col-graph-empty: #CFCFD8;
+$col-graph-empty: #cfcfd8;
 
 @mixin graph-wrapper {
   background-color: $col-background;
@@ -10,8 +10,6 @@ $col-graph-empty: #CFCFD8;
   }
 }
 
-
-
 .graph {
   &--wrapper {
     @include graph-wrapper;
@@ -19,12 +17,12 @@ $col-graph-empty: #CFCFD8;
 
     &__small {
       --graph-height: 17rem;
+      @include lg-down {
+        --graph-height: 12.25rem;
+      }
+      @include md-down {
+        --graph-height: 15rem;
+      }
     }
   }
-
-
-
-
-
-
 }
