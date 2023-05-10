@@ -10,6 +10,7 @@ import Slideshow from "@/components/global/slideshow/Slideshow";
 import Pitch from "@/components/sections/Pitch";
 import { STUDY_MAKERIGHT } from "@/data/CASE_STUDIES";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
+import Nobr from "@/components/utilities/Nobr";
 
 function MakeRight({ pop }) {
   const study = STUDY_MAKERIGHT;
@@ -30,7 +31,8 @@ function MakeRight({ pop }) {
             </Heading>
             <Description>
               <p>
-                Offering endless customization, cheap manufacturing, and fast production speeds. <br className="d-md-none"/> 3D printing has a vast potential to benefit everyday consumers.
+                Offering endless customization, cheap manufacturing, and fast production speeds. <br className="d-md-none" /> 3D printing has a vast
+                potential to benefit everyday consumers.
               </p>
               <p>
                 In the early 2010s, we were told they would be found in every home; giving consumer&rsquo;s the power to create anything. But its
@@ -146,9 +148,7 @@ function MakeRight({ pop }) {
             </Column>
             <Column>
               <Heading type="h3">
-                Operating much like an &apos;Uber&apos;
-                <br />
-                for 3D prints from local makers.
+                Operating much like an &apos;Uber&apos; <br className="d-md-none" /> for <Nobr>3D prints</Nobr> from local makers.
               </Heading>
               <Description>
                 <p>
@@ -179,14 +179,21 @@ function MakeRight({ pop }) {
 
             <Column>
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["secondary_research"]} />
-              <Description type="h3" className="graphic--caption">
-                <b>Secondary research</b> for high-level context of the 3D printing world
+              <Description type="h3" className="graphic--caption d-lg-none d-md-block">
+                <b>Secondary research</b> for <Nobr>high-level</Nobr> context of the 3D printing world
               </Description>
+              <Description className="graphic--caption d-none d-lg-block d-md-none">
+                <h3><b>Secondary research</b></h3><p style={{marginTop:'0.125rem'}}>for <Nobr>high-level</Nobr> context of the <Nobr>3D printing world</Nobr></p>
+              </Description>
+
             </Column>
             <Column>
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["interviews"]} />
-              <Description type="h3" className="graphic--caption">
+              <Description type="h3" className="graphic--caption d-lg-none d-md-block">
                 <b>Interviews & surveys</b> to understand users&apos; experiences at a lower level
+              </Description>
+              <Description className="graphic--caption d-none d-lg-block d-md-none">
+                <h3><b>Interviews & surveys</b></h3><p style={{marginTop:'0.125rem'}}> to understand users&apos; experiences <Nobr>at a lower level</Nobr></p>
               </Description>
             </Column>
           </Section>
@@ -248,19 +255,20 @@ function MakeRight({ pop }) {
 
             <Column>
               <Quote background="background">
-                &ldquo;...In architecture, some calculations are easier when <br className="d-lg-none" /> you have a real model vs. digital...&rdquo;
-                - Layperson #6
+                &ldquo;...In architecture, some calculations are easier when <br className="d-lg-none" /> you have a real model vs. digital...&rdquo;{" "}
+                <Nobr>- Layperson #6</Nobr>
               </Quote>
             </Column>
 
             <Column>
               <Quote background="background">
-                &ldquo;But I never use [3D printing] because I don&rsquo;t know <br className="d-lg-none" /> how to work the machines.&rdquo; <br className="d-none d-lg-block d-md-none" /> - Layperson #4
+                &ldquo;But I never use [3D printing] because I don&rsquo;t know <br className="d-lg-none" /> how to work the machines.&rdquo;
+                <br className="d-none d-lg-block d-md-none" /> <Nobr>- Layperson #4</Nobr>
               </Quote>
             </Column>
           </Section>
 
-          <Section id="Research--Owners" type="columns" titled  background="background darkest">
+          <Section id="Research--Owners" type="columns" titled background="background darkest">
             <Heading type="h3">While many owners of 3D printers have idle machines, and free time</Heading>
             <Description className={desktop ? "mt-less" : ""}>
               <p>
@@ -270,36 +278,46 @@ function MakeRight({ pop }) {
             </Description>
 
             <Column>
-              <Quote background="background">&ldquo;How often do you use your printer?&rdquo;<br className="d-none d-lg-block d-md-none d-sm-block" /> - Me</Quote>
+              <Quote background="background">
+                &ldquo;How often do you use your printer?&rdquo; <Nobr>- Me</Nobr>
+              </Quote>
             </Column>
 
             <Column>
-              <Quote background="background">&ldquo;Not enough&rdquo;<br className="d-none d-lg-block d-md-none d-sm-block" /> - Owners #1-4, unanimously</Quote>
+              <Quote background="background">
+                &ldquo;Not enough&rdquo; <Nobr>- Owners #1-4, unanimously</Nobr>
+              </Quote>
             </Column>
           </Section>
 
           <Section id="Research--Aha-Moment" type="columns">
-            <Column className="col-5">
-              <Graphic type="mask" className="graphic--panel__flexible" background="background darker" img={MAKERIGHT_IMGS["aha_moment"]} />
+            <Column className="col-5 col-lg-5 col-md-12">
+              <Graphic
+                type="mask"
+                {...(desktop ? { className: "graphic--panel__flexible" } : {})}
+                {...(desktop ? { background: "background darker" } : {})}
+                img={MAKERIGHT_IMGS["aha_moment"]}
+              />
             </Column>
 
-            <Column className="col-7">
+            <Column className="col-7 col-lg-6 col-md-12">
               <Title>&apos;Aha&apos; Moment</Title>
               <Heading>
-                Idle printers, <br />
+                Idle printers, <br className="d-md-none" />
                 potential for wider use
               </Heading>
               <Description>
-                <p>
-                  Primary and secondary research had converged on these 2 key takeaways.
-                  <br />I knew my solution would be found at their intersection.
-                </p>
+                <p>Primary and secondary research had converged on these 2 key takeaways. I knew my solution would be found at their intersection.</p>
                 <ol>
                   <li>
-                    <span>The machines of skilled printer owners are largely idle</span>
+                    <span>
+                      The machines of skilled printer owners are <Nobr>largely idle</Nobr>
+                    </span>
                   </li>
                   <li>
-                    <span>Laypersons feel barred from 3D printing, despite having several ideas and uses for it</span>
+                    <span>
+                      Laypersons feel barred from 3D printing, despite having <br className="d-lg-none" /> several ideas and uses for it
+                    </span>
                   </li>
                 </ol>
               </Description>
@@ -310,25 +328,35 @@ function MakeRight({ pop }) {
         <Chapter name="Develop" id="Develop">
           <Section id="Develop--Methodology" type="columns" titled arrows background="background darker" wrapperClassName="mt-0">
             <Title>Methodology</Title>
-            <Heading>Moving from problem to solution</Heading>
+            <Heading>Moving from problem <Nobr>to solution</Nobr></Heading>
 
             <Column>
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["brainstorming"]} />
-              <Description type="h3" className="graphic--caption">
+              <Description type="h3" className="graphic--caption d-lg-none d-md-block">
                 <b>Brainstorming</b> to generate a wide number of potential solutions
               </Description>
+              <Description className="graphic--caption d-none d-lg-block d-md-none">
+                <h3><b>Brainstorming</b></h3><p style={{marginTop:'0.125rem'}}>to generate a wide number of potential solutions</p>
+              </Description>
+
             </Column>
             <Column>
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["refine_ideas"]} />
-              <Description type="h3" className="graphic--caption">
+              <Description type="h3" className="graphic--caption d-lg-none d-md-block">
                 <b>Refine ideas</b> to fully explore promising concepts
+              </Description>
+              <Description className="graphic--caption d-none d-lg-block d-md-none">
+                <h3><b>Refine ideas</b></h3><p style={{marginTop:'0.125rem'}}>to fully explore promising concepts</p>
               </Description>
             </Column>
 
             <Column>
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["focus_group_testing"]} />
-              <Description type="h3" className="graphic--caption">
+              <Description type={'h3'} className="graphic--caption d-lg-none d-md-block">
                 <b>Focus group testing</b> to gauge reception and feedback from users
+              </Description>
+              <Description className="graphic--caption d-none d-lg-block d-md-none">
+                <h3><b>Focus group</b></h3><p style={{marginTop:'0.125rem'}}>to gauge reception and feedback <Nobr>from users</Nobr></p>
               </Description>
             </Column>
           </Section>

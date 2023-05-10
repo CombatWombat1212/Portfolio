@@ -123,12 +123,12 @@ input, button, textarea, select {
   --font-size-quote: 0.9875rem;
   --font-size-logo: 1.375rem;
   --font-leading-h1: 4rem;
-  --font-leading-h2: 3.165rem;
+  --font-leading-h2: 3.15rem;
   --font-leading-h3: 2.225rem;
   --font-leading-h4: 1.15rem;
-  --font-leading-body: 1.575rem;
+  --font-leading-body: 1.545rem;
   --font-leading-quote: 1.51rem;
-  --font-margin-bottom-h2: 1.4rem;
+  --font-margin-bottom-h2: 1.25rem;
   --font-margin-bottom-h2_less: 0.65rem;
   --font-margin-bottom-h3: 1.125rem;
   --font-margin-bottom-h3_less: 0.695rem;
@@ -184,7 +184,7 @@ input, button, textarea, select {
     --font-size-logo: 1.3125rem;
     --font-leading-h1: 3.15rem;
     --font-leading-h2: 2.635rem;
-    --font-leading-h3: 1.825rem;
+    --font-leading-h3: 1.865rem;
     --font-leading-h4: 1.125rem;
     --font-leading-body: 1.345rem;
     --font-leading-quote: 1.3565rem;
@@ -205,11 +205,11 @@ input, button, textarea, select {
     --font-size-quote: 0.895rem;
     --font-size-logo: 1.3125rem;
     --font-leading-h1: 2.795rem;
-    --font-leading-h2: 2.315rem;
+    --font-leading-h2: 2.335rem;
     --font-leading-h3: 1.785rem;
     --font-leading-h4: 1.105rem;
     --font-leading-body: 1.3535rem;
-    --font-leading-quote: 1.31rem;
+    --font-leading-quote: 1.32rem;
   }
 }
 
@@ -339,6 +339,10 @@ body {
 .noscroll {
   overflow: hidden;
   overflow: -moz-hidden-unscrollable;
+}
+
+.nobr {
+  white-space: nowrap;
 }
 
 .off {
@@ -7335,7 +7339,7 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 61.9375em) and (min-width: 50em) {
   .pie .circle--wrapper {
-    margin-bottom: -0.225rem;
+    margin-bottom: -0.24rem;
   }
 }
 
@@ -9140,6 +9144,148 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 61.9375em) {
   #Makeright #Research--Hobbyists .section {
     --gap: 2.75rem;
+  }
+}
+
+@media screen and (max-width: 61.9375em) and (min-width: 50em) {
+  #Makeright #Research--Aha-Moment .section {
+    gap: 3rem;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Makeright #Research--Aha-Moment .section {
+    position: relative;
+  }
+}
+
+#Makeright #Research--Aha-Moment .section--graphic {
+  --graphic-scale: 0.95;
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Makeright #Research--Aha-Moment .section--graphic {
+    --graphic-scale: 1.35;
+    opacity: var(--graphic-overview-opacity);
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Makeright #Research--Aha-Moment .section--graphic {
+    --graphic-scale: 1.5;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Makeright #Research--Aha-Moment .section .column-1 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Makeright #Research--Aha-Moment .section .mask {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Makeright #Develop--Methodology .section {
+    max-width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media screen and (max-width: 91.9375em) {
+  #Makeright #Develop--Methodology .section--main {
+    --gap: 5.5rem;
+    gap: var(--gap);
+    column-gap: var(--gap);
+    row-gap: var(--gap);
+  }
+}
+
+@media screen and (max-width: 79.9375em) {
+  #Makeright #Develop--Methodology .section--main {
+    --gap: 4.75rem;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Makeright #Develop--Methodology .section--main {
+    --gap: 4.15rem;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Makeright #Develop--Methodology .section--main {
+    --gap: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    row-gap: 3.5rem;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Makeright #Develop--Methodology .section--main {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 91.9375em) {
+  #Makeright #Develop--Methodology .section--graphic {
+    --graphic-scale: 0.925;
+    --img-panel-height: 11.5rem;
+  }
+}
+
+@media screen and (max-width: 79.9375em) {
+  #Makeright #Develop--Methodology .section--graphic {
+    --graphic-scale: 0.825;
+    --img-panel-height: 10.5rem;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Makeright #Develop--Methodology .section--graphic {
+    --graphic-scale: 0.75;
+    --img-panel-height: 9.5rem;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Makeright #Develop--Methodology .section--graphic {
+    --graphic-scale: 0.85;
+    --img-panel-height: 11rem;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Makeright #Develop--Methodology .section--graphic {
+    --img-panel-height: 13rem;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Makeright #Develop--Methodology .section--column {
+    width: 100%;
+    max-width: unset;
+    min-width: unset;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Makeright #Develop--Methodology .arrow--column {
+    display: none;
   }
 }
 

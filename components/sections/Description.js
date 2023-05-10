@@ -7,6 +7,7 @@ function getDescriptionClasses(type) {
   if (type == "h2") descriptionClasses += " text--h2";
   if (type == "h3") descriptionClasses += " text--h3";
   if (type == "h4") descriptionClasses += " text--h4";
+  if (type == "p" || type=="body") descriptionClasses += " text--body";
   return descriptionClasses;
 }
 

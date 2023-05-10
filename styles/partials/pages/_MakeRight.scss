@@ -265,10 +265,8 @@
     }
 
     &--Hobbyists {
-
-
-      .pie--wrapper{
-        @include md-down{
+      .pie--wrapper {
+        @include md-down {
           --graph-height: 14rem;
         }
       }
@@ -286,18 +284,117 @@
     &--Primary {
     }
     &--Non-Owners {
-
       // .section{&--main{}}
     }
     &--Owners {
     }
     &--Aha-Moment {
+      .section {
+        @include lg {
+          gap: 3rem;
+        }
+        @include md-down {
+          position: relative;
+        }
+
+        &--graphic {
+          --graphic-scale: 0.95;
+          @include md-down {
+            --graphic-scale: 1.35;
+            opacity: var(--graphic-overview-opacity);
+            max-width: 100%;
+          }
+          @include sm-down {
+            --graphic-scale: 1.5;
+          }
+        }
+
+        .column-1 {
+          @include md-down {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            @include flex-row-center;
+            align-items: center;
+          }
+        }
+
+        .mask {
+          @include md-down {
+            max-width: 100%;
+          }
+        }
+      }
     }
   }
 
   #Develop {
     &--Methodology {
+      .section {
+        @include sm-down {
+          max-width: 80%;
+          @include mx-auto;
+        }
+
+        &--main {
+          @include xxl-down {
+            --gap: 5.5rem;
+            @include gap;
+          }
+          @include xl-down {
+            --gap: 4.75rem;
+          }
+          @include lg-down {
+            --gap: 4.15rem;
+          }
+          @include md-down {
+            --gap: 4rem;
+            @include flex-row-center;
+            row-gap:3.5rem;
+          }
+          @include sm-down {
+            @include flex-col;
+          }
+        }
+
+        &--graphic {
+          @include xxl-down {
+            --graphic-scale: 0.925;
+            --img-panel-height: 11.5rem;
+          }
+          @include xl-down {
+            --graphic-scale: 0.825;
+            --img-panel-height: 10.5rem;
+          }
+          @include lg-down {
+            --graphic-scale: 0.75;
+            --img-panel-height: 9.5rem;
+          }
+          @include md-down {
+            --graphic-scale: 0.85;
+            --img-panel-height: 11rem;
+          }
+          @include sm-down {
+            --img-panel-height: 13rem;
+          }
+        }
+
+        &--column {
+          @include sm-down {
+            width: 100%;
+            max-width: unset;
+            min-width: unset;
+          }
+        }
+      }
+
+      .arrow--column {
+        @include md-down {
+          display: none;
+        }
+      }
     }
+
     &--Brainstorming {
     }
     &--Refine {
