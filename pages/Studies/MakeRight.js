@@ -363,9 +363,9 @@ function MakeRight({ pop }) {
 
           <Section id="Develop--Brainstorming" type="columns" titled background="background darkest">
             <Title>Brainstorming</Title>
-            <Heading>Out of all concepts, one stood out in terms of viability</Heading>
+            <Heading>Out of all concepts, one stood out <Nobr className="d-sm-none">in terms of viability</Nobr></Heading>
 
-            <Column className="col-4">
+            <Column className="col-4 col-lg-5 col-md-12">
               <Graphic className="flex-col h-auto" background="background" type="mask" img={MAKERIGHT_IMGS["brainstorming_chart"]}>
                 <Button
                   color="primary"
@@ -380,11 +380,11 @@ function MakeRight({ pop }) {
               </Graphic>
             </Column>
 
-            <Column className="col-8">
+            <Column className="col-8 col-lg-7 col-md-12">
               <Description background="background">
                 <h3>
                   A gig-economy-based 3D printing service,
-                  <br />a sort-of Uber for 3D models.
+                  <br className="d-lg-none" /> a <Nobr>sort-of</Nobr> Uber for 3D models.
                 </h3>
                 <ul>
                   <li className="mt-less">
@@ -474,18 +474,17 @@ function MakeRight({ pop }) {
           <Section id="Develop--Reception" type="columns" titled background="background darkest">
             <Heading type="h3">Reception was quite positive among both groups:</Heading>
             <Description className="mt-less">
-              Laypersons commented ideas for what they would print, while makers showed excitement towards profiting off their equipment.
+              <p>Laypersons commented ideas for what they would print, while makers showed excitement towards profiting off their equipment.</p>
             </Description>
 
             <Column>
               <Quote background="background">
-                Laypersons commented ideas for what they would print, while makers showed excitement towards profiting off their equipment.
+              &ldquo;I think a business like this could totally work... ...I think there’s a lot of people with printers and free time that would hop on an opportunity like this.&rdquo; <Nobr>- Maker #2</Nobr>
               </Quote>
             </Column>
             <Column>
               <Quote background="background">
-                &ldquo;I would definitely use that service. Not having to set up and use a printer myself? I would print so much stuff!&rdquo; -
-                Layperson #4
+                &ldquo;I would definitely use that service. Not having to set up and use a printer myself? I would print so much stuff!&rdquo; <Nobr>- Layperson #4</Nobr>
               </Quote>
             </Column>
           </Section>

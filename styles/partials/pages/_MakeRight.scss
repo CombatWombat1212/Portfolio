@@ -350,7 +350,7 @@
           @include md-down {
             --gap: 4rem;
             @include flex-row-center;
-            row-gap:3.5rem;
+            row-gap: 3.5rem;
           }
           @include sm-down {
             @include flex-col;
@@ -396,6 +396,35 @@
     }
 
     &--Brainstorming {
+      .section {
+        @include md {
+          max-width: 80%;
+          @include mx-auto;
+        }
+        &--main {
+          @include md-down {
+            @include flex-col-center;
+          }
+        }
+        &--graphic {
+          @include xxl-down {
+            --graphic-scale: 0.885;
+          }
+          @include xl-down {
+            --graphic-scale: 0.775;
+          }
+          @include md-down {
+            --graphic-scale: 0.8;
+          }
+        }
+
+
+        .column-1{@include md-down{order:1;}}
+        .column-2{@include md-down{order:0;}}
+
+
+
+      }
     }
     &--Refine {
     }

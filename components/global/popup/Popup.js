@@ -732,7 +732,7 @@ function Head({ pop, nav, popclass, handles, state }) {
       {!isLightbox && (
         <div className={`popup--header ${popclass.header} popup--nav`}>
           <Title pop={pop} />
-          {isInteractive && <Close pop={pop} nav={nav} handles={handles} popclass={popclass} state={state} />}
+          {isInteractive && <Close pop={pop} nav={nav} handles={handles} popclass={popclass} state={state} type={type} />}
         </div>
       )}
     </>
