@@ -4,27 +4,31 @@ $font-body: "Tenon";
 :root {
   --font-size-h1: 3.395rem;
   --font-size-h2: 2.375rem;
-  --font-size-h3: 1.625rem;
+  // --font-size-h3: 1.625rem;
+  --font-size-h3: 1.665rem;
   --font-size-h4: 0.875rem;
-  --font-size-body: 1.125rem;
-  --font-size-quote: 1.035rem;
+  // --font-size-body: 1.125rem;
+  --font-size-body: 1.1185rem
+  --font-size-quote: 0.9875rem;
 
   --font-size-logo: 1.375rem;
 
   --font-leading-h1: 4rem;
-  --font-leading-h2: 3.125rem;
-  --font-leading-h3: 2.305rem;
+  --font-leading-h2: 3.115rem;
+  // --font-leading-h3: 2.305rem;
+  --font-leading-h3: 2.175rem;
   --font-leading-h4: 1.15rem;
 
   // --font-leading-body: 1.5625rem;
-  --font-leading-body: 1.5525rem;
-  --font-leading-quote: 1.555rem;
+  // --font-leading-body: 1.575rem;
+  --font-leading-body: 1.545rem;
+  --font-leading-quote: 1.51rem;
 
   // --font-margin-bottom-h2: 1.5rem;
   --font-margin-bottom-h2: 1.4rem;
   --font-margin-bottom-h2_less: 0.65rem;
   --font-margin-bottom-h3: 1.125rem;
-  --font-margin-bottom-h3_less: 0.75rem;
+  --font-margin-bottom-h3_less: 0.695rem;
   --font-margin-bottom-h4: 0.25rem;
 
   
@@ -45,17 +49,17 @@ $font-body: "Tenon";
     --font-size-h3: 1.575rem;
     --font-size-h4: 0.84375rem;
     --font-size-body: 1.09375rem;
-    --font-size-quote: 1.035rem;
+    --font-size-quote: 0.98rem;
 
     --font-size-logo: 1.3125rem;
 
     --font-leading-h1: 3.875rem;
     --font-leading-h2: 3.125rem;
-    --font-leading-h3: 2.215rem;
+    --font-leading-h3: 2.08rem;
     --font-leading-h4: 1.21875rem;
 
     --font-leading-body: 1.53125rem;
-    --font-leading-quote: 1.515rem;
+    --font-leading-quote: 1.495rem;
 
 
     // --font-margin-bottom-h2: 1.25rem;
@@ -73,11 +77,11 @@ $font-body: "Tenon";
     --font-size-body: 1.05rem;
     --font-size-quote: 0.975rem;
 
-    --font-size-logo: 1.2125rem;
+    --font-size-logo: 1.3125rem;
 
     --font-leading-h1: 3.3825rem;
-    --font-leading-h2: 2.85rem;
-    --font-leading-h3: 2.125rem;
+    --font-leading-h2: 2.725rem;
+    --font-leading-h3: 2rem;
     --font-leading-h4: 1.125rem;
 
     --font-leading-body: 1.475rem;
@@ -96,18 +100,18 @@ $font-body: "Tenon";
     --font-size-h2: 2rem;
     --font-size-h3: 1.35rem;
     --font-size-h4: 0.8125rem;
-    --font-size-body: 1.035rem;
-    --font-size-quote: 0.9575rem;
+    --font-size-body: 1.0265rem;
+    --font-size-quote: 0.9525rem;
 
-    --font-size-logo: 1.2125rem;
+    --font-size-logo: 1.3125rem;
 
     --font-leading-h1: 3.15rem;
     --font-leading-h2: 2.635rem;
-    --font-leading-h3: 1.95rem;
+    --font-leading-h3: 1.85rem;
     --font-leading-h4: 1.125rem;
 
-    --font-leading-body: 1.475rem;
-    --font-leading-quote: 1.4rem;
+    --font-leading-body: 1.345rem;
+    --font-leading-quote: 1.3565rem;
 
 
     --font-margin-bottom-h2: 1.25rem;
@@ -122,21 +126,19 @@ $font-body: "Tenon";
     --font-size-h2: 1.775rem;
     --font-size-h3: 1.295rem;
     --font-size-h4: 0.8125rem;
-    --font-size-body: 0.975rem;
-    --font-size-quote: 0.9rem;
+    --font-size-body: 1.015rem;
+    --font-size-quote: 0.895rem;
 
-    --font-size-logo: 1.2125rem;
+    --font-size-logo: 1.3125rem;
 
     --font-leading-h1: 2.795rem;
-    --font-leading-h2: 2.285rem;
-    // --font-leading-h3: 1.765rem;
-    --font-leading-h3: 1.795rem;
+    --font-leading-h2: 2.315rem;
+    --font-leading-h3: 1.785rem;
     --font-leading-h4: 1.105rem;
 
 
-    // --font-leading-body: 1.3075rem;
-    --font-leading-body: 1.285rem;
-    --font-leading-quote: 1.35rem;
+    --font-leading-body: 1.3535rem;
+    --font-leading-quote: 1.31rem;
 
 
     // --font-margin-bottom-h2: 0.875rem;
@@ -249,6 +251,7 @@ $font-body: "Tenon";
   font-family: $font-title;
   font-size: var(--font-size-quote);
   line-height: var(--font-leading-quote);
+  word-spacing: 0.0125rem;
   @include weight-light;
   @include italic;
 }

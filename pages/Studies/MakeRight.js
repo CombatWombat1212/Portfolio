@@ -30,9 +30,7 @@ function MakeRight({ pop }) {
             </Heading>
             <Description>
               <p>
-                Offering endless customization, cheap manufacturing, and fast production speeds.
-                <br />
-                3D printing has a vast potential to benefit everyday consumers.
+                Offering endless customization, cheap manufacturing, and fast production speeds. <br className="d-md-none"/> 3D printing has a vast potential to benefit everyday consumers.
               </p>
               <p>
                 In the early 2010s, we were told they would be found in every home; giving consumer&rsquo;s the power to create anything. But its
@@ -237,7 +235,7 @@ function MakeRight({ pop }) {
             </Heading>
           </Section>
 
-          <Section id="Research--Non-Owners" type="columns" titled mainClassName={desktop ? "mt-less" : ""} background="background darkest">
+          <Section id="Research--Non-Owners" type="columns" titled background="background darkest">
             <Heading type="h3">
               Non-printer owners have interest in the tech, and barriers <br className="d-none d-lg-block d-md-none" /> to accessing it
             </Heading>
@@ -262,7 +260,7 @@ function MakeRight({ pop }) {
             </Column>
           </Section>
 
-          <Section id="Research--Owners" type="columns" titled mainClassName={desktop ? `mt-less` : ""} background="background darkest">
+          <Section id="Research--Owners" type="columns" titled  background="background darkest">
             <Heading type="h3">While many owners of 3D printers have idle machines, and free time</Heading>
             <Description className={desktop ? "mt-less" : ""}>
               <p>
