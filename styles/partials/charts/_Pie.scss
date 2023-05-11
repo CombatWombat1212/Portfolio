@@ -39,6 +39,9 @@
       @include lg-md {
         margin-bottom: -0.24rem;
       }
+      @include md-down {
+        margin-bottom: -0.35rem;
+      }
     }
     &--inner {
       position: relative;

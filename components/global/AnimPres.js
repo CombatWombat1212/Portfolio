@@ -73,6 +73,12 @@ function AnimPres({
       }
     : defaultTransition;
 
+
+  // const transition1 = {duration: 10};
+
+  // console.log(duration, hasInOutAnimation, transition, transition1)
+
+
   return (
     <AnimatePresence mode={mode ? mode : "sync"}>
     {condition &&

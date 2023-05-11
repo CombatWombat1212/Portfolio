@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Mask from "../utilities/Mask";
 import GANTT_CHARTS from "/data/charts/GANTT_CHARTS";
 import { chevron_down } from "/data/ICONS";
+import ResponsiveText from "../global/ResponsiveText";
 
 
 // TODO: Add the ability to set start and end points optionally which trim the chart to a specific range
@@ -67,7 +68,8 @@ function Bar({ className, bars, cycle }) {
 function Label({ className, children }) {
   return (
     <div className={`label ${className}`}>
-      <span title={children}>{children}</span>
+      {/* <span title={children}>{children}</span> */}
+      <ResponsiveText>{children}</ResponsiveText>
     </div>
   );
 }

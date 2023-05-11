@@ -4,11 +4,13 @@
   }
 
   @include scrollbar-track {
-    background-color: darken($col-tertiary, 5);
+    --scrollbar-track-color: #{darken($col-tertiary, 5)};
+    background-color: var(--scrollbar-track-color);
   }
 
   @include scrollbar-thumb {
-    background-color: lighten($col-tertiary-light, 10);
+    --scrollbar-thumb-color: #{lighten($col-tertiary-light, 10)};
+    background-color: var(--scrollbar-thumb-color);
   }
 }
 
@@ -80,11 +82,11 @@ $col-media-wrapper: rgba($col-background, 0.075);
     // max-width: calc(var(--site-max-width) - var(--popup-pad));
     // max-width: calc(var(--site-max-width));
     max-width: calc(var(--site-max-width) - 5rem);
-    max-height: calc(100% - var(--nav-height) - var(--popup-pad));
+    // max-height: calc(100% - var(--nav-height) - var(--popup-pad));
+    max-height: calc(100% - var(--nav-height) - var(--popup-pad) - 2rem);
     width: auto;
     height: auto;
 
-    
     @include lg-down {
       --popup-controls-offset: calc(var(--button-height) * 0.45);
       max-width: calc(var(--site-max-width) - 4rem);
@@ -93,8 +95,6 @@ $col-media-wrapper: rgba($col-background, 0.075);
     @include md-down {
       max-width: calc(var(--site-max-width));
     }
-
-
   }
 
   &__lightbox-group {
@@ -261,8 +261,20 @@ $col-media-wrapper: rgba($col-background, 0.075);
       max-height: unset;
       height: auto;
       overflow: visible;
-      margin-bottom: -0.25rem;
+      margin-bottom: -0.45rem;
       min-height: fit-content;
+    }
+
+
+    transition: clip-path 0.2s, opacity 0.2s ;
+    &__show#{&}__default {
+      // clip-path: inset(0 0 0 0);
+      opacity: 1;
+
+    }
+    &__hidden#{&}__default {
+      // clip-path: inset(0 15px 0 0);
+      opacity: 0;
     }
   }
 
@@ -676,15 +688,29 @@ $col-media-wrapper: rgba($col-background, 0.075);
       pointer-events: all;
       top: 0;
       right: -0.75rem;
+
+      @include lg-down {
+        .mask {
+          --button-icon-scale: 1.175;
+        }
+      }
+    }
+
+    &__lightbox {
+      transform: translate(100%, -18.5%);
+
+      @include lg-down {
+        top: 1rem;
+        transform: translate(0%, -157%);
+      }
+    }
+
+    &__lightbox-group {
       transform: translate(100%, -100%);
 
       @include lg-down {
         top: 1rem;
         transform: translate(0%, -200%);
-
-        .mask {
-          --button-icon-scale: 1.175;
-        }
       }
     }
   }
@@ -889,6 +915,11 @@ $col-media-wrapper: rgba($col-background, 0.075);
       img {
         @include img-contain;
       }
+
+      @include md-down{
+        --size: 11rem;
+      }
+
     }
   }
 }

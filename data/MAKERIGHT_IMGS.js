@@ -236,9 +236,18 @@ const MAKERIGHT_IMGS = processImages({
     alt: "A large-scale mindmap surrounding the cost and difficulty of 3D printing",
     width: 1445.2,
     height: 1210,
-    // width: 14452,
-    // height: 12100,
   },
+
+  brainstorming_chart_full_background: {
+    name: "brainstorming_chart_full_background",
+    title: "Cost and Difficulty of 3D Printing Mindmap",
+    src: "./assets/images/case_studies/makeright/brainstorming_chart_full_background.svg",
+    alt: "A large-scale mindmap surrounding the cost and difficulty of 3D printing with an opaque background",
+    width: 3920,
+    height: 3395,
+  },
+
+
 
   // TODO: its not actually a system map its a journey map
   journey_map: {

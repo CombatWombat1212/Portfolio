@@ -12,6 +12,7 @@ import swipeEventsInit from "@/scripts/SwipeEvents";
 import useListener from "@/scripts/hooks/useListener";
 import useScrollDirection from "@/scripts/hooks/useScrollDirection";
 import useScrollType from "@/scripts/useScrollType";
+import useDeviceDetect from "@/scripts/hooks/useDetectDevice";
 
 const laptop_frame = MAKERIGHT_IMGS.pitch_laptop_frame;
 
@@ -283,6 +284,7 @@ function Pitch({ children }) {
   const pitch = useRef(null);
 
   const { desktop, isBpAndDown, bp, loading } = useResponsive();
+  const {isMobileDevice} = useDeviceDetect();
   const lgAndDown = !(!isBpAndDown("lg") || loading);
   const mdAndDown = !(!isBpAndDown("md") || loading);
   const smAndDown = !(!isBpAndDown("sm") || loading);
@@ -314,11 +316,10 @@ function Pitch({ children }) {
   // if mdAndDown is true do the following:
   // cancel all scrolling once the top of .pitch (including its padding-top) has reached the top of the screen, from there listen for swipes and with every swipe up, scroll to the top of the next .pitch--placeholder, you know which one is the current placeholder based on pitch.rows.current that is set on scroll and resize
 
-  const scrollDir = useScrollDirection();
   const scrollType = useScrollType();
 
   function handleScroll(e) {
-    if (!(mdAndDown && pitches.find((pitch) => pitch.inView))) {
+    if (!(mdAndDown && pitches.find((pitch) => pitch.inView) && isMobileDevice)) {
       setLockScroll(false);
       return;
     }
@@ -338,7 +339,6 @@ function Pitch({ children }) {
     setWithinPitch(withinPitch);
 
     const scrollTouch = scrollType == "touch";
-    const withinTopOffset = pitchRect.top >= -topOffset && pitchRect.top <= topOffset;
     const set = withinPitch && scrollTouch && !(withinFirstOrLastRow);
     setLockScroll(set);
   }

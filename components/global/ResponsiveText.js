@@ -1,4 +1,8 @@
-function ResponsiveText({ data, tag = "span" }) {
+function ResponsiveText({ data: dataProp
+  , tag = "span", children }) {
+
+  var data = dataProp || children || "";
+
   const isString = typeof data === "string";
   const keys = typeof data === "object" ? Object.keys(data) : [];
 

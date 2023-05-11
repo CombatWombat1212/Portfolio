@@ -21,12 +21,21 @@ var GRAPHS = [
             highlighted: true,
           },
           {
-            name: "Knowledge Gap",
+            name: {
+              xxl: "Knowledge Gap",
+              sm: "Know. Gap",
+            },
+
+            
             value: 51,
             highlighted: true,
           },
           {
-            name: "Operating Cost",
+            name: {
+              xxl: "Operating Cost",
+              sm: "Op. Cost",
+            },
+
             value: 39,
             highlighted: false,
           },

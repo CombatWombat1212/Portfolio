@@ -1,7 +1,7 @@
 import CaseStudyPage from "@/components/studies/CaseStudyPage";
 import { Section, Chapter, Title, Column, Heading, Description, Graphic, Quote } from "@/components/sections/Sections";
-import MAKERIGHT_IMGS from "/data/MAKERIGHT_IMGS";
-import Gantt from "/components/charts/Gantt";
+import MAKERIGHT_IMGS from "@/data/MAKERIGHT_IMGS";
+import Gantt from "@/components/charts/Gantt";
 import BarGraph from "@/components/charts/BarGraph";
 import DLink from "@/components/utilities/DynamicLink";
 import PieChart from "@/components/charts/PieChart";
@@ -183,9 +183,13 @@ function MakeRight({ pop }) {
                 <b>Secondary research</b> for <Nobr>high-level</Nobr> context of the 3D printing world
               </Description>
               <Description className="graphic--caption d-none d-lg-block d-md-none">
-                <h3><b>Secondary research</b></h3><p style={{marginTop:'0.125rem'}}>for <Nobr>high-level</Nobr> context of the <Nobr>3D printing world</Nobr></p>
+                <h3>
+                  <b>Secondary research</b>
+                </h3>
+                <p style={{ marginTop: "0.125rem" }}>
+                  for <Nobr>high-level</Nobr> context of the <Nobr>3D printing world</Nobr>
+                </p>
               </Description>
-
             </Column>
             <Column>
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["interviews"]} />
@@ -193,7 +197,12 @@ function MakeRight({ pop }) {
                 <b>Interviews & surveys</b> to understand users&apos; experiences at a lower level
               </Description>
               <Description className="graphic--caption d-none d-lg-block d-md-none">
-                <h3><b>Interviews & surveys</b></h3><p style={{marginTop:'0.125rem'}}> to understand users&apos; experiences <Nobr>at a lower level</Nobr></p>
+                <h3>
+                  <b>Interviews & surveys</b>
+                </h3>
+                <p style={{ marginTop: "0.125rem" }}>
+                  to understand users&apos; experiences <Nobr>at a lower level</Nobr>
+                </p>
               </Description>
             </Column>
           </Section>
@@ -206,7 +215,7 @@ function MakeRight({ pop }) {
             </Heading>
           </Section>
 
-          <Section id="Research--Factors" className="flex-col" background="background darkest">
+          <Section id="Research--Factors" className={`flex-col`} background="background darkest" wrapperClassName={desktop ? "" : "mb-less"}>
             <Heading type="h3">What factors limit the adoption of 3D printing?</Heading>
             <BarGraph study="MakeRight" graph="Limiting Factors" type="default" />
             <Description>
@@ -217,6 +226,7 @@ function MakeRight({ pop }) {
               </p>
             </Description>
           </Section>
+
 
           <Section id="Research--Hobbyists" type="columns" className="gap-6" background="background darkest">
             <Column>
@@ -237,8 +247,7 @@ function MakeRight({ pop }) {
           <Section id="Research--Primary" background="background darkest">
             <Title>Primary Research</Title>
             <Heading>
-              Interviews with 4 makers, and 6 laypersons <br className="d-md-none" />
-              corroborated these statistics
+              Interviews with 4 makers, and 6 laypersons <br className="d-md-none" /> corroborated these statistics
             </Heading>
           </Section>
 
@@ -328,7 +337,9 @@ function MakeRight({ pop }) {
         <Chapter name="Develop" id="Develop">
           <Section id="Develop--Methodology" type="columns" titled arrows background="background darker" wrapperClassName="mt-0">
             <Title>Methodology</Title>
-            <Heading>Moving from problem <Nobr>to solution</Nobr></Heading>
+            <Heading>
+              Moving from problem <Nobr>to solution</Nobr>
+            </Heading>
 
             <Column>
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["brainstorming"]} />
@@ -336,9 +347,11 @@ function MakeRight({ pop }) {
                 <b>Brainstorming</b> to generate a wide number of potential solutions
               </Description>
               <Description className="graphic--caption d-none d-lg-block d-md-none">
-                <h3><b>Brainstorming</b></h3><p style={{marginTop:'0.125rem'}}>to generate a wide number of potential solutions</p>
+                <h3>
+                  <b>Brainstorming</b>
+                </h3>
+                <p style={{ marginTop: "0.125rem" }}>to generate a wide number of potential solutions</p>
               </Description>
-
             </Column>
             <Column>
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["refine_ideas"]} />
@@ -346,35 +359,62 @@ function MakeRight({ pop }) {
                 <b>Refine ideas</b> to fully explore promising concepts
               </Description>
               <Description className="graphic--caption d-none d-lg-block d-md-none">
-                <h3><b>Refine ideas</b></h3><p style={{marginTop:'0.125rem'}}>to fully explore promising concepts</p>
+                <h3>
+                  <b>Refine ideas</b>
+                </h3>
+                <p style={{ marginTop: "0.125rem" }}>to fully explore promising concepts</p>
               </Description>
             </Column>
 
             <Column>
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["focus_group_testing"]} />
-              <Description type={'h3'} className="graphic--caption d-lg-none d-md-block">
+              <Description type={"h3"} className="graphic--caption d-lg-none d-md-block">
                 <b>Focus group testing</b> to gauge reception and feedback from users
               </Description>
               <Description className="graphic--caption d-none d-lg-block d-md-none">
-                <h3><b>Focus group</b></h3><p style={{marginTop:'0.125rem'}}>to gauge reception and feedback <Nobr>from users</Nobr></p>
+                <h3>
+                  <b>Focus group</b>
+                </h3>
+                <p style={{ marginTop: "0.125rem" }}>
+                  to gauge reception and feedback <Nobr>from users</Nobr>
+                </p>
               </Description>
             </Column>
           </Section>
 
           <Section id="Develop--Brainstorming" type="columns" titled background="background darkest">
             <Title>Brainstorming</Title>
-            <Heading>Out of all concepts, one stood out <Nobr className="d-sm-none">in terms of viability</Nobr></Heading>
+            <Heading>
+              Out of all concepts, one stood out <Nobr className="d-sm-none">in terms of viability</Nobr>
+            </Heading>
 
             <Column className="col-4 col-lg-5 col-md-12">
               <Graphic className="flex-col h-auto" background="background" type="mask" img={MAKERIGHT_IMGS["brainstorming_chart"]}>
                 <Button
                   color="primary"
                   type="bottom"
-                  onClick={() => {
-                    pop.setOn(true);
-                    pop.setType("interactive");
-                    pop.setImg(MAKERIGHT_IMGS["brainstorming_chart_full"]);
-                  }}>
+                  //
+                  //
+                  //
+
+                  {...(desktop
+                    ? {
+                        onClick: () => {
+                          pop.setOn(true);
+                          pop.setType("interactive");
+                          pop.setImg(MAKERIGHT_IMGS["brainstorming_chart_full"]);
+                        },
+                      }
+                    : {
+                      onClick: () => {
+                        pop.setOn(true);
+                        pop.setType("lightbox");
+                        pop.setImg(MAKERIGHT_IMGS["brainstorming_chart_full_background"]);
+                      },
+                    })}
+                    
+                    
+                    >
                   View full exercise
                 </Button>
               </Graphic>
@@ -479,12 +519,14 @@ function MakeRight({ pop }) {
 
             <Column>
               <Quote background="background">
-              &ldquo;I think a business like this could totally work... ...I think there’s a lot of people with printers and free time that would hop on an opportunity like this.&rdquo; <Nobr>- Maker #2</Nobr>
+                &ldquo;I think a business like this could totally work... ...I think there’s a lot of people with printers and free time that would
+                hop on an opportunity like this.&rdquo; <Nobr>- Maker #2</Nobr>
               </Quote>
             </Column>
             <Column>
               <Quote background="background">
-                &ldquo;I would definitely use that service. Not having to set up and use a printer myself? I would print so much stuff!&rdquo; <Nobr>- Layperson #4</Nobr>
+                &ldquo;I would definitely use that service. Not having to set up and use a printer myself? I would print so much stuff!&rdquo;{" "}
+                <Nobr>- Layperson #4</Nobr>
               </Quote>
             </Column>
           </Section>

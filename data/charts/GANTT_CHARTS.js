@@ -9,7 +9,10 @@ var GANTT_CHARTS = [
         length: 14,
         phases: [
           {
-            name: "Research / Ideation",
+            name: {
+              xxl: "Research / Ideation",
+              sm: "Research",
+            },
             stages: [
               {
                 name: "Define",
@@ -20,12 +23,18 @@ var GANTT_CHARTS = [
                     end: 6,
                   },
                   {
-                    name: "Define Area of Focus",
+                    name: {
+                      xxl: "Define Area of Focus",
+                      sm: "Define Focus",
+                    },
                     start: 5,
                     end: 12,
                   },
                   {
-                    name: "Identify Assumptions",
+                    name: {
+                      xxl: "Identify Assumptions",
+                      sm: "Assumptions",
+                    },
                     start: 12,
                     end: 14,
                   },
@@ -35,7 +44,10 @@ var GANTT_CHARTS = [
                 name: "Plan",
                 tasks: [
                   {
-                    name: "Project Roadmap",
+                    name: {
+                      xxl: "Project Roadmap",
+                      sm: "Roadmap",
+                    },
                     start: 14,
                     end: 17,
                   },
@@ -55,7 +67,10 @@ var GANTT_CHARTS = [
                     end: 23,
                   },
                   {
-                    name: "Focus Group Research",
+                    name: {
+                      xxl: "Focus Group Research",
+                      sm: "Focus Group",
+                    },
                     start: 22,
                     end: 26,
                   },
@@ -71,7 +86,10 @@ var GANTT_CHARTS = [
                     end: 30,
                   },
                   {
-                    name: "User Journey Map",
+                    name: {
+                      xxl: "User Journey Map",
+                      sm: "Journey Map",
+                    },
                     start: 30,
                     end: 33,
                   },
@@ -81,7 +99,10 @@ var GANTT_CHARTS = [
                     end: 35,
                   },
                   {
-                    name: "Explore Barriers / Flaws",
+                    name: {
+                      xxl: "Explore Barriers / Flaws",
+                      sm: "Explore Barriers",
+                    },
                     start: 35,
                     end: 38,
                   },
@@ -102,7 +123,10 @@ var GANTT_CHARTS = [
                     end: [46, 51],
                   },
                   {
-                    name: "Plan / Conduct User Tests",
+                    name: {
+                      xxl: "Plan / Conduct User Tests",
+                      sm: "User Tests",
+                    },
                     start: 45,
                     end: 48,
                   },
@@ -119,7 +143,10 @@ var GANTT_CHARTS = [
                 name: "Deliver",
                 tasks: [
                   {
-                    name: "Write / Design Case Study",
+                    name: {
+                      xxl: "Write / Design Case Study",
+                      sm: "Case Study",
+                    },
                     start: 51,
                     end: 56,
                   },
@@ -852,7 +879,6 @@ var GANTT_CHARTS = [
       },
     ],
   },
-
 ];
 
 function checkGantt(arr) {
@@ -868,7 +894,9 @@ function checkGantt(arr) {
     }
 
     if (length != cyclesLength) {
-      console.error("Chart " + chart.name + " has a length of " + length + " but the sum of its cycles is " + cyclesLength + " These values should be equal.");
+      console.error(
+        "Chart " + chart.name + " has a length of " + length + " but the sum of its cycles is " + cyclesLength + " These values should be equal."
+      );
     }
   }
 
@@ -888,11 +916,17 @@ function checkGantt(arr) {
             var task = stage.tasks[m];
 
             if (typeof task.start != typeof task.end) {
-              console.error(`Task "${task.name}," from stage "${stage.name}," phase "${phase.name}," chart "${chart.name}," has start and end values that are not the same type. They should both be either numbers or arrays of numbers. Task.start is a "${typeof task.start}" and task.end is a "${typeof task.end}".`);
+              console.error(
+                `Task "${task.name}," from stage "${stage.name}," phase "${phase.name}," chart "${
+                  chart.name
+                }," has start and end values that are not the same type. They should both be either numbers or arrays of numbers. Task.start is a "${typeof task.start}" and task.end is a "${typeof task.end}".`
+              );
             }
             if (typeof task.start == "object" && typeof task.end == "object") {
               if (task.start.length != task.end.length) {
-                console.error(`Task "${task.name}," from stage "${stage.name}," phase "${phase.name}," chart "${chart.name}," has start and end value arrays that are not the same length. Task.start.length is "${task.start.length}" and task.end.length is "${task.end.length}".`);
+                console.error(
+                  `Task "${task.name}," from stage "${stage.name}," phase "${phase.name}," chart "${chart.name}," has start and end value arrays that are not the same length. Task.start.length is "${task.start.length}" and task.end.length is "${task.end.length}".`
+                );
               }
             }
           }

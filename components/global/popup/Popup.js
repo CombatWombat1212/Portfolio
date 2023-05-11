@@ -7,7 +7,7 @@ import { galleryInit, lightboxInit, seekHandler, setPopupGroup, updatePopupNav }
 import { Graphic, Heading } from "@/components/sections/Sections";
 import useBodyClass from "@/scripts/hooks/useBodyClass";
 import useListener from "@/scripts/hooks/useListener";
-import { AnimatePresence, motion, useAnimation, useIsPresent } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import useMouseMoving from "@/scripts/hooks/useMouseMoving";
 import useHoverAndFocus from "@/scripts/hooks/useHoverAndFocus";
 import useInputDown from "@/scripts/hooks/useInputDown";
@@ -75,6 +75,7 @@ function getPopupClasses(pop) {
       popclass.container.push("popup__lightbox-group");
       popclass.content.push("popup--content__lightbox-group");
       popclass.header.push("popup--header__lightbox-group");
+      popclass.close.push("popup--close__lightbox-group");
     }
     // Nested Case 1.4: group is false
     if (!pop.group) {
@@ -253,7 +254,7 @@ function Wrapper({ pop, bp }) {
     canInteract.current = false;
     setTimeout(() => {
       canInteract.current = true;
-    }, popSeekDuration * 1000 * 2 * 1.15);
+    }, popSeekDuration * 1000 * 2 * 1.5);
 
     return true;
   };
@@ -306,7 +307,6 @@ function Wrapper({ pop, bp }) {
         pop.setImgLoaded(false);
         pop.setImgReady(false);
         pop.setImgDrawn(false);
-
         break;
       } while (pop.group.imgs[ind].hidden);
     },
@@ -373,19 +373,19 @@ function Wrapper({ pop, bp }) {
 
 
 
-  const router = useRouter();
+  // const router = useRouter();
 
-  useEffect(() => {
-    const handleRouteChange = () => {
-      handles.close();
-    };
+  // useEffect(() => {
+  //   const handleRouteChange = () => {
+  //     handles.close();
+  //   };
   
-    router.events.on('routeChangeStart', handleRouteChange);
+  //   router.events.on('routeChangeStart', handleRouteChange);
   
-    return () => {
-      router.events.off('routeChangeStart', handleRouteChange);
-    };
-  }, [handles.close, router]);
+  //   return () => {
+  //     router.events.off('routeChangeStart', handleRouteChange);
+  //   };
+  // }, [handles.close, router]);
   
 
 

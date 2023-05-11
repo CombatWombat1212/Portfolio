@@ -54,8 +54,12 @@
     }
 
     @include sm-down {
-      --bar-graph-bar-spacing: 2.25rem;
+      --bar-graph-pad-top: 2rem;
+      --bar-graph-pad-bottom: 3.65rem;
+      --bar-graph-bar-spacing: 1.75rem;
       --bar-graph-bar-width: 2.65rem;
+      --graph-height: 15rem;
+      --bar-graph-pad: 0.75rem;
     }
     
 
@@ -80,6 +84,9 @@
     @include md-down{
       padding-right:1.65rem;
       --gap: 1.175rem;
+    }
+    @include sm-down{
+      padding-right:1.8rem;
     }
   }
 
@@ -175,6 +182,7 @@
       color: $col-background;
       margin-top: var(--bar-graph-bar-label-pad);
       margin-bottom: calc((var(--bar-graph-bar-label-height) + var(--bar-graph-bar-label-pad)) * -1);
+
     }
   }
 
@@ -200,6 +208,8 @@
 
     &__default {
       color: $col-primary;
+
+
     }
   }
 }

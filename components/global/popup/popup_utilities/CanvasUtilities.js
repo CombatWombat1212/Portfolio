@@ -215,6 +215,11 @@ function canvasInit(pop) {
 
     // var loading = document.querySelector(".popup--loading");
     // removeLoading(loading, canvas);
+    canvas.removeEventListener("wheel", canvasZoom);
+    canvas.removeEventListener("mousemove", canvasMouseMoveHandler);
+    canvas.removeEventListener("mousedown", canvasMouseDownHandler);
+    canvas.removeEventListener("mouseup", canvasMouseUpHandler);
+
     canvas.addEventListener("wheel", canvasZoom);
     canvas.addEventListener("mousemove", canvasMouseMoveHandler);
     canvas.addEventListener("mousedown", canvasMouseDownHandler);

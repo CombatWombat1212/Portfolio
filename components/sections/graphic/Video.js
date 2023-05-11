@@ -53,7 +53,7 @@ function getUpdatedVideoProps(props, desktop) {
 
   var { ["data-autoplay"]: dataAutoplay, ["data-loop"]: dataLoop } = props;
   dataAutoplay = (() => {
-    if (dataAutoplay.includes("staggered")) return "scroll staggered";
+    if (typeof dataAutoplay == "string" && dataAutoplay.includes("staggered")) return "scroll staggered";
     else return "scroll";
   })();
   dataLoop = true;

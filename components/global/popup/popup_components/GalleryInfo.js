@@ -18,8 +18,24 @@ import useElementStyle from "@/scripts/hooks/useElementStyle";
 import useOffsetTop from "@/scripts/hooks/useOffsetTop";
 import { STUDY_LINKS } from "@/data/CASE_STUDIES";
 
-function GalInfoMotionWrapper({ elems, scrollbar, children, styles, type = "default" }) {
+
+
+// this is used to fix a bug where the scrollbar of popup--info is visible and updating several times before popup--description is ready to be drawn, so we delay both by a lil bit so that the popup (and in turn, the rest of the element), is only visible when the scrollbar is ready to be drawn
+const INFO_ANIM_DELAY = 0.3;
+
+function GalInfoMotionWrapper({ pop, state, elems, scrollbar, children, styles, type = "default" }) {
   const scroll = type != "above" && scrollbar.info.classes ? scrollbar.info.classes : "";
+
+
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    if (pop.firstImgDrawn || state.mobileGallery) {
+      setTimeout(() => {
+        setReady(true);
+      }, INFO_ANIM_DELAY * 1000);
+    }
+  }, [pop.firstImgDrawn, state.mobileGallery]);
+
   
   return (
     // <motion.div
@@ -28,7 +44,9 @@ function GalInfoMotionWrapper({ elems, scrollbar, children, styles, type = "defa
       // transition={{
       //   layout: { duration: popLayoutTransition },
       // }}
-      className={`popup--info ${scroll} popup--info__${type}`}
+      className={`popup--info ${scroll} popup--info__${type}
+                  popup--info__${ready ? "show" : "hidden"}
+      `}
 
       // ref={elems.info.ref}
 
@@ -49,7 +67,7 @@ function GalInfoAnimPres({ elems, pop, styles, state, popclass, scrollbar, child
           mode="wait"
           fragment
           animation={popAnims.slideFade}
-          // delay={0.25}
+          delay={INFO_ANIM_DELAY}
           condition={true}
           reference={elems.desc.ref}
           className={`popup--description ${popclass.desc} ${scrollbar.desc.classes} popup--description__${type}`}
