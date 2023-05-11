@@ -1,6 +1,4 @@
-import swipeEventsInit from "@/scripts/SwipeEvents";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
 
 function AnimPres({
   children,
@@ -19,8 +17,7 @@ function AnimPres({
   tag,
   initial: initialProp,
   fragment = false,
-    transition: transitionProp = {},
-  
+  transition: transitionProp = {},
 }) {
   const hasInOutAnimation = Boolean(animation.in && animation.out);
   const hasHiddenVisibleAnimation = Boolean(animation.hidden && animation.visible);
@@ -34,37 +31,9 @@ function AnimPres({
     delay: 0,
   };
 
-
-
-  // const applyTransitionOverrides = (animType) => {
-  //   if (!animType || !animType.transition) return animType;
-
-  //   const result = {
-  //     ...animType,
-      
-  //   };
-
-  //   result.transition = {
-  //     ...animType.transition,
-  //     ...(transitionProp ? transitionProp : {}),
-  //     duration:
-  //       duration !== undefined ? duration : animType.transition.duration !== undefined ? animType.transition.duration : defaultTransition.duration,
-  //     delay: delay !== undefined ? delay : animType.transition.delay !== undefined ? animType.transition.delay : defaultTransition.delay,
-  //   };
-
-  //   return result;
-  // };
-
-
-  // if (hasHiddenVisibleAnimation) {
-  //   animation.hidden = applyTransitionOverrides(animation.hidden);
-  //   animation.visible = applyTransitionOverrides(animation.visible);
-  //   animation.exit = applyTransitionOverrides(animation.exit);
-  // }
- 
   const applyTransitionOverrides = (animType) => {
     if (!animType || !animType.transition) return animType;
-  
+
     return {
       ...animType,
       transition: {
@@ -76,77 +45,30 @@ function AnimPres({
       },
     };
   };
-  
 
-  const variants = hasHiddenVisibleAnimation ? {
-    hidden: applyTransitionOverrides(animation.hidden),
-    visible: applyTransitionOverrides(animation.visible),
-    exit: applyTransitionOverrides(animation.exit),
-  } : undefined;
-  
-  // const transition = hasInOutAnimation
-  //   ? {
-  //       ...animation.in.transition,
-  //       ...(transitionProp ? transitionProp : {}),
-  //       duration:
-  //         duration !== undefined
-  //           ? duration
-  //           : animation.in.transition.duration !== undefined
-  //           ? animation.in.transition.duration
-  //           : defaultTransition.duration,
-  //       delay: delay !== undefined ? delay : animation.in.transition.delay !== undefined ? animation.in.transition.delay : defaultTransition.delay,
-  //     }
-  //   : defaultTransition;
+  const variants = hasHiddenVisibleAnimation
+    ? {
+        hidden: applyTransitionOverrides(animation.hidden),
+        visible: applyTransitionOverrides(animation.visible),
+        exit: applyTransitionOverrides(animation.exit),
+      }
+    : undefined;
 
-    const transition = hasInOutAnimation
+  const transition = hasInOutAnimation
     ? {
         ...animation.in.transition,
         ...(transitionProp ? transitionProp : {}),
       }
     : defaultTransition;
 
-// Set duration and delay after spreading animation.in.transition and transitionProp
-transition.duration = duration !== undefined ? duration : transition.duration !== undefined ? transition.duration : defaultTransition.duration;
-transition.delay = delay !== undefined ? delay : transition.delay !== undefined ? transition.delay : defaultTransition.delay;
+  // Set duration and delay after spreading animation.in.transition and transitionProp
+  transition.duration = duration !== undefined ? duration : transition.duration !== undefined ? transition.duration : defaultTransition.duration;
+  transition.delay = delay !== undefined ? delay : transition.delay !== undefined ? transition.delay : defaultTransition.delay;
 
 
-    // console.log(transitionProp);
-
-
-
-if(className.includes("popup--media-wrapper")){
-    console.log({
-      key: elemkey ? elemkey : "anim",
-      initial,
-      animate,
-      exit,
-      variants,
-      transition,
-      className: className ? className : "",
-      style: style ? style : {},
-      reference,
-      onAnimationComplete: onAnimationComplete ? onAnimationComplete : () => {},
-      layout: layout !== undefined ? layout : "undefined",
-      secondaryCondition,
-      children,
-    });
-  }
-
-
-  return (
-    <AnimatePresence mode={mode ? mode : "sync"}>
-    {condition &&
-      (fragment ? (
-        <>{renderMotionDiv()}</>
-      ) : (
-        renderMotionDiv()
-      ))}
-  </AnimatePresence>
-  );
-
+  return <AnimatePresence mode={mode ? mode : "sync"}>{condition && (fragment ? <>{renderMotionDiv()}</> : renderMotionDiv())}</AnimatePresence>;
 
   function renderMotionDiv() {
-
     const MotionElement = tag ? motion[tag] : motion.div;
 
     return (
@@ -161,17 +83,11 @@ if(className.includes("popup--media-wrapper")){
         style={style ? style : {}}
         ref={reference}
         onAnimationComplete={onAnimationComplete ? onAnimationComplete : () => {}}
-        {...(layout !== undefined ? { layout: layout } : {})}
-        
-  
-        >
-
+        {...(layout !== undefined ? { layout: layout } : {})}>
         {secondaryCondition && children}
-
       </MotionElement>
     );
   }
-  
 }
 
 export default AnimPres;
