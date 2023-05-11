@@ -22,8 +22,8 @@ function AnimPres({
     transition: transitionProp = {},
   
 }) {
-  const hasInOutAnimation = animation.in && animation.out;
-  const hasHiddenVisibleAnimation = animation.hidden && animation.visible;
+  const hasInOutAnimation = Boolean(animation.in && animation.out);
+  const hasHiddenVisibleAnimation = Boolean(animation.hidden && animation.visible);
 
   const initial = initialProp !== undefined ? initialProp : hasInOutAnimation ? animation.in.initial : "hidden";
   const animate = hasInOutAnimation ? animation.in.animate : "visible";
@@ -36,9 +36,35 @@ function AnimPres({
 
 
 
+  // const applyTransitionOverrides = (animType) => {
+  //   if (!animType || !animType.transition) return animType;
+
+  //   const result = {
+  //     ...animType,
+      
+  //   };
+
+  //   result.transition = {
+  //     ...animType.transition,
+  //     ...(transitionProp ? transitionProp : {}),
+  //     duration:
+  //       duration !== undefined ? duration : animType.transition.duration !== undefined ? animType.transition.duration : defaultTransition.duration,
+  //     delay: delay !== undefined ? delay : animType.transition.delay !== undefined ? animType.transition.delay : defaultTransition.delay,
+  //   };
+
+  //   return result;
+  // };
+
+
+  // if (hasHiddenVisibleAnimation) {
+  //   animation.hidden = applyTransitionOverrides(animation.hidden);
+  //   animation.visible = applyTransitionOverrides(animation.visible);
+  //   animation.exit = applyTransitionOverrides(animation.exit);
+  // }
+ 
   const applyTransitionOverrides = (animType) => {
     if (!animType || !animType.transition) return animType;
-
+  
     return {
       ...animType,
       transition: {
@@ -50,33 +76,61 @@ function AnimPres({
       },
     };
   };
+  
 
-  if (hasHiddenVisibleAnimation) {
-    animation.hidden = applyTransitionOverrides(animation.hidden);
-    animation.visible = applyTransitionOverrides(animation.visible);
-    animation.exit = applyTransitionOverrides(animation.exit);
-  }
- 
-  const variants = hasHiddenVisibleAnimation ? animation : undefined;
+  const variants = hasHiddenVisibleAnimation ? {
+    hidden: applyTransitionOverrides(animation.hidden),
+    visible: applyTransitionOverrides(animation.visible),
+    exit: applyTransitionOverrides(animation.exit),
+  } : undefined;
+  
+  // const transition = hasInOutAnimation
+  //   ? {
+  //       ...animation.in.transition,
+  //       ...(transitionProp ? transitionProp : {}),
+  //       duration:
+  //         duration !== undefined
+  //           ? duration
+  //           : animation.in.transition.duration !== undefined
+  //           ? animation.in.transition.duration
+  //           : defaultTransition.duration,
+  //       delay: delay !== undefined ? delay : animation.in.transition.delay !== undefined ? animation.in.transition.delay : defaultTransition.delay,
+  //     }
+  //   : defaultTransition;
 
-  const transition = hasInOutAnimation
+    const transition = hasInOutAnimation
     ? {
         ...animation.in.transition,
         ...(transitionProp ? transitionProp : {}),
-        duration:
-          duration !== undefined
-            ? duration
-            : animation.in.transition.duration !== undefined
-            ? animation.in.transition.duration
-            : defaultTransition.duration,
-        delay: delay !== undefined ? delay : animation.in.transition.delay !== undefined ? animation.in.transition.delay : defaultTransition.delay,
       }
     : defaultTransition;
 
+// Set duration and delay after spreading animation.in.transition and transitionProp
+transition.duration = duration !== undefined ? duration : transition.duration !== undefined ? transition.duration : defaultTransition.duration;
+transition.delay = delay !== undefined ? delay : transition.delay !== undefined ? transition.delay : defaultTransition.delay;
 
-  // const transition1 = {duration: 10};
 
-  // console.log(duration, hasInOutAnimation, transition, transition1)
+    // console.log(transitionProp);
+
+
+
+if(className.includes("popup--media-wrapper")){
+    console.log({
+      key: elemkey ? elemkey : "anim",
+      initial,
+      animate,
+      exit,
+      variants,
+      transition,
+      className: className ? className : "",
+      style: style ? style : {},
+      reference,
+      onAnimationComplete: onAnimationComplete ? onAnimationComplete : () => {},
+      layout: layout !== undefined ? layout : "undefined",
+      secondaryCondition,
+      children,
+    });
+  }
 
 
   return (
