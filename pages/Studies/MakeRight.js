@@ -1,6 +1,7 @@
 import CaseStudyPage from "@/components/studies/CaseStudyPage";
 import { Section, Chapter, Title, Column, Heading, Description, Graphic, Quote } from "@/components/sections/Sections";
 import MAKERIGHT_IMGS from "@/data/MAKERIGHT_IMGS";
+import QUOTE_TABLES from "@/data/QUOTE_TABLES";
 import Gantt from "@/components/charts/Gantt";
 import BarGraph from "@/components/charts/BarGraph";
 import DLink from "@/components/utilities/DynamicLink";
@@ -11,6 +12,7 @@ import Pitch from "@/components/sections/Pitch";
 import { STUDY_MAKERIGHT } from "@/data/CASE_STUDIES";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import Nobr from "@/components/utilities/Nobr";
+import QuoteTable from "@/components/global/QuoteTable";
 
 function MakeRight({ pop }) {
   const study = STUDY_MAKERIGHT;
@@ -227,7 +229,6 @@ function MakeRight({ pop }) {
             </Description>
           </Section>
 
-
           <Section id="Research--Hobbyists" type="columns" className="gap-6" background="background darkest">
             <Column>
               <Heading type="h3">
@@ -247,7 +248,15 @@ function MakeRight({ pop }) {
           <Section id="Research--Primary" background="background darkest">
             <Title>Primary Research</Title>
             <Heading>
-              Interviews with 4 makers, and 6 laypersons <br className="d-md-none" /> corroborated these statistics
+              {!mdAndDown ? (
+                <>
+                  Interviews with 4 makers, and 6 laypersons <br className="d-md-none" /> corroborated these statistics
+                </>
+              ) : (
+                <>
+                  Interviews with makers, and laypersons <br className="d-md-none" /> corroborated these findings
+                </>
+              )}
             </Heading>
           </Section>
 
@@ -406,15 +415,12 @@ function MakeRight({ pop }) {
                         },
                       }
                     : {
-                      onClick: () => {
-                        pop.setOn(true);
-                        pop.setType("lightbox");
-                        pop.setImg(MAKERIGHT_IMGS["brainstorming_chart_full_background"]);
-                      },
-                    })}
-                    
-                    
-                    >
+                        onClick: () => {
+                          pop.setOn(true);
+                          pop.setType("lightbox");
+                          pop.setImg(MAKERIGHT_IMGS["brainstorming_chart_full_background"]);
+                        },
+                      })}>
                   View full exercise
                 </Button>
               </Graphic>
@@ -440,58 +446,16 @@ function MakeRight({ pop }) {
 
           <Section id="Develop--Refine" background="background darkest">
             <Title>Refine Ideas</Title>
-            <Heading className="quote-table--heading">I expanded on this chosen idea by considering:</Heading>
+            <Heading className="quote-table--heading">
+              I expanded on this chosen idea <Nobr>by considering:</Nobr>
+            </Heading>
 
-            <div className="quote-table">
-              <div className="quote-table--subheading">
-                <h3>Goals</h3>
-              </div>
-              <div className="quote-table--subheading">
-                <h3>How This Might Be Addressed</h3>
-              </div>
-
-              <div className="quote-table--cell quote-table__primary">
-                <span>Provide clear benefit and value to those who wouldn&rsquo;t otherwise use 3D printing to solve their issues.</span>
-              </div>
-              <div className="quote-table--cell quote-table__secondary">
-                <span>Strong messaging, and UX, suited for those unfamiliar with 3D printing.</span>
-              </div>
-
-              <div className="quote-table--cell quote-table__primary">
-                <span>Ensure both customers and makers have a confident trust in the service.</span>
-              </div>
-              <div className="quote-table--cell quote-table__secondary">
-                <span>Vet makers & verify skills. Add verification checkpoints throughout the ordering process.</span>
-              </div>
-
-              <div className="quote-table--subheading">
-                <h3>Concerns</h3>
-              </div>
-              <div className="quote-table--subheading">
-                <h3></h3>
-              </div>
-
-              <div className="quote-table--cell quote-table__primary">
-                <span>What would get everyday consumers to use this service over alternatives?</span>
-              </div>
-              <div className="quote-table--cell quote-table__secondary">
-                <span>Cheap customizability. Encourage ‘window-shopping&rsquo; within the service, show examples of what printing can offer.</span>
-              </div>
-
-              <div className="quote-table--cell quote-table__primary">
-                <span>Would owners of 3D printers be interested in participating in this service?</span>
-              </div>
-              <div className="quote-table--cell quote-table__secondary">
-                <span>Fair compensation for makers, and realistic deadlines with room for human error.</span>
-              </div>
-            </div>
+            <QuoteTable data={QUOTE_TABLES.refine_ideas} />
           </Section>
 
           <Section id="Develop--Focus-Intro" background="background darkest">
             <Heading>
-              Focus group testing on the newly refined concept
-              <br />
-              allowed me to gauge reception, and gather feedback.
+              Focus group testing on the newly refined concept <br className="d-lg-none" /> allowed me to gauge reception, and gather feedback
             </Heading>
           </Section>
 
@@ -525,7 +489,7 @@ function MakeRight({ pop }) {
             </Column>
             <Column>
               <Quote background="background">
-                &ldquo;I would definitely use that service. Not having to set up and use a printer myself? I would print so much stuff!&rdquo;{" "}
+                &ldquo;I would definitely use that service. Not having to set up and use a printer myself? I would print so much stuff!&rdquo;
                 <Nobr>- Layperson #4</Nobr>
               </Quote>
             </Column>
@@ -536,32 +500,34 @@ function MakeRight({ pop }) {
               With important concerns being raised, as well:
             </Heading>
 
-            <div className="quote-table">
-              <div className="quote-table--cell quote-table__primary">
+            <QuoteTable data={QUOTE_TABLES.concerns} />
+
+            {/* <div className="quote-table">
+              <div className="quote-table--cell quote-table--cell__primary">
                 <p className="weight-bold mb-1">Distribution of responsibilities</p>
                 <p>Draw a line separating the responsibilities of makers, and customers.</p>
               </div>
-              <Quote background="background" className="quote-table--cell quote-table__secondary">
+              <Quote background="background" className="quote-table--cell quote-table--cell__secondary">
                 &ldquo;It&rsquo;s a question of distributing responsibility. There&rsquo;s 2 types of problems: maker problems, and customer
                 problems.&rdquo; - Layperson #3
               </Quote>
 
-              <div className="quote-table--cell quote-table__primary">
+              <div className="quote-table--cell quote-table--cell__primary">
                 <p className="weight-bold mb-1">Ensure a viable work experience for makers</p>
                 <p>Appropriate deadlines for printers, with some kind of flexibility.</p>
               </div>
-              <Quote background="background" className="quote-table--cell quote-table__secondary">
+              <Quote background="background" className="quote-table--cell quote-table--cell__secondary">
                 &ldquo;There&rsquo;s a lot of little steps and things that go into making the print that can take time.&rdquo; - Maker #3
               </Quote>
 
-              <div className="quote-table--cell quote-table__primary">
+              <div className="quote-table--cell quote-table--cell__primary">
                 <p className="weight-bold mb-1">3D modelling adds too much complication</p>
                 <p>Model creation and design is whole service in itself; including it in the service would drastically affect scope.</p>
               </div>
-              <Quote background="background" className="quote-table--cell quote-table__secondary">
+              <Quote background="background" className="quote-table--cell quote-table--cell__secondary">
                 &ldquo;I can&rsquo;t model things for people, so I&rsquo;m not very interested in that side of the service.&rdquo; - Maker #3
               </Quote>
-            </div>
+            </div> */}
           </Section>
 
           <Section id="Develop--Conclusion">

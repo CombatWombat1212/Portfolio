@@ -205,11 +205,11 @@ input, button, textarea, select {
     --font-size-quote: 0.895rem;
     --font-size-logo: 1.3125rem;
     --font-leading-h1: 2.795rem;
-    --font-leading-h2: 2.325rem;
-    --font-leading-h3:  1.825rem;
+    --font-leading-h2: 2.275rem;
+    --font-leading-h3:  1.775rem;
     --font-leading-h4: 1.105rem;
-    --font-leading-body: 1.3535rem;
-    --font-leading-quote: 1.32rem;
+    --font-leading-body: 1.3235rem;
+    --font-leading-quote: 1.25rem;
   }
 }
 
@@ -4531,26 +4531,52 @@ h3 + .studypanel--paragraph {
   grid-template-columns: repeat(2, 1fr);
 }
 
+@media screen and (max-width: 49.9375em) {
+  .quote-table {
+    --quote-table-cell-margin-top: 2.5rem;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 .quote-table--heading {
   margin-bottom: -1.15rem;
 }
 
 .quote-table--subheading {
   margin-top: 3.5rem;
-  margin-bottom: calc( var(--quote-table-heading-margin-bottom) - var(--quote-table-cell-margin-top));
+  margin-bottom: calc(var(--quote-table-heading-margin-bottom) - var(--quote-table-cell-margin-top));
+}
+
+@media screen and (max-width: 49.9375em) {
+  .quote-table--subheading {
+    margin-top: 3.25rem;
+  }
 }
 
 .quote-table--cell {
   padding: 1.75rem;
   margin-top: var(--quote-table-cell-margin-top);
+  position: relative;
 }
 
-.quote-table__primary {
+@media screen and (max-width: 49.9375em) {
+  .quote-table--cell {
+    margin-top: 0rem;
+  }
+}
+
+.quote-table--cell__primary {
   background-color: #F3F3F7;
 }
 
-.quote-table__secondary {
-  background-color: #ECECF3;
+@media screen and (max-width: 49.9375em) {
+  .quote-table--cell__primary {
+    margin-top: var(--quote-table-cell-margin-top);
+  }
+}
+
+.quote-table--cell__secondary {
+  background-color: #ececf3;
 }
 
 .slideshow {

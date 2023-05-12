@@ -3,7 +3,7 @@ function ResponsiveText({ data: dataProp
 
   var data = dataProp || children || "";
 
-  const isString = typeof data === "string";
+  const isString = typeof data === "string" || typeof data === "number";
   const keys = typeof data === "object" ? Object.keys(data) : [];
 
   const Elem = tag;

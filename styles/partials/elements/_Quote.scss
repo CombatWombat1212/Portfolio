@@ -1,56 +1,65 @@
 // TODO: i don't think quote needs to be integrated into section in this way at all in terms of the css, it could probably be seperated out of the section component too
 
-
 $quote-padding: 1.75rem;
 
+.section {
+  &--quote {
+    * {
+      @include quote;
+    }
 
-.section{
-
-    &--quote {
-        * {
-          @include quote;
-        }
-    
-        &__color {
-          padding: $quote-padding;
-        }
-      }
-    
+    &__color {
+      padding: $quote-padding;
+    }
+  }
 }
 
+.quote-table {
+  --quote-table-cell-margin-top: 1.875rem;
+  --quote-table-heading-margin-bottom: 1.25rem;
 
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 
+  @include md-down {
+    --quote-table-cell-margin-top: 2.5rem;
+    grid-template-columns: repeat(1, 1fr);
+  }
 
-.quote-table{
+  &--heading {
+    margin-bottom: -1.15rem;
+  }
 
-    --quote-table-cell-margin-top: 1.875rem;
-    --quote-table-heading-margin-bottom: 1.25rem;
+  &--subheading {
+    margin-top: 3.5rem;
+    margin-bottom: calc(var(--quote-table-heading-margin-bottom) - var(--quote-table-cell-margin-top));
 
-    display:grid;
-    grid-template-columns: repeat(2, 1fr);
+    @include md-down {
+      margin-top: 3.25rem;
+    }
+  }
 
-    &--heading{
-        margin-bottom: -1.15rem;
+  &--cell {
+    padding: $quote-padding;
+    margin-top: var(--quote-table-cell-margin-top);
+    position: relative;
+    @include md-down {
+      margin-top: 0rem;
     }
 
-    &--subheading{
-        margin-top:3.5rem;
-        margin-bottom: calc( var(--quote-table-heading-margin-bottom) - var(--quote-table-cell-margin-top) );
-    }
+    &__primary {
+      background-color: $col-background;
 
-
-    &--cell{
-        padding: $quote-padding;
+      @include md-down {
         margin-top: var(--quote-table-cell-margin-top);
+      }
     }
 
-
-    &__primary{
-        background-color: $col-background;
+    &__secondary {
+      background-color: #ececf3;
+    //   @include md-down {
+    //     background-color: rgba($col-tertiary-light, 0.095);
+    //   }
     }
-
-    &__secondary{
-        background-color: #ECECF3;
-    }
-
+  }
 }
