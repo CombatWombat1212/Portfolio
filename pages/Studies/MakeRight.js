@@ -541,8 +541,7 @@ function MakeRight({ pop }) {
             <Column className="col-7">
               <Heading>
                 Prototype scope covered the core journey of makers
-                <br />
-                and customers
+                <br className="d-lg-none"/> and customers
               </Heading>
             </Column>
             <Column className="col-5">
@@ -565,9 +564,9 @@ function MakeRight({ pop }) {
             mainClassName="gap-5"
             mainType="grid">
             <Title>Methodology</Title>
-            <Heading>The workload was divided across 4 project phases</Heading>
+            <Heading>The workload was divided <br className="d-none d-md-block d-sm-none" />across <Nobr>4 project phases</Nobr></Heading>
             <Description className="mt-1">
-              <p>I broke development into 4 phases of 4-6 weeks. Each containing their own cycles of development, testing, and iteration.</p>
+              <p>I broke development into 4 phases of 4-6 weeks. <br className="d-none d-lg-block d-sm-none" />Each containing their own cycles <Nobr className="d-md-none">of development, testing, and iteration.</Nobr></p>
             </Description>
 
             <Column>
@@ -576,7 +575,7 @@ function MakeRight({ pop }) {
                 <p>
                   <b>Phase 1:</b>
                 </p>
-                <p className="mt-less">Maker Journey, Low-Fi</p>
+                <p className="mt-less">Maker Journey, <Nobr>Low-Fi</Nobr></p>
               </Description>
             </Column>
             <Column>
@@ -585,7 +584,7 @@ function MakeRight({ pop }) {
                 <p>
                   <b>Phase 2:</b>
                 </p>
-                <p className="mt-less">Customer Journey, Low-Fi</p>
+                <p className="mt-less">Customer Journey, <Nobr>Low-Fi</Nobr></p>
               </Description>
             </Column>
 
@@ -595,7 +594,7 @@ function MakeRight({ pop }) {
                 <p>
                   <b>Phase 3:</b>
                 </p>
-                <p className="mt-less">Maker Journey, High-Fi</p>
+                <p className="mt-less">Maker Journey, <Nobr>High-Fi</Nobr></p>
               </Description>
             </Column>
             <Column>
@@ -604,7 +603,7 @@ function MakeRight({ pop }) {
                 <p>
                   <b>Phase 4:</b>
                 </p>
-                <p className="mt-less">Customer Journey, High-Fi</p>
+                <p className="mt-less">Customer Journey, <Nobr>High-Fi</Nobr></p>
               </Description>
             </Column>
           </Section>
@@ -649,9 +648,7 @@ function MakeRight({ pop }) {
             <Heading>Significant issues addressed during testing and revision:</Heading>
             <Description>
               <p>
-                Some changes were a structural shift in the service&rsquo;s rules and mechanics, others were simply UI and UX improvements.
-                <br />
-                Here is a smattering of the most notable issues addressed along the way.
+                Some changes were a structural shift in the service&rsquo;s rules and mechanics, others were simply UI and UX improvements. <br className="d-lg-none"/> Here is a smattering of the most notable issues addressed along the way.
               </p>
             </Description>
           </Section>
