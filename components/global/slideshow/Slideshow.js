@@ -6,26 +6,29 @@ import Button from "../../elements/Buttons";
 import Card from "./slider_subcomponents/Card";
 import { cardOnClickHandler } from "./slideshow_utilities/CardUtilities";
 import { sliderInit, sliderHandleMouseDown, sliderMouseMoveStart, sliderNotchOnClickHandler } from "./slideshow_utilities/SliderUtilities";
-import { slideShowButtonHandler, slideshowButtonsDisable, slideshowCheckInit, slideshowInit, slideshowMouseDown, slideshowSetPosition, slideshowUpdateCardStyle } from "./slideshow_utilities/SlideshowUtilities";
+import {
+  slideShowButtonHandler,
+  slideshowButtonsDisable,
+  slideshowCheckInit,
+  slideshowInit,
+  slideshowMouseDown,
+  slideshowSetPosition,
+  slideshowUpdateCardStyle,
+} from "./slideshow_utilities/SlideshowUtilities";
 import swipeEventsInit from "@/scripts/SwipeEvents";
-
-
 
 var loadOnceCount = 0;
 
 var slideshows = [];
 var cardImages = [];
 
-
-
-function slideshowGetCardImage(slideshow){
-  for(var i = 0; i < slideshows.length; i++){
-    if(slideshows[i] == slideshow){
+function slideshowGetCardImage(slideshow) {
+  for (var i = 0; i < slideshows.length; i++) {
+    if (slideshows[i] == slideshow) {
       return cardImages[i];
     }
   }
 }
-
 
 function Slideshow({ children, img }) {
   // TODO: should they be container__wide?
@@ -58,13 +61,11 @@ function Slideshow({ children, img }) {
     slideshowCheckInit(container, setHitStartPoint);
 
     sliderInit(slideshow, group, setCardImage);
-    // slideshow.current.querySelector(".slideshow--empty").style.setProperty("margin-left", `-${getElemWidth(container.current.children[1])* img.index}px`);
 
-    if(!slideshows.includes(slideshow.current)) slideshows.push(slideshow.current);
+    if (!slideshows.includes(slideshow.current)) slideshows.push(slideshow.current);
     for (var i = 0; i < slideshows.length; i++) {
       cardImages[i] = cardImage;
     }
-
 
     function once() {
       swipeEventsInit();
@@ -74,13 +75,7 @@ function Slideshow({ children, img }) {
       once();
       loadOnceCount++;
     }
-
-
   });
-
-  var containerStyle = {
-    "--slide-img-index": `${img.index}`,
-  };
 
   useEffect(() => {
     if (!hitStartPoint) return;
@@ -91,12 +86,7 @@ function Slideshow({ children, img }) {
     for (var i = 0; i < slideshows.length; i++) {
       cardImages[i] = cardImage;
     }
-
   }, [cardImage]);
-
-
-
-
 
   return (
     <div className="slideshow" style={cardGraphicStyle} ref={slideshow}>
@@ -108,7 +98,8 @@ function Slideshow({ children, img }) {
       </div>
 
       <div
-        className={`slideshow--container ${hitStartPoint ? "slideshow--container__visible" : "slideshow--container__hide"}`} onTouchStart={slideshowMouseDown}
+        className={`slideshow--container ${hitStartPoint ? "slideshow--container__visible" : "slideshow--container__hide"}`}
+        onTouchStart={slideshowMouseDown}
         style={{
           "--slide-img-index": `${cardImage.index}`,
         }}
@@ -117,7 +108,14 @@ function Slideshow({ children, img }) {
         {group.imgs.map((groupImg) => {
           return (
             <div className="slideshow--card" key={`card ${groupImg.index}`}>
-              <Card img={groupImg} index={groupImg.index} width={width} height={height} descriptionOn={descriptionOn} onClick={groupImg.index === cardImage.index ? null : (e) => cardOnClickHandler(e, group, groupImg.index, cardImage, setCardImage)} />
+              <Card
+                img={groupImg}
+                index={groupImg.index}
+                width={width}
+                height={height}
+                descriptionOn={descriptionOn}
+                onClick={groupImg.index === cardImage.index ? null : (e) => cardOnClickHandler(e, group, groupImg.index, cardImage, setCardImage)}
+              />
             </div>
           );
         })}
@@ -148,13 +146,26 @@ function Slideshow({ children, img }) {
               "--slider-section-end": `${group.sections.filter((section) => section.name == cardImage.section)[0].end}`,
             }}>
             <div className="slider--bar">
-              <div className="slider--handle" onMouseDown={sliderHandleMouseDown} onTouchStart={sliderHandleMouseDown} onMouseMove={sliderMouseMoveStart} onTouchMove={sliderMouseMoveStart}></div>
+              <div
+                className="slider--handle"
+                onMouseDown={sliderHandleMouseDown}
+                onTouchStart={sliderHandleMouseDown}
+                onMouseMove={sliderMouseMoveStart}
+                onTouchMove={sliderMouseMoveStart}></div>
 
               {group.imgs.map((groupImg, i) => {
                 const section = group.sections.find((section) => section.name === cardImage.section);
                 const isSectionActive = section && i >= section.start && i <= section.end;
-                const notchClass = `slider--notch slider--notch__hoverable${section ? (isSectionActive ? " slider--notch__active" : " slider--notch__inactive") : ""}`;
-                return <div className={notchClass} style={{ "--slider-notch-index": `${i}` }} key={`marker ${groupImg.index}`} onClick={(e) => sliderNotchOnClickHandler(e, i, group, setCardImage)}></div>;
+                const notchClass = `slider--notch slider--notch__hoverable${
+                  section ? (isSectionActive ? " slider--notch__active" : " slider--notch__inactive") : ""
+                }`;
+                return (
+                  <div
+                    className={notchClass}
+                    style={{ "--slider-notch-index": `${i}` }}
+                    key={`marker ${groupImg.index}`}
+                    onClick={(e) => sliderNotchOnClickHandler(e, i, group, setCardImage)}></div>
+                );
               })}
             </div>
 
@@ -180,5 +191,4 @@ function Slideshow({ children, img }) {
 
 export default Slideshow;
 
-
-export {slideshowGetCardImage};
+export { slideshowGetCardImage };

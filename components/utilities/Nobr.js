@@ -1,12 +1,11 @@
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 
 function Nobr({ children, className = "" }) {
-  const {bp} = useResponsive();
+  const { bp } = useResponsive();
   const breakpoints = getClassBreakpoints(className);
 
   let text = "";
   if (typeof children === "string") text = children;
-
 
   if (typeof children === "string" && breakpoints[bp] === "block") {
     text = children.replace(/ /g, "\u00A0"); // Replace spaces with non-breaking spaces

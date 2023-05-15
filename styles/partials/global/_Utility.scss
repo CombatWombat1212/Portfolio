@@ -118,6 +118,12 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
             class: h,
             values: (auto:auto,
             unset: unset)),
+        "width": (
+            property: width,
+            important: true,
+            class: w,
+            values: (auto:auto,
+            unset: unset, 100:100%)),
         "border-radius": (
             property: border-radius,
             important: true,

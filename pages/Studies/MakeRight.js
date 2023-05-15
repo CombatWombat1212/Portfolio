@@ -13,14 +13,16 @@ import { STUDY_MAKERIGHT } from "@/data/CASE_STUDIES";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import Nobr from "@/components/utilities/Nobr";
 import QuoteTable from "@/components/global/QuoteTable";
+import ResponsiveText from "@/components/global/ResponsiveText";
 
 function MakeRight({ pop }) {
   const study = STUDY_MAKERIGHT;
 
-  const { desktop, isBpAndDown, bp, loading } = useResponsive();
-  const lgAndDown = !(!isBpAndDown("lg") || loading);
-  const mdAndDown = !(!isBpAndDown("md") || loading);
-  const smAndDown = !(!isBpAndDown("sm") || loading);
+  const { desktop, isBpAndDown, isBp, bp, loading } = useResponsive();
+  const isLgAndDown = !(!isBpAndDown("lg") || loading);
+  const isMdAndDown = !(!isBpAndDown("md") || loading);
+  const isSmAndDown = !(!isBpAndDown("sm") || loading);
+  const isMd = !(!isBp("md") || loading);
 
   return (
     <>
@@ -248,7 +250,7 @@ function MakeRight({ pop }) {
           <Section id="Research--Primary" background="background darkest">
             <Title>Primary Research</Title>
             <Heading>
-              {!mdAndDown ? (
+              {!isMdAndDown ? (
                 <>
                   Interviews with 4 makers, and 6 laypersons <br className="d-md-none" /> corroborated these statistics
                 </>
@@ -541,7 +543,7 @@ function MakeRight({ pop }) {
             <Column className="col-7">
               <Heading>
                 Prototype scope covered the core journey of makers
-                <br className="d-lg-none"/> and customers
+                <br className="d-lg-none" /> and customers
               </Heading>
             </Column>
             <Column className="col-5">
@@ -564,9 +566,15 @@ function MakeRight({ pop }) {
             mainClassName="gap-5"
             mainType="grid">
             <Title>Methodology</Title>
-            <Heading>The workload was divided <br className="d-none d-md-block d-sm-none" />across <Nobr>4 project phases</Nobr></Heading>
+            <Heading>
+              The workload was divided <br className="d-none d-md-block d-sm-none" />
+              across <Nobr>4 project phases</Nobr>
+            </Heading>
             <Description className="mt-1">
-              <p>I broke development into 4 phases of 4-6 weeks. <br className="d-none d-lg-block d-sm-none" />Each containing their own cycles <Nobr className="d-md-none">of development, testing, and iteration.</Nobr></p>
+              <p>
+                I broke development into 4 phases of 4-6 weeks. <br className="d-none d-lg-block d-sm-none" />
+                Each containing their own cycles <Nobr className="d-md-none">of development, testing, and iteration.</Nobr>
+              </p>
             </Description>
 
             <Column>
@@ -575,7 +583,9 @@ function MakeRight({ pop }) {
                 <p>
                   <b>Phase 1:</b>
                 </p>
-                <p className="mt-less">Maker Journey, <Nobr>Low-Fi</Nobr></p>
+                <p className="mt-less">
+                  Maker Journey, <Nobr>Low-Fi</Nobr>
+                </p>
               </Description>
             </Column>
             <Column>
@@ -584,7 +594,9 @@ function MakeRight({ pop }) {
                 <p>
                   <b>Phase 2:</b>
                 </p>
-                <p className="mt-less">Customer Journey, <Nobr>Low-Fi</Nobr></p>
+                <p className="mt-less">
+                  Customer Journey, <Nobr>Low-Fi</Nobr>
+                </p>
               </Description>
             </Column>
 
@@ -594,7 +606,9 @@ function MakeRight({ pop }) {
                 <p>
                   <b>Phase 3:</b>
                 </p>
-                <p className="mt-less">Maker Journey, <Nobr>High-Fi</Nobr></p>
+                <p className="mt-less">
+                  Maker Journey, <Nobr>High-Fi</Nobr>
+                </p>
               </Description>
             </Column>
             <Column>
@@ -603,7 +617,9 @@ function MakeRight({ pop }) {
                 <p>
                   <b>Phase 4:</b>
                 </p>
-                <p className="mt-less">Customer Journey, <Nobr>High-Fi</Nobr></p>
+                <p className="mt-less">
+                  Customer Journey, <Nobr>High-Fi</Nobr>
+                </p>
               </Description>
             </Column>
           </Section>
@@ -614,51 +630,93 @@ function MakeRight({ pop }) {
 
             <Column caption="above">
               <Description className="graphic--caption graphic--caption__split">
-                <p>Customer Journey - Item Listing (Low-Fi)</p>
-                <p>Phase 1</p>
+                <p className="section--description-title">
+                  <ResponsiveText
+                    tag="Fragment"
+                    data={{
+                      xxl: "Customer Journey ",
+                      xs: "Customer ",
+                    }}
+                  />
+                  - Item Listing (Low-Fi)
+                </p>
+                <p className="section--description-phase">Phase 1</p>
               </Description>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_checkout_low_fi"]} lightbox pop={pop} />
             </Column>
             <Column caption="above">
               <Description className="graphic--caption graphic--caption__split">
-                <p>Customer Journey - Item Listing (High-Fi)</p>
-                <p>Phase 2</p>
+                <p className="section--description-title">
+                  <ResponsiveText
+                    tag="Fragment"
+                    data={{
+                      xxl: "Customer Journey ",
+                      xs: "Customer ",
+                    }}
+                  />
+                  - Item Listing (High-Fi)
+                </p>
+                <p className="section--description-phase">Phase 2</p>
               </Description>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_checkout_high_fi"]} lightbox pop={pop} />
             </Column>
 
             <Column caption="above">
               <Description className="graphic--caption graphic--caption__split">
-                <p>Maker Journey - File Checking (Low-Fi)</p>
-                <p>Phase 1</p>
+                <p className="section--description-title">
+                  <ResponsiveText
+                    tag="Fragment"
+                    data={{
+                      xxl: "Maker Journey ",
+                      xs: "Maker ",
+                    }}
+                  />
+                  - File Checking (Low-Fi)
+                </p>
+                <p className="section--description-phase">Phase 1</p>
               </Description>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_file_checking_low_fi"]} lightbox pop={pop} />
             </Column>
             <Column caption="above">
               <Description className="graphic--caption graphic--caption__split">
-                <p>Maker Journey - File Checking (High-Fi)</p>
-                <p>Phase 2</p>
+                <p className="section--description-title">
+                  <ResponsiveText
+                    tag="Fragment"
+                    data={{
+                      xxl: "Maker Journey ",
+                      xs: "Maker ",
+                    }}
+                  />
+                  - File Checking (High-Fi)
+                </p>
+                <p className="section--description-phase">Phase 2</p>
               </Description>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["iterations_file_checking_high_fi"]} lightbox pop={pop} />
             </Column>
           </Section>
 
-          <Section id="Prototyping--Feedback" background="tertiary light">
+          <Section id="Prototyping--Feedback" background="tertiary light" titled="above">
             <Title>Noteable Feedback Changes</Title>
-            <Heading>Significant issues addressed during testing and revision:</Heading>
-            <Description>
-              <p>
-                Some changes were a structural shift in the service&rsquo;s rules and mechanics, others were simply UI and UX improvements. <br className="d-lg-none"/> Here is a smattering of the most notable issues addressed along the way.
-              </p>
-            </Description>
+            <Column>
+              <Heading>
+                Significant issues addressed during <Nobr>testing and revision:</Nobr>
+              </Heading>
+            </Column>
+            <Column>
+              <Description>
+                <p>
+                  Some changes were a structural shift in the service&rsquo;s rules and mechanics, others were simply UI and UX improvements.
+                  <br className="d-xl-none" /> Here is a smattering of the most notable issues addressed along the way.
+                </p>
+              </Description>
+            </Column>
           </Section>
 
           <Section id="Prototyping--Overview" titled type="columns" arrows="background anchored" background="tertiary">
             <Heading type="h3">The Manufacturer Overview</Heading>
-
             <Column>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_overview_before"]} lightbox pop={pop} />
-              <Description className="mt-more graphic--caption graphic--caption__split">
+              <Description className="mt-more graphic--caption">
                 <p>
                   Aspiring makers need to understand the expectations of their new job. Originally, this was taught with an 8-page slideshow. But
                   users found it droning, hard to retain, and too easy to skip.
@@ -673,10 +731,9 @@ function MakeRight({ pop }) {
                 lightbox={MAKERIGHT_IMGS["feedback_overview_after_full"]}
                 pop={pop}
               />
-              <Description className="mt-more graphic--caption graphic--caption__split">
+              <Description className="mt-more graphic--caption">
                 <p>
-                  Now, that info exists as a single inviting page. As well, I added a brief video chat at the end onboarding to ensure new Makers have
-                  read the overview, and can ask questions.
+                  Now, that info exists as a single inviting page. As well, I added a brief video chat at the end onboarding to ensure new Makers have read the overview, and can ask questions.
                 </p>
               </Description>
             </Column>
@@ -687,26 +744,26 @@ function MakeRight({ pop }) {
 
             <Column>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_printers_before"]} lightbox pop={pop} />
-              <Description className="mt-more graphic--caption graphic--caption__split">
+              <Description className="mt-more graphic--caption">
                 <p>User&rsquo;s noted: lack of parity between printer and filament inputs, and the inability to add multiple printers.</p>
               </Description>
             </Column>
             <Column>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_printers_after"]} lightbox pop={pop} />
-              <Description className="mt-more graphic--caption graphic--caption__split">
+              <Description className="mt-more graphic--caption">
                 <p>Redesign to match filament inputs, now with support for multiple printers, and integrated support via tooltips.</p>
               </Description>
             </Column>
 
             <Column>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_filament_before"]} lightbox pop={pop} />
-              <Description className="mt-more graphic--caption graphic--caption__split">
+              <Description className="mt-more graphic--caption">
                 <p>Makers may have entire shelves of filament, so it would be useful to have more distinction between each added material.</p>
               </Description>
             </Column>
             <Column>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_filament_after"]} lightbox pop={pop} />
-              <Description className="mt-more graphic--caption graphic--caption__split">
+              <Description className="mt-more graphic--caption">
                 <p>
                   A stripe across the top of the cards match the real-world color of the inputted filament; making them much easier to differentiate.
                 </p>
@@ -718,15 +775,13 @@ function MakeRight({ pop }) {
             <Heading type="h3">Tutorial system</Heading>
 
             <Column>
-              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_tutorials"]} />
-              <Description className="mt-more graphic--caption gap-4 graphic--caption__split">
+              <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_tutorials"]} lightbox pop={pop} />
+              <Description className={`mt-more graphic--caption gap-4 gap-lg-3 ${!isLgAndDown && "graphic--caption__split"}`}>
                 <p>
-                  Testers of the Maker journey were navigating much more fluidly halfway through each test. It was taking a few pages of exploration
-                  before the terminology, and flow finally clicked.
+                  Testers of the Maker journey were navigating much more fluidly halfway through each test. It was taking a few pages of exploration before the terminology, and flow finally clicked.
                 </p>
                 <p>
-                  To ease the friction of a user&rsquo;s first order fulfillment, I added an optional tutorial system. Boxes appear one by one
-                  describing important elements, and directing the user through their task.
+                  To ease the friction of a user&rsquo;s first order fulfillment, I added an optional tutorial system. Boxes appear one by one describing important elements, and directing the user through their task.
                 </p>
               </Description>
             </Column>
@@ -734,7 +789,7 @@ function MakeRight({ pop }) {
 
           <Section id="Prototyping--Closing" background="tertiary light">
             <Heading>
-              With these and many other issues addressed, <br />I had actualized the core functionality of the service.
+              With these and many other issues addressed, <br className="d-lg-none"/>I had actualized the core functionality of the service.
             </Heading>
           </Section>
         </Chapter>

@@ -193,10 +193,14 @@
 
       &__split {
         @include flex-row-between;
-        align-items: flex-end;
+        // align-items: flex-end;
+        align-items: start;
 
         & > * + * {
           margin: 0;
+        }
+        & > *{
+          @include flex-col;
         }
       }
 

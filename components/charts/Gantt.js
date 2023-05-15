@@ -69,7 +69,7 @@ function Label({ className, children }) {
   return (
     <div className={`label ${className}`}>
       {/* <span title={children}>{children}</span> */}
-      <ResponsiveText>{children}</ResponsiveText>
+      <ResponsiveText data={children}/>
     </div>
   );
 }

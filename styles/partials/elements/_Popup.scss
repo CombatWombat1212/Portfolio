@@ -102,7 +102,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
   }
 
   &__lightbox-zoom {
-    max-height: calc(100% - var(--nav-height) - var(--popup-pad));
+    max-height: calc(100% - var(--nav-height) - var(--popup-pad) - 4rem);
     width: calc(var(--site-max-width) - var(--popup-pad));
   }
 

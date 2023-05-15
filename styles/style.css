@@ -123,7 +123,7 @@ input, button, textarea, select {
   --font-size-quote: 0.9875rem;
   --font-size-logo: 1.375rem;
   --font-leading-h1: 4rem;
-  --font-leading-h2: 3.15rem;
+  --font-leading-h2: 3.1rem;
   --font-leading-h3: 2.285rem;
   --font-leading-h4: 1.15rem;
   --font-leading-body: 1.545rem;
@@ -3250,11 +3250,16 @@ h3 + .studypanel--paragraph {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: start;
 }
 
 .section .graphic--caption__split > * + * {
   margin: 0;
+}
+
+.section .graphic--caption__split > * {
+  display: flex;
+  flex-direction: column;
 }
 
 .section .graphic--caption.mt-more {
@@ -3470,7 +3475,7 @@ h3 + .studypanel--paragraph {
 }
 
 .popup__lightbox-zoom {
-  max-height: calc(100% - var(--nav-height) - var(--popup-pad));
+  max-height: calc(100% - var(--nav-height) - var(--popup-pad) - 4rem);
   width: calc(var(--site-max-width) - var(--popup-pad));
 }
 
@@ -7920,6 +7925,18 @@ h3 + .studypanel--paragraph {
   height: unset !important;
 }
 
+.w-auto {
+  width: auto !important;
+}
+
+.w-unset {
+  width: unset !important;
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
 .b-rad {
   border-radius: var(--b-rad) !important;
   overflow: hidden !important;
@@ -9570,8 +9587,68 @@ h3 + .studypanel--paragraph {
   grid-template-columns: repeat(2, 1fr);
 }
 
+@media screen and (max-width: 61.9375em) and (min-width: 50em) {
+  #Makeright #Prototyping--Progression .section--main {
+    --gap: 4.15rem;
+    gap: var(--gap);
+    column-gap: var(--gap);
+    row-gap: var(--gap);
+    row-gap: 3.25rem;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Makeright #Prototyping--Progression .section--main {
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 61.9375em) and (min-width: 50em) {
+  #Makeright #Prototyping--Progression .section--description {
+    flex-direction: column;
+    align-items: start;
+  }
+}
+
+@media screen and (max-width: 61.9375em) and (min-width: 50em) {
+  #Makeright #Prototyping--Progression .section--description-title {
+    order: 1;
+  }
+}
+
+@media screen and (max-width: 61.9375em) and (min-width: 50em) {
+  #Makeright #Prototyping--Progression .section--description-phase {
+    order: 0;
+  }
+}
+
 #Makeright #Prototyping--Equipment .section--main {
   grid-template-columns: repeat(2, 1fr);
+}
+
+#Makeright #Prototyping--Overview .section--main, #Makeright #Prototyping--Equipment .section--main, #Makeright #Prototyping--Tutorial .section--main {
+  margin-top: calc(var(--section-text-spacing) * 1);
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Makeright #Prototyping--Overview .section--main, #Makeright #Prototyping--Equipment .section--main, #Makeright #Prototyping--Tutorial .section--main {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Makeright #Prototyping--Overview .section--column, #Makeright #Prototyping--Equipment .section--column, #Makeright #Prototyping--Tutorial .section--column {
+    min-width: unset;
+    max-width: unset;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Makeright #Prototyping--Overview .section .arrow--column, #Makeright #Prototyping--Equipment .section .arrow--column, #Makeright #Prototyping--Tutorial .section .arrow--column {
+    display: none;
+  }
 }
 
 #Makeright #Delivery {

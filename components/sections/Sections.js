@@ -222,6 +222,8 @@ function useSectionObject(
     ["columns", { elemType: "Column" }],
   ]);
   
+
+
   var { columns: organizedColumns } = organizeChildren(children, [["columns", { elemType: "Column" }]]);
 
 
@@ -252,6 +254,7 @@ function useSectionObject(
     mainNoHead = true;
   }
   var hasMain = mainType == "grid" && (!titled || foundChildren.columns) ? true : false;
+
 
 
   if (titled == "above")

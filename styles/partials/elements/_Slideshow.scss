@@ -105,8 +105,12 @@
     overflow: hidden;
     background-color: $col-tertiary-light;
 
-    // @include gap(var(--slide-inner-pad));
+    // @include md-down{
+    //   flex-direction: column;
+    // }
 
+
+    
     &--title {
       // margin-top: 0.3rem!important;
       margin-bottom: -0.75rem !important;
