@@ -2,6 +2,8 @@ import { getElemWidth, map, splitPx, splitS } from "@/scripts/GlobalUtilities";
 
 
 
+
+
 function slideshowUpdateCardImageAndSlider(slide, move) {
   var index = slide.states.img.index;
   if (index <= 0 && move == -1) move = 0;
