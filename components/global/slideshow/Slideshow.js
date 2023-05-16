@@ -29,18 +29,16 @@ import { RESIZE_TIMEOUT, getElemWidth, splitPx } from "@/scripts/GlobalUtilities
 import useHorizontalResize from "@/scripts/hooks/useHorizontalResize";
 import ResponsiveText from "../ResponsiveText";
 
-var loadOnceCount = 0;
+// var slideshows = [];
+// var cardImages = [];
 
-var slideshows = [];
-var cardImages = [];
-
-function slideshowGetCardImage(slideshow) {
-  for (var i = 0; i < slideshows.length; i++) {
-    if (slideshows[i] == slideshow) {
-      return cardImages[i];
-    }
-  }
-}
+// function slideshowGetCardImage(slideshow) {
+//   for (var i = 0; i < slideshows.length; i++) {
+//     if (slideshows[i] == slideshow) {
+//       return cardImages[i];
+//     }
+//   }
+// }
 
 function Slideshow({ children, img }) {
   // TODO: should they be container__wide?
@@ -83,6 +81,8 @@ function Slideshow({ children, img }) {
     slider: {
       grabbed: 0,
       index: cardImage.index,
+      min: 0,
+      max: group.imgs.length - 1,
       mouse: {
         start: { x: 0, y: 0 },
         cur: { x: 0, y: 0 },
@@ -108,21 +108,21 @@ function Slideshow({ children, img }) {
     slideshowCheckInit(slide);
     sliderHandleSet(slide);
 
-    if (!slideshows.includes(slideshow.current)) slideshows.push(slideshow.current);
-    for (var i = 0; i < slideshows.length; i++) {
-      cardImages[i] = cardImage;
-    }
+    // if (!slideshows.includes(slideshow.current)) slideshows.push(slideshow.current);
+    // for (var i = 0; i < slideshows.length; i++) {
+    //   cardImages[i] = cardImage;
+    // }
   });
 
   useEffect(() => {
-    if (!hitStartPoint) return;
+    if (!slide.states.atStart) return;
     slideshowUpdateCardStyle(slide);
     slideshowSetPosition(slide);
     slideshowButtonsDisable(slide);
 
-    for (var i = 0; i < slideshows.length; i++) {
-      cardImages[i] = cardImage;
-    }
+    // for (var i = 0; i < slideshows.length; i++) {
+    //   cardImages[i] = cardImage;
+    // }
   }, [slide.states.img]);
 
   useEffect(() => {
@@ -136,7 +136,7 @@ function Slideshow({ children, img }) {
       <div className="slideshow--header container">
         <div className="slideshow--title">{children}</div>
         <div className="slideshow--toggle">
-          <Toggle state={descriptionOn} set={setDescriptionOn}>
+          <Toggle state={slide.states.desc} set={slide.states.setDesc}>
             <ResponsiveText tag="Fragment">
               <xxl>Descriptions</xxl>
               <md>Info</md>
@@ -146,7 +146,7 @@ function Slideshow({ children, img }) {
       </div>
 
       <div
-        className={`slideshow--container ${hitStartPoint ? "slideshow--container__visible" : "slideshow--container__hide"}`}
+        className={`slideshow--container ${slide.states.atStart ? "slideshow--container__visible" : "slideshow--container__hide"}`}
         onTouchStart={slideshowMouseDown}
         style={{
           "--slide-img-index": `${slide.states.img.index}`,
@@ -162,7 +162,7 @@ function Slideshow({ children, img }) {
                 data-index={groupImg.index}
                 width={slide.width}
                 height={slide.height}
-                descriptionOn={descriptionOn}
+                descriptionOn={slide.states.desc}
                 onClick={cardOnClickHandler}
               />
             </div>
@@ -180,17 +180,15 @@ function Slideshow({ children, img }) {
             animation="scale-in"
             color="transparent-background"
             data-direction="left"
-            onClick={slideshowButtonLeftHandler}
+            onClick={slideshowButtonHandler}
           />
 
           <div
             ref={slider}
             className="slider"
-            data-min="0"
-            data-max={group.imgs.length - 1}
             style={{
-              "--slider-min": `0`,
-              "--slider-max": `${group.imgs.length - 1}`,
+              "--slider-min": slide.slider.min,
+              "--slider-max": slide.slider.max,
               "--slider-section-start": `${group.sections.filter((section) => section.name == cardImage.section)[0].start}`,
               "--slider-section-end": `${group.sections.filter((section) => section.name == cardImage.section)[0].end}`,
             }}>
@@ -232,7 +230,7 @@ function Slideshow({ children, img }) {
             animation="scale-in"
             color="transparent-background"
             data-direction="right"
-            onClick={slideshowButtonRightHandler}
+            onClick={slideshowButtonHandler}
           />
         </div>
         <p className="slideshow--message container">Slide to explore the final user journey.</p>
@@ -260,16 +258,12 @@ function Slideshow({ children, img }) {
     if (slide.states.img.index == index) return;
     const group = slide.group;
     slide.states.setImg(group.imgs[index]);
-    // sliderHandleSet(slide);
   }
 
-  function slideshowButtonLeftHandler() {
-    const move = -1;
-    slideshowUpdateCardImageAndSlider(slide, move);
-  }
+  function slideshowButtonHandler(e) {
+    const direction = e.target.closest('.slider--button').getAttribute("data-direction");
+    const move = direction == "left" ? -1 : 1;
 
-  function slideshowButtonRightHandler() {
-    const move = 1;
     slideshowUpdateCardImageAndSlider(slide, move);
   }
 
@@ -301,8 +295,8 @@ function Slideshow({ children, img }) {
     if (handlePos < 0) handlePos = 0;
     if (handlePos > max) handlePos = max;
 
-    var min = parseInt(slider.getAttribute("data-min"));
-    var max = parseInt(slider.getAttribute("data-max"));
+    var min = slide.slider.min;
+    var max = slide.slider.max;
 
     var notch = barWidth / (max - min);
 
@@ -322,10 +316,10 @@ function Slideshow({ children, img }) {
     const index = slide.states.img.index;
     const bar = slide.refs.bar.current;
     const handle = slide.refs.handle.current;
+    const min = slide.slider.min;
+    const max = slide.slider.max;
 
     var barWidth = getElemWidth(bar);
-    var min = parseInt(slider.getAttribute("data-min"));
-    var max = parseInt(slider.getAttribute("data-max"));
     var notch = barWidth / (max - min);
 
     var handlePos = index * notch;
@@ -393,12 +387,12 @@ function Slideshow({ children, img }) {
     document.removeEventListener("mouseup", sliderHandleMouseUp);
   }
 
-  function sliderHandler(index, group, setCardImage) {
-    var img = group.imgs[index];
-    setCardImage(img);
-  }
+  // function sliderHandler(index, group, setCardImage) {
+  //   var img = group.imgs[index];
+  //   setCardImage(img);
+  // }
 }
 
 export default Slideshow;
 
-export { slideshowGetCardImage };
+// export { slideshowGetCardImage };
