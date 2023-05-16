@@ -4,7 +4,7 @@ import { arrayItemDoesExist, capFirstRemovePeriod } from "@/scripts/GlobalUtilit
 import { useEffect, useRef } from "react";
 import Info from "./Info";
 
-function Card({ img, index, width, height, descriptionOn, onClick }) {
+function Card({ img, index, width, height, descriptionOn, onClick, ...props }) {
     var hasActions = arrayItemDoesExist(img.actions);
     var hasNotes = arrayItemDoesExist(img.notes);
     var hasMultipleActions = hasActions && img.actions.length > 1;
@@ -32,7 +32,9 @@ function Card({ img, index, width, height, descriptionOn, onClick }) {
     cardClasses = cardClasses.join(" ");
   
     return (
-      <div className={`${cardClasses}`} ref={card} onClick={onClick}>
+      <div className={`${cardClasses}`} ref={card} onClick={onClick}
+      {...props}
+      >
         <div className="card--graphic card--graphic__off" width={width} height={height}>
           <Graphic className="card--img" type="image" img={img} />
         </div>

@@ -2,30 +2,30 @@ import { getElemWidth, map, RESIZE_TIMEOUT, splitPx, splitS } from "@/scripts/Gl
 import { slideshowGetCardImage } from "../Slideshow";
 import { sliderHandleSet } from "./SliderUtilities";
 
-var slideshows = [];
+// var slideshows = [];
 
-function slideshowSwipeListenersInit(slide) {
-  const slideshow = slide.refs.slideshow.current;
-  const container = slide.refs.container.current;
-  const group = slide.group;
-  if (slideshows.includes(slideshow)) return;
-  slideshows.push(slideshow);
+// function slideshowSwipeListenersInit(slide) {
+//   const slideshow = slide.refs.slideshow.current;
+//   const container = slide.refs.container.current;
+//   const group = slide.group;
+//   if (slideshows.includes(slideshow)) return;
+//   slideshows.push(slideshow);
 
-  container.removeEventListener(
-    "swiped",
-    (e) => {
-      slideshowContainerSwiped(e, group, slide.states.setImg);
-    },
-    true
-  );
-  container.addEventListener(
-    "swiped",
-    (e) => {
-      slideshowContainerSwiped(e, group, slide.states.setImg);
-    },
-    true
-  );
-}
+//   container.removeEventListener(
+//     "swiped",
+//     (e) => {
+//       slideshowContainerSwiped(e, group, slide.states.setImg);
+//     },
+//     true
+//   );
+//   container.addEventListener(
+//     "swiped",
+//     (e) => {
+//       slideshowContainerSwiped(e, group, slide.states.setImg);
+//     },
+//     true
+//   );
+// }
 
 // function slideshowContainerSwiped(e, group, setCardImage){
 
@@ -83,49 +83,42 @@ function slideshowSwipeListenersInit(slide) {
 //   sliderHandleSet(slider, index);
 // }
 
-function updateCardImageAndSlider(cardImage, setCardImage, slider, index, group, move) {
+
+function slideshowUpdateCardImageAndSlider(slide, move) {
+  var index = slide.states.img.index;
   if (index <= 0 && move == -1) move = 0;
-  if (index >= group.imgs.length - 1 && move == 1) move = 0;
-
+  if (index >= slide.group.imgs.length - 1 && move == 1) move = 0;
   if (move == 0) return;
-
   index += move;
-  var img = group.imgs[index];
+  const img = slide.group.imgs[index];
 
-  setCardImage(img);
-  sliderHandleSet(slider, index);
+  slide.states.setImg(img);
+
 }
 
-function slideshowContainerSwiped(e, group, setCardImage) {
-  if (e.detail.dir != "left" && e.detail.dir != "right") return;
 
-  var slideshow = e.target.closest(".slideshow");
-  var slider = slideshow.querySelector(".slider");
-  var dir = e.detail.dir;
+// function slideshowContainerSwiped(e, group, setCardImage) {
+//   if (e.detail.dir != "left" && e.detail.dir != "right") return;
 
-  if (dir == "left") dir = "right";
-  else if (dir == "right") dir = "left";
+//   var slideshow = e.target.closest(".slideshow");
+//   var slider = slideshow.querySelector(".slider");
+//   var dir = e.detail.dir;
 
-  var cardImage = slideshowGetCardImage(slideshow);
-  var index = cardImage.index;
-  var move = dir == "left" ? -1 : 1;
+//   if (dir == "left") dir = "right";
+//   else if (dir == "right") dir = "left";
 
-  updateCardImageAndSlider(cardImage, setCardImage, slider, index, group, move);
-}
+//   var cardImage = slideshowGetCardImage(slideshow);
+//   var index = cardImage.index;
+//   var move = dir == "left" ? -1 : 1;
 
-function slideShowButtonHandler(e, cardImage, setCardImage, group, str) {
-  var slideshow = e.target.closest(".slideshow");
-  var slider = slideshow.querySelector(".slider");
+//   slideshowUpdateCardImageAndSlider(cardImage, setCardImage, slider, index, group, move);
+// }
 
-  var index = cardImage.index;
-  var move = str == "left" ? -1 : 1;
 
-  updateCardImageAndSlider(cardImage, setCardImage, slider, index, group, move);
-}
+function slideshowSetPosition(slide) {
 
-function slideshowSetPosition(container, index) {
-  if (container == null) return;
-  container = container.current ? container.current : container;
+  const container = slide.refs.container.current;
+  const index = slide.states.img.index;
 
   var card = { width: 0, height: 0 };
   card.width = getElemWidth(container.children[1]);
@@ -160,11 +153,11 @@ function slideshowSetPosition(container, index) {
   }, 10);
 }
 
-function slideshowButtonsDisable(slideshow, cardImage, group) {
-  slideshow = slideshow.current ? slideshow.current : slideshow;
-
-  var prevButton = slideshow.querySelectorAll(".slider--button")[0];
-  var nextButton = slideshow.querySelectorAll(".slider--button")[slideshow.querySelectorAll(".slider--button").length - 1];
+function slideshowButtonsDisable(slide) {
+  const prevButton = slide.refs.prevBtn.current;
+  const nextButton = slide.refs.nextBtn.current;
+  const cardImage = slide.states.img;
+  const group = slide.group;
 
   if (cardImage.index <= 0) {
     prevButton.classList.add("slider--button__disabled");
@@ -183,13 +176,10 @@ function slideshowButtonsDisable(slideshow, cardImage, group) {
   }
 }
 
-function slideshowUpdateCardStyle(slideshow, cardImage) {
-  slideshow = slideshow.current ? slideshow.current : slideshow;
-
-  var container = slideshow.querySelector(".slideshow--container");
-  var index = cardImage.index;
-  var cards = container.querySelectorAll(".slideshow--card");
-  cards = Array.from(cards);
+function slideshowUpdateCardStyle(slide) {
+  const container = slide.refs.container.current;
+  const index = slide.states.img.index;
+  const cards =  Array.from(container.querySelectorAll(".slideshow--card"));
 
   for (let i = 0; i < cards.length; i++) {
     if (i != index) {
@@ -202,26 +192,25 @@ function slideshowUpdateCardStyle(slideshow, cardImage) {
   }
 }
 
-function slideshowCheckInit(container, setHitStartPoint) {
-  container = container.current ? container.current : container;
-  var empty = container.querySelector(".slideshow--empty");
+function slideshowCheckInit(slide) {
+  const container = slide.refs.container.current;
+  const empty = slide.refs.empty.current;
+
   var card = { width: 0, height: 0 };
   card.width = getElemWidth(container.children[1]);
   var currentTransition = splitS(getComputedStyle(empty).getPropertyValue("transition-duration"));
   setTimeout(() => {
-    setHitStartPoint(true);
+    slide.states.setAtStart(true);
   }, currentTransition * 2);
 }
 
 function slideshowInit(slide) {
-  const slideshow = slide.refs.slideshow.current;
   const container = slide.refs.container.current;
-  const index = slide.states.img.index;
   const group = slide.group;
+  const empty = slide.refs.empty.current;
 
-  slideshowSwipeListenersInit(slide);
+  // slideshowSwipeListenersInit(slide);
 
-  var empty = container.querySelector(".slideshow--empty");
 
   function run(emptyTransition) {
     var interval = setInterval(() => {
@@ -291,11 +280,12 @@ function slideshowScrollingDelayedFunctions() {
 function slideshowMouseDown(e) {}
 
 export {
-  slideShowButtonHandler,
+  // slideShowButtonHandler,
   slideshowInit,
   slideshowSetPosition,
   slideshowUpdateCardStyle,
   slideshowCheckInit,
   slideshowButtonsDisable,
   slideshowMouseDown,
+  slideshowUpdateCardImageAndSlider,
 };

@@ -10,6 +10,7 @@ import ICONS from "../../data/ICONS";
 //Components
 import Mask from "../utilities/Mask";
 import DLink from "../utilities/DynamicLink";
+import { useEffect } from "react";
 
 function ButtonCopy({ children }) {
   return <span className="button--copy">{children}</span>;
@@ -93,11 +94,6 @@ function Button({ children, className, type, icon, animation, color, tag, refere
 
 
   const ButtonWrapper = tag;
-
-
-
-
-
 
   return tag === 'a' ? (
     <DLink {...commonProps}>
