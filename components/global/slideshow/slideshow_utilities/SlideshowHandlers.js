@@ -21,9 +21,9 @@ function slideshowCreateHandlers(slide) {
     },
 
     containerSwipe: (e) => {
-        containerSwipe(e, slide);
+      containerSwipe(e, slide);
     },
-    
+
     sliderMouseMoveStart: (e) => {
       sliderMouseMoveStart(e, slide);
     },
@@ -160,6 +160,7 @@ function sliderMouseUp(e, slide, handlers) {
   slide.slider.grabbed = 0;
   const handle = slide.refs.handle.current;
 
+  if(!handle) return;
   handle.classList.remove("slider--handle__active");
   document.body.classList.remove("cursor-grabbed");
 

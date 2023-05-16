@@ -352,6 +352,7 @@ function MakeRight({ pop }) {
               Moving from problem <Nobr>to solution</Nobr>
             </Heading>
 
+
             <Column>
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["brainstorming"]} />
               <Description type="h3" className="graphic--caption d-lg-none d-md-block">
@@ -825,6 +826,7 @@ function MakeRight({ pop }) {
                 <ResponsiveText tag="Fragment">
                   <xxl>Customer user journey</xxl>
                   <lg>Customer journey</lg>
+                  <md>Cust. journey</md>
                 </ResponsiveText>
               </Heading>
             </Slideshow>

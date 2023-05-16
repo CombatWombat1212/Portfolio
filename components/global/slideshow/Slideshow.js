@@ -5,12 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import Button from "../../elements/Buttons";
 import Card from "./slider_subcomponents/Card";
 import { cardOnClickHandler } from "./slideshow_utilities/CardUtilities";
-import {
-  slideshowButtonsDisable,
-  slideshowCheckInit,
-  slideshowSetPosition,
-  slideshowUpdateCardStyle,
-} from "./slideshow_utilities/SlideshowUtilities";
+import { slideshowCheckInit, slideshowSetPosition } from "./slideshow_utilities/SlideshowUtilities";
 import useHorizontalResize from "@/scripts/hooks/useHorizontalResize";
 import ResponsiveText from "../ResponsiveText";
 import useSlide from "./slideshow_utilities/useSlide";
@@ -20,12 +15,15 @@ import { sliderHandleSet } from "./slideshow_utilities/SliderUtilities";
 import useOnce from "@/scripts/hooks/useOnce";
 import swipeEventsInit from "@/scripts/SwipeEvents";
 import useListener from "@/scripts/hooks/useListener";
+import useScrollbarSize from "@/scripts/hooks/useScrollbarSize";
+import useInView from "@/scripts/hooks/useInView";
 
 function Slideshow({ children, img }) {
   // TODO: should they be container__wide?
 
   const slide = useSlide(img);
   const handlers = slideshowCreateHandlers(slide);
+  const scrollbar = useScrollbarSize();
 
   const styles = {
     slideshow: {
@@ -33,9 +31,7 @@ function Slideshow({ children, img }) {
       "--img-aspect-height": `${slide.height}`,
       "--img-width": `${slide.width}px`,
       "--img-height": `${slide.height}px`,
-    },
-    constainer: {
-      "--slide-img-index": `${slide.states.img.index}`,
+      "--page-scrollbar-width": `${scrollbar}px`,
     },
     slider: {
       "--slider-min": slide.slider.min,
@@ -47,16 +43,13 @@ function Slideshow({ children, img }) {
 
   useMountEffect(() => {
     slideshowSetPosition(slide);
-    slideshowUpdateCardStyle(slide);
     slideshowCheckInit(slide);
     sliderHandleSet(slide);
   });
 
   useEffect(() => {
     if (!slide.states.atStart) return;
-    slideshowUpdateCardStyle(slide);
     slideshowSetPosition(slide);
-    slideshowButtonsDisable(slide);
   }, [slide.states.atStart, slide.states.img]);
 
   useEffect(() => {
@@ -64,11 +57,13 @@ function Slideshow({ children, img }) {
   }, [slide.states.img]);
 
   useHorizontalResize(handlers.resize);
-  useOnce(()=>{swipeEventsInit});
-  useListener('swiped-left', handlers.containerSwipe, {ref:slide.refs.container})
-  useListener('swiped-right', handlers.containerSwipe, {ref:slide.refs.container})
+  useOnce(() => {
+    swipeEventsInit;
+  });
+  useListener("swiped-left", handlers.containerSwipe, { ref: slide.refs.container });
+  useListener("swiped-right", handlers.containerSwipe, { ref: slide.refs.container });
 
-  
+
   return (
     <div className="slideshow" style={styles.slideshow} ref={slide.refs.slideshow}>
       <div className="slideshow--header container">
@@ -85,19 +80,20 @@ function Slideshow({ children, img }) {
 
       <div
         className={`slideshow--container ${slide.states.atStart ? "slideshow--container__visible" : "slideshow--container__hide"}`}
-        style={styles.container}
         ref={slide.refs.container}>
         <div className="slideshow--empty" ref={slide.refs.empty}></div>
         {slide.group.imgs.map((groupImg) => {
           return (
-            <div className="slideshow--card" key={`card ${groupImg.index}`}>
+            <div
+              className={`slideshow--card ${groupImg.index == slide.states.img.index ? "slideshow--card__active" : "slideshow--card__inactive"}`}
+              key={`card ${groupImg.index}`}>
               <Card
                 img={groupImg}
                 index={groupImg.index}
                 data-index={groupImg.index}
                 width={slide.width}
                 height={slide.height}
-                descriptionOn={slide.states.desc}
+                slide={slide}
                 onClick={handlers.cardOnClick}
               />
             </div>
@@ -108,8 +104,8 @@ function Slideshow({ children, img }) {
       <div className="slideshow--footer">
         <div className="slider--wrapper container">
           <Button
-            className="slider--button slider--button__enabled
-            slider--button__left"
+            className={`slider--button
+            slider--button__left ${slide.states.img.index <= 0 ? "slider--button__disabled" : "slider--button__enabled"}`}
             reference={slide.refs.prevBtn}
             icon={["chevron_left", "alone", "mask"]}
             animation="scale-in"
@@ -138,8 +134,8 @@ function Slideshow({ children, img }) {
           </div>
 
           <Button
-            className="slider--button slider--button__enabled
-            slider--button__right"
+            className={`slider--button
+            slider--button__right ${slide.states.img.index >= slide.group.imgs.length - 1 ? "slider--button__disabled" : "slider--button__enabled"}`}
             reference={slide.refs.nextBtn}
             icon={["chevron_right", "alone", "mask"]}
             animation="scale-in"
@@ -148,7 +144,12 @@ function Slideshow({ children, img }) {
             onClick={handlers.buttonOnClick}
           />
         </div>
-        <p className="slideshow--message container">Slide to explore the final user journey.</p>
+        <p className="slideshow--message container">
+          <ResponsiveText tag="Fragment">
+            <xxl>Slide to explore the final user journey.</xxl>
+            <md>Slide or swipe to explore the user journey.</md>
+          </ResponsiveText>
+        </p>
       </div>
     </div>
   );
