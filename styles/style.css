@@ -4703,6 +4703,12 @@ h3 + .studypanel--paragraph {
   margin-bottom: -0.75rem !important;
 }
 
+@media screen and (max-width: 61.9375em) {
+  .slideshow .card--title {
+    margin-bottom: -0.5rem !important;
+  }
+}
+
 .slideshow .card--subtitle {
   margin-bottom: -0.15rem;
 }

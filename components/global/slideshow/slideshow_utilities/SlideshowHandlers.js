@@ -20,6 +20,10 @@ function slideshowCreateHandlers(slide) {
       slideshowButtonOnClick(e, slide);
     },
 
+    containerSwipe: (e) => {
+        containerSwipe(e, slide);
+    },
+    
     sliderMouseMoveStart: (e) => {
       sliderMouseMoveStart(e, slide);
     },
@@ -166,6 +170,12 @@ function sliderMouseUp(e, slide, handlers) {
 
   document.removeEventListener("mousemove", handlers.sliderMouseMove);
   document.removeEventListener("mouseup", handlers.sliderMouseUp);
+}
+
+function containerSwipe(e, slide) {
+  const direction = e.detail.dir;
+  const move = direction == "left" ? 1 : -1;
+  slideshowUpdateCardImageAndSlider(slide, move);
 }
 
 export { slideshowCreateHandlers };

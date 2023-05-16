@@ -17,6 +17,9 @@ import useSlide from "./slideshow_utilities/useSlide";
 import Notch from "./slider_subcomponents/Notch";
 import { slideshowCreateHandlers } from "./slideshow_utilities/SlideshowHandlers";
 import { sliderHandleSet } from "./slideshow_utilities/SliderUtilities";
+import useOnce from "@/scripts/hooks/useOnce";
+import swipeEventsInit from "@/scripts/SwipeEvents";
+import useListener from "@/scripts/hooks/useListener";
 
 function Slideshow({ children, img }) {
   // TODO: should they be container__wide?
@@ -61,7 +64,11 @@ function Slideshow({ children, img }) {
   }, [slide.states.img]);
 
   useHorizontalResize(handlers.resize);
+  useOnce(()=>{swipeEventsInit});
+  useListener('swiped-left', handlers.containerSwipe, {ref:slide.refs.container})
+  useListener('swiped-right', handlers.containerSwipe, {ref:slide.refs.container})
 
+  
   return (
     <div className="slideshow" style={styles.slideshow} ref={slide.refs.slideshow}>
       <div className="slideshow--header container">

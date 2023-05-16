@@ -72,7 +72,7 @@
     &__active {
       opacity: 1;
     }
-    
+
     &__inactive {
       opacity: 0.3;
       cursor: pointer;
@@ -120,6 +120,9 @@
     &--title {
       // margin-top: 0.3rem!important;
       margin-bottom: -0.75rem !important;
+      @include lg-down{
+        margin-bottom: -0.5rem !important;
+      }
     }
 
     &--subtitle {
