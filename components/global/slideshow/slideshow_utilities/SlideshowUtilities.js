@@ -2,86 +2,6 @@ import { getElemWidth, map, RESIZE_TIMEOUT, splitPx, splitS } from "@/scripts/Gl
 import { slideshowGetCardImage } from "../Slideshow";
 import { sliderHandleSet } from "./SliderUtilities";
 
-// var slideshows = [];
-
-// function slideshowSwipeListenersInit(slide) {
-//   const slideshow = slide.refs.slideshow.current;
-//   const container = slide.refs.container.current;
-//   const group = slide.group;
-//   if (slideshows.includes(slideshow)) return;
-//   slideshows.push(slideshow);
-
-//   container.removeEventListener(
-//     "swiped",
-//     (e) => {
-//       slideshowContainerSwiped(e, group, slide.states.setImg);
-//     },
-//     true
-//   );
-//   container.addEventListener(
-//     "swiped",
-//     (e) => {
-//       slideshowContainerSwiped(e, group, slide.states.setImg);
-//     },
-//     true
-//   );
-// }
-
-// function slideshowContainerSwiped(e, group, setCardImage){
-
-//   if(e.detail.dir != 'left' && e.detail.dir != 'right') return;
-//   var slideshow = e.target.closest(".slideshow");
-//   var slider = slideshow.querySelector(".slider");
-//   var dir = e.detail.dir;
-
-//   if(dir == 'left') dir = 'right';
-//   else if(dir == 'right') dir = 'left';
-
-//   var cardImage = slideshowGetCardImage(slideshow);
-
-//   var index = cardImage.index;
-//   var move = 0;
-
-//   if (dir == "left") move = -1;
-//   else if (dir == "right") move = 1;
-
-//   if (index <= 0 && move == -1) move = 0;
-//   if (index >= group.imgs.length - 1 && move == 1) move = 0;
-
-//   if (move == 0) return;
-
-//   index += move;
-//   var img = group.imgs[index];
-
-//   setCardImage(img);
-//   sliderHandleSet(slider, index);
-
-// }
-
-// function slideShowButtonHandler(e, cardImage, setCardImage, group, str) {
-//   var slideshow = e.target.closest(".slideshow");
-//   var container = slideshow.querySelector(".slideshow--container");
-//   var button = e.target.closest(".button");
-//   var slider = slideshow.querySelector(".slider");
-
-//   var index = cardImage.index;
-
-//   var move = 0;
-
-//   if (str == "left") move = -1;
-//   else if (str == "right") move = 1;
-
-//   if (index <= 0 && move == -1) move = 0;
-//   if (index >= group.imgs.length - 1 && move == 1) move = 0;
-
-//   if (move == 0) return;
-
-//   index += move;
-//   var img = group.imgs[index];
-
-//   setCardImage(img);
-//   sliderHandleSet(slider, index);
-// }
 
 
 function slideshowUpdateCardImageAndSlider(slide, move) {
@@ -95,24 +15,6 @@ function slideshowUpdateCardImageAndSlider(slide, move) {
   slide.states.setImg(img);
 
 }
-
-
-// function slideshowContainerSwiped(e, group, setCardImage) {
-//   if (e.detail.dir != "left" && e.detail.dir != "right") return;
-
-//   var slideshow = e.target.closest(".slideshow");
-//   var slider = slideshow.querySelector(".slider");
-//   var dir = e.detail.dir;
-
-//   if (dir == "left") dir = "right";
-//   else if (dir == "right") dir = "left";
-
-//   var cardImage = slideshowGetCardImage(slideshow);
-//   var index = cardImage.index;
-//   var move = dir == "left" ? -1 : 1;
-
-//   slideshowUpdateCardImageAndSlider(cardImage, setCardImage, slider, index, group, move);
-// }
 
 
 function slideshowSetPosition(slide) {
@@ -152,6 +54,8 @@ function slideshowSetPosition(slide) {
     }
   }, 10);
 }
+
+
 
 function slideshowButtonsDisable(slide) {
   const prevButton = slide.refs.prevBtn.current;
@@ -212,18 +116,18 @@ function slideshowInit(slide) {
   // slideshowSwipeListenersInit(slide);
 
 
-  function run(emptyTransition) {
-    var interval = setInterval(() => {
-      slideshowScrolling(group, container);
-      slideshowScrollingDelayed();
-    }, emptyTransition / 20);
+  // function run(emptyTransition) {
+  //   var interval = setInterval(() => {
+  //     // slideshowScrolling(group, container);
+  //     // slideshowScrollingDelayed();
+  //   }, emptyTransition / 20);
 
-    setTimeout(() => {
-      clearInterval(interval);
-    }, emptyTransition);
-  }
+  //   setTimeout(() => {
+  //     clearInterval(interval);
+  //   }, emptyTransition);
+  // }
 
-  run();
+  // run();
 
   // Create a new MutationObserver that observes changes to the style property of container.querySelector('.slideshow--empty')
   const existingObserver = empty.observer;
@@ -240,7 +144,7 @@ function slideshowInit(slide) {
         const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
         if (isVisible) {
           var emptyTransition = splitS(getComputedStyle(empty).getPropertyValue("transition-duration"));
-          run(emptyTransition);
+          // run(emptyTransition);
         }
       }
     }
@@ -253,31 +157,31 @@ function slideshowInit(slide) {
   empty.observer = observer;
 }
 
-function slideshowScrolling(group, container) {
-  var slideshow = container.parentElement;
-  var card = container.children[1];
-  var drawnIndex = parseInt(getComputedStyle(container).getPropertyValue("--slide-img-index"));
+// function slideshowScrolling(group, container) {
+//   var slideshow = container.parentElement;
+//   var card = container.children[1];
+//   var drawnIndex = parseInt(getComputedStyle(container).getPropertyValue("--slide-img-index"));
 
-  var buffer = 0.5;
-  var cardWidth = getElemWidth(card);
-  var scrollPos = splitPx(window.getComputedStyle(container.querySelector(".slideshow--empty")).getPropertyValue("margin-left"));
-  var calcIndex = Math.abs(Math.floor((scrollPos + cardWidth * buffer) / cardWidth));
-}
+//   var buffer = 0.5;
+//   var cardWidth = getElemWidth(card);
+//   var scrollPos = splitPx(window.getComputedStyle(container.querySelector(".slideshow--empty")).getPropertyValue("margin-left"));
+//   var calcIndex = Math.abs(Math.floor((scrollPos + cardWidth * buffer) / cardWidth));
+// }
 
-var slideshowIsScrolling;
+// var slideshowIsScrolling;
 
-function slideshowScrollingDelayed() {
-  window.clearTimeout(slideshowIsScrolling);
-  slideshowIsScrolling = setTimeout(slideshowScrollingDelayedFunctions(), RESIZE_TIMEOUT);
-}
+// function slideshowScrollingDelayed() {
+//   window.clearTimeout(slideshowIsScrolling);
+//   slideshowIsScrolling = setTimeout(slideshowScrollingDelayedFunctions(), RESIZE_TIMEOUT);
+// }
 
-function slideshowScrollingDelayedFunctions() {
-  function actions() {}
-  actions();
-}
+// function slideshowScrollingDelayedFunctions() {
+//   function actions() {}
+//   actions();
+// }
 
 
-function slideshowMouseDown(e) {}
+// function slideshowMouseDown(e) {}
 
 export {
   // slideShowButtonHandler,
@@ -286,6 +190,6 @@ export {
   slideshowUpdateCardStyle,
   slideshowCheckInit,
   slideshowButtonsDisable,
-  slideshowMouseDown,
+  // slideshowMouseDown,
   slideshowUpdateCardImageAndSlider,
 };
