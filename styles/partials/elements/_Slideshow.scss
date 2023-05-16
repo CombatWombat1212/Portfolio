@@ -94,7 +94,7 @@
     min-width: var(--width);
     margin-left: var(--empty-margin-left);
     @include md-down {
-      margin-left: calc(var(--empty-margin-left) - (var(--page-scrollbar-width) / 4));
+      margin-left: calc(var(--empty-margin-left) - (var(--page-scrollbar-width) / 8));
     }
   }
 

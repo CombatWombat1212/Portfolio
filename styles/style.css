@@ -4673,7 +4673,7 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 49.9375em) {
   .slideshow--empty {
-    margin-left: calc(var(--empty-margin-left) - (var(--page-scrollbar-width) / 4));
+    margin-left: calc(var(--empty-margin-left) - (var(--page-scrollbar-width) / 8));
   }
 }
 
@@ -9080,10 +9080,6 @@ h3 + .studypanel--paragraph {
   }
 }
 
-.section--wrapper:not(#Overview--Pitch) {
-  overflow: hidden;
-}
-
 #Makeright {
   --background-info-gap: 6rem;
 }
@@ -9776,6 +9772,75 @@ h3 + .studypanel--paragraph {
 
 #Makeright #Delivery--Banner-Intro {
   margin-top: 0;
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Makeright #Delivery--Banner-Intro.section--wrapper {
+    padding-top: calc(var(--section-gap) / 1.25);
+    padding-bottom: calc(var(--section-gap) / 1.25);
+  }
+}
+
+@media screen and (max-width: 61.9375em) and (min-width: 50em) {
+  #Makeright #Delivery--Conclusion .section {
+    --graphic-scale: 0.8;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Makeright #Delivery--Conclusion .section {
+    --graphic-scale: 0.7;
+  }
+}
+
+@media screen and (max-width: 49.9375em) and (min-width: 37em) {
+  #Makeright #Delivery--Conclusion .section {
+    --graphic-scale: 0.675;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Makeright #Delivery--Conclusion .section {
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    --graphic-scale: 0.875;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Makeright #Delivery--Conclusion .section--main {
+    justify-content: center;
+    --gap: 3rem;
+    gap: var(--gap);
+    column-gap: var(--gap);
+    row-gap: var(--gap);
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  #Makeright #Delivery--Conclusion .section--graphic {
+    --img-panel-height: 8rem;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Makeright #Delivery--Conclusion .section--graphic {
+    --img-panel-height: 10rem;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Makeright #Delivery--Conclusion .section--column {
+    width: 100%;
+    max-width: unset;
+    min-width: unset;
+  }
+}
+
+#Makeright #Delivery--Conclusion .section .mask {
+  width: Min(Max(75%, var(--w)), 100%);
+  height: Min(Max(75%, var(--h)), 100%);
 }
 
 #Makeright #Delivery--Forward ul {

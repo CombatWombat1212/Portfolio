@@ -584,6 +584,33 @@ const MAKERIGHT_IMGS = processImages(
       alt: "A screen providing the details of a particular job order, with options to accept or reject it.",
     },
 
+    maker_screen_10_with_tutorials: {
+      name: "maker_screen_10_with_tutorials",
+      src: "./assets/images/case_studies/makeright/final_screens/maker/tutorials/maker_screen_10.png",
+      width: 3840,
+      height: 6600,
+      group: "makeright_maker_final",
+      section: "Maker test start",
+      title: {
+        xxl: (
+          <>
+            Order details <Nobr>(Info Mode)</Nobr>
+          </>
+        ),
+      },
+      phase: "3/3",
+      description: [
+        "Identical to the last screen, except with tutorials enabled via the 'Info Mode' toggle. Once enabled, tooltips appear one by one to walk the user through the manufacturer test.  This is enabled by default during the test, but can be disabled by the user at any time.",
+        "'Info Mode' was created to ensure that makers face as little friction as possible in completing their first job.",
+        "Otherwise, the purpose of this page is the same as the last: provide the details of particular job order: the user’s chosen specifications, object info, a preview of the model, order timeline, and additional comments left by your customer.",
+      ],
+      actions: ["Click through the provided tutorials", "Accept or reject their incoming order."],
+      notes: [
+        "Users can accept the order at any time, however, once accepted they have 24hrs to complete the vetting process. This allows for some flexibility as to when to begin the practical test. In a real order, they would have 2hrs to accept or reject a new job.",
+      ],
+      alt: "A screen providing the details of a particular job order, with options to accept or reject it. Tutorials enabled.",
+    },
+
     maker_screen_11: {
       name: "maker_screen_11",
       src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_11.png",
@@ -886,7 +913,13 @@ const MAKERIGHT_IMGS = processImages(
       height: 3054,
       group: "makeright_customer_final",
       section: "Order in-progress",
-      title: { xxl: <>My Orders <Nobr>(accepted / vetting)</Nobr></> },
+      title: {
+        xxl: (
+          <>
+            My Orders <Nobr>(accepted / vetting)</Nobr>
+          </>
+        ),
+      },
       phase: "2/2",
       description: [
         "A customer’s 'My Orders' page when their ticket has been accepted by a Maker.  At this stage, the Maker is currently assessing whether or not the ordered file is ready to be printed.",
@@ -901,7 +934,13 @@ const MAKERIGHT_IMGS = processImages(
       height: 4504,
       group: "makeright_customer_final",
       section: "Order in-progress",
-      title: { xxl: <>Order ticket <Nobr>(accepted / vetting)</Nobr></> },
+      title: {
+        xxl: (
+          <>
+            Order ticket <Nobr>(accepted / vetting)</Nobr>
+          </>
+        ),
+      },
       phase: "2/2",
       description: [
         "The expanded view of an order ticket, i.e. the ticket’s dedicated page.  Identical to the previous screen, this shows the appearance of an order ticket that has just been accepted by a Maker if the user were to click on it from the previous My Order’s screen.",
@@ -918,7 +957,13 @@ const MAKERIGHT_IMGS = processImages(
       height: 3762,
       group: "makeright_customer_final",
       section: "Print completed",
-      title: { xxl: <>My Orders <Nobr>(print completed)</Nobr></> },
+      title: {
+        xxl: (
+          <>
+            My Orders <Nobr>(print completed)</Nobr>
+          </>
+        ),
+      },
 
       phase: "1/4",
       description: [
@@ -936,7 +981,7 @@ const MAKERIGHT_IMGS = processImages(
       group: "makeright_customer_final",
       section: "Print completed",
       title: "My Orders (verifying print)",
-      
+
       phase: "1/4",
       description: [
         "Once the print has been completed, the Maker submits verification images to the customer.  This ensures that the customer is never surprised with the product that arrives at their front door, and can intervene if something appears off before shipping.",
@@ -952,7 +997,13 @@ const MAKERIGHT_IMGS = processImages(
       height: 4576,
       group: "makeright_customer_final",
       section: "Print completed",
-      title: { xxl: <>My Orders <Nobr>(verifying print, expanded)</Nobr></> },
+      title: {
+        xxl: (
+          <>
+            My Orders <Nobr>(verifying print, expanded)</Nobr>
+          </>
+        ),
+      },
 
       phase: "1/4",
       description: [

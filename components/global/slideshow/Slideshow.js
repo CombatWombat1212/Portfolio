@@ -63,7 +63,6 @@ function Slideshow({ children, img }) {
   useListener("swiped-left", handlers.containerSwipe, { ref: slide.refs.container });
   useListener("swiped-right", handlers.containerSwipe, { ref: slide.refs.container });
 
-
   return (
     <div className="slideshow" style={styles.slideshow} ref={slide.refs.slideshow}>
       <div className="slideshow--header container">

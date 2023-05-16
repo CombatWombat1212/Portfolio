@@ -10,7 +10,6 @@ function ResponsiveText({ data: dataProp, tag = "span", children }) {
   return (
     <>
       {is.string ? (
-        
         <ResElem keyIndex={0} data={data} elem={Elem} />
       ) : is.fragment ? (
         <ResFrag data={data} />
@@ -29,6 +28,7 @@ function ResFrag({ data }) {
   const text = !(!isBp(bp) || loading) ? cascadeData[bp] : cascadeData["xxl"];
   return <>{text}</>;
 }
+
 
 function ResElem({ keyIndex, className = "", data, elem: Elem }) {
   return (

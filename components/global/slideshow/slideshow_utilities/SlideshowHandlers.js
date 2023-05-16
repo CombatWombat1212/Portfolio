@@ -156,6 +156,7 @@ function sliderMouseDown(e, slide, handlers) {
   }
 }
 
+
 function sliderMouseUp(e, slide, handlers) {
   slide.slider.grabbed = 0;
   const handle = slide.refs.handle.current;

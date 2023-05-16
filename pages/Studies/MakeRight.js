@@ -23,6 +23,8 @@ function MakeRight({ pop }) {
   const isMdAndDown = !(!isBpAndDown("md") || loading);
   const isSmAndDown = !(!isBpAndDown("sm") || loading);
   const isMd = !(!isBp("md") || loading);
+  const isSm = !(!isBp("sm") || loading);
+  const isMdOrSm = isMd || isSm;
 
   return (
     <>
@@ -351,7 +353,6 @@ function MakeRight({ pop }) {
             <Heading>
               Moving from problem <Nobr>to solution</Nobr>
             </Heading>
-
 
             <Column>
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["brainstorming"]} />
@@ -804,7 +805,6 @@ function MakeRight({ pop }) {
           <Section id="Delivery--Banner-Intro" background={MAKERIGHT_IMGS.delivered_project_banner}>
             <Heading>Delivered Project</Heading>
           </Section>
-
           <Section type="passthrough" id="Delivery--Maker" background="tertiary" margin="none">
             {/* TODO: i think maybe these should be the non-tutorial versions :/ what do you think?? */}
             {/* TODO: yeah i do think these should be the non-tutorial versions */}
@@ -839,22 +839,22 @@ function MakeRight({ pop }) {
 
             <Column>
               <Graphic type="mask" background="tertiary" color="background" img={MAKERIGHT_IMGS["connecting_consumers"]} />
-              <Description className="graphic--caption">
-                <h3 className="mt-less">Connecting consumers to local hobbyist makers for cheap, customizable manufacturing</h3>
-              </Description>
+              <Heading className="graphic--caption" type={isMdOrSm ? "p" : "h3"}>
+                Connecting consumers to local hobbyist makers for cheap, customizable manufacturing
+              </Heading>
             </Column>
             <Column>
               <Graphic type="mask" background="tertiary" color="background" img={MAKERIGHT_IMGS["browseable_storefront"]} />
-              <Description className="graphic--caption">
-                <h3 className="mt-less">A browsable online storefront of ready-to-print 3D models, sourced from around the internet</h3>
-              </Description>
+              <Heading className="graphic--caption" type={isMdOrSm ? "p" : "h3"}>
+                A browsable online storefront of ready-to-print 3D models, sourced from around the internet
+              </Heading>
             </Column>
 
             <Column>
               <Graphic type="mask" background="tertiary" color="background" img={MAKERIGHT_IMGS["maker_profit"]} />
-              <Description className="graphic--caption">
-                <h3 className="mt-less">Enabling makers to profit off of their equipment and skills in their spare time</h3>
-              </Description>
+              <Heading className="graphic--caption" type={isMdOrSm ? "p" : "h3"}>
+                Enabling makers to profit off of their equipment and skills in their spare time
+              </Heading>
             </Column>
           </Section>
 
@@ -914,13 +914,13 @@ function MakeRight({ pop }) {
         </Chapter>
 
         <Chapter name="Closing" id="Closing">
-          <Section id="Closing--Copy" type="columns" titled mainClassName="gap-6 mt-6">
+          <Section id="Closing--Copy" type="columns" titled mainClassName="gap-6 gap-lg-4 mt-6">
             <Title>Areas Of Growth</Title>
             <Heading>
-              Considering entire userflows and journeys <br />
+              Considering entire userflows and journeys <br className="d-lg-none" />
               makes for far better UI than individual features
             </Heading>
-            <Description className="text-col-2 text-gap-6">
+            <Description className={`text-col-2 ${!isLgAndDown ? "text-gap-6" : "text-gap-4" }`}>
               <p>
                 When I began planning my approach to prototyping, I chose a number of the service&rsquo;s most important features. From there, I
                 intended to create mockups of each. Eventually, I reached the question of how the service would verify that makers were capable and
