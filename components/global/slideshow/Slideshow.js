@@ -13,12 +13,9 @@ import {
   sliderHandleSet,
 } from "./slideshow_utilities/SliderUtilities";
 import {
-  slideShowButtonHandler,
   slideshowButtonsDisable,
   slideshowCheckInit,
-  slideshowInit,
   slideshowMouseDown,
-  slideshowResize,
   slideshowSetPosition,
   slideshowUpdateCardImageAndSlider,
   slideshowUpdateCardStyle,
@@ -94,24 +91,29 @@ function Slideshow({ children, img }) {
     },
   };
 
-  var cardGraphicStyle = {
-    "--img-aspect-width": `${slide.width}`,
-    "--img-aspect-height": `${slide.height}`,
-    "--img-width": `${slide.width}px`,
-    "--img-height": `${slide.height}px`,
+  const styles = {
+    slideshow: {
+      "--img-aspect-width": `${slide.width}`,
+      "--img-aspect-height": `${slide.height}`,
+      "--img-width": `${slide.width}px`,
+      "--img-height": `${slide.height}px`,
+    },
+    constainer: {
+      "--slide-img-index": `${slide.states.img.index}`,
+    },
+    slider: {
+      "--slider-min": slide.slider.min,
+      "--slider-max": slide.slider.max,
+      "--slider-section-start": `${slide.group.sections.filter((section) => section.name == slide.states.img.section)[0].start}`,
+      "--slider-section-end": `${slide.group.sections.filter((section) => section.name == slide.states.img.section)[0].end}`,
+    },
   };
 
   useMountEffect(() => {
-    slideshowInit(slide);
     slideshowSetPosition(slide);
     slideshowUpdateCardStyle(slide);
     slideshowCheckInit(slide);
     sliderHandleSet(slide);
-
-    // if (!slideshows.includes(slideshow.current)) slideshows.push(slideshow.current);
-    // for (var i = 0; i < slideshows.length; i++) {
-    //   cardImages[i] = cardImage;
-    // }
   });
 
   useEffect(() => {
@@ -119,11 +121,7 @@ function Slideshow({ children, img }) {
     slideshowUpdateCardStyle(slide);
     slideshowSetPosition(slide);
     slideshowButtonsDisable(slide);
-
-    // for (var i = 0; i < slideshows.length; i++) {
-    //   cardImages[i] = cardImage;
-    // }
-  }, [slide.states.img]);
+  }, [slide.states.atStart, slide.states.img]);
 
   useEffect(() => {
     sliderHandleSet(slide);
@@ -132,7 +130,7 @@ function Slideshow({ children, img }) {
   useHorizontalResize(slideshowResize);
 
   return (
-    <div className="slideshow" style={cardGraphicStyle} ref={slideshow}>
+    <div className="slideshow" style={styles.slideshow} ref={slide.refs.slideshow}>
       <div className="slideshow--header container">
         <div className="slideshow--title">{children}</div>
         <div className="slideshow--toggle">
@@ -148,10 +146,8 @@ function Slideshow({ children, img }) {
       <div
         className={`slideshow--container ${slide.states.atStart ? "slideshow--container__visible" : "slideshow--container__hide"}`}
         onTouchStart={slideshowMouseDown}
-        style={{
-          "--slide-img-index": `${slide.states.img.index}`,
-        }}
-        ref={container}>
+        style={styles.container}
+        ref={slide.refs.container}>
         <div className="slideshow--empty" ref={empty}></div>
         {group.imgs.map((groupImg) => {
           return (
@@ -175,7 +171,7 @@ function Slideshow({ children, img }) {
           <Button
             className="slider--button slider--button__enabled
             slider--button__left"
-            reference={prevBtn}
+            reference={slide.refs.prevBtn}
             icon={["chevron_left", "alone", "mask"]}
             animation="scale-in"
             color="transparent-background"
@@ -183,15 +179,7 @@ function Slideshow({ children, img }) {
             onClick={slideshowButtonHandler}
           />
 
-          <div
-            ref={slider}
-            className="slider"
-            style={{
-              "--slider-min": slide.slider.min,
-              "--slider-max": slide.slider.max,
-              "--slider-section-start": `${group.sections.filter((section) => section.name == cardImage.section)[0].start}`,
-              "--slider-section-end": `${group.sections.filter((section) => section.name == cardImage.section)[0].end}`,
-            }}>
+          <div ref={slide.refs.slider} className="slider" style={styles.slider}>
             <div className="slider--bar" ref={bar}>
               <div
                 className="slider--handle"
@@ -199,10 +187,10 @@ function Slideshow({ children, img }) {
                 onTouchStart={sliderHandleMouseDown}
                 onMouseMove={sliderMouseMoveStart}
                 onTouchMove={sliderMouseMoveStart}
-                ref={handle}></div>
+                ref={slide.refs.handle}></div>
 
-              {group.imgs.map((groupImg, i) => {
-                const section = group.sections.find((section) => section.name === cardImage.section);
+              {slide.group.imgs.map((groupImg, i) => {
+                const section = slide.group.sections.find((section) => section.name === slide.states.img.section);
                 const isSectionActive = section && i >= section.start && i <= section.end;
                 const notchClass = `slider--notch slider--notch__hoverable${
                   section ? (isSectionActive ? " slider--notch__active" : " slider--notch__inactive") : ""
@@ -225,7 +213,7 @@ function Slideshow({ children, img }) {
           <Button
             className="slider--button slider--button__enabled
             slider--button__right"
-            reference={nextBtn}
+            reference={slide.refs.nextBtn}
             icon={["chevron_right", "alone", "mask"]}
             animation="scale-in"
             color="transparent-background"
@@ -250,7 +238,6 @@ function Slideshow({ children, img }) {
   function sliderNotchOnClickHandler(e) {
     const index = parseInt(e.target.getAttribute("data-index"));
     slide.states.setImg(slide.group.imgs[index]);
-    // sliderHandleSet(slide);
   }
 
   function cardOnClickHandler(e) {
@@ -261,7 +248,7 @@ function Slideshow({ children, img }) {
   }
 
   function slideshowButtonHandler(e) {
-    const direction = e.target.closest('.slider--button').getAttribute("data-direction");
+    const direction = e.target.closest(".slider--button").getAttribute("data-direction");
     const move = direction == "left" ? -1 : 1;
 
     slideshowUpdateCardImageAndSlider(slide, move);
@@ -312,7 +299,6 @@ function Slideshow({ children, img }) {
   }
 
   function sliderHandleSet(slide) {
-    const slider = slide.refs.slider.current;
     const index = slide.states.img.index;
     const bar = slide.refs.bar.current;
     const handle = slide.refs.handle.current;
@@ -386,13 +372,6 @@ function Slideshow({ children, img }) {
     document.removeEventListener("mousemove", sliderHandleMouseMove);
     document.removeEventListener("mouseup", sliderHandleMouseUp);
   }
-
-  // function sliderHandler(index, group, setCardImage) {
-  //   var img = group.imgs[index];
-  //   setCardImage(img);
-  // }
 }
 
 export default Slideshow;
-
-// export { slideshowGetCardImage };

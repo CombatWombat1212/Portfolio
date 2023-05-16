@@ -1,6 +1,4 @@
-import { getElemWidth, map, RESIZE_TIMEOUT, splitPx, splitS } from "@/scripts/GlobalUtilities";
-import { slideshowGetCardImage } from "../Slideshow";
-import { sliderHandleSet } from "./SliderUtilities";
+import { getElemWidth, map, splitPx, splitS } from "@/scripts/GlobalUtilities";
 
 
 
@@ -108,88 +106,14 @@ function slideshowCheckInit(slide) {
   }, currentTransition * 2);
 }
 
-function slideshowInit(slide) {
-  const container = slide.refs.container.current;
-  const group = slide.group;
-  const empty = slide.refs.empty.current;
-
-  // slideshowSwipeListenersInit(slide);
 
 
-  // function run(emptyTransition) {
-  //   var interval = setInterval(() => {
-  //     // slideshowScrolling(group, container);
-  //     // slideshowScrollingDelayed();
-  //   }, emptyTransition / 20);
 
-  //   setTimeout(() => {
-  //     clearInterval(interval);
-  //   }, emptyTransition);
-  // }
-
-  // run();
-
-  // Create a new MutationObserver that observes changes to the style property of container.querySelector('.slideshow--empty')
-  const existingObserver = empty.observer;
-  if (existingObserver) {
-    existingObserver.disconnect();
-    delete empty.observer;
-  }
-
-  const observer = new MutationObserver((mutationsList, observer) => {
-    for (let mutation of mutationsList) {
-      if (mutation.attributeName === "style") {
-        const empty = container.querySelector(".slideshow--empty");
-        const rect = empty.getBoundingClientRect();
-        const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
-        if (isVisible) {
-          var emptyTransition = splitS(getComputedStyle(empty).getPropertyValue("transition-duration"));
-          // run(emptyTransition);
-        }
-      }
-    }
-  });
-
-  // Start observing changes to the style property of container.querySelector('.slideshow--empty')
-  observer.observe(empty, { attributes: true });
-
-  // Store the observer on the element for future access
-  empty.observer = observer;
-}
-
-// function slideshowScrolling(group, container) {
-//   var slideshow = container.parentElement;
-//   var card = container.children[1];
-//   var drawnIndex = parseInt(getComputedStyle(container).getPropertyValue("--slide-img-index"));
-
-//   var buffer = 0.5;
-//   var cardWidth = getElemWidth(card);
-//   var scrollPos = splitPx(window.getComputedStyle(container.querySelector(".slideshow--empty")).getPropertyValue("margin-left"));
-//   var calcIndex = Math.abs(Math.floor((scrollPos + cardWidth * buffer) / cardWidth));
-// }
-
-// var slideshowIsScrolling;
-
-// function slideshowScrollingDelayed() {
-//   window.clearTimeout(slideshowIsScrolling);
-//   slideshowIsScrolling = setTimeout(slideshowScrollingDelayedFunctions(), RESIZE_TIMEOUT);
-// }
-
-// function slideshowScrollingDelayedFunctions() {
-//   function actions() {}
-//   actions();
-// }
-
-
-// function slideshowMouseDown(e) {}
 
 export {
-  // slideShowButtonHandler,
-  slideshowInit,
   slideshowSetPosition,
   slideshowUpdateCardStyle,
   slideshowCheckInit,
   slideshowButtonsDisable,
-  // slideshowMouseDown,
   slideshowUpdateCardImageAndSlider,
 };

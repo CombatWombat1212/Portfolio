@@ -5,6 +5,8 @@ import { useEffect, useRef } from "react";
 import Info from "./Info";
 
 function Card({ img, index, width, height, descriptionOn, onClick, ...props }) {
+    const card = useRef(null);
+
     var hasActions = arrayItemDoesExist(img.actions);
     var hasNotes = arrayItemDoesExist(img.notes);
     var hasMultipleActions = hasActions && img.actions.length > 1;
@@ -17,7 +19,6 @@ function Card({ img, index, width, height, descriptionOn, onClick, ...props }) {
   
     var affectedClasses = ["card--description-inner", "card--description", "card--graphic"];
   
-    var card = useRef(null);
   
     useEffect(() => {
       if (card.current == null) return;
