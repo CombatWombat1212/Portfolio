@@ -2,7 +2,7 @@ const { addAttrNonDestructive } = require("@/scripts/GlobalUtilities");
 const { useMountEffect } = require("@/scripts/hooks/useMountEffect");
 const { useRef } = require("react");
 
-function Toggle({ state, set, name }) {
+function Toggle({ state, set, children}) {
     var toggle = useRef(null);
   
     useMountEffect(() => {
@@ -29,7 +29,7 @@ function Toggle({ state, set, name }) {
           <span className="toggle--slider"></span>
         </label>
         <div className="toggle--label">
-          <span>{name}</span>
+          <span>{children}</span>
         </div>
       </div>
     );

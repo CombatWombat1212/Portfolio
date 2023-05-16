@@ -2,21 +2,30 @@ import { getElemWidth, map, RESIZE_TIMEOUT, splitPx, splitS } from "@/scripts/Gl
 import { slideshowGetCardImage } from "../Slideshow";
 import { sliderHandleSet } from "./SliderUtilities";
 
-
 var slideshows = [];
 
-function slideshowSwipeListenersInit(slideshow, container, group, setCardImage){
-
-  // add slideshow to slideshows if it is not already there
-  if(slideshows.includes(slideshow)) return
+function slideshowSwipeListenersInit(slide) {
+  const slideshow = slide.refs.slideshow.current;
+  const container = slide.refs.container.current;
+  const group = slide.group;
+  if (slideshows.includes(slideshow)) return;
   slideshows.push(slideshow);
 
-  container.removeEventListener('swiped', (e)=>{slideshowContainerSwiped(e, group, setCardImage)}, true);
-  container.addEventListener('swiped', (e)=>{slideshowContainerSwiped(e, group, setCardImage)}, true);
-
+  container.removeEventListener(
+    "swiped",
+    (e) => {
+      slideshowContainerSwiped(e, group, slide.states.setImg);
+    },
+    true
+  );
+  container.addEventListener(
+    "swiped",
+    (e) => {
+      slideshowContainerSwiped(e, group, slide.states.setImg);
+    },
+    true
+  );
 }
-
-
 
 // function slideshowContainerSwiped(e, group, setCardImage){
 
@@ -24,37 +33,30 @@ function slideshowSwipeListenersInit(slideshow, container, group, setCardImage){
 //   var slideshow = e.target.closest(".slideshow");
 //   var slider = slideshow.querySelector(".slider");
 //   var dir = e.detail.dir;
-  
+
 //   if(dir == 'left') dir = 'right';
 //   else if(dir == 'right') dir = 'left';
 
-
 //   var cardImage = slideshowGetCardImage(slideshow);
-  
+
 //   var index = cardImage.index;
 //   var move = 0;
-
 
 //   if (dir == "left") move = -1;
 //   else if (dir == "right") move = 1;
 
 //   if (index <= 0 && move == -1) move = 0;
 //   if (index >= group.imgs.length - 1 && move == 1) move = 0;
-  
-  
+
 //   if (move == 0) return;
-  
-  
+
 //   index += move;
 //   var img = group.imgs[index];
-
 
 //   setCardImage(img);
 //   sliderHandleSet(slider, index);
 
-  
 // }
-
 
 // function slideShowButtonHandler(e, cardImage, setCardImage, group, str) {
 //   var slideshow = e.target.closest(".slideshow");
@@ -74,15 +76,12 @@ function slideshowSwipeListenersInit(slideshow, container, group, setCardImage){
 
 //   if (move == 0) return;
 
-  
 //   index += move;
 //   var img = group.imgs[index];
-
 
 //   setCardImage(img);
 //   sliderHandleSet(slider, index);
 // }
-
 
 function updateCardImageAndSlider(cardImage, setCardImage, slider, index, group, move) {
   if (index <= 0 && move == -1) move = 0;
@@ -98,18 +97,18 @@ function updateCardImageAndSlider(cardImage, setCardImage, slider, index, group,
 }
 
 function slideshowContainerSwiped(e, group, setCardImage) {
-  if (e.detail.dir != 'left' && e.detail.dir != 'right') return;
+  if (e.detail.dir != "left" && e.detail.dir != "right") return;
 
   var slideshow = e.target.closest(".slideshow");
   var slider = slideshow.querySelector(".slider");
   var dir = e.detail.dir;
 
-  if (dir == 'left') dir = 'right';
-  else if (dir == 'right') dir = 'left';
+  if (dir == "left") dir = "right";
+  else if (dir == "right") dir = "left";
 
   var cardImage = slideshowGetCardImage(slideshow);
   var index = cardImage.index;
-  var move = (dir == 'left') ? -1 : 1;
+  var move = dir == "left" ? -1 : 1;
 
   updateCardImageAndSlider(cardImage, setCardImage, slider, index, group, move);
 }
@@ -119,15 +118,10 @@ function slideShowButtonHandler(e, cardImage, setCardImage, group, str) {
   var slider = slideshow.querySelector(".slider");
 
   var index = cardImage.index;
-  var move = (str == "left") ? -1 : 1;
+  var move = str == "left" ? -1 : 1;
 
   updateCardImageAndSlider(cardImage, setCardImage, slider, index, group, move);
 }
-
-
-
-
-
 
 function slideshowSetPosition(container, index) {
   if (container == null) return;
@@ -189,10 +183,6 @@ function slideshowButtonsDisable(slideshow, cardImage, group) {
   }
 }
 
-
-
-
-
 function slideshowUpdateCardStyle(slideshow, cardImage) {
   slideshow = slideshow.current ? slideshow.current : slideshow;
 
@@ -223,16 +213,15 @@ function slideshowCheckInit(container, setHitStartPoint) {
   }, currentTransition * 2);
 }
 
-function slideshowInit(group, slideshow, container, cardImage, setCardImage) {
-  slideshow = slideshow.current;
-  container = container.current;
+function slideshowInit(slide) {
+  const slideshow = slide.refs.slideshow.current;
+  const container = slide.refs.container.current;
+  const index = slide.states.img.index;
+  const group = slide.group;
 
-  var index = cardImage.index;
-  slideshowSwipeListenersInit(slideshow, container, group, setCardImage);
-  slideshowResizeFunctions(slideshow, container, index);
+  slideshowSwipeListenersInit(slide);
 
   var empty = container.querySelector(".slideshow--empty");
-  // var emptyTransition = splitS(getComputedStyle(empty).getPropertyValue("transition-duration"));
 
   function run(emptyTransition) {
     var interval = setInterval(() => {
@@ -273,18 +262,6 @@ function slideshowInit(group, slideshow, container, cardImage, setCardImage) {
 
   // Store the observer on the element for future access
   empty.observer = observer;
-
-  // TODO: keyboard navigation support
-  // container.removeEventListener("wheel", slideshowWheelHandler, false);
-  // container.addEventListener("wheel", slideshowWheelHandler, false);
-
-  // window.removeEventListener("keydown", (e)=>slideshowCatchKeys(e,container), true);
-  // window.addEventListener("keydown", (e)=>slideshowCatchKeys(e,container), true);
-  // window.removeEventListener("keyup", (e)=>handleKeyUp(e,container), true);
-  // window.addEventListener("keyup", (e)=>handleKeyUp(e,container), true);
-
-  window.removeEventListener("resize", slideshowResize, false);
-  window.addEventListener("resize", slideshowResize, false);
 }
 
 function slideshowScrolling(group, container) {
@@ -310,57 +287,15 @@ function slideshowScrollingDelayedFunctions() {
   actions();
 }
 
-var slideshowIsResizing;
 
-function slideshowResize() {
-  window.clearTimeout(slideshowIsResizing);
-  slideshowIsResizing = setTimeout(slideshowResizeFunctions, RESIZE_TIMEOUT);
-}
+function slideshowMouseDown(e) {}
 
-function slideshowResizeFunctions(slideshow = null, container = null, index = null) {
-  function actions(slideshow, container, index) {
-    if (index == null) index = parseInt(getComputedStyle(container).getPropertyValue("--slide-img-index"));
-
-    sliderHandleSet(slideshow.querySelector(".slider"), index);
-
-    // TODO: this works for now but you could always create a new state that's true while resizing, and false once resizing is done and use that to trigger the set position after a resize rather than just a timeout
-    setTimeout(() => {
-      slideshowSetPosition(container, index);
-    }, 2000);
-  }
-
-  if (slideshow == null && container == null && index == null) {
-    var elems = document.querySelectorAll(".slideshow");
-    elems.forEach((elem) => {
-      var slideshow = elem;
-      var container = elem.querySelector(".slideshow--container");
-      var index = parseInt(getComputedStyle(container).getPropertyValue("--slide-img-index"));
-      actions(slideshow, container, index);
-    });
-  } else {
-    actions(slideshow, container, index);
-  }
-}
-
-
-
-
-function slideshowMouseDown(e){
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-export { slideShowButtonHandler, slideshowInit, slideshowSetPosition, slideshowUpdateCardStyle, slideshowCheckInit, slideshowButtonsDisable, slideshowMouseDown };
+export {
+  slideShowButtonHandler,
+  slideshowInit,
+  slideshowSetPosition,
+  slideshowUpdateCardStyle,
+  slideshowCheckInit,
+  slideshowButtonsDisable,
+  slideshowMouseDown,
+};

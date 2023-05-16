@@ -626,7 +626,9 @@ function MakeRight({ pop }) {
 
           <Section id="Prototyping--Progression" type="columns" margin="wide" arrows="background" background="tertiary" titled mainType="grid">
             <Title>Project Iterations</Title>
-            <Heading>Progression & refinement</Heading>
+            <Heading>
+              Progression <Nobr>& refinement</Nobr>
+            </Heading>
 
             <Column caption="above">
               <Description className="graphic--caption graphic--caption__split">
@@ -733,7 +735,8 @@ function MakeRight({ pop }) {
               />
               <Description className="mt-more graphic--caption">
                 <p>
-                  Now, that info exists as a single inviting page. As well, I added a brief video chat at the end onboarding to ensure new Makers have read the overview, and can ask questions.
+                  Now, that info exists as a single inviting page. As well, I added a brief video chat at the end onboarding to ensure new Makers have
+                  read the overview, and can ask questions.
                 </p>
               </Description>
             </Column>
@@ -778,10 +781,12 @@ function MakeRight({ pop }) {
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_tutorials"]} lightbox pop={pop} />
               <Description className={`mt-more graphic--caption gap-4 gap-lg-3 ${!isLgAndDown && "graphic--caption__split"}`}>
                 <p>
-                  Testers of the Maker journey were navigating much more fluidly halfway through each test. It was taking a few pages of exploration before the terminology, and flow finally clicked.
+                  Testers of the Maker journey were navigating much more fluidly halfway through each test. It was taking a few pages of exploration
+                  before the terminology, and flow finally clicked.
                 </p>
                 <p>
-                  To ease the friction of a user&rsquo;s first order fulfillment, I added an optional tutorial system. Boxes appear one by one describing important elements, and directing the user through their task.
+                  To ease the friction of a user&rsquo;s first order fulfillment, I added an optional tutorial system. Boxes appear one by one
+                  describing important elements, and directing the user through their task.
                 </p>
               </Description>
             </Column>
@@ -789,7 +794,7 @@ function MakeRight({ pop }) {
 
           <Section id="Prototyping--Closing" background="tertiary light">
             <Heading>
-              With these and many other issues addressed, <br className="d-lg-none"/>I had actualized the core functionality of the service.
+              With these and many other issues addressed, <br className="d-lg-none" />I had actualized the core functionality of the service.
             </Heading>
           </Section>
         </Chapter>
@@ -805,13 +810,23 @@ function MakeRight({ pop }) {
             {/* TODO: Okay so the way you do it is none of them should have tutorials, except one that you think is a really good example of the tutorials.  For that one, show the non-tutorial first, then after it show the tutorial version and comment on what that is */}
 
             <Slideshow img={MAKERIGHT_IMGS.maker_screen_10}>
-              <Heading>Maker user journey</Heading>
+              <Heading>
+                <ResponsiveText tag="Fragment">
+                  <xxl>Maker user journey</xxl>
+                  <lg>Maker journey</lg>
+                </ResponsiveText>
+              </Heading>
             </Slideshow>
           </Section>
 
           <Section type="passthrough" id="Delivery--Customer" background="tertiary" margin="none">
             <Slideshow img={MAKERIGHT_IMGS.customer_screen_06}>
-              <Heading>Customer user journey</Heading>
+              <Heading>
+                <ResponsiveText tag="Fragment">
+                  <xxl>Customer user journey</xxl>
+                  <lg>Customer journey</lg>
+                </ResponsiveText>
+              </Heading>
             </Slideshow>
           </Section>
 

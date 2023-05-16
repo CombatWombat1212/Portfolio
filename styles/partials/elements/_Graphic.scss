@@ -194,7 +194,7 @@
       &__split {
         @include flex-row-between;
         // align-items: flex-end;
-        align-items: start;
+        align-items: flex-start;
 
         & > * + * {
           margin: 0;

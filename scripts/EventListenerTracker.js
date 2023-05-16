@@ -39,7 +39,7 @@ function createEventListenerTracker() {
   
         elementListenersMap.delete(element);
       }
-    }
+    }  
   
     return {
       addEventListenerWithTracking,

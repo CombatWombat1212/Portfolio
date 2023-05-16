@@ -13,77 +13,6 @@ var sliderHandle = {
 var sliderMouseGrabbed = 0;
 
 
-// function sliderHandleMouseMove(e, handle) {
-//   if (sliderMouseGrabbed < 2) return;
-
-//   if (e.type == "mousemove") {
-//     var bar = handle.parentElement;
-//     var slider = bar.parentElement;
-
-//     var mouse = { x: 0, y: 0 };
-//     mouse.x = e.clientX;
-
-//     sliderMouse.cur.x = mouse.x;
-
-//     var handlePos = sliderHandle.start.x + (sliderMouse.cur.x - sliderMouse.start.x);
-
-//     var barWidth = getElemWidth(bar);
-//     var handleWidth = getElemWidth(handle);
-
-//     var min = 0;
-//     var max = barWidth;
-
-//     if (handlePos < 0) handlePos = 0;
-//     if (handlePos > max) handlePos = max;
-
-//     var min = parseInt(slider.getAttribute("data-min"));
-//     var max = parseInt(slider.getAttribute("data-max"));
-
-//     var notch = barWidth / (max - min);
-
-//     var value = Math.round(handlePos / notch);
-
-//     slider.setAttribute("data-value", value);
-
-//     handlePos = Math.round(handlePos / notch) * notch;
-
-//     handle.style.setProperty("--slider-handle-left", `${handlePos}px`);
-//   } else if (e.type == "touchmove") {
-//     var bar = handle.parentElement;
-//     var slider = bar.parentElement;
-
-//     var touch = e.touches[0];
-
-//     var mouse = { x: 0, y: 0 };
-//     mouse.x = touch.clientX;
-
-//     sliderMouse.cur.x = mouse.x;
-
-//     var handlePos = sliderHandle.start.x + (sliderMouse.cur.x - sliderMouse.start.x);
-
-//     var barWidth = getElemWidth(bar);
-//     var handleWidth = getElemWidth(handle);
-
-//     var min = 0;
-//     var max = barWidth;
-
-//     if (handlePos < 0) handlePos = 0;
-//     if (handlePos > max) handlePos = max;
-
-//     var min = parseInt(slider.getAttribute("data-min"));
-//     var max = parseInt(slider.getAttribute("data-max"));
-
-//     var notch = barWidth / (max - min);
-
-//     var value = Math.round(handlePos / notch);
-
-//     slider.setAttribute("data-value", value);
-
-//     handlePos = Math.round(handlePos / notch) * notch;
-
-//     handle.style.setProperty("--slider-handle-left", `${handlePos}px`);
-//   }
-// }
 
 function sliderHandleMouseMove(e, handle) {
   if (sliderMouseGrabbed < 2) return;
@@ -128,6 +57,7 @@ function sliderHandleMouseMove(e, handle) {
 
 
 function sliderHandleSet(slider, index) {
+  
   var bar = slider.querySelector(".slider--bar");
   var handle = slider.querySelector(".slider--handle");
 

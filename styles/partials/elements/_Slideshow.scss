@@ -14,16 +14,24 @@
   --slide-max-height: calc(100% * var(--img-aspect-height) / var(--img-aspect-width));
   --slide-inner-item-spacing: calc(var(--section-text-spacing) * 0.25);
   --slide-transition: 0.5s;
-
   width: 100%;
+
+  --slide-graphic-height_mobile: 34vh;
+  --slide-description-height_mobile: 24vh;
+
+  @include lg-down {
+    --slide-inner-pad: 2rem;
+  }
 
   &--header {
     margin-bottom: var(--font-margin-bottom-h2);
 
     @include flex-row-between;
     align-items: flex-end;
+    @include md-down{
+      align-items: center;
+    }
   }
-
 
   --site-x-margin: calc((100% - var(--site-max-width)) / 2);
   --card-gap: 8vw;
@@ -64,16 +72,17 @@
     &__active {
       opacity: 1;
     }
+    
     &__inactive {
       opacity: 0.3;
       cursor: pointer;
 
-      @include hover{
+      @include hover {
         opacity: 0.75;
       }
-
-
     }
+
+
   }
 
   &--empty {
@@ -83,19 +92,18 @@
     min-width: var(--width);
   }
 
-
-  &--footer{
-
+  &--footer {
     @include flex-col;
     align-items: center;
   }
 
-  &--message{
-    margin-top:2rem;
+  &--message {
+    margin-top: 2rem;
     text-align: center;
+    @include lg-down{
+      margin-top: 1.15rem;
+    }
   }
-
-
 }
 
 .slideshow {
@@ -105,12 +113,10 @@
     overflow: hidden;
     background-color: $col-tertiary-light;
 
-    // @include md-down{
-    //   flex-direction: column;
-    // }
+    @include lg-down {
+      flex-direction: column;
+    }
 
-
-    
     &--title {
       // margin-top: 0.3rem!important;
       margin-bottom: -0.75rem !important;
@@ -155,6 +161,15 @@
 
       &__off {
         margin-left: calc(var(--width) * -1 - var(--slide-inner-pad) * 2);
+        @include lg-down {
+          margin-left: 0;
+          margin-top: calc(var(--slide-description-height_mobile) * -1);
+        }
+      }
+
+      @include lg-down {
+        height: calc(var(--slide-description-height_mobile) - (var(--slide-inner-pad) * 2));
+        width: 100%;
       }
     }
 
@@ -196,6 +211,10 @@
       transition-duration: var(--slide-transition);
       z-index: 1;
 
+      @include lg-down {
+        max-height: var(--slide-graphic-height_mobile);
+      }
+
       @include scrollbar {
         width: var(--slide-scrollbar-width);
       }
@@ -214,6 +233,9 @@
 
       &__on {
         width: calc(#{col-width(8)} - (var(--slide-inner-pad) * 2));
+        @include lg-down {
+          width: 100%;
+        }
       }
     }
 
@@ -251,9 +273,7 @@
 }
 
 .slideshow {
-
   .slider {
-
     &--wrapper {
       @include flex-row-center;
       align-items: center;
@@ -261,32 +281,28 @@
       gap: 3rem;
       --slider-bar-height: 0.25rem;
       --slider-handle-size: 1.875rem;
-      // --slider-handle-size: 1rem;
       --slider-col-inactive: #{darken($col-background_darkest, 30)};
       --slider-inactive-transition: 0.2s;
+
+      @include lg-down {
+        gap: 0.65rem;
+        margin-top: 1.25rem;
+      }
+      @include sm-down {
+        --slider-handle-size: 1.3625rem;
+        --slider-bar-height: 0.1875rem;
+      }
+
     }
-  
-
-
-
-
 
     width: 70%;
     @include flex-row-center;
     align-items: center;
     position: relative;
 
-    // &--input{
-    //   width:85%;
-    //   -webkit-appearance: none;
-    //   appearance: none;
-
-    //   height: var(--slider-bar-height);
-
-    //   border-radius: 100rem;
-
-    // }
-
+    @include lg-down {
+      width: 90%;
+    }
 
     &--bar {
       width: 100%;
@@ -336,13 +352,11 @@
       z-index: 2;
       cursor: grab;
 
-
-
-      &::before{
-        content: '';
+      &::before {
+        content: "";
         position: absolute;
-        width:calc(var(--slider-handle-size)*1.5);
-        height:calc(var(--slider-handle-size)*1.5);
+        width: calc(var(--slider-handle-size) * 1.5);
+        height: calc(var(--slider-handle-size) * 1.5);
         border-radius: 100rem;
         top: 50%;
         left: 50%;
@@ -350,25 +364,19 @@
         z-index: 1;
       }
 
-
-      @mixin handle-active{
+      @mixin handle-active {
         background-color: $col-background_darkest;
       }
-      
-      
+
       &__active {
         cursor: grabbing;
         @include handle-active;
       }
 
-
       @include hover {
         @include handle-active;
       }
-
     }
-
-
 
     &--notch {
       // --slider-min
@@ -394,18 +402,15 @@
 
       pointer-events: none;
       cursor: default;
-      
-      &__hoverable{
+
+      &__hoverable {
         cursor: pointer;
         pointer-events: auto;
       }
 
-
-      @include hover{
+      @include hover {
         background-color: $col-background;
       }
-
-
 
       &__active {
         background-color: $col-background;
@@ -415,47 +420,43 @@
         background-color: var(--slider-col-inactive);
       }
 
-
-
-      &::before{
-        content: '';
+      &::before {
+        content: "";
         position: absolute;
-        width:1.5rem;
-        height:1.5rem;
+        width: 1.5rem;
+        height: 1.5rem;
         border-radius: 100rem;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 1;
       }
-
-
-      
-
-
-
-
     }
-
-
-
-
-
 
     &--button {
       transition-duration: var(--slider-inactive-transition);
-  
+
+      &__left {
+        @include lg-down {
+          margin-left: -0.75rem;
+        }
+      }
+
+      &__right {
+        @include lg-down {
+          margin-right: -0.75rem;
+        }
+      }
+
       &__enabled {
         opacity: 1;
         pointer-events: auto;
       }
-  
+
       &__disabled {
-        
         --button-color: var(--slider-col-inactive);
         pointer-events: none;
       }
     }
-  
   }
 }

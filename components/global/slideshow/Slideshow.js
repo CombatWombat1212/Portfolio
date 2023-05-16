@@ -5,17 +5,27 @@ import { useEffect, useRef, useState } from "react";
 import Button from "../../elements/Buttons";
 import Card from "./slider_subcomponents/Card";
 import { cardOnClickHandler } from "./slideshow_utilities/CardUtilities";
-import { sliderInit, sliderHandleMouseDown, sliderMouseMoveStart, sliderNotchOnClickHandler } from "./slideshow_utilities/SliderUtilities";
+import {
+  sliderInit,
+  sliderHandleMouseDown,
+  sliderMouseMoveStart,
+  sliderNotchOnClickHandler,
+  sliderHandleSet,
+} from "./slideshow_utilities/SliderUtilities";
 import {
   slideShowButtonHandler,
   slideshowButtonsDisable,
   slideshowCheckInit,
   slideshowInit,
   slideshowMouseDown,
+  slideshowResize,
   slideshowSetPosition,
   slideshowUpdateCardStyle,
 } from "./slideshow_utilities/SlideshowUtilities";
 import swipeEventsInit from "@/scripts/SwipeEvents";
+import useListener from "@/scripts/hooks/useListener";
+import { RESIZE_TIMEOUT } from "@/scripts/GlobalUtilities";
+import useHorizontalResize from "@/scripts/hooks/useHorizontalResize";
 
 var loadOnceCount = 0;
 
@@ -33,29 +43,40 @@ function slideshowGetCardImage(slideshow) {
 function Slideshow({ children, img }) {
   // TODO: should they be container__wide?
 
-  var slideshow = useRef(null);
-  var container = useRef(null);
-
+  const slideshow = useRef(null);
+  const container = useRef(null);
+  const slider = useRef(null);
   const [cardImage, setCardImage] = useState(img);
   const [descriptionOn, setDescriptionOn] = useState(false);
   const [hitStartPoint, setHitStartPoint] = useState(false);
+  const group = MAKERIGHT_IMG_GROUPS[img.group];
 
-  var group = MAKERIGHT_IMG_GROUPS[img.group];
-  var startIndex = img.index;
-  var index = img.index;
-
-  var width = group.width.min;
-  var height = group.height.min;
+  const slide = {
+    refs: {
+      slideshow: slideshow,
+      container: container,
+      slider: slider,
+    },
+    states: {
+      img: cardImage,
+      setImg: setCardImage,
+      desc: descriptionOn,
+      setDesc: setDescriptionOn,
+    },
+    group: group,
+    width: group.width.min,
+    height: group.height.min,
+  };
 
   var cardGraphicStyle = {
-    "--img-aspect-width": `${width}`,
-    "--img-aspect-height": `${height}`,
-    "--img-width": `${width}px`,
-    "--img-height": `${height}px`,
+    "--img-aspect-width": `${slide.width}`,
+    "--img-aspect-height": `${slide.height}`,
+    "--img-width": `${slide.width}px`,
+    "--img-height": `${slide.height}px`,
   };
 
   useMountEffect(() => {
-    slideshowInit(group, slideshow, container, cardImage, setCardImage);
+    slideshowInit(slide);
     slideshowSetPosition(container, img.index);
     slideshowUpdateCardStyle(slideshow, img);
     slideshowCheckInit(container, setHitStartPoint);
@@ -65,15 +86,6 @@ function Slideshow({ children, img }) {
     if (!slideshows.includes(slideshow.current)) slideshows.push(slideshow.current);
     for (var i = 0; i < slideshows.length; i++) {
       cardImages[i] = cardImage;
-    }
-
-    function once() {
-      swipeEventsInit();
-    }
-
-    if (loadOnceCount == 0) {
-      once();
-      loadOnceCount++;
     }
   });
 
@@ -87,6 +99,8 @@ function Slideshow({ children, img }) {
       cardImages[i] = cardImage;
     }
   }, [cardImage]);
+
+  useHorizontalResize(slideshowResize);
 
   return (
     <div className="slideshow" style={cardGraphicStyle} ref={slideshow}>
@@ -111,8 +125,8 @@ function Slideshow({ children, img }) {
               <Card
                 img={groupImg}
                 index={groupImg.index}
-                width={width}
-                height={height}
+                width={slide.width}
+                height={slide.height}
                 descriptionOn={descriptionOn}
                 onClick={groupImg.index === cardImage.index ? null : (e) => cardOnClickHandler(e, group, groupImg.index, cardImage, setCardImage)}
               />
@@ -123,7 +137,7 @@ function Slideshow({ children, img }) {
       </div>
 
       <div className="slideshow--footer">
-        <div className="slider--wrapper container">
+        <div className="slider--wrapper container" ref={slider}>
           <Button
             className="slider--button slider--button__enabled"
             icon={["chevron_left", "alone", "mask"]}
@@ -187,6 +201,19 @@ function Slideshow({ children, img }) {
       </div>
     </div>
   );
+
+  function slideshowResize() {
+    const container = slide.refs.container.current;
+    const slider = slide.refs.slider.current;
+    const index = slide.states.img.index;
+
+    sliderHandleSet(slider, index);
+
+    // TODO: this works for now but you could always create a new state that's true while resizing, and false once resizing is done and use that to trigger the set position after a resize rather than just a timeout
+    setTimeout(() => {
+      slideshowSetPosition(container, index);
+    }, 2000);
+  }
 }
 
 export default Slideshow;

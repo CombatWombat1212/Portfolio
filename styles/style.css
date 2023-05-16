@@ -3250,7 +3250,7 @@ h3 + .studypanel--paragraph {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .section .graphic--caption__split > * + * {
@@ -4591,9 +4591,17 @@ h3 + .studypanel--paragraph {
   --slide-inner-item-spacing: calc(var(--section-text-spacing) * 0.25);
   --slide-transition: 0.5s;
   width: 100%;
+  --slide-graphic-height_mobile: 34vh;
+  --slide-description-height_mobile: 24vh;
   --site-x-margin: calc((100% - var(--site-max-width)) / 2);
   --card-gap: 8vw;
   --card-width: calc(var(--site-max-width) + var(--card-gap));
+}
+
+@media screen and (max-width: 61.9375em) {
+  .slideshow {
+    --slide-inner-pad: 2rem;
+  }
 }
 
 .slideshow--header {
@@ -4602,6 +4610,12 @@ h3 + .studypanel--paragraph {
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
+}
+
+@media screen and (max-width: 49.9375em) {
+  .slideshow--header {
+    align-items: center;
+  }
 }
 
 .slideshow--container {
@@ -4662,6 +4676,12 @@ h3 + .studypanel--paragraph {
   text-align: center;
 }
 
+@media screen and (max-width: 61.9375em) {
+  .slideshow--message {
+    margin-top: 1.15rem;
+  }
+}
+
 .slideshow .card {
   display: flex;
   flex-direction: row;
@@ -4671,6 +4691,12 @@ h3 + .studypanel--paragraph {
   -khtml-border-radius: var(--b-rad);
   overflow: hidden;
   background-color: #5D5D7E;
+}
+
+@media screen and (max-width: 61.9375em) {
+  .slideshow .card {
+    flex-direction: column;
+  }
 }
 
 .slideshow .card--title {
@@ -4718,6 +4744,20 @@ h3 + .studypanel--paragraph {
   margin-left: calc(var(--width) * -1 - var(--slide-inner-pad) * 2);
 }
 
+@media screen and (max-width: 61.9375em) {
+  .slideshow .card--description__off {
+    margin-left: 0;
+    margin-top: calc(var(--slide-description-height_mobile) * -1);
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  .slideshow .card--description {
+    height: calc(var(--slide-description-height_mobile) - (var(--slide-inner-pad) * 2));
+    width: 100%;
+  }
+}
+
 .slideshow .card--description-inner {
   position: absolute;
   padding-bottom: var(--slide-inner-pad);
@@ -4740,6 +4780,12 @@ h3 + .studypanel--paragraph {
   z-index: 1;
 }
 
+@media screen and (max-width: 61.9375em) {
+  .slideshow .card--graphic {
+    max-height: var(--slide-graphic-height_mobile);
+  }
+}
+
 .slideshow .card--graphic::-webkit-scrollbar {
   width: var(--slide-scrollbar-width);
 }
@@ -4758,6 +4804,12 @@ h3 + .studypanel--paragraph {
 
 .slideshow .card--graphic__on {
   width: calc(66.66667% - (var(--slide-inner-pad) * 2));
+}
+
+@media screen and (max-width: 61.9375em) {
+  .slideshow .card--graphic__on {
+    width: 100%;
+  }
 }
 
 .slideshow .card--paragraph {
@@ -4807,6 +4859,26 @@ h3 + .studypanel--paragraph {
   --slider-inactive-transition: 0.2s;
 }
 
+@media screen and (max-width: 61.9375em) {
+  .slideshow .slider--wrapper {
+    gap: 0.65rem;
+    margin-top: 1.25rem;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  .slideshow .slider--wrapper {
+    --slider-handle-size: 1.3625rem;
+    --slider-bar-height: 0.1875rem;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  .slideshow .slider {
+    width: 90%;
+  }
+}
+
 .slideshow .slider--bar {
   width: 100%;
   border-radius: 10rem;
@@ -4849,10 +4921,10 @@ h3 + .studypanel--paragraph {
 }
 
 .slideshow .slider--handle::before {
-  content: '';
+  content: "";
   position: absolute;
-  width: calc(var(--slider-handle-size)*1.5);
-  height: calc(var(--slider-handle-size)*1.5);
+  width: calc(var(--slider-handle-size) * 1.5);
+  height: calc(var(--slider-handle-size) * 1.5);
   border-radius: 100rem;
   top: 50%;
   left: 50%;
@@ -4911,7 +4983,7 @@ h3 + .studypanel--paragraph {
 }
 
 .slideshow .slider--notch::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 1.5rem;
   height: 1.5rem;
@@ -4924,6 +4996,18 @@ h3 + .studypanel--paragraph {
 
 .slideshow .slider--button {
   transition-duration: var(--slider-inactive-transition);
+}
+
+@media screen and (max-width: 61.9375em) {
+  .slideshow .slider--button__left {
+    margin-left: -0.75rem;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  .slideshow .slider--button__right {
+    margin-right: -0.75rem;
+  }
 }
 
 .slideshow .slider--button__enabled {
@@ -9607,7 +9691,7 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 61.9375em) and (min-width: 50em) {
   #Makeright #Prototyping--Progression .section--description {
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
   }
 }
 
