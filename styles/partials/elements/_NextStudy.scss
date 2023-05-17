@@ -33,6 +33,8 @@
 
   @include sm-down {
     --next-study-pad: 1.15rem;
+
+    min-width: 50%;
   }
 
   @include hover {
@@ -146,9 +148,20 @@
     @include flex-row-between;
 
     @include sm-down {
-      --button-height:2.95rem;
-      &__left{
+      --button-height: 2.95rem;
+      &__left {
         justify-content: flex-start;
+      }
+    }
+
+
+    .button--copy{
+      @include sm-down{
+        overflow:hidden;
+        display: block;
+        @include my-auto;
+        height:min-content;
+        text-overflow: ellipsis;  
       }
     }
 

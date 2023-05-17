@@ -56,18 +56,13 @@ function Copy({ study }) {
   return (
     <>
       <div className="next-study--copy col-8 col-xl-10 col-lg-12">
-
-        <Graphic
-          className="next-study--graphic next-study--graphic__mobile d-md-flex d-none"
-          img={study.imgs.main}
-        />
+        <Graphic className="next-study--graphic next-study--graphic__mobile d-md-flex d-none" img={study.imgs.main} />
         <Heading className="next-study--title" type="h3">
           {study.name}
         </Heading>
         <Description className="next-study--description">
           <p>{study.subtitle.string}</p>
         </Description>
-
       </div>
     </>
   );
@@ -83,7 +78,6 @@ function Study({ study, button, index }) {
   const handleMouseLeave = (e) => {
     studyMouseLeave(e, reference);
   };
-
 
   const { isBpAndDown, loading } = useResponsiveUtils();
 
@@ -102,7 +96,6 @@ function Study({ study, button, index }) {
     }
     return direction;
   })();
-  
 
   const btnText = (() => {
     let text = button;
@@ -136,20 +129,14 @@ function Study({ study, button, index }) {
           {/* <Tags study={study} /> */}
         </div>
 
-        <Button tag="div" type="bottom" className={`next-study--button next-study--button__${btnIconSide} link`} 
-          
-          icon={[
-            btnIcon,
-            btnIconSide,
-            "mask"
-          ]
-                    
-          
-          } animation="pulse-right">
+        <Button
+          tag="div"
+          type="bottom"
+          className={`next-study--button next-study--button__${btnIconSide} link`}
+          icon={[btnIcon, btnIconSide, "mask"]}
+          animation="pulse-right">
           {btnText}
         </Button>
-        
-
       </div>
     </Link>
   );
@@ -161,7 +148,6 @@ function NextStudies({ study }) {
 
   var adjacentStudies = [first, second];
 
-  // const captions = ["Have a look-see", "Take a gander", "Check it", "I must know", "Gimme", "Go on..."];
   const captions = ["Check it", "Tell me", "Gimme", "I'll bite", "Ouu", "Do tell", "Go on..."];
 
   const chosen = useRandomCaptions(captions, 2);

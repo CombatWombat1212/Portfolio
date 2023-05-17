@@ -55,6 +55,9 @@
   @include md-down {
     --wrapper-column-gap: 3.75rem;
   }
+  @include sm-down {
+    --wrapper-column-gap: 2.75rem
+  }
 }
 
 .footer {

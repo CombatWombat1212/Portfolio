@@ -173,7 +173,7 @@ function MakeRight({ pop }) {
 
           <Section id="Plan--Gantt" className="flex-col">
             <Title>Project Plan</Title>
-            <Heading>Project phases and timeline</Heading>
+            <Heading>Project phases <Nobr>and timeline</Nobr></Heading>
             <Gantt study="MakeRight" />
           </Section>
         </Chapter>
@@ -826,7 +826,7 @@ function MakeRight({ pop }) {
                 <ResponsiveText tag="Fragment">
                   <xxl>Customer user journey</xxl>
                   <lg>Customer journey</lg>
-                  <md>Cust. journey</md>
+                  <xs>Cust. journey</xs>
                 </ResponsiveText>
               </Heading>
             </Slideshow>

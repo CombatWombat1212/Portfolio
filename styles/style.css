@@ -2320,6 +2320,13 @@ h3 + .studypanel--paragraph {
   }
 }
 
+@media screen and (max-width: 36.9375em) {
+  .footer {
+    --wrapper-column-gap: 2.75rem
+  ;
+  }
+}
+
 .footer .sitemap {
   background-color: #404064;
   display: flex;
@@ -5174,6 +5181,7 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 36.9375em) {
   .next-study {
     --next-study-pad: 1.15rem;
+    min-width: 50%;
   }
 }
 
@@ -5314,10 +5322,21 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 36.9375em) {
   .next-study--button {
-    --button-height:2.95rem;
+    --button-height: 2.95rem;
   }
   .next-study--button__left {
     justify-content: flex-start;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  .next-study--button .button--copy {
+    overflow: hidden;
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+    height: min-content;
+    text-overflow: ellipsis;
   }
 }
 
@@ -9462,6 +9481,7 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 36.9375em) {
   #Makeright #Develop--Methodology .section--main {
+    --gap: 3rem;
     display: flex;
     flex-direction: column;
   }
