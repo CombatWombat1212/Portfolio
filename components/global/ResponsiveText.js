@@ -1,25 +1,27 @@
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import React from "react";
 
-function ResponsiveText({ data: dataProp, tag = "span", children }) {
+function ResponsiveText({ data: dataProp, tag = "span", children, className = "" }) {
   const Elem = tag;
   dataProp = dataProp || children || "";
-  const is = getIs(dataProp, tag);
-  const { keys, data } = getKeys(dataProp, is);
 
-  return (
-    <>
-      {is.string ? (
-        <ResElem keyIndex={0} data={data} elem={Elem} />
-      ) : is.fragment ? (
-        <ResFrag data={data} />
-      ) : is.data ? (
-        keys.map((key, i) => {
-          return <ResElem key={i} keyIndex={i} className={getDataClasses(keys, key, i)} data={data[key]} elem={Elem} />;
-        })
-      ) : null}
-    </>
-  );
+  const { is, keys, data } = getDetails(dataProp, tag);
+
+  const renderString = () => {
+    return is.fragment ? <>{data}</> : <Elem>{data}</Elem>;
+  };
+
+  const renderFragment = () => {
+    return <ResFrag data={data} />;
+  };
+
+  const renderData = () => {
+    return keys.map((key, i) => (
+      <ResElem key={i} keyIndex={i} className={getDataClasses(keys, key, i) + ` ${className}`} data={data[key]} elem={Elem} />
+    ));
+  };
+
+  return <>{is.string ? renderString() : is.fragment ? renderFragment() : is.data ? renderData() : null}</>;
 }
 
 function ResFrag({ data }) {
@@ -28,7 +30,6 @@ function ResFrag({ data }) {
   const text = !(!isBp(bp) || loading) ? cascadeData[bp] : cascadeData["xxl"];
   return <>{text}</>;
 }
-
 
 function ResElem({ keyIndex, className = "", data, elem: Elem }) {
   return (
@@ -51,18 +52,30 @@ function getCascadeData(data) {
   return cascadeData;
 }
 
-function getKeys(data, is) {
-  let keys = typeof data === "object" ? Object.keys(data) : [];
+function getDetails(dataProp, tag) {
+  const initialIs = getIs(dataProp, tag);
 
-  if (is.jsx) {
-    keys = React.Children.map(data, (child) => child.type);
-    data = React.Children.toArray(data).reduce((acc, child) => {
-      acc[child.type] = child.props.children;
-      return acc;
-    }, {});
+  var data = typeof dataProp === "object" ? dataProp : {};
+  var keys = typeof dataProp === "object" ? Object.keys(dataProp) : [];
+
+  if (initialIs.jsx) {
+    data = getJSXData(dataProp);
+    keys = getJSXKeys(dataProp);
   }
 
-  return { keys, data };
+  const is = getIs(data, tag);
+  return { is, keys, data };
+}
+
+function getJSXData(data) {
+  return React.Children.toArray(data).reduce((acc, child) => {
+    acc[child.type] = child.props.children;
+    return acc;
+  }, {});
+}
+
+function getJSXKeys(data) {
+  return React.Children.map(data, (child) => child.type);
 }
 
 function getDataClasses(keys, key, i) {
@@ -78,7 +91,7 @@ function getIs(data, tag) {
   const is = {
     string: typeof data === "string" || typeof data === "number",
     object: typeof data === "object",
-    jsx: typeof data === "object" && (data.$$typeof || (data[0] && data[0].$$typeof)),
+    jsx: Boolean(typeof data === "object" && (data.$$typeof || (Array.isArray(data) && data.some((item) => item.$$typeof)))),
     fragment: tag == "Fragment" || tag == "fragment",
   };
   is.data = is.object && !is.jsx;

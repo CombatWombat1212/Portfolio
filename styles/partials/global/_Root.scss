@@ -1,83 +1,75 @@
+:root {
+  // --site-pad-top: 7rem;
+  // --site-pad-x: 2rem;
+  --transition: 0.1s;
+  $b-rad: 0.5rem;
+  $b-rad_less: 0.3125rem;
+  --b-rad: #{$b-rad};
+  --b-rad_less: #{$b-rad_less};
 
-
-
-
-
-
-
-:root{
-    // --site-pad-top: 7rem;
-    // --site-pad-x: 2rem;
-    --transition: 0.1s;
-    $b-rad: 0.5rem;
-    $b-rad_less: 0.3125rem;
-    --b-rad: #{$b-rad};
-    --b-rad_less: #{$b-rad_less};
-
-    --font-height-body: Max(var(--font-size-body), var(--font-leading-body));
-
-    scroll-behavior: smooth;
-    
-
-    --sfh:4.9406564584124654e-324;
-
+  --font-height-body: Max(var(--font-size-body), var(--font-leading-body));
+  
+  --sfh: 4.9406564584124654e-324;
 }
 
-
-body{
-    background-color: $col-background;
-
-    // p, li {
-    //     @include body;
-    // }
-}
-.base-page-size{
-    // background-color: $col-background;
+html{
+  scroll-behavior: smooth;
 }
 
+body {
+  background-color: $col-background;
+  // p, li {
+  //     @include body;
+  // }
+}
+// .base-page-size{
+// background-color: $col-background;
+// }
 
 .overflow__ellipsis {
-    height: var(--rounded-height);
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: var(--visible-lines);
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
+  height: var(--rounded-height);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: var(--visible-lines);
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
 }
 
-
-
-
-.noscroll{
-  overflow:hidden;
-  overflow:-moz-hidden-unscrollable;
-}
-.nobr{
-  white-space:nowrap;
+.noscroll {
+  overflow: hidden;
+  overflow: -moz-hidden-unscrollable;
 }
 
+.scrollauto {
+  scroll-behavior: auto !important;
+  // * {
+  //   scroll-behavior: auto !important;
+  // }
+}
+
+.nobr {
+  white-space: nowrap;
+}
 
 .off {
-    opacity: 0;
-    display: none!important;
-  }
-  .on {
-    opacity: 1;
-  }
-  .tran,.tran1 {
-    opacity: 0;
-  }
-  .tran2 {
-    opacity: 1;
-  }
+  opacity: 0;
+  display: none !important;
+}
+.on {
+  opacity: 1;
+}
+.tran,
+.tran1 {
+  opacity: 0;
+}
+.tran2 {
+  opacity: 1;
+}
 
+.cursor-grabbed {
+  cursor: grabbing !important;
+}
 
-  .cursor-grabbed {
-    cursor: grabbing!important;
-  }
-  
-  .cursor-ew-resize {
-    cursor: ew-resize!important;
-  }
-
-
+.cursor-ew-resize {
+  cursor: ew-resize !important;
+}

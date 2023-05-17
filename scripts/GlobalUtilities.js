@@ -456,8 +456,8 @@ function isElementNearTop(el, threshold = 200) {
   return rect.top >= 0 && rect.top <= threshold;
 }
 
-function scrollToTarget(target, attempts = 0, maxAttempts = 10) {
-  target.scrollIntoView({ behavior: "smooth" });
+function scrollToTarget(target, attempts = 0, maxAttempts = 10, behavior = "smooth") {
+  target.scrollIntoView({ behavior: behavior });
 
   if (attempts < maxAttempts) {
     const timeoutId = setTimeout(() => {

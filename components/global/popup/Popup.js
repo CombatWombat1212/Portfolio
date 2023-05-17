@@ -665,7 +665,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
         }}
         elemkey={pop.img.src}
         duration={popSeekDuration}
-        delay={pop.firstImgDrawn ? 0 : 0.3}
+        delay={pop.firstImgDrawn ? 0 : 0.1}
         onAnimationComplete={() => {
           pop.setImgDrawn(true);
           if (!pop.firstImgDrawn) pop.setFirstImgDrawn(true);

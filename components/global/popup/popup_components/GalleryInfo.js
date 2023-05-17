@@ -17,15 +17,25 @@ import useHasOverflow from "@/scripts/hooks/useHasOverflow";
 import useElementStyle from "@/scripts/hooks/useElementStyle";
 import useOffsetTop from "@/scripts/hooks/useOffsetTop";
 import { STUDY_LINKS } from "@/data/CASE_STUDIES";
-
-
+import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 
 // this is used to fix a bug where the scrollbar of popup--info is visible and updating several times before popup--description is ready to be drawn, so we delay both by a lil bit so that the popup (and in turn, the rest of the element), is only visible when the scrollbar is ready to be drawn
-const INFO_ANIM_DELAY = 0.3;
+// const INFO_ANIM_DELAY = 0.3;
+// moved elsewhere to try and make it responsive
+
+
+function useInfoAnimDelay() {
+  const { loading, isBpAndDown } = useResponsive();
+  const isMdAndDown = !(!isBpAndDown("md") || loading);
+  const INFO_ANIM_DELAY = isMdAndDown ? 0.3 : 0.1;
+  return INFO_ANIM_DELAY;
+}
+
 
 function GalInfoMotionWrapper({ pop, state, elems, scrollbar, children, styles, type = "default" }) {
   const scroll = type != "above" && scrollbar.info.classes ? scrollbar.info.classes : "";
 
+  const INFO_ANIM_DELAY = useInfoAnimDelay();
 
   const [ready, setReady] = useState(false);
   useEffect(() => {
@@ -36,7 +46,6 @@ function GalInfoMotionWrapper({ pop, state, elems, scrollbar, children, styles, 
     }
   }, [pop.firstImgDrawn, state.mobileGallery]);
 
-  
   return (
     // <motion.div
     <div
@@ -47,11 +56,9 @@ function GalInfoMotionWrapper({ pop, state, elems, scrollbar, children, styles, 
       className={`popup--info ${scroll} popup--info__${type}
                   popup--info__${ready ? "show" : "hidden"}
       `}
-
       // ref={elems.info.ref}
 
-      {...(type != "above" ? { ref:elems.info.ref  } : {})}
-
+      {...(type != "above" ? { ref: elems.info.ref } : {})}
       style={styles.description}>
       {children}
     </div>
@@ -59,6 +66,7 @@ function GalInfoMotionWrapper({ pop, state, elems, scrollbar, children, styles, 
 }
 
 function GalInfoAnimPres({ elems, pop, styles, state, popclass, scrollbar, children, type = "default" }) {
+  const INFO_ANIM_DELAY = useInfoAnimDelay();
 
   return (
     <>
@@ -105,9 +113,6 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
     title = false;
   }
 
-
-
-
   const galInfoHeight = (() => {
     if (state.desktop) {
       if (elems.img.height != 0) return elems.img.height;
@@ -142,7 +147,6 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
     }
   })();
 
-
   const galDescHeight = (() => {
     if (state.desktop) return 0;
     if (!elems.info.ref.current) return 0;
@@ -160,10 +164,6 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
 
     return descHeight;
   })();
-
-
-
-
 
   const styles = {
     description: {
@@ -224,7 +224,6 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
   };
 
   const wrapperProps = { elems: elems, pop: pop, styles: styles, state: state, popclass: popclass, scrollbar: scrollbar, handles: handles };
-
 
   return (
     <>
@@ -430,9 +429,6 @@ const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle
 
   var j = 0;
 
-
-
-
   const renderTags = ({ isSimple } = {}) => {
     const tagProps = (item, index, isSimple) => {
       return {
@@ -442,24 +438,22 @@ const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle
         key: `${item.key} ${index}`,
       };
     };
-  
+
     const inner = (item) => {
       if (isSimple) {
-        return j !== pop.img.disciplines.length + pop.img.tools.length ?  `${item}, ` : `${item}.`;
+        return j !== pop.img.disciplines.length + pop.img.tools.length ? `${item}, ` : `${item}.`;
       }
       return item;
     };
-  
+
     const renderItems = (items) => {
       return items.map((item, i) => {
         const TagComponent = isSimple ? Fragment : Tag;
         j++;
-        return (
-          <TagComponent {...tagProps(item, i, isSimple)}>{inner(item)}</TagComponent>
-        );
+        return <TagComponent {...tagProps(item, i, isSimple)}>{inner(item)}</TagComponent>;
       });
     };
-  
+
     return (
       <>
         {renderItems(pop.img.disciplines)}
@@ -468,8 +462,6 @@ const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle
     );
   };
 
-
-  
   return (
     <div
       className={`gallery--categories-wrapper ${catclasses}
@@ -523,6 +515,5 @@ const GalDescription = React.memo(function GalDescription({ pop }) {
     </>
   );
 }, createUpdateConditions(["pop.img", "pop.index"]));
-
 
 export { GalInfo, GalCategories, GalDescription };

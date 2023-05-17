@@ -18,6 +18,7 @@ import { useBreakpoint, useResponsiveUtils } from "@/scripts/hooks/useBreakpoint
 import { splitPx } from "@/scripts/GlobalUtilities";
 import useScreenWidth from "@/scripts/hooks/useScreenWidth";
 import { ResponsiveProvider } from "@/scripts/contexts/ResponsiveContext";
+
 // const style =
 // `font-family: "Gira Sans"; font-size: 1.4375rem;` +
 // // +`line-height:2rem;`
@@ -92,7 +93,6 @@ export default function App({ Component, pageProps }) {
   const [firstImgReady, setFirstImgReady] = useState(false);
   const [firstImgDrawn, setFirstImgDrawn] = useState(false);
 
-
   const pop = {
     type: popupType,
     setType: setPopupType,
@@ -130,66 +130,6 @@ export default function App({ Component, pageProps }) {
     },
   };
 
-  const router = useRouter();
-
-  // const [isReadyToAnimate, setIsReadyToAnimate] = useState(false);
-  const [loaded, setLoaded] = useState(false);
-  const [transitioning, setTransitioning] = useState(false);
-  const [showLoading, setShowLoading] = useState(true);
-  const [chosen, setChosen] = useState(null);
-  const [unseenMessages, setUnseenMessages] = useState([...loadingMessages]);
-
-  // var dur = 0.65;
-  var dur = 0.65;
-  var delay = 0.1;
-
-  useEffect(() => {
-    setShowLoading(true);
-    setLoaded(true);
-  }, [router.route]);
-
-  useEffect(() => {
-    if (loaded) return;
-    setTransitioning(true);
-  }, [router.route, loaded]);
-
-  const { isEntering, getTransitionVariant } = usePageTransition(incomingVariants, outgoingVariants);
-  const transitionVariant = getTransitionVariant(isEntering);
-
-  const chooseRandomMessage = () => {
-    const index = Math.floor(Math.random() * unseenMessages.length);
-    const chosenMessage = unseenMessages[index];
-    setUnseenMessages(unseenMessages.filter((_, i) => i !== index));
-    return chosenMessage;
-  };
-
-  useEffect(() => {
-    if (unseenMessages.length === 0) {
-      setUnseenMessages([...loadingMessages]);
-    }
-  }, [unseenMessages]);
-
-  useEffect(() => {
-    setChosen(chooseRandomMessage());
-  }, []);
-
-  const handleTransitionEnd = () => {
-    if (transitioning) {
-      setLoaded(true);
-      setTransitioning(false);
-      setTimeout(() => {
-        setChosen(chooseRandomMessage());
-        setTimeout(() => {
-          setShowLoading(false);
-        }, 500);
-      }, dur * 1000 + 500);
-    }
-  };
-
-  // TODO right now if you scroll down a page really fast on a laggy machine you can see the scroll page behind it, so we should update this so that theres actually an element in between the two pages rather than just the background behind them
-
-
-
 
   const bp = useBreakpoint();
   useEffect(() => {
@@ -197,136 +137,46 @@ export default function App({ Component, pageProps }) {
   }, [bp]);
 
 
-  // useEffect(() => {
-  //   const handleRouteChange = () => {
-  //     window.scrollTo(0, 0);
-  //   };
-
-  //   router.events.on('routeChangeComplete', handleRouteChange);
-
-  //   // If the component is unmounted, unsubscribe
-  //   // from the event with the `off` method
-  //   return () => {
-  //     router.events.off('routeChangeComplete', handleRouteChange);
-  //   };
-  // }, [router.events]);
 
 
 
-  // const navConRef = useRef(null);
-  // const width = useScreenWidth({ debounceTime: 200});
-  // const [siteMarginWide, setSiteMarginWide] = useState(0);
-
-
-  // const global = {
-  //   margin:{
-  //     wide: siteMarginWide,
-  //     setWide: setSiteMarginWide,
-  //   },
-  //   refs: {
-  //     navCon: navConRef,
-  //   }
-  // }
 
 
 
   return (
     <ResponsiveProvider>
-
-    <div className="site">
-
-      <Layout>
-        <Popup pop={pop} />
-
-        {/* TODO: They break when you go back in the browser */}
-        {/* <AnimatePresence
-          mode="wait"
-          onExitComplete={() => {
-            window.scrollTo({
-              top: 0,
-              left: 0,
-              behavior: "instant",
-            });
-            setLoaded(false);
-          }}>
-          <motion.div
-            key={router.route}
-            initial={loaded ? (isEntering ? "initialState" : "exitState") : "initialState"}
-            animate={loaded ? (isEntering ? "animateState" : "exitState") : "initialState"}
-            exit={loaded ? (isEntering ? "initialState" : "exitState") : "initialState"}
-            className="base-page-size"
-            transition={{
-              duration: dur,
-              ease: "backInOut",
-            }}
-            variants={transitionVariant}
-            onTransitionEnd={handleTransitionEnd}> */}
-
-        {/* TODO:delete this once you uncomment the rest */}
-        {/* TODO: To fix the loading screen issue you were having, go back to what you had before and set it so that it disapears when its not in use so that its not in the background.  Then to address the issue with it not showing up when its time to transition, go to DLINK or Button or something and make it so that when they are hovered the loading screen is shown for the next 2 or 3 seconds and then disappears again.  For mobile this wouldn't help though so ahh shoot */}
-        <div className="base-page-size">
+      <LoadingScreen />
+      <div className="site">
+        <Layout>
+          <Popup pop={pop} />
           <Component pop={pop} />
-        </div>
-        <Footer />
-        {/* </motion.div>
-        </AnimatePresence> */}
-
-        {/* <LoadingScreen showLoading={showLoading} chosen={chosen} /> */}
-      </Layout>
-    </div>
+          <Footer />
+        </Layout>
+      </div>
     </ResponsiveProvider>
   );
 }
 
-const loadingMessages = [
-  `hol up...`,
-  `<i>*elevator music*</i>`,
-  `catch the game last night?`,
-  `lemme grab that for ya`,
-  `Ensure your Wii remote strap is tightly secured`,
-  `Wanna do something after this?`,
-  `We should do this more often`,
-  `<i>shawty like a melody</i>`,
-  `sicko mode <i>bwaaaa</i>`,
-  `right this way`,
-  `<i>*utz utz utz*</i>`,
-  `<i>*boots n cats n boots n cats*</i>`,
-  `lemme check the back...`,
-  `who turned off the lights?`,
-  `<i>*dial-up noises*</i>`,
-  `bleep bloop`,
-  `where did i put that...`,
-  `ouu good choice`,
-  `niceee`,
-  `<i>*crickets*</i>`,
-];
+// const loadingMessages = [
+//   `hol up...`,
+//   `<i>*elevator music*</i>`,
+//   `catch the game last night?`,
+//   `lemme grab that for ya`,
+//   `Ensure your Wii remote strap is tightly secured`,
+//   `Wanna do something after this?`,
+//   `We should do this more often`,
+//   `<i>shawty like a melody</i>`,
+//   `sicko mode <i>bwaaaa</i>`,
+//   `right this way`,
+//   `<i>*utz utz utz*</i>`,
+//   `<i>*boots n cats n boots n cats*</i>`,
+//   `lemme check the back...`,
+//   `who turned off the lights?`,
+//   `<i>*dial-up noises*</i>`,
+//   `bleep bloop`,
+//   `where did i put that...`,
+//   `ouu good choice`,
+//   `niceee`,
+//   `<i>*crickets*</i>`,
+// ];
 
-const incomingVariants = {
-  initialState: {
-    // overflow: "hidden",
-    clipPath: "polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%)",
-  },
-  animateState: {
-    // overflow: "hidden",
-    clipPath: "polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%)",
-  },
-  exitState: {
-    // overflow: "hidden",
-    clipPath: "polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%)",
-  },
-};
-
-const outgoingVariants = {
-  initialState: {
-    // overflow: "hidden",
-    clipPath: "polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%)",
-  },
-  animateState: {
-    // overflow: "hidden",
-    clipPath: "polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%)",
-  },
-  exitState: {
-    // overflow: "hidden",
-    clipPath: "polygon(100% 0%, 100% 100%, 100% 100%, 100% 0%)",
-  },
-};

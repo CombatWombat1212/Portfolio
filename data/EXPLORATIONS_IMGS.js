@@ -621,7 +621,7 @@ const EXPLORATIONS_IMGS = processImages(
       ],
       //   study: "",
       group: "obsessive_seas",
-      project: "Navigating <i>Obsessive Seas</i>",
+      project: `Navigating <br class="d-md-none" /><i>Obsessive Seas</i>`,
       index: 0,
     },
     obsessive_seas_render_05: {

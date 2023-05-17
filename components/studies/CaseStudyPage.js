@@ -88,7 +88,6 @@ function Next({ study }) {
     "Case studies, anyone?",
     "Lets keep the good times rollin'",
     "Another one.",
-    "We're done when I say we're done.",
     "There's more where that came from",
     "Get 'em while they're hot",
     "We're just gettin' started",

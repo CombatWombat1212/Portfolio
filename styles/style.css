@@ -320,8 +320,11 @@ span {
   --b-rad: 0.5rem;
   --b-rad_less: 0.3125rem;
   --font-height-body: Max(var(--font-size-body), var(--font-leading-body));
+  --sfh: 4.9406564584124654e-324;
+}
+
+html {
   scroll-behavior: smooth;
-  --sfh:4.9406564584124654e-324;
 }
 
 body {
@@ -341,6 +344,10 @@ body {
   overflow: -moz-hidden-unscrollable;
 }
 
+.scrollauto {
+  scroll-behavior: auto !important;
+}
+
 .nobr {
   white-space: nowrap;
 }
@@ -354,7 +361,8 @@ body {
   opacity: 1;
 }
 
-.tran, .tran1 {
+.tran,
+.tran1 {
   opacity: 0;
 }
 
@@ -1216,7 +1224,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: #074391;
-  z-index: -1;
+  z-index: 10000;
 }
 
 .loading-screen--text {
@@ -9062,7 +9070,7 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 49.9375em) {
   #Home .studypanel--description {
     margin-top: 0rem;
-    width: 66.66667%;
+    width: 69.16667%;
   }
 }
 
