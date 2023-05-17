@@ -1,135 +1,55 @@
 // LoadingScreen.js
 import React, { useEffect, useRef, useState } from "react";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
-import useEllipse from "@/scripts/hooks/useEllipse";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
-import AnimPres from "../global/AnimPres";
-import popAnims from "../global/popup/popup_utilities/PopupAnimations";
+import { AnimatePresence, motion } from "framer-motion";
+import useRandomString from "@/scripts/hooks/useRandomString";
 
-const animations = {
-  wipeIn: {
-    hidden: {
-      clipPath: "polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%)",
-    },
-    visible: {
-      clipPath: "polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%)",
-    },
-    exit: {
-      clipPath: "polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%)",
-    },
-  },
-  wipeOut: {
-    hidden: {
-      clipPath: "polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%)",
-    },
-    visible: {
-      clipPath: "polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%)",
-    },
-    exit: {
-      clipPath: "polygon(100% 0%, 100% 100%, 100% 100%, 100% 0%)",
-    },
-  },
+const variants = {
+  initial: { clipPath: "polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%)" },
+  animate: { clipPath: "polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%)" },
+  exit: { clipPath: "polygon(100% 0%, 100% 100%, 100% 100%, 100% 0%)" },
 };
 
-// This approach works although i theorize that it might not be as widely supported on all browsers:
-// const promiseScrollToTop = () => {
-//   return new Promise((resolve) => {
-//     if (document.documentElement.scrollTop != 0 || document.body.scrollTop != 0) {
-//       window.scroll(0, 0);
-//       window.onscroll = function () {
-//         if (document.documentElement.scrollTop == 0 && document.body.scrollTop == 0) {
-//           resolve();
-//         }
-//       };
-//     } else {
-//       resolve();
-//     }
-//   });
-// };
-
-// const routeChangeStart = () => {
-//   setLoading(true);
-//   document.documentElement.classList.add("scrollauto");
-//   promiseScrollToTop().catch((err) => {
-//     console.log(err);
-//   });
-// };
-
-// const routeChangeEnd = () => {
-//   if (document.documentElement.scrollTop == 0 && document.body.scrollTop == 0) {
-//     setLoading(false);
-//     document.documentElement.classList.remove("scrollauto");
-//   } else {
-//     console.log("Page is not scrolled to top. routeChangeEnd logic cannot run");
-//   }
-// };
-
-// This approach might have better support but again this wasn't tested just like the above, and as it turns out just having a delay of 0 ended up working as well, but here is the 2 promise approach:
-// const applyScrollAuto = () => {
-//   return new Promise((resolve, reject) => {
-//     if (document.documentElement.classList.contains('scrollauto')) {
-//       reject('scrollauto is already applied');
-//     } else {
-//       document.documentElement.classList.add('scrollauto');
-//       document.documentElement.style.scrollBehavior = 'auto';
-//       resolve();
-//     }
-//   });
-// };
-
-// const scrollToTop = () => {
-//   return new Promise((resolve, reject) => {
-//     if (document.documentElement.scrollTop != 0 || document.body.scrollTop != 0) {
-//       window.scroll(0, 0);
-//       window.onscroll = function() {
-//         if (document.documentElement.scrollTop == 0 && document.body.scrollTop == 0) {
-//           resolve();
-//         }
-//       };
-//     } else {
-//       resolve();
-//     }
-//   });
-// };
-
-// const routeChangeStart = () => {
-//   setLoading(true);
-//   applyScrollAuto()
-//     .then(() => {
-//       return scrollToTop();
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     });
-// };
-
-// const routeChangeEnd = () => {
-//   if (document.documentElement.scrollTop == 0 && document.body.scrollTop == 0) {
-//     setLoading(false);
-//     document.documentElement.classList.remove('scrollauto');
-//   } else {
-//     console.log('Page is not scrolled to top. routeChangeEnd logic cannot run');
-//   }
-// };
+const LOADING_DURATION = 0.3;
 
 function LoadingScreen() {
   const [show, setShow] = useState(false);
 
   const { loading } = useResponsive();
   const loadingRef = useRef(loading);
+  const loadingScreen = useRef(null);
 
   const router = useRouter();
 
   const routeChangeStart = () => {
-    setShow(true);
     document.documentElement.classList.add("scrollauto");
+    document.body.classList.add("noscroll");
     setTimeout(() => window.scroll(0, 0), 0);
   };
+
   const routeChangeEnd = () => {
+    setShow(false);
+    document.documentElement.classList.remove("scrollauto");
+    document.body.classList.remove("noscroll");
+  };
+
+  const routeChangeStartHandler = (url) => {
+    if (url === "/#Home") {
+      router.push("/");
+    }
+    setShow(true);
+    setTimeout(() => {
+      routeChangeStart();
+    }, (LOADING_DURATION * 1000)*1.15);
+  };
+
+  const routeChangeEndHandler = () => {
     if (!loadingRef.current) {
-      setShow(false);
-      document.documentElement.classList.remove("scrollauto");
+      setTimeout(() => {
+        routeChangeEnd();
+      }, (LOADING_DURATION * 1000)*1.15);
     }
   };
 
@@ -138,30 +58,68 @@ function LoadingScreen() {
   }, [loading]);
 
   useEffect(() => {
-    router.events.on("routeChangeStart", routeChangeStart);
-    router.events.on("routeChangeComplete", routeChangeEnd);
-    router.events.on("routeChangeError", routeChangeEnd);
+    router.events.on("routeChangeStart", routeChangeStartHandler);
+    router.events.on("routeChangeComplete", routeChangeEndHandler);
+    router.events.on("routeChangeError", routeChangeEndHandler);
 
     return () => {
-      router.events.off("routeChangeStart", routeChangeStart);
-      router.events.off("routeChangeComplete", routeChangeEnd);
-      router.events.off("routeChangeError", routeChangeEnd);
+      router.events.off("routeChangeStart", routeChangeStartHandler);
+      router.events.off("routeChangeComplete", routeChangeEndHandler);
+      router.events.off("routeChangeError", routeChangeEndHandler);
     };
   }, [router.events]);
 
+
+
+
+
+
   return (
-    <AnimPres className={`loading-screen--wrapper`} condition={show} animation={popAnims.slideFade}>
-      <Wrapper />
-    </AnimPres>
+    <div
+      className="loading-screen--wrapper"
+      style={{
+        "--transition": `${LOADING_DURATION}s`,
+      }}>
+      <AnimatePresence>
+        {show && (
+          <motion.div
+            className={`loading-screen`}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={variants}
+            ref={loadingScreen}
+            transition={{
+              duration: LOADING_DURATION,
+              ease: "easeInOut",
+            }}>
+            <Text />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
 
-function Wrapper() {
-  return (
-    <div className={`loading-screen`}>
-      <h3 className={`loading-screen--text`}>test</h3>
-    </div>
-  );
+
+
+function Text(){
+
+  const captions = [
+    "Room for one more?",
+    "Case studies, anyone?",
+    "Lets keep the good times rollin'",
+    "Another one.",
+    "There's more where that came from",
+    "Get 'em while they're hot",
+    "We're just gettin' started",
+  ];
+
+  const nextStudyTitle = useRandomString(captions);
+
+
+
+  return(<h3 className={`loading-screen--text`}>{nextStudyTitle}</h3>)
 }
 
 export default LoadingScreen;

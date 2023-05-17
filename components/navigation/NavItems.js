@@ -11,15 +11,20 @@ import { useBreakpoint, useBreakpointUtils } from "@/scripts/hooks/useBreakpoint
 function NavLink({ item, nav, className, type }) {
   const { setOpen } = nav;
 
+
+  const onClickHandler = () => {
+    setOpen(false);
+  }
+
+
   function renderItem() {
     return (
       <DLink
         className={`nav--item ${className ? className : ""}`}
         href={item.link}
         aria-label={item.ariaLabel}
-        onClick={() => {
-          setOpen(false);
-        }}>
+        onClick={onClickHandler}
+        >
         {item.text}
       </DLink>
     );
@@ -128,6 +133,15 @@ function DropdownItem({ study, drop }) {
   const ref = useRef(null);
   const hovered = useHoverAndFocus(ref);
 
+
+
+  // TODO: Once you've implimented loading screens, make it so that the dropdown only dissapears once the loading screen is present
+  const onClickHandler = () => {
+    drop.setActive(false);
+  }
+
+
+
   useEffect(() => {
     drop.setItems((prev) => {
       const newItems = [...prev];
@@ -144,7 +158,9 @@ function DropdownItem({ study, drop }) {
       style={{
         "--dropdown-index": `${study.index}`,
         "--dropdown-delay": `${(study.index + 1) * 0.3}s`,
-      }}>
+      }}
+        
+      >
       {study.name}
     </DLink>
   );

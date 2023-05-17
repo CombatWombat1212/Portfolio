@@ -106,6 +106,7 @@ function dualTransitionToggleOff(elem, { classPref = "", overlap = false, durati
 }
 
 function toggle(elem, { classPref = "", duration = 0, animated = true, transitions = "", overlap = "overlap start", state = "" } = {}) {
+  elem = elem.current || elem;
   var selectorPrefix = "__";
   if (classPref == "") selectorPrefix = "";
   classPref = classPref + selectorPrefix;
