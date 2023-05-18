@@ -1,23 +1,25 @@
-import { useState } from "react";
-import { useMountEffect } from "@/scripts/hooks/useMountEffect";
+// DEPRECATED
 
-const useRandomCaptions = (captions, len) => {
-  const [chosen, setChosen] = useState([]);
+// import { useState } from "react";
+// import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 
-  const getRandomUniqueCaptions = (captions, len) => {
-    var count = len;
-    if (count > captions.length) {
-      throw new Error("count should be less than or equal to the number of captions");
-    }
-    const shuffledCaptions = [...captions].sort(() => 0.5 - Math.random());
-    return shuffledCaptions.slice(0, count);
-  };
+// const useRandomCaptions = (captions, len) => {
+//   const [chosen, setChosen] = useState([]);
 
-  useMountEffect(() => {
-    setChosen(getRandomUniqueCaptions(captions, len));
-  }, []);
+//   const getRandomUniqueCaptions = (captions, len) => {
+//     var count = len;
+//     if (count > captions.length) {
+//       throw new Error("count should be less than or equal to the number of captions");
+//     }
+//     const shuffledCaptions = [...captions].sort(() => 0.5 - Math.random());
+//     return shuffledCaptions.slice(0, count);
+//   };
 
-  return chosen;
-};
+//   useMountEffect(() => {
+//     setChosen(getRandomUniqueCaptions(captions, len));
+//   }, []);
 
-export default useRandomCaptions;
+//   return chosen;
+// };
+
+// export default useRandomCaptions;

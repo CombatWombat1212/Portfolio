@@ -1,7 +1,5 @@
 import toggle from "@/scripts/AnimationTools";
 import { getAdjacentStudy } from "@/scripts/GetStudy";
-import { useMountEffect } from "@/scripts/hooks/useMountEffect";
-import Link from "next/link";
 import { useRef } from "react";
 import Button from "../elements/Buttons";
 import Tag from "../elements/Tag";
@@ -9,10 +7,10 @@ import { Column } from "../sections/Columns";
 import Description from "../sections/Description";
 import Graphic from "../sections/graphic/Graphic";
 import Heading from "../sections/Heading";
-import useRandomCaptions from "@/scripts/hooks/useRandomCaptions";
 import { useResponsiveUtils } from "@/scripts/hooks/useBreakpoint";
 import { arrow_left, arrow_right } from "@/data/ICONS";
 import DLink from "../utilities/DynamicLink";
+import useRandomString from "@/scripts/hooks/useRandomString";
 
 const STUDY_HOVER_AFFECTED = ["next-study", "next-study--button", "graphic--effect__default", "graphic--effect__hover", "next-study--graphic", "tag"];
 
@@ -150,8 +148,7 @@ function NextStudies({ study }) {
   var adjacentStudies = [first, second];
 
   const captions = ["Check it", "Tell me", "Gimme", "I'll bite", "Ouu", "Do tell", "Go on..."];
-
-  const chosen = useRandomCaptions(captions, 2);
+  const chosen = useRandomString(captions, { localStorage: true, key: "next-study--caption", count: 2 });
 
   return (
     <div className="next-study--group">

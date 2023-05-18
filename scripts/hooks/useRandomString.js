@@ -1,60 +1,63 @@
 import { useState, useEffect, useRef } from "react";
 
-function useRandomString(strings, options = {}) {
-  const { localStorage: useLocalStorage, key = "useRandomString" } = options;
+function useRandomString(items, options = {}) {
+  const { localStorage: useLocalStorage, key = "useRandomString", count = 1 } = options;
 
-  const [randomString, setRandomString] = useState("");
+  const [randomItems, setRandomItems] = useState([]);
   const [initialized, setInitialized] = useState(false);
 
-  const availableStringsRef = useRef([]);
-  const stringsRef = useRef(strings);
+  const availableIndexesRef = useRef([]);
+  const itemsRef = useRef(items);
 
   useEffect(() => {
-    let savedStrings = [];
-    let savedRandomString = "";
+    let savedIndexes = [];
+    let savedRandomItemIndexes = [];
     if (useLocalStorage) {
       const savedData = JSON.parse(window.localStorage.getItem(key));
-      if (savedData && JSON.stringify(savedData.allStrings) === JSON.stringify(stringsRef.current)) {
-        savedStrings = savedData.availableStrings;
-        savedRandomString = savedData.randomString;
+      if (savedData && savedData.allItemsLength === itemsRef.current.length) {
+        savedIndexes = savedData.availableIndexes;
+        savedRandomItemIndexes = savedData.randomItemIndexes;
       }
     }
-    availableStringsRef.current = savedStrings.length > 0 ? savedStrings : [...stringsRef.current];
-    setRandomString(savedRandomString || "");
+    availableIndexesRef.current = savedIndexes.length > 0 ? savedIndexes : [...Array(itemsRef.current.length).keys()];
+    setRandomItems(savedRandomItemIndexes.map(index => itemsRef.current[index]));
     setInitialized(true);
   }, [useLocalStorage, key]);
 
   useEffect(() => {
-    const getRandomString = () => {
-      if (availableStringsRef.current.length === 0) {
-        availableStringsRef.current = [...stringsRef.current];
-        return "";
+    const getRandomItems = () => {
+      let selectedIndexes = [];
+      for(let i = 0; i < count; i++) {
+        if (availableIndexesRef.current.length === 0) {
+          availableIndexesRef.current = [...Array(itemsRef.current.length).keys()];
+        }
+
+        const randomIndex = Math.floor(Math.random() * availableIndexesRef.current.length);
+        const selectedIndex = availableIndexesRef.current[randomIndex];
+
+        selectedIndexes.push(selectedIndex);
+        availableIndexesRef.current = availableIndexesRef.current.filter((_, index) => index !== randomIndex);
       }
-
-      const randomIndex = Math.floor(Math.random() * availableStringsRef.current.length);
-      const selectedString = availableStringsRef.current[randomIndex];
-
-      availableStringsRef.current = availableStringsRef.current.filter((_, index) => index !== randomIndex);
-      return selectedString;
+      return selectedIndexes.map(index => itemsRef.current[index]);
     };
 
     if (initialized) {
-      const newRandomString = getRandomString();
-      setRandomString(newRandomString);
+      const newRandomItems = getRandomItems();
+      setRandomItems(newRandomItems);
       if (useLocalStorage) {
         window.localStorage.setItem(
           key,
           JSON.stringify({
-            allStrings: stringsRef.current,
-            availableStrings: availableStringsRef.current,
-            randomString: newRandomString,
+            allItemsLength: itemsRef.current.length,
+            availableIndexes: availableIndexesRef.current,
+            randomItemIndexes: newRandomItems.map(item => itemsRef.current.indexOf(item)),
           })
         );
       }
     }
-  }, [initialized, useLocalStorage, key]);
+  }, [initialized, useLocalStorage, key, count]);
 
-  return randomString;
+  return randomItems;
 }
 
 export default useRandomString;

@@ -11,14 +11,13 @@ import { PanelWrapper, PanelDesc, PanelImg, Panel, StudyPanel } from "@/componen
 import Mask from "/components/utilities/Mask";
 import { useEffect, useState } from "react";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
-import useRandomCaptions from "@/scripts/hooks/useRandomCaptions";
 import ResponsiveText from "@/components/global/ResponsiveText";
 import Nobr from "@/components/utilities/Nobr";
+import useRandomString from "@/scripts/hooks/useRandomString";
 
 function Index() {
   const captions = ["Have a look-see", "Take a gander", "Check it", "I must know", "Gimme", "Go on...", "Do tell", "I'm all ears"];
-
-  const chosen = useRandomCaptions(captions, CASE_STUDIES.length);
+  const chosen = useRandomString(captions, { localStorage: true, key: "studypanel--buttons", count: CASE_STUDIES.length });
 
   return (
     <>
@@ -44,15 +43,13 @@ function Index() {
         </Panel>
       </PanelWrapper>
 
-      {CASE_STUDIES.map((item) => {
-        var caption = chosen[CASE_STUDIES.indexOf(item)];
+      {CASE_STUDIES.map((item, i) => {
+        var caption = chosen[i];
         return <StudyPanel id={`Home--${item.id}`} key={item.key} variant="home" study={item} button={caption} />;
       })}
     </>
   );
 }
-
-
 
 function MainHeading() {
   const T = ({ children, className = "" }) => <span className={`studypanel--title ${className}`}>{children}</span>;
