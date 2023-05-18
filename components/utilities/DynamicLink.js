@@ -31,6 +31,10 @@ function DLink({ reference, color, onClick, ...props }) {
     if (onClick) {
       onClick(e);
       actualRef.current.blur();
+    } else {
+      setTimeout(() => {
+        actualRef.current.blur();
+      }, 200);
     }
   };
 
@@ -46,9 +50,7 @@ function DLink({ reference, color, onClick, ...props }) {
 
   const onClickHandler = (e) => {
     defaultOnClick(e);
-    if (isLink) {
-      delayedOnClick(e);
-    }
+    if (isLink) delayedOnClick(e);
   };
 
   const classes = `link ${color ? `link__${color}` : ""} ${props.className || ""}`;
@@ -76,3 +78,4 @@ function DLink({ reference, color, onClick, ...props }) {
 }
 
 export default DLink;
+

@@ -8,16 +8,21 @@ import navAnims from "./NavAnims";
 import useBodyClass from "@/scripts/hooks/useBodyClass";
 import { useIntercept } from "@/scripts/contexts/InterceptContext";
 import { useBreakpoint, useBreakpointUtils } from "@/scripts/hooks/useBreakpoint";
+import { Router, useRouter } from "next/router";
 
 function NavLink({ item, nav, className, type }) {
   const { setOpen } = nav;
   const [clicked, setClicked] = useState(false);
 
   const { intercept, setIntercept, routeChanging } = useIntercept();
+  const router = useRouter();
 
   const onClickHandler = () => {
-    // setOpen(false);
     setClicked(true);
+    console.log(item.link, router.pathname)
+    if(type == "menu" && item.link == router.pathname) {
+      setOpen(false);
+    }
   };
 
   useEffect(() => {
