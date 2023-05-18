@@ -9,11 +9,16 @@ import CASE_STUDIES from "@/data/CASE_STUDIES";
 //Components
 import { PanelWrapper, PanelDesc, PanelImg, Panel, StudyPanel } from "@/components/elements/Panel";
 import Mask from "/components/utilities/Mask";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import ResponsiveText from "@/components/global/ResponsiveText";
 import Nobr from "@/components/utilities/Nobr";
 import useRandomString from "@/scripts/hooks/useRandomString";
+import useElementWidth from "@/scripts/hooks/useElementWidth";
+import useListener from "@/scripts/hooks/useListener";
+import useHorizontalResize from "@/scripts/hooks/useHorizontalResize";
+import { splitPx } from "@/scripts/GlobalUtilities";
+import AnimatedText from "@/components/global/AnimText";
 
 function Index() {
   const captions = ["Have a look-see", "Take a gander", "Check it", "I must know", "Gimme", "Go on...", "Do tell", "I'm all ears"];
@@ -52,37 +57,45 @@ function Index() {
 }
 
 function MainHeading() {
-  const T = ({ children, className = "" }) => <span className={`studypanel--title ${className}`}>{children}</span>;
+  const TitleText = ({ children, className = "" }) => <span className={`studypanel--title ${className}`}>{children}</span>;
 
-  const TP = ({ children }) => <span className={`studypanel--title color--secondary`}>{children}</span>;
+  const TitleName = () => {
+    return (
+      <>
+        <TitleText className="color--secondary">Sam </TitleText>
+        <AnimatedText className="studypanel--title color--secondary" main="Giustizia" alternate="Juh-stee-zee-uh" />
+      </>
+    );
+  };
 
   return (
     <ResponsiveText>
       <xxl>
-        <T>Hi, I&apos;m </T>
-        <TP>Sam Giustizia</TP>
-        <T>
+        <TitleText>Hi, I&apos;m </TitleText>
+        <TitleName />
+        <TitleText>
           , <br /> how are you?
-        </T>
+        </TitleText>
       </xxl>
       <md>
-        <T>I&apos;m </T>
-        <TP>Sam Giustizia</TP>
-        <T>
+        <TitleText>I&apos;m </TitleText>
+        <TitleName />
+        <TitleText>
           , <br /> how are you?
-        </T>
+        </TitleText>
       </md>
       <sm>
-        <T>
+        <TitleText>
           Hi I&apos;m <br />
-        </T>
-        <TP>Sam Giustizia</TP>
-        <T>
+        </TitleText>
+        <TitleName />
+        <TitleText>
           , <br /> how are you?
-        </T>
+        </TitleText>
       </sm>
     </ResponsiveText>
   );
 }
+
 
 export default Index;

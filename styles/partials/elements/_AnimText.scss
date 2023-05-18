@@ -1,0 +1,30 @@
+.anim-text {
+
+
+  &--wrapper {
+    display: inline-block;
+    height: var(--font-height-h1);
+    transition:0.3s;
+  }
+  
+  height: var(--font-height-h1);
+  display: inline-block;
+  // transition:0.3s;
+
+
+  &__on {
+    transform: translateY(0);
+  }
+  &__off {
+    transform: translateY(calc(var(--font-height-h1) * -1));
+  }
+
+  &__main {
+  }
+  &__alt {
+  }
+
+  &--span{
+    white-space: nowrap;
+  }
+}

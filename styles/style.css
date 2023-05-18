@@ -320,6 +320,7 @@ span {
   --b-rad: 0.5rem;
   --b-rad_less: 0.3125rem;
   --font-height-body: Max(var(--font-size-body), var(--font-leading-body));
+  --font-height-h1: Max(var(--font-size-h1), var(--font-leading-h1));
   --sfh: 4.9406564584124654e-324;
 }
 
@@ -7019,6 +7020,29 @@ h3 + .studypanel--paragraph {
 .whatim--link:hover::before, .whatim--link:focus::before, .whatim--link.focus::before, .whatim--link.hover::before {
   --pad: -0.4rem;
   background-color: #074391;
+}
+
+.anim-text {
+  height: var(--font-height-h1);
+  display: inline-block;
+}
+
+.anim-text--wrapper {
+  display: inline-block;
+  height: var(--font-height-h1);
+  transition: 0.3s;
+}
+
+.anim-text__on {
+  transform: translateY(0);
+}
+
+.anim-text__off {
+  transform: translateY(calc(var(--font-height-h1) * -1));
+}
+
+.anim-text--span {
+  white-space: nowrap;
 }
 
 .graph--wrapper {

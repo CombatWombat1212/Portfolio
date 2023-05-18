@@ -1,20 +1,16 @@
 #Home {
-
   .studypanel {
+    @at-root #Home.studypanel--wrapper {
+      height: calc(100vh - var(--nav-height)) !important;
+      margin: 0 !important;
 
-    @at-root #Home.studypanel--wrapper{
-      height: calc(100vh - var(--nav-height))!important;
-      margin:0!important;
-
-      @include md-down{
-        height: calc(95vh - var(--nav-height))!important;
-        margin-bottom: -7.5rem!important;
+      @include md-down {
+        height: calc(95vh - var(--nav-height)) !important;
+        margin-bottom: -7.5rem !important;
       }
     }
 
-
     &--img {
-
       @include mx-auto;
       width: 9.5rem;
 
@@ -43,7 +39,6 @@
       @include sm-down {
         margin-top: Min(8vh, 4rem);
       }
-      
     }
 
     &--description {
@@ -82,5 +77,4 @@
       }
     }
   }
-
 }

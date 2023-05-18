@@ -8,6 +8,7 @@
   --b-rad_less: #{$b-rad_less};
 
   --font-height-body: Max(var(--font-size-body), var(--font-leading-body));
+  --font-height-h1: Max(var(--font-size-h1), var(--font-leading-h1));
   
   --sfh: 4.9406564584124654e-324;
 }
