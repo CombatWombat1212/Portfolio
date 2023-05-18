@@ -14,18 +14,67 @@
   background-color: $col-primary;
   pointer-events: all;
 
-
   transition: var(--transition);
 
-
   &--text {
-    top: 50%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    color: $col-background;
-    text-align: left;
 
+
+    top: 50%;
+    left: calc(50% - var(--scrollbar-width)/2);
+    position: absolute;
+    // transform: translate(-50%, -50%);
+    color: $col-background;
+    // text-align: left;
+    --bob-distance: 0.25rem;
+    animation: bobbing 3s infinite ease-in-out;
     opacity: 1;
+    text-align: center;
+    width: calc(var(--site-max-width) - var(--scrollbar-width));
+  }
+
+  &--ellipse {
+    display: inline-flex;
+    width: 1.5rem;
+  }
+
+  &--graphic {
+    // max-width: calc(100vw - 2.35rem);
+    max-width: calc(100vw - 4.35rem);
+    width: 12rem;
+    display: flex;
+    @include b-rad;
+    overflow: hidden;
+    * {
+      object-fit: contain;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .video--background{
+      display:none;
+    }
   }
 }
+
+@keyframes bobbing {
+  0%,
+  100% {
+    // transform: translateY(var(--bob-distance));
+    transform: translate(-50%, calc(-50% + var(--bob-distance)));
+  }
+
+  50% {
+    // transform: translateY(calc(var(--bob-distance) * -1));
+    transform: translate(-50%, calc(-50% + calc(var(--bob-distance) * -1)));
+  }
+}
+
+// @keyframes bobbing {
+//   0%, 100%{
+//     transform: translateY(var(--bob-distance));
+//   }
+
+//   50% {
+//     transform: translateY(calc(var(--bob-distance) * -1));
+//   }
+// }

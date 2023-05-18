@@ -1237,12 +1237,50 @@ body {
 
 .loading-screen--text {
   top: 50%;
-  left: 50%;
+  left: calc(50% - var(--scrollbar-width)/2);
   position: absolute;
-  transform: translate(-50%, -50%);
   color: #F3F3F7;
-  text-align: left;
+  --bob-distance: 0.25rem;
+  animation: bobbing 3s infinite ease-in-out;
   opacity: 1;
+  text-align: center;
+  width: calc(var(--site-max-width) - var(--scrollbar-width));
+}
+
+.loading-screen--ellipse {
+  display: inline-flex;
+  width: 1.5rem;
+}
+
+.loading-screen--graphic {
+  max-width: calc(100vw - 4.35rem);
+  width: 12rem;
+  display: flex;
+  border-radius: var(--b-rad);
+  -webkit-border-radius: var(--b-rad);
+  -moz-border-radius: var(--b-rad);
+  -khtml-border-radius: var(--b-rad);
+  overflow: hidden;
+}
+
+.loading-screen--graphic * {
+  object-fit: contain;
+  max-width: 100%;
+  height: auto;
+}
+
+.loading-screen--graphic .video--background {
+  display: none;
+}
+
+@keyframes bobbing {
+  0%,
+  100% {
+    transform: translate(-50%, calc(-50% + var(--bob-distance)));
+  }
+  50% {
+    transform: translate(-50%, calc(-50% + calc(var(--bob-distance) * -1)));
+  }
 }
 
 .studypanel {
@@ -2149,7 +2187,6 @@ h3 + .studypanel--paragraph {
 }
 
 .nav--drop-item__inactive {
-  pointer-events: none;
   transition-delay: 0s;
 }
 
@@ -2223,7 +2260,7 @@ h3 + .studypanel--paragraph {
   font-family: "Gira Sans";
   font-size: var(--font-size-h2);
   line-height: var(--font-leading-h2);
-  font-weight: 500;
+  font-weight: 400;
   color: #074391;
   transition: 0.2s;
   position: relative;

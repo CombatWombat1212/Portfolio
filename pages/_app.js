@@ -9,7 +9,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { getStudy } from "@/scripts/GetStudy";
 import usePageTransition from "@/scripts/hooks/usePageTransition";
-import useEllipse from "@/scripts/hooks/useEllipse";
 import Footer from "@/components/navigation/Footer";
 import LoadingScreen from "@/components/navigation/LoadingScreen";
 import useSecret from "@/scripts/hooks/useSecret";
@@ -136,8 +135,6 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     console.log(bp);
   }, [bp]);
-
-
 
 
 

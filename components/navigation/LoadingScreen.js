@@ -6,30 +6,17 @@ import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import { AnimatePresence, motion } from "framer-motion";
 import useRandomString from "@/scripts/hooks/useRandomString";
 import { useIntercept } from "@/scripts/contexts/InterceptContext";
+import useEllipse, { Ellipse } from "@/scripts/hooks/useEllipse";
+import { Graphic } from "../sections/Sections";
+import { KOALAKO_IMGS } from "@/data/KOALAKO_IMGS";
+import { LOADING_IMGS } from "@/data/LOADING_IMGS";
+import useScrollbarWidth from "@/scripts/hooks/useScrollbarSize";
 
-const loadingMessages = [`test 1`, <i>test 2</i>, `test 3`, `test 4`];
-// const loadingMessages = [
-//   `hol up...`,
-//   `<i>*elevator music*</i>`,
-//   `catch the game last night?`,
-//   `lemme grab that for ya`,
+// const loadingMessages = [`test 1`, <i>test 2</i>, `test 3`, `test 4`];
+{/* <i>*boots n cats n boots n cats*</i>, */}
+
 //   `Ensure your Wii remote strap is tightly secured`,
-//   `Wanna do something after this?`,
-//   `We should do this more often`,
-//   `<i>shawty like a melody</i>`,
-//   `sicko mode <i>bwaaaa</i>`,
-//   `right this way`,
-//   `<i>*utz utz utz*</i>`,
-//   `<i>*boots n cats n boots n cats*</i>`,
-//   `lemme check the back...`,
-//   `who turned off the lights?`,
-//   `<i>*dial-up noises*</i>`,
-//   `bleep bloop`,
-//   `where did i put that...`,
-//   `ouu good choice`,
-//   `niceee`,
-//   `<i>*crickets*</i>`,
-// ];
+
 
 const variants = {
   initial: { clipPath: "polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%)" },
@@ -43,10 +30,9 @@ function LoadingScreen() {
   const { intercept, setIntercept, routeChanging } = useIntercept();
 
   const { loading } = useResponsive();
-  // const loadingRef = useRef(loading);
   const loadingScreen = useRef(null);
 
-  const router = useRouter();
+  const scrollbarWidth = useScrollbarWidth();
 
   const routeChangeStart = () => {
     document.documentElement.classList.add("scrollauto");
@@ -64,10 +50,9 @@ function LoadingScreen() {
   };
 
   const routeChangeEndHandler = () => {
-    console.log('end')
     if (!loading) {
       // setTimeout(() => {
-        routeChangeEnd();
+      routeChangeEnd();
       // }, (LOADING_DURATION * 1000)/4);
     }
   };
@@ -77,25 +62,12 @@ function LoadingScreen() {
     else routeChangeEndHandler();
   }, [routeChanging]);
 
-
-
-  // useEffect(() => {
-  //   router.events.on("routeChangeStart", routeChangeStartHandler);
-  //   router.events.on("routeChangeComplete", routeChangeEndHandler);
-  //   router.events.on("routeChangeError", routeChangeEndHandler);
-
-  //   return () => {
-  //     router.events.off("routeChangeStart", routeChangeStartHandler);
-  //     router.events.off("routeChangeComplete", routeChangeEndHandler);
-  //     router.events.off("routeChangeError", routeChangeEndHandler);
-  //   };
-  // }, [router.events]);
-
   return (
     <div
       className="loading-screen--wrapper"
       style={{
         "--transition": `${LOADING_DURATION}s`,
+        "--scrollbar-width": `${scrollbarWidth}px`,
       }}>
       <AnimatePresence>
         {intercept && (
@@ -119,6 +91,47 @@ function LoadingScreen() {
 }
 
 function Text() {
+
+  const Dot = () => {
+    return <div className="loading-screen--ellipse"><Ellipse
+    min={0}
+    /></div>
+  }
+
+  const Img = ({img}) => {
+    return <Graphic className="loading-screen--graphic" img={img}
+    controls={false} type="video" autoplay={"scroll"} loop={true} muted={true}
+    />
+  }
+  
+  const loadingMessages = [
+    <>hol up<Dot /></>,
+    <>just one sec<Dot /></>,
+    <i>*elevator music*</i>,
+    `catch the game last night?`,
+    `lemme grab that for ya`,
+    `tighten your Wii remote strap`,
+    `wanna do something after this?`,
+    `we should do this more often`,
+    <i>shawty like a melody</i>,
+    <>sicko mode <i>bwaaaa</i></>,
+    `right this way`,
+    `no you hang up first`,
+    <i>*utz utz utz*</i>,
+    <>lemme check the back<Dot /></>,
+    `who turned off the lights?`,
+    <i>*dial-up noises*</i>,
+    `bleep bloop`,
+    <>where did i put that<Dot /></>,
+    `ouu good choice`,
+    `niceee`,
+    <i>*crickets*</i>,
+    <>pondering my orb<Dot /></>,
+    `:-)`,
+    // <Img img={LOADING_IMGS.loading_snail} />,
+  ];
+  
+
   const text = useRandomString(loadingMessages, { localStorage: true, key: "loading-screen--text" });
   return <h3 className={`loading-screen--text`}>{text}</h3>;
 }

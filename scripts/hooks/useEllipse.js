@@ -1,8 +1,15 @@
-// useEllipse.js
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-const useEllipse = (duration = 500, maxLength = 3, minLength = 1) => {
-  const [ellipse, setEllipse] = useState('.'.repeat(maxLength));
+const DEFAULT_OPTIONS = {
+  duration: 500,
+  min: 1,
+  max: 3,
+  character: ".",
+};
+
+const useEllipse = (options = {}) => {
+  const { duration, min, max, character } = { ...DEFAULT_OPTIONS, ...options };
+  const [ellipse, setEllipse] = useState(character.repeat(max));
   const [direction, setDirection] = useState(-1);
 
   useEffect(() => {
@@ -10,24 +17,31 @@ const useEllipse = (duration = 500, maxLength = 3, minLength = 1) => {
       setEllipse((prevEllipse) => {
         const newLength = prevEllipse.length + direction;
 
-        if (newLength <= minLength) {
+        if (newLength <= min) {
           setDirection(1);
-          return '.'.repeat(minLength);
+          return character.repeat(min);
         }
 
-        if (newLength >= maxLength) {
+        if (newLength >= max) {
           setDirection(-1);
-          return '.'.repeat(maxLength);
+          return character.repeat(max);
         }
 
-        return '.'.repeat(newLength);
+        return character.repeat(newLength);
       });
     }, duration);
 
     return () => clearInterval(interval);
-  }, [duration, maxLength, minLength, direction]);
+  }, [duration, max, min, direction, character]);
 
   return ellipse;
 };
 
+function Ellipse(props = {}) {
+  const { duration, min, max, character } = { ...DEFAULT_OPTIONS, ...props };
+  const ellipse = useEllipse({ duration, min, max, character });
+  return <>{ellipse}</>;
+}
+
 export default useEllipse;
+export { Ellipse };

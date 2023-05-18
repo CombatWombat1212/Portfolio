@@ -1,21 +1,34 @@
 import { useRouter } from "next/router";
-import React, { createContext, use, useContext, useEffect, useState } from "react";
+import React, { createContext, use, useContext, useEffect, useRef, useState } from "react";
 
 const InterceptContext = createContext();
 
+
+const DEFAULT_WAIT = 350;
+// const DEFAULT_WAIT = 100000;
 export const InterceptProvider = ({ children }) => {
   const [intercept, setIntercept] = useState(false);
   const [routeChanging, setRouteChanging] = useState(false);
+  const routeChangeStartTimestamp = useRef(null);
 
   const routeChangeStartHandler = () => {
+    routeChangeStartTimestamp.current = Date.now();
     setRouteChanging(true);
   };
 
   const routeChangeEndHandler = () => {
-    setRouteChanging(false);
-    setIntercept(false);
-  };
+    const duration = Date.now() - routeChangeStartTimestamp.current;
 
+    if (duration < DEFAULT_WAIT) {
+      setTimeout(() => {
+        setRouteChanging(false);
+        setIntercept(false);
+      }, DEFAULT_WAIT - duration);
+    } else {
+      setRouteChanging(false);
+      setIntercept(false);
+    }
+  };
 
   const router = useRouter();
   useEffect(() => {

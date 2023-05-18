@@ -9,6 +9,7 @@ import ProsCons, { Con, Pro } from "@/components/global/ProsCons";
 import { STUDY_MADE } from "@/data/CASE_STUDIES";
 import { useEffect } from "react";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
+import Nobr from "@/components/utilities/Nobr";
 
 function MADE({ pop }) {
   const study = STUDY_MADE;
@@ -25,8 +26,8 @@ function MADE({ pop }) {
           <Section id="Overview--Client" type="columns" titled>
             <Title>Client</Title>
             <Heading>
-              With a brand rooted in personalization, <br />
-              MADE aimed to bring their bespoke offerings online
+              With a brand rooted in personalization, <br className="d-md-none" />
+              <Nobr>MADE aimed</Nobr> to bring their bespoke <Nobr>offerings online</Nobr>
             </Heading>
 
             <Column>
