@@ -6,6 +6,35 @@ import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import { AnimatePresence, motion } from "framer-motion";
 import useRandomString from "@/scripts/hooks/useRandomString";
 
+const loadingMessages = [
+  `test 1`,
+  <i>test 2</i>,
+  `test 3`,
+  `test 4`,
+];
+// const loadingMessages = [
+//   `hol up...`,
+//   `<i>*elevator music*</i>`,
+//   `catch the game last night?`,
+//   `lemme grab that for ya`,
+//   `Ensure your Wii remote strap is tightly secured`,
+//   `Wanna do something after this?`,
+//   `We should do this more often`,
+//   `<i>shawty like a melody</i>`,
+//   `sicko mode <i>bwaaaa</i>`,
+//   `right this way`,
+//   `<i>*utz utz utz*</i>`,
+//   `<i>*boots n cats n boots n cats*</i>`,
+//   `lemme check the back...`,
+//   `who turned off the lights?`,
+//   `<i>*dial-up noises*</i>`,
+//   `bleep bloop`,
+//   `where did i put that...`,
+//   `ouu good choice`,
+//   `niceee`,
+//   `<i>*crickets*</i>`,
+// ];
+
 const variants = {
   initial: { clipPath: "polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%)" },
   animate: { clipPath: "polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%)" },
@@ -13,6 +42,7 @@ const variants = {
 };
 
 const LOADING_DURATION = 0.3;
+const DELAY = 0.2;
 
 function LoadingScreen() {
   const [show, setShow] = useState(false);
@@ -26,7 +56,7 @@ function LoadingScreen() {
   const routeChangeStart = () => {
     document.documentElement.classList.add("scrollauto");
     document.body.classList.add("noscroll");
-    setTimeout(() => window.scroll(0, 0), 0);
+    setTimeout(() => window.scroll(0, 0), LOADING_DURATION * 1000 * 1.15);
   };
 
   const routeChangeEnd = () => {
@@ -36,20 +66,18 @@ function LoadingScreen() {
   };
 
   const routeChangeStartHandler = (url) => {
-    if (url === "/#Home") {
-      router.push("/");
-    }
+    // if (url === "/#Home") {
+    //   router.push("/");
+    // }
     setShow(true);
-    setTimeout(() => {
-      routeChangeStart();
-    }, (LOADING_DURATION * 1000)*1.15);
+    routeChangeStart();
   };
 
   const routeChangeEndHandler = () => {
     if (!loadingRef.current) {
       setTimeout(() => {
         routeChangeEnd();
-      }, (LOADING_DURATION * 1000)*1.15);
+      }, LOADING_DURATION * 1000 * 1.15 + DELAY * 1000);
     }
   };
 
@@ -68,11 +96,6 @@ function LoadingScreen() {
       router.events.off("routeChangeError", routeChangeEndHandler);
     };
   }, [router.events]);
-
-
-
-
-
 
   return (
     <div
@@ -101,25 +124,10 @@ function LoadingScreen() {
   );
 }
 
+function Text() {
+  const text = useRandomString(loadingMessages, { localStorage: true, key: "loading-screen--text" });
 
-
-function Text(){
-
-  const captions = [
-    "Room for one more?",
-    "Case studies, anyone?",
-    "Lets keep the good times rollin'",
-    "Another one.",
-    "There's more where that came from",
-    "Get 'em while they're hot",
-    "We're just gettin' started",
-  ];
-
-  const nextStudyTitle = useRandomString(captions);
-
-
-
-  return(<h3 className={`loading-screen--text`}>{nextStudyTitle}</h3>)
+  return <h3 className={`loading-screen--text`} dangerouslySetInnerHTML={{ __html: text }} />;
 }
 
 export default LoadingScreen;

@@ -26,6 +26,7 @@ function ResponsiveText({ data: dataProp, tag = "span", children, className = ""
 
 function ResFrag({ data }) {
   const { bp, isBp, loading } = useResponsive();
+  console.log(data);
   const cascadeData = getCascadeData(data);
   const text = !(!isBp(bp) || loading) ? cascadeData[bp] : cascadeData["xxl"];
   return <>{text}</>;
@@ -55,7 +56,7 @@ function getCascadeData(data) {
 function getDetails(dataProp, tag) {
   const initialIs = getIs(dataProp, tag);
 
-  var data = typeof dataProp === "object" ? dataProp : {};
+  var data = dataProp;
   var keys = typeof dataProp === "object" ? Object.keys(dataProp) : [];
 
   if (initialIs.jsx) {

@@ -53,7 +53,7 @@ function MakeRight({ pop }) {
           <Section id="Overview--Challenge" type="overview">
             <Title>Challenge</Title>
             <Heading>
-              Cost, and technical knowledge <br className="d-lg-none" />
+              Cost, and technical knowledge <br className="d-xl-none" />
               stand in the way <br className="d-lg-none" /> of mass adoption
             </Heading>
             <Description>

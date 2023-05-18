@@ -12,6 +12,7 @@ import Heading from "../sections/Heading";
 import useRandomCaptions from "@/scripts/hooks/useRandomCaptions";
 import { useResponsiveUtils } from "@/scripts/hooks/useBreakpoint";
 import { arrow_left, arrow_right } from "@/data/ICONS";
+import DLink from "../utilities/DynamicLink";
 
 const STUDY_HOVER_AFFECTED = ["next-study", "next-study--button", "graphic--effect__default", "graphic--effect__hover", "next-study--graphic", "tag"];
 
@@ -106,8 +107,8 @@ function Study({ study, button, index }) {
   })();
 
   return (
-    <Link
-      ref={reference}
+    <DLink
+      reference={reference}
       className="next-study"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -138,7 +139,7 @@ function Study({ study, button, index }) {
           {btnText}
         </Button>
       </div>
-    </Link>
+    </DLink>
   );
 }
 

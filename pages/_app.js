@@ -157,26 +157,3 @@ export default function App({ Component, pageProps }) {
   );
 }
 
-// const loadingMessages = [
-//   `hol up...`,
-//   `<i>*elevator music*</i>`,
-//   `catch the game last night?`,
-//   `lemme grab that for ya`,
-//   `Ensure your Wii remote strap is tightly secured`,
-//   `Wanna do something after this?`,
-//   `We should do this more often`,
-//   `<i>shawty like a melody</i>`,
-//   `sicko mode <i>bwaaaa</i>`,
-//   `right this way`,
-//   `<i>*utz utz utz*</i>`,
-//   `<i>*boots n cats n boots n cats*</i>`,
-//   `lemme check the back...`,
-//   `who turned off the lights?`,
-//   `<i>*dial-up noises*</i>`,
-//   `bleep bloop`,
-//   `where did i put that...`,
-//   `ouu good choice`,
-//   `niceee`,
-//   `<i>*crickets*</i>`,
-// ];
-
