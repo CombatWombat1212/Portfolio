@@ -126,7 +126,6 @@ function LoadingScreen() {
 
 function Text() {
   const text = useRandomString(loadingMessages, { localStorage: true, key: "loading-screen--text" });
-
   return <h3 className={`loading-screen--text`}>{text}</h3>;
 }
 

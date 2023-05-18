@@ -26,7 +26,6 @@ function ResponsiveText({ data: dataProp, tag = "span", children, className = ""
 
 function ResFrag({ data }) {
   const { bp, isBp, loading } = useResponsive();
-  console.log(data);
   const cascadeData = getCascadeData(data);
   const text = !(!isBp(bp) || loading) ? cascadeData[bp] : cascadeData["xxl"];
   return <>{text}</>;
