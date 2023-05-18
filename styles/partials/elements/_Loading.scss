@@ -12,19 +12,10 @@
   width: 100%;
   height: 100%;
   background-color: $col-primary;
+  pointer-events: all;
 
 
   transition: var(--transition);
-
-  &__on{
-    margin-left: 0rem;
-  }
-  &__tran{
-    margin-left:0rem;
-  }
-  &__off{
-    margin-left: 100rem;
-  }
 
 
   &--text {

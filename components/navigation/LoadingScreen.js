@@ -5,13 +5,9 @@ import { useRouter } from "next/router";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import { AnimatePresence, motion } from "framer-motion";
 import useRandomString from "@/scripts/hooks/useRandomString";
+import { useIntercept } from "@/scripts/contexts/InterceptContext";
 
-const loadingMessages = [
-  `test 1`,
-  <i>test 2</i>,
-  `test 3`,
-  `test 4`,
-];
+const loadingMessages = [`test 1`, <i>test 2</i>, `test 3`, `test 4`];
 // const loadingMessages = [
 //   `hol up...`,
 //   `<i>*elevator music*</i>`,
@@ -42,13 +38,12 @@ const variants = {
 };
 
 const LOADING_DURATION = 0.3;
-const DELAY = 0.2;
 
 function LoadingScreen() {
-  const [show, setShow] = useState(false);
+  const { intercept, setIntercept, routeChanging } = useIntercept();
 
   const { loading } = useResponsive();
-  const loadingRef = useRef(loading);
+  // const loadingRef = useRef(loading);
   const loadingScreen = useRef(null);
 
   const router = useRouter();
@@ -56,46 +51,45 @@ function LoadingScreen() {
   const routeChangeStart = () => {
     document.documentElement.classList.add("scrollauto");
     document.body.classList.add("noscroll");
-    setTimeout(() => window.scroll(0, 0), LOADING_DURATION * 1000 * 1.15);
+    setTimeout(() => window.scroll(0, 0), 0);
   };
 
   const routeChangeEnd = () => {
-    setShow(false);
     document.documentElement.classList.remove("scrollauto");
     document.body.classList.remove("noscroll");
   };
 
   const routeChangeStartHandler = (url) => {
-    // if (url === "/#Home") {
-    //   router.push("/");
-    // }
-    setShow(true);
     routeChangeStart();
   };
 
   const routeChangeEndHandler = () => {
-    if (!loadingRef.current) {
-      setTimeout(() => {
+    console.log('end')
+    if (!loading) {
+      // setTimeout(() => {
         routeChangeEnd();
-      }, LOADING_DURATION * 1000 * 1.15 + DELAY * 1000);
+      // }, (LOADING_DURATION * 1000)/4);
     }
   };
 
   useEffect(() => {
-    loadingRef.current = loading;
-  }, [loading]);
+    if (routeChanging) routeChangeStartHandler();
+    else routeChangeEndHandler();
+  }, [routeChanging]);
 
-  useEffect(() => {
-    router.events.on("routeChangeStart", routeChangeStartHandler);
-    router.events.on("routeChangeComplete", routeChangeEndHandler);
-    router.events.on("routeChangeError", routeChangeEndHandler);
 
-    return () => {
-      router.events.off("routeChangeStart", routeChangeStartHandler);
-      router.events.off("routeChangeComplete", routeChangeEndHandler);
-      router.events.off("routeChangeError", routeChangeEndHandler);
-    };
-  }, [router.events]);
+
+  // useEffect(() => {
+  //   router.events.on("routeChangeStart", routeChangeStartHandler);
+  //   router.events.on("routeChangeComplete", routeChangeEndHandler);
+  //   router.events.on("routeChangeError", routeChangeEndHandler);
+
+  //   return () => {
+  //     router.events.off("routeChangeStart", routeChangeStartHandler);
+  //     router.events.off("routeChangeComplete", routeChangeEndHandler);
+  //     router.events.off("routeChangeError", routeChangeEndHandler);
+  //   };
+  // }, [router.events]);
 
   return (
     <div
@@ -104,7 +98,7 @@ function LoadingScreen() {
         "--transition": `${LOADING_DURATION}s`,
       }}>
       <AnimatePresence>
-        {show && (
+        {intercept && (
           <motion.div
             className={`loading-screen`}
             initial="initial"
@@ -130,6 +124,8 @@ function Text() {
 }
 
 export default LoadingScreen;
+
+export { LOADING_DURATION };
 
 // const ellipse = useEllipse(450, 3, 1);
 

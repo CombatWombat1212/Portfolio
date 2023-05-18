@@ -1221,6 +1221,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: #074391;
+  pointer-events: all;
   transition: var(--transition);
 }
 
@@ -1232,18 +1233,6 @@ body {
   height: 100%;
   z-index: 10000;
   pointer-events: none;
-}
-
-.loading-screen__on {
-  margin-left: 0rem;
-}
-
-.loading-screen__tran {
-  margin-left: 0rem;
-}
-
-.loading-screen__off {
-  margin-left: 100rem;
 }
 
 .loading-screen--text {

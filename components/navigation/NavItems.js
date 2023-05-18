@@ -6,25 +6,30 @@ import { Graphic } from "../sections/Sections";
 import AnimPres from "../global/AnimPres";
 import navAnims from "./NavAnims";
 import useBodyClass from "@/scripts/hooks/useBodyClass";
+import { useIntercept } from "@/scripts/contexts/InterceptContext";
 import { useBreakpoint, useBreakpointUtils } from "@/scripts/hooks/useBreakpoint";
 
 function NavLink({ item, nav, className, type }) {
   const { setOpen } = nav;
+  const [clicked, setClicked] = useState(false);
 
+  const { intercept, setIntercept, routeChanging } = useIntercept();
 
   const onClickHandler = () => {
-    setOpen(false);
-  }
+    // setOpen(false);
+    setClicked(true);
+  };
 
+  useEffect(() => {
+    if (clicked && routeChanging) {
+      setOpen(false);
+      setClicked(false);
+    }
+  }, [clicked, routeChanging]);
 
   function renderItem() {
     return (
-      <DLink
-        className={`nav--item ${className ? className : ""}`}
-        href={item.link}
-        aria-label={item.ariaLabel}
-        onClick={onClickHandler}
-        >
+      <DLink className={`nav--item ${className ? className : ""}`} href={item.link} aria-label={item.ariaLabel} onClick={onClickHandler}>
         {item.text}
       </DLink>
     );
@@ -111,9 +116,9 @@ function Dropdown({ item }) {
 
   return (
     <>
-      <a className={`nav--item nav--item__drop ${drop.active ? "hover" : ""}`} aria-label={item.ariaLabel} ref={drop.btn.ref} tabIndex={0}>
+      <DLink className={`nav--item nav--item__drop ${drop.active ? "hover" : ""}`} aria-label={item.ariaLabel} reference={drop.btn.ref} tabIndex={0}>
         {item.text}
-      </a>
+      </DLink>
 
       <div
         className={`nav--dropdown ${drop.active ? "nav--dropdown__active" : "nav--dropdown__inactive"}`}
@@ -133,14 +138,10 @@ function DropdownItem({ study, drop }) {
   const ref = useRef(null);
   const hovered = useHoverAndFocus(ref);
 
-
-
-  // TODO: Once you've implimented loading screens, make it so that the dropdown only dissapears once the loading screen is present
+  // // TODO: Once you've implimented loading screens, make it so that the dropdown only dissapears once the loading screen is present
   const onClickHandler = () => {
-    drop.setActive(false);
-  }
-
-
+    // drop.setActive(false);
+  };
 
   useEffect(() => {
     drop.setItems((prev) => {
@@ -159,8 +160,7 @@ function DropdownItem({ study, drop }) {
         "--dropdown-index": `${study.index}`,
         "--dropdown-delay": `${(study.index + 1) * 0.3}s`,
       }}
-        
-      >
+      onClick={onClickHandler}>
       {study.name}
     </DLink>
   );
@@ -197,14 +197,13 @@ function NavMenuButton({ nav }) {
     classes[key] = classes[key].join(" ");
   });
 
-
   const menuBtnRef = useRef(null);
   const [focused, setFocused] = useState(false);
 
   const menuOnClickHandler = () => {
     setOpen(!open);
-      setFocused(false);
-  }
+    setFocused(false);
+  };
 
   useEffect(() => {
     if (!focused && menuBtnRef.current) {
@@ -212,21 +211,17 @@ function NavMenuButton({ nav }) {
     }
   }, [focused]);
   const handleFocus = () => {
-  setFocused(true);
-};
-
-
+    setFocused(true);
+  };
 
   return (
     <>
-      <DLink className={`nav--item nav--menu-btn ${classes["menu-btn"]}`}
-      
-      reference={menuBtnRef}  
-      onClick={menuOnClickHandler}
-      onFocus={handleFocus}
-
-      
-      aria-label="Open Menu">
+      <DLink
+        className={`nav--item nav--menu-btn ${classes["menu-btn"]}`}
+        reference={menuBtnRef}
+        onClick={menuOnClickHandler}
+        onFocus={handleFocus}
+        aria-label="Open Menu">
         <Graphic
           type="mask"
           className={`nav--menu-icon ${classes["menu-icon"]}`}

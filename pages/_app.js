@@ -17,7 +17,8 @@ import useRandomString from "@/scripts/hooks/useRandomString";
 import { useBreakpoint, useResponsiveUtils } from "@/scripts/hooks/useBreakpoint";
 import { splitPx } from "@/scripts/GlobalUtilities";
 import useScreenWidth from "@/scripts/hooks/useScreenWidth";
-import { ResponsiveProvider } from "@/scripts/contexts/ResponsiveContext";
+import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
+import Providers from "@/scripts/contexts/Providers";
 
 // const style =
 // `font-family: "Gira Sans"; font-size: 1.4375rem;` +
@@ -144,7 +145,7 @@ export default function App({ Component, pageProps }) {
 
 
   return (
-    <ResponsiveProvider>
+    <Providers>
       <LoadingScreen />
       <div className="site">
         <Layout>
@@ -153,7 +154,7 @@ export default function App({ Component, pageProps }) {
           <Footer />
         </Layout>
       </div>
-    </ResponsiveProvider>
+    </Providers>
   );
 }
 
