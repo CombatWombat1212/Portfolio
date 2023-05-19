@@ -2186,7 +2186,7 @@ h3 + .studypanel--paragraph {
   margin-top: var(--nav-height);
   display: flex;
   flex-direction: column;
-  transition: 0.5s;
+  transition: 0.45s;
 }
 
 .nav--dropdown__active {

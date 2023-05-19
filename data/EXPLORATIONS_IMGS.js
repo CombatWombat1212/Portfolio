@@ -4,7 +4,7 @@ const EXPLORATIONS_IMGS = processImages(
   {
     modern_room: {
       name: "modern_room",
-      src: "./assets/images/case_studies/explorations/3d_design/modern_room.jpg",
+      src: "./assets/images/explorations/3d_design/modern_room.jpg",
       alt: "Photorealistic 3d rendering of a modern room",
       width: 2560,
       height: 1440,
@@ -18,7 +18,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     appa: {
       name: "appa",
-      src: "./assets/images/case_studies/explorations/3d_design/appa.png",
+      src: "./assets/images/explorations/3d_design/appa.png",
       alt: "Low poly rendering of Appa from Avatar: The Last Airbender",
       width: 2000,
       height: 2000,
@@ -32,7 +32,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     cinema: {
       name: "cinema",
-      src: "./assets/images/case_studies/explorations/3d_design/cinema.png",
+      src: "./assets/images/explorations/3d_design/cinema.png",
       alt: "Photorealistic 3d rendering of the outside of a cinema",
       width: 1303,
       height: 1512,
@@ -46,7 +46,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     finn: {
       name: "finn",
-      src: "./assets/images/case_studies/explorations/3d_design/finn.png",
+      src: "./assets/images/explorations/3d_design/finn.png",
       alt: "Low poly rendering of Finn from Adventure Time",
       width: 1080,
       height: 1080,
@@ -60,7 +60,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     // headphones: {
     //   name: "headphones",
-    //   src: "./assets/images/case_studies/explorations/3d_design/headphones.png",
+    //   src: "./assets/images/explorations/3d_design/headphones.png",
     //   alt: "A photorealistic rendering of a pair of headphones hanging on a wall",
     //   width: 2000,
     //   height: 2000,
@@ -70,7 +70,7 @@ const EXPLORATIONS_IMGS = processImages(
     // },
     pops: {
       name: "pops",
-      src: "./assets/images/case_studies/explorations/3d_design/pops.png",
+      src: "./assets/images/explorations/3d_design/pops.png",
       alt: "Low poly rendering of Pops from Regular Show",
       width: 1920,
       height: 1080,
@@ -84,7 +84,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     submarine: {
       name: "submarine",
-      src: "./assets/images/case_studies/explorations/3d_design/submarine.png",
+      src: "./assets/images/explorations/3d_design/submarine.png",
       alt: "A photorealistic of the interior of a submarine",
       width: 1800,
       height: 1100,
@@ -98,7 +98,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     to_alleyway_thumbnail: {
       name: "to_alleyway_thumbnail",
-      src: "./assets/images/case_studies/explorations/3d_design/to_alleyway/to_alleyway_thumbnail.png",
+      src: "./assets/images/explorations/3d_design/to_alleyway/to_alleyway_thumbnail.png",
       alt: "Thumbnail for a video of a garage door opening to reveal a pair of eyes underneath",
       width: 1920,
       height: 1200,
@@ -112,7 +112,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     to_alleyway_video: {
       name: "to_alleyway_video",
-      src: "./assets/images/case_studies/explorations/3d_design/to_alleyway/to_alleyway_video.mp4",
+      src: "./assets/images/explorations/3d_design/to_alleyway/to_alleyway_video.mp4",
       alt: "An animated video of a garage door opening to reveal a pair of eyes underneath",
       width: 1920,
       height: 1200,
@@ -125,7 +125,7 @@ const EXPLORATIONS_IMGS = processImages(
 
     jabbar_and_co_foundation_01: {
       name: "jabbar_and_co_foundation_01",
-      src: "./assets/images/case_studies/explorations/3d_design/jabbar_and_co/jabbar_and_co_foundation_01.png",
+      src: "./assets/images/explorations/3d_design/jabbar_and_co/jabbar_and_co_foundation_01.png",
       alt: "A bottle of makeup foundation in a pinkish shade",
       width: 1024,
       height: 1270,
@@ -141,7 +141,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     jabbar_and_co_foundation_02: {
       name: "jabbar_and_co_foundation_02",
-      src: "./assets/images/case_studies/explorations/3d_design/jabbar_and_co/jabbar_and_co_foundation_02.png",
+      src: "./assets/images/explorations/3d_design/jabbar_and_co/jabbar_and_co_foundation_02.png",
       alt: "A bottle of makeup foundation in a beige shade",
       width: 1024,
       height: 1270,
@@ -157,7 +157,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     jabbar_and_co_foundation_03: {
       name: "jabbar_and_co_foundation_03",
-      src: "./assets/images/case_studies/explorations/3d_design/jabbar_and_co/jabbar_and_co_foundation_03.png",
+      src: "./assets/images/explorations/3d_design/jabbar_and_co/jabbar_and_co_foundation_03.png",
       alt: "A bottle of makeup foundation in a dark brown shade",
       width: 1024,
       height: 1270,
@@ -173,7 +173,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     jabbar_and_co_foundation_video_01: {
       name: "limitations_bottle",
-      src: "./assets/images/case_studies/made/limitations/limitations_bottle.mp4",
+      src: "./assets/images/made/limitations/limitations_bottle.mp4",
       alt: "A 3D rendering of a foundation makeup bottle product shot.  The bottle's label reads 'Jabbar & Co.'. The bottle cycles through a series of different skin tone colors to demonstrate how the previously described system was scaleable and was able to be reused in a later project of mine.",
       disciplines: ["3D Design"],
       tools: ["Blender", "Photoshop", "Adobe Dimension", "Adobe Illustrator"],
@@ -187,7 +187,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     jabbar_and_co_products_01: {
       name: "jabbar_and_co_products_01",
-      src: "./assets/images/case_studies/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_01.png",
+      src: "./assets/images/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_01.png",
       alt: "A product rendering of a makeup brush",
       width: 1024,
       height: 1270,
@@ -203,7 +203,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     jabbar_and_co_products_02: {
       name: "jabbar_and_co_products_02",
-      src: "./assets/images/case_studies/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_02.png",
+      src: "./assets/images/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_02.png",
       alt: "A product rendering of a tube of cleanser",
       width: 1024,
       height: 1270,
@@ -219,7 +219,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     jabbar_and_co_products_03: {
       name: "jabbar_and_co_products_03",
-      src: "./assets/images/case_studies/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_03.png",
+      src: "./assets/images/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_03.png",
       alt: "A product rendering of a bottle of botanical firming toner",
       width: 1024,
       height: 1270,
@@ -235,7 +235,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     jabbar_and_co_products_04: {
       name: "jabbar_and_co_products_04",
-      src: "./assets/images/case_studies/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_04.png",
+      src: "./assets/images/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_04.png",
       alt: "A product rendering of firming face and eye serum",
       width: 1024,
       height: 1270,
@@ -251,7 +251,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     jabbar_and_co_products_05: {
       name: "jabbar_and_co_products_05",
-      src: "./assets/images/case_studies/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_05.png",
+      src: "./assets/images/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_05.png",
       alt: "A product rendering of a tube of hydrating mango face cream",
       width: 1024,
       height: 1270,
@@ -267,7 +267,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     jabbar_and_co_products_06: {
       name: "jabbar_and_co_products_06",
-      src: "./assets/images/case_studies/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_06.png",
+      src: "./assets/images/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_06.png",
       alt: "A product rendering of a spray bottle of setting spray",
       width: 1024,
       height: 1270,
@@ -283,7 +283,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     jabbar_and_co_products_07: {
       name: "jabbar_and_co_products_07",
-      src: "./assets/images/case_studies/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_07.png",
+      src: "./assets/images/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_07.png",
       alt: "A product rendering of an angular black glass jar of anti-aging face cream",
       width: 1024,
       height: 1270,
@@ -299,7 +299,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     jabbar_and_co_products_08: {
       name: "jabbar_and_co_products_08",
-      src: "./assets/images/case_studies/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_08.png",
+      src: "./assets/images/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_08.png",
       alt: "A product rendering of an angular black glass jar of anti-aging face cream with the lid removed",
       width: 1024,
       height: 1270,
@@ -317,7 +317,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     jabbar_and_co_products_09: {
       name: "jabbar_and_co_products_09",
-      src: "./assets/images/case_studies/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_09.png",
+      src: "./assets/images/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_09.png",
       alt: "A product rendering of an angular black glass jar of hyaluronic moisturizer",
       width: 1024,
       height: 1270,
@@ -334,7 +334,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     jabbar_and_co_products_10: {
       name: "jabbar_and_co_products_10",
-      src: "./assets/images/case_studies/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_10.png",
+      src: "./assets/images/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_10.png",
       alt: "A product rendering of an angular black glass jar of hyaluronic moisturizer with the lid off",
       width: 1024,
       height: 1270,
@@ -351,7 +351,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     jabbar_and_co_products_11: {
       name: "jabbar_and_co_products_11",
-      src: "./assets/images/case_studies/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_11.png",
+      src: "./assets/images/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_11.png",
       alt: "A product rendering of a buki brush",
       width: 1024,
       height: 1270,
@@ -366,7 +366,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     jabbar_and_co_products_12: {
       name: "jabbar_and_co_products_12",
-      src: "./assets/images/case_studies/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_12.png",
+      src: "./assets/images/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_12.png",
       alt: "A product rendering of a black blotting powder container that is closed",
       width: 1024,
       height: 1270,
@@ -382,7 +382,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     jabbar_and_co_products_13: {
       name: "jabbar_and_co_products_13",
-      src: "./assets/images/case_studies/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_13.png",
+      src: "./assets/images/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_13.png",
       alt: "A product rendering of a black blotting powder container that is open",
       width: 1024,
       height: 1270,
@@ -398,7 +398,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     jabbar_and_co_products_14: {
       name: "jabbar_and_co_products_14",
-      src: "./assets/images/case_studies/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_14.png",
+      src: "./assets/images/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_14.png",
       alt: "A product rendering of a small glass jar of loose setting powder",
       width: 1024,
       height: 1270,
@@ -415,7 +415,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     jabbar_and_co_products_15: {
       name: "jabbar_and_co_products_15",
-      src: "./assets/images/case_studies/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_15.png",
+      src: "./assets/images/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_15.png",
       alt: "A product rendering of a small glass jar of loose setting powder with the lid removed",
       width: 1024,
       height: 1270,
@@ -431,7 +431,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     jabbar_and_co_products_16: {
       name: "jabbar_and_co_products_16",
-      src: "./assets/images/case_studies/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_16.png",
+      src: "./assets/images/explorations/3d_design/jabbar_and_co/jabbar_and_co_products_16.png",
       alt: "A product rendering of a black, cream-dispensing pump bottle of 'Camera Ready Primer'",
       width: 1024,
       height: 1270,
@@ -448,7 +448,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     made_shirts_01: {
       name: "made_shirts_01",
-      src: "./assets/images/case_studies/explorations/3d_design/made_shirts/made_shirts_01.png",
+      src: "./assets/images/explorations/3d_design/made_shirts/made_shirts_01.png",
       alt: "A plaid shirt with no contrast fabric, french cuff, and mini-wide collar",
       width: 1200,
       height: 1200,
@@ -464,7 +464,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     made_shirts_02: {
       name: "made_shirts_02",
-      src: "./assets/images/case_studies/explorations/3d_design/made_shirts/made_shirts_02.png",
+      src: "./assets/images/explorations/3d_design/made_shirts/made_shirts_02.png",
       alt: "A dark grey shirt with black and white plaid contrast fabric, regular cuff, and mini-wide collar",
       width: 1200,
       height: 1200,
@@ -480,7 +480,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     made_shirts_03: {
       name: "made_shirts_03",
-      src: "./assets/images/case_studies/explorations/3d_design/made_shirts/made_shirts_03.png",
+      src: "./assets/images/explorations/3d_design/made_shirts/made_shirts_03.png",
       alt: "A dark blue and green plaid shirt with plain dark blue contrast fabric, french cuff, and wide collar",
       width: 1200,
       height: 1200,
@@ -496,7 +496,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     made_shirts_04: {
       name: "made_shirts_04",
-      src: "./assets/images/case_studies/explorations/3d_design/made_shirts/made_shirts_04.png",
+      src: "./assets/images/explorations/3d_design/made_shirts/made_shirts_04.png",
       alt: "A dark green shirt with blue paisley contrast fabric, french cuff, and band collar",
       width: 1200,
       height: 1200,
@@ -512,7 +512,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     made_shirts_05: {
       name: "made_shirts_05",
-      src: "./assets/images/case_studies/explorations/3d_design/made_shirts/made_shirts_05.png",
+      src: "./assets/images/explorations/3d_design/made_shirts/made_shirts_05.png",
       alt: "A light grey shirt with black and white spotted contrast fabric, french cuff, and wide collar",
       width: 1200,
       height: 1200,
@@ -528,7 +528,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     made_shirts_06: {
       name: "made_shirts_06",
-      src: "./assets/images/case_studies/explorations/3d_design/made_shirts/made_shirts_06.png",
+      src: "./assets/images/explorations/3d_design/made_shirts/made_shirts_06.png",
       alt: "A light blue shirt with intricate blue and white contrast fabric, french cuff, and wide collar",
       width: 1200,
       height: 1200,
@@ -544,7 +544,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     made_shirts_07: {
       name: "made_shirts_07",
-      src: "./assets/images/case_studies/explorations/3d_design/made_shirts/made_shirts_07.png",
+      src: "./assets/images/explorations/3d_design/made_shirts/made_shirts_07.png",
       alt: "A white shirt with no contrast fabric, french cuff, and mini-wide collar",
       width: 1200,
       height: 1200,
@@ -560,7 +560,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     made_shirts_08: {
       name: "made_shirts_08",
-      src: "./assets/images/case_studies/explorations/3d_design/made_shirts/made_shirts_08.png",
+      src: "./assets/images/explorations/3d_design/made_shirts/made_shirts_08.png",
       alt: "A grey shirt with light blue contrast fabric, french cuff, and wide collar",
       width: 1200,
       height: 1200,
@@ -576,7 +576,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     dome_01: {
       name: "dome_01",
-      src: "./assets/images/case_studies/explorations/3d_design/nft_dome/dome_01.png",
+      src: "./assets/images/explorations/3d_design/nft_dome/dome_01.png",
       alt: "A 3d rendering of an intricate abstract, black and blue metalic futuristic building on a tropical island beach surrounded by palm trees",
       width: 1800,
       height: 1200,
@@ -591,7 +591,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     dome_02: {
       name: "dome_02",
-      src: "./assets/images/case_studies/explorations/3d_design/nft_dome/dome_02.png",
+      src: "./assets/images/explorations/3d_design/nft_dome/dome_02.png",
       alt: "A 3d rendering of an intricate abstract, black and blue metalic futuristic building from a higher angle than the first image",
       width: 1800,
       height: 1200,
@@ -606,7 +606,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     obsessive_seas_render_01: {
       name: "obsessive_seas_render_01",
-      src: "./assets/images/case_studies/explorations/3d_design/obsessive_seas/obsessive_seas_render_01.png",
+      src: "./assets/images/explorations/3d_design/obsessive_seas/obsessive_seas_render_01.png",
       alt: "A 3D rendering of the interior of a small art gallery space with an abstract object casting shadows in the back corner, a projection of ocean waves on the wall, and 2 groups of framed artworks on the wall across from each other",
       width: 1920,
       height: 1400,
@@ -626,7 +626,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     obsessive_seas_render_05: {
       name: "obsessive_seas_render_05",
-      src: "./assets/images/case_studies/explorations/3d_design/obsessive_seas/obsessive_seas_render_05.png",
+      src: "./assets/images/explorations/3d_design/obsessive_seas/obsessive_seas_render_05.png",
       alt: "A wider rendering of the ocean waves being projected on the wall in the Obsessive Seas art gallery",
       width: 1920,
       height: 1400,
@@ -641,7 +641,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     obsessive_seas_gallery_01: {
       name: "obsessive_seas_gallery_01",
-      src: "./assets/images/case_studies/explorations/3d_design/obsessive_seas/obsessive_seas_gallery_01.jpg",
+      src: "./assets/images/explorations/3d_design/obsessive_seas/obsessive_seas_gallery_01.jpg",
       alt: "A real world photograph of a metal podium standing accross the room from a projection of ocean waves, and a blue wall with information about the art gallery exhibit",
       width: 1776,
       height: 1184,
@@ -656,7 +656,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     obsessive_seas_render_03: {
       name: "obsessive_seas_render_03",
-      src: "./assets/images/case_studies/explorations/3d_design/obsessive_seas/obsessive_seas_render_03.png",
+      src: "./assets/images/explorations/3d_design/obsessive_seas/obsessive_seas_render_03.png",
       alt: "A tightly focused 3D rendering of the latter of the two groups of framed artworks on the wall across from each other in the Obsessive Seas art gallery",
       width: 1920,
       height: 1400,
@@ -671,7 +671,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     obsessive_seas_measurements_02: {
       name: "obsessive_seas_measurements_02",
-      src: "./assets/images/case_studies/explorations/3d_design/obsessive_seas/obsessive_seas_measurements_02.png",
+      src: "./assets/images/explorations/3d_design/obsessive_seas/obsessive_seas_measurements_02.png",
       alt: "A tightly focused 3D rendering of the latter of the two groups of framed artworks on the wall across from each other in the Obsessive Seas art gallery, with annotated measurements",
       width: 1920,
       height: 1401,
@@ -684,7 +684,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     obsessive_seas_gallery_02: {
       name: "obsessive_seas_gallery_02",
-      src: "./assets/images/case_studies/explorations/3d_design/obsessive_seas/obsessive_seas_gallery_02.jpg",
+      src: "./assets/images/explorations/3d_design/obsessive_seas/obsessive_seas_gallery_02.jpg",
       alt: "A real world photograph of a woman standing in front of a series of acrylic and glass works of art",
       width: 4160,
       height: 6240,
@@ -699,7 +699,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     obsessive_seas_render_04: {
       name: "obsessive_seas_render_04",
-      src: "./assets/images/case_studies/explorations/3d_design/obsessive_seas/obsessive_seas_render_04.png",
+      src: "./assets/images/explorations/3d_design/obsessive_seas/obsessive_seas_render_04.png",
       alt: "A close rendering of the blue wall with information about the art gallery exhibit, next to the projection of ocean waves",
       width: 1920,
       height: 1400,
@@ -714,7 +714,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     obsessive_seas_render_06: {
       name: "obsessive_seas_render_06",
-      src: "./assets/images/case_studies/explorations/3d_design/obsessive_seas/obsessive_seas_render_06.png",
+      src: "./assets/images/explorations/3d_design/obsessive_seas/obsessive_seas_render_06.png",
       alt: "A close rendering of the abstract object casting shadows in the back corner of the Obsessive Seas art gallery",
       width: 1920,
       height: 1400,
@@ -729,7 +729,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     obsessive_seas_render_02: {
       name: "obsessive_seas_render_02",
-      src: "./assets/images/case_studies/explorations/3d_design/obsessive_seas/obsessive_seas_render_02.png",
+      src: "./assets/images/explorations/3d_design/obsessive_seas/obsessive_seas_render_02.png",
       alt: "A more tightly focused 3D rendering of one of the two groups of framed artworks on the wall across from each other in the Obsessive Seas art gallery",
       width: 1920,
       height: 1400,
@@ -744,7 +744,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     obsessive_seas_measurements_01: {
       name: "obsessive_seas_measurements_01",
-      src: "./assets/images/case_studies/explorations/3d_design/obsessive_seas/obsessive_seas_measurements_01.png",
+      src: "./assets/images/explorations/3d_design/obsessive_seas/obsessive_seas_measurements_01.png",
       alt: "A more tightly focused 3D rendering of one of the two groups of framed artworks on the wall across from each other in the Obsessive Seas art gallery, with annotated measurements",
       width: 1920,
       height: 1401,
@@ -757,7 +757,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     obsessive_seas_release: {
       name: "obsessive_seas_release",
-      src: "./assets/images/case_studies/explorations/3d_design/obsessive_seas/obsessive_seas_release.png",
+      src: "./assets/images/explorations/3d_design/obsessive_seas/obsessive_seas_release.png",
       alt: "A screenshot of a website with a press release for the Obsessive Seas art exhibit",
       width: 1920,
       height: 3939,
@@ -774,7 +774,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     // virtual_pangea_temp: {
     //   name: "virtual_pangea_temp",
-    //   src: "./assets/images/case_studies/explorations/frontend/virtual_pangea_temp.mp4",
+    //   src: "./assets/images/explorations/frontend/virtual_pangea_temp.mp4",
     //   //   group: '',
     //   //   index: 0,
     // },
@@ -782,7 +782,7 @@ const EXPLORATIONS_IMGS = processImages(
 
     virtual_pangea_temp_thumbnail: {
       name: "virtual_pangea_temp_thumbnail",
-      src: "./assets/images/case_studies/explorations/frontend/virtual_pangea_temp/virtual_pangea_temp_thumbnail.png",
+      src: "./assets/images/explorations/frontend/virtual_pangea_temp/virtual_pangea_temp_thumbnail.png",
       alt: "A thumbnail for a screen-recorded video showing the Virtual Pangea website in action",
       width: 861,
       height: 861,
@@ -792,7 +792,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     virtual_pangea_temp_video: {
       name: "virtual_pangea_temp_video",
-      src: "./assets/images/case_studies/explorations/frontend/virtual_pangea_temp/virtual_pangea_temp_video.mp4",
+      src: "./assets/images/explorations/frontend/virtual_pangea_temp/virtual_pangea_temp_video.mp4",
       alt: "A screen-recorded video showing the Virtual Pangea website in action",
       width: 1920,
       height: 1080,
@@ -816,7 +816,7 @@ const EXPLORATIONS_IMGS = processImages(
 
     crypic_pixel_video_01: {
       name: "crypic_pixel_video_01",
-      src: "./assets/images/case_studies/explorations/frontend/cryptic_pixel/crypic_pixel_video_01.mp4",
+      src: "./assets/images/explorations/frontend/cryptic_pixel/crypic_pixel_video_01.mp4",
       alt: "A screen-recorded video showing the Cryptic Pixel website in action",
       width: 1920,
       height: 1080,
@@ -836,7 +836,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     cryptic_pixel_01_home: {
       name: "cryptic_pixel_01_home",
-      src: "./assets/images/case_studies/explorations/frontend/cryptic_pixel/cryptic_pixel_01_home.png",
+      src: "./assets/images/explorations/frontend/cryptic_pixel/cryptic_pixel_01_home.png",
       alt: "A screenshot of the Cryptic Pixel website homepage",
       width: 1920,
       height: 1080,
@@ -850,7 +850,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     cryptic_pixel_02_games: {
       name: "cryptic_pixel_02_games",
-      src: "./assets/images/case_studies/explorations/frontend/cryptic_pixel/cryptic_pixel_02_games.png",
+      src: "./assets/images/explorations/frontend/cryptic_pixel/cryptic_pixel_02_games.png",
       alt: "A screenshot of the Cryptic Pixel website games section, with two game cartidges displayed",
       width: 1920,
       height: 1080,
@@ -864,7 +864,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     cryptic_pixel_03_events: {
       name: "cryptic_pixel_03_events",
-      src: "./assets/images/case_studies/explorations/frontend/cryptic_pixel/cryptic_pixel_03_events.png",
+      src: "./assets/images/explorations/frontend/cryptic_pixel/cryptic_pixel_03_events.png",
       alt: "A screenshot of the Cryptic Pixel website events section, with information about past and upcoming competitions",
       width: 1920,
       height: 1080,
@@ -878,7 +878,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     cryptic_pixel_04_gallery: {
       name: "cryptic_pixel_04_gallery",
-      src: "./assets/images/case_studies/explorations/frontend/cryptic_pixel/cryptic_pixel_04_gallery.png",
+      src: "./assets/images/explorations/frontend/cryptic_pixel/cryptic_pixel_04_gallery.png",
       alt: "A screenshot of the Cryptic Pixel website gallery section, with an interactive carousel of NFT artworks pulled from the OpenSea marketplace",
       width: 1920,
       height: 1080,
@@ -892,7 +892,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     cryptic_pixel_05_youtube: {
       name: "cryptic_pixel_05_youtube",
-      src: "./assets/images/case_studies/explorations/frontend/cryptic_pixel/cryptic_pixel_05_youtube.png",
+      src: "./assets/images/explorations/frontend/cryptic_pixel/cryptic_pixel_05_youtube.png",
       alt: "A screenshot of the Cryptic Pixel website YouTube section, with an interactive carousel of videos from their youtube channel with a main video above them, and a row of thumbnails below",
       width: 1920,
       height: 1080,
@@ -906,7 +906,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     cryptic_pixel_06_contact: {
       name: "cryptic_pixel_06_contact",
-      src: "./assets/images/case_studies/explorations/frontend/cryptic_pixel/cryptic_pixel_06_contact.png",
+      src: "./assets/images/explorations/frontend/cryptic_pixel/cryptic_pixel_06_contact.png",
       alt: "A screenshot of the Cryptic Pixel website contact section, with a form for users to submit their information",
       width: 1920,
       height: 1080,
@@ -920,7 +920,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     cryptic_pixel_07_gameplay: {
       name: "cryptic_pixel_07_gameplay",
-      src: "./assets/images/case_studies/explorations/frontend/cryptic_pixel/cryptic_pixel_07_gameplay.png",
+      src: "./assets/images/explorations/frontend/cryptic_pixel/cryptic_pixel_07_gameplay.png",
       alt: "A screenshot of a secondary page in the Cryptic Pixel website, showing a carousel of screenshots with screenshots of gameplay",
       width: 1920,
       height: 1080,
@@ -934,7 +934,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     cryptic_pixel_08_bosses: {
       name: "cryptic_pixel_08_bosses",
-      src: "./assets/images/case_studies/explorations/frontend/cryptic_pixel/cryptic_pixel_08_bosses.png",
+      src: "./assets/images/explorations/frontend/cryptic_pixel/cryptic_pixel_08_bosses.png",
       alt: "A screenshot of a secondary page in the Cryptic Pixel website, showing a carousel of 8-bit bosses from their flagship game, as well as a leaderboard underneath",
       width: 1920,
       height: 1080,
@@ -948,7 +948,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     crypic_pixel_thumbnail: {
       name: "crypic_pixel_thumbnail",
-      src: "./assets/images/case_studies/explorations/frontend/cryptic_pixel/crypic_pixel_thumbnail.png",
+      src: "./assets/images/explorations/frontend/cryptic_pixel/crypic_pixel_thumbnail.png",
       alt: "A thumbnail for a screen-recorded video showing the Cryptic Pixel website in action",
       width: 1024,
       height: 1024,
@@ -958,7 +958,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     discog_calc_video_01_example_brockhampton: {
       name: "discog_calc_video_01_example_brockhampton",
-      src: "./assets/images/case_studies/explorations/frontend/discog_calc/discog_calc_video_01_example_brockhampton.mp4",
+      src: "./assets/images/explorations/frontend/discog_calc/discog_calc_video_01_example_brockhampton.mp4",
       alt: "A screen-recorded video showing the Discogs-API powered website in action, searching for BROCKHAMPTON and returning their discography",
       width: 1920,
       height: 1080,
@@ -975,7 +975,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     discog_calc_video_02_example_simz: {
       name: "discog_calc_video_02_example_simz",
-      src: "./assets/images/case_studies/explorations/frontend/discog_calc/discog_calc_video_02_example_simz.mp4",
+      src: "./assets/images/explorations/frontend/discog_calc/discog_calc_video_02_example_simz.mp4",
       alt: "A screen-recorded video showing the Discogs-API powered website in action, searching for Little Simz and returning their discography",
       width: 1920,
       height: 1080,
@@ -989,7 +989,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     discog_calc_video_03_example_aphex: {
       name: "discog_calc_video_03_example_aphex",
-      src: "./assets/images/case_studies/explorations/frontend/discog_calc/discog_calc_video_03_example_aphex.mp4",
+      src: "./assets/images/explorations/frontend/discog_calc/discog_calc_video_03_example_aphex.mp4",
       alt: "A screen-recorded video showing the Discogs-API powered website in action, searching for Aphex Twin and returning their discography",
       width: 1920,
       height: 1080,
@@ -1004,7 +1004,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     discog_calc_01_home: {
       name: "discog_calc_01_home",
-      src: "./assets/images/case_studies/explorations/frontend/discog_calc/discog_calc_01_home.png",
+      src: "./assets/images/explorations/frontend/discog_calc/discog_calc_01_home.png",
       alt: "A screenshot of the homepage of a Discogs-API powered website that allows users to search for artists and view the total cost of their discography",
       width: 1920,
       height: 1080,
@@ -1018,7 +1018,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     discog_calc_02_searched: {
       name: "discog_calc_02_searched",
-      src: "./assets/images/case_studies/explorations/frontend/discog_calc/discog_calc_02_searched.png",
+      src: "./assets/images/explorations/frontend/discog_calc/discog_calc_02_searched.png",
       alt: "A screenshot of the results page of the same Discogs-API powered website, showing a returned search result; the artist, their bio, and the total cost of their discography",
       width: 1920,
       height: 1080,
@@ -1032,7 +1032,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     discog_calc_03_expanded: {
       name: "discog_calc_03_expanded",
-      src: "./assets/images/case_studies/explorations/frontend/discog_calc/discog_calc_03_expanded.png",
+      src: "./assets/images/explorations/frontend/discog_calc/discog_calc_03_expanded.png",
       alt: "A breakdown of the artists discography, the cost of each item, and the percentage amount that release makes up of the total cost of the discography",
       width: 1920,
       height: 1080,
@@ -1046,7 +1046,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     discog_calc_04_scrolled: {
       name: "discog_calc_04_scrolled",
-      src: "./assets/images/case_studies/explorations/frontend/discog_calc/discog_calc_04_scrolled.png",
+      src: "./assets/images/explorations/frontend/discog_calc/discog_calc_04_scrolled.png",
       alt: "A full view of the album screen of the same Discogs-API powered website, showing the album cover, and a link to the discogs page for it",
       width: 1920,
       height: 1080,
@@ -1060,7 +1060,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     discog_calc_thumbnail_01: {
       name: "discog_calc_thumbnail_01",
-      src: "./assets/images/case_studies/explorations/frontend/discog_calc/discog_calc_thumbnail_01.png",
+      src: "./assets/images/explorations/frontend/discog_calc/discog_calc_thumbnail_01.png",
       alt: "A thumbnail image of a screen-recorded video showing the Discogs-API powered website in action, searching for BROCKHAMPTON and returning their discography",
       width: 658,
       height: 658,
@@ -1071,7 +1071,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     discog_calc_thumbnail_02: {
       name: "discog_calc_thumbnail_02",
-      src: "./assets/images/case_studies/explorations/frontend/discog_calc/discog_calc_thumbnail_02.png",
+      src: "./assets/images/explorations/frontend/discog_calc/discog_calc_thumbnail_02.png",
       alt: "A thumbnail image of a screen-recorded video showing the Discogs-API powered website in action, searching for BROCKHAMPTON and returning their discography",
       width: 1920,
       height: 1080,
@@ -1084,7 +1084,7 @@ const EXPLORATIONS_IMGS = processImages(
 
     killer_mike_motion_graphic_thumbnail_01: {
       name: "killer_mike_motion_graphic_thumbnail_01",
-      src: "./assets/images/case_studies/explorations/motion_graphics/killer_mike/killer_mike_motion_graphic_thumbnail_01.png",
+      src: "./assets/images/explorations/motion_graphics/killer_mike/killer_mike_motion_graphic_thumbnail_01.png",
       alt: "Thumbnail image for a motion graphic for a soundbite from Killer Mike on the Stephen Colbert show",
       width: 1920,
       height: 1080,
@@ -1094,7 +1094,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     killer_mike_motion_graphic_thumbnail_02: {
       name: "killer_mike_motion_graphic_thumbnail_02",
-      src: "./assets/images/case_studies/explorations/motion_graphics/killer_mike/killer_mike_motion_graphic_thumbnail_02.png",
+      src: "./assets/images/explorations/motion_graphics/killer_mike/killer_mike_motion_graphic_thumbnail_02.png",
       alt: "Thumbnail image for a motion graphic for a soundbite from Killer Mike on the Stephen Colbert show",
       width: 1920,
       height: 1080,
@@ -1103,7 +1103,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     killer_mike_motion_graphic_video: {
       name: "killer_mike_motion_graphic_video",
-      src: "./assets/images/case_studies/explorations/motion_graphics/killer_mike/killer_mike_motion_graphic_video.mp4",
+      src: "./assets/images/explorations/motion_graphics/killer_mike/killer_mike_motion_graphic_video.mp4",
       alt: "A kinetic typography motion graphic for a soundbite from Killer Mike on the Stephen Colbert show",
       width: 1920,
       height: 1080,
@@ -1119,7 +1119,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     makeright_presentation_thumbnail: {
       name: "makeright_presentation_thumbnail",
-      src: "./assets/images/case_studies/explorations/motion_graphics/makeright_presentation/makeright_presentation_thumbnail.png",
+      src: "./assets/images/explorations/motion_graphics/makeright_presentation/makeright_presentation_thumbnail.png",
       alt: "Thumbnail for a narrated, and scored motion graphic presentation for a fictional company, MakeRight, created for my undergrad thesis",
       width: 1920,
       height: 1080,
@@ -1129,7 +1129,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     makeright_presentation_video: {
       name: "makeright_presentation_video",
-      src: "./assets/images/case_studies/explorations/motion_graphics/makeright_presentation/makeright_presentation_video.mp4",
+      src: "./assets/images/explorations/motion_graphics/makeright_presentation/makeright_presentation_video.mp4",
       alt: "A narrated, and scored motion graphic presentation for a fictional company, MakeRight, created for my undergrad thesis",
       width: 1920,
       height: 1080,
@@ -1147,12 +1147,12 @@ const EXPLORATIONS_IMGS = processImages(
 
     // makeright_presentation_video: {
     //   name: "makeright_presentation_video",
-    //   src: "./assets/images/case_studies/explorations/motion_graphics/makeright_presentation_video.mp4",
+    //   src: "./assets/images/explorations/motion_graphics/makeright_presentation_video.mp4",
     // },
 
     // prepr_project_leadership: {
     //   name: "prepr_project_leadership",
-    //   src: "./assets/images/case_studies/explorations/motion_graphics/prepr_project_leadership.mp4",
+    //   src: "./assets/images/explorations/motion_graphics/prepr_project_leadership.mp4",
     //   alt: "A short, peppy motion graphic for a company called Prepr, explaining their outlook and advice on project leadership",
     //   width: 1920,
     //   height: 1080,
@@ -1166,7 +1166,7 @@ const EXPLORATIONS_IMGS = processImages(
     // },
     // abandoned_railroad: {
     //   name: "abandoned_railroad",
-    //   src: "./assets/images/case_studies/explorations/photography/abandoned_railroad.jpg",
+    //   src: "./assets/images/explorations/photography/abandoned_railroad.jpg",
     //   alt: "A photograph of an old abandoned building",
     //   width: 5027,
     //   height: 3351,
@@ -1177,7 +1177,7 @@ const EXPLORATIONS_IMGS = processImages(
     // },
     boat_eli_nate: {
       name: "boat_eli_nate",
-      src: "./assets/images/case_studies/explorations/photography/boat_eli_nate.jpg",
+      src: "./assets/images/explorations/photography/boat_eli_nate.jpg",
       alt: "A close up photograph of two men in a boat on a lake",
       width: 5184,
       height: 3456,
@@ -1190,7 +1190,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     dad_and_the_heli: {
       name: "dad_and_the_heli",
-      src: "./assets/images/case_studies/explorations/photography/dad_and_the_heli.jpg",
+      src: "./assets/images/explorations/photography/dad_and_the_heli.jpg",
       alt: "a close up photograph of a man standing next to a helicopter atop a mountain",
       width: 3835,
       height: 2521,
@@ -1203,7 +1203,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     // eclipse: {
     //   name: "eclipse",
-    //   src: "./assets/images/case_studies/explorations/photography/eclipse.JPG",
+    //   src: "./assets/images/explorations/photography/eclipse.JPG",
     //   alt: "A photograph of the sun during an eclipse",
     //   width: 5184,
     //   height: 3456,
@@ -1217,7 +1217,7 @@ const EXPLORATIONS_IMGS = processImages(
     // },
     foggy_boat: {
       name: "foggy_boat",
-      src: "./assets/images/case_studies/explorations/photography/foggy_boat.jpg",
+      src: "./assets/images/explorations/photography/foggy_boat.jpg",
       alt: "A photograph of a boat in a bay with a dense fog in the air",
       width: 3456,
       height: 5184,
@@ -1230,7 +1230,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     hamilton: {
       name: "hamilton",
-      src: "./assets/images/case_studies/explorations/photography/hamilton.jpg",
+      src: "./assets/images/explorations/photography/hamilton.jpg",
       alt: "A photograph of a metal sign reading 'Canada' taken through a glass prism with an array of refractions scattered across the image",
       width: 5760,
       height: 3840,
@@ -1243,7 +1243,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     ju: {
       name: "ju",
-      src: "./assets/images/case_studies/explorations/photography/ju.jpg",
+      src: "./assets/images/explorations/photography/ju.jpg",
       alt: "A man in a yellow shirt looking down a hill",
       width: 5472,
       height: 3648,
@@ -1256,7 +1256,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     lush_waterfall: {
       name: "lush_waterfall",
-      src: "./assets/images/case_studies/explorations/photography/lush_waterfall.jpg",
+      src: "./assets/images/explorations/photography/lush_waterfall.jpg",
       alt: "A vibrant, luch photograph of a small waterfall",
       width: 3456,
       height: 5184,
@@ -1269,7 +1269,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     mountain: {
       name: "mountain",
-      src: "./assets/images/case_studies/explorations/photography/mountain.jpg",
+      src: "./assets/images/explorations/photography/mountain.jpg",
       alt: "A panoramic photograph of a mountain",
       width: 9877,
       height: 6784,
@@ -1282,7 +1282,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     prism: {
       name: "prism",
-      src: "./assets/images/case_studies/explorations/photography/prism.jpg",
+      src: "./assets/images/explorations/photography/prism.jpg",
       alt: "A trippy, refracted, colorful image of a tree taken through a glass prism",
       width: 3840,
       height: 5760,
@@ -1295,7 +1295,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     nathan_and_ellie_01: {
       name: "nathan_and_ellie_01",
-      src: "./assets/images/case_studies/explorations/photography/nathan_and_ellie/nathan_and_ellie_01.jpg",
+      src: "./assets/images/explorations/photography/nathan_and_ellie/nathan_and_ellie_01.jpg",
       alt: "A man and a woman in the water at a beach",
       width: 5184,
       height: 3456,
@@ -1307,7 +1307,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     nathan_and_ellie_02: {
       name: "nathan_and_ellie_02",
-      src: "./assets/images/case_studies/explorations/photography/nathan_and_ellie/nathan_and_ellie_02.jpg",
+      src: "./assets/images/explorations/photography/nathan_and_ellie/nathan_and_ellie_02.jpg",
       alt: "A man and a woman on their way out of the water at a beach",
       width: 5184,
       height: 3456,
@@ -1319,7 +1319,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     nathan_and_ellie_03: {
       name: "nathan_and_ellie_03",
-      src: "./assets/images/case_studies/explorations/photography/nathan_and_ellie/nathan_and_ellie_03.jpg",
+      src: "./assets/images/explorations/photography/nathan_and_ellie/nathan_and_ellie_03.jpg",
       alt: "A man and a woman emerging from the water on a beach",
       width: 5184,
       height: 3456,
@@ -1331,7 +1331,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     //   koalako_final_01: {
     //     name: "koalako_final_01",
-    //     src: "./assets/images/case_studies/explorations/ui_ux/koalako/koalako_final_01.png",
+    //     src: "./assets/images/explorations/ui_ux/koalako/koalako_final_01.png",
     //     alt: "",
     //     width: 1125,
     //     height: 2436,
@@ -1345,7 +1345,7 @@ const EXPLORATIONS_IMGS = processImages(
     //   },
     //   koalako_final_02: {
     //     name: "koalako_final_02",
-    //     src: "./assets/images/case_studies/explorations/ui_ux/koalako/koalako_final_02.png",
+    //     src: "./assets/images/explorations/ui_ux/koalako/koalako_final_02.png",
     //     alt: "",
     //     width: 1125,
     //     height: 2436,
@@ -1359,7 +1359,7 @@ const EXPLORATIONS_IMGS = processImages(
     //   },
     //   koalako_final_03: {
     //     name: "koalako_final_03",
-    //     src: "./assets/images/case_studies/explorations/ui_ux/koalako/koalako_final_03.png",
+    //     src: "./assets/images/explorations/ui_ux/koalako/koalako_final_03.png",
     //     alt: "",
     //     width: 1125,
     //     height: 2436,
@@ -1373,7 +1373,7 @@ const EXPLORATIONS_IMGS = processImages(
     //   },
     //   koalako_final_04: {
     //     name: "koalako_final_04",
-    //     src: "./assets/images/case_studies/explorations/ui_ux/koalako/koalako_final_04.png",
+    //     src: "./assets/images/explorations/ui_ux/koalako/koalako_final_04.png",
     //     alt: "",
     //     width: 1125,
     //     height: 2436,
@@ -1388,7 +1388,7 @@ const EXPLORATIONS_IMGS = processImages(
 
     koalako_final_01: {
       name: "delivery_statistics",
-      src: "./assets/images/case_studies/koalako/delivery/delivery_statistics.png",
+      src: "./assets/images/koalako/delivery/delivery_statistics.png",
       alt: "A screenshot of the KoalaKo app showing the statistics screen.  This screen shows the number of activities that have been completed, the types of creative play within those activities such as physically active, or musical, the structure of the activities such as structured or unstructured, and filters for the timeframe of this data.",
       width: 1125,
       height: 2436,
@@ -1406,7 +1406,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     koalako_final_02: {
       name: "delivery_activities",
-      src: "./assets/images/case_studies/koalako/delivery/delivery_activities.png",
+      src: "./assets/images/koalako/delivery/delivery_activities.png",
       alt: "A screenshot of the KoalaKo activities page, showing a list of activities that parents can do with their child. Each activity has a title, description, tags, an icon to favorite, and can be tapped to view more information",
       width: 1125,
       height: 2436,
@@ -1419,7 +1419,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     koalako_final_03: {
       name: "delivery_game_listing",
-      src: "./assets/images/case_studies/koalako/delivery/delivery_game_listing.png",
+      src: "./assets/images/koalako/delivery/delivery_game_listing.png",
       alt: "A screenshot of the KoalaKo game listing page, showing a listing of a game that has been selected from the activities screen. The listing shows the title, description, tags, an icon to favorite the game, user reviews, and a suggested local spot to play",
       width: 1125,
       height: 2436,
@@ -1432,7 +1432,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     koalako_final_04: {
       name: "delivery_map",
-      src: "./assets/images/case_studies/koalako/delivery/delivery_map.png",
+      src: "./assets/images/koalako/delivery/delivery_map.png",
       alt: "A closely cropped screenshot of the KoalaKo app which shows the ability to search your local area for child friendly play areas",
       width: 1125,
       height: 2436,
@@ -1445,7 +1445,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     koalako_final_05: {
       name: "delivery_trophies",
-      src: "./assets/images/case_studies/koalako/delivery/delivery_trophies.png",
+      src: "./assets/images/koalako/delivery/delivery_trophies.png",
       alt: "A screenshot of the KoalaKo app showing the trophies screen. This screen is a collection of awards and achievements you can earn in various ways while using the app and completing activities.",
       width: 1125,
       height: 2436,
@@ -1458,7 +1458,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     koalako_final_06: {
       name: "delivery_post_activity",
-      src: "./assets/images/case_studies/koalako/delivery/delivery_post_activity.png",
+      src: "./assets/images/koalako/delivery/delivery_post_activity.png",
       alt: "A screenshot of the KoalaKo app where, after completing an activity, the user can post a review of the activity, and provide feedback, or continue on with another activity.",
       width: 1125,
       height: 2436,
@@ -1471,7 +1471,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     koalako_final_07: {
       name: "delivery_profile_child",
-      src: "./assets/images/case_studies/koalako/delivery/delivery_profile_child.png",
+      src: "./assets/images/koalako/delivery/delivery_profile_child.png",
       alt: "A screenshot of the KoalaKo app showing the profile of your child.  This profile contains no personal details about your child, except for their name which isnt necessary to provide.  The profile contains a list of activities that the child has completed, and their favourite activities.",
       width: 1125,
       height: 2436,
@@ -1484,7 +1484,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     koalako_thumbnail: {
       name: "koalako_thumbnail",
-      src: "./assets/images/case_studies/explorations/ui_ux/koalako/koalako_thumbnail.png",
+      src: "./assets/images/explorations/ui_ux/koalako/koalako_thumbnail.png",
       alt: "Thumbnail graphic for the gallery listing of the KoalaKo project",
       width: 1392,
       height: 1392,
@@ -1499,7 +1499,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     customer_screen_06: {
       name: "customer_screen_06",
-      src: "./assets/images/case_studies/explorations/ui_ux/makeright/customer_screen_06.png",
+      src: "./assets/images/explorations/ui_ux/makeright/customer_screen_06.png",
       alt: "Storefront page for MakeRight, where customers can browse through available items.",
       width: 3840,
       height: 7016,
@@ -1519,7 +1519,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     customer_screen_07: {
       name: "customer_screen_07",
-      src: "./assets/images/case_studies/explorations/ui_ux/makeright/customer_screen_07.png",
+      src: "./assets/images/explorations/ui_ux/makeright/customer_screen_07.png",
       alt: "Item listing page for MakeRight, where customers can view detailed information about the selected item, including an interactive 3D model, images of past prints, and comments from other customers.",
       width: 3840,
       height: 5030,
@@ -1534,7 +1534,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     customer_screen_08: {
       name: "customer_screen_08",
-      src: "./assets/images/case_studies/explorations/ui_ux/makeright/customer_screen_08.png",
+      src: "./assets/images/explorations/ui_ux/makeright/customer_screen_08.png",
       alt: "Checkout page for MakeRight, where customers can customize their order and finalize their purchase.",
       width: 3840,
       height: 4042,
@@ -1549,7 +1549,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     customer_screen_13: {
       name: "customer_screen_13",
-      src: "./assets/images/case_studies/explorations/ui_ux/makeright/customer_screen_13.png",
+      src: "./assets/images/explorations/ui_ux/makeright/customer_screen_13.png",
       alt: "Expanded Order Ticket page for MakeRight, where customers can manage their order details, communicate with their Maker, and request changes.",
       width: 3840,
       height: 4504,
@@ -1564,7 +1564,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     maker_screen_09_no_tutorial: {
       name: "maker_screen_09_no_tutorial",
-      src: "./assets/images/case_studies/explorations/ui_ux/makeright/maker_screen_09_no_tutorial.png",
+      src: "./assets/images/explorations/ui_ux/makeright/maker_screen_09_no_tutorial.png",
       alt: "A screen showing a list of past and present job orders for makers, with optional tutorials disabled.",
       width: 3840,
       height: 2160,
@@ -1578,7 +1578,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     // maker_screen_09_tutorial: {
     //   name: "maker_screen_09_tutorial",
-    //   src: "./assets/images/case_studies/explorations/ui_ux/makeright/maker_screen_09_tutorial.png",
+    //   src: "./assets/images/explorations/ui_ux/makeright/maker_screen_09_tutorial.png",
     //   alt: "A screen showing a list of past and present job orders for makers, with optional tutorials enabled.",
     //   width: 3840,
     //   height: 2160,
@@ -1591,7 +1591,7 @@ const EXPLORATIONS_IMGS = processImages(
     // },
     maker_screen_10: {
       name: "maker_screen_10",
-      src: "./assets/images/case_studies/explorations/ui_ux/makeright/maker_screen_10.png",
+      src: "./assets/images/explorations/ui_ux/makeright/maker_screen_10.png",
       alt: "A screen providing the details of a particular job order, with options to accept or reject it.",
       width: 3840,
       height: 6600,
@@ -1607,7 +1607,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     maker_screen_12_no_tutorial: {
       name: "maker_screen_12_no_tutorial",
-      src: "./assets/images/case_studies/explorations/ui_ux/makeright/maker_screen_12_no_tutorial.png",
+      src: "./assets/images/explorations/ui_ux/makeright/maker_screen_12_no_tutorial.png",
       alt: "A screen for makers to download and vet a file to ensure it can be printed, with optional tutorials enabled.",
       width: 3840,
       height: 5354,
@@ -1623,7 +1623,7 @@ const EXPLORATIONS_IMGS = processImages(
     },
     // maker_screen_12_tutorial: {
     //   name: "maker_screen_12_tutorial",
-    //   src: "./assets/images/case_studies/explorations/ui_ux/makeright/maker_screen_12_tutorial.png",
+    //   src: "./assets/images/explorations/ui_ux/makeright/maker_screen_12_tutorial.png",
     //   alt: "A screen for makers to download and vet a file to ensure it can be printed, with optional tutorials disabled.",
     //   width: 3840,
     //   height: 4518,
@@ -1637,7 +1637,7 @@ const EXPLORATIONS_IMGS = processImages(
     // },
     maker_screen_14: {
       name: "maker_screen_14",
-      src: "./assets/images/case_studies/explorations/ui_ux/makeright/maker_screen_14.png",
+      src: "./assets/images/explorations/ui_ux/makeright/maker_screen_14.png",
       alt: "A screen for makers to submit 4 images of the printed object for customer verification.",
       width: 3840,
       height: 4538,
@@ -1653,7 +1653,7 @@ const EXPLORATIONS_IMGS = processImages(
 
     makeright_thumbnail_04: {
       name: "makeright_thumbnail_04",
-      src: "./assets/images/case_studies/explorations/ui_ux/makeright/makeright_thumbnail_04.png",
+      src: "./assets/images/explorations/ui_ux/makeright/makeright_thumbnail_04.png",
       alt: "A thumbnail for the MakeRight case study",
       width: 857,
       height: 857,
@@ -1664,7 +1664,7 @@ const EXPLORATIONS_IMGS = processImages(
     // TODO: uncomment once we're compressing
     // pano_01_house: {
     //   name: "pano_01_house",
-    //   src: "./assets/images/case_studies/explorations/photography/pano_01_house.jpg",
+    //   src: "./assets/images/explorations/photography/pano_01_house.jpg",
     //   alt: "A colorful panoramic image of a farm house in the countryside",
     //   width: 15160,
     //   height: 6781,
@@ -1675,7 +1675,7 @@ const EXPLORATIONS_IMGS = processImages(
     // },
     // pano_02_hill: {
     //   name: "pano_02_hill",
-    //   src: "./assets/images/case_studies/explorations/photography/pano_02_hill.jpg",
+    //   src: "./assets/images/explorations/photography/pano_02_hill.jpg",
     //   alt: "A colorful panoramic image of a treeline on top of a mountain",
     //   width: 12806,
     //   height: 4275,
@@ -1686,7 +1686,7 @@ const EXPLORATIONS_IMGS = processImages(
     // },
     // pano_03_neighborhood: {
     //   name: "pano_03_neighborhood",
-    //   src: "./assets/images/case_studies/explorations/photography/pano_03_neighborhood.jpg",
+    //   src: "./assets/images/explorations/photography/pano_03_neighborhood.jpg",
     //   alt: "A colorful panoramic image of a neighborhood taken from the top of a mountain",
     //   width: 6526,
     //   height: 3834,

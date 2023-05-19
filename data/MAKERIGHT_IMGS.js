@@ -5,14 +5,14 @@ const MAKERIGHT_IMGS = processImages(
   {
     full_potential: {
       name: "full_potential",
-      src: "./assets/images/case_studies/makeright/full_potential.svg",
+      src: "./assets/images/makeright/full_potential.svg",
       alt: "3D printer in the shape of a pad lock",
       width: 212.28,
       height: 283,
     },
     barriers_to_entry: {
       name: "barriers_to_entry",
-      src: "./assets/images/case_studies/makeright/barriers_to_entry.svg",
+      src: "./assets/images/makeright/barriers_to_entry.svg",
       alt: "Gate / barrier with the symbols for knowledge, and money",
       width: 360.84,
       height: 330.02,
@@ -20,7 +20,7 @@ const MAKERIGHT_IMGS = processImages(
 
     makeright_logo: {
       name: "makeright_logo",
-      src: "./assets/images/case_studies/makeright/makeright_logo.svg",
+      src: "./assets/images/makeright/makeright_logo.svg",
       alt: "The text 'MakeRight' with logo of a 3D printer nozzle",
       width: 889.88,
       height: 162.04,
@@ -28,7 +28,7 @@ const MAKERIGHT_IMGS = processImages(
 
     pitch_vector_choose: {
       name: "pitch_vector_choose",
-      src: "./assets/images/case_studies/makeright/pitch/pitch_vector_choose.svg",
+      src: "./assets/images/makeright/pitch/pitch_vector_choose.svg",
       alt: "A graphic of a 3D model of a boat being clicked on",
       width: 102.24,
       height: 128.4,
@@ -36,7 +36,7 @@ const MAKERIGHT_IMGS = processImages(
 
     pitch_vector_tweak: {
       name: "pitch_vector_tweak",
-      src: "./assets/images/case_studies/makeright/pitch/pitch_vector_tweak.svg",
+      src: "./assets/images/makeright/pitch/pitch_vector_tweak.svg",
       alt: "A graphic of a boat with different paint-job options",
       width: 96.56,
       height: 119.75,
@@ -44,7 +44,7 @@ const MAKERIGHT_IMGS = processImages(
 
     pitch_vector_order: {
       name: "pitch_vector_order",
-      src: "./assets/images/case_studies/makeright/pitch/pitch_vector_order.svg",
+      src: "./assets/images/makeright/pitch/pitch_vector_order.svg",
       alt: "A graphic of a 3D printed boat inside a shopping cart",
       width: 110.73,
       height: 100.59,
@@ -52,7 +52,7 @@ const MAKERIGHT_IMGS = processImages(
 
     pitch_vector_recieve: {
       name: "pitch_vector_recieve",
-      src: "./assets/images/case_studies/makeright/pitch/pitch_vector_recieve.svg",
+      src: "./assets/images/makeright/pitch/pitch_vector_recieve.svg",
       alt: "A graphic of a gift-wrapped 3D printed boat on a doorstep",
       width: 96.95,
       height: 117.8,
@@ -60,7 +60,7 @@ const MAKERIGHT_IMGS = processImages(
 
     pitch_laptop_choose: {
       name: "pitch_laptop_choose",
-      src: "./assets/images/case_studies/makeright/pitch/pitch_laptop_choose.png",
+      src: "./assets/images/makeright/pitch/pitch_laptop_choose.png",
       alt: "MakeRight UI screenshot showing a storefront page filled with different 3D models",
       width: 2952,
       height: 1743,
@@ -68,7 +68,7 @@ const MAKERIGHT_IMGS = processImages(
 
     pitch_laptop_tweak: {
       name: "pitch_laptop_tweak",
-      src: "./assets/images/case_studies/makeright/pitch/pitch_laptop_tweak.png",
+      src: "./assets/images/makeright/pitch/pitch_laptop_tweak.png",
       alt: "MakeRight UI screenshot showing the ability to customize the scale, color, and material of your 3D printed object",
       width: 2952,
       height: 1743,
@@ -76,7 +76,7 @@ const MAKERIGHT_IMGS = processImages(
 
     pitch_laptop_order: {
       name: "pitch_laptop_order",
-      src: "./assets/images/case_studies/makeright/pitch/pitch_laptop_order.png",
+      src: "./assets/images/makeright/pitch/pitch_laptop_order.png",
       alt: "MakeRight UI screenshot showing the order ticket page, where a plastic boat has been purchased",
       width: 2952,
       height: 1743,
@@ -84,7 +84,7 @@ const MAKERIGHT_IMGS = processImages(
 
     pitch_laptop_recieve: {
       name: "pitch_laptop_recieve",
-      src: "./assets/images/case_studies/makeright/pitch/pitch_laptop_recieve.png",
+      src: "./assets/images/makeright/pitch/pitch_laptop_recieve.png",
       alt: "MakeRight UI screenshot showing a message from your assigned 3D printer - your order is ready and images are attatched to the message to prove it",
       width: 2952,
       height: 1743,
@@ -92,7 +92,7 @@ const MAKERIGHT_IMGS = processImages(
 
     pitch_laptop_frame: {
       name: "pitch_laptop_frame",
-      src: "./assets/images/case_studies/makeright/pitch/pitch_laptop_frame.png",
+      src: "./assets/images/makeright/pitch/pitch_laptop_frame.png",
       alt: "Empty frame of a laptop bordering a screenshot of the MakeRight UI",
       width: 2952,
       height: 1743,
@@ -100,7 +100,7 @@ const MAKERIGHT_IMGS = processImages(
 
     pitch_mockup_choose: {
       name: "pitch_mockup_choose",
-      src: "./assets/images/case_studies/makeright/pitch/pitch_mockup_choose.png",
+      src: "./assets/images/makeright/pitch/pitch_mockup_choose.png",
       alt: "MakeRight UI screenshot showing a storefront page filled with different 3D models",
       width: 2952,
       height: 1743,
@@ -108,7 +108,7 @@ const MAKERIGHT_IMGS = processImages(
 
     pitch_mockup_tweak: {
       name: "pitch_mockup_tweak",
-      src: "./assets/images/case_studies/makeright/pitch/pitch_mockup_tweak.png",
+      src: "./assets/images/makeright/pitch/pitch_mockup_tweak.png",
       alt: "MakeRight UI screenshot showing the ability to customize the scale, color, and material of your 3D printed object",
       width: 2952,
       height: 1743,
@@ -116,7 +116,7 @@ const MAKERIGHT_IMGS = processImages(
 
     pitch_mockup_order: {
       name: "pitch_mockup_order",
-      src: "./assets/images/case_studies/makeright/pitch/pitch_mockup_order.png",
+      src: "./assets/images/makeright/pitch/pitch_mockup_order.png",
       alt: "MakeRight UI screenshot showing the order ticket page, where a plastic boat has been purchased",
       width: 2952,
       height: 1743,
@@ -124,7 +124,7 @@ const MAKERIGHT_IMGS = processImages(
 
     pitch_mockup_recieve: {
       name: "pitch_mockup_recieve",
-      src: "./assets/images/case_studies/makeright/pitch/pitch_mockup_recieve.png",
+      src: "./assets/images/makeright/pitch/pitch_mockup_recieve.png",
       alt: "MakeRight UI screenshot showing a message from your assigned 3D printer - your order is ready and images are attatched to the message to prove it",
       width: 2952,
       height: 1743,
@@ -132,7 +132,7 @@ const MAKERIGHT_IMGS = processImages(
 
     building_makeright_banner: {
       name: "building_makeright_banner",
-      src: "./assets/images/case_studies/makeright/building_makeright_banner.png",
+      src: "./assets/images/makeright/building_makeright_banner.png",
       alt: "Photograph of a lab filled with 3D printers",
       width: 3840,
       height: 1400,
@@ -140,7 +140,7 @@ const MAKERIGHT_IMGS = processImages(
 
     secondary_research: {
       name: "secondary_research",
-      src: "./assets/images/case_studies/makeright/secondary_research.svg",
+      src: "./assets/images/makeright/secondary_research.svg",
       alt: "Graphic of a document with charts and a magnifying glass",
       width: 191.61,
       height: 184.39,
@@ -148,7 +148,7 @@ const MAKERIGHT_IMGS = processImages(
 
     interviews: {
       name: "interviews",
-      src: "./assets/images/case_studies/makeright/interviews.svg",
+      src: "./assets/images/makeright/interviews.svg",
       alt: "Graphic of two people sitting at a table",
       width: 199.66,
       height: 182.73,
@@ -156,7 +156,7 @@ const MAKERIGHT_IMGS = processImages(
 
     aha_moment: {
       name: "aha_moment",
-      src: "./assets/images/case_studies/makeright/aha_moment.svg",
+      src: "./assets/images/makeright/aha_moment.svg",
       alt: "Stylized graphic of a lightbulb",
       width: 206.75,
       height: 209.42,
@@ -164,28 +164,28 @@ const MAKERIGHT_IMGS = processImages(
 
     brainstorming: {
       name: "brainstorming",
-      src: "./assets/images/case_studies/makeright/brainstorming.svg",
+      src: "./assets/images/makeright/brainstorming.svg",
       alt: "Graphic of a brain with a lightning bolt to represent brainstorming",
       width: 147.7,
       height: 193.83,
     },
     refine_ideas: {
       name: "refine_ideas",
-      src: "./assets/images/case_studies/makeright/refine_ideas.svg",
+      src: "./assets/images/makeright/refine_ideas.svg",
       alt: "Graphic of a lightbulb in a funnel to represent refining ideas",
       width: 101.37,
       height: 197.83,
     },
     focus_group_testing: {
       name: "focus_group_testing",
-      src: "./assets/images/case_studies/makeright/focus_group_testing.svg",
+      src: "./assets/images/makeright/focus_group_testing.svg",
       alt: "Graphic of 3 people under a magnifying glass to represent focus group testing",
       width: 169.33,
       height: 171.65,
     },
     brainstorming_chart: {
       name: "brainstorming_chart",
-      src: "./assets/images/case_studies/makeright/brainstorming_chart.svg",
+      src: "./assets/images/makeright/brainstorming_chart.svg",
       alt: "Simplified version of a brainstorming mind map",
       width: 230.48,
       height: 252.89,
@@ -194,7 +194,7 @@ const MAKERIGHT_IMGS = processImages(
     brainstorming_chart_full: {
       name: "brainstorming_chart_full",
       title: "Cost and Difficulty of 3D Printing Mindmap",
-      src: "./assets/images/case_studies/makeright/brainstorming_chart_full.svg",
+      src: "./assets/images/makeright/brainstorming_chart_full.svg",
       alt: "A large-scale mindmap surrounding the cost and difficulty of 3D printing",
       width: 1445.2,
       height: 1210,
@@ -203,7 +203,7 @@ const MAKERIGHT_IMGS = processImages(
     brainstorming_chart_full_background: {
       name: "brainstorming_chart_full_background",
       title: "Cost and Difficulty of 3D Printing Mindmap",
-      src: "./assets/images/case_studies/makeright/brainstorming_chart_full_background.svg",
+      src: "./assets/images/makeright/brainstorming_chart_full_background.svg",
       alt: "A large-scale mindmap surrounding the cost and difficulty of 3D printing with an opaque background",
       width: 3920,
       height: 3395,
@@ -212,7 +212,7 @@ const MAKERIGHT_IMGS = processImages(
     // TODO: its not actually a system map its a journey map
     journey_map: {
       name: "journey_map",
-      src: "./assets/images/case_studies/makeright/journey_map.svg",
+      src: "./assets/images/makeright/journey_map.svg",
       alt: "Journey map of the MakeRight platform",
       width: 1045.55,
       height: 430.16,
@@ -220,7 +220,7 @@ const MAKERIGHT_IMGS = processImages(
 
     maker_journey_low_fi: {
       name: "maker_journey_low_fi",
-      src: "./assets/images/case_studies/makeright/maker_journey_low_fi.png",
+      src: "./assets/images/makeright/maker_journey_low_fi.png",
       alt: "A hand drawn sketch of a 3D printer nozzle",
       width: 974,
       height: 1130,
@@ -228,7 +228,7 @@ const MAKERIGHT_IMGS = processImages(
 
     customer_journey_low_fi: {
       name: "customer_journey_low_fi",
-      src: "./assets/images/case_studies/makeright/customer_journey_low_fi.png",
+      src: "./assets/images/makeright/customer_journey_low_fi.png",
       alt: "A hand drawn sketch of a shopping bag",
       width: 978,
       height: 960,
@@ -236,7 +236,7 @@ const MAKERIGHT_IMGS = processImages(
 
     maker_journey_high_fi: {
       name: "maker_journey_high_fi",
-      src: "./assets/images/case_studies/makeright/maker_journey_high_fi.svg",
+      src: "./assets/images/makeright/maker_journey_high_fi.svg",
       alt: "A graphic of a 3D printer nozzle",
       width: 95.56,
       height: 105.54,
@@ -244,7 +244,7 @@ const MAKERIGHT_IMGS = processImages(
 
     customer_journey_high_fi: {
       name: "customer_journey_high_fi",
-      src: "./assets/images/case_studies/makeright/customer_journey_high_fi.svg",
+      src: "./assets/images/makeright/customer_journey_high_fi.svg",
       alt: "A graphic of a shopping bag",
       width: 93.59,
       height: 90.66,
@@ -254,7 +254,7 @@ const MAKERIGHT_IMGS = processImages(
 
     iterations_checkout_low_fi: {
       name: "iterations_checkout_low_fi",
-      src: "./assets/images/case_studies/makeright/prototypes/iterations_checkout_low_fi.png",
+      src: "./assets/images/makeright/prototypes/iterations_checkout_low_fi.png",
       alt: "A low fidelity prototype of the checkout page",
       width: 2139,
       height: 1305,
@@ -263,7 +263,7 @@ const MAKERIGHT_IMGS = processImages(
 
     iterations_checkout_high_fi: {
       name: "iterations_checkout_high_fi",
-      src: "./assets/images/case_studies/makeright/prototypes/iterations_checkout_high_fi.png",
+      src: "./assets/images/makeright/prototypes/iterations_checkout_high_fi.png",
       alt: "A high fidelity prototype of the checkout page",
       width: 2139,
       height: 1305,
@@ -272,7 +272,7 @@ const MAKERIGHT_IMGS = processImages(
 
     iterations_file_checking_low_fi: {
       name: "iterations_file_checking_low_fi",
-      src: "./assets/images/case_studies/makeright/prototypes/iterations_file_checking_low_fi.png",
+      src: "./assets/images/makeright/prototypes/iterations_file_checking_low_fi.png",
       alt: "A low fidelity prototype of the file checking page",
       width: 2139,
       height: 1305,
@@ -281,7 +281,7 @@ const MAKERIGHT_IMGS = processImages(
 
     iterations_file_checking_high_fi: {
       name: "iterations_file_checking_high_fi",
-      src: "./assets/images/case_studies/makeright/prototypes/iterations_file_checking_high_fi.png",
+      src: "./assets/images/makeright/prototypes/iterations_file_checking_high_fi.png",
       alt: "A high fidelity prototype of the file checking page",
       width: 2139,
       height: 1305,
@@ -290,7 +290,7 @@ const MAKERIGHT_IMGS = processImages(
 
     feedback_overview_before: {
       name: "feedback_overview_before",
-      src: "./assets/images/case_studies/makeright/prototypes/feedback_overview_before.png",
+      src: "./assets/images/makeright/prototypes/feedback_overview_before.png",
       alt: "A condensed stack of images that show the original version of the MakeRight Manufacturer Overview page",
       width: 2084,
       height: 1283,
@@ -299,7 +299,7 @@ const MAKERIGHT_IMGS = processImages(
 
     feedback_overview_after: {
       name: "feedback_overview_after",
-      src: "./assets/images/case_studies/makeright/prototypes/feedback_overview_after.png",
+      src: "./assets/images/makeright/prototypes/feedback_overview_after.png",
       alt: "A snippet of a single scrolling page, the final version of the MakeRight Manufacturer Overview",
       width: 2084,
       height: 1283,
@@ -309,7 +309,7 @@ const MAKERIGHT_IMGS = processImages(
 
     feedback_overview_after_full: {
       name: "feedback_overview_after_full",
-      src: "./assets/images/case_studies/makeright/prototypes/feedback_overview_after_full.png",
+      src: "./assets/images/makeright/prototypes/feedback_overview_after_full.png",
       alt: "The full MakeRight Manufacturer Overview page",
       width: 3840,
       height: 19480,
@@ -319,7 +319,7 @@ const MAKERIGHT_IMGS = processImages(
 
     feedback_printers_before: {
       name: "feedback_printers_before",
-      src: "./assets/images/case_studies/makeright/prototypes/feedback_printers_before.png",
+      src: "./assets/images/makeright/prototypes/feedback_printers_before.png",
       alt: "An older version of the UI for inputting a manufacturer's 3D printer during signup",
       width: 2084,
       height: 1065,
@@ -328,7 +328,7 @@ const MAKERIGHT_IMGS = processImages(
 
     feedback_printers_after: {
       name: "feedback_printers_after",
-      src: "./assets/images/case_studies/makeright/prototypes/feedback_printers_after.png",
+      src: "./assets/images/makeright/prototypes/feedback_printers_after.png",
       alt: "Updated UI for inputting a manufacturer's 3D printer during signup",
       width: 2084,
       height: 1065,
@@ -337,7 +337,7 @@ const MAKERIGHT_IMGS = processImages(
 
     feedback_filament_before: {
       name: "feedback_filament_before",
-      src: "./assets/images/case_studies/makeright/prototypes/feedback_filament_before.png",
+      src: "./assets/images/makeright/prototypes/feedback_filament_before.png",
       alt: "An early version of the UI for inputting a manufacturer's filament during signup",
       width: 2084,
       height: 1149,
@@ -346,7 +346,7 @@ const MAKERIGHT_IMGS = processImages(
 
     feedback_filament_after: {
       name: "feedback_filament_after",
-      src: "./assets/images/case_studies/makeright/prototypes/feedback_filament_after.png",
+      src: "./assets/images/makeright/prototypes/feedback_filament_after.png",
       alt: "Updated UI for inputting a manufacturer's filament during signup",
       width: 2084,
       height: 1149,
@@ -355,7 +355,7 @@ const MAKERIGHT_IMGS = processImages(
 
     feedback_tutorials: {
       name: "feedback_tutorials",
-      src: "./assets/images/case_studies/makeright/prototypes/feedback_tutorial_system.png",
+      src: "./assets/images/makeright/prototypes/feedback_tutorial_system.png",
       alt: "A screenshot of the Tutorial tooltips that were added throughout the manufacturer testing process",
       width: 4568,
       height: 1568,
@@ -363,7 +363,7 @@ const MAKERIGHT_IMGS = processImages(
 
     delivered_project_banner: {
       name: "delivered_project_banner",
-      src: "./assets/images/case_studies/makeright/delivered_project_banner.png",
+      src: "./assets/images/makeright/delivered_project_banner.png",
       alt: "A rendering of a 3D printed elephant, sitting in a cardboard box, with a MakeRight logo on the side, on a table",
       width: 1920,
       height: 500,
@@ -371,7 +371,7 @@ const MAKERIGHT_IMGS = processImages(
 
     connecting_consumers: {
       name: "connecting_consumers",
-      src: "./assets/images/case_studies/makeright/connecting_consumers.svg",
+      src: "./assets/images/makeright/connecting_consumers.svg",
       alt: "A graphic representing connecting consumers to manufacturers",
       width: 224.16,
       height: 177.14,
@@ -379,7 +379,7 @@ const MAKERIGHT_IMGS = processImages(
 
     browseable_storefront: {
       name: "browseable_storefront",
-      src: "./assets/images/case_studies/makeright/browseable_storefront.svg",
+      src: "./assets/images/makeright/browseable_storefront.svg",
       alt: "A graphic of a storefront",
       width: 175.72,
       height: 166.84,
@@ -387,7 +387,7 @@ const MAKERIGHT_IMGS = processImages(
 
     maker_profit: {
       name: "maker_profit",
-      src: "./assets/images/case_studies/makeright/maker_profit.svg",
+      src: "./assets/images/makeright/maker_profit.svg",
       alt: "A graphic of money being 3D printed to represent maker profit",
       width: 158.88,
       height: 178.89,
@@ -395,7 +395,7 @@ const MAKERIGHT_IMGS = processImages(
 
     closing_banner: {
       name: "closing_banner",
-      src: "./assets/images/case_studies/makeright/makeright_closing_banner.png",
+      src: "./assets/images/makeright/makeright_closing_banner.png",
       alt: "A 3D rendering of the word 'MakeRight' in 3D printed letters",
       width: 1920,
       height: 650,
@@ -403,7 +403,7 @@ const MAKERIGHT_IMGS = processImages(
 
     maker_screen_01: {
       name: "maker_screen_01",
-      src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_01.png",
+      src: "./assets/images/makeright/final_screens/maker/no_tutorials/maker_screen_01.png",
       width: 3840,
       height: 2160,
       group: "makeright_maker_final",
@@ -420,7 +420,7 @@ const MAKERIGHT_IMGS = processImages(
 
     maker_screen_02: {
       name: "maker_screen_02",
-      src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_02.png",
+      src: "./assets/images/makeright/final_screens/maker/no_tutorials/maker_screen_02.png",
       width: 3840,
       height: 2160,
       group: "makeright_maker_final",
@@ -435,7 +435,7 @@ const MAKERIGHT_IMGS = processImages(
 
     maker_screen_03: {
       name: "maker_screen_03",
-      src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_03.png",
+      src: "./assets/images/makeright/final_screens/maker/no_tutorials/maker_screen_03.png",
       width: 3840,
       height: 3134,
       group: "makeright_maker_final",
@@ -453,7 +453,7 @@ const MAKERIGHT_IMGS = processImages(
 
     maker_screen_04: {
       name: "maker_screen_04",
-      src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_04.png",
+      src: "./assets/images/makeright/final_screens/maker/no_tutorials/maker_screen_04.png",
       width: 3840,
       height: 6818,
       group: "makeright_maker_final",
@@ -470,7 +470,7 @@ const MAKERIGHT_IMGS = processImages(
 
     maker_screen_05: {
       name: "maker_screen_05",
-      src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_05.png",
+      src: "./assets/images/makeright/final_screens/maker/no_tutorials/maker_screen_05.png",
       width: 3840,
       height: 6198,
       group: "makeright_maker_final",
@@ -491,7 +491,7 @@ const MAKERIGHT_IMGS = processImages(
 
     maker_screen_06: {
       name: "maker_screen_06",
-      src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_06.png",
+      src: "./assets/images/makeright/final_screens/maker/no_tutorials/maker_screen_06.png",
       width: 3840,
       height: 2160,
       group: "makeright_maker_final",
@@ -508,7 +508,7 @@ const MAKERIGHT_IMGS = processImages(
 
     maker_screen_07: {
       name: "maker_screen_07",
-      src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_07.png",
+      src: "./assets/images/makeright/final_screens/maker/no_tutorials/maker_screen_07.png",
       width: 3840,
       height: 2160,
       group: "makeright_maker_final",
@@ -523,7 +523,7 @@ const MAKERIGHT_IMGS = processImages(
 
     maker_screen_08: {
       name: "maker_screen_08",
-      src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_08.png",
+      src: "./assets/images/makeright/final_screens/maker/no_tutorials/maker_screen_08.png",
       width: 3840,
       height: 2160,
       group: "makeright_maker_final",
@@ -540,7 +540,7 @@ const MAKERIGHT_IMGS = processImages(
 
     maker_screen_09: {
       name: "maker_screen_09",
-      src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_09.png",
+      src: "./assets/images/makeright/final_screens/maker/no_tutorials/maker_screen_09.png",
       width: 3840,
       height: 2160,
       group: "makeright_maker_final",
@@ -566,7 +566,7 @@ const MAKERIGHT_IMGS = processImages(
 
     maker_screen_10: {
       name: "maker_screen_10",
-      src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_10.png",
+      src: "./assets/images/makeright/final_screens/maker/no_tutorials/maker_screen_10.png",
       width: 3840,
       height: 6600,
       group: "makeright_maker_final",
@@ -586,7 +586,7 @@ const MAKERIGHT_IMGS = processImages(
 
     maker_screen_10_with_tutorials: {
       name: "maker_screen_10_with_tutorials",
-      src: "./assets/images/case_studies/makeright/final_screens/maker/tutorials/maker_screen_10.png",
+      src: "./assets/images/makeright/final_screens/maker/tutorials/maker_screen_10.png",
       width: 3840,
       height: 6600,
       group: "makeright_maker_final",
@@ -613,7 +613,7 @@ const MAKERIGHT_IMGS = processImages(
 
     maker_screen_11: {
       name: "maker_screen_11",
-      src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_11.png",
+      src: "./assets/images/makeright/final_screens/maker/no_tutorials/maker_screen_11.png",
       width: 3840,
       height: 2160,
       group: "makeright_maker_final",
@@ -628,7 +628,7 @@ const MAKERIGHT_IMGS = processImages(
 
     maker_screen_12: {
       name: "maker_screen_12",
-      src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_12.png",
+      src: "./assets/images/makeright/final_screens/maker/no_tutorials/maker_screen_12.png",
       width: 3840,
       height: 4518,
       group: "makeright_maker_final",
@@ -649,7 +649,7 @@ const MAKERIGHT_IMGS = processImages(
 
     maker_screen_13: {
       name: "maker_screen_13",
-      src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_13.png",
+      src: "./assets/images/makeright/final_screens/maker/no_tutorials/maker_screen_13.png",
       width: 3840,
       height: 2160,
       group: "makeright_maker_final",
@@ -666,7 +666,7 @@ const MAKERIGHT_IMGS = processImages(
 
     maker_screen_14: {
       name: "maker_screen_14",
-      src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_14.png",
+      src: "./assets/images/makeright/final_screens/maker/no_tutorials/maker_screen_14.png",
       width: 3840,
       height: 4538,
       group: "makeright_maker_final",
@@ -683,7 +683,7 @@ const MAKERIGHT_IMGS = processImages(
 
     maker_screen_15: {
       name: "maker_screen_15",
-      src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_15.png",
+      src: "./assets/images/makeright/final_screens/maker/no_tutorials/maker_screen_15.png",
       width: 3840,
       height: 2160,
       group: "makeright_maker_final",
@@ -702,7 +702,7 @@ const MAKERIGHT_IMGS = processImages(
 
     maker_screen_16: {
       name: "maker_screen_16",
-      src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_16.png",
+      src: "./assets/images/makeright/final_screens/maker/no_tutorials/maker_screen_16.png",
       width: 3840,
       height: 2160,
       group: "makeright_maker_final",
@@ -721,7 +721,7 @@ const MAKERIGHT_IMGS = processImages(
 
     maker_screen_17: {
       name: "maker_screen_17",
-      src: "./assets/images/case_studies/makeright/final_screens/maker/no_tutorials/maker_screen_17.png",
+      src: "./assets/images/makeright/final_screens/maker/no_tutorials/maker_screen_17.png",
       width: 3840,
       height: 5270,
       group: "makeright_maker_final",
@@ -740,7 +740,7 @@ const MAKERIGHT_IMGS = processImages(
 
     customer_screen_01: {
       name: "customer_screen_01",
-      src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_01.png",
+      src: "./assets/images/makeright/final_screens/customer/customer_screen_01.png",
       width: 3840,
       height: 2160,
       group: "makeright_customer_final",
@@ -755,7 +755,7 @@ const MAKERIGHT_IMGS = processImages(
     },
     customer_screen_02: {
       name: "customer_screen_02",
-      src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_02.png",
+      src: "./assets/images/makeright/final_screens/customer/customer_screen_02.png",
       width: 3840,
       height: 2160,
       group: "makeright_customer_final",
@@ -769,7 +769,7 @@ const MAKERIGHT_IMGS = processImages(
     },
     customer_screen_03: {
       name: "customer_screen_03",
-      src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_03.png",
+      src: "./assets/images/makeright/final_screens/customer/customer_screen_03.png",
       width: 3840,
       height: 4992,
       group: "makeright_customer_final",
@@ -783,7 +783,7 @@ const MAKERIGHT_IMGS = processImages(
     },
     customer_screen_04: {
       name: "customer_screen_04",
-      src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_04.png",
+      src: "./assets/images/makeright/final_screens/customer/customer_screen_04.png",
       width: 3840,
       height: 2736,
       group: "makeright_customer_final",
@@ -799,7 +799,7 @@ const MAKERIGHT_IMGS = processImages(
     },
     customer_screen_05: {
       name: "customer_screen_05",
-      src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_05.png",
+      src: "./assets/images/makeright/final_screens/customer/customer_screen_05.png",
       width: 3840,
       height: 2160,
       group: "makeright_customer_final",
@@ -816,7 +816,7 @@ const MAKERIGHT_IMGS = processImages(
 
     customer_screen_06: {
       name: "customer_screen_06",
-      src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_06.png",
+      src: "./assets/images/makeright/final_screens/customer/customer_screen_06.png",
       width: 3840,
       height: 7016,
       group: "makeright_customer_final",
@@ -831,7 +831,7 @@ const MAKERIGHT_IMGS = processImages(
     },
     customer_screen_07: {
       name: "customer_screen_07",
-      src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_07.png",
+      src: "./assets/images/makeright/final_screens/customer/customer_screen_07.png",
       width: 3840,
       height: 5030,
       group: "makeright_customer_final",
@@ -849,7 +849,7 @@ const MAKERIGHT_IMGS = processImages(
 
     customer_screen_08: {
       name: "customer_screen_08",
-      src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_08.png",
+      src: "./assets/images/makeright/final_screens/customer/customer_screen_08.png",
       width: 3840,
       height: 4042,
       group: "makeright_customer_final",
@@ -865,7 +865,7 @@ const MAKERIGHT_IMGS = processImages(
 
     customer_screen_09: {
       name: "customer_screen_09",
-      src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_09.png",
+      src: "./assets/images/makeright/final_screens/customer/customer_screen_09.png",
       width: 3840,
       height: 4688,
       group: "makeright_customer_final",
@@ -881,7 +881,7 @@ const MAKERIGHT_IMGS = processImages(
 
     customer_screen_10: {
       name: "customer_screen_10",
-      src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_10.png",
+      src: "./assets/images/makeright/final_screens/customer/customer_screen_10.png",
       width: 3840,
       height: 3248,
       group: "makeright_customer_final",
@@ -895,7 +895,7 @@ const MAKERIGHT_IMGS = processImages(
 
     customer_screen_11: {
       name: "customer_screen_11",
-      src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_11.png",
+      src: "./assets/images/makeright/final_screens/customer/customer_screen_11.png",
       width: 3840,
       height: 2160,
       group: "makeright_customer_final",
@@ -908,7 +908,7 @@ const MAKERIGHT_IMGS = processImages(
     },
     customer_screen_12: {
       name: "customer_screen_12",
-      src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_12.png",
+      src: "./assets/images/makeright/final_screens/customer/customer_screen_12.png",
       width: 3840,
       height: 3054,
       group: "makeright_customer_final",
@@ -929,7 +929,7 @@ const MAKERIGHT_IMGS = processImages(
     },
     customer_screen_13: {
       name: "customer_screen_13",
-      src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_13.png",
+      src: "./assets/images/makeright/final_screens/customer/customer_screen_13.png",
       width: 3840,
       height: 4504,
       group: "makeright_customer_final",
@@ -952,7 +952,7 @@ const MAKERIGHT_IMGS = processImages(
     },
     customer_screen_14: {
       name: "customer_screen_14",
-      src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_14.png",
+      src: "./assets/images/makeright/final_screens/customer/customer_screen_14.png",
       width: 3840,
       height: 3762,
       group: "makeright_customer_final",
@@ -975,7 +975,7 @@ const MAKERIGHT_IMGS = processImages(
 
     customer_screen_15: {
       name: "customer_screen_15",
-      src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_15.png",
+      src: "./assets/images/makeright/final_screens/customer/customer_screen_15.png",
       width: 3840,
       height: 3762,
       group: "makeright_customer_final",
@@ -992,7 +992,7 @@ const MAKERIGHT_IMGS = processImages(
 
     customer_screen_16: {
       name: "customer_screen_16",
-      src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_16.png",
+      src: "./assets/images/makeright/final_screens/customer/customer_screen_16.png",
       width: 3840,
       height: 4576,
       group: "makeright_customer_final",
@@ -1015,7 +1015,7 @@ const MAKERIGHT_IMGS = processImages(
 
     customer_screen_17: {
       name: "customer_screen_17",
-      src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_17.png",
+      src: "./assets/images/makeright/final_screens/customer/customer_screen_17.png",
       width: 3840,
       height: 7340,
       group: "makeright_customer_final",
@@ -1029,7 +1029,7 @@ const MAKERIGHT_IMGS = processImages(
 
     customer_screen_18: {
       name: "customer_screen_18",
-      src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_18.png",
+      src: "./assets/images/makeright/final_screens/customer/customer_screen_18.png",
       width: 3840,
       height: 2662,
       group: "makeright_customer_final",
@@ -1045,7 +1045,7 @@ const MAKERIGHT_IMGS = processImages(
 
     customer_screen_19: {
       name: "customer_screen_19",
-      src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_19.png",
+      src: "./assets/images/makeright/final_screens/customer/customer_screen_19.png",
       width: 3840,
       height: 7750,
       group: "makeright_customer_final",
@@ -1061,7 +1061,7 @@ const MAKERIGHT_IMGS = processImages(
 
     customer_screen_20: {
       name: "customer_screen_20",
-      src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_20.png",
+      src: "./assets/images/makeright/final_screens/customer/customer_screen_20.png",
       width: 3840,
       height: 3474,
       group: "makeright_customer_final",
@@ -1077,7 +1077,7 @@ const MAKERIGHT_IMGS = processImages(
 
     customer_screen_21: {
       name: "customer_screen_21",
-      src: "./assets/images/case_studies/makeright/final_screens/customer/customer_screen_21.png",
+      src: "./assets/images/makeright/final_screens/customer/customer_screen_21.png",
       width: 3840,
       height: 9206,
       group: "makeright_customer_final",
