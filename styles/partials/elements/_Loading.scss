@@ -30,6 +30,10 @@
     opacity: 1;
     text-align: center;
     width: calc(var(--site-max-width) - var(--scrollbar-width));
+    @include md-down{
+      width: var(--site-max-width);
+      left: 50%;
+    }
   }
 
   &--ellipse {
@@ -40,10 +44,16 @@
   &--graphic {
     // max-width: calc(100vw - 2.35rem);
     max-width: calc(100vw - 4.35rem);
-    width: 12rem;
+    width: 10rem;
     display: flex;
     @include b-rad;
     overflow: hidden;
+    @include mx-auto;
+    
+    @include md-down{
+      
+      width: 8rem;
+    }
     * {
       object-fit: contain;
       max-width: 100%;

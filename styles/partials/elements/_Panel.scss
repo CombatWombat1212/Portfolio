@@ -42,6 +42,10 @@
   &--title {
     @include h1;
   }
+  &--subtitle {
+    @include h2;
+    font-weight: 500;
+  }
 
   &--subheading {
     h1 + & {

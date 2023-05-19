@@ -63,7 +63,7 @@ function MainHeading() {
     return (
       <>
         <TitleText className="color--secondary">Sam </TitleText>
-        <AnimatedText className="studypanel--title color--secondary" main="Giustizia" alternate="Juh-stee-zee-uh" />
+        <AnimatedText className="studypanel--title color--secondary" innerClassName="studypanel--subtitle color--secondary" main="Giustizia" alternate="Juh-stee-zee-uh" />
       </>
     );
   };

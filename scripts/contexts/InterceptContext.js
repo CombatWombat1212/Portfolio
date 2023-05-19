@@ -4,8 +4,8 @@ import React, { createContext, use, useContext, useEffect, useRef, useState } fr
 const InterceptContext = createContext();
 
 
-const DEFAULT_WAIT = 350;
-// const DEFAULT_WAIT = 100000;
+const MINIMUM_WAIT = 425;
+// const MINIMUM_WAIT = 100000;
 export const InterceptProvider = ({ children }) => {
   const [intercept, setIntercept] = useState(false);
   const [routeChanging, setRouteChanging] = useState(false);
@@ -19,11 +19,11 @@ export const InterceptProvider = ({ children }) => {
   const routeChangeEndHandler = () => {
     const duration = Date.now() - routeChangeStartTimestamp.current;
 
-    if (duration < DEFAULT_WAIT) {
+    if (duration < MINIMUM_WAIT) {
       setTimeout(() => {
         setRouteChanging(false);
         setIntercept(false);
-      }, DEFAULT_WAIT - duration);
+      }, MINIMUM_WAIT - duration);
     } else {
       setRouteChanging(false);
       setIntercept(false);
