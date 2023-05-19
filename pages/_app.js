@@ -18,6 +18,8 @@ import { splitPx } from "@/scripts/GlobalUtilities";
 import useScreenWidth from "@/scripts/hooks/useScreenWidth";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import Providers from "@/scripts/contexts/Providers";
+import Head from "next/head";
+import Favicon from "@/components/head/Favicon";
 
 // const style =
 // `font-family: "Gira Sans"; font-size: 1.4375rem;` +
@@ -130,19 +132,18 @@ export default function App({ Component, pageProps }) {
     },
   };
 
-
   const bp = useBreakpoint();
   useEffect(() => {
     console.log(bp);
   }, [bp]);
 
-
-
-
-
-
   return (
     <Providers>
+        <Favicon />
+      <Head>
+        <title>Sam Giustizia</title>        
+        <link rel="manifest" href="/site.webmanifest" />
+      </Head>
       <LoadingScreen />
       <div className="site">
         <Layout>
@@ -154,4 +155,3 @@ export default function App({ Component, pageProps }) {
     </Providers>
   );
 }
-

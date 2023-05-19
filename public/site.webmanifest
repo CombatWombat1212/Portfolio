@@ -1,0 +1,13 @@
+{
+  "name": "Sam Giustizia | Multidisciplinary Designer",
+  "short_name": "Sam Giustizia's Portfolio",
+  "icons": [
+    { "src": "/favicons/favicon_dark-android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/favicons/favicon_dark-android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "start_url": "/",
+  "scope": "/",
+  "theme_color": "#074391",
+  "background_color": "#F3F3F7",
+  "display": "standalone"
+}
