@@ -139,11 +139,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <Providers>
-        <Favicon />
-      <Head>
-        <title>Sam Giustizia</title>        
-        <link rel="manifest" href="/site.webmanifest" />
-      </Head>
+      <Favicon />
       <LoadingScreen />
       <div className="site">
         <Layout>

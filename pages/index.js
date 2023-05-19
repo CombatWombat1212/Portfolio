@@ -13,6 +13,7 @@ import { splitPx } from "@/scripts/GlobalUtilities";
 import AnimatedText from "@/components/global/AnimText";
 import { squiggle } from "@/data/ICONS";
 import { Graphic } from "@/components/sections/Sections";
+import Seo from "@/components/head/Seo";
 
 function Index() {
   const captions = ["Have a look-see", "Take a gander", "Check it", "I must know", "Gimme", "Go on...", "Do tell", "I'm all ears"];
@@ -20,6 +21,8 @@ function Index() {
 
   return (
     <>
+      <Seo page="home" />
+
       <PanelWrapper id="Home" variant="home">
         <Panel id="Home--Hero" type="img-desc" className={`studypanel studypanel__home`}>
           <PanelDesc variant={"home"}>
@@ -89,6 +92,5 @@ function MainHeading() {
     </ResponsiveText>
   );
 }
-
 
 export default Index;
