@@ -1542,7 +1542,7 @@ h3 + .studypanel--paragraph {
     order: 1;
     margin-right: auto;
     margin-left: auto;
-    margin-top: 2.65rem;
+    margin-top: 2.85rem;
     width: 62.08333%;
   }
 }
@@ -9098,6 +9098,10 @@ h3 + .studypanel--paragraph {
   }
 }
 
+.studypanel--wrapper:nth-child(2) {
+  margin-top: 0;
+}
+
 #Home.studypanel--wrapper {
   height: calc(100vh - var(--nav-height)) !important;
   margin: 0 !important;
@@ -9105,8 +9109,7 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 49.9375em) {
   #Home.studypanel--wrapper {
-    height: calc(95vh - var(--nav-height)) !important;
-    margin-bottom: -7.5rem !important;
+    height: calc(100vh - var(--nav-height)) !important;
   }
 }
 

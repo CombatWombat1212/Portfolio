@@ -1,3 +1,19 @@
+
+.studypanel {
+
+
+  &--wrapper{
+    &:nth-child(2) {
+      margin-top: 0;
+    }  
+  }
+
+
+}
+
+
+
+
 #Home {
   .studypanel {
     @at-root #Home.studypanel--wrapper {
@@ -5,10 +21,12 @@
       margin: 0 !important;
 
       @include md-down {
-        height: calc(95vh - var(--nav-height)) !important;
-        margin-bottom: -7.5rem !important;
+        // height: calc(95vh - var(--nav-height)) !important;
+        // margin-bottom: -7.5rem !important;
+        height: calc(100vh - var(--nav-height)) !important;
       }
     }
+
 
     &--img {
       @include mx-auto;

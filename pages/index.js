@@ -19,6 +19,8 @@ import useListener from "@/scripts/hooks/useListener";
 import useHorizontalResize from "@/scripts/hooks/useHorizontalResize";
 import { splitPx } from "@/scripts/GlobalUtilities";
 import AnimatedText from "@/components/global/AnimText";
+import { squiggle } from "@/data/ICONS";
+import { Graphic } from "@/components/sections/Sections";
 
 function Index() {
   const captions = ["Have a look-see", "Take a gander", "Check it", "I must know", "Gimme", "Go on...", "Do tell", "I'm all ears"];
@@ -42,8 +44,7 @@ function Index() {
             <p className="studypanel--paragraph text--body">This is my portfolio. Enjoy your stay :)</p>
           </PanelDesc>
           <PanelImg>
-            {/* TODO: fix now that i know what the standard is here */}
-            <Mask src="/assets/images/flair/Arrow_Squiggle.svg" alt="Squiggly arrow pointing downwards" width={160.42} height={248.06} />
+            <Graphic type="mask" img={squiggle} />
           </PanelImg>
         </Panel>
       </PanelWrapper>
@@ -62,8 +63,8 @@ function MainHeading() {
   const TitleName = () => {
     return (
       <>
-        <TitleText className="color--secondary">Sam </TitleText>
-        <AnimatedText className="studypanel--title color--secondary" innerClassName="studypanel--subtitle color--secondary" main="Giustizia" alternate="Juh-stee-zee-uh" />
+        <TitleText className="color--secondary">Sam Giustizia</TitleText>
+        {/* <AnimatedText className="studypanel--title color--secondary" innerClassName="studypanel--subtitle color--secondary" main="Giustizia" alternate="Juh-stee-zee-uh" /> */}
       </>
     );
   };

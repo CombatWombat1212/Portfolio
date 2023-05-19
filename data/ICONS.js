@@ -159,6 +159,15 @@ const ICONS = {
     height: 512,
   },
 
+
+  squiggle: {
+    name: "squiggle",
+    src: "/assets/icons/Arrow_Squiggle.svg",
+    alt: "Squiggle arrow",
+    width: 160.42,
+    height: 248.06,
+  },
+
 };
 
 
@@ -192,9 +201,11 @@ const menu = new Icon(ICONS.menu);
 const stack = new Icon(ICONS.stack);
 const play = new Icon(ICONS.play);
 
+const squiggle = new Icon(ICONS.squiggle);
+
 
 export default ICONS
-export { arrow_right, arrow_left, arrow_down, chevron_down, chevron_right,chevron_left, document, email, instagram, linkedin, loading, loading_white, checkmark, xmark, stack, play,menu }
+export { arrow_right, arrow_left, arrow_down, chevron_down, chevron_right,chevron_left, document, email, instagram, linkedin, loading, loading_white, checkmark, xmark, stack, play,menu, squiggle }
   
 
 
