@@ -38,7 +38,10 @@ function ButtonIcon({ img, type }) {
 
 function Inner({ children, className, type, icon, animation, color, tag, ...props }) {
   if (typeof icon == "string") icon = icon.split(" ");
-  if (icon?.length < 3) console.error("Button icon prop must be a string with 3 values separated by spaces, or an array of those same three values. These are the values: [iconName, iconSide, iconType]. Icon name must match the name of the imported image in the ICONS.js file.  The iconSide value must be either 'left', 'right', or 'alone'. The iconType value must be either 'img' or 'mask ");
+  if (icon?.length < 3)
+    console.error(
+      "Button icon prop must be a string with 3 values separated by spaces, or an array of those same three values. These are the values: [iconName, iconSide, iconType]. Icon name must match the name of the imported image in the ICONS.js file.  The iconSide value must be either 'left', 'right', or 'alone'. The iconType value must be either 'img' or 'mask "
+    );
 
   if (icon) var [iconName, iconSide, iconType] = icon;
 
@@ -58,32 +61,30 @@ function Inner({ children, className, type, icon, animation, color, tag, ...prop
   );
 }
 
-function Button({ children, className, type, icon, animation, color, tag, reference,copy, ...props }) {
+function Button({ children, className, type, icon, animation, color, tag, reference, copy, ...props }) {
   const [iconName, iconSide, iconType] = icon || [];
 
-  const buttonClasses = ['button'];
+  const buttonClasses = ["button"];
   if (className) buttonClasses.push(className);
   if (type) buttonClasses.push(`button__${type}`);
   if (color) buttonClasses.push(`button__${color}`);
   if (iconSide) buttonClasses.push(`button__${iconSide}`);
   if (animation) buttonClasses.push(`button__${animation}`);
 
-  var tabIndex = tag === 'a' ? 0 : null;
-
+  var tabIndex = tag === "a" ? 0 : null;
 
   const copyHandler = async () => {
     if (copy) {
       try {
         await navigator.clipboard.writeText(copy);
-        // console.log('Text copied to clipboard');
       } catch (err) {
-        console.error('Failed to copy text: ', err);
+        console.error("Failed to copy text: ", err);
       }
     }
   };
 
   const commonProps = {
-    className: buttonClasses.join(' '),
+    className: buttonClasses.join(" "),
     tabIndex: tabIndex,
     reference: reference,
     ...props,
@@ -91,28 +92,26 @@ function Button({ children, className, type, icon, animation, color, tag, refere
     ...(copy !== undefined ? { onClick: copyHandler } : {}),
   };
 
+  const ButtonWrapper = tag === "a" ? DLink : tag;
 
+  const buttonProps = {
+    className,
+    type,
+    icon,
+    animation,
+    color,
+    tag,
+    ...props,
+  };
 
-  const ButtonWrapper = tag;
+  const wrapperProps = tag === "a" ? { ...commonProps } : { ...commonProps, ref: reference };
 
-  return tag === 'a' ? (
-    <DLink {...commonProps}>
-      <Inner className={className} type={type} icon={icon} animation={animation} color={color} tag={tag} {...props}>
-        {children}
-      </Inner>
-    </DLink>
-  ) : (
-    <ButtonWrapper {...commonProps} ref={reference}>
-      <Inner className={className} type={type} icon={icon} animation={animation} color={color} tag={tag} {...props}>
-        {children}
-      </Inner>
+  return (
+    <ButtonWrapper {...wrapperProps}>
+      <Inner {...buttonProps}>{children}</Inner>
     </ButtonWrapper>
   );
 }
-
-
-
-
 
 Button.defaultProps = {
   type: "regular",
@@ -121,7 +120,19 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
-  color: propTypes.oneOf(["primary", "secondary", "tertiary", "transparent-primary", "transparent-secondary", "transparent-tertiary", "transparent-background", "background-primary", "background_darkest-primary", "background-secondary", "background-tertiary"]),
+  color: propTypes.oneOf([
+    "primary",
+    "secondary",
+    "tertiary",
+    "transparent-primary",
+    "transparent-secondary",
+    "transparent-tertiary",
+    "transparent-background",
+    "background-primary",
+    "background_darkest-primary",
+    "background-secondary",
+    "background-tertiary",
+  ]),
   type: propTypes.oneOf(["regular", "bottom"]),
   tag: propTypes.oneOf(["a", "div"]),
 };

@@ -19,8 +19,10 @@ function NavLink({ item, nav, className, type }) {
 
   const onClickHandler = () => {
     setClicked(true);
-    console.log(item.link, router.pathname)
-    if(type == "menu" && item.link == router.pathname) {
+    const isSamePathname = item.link == router.pathname;
+    const isSamePathHash = item.link == router.asPath;
+    const isSamePage = isSamePathname || isSamePathHash;
+    if(type == "menu" && isSamePage) {
       setOpen(false);
     }
   };

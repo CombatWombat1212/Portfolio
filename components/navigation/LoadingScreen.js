@@ -109,6 +109,7 @@ function Text() {
     <>just one sec<Dot /></>,
     <i>*elevator music*</i>,
     `catch the game last night?`,
+    <>it's pronounced <i>juh-stee-zee-uh</i></>,
     `lemme grab that for ya`,
     `tighten your Wii remote strap`,
     `wanna do something after this?`,

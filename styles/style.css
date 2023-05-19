@@ -9145,8 +9145,8 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 49.9375em) {
   #Home .studypanel--img {
     display: block;
-    margin-top: 6rem;
-    width: 5.5rem;
+    margin-top: 5.5rem;
+    width: 6rem;
   }
 }
 

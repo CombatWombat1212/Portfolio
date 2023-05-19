@@ -1,7 +1,8 @@
 import { processGallery } from "@/scripts/processGallery";
 import { v4 as uuidv4 } from "uuid";
+import { HOME_IMGS } from "./HOME_IMGS";
 
-var CASE_STUDIES = [
+const CASE_STUDIES = caseStudiesInit([
   {
     name: "MakeRight",
     id: "Makeright",
@@ -37,19 +38,8 @@ var CASE_STUDIES = [
     },
 
     imgs: {
-      main: {
-        src: "./assets/images/case_study_thumbnails/MakeRight.png",
-        alt: "3D printed plastic elephant diving into a cardboard box",
-        width: 1038,
-        height: 944,
-      },
-
-      alt: {
-        src: "./assets/images/case_study_thumbnails/MakeRight_Alt.png",
-        alt: "3D printed plastic elephant sitting in a cardboard box",
-        width: 1038,
-        height: 716,
-      },
+      main: HOME_IMGS.makeright_main,
+      alt: HOME_IMGS.makeright_alt,
     },
 
     link: "/Studies/MakeRight",
@@ -85,24 +75,11 @@ var CASE_STUDIES = [
           </>
         ),
       },
-
       roles: ["3D Designer / Generalist"],
     },
 
     imgs: {
-      main: {
-        src: "./assets/images/case_study_thumbnails/MADE.png",
-        alt: "3D rendering of a blue dress-shirt",
-        width: 526,
-        height: 823,
-      },
-
-      // alt: {
-      //   src: "./assets/images/case_study_thumbnails/MADE.png",
-      //   alt: "3D rendering of a blue dress-shirt",
-      //   width: 526,
-      //   height: 823,
-      // },
+      main: HOME_IMGS.made_main,
     },
 
     link: "/Studies/MADE",
@@ -131,12 +108,7 @@ var CASE_STUDIES = [
     },
 
     imgs: {
-      main: {
-        src: "./assets/images/case_study_thumbnails/KoalaKo.png",
-        alt: "3D rendering of a phone with an app called 'KoalaKo' open on the screen",
-        width: 738,
-        height: 842,
-      },
+      main: HOME_IMGS.koalako_main,
     },
 
     link: "/Studies/KoalaKo",
@@ -155,23 +127,12 @@ var CASE_STUDIES = [
       ),
     },
     imgs: {
-      main: {
-        src: "./assets/images/case_study_thumbnails/Explorations.png",
-        alt: "3D rendering of a worn steel compass",
-        width: 730,
-        height: 1626,
-      },
-
-      alt: {
-        src: "./assets/images/case_study_thumbnails/Explorations_Alt.png",
-        alt: "3D rendering of a worn steel compass on its side",
-        width: 730,
-        height: 1626,
-      },
+      main: HOME_IMGS.explorations_main,
+      alt: HOME_IMGS.explorations_alt,
     },
     link: "/Explorations",
   },
-];
+]);
 
 function addKey(arr) {
   for (var i = 0; i < arr.length; i++) {
@@ -197,7 +158,6 @@ function caseStudiesInit(arr) {
   return arr;
 }
 
-CASE_STUDIES = caseStudiesInit(CASE_STUDIES);
 const STUDY_LINKS = CASE_STUDIES.map((study) => study.link);
 const STUDY_MAKERIGHT = CASE_STUDIES[0];
 const STUDY_MADE = CASE_STUDIES[1];

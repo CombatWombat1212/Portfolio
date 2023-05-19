@@ -2,6 +2,7 @@ import Experience from "@/components/global/Experience";
 import WhatIm from "@/components/global/WhatIm";
 import Section, { Chapter, Column, Description, Graphic, Heading, Title } from "@/components/sections/Sections";
 import CaseStudyPage from "@/components/studies/CaseStudyPage";
+import Nobr from "@/components/utilities/Nobr";
 import { ABOUT_IMGS } from "@/data/ABOUT_IMGS";
 import { STUDY_EXPLORATIONS } from "@/data/CASE_STUDIES";
 import MAKERIGHT_IMGS from "@/data/MAKERIGHT_IMGS";
@@ -155,7 +156,7 @@ function About() {
           <div className="toolbelt">
             <Heading className="color--secondary">
               I Put the &lsquo;Discipline&rsquo; <br className="d-none d-md-flex d-sm-none" />
-              in &lsquo;Multidisciplinary&rsquo;
+              <Nobr>in &lsquo;Multidisciplinary&rsquo;</Nobr>
             </Heading>
 
             <div className="toolbelt--inner">

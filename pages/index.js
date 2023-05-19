@@ -1,12 +1,4 @@
-//Libraries
-// import Image from "next/image";
-
-//Data
 import CASE_STUDIES from "@/data/CASE_STUDIES";
-
-//Utilities
-
-//Components
 import { PanelWrapper, PanelDesc, PanelImg, Panel, StudyPanel } from "@/components/elements/Panel";
 import Mask from "/components/utilities/Mask";
 import { useEffect, useRef, useState } from "react";

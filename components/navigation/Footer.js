@@ -83,7 +83,8 @@ function Contact() {
             </div>
 
             <div className="contact--child contact--actions">
-              <Button className="contact--button d-sm-none" icon={["email", "right", "mask"]} copy={"ssamgiustizia@outlook.com"}>
+              
+              <Button className="contact--button d-sm-none" icon={["email", "right", "mask"]} copy={"ssamgiustizia@outlook.com"} animation="scale-in"> 
                 <span>Say whatup!</span>
               </Button>
 
