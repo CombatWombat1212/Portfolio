@@ -23,7 +23,7 @@ function slideshowSetPosition(slide) {
   const index = slide.states.img.index;
 
   var card = { width: 0, height: 0 };
-  if (!container?.current || !container.children || container.children.length <= 1) return;
+  if (!container || !container.children || container.children.length <= 1) return;
   card.width = getElemWidth(container.children[1]);
 
   var scrollTarget = card.width * index;

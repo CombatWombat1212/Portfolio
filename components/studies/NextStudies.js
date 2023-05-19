@@ -133,7 +133,7 @@ function Study({ study, button, index }) {
           type="bottom"
           className={`next-study--button next-study--button__${btnIconSide} link`}
           icon={[btnIcon, btnIconSide, "mask"]}
-          animation="pulse-right">
+          animation={`pulse-${btnIconSide}`}>
           {btnText}
         </Button>
       </div>

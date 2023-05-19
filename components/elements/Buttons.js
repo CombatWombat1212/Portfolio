@@ -45,21 +45,22 @@ function Inner({ children, className, type, icon, animation, color, tag, ...prop
 
   if (icon) var [iconName, iconSide, iconType] = icon;
 
-  return (
-    <>
-      {icon ? (
-        <>
-          {(iconSide == "alone" || iconSide == "middle") && <ButtonIcon img={iconName} type={iconType}></ButtonIcon>}
-          {iconSide == "left" && <ButtonIcon img={iconName} type={iconType}></ButtonIcon>}
-          {iconSide != "alone" && iconSide != "middle" && <ButtonCopy>{children}</ButtonCopy>}
-          {iconSide == "right" && <ButtonIcon img={iconName} type={iconType}></ButtonIcon>}
-        </>
-      ) : (
-        <>{iconSide != "alone" && iconSide != "middle" && <ButtonCopy>{children}</ButtonCopy>}</>
-      )}
-    </>
-  );
-}
+return (
+  <>
+    {icon && ((iconSide === "alone" || iconSide === "middle" || iconSide === "left") && 
+      <ButtonIcon img={iconName} type={iconType} />
+    )}
+
+    {(iconSide !== "alone" && iconSide !== "middle") && 
+      <ButtonCopy>{children}</ButtonCopy>
+    }
+
+    {icon && (iconSide === "right") &&
+      <ButtonIcon img={iconName} type={iconType} />
+    }
+  </>
+);
+  }
 
 function Button({ children, className, type, icon, animation, color, tag, reference, copy, ...props }) {
   const [iconName, iconSide, iconType] = icon || [];
