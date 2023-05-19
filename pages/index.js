@@ -30,9 +30,14 @@ function Index() {
               <MainHeading />
             </h1>
             {/* TODO: i really think this should be 2 lines not 3.  More about length than of element size, i think you can trim it a bit */}
-            <h3 className="studypanel--subheading">
+            {/* <h3 className="studypanel--subheading">
               I&apos;m a multidisciplinary designer,
               <br className="d-sm-none " /> <Nobr>and maker</Nobr> <Nobr>of digital solutions</Nobr>,
+              <br className="d-sm-none " /> <Nobr>tailor-fitted</Nobr> to <Nobr>real-world</Nobr> problems.
+            </h3> */}
+
+            <h3 className="studypanel--subheading">
+              <Nobr>I make</Nobr> <Nobr>of digital solutions</Nobr>,
               <br className="d-sm-none " /> <Nobr>tailor-fitted</Nobr> to <Nobr>real-world</Nobr> problems.
             </h3>
 

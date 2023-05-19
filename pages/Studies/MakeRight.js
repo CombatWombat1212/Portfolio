@@ -14,6 +14,7 @@ import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import Nobr from "@/components/utilities/Nobr";
 import QuoteTable from "@/components/global/QuoteTable";
 import ResponsiveText from "@/components/global/ResponsiveText";
+import Seo from "@/components/head/Seo";
 
 function MakeRight({ pop }) {
   const study = STUDY_MAKERIGHT;
@@ -28,6 +29,8 @@ function MakeRight({ pop }) {
 
   return (
     <>
+      <Seo page="makeright" />
+
       <CaseStudyPage id={study.id} study={study}>
         <Chapter id="Overview" name="Overview">
           <Section id="Overview--Background" type="overview">
@@ -173,7 +176,9 @@ function MakeRight({ pop }) {
 
           <Section id="Plan--Gantt" className="flex-col">
             <Title>Project Plan</Title>
-            <Heading>Project phases <Nobr>and timeline</Nobr></Heading>
+            <Heading>
+              Project phases <Nobr>and timeline</Nobr>
+            </Heading>
             <Gantt study="MakeRight" />
           </Section>
         </Chapter>
@@ -920,7 +925,7 @@ function MakeRight({ pop }) {
               Considering entire userflows and journeys <br className="d-lg-none" />
               makes for far better UI than individual features
             </Heading>
-            <Description className={`text-col-2 ${!isLgAndDown ? "text-gap-6" : "text-gap-4" }`}>
+            <Description className={`text-col-2 ${!isLgAndDown ? "text-gap-6" : "text-gap-4"}`}>
               <p>
                 When I began planning my approach to prototyping, I chose a number of the service&rsquo;s most important features. From there, I
                 intended to create mockups of each. Eventually, I reached the question of how the service would verify that makers were capable and

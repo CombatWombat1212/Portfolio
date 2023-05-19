@@ -49,14 +49,17 @@ function Split({ before, after, square }) {
   const lineRef = useRef(null);
 
   const split = {
+    ref: splitRef,
     elem: splitRef.current,
     width: 0,
     left: 0,
     progress: 0.5,
+    divisionRef: divisionRef,
     division: divisionRef.current,
     grabbed: 0,
     line: {
       elem: lineRef.current,
+      ref: lineRef,
       width: 0,
     },
     pos: {
@@ -69,9 +72,11 @@ function Split({ before, after, square }) {
   };
 
   useEffect(() => {
-    if (!split.elem || !split.line.elem || !split.division) return;
+    if (!split.ref.current || !split.line.ref.current || !split.divisionRef.current) return;
     setMounted(true);
-  }, [split.elem, split.line.elem, split.division]);
+  }, [split.ref, split.line.ref, split.divisionRef]);
+
+
 
   useEffect(() => {
     if (!mounted) return;
@@ -174,7 +179,7 @@ function Split({ before, after, square }) {
   useEffect(() => {
     if (!mounted) return;
     refresh();
-  }, [loading, bp]);
+  }, [mounted, loading, bp]);
 
   function refresh() {
     splitGetScale(split);
@@ -192,7 +197,7 @@ function Split({ before, after, square }) {
 
 
   return (
-    <div className={`split ${isSquare && "split__square"}`} ref={splitRef}>
+    <div className={`split ${isSquare ? "split__square" : ""}`} ref={splitRef}>
       <div className="split--viewer split--before">
         <Graphic type="image" className="split--graphic" img={before} />
         <div className="split--label split--label__before">

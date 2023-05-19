@@ -77,10 +77,8 @@
 
       // --graphic-scale:1;
       .section {
-
-
-        &--main{
-          @include sm-down{
+        &--main {
+          @include sm-down {
             max-width: 90%;
             @include mx-auto;
           }
@@ -117,25 +115,22 @@
     &--WhatIm {
       @include pad-y(calc(var(--section-gap) * 0.75));
 
-      .section{
-        @include xl-down{
+      .section {
+        @include xl-down {
           max-width: fit-content;
         }
       }
     }
 
-
-    &--Closer{
-
+    &--Closer {
       @include xxl-down {
         text-align: center;
-        justify-content: center;
       }
-
+      .section {
+        @include xxl-down {
+          justify-content: center;
+        }
+      }
     }
-
-
-
-
   }
 }

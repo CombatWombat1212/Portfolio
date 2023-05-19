@@ -78,7 +78,7 @@ const WHATIM = [
   },
   {
     category: "What I&rsquo;m Doing",
-    items: ["Biking", "Meditating", "Finding New Music", "Hangin&rsquo; with friends"],
+    items: ["Biking", "Meditating", "Finding new Music", "Hangin&rsquo; with friends"],
   },
   {
     category: "What I&rsquo;m Making",
@@ -120,7 +120,7 @@ const WHATIM = [
 function About() {
   return (
     <>
-    <Seo page="about" />
+      <Seo page="about" />
       <div id="About" className="page">
         <Chapter id="Intro" name="Intro">
           <Section id="Intro--Hero" background="background darker">

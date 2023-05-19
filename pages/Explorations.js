@@ -1,10 +1,11 @@
+import Seo from "@/components/head/Seo";
 import Section, { Chapter, Column, Graphic, Heading } from "@/components/sections/Sections";
 import CaseStudyPage from "@/components/studies/CaseStudyPage";
 import { STUDY_EXPLORATIONS } from "@/data/CASE_STUDIES";
 import { EXPLORATIONS_IMGS, EXPLORATIONS_IMG_GROUPS, EXPLORATIONS_ORDER } from "@/data/EXPLORATIONS_IMGS";
 import { play, stack } from "@/data/ICONS";
 import { IMAGE_TYPES, VIDEO_TYPES, ensureArray } from "@/scripts/GlobalUtilities";
-import {useMemo } from "react";
+import { useMemo } from "react";
 
 function Explorations({ pop }) {
   const study = STUDY_EXPLORATIONS;
@@ -24,6 +25,8 @@ function Explorations({ pop }) {
 
   return (
     <>
+      <Seo page="explorations" />
+
       <CaseStudyPage id={study.id} study={study}>
         {orderedDisciplines.map((discipline) => {
           // const orderedItems = useOrderedItems(GALLERY_CONTENT, discipline.name, EXPLORATIONS_ORDER);
