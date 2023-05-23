@@ -104,33 +104,33 @@ function Text() {
     />
   }
   
-  const loadingMessages = addKeysToElements([
-    <>hol up<Dot /></>,
-    <>just one sec<Dot /></>,
-    <i>*elevator music*</i>,
+  const loadingMessages = [
+    <Fragment key={uuidv4()}>hol up<Dot /></Fragment>,
+    <Fragment key={uuidv4()}>just one sec<Dot /></Fragment>,
+    <i key={uuidv4()}>*elevator music*</i>,
     `catch the game last night?`,
-    <>it's pronounced <i>juh-stee-zee-uh</i></>,
+    <Fragment key={uuidv4()}>it's pronounced <i>juh-stee-zee-uh</i></Fragment>,
     `lemme grab that for ya`,
     `tighten your Wii remote strap`,
     `wanna do something after this?`,
     `we should do this more often`,
-    <i>shawty like a melody</i>,
-    <>sicko mode <i>bwaaaa</i></>,
+    <Fragment key={uuidv4()}><i>shawty like a melody</i></Fragment>,
+    <Fragment key={uuidv4()}>sicko mode <i>bwaaaa</i></Fragment>,
     `right this way`,
     `no you hang up first`,
-    <i>*utz utz utz*</i>,
-    <>lemme check the back<Dot /></>,
+    <i key={uuidv4()}>*utz utz utz*</i>,
+    <Fragment key={uuidv4()}>lemme check the back<Dot /></Fragment>,
     `who turned off the lights?`,
-    <i>*dial-up noises*</i>,
+    <i key={uuidv4()}>*dial-up noises*</i>,
     `bleep bloop`,
-    <>where did i put that<Dot /></>,
+    <Fragment key={uuidv4()}>where did i put that<Dot /></Fragment>,
     `ouu good choice`,
     `niceee`,
-    <i>*crickets*</i>,
-    <>pondering my orb<Dot /></>,
+    <i key={uuidv4()}>*crickets*</i>,
+    <Fragment key={uuidv4()}>pondering my orb<Dot /></Fragment>,
     `:-)`,
     // <Img img={LOADING_IMGS.loading_snail} />,
-  ]);
+  ];
 
 
   console.log(loadingMessages);
@@ -236,13 +236,3 @@ export { LOADING_DURATION };
 //   }
 // }
 
-
-
-function addKeysToElements(elements) {
-  return elements.map((element) => {
-    if (typeof element === 'object' && element.$$typeof) {
-      return React.cloneElement(element, { key: uuidv4() });
-    }
-    return element;
-  });
-}
