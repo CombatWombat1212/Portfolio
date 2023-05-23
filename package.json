@@ -9,6 +9,7 @@
     "build": "next build && next export"
   },
   "dependencies": {
+    "@babel/core": "^7.21.8",
     "@next/font": "13.1.2",
     "@vidstack/player": "^1.6.5",
     "@vidstack/player-react": "^1.6.5",
@@ -28,6 +29,8 @@
     "vidstack": "^0.4.2"
   },
   "devDependencies": {
+    "@babel/plugin-transform-react-display-name": "^7.18.6",
+    "babel-plugin-add-react-displayname": "0.0.5",
     "video.js": "^8.0.4"
   }
 }
