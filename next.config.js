@@ -2,6 +2,7 @@
 const withVideos = require('next-videos')
 
 const nextConfig = {
+  productionBrowserSourceMaps: true,
   reactStrictMode: true,
   images: {
     loader: "custom",
