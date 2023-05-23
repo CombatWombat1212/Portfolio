@@ -1,7 +1,7 @@
 import CaseStudyPage from "@/components/studies/CaseStudyPage";
 import { Section, Chapter, Title, Column, Heading, Description, Graphic, Quote } from "@/components/sections/Sections";
 import MAKERIGHT_IMGS from "@/data/MAKERIGHT_IMGS";
-import QUOTE_TABLES from "@/data/QUOTE_TABLES";
+import QUOTE_TABLES from "@/data/QUOTE_TABLE";
 import Gantt from "@/components/charts/Gantt";
 import BarGraph from "@/components/charts/BarGraph";
 import DLink from "@/components/utilities/DynamicLink";
