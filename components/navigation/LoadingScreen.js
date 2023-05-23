@@ -109,7 +109,7 @@ function Text() {
     <Fragment key={uuidv4()}>just one sec<Dot /></Fragment>,
     <i key={uuidv4()}>*elevator music*</i>,
     `catch the game last night?`,
-    <Fragment key={uuidv4()}>it's pronounced <i>juh-stee-zee-uh</i></Fragment>,
+    <Fragment key={uuidv4()}>it&rsquo;s pronounced <i>juh-stee-zee-uh</i></Fragment>,
     `lemme grab that for ya`,
     `tighten your Wii remote strap`,
     `wanna do something after this?`,
@@ -131,15 +131,7 @@ function Text() {
     `:-)`,
     // <Img img={LOADING_IMGS.loading_snail} />,
   ];
-
-
-  console.log(loadingMessages);
-
-
-
-
-
-  
+ 
 
   const text = useRandomString(loadingMessages, { localStorage: true, key: "loading-screen--text" });
   return <h3 className={`loading-screen--text`}>{text}</h3>;
