@@ -84,14 +84,14 @@ function Contact() {
 
             <div className="contact--child contact--actions">
               
-              <Button className="contact--button d-sm-none" icon={["email", "right", "mask"]} copy={"ssamgiustizia@outlook.com"} animation="scale-in"> 
+              <Button className="contact--button d-sm-none" icon={["email", "right", "mask"]} copy={"ssamgiustizia@outlook.com"} message="Email copied!" animation="scale-in"> 
                 <span>Say whatup!</span>
               </Button>
 
               <Button
                 className="contact--button d-sm-flex d-none"
                 icon={["email", "alone", "mask"]}
-                copy={"ssamgiustizia@outlook.com"}
+                href={"mailto:ssamgiustizia@outlook.com"}
                 animation="scale-in"
               />
 

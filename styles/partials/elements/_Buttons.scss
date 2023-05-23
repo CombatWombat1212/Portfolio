@@ -42,14 +42,24 @@
 
   width: fit-content;
   height: var(--button-height);
+  overflow: hidden;
 
-  & > * + * {
-    margin-left: var(--button-icon-margin);
+
+  &--inner {
+    @include flex-row;
+    & > * + * {
+      margin-left: var(--button-icon-margin);
+    }
+    height: var(--button-height);
+    position: relative;
+
+    transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    &__copied{
+      margin-top: calc(var(--button-height) * -1);
+    }
   }
 
-
-
-  
 
   &--img {
     @include flex-col-center;
@@ -59,11 +69,20 @@
     color: var(--button-color) !important;
     @include flex-col-center;
 
-
-    &__copied{
+    &__copied {
       margin-top: var(--button-height);
     }
   }
+
+  &--copy-feedback {
+    position: absolute;
+    height: var(--button-height);
+    width: 100%;
+    text-align: center;
+    margin-left: 0rem;
+    margin-top: var(--button-height);
+  }
+
 
   &--icon {
     @include trans;

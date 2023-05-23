@@ -16,6 +16,7 @@ function DLink({ reference, color, onClick,target="_self", ...props }) {
   const [isNewLink, setIsNewLink] = useState(false);
   const { intercept, setIntercept } = useIntercept();
   const isExternal = target == "_blank";
+  const isMail = href && href.startsWith("mailto:");
 
   useEffect(() => {
     setIsLink(href && href.length > 0);
@@ -41,7 +42,7 @@ function DLink({ reference, color, onClick,target="_self", ...props }) {
 
   const delayedOnClick = (e) => {
     if (isAnchor || !isLink) return;
-    if (isExternal) return;
+    if (isExternal || isMail) return;
     e.preventDefault();
     actualRef.current.blur();
     if (isNewLink) setIntercept(true);

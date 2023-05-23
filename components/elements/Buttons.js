@@ -10,15 +10,15 @@ import ICONS from "../../data/ICONS";
 //Components
 import Mask from "../utilities/Mask";
 import DLink from "../utilities/DynamicLink";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-function useCreateCopy(copyProp) {
+function useCreateCopy(copyProp, message) {
   const mouseInRef = useRef(false);
   const [mouseIn, _setMouseIn] = useState(false);
   const [copied, setCopied] = useState(false);
   const [clicked, setClicked] = useState(false);
   const timer = useRef(null);
-  const timeout = 400;
+  const timeout = 600;
 
   const setMouseIn = (data) => {
     mouseInRef.current = data;
@@ -28,8 +28,10 @@ function useCreateCopy(copyProp) {
   const copy = {
     bool: Boolean(copyProp),
     text: copyProp,
+    copied,
+    ...(Boolean(message) ? { message: message } : {}),
   };
-
+  
   const copyOnClickHandler = async () => {
     setClicked(true);
     if (copy.bool) {
@@ -76,10 +78,10 @@ function useCreateCopy(copyProp) {
   return copy;
 }
 
-function Button({ children, className, type, icon, animation, color, tag, reference, copy: copyProp, target = "_self", ...props }) {
+function Button({ children, className, type, icon, animation, color, tag, reference, copy: copyProp, message, target = "_self", ...props }) {
   const [iconName, iconSide, iconType] = icon || [];
 
-  const copy = useCreateCopy(copyProp);
+  const copy = useCreateCopy(copyProp, message);
 
   const buttonClasses = ["button"];
   if (className) buttonClasses.push(className);
@@ -116,7 +118,7 @@ function Button({ children, className, type, icon, animation, color, tag, refere
 
   return (
     <ButtonWrapper {...wrapperProps}>
-      <Inner {...buttonProps}>{children}</Inner>
+      <ButtonInner {...buttonProps}>{children}</ButtonInner>
     </ButtonWrapper>
   );
 }
@@ -145,37 +147,70 @@ function ButtonIcon({ img, type }) {
   );
 }
 
-function buttonInnerThrowErrors(icon) {
+function buttonButtonInnerThrowErrors(icon) {
   if (icon?.length < 3)
     console.error(
       "Button icon prop must be a string with 3 values separated by spaces, or an array of those same three values. These are the values: [iconName, iconSide, iconType]. Icon name must match the name of the imported image in the ICONS.js file.  The iconSide value must be either 'left', 'right', or 'alone'. The iconType value must be either 'img' or 'mask "
     );
 }
 
+function ButtonInner(props) {
+
+  const { copy } = props;
 
 
-
-
-
-function Inner({ children, className, type, icon, animation, color, tag, copy, ...props }) {
-  if (typeof icon == "string") icon = icon.split(" ");
-  buttonInnerThrowErrors(icon);
-  if (icon) var [iconName, iconSide, iconType] = icon;
-
-
-
-  const Body = () => {
-    return (
-      <>
-        {icon && (iconSide === "alone" || iconSide === "middle" || iconSide === "left") && <ButtonIcon img={iconName} type={iconType} />}
-        {iconSide !== "alone" && iconSide !== "middle" && <ButtonCopy>{children}</ButtonCopy>}
-        {icon && iconSide === "right" && <ButtonIcon img={iconName} type={iconType} />}
-      </>
-    );
+  const classes = {
+    "inner": [],
+    // "copy-feedback": [],
   };
 
-  return <Body />;
+  Object.keys(classes).forEach((key) => {
+    classes[key].push(`button--${key}`)
+    if(copy.bool) classes[key].push(`button--${key}__${copy.copied ? "copied" : "default"}`);
+  });
+
+  Object.keys(classes).forEach((key) => {
+    classes[key] = classes[key].join(" ");
+  });
+
+
+  return (
+    <>
+      <div className={classes['inner']}>
+        <InnerBody {...props} />
+        {copy.bool && <span className="button--copy button--copy-feedback">{copy.message || "Copied!"}</span>}
+      </div>
+    </>
+  );
 }
+
+
+
+function InnerBody({ children, className, type, icon, animation, color, tag, copy, ...props }) {
+
+  if (typeof icon == "string") icon = icon.split(" ");
+  buttonButtonInnerThrowErrors(icon);
+  if (icon) var [iconName, iconSide, iconType] = icon;
+
+  const isAlone = iconSide === "alone";
+  const isMiddle = iconSide === "middle";
+  const isLeft = iconSide === "left";
+  const isRight = iconSide === "right";
+
+  const iconProps = {
+    img: iconName,
+    type: iconType,
+  };
+
+  return (
+    <>
+      {icon && (isAlone || isMiddle || isLeft) && <ButtonIcon {...iconProps} />}
+      {!isAlone && !isMiddle && <ButtonCopy>{children}</ButtonCopy>}
+      {icon && isRight && <ButtonIcon {...iconProps} />}
+    </>
+  );
+};
+
 
 
 

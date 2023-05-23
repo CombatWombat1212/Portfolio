@@ -54,7 +54,7 @@ function Index() {
 
       {CASE_STUDIES.map((item, i) => {
         var caption = chosen[i];
-        return <StudyPanel id={`Home--${item.id}`} key={item.key} variant="home" study={item} button={caption} />;
+        return <StudyPanel id={`${item.name}`} key={item.key} variant="home" study={item} button={caption} />;
       })}
     </>
   );

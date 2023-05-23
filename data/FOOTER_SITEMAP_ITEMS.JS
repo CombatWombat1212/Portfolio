@@ -25,7 +25,7 @@ var footer_sitemap = [
 
   {
     name: "Case Studies",
-    link: "/",
+    link: "/#MakeRight",
     key: '',
     list: [
       {
