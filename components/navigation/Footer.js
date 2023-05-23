@@ -3,7 +3,7 @@ import { useMountEffect } from "/scripts/hooks/useMountEffect";
 import Button from "../elements/Buttons";
 import { PanelDesc } from "../elements/Panel";
 import DLink from "../utilities/DynamicLink";
-import FOOTER_SITEMAP_ITEMS from "@/data/FOOTER_SITEMAP_ITEMS";
+import FOOTER_SITEMAP_ITEMS from "../../data/FOOTER_SITEMAP_ITEMS";
 import useListener from "@/scripts/hooks/useListener";
 import { useEffect, useState } from "react";
 import { useBreakpointUtils, useResponsiveUtils } from "@/scripts/hooks/useBreakpoint";
