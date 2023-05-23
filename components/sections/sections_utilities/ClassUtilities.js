@@ -64,12 +64,30 @@ function addStyleToJsxObj(jsxObj, propName, propValue) {
 }
 
 
+
+// function addClassToJsxObj(jsxObj, className) {
+//   function addClass(obj, className) {
+//     var copy = { ...obj };
+//     copy.props = { ...obj.props };
+//     copy.props.className = copy.props.className ? `${copy.props.className} ${className}` : className;
+//     return copy;
+//   }
+
+//   var jsxObjCopy = Array.isArray(jsxObj) ? jsxObj.slice() : [jsxObj];
+
+//   for (var i = 0; i < jsxObjCopy.length; i++) {
+//     jsxObjCopy[i] = addClass(jsxObjCopy[i], className);
+//   }
+
+//   return Array.isArray(jsxObj) ? jsxObjCopy : jsxObjCopy[0];
+// }
+
 function addClassToJsxObj(jsxObj, className) {
   function addClass(obj, className) {
     console.log(`addClass function called with className: ${className}`);
     
     if (!obj) {
-      console.error('The object passed to addClass is undefined.');
+      console.error(`The object passed to addClass, ${className}, is undefined.`);
       return;
     }
     if (!obj.props) {
