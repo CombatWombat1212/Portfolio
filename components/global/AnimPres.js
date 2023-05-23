@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 function AnimPres({
   children,
   animation,
-  condition,
+  condition = true,
   secondaryCondition = true,
   className,
   mode,

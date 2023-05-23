@@ -14,6 +14,9 @@ import AnimatedText from "@/components/global/AnimText";
 import { squiggle } from "@/data/ICONS";
 import { Graphic } from "@/components/sections/Sections";
 import Seo from "@/components/head/Seo";
+import { motion } from "framer-motion";
+import AnimPres from "@/components/global/AnimPres";
+import popAnims from "@/components/global/popup/popup_utilities/PopupAnimations";
 
 function Index() {
   const captions = ["Have a look-see", "Take a gander", "Check it", "I must know", "Gimme", "Go on...", "Do tell", "I'm all ears"];

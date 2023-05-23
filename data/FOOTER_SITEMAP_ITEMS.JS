@@ -3,9 +3,6 @@ import { v4 as uuidv4 } from "uuid";
 
 
 
-
-// TODO: Figure out the final list of elements under the 'explorations' section, its a max of 3, but should there be some way of showing the ones that arent included? should they rotate or change page by page? or if thats too complicated they can just be the three
-
 var footer_sitemap = [
 
   {
@@ -56,23 +53,23 @@ var footer_sitemap = [
     key: '',
     list: [
       {
-        name: "Frontend Dev",
-        link: "/",
-        key: '',
-      },
-      {
-        name: "3D Design",
-        link: "/",
-        key: '',
-      },
-      {
-        name: "Motion Graphics",
-        link: "/",
+        name: "UX Engineering",
+        link: "/Explorations#UX-Engineering",
         key: '',
       },
       {
         name: "UX/UI Design",
-        link: "/",
+        link: "/Explorations#UX-Design",
+        key: '',
+      },
+      {
+        name: "3D Design",
+        link: "/Explorations#3D-Design",
+        key: '',
+      },
+      {
+        name: "Motion Graphics",
+        link: "/Explorations#Motion-Graphics",
         key: '',
       },
       {

@@ -362,6 +362,15 @@ function MADE({ pop }) {
             </Column>
           </Section>
 
+
+
+
+
+
+
+
+
+
           <Section id="Texturing--Contrast-Desc" type="columns" titled="above" background="background darker" wrapperClassName="mb-less-2">
             <Title>Contrast Areas</Title>
             <Column>
@@ -435,6 +444,19 @@ function MADE({ pop }) {
               </Description>
             </Column>
           </Section>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           <Section id="Texturing--Details-Description" type="columns" titled="above" background="background darker" wrapperClassName="mb-less-2">
             <Title>Additional Details</Title>

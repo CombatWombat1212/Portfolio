@@ -106,7 +106,7 @@ function StudyPanel({ id, study, variant, button }) {
               variant == "study" &&
               study.type != "gallery" && (
                 <>
-                  <Button
+                  {/* <Button
                     className={`studypanel--button studypanel--button__${variant}`}
                     type="regular"
                     icon={["arrow_down", "right", "mask"]}
@@ -114,7 +114,7 @@ function StudyPanel({ id, study, variant, button }) {
                     // href={'#Delivery'}
                     onClick={skipHandler}>
                     Skip to Solution
-                  </Button>
+                  </Button> */}
                 </>
               )
             )}

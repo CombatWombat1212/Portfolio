@@ -33,7 +33,7 @@ function Explorations({ pop }) {
           const disciplineItems = orderedItems[discipline.name];
 
           return (
-            <Chapter key={discipline.name} id={discipline.name} name={discipline.name}>
+            <Chapter key={discipline.name} id={discipline.name.replace(' ', '-')} name={discipline.name}>
               <Section id={`${discipline.name}--Section`} className="gallery--section" mainType="grid" background="none">
                 <Heading>{discipline.displayName}</Heading>
                 {...disciplineItems.map((item) => {

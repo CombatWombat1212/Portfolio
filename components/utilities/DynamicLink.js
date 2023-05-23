@@ -19,6 +19,9 @@ function DLink({ reference, color, onClick, ...props }) {
   useEffect(() => {
     setIsLink(href && href.length > 0);
     const checkAnchor = href && (href.startsWith("#") || href.startsWith(`${router.pathname}#`));
+    if(href){
+      console.log(href, router.pathname);
+    }
     if (checkAnchor) setIsAnchor(true);
     else setIsAnchor(false);
   }, [href, router.pathname]);
