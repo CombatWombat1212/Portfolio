@@ -70,7 +70,7 @@ function StudyPanel({ id, study, variant, button }) {
   var btnStyle = button == "" ? { opacity: 0 } : { opacity: 1 };
 
   const skipHandler = () => {
-    const target = document.getElementById("Delivery");
+    const target = document.getElementById("Solution");
     scrollToTarget(target);
   };
 

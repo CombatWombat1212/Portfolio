@@ -1,7 +1,7 @@
 
 
 
-function Title({ children, className, innerClassName, caps=true, italic=false }) {
+function Title({ children, className, innerClassName, caps=true, italic=false, id }) {
     var title = children;
 
 
@@ -18,7 +18,9 @@ function Title({ children, className, innerClassName, caps=true, italic=false })
     }
   
     return (
-      <div className={`section--title ${className}`}>
+      <div className={`section--title ${className}`}
+      {...(id ? { id: id } : {})}
+      >
         <h4 className={`${innerClassName}`}>{title}</h4>
       </div>
     );

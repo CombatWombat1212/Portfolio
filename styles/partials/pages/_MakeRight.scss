@@ -131,7 +131,37 @@
 
     &--Opportunity {
     }
-    &--Hero-Logo {
+
+    // &--Hero-Logo {
+    //   --pad-y: 5rem;
+
+    //   @include pad-y(var(--pad-y), calc(var(--pad-y) * 1.1));
+
+    //   @include lg-down {
+    //     --pad-y: 3rem;
+    //   }
+
+    //   .section {
+    //     overflow: hidden;
+
+    //     &--graphic {
+    //       @include flex-row-center;
+    //       width: 100%;
+
+    //       @include lg-down {
+    //         transform: scale(1.25);
+    //         margin-left: -0.225rem;
+    //       }
+
+    //       & > * {
+    //         background-color: $col-background;
+    //         width: 70%;
+    //       }
+    //     }
+    //   }
+    // }
+
+    @at-root #Makeright #Solution {
       --pad-y: 5rem;
 
       @include pad-y(var(--pad-y), calc(var(--pad-y) * 1.1));
@@ -160,8 +190,6 @@
       }
     }
 
-    &--Solution {
-    }
 
     &--Pitch {
       .mask {
@@ -695,9 +723,9 @@
           }
         }
 
-        .mask{
+        .mask {
           width: Min(Max(75%, var(--w)), 100%);
-          height: Min(Max(75%, var(--h)),  100%);
+          height: Min(Max(75%, var(--h)), 100%);
         }
       }
     }

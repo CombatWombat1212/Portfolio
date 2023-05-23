@@ -130,7 +130,7 @@ function KoalaKo({ pop }) {
           </Section>
 
           <Section id="Overview--Client" type="columns" titled>
-            <Title>Solution</Title>
+            <Title id="Solution">Solution</Title>
             <Heading>
               KoalaKo, the smart activity database, <br className="d-block d-md-none" />
               built to help parents help kids
@@ -760,7 +760,7 @@ function KoalaKo({ pop }) {
             </Column>
           </Section>
 
-          <Section id="Delivery--Submission-Graphics-1" wrapperClassName="mt-less">
+          <Section id="Delivery--Submission-Graphics-1" wrapperClassName="mt-less-2">
             <Column>
               <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_login} />
             </Column>
@@ -799,7 +799,7 @@ function KoalaKo({ pop }) {
             </Column>
           </Section>
 
-          <Section id="Delivery--Submission-Graphics-2" wrapperClassName="mt-less">
+          <Section id="Delivery--Submission-Graphics-2" wrapperClassName="mt-less-2">
             <Column>
               <Graphic className="b-rad border-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_post_activity} />
             </Column>

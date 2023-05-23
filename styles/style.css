@@ -4147,6 +4147,10 @@ h3 + .studypanel--paragraph {
   cursor: pointer;
 }
 
+.gallery--categories-wrapper__overflow.gallery--categories-wrapper__no-desc .gallery--categories-inner {
+  margin-bottom: 0.5rem;
+}
+
 .popup .gallery--categories-inner__no-overflow {
   cursor: default;
 }
@@ -4440,6 +4444,7 @@ h3 + .studypanel--paragraph {
   margin-top: calc(var(--img-max-height) * -1);
   transition: opacity 0.3s;
   opacity: 1;
+  pointer-events: none;
 }
 
 .popup .loading--wrapper__zoom {
@@ -9328,23 +9333,23 @@ h3 + .studypanel--paragraph {
   --graphic-scale: 0.95;
 }
 
-#Makeright #Overview--Hero-Logo {
+#Makeright #Solution {
   --pad-y: 5rem;
   padding-top: var(--pad-y);
   padding-bottom: calc(var(--pad-y) * 1.1);
 }
 
 @media screen and (max-width: 61.9375em) {
-  #Makeright #Overview--Hero-Logo {
+  #Makeright #Solution {
     --pad-y: 3rem;
   }
 }
 
-#Makeright #Overview--Hero-Logo .section {
+#Makeright #Solution .section {
   overflow: hidden;
 }
 
-#Makeright #Overview--Hero-Logo .section--graphic {
+#Makeright #Solution .section--graphic {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -9352,13 +9357,13 @@ h3 + .studypanel--paragraph {
 }
 
 @media screen and (max-width: 61.9375em) {
-  #Makeright #Overview--Hero-Logo .section--graphic {
+  #Makeright #Solution .section--graphic {
     transform: scale(1.25);
     margin-left: -0.225rem;
   }
 }
 
-#Makeright #Overview--Hero-Logo .section--graphic > * {
+#Makeright #Solution .section--graphic > * {
   background-color: #F3F3F7;
   width: 70%;
 }

@@ -594,6 +594,9 @@ $col-media-wrapper: rgba($col-background, 0.075);
         &__overflow {
           cursor: pointer;
         }
+        @at-root .gallery--categories-wrapper__overflow.gallery--categories-wrapper__no-desc .gallery--categories-inner{
+          margin-bottom: 0.5rem;
+        }
 
         &__no-overflow {
           cursor: default;
@@ -871,13 +874,11 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
       width: var(--img-max-width);
       height: var(--img-max-height);
-
       position: relative;
-
       margin-top: calc(var(--img-max-height) * -1);
-
       transition: opacity 0.3s;
       opacity: 1;
+      pointer-events: none;
 
       &__zoom {
         width: var(--img-avail-width);

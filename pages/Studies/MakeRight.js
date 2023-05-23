@@ -56,9 +56,12 @@ function MakeRight({ pop }) {
           <Section id="Overview--Challenge" type="overview">
             <Title>Challenge</Title>
             <Heading>
-              Cost, and technical knowledge <br className="d-xl-none" />
-              stand in the way <br className="d-lg-none" /> of mass adoption
+              Cost, and technical knowledge prevent mass adoption
             </Heading>
+            {/* <Heading>
+              Cost, and technical knowledge 
+              <br className="d-xl-none" /> stand in the way of mass adoption
+            </Heading> */}
             <Description>
               <p>
                 Owning a 3D printer is a steep upfront investment, and learning to use it is a massive time sink. Even then, users without 3D
@@ -78,14 +81,14 @@ function MakeRight({ pop }) {
             <Heading>How might we remove these barriers, and translate the benefits of 3D printing to the average consumer?</Heading>
           </Section>
 
-          <Section id="Overview--Hero-Logo" type="logo banner" background="primary" align="just-center">
+          <Section id="Solution" type="logo banner" background="primary" align="just-center">
             <Graphic type="mask" img={MAKERIGHT_IMGS["makeright_logo"]} />
           </Section>
 
           <Section id="Overview--Solution" background="background">
             <Title>Solution</Title>
             <Heading>
-              Directly connect consumers with owners of 3D printers <br className="d-xxl-none" /> for stress-free, low-cost production.
+              Connect consumers with owners of 3D printers <br className="d-xxl-none" /> for stress-free, low-cost production.
             </Heading>
           </Section>
 

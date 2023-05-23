@@ -10,6 +10,7 @@ import { STUDY_MADE } from "@/data/CASE_STUDIES";
 import { useEffect } from "react";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import Nobr from "@/components/utilities/Nobr";
+import Seo from "@/components/head/Seo";
 
 function MADE({ pop }) {
   const study = STUDY_MADE;
@@ -21,6 +22,7 @@ function MADE({ pop }) {
 
   return (
     <>
+      <Seo page="made" />
       <CaseStudyPage id={study.id} study={study}>
         <Chapter id="Overview" name="Overview">
           <Section id="Overview--Client" type="columns" titled>
@@ -103,7 +105,7 @@ function MADE({ pop }) {
             </Column>
           </Section>
 
-          <Section id="Overview--Outcome" background="tertiary" type={"columns"} titled>
+          <Section id="Solution" background="tertiary" type={"columns"} titled>
             <Title>Outcome</Title>
             <Heading>Final configurator</Heading>
 
@@ -522,7 +524,7 @@ function MADE({ pop }) {
           <Section id="Rendering--Shadow-Description" type="columns" titled="above" background="background darkest" wrapperClassName="mb-less">
             <Title>Shadows</Title>
             <Column>
-              <Heading>Supporting the final use-case by embedding shadows within each component image.</Heading>
+              <Heading>Supporting the final <Nobr>use-case</Nobr> by embedding shadows within each component image.</Heading>
             </Column>
             <Column>
               <Description className={desktop && "mt-less"}>
