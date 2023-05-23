@@ -1,7 +1,6 @@
 import "../styles/style.css";
 import Layout from "../components/navigation/Layout";
 
-import { useMountEffect } from "/scripts/hooks/useMountEffect";
 import { postScreenSizeToRoot } from "/scripts/GlobalUtilities";
 import Popup from "@/components/global/popup/Popup";
 import { useEffect, useRef, useState } from "react";
@@ -14,12 +13,9 @@ import LoadingScreen from "@/components/navigation/LoadingScreen";
 import useSecret from "@/scripts/hooks/useSecret";
 import useRandomString from "@/scripts/hooks/useRandomString";
 import { useBreakpoint, useResponsiveUtils } from "@/scripts/hooks/useBreakpoint";
-import { splitPx } from "@/scripts/GlobalUtilities";
-import useScreenWidth from "@/scripts/hooks/useScreenWidth";
-import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import Providers from "@/scripts/contexts/Providers";
-import Head from "next/head";
 import Favicon from "@/components/head/Favicon";
+
 
 // const style =
 // `font-family: "Gira Sans"; font-size: 1.4375rem;` +
