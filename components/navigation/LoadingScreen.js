@@ -1,7 +1,7 @@
 // LoadingScreen.js
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-
+import { v4 as uuidv4 } from 'uuid';
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import { AnimatePresence, motion } from "framer-motion";
 import useRandomString from "@/scripts/hooks/useRandomString";
@@ -104,7 +104,7 @@ function Text() {
     />
   }
   
-  const loadingMessages = [
+  const loadingMessages = addKeysToElements([
     <>hol up<Dot /></>,
     <>just one sec<Dot /></>,
     <i>*elevator music*</i>,
@@ -130,7 +130,15 @@ function Text() {
     <>pondering my orb<Dot /></>,
     `:-)`,
     // <Img img={LOADING_IMGS.loading_snail} />,
-  ];
+  ]);
+
+
+  console.log(loadingMessages);
+
+
+
+
+
   
 
   const text = useRandomString(loadingMessages, { localStorage: true, key: "loading-screen--text" });
@@ -227,3 +235,14 @@ export { LOADING_DURATION };
 //     navCon: navConRef,
 //   }
 // }
+
+
+
+function addKeysToElements(elements) {
+  return elements.map((element) => {
+    if (typeof element === 'object' && element.$$typeof) {
+      return React.cloneElement(element, { key: uuidv4() });
+    }
+    return element;
+  });
+}

@@ -450,7 +450,7 @@ const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle
       return items.map((item, i) => {
         const TagComponent = isSimple ? Fragment : Tag;
         j++;
-        return <TagComponent {...tagProps(item, i, isSimple)}>{inner(item)}</TagComponent>;
+        return <TagComponent key={i} {...tagProps(item, i, isSimple)}>{inner(item)}</TagComponent>;
       });
     };
 
