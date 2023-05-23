@@ -1831,6 +1831,10 @@ h3 + .studypanel--paragraph {
   justify-content: center;
 }
 
+.button--copy__copied {
+  margin-top: var(--button-height);
+}
+
 .button--icon {
   transition: var(--transition);
   --size: var(--button-icon-size);

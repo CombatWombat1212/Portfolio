@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { LOADING_DURATION } from "../navigation/LoadingScreen";
 import { useIntercept } from "@/scripts/contexts/InterceptContext";
 
-function DLink({ reference, color, onClick, ...props }) {
+function DLink({ reference, color, onClick,target="_self", ...props }) {
   const internalRef = useRef();
   const actualRef = reference || internalRef;
   const router = useRouter();
@@ -15,13 +15,11 @@ function DLink({ reference, color, onClick, ...props }) {
   const [isAnchor, setIsAnchor] = useState(false);
   const [isNewLink, setIsNewLink] = useState(false);
   const { intercept, setIntercept } = useIntercept();
+  const isExternal = target == "_blank";
 
   useEffect(() => {
     setIsLink(href && href.length > 0);
     const checkAnchor = href && (href.startsWith("#") || href.startsWith(`${router.pathname}#`));
-    if(href){
-      console.log(href, router.pathname);
-    }
     if (checkAnchor) setIsAnchor(true);
     else setIsAnchor(false);
   }, [href, router.pathname]);
@@ -43,6 +41,7 @@ function DLink({ reference, color, onClick, ...props }) {
 
   const delayedOnClick = (e) => {
     if (isAnchor || !isLink) return;
+    if (isExternal) return;
     e.preventDefault();
     actualRef.current.blur();
     if (isNewLink) setIntercept(true);
@@ -58,7 +57,7 @@ function DLink({ reference, color, onClick, ...props }) {
 
   const classes = `link ${color ? `link__${color}` : ""} ${props.className || ""}`;
   const Component = isLink ? Link : "a";
-  const hrefProps = isLink ? { href, scroll: false } : {};
+  const hrefProps = isLink ? { href, scroll: false, target: target } : {};
 
   // useMountEffect(() => {
   //   if (!actualRef.current) return;

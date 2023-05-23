@@ -38,9 +38,6 @@
   text-decoration: none;
   background-color: var(--button-background);
 
-  // --button-background: #{$col-secondary};
-  // --button-color: #{$col-background};
-
   padding: 0 var(--button-padding);
 
   width: fit-content;
@@ -50,6 +47,10 @@
     margin-left: var(--button-icon-margin);
   }
 
+
+
+  
+
   &--img {
     @include flex-col-center;
   }
@@ -57,6 +58,11 @@
   &--copy {
     color: var(--button-color) !important;
     @include flex-col-center;
+
+
+    &__copied{
+      margin-top: var(--button-height);
+    }
   }
 
   &--icon {
