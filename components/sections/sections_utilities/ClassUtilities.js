@@ -104,7 +104,7 @@ function addClassToJsxObj(jsxObj, className) {
   console.log(`addClassToJsxObj called with className: ${className}`);
 
   if (!jsxObj) {
-    console.error('The jsxObj passed to addClassToJsxObj is undefined.');
+    console.error(`The jsxObj passed to addClassToJsxObj, ${className}, is undefined.`);
     return;
   }
 
