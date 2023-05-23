@@ -450,6 +450,8 @@ const PitchBody = ({ index, vectorProps, heading, description }) => {
 
 function formatRow(row) {
   var { description, title, heading, graphic, other } = row.childs;
+  console.log(row.childs);
+  console.log(description, title, heading, graphic, other);
   description = addClassToJsxObj(description, "pitch--description");
   title = addClassToJsxObj(title, "pitch--title");
   heading = addClassToJsxObj(heading, "pitch--heading");
