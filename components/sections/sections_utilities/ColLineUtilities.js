@@ -43,6 +43,7 @@ function updateRows(lines) {
 
 function colLineGetRows(line) {
   var parent = line.section.querySelector(`.${line.data.parent}`);
+  console.log(parent, line, line.section, line.data.parent, `.${line.data.parent}`, line.section.querySelector(`.${line.data.parent}`));
 
   var rows = 0;
   var columns = 0;
