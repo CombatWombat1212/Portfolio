@@ -6,7 +6,6 @@ import GANTT_CHARTS from "/data/charts/GANTT_CHARTS";
 import { chevron_down } from "/data/ICONS";
 import ResponsiveText from "../global/ResponsiveText";
 
-
 // TODO: Add the ability to set start and end points optionally which trim the chart to a specific range
 
 function BarFilled({ className, start, end, cycle }) {
@@ -69,7 +68,7 @@ function Label({ className, children }) {
   return (
     <div className={`label ${className}`}>
       {/* <span title={children}>{children}</span> */}
-      <ResponsiveText data={children}/>
+      <ResponsiveText data={children} />
     </div>
   );
 }
@@ -130,7 +129,6 @@ function phaseOnClick(elem) {
   icon.classList.toggle("gantt--icon__closed");
 
   phaseBackgroundAnimate(elem);
-
 }
 
 class PhaseObj {
@@ -156,7 +154,7 @@ function phaseBackgroundClasslistToggle(phase) {
   var background = phase.elem.querySelector(".bar__background");
 
   phase.on = phase.elem.classList.contains("gantt--phase__open") ? true : false;
-  
+
   if (phase.on) {
     background.classList.add("bar__background__open");
     background.classList.add("bar__background__open-transition");
@@ -173,24 +171,22 @@ function phaseBackgroundAnimate(elem) {
   if (allPhases[index] == undefined) return;
   var phase = allPhases[index];
 
-  
   var trans = getComputedStyle(elem).getPropertyValue("--gant-phase-trans").split("s")[0] * 1000;
   var delay = getComputedStyle(elem).getPropertyValue("--gant-phase-delay").split("s")[0] * 1000;
-  
+
   var background = elem.querySelector(".bar__background");
-  
+
   phaseBackgroundClasslistToggle(phase);
-  
+
   if (!phase.waiting) {
     phase.waiting = true;
-    
+
     setTimeout(() => {
       phase.waiting = false;
-      
+
       background.classList.remove("bar__background__open-transition");
       background.classList.remove("bar__background__closed-transition");
-
-    }, trans + trans  + delay);
+    }, trans + trans + delay);
   }
 }
 
@@ -256,7 +252,9 @@ function Cycle({ cycle, weeks }) {
   var phases = cycle.phases;
 
   return (
-    <div className="gantt--cycle" style={{ "--gantt-weeks": cycle.length, "--gantt-weeks_less": cycle.length - 1, "--gantt-days_less": (cycle.length - 1) * 7 }}>
+    <div
+      className="gantt--cycle"
+      style={{ "--gantt-weeks": cycle.length, "--gantt-weeks_less": cycle.length - 1, "--gantt-days_less": (cycle.length - 1) * 7 }}>
       <div className="gantt--timeline">
         <Label className="label--title label__primary">Week</Label>
 
@@ -285,18 +283,16 @@ function Gantt({ study, className }) {
   var lengths = cycles.map((cycle) => cycle.length);
 
   const ganttRef = useRef(null);
-  
+
   useMountEffect(() => {
     phaseInit();
   });
-  
-
 
   useEffect(() => {
     const gantt = ganttRef.current;
     const observer = new IntersectionObserver((entries) => {
       const [entry] = entries;
-      if (!entry.isIntersecting){
+      if (!entry.isIntersecting) {
         phaseCloseAllOthers();
       }
     });
@@ -308,12 +304,9 @@ function Gantt({ study, className }) {
     };
   }, []);
 
-
-
-
   return (
     <>
-      <div className={`gantt ${className ? className : ''}`} ref={ganttRef}>
+      <div className={`gantt ${className ? className : ""}`} ref={ganttRef}>
         {cycles.map((cycle) => {
           return <Cycle key={cycle.key} cycle={cycle} weeks={cycle.weeks} />;
         })}
@@ -321,5 +314,14 @@ function Gantt({ study, className }) {
     </>
   );
 }
+
+BarFilled.displayName = "BarFilled";
+Bar.displayName = "Bar";
+Label.displayName = "Label";
+Task.displayName = "Task";
+Stage.displayName = "Stage";
+Phase.displayName = "Phase";
+Cycle.displayName = "Cycle";
+Gantt.displayName = "Gantt";
 
 export default Gantt;

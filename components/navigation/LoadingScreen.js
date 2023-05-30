@@ -1,7 +1,7 @@
 // LoadingScreen.js
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import { AnimatePresence, motion } from "framer-motion";
 import useRandomString from "@/scripts/hooks/useRandomString";
@@ -13,10 +13,11 @@ import { LOADING_IMGS } from "@/data/LOADING_IMGS";
 import useScrollbarWidth from "@/scripts/hooks/useScrollbarSize";
 
 // const loadingMessages = [`test 1`, <i>test 2</i>, `test 3`, `test 4`];
-{/* <i>*boots n cats n boots n cats*</i>, */}
+{
+  /* <i>*boots n cats n boots n cats*</i>, */
+}
 
 //   `Ensure your Wii remote strap is tightly secured`,
-
 
 const variants = {
   initial: { clipPath: "polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%)" },
@@ -91,47 +92,66 @@ function LoadingScreen() {
 }
 
 function Text() {
-
   const Dot = () => {
-    return <div className="loading-screen--ellipse"><Ellipse
-    min={0}
-    /></div>
-  }
+    return (
+      <div className="loading-screen--ellipse">
+        <Ellipse min={0} />
+      </div>
+    );
+  };
 
-  const Img = ({img}) => {
-    return <Graphic className="loading-screen--graphic" img={img}
-    controls={false} type="video" autoplay={"scroll"} loop={true} muted={true}
-    />
-  }
-  
+  const Img = ({ img }) => {
+    return <Graphic className="loading-screen--graphic" img={img} controls={false} type="video" autoplay={"scroll"} loop={true} muted={true} />;
+  };
+
   const loadingMessages = [
-    <Fragment key={uuidv4()}>hol up<Dot /></Fragment>,
-    <Fragment key={uuidv4()}>just one sec<Dot /></Fragment>,
+    <Fragment key={uuidv4()}>
+      hol up
+      <Dot />
+    </Fragment>,
+    <Fragment key={uuidv4()}>
+      just one sec
+      <Dot />
+    </Fragment>,
     <i key={uuidv4()}>*elevator music*</i>,
     `catch the game last night?`,
-    <Fragment key={uuidv4()}>it&rsquo;s pronounced <i>juh-stee-zee-uh</i></Fragment>,
+    <Fragment key={uuidv4()}>
+      it&rsquo;s pronounced <i>juh-stee-zee-uh</i>
+    </Fragment>,
     `lemme grab that for ya`,
     `tighten your Wii remote strap`,
     `wanna do something after this?`,
     `we should do this more often`,
-    <Fragment key={uuidv4()}><i>shawty like a melody</i></Fragment>,
-    <Fragment key={uuidv4()}>sicko mode <i>bwaaaa</i></Fragment>,
+    <Fragment key={uuidv4()}>
+      <i>shawty like a melody</i>
+    </Fragment>,
+    <Fragment key={uuidv4()}>
+      sicko mode <i>bwaaaa</i>
+    </Fragment>,
     `right this way`,
     `no you hang up first`,
     <i key={uuidv4()}>*utz utz utz*</i>,
-    <Fragment key={uuidv4()}>lemme check the back<Dot /></Fragment>,
+    <Fragment key={uuidv4()}>
+      lemme check the back
+      <Dot />
+    </Fragment>,
     `who turned off the lights?`,
     <i key={uuidv4()}>*dial-up noises*</i>,
     `bleep bloop`,
-    <Fragment key={uuidv4()}>where did i put that<Dot /></Fragment>,
+    <Fragment key={uuidv4()}>
+      where did i put that
+      <Dot />
+    </Fragment>,
     `ouu good choice`,
     `niceee`,
     <i key={uuidv4()}>*crickets*</i>,
-    <Fragment key={uuidv4()}>pondering my orb<Dot /></Fragment>,
+    <Fragment key={uuidv4()}>
+      pondering my orb
+      <Dot />
+    </Fragment>,
     `:-)`,
     // <Img img={LOADING_IMGS.loading_snail} />,
   ];
- 
 
   const text = useRandomString(loadingMessages, { localStorage: true, key: "loading-screen--text" });
   return <h3 className={`loading-screen--text`}>{text}</h3>;
@@ -140,6 +160,9 @@ function Text() {
 export default LoadingScreen;
 
 export { LOADING_DURATION };
+
+LoadingScreen.displayName = "LoadingScreen";
+Text.displayName = "Text";
 
 // const ellipse = useEllipse(450, 3, 1);
 
@@ -227,4 +250,3 @@ export { LOADING_DURATION };
 //     navCon: navConRef,
 //   }
 // }
-

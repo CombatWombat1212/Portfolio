@@ -65,6 +65,6 @@ Heading.defaultProps = {
 Heading.propTypes = {
   type: PropTypes.oneOf(["h1", "h2", "h3", "h4", "h5", "p"]),
 };
-
+Heading.displayName = "Heading";
 export default Heading;
 export { Heading, getAdditionalHeadingClassesFromParentProps };

@@ -25,4 +25,7 @@ function WhatIm({data}) {
 );
 }
 
+
+WhatIm.displayName = "WhatIm";
+
 export default WhatIm;

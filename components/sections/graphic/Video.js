@@ -105,4 +105,6 @@ function getOrganizedVideoProps(props, desktop) {
   return { COMMON_VIDEO_PROPS, SOURCE_PROPS, FOREGROUND_PROPS };
 }
 
+Video.displayName = "Video";
+
 export default Video;

@@ -159,4 +159,9 @@ function NextStudies({ study }) {
   );
 }
 
+Tags.displayName = "Tags";
+Copy.displayName = "Copy";
+Study.displayName = "Study";
+NextStudies.displayName = "NextStudies";
+
 export default NextStudies;

@@ -3,7 +3,6 @@ import { defaultProps, PropTypes } from "prop-types";
 // TODO: there should be a way to have a 'tool' variant vs the default 'category' varient, i.e. one thats round vs the default one
 
 function Tag({ children, variant, filter, color, reference }) {
-
   var Elem = "div";
 
   var tagClasses = ["tag"];
@@ -22,10 +21,14 @@ function Tag({ children, variant, filter, color, reference }) {
 
   return (
     <>
-      <Elem className={`${tagClasses} text-size-h4`} ref={reference ? reference : null}>{children}</Elem>
+      <Elem className={`${tagClasses} text-size-h4`} ref={reference ? reference : null}>
+        {children}
+      </Elem>
     </>
   );
 }
+
+Tag.displayName = "Tag";
 
 Tag.defaultProps = {
   variant: "regular",

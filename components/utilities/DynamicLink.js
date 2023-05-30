@@ -80,5 +80,8 @@ function DLink({ reference, color, onClick,target="_self", ...props }) {
   );
 }
 
+
+DLink.displayName = "DLink";
+
 export default DLink;
 

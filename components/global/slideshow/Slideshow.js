@@ -153,5 +153,5 @@ function Slideshow({ children, img }) {
     </div>
   );
 }
-
+Slideshow.displayName = "Slideshow";
 export default Slideshow;

@@ -110,6 +110,7 @@ function Chapter({ children, type, wrapperClassName, background, id, name, margi
   );
 }
 
+Chapter.displayName = "Chapter";
 Chapter.defaultProps = SECTION_DEFAULT_PROPS;
 Chapter.propTypes = SECTION_PROP_TYPES;
 

@@ -4,7 +4,7 @@ import { Description, Graphic } from "../sections/Sections";
 
 function Experience({ data }) {
   const { isBpAndDown, loading } = useResponsive();
-  const desk = (!isBpAndDown("lg") || loading);
+  const desk = !isBpAndDown("lg") || loading;
 
   return (
     <div className="experience">
@@ -54,5 +54,5 @@ function Experience({ data }) {
     </div>
   );
 }
-
+Experience.displayName = "Experience";
 export default Experience;

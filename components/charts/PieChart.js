@@ -18,7 +18,11 @@ function Circle({ item }) {
             "--circle-value": inView ? item.value : 0,
           }}>
           <circle className="circle circle--empty" />
-          <circle className={`circle circle--filled ${item.highlighted ? "circle--filled__highlighted" : "circle--filled__default"} circle__${inView ? "in-view" : "out-of-view"}`} />
+          <circle
+            className={`circle circle--filled ${item.highlighted ? "circle--filled__highlighted" : "circle--filled__default"} circle__${
+              inView ? "in-view" : "out-of-view"
+            }`}
+          />
         </svg>
       </div>
 
@@ -47,5 +51,8 @@ function PieChart({ study, graph }) {
     </div>
   );
 }
+
+Circle.displayName = "Circle";
+PieChart.displayName = "PieChart";
 
 export default PieChart;

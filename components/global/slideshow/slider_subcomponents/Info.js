@@ -24,5 +24,5 @@ function Info({ name, hasMultiple, items }) {
   }
 
   
-
+  Info.displayName = "Info";
   export default Info;

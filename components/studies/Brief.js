@@ -1,8 +1,5 @@
 import { addKey, caseStudiesInit } from "@/data/CASE_STUDIES";
-import {
-  EXPLORATIONS_IMGS,
-  EXPLORATIONS_IMG_GROUPS,
-} from "@/data/EXPLORATIONS_IMGS";
+import { EXPLORATIONS_IMGS, EXPLORATIONS_IMG_GROUPS } from "@/data/EXPLORATIONS_IMGS";
 import toggle from "@/scripts/AnimationTools";
 import { toTitleCase } from "@/scripts/GlobalUtilities";
 import useElementWidth from "@/scripts/hooks/useElementWidth";
@@ -11,13 +8,7 @@ import { useEffect, useRef } from "react";
 import Tag from "../elements/Tag";
 import Heading from "../sections/Heading";
 
-const POINT_ORDER = [
-  "deliverables",
-  "roles",
-  "timeline",
-  "disciplines",
-  "tools",
-];
+const POINT_ORDER = ["deliverables", "roles", "timeline", "disciplines", "tools"];
 const LIST_TYPES = ["roles", "deliverables", "tools", "disciplines"];
 const TAG_TYPES = ["tools", "disciplines"];
 const STRING_TYPES = ["timeline", "description"];
@@ -26,9 +17,7 @@ function Brief({ study }) {
   var brief = study.brief;
   var hasDesc = "brief" in study && "description" in brief;
 
-  var briefClasses = `brief--container ${
-    hasDesc ? "brief--container__study" : "brief--container__gallery"
-  }`;
+  var briefClasses = `brief--container ${hasDesc ? "brief--container__study" : "brief--container__gallery"}`;
 
   return (
     <div className="brief">
@@ -44,11 +33,7 @@ function Desc({ study }) {
   var brief = study.brief;
   return (
     <div className="brief--group">
-      <Point
-        type={"description"}
-        items={brief["description"]}
-        study={study}
-      />
+      <Point type={"description"} items={brief["description"]} study={study} />
     </div>
   );
 }
@@ -57,38 +42,26 @@ function Groups({ study }) {
   var brief = study.brief;
   var hasDesc = "brief" in study && "description" in brief;
 
-  var groupClasses = `brief--group ${
-    hasDesc ? "brief--group__study" : "brief--group__gallery"
-  }`;
+  var groupClasses = `brief--group ${hasDesc ? "brief--group__study" : "brief--group__gallery"}`;
 
   var briefItems = Object.keys(brief).filter((item) => {
-    return (brief && item in brief) && item != "description";
+    return brief && item in brief && item != "description";
   });
 
   var notTagItems = briefItems.filter((item) => {
     return !TAG_TYPES.includes(item);
   });
 
-
   return (
-    <div className={groupClasses}
-    style={{
-      '--brief-items': briefItems.length,
-      '--brief-items_non-tags': notTagItems.length,
-    }}
-    >
+    <div
+      className={groupClasses}
+      style={{
+        "--brief-items": briefItems.length,
+        "--brief-items_non-tags": notTagItems.length,
+      }}>
       {POINT_ORDER.map((item) => {
         var hasItem = brief && item in brief;
-        return (
-          hasItem && (
-            <Point
-              key={item}
-              type={item}
-              items={brief[item]}
-              study={study}
-            />
-          )
-        );
+        return hasItem && <Point key={item} type={item} items={brief[item]} study={study} />;
       })}
     </div>
   );
@@ -126,26 +99,18 @@ function Point({ items, type, study }) {
   return (
     <>
       {items && (
-        <div className={pointClasses}
-        style={{
-          '--point-is-tag': isTags ? 1 : 0,
-        }}
-        id={type}
-        >
-          <Heading
-            type={titleType}
-            className={`brief--title ${titleClasses}`}>
+        <div
+          className={pointClasses}
+          style={{
+            "--point-is-tag": isTags ? 1 : 0,
+          }}
+          id={type}>
+          <Heading type={titleType} className={`brief--title ${titleClasses}`}>
             {title}
           </Heading>
 
           {isList ? (
-            <>
-              {isTags ? (
-                <Tags items={items} type={type} />
-              ) : (
-                <List items={items} itemClasses={itemClasses} />
-              )}
-            </>
+            <>{isTags ? <Tags items={items} type={type} /> : <List items={items} itemClasses={itemClasses} />}</>
           ) : (
             <p className={itemClasses}>{items.jsx || items}</p>
           )}
@@ -160,17 +125,13 @@ Point.propTypes = {
 };
 
 function Tags({ items, type }) {
-  var variant =
-    type == "tools" ? "tool" : type == "disciplines" ? "regular" : "";
+  var variant = type == "tools" ? "tool" : type == "disciplines" ? "regular" : "";
 
   return (
     <div className="brief--list brief--tags">
       {items.map((item, index) => {
         return (
-          <Tag
-            key={`${item.key} ${index}`}
-            variant={variant}
-            filter={item.filterBy}>
+          <Tag key={`${item.key} ${index}`} variant={variant} filter={item.filterBy}>
             {item.displayName || item.name}
           </Tag>
         );
@@ -192,5 +153,12 @@ function List({ items, itemClasses }) {
     </ul>
   );
 }
+
+Brief.displayName = "Brief";
+Desc.displayName = "Desc";
+Groups.displayName = "Groups";
+Point.displayName = "Point";
+Tags.displayName = "Tags";
+List.displayName = "List";
 
 export default Brief;

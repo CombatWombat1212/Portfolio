@@ -210,37 +210,26 @@ function useSectionObject(
   if (children == undefined) children = children ?? <></>;
   if (children.length == undefined) children = [children];
 
-
   // Fallback for when section has titles but it isn't explicitly set to true
   var topLevelFoundChildren = false;
-
-
 
   var foundChildren = findChildren(children, [
     ["titles", { elemType: "Title" }],
     ["headings", { elemType: "Heading" }],
     ["columns", { elemType: "Column" }],
   ]);
-  
-
 
   var { columns: organizedColumns } = organizeChildren(children, [["columns", { elemType: "Column" }]]);
 
-
-
-
   const { desktop } = useResponsive();
   const isSplitTitledAbove = getSplitTitledAbove(titled, foundChildren, organizedColumns);
-  const ISTA_RESULT = updateChildrenSplitTitled(children, titled,foundChildren, organizedColumns, isSplitTitledAbove, desktop);
+  const ISTA_RESULT = updateChildrenSplitTitled(children, titled, foundChildren, organizedColumns, isSplitTitledAbove, desktop);
   children = ISTA_RESULT.children;
   titled = ISTA_RESULT.titled;
   foundChildren = ISTA_RESULT.foundChildren;
   organizedColumns = ISTA_RESULT.organizedColumns;
 
   var { columns, description, title, heading, graphic, other } = getSectionChildren(children);
-
-
-
 
   topLevelFoundChildren = (titled === true || titled === false) && (foundChildren.titles || foundChildren.headings) && foundChildren.columns;
 
@@ -255,8 +244,6 @@ function useSectionObject(
   }
   var hasMain = mainType == "grid" && (!titled || foundChildren.columns) ? true : false;
 
-
-
   if (titled == "above")
     ({ columns, description, title, heading, graphic, other } = getAdditionalHeadingClassesFromParentProps(
       { columns, description, title, heading, graphic, other },
@@ -266,10 +253,8 @@ function useSectionObject(
   var hasGraphic = getHasGraphic(graphic);
   var hasDescBelow = organizeChildren(children, [["all", { elemType: "Description", below: true }]]).all.length > 0 ? true : false;
 
-  
   var hasColumns = foundChildren.columns ? true : false;
   if (type == "default" && hasColumns) type = "columns";
-
 
   const hasEvenCol = (() => {
     if (!(organizedColumns.length > 0)) return false;
@@ -292,13 +277,6 @@ function useSectionObject(
     if (organizedColumns.length > 1 && colClasses.every((c) => c == colClasses[0]) && noCol.every((c) => c == false || c == undefined)) return true;
     return false;
   })();
-
-
-
-
-
-
-
 
   var sec = {
     has: {
@@ -362,6 +340,12 @@ Section.propTypes = {
   type: PropTypes.oneOf(SECTION_TYPES),
   background: PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf(["none", ...BACKGROUND_COLORS])]),
 };
+
+SectionBackground.displayName = "SectionBackground";
+SectionInner.displayName = "SectionInner";
+SectionWrapper.displayName = "SectionWrapper";
+SectionBody.displayName = "SectionBody";
+Section.displayName = "Section";
 
 // TODO: might be worth checking if this is working properly, specifically the two variables below
 var SECTION_DEFAULT_PROPS = Section.defaultProps;

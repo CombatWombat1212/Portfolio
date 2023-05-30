@@ -166,11 +166,7 @@ function Graphic(props) {
   effect = effect ? effect : false;
   playbackRate = playbackRate ? playbackRate : 1;
 
-
   const loading = lazy ? "lazy" : "eager";
-
-
-
 
   const handleImageLoad = () => {
     setImageLoaded(true);
@@ -285,7 +281,7 @@ function Graphic(props) {
     style: innerStyle,
     onLoadingComplete: onLoad,
     ...(isVideo && INNER_COMMON_VIDEO_PROPS),
-    ...((isImg && lazy == false ) && { loading: loading }),
+    ...(isImg && lazy == false && { loading: loading }),
     reference: graphicref,
   };
 
@@ -295,7 +291,6 @@ function Graphic(props) {
       {includeChildren && children}
     </Wrapper>
   );
-
 
   return (
     <>
@@ -314,6 +309,10 @@ function Wrapper({ props, children, effect }) {
     </div>
   );
 }
+
+Effect.displayName = "Effect";
+Graphic.displayName = "Graphic";
+Wrapper.displayName = "Wrapper";
 
 Graphic.defaultProps = {
   type: "image",

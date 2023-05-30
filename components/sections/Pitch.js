@@ -278,15 +278,13 @@ function Pitch({ children }) {
   var rows = [];
 
   for (var i = 0; i < children.length; i++) {
-    rows.push(
-      { childs: getSectionChildren(children[i].props.children), props: children[i].props }
-    );
+    rows.push({ childs: getSectionChildren(children[i].props.children), props: children[i].props });
   }
 
   const pitch = useRef(null);
 
   const { desktop, isBpAndDown, bp, loading } = useResponsive();
-  const {isMobileDevice} = useDeviceDetect();
+  const { isMobileDevice } = useDeviceDetect();
   const lgAndDown = !(!isBpAndDown("lg") || loading);
   const mdAndDown = !(!isBpAndDown("md") || loading);
   const smAndDown = !(!isBpAndDown("sm") || loading);
@@ -341,7 +339,7 @@ function Pitch({ children }) {
     setWithinPitch(withinPitch);
 
     const scrollTouch = scrollType == "touch";
-    const set = withinPitch && scrollTouch && !(withinFirstOrLastRow);
+    const set = withinPitch && scrollTouch && !withinFirstOrLastRow;
     setLockScroll(set);
   }
 
@@ -546,5 +544,9 @@ function pitchResizeFunctions() {
     pitchSetVectorSize(pitch);
   });
 }
+
+Laptop.displayName = "Laptop";
+Pitch.displayName = "Pitch";
+PitchBody.displayName = "PitchBody";
 
 export default Pitch;

@@ -56,7 +56,7 @@ function getClassBreakpoints(className) {
 
   return breakpoints;
 }
-
+Nobr.displayName = "Nobr";
 export default Nobr;
 
 // function Nobr({ children }) {

@@ -12,5 +12,5 @@ function Background({ img }) {
     </>
   );
 }
-
+Background.displayName="Background";
 export default Background;

@@ -89,5 +89,5 @@ function AnimPres({
     );
   }
 }
-
+AnimPres.displayName = "AnimPres";
 export default AnimPres;

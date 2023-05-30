@@ -667,5 +667,5 @@ function Indicator({}) {
     </div>
   );
 }
-
+Indicator.displayName = "Indicator";
 export default Indicator;

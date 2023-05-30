@@ -31,7 +31,7 @@ function useCreateCopy(copyProp, message) {
     copied,
     ...(Boolean(message) ? { message: message } : {}),
   };
-  
+
   const copyOnClickHandler = async () => {
     setClicked(true);
     if (copy.bool) {
@@ -155,28 +155,25 @@ function buttonButtonInnerThrowErrors(icon) {
 }
 
 function ButtonInner(props) {
-
   const { copy } = props;
 
-
   const classes = {
-    "inner": [],
+    inner: [],
     // "copy-feedback": [],
   };
 
   Object.keys(classes).forEach((key) => {
-    classes[key].push(`button--${key}`)
-    if(copy.bool) classes[key].push(`button--${key}__${copy.copied ? "copied" : "default"}`);
+    classes[key].push(`button--${key}`);
+    if (copy.bool) classes[key].push(`button--${key}__${copy.copied ? "copied" : "default"}`);
   });
 
   Object.keys(classes).forEach((key) => {
     classes[key] = classes[key].join(" ");
   });
 
-
   return (
     <>
-      <div className={classes['inner']}>
+      <div className={classes["inner"]}>
         <InnerBody {...props} />
         {copy.bool && <span className="button--copy button--copy-feedback">{copy.message || "Copied!"}</span>}
       </div>
@@ -184,10 +181,7 @@ function ButtonInner(props) {
   );
 }
 
-
-
 function InnerBody({ children, className, type, icon, animation, color, tag, copy, ...props }) {
-
   if (typeof icon == "string") icon = icon.split(" ");
   buttonButtonInnerThrowErrors(icon);
   if (icon) var [iconName, iconSide, iconType] = icon;
@@ -209,13 +203,13 @@ function InnerBody({ children, className, type, icon, animation, color, tag, cop
       {icon && isRight && <ButtonIcon {...iconProps} />}
     </>
   );
-};
+}
 
-
-
-
-
-
+Button.displayName = "Button";
+ButtonCopy.displayName = "ButtonCopy";
+ButtonIcon.displayName = "ButtonIcon";
+ButtonInner.displayName = "ButtonInner";
+InnerBody.displayName = "InnerBody";
 
 Button.defaultProps = {
   type: "regular",

@@ -6,7 +6,7 @@ import useScreenWidth from "@/scripts/hooks/useScreenWidth";
 import { splitPx } from "@/scripts/GlobalUtilities";
 
 
-function Navigation({ globalStyle }) {
+function Navigation() {
   const [open, setOpen] = useState(false);
 
   const nav = {
@@ -63,5 +63,5 @@ function Navigation({ globalStyle }) {
     </>
   );
 }
-
+Navigation.displayName = "Navigation";
 export default Navigation;

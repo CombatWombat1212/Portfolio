@@ -94,4 +94,10 @@ const renderObj = (item) => {
   );
 };
 
+QuoteTable.displayName = "QuoteTable";
+Body.displayName = "Body";
+Subheading.displayName = "Subheading";
+Row.displayName = "Row";
+Cell.displayName = "Cell";
+
 export default QuoteTable;

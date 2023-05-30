@@ -166,9 +166,9 @@ function Wrapper({ pop, bp }) {
   var popclass = getPopupClasses(pop);
 
   useBodyClass("noscroll", pop.on);
-  useListener("resize", popupResize, {enabled: pop.on});
-  useListener("keydown", seekHandlerWithKeydown, {enabled: pop.on});
-  useListener("keydown", closeHandlerWithKeydown, {enabled: pop.on});
+  useListener("resize", popupResize, { enabled: pop.on });
+  useListener("keydown", seekHandlerWithKeydown, { enabled: pop.on });
+  useListener("keydown", closeHandlerWithKeydown, { enabled: pop.on });
 
   const nav = useNavControls();
   const mouseMoving = useMouseMoving(null, 1000);
@@ -371,25 +371,19 @@ function Wrapper({ pop, bp }) {
     mobileGallery: stateMobileGallery,
   };
 
-
-
   // const router = useRouter();
 
   // useEffect(() => {
   //   const handleRouteChange = () => {
   //     handles.close();
   //   };
-  
+
   //   router.events.on('routeChangeStart', handleRouteChange);
-  
+
   //   return () => {
   //     router.events.off('routeChangeStart', handleRouteChange);
   //   };
   // }, [handles.close, router]);
-  
-
-
-
 
   return (
     <>
@@ -648,8 +642,8 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
   }, []);
 
   const mediaWrapperRef = useRef(null);
-  useListener("swiped-left", handles.swipeLeft, {ref: mediaWrapperRef});
-  useListener("swiped-right", handles.swipeRight, {ref: mediaWrapperRef});
+  useListener("swiped-left", handles.swipeLeft, { ref: mediaWrapperRef });
+  useListener("swiped-right", handles.swipeRight, { ref: mediaWrapperRef });
 
   return (
     <>
@@ -996,6 +990,20 @@ function Anim({ children, animation, condition, className, style }) {
 export default Popup;
 
 // export { waitToLoad, setWaitingToShowLoading };
+
+Popup.displayName = "Popup";
+Wrapper.displayName = "Wrapper";
+Lightbox.displayName = "Lightbox";
+Background.displayName = "Background";
+Head.displayName = "Head";
+Title.displayName = "Title";
+Controls.displayName = "Controls";
+Seek.displayName = "Seek";
+Pagination.displayName = "Pagination";
+Close.displayName = "Close";
+ScaleWrapper.displayName = "ScaleWrapper";
+Scale.displayName = "Scale";
+Anim.displayName = "Anim";
 
 export { startZoom, minZoom, maxZoom };
 export { Close };

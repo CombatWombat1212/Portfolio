@@ -2,7 +2,6 @@ import useHorizontalResize from "@/scripts/hooks/useHorizontalResize";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-
 // TODO: going to have to rethink the animation a bit, and have the pieces come down one at a time rather than all at once.  you know what i mean
 
 const variants = {
@@ -49,8 +48,6 @@ function AnimatedText({ main, alternate, className = "", innerClassName = "" }) 
     key: output,
   };
 
-
-
   return (
     <div className="anim-text--wrapper" onClick={onClickHandler}>
       <AnimatePresence mode="wait">
@@ -73,9 +70,8 @@ function AnimatedText({ main, alternate, className = "", innerClassName = "" }) 
                   initial="initial"
                   animate="animate"
                   style={{ display: "inline-block" }}
-                  className={innerClassName}
-                  >
-                    {piece}
+                  className={innerClassName}>
+                  {piece}
                 </motion.span>
               );
             })}
@@ -89,23 +85,14 @@ const Span = ({ text, children, type }) => {
   const { width, setWidth, ref } = text[type];
   const { className } = text;
 
-  //   const updateWidth = () => {
-  //     if (!ref.current) return;
-  //     if (width === ref.current.offsetWidth) return;
-  //     setWidth(ref.current.offsetWidth);
-  //   };
-
-  //   useEffect(() => {
-  //     updateWidth();
-  //   }, []);
-
-  //   useHorizontalResize(updateWidth);
-
   return (
     <span ref={ref} className={`anim-text--span ${className}`}>
       {children}
     </span>
   );
 };
+
+AnimatedText.displayName = "AnimatedText";
+Span.displayName = "Span";
 
 export default AnimatedText;

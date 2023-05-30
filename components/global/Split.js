@@ -221,4 +221,7 @@ function Split({ before, after, square }) {
   );
 }
 
+
+Split.displayName = "Split";
+
 export default Split;

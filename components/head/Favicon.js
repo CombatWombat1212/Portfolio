@@ -33,3 +33,5 @@ export default function Favicon() {
     </Head>
   );
 }
+
+Favicon.displayName = "Favicon";

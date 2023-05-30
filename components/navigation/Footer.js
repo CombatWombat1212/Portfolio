@@ -65,8 +65,6 @@ function Contact() {
     setMl(ml);
   }, [width]);
 
-  
-
   return (
     <>
       <div className="contact col-5 col-xl-12">
@@ -82,8 +80,12 @@ function Contact() {
             </div>
 
             <div className="contact--child contact--actions">
-              
-              <Button className="contact--button d-sm-none" icon={["email", "right", "mask"]} copy={"ssamgiustizia@outlook.com"} message="Email copied!" animation="scale-in"> 
+              <Button
+                className="contact--button d-sm-none"
+                icon={["email", "right", "mask"]}
+                copy={"ssamgiustizia@outlook.com"}
+                message="Email copied!"
+                animation="scale-in">
                 <span>Say whatup!</span>
               </Button>
 
@@ -118,5 +120,9 @@ function Contact() {
     </>
   );
 }
+
+Footer.displayName = "Footer";
+FooterLink.displayName = "FooterLink";
+Contact.displayName = "Contact";
 
 export default Footer;

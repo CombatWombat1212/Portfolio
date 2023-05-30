@@ -22,7 +22,7 @@ function NavLink({ item, nav, className, type }) {
     const isSamePathname = item.link == router.pathname;
     const isSamePathHash = item.link == router.asPath;
     const isSamePage = isSamePathname || isSamePathHash;
-    if(type == "menu" && isSamePage) {
+    if (type == "menu" && isSamePage) {
       setOpen(false);
     }
   };
@@ -283,5 +283,12 @@ function updateItems(items, type) {
     return items;
   }
 }
+
+NavLink.displayName = "NavLink";
+NavItems.displayName = "NavItems";
+Dropdown.displayName = "Dropdown";
+DropdownItem.displayName = "DropdownItem";
+NavMenu.displayName = "NavMenu";
+NavMenuButton.displayName = "NavMenuButton";
 
 export { NavItems, NavLink, NavMenuButton, NavMenu };

@@ -28,6 +28,12 @@ function ProsCons({ children }) {
   return <div className="pro-con">{children}</div>;
 }
 
+Item.displayName="Item";
+Pro.displayName="Pro";
+Con.displayName="Con";
+ProsCons.displayName="ProsCons";
+
+
 export default ProsCons;
 
 export { Pro, Con };

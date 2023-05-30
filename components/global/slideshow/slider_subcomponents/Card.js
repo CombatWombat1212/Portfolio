@@ -62,4 +62,6 @@ function Card({ img, index, width, height, slide, onClick, ...props }) {
   );
 }
 
+Card.displayName = "Card";
+
 export default Card;

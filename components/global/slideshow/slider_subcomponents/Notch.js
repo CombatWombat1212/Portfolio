@@ -17,4 +17,6 @@ function Notch({ slide, index, handlers: { notchOnClick } }) {
   );
 }
 
+Notch.displayName = "Notch";
+
 export default Notch;

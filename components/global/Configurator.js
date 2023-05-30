@@ -499,4 +499,11 @@ function Materials({ materials, config, setConfig }) {
   );
 }
 
+Options.displayName = "Options";
+Configurator.displayName = "Configurator";
+ViewerBody.displayName = "ViewerBody";
+MaterialWrapper.displayName = "MaterialWrapper";
+Preview.displayName = "Preview";
+Materials.displayName = "Materials";
+
 export default Configurator;

@@ -33,6 +33,8 @@ function Mask({ className, src, alt, width, height, img, style}) {
   );
 }
 
+Mask.displayName = "Mask";
+
 Mask.defaultProps = {
   img: undefined,
 };

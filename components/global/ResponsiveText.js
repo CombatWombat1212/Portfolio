@@ -117,4 +117,8 @@ function formatClass(key, display) {
   return className;
 }
 
+ResponsiveText.displayName = "ResponsiveText";
+ResFrag.displayName = "ResFrag";
+ResElem.displayName = "ResElem";
+
 export default ResponsiveText;

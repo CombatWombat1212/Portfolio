@@ -154,6 +154,8 @@ function BarGraph({ study, graph, type, small }) {
 }
 
 
+BarGraph.displayName = "BarGraph";
+
 BarGraph.defaultProps = {
   type: "default",
 };

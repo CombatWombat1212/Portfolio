@@ -26,9 +26,9 @@ function Method({ children }) {
   const type = orgChilds.heading[0].props.type;
 
   const { isBp, loading } = useResponsive();
-  const md = (isBp("md") && !loading);
-  const sm = ((isBp("sm") || isBp("xs")) && !loading);
-  const desk = (!sm && !md);
+  const md = isBp("md") && !loading;
+  const sm = (isBp("sm") || isBp("xs")) && !loading;
+  const desk = !sm && !md;
 
   return (
     <>
@@ -52,5 +52,5 @@ function Method({ children }) {
     </>
   );
 }
-
+Method.displayName = "Method";
 export default Method;

@@ -145,4 +145,10 @@ StudyPanel.propTypes = {
   variant: PropTypes.oneOf(["home", "study"]),
 };
 
+PanelWrapper.displayName = "PanelWrapper";
+Panel.displayName = "Panel";
+PanelDesc.displayName = "PanelDesc";
+PanelImg.displayName = "PanelImg";
+StudyPanel.displayName = "StudyPanel";
+
 export { PanelWrapper, Panel, PanelDesc, PanelImg, StudyPanel };

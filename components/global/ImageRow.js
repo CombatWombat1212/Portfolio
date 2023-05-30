@@ -2,7 +2,7 @@ import { clamp, map, RESIZE_TIMEOUT, splitPx } from "@/scripts/GlobalUtilities";
 import { useEffect, useRef, useState } from "react";
 import { addClassToJsxObj, addStyleToJsxObj } from "../sections/sections_utilities/ClassUtilities";
 
-function ImageRow({ children,className, col, direction }) {
+function ImageRow({ children, className, col, direction }) {
   const [mounted, setMounted] = useState(false);
   const [currentCol, setCurrentCol] = useState(col);
 
@@ -11,7 +11,6 @@ function ImageRow({ children,className, col, direction }) {
   useEffect(() => {
     setMounted(true);
   }, [reference]);
-
 
   useEffect(() => {
     if (!mounted) return;
@@ -22,7 +21,6 @@ function ImageRow({ children,className, col, direction }) {
   useEffect(() => {
     setCurrentCol(col);
   }, [col]);
-  
 
   var childs = children.map((child, index) => {
     var el = addClassToJsxObj(child, "image-row--image");
@@ -30,13 +28,10 @@ function ImageRow({ children,className, col, direction }) {
     return el;
   });
 
-
   var dir = {
     key: direction,
     value: direction == "right" ? 1 : 0,
-  }
-
-
+  };
 
   return (
     <div
@@ -54,7 +49,7 @@ function ImageRow({ children,className, col, direction }) {
 ImageRow.defaultProps = {
   direction: "right",
 };
-
+ImageRow.displayName = "ImageRow";
 
 function rowGetImages(row) {
   var images = Array.from(row.elem.querySelectorAll(".image-row--image"));

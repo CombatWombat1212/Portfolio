@@ -42,4 +42,6 @@ function toggleState(state, set) {
   set(!state);
 }
 
+Toggle.displayName = "Toggle";
+
 export { Toggle };

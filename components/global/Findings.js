@@ -102,6 +102,8 @@ function Findings({ children, className }) {
   );
 }
 
+
+Findings.displayName = "Findings";
 export default Findings;
 
 function toggleClasses(element, classNames, isOpen) {

@@ -264,21 +264,19 @@ function useColLine(hasColLine, { update = null } = {}) {
 
   useLayoutEffect(() => {
     if (hasColLine) {
-        colLineInit();
+      colLineInit();
     }
   }, [hasColLine]);
 
-
   useHorizontalResize(colLineInit);
-
 
   useEffect(() => {
     if (hasColLine) {
-        colLineInit();
+      colLineInit();
     }
   }, [update]);
 
-  useListener("resize", handleResizeRef.current, {enabled: hasColLine});
+  useListener("resize", handleResizeRef.current, { enabled: hasColLine });
 }
 
 export { useColLine };

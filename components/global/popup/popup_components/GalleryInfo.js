@@ -23,14 +23,12 @@ import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 // const INFO_ANIM_DELAY = 0.3;
 // moved elsewhere to try and make it responsive
 
-
 function useInfoAnimDelay() {
   const { loading, isBpAndDown } = useResponsive();
   const isMdAndDown = !(!isBpAndDown("md") || loading);
   const INFO_ANIM_DELAY = isMdAndDown ? 0.3 : 0.1;
   return INFO_ANIM_DELAY;
 }
-
 
 function GalInfoMotionWrapper({ pop, state, elems, scrollbar, children, styles, type = "default" }) {
   const scroll = type != "above" && scrollbar.info.classes ? scrollbar.info.classes : "";
@@ -450,7 +448,11 @@ const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle
       return items.map((item, i) => {
         const TagComponent = isSimple ? Fragment : Tag;
         j++;
-        return <TagComponent key={i} {...tagProps(item, i, isSimple)}>{inner(item)}</TagComponent>;
+        return (
+          <TagComponent key={i} {...tagProps(item, i, isSimple)}>
+            {inner(item)}
+          </TagComponent>
+        );
       });
     };
 
@@ -515,5 +517,12 @@ const GalDescription = React.memo(function GalDescription({ pop }) {
     </>
   );
 }, createUpdateConditions(["pop.img", "pop.index"]));
+
+GalInfoMotionWrapper.displayName = "GalInfoMotionWrapper";
+GalInfoAnimPres.displayName = "GalInfoAnimPres";
+GalHeading.displayName = "GalHeading";
+GalInfo.displayName = "GalInfo";
+GalCategories.displayName = "GalCategories";
+GalDescription.displayName = "GalDescription";
 
 export { GalInfo, GalCategories, GalDescription };

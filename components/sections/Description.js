@@ -7,7 +7,7 @@ function getDescriptionClasses(type) {
   if (type == "h2") descriptionClasses += " text--h2";
   if (type == "h3") descriptionClasses += " text--h3";
   if (type == "h4") descriptionClasses += " text--h4";
-  if (type == "p" || type=="body") descriptionClasses += " text--body";
+  if (type == "p" || type == "body") descriptionClasses += " text--body";
   return descriptionClasses;
 }
 
@@ -50,5 +50,5 @@ function Description({ className, children, type, background, below, ...props })
     </div>
   );
 }
-
+Description.displayName = "Description";
 export default Description;

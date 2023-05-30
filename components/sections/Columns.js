@@ -144,4 +144,7 @@ function Column({ children, className }) {
   );
 }
 
+ColumnGroup.displayName = "ColumnGroup";
+Column.displayName = "Column";
+
 export { Column, ColumnGroup };

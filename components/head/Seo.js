@@ -25,15 +25,11 @@ function Info({ page }) {
       <meta name="keywords" content={keywords} />
     </Head>
   );
-
-  
 }
 
 function Preview({ page }) {
   const { title, description, img, imgUrl, url } = page;
   return (
-
-    
     <Head>
       <meta property="og:type" content="website" />
       <meta property="og:url" content={url} />
@@ -52,15 +48,14 @@ function Preview({ page }) {
       <meta name="twitter:image:alt" content={img.alt} />
     </Head>
   );
-
-  
 }
 
-
+Seo.displayName = "Seo";
+Info.displayName = "Info";
+Preview.displayName = "Preview";
 
 // const Meta = ({ name, content, property }) => (
 //     <meta key={name || property} {...(name ? { name: name } : {})} {...(property ? { property: property } : {})} content={content} />
 //   );
-
 
 export default Seo;

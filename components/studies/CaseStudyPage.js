@@ -58,7 +58,7 @@ function StudyWrapper({ id, study, children }) {
 
   const { bp, loading } = useResponsive();
 
-  useAnchoredArrowsInit(newChildren, {update:[bp, loading], timeout: 500});
+  useAnchoredArrowsInit(newChildren, { update: [bp, loading], timeout: 500 });
 
   useMirrorStyle();
 
@@ -107,5 +107,10 @@ function ColLineInit({ hasColLine }) {
   const { bp } = useResponsive();
   useColLine(hasColLine, { update: [bp] });
 }
+
+StudyWrapper.displayName = "StudyWrapper";
+CaseStudyPage.displayName = "CaseStudyPage";
+Next.displayName = "Next";
+ColLineInit.displayName = "ColLineInit";
 
 export default CaseStudyPage;
