@@ -278,7 +278,9 @@ function Pitch({ children }) {
   var rows = [];
 
   for (var i = 0; i < children.length; i++) {
-    rows.push({ childs: getSectionChildren(children[i].props.children), props: children[i].props });
+    rows.push(
+      { childs: getSectionChildren(children[i].props.children), props: children[i].props }
+    );
   }
 
   const pitch = useRef(null);
@@ -451,7 +453,6 @@ const PitchBody = ({ index, vectorProps, heading, description }) => {
 function formatRow(row) {
   var { description, title, heading, graphic, other } = row.childs;
   console.log(row.childs);
-  console.log(description, title, heading, graphic, other);
   description = addClassToJsxObj(description, "pitch--description");
   title = addClassToJsxObj(title, "pitch--title");
   heading = addClassToJsxObj(heading, "pitch--heading");
