@@ -1,4 +1,7 @@
-function Notch({ slide, index, handlers: { notchOnClick } }) {
+import { useRef } from "react";
+
+function Notch({ slide, index, handlers }) {
+  const {notchOnMouseDown } = handlers;
   const group = slide.group;
   const img = slide.states.img;
   const section = group.sections.find((section) => section.name === img.section);
@@ -7,13 +10,19 @@ function Notch({ slide, index, handlers: { notchOnClick } }) {
     section ? (isSectionActive ? "slider--notch__active" : "slider--notch__inactive") : ""
   }`;
 
+  slide.refs.notches[index] = useRef(null);
+
   return (
     <div
       className={notchClass}
+      ref={slide.refs.notches[index]}
       style={{ "--slider-notch-index": `${index}` }}
       data-index={index}
       key={`marker ${index}`}
-      onClick={notchOnClick}></div>
+      onMouseDown={notchOnMouseDown}
+      onTouchStart={notchOnMouseDown}
+
+      ></div>
   );
 }
 

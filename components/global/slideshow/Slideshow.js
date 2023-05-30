@@ -100,8 +100,11 @@ function Slideshow({ children, img }) {
       </div>
       
 
+
+
       <div className="slideshow--footer">
-        <div className="slider--wrapper container">
+        <div className="slider--wrapper container"onMouseMove={handlers.sliderMouseMoveStart}
+                onTouchMove={handlers.sliderMouseMoveStart}>
           <Button
             className={`slider--button
             slider--button__left ${slide.states.img.index <= 0 ? "slider--button__disabled" : "slider--button__enabled"}`}
@@ -119,9 +122,8 @@ function Slideshow({ children, img }) {
                 className="slider--handle"
                 onMouseDown={handlers.sliderMouseDown}
                 onTouchStart={handlers.sliderMouseDown}
-                onMouseMove={handlers.sliderMouseMoveStart}
-                onTouchMove={handlers.sliderMouseMoveStart}
-                ref={slide.refs.handle}></div>
+                ref={slide.refs.handle}
+                ></div>
 
               {slide.group.imgs.map((groupImg, i) => (
                 <Notch key={i} index={i} slide={slide} handlers={handlers} />

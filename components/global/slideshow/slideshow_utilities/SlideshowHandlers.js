@@ -1,15 +1,12 @@
 import { getElemWidth, splitPx } from "@/scripts/GlobalUtilities";
 import { sliderHandleSet } from "./SliderUtilities";
 import { slideshowSetPosition, slideshowUpdateCardImageAndSlider } from "./SlideshowUtilities";
+import { SliderElement } from "@vidstack/player";
 
 function slideshowCreateHandlers(slide) {
   let handlers = {
     resize: (e) => {
       slideshowResize(slide);
-    },
-
-    notchOnClick: (e) => {
-      sliderNotchOnClick(e, slide);
     },
 
     cardOnClick: (e) => {
@@ -41,6 +38,11 @@ function slideshowCreateHandlers(slide) {
     sliderMouseUp(e, slide, handlers);
   };
 
+  handlers.notchOnMouseDown = (e) => {
+    // sliderNotchOnMouseDown(e, slide);
+    sliderMouseDown(e, slide, handlers);
+  };
+
   return handlers;
 }
 
@@ -60,8 +62,10 @@ function slideshowButtonOnClick(e, slide) {
   slideshowUpdateCardImageAndSlider(slide, move);
 }
 
-function sliderNotchOnClick(e, slide) {
-  const index = parseInt(e.target.getAttribute("data-index"));
+function sliderNotchOnMouseDown(e, slide) {
+  slide.slider.grabbed++;
+  const target = e.target;
+  const index = parseInt(target.getAttribute("data-index"));
   slide.states.setImg(slide.group.imgs[index]);
 }
 
@@ -89,6 +93,13 @@ function sliderMouseMove(e, slide) {
   slide.slider.mouse.cur.x = mouse.x;
 
   var handlePos = slide.slider.handle.start.x + (slide.slider.mouse.cur.x - slide.slider.mouse.start.x);
+  console.log(
+    `
+handle start: ${slide.slider.handle.start.x},
+mouse start: ${slide.slider.mouse.start.x},
+mouse cur: ${slide.slider.mouse.cur.x},
+handle pos: ${handlePos}`
+  );
 
   var barWidth = getElemWidth(bar);
   var handleWidth = getElemWidth(handle);
@@ -115,24 +126,33 @@ function sliderMouseMove(e, slide) {
   slide.states.setImg(group.imgs[value]);
 }
 
+
+
 function sliderMouseMoveStart(e, slide) {
   const handle = slide.refs.handle.current;
-
   var mouse = { x: 0, y: 0 };
 
-  if (e.type == "mousemove" && slide.slider.grabbed == 1) {
-    slide.slider.grabbed++;
-    mouse.x = e.clientX;
-    slide.slider.mouse.start.x = mouse.x;
-    slide.slider.handle.start.x = splitPx(window.getComputedStyle(handle).getPropertyValue("--slider-handle-left"));
-  } else if (e.type == "touchmove" && slide.slider.grabbed == 1) {
-    slide.slider.grabbed++;
+  console.log('checking', slide.slider.grabbed);
+  
+  function updateSlideState(clientX) {
+    if (slide.slider.grabbed === 1) {
+      console.log('checked');
+      slide.slider.grabbed++;
+      mouse.x = clientX;
+      slide.slider.mouse.start.x = mouse.x;
+      slide.slider.handle.start.x = splitPx(window.getComputedStyle(handle).getPropertyValue("--slider-handle-left"));
+    }
+  }
+
+  if (e.type === "mousemove") {
+    updateSlideState(e.clientX);
+  } else if (e.type === "touchmove") {
     var touch = e.touches[0];
-    mouse.x = touch.clientX;
-    slide.slider.mouse.start.x = mouse.x;
-    slide.slider.handle.start.x = splitPx(window.getComputedStyle(handle).getPropertyValue("--slider-handle-left"));
+    updateSlideState(touch.clientX);
   }
 }
+
+
 
 function sliderMouseDown(e, slide, handlers) {
   slide.slider.grabbed++;
@@ -140,10 +160,7 @@ function sliderMouseDown(e, slide, handlers) {
 
   handle.classList.add("slider--handle__active");
 
-  var notches = Array.from(handle.parentElement.querySelectorAll(".slider--notch"));
-  notches.forEach((notch) => {
-    notch.classList.remove("slider--notch__hoverable");
-  });
+  notchesRemoveHoverabe(slide);
 
   document.body.classList.add("cursor-grabbed");
 
@@ -157,27 +174,47 @@ function sliderMouseDown(e, slide, handlers) {
 }
 
 
+
+
+
+
+
+
+
 function sliderMouseUp(e, slide, handlers) {
   slide.slider.grabbed = 0;
   const handle = slide.refs.handle.current;
 
-  if(!handle) return;
+  if (!handle) return;
   handle.classList.remove("slider--handle__active");
   document.body.classList.remove("cursor-grabbed");
 
-  var notches = handle.parentElement.querySelectorAll(".slider--notch");
-  notches.forEach((notch) => {
-    notch.classList.add("slider--notch__hoverable");
-  });
+  notchesAddHoverabe(slide);
 
   document.removeEventListener("mousemove", handlers.sliderMouseMove);
   document.removeEventListener("mouseup", handlers.sliderMouseUp);
+  document.removeEventListener("touchmove", handlers.sliderMouseMove);
+  document.removeEventListener("touchend", handlers.sliderMouseUp);
 }
 
 function containerSwipe(e, slide) {
   const direction = e.detail.dir;
   const move = direction == "left" ? 1 : -1;
   slideshowUpdateCardImageAndSlider(slide, move);
+}
+
+function notchesRemoveHoverabe(slide) {
+  const notches = slide.refs.notches;
+  notches.forEach((notch) => {
+    notch.current.classList.remove("slider--notch__hoverable");
+  });
+}
+
+function notchesAddHoverabe(slide) {
+  const notches = slide.refs.notches;
+  notches.forEach((notch) => {
+    notch.current.classList.add("slider--notch__hoverable");
+  });
 }
 
 export { slideshowCreateHandlers };
