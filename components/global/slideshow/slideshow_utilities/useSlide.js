@@ -25,6 +25,7 @@ function useSlide(img) {
       empty: empty,
       bar: bar,
       handle: handle,
+      notches: [],
     },
     states: {
       img: cardImage,

@@ -486,6 +486,14 @@ function cooldown(fn, delay) {
   };
 }
 
+function getClientXFromEvent(e) {
+  if (e.type === "mousemove") {
+    return e.clientX;
+  } else if (e.type === "touchmove") {
+    return e.touches[0].clientX;
+  }
+}
+
 
 
 
@@ -529,6 +537,7 @@ export {
   isElementNearTop,
 scrollToTarget,
 cooldown,
+getClientXFromEvent,
   RESIZE_TIMEOUT,
   VIDEO_TYPES,
   IMAGE_TYPES,
