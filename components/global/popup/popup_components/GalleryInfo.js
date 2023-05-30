@@ -18,6 +18,7 @@ import useElementStyle from "@/scripts/hooks/useElementStyle";
 import useOffsetTop from "@/scripts/hooks/useOffsetTop";
 import { STUDY_LINKS } from "@/data/CASE_STUDIES";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
+import useScrollTop from "@/scripts/hooks/useScrollTop";
 
 // this is used to fix a bug where the scrollbar of popup--info is visible and updating several times before popup--description is ready to be drawn, so we delay both by a lil bit so that the popup (and in turn, the rest of the element), is only visible when the scrollbar is ready to be drawn
 // const INFO_ANIM_DELAY = 0.3;
@@ -43,6 +44,13 @@ function GalInfoMotionWrapper({ pop, state, elems, scrollbar, children, styles, 
       }, INFO_ANIM_DELAY * 1000);
     }
   }, [pop.firstImgDrawn, state.mobileGallery]);
+
+
+  // const scrollTop = useScrollTop(elems.info.ref);
+  // useEffect(() => {
+  //   console.log(scrollTop);
+  // }, [scrollTop])
+
 
   return (
     // <motion.div
@@ -503,6 +511,7 @@ const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle
 
 const GalDescription = React.memo(function GalDescription({ pop }) {
   var descs = pop.img.description ? pop.img.description : pop.group.description[pop.index];
+
   return (
     <>
       <div className="gallery--description">

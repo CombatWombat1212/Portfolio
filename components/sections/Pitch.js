@@ -415,6 +415,7 @@ function Pitch({ children }) {
           <div className="pitch--captions">
             {rows.map((row, i) => {
               var { description, heading, vector } = formatRow(row);
+              console.log(description, heading, vector)
               var vectorProps = vector.props;
 
               return <PitchBody key={i} index={i} vectorProps={vectorProps} heading={heading} description={description} />;

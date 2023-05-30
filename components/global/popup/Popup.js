@@ -378,7 +378,6 @@ function Wrapper({ pop, bp }) {
     handles.close();
   }, [routeChanging]);
 
-
   return (
     <>
       <Background handles={handles} popclass={popclass} />
