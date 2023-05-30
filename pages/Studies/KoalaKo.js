@@ -475,7 +475,7 @@ function KoalaKo({ pop }) {
             </Column>
           </Section>
 
-          <Section id="Prototyping--Features" type="columns" background="tertiary" mainType="grid" mainClassName="gap- mts-4 mts-md-3 mts-sm-2">
+          <Section id="Prototyping--Features" type="columns" background="tertiary" mainType="grid" mainClassName="gap- mts-4 mts-md-3 mts-sm-3">
             <Heading>Features added at this stage include:</Heading>
 
             <Column>

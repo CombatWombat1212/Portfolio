@@ -11306,7 +11306,7 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 49.9375em) and (min-width: 37em) {
   #Koalako #Prototyping--Features .section--inner {
-    max-width: calc(100% - 6rem);
+    max-width: calc(100% - 4rem);
     margin-right: auto;
     margin-left: auto;
   }
@@ -11349,8 +11349,8 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 36.9375em) {
   #Koalako #Prototyping--Features .section--main {
-    --gap: 2.5rem;
-    row-gap: 3.5rem;
+    row-gap: 4rem;
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 
@@ -11361,6 +11361,12 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 61.9375em) {
   #Koalako #Prototyping--Features .section--column:nth-child(5) {
     grid-column: span 2;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  #Koalako #Prototyping--Features .section--column:nth-child(5) {
+    grid-column: span 1;
   }
 }
 
