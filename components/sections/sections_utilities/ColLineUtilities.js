@@ -43,12 +43,13 @@ function updateRows(lines) {
 
 function colLineGetRows(line) {
   var parent = line.section.querySelector(`.${line.data.parent}`);
-  console.log(parent, line, line.section, line.data.parent, `.${line.data.parent}`, line.section.querySelector(`.${line.data.parent}`));
 
   var rows = 0;
   var columns = 0;
   var children = 0;
   var gap = 0;
+
+  if(!parent) return;
 
   if (getComputedStyle(parent).getPropertyValue("display") == "grid") {
     columns = getComputedStyle(parent).getPropertyValue("grid-template-columns").split(" ").length;
