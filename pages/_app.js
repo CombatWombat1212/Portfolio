@@ -16,7 +16,6 @@ import { useBreakpoint, useResponsiveUtils } from "@/scripts/hooks/useBreakpoint
 import Providers from "@/scripts/contexts/Providers";
 import Favicon from "@/components/head/Favicon";
 
-
 // const style =
 // `font-family: "Gira Sans"; font-size: 1.4375rem;` +
 // // +`line-height:2rem;`
