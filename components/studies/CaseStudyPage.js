@@ -13,11 +13,11 @@ import useMirrorStyle from "@/scripts/useMirrorStyle";
 function insertNextElementAfterLastSection(newChildren, lastChapterIndex, lastChapterChildren) {
   if (lastChapterChildren[0] == undefined && lastChapterChildren.length == 1) lastChapterChildren = [<></>];
 
-  var lastSectionIndex = lastChapterChildren.findIndex((child) => child.type.name === "Section");
+  var lastSectionIndex = lastChapterChildren.findIndex((child) => (child.type.name || child.type.displayName) === "Section");
 
   // If a "Section" was found within the last chapter, insert the "Next" element after it
   if (lastSectionIndex !== -1) {
-    const nextElementIndex = newChildren.findIndex((child) => child.type.name === "Next");
+    const nextElementIndex = newChildren.findIndex((child) => (child.type.name || child.type.displayName) === "Next");
     if (nextElementIndex !== -1) {
       const nextElement = newChildren.splice(nextElementIndex, 1)[0];
       const lastChapter = newChildren[lastChapterIndex];
