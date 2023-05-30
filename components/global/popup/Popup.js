@@ -19,6 +19,7 @@ import popAnims, { popLayoutTransition, popSeekDuration } from "./popup_utilitie
 import { useResponsiveUtils } from "@/scripts/hooks/useBreakpoint";
 import swipeEventsInit from "@/scripts/SwipeEvents";
 import { useRouter } from "next/router";
+import { useIntercept } from "@/scripts/contexts/InterceptContext";
 
 // TODO: update controls so that the seek buttons have a dedicated state for when they're overflowing.  or like a max number of them
 // TODO: Stop calculations that don't need to run on mobile
@@ -371,19 +372,12 @@ function Wrapper({ pop, bp }) {
     mobileGallery: stateMobileGallery,
   };
 
-  // const router = useRouter();
+  const { routeChanging } = useIntercept();
+  useEffect(() => {
+    if (!routeChanging) return;
+    handles.close();
+  }, [routeChanging]);
 
-  // useEffect(() => {
-  //   const handleRouteChange = () => {
-  //     handles.close();
-  //   };
-
-  //   router.events.on('routeChangeStart', handleRouteChange);
-
-  //   return () => {
-  //     router.events.off('routeChangeStart', handleRouteChange);
-  //   };
-  // }, [handles.close, router]);
 
   return (
     <>

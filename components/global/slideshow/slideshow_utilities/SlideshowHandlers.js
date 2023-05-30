@@ -39,8 +39,9 @@ function slideshowCreateHandlers(slide) {
   };
 
   handlers.notchOnMouseDown = (e) => {
+    sliderNotchOnClick(e,slide);
     // sliderNotchOnMouseDown(e, slide);
-    sliderMouseDown(e, slide, handlers);
+    // sliderMouseDown(e, slide, handlers);
   };
 
   return handlers;
@@ -60,6 +61,12 @@ function slideshowButtonOnClick(e, slide) {
   const move = direction == "left" ? -1 : 1;
 
   slideshowUpdateCardImageAndSlider(slide, move);
+}
+
+function sliderNotchOnClick(e, slide) {
+  const target = e.target;
+  const index = parseInt(target.getAttribute("data-index"));
+  slide.states.setImg(slide.group.imgs[index]);
 }
 
 function sliderNotchOnMouseDown(e, slide) {
@@ -93,13 +100,13 @@ function sliderMouseMove(e, slide) {
   slide.slider.mouse.cur.x = mouse.x;
 
   var handlePos = slide.slider.handle.start.x + (slide.slider.mouse.cur.x - slide.slider.mouse.start.x);
-  console.log(
-    `
-handle start: ${slide.slider.handle.start.x},
-mouse start: ${slide.slider.mouse.start.x},
-mouse cur: ${slide.slider.mouse.cur.x},
-handle pos: ${handlePos}`
-  );
+//   console.log(
+//     `
+// handle start: ${slide.slider.handle.start.x},
+// mouse start: ${slide.slider.mouse.start.x},
+// mouse cur: ${slide.slider.mouse.cur.x},
+// handle pos: ${handlePos}`
+//   );
 
   var barWidth = getElemWidth(bar);
   var handleWidth = getElemWidth(handle);
@@ -131,12 +138,9 @@ handle pos: ${handlePos}`
 function sliderMouseMoveStart(e, slide) {
   const handle = slide.refs.handle.current;
   var mouse = { x: 0, y: 0 };
-
-  console.log('checking', slide.slider.grabbed);
   
   function updateSlideState(clientX) {
     if (slide.slider.grabbed === 1) {
-      console.log('checked');
       slide.slider.grabbed++;
       mouse.x = clientX;
       slide.slider.mouse.start.x = mouse.x;
