@@ -98,6 +98,7 @@ function Slideshow({ children, img }) {
           );
         })}
       </div>
+      
 
       <div className="slideshow--footer">
         <div className="slider--wrapper container">
