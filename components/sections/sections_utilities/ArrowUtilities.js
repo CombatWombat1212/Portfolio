@@ -75,21 +75,21 @@ function getAnchoredArrows() {
       }
     }
 
-
     if (!anchor) continue;
 
-    if (!allAnchoredArrows.some((entry) => entry.arrow === arrowElement  && entry.anchor === anchor)) {
+    if (!allAnchoredArrows.some((entry) => entry.arrow === arrowElement && entry.anchor === anchor)) {
       allAnchoredArrows.push({ arrow: arrowElement, anchor: anchor });
     }
   }
 }
 
 function useAnchoredArrowsInit(children, options = {}) {
-
   const hasDynamicArrows = children.some((child) => {
-    if (child.type.name === "Chapter") {
+    if (child.type.name === "Chapter" || child.type.displayName === "Chapter") {
       const chapterChildren = Array.isArray(child.props.children) ? child.props.children : [child.props.children];
-      return chapterChildren.some((chapterChild) => chapterChild.type.name === "Section" && chapterChild.props.arrows);
+      return chapterChildren.some(
+        (chapterChild) => (chapterChild.type.name === "Section" || chapterChild.type.displayName === "Section") && chapterChild.props.arrows
+      );
     }
     return false;
   });
@@ -117,7 +117,7 @@ function useRunAnchoredArrows(hasDynamicArrows, options) {
   useEffect(() => {
     if (!mounted) return;
     setTimeout(() => {
-    run();
+      run();
     }, timeout);
   }, [update]);
 
@@ -138,9 +138,6 @@ function useRunAnchoredArrows(hasDynamicArrows, options) {
 
   useHorizontalResize(ran);
 }
-
-
-
 
 function removeExcessArrows() {
   var gridSections = document.querySelectorAll(".section--main__grid");

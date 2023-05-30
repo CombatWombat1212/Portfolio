@@ -179,7 +179,7 @@ function Graphic(props) {
     if (children) {
       var childrenArray = React.Children.toArray(children);
       for (var i = 0; i < childrenArray.length; i++) {
-        if (childrenArray[i].type.name == "Button") {
+        if (childrenArray[i].type.name == "Button" || childrenArray[i].type.displayName == "Button") {
           return true;
         }
       }
