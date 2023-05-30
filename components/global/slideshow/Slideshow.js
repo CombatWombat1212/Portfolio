@@ -4,7 +4,6 @@ import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { useEffect, useRef, useState } from "react";
 import Button from "../../elements/Buttons";
 import Card from "./slider_subcomponents/Card";
-import { cardOnClickHandler } from "./slideshow_utilities/CardUtilities";
 import { slideshowCheckInit, slideshowSetPosition } from "./slideshow_utilities/SlideshowUtilities";
 import useHorizontalResize from "@/scripts/hooks/useHorizontalResize";
 import ResponsiveText from "../ResponsiveText";
