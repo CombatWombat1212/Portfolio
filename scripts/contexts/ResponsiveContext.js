@@ -26,8 +26,8 @@ export const ResponsiveProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log(value);
-  }, [value]);
+    console.log(loading);
+  }, [loading]);
 
   // const value = {desktop};
 
