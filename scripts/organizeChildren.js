@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const organizeChildren = (children, searchTermArray) => {
   const traverseAndOrganize = (element, searchProps, key, result, unwrapChildren) => {
@@ -8,16 +8,26 @@ const organizeChildren = (children, searchTermArray) => {
 
     const elementProps = element.props;
     const elementType = element.type;
-    const elementTypeName = typeof elementType === 'function' ? elementType.name : elementType;
-
-    const matchesSearchTerm = Object.entries(searchProps).every(
-      ([searchKey, searchValue]) => {
-        if (searchKey === 'elemType') {
-          return elementTypeName === searchValue;
-        }
-        return elementProps[searchKey] === searchValue;
+    // const elementTypeName = elementType === 'function' ? elementType.name : elementType;
+    const elementTypeName = (() => {
+      if (typeof elementType === "string") {
+        return elementType;
+      } else if (typeof elementType === "function") {
+        return elementType.displayName || elementType.name;
+      }else if(elementType == React.Fragment){
+        return "Fragment";
+      } else {
+        return "Unknown";
       }
-    );
+    })();
+
+    
+    const matchesSearchTerm = Object.entries(searchProps).every(([searchKey, searchValue]) => {
+      if (searchKey === "elemType") {
+        return elementTypeName === searchValue;
+      }
+      return elementProps[searchKey] === searchValue;
+    });
 
     if (matchesSearchTerm) {
       if (unwrapChildren && elementProps.children) {
@@ -30,9 +40,7 @@ const organizeChildren = (children, searchTermArray) => {
     }
 
     if (elementProps && elementProps.children) {
-      React.Children.forEach(elementProps.children, (child) =>
-        traverseAndOrganize(child, searchProps, key, result, unwrapChildren)
-      );
+      React.Children.forEach(elementProps.children, (child) => traverseAndOrganize(child, searchProps, key, result, unwrapChildren));
     }
   };
 
@@ -44,9 +52,7 @@ const organizeChildren = (children, searchTermArray) => {
 
   searchTermArray.forEach(([key, searchProps, unwrapChildren = false]) => {
     organizedChildren[key] = [];
-    React.Children.forEach(children, (child) =>
-      traverseAndOrganize(child, searchProps, key, organizedChildren, unwrapChildren)
-    );
+    React.Children.forEach(children, (child) => traverseAndOrganize(child, searchProps, key, organizedChildren, unwrapChildren));
   });
 
   return organizedChildren;

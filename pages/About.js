@@ -37,7 +37,7 @@ const EXPERIENCE = [
     position: "Sheridan College",
     // TODO: rewrite this
     description: {
-      long: "Graduated with Honours.  Learned the fundamentals of user-centric design, and how to become a Swiss Army knife of digital production. I studied a range of subjects, from UX Research, to 3D design, to web development, and countless other disciplines.  All while working with talented and supportive peers.",
+      long: "Graduated with Honours.  Learned the fundamentals of user-centric design, and the tools to becoming a Swiss Army knife of digital production. I studied a range of subjects, from UX Research, to 3D design, to web development, and countless other disciplines.  All while working with talented and supportive peers.",
       short: "Graduated with Honours, developed skills in user-centric design and all-around digital production.",
       // short: "Graduated with Honours.  I honed skills in user-centric design and all-around digital production; including UX, 3D design, and web development.",
       // short: "Graduated with Honours.  I honed skills in user-centric design and all-around digital production; including UX Research, 3D design, and web development",
