@@ -49,8 +49,6 @@ function colLineGetRows(line) {
   var children = 0;
   var gap = 0;
 
-  if(!parent) return;
-
   if (getComputedStyle(parent).getPropertyValue("display") == "grid") {
     columns = getComputedStyle(parent).getPropertyValue("grid-template-columns").split(" ").length;
 
