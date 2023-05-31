@@ -98,10 +98,10 @@ function Next({ study }) {
   const nextStudyTitle = useRandomString(captions);
 
   return (
-    <Section id="Closing--Next" type="passthrough" wrapperClassName={"pb-section-gap"} titled>
-      <Heading>{nextStudyTitle}</Heading>
-      <NextStudies study={study} />
-    </Section>
+      <>
+        <Heading>{nextStudyTitle}</Heading>
+        <NextStudies study={study} />
+      </>
   );
 }
 
