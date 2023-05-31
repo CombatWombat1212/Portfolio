@@ -93,11 +93,11 @@ function Next({ study }) {
     "We're just gettin' started",
   ];
 
-  // const nextStudyTitle = useRandomString(captions, { localStorage: true, key: "next--title"});
+  const nextStudyTitle = useRandomString(captions, { localStorage: true, key: "next--title"});
 
   return (
     <Section id="Closing--Next" type="passthrough" wrapperClassName={"pb-section-gap"} titled>
-      {/* <Heading>{nextStudyTitle}</Heading> */}
+      <Heading>{nextStudyTitle}</Heading>
       <NextStudies study={study} />
     </Section>
   );

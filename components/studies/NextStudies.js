@@ -148,12 +148,12 @@ function NextStudies({ study }) {
   var adjacentStudies = [first, second];
 
   const captions = ["Check it", "Tell me", "Gimme", "I'll bite", "Ouu", "Do tell", "Go on..."];
-  // const chosen = useRandomString(captions, { localStorage: true, key: "next-study--caption", count: 2 });
+  const chosen = useRandomString(captions, { localStorage: true, key: "next-study--caption", count: 2 });
 
   return (
     <div className="next-study--group">
       {adjacentStudies.map((study, index) => (
-        <Study study={study} key={study.key} button={"chosen[index]"} index={index} />
+        <Study study={study} key={study.key} button={chosen[index]} index={index} />
       ))}
     </div>
   );
