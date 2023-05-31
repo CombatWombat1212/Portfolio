@@ -71,29 +71,17 @@ import { RESIZE_TIMEOUT } from '../GlobalUtilities';
 
 const useBreakpoint = ({ debounceTime = RESIZE_TIMEOUT } = {}) => {
   const getBreakpoint = () => {
-    if (typeof window === 'undefined' || typeof document === 'undefined') {
-      console.log("Server-side rendering, window and document are undefined");
-      return;
-    }
-
-    console.log("Getting breakpoint names");
     const breakpoints = getBreakpointNames();
 
-    const breakpointValues = breakpoints.map(bp => {
-      const breakpointValue = parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue(`--${bp}`));
-      console.log(`Breakpoint ${bp}: ${breakpointValue}`);
-      return {
-        name: bp,
-        value: breakpointValue
-      };
-    });
+    const breakpointValues = breakpoints.map(bp => ({
+      name: bp,
+      value: parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue(`--${bp}`))
+    }));
 
     const windowWidthInEm = window.innerWidth / parseFloat(getComputedStyle(document.documentElement).fontSize);
-    console.log(`Window width in em: ${windowWidthInEm}`);
 
     for (let i = breakpointValues.length - 1; i >= 0; i--) {
       if (windowWidthInEm >= breakpointValues[i].value) {
-        console.log(`Current breakpoint: ${breakpointValues[i].name}`);
         return breakpointValues[i].name;
       }
     }
@@ -105,19 +93,21 @@ const useBreakpoint = ({ debounceTime = RESIZE_TIMEOUT } = {}) => {
   const handleBreakpointChange = useCallback(() => {
     const newBreakpoint = getBreakpoint();
     if (newBreakpoint !== currentBreakpoint) {
-      console.log(`Breakpoint changed from ${currentBreakpoint} to ${newBreakpoint}`);
       setCurrentBreakpoint(newBreakpoint);
     }
   }, [currentBreakpoint]);
 
   useEffect(() => {
-    const handleLoad = () => {
-      console.log("Window loaded, updating breakpoint");
-      handleBreakpointChange();
-      hasExecuted.current = true;
-    };
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return;
+    }
 
     if (typeof window !== 'undefined' && !hasExecuted.current) {
+      const handleLoad = () => {
+        handleBreakpointChange();
+        hasExecuted.current = true;
+      };
+
       if (document.readyState === 'complete') {
         handleLoad();
       } else {
@@ -136,10 +126,8 @@ const useBreakpoint = ({ debounceTime = RESIZE_TIMEOUT } = {}) => {
 
     const debouncedHandleBreakpointChange = debounce(handleBreakpointChange, debounceTime);
 
-    console.log("Adding resize event listener");
     window.addEventListener('resize', debouncedHandleBreakpointChange);
     return () => {
-      console.log("Removing resize event listener");
       window.removeEventListener('resize', debouncedHandleBreakpointChange);
     };
   }, [handleBreakpointChange, debounceTime]);
@@ -176,8 +164,6 @@ const getBreakpointNames = () => {
 
   return breakpoints;
 };
-
-
 
 
 const useBreakpointUtils = ({debounceTime = RESIZE_TIMEOUT} = {}) => {
