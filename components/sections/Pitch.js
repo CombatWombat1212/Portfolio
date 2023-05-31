@@ -277,11 +277,9 @@ function Pitch({ children }) {
 
   var rows = [];
 
-  console.log(children);
   for (var i = 0; i < children.length; i++) {
     rows.push({ childs: getSectionChildren(children[i].props.children), props: children[i].props });
   }
-  console.log(rows);
 
   const pitch = useRef(null);
 

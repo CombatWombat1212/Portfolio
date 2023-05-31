@@ -25,6 +25,10 @@ export const ResponsiveProvider = ({ children }) => {
     desktop,
   };
 
+  useEffect(() => {
+    console.log(value);
+  }, [value]);
+
   // const value = {desktop};
 
   return (

@@ -32,7 +32,6 @@ function organizeChildren(allChildren) {
         if (!child.type) return false; // Check if type is defined
 
         const componentName = getComponentName(child);
-        console.log(componentName);
         return componentName === allTypes[i];
       });
     } else {
