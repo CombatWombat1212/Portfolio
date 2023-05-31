@@ -79,7 +79,7 @@ function CaseStudyPage({ id, study, children }) {
 
       { children }
   
-     {/* <Next study={study} /> */}
+     <Next study={study} />
     </StudyWrapper>
   );
 }
