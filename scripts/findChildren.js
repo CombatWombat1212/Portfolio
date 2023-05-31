@@ -23,7 +23,19 @@ const findChildren = (children, searchTermArray) => {
 
     const elementProps = element.props;
     const elementType = element.type;
-    const elementTypeName = typeof elementType === 'function' ? elementType.name : elementType;
+    // const elementTypeName = typeof elementType === 'function' ? elementType.name : elementType;
+    const elementTypeName = (() => {
+      if (typeof elementType === "string") {
+        return elementType;
+      } else if (typeof elementType === "function") {
+        return elementType.displayName || elementType.name;
+      }else if(elementType == React.Fragment){
+        return "Fragment";
+      } else {
+        return "Unknown";
+      }
+    })();
+
 
     const matchesSearchTerm = Object.entries(searchProps).every(
       ([searchKey, searchValue]) => {

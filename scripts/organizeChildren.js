@@ -8,7 +8,7 @@ const organizeChildren = (children, searchTermArray) => {
 
     const elementProps = element.props;
     const elementType = element.type;
-    // const elementTypeName = elementType === 'function' ? elementType.name : elementType;
+    // const elementTypeName = typeof elementType === 'function' ? elementType.name : elementType;
     const elementTypeName = (() => {
       if (typeof elementType === "string") {
         return elementType;
