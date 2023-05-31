@@ -40,21 +40,20 @@ function MakeRight({ pop }) {
     <>
       <Seo page="makeright" />
 
-      <CaseStudyPage id={study.id} study={study}>
+      {/* <CaseStudyPage id={study.id} study={study}> */}
         
 
         <Chapter name="Delivery" id="Delivery">
 
           <Section id="Delivery--Conclusion" type="columns" titled background="tertiary light">
             <Heading>Bringing 3D printing to everyday consumers</Heading>
-
           </Section>
 
         </Chapter>
 
 
 
-      </CaseStudyPage>
+      {/* </CaseStudyPage> */}
     </>
   );
 }
