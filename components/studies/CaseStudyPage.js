@@ -75,10 +75,10 @@ function StudyWrapper({ id, study, children }) {
 
 function CaseStudyPage({ id, study, children }) {
   return (
-    <StudyWrapper id={id} study={study}>
-      {children}
-      <Next study={study} />
-    </StudyWrapper>
+    // <StudyWrapper id={id} study={study}>
+    { children }
+    // <Next study={study} />
+    // </StudyWrapper>
   );
 }
 
