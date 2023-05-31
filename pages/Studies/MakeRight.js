@@ -48,25 +48,6 @@ function MakeRight({ pop }) {
           <Section id="Delivery--Conclusion" type="columns" titled background="tertiary light">
             <Heading>Bringing 3D printing to everyday consumers</Heading>
 
-            <Column>
-              <Graphic type="mask" background="tertiary" color="background" img={MAKERIGHT_IMGS["connecting_consumers"]} />
-              <Heading className="graphic--caption" type={isMdOrSm ? "p" : "h3"}>
-                Connecting consumers to local hobbyist makers for cheap, customizable manufacturing
-              </Heading>
-            </Column>
-            <Column>
-              <Graphic type="mask" background="tertiary" color="background" img={MAKERIGHT_IMGS["browseable_storefront"]} />
-              <Heading className="graphic--caption" type={isMdOrSm ? "p" : "h3"}>
-                A browsable online storefront of ready-to-print 3D models, sourced from around the internet
-              </Heading>
-            </Column>
-
-            <Column>
-              <Graphic type="mask" background="tertiary" color="background" img={MAKERIGHT_IMGS["maker_profit"]} />
-              <Heading className="graphic--caption" type={isMdOrSm ? "p" : "h3"}>
-                Enabling makers to profit off of their equipment and skills in their spare time
-              </Heading>
-            </Column>
           </Section>
 
         </Chapter>
