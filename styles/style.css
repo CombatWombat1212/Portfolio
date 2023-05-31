@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
@@ -1860,7 +1861,11 @@ h3 + .studypanel--paragraph {
   justify-content: center;
 }
 
-.safari .button--copy {
+.button--copy:not(.button--copy-feedback) {
+  margin-top: calc(var(--button-height) * -1);
+}
+
+.safari .button--copy:not(.button--copy-feedback) {
   margin-top: -0.25rem;
 }
 
@@ -2953,7 +2958,8 @@ h3 + .studypanel--paragraph {
   margin-top: calc(var(--section-text-spacing) * 0.35);
 }
 
-.safari .section--description ol {
+.safari .section--description ol, .safari
+.section--description ul {
   list-style-type: none;
 }
 
@@ -2965,17 +2971,31 @@ h3 + .studypanel--paragraph {
   margin-top: var(--mt);
 }
 
-.safari .section--description ol li span {
+.safari .section--description li span {
   margin-top: calc(var(--mt) * -0.85);
+  position: relative;
 }
 
-.safari .section--description ol li span::before {
+.safari .section--description li span::before {
   counter-increment: li-span-safari-counter;
   content: counter(li-span-safari-counter) ".";
   position: absolute;
   width: var(--counter-width);
   left: 0;
   margin-left: 0;
+}
+
+.safari .section--description ul li span {
+  position: relative;
+}
+
+.safari .section--description ul li span::before {
+  content: "•";
+  font-family: "Tenon";
+  font-size: var(--font-size-body);
+  line-height: var(--font-leading-body);
+  font-weight: 400;
+  font-size: 1.75rem;
 }
 
 .section--description__color {
@@ -5372,6 +5392,7 @@ h3 + .studypanel--paragraph {
   margin: auto;
   margin-right: 0;
   transform: scale(1);
+  aspect-ratio: var(--img-aspect-width)/var(--img-aspect-height);
 }
 
 .next-study--graphic {

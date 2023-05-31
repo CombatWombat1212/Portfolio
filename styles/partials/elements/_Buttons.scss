@@ -44,7 +44,6 @@
   height: var(--button-height);
   overflow: hidden;
 
-
   &--inner {
     @include flex-row;
     & > * + * {
@@ -55,11 +54,10 @@
 
     transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
-    &__copied{
+    &__copied {
       margin-top: calc(var(--button-height) * -1);
     }
   }
-
 
   &--img {
     @include flex-col-center;
@@ -69,8 +67,12 @@
     color: var(--button-color) !important;
     @include flex-col-center;
 
-    @include safari{
-      margin-top: -0.25rem;
+    &:not(.button--copy-feedback) {
+      margin-top: calc(var(--button-height) * -1);
+
+      @include safari {
+        margin-top: -0.25rem;
+      }
     }
 
     &__copied {
@@ -86,7 +88,6 @@
     margin-left: 0rem;
     margin-top: var(--button-height);
   }
-
 
   &--icon {
     @include trans;

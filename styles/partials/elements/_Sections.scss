@@ -136,9 +136,7 @@
       list-style-position: inside;
 
       counter-reset: li-span-safari-counter;
-    }
 
-    ol {
       @include safari {
         list-style-type: none;
       }
@@ -153,21 +151,34 @@
         --mt: calc(var(--font-height-body) * -1);
         margin-top: var(--mt);
 
-        @at-root .section--description ol li span{
-          @include safari {
-            margin-top: calc(var(--mt) * -0.85);
-            &::before {
-              counter-increment: li-span-safari-counter;
-              content: counter(li-span-safari-counter) ".";
-              position: absolute;
-              width: var(--counter-width);
-              left: 0;
-              margin-left: 0;
-            }
+        @include safari {
+          margin-top: calc(var(--mt) * -0.85);
+          position:relative;
+          &::before {
+            counter-increment: li-span-safari-counter;
+            content: counter(li-span-safari-counter) ".";
+            position: absolute;
+            width: var(--counter-width);
+            left: 0;
+            margin-left: 0;
           }
         }
       }
     }
+    ul li {
+      span {
+        @include safari {
+          position:relative;
+          &::before {
+            content:"•";
+            @include body;
+            font-size:1.75rem;
+          }
+        }
+      }
+    }
+
+
 
     &__color {
       @include b-rad;

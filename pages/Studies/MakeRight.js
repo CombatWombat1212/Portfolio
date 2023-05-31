@@ -717,9 +717,9 @@ function MakeRight({ pop }) {
             <Column>
               <Description>
                 <p>
-                  Some changes were a structural shift in the service&rsquo;s rules and mechanics, others were simply UI and UX improvements.
-                  <br className="d-xl-none" /> Here is a smattering of the most notable issues addressed along the way.
-                </p>
+                  Some changes were a structural shift in the service&rsquo;s rules and mechanics, others were simply UI and UX improvements.</p>
+                   <p>Here is a smattering of the most notable issues addressed along the way.</p>
+                
               </Description>
             </Column>
           </Section>
