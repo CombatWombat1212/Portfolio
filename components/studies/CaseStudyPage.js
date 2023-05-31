@@ -95,13 +95,15 @@ function Next({ study }) {
     "We're just gettin' started",
   ];
 
-  const nextStudyTitle = "We're just gettin' started";
+  const nextStudyTitle = "useRandomString(captions, { localStorage: true, key: `nextStudyTitle` });"
 
   return (
-      <>
+    // <Section id="Closing--Next" type="passthrough" wrapperClassName={"pb-section-gap"} titled>
+<>
         <Heading>{nextStudyTitle}</Heading>
         <NextStudies study={study} />
-      </>
+  
+</>    // </Section>
   );
 }
 
