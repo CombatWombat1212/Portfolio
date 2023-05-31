@@ -36,32 +36,47 @@ function LoadingScreen() {
   const scrollbarWidth = useScrollbarWidth();
 
   const routeChangeStart = () => {
+    console.log("routeChangeStart() called");
     document.documentElement.classList.add("scrollauto");
     document.body.classList.add("noscroll");
-    setTimeout(() => window.scroll(0, 0), 0);
+    console.log("Added classes 'scrollauto' and 'noscroll' to the document");
+    setTimeout(() => {
+      window.scroll(0, 0);
+      console.log("Scrolled to the top of the page");
+    }, 0);
   };
 
   const routeChangeEnd = () => {
+    console.log("routeChangeEnd() called");
     document.documentElement.classList.remove("scrollauto");
     document.body.classList.remove("noscroll");
+    console.log("Removed classes 'scrollauto' and 'noscroll' from the document");
   };
 
   const routeChangeStartHandler = (url) => {
+    console.log("routeChangeStartHandler() called with url:", url);
     routeChangeStart();
   };
 
   const routeChangeEndHandler = () => {
+    console.log("routeChangeEndHandler() called");
     if (!loading) {
-      // setTimeout(() => {
       routeChangeEnd();
-      // }, (LOADING_DURATION * 1000)/4);
+    } else {
+      console.log("Page is still loading, not calling routeChangeEnd()");
     }
   };
 
   useEffect(() => {
-    if (routeChanging) routeChangeStartHandler();
-    else routeChangeEndHandler();
+    console.log("useEffect() called with routeChanging value: ", routeChanging);
+    if (routeChanging) {
+      routeChangeStartHandler();
+    } else {
+      routeChangeEndHandler();
+    }
   }, [routeChanging]);
+
+  
 
   return (
     <div
