@@ -148,7 +148,8 @@ function NextStudies({ study }) {
   var adjacentStudies = [first, second];
 
   const captions = ["Check it", "Tell me", "Gimme", "I'll bite", "Ouu", "Do tell", "Go on..."];
-  const chosen = useRandomString(captions, { localStorage: true, key: "next-study--caption", count: 2 });
+  // const chosen = useRandomString(captions, { localStorage: true, key: "next-study--caption", count: 2 });
+  const chosen = ['text 1', 'text 2'];
 
   return (
     <div className="next-study--group">
