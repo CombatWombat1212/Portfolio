@@ -100,7 +100,7 @@ function Next({ study }) {
   return (
     <Section id="Closing--Next" type="passthrough" wrapperClassName={"pb-section-gap"} titled>
       <Heading>{nextStudyTitle}</Heading>
-      <NextStudies study={study} />
+      {/* <NextStudies study={study} /> */}
     </Section>
   );
 }

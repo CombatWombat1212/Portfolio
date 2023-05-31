@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
-function useRandomItems(items, options = {}) {
-  const { localStorage: useLocalStorage, key = "useRandomItems", count = 1 } = options;
+function useRandomString(items, options = {}) {
+  const { localStorage: useLocalStorage, key = "useRandomString", count = 1 } = options;
   randomItemsErrors(count, useLocalStorage, key, items);
 
   const [randomItems, setRandomItems] = useState([]);
@@ -75,4 +75,4 @@ function randomItemsErrors(count, useLocalStorage, key, items) {
   }
 }
 
-export default useRandomItems;
+export default useRandomString;
