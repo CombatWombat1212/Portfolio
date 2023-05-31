@@ -183,6 +183,7 @@ $font-body: "Tenon";
   font-family: $font-title;
   font-size: var(--font-size-h2);
   line-height: var(--font-leading-h2);
+  @include weight-med;
 }
 
 @mixin h2-margin {

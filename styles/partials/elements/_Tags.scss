@@ -11,10 +11,18 @@
 
 
   font-size: var(--font-size-h4);
-  padding: 0.4rem 0.5rem 0.25rem 0.5rem;
   border: 0.125rem solid $col-primary;
   border-radius: var(--b-rad_less);
   background-color: $col-background;
+
+  padding: 0.4rem 0.5rem 0.25rem 0.5rem;
+  
+  @include safari{
+    
+    padding: 0.25rem 0.5rem 0.365rem 0.5rem;
+  }
+
+
   
   @include s;
   --size: fit-content;

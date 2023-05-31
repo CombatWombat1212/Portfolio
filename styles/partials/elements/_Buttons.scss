@@ -69,6 +69,10 @@
     color: var(--button-color) !important;
     @include flex-col-center;
 
+    @include safari{
+      margin-top: -0.25rem;
+    }
+
     &__copied {
       margin-top: var(--button-height);
     }

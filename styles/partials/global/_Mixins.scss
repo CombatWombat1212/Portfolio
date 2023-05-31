@@ -1135,3 +1135,22 @@
 	margin-top: map-get($spacers_section, $size);
 }
   
+
+@mixin safari {
+	.safari & {
+	  @content;
+	}
+  }
+  
+  @mixin chrome {
+	.chrome & {
+	  @content;
+	}
+  }
+  
+  @mixin firefox {
+	.firefox & {
+	  @content;
+	}
+  }
+  

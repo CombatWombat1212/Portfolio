@@ -15,6 +15,7 @@ import useRandomString from "@/scripts/hooks/useRandomString";
 import { useBreakpoint, useResponsiveUtils } from "@/scripts/hooks/useBreakpoint";
 import Providers from "@/scripts/contexts/Providers";
 import Favicon from "@/components/head/Favicon";
+import useBrowserClass from "@/scripts/hooks/useBrowserClass";
 
 // const style =
 // `font-family: "Gira Sans"; font-size: 1.4375rem;` +
@@ -131,6 +132,8 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     console.log(bp);
   }, [bp]);
+
+  useBrowserClass();
 
   return (
     <Providers>
