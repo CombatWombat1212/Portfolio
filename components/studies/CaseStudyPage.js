@@ -13,11 +13,11 @@ import useMirrorStyle from "@/scripts/useMirrorStyle";
 function insertNextElementAfterLastSection(newChildren, lastChapterIndex, lastChapterChildren) {
   if (lastChapterChildren[0] == undefined && lastChapterChildren.length == 1) lastChapterChildren = [<></>];
 
-  var lastSectionIndex = lastChapterChildren.findIndex((child) => (child.type.name || child.type.displayName) === "Section");
+  var lastSectionIndex = lastChapterChildren.findIndex((child) => child.type.name === "Section");
 
   // If a "Section" was found within the last chapter, insert the "Next" element after it
   if (lastSectionIndex !== -1) {
-    const nextElementIndex = newChildren.findIndex((child) => (child.type.name || child.type.displayName) === "Next");
+    const nextElementIndex = newChildren.findIndex((child) => child.type.name === "Next");
     if (nextElementIndex !== -1) {
       const nextElement = newChildren.splice(nextElementIndex, 1)[0];
       const lastChapter = newChildren[lastChapterIndex];
@@ -58,7 +58,7 @@ function StudyWrapper({ id, study, children }) {
 
   const { bp, loading } = useResponsive();
 
-  useAnchoredArrowsInit(newChildren, { update: [bp, loading], timeout: 500 });
+  useAnchoredArrowsInit(newChildren, {update:[bp, loading], timeout: 500});
 
   useMirrorStyle();
 
@@ -76,10 +76,8 @@ function StudyWrapper({ id, study, children }) {
 function CaseStudyPage({ id, study, children }) {
   return (
     <StudyWrapper id={id} study={study}>
-
-      { children }
-  
-     <Next study={study} />
+      {children}
+      <Next study={study} />
     </StudyWrapper>
   );
 }
@@ -95,13 +93,13 @@ function Next({ study }) {
     "We're just gettin' started",
   ];
 
-  const nextStudyTitle = `useRandomString(captions, { localStorage: true, key: "nextStudyTitle" });`
+  const nextStudyTitle = useRandomString(captions, { localStorage: true, key: "next--title"});
 
   return (
-    <Section id="Closing--Next" type="passthrough" wrapperClassName={"pb-section-gap"} titled>
-      {/* <Heading>{nextStudyTitle}</Heading> */}
-      {/* <NextStudies study={study} /> */}
-    </Section>
+    <>
+      <Heading>{nextStudyTitle}</Heading>
+      <NextStudies study={study} />
+    </>
   );
 }
 
@@ -109,10 +107,5 @@ function ColLineInit({ hasColLine }) {
   const { bp } = useResponsive();
   useColLine(hasColLine, { update: [bp] });
 }
-
-StudyWrapper.displayName = "StudyWrapper";
-CaseStudyPage.displayName = "CaseStudyPage";
-Next.displayName = "Next";
-ColLineInit.displayName = "ColLineInit";
 
 export default CaseStudyPage;
