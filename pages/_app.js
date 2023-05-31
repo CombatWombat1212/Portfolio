@@ -135,6 +135,7 @@ export default function App({ Component, pageProps }) {
 
   useBrowserClass();
 
+  
   return (
     <Providers>
       <Favicon />

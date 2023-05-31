@@ -1154,3 +1154,20 @@
 	}
   }
   
+
+  @mixin safari-rem($property, $value) {
+	// Remove 'rem' from the end of the value and convert to number
+	$remValue: to-number(str-slice($value, 1, str-length($value) - 3));
+  
+	// Convert rem to pixels (assuming 1rem is 16px)
+	$pxValue: $remValue * 16;
+  
+	// Output the default property
+	#{$property}: #{$value};
+  
+	// Output the Safari-specific property
+	@include safari {
+	  #{$property}: #{$pxValue}px;
+	}
+  }
+	  

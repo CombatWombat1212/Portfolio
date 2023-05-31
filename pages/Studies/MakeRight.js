@@ -251,7 +251,7 @@ function MakeRight({ pop }) {
 
             <Column>
               <Heading type="h3">
-                Only to have their printer sit idle <br className="d-sm-none" /> most of the time
+                Only to have their printer sit idle <Nobr className="d-sm-none">most of the time</Nobr>
               </Heading>
               <BarGraph study="MakeRight" graph="Printer Usage" type="seperated" small />
             </Column>
@@ -285,7 +285,7 @@ function MakeRight({ pop }) {
 
             <Column>
               <Quote background="background">
-                &ldquo;...In architecture, some calculations are easier when <br className="d-lg-none" /> you have a real model vs. digital...&rdquo;{" "}
+                &ldquo;...In architecture, some calculations are easier when <br className="d-xl-none" /> you have a real model vs. digital...&rdquo;{" "}
                 <Nobr>- Layperson #6</Nobr>
               </Quote>
             </Column>

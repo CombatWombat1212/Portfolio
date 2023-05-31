@@ -56,8 +56,12 @@
       transform: translate(-50%, -50%);
       margin-left: 0.115rem;
       margin-top: 0.05rem;
+      @include safari{
+        margin-top: -0.05rem;
+      }
 
-      span {
+
+    span {
         @include h2;
         @include font-body;
         @include weight-light;
@@ -89,9 +93,13 @@
 
     &--svg {
       display: block;
-      --circle-r: 6.35rem;
+      // --circle-r: 6.35rem;
+      // --circle-stroke: 0.5rem;
+
+      @include safari-rem("--circle-r", "6.35rem");
+      @include safari-rem("--circle-stroke", "0.5rem");
+
       --circle-r_real: calc((var(--circle-r) - (var(--circle-stroke))) / 2);
-      --circle-stroke: 0.5rem;
       --circle-circumference: calc(2 * var(--circle-r_real) * var(--pi));
       --circle-filled: calc((var(--circle-value) / 100) * var(--circle-circumference));
       width: var(--circle-r);
@@ -99,13 +107,15 @@
       transform: rotate(-90deg);
 
       @include xl-down {
-        --circle-r: 6rem;
+        @include safari-rem("--circle-r", "6rem");
+  
       }
       @include lg-down {
-        --circle-r: 5.5rem;
+        @include safari-rem("--circle-r", "5.5rem");
       }
       @include md-down {
         --circle-r: 5.25rem;
+        @include safari-rem("--circle-r", "5.25rem");
       }
     }
 

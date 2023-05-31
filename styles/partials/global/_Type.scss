@@ -259,6 +259,10 @@ h2,
 h3,
 .text--h3 {
   @include h3;
+  
+  b{
+    font-weight: 500;
+  }
 }
 
 h4,
