@@ -42,7 +42,7 @@ function MakeRight({ pop }) {
               Considering entire userflows and journeys <br className="d-lg-none" />
               makes for far better UI than individual features
             </Heading>
-            <Description className={`text-col-2 ${!isLgAndDown ? "text-gap-6" : "text-gap-4"}`}>
+            <Description className={`text-col-2 ${!true ? "text-gap-6" : "text-gap-4"}`}>
               <p>
                 When I began planning my approach to prototyping, I chose a number of the service&rsquo;s most important features. From there, I
                 intended to create mockups of each. Eventually, I reached the question of how the service would verify that makers were capable and
