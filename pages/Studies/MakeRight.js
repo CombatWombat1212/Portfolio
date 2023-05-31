@@ -19,13 +19,22 @@ import Seo from "@/components/head/Seo";
 function MakeRight({ pop }) {
   const study = STUDY_MAKERIGHT;
 
-  const { desktop, isBpAndDown, isBp, bp, loading } = useResponsive();
-  const isLgAndDown = !(!isBpAndDown("lg") || loading);
-  const isMdAndDown = !(!isBpAndDown("md") || loading);
-  const isSmAndDown = !(!isBpAndDown("sm") || loading);
-  const isMd = !(!isBp("md") || loading);
-  const isSm = !(!isBp("sm") || loading);
-  const isMdOrSm = isMd || isSm;
+  // const { desktop, isBpAndDown, isBp, bp, loading } = useResponsive();
+  // const isLgAndDown = !(!isBpAndDown("lg") || loading);
+  // const isMdAndDown = !(!isBpAndDown("md") || loading);
+  // const isSmAndDown = !(!isBpAndDown("sm") || loading);
+  // const isMd = !(!isBp("md") || loading);
+  // const isSm = !(!isBp("sm") || loading);
+  // const isMdOrSm = isMd || isSm;
+
+  // const { desktop, isBpAndDown, isBp, bp, loading } = useResponsive();
+  const desktop = true;
+  const isLgAndDown = true;
+  const isMdAndDown = false;
+  const isMdOrSm = false;
+
+
+
 
   return (
     <>
