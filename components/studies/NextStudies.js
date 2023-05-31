@@ -153,7 +153,7 @@ function NextStudies({ study }) {
   return (
     <div className="next-study--group">
       {adjacentStudies.map((study, index) => (
-        <Study study={study} key={study.key} button={chosen[index]} index={index} />
+        <Study study={study} key={study.key} button={"chosen[index]"} index={index} />
       ))}
     </div>
   );
