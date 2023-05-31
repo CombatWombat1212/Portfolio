@@ -1861,11 +1861,8 @@ h3 + .studypanel--paragraph {
   justify-content: center;
 }
 
-.button--copy:not(.button--copy-feedback) {
-  margin-top: calc(var(--button-height) * -1);
-}
-
 .safari .button--copy:not(.button--copy-feedback) {
+  margin-top: calc(var(--button-height) * -1);
   margin-top: -0.25rem;
 }
 

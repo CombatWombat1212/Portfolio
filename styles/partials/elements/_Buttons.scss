@@ -68,9 +68,9 @@
     @include flex-col-center;
 
     &:not(.button--copy-feedback) {
-      margin-top: calc(var(--button-height) * -1);
-
+      
       @include safari {
+        margin-top: calc(var(--button-height) * -1);
         margin-top: -0.25rem;
       }
     }
