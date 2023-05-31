@@ -524,7 +524,7 @@ body {
 }
 
 .e-col-0 {
-  --expected-cols: calc(calc((12 / 0)) * var(--sfh) / var(--sfh));
+  --expected-cols: 0;
   min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
   max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
@@ -544,7 +544,7 @@ body {
 }
 
 .e-col-1 {
-  --expected-cols: calc(calc((12 / 1)) * var(--sfh) / var(--sfh));
+  --expected-cols: 12;
   min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
   max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
@@ -564,7 +564,7 @@ body {
 }
 
 .e-col-2 {
-  --expected-cols: calc(calc((12 / 2)) * var(--sfh) / var(--sfh));
+  --expected-cols: 6;
   min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
   max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
@@ -584,7 +584,7 @@ body {
 }
 
 .e-col-3 {
-  --expected-cols: calc(calc((12 / 3)) * var(--sfh) / var(--sfh));
+  --expected-cols: 4;
   min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
   max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
@@ -604,7 +604,7 @@ body {
 }
 
 .e-col-4 {
-  --expected-cols: calc(calc((12 / 4)) * var(--sfh) / var(--sfh));
+  --expected-cols: 3;
   min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
   max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
@@ -624,7 +624,7 @@ body {
 }
 
 .e-col-5 {
-  --expected-cols: calc(calc((12 / 5)) * var(--sfh) / var(--sfh));
+  --expected-cols: 2;
   min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
   max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
@@ -644,7 +644,7 @@ body {
 }
 
 .e-col-6 {
-  --expected-cols: calc(calc((12 / 6)) * var(--sfh) / var(--sfh));
+  --expected-cols: 2;
   min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
   max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
@@ -664,7 +664,7 @@ body {
 }
 
 .e-col-7 {
-  --expected-cols: calc(calc((12 / 7)) * var(--sfh) / var(--sfh));
+  --expected-cols: 1;
   min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
   max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
@@ -684,7 +684,7 @@ body {
 }
 
 .e-col-8 {
-  --expected-cols: calc(calc((12 / 8)) * var(--sfh) / var(--sfh));
+  --expected-cols: 1;
   min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
   max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
@@ -704,7 +704,7 @@ body {
 }
 
 .e-col-9 {
-  --expected-cols: calc(calc((12 / 9)) * var(--sfh) / var(--sfh));
+  --expected-cols: 1;
   min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
   max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
@@ -724,7 +724,7 @@ body {
 }
 
 .e-col-10 {
-  --expected-cols: calc(calc((12 / 10)) * var(--sfh) / var(--sfh));
+  --expected-cols: 1;
   min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
   max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
@@ -744,7 +744,7 @@ body {
 }
 
 .e-col-11 {
-  --expected-cols: calc(calc((12 / 11)) * var(--sfh) / var(--sfh));
+  --expected-cols: 1;
   min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
   max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
@@ -764,7 +764,7 @@ body {
 }
 
 .e-col-12 {
-  --expected-cols: calc(calc((12 / 12)) * var(--sfh) / var(--sfh));
+  --expected-cols: 1;
   min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
   max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
 }
@@ -3488,7 +3488,8 @@ h3 + .studypanel--paragraph {
 }
 
 .arrow--mask__default {
-  margin-top: calc( ((var(--section-graphic-panel-pad) * 2) + var(--img-panel-height) - var(--arrow-height)) / 2);
+  margin-top: calc(
+ ((var(--section-graphic-panel-pad) * 2) + var(--img-panel-height) - var(--arrow-height)) / 2);
 }
 
 .arrow--mask__anchored {
@@ -5979,7 +5980,11 @@ h3 + .studypanel--paragraph {
     * var(--row-is-incomplete)
     
     );
-  width: calc( 100% -  (var(--site-x-margin) * var(--line-isnt-middle)) -  (var(--buffer) * var(--line-isnt-middle)) - var(--column-offset));
+  width: calc(
+ 100% - 
+ (var(--site-x-margin) * var(--line-isnt-middle)) - 
+ (var(--buffer) * var(--line-isnt-middle))
+ - var(--column-offset));
   top: calc(var(--line-top) - (var(--col-line-height) / 2));
   left: calc(var(--site-x-margin) + (var(--site-x-margin) * var(--line-left-offset)) + (var(--buffer) * var(--line-is-first)));
 }
@@ -9505,7 +9510,7 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 49.9375em) and (min-width: 37em) {
   #Makeright #Research--Approach .section--column {
-    --expected-cols: calc(calc((12 / 6)) * var(--sfh) / var(--sfh));
+    --expected-cols: 2;
     min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
     max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
   }
@@ -11467,7 +11472,7 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 49.9375em) {
   #Koalako #Prototyping--Methodology .section--column {
-    --expected-cols: calc(calc((12 / 4)) * var(--sfh) / var(--sfh));
+    --expected-cols: 3;
     min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
     max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
   }
@@ -11475,7 +11480,7 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 36.9375em) {
   #Koalako #Prototyping--Methodology .section--column {
-    --expected-cols: calc(calc((12 / 12)) * var(--sfh) / var(--sfh));
+    --expected-cols: 1;
     min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
     max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
   }

@@ -33,20 +33,26 @@ width: ($b/$column-grid-max) * 100#{'%'};
 }
 
 @mixin e-col-width($b) {
+    //  --expected-cols: #{floor-round(calc((12 / #{$b})))};
+    // $calculated-cols: floor();
+    
+    $expected-cols: 0;
+    $cols: 0;
 
+    @if $b == 0 {
+        $cols: 0;
+    } @else {
+        $cols: $column-grid-max/$b;
+    }
 
-     --expected-cols: #{floor-round(calc((12 / #{$b})))};
+    $expected-cols: floor($cols);
+
+    --expected-cols: #{$expected-cols};
+
+    
+
     min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
     max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
-
-
-    // --col-width: Min(
-    //     calc(#{($b/$column-grid-max) * 100#{'%'}} - var(--gap)),
-    //     #{($b/$column-grid-max) * 100#{'%'}});
-    // min-width: var(--col-width);
-    // max-width: var(--col-width);
-        // flex: 1 0;
-
 }
 
 
@@ -73,7 +79,7 @@ width: ($b/$column-grid-max) * 100#{'%'};
     }
 
     .e-col-#{$b} {
-            @include e-col-width($b);
+        @include e-col-width($b);
     }
 }
 
