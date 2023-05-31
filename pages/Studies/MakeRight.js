@@ -28,6 +28,12 @@ function MakeRight({ pop }) {
 
         
 
+        <Chapter name="Closing" id="Closing">
+          <Section id="Closing--Copy" type="columns" titled mainClassName="gap-6 gap-lg-4 mt-6">
+          </Section>
+        </Chapter>
+
+
 
       </CaseStudyPage>
     </>
