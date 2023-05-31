@@ -75,10 +75,15 @@ const useBreakpoint = ({ debounceTime = RESIZE_TIMEOUT } = {}) => {
       console.log("Server-side rendering, window and document are undefined");
       return;
     }
-
+  
     console.log("Getting breakpoint names");
     const breakpoints = getBreakpointNames();
-
+    
+    // ensure breakpoints is an array
+    if (typeof breakpoints === 'string') {
+      breakpoints = breakpoints.split(',');
+    }
+  
     const breakpointValues = breakpoints.map(bp => {
       const breakpointValue = parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue(`--${bp}`));
       console.log(`Breakpoint ${bp}: ${breakpointValue}`);
@@ -87,10 +92,10 @@ const useBreakpoint = ({ debounceTime = RESIZE_TIMEOUT } = {}) => {
         value: breakpointValue
       };
     });
-
+  
     const windowWidthInEm = window.innerWidth / parseFloat(getComputedStyle(document.documentElement).fontSize);
     console.log(`Window width in em: ${windowWidthInEm}`);
-
+  
     for (let i = breakpointValues.length - 1; i >= 0; i--) {
       if (windowWidthInEm >= breakpointValues[i].value) {
         console.log(`Current breakpoint: ${breakpointValues[i].name}`);
@@ -98,7 +103,7 @@ const useBreakpoint = ({ debounceTime = RESIZE_TIMEOUT } = {}) => {
       }
     }
   };
-
+  
   const [currentBreakpoint, setCurrentBreakpoint] = useState(null);
   const hasExecuted = useRef(false);
 
