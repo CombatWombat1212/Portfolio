@@ -24,7 +24,7 @@ function MakeRight({ pop }) {
     <>
       <Seo page="makeright" />
 
-      <CaseStudyPage id={study.id} study={study}>
+      {/* <CaseStudyPage id={study.id} study={study}> */}
 
         
 
@@ -35,7 +35,7 @@ function MakeRight({ pop }) {
 
 
 
-      </CaseStudyPage>
+      {/* </CaseStudyPage> */}
     </>
   );
 }
