@@ -97,8 +97,7 @@ function Next({ study }) {
 
   return (
     <>
-      <Heading>{nextStudyTitle}</Heading>
-      {/* <NextStudies study={study} /> */}
+      {/* <Heading>{nextStudyTitle}</Heading> */}
     </>
   );
 }
