@@ -95,7 +95,7 @@ function Next({ study }) {
     "We're just gettin' started",
   ];
 
-  const nextStudyTitle = useRandomString(captions);
+  const nextStudyTitle = "We're just gettin' started";
 
   return (
       <>
