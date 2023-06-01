@@ -16,6 +16,7 @@ import { useBreakpoint, useResponsiveUtils } from "@/scripts/hooks/useBreakpoint
 import Providers from "@/scripts/contexts/Providers";
 import Favicon from "@/components/head/Favicon";
 import useBrowserClass from "@/scripts/hooks/useBrowserClass";
+import patchConsoleError from "@/scripts/CatchHydrationErrors";
 
 // const style =
 // `font-family: "Gira Sans"; font-size: 1.4375rem;` +
@@ -46,6 +47,11 @@ function generateWaveText(text, hue) {
   );
   return [styledText, ...styles];
 }
+
+
+
+patchConsoleError();
+
 
 export default function App({ Component, pageProps }) {
   // TODO: add an easy out for people on the case study pages.  either a next or back button, skip to bottom, something that will allow them to quickly bounce around case studies
@@ -135,7 +141,7 @@ export default function App({ Component, pageProps }) {
 
   useBrowserClass();
 
-  
+
   return (
     <Providers>
       <Favicon />
