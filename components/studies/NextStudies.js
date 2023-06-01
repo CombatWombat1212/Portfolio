@@ -1,5 +1,5 @@
 import toggle from "@/scripts/AnimationTools";
-import { getAdjacentStudy } from "@/scripts/GetStudy";
+import { getAdjacentStudy, getStudy } from "@/scripts/GetStudy";
 import { useRef } from "react";
 import Button from "../elements/Buttons";
 import Tag from "../elements/Tag";
@@ -11,6 +11,7 @@ import { useResponsiveUtils } from "@/scripts/hooks/useBreakpoint";
 import { arrow_left, arrow_right } from "@/data/ICONS";
 import DLink from "../utilities/DynamicLink";
 import useRandomString from "@/scripts/hooks/useRandomString";
+import Section from "../sections/Sections";
 
 const STUDY_HOVER_AFFECTED = ["next-study", "next-study--button", "graphic--effect__default", "graphic--effect__hover", "next-study--graphic", "tag"];
 
@@ -159,4 +160,33 @@ function NextStudies({ study }) {
   );
 }
 
+
+function Next({ study }) {
+
+
+
+  const captions = [
+    "Room for one more?",
+    "Case studies, anyone?",
+    "Lets keep the good times rollin'",
+    "Another one.",
+    "There's more where that came from",
+    "Get 'em while they're hot",
+    "We're just gettin' started",
+  ];
+
+  const nextStudyTitle = useRandomString(captions, { localStorage: true, key: "next--title" });
+
+  return (
+    <Section id="Closing--Next" type="passthrough" wrapperClassName={"pb-section-gap"} titled>
+      <Heading>{nextStudyTitle}</Heading>
+      <NextStudies study={study} />
+    </Section>
+  );
+}
+
+
+
 export default NextStudies;
+
+export { Next };

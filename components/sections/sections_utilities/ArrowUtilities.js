@@ -50,15 +50,12 @@ function refreshAnchorHeight() {
   }
 }
 
-
-function unhideHiddenArrows(){
+function unhideHiddenArrows() {
   const arrows = document.querySelectorAll(".arrow--column__hidden");
   arrows.forEach((arrow) => {
     arrow.classList.remove("arrow--column__hidden");
-  }
-  )
+  });
 }
-
 
 function getAnchoredArrows() {
   var arrows = document.querySelectorAll(".arrow--mask__anchored");
@@ -94,21 +91,21 @@ function getAnchoredArrows() {
 }
 
 function useAnchoredArrowsInit(children, options = {}) {
-  const hasDynamicArrows = Boolean(children?.some((child) => {
-    if (child.type.name === "Chapter" || child.type.displayName === "Chapter") {
+  const hasDynamicArrows = Boolean(
+    children?.some((child) => {
+      if (!child?.type?.name === "Chapter" && !child?.type?.displayName === "Chapter") return false;
+      if (!child.props?.children) return false;
       const chapterChildren = Array.isArray(child.props.children) ? child.props.children : [child.props.children];
       if (chapterChildren.length === 0 || chapterChildren[0] == undefined) return false;
       return chapterChildren.some(
         (chapterChild) => (chapterChild.type.name === "Section" || chapterChild.type.displayName === "Section") && chapterChild.props.arrows
       );
-    }
-    return false;
-  }));
+    })
+  );
   useRunAnchoredArrows(hasDynamicArrows, options);
 }
 
 function useRunAnchoredArrows(hasDynamicArrows, options) {
-
   const { update = null, timeout = 0 } = options;
   const [mounted, setMounted] = useState(false);
 
@@ -146,17 +143,11 @@ function useRunAnchoredArrows(hasDynamicArrows, options) {
       run();
     }, RESIZE_TIMEOUT);
   }, [run]); // assuming `run` is stable across renders
-  
+
   useHorizontalResize(ran);
-  }
-
-
-
-
-
+}
 
 function removeExcessArrows() {
-
   var gridSections = document.querySelectorAll(".section--main__grid");
 
   gridSections = Array.from(gridSections).filter((section) => {
