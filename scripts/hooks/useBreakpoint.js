@@ -175,7 +175,19 @@ const useResponsiveUtils = ({ debounceTime = RESIZE_TIMEOUT } = {}) => {
     return utils;
   }, [currentBreakpoint, breakpointUtils]);
 
-  return { ...responsiveUtils, currentBreakpoint, loading };
+  // return { ...responsiveUtils, currentBreakpoint, loading };
+
+  return{
+    currentBreakpoint: "lg",
+      isBp: ()=> true,
+      isntBp: ()=> true,
+      isBpOrDown: ()=> true,
+      isBpOrUp: ()=> true,
+      isBpAndDown: ()=> true,
+      isBpAndUp: ()=> true,
+      loading: false,
+  }
+
 };
 
 export { useBreakpoint, useBreakpointUtils, useResponsiveUtils, getBreakpointNames}

@@ -9,13 +9,13 @@ export const ResponsiveProvider = ({ children }) => {
 
   const bp = currentBreakpoint;
 
-  useEffect(() => {
-    if (!isBpAndDown("md") || loading) {
-      setDesktop(true);
-    } else {
-      setDesktop(false);
-    }
-  }, [isBpAndDown("md"), loading]);
+  // useEffect(() => {
+  //   if (!isBpAndDown("md") || loading) {
+  //     setDesktop(true);
+  //   } else {
+  //     setDesktop(false);
+  //   }
+  // }, [isBpAndDown("md"), loading]);
 
 
   const value = {
