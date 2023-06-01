@@ -87,6 +87,7 @@ function useAnchoredArrowsInit(children, options = {}) {
   const hasDynamicArrows = children.some((child) => {
     if (child.type.name === "Chapter" || child.type.displayName === "Chapter") {
       const chapterChildren = Array.isArray(child.props.children) ? child.props.children : [child.props.children];
+      if (chapterChildren.length === 0 || chapterChildren[0] == undefined) return false;
       return chapterChildren.some(
         (chapterChild) => (chapterChild.type.name === "Section" || chapterChild.type.displayName === "Section") && chapterChild.props.arrows
       );

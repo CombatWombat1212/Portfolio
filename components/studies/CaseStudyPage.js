@@ -13,11 +13,11 @@ import useMirrorStyle from "@/scripts/useMirrorStyle";
 function insertNextElementAfterLastSection(newChildren, lastChapterIndex, lastChapterChildren) {
   if (lastChapterChildren[0] == undefined && lastChapterChildren.length == 1) lastChapterChildren = [<></>];
 
-  var lastSectionIndex = lastChapterChildren.findIndex((child) => child.type.name === "Section");
+  var lastSectionIndex = lastChapterChildren.findIndex((child) => (child.type.name === "Section" || child.type.displayName === "Section"));
 
   // If a "Section" was found within the last chapter, insert the "Next" element after it
   if (lastSectionIndex !== -1) {
-    const nextElementIndex = newChildren.findIndex((child) => child.type.name === "Next");
+    const nextElementIndex = newChildren.findIndex((child) => (child.type.name === "Next" || child.type.displayName === "Next"));
     if (nextElementIndex !== -1) {
       const nextElement = newChildren.splice(nextElementIndex, 1)[0];
       const lastChapter = newChildren[lastChapterIndex];
@@ -35,7 +35,7 @@ function StudyWrapper({ id, study, children }) {
   // Find the index of the last chapter within newChildren
   var lastChapterIndex = -1;
   for (let i = newChildren.length - 1; i >= 0; i--) {
-    if (newChildren[i].type.name === "Chapter") {
+    if (newChildren[i].type.name === "Chapter" || newChildren[i].type.displayName === "Chapter") {
       lastChapterIndex = i;
       break;
     }
@@ -51,7 +51,7 @@ function StudyWrapper({ id, study, children }) {
   const hasColLine = newChildren.some((child) => {
     if (child.type.name === "Chapter") {
       const chapterChildren = Array.isArray(child.props.children) ? child.props.children : [child.props.children];
-      return chapterChildren.some((chapterChild) => chapterChild.type.name === "Section" && chapterChild.props.line);
+      return chapterChildren.some((chapterChild) => (chapterChild.type.name === "Section" || chapterChild.type.displayName === "Section") && chapterChild.props.line);
     }
     return false;
   });
