@@ -13,11 +13,11 @@ import useMirrorStyle from "@/scripts/useMirrorStyle";
 function insertNextElementAfterLastSection(newChildren, lastChapterIndex, lastChapterChildren) {
   if (lastChapterChildren[0] == undefined && lastChapterChildren.length == 1) lastChapterChildren = [<></>];
 
-  var lastSectionIndex = lastChapterChildren.findIndex((child) => (child.type.name === "Section" || child.type.displayName === "Section"));
+  var lastSectionIndex = lastChapterChildren.findIndex((child) => child.type.name === "Section" || child.type.displayName === "Section");
 
   // If a "Section" was found within the last chapter, insert the "Next" element after it
   if (lastSectionIndex !== -1) {
-    const nextElementIndex = newChildren.findIndex((child) => (child.type.name === "Next" || child.type.displayName === "Next"));
+    const nextElementIndex = newChildren.findIndex((child) => child.type.name === "Next" || child.type.displayName === "Next");
     if (nextElementIndex !== -1) {
       const nextElement = newChildren.splice(nextElementIndex, 1)[0];
       const lastChapter = newChildren[lastChapterIndex];
@@ -29,36 +29,46 @@ function insertNextElementAfterLastSection(newChildren, lastChapterIndex, lastCh
 }
 
 function StudyWrapper({ id, study, children }) {
-  var newChildren = React.Children.toArray(children);
-  if (!Array.isArray(newChildren)) newChildren = [newChildren];
+  const [processedChildren, setProcessedChildren] = useState(null);
+  const [hasColLine, setHasColLine] = useState(false);
 
-  // Find the index of the last chapter within newChildren
-  var lastChapterIndex = -1;
-  for (let i = newChildren.length - 1; i >= 0; i--) {
-    if (newChildren[i].type.name === "Chapter" || newChildren[i].type.displayName === "Chapter") {
-      lastChapterIndex = i;
-      break;
+  useEffect(() => {
+    var newChildren = React.Children.toArray(children);
+    if (!Array.isArray(newChildren)) newChildren = [newChildren];
+
+    var lastChapterIndex = -1;
+    for (let i = newChildren.length - 1; i >= 0; i--) {
+      if (newChildren[i].type.name === "Chapter" || newChildren[i].type.displayName === "Chapter") {
+        lastChapterIndex = i;
+        break;
+      }
     }
-  }
 
-  // If a chapter was found, check if the last child of the last chapter is a "Section"
-  if (lastChapterIndex !== -1) {
-    const lastChapter = newChildren[lastChapterIndex];
-    const lastChapterChildren = Array.isArray(lastChapter.props.children) ? lastChapter.props.children : [lastChapter.props.children];
-    insertNextElementAfterLastSection(newChildren, lastChapterIndex, lastChapterChildren);
-  }
+    if (lastChapterIndex !== -1) {
+      const lastChapter = newChildren[lastChapterIndex];
+      const lastChapterChildren = Array.isArray(lastChapter.props.children) ? lastChapter.props.children : [lastChapter.props.children];
+      insertNextElementAfterLastSection(newChildren, lastChapterIndex, lastChapterChildren);
+    }
 
-  const hasColLine = newChildren.some((child) => {
-    if (child.type.name === "Chapter") {
+    setProcessedChildren(newChildren);
+  }, [children]);
+
+  useEffect(() => {
+    if (!processedChildren) return;
+    const line = processedChildren.some((child) => {
+      if (!child.type.name === "Chapter" && !child.type.displayName === "Chapter") return false;
       const chapterChildren = Array.isArray(child.props.children) ? child.props.children : [child.props.children];
-      return chapterChildren.some((chapterChild) => (chapterChild.type.name === "Section" || chapterChild.type.displayName === "Section") && chapterChild.props.line);
-    }
-    return false;
-  });
+      if (chapterChildren.length === 0 || chapterChildren[0] == undefined) return false;
+      return chapterChildren.some(
+        (chapterChild) => (chapterChild.type.name === "Section" || chapterChild.type.displayName === "Section") && chapterChild.props.line
+      );
+    });
+    setHasColLine(line);
+  }, [processedChildren]);
 
   const { bp, loading } = useResponsive();
 
-  useAnchoredArrowsInit(newChildren, {update:[bp, loading], timeout: 500});
+  useAnchoredArrowsInit(processedChildren, { update: [bp, loading], timeout: 500 });
 
   useMirrorStyle();
 
@@ -68,7 +78,7 @@ function StudyWrapper({ id, study, children }) {
       <Indicator />
       <StudyPanel variant={"study"} study={study} />
       <Brief study={study} />
-      {newChildren}
+      {processedChildren}
     </div>
   );
 }
@@ -93,7 +103,7 @@ function Next({ study }) {
     "We're just gettin' started",
   ];
 
-  const nextStudyTitle = useRandomString(captions, { localStorage: true, key: "next--title"});
+  const nextStudyTitle = useRandomString(captions, { localStorage: true, key: "next--title" });
 
   return (
     <Section id="Closing--Next" type="passthrough" wrapperClassName={"pb-section-gap"} titled>

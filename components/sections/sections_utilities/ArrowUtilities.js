@@ -1,6 +1,6 @@
 import { RESIZE_TIMEOUT, splitPx } from "@/scripts/GlobalUtilities";
 import useHorizontalResize from "@/scripts/hooks/useHorizontalResize";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 var allAnchoredArrows = [];
 
@@ -50,6 +50,16 @@ function refreshAnchorHeight() {
   }
 }
 
+
+function unhideHiddenArrows(){
+  const arrows = document.querySelectorAll(".arrow--column__hidden");
+  arrows.forEach((arrow) => {
+    arrow.classList.remove("arrow--column__hidden");
+  }
+  )
+}
+
+
 function getAnchoredArrows() {
   var arrows = document.querySelectorAll(".arrow--mask__anchored");
   arrows = Array.from(arrows);
@@ -84,7 +94,7 @@ function getAnchoredArrows() {
 }
 
 function useAnchoredArrowsInit(children, options = {}) {
-  const hasDynamicArrows = children.some((child) => {
+  const hasDynamicArrows = Boolean(children?.some((child) => {
     if (child.type.name === "Chapter" || child.type.displayName === "Chapter") {
       const chapterChildren = Array.isArray(child.props.children) ? child.props.children : [child.props.children];
       if (chapterChildren.length === 0 || chapterChildren[0] == undefined) return false;
@@ -93,14 +103,13 @@ function useAnchoredArrowsInit(children, options = {}) {
       );
     }
     return false;
-  });
-
+  }));
   useRunAnchoredArrows(hasDynamicArrows, options);
 }
 
 function useRunAnchoredArrows(hasDynamicArrows, options) {
-  const { update = null, timeout = 0 } = options;
 
+  const { update = null, timeout = 0 } = options;
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -123,6 +132,7 @@ function useRunAnchoredArrows(hasDynamicArrows, options) {
   }, [update]);
 
   function run() {
+    unhideHiddenArrows();
     getAnchoredArrows();
     refreshAnchorHeight();
     removeExcessArrows();
@@ -130,17 +140,23 @@ function useRunAnchoredArrows(hasDynamicArrows, options) {
 
   var isResizing;
 
-  function ran() {
+  const ran = useCallback(() => {
     window.clearTimeout(isResizing);
     isResizing = setTimeout(function () {
       run();
     }, RESIZE_TIMEOUT);
+  }, [run]); // assuming `run` is stable across renders
+  
+  useHorizontalResize(ran);
   }
 
-  useHorizontalResize(ran);
-}
+
+
+
+
 
 function removeExcessArrows() {
+
   var gridSections = document.querySelectorAll(".section--main__grid");
 
   gridSections = Array.from(gridSections).filter((section) => {
