@@ -9242,7 +9242,7 @@ h3 + .studypanel--paragraph {
     height: calc(100vh - var(--nav-height)) !important;
   }
   .safari #Home.studypanel--wrapper {
-    margin-bottom: 2rem !important;
+    margin-bottom: 3rem !important;
   }
 }
 
