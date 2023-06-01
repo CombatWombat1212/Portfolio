@@ -14,20 +14,55 @@ const MULTIDISCIPLINARY = [
   {
     name: "Disciplines",
     items: [
-      "3D / CG Design",
-      "Web Development",
-      "Physical Computing",
-      "UX / UI Design",
+      {
+        xxl: "3D / CG Design",
+        sm: "3D Design",
+      },
+      {
+        xxl: "Web Development",
+        sm: "Web Dev",
+      },
+      {
+        xxl: "Physical Computing",
+        sm: "Arduino",
+      },
+      {
+        xxl: "UX / UI Design",
+        sm: "UX/UI",
+      },
       "Photography",
       "Motion Graphics",
       "UX Research",
       "Videography",
-      "Print Layout Design",
+      {
+        xxl: "Print Layout Design",
+        sm: "Print Design",
+      },
     ],
   },
   {
     name: "Toolbelt",
-    items: ["Blender 3D", "HTML/CSS/JS", "3D Printing", "Adobe XD / Figma", "Ableton Live", "React.js / Next.js", "Adobe Creative Suite"],
+    items: [
+      "Blender 3D",
+      "HTML/CSS/JS",
+      "3D Printing",
+      {
+        xxl: "Adobe XD / Figma",
+        sm: "XD / Figma",
+      },
+      {
+        xxl: "Ableton Live",
+        sm: "Ableton",
+      },
+      {
+        xxl: "React.js / Next.js",
+        sm: "React / Next",
+      },
+      {
+        xxl: "Adobe Creative Suite",
+        sm: "Adobe Suite",
+      },
+    ],
   },
 ];
 
@@ -176,7 +211,7 @@ function About() {
                   function Head({ className }) {
                     return (
                       <Heading type="h3" className={`weight-med toolbelt--title col-4 ${className || ""}`}>
-                        {name}
+                        <ResponsiveText tag="Fragment" data={name} />
                       </Heading>
                     );
                   }
@@ -194,7 +229,7 @@ function About() {
                             </li>
 
                             {items.map((item) => {
-                              return <li key={item}>{item}</li>;
+                              return <ResponsiveText tag="li" data={item} key={item} />;
                             })}
                           </ul>
                         </div>
