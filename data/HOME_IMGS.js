@@ -3,42 +3,42 @@ import { processGroups, processImages } from "@/scripts/ProcessImages";
 const HOME_IMGS = processImages(
   {
     makeright_main: {
-      src: "./assets/images/home/MakeRight.png",
+      src: "/assets/images/home/MakeRight.png",
       alt: "3D printed plastic elephant diving into a cardboard box",
       width: 1038,
       height: 944,
     },
 
     makeright_alt: {
-      src: "./assets/images/home/MakeRight_Alt.png",
+      src: "/assets/images/home/MakeRight_Alt.png",
       alt: "3D printed plastic elephant sitting in a cardboard box",
       width: 1038,
       height: 716,
     },
 
     made_main: {
-      src: "./assets/images/home/MADE.png",
+      src: "/assets/images/home/MADE.png",
       alt: "3D rendering of a blue dress-shirt",
       width: 526,
       height: 823,
     },
 
     koalako_main: {
-      src: "./assets/images/home/KoalaKo.png",
+      src: "/assets/images/home/KoalaKo.png",
       alt: "3D rendering of a phone with an app called 'KoalaKo' open on the screen",
       width: 738,
       height: 842,
     },
 
     explorations_main: {
-      src: "./assets/images/home/Explorations.png",
+      src: "/assets/images/home/Explorations.png",
       alt: "3D rendering of a worn steel compass",
       width: 730,
       height: 1626,
     },
 
     explorations_alt: {
-      src: "./assets/images/home/Explorations_Alt.png",
+      src: "/assets/images/home/Explorations_Alt.png",
       alt: "3D rendering of a worn steel compass on its side",
       width: 730,
       height: 1626,
