@@ -9240,6 +9240,7 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 49.9375em) {
   #Home.studypanel--wrapper {
     height: calc(100vh - var(--nav-height)) !important;
+    margin-bottom: 2rem;
   }
 }
 
