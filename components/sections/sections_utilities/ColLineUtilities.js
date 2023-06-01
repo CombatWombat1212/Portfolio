@@ -1,7 +1,7 @@
 import { RESIZE_TIMEOUT, splitPx } from "@/scripts/GlobalUtilities";
 import useHorizontalResize from "@/scripts/hooks/useHorizontalResize";
 import useListener from "@/scripts/hooks/useListener";
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 function ColLine(elem) {
   this.elem = elem.querySelector(".col-line--wrapper");
@@ -262,7 +262,7 @@ function useColLine(hasColLine, { update = null } = {}) {
     var isResizing;
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (hasColLine) {
       colLineInit();
     }

@@ -3,7 +3,7 @@ import { SHIRT_COMPONENTS, SHIRT_COMPONENTS_GROUPS } from "@/data/SHIRT_COMPONEN
 import { RESIZE_TIMEOUT, createUpdateConditions } from "@/scripts/GlobalUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { setConfig } from "next/config";
-import React, { Fragment, useLayoutEffect, useRef } from "react";
+import React, { Fragment, useRef } from "react";
 import { useEffect, useState } from "react";
 import Graphic from "../sections/graphic/Graphic";
 import Heading from "../sections/Heading";

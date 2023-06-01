@@ -2,7 +2,7 @@ import { getColors, RESIZE_TIMEOUT, splitS } from "@/scripts/GlobalUtilities";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import Image from "next/image";
 import { defaultProps, PropTypes } from "prop-types";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Mask from "../../utilities/Mask";
 import { getBackgroundClasses } from "../sections_utilities/GetClasses";
 import graphicVideoInit from "./VideoUtilities";

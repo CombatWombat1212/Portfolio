@@ -6,7 +6,8 @@
     "dev": "next dev",
     "start": "next start",
     "lint": "next lint",
-    "build": "next build && next export"
+    "build": "next build && next export",
+    "build-start": "next build && next export && next start"
   },
   "dependencies": {
     "@babel/core": "^7.21.8",
@@ -22,8 +23,9 @@
     "next-optimized-images": "^2.6.2",
     "next-videos": "^1.4.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react-dom": "^18.2.0",
     "react-player": "^2.12.0",
+    "scheduler": "^0.23.0",
     "uuid": "^9.0.0",
     "uuidv4": "^6.2.13",
     "vidstack": "^0.4.2"
