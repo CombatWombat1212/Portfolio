@@ -2,8 +2,8 @@
 const HYDRATION_ERROR_MSGS = [
     "Warning: Did not expect server HTML to contain",
     "Warning: Text content did not match. Server",
-    "Minified React error #418",
-    "Minified React error #423"
+    "418",
+    "423"
 ];
   
   //Can use any npm packag instead of this
