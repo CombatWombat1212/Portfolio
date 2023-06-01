@@ -98,7 +98,7 @@ function getOrganizedVideoProps(props, desktop) {
   };
 
   const SOURCE_PROPS = {
-    src: `..${src}`,
+    src: `${src}`,
     type: `video/${type}`,
   };
 
