@@ -5,9 +5,10 @@ const nextConfig = {
   productionBrowserSourceMaps: true,
   reactStrictMode: true,
   images: {
-    loader: "custom",
-    loaderFile: "./configs/ImageLoader.js",
-    formats: ["image/webp"],
+    loader: "default",
+    // loader: "custom",
+    // loaderFile: "./configs/ImageLoader.js",
+    // formats: ["image/webp"],
   },
 
 }
