@@ -64,6 +64,9 @@ const SEO_DATA = processSeoData({
 });
 
 function processSeoData(seo) {
+
+  const domain = "https://www.samgiustizia.ca";
+
   for (let page in seo) {
     if (!seo[page]) {
       console.log(`Missing data for page: ${page}`);
@@ -79,7 +82,7 @@ function processSeoData(seo) {
       console.log(`Missing URL for page: ${page}`);
     }
 
-    seo[page].url = "https://www.samgiustizia.ca" + seo[page].url;
+    seo[page].url = domain + seo[page].url;
 
     if (!seo[page].img) {
       seo[page].img = {};
@@ -91,7 +94,7 @@ function processSeoData(seo) {
       console.log(`Missing image source for page: ${page}`);
     }
 
-    seo[page].imgUrl = "https://www.samgiustizia.ca" + seo[page].img.src.replace(".", "");
+    seo[page].imgUrl = domain + seo[page].img.src.replace(".", "");
   }
 
   return seo;
