@@ -13,6 +13,7 @@ import { STUDY_KOALAKO } from "@/data/CASE_STUDIES";
 // Imports - Scripts
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import Seo from "@/components/head/Seo";
+import Nobr from "@/components/utilities/Nobr";
 
 function KoalaKo({ pop }) {
   const study = STUDY_KOALAKO;
@@ -84,8 +85,7 @@ function KoalaKo({ pop }) {
           <Section id="Overview--Background" type="overview">
             <Title>Background</Title>
             <Heading>
-              &ldquo;Creativity is in crisis&rdquo;
-              <br className="d-none d-xl-block d-lg-none d-sm-block" /> - LEGO & AKQA
+              &ldquo;Creativity is in crisis&rdquo; <Nobr>- LEGO & AKQA</Nobr>
             </Heading>
             <Description>
               <p>

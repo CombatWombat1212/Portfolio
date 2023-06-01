@@ -196,7 +196,7 @@ function Configurator() {
     setConfig,
   };
 
-  // useConfigImgPrefetch(configurator);
+  useConfigImgPrefetch(configurator);
 
   return (
     <>

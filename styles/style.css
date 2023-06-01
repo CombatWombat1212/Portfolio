@@ -3390,6 +3390,10 @@ h3 + .studypanel--paragraph {
   height: 100%;
 }
 
+.popup .video--background {
+  display: none;
+}
+
 .section .graphic--video .video__hidden {
   opacity: 0;
 }
@@ -6838,6 +6842,7 @@ h3 + .studypanel--paragraph {
   aspect-ratio: 1/1;
   overflow: hidden;
   border-radius: 0.25rem;
+  background-color: #E9E9F2;
 }
 
 .gallery--graphic * {

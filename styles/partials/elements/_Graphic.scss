@@ -157,10 +157,16 @@
             width: calc(100% - (var(--section-graphic-panel-pad) * 2));
             height: calc(100% - (var(--section-graphic-panel-pad) * 2));
           }
+
           @at-root .section--graphic:not(.graphic--panel) .video--background{
             width: 100%;
             height:100%;
           }
+
+          @at-root .popup .video--background{
+            display:none;
+          }
+          
         }
 
         &__hidden {
