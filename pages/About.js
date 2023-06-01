@@ -1,4 +1,5 @@
 import Experience from "@/components/global/Experience";
+import ResponsiveText from "@/components/global/ResponsiveText";
 import WhatIm from "@/components/global/WhatIm";
 import Seo from "@/components/head/Seo";
 import Section, { Chapter, Column, Description, Graphic, Heading, Title } from "@/components/sections/Sections";
@@ -145,7 +146,10 @@ function About() {
                   </ResponsiveText>
                 </Heading>
                 <Title caps={false} innerClassName="color--primary">
-                  Began August 15th, 2021
+                  <ResponsiveText>
+                    <xxl>Began August 15th, 2021</xxl>
+                    <sm>Began 15/08/2021</sm>
+                  </ResponsiveText>
                 </Title>
               </div>
 
