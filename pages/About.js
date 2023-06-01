@@ -138,7 +138,12 @@ function About() {
           <Section id="Intro--Focus" type="passthrough">
             <div className="myfocus">
               <div className="myfocus--head">
-                <Heading type="h3">My Current Focus</Heading>
+                <Heading type="h3">
+                  <ResponsiveText>
+                    <xxl>My Current Focus</xxl>
+                    <sm>Current Focus</sm>
+                  </ResponsiveText>
+                </Heading>
                 <Title caps={false} innerClassName="color--primary">
                   Began August 15th, 2021
                 </Title>
