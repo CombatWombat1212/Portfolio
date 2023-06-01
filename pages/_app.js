@@ -47,7 +47,6 @@ function generateWaveText(text, hue) {
   return [styledText, ...styles];
 }
 
-
 export default function App({ Component, pageProps }) {
   // TODO: add an easy out for people on the case study pages.  either a next or back button, skip to bottom, something that will allow them to quickly bounce around case studies
 
@@ -136,18 +135,19 @@ export default function App({ Component, pageProps }) {
 
   useBrowserClass();
 
-
   return (
-    <Providers>
+    <>
       <Favicon />
-      <LoadingScreen />
-      <div className="site">
-        <Layout>
-          <Popup pop={pop} />
-          <Component pop={pop} />
-          <Footer />
-        </Layout>
-      </div>
-    </Providers>
+      <Providers>
+        <LoadingScreen />
+        <div className="site">
+          <Layout>
+            <Popup pop={pop} />
+            <Component pop={pop} />
+            <Footer />
+          </Layout>
+        </div>
+      </Providers>
+    </>
   );
 }
