@@ -9,13 +9,13 @@ export const ResponsiveProvider = ({ children }) => {
 
   const bp = currentBreakpoint;
 
-  // useEffect(() => {
-  //   if (!isBpAndDown("md") || loading) {
-  //     setDesktop(true);
-  //   } else {
-  //     setDesktop(false);
-  //   }
-  // }, [isBpAndDown("md"), loading]);
+  useEffect(() => {
+    if (!isBpAndDown("md") || loading) {
+      setDesktop(true);
+    } else {
+      setDesktop(false);
+    }
+  }, [isBpAndDown("md"), loading]);
 
 
   const value = {
@@ -24,12 +24,6 @@ export const ResponsiveProvider = ({ children }) => {
     loading, 
     desktop,
   };
-
-  useEffect(() => {
-    console.log(loading);
-  }, [loading]);
-
-  // const value = {desktop};
 
   return (
     <ResponsiveContext.Provider value={value}>
