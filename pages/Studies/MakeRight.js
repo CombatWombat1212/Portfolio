@@ -513,33 +513,6 @@ function MakeRight({ pop }) {
             </Heading>
 
             <QuoteTable data={QUOTE_TABLES.concerns} />
-
-            {/* <div className="quote-table">
-              <div className="quote-table--cell quote-table--cell__primary">
-                <p className="weight-bold mb-1">Distribution of responsibilities</p>
-                <p>Draw a line separating the responsibilities of makers, and customers.</p>
-              </div>
-              <Quote background="background" className="quote-table--cell quote-table--cell__secondary">
-                &ldquo;It&rsquo;s a question of distributing responsibility. There&rsquo;s 2 types of problems: maker problems, and customer
-                problems.&rdquo; - Layperson #3
-              </Quote>
-
-              <div className="quote-table--cell quote-table--cell__primary">
-                <p className="weight-bold mb-1">Ensure a viable work experience for makers</p>
-                <p>Appropriate deadlines for printers, with some kind of flexibility.</p>
-              </div>
-              <Quote background="background" className="quote-table--cell quote-table--cell__secondary">
-                &ldquo;There&rsquo;s a lot of little steps and things that go into making the print that can take time.&rdquo; - Maker #3
-              </Quote>
-
-              <div className="quote-table--cell quote-table--cell__primary">
-                <p className="weight-bold mb-1">3D modelling adds too much complication</p>
-                <p>Model creation and design is whole service in itself; including it in the service would drastically affect scope.</p>
-              </div>
-              <Quote background="background" className="quote-table--cell quote-table--cell__secondary">
-                &ldquo;I can&rsquo;t model things for people, so I&rsquo;m not very interested in that side of the service.&rdquo; - Maker #3
-              </Quote>
-            </div> */}
           </Section>
 
           <Section id="Develop--Conclusion">
