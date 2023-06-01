@@ -24,7 +24,10 @@
         // height: calc(95vh - var(--nav-height)) !important;
         // margin-bottom: -7.5rem !important;
         height: calc(100vh - var(--nav-height)) !important;
-        margin-bottom:2rem;
+
+        @include safari{
+          margin-bottom:2rem!important;
+        }
       }
     }
 
