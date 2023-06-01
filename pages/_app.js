@@ -16,7 +16,6 @@ import { useBreakpoint, useResponsiveUtils } from "@/scripts/hooks/useBreakpoint
 import Providers from "@/scripts/contexts/Providers";
 import Favicon from "@/components/head/Favicon";
 import useBrowserClass from "@/scripts/hooks/useBrowserClass";
-import patchConsoleError from "@/scripts/CatchHydrationErrors";
 
 // const style =
 // `font-family: "Gira Sans"; font-size: 1.4375rem;` +
@@ -47,10 +46,6 @@ function generateWaveText(text, hue) {
   );
   return [styledText, ...styles];
 }
-
-
-
-patchConsoleError();
 
 
 export default function App({ Component, pageProps }) {
