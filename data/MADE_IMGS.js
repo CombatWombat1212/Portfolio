@@ -597,6 +597,7 @@ const MADE_IMGS = processImages(
     limitations_bottle: {
       name: "limitations_bottle",
       src: "/assets/images/made/limitations/limitations_bottle.mp4",
+      fallback: "/assets/images/made/limitations/limitations_bottle.png",
       alt: "A 3D rendering of a foundation makeup bottle product shot.  The bottle's label reads 'Jabbar & Co.'. The bottle cycles through a series of different skin tone colors to demonstrate how the previously described system was scaleable and was able to be reused in a later project of mine.",
       width: 1200,
       height: 1200,
@@ -604,6 +605,7 @@ const MADE_IMGS = processImages(
     limitations_multiple_objects: {
       name: "limitations_multiple_objects",
       src: "/assets/images/made/limitations/limitations_multiple_objects.mp4",
+      fallback: "/assets/images/made/limitations/limitations_multiple_objects.png",
       alt: "A motion graphic animation with a dress shirt in center frame.  A camera shutter surrounds it and captures an image of the shirt.  The shirt then slides off frame to the left, and is replaced by a new shirt with a different pattern which comes in from the right. The image is captured once again, and the cycle continues.  This animation represents one potential approach for rendering the shirt components I created for MADE.  The approach was to have a series of identical objects that would each be rendered individually.",
       width: 1200,
       height: 1200,
@@ -611,6 +613,7 @@ const MADE_IMGS = processImages(
     limitations_single_object: {
       name: "limitations_single_object",
       src: "/assets/images/made/limitations/limitations_single_object.mp4",
+      fallback: "/assets/images/made/limitations/limitations_single_object.png",
       alt: "A motion graphic animation with a dress shirt in center frame.  A camera shutter surrounds it and captures an image of the shirt.  The shirt then undergoes a wipe transition from top to bottom and its color/pattern changes. The image is captured once again, and the cycle continues.  This animation represents one potential approach for rendering the shirt components I created for MADE. The approach was to have a single object that would be able to dynamically change its pattern every frame.  Meaning the 3D scene only had one object, rather than a series of identical objects.",
       width: 1200,
       height: 1200,
@@ -618,6 +621,7 @@ const MADE_IMGS = processImages(
     limitations_switcher: {
       name: "limitations_switcher",
       src: "/assets/images/made/limitations/limitations_switcher.mp4",
+      fallback: "/assets/images/made/limitations/limitations_switcher.png",
       alt: "A motion graphic animation which describes the underlying system used to power the second approach described above, the approach with only one shirt which can change its pattern.  The animation shows 3 nodes on the left side of the screen, each representing a different pattern.  The three nodes are plugged into a much larger center node titled 'Switcher'.  The switcher node is then plugged into the shirt object on the right side of the animation.  Even though all 3 pattern nodes on the left are plugged into the switcher, only the first has a 'live' connection which is fully opaque compared to the rest.  This was decided by a numeric dial on the switcher node which currently reads '1'.  As a result, the switcher assigns the first material to the shirt.  The animation is then built around the numeric dial being changed to '2' and '3' to show how with each value change, a different pattern in the sequence is selected and assigned to the shirt.",
       width: 2400,
       height: 1200,
