@@ -12,33 +12,36 @@
   }
 }
 
-@mixin outline-on-and-off{
-  &__on {
-    outline: var(--outline-on);
-    @include safari {
-      position:relative;
-      outline: none;
-      &::before{
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: inherit;
-        box-shadow: var(--box-shadow-on);
-      }
+@mixin outline-before($str) {
+  outline: var(--outline-#{$str});
+  @include safari {
+    outline: none;
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      z-index: 1;
+      box-shadow: var(--box-shadow-#{$str});
     }
   }
-  &__off {
-    outline: var(--outline-off);
-    @include safari {
-      outline: none;
-      box-shadow: var(--box-shadow-off);
-    }
-  }  
 }
 
+@mixin outline-on-and-off {
+  &::before {
+    transition: 0.1s;
+  }
+  &__on {
+    @include outline-before(on);
+  }
+  &__off {
+    @include outline-before(off);
+  }
+}
 
 .configurator {
   //   &--wrapper {
@@ -51,10 +54,10 @@
   --outline-partial: 0.125rem solid #{$col-tertiary};
 
   @include safari {
-    --outline-width: 0rem;
-    --box-shadow-on: inset 0 0 0 #{$outline-width} #{$col-tertiary};
-    --box-shadow-off: inset 0 0 0 0rem #{$col-tertiary};
-    --box-shadow-partial: inset 0 0 0 #{$outline-width/2} #{$col-tertiary};
+  --outline-width: 0rem;
+  --box-shadow-on: 0 0 0 #{$outline-width} #{$col-tertiary};
+  --box-shadow-off: 0 0 0 0rem #{$col-tertiary};
+  --box-shadow-partial: 0 0 0 #{$outline-width/2} #{$col-tertiary};
   }
 
   width: 100%;
@@ -309,11 +312,10 @@
       }
     }
 
-    border-radius: 100rem;
-    overflow: hidden;
     width: 100%;
     cursor: pointer;
     transition: 0.2s;
+    border-radius: 100rem;
 
     @include md-down {
       aspect-ratio: 1/1;
@@ -321,8 +323,10 @@
 
     @include outline-on-and-off;
 
-
     &--graphic {
+      border-radius: 100rem;
+      overflow: hidden;
+
       filter: brightness(1);
 
       @include hover(".material", ".material--graphic") {
