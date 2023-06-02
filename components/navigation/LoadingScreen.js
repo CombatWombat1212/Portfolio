@@ -58,19 +58,21 @@ function LoadingScreen() {
 
 
 
-  const { isFirefox, browserFound } = useBrowser();
+  const { isFirefox, isSafari, browserFound } = useBrowser();
   const isntFirefox = !browserFound || !isFirefox || (browserFound && !isFirefox);
+  const isntSafari = !browserFound || !isSafari || (browserFound && !isSafari);
+  const isntFallback = isntFirefox && isntSafari;
 
   const [showFallbackText, setShowFallbackText] = useState(false);
 
   useEffect(() => {
-    if (isntFirefox) return;
+    if (isntFallback) return;
     if (intercept) {
       setShowFallbackText(true);
     } else {
       setTimeout(() => setShowFallbackText(false), 300);
     }
-  }, [isntFirefox, intercept]);
+  }, [isntFallback, intercept]);
 
   const fallbackLoadingState = useInOut(intercept, { ref: loadingScreen });
 
@@ -83,7 +85,7 @@ function LoadingScreen() {
         "--transition": `${LOADING_DURATION}s`,
         "--scrollbar-width": `${scrollbarWidth}px`,
       }}>
-      {isntFirefox ? (
+      {isntFallback ? (
         <AnimatePresence>
           {intercept && (
             <motion.div
