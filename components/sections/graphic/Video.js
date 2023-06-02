@@ -108,6 +108,7 @@ function getOrganizedVideoProps(props, desktop, browser) {
     height,
     disableRemotePlayback: true,
     'webkit-playsinline': true,
+    playsInline: true,
   };
 
   const SOURCE_PROPS = {
