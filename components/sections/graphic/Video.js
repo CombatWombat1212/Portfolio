@@ -10,7 +10,7 @@ function Video(props) {
 
   const { className, reference, playbackRate } = props;
   const updatedProps = getUpdatedVideoProps(props, desktop);
-  const { COMMON_VIDEO_PROPS, SOURCE_PROPS, FOREGROUND_PROPS } = useOrganizedVideoProps(updatedProps, desktop, browser);
+  const { COMMON_VIDEO_PROPS, SOURCE_PROPS, FOREGROUND_PROPS } = getOrganizedVideoProps(updatedProps, desktop, browser);
 
   useEffect(() => {
     if (!reference) return;
@@ -64,26 +64,18 @@ function getUpdatedVideoProps(props, desktop) {
   };
 }
 
-function useOrganizedVideoProps(props, desktop, browser) {
-  const [src, setSrc] = useState(props.src);
-  const [type, setType] = useState(props.type);
-  const [isntSafari, setIsntSafari] = useState(true);
-  const { isSafari, browserFound } = browser;
+function getOrganizedVideoProps(props, desktop, browser) {
+  
+  const { 
+    isSafari, 
+    browserFound
+  } = browser;
 
-  useEffect(() => {
-    const newIsntSafari = !browserFound || !isSafari || (browserFound && !isSafari);
-    setIsntSafari(newIsntSafari);
-  }, [browserFound, isSafari]);
-
-  useEffect(() => {
-    if (isntSafari) return;
-    const transparent = props["data-transparent"];
-    const switchToMp4 = transparent && !isntSafari;
-    const realSrc = switchToMp4 ? props.src.replace("webm", "mp4") : props.src;
-    const realType = switchToMp4 ? props.type.replace("webm", "mp4") : props.type;
-    setSrc(realSrc);
-    setType(realType);
-  }, [isntSafari]);
+  const isntSafari = !browserFound || !isSafari || (browserFound && !isSafari);
+  const transparent = props['data-transparent'];
+  const switchToMp4 = transparent && !isntSafari;
+  const realSrc = switchToMp4 ? props.src.replace("webm", "mp4") : props.src;
+  const realType = switchToMp4 ? props.type.replace("webm", "mp4") : props.type;
 
   const {
     alt,
@@ -118,13 +110,9 @@ function useOrganizedVideoProps(props, desktop, browser) {
   };
 
   const SOURCE_PROPS = {
-    src: `..${src}`,
-    type: `video/${type}`,
+    src: `..${realSrc}`,
+    type: `video/${realType}`,
   };
-
-  // if(switchToMp4){
-  //   console.log({ COMMON_VIDEO_PROPS, SOURCE_PROPS, FOREGROUND_PROPS });
-  //   }
 
   return { COMMON_VIDEO_PROPS, SOURCE_PROPS, FOREGROUND_PROPS };
 }

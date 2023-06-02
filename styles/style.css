@@ -10629,6 +10629,16 @@ h3 + .studypanel--paragraph {
   }
 }
 
+#Made #Texturing--Contrast-Areas .section--graphic:not(.pro-con--icon) {
+  background-color: #E0E0EA !important;
+  height: unset;
+  filter: brightness(1);
+}
+
+#Made #Texturing--Contrast-Areas .section--graphic:not(.pro-con--icon)[data-playing="true"] {
+  filter: brightness(1.075);
+}
+
 #Made #Texturing--Contrast-Split .graphic {
   height: unset;
   --graphic-scale: 1;
@@ -10656,6 +10666,16 @@ h3 + .studypanel--paragraph {
   #Made #Texturing--Contrast-Split .graphic {
     --graphic-scale: 1.085;
   }
+}
+
+#Made #Texturing--Contrast-Split .section--graphic:not(.pro-con--icon) {
+  background-color: #E0E0EA !important;
+  height: unset;
+  filter: brightness(1);
+}
+
+#Made #Texturing--Contrast-Split .section--graphic:not(.pro-con--icon)[data-playing="true"] {
+  filter: brightness(1.075);
 }
 
 #Made #Texturing--Details-Graphics .section--graphic .mask {
@@ -10859,6 +10879,7 @@ h3 + .studypanel--paragraph {
 }
 
 #Made #Rendering--Roadblocks-Graphics .section--graphic:not(.pro-con--icon) {
+  background-color: #F3F3F7 !important;
   height: unset;
   filter: brightness(1);
 }
@@ -10878,6 +10899,7 @@ h3 + .studypanel--paragraph {
 }
 
 #Made #Rendering--Python-Graphic .section--graphic:not(.pro-con--icon) {
+  background-color: #F3F3F7 !important;
   height: unset;
   filter: brightness(1);
 }
@@ -10891,6 +10913,7 @@ h3 + .studypanel--paragraph {
 }
 
 #Made #Rendering--Scalable .section--graphic:not(.pro-con--icon) {
+  background-color: #F3F3F7 !important;
   height: unset;
   filter: brightness(1);
 }

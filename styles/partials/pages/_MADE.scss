@@ -10,6 +10,22 @@
   .section {
     --section-graphic-panel-pad: 0rem;
     &--graphic:not(.pro-con--icon) {
+      background-color: $col-background !important;
+      height: unset;
+      filter: brightness(1);
+      // &:hover,
+      // &:focus,
+      // &.hover,
+      &[data-playing="true"] {
+        filter: brightness(#{$b});
+      }
+    }
+  }
+}
+@mixin hoverable-graphic-panel-with-background_shirt($b: 1.075) {
+  .section {
+    &--graphic:not(.pro-con--icon) {
+      background-color: $col-background_darkest !important;
       height: unset;
       filter: brightness(1);
       // &:hover,
@@ -411,32 +427,21 @@
     &--Contrast-Areas {
       .graphic {
         height: unset;
-
         @include shirt-video-scale;
       }
+      @include hoverable-graphic-panel-with-background_shirt;
     }
 
     &--Contrast-Split {
       .section {
-        // &--column {
-        //   @include flex-col;
-        // }
-        // &--graphic {
-        //   @include md-down {
-        //     order: 1;
-        //   }
-        // }
-        // &--description {
-        //   @include md-down {
-        //     order: 0;
-        //   }
-        // }
       }
 
       .graphic {
         height: unset;
         @include shirt-video-scale;
       }
+
+      @include hoverable-graphic-panel-with-background_shirt;
     }
 
     &--Details-Description {
