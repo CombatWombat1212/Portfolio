@@ -6065,7 +6065,7 @@ h3 + .studypanel--paragraph {
   --outline-width: 0.25rem;
   --outline-on: var(--outline-width) solid #404064;
   --outline-off: 0rem solid #404064;
-  --outline-partial: 0.125rem solid #404064;
+  --outline-partial: calc(var(--outline-width)/2) solid #404064;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -6076,10 +6076,9 @@ h3 + .studypanel--paragraph {
 }
 
 .safari .configurator {
-  --outline-width: 0rem;
-  --box-shadow-on: 0 0 0 0.25rem #404064;
+  --box-shadow-on: 0 0 0 var(--outline-width) #404064;
   --box-shadow-off: 0 0 0 0rem #404064;
-  --box-shadow-partial: 0 0 0 0.125rem #404064;
+  --box-shadow-partial: 0 0 0 calc(var(--outline-width)/2) #404064;
 }
 
 @media screen and (max-width: 79.9375em) {

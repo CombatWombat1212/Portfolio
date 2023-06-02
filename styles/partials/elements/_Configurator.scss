@@ -47,17 +47,15 @@
   //   &--wrapper {
   //     width: 100%;
   //   }
-  $outline-width: 0.25rem;
   --outline-width: 0.25rem;
   --outline-on: var(--outline-width) solid #{$col-tertiary};
   --outline-off: 0rem solid #{$col-tertiary};
-  --outline-partial: 0.125rem solid #{$col-tertiary};
+  --outline-partial: calc(var(--outline-width)/2) solid #{$col-tertiary};
 
   @include safari {
-  --outline-width: 0rem;
-  --box-shadow-on: 0 0 0 #{$outline-width} #{$col-tertiary};
+  --box-shadow-on: 0 0 0 var(--outline-width) #{$col-tertiary};
   --box-shadow-off: 0 0 0 0rem #{$col-tertiary};
-  --box-shadow-partial: 0 0 0 #{$outline-width/2} #{$col-tertiary};
+  --box-shadow-partial: 0 0 0 calc(var(--outline-width)/2) #{$col-tertiary};
   }
 
   width: 100%;
