@@ -429,7 +429,10 @@
         height: unset;
         @include shirt-video-scale;
       }
-      @include hoverable-graphic-panel-with-background_shirt;
+
+      @include safari{
+        @include hoverable-graphic-panel-with-background_shirt;
+      }
     }
 
     &--Contrast-Split {
@@ -441,7 +444,9 @@
         @include shirt-video-scale;
       }
 
-      @include hoverable-graphic-panel-with-background_shirt;
+      @include safari{
+        @include hoverable-graphic-panel-with-background_shirt;
+      }
     }
 
     &--Details-Description {

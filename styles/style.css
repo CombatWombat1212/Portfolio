@@ -10629,13 +10629,13 @@ h3 + .studypanel--paragraph {
   }
 }
 
-#Made #Texturing--Contrast-Areas .section--graphic:not(.pro-con--icon) {
+.safari #Made #Texturing--Contrast-Areas .section--graphic:not(.pro-con--icon) {
   background-color: #E0E0EA !important;
   height: unset;
   filter: brightness(1);
 }
 
-#Made #Texturing--Contrast-Areas .section--graphic:not(.pro-con--icon)[data-playing="true"] {
+.safari #Made #Texturing--Contrast-Areas .section--graphic:not(.pro-con--icon)[data-playing="true"] {
   filter: brightness(1.075);
 }
 
@@ -10668,13 +10668,13 @@ h3 + .studypanel--paragraph {
   }
 }
 
-#Made #Texturing--Contrast-Split .section--graphic:not(.pro-con--icon) {
+.safari #Made #Texturing--Contrast-Split .section--graphic:not(.pro-con--icon) {
   background-color: #E0E0EA !important;
   height: unset;
   filter: brightness(1);
 }
 
-#Made #Texturing--Contrast-Split .section--graphic:not(.pro-con--icon)[data-playing="true"] {
+.safari #Made #Texturing--Contrast-Split .section--graphic:not(.pro-con--icon)[data-playing="true"] {
   filter: brightness(1.075);
 }
 
