@@ -38,7 +38,15 @@ const useBrowser = () => {
     }
   }, []);
 
-  return { browser, isChrome, isFirefox, isSafari, isOpera, isEdge, browserFound };
+  return { 
+    browser, 
+    isChrome, 
+    isFirefox, 
+    isSafari, 
+    isOpera, 
+    isEdge, 
+    browserFound
+  };
 };
 
 export default useBrowser;

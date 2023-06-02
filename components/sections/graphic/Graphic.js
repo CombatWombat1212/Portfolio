@@ -283,6 +283,7 @@ function Graphic(props) {
     ...(isVideo && INNER_COMMON_VIDEO_PROPS),
     ...(isImg && lazy == false && { loading: loading }),
     reference: graphicref,
+    'data-transparent': Boolean(img.transparent),
   };
 
   const renderContent = (Component, innerProps, includeChildren = false) => (
