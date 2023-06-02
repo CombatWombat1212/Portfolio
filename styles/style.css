@@ -5533,10 +5533,13 @@ h3 + .studypanel--paragraph {
   .next-study--button .button--copy {
     overflow: hidden;
     display: block;
-    margin-top: auto;
-    margin-bottom: auto;
     height: min-content;
     text-overflow: ellipsis;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+  }
+  .safari .next-study--button .button--copy {
+    transform: translateY(-0.15rem);
   }
 }
 

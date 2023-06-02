@@ -160,9 +160,14 @@
       @include sm-down{
         overflow:hidden;
         display: block;
-        @include my-auto;
         height:min-content;
         text-overflow: ellipsis;  
+        @include my-auto(!important);
+
+        @include safari{
+          transform: translateY(-0.15rem);
+        }
+
       }
     }
 
