@@ -33,8 +33,8 @@ function Video(props) {
 
   const VidSource = (additionalClassName, additionalProps) => (
     <video className={`${className} ${additionalClassName}`} {...COMMON_VIDEO_PROPS} {...additionalProps} {...SOURCE_PROPS}>
-      {/* <source {...SOURCE_PROPS}></source> */}
-      {/* <img src="/images/product/product-parent-hero.jpg" title="Your browser does not support the <video> tag" /> */}
+      <source {...SOURCE_PROPS}></source>
+      <img src="/assets/images/made/contrast_areas/contrast_split_wide_video.png"  />
     </video>
   );
 
