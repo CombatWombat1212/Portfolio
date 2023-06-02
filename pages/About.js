@@ -31,7 +31,10 @@ const MULTIDISCIPLINARY = [
         sm: "UX/UI",
       },
       "Photography",
-      "Motion Graphics",
+      {
+        xxl: "Motion Graphics",
+        sm: "Motion",
+      },
       "UX Research",
       "Videography",
       {
@@ -210,7 +213,7 @@ function About() {
                 {MULTIDISCIPLINARY.map(({ name, items }, index) => {
                   function Head({ className }) {
                     return (
-                      <Heading type="h3" className={`weight-med toolbelt--title col-4 ${className || ""}`}>
+                      <Heading type="h3" key={index} className={`weight-med toolbelt--title col-4 ${className || ""}`}>
                         <ResponsiveText tag="Fragment" data={name} />
                       </Heading>
                     );
@@ -221,15 +224,14 @@ function About() {
                       {index > 0 && <div className="toolbelt--divider"></div>}
                       <div className="toolbelt--section" key={name}>
                         <Head className={"d-block d-sm-none"} />
-
                         <div className="toolbelt--body col-8  col-sm-12 ">
                           <ul className="toolbelt--list">
                             <li className="toolbelt--title d-none d-sm-block">
                               <Head />
                             </li>
 
-                            {items.map((item) => {
-                              return <ResponsiveText tag="li" data={item} key={item} />;
+                            {items.map((item, ii) => {
+                              return <ResponsiveText tag="li" data={item} key={ii} />;
                             })}
                           </ul>
                         </div>

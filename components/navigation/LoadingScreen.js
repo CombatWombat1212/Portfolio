@@ -11,13 +11,8 @@ import { Graphic } from "../sections/Sections";
 import { KOALAKO_IMGS } from "@/data/KOALAKO_IMGS";
 import { LOADING_IMGS } from "@/data/LOADING_IMGS";
 import useScrollbarWidth from "@/scripts/hooks/useScrollbarSize";
-
-// const loadingMessages = [`test 1`, <i>test 2</i>, `test 3`, `test 4`];
-{
-  /* <i>*boots n cats n boots n cats*</i>, */
-}
-
-//   `Ensure your Wii remote strap is tightly secured`,
+import useBrowser from "@/scripts/hooks/useBrowser";
+import useInOut from "@/scripts/hooks/useInOut";
 
 const variants = {
   initial: { clipPath: "polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%)" },
@@ -52,9 +47,7 @@ function LoadingScreen() {
 
   const routeChangeEndHandler = () => {
     if (!loading) {
-      // setTimeout(() => {
       routeChangeEnd();
-      // }, (LOADING_DURATION * 1000)/4);
     }
   };
 
@@ -63,8 +56,26 @@ function LoadingScreen() {
     else routeChangeEndHandler();
   }, [routeChanging]);
 
-  
 
+
+  const { isFirefox, browserFound } = useBrowser();
+  const isntFirefox = !browserFound || !isFirefox || (browserFound && !isFirefox);
+
+  const [showFallbackText, setShowFallbackText] = useState(false);
+
+  useEffect(() => {
+    if (isntFirefox) return;
+    if (intercept) {
+      setShowFallbackText(true);
+    } else {
+      setTimeout(() => setShowFallbackText(false), 300);
+    }
+  }, [isntFirefox, intercept]);
+
+  const fallbackLoadingState = useInOut(intercept, { ref: loadingScreen });
+
+
+  
   return (
     <div
       className="loading-screen--wrapper"
@@ -72,23 +83,29 @@ function LoadingScreen() {
         "--transition": `${LOADING_DURATION}s`,
         "--scrollbar-width": `${scrollbarWidth}px`,
       }}>
-      <AnimatePresence>
-        {intercept && (
-          <motion.div
-            className={`loading-screen`}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            variants={variants}
-            ref={loadingScreen}
-            transition={{
-              duration: LOADING_DURATION,
-              ease: "easeInOut",
-            }}>
-            <Text />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isntFirefox ? (
+        <AnimatePresence>
+          {intercept && (
+            <motion.div
+              className={`loading-screen`}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={variants}
+              ref={loadingScreen}
+              transition={{
+                duration: LOADING_DURATION,
+                ease: "easeInOut",
+              }}>
+              <Text />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      ) : (
+        <div className={`loading-screen loading-screen__${fallbackLoadingState}`} ref={loadingScreen}>
+          {showFallbackText && <Text />}
+        </div>
+      )}
     </div>
   );
 }

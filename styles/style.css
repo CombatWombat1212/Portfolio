@@ -1248,9 +1248,27 @@ body {
   pointer-events: none;
 }
 
+.loading-screen__initial {
+  visibility: hidden;
+  clip-path: polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%);
+  transition: clip-path var(--transition), visibility 0s var(--transition);
+}
+
+.loading-screen__animate {
+  visibility: visible;
+  clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%);
+  transition: clip-path var(--transition), visibility 0s 0s;
+}
+
+.loading-screen__exit {
+  visibility: hidden;
+  clip-path: polygon(100% 0%, 100% 100%, 100% 100%, 100% 0%);
+  transition: clip-path var(--transition), visibility 0s var(--transition);
+}
+
 .loading-screen--text {
   top: 50%;
-  left: calc(50% - var(--scrollbar-width)/2);
+  left: calc(50% - var(--scrollbar-width) / 2);
   position: absolute;
   color: #F3F3F7;
   --bob-distance: 0.25rem;
