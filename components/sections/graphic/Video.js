@@ -72,8 +72,7 @@ function getOrganizedVideoProps(props, desktop, browser) {
     browserFound
   } = browser;
 
-  // const isntSafari = !browserFound || !isSafari || (browserFound && !isSafari);
-  const isntSafari = false;
+  const isntSafari = !browserFound || !isSafari || (browserFound && !isSafari);
   const transparent = props['data-transparent'];
   const switchToMp4 = transparent && !isntSafari;
   const realSrc = switchToMp4 ? props.src.replace("webm", "mp4") : props.src;
