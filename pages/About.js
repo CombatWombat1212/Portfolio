@@ -245,14 +245,14 @@ function About() {
 
           <Section id="Intro--Experience">
             <Heading className="color--secondary experience--heading">
-              <ResponsiveText>
+              <ResponsiveText tag="Fragment">
                 <xxl>
                   And the
                   <br className="d-block d-lg-none d-lg-block  d-sm-none" /> &lsquo;Education & Experience&rsquo;{" "}
                   <br className="d-none d-lg-block  d-sm-none" />
                   in &lsquo;Education & Experience&rsquo;
                 </xxl>
-                <sm>And the &lsquo;Experience&rsquo; in &lsquo;Experience&rsquo;</sm>
+                <sm>And the &lsquo;Experience&rsquo; <Nobr>in &lsquo;Experience&rsquo;</Nobr></sm>
               </ResponsiveText>
             </Heading>
 
