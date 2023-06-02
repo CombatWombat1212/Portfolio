@@ -32,7 +32,7 @@ function Video(props) {
   // console.log(SOURCE_PROPS);
 
   const VidSource = (additionalClassName, additionalProps) => (
-    <video className={`${className} ${additionalClassName}`} {...COMMON_VIDEO_PROPS} {...additionalProps} {...SOURCE_PROPS} muted autoplay preload="metadata" controls="false">
+    <video className={`${className} ${additionalClassName}`} {...COMMON_VIDEO_PROPS} {...additionalProps} {...SOURCE_PROPS}>
       {/* <source {...SOURCE_PROPS}></source> */}
     </video>
   );
