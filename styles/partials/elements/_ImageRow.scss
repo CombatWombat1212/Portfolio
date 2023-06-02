@@ -12,6 +12,23 @@
     overflow-x: clip;
     position: relative;
     height: var(--image-height);
+
+
+    @include safari{
+
+
+      &::before{
+        content: "";
+        position: absolute;
+        left: 0;
+        right:0;
+        width: 100%;
+        height: var(--image-height);
+      }
+ 
+    }
+      
+
   }
 
   &--image {

@@ -6695,6 +6695,15 @@ h3 + .studypanel--paragraph {
   height: var(--image-height);
 }
 
+.safari .image-row--wrapper::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: var(--image-height);
+}
+
 .image-row--image {
   --col-width: calc(((100% - (0rem * (calc(var(--image-row-col) - var(--image-row-offset)) - 1))) / calc(var(--image-row-col) - var(--image-row-offset))) - 0rem);
   width: var(--col-width);
