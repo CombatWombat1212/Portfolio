@@ -34,6 +34,7 @@ function Video(props) {
   const VidSource = (additionalClassName, additionalProps) => (
     <video className={`${className} ${additionalClassName}`} {...COMMON_VIDEO_PROPS} {...additionalProps} {...SOURCE_PROPS}>
       {/* <source {...SOURCE_PROPS}></source> */}
+      {/* <img src="/images/product/product-parent-hero.jpg" title="Your browser does not support the <video> tag" /> */}
     </video>
   );
 
@@ -71,7 +72,8 @@ function getOrganizedVideoProps(props, desktop, browser) {
     browserFound
   } = browser;
 
-  const isntSafari = !browserFound || !isSafari || (browserFound && !isSafari);
+  // const isntSafari = !browserFound || !isSafari || (browserFound && !isSafari);
+  const isntSafari = false;
   const transparent = props['data-transparent'];
   const switchToMp4 = transparent && !isntSafari;
   const realSrc = switchToMp4 ? props.src.replace("webm", "mp4") : props.src;
