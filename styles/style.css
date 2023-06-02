@@ -6695,13 +6695,11 @@ h3 + .studypanel--paragraph {
   height: var(--image-height);
 }
 
-.safari .image-row--wrapper::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: var(--image-height);
+.safari .image-row--wrapper {
+  margin-top: -10rem;
+  margin-bottom: -10rem;
+  padding-top: 10rem;
+  padding-bottom: 10rem;
 }
 
 .image-row--image {
@@ -6716,6 +6714,10 @@ h3 + .studypanel--paragraph {
   --value2: var(--image-row-progress);
   --image-row-left: calc( var(--offset-size) * calc(var(--value1) * var(--image-row-direction) + var(--value2) * (1 - var(--image-row-direction))) );
   left: calc((var(--image-row-index) * var(--col-width)) + var(--image-row-left));
+}
+
+.safari .image-row--image {
+  top: unset;
 }
 
 .pro-con {

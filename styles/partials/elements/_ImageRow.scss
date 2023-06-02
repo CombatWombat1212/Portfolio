@@ -15,16 +15,10 @@
 
 
     @include safari{
-
-
-      &::before{
-        content: "";
-        position: absolute;
-        left: 0;
-        right:0;
-        width: 100%;
-        height: var(--image-height);
-      }
+      margin-top: -10rem;
+      margin-bottom: -10rem;
+      padding-top: 10rem;
+      padding-bottom: 10rem;
  
     }
       
@@ -39,6 +33,11 @@
     transform: scale(var(--image-row-scale));
     position: absolute !important;
     top: 0;
+
+    @include safari{
+      top:unset;
+    }
+
 
     --offset-size: calc((var(--image-row-offset) * var(--col-width)) * -1);
     --value1: calc(1 - var(--image-row-progress));
