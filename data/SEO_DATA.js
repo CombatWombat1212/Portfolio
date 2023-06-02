@@ -39,7 +39,7 @@ const SEO_DATA = processSeoData({
       "KoalaKo is a prototype app created to help parents support the creative development of their children.  Made in collaboration with 3 talented designers.",
     keywords: "Sam Giustizia, UX Design, KoalaKo, Design Lead, Case Study, Prototyping",
     url: "/Studies/KoalaKo",
-    img: HOME_IMGS.koalako_main,
+    img: PREVIEW_IMGS.koalako_main,
   },
 
   explorations: {
@@ -59,7 +59,7 @@ const SEO_DATA = processSeoData({
       "My past work experience, and education, as well as some of my hobbies and obsessions at the moment. Stop by and say hi!",
     keywords: "Sam Giustizia, UX Engineering, Gallery, Explorations, 3D Design, Photography",
     url: "/About",
-    img: ABOUT_IMGS.me,
+    img: PREVIEW_IMGS.me,
 
   },
 });
@@ -71,7 +71,7 @@ function processSeoData(seo) {
 
   for (let page in seo) {
     if (!seo[page]) {
-      console.log(`Missing data for page: ${page}`);
+      // console.log(`Missing data for page: ${page}`);
       continue;
     }
 
@@ -81,19 +81,19 @@ function processSeoData(seo) {
     seo[page].url = seo[page].url || "";
 
     if (seo[page].url === "") {
-      console.log(`Missing URL for page: ${page}`);
+      // console.log(`Missing URL for page: ${page}`);
     }
 
     seo[page].url = domain + seo[page].url;
 
     if (!seo[page].img) {
       seo[page].img = {};
-      console.log(`Missing image for page: ${page}`);
+      // console.log(`Missing image for page: ${page}`);
     }
 
     if (!seo[page].img.src) {
       seo[page].img.src = "";
-      console.log(`Missing image source for page: ${page}`);
+      // console.log(`Missing image source for page: ${page}`);
     }
 
     seo[page].imgUrl = domain + seo[page].img.src;
