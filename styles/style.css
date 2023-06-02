@@ -5446,13 +5446,16 @@ h3 + .studypanel--paragraph {
   .next-study--graphic__mobile {
     margin-top: 0rem;
     height: 12rem;
+    margin-right: auto;
+    margin-left: auto;
   }
 }
 
 @media screen and (max-width: 36.9375em) {
   .next-study--graphic__mobile {
-    height: 8.35rem;
+    height: 7.75rem;
     margin-top: 0rem;
+    max-width: 100%;
   }
 }
 

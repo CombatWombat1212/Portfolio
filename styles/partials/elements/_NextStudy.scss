@@ -84,11 +84,13 @@
       @include md-down {
         margin-top: 0rem;
         height: 12rem;
+        @include mx-auto;
       }
 
       @include sm-down {
-        height: 8.35rem;
+        height: 7.75rem;
         margin-top: 0rem;
+        max-width:100%;
       }
     }
 
