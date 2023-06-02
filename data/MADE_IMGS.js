@@ -569,6 +569,7 @@ const MADE_IMGS = processImages(
     configurator_demo: {
       name: "configurator_demo",
       src: "/assets/images/made/configurator/configurator_demo.mp4",
+      fallback: "/assets/images/made/configurator/configurator_demo.png",
       alt: "A live demo video of MADE's dress shirt configuration tool being used on their website.  Powered by the image components created in this study.",
       width: 1438,
       height: 720,

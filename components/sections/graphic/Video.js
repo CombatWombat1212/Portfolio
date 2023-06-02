@@ -30,8 +30,6 @@ function Video(props) {
     reference.current.querySelector(".video--foreground").playbackRate = playbackRate;
   }, [mounted]);
 
-  // console.log(SOURCE_PROPS);
-
   const { ["data-fallback"]: fallback } = props;
   const hasFallback = fallback && fallback !== false;
 
@@ -39,7 +37,6 @@ function Video(props) {
 
   const VidSource = (additionalClassName, additionalProps) => {
     const isForeground = additionalClassName.includes("foreground");
-    const isBackground = additionalClassName.includes("background");
     const classes = `${className} ${additionalClassName}`;
     const p = {...COMMON_VIDEO_PROPS, ...additionalProps, ...SOURCE_PROPS}
     return (
