@@ -35,17 +35,23 @@ function Video(props) {
   const { ["data-fallback"]: fallback } = props;
   const hasFallback = fallback && fallback !== false;
 
-  const renderFallback = () => <Image src={fallback} width={props.width} height={props.height} alt={props.alt} />;
+  const renderFallback = (classes) => <Image className={classes} src={fallback} width={props.width} height={props.height} alt={props.alt} />;
 
   const VidSource = (additionalClassName, additionalProps) => {
     const isForeground = additionalClassName.includes("foreground");
     const isBackground = additionalClassName.includes("background");
-    
+    const classes = `${className} ${additionalClassName}`;
     return (
-      <video className={`${className} ${additionalClassName}`} {...COMMON_VIDEO_PROPS} {...additionalProps} {...SOURCE_PROPS}>
-        {/* <source {...SOURCE_PROPS}></source> */}
-        {hasFallback && renderFallback()}
-      </video>
+      <>
+        {isForeground ? (
+          <video className={classes} {...COMMON_VIDEO_PROPS} {...additionalProps} {...SOURCE_PROPS}>
+            {/* <source {...SOURCE_PROPS}></source> */}
+            {hasFallback && renderFallback(classes)}
+          </video>
+        ) : (
+          <>{hasFallback && renderFallback(classes)}</>
+        )}
+      </>
     );
   };
 
