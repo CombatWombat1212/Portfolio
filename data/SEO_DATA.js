@@ -39,7 +39,7 @@ const SEO_DATA = processSeoData({
       "KoalaKo is a prototype app created to help parents support the creative development of their children.  Made in collaboration with 3 talented designers.",
     keywords: "Sam Giustizia, UX Design, KoalaKo, Design Lead, Case Study, Prototyping",
     url: "/Studies/KoalaKo",
-    img: PREVIEW_IMGS.koalako_main,
+    img: PREVIEW_IMGS.koalako,
   },
 
   explorations: {
