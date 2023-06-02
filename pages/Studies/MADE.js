@@ -605,14 +605,14 @@ function MADE({ pop }) {
               <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_2_hidden} lightbox pop={pop} />
             </Column>
             <Column caption="above">
-              <Description className="graphic--caption weight-reg">
+              <Description className="graphic--caption weight-reg" mirrorstyle="isolated-edited-titles match height">
                 <h3> Isolated shadow</h3>
               </Description>
 
               <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_3_isolated} lightbox pop={pop} />
             </Column>
             <Column caption="above">
-              <Description className="graphic--caption weight-reg">
+              <Description className="graphic--caption weight-reg" mirrorstyle="isolated-edited-titles match height">
                 <h3>Edited</h3>
               </Description>
               <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_4_edited} lightbox pop={pop} />
