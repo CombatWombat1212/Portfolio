@@ -462,8 +462,7 @@ function MADE({ pop }) {
             <Title>Additional Details</Title>
             <Column>
               <Heading>
-                The devil is in the details / <br className="d-none" />
-                the realism is in the seams
+                The devil is in the details / the realism is in the seams
               </Heading>
             </Column>
             <Column>
