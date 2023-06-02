@@ -45,7 +45,8 @@ const SEO_DATA = processSeoData({
   explorations: {
     // title: "Explorations | Creative Endeavors And Loose Ends",
     // title: "Explorations | Gallery Of Creative Endeavors And Other Pixels",
-    title: "Explorations | Creative Endeavors And Loose Ends",
+    // title: "Explorations | Creative Endeavors And Loose Ends",
+    title: "Explorations | All My Pixels",
     description:
       "The (mostly) complete collection of my experiments, client work, and side projects.  Everything that didn't fit in a case study.",
     keywords: "Sam Giustizia, UX Engineering, Gallery, Explorations, 3D Design, Photography",
