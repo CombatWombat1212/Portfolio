@@ -1,4 +1,5 @@
 import { HOME_IMGS } from "./HOME_IMGS";
+import { PREVIEW_IMGS } from "./PREVIEW_IMGS";
 
 const { ABOUT_IMGS } = require("./ABOUT_IMGS");
 
@@ -8,7 +9,7 @@ const SEO_DATA = processSeoData({
     description:
       "Hi, I'm Sam. I'm a digital creator with a focus on UX and 3D Design. This portfolio's got all my favorite projects. If you're free, come check it out :)",
     keywords: "Sam Giustizia, UX/UI Design, Portfolio, 3D Design, Multidisciplinary Designer, UX Engineer",
-    img: ABOUT_IMGS.me,
+    img: PREVIEW_IMGS.me,
     url: "/",
   },
 
@@ -18,7 +19,7 @@ const SEO_DATA = processSeoData({
       "Breaking down barriers to 3D printing by connecting hobbyist makers to customers in need. A theoretical service, created as the capstone to my Bachelor's in IXD",
     keywords: "Sam Giustizia, MakeRight, Interaction Design, Case Study, 3D Printing, User Experience, Prototyping",
     url: "/Studies/MakeRight",
-    img: HOME_IMGS.makeright_main,
+    img: PREVIEW_IMGS.makeright,
   },
 
 
@@ -28,7 +29,7 @@ const SEO_DATA = processSeoData({
       "Collaborating with MADE Clothing Co., I created photorealistic renders of dress shirt components. Images which then powered an online tool for custom purchases.",
     keywords: "Sam Giustizia, 3D Generalist, Made Clothing Co., Case Study, Product Rendering",
     url: "/Studies/MADE",
-    img: HOME_IMGS.made_main,
+    img: PREVIEW_IMGS.makeright.made,
   },
 
 
@@ -49,7 +50,7 @@ const SEO_DATA = processSeoData({
       "The (mostly) complete collection of my experiments, client work, and side projects.  Everything that didn't fit in a case study.",
     keywords: "Sam Giustizia, UX Engineering, Gallery, Explorations, 3D Design, Photography",
     url: "/Explorations",
-    img: HOME_IMGS.explorations_alt,
+    img: PREVIEW_IMGS.explorations,
   },
 
   about: {
