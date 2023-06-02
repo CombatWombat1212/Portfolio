@@ -41,10 +41,11 @@ function Video(props) {
     const isForeground = additionalClassName.includes("foreground");
     const isBackground = additionalClassName.includes("background");
     const classes = `${className} ${additionalClassName}`;
+    const p = {...COMMON_VIDEO_PROPS, ...additionalProps, ...SOURCE_PROPS}
     return (
       <>
         {isForeground ? (
-          <video className={classes} {...COMMON_VIDEO_PROPS} {...additionalProps} {...SOURCE_PROPS}>
+          <video className={classes} {...p}>
             {/* <source {...SOURCE_PROPS}></source> */}
             {hasFallback && renderFallback(classes)}
           </video>
