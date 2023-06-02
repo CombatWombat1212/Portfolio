@@ -196,7 +196,8 @@ function Configurator() {
     setConfig,
   };
 
-  useConfigImgPrefetch(configurator);
+  // TODO: yeah i disabled the prefetch because since it loads the full res images but i reworked the rest of the component to use <Image> i don't think it'll even help because its prefetching full res but loading responsive images
+  // useConfigImgPrefetch(configurator);
 
   return (
     <>
