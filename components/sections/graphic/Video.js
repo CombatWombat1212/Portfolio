@@ -33,8 +33,7 @@ function Video(props) {
 
   const VidSource = (additionalClassName, additionalProps) => (
     <video className={`${className} ${additionalClassName}`} {...COMMON_VIDEO_PROPS} {...additionalProps} {...SOURCE_PROPS}>
-      <source {...SOURCE_PROPS}></source>
-      <img src="/assets/images/made/contrast_areas/contrast_split_wide_video.png"  />
+      {/* <source {...SOURCE_PROPS}></source> */}
     </video>
   );
 
