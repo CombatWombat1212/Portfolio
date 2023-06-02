@@ -580,6 +580,7 @@ const MADE_IMGS = processImages(
       alt: "A 3D rendering of a mini-wide-collar dress shirt with contrast fabric.  The base fabric is then horizontally wiped away and replaced with a mat-cap texture, leaving only the contrast fabric.  From there, the contrast fabrics begin cycling through a series of different colors and patters.",
       width: 1200,
       height: 1200,
+      transparent: true,
     },
 
     contrast_split_wide_video: {
@@ -588,6 +589,7 @@ const MADE_IMGS = processImages(
       alt: "A 3D rendering of a wide-collar dress shirt with contrast fabric.  The base fabric is then horizontally wiped away and replaced with a mat-cap texture, leaving only the contrast fabric.  From there, the contrast fabrics begin cycling through a series of different colors and patters.",
       width: 1200,
       height: 1200,
+      transparent: true,
     },
 
     limitations_bottle: {

@@ -32,8 +32,8 @@ function Video(props) {
   // console.log(SOURCE_PROPS);
 
   const VidSource = (additionalClassName, additionalProps) => (
-    <video className={`${className} ${additionalClassName}`} {...COMMON_VIDEO_PROPS} {...additionalProps}>
-      <source {...SOURCE_PROPS}></source>
+    <video className={`${className} ${additionalClassName}`} {...COMMON_VIDEO_PROPS} {...additionalProps} {...SOURCE_PROPS}>
+      {/* <source {...SOURCE_PROPS}></source> */}
     </video>
   );
 
@@ -65,15 +65,10 @@ function getUpdatedVideoProps(props, desktop) {
 }
 
 function useOrganizedVideoProps(props, desktop, browser) {
-  
-  
   const [src, setSrc] = useState(props.src);
   const [type, setType] = useState(props.type);
   const [isntSafari, setIsntSafari] = useState(true);
-  const { 
-    isSafari, 
-    browserFound
-  } = browser;
+  const { isSafari, browserFound } = browser;
 
   useEffect(() => {
     const newIsntSafari = !browserFound || !isSafari || (browserFound && !isSafari);
@@ -82,15 +77,13 @@ function useOrganizedVideoProps(props, desktop, browser) {
 
   useEffect(() => {
     if (isntSafari) return;
-    const transparent = props['data-transparent'];
+    const transparent = props["data-transparent"];
     const switchToMp4 = transparent && !isntSafari;
     const realSrc = switchToMp4 ? props.src.replace("webm", "mp4") : props.src;
     const realType = switchToMp4 ? props.type.replace("webm", "mp4") : props.type;
     setSrc(realSrc);
     setType(realType);
   }, [isntSafari]);
-
-
 
   const {
     alt,
@@ -129,14 +122,9 @@ function useOrganizedVideoProps(props, desktop, browser) {
     type: `video/${type}`,
   };
 
-
-
   // if(switchToMp4){
   //   console.log({ COMMON_VIDEO_PROPS, SOURCE_PROPS, FOREGROUND_PROPS });
   //   }
-
-
-  
 
   return { COMMON_VIDEO_PROPS, SOURCE_PROPS, FOREGROUND_PROPS };
 }
