@@ -807,7 +807,7 @@ function MakeRight({ pop }) {
                 <ResponsiveText tag="Fragment">
                   <xxl>Customer user journey</xxl>
                   <lg>Customer journey</lg>
-                  <xs>Cust. journey</xs>
+                  <xs>Custo. journey</xs>
                 </ResponsiveText>
               </Heading>
             </Slideshow>
