@@ -29,7 +29,7 @@ const SEO_DATA = processSeoData({
       "Collaborating with MADE Clothing Co., I created photorealistic renders of dress shirt components. Images which then powered an online tool for custom purchases.",
     keywords: "Sam Giustizia, 3D Generalist, Made Clothing Co., Case Study, Product Rendering",
     url: "/Studies/MADE",
-    img: PREVIEW_IMGS.makeright.made,
+    img: PREVIEW_IMGS.made,
   },
 
 
