@@ -204,6 +204,12 @@
         color: $col-tertiary;
       }
 
+      @include lg-down{
+        @include safari{
+          transform: translateY(-0.15rem);
+        }
+      }
+
       // @include hover('.indicator--wrapper', '&'){
       //   @include marg-y(calc(var(--name-pad-y) * -1));
       // }

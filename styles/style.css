@@ -6027,6 +6027,12 @@ h3 + .studypanel--paragraph {
   color: #404064;
 }
 
+@media screen and (max-width: 61.9375em) {
+  .safari .indicator .label--name {
+    transform: translateY(-0.15rem);
+  }
+}
+
 .col-line {
   transition: var(--transition);
   --buffer: 2rem;
