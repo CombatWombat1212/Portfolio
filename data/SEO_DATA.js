@@ -96,7 +96,7 @@ function processSeoData(seo) {
       console.log(`Missing image source for page: ${page}`);
     }
 
-    seo[page].imgUrl = domain + seo[page].img.src.replace(".", "");
+    seo[page].imgUrl = domain + seo[page].img.src;
   }
 
   return seo;

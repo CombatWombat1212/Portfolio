@@ -200,9 +200,7 @@ function processImages(images, collection) {
       const fileExtension = image.src.split(".").pop();
       image.type = fileExtension.toLowerCase();
       image.media = VIDEO_TYPES.includes(image.type) ? "video" : IMAGE_TYPES.includes(image.type) ? "image" : "unknown";
-      image.description = ensureArray(image.description || false) || false;
-
-        
+      image.description = ensureArray(image.description || false) || false;        
       image.collection = collection;
       processedImages[key] = image;
     }
