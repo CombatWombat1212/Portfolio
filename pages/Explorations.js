@@ -43,7 +43,7 @@ function Explorations({ pop }) {
                   const { isGroup, type, isVideo, isStack, img, thumb } = getMediaDetails({ item }, { onlyFirst: true });
 
                   return (
-                    <Column key={img.src}>
+                    <Column key={img.src} className={'gallery--column'}>
                       <Graphic
                         className="gallery--graphic"
                         type={type}

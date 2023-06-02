@@ -6999,6 +6999,10 @@ h3 + .studypanel--paragraph {
   background-color: #F3F3F7 !important;
 }
 
+.safari .gallery--column {
+  height: min-content;
+}
+
 .myfocus {
   display: flex;
   flex-direction: column;

@@ -40,4 +40,10 @@
       background-color: $col-background!important;
     }
   }
+
+  &--column{
+    @include safari{
+      height: min-content;
+    }
+  }
 }
