@@ -2115,6 +2115,10 @@ h3 + .studypanel--paragraph {
   padding: 0.25rem 0.5rem 0.365rem 0.5rem;
 }
 
+.safari .tag {
+  padding: 0.25rem 0.5rem 0.365rem 0.5rem;
+}
+
 .tag__tool {
   padding: 0.4rem 0.55rem 0.25rem 0.55rem;
   border-radius: 100rem;

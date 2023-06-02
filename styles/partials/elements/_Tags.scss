@@ -20,6 +20,9 @@
   @include mac{
     padding: 0.25rem 0.5rem 0.365rem 0.5rem;
   }
+  @include safari{
+    padding: 0.25rem 0.5rem 0.365rem 0.5rem;
+  }
 
 
   
