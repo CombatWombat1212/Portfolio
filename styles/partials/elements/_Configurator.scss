@@ -16,8 +16,8 @@
   &__on {
     outline: var(--outline-on);
     @include safari {
+      position:relative;
       outline: none;
-
       &::before{
         content: "";
         position: absolute;

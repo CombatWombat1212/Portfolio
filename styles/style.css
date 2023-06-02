@@ -6246,6 +6246,7 @@ h3 + .studypanel--paragraph {
 }
 
 .safari .configurator .assets--panel__on {
+  position: relative;
   outline: none;
 }
 
@@ -6443,6 +6444,7 @@ h3 + .studypanel--paragraph {
 }
 
 .safari .configurator .materials__on {
+  position: relative;
   outline: none;
 }
 
