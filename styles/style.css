@@ -6075,6 +6075,13 @@ h3 + .studypanel--paragraph {
   row-gap: var(--config-gap);
 }
 
+.safari .configurator {
+  --outline-width: 0rem;
+  --box-shadow-on: inset 0 0 0 0.25rem #404064;
+  --box-shadow-off: inset 0 0 0 0rem #404064;
+  --box-shadow-partial: inset 0 0 0 0.125rem #404064;
+}
+
 @media screen and (max-width: 79.9375em) {
   .configurator {
     --config-gap: 4.5rem;
@@ -6167,7 +6174,7 @@ h3 + .studypanel--paragraph {
     padding-bottom: var(--assets-gap);
   }
   .configurator .assets--row:first-child {
-    padding-left: calc((var(--outline-width)*2) + var(--assets-gap));
+    padding-left: calc((var(--outline-width) * 2) + var(--assets-gap));
   }
   .configurator .assets--row:last-child {
     padding-right: var(--outline-width);
@@ -6238,8 +6245,28 @@ h3 + .studypanel--paragraph {
   outline: var(--outline-on);
 }
 
+.safari .configurator .assets--panel__on {
+  outline: none;
+}
+
+.safari .configurator .assets--panel__on::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  box-shadow: var(--box-shadow-on);
+}
+
 .configurator .assets--panel__off {
   outline: var(--outline-off);
+}
+
+.safari .configurator .assets--panel__off {
+  outline: none;
+  box-shadow: var(--box-shadow-off);
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -6415,8 +6442,28 @@ h3 + .studypanel--paragraph {
   outline: var(--outline-on);
 }
 
+.safari .configurator .materials__on {
+  outline: none;
+}
+
+.safari .configurator .materials__on::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  box-shadow: var(--box-shadow-on);
+}
+
 .configurator .materials__off {
   outline: var(--outline-off);
+}
+
+.safari .configurator .materials__off {
+  outline: none;
+  box-shadow: var(--box-shadow-off);
 }
 
 .configurator .materials--graphic {

@@ -12,15 +12,50 @@
   }
 }
 
+@mixin outline-on-and-off{
+  &__on {
+    outline: var(--outline-on);
+    @include safari {
+      outline: none;
+
+      &::before{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        box-shadow: var(--box-shadow-on);
+      }
+    }
+  }
+  &__off {
+    outline: var(--outline-off);
+    @include safari {
+      outline: none;
+      box-shadow: var(--box-shadow-off);
+    }
+  }  
+}
+
+
 .configurator {
   //   &--wrapper {
   //     width: 100%;
   //   }
-
+  $outline-width: 0.25rem;
   --outline-width: 0.25rem;
   --outline-on: var(--outline-width) solid #{$col-tertiary};
   --outline-off: 0rem solid #{$col-tertiary};
   --outline-partial: 0.125rem solid #{$col-tertiary};
+
+  @include safari {
+    --outline-width: 0rem;
+    --box-shadow-on: inset 0 0 0 #{$outline-width} #{$col-tertiary};
+    --box-shadow-off: inset 0 0 0 0rem #{$col-tertiary};
+    --box-shadow-partial: inset 0 0 0 #{$outline-width/2} #{$col-tertiary};
+  }
 
   width: 100%;
   display: grid;
@@ -85,17 +120,16 @@
       }
 
       @include md-down {
-        
         padding-bottom: var(--assets-gap);
-        &:first-child{
-          padding-left: calc((var(--outline-width)*2) + var(--assets-gap));
+        &:first-child {
+          padding-left: calc((var(--outline-width) * 2) + var(--assets-gap));
         }
-        &:last-child{
+        &:last-child {
           padding-right: var(--outline-width);
         }
         // width: #{col-width(4) - (--assets-gap)/2};
-      // padding: var(--assets-gap);
-      // padding-top: 0rem;
+        // padding: var(--assets-gap);
+        // padding-top: 0rem;
 
         & + .assets--row {
           margin-top: 0rem;
@@ -126,7 +160,6 @@
 
         margin-left: calc(#{$section-space} * -1);
 
-
         padding-right: calc(#{$section-space});
         margin-right: $section-space;
         margin-top: var(--outline-width);
@@ -136,7 +169,7 @@
         }
         @at-root .assets--row:last-child .assets--inner {
           margin-right: 0rem;
-          padding-right:0rem;
+          padding-right: 0rem;
         }
       }
     }
@@ -155,12 +188,7 @@
         background-color: $col-background_darkest;
       }
 
-      &__on {
-        outline: var(--outline-on);
-      }
-      &__off {
-        outline: var(--outline-off);
-      }
+      @include outline-on-and-off;
 
       @include xxl-down {
         --graphic-scale: 0.85;
@@ -291,12 +319,8 @@
       aspect-ratio: 1/1;
     }
 
-    &__on {
-      outline: var(--outline-on);
-    }
-    &__off {
-      outline: var(--outline-off);
-    }
+    @include outline-on-and-off;
+
 
     &--graphic {
       filter: brightness(1);
