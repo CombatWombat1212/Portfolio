@@ -2,6 +2,7 @@ import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import { useEffect, useState } from "react";
 import graphicVideoInit from "./VideoUtilities";
 import useBrowser from "@/scripts/hooks/useBrowser";
+import Image from "next/image";
 
 function Video(props) {
   const [mounted, setMounted] = useState(false);
@@ -31,11 +32,22 @@ function Video(props) {
 
   // console.log(SOURCE_PROPS);
 
-  const VidSource = (additionalClassName, additionalProps) => (
-    <video className={`${className} ${additionalClassName}`} {...COMMON_VIDEO_PROPS} {...additionalProps} {...SOURCE_PROPS}>
-      {/* <source {...SOURCE_PROPS}></source> */}
-    </video>
-  );
+  const { ["data-fallback"]: fallback } = props;
+  const hasFallback = fallback && fallback !== false;
+
+  const renderFallback = () => <Image src={fallback} width={props.width} height={props.height} alt={props.alt} />;
+
+  const VidSource = (additionalClassName, additionalProps) => {
+    const isForeground = additionalClassName.includes("foreground");
+    const isBackground = additionalClassName.includes("background");
+    
+    return (
+      <video className={`${className} ${additionalClassName}`} {...COMMON_VIDEO_PROPS} {...additionalProps} {...SOURCE_PROPS}>
+        {/* <source {...SOURCE_PROPS}></source> */}
+        {hasFallback && renderFallback()}
+      </video>
+    );
+  };
 
   return (
     <>
@@ -65,14 +77,10 @@ function getUpdatedVideoProps(props, desktop) {
 }
 
 function getOrganizedVideoProps(props, desktop, browser) {
-  
-  const { 
-    isSafari, 
-    browserFound
-  } = browser;
+  const { isSafari, browserFound } = browser;
 
   const isntSafari = !browserFound || !isSafari || (browserFound && !isSafari);
-  const transparent = props['data-transparent'];
+  const transparent = props["data-transparent"];
   const switchToMp4 = transparent && !isntSafari;
   const realSrc = switchToMp4 ? props.src.replace("webm", "mp4") : props.src;
   const realType = switchToMp4 ? props.type.replace("webm", "mp4") : props.type;
@@ -107,7 +115,7 @@ function getOrganizedVideoProps(props, desktop, browser) {
     width,
     height,
     disableRemotePlayback: true,
-    'webkit-playsinline': true,
+    "webkit-playsinline": "true",
     playsInline: true,
   };
 

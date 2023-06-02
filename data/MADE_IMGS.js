@@ -577,6 +577,7 @@ const MADE_IMGS = processImages(
     contrast_split_mini_wide_video: {
       name: "contrast_split_mini_wide_video",
       src: "/assets/images/made/contrast_areas/contrast_split_mini_wide_video.webm",
+      fallback: "/assets/images/made/contrast_areas/contrast_split_mini_wide_video.png",
       alt: "A 3D rendering of a mini-wide-collar dress shirt with contrast fabric.  The base fabric is then horizontally wiped away and replaced with a mat-cap texture, leaving only the contrast fabric.  From there, the contrast fabrics begin cycling through a series of different colors and patters.",
       width: 1200,
       height: 1200,
@@ -586,6 +587,7 @@ const MADE_IMGS = processImages(
     contrast_split_wide_video: {
       name: "contrast_split_wide_video",
       src: "/assets/images/made/contrast_areas/contrast_split_wide_video.webm",
+      fallback: "/assets/images/made/contrast_areas/contrast_split_wide_video.png",
       alt: "A 3D rendering of a wide-collar dress shirt with contrast fabric.  The base fabric is then horizontally wiped away and replaced with a mat-cap texture, leaving only the contrast fabric.  From there, the contrast fabrics begin cycling through a series of different colors and patters.",
       width: 1200,
       height: 1200,
@@ -623,6 +625,7 @@ const MADE_IMGS = processImages(
     contrast_glow_mini_wide_fabric_video: {
       name: "contrast_glow_mini_wide_fabric_video",
       src: "/assets/images/made/contrast_areas/contrast_glow_mini_wide_fabric_video.webm",
+      fallback: "/assets/images/made/contrast_areas/contrast_glow_mini_wide_fabric_video.png",
       alt: "A 3D rendering of a shirt model with a wide collar where the inner fabric of the collar and cuff is pulsing with white light to act as a visual guide for what a contrast fabric is and where they are located",
       width: 1000,
       height: 1000,
@@ -631,6 +634,7 @@ const MADE_IMGS = processImages(
     contrast_glow_wide_fabric_video: {
       name: "contrast_glow_wide_fabric_video",
       src: "/assets/images/made/contrast_areas/contrast_glow_wide_fabric_video.webm",
+      fallback: "/assets/images/made/contrast_areas/contrast_glow_wide_fabric_video.png",
       alt: "A 3D rendering of a shirt model with a wide collar where the inner fabric of the collar and cuff is pulsing with white light to act as a visual guide for what a contrast fabric is and where they are located",
       width: 1000,
       height: 1000,
@@ -639,6 +643,7 @@ const MADE_IMGS = processImages(
     contrast_glow_mini_wide_metal_video: {
       name: "contrast_glow_mini_wide_metal_video",
       src: "/assets/images/made/contrast_areas/contrast_glow_mini_wide_metal_video.webm",
+      fallback: "/assets/images/made/contrast_areas/contrast_glow_mini_wide_metal_video.png",
       alt: "A 3D mat-cap rendering of a shirt model with a mini wide collar where the inner fabric of the collar and cuff is pulsing with white light to act as a visual guide for what a contrast fabric is and where they are located",
       width: 1000,
       height: 1000,
@@ -647,6 +652,7 @@ const MADE_IMGS = processImages(
     contrast_glow_wide_metal_video: {
       name: "contrast_glow_wide_metal_video",
       src: "/assets/images/made/contrast_areas/contrast_glow_wide_metal_video.webm",
+      fallback: "/assets/images/made/contrast_areas/contrast_glow_wide_metal_video.png",
       alt: "A mat-cap 3D rendering of a shirt model with a wide collar where the inner fabric of the collar and cuff is pulsing with white light to act as a visual guide for what a contrast fabric is and where they are located",
       width: 1000,
       height: 1000,

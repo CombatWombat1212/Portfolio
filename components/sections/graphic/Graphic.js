@@ -284,6 +284,7 @@ function Graphic(props) {
     ...(isImg && lazy == false && { loading: loading }),
     reference: graphicref,
     'data-transparent': Boolean(img.transparent),
+    'data-fallback': img.fallback ? img.fallback : false,
   };
 
   const renderContent = (Component, innerProps, includeChildren = false) => (
