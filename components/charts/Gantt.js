@@ -232,17 +232,19 @@ function Phase({ phase, cycle }) {
         }}
         tabIndex="0"
         style={{ "--gantt-stage-count": stages.length, "--gantt-task-count": taskCount }}>
-        <Label className="label--phase label__inner label__secondary">{phase.name}</Label>
+        <div className="gantt--phase-inner">
+          <Label className="label--phase label__inner label__secondary">{phase.name}</Label>
 
-        <Bar className="bar__phase" bars={phase.bars} cycle={cycle} />
+          <Bar className="bar__phase" bars={phase.bars} cycle={cycle} />
 
-        <div className="gantt--icon gantt--icon__closed">
-          <Mask img={chevron_down} />
+          <div className="gantt--icon gantt--icon__closed">
+            <Mask img={chevron_down} />
+          </div>
+
+          {stages.map((stage) => {
+            return <Stage key={stage.key} stage={stage} cycle={cycle} />;
+          })}
         </div>
-
-        {stages.map((stage) => {
-          return <Stage key={stage.key} stage={stage} cycle={cycle} />;
-        })}
       </div>
     </>
   );

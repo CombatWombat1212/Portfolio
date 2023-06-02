@@ -38,7 +38,6 @@ $gantt-phase-delay: 0.2s;
 
   --gantt-phase-background-top: calc((((var(--gantt-label-height) - var(--gantt-bar-height)) / 2) + var(--gantt-pad)) * -1);
 
-
   .h2 + & {
     margin-top: var(--gantt-top-margin);
   }
@@ -59,35 +58,49 @@ $gantt-phase-delay: 0.2s;
     --gant-phase-delay: #{$gantt-phase-delay};
 
     // TODO: there literally HAS to be a better way
-    --gantt-phase-height_max: calc(var(--gantt-phase-height) + (var(--gantt-stage-count) * var(--gantt-stage-top-margin)) + (var(--gantt-task-count) * var(--gantt-task-top-margin)) + ((var(--gantt-stage-count) + var(--gantt-task-count)) * var(--gantt-label-height)));
+    --gantt-phase-height_max: calc(
+      var(--gantt-phase-height) + (var(--gantt-stage-count) * var(--gantt-stage-top-margin)) +
+        (var(--gantt-task-count) * var(--gantt-task-top-margin)) + ((var(--gantt-stage-count) + var(--gantt-task-count)) * var(--gantt-label-height))
+    );
 
     background-color: $col-background_darker;
     padding-top: var(--gantt-pad);
     padding-bottom: var(--gantt-pad-bot);
 
     @include b-rad;
-    @include gantt-grid;
+    // @include gantt-grid;
 
     transition: height $gantt-phase-trans, background-color var(--transition) !important;
+    // transition: grid-template-rows $gantt-phase-trans, background-color var(--transition) !important;
 
     overflow: hidden;
     cursor: pointer;
+
+    display: grid;
+    grid-template-rows: 0fr;
 
     & + & {
       margin-top: var(--gantt-phase-spacing);
     }
 
     &__closed {
+      // grid-template-rows: 0fr;
       height: var(--gantt-phase-height);
     }
 
     &__open {
+      // grid-template-rows: 1fr;
       height: var(--gantt-phase-height_max);
     }
 
     @include hover {
       background-color: darken($col-background_darker, $gantt-hover-darken-amt);
     }
+  }
+
+  &--phase-inner {
+    // min-height: var(--gantt-phase-height);
+    @include gantt-grid;
   }
 
   &--stage {
@@ -140,7 +153,7 @@ $gantt-phase-delay: 0.2s;
       grid-column: span var(--gantt-days_less);
 
       @include hover(".gantt--phase", ".bar__empty") {
-        background-color: darken($col-gantt-bar-empty, $gantt-hover-darken-amt*1.15);
+        background-color: darken($col-gantt-bar-empty, $gantt-hover-darken-amt * 1.15);
       }
 
       @at-root {
@@ -167,7 +180,6 @@ $gantt-phase-delay: 0.2s;
 
       transition: $gantt-phase-trans $gantt-phase-trans/2 height, 0s 0.2s opacity;
 
-
       &__open {
         opacity: 1;
         height: calc(var(--gantt-phase-height_max) + (var(--gantt-phase-background-top) * -1));
@@ -182,20 +194,16 @@ $gantt-phase-delay: 0.2s;
       }
 
       &__open-transition {
-        opacity: 1!important;
-        height: calc(var(--gantt-phase-height_max) + (var(--gantt-phase-background-top) * -1))!important;
-        transition: $gantt-phase-trans $gantt-phase-trans/2 height, 0s 0.2s opacity!important;
-
+        opacity: 1 !important;
+        height: calc(var(--gantt-phase-height_max) + (var(--gantt-phase-background-top) * -1)) !important;
+        transition: $gantt-phase-trans $gantt-phase-trans/2 height, 0s 0.2s opacity !important;
       }
 
       &__closed-transition {
-        opacity: 0!important;
-        height: 0rem!important;
-        transition: $gantt-phase-trans $gantt-phase-trans height, $gantt-phase-trans $gantt-phase-delay opacity!important;
+        opacity: 0 !important;
+        height: 0rem !important;
+        transition: $gantt-phase-trans $gantt-phase-trans height, $gantt-phase-trans $gantt-phase-delay opacity !important;
       }
-
-
-      
     }
 
     &__start {
