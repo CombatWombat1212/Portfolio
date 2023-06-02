@@ -1154,6 +1154,36 @@
 	}
   }
   
+  @mixin windows {
+	.windows & {
+	  @content;
+	}
+  }
+  
+  @mixin mac {
+	.mac & {
+	  @content;
+	}
+  }
+  
+  @mixin linux {
+	.linux & {
+	  @content;
+	}
+  }
+  
+  @mixin android {
+	.android & {
+	  @content;
+	}
+  }
+  
+  @mixin ios {
+	.ios & {
+	  @content;
+	}
+  }
+	
 
   @mixin safari-rem($property, $value) {
 	// Remove 'rem' from the end of the value and convert to number

@@ -2111,7 +2111,7 @@ h3 + .studypanel--paragraph {
   margin-left: var(--tag-spacing);
 }
 
-.safari .tag {
+.mac .tag {
   padding: 0.25rem 0.5rem 0.365rem 0.5rem;
 }
 
