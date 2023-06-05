@@ -1670,7 +1670,7 @@ const EXPLORATIONS_IMGS = processImages(
       height: 6781,
             disciplines: ["Photography"],
       tools: ["Photoshop","Lightroom"],
-      group: "montreal_panos",
+      // group: "montreal_panos",
       project: "Mount Royal",
     },
     pano_02_hill: {
@@ -1681,7 +1681,7 @@ const EXPLORATIONS_IMGS = processImages(
       height: 4275,
             disciplines: ["Photography"],
       tools: ["Photoshop","Lightroom"],
-      group: "montreal_panos",
+      // group: "montreal_panos",
       project: "Mount Royal",
     },
     pano_03_neighborhood: {
@@ -1692,9 +1692,48 @@ const EXPLORATIONS_IMGS = processImages(
       height: 3834,
             disciplines: ["Photography"],
       tools: ["Photoshop","Lightroom"],
-      group: "montreal_panos",
+      // group: "montreal_panos",
       project: "Mount Royal",
     },
+
+
+    // pano_01_house: {
+    //   name: "pano_01_house",
+    //   src: "/assets/images/explorations/photography/pano_01_house.jpg",
+    //   alt: "A colorful panoramic image of a farm house in the countryside",
+    //   width: 15160,
+    //   height: 6781,
+    //         disciplines: ["Photography"],
+    //   tools: ["Photoshop","Lightroom"],
+    //   group: "montreal_panos",
+    //   project: "Mount Royal",
+    // },
+    // pano_02_hill: {
+    //   name: "pano_02_hill",
+    //   src: "/assets/images/explorations/photography/pano_02_hill.jpg",
+    //   alt: "A colorful panoramic image of a treeline on top of a mountain",
+    //   width: 12806,
+    //   height: 4275,
+    //         disciplines: ["Photography"],
+    //   tools: ["Photoshop","Lightroom"],
+    //   group: "montreal_panos",
+    //   project: "Mount Royal",
+    // },
+    // pano_03_neighborhood: {
+    //   name: "pano_03_neighborhood",
+    //   src: "/assets/images/explorations/photography/pano_03_neighborhood.jpg",
+    //   alt: "A colorful panoramic image of a neighborhood taken from the top of a mountain",
+    //   width: 6526,
+    //   height: 3834,
+    //         disciplines: ["Photography"],
+    //   tools: ["Photoshop","Lightroom"],
+    //   group: "montreal_panos",
+    //   project: "Mount Royal",
+    // },
+
+
+
+
   },
 
   "explorations"

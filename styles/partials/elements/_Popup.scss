@@ -806,7 +806,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
   }
 
   &--circle {
-    transition: 0.3s!important;
+    transition: all 0.3s, opacity 0.2s!important;
 
     width: var(--circle-width);
     min-width: var(--circle-width);
@@ -837,8 +837,12 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
     &__off {
       transform: scale(0);
+      opacity: 0;
 
       width: 0rem;
+    }
+    &__on {
+      opacity: 1;
     }
 
     &__inactive {

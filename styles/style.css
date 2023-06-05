@@ -4491,7 +4491,7 @@ h3 + .studypanel--paragraph {
 }
 
 .popup--circle {
-  transition: 0.3s !important;
+  transition: all 0.3s, opacity 0.2s !important;
   width: var(--circle-width);
   min-width: var(--circle-width);
   height: var(--circle-width);
@@ -4521,7 +4521,12 @@ h3 + .studypanel--paragraph {
 
 .popup--circle__off {
   transform: scale(0);
+  opacity: 0;
   width: 0rem;
+}
+
+.popup--circle__on {
+  opacity: 1;
 }
 
 .popup--circle__inactive {
