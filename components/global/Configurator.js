@@ -141,48 +141,38 @@ function Options({ imgs, config, setConfig }) {
   );
 }
 
-function useConfigImgPrefetch(configurator) {
-  const [mount, setMount] = useState(false);
-  const [ready, setReady] = useState(false);
-  const inView = useInView(configurator, { threshold: 0.5 });
+// function useConfigImgPrefetch(configurator) {
+//   const [mount, setMount] = useState(false);
+//   const [ready, setReady] = useState(false);
+//   const inView = useInView(configurator, { threshold: 0.5 });
 
-  useEffect(() => {
-    if (!inView) return;
-    setMount(true);
-  }, [inView]);
+//   useEffect(() => {
+//     if (!inView) return;
+//     setMount(true);
+//   }, [inView]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setMount(true);
-    }, 5000);
-  }, []);
+//   useEffect(() => {
+//     setTimeout(() => {
+//       setMount(true);
+//     }, 5000);
+//   }, []);
 
-  useEffect(() => {
-    if (!mount) return;
-    setReady(true);
-  }, [mount]);
+//   useEffect(() => {
+//     if (!mount) return;
+//     setReady(true);
+//   }, [mount]);
 
-  useEffect(() => {
-    if (!ready) return;
-    configImgPrefetch();
-  }, [ready]);
-}
+//   useEffect(() => {
+//     if (!ready) return;
+//     configImgPrefetch();
+//   }, [ready]);
+// }
 
-function Configurator() {
-  const [config, setConfig] = useState(defaultConfig);
-  const [preloadConfig, setPreloadConfig] = useState(defaultConfig);
-  const [imgs, setImgs] = useState([]);
-  const [preloadImgs, setPreloadImgs] = useState([]);
+function useConfigImgPrefetch({ materials, preloadConfig, setPreloadConfig, setPreloadImgs, setPreloaded, inView }) {
+  const waitAfterMount = 5000;
 
-  var materials = [];
-  for (var key in SHIRT_COMPONENTS_GROUPS) {
-    materials.push(key);
-  }
-
-  useEffect(() => {
-    var images = configGetProcessedImages(config);
-    setImgs(images);
-  }, [config]);
+  const hasRun = useRef(false); // Keeps track of whether the effect has run
+  const timerRef = useRef(); // Keeps track of the timer
 
   useEffect(() => {
     var images = configGetProcessedImages(preloadConfig);
@@ -190,6 +180,9 @@ function Configurator() {
   }, [preloadConfig]);
 
   useEffect(() => {
+    // Do nothing if the effect has already run
+    if (hasRun.current) return;
+
     const duration = 500;
     const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -200,13 +193,48 @@ function Configurator() {
         setPreloadConfig(set);
       }
       await delay(duration);
-      setPreloadConfig(defaultConfig);
+      setPreloaded(true);
     };
-    const timer = setTimeout(updateMaterials, 1000);
-    return () => clearTimeout(timer); // clear the timer if the component unmounts
-  }, []);
 
+    if (inView) {
+      // If inView is true, run the code immediately
+      updateMaterials();
+      hasRun.current = true; // Mark the effect as having run
+    } else {
+      // If inView is false, start the timer
+      timerRef.current = setTimeout(() => {
+        updateMaterials();
+        hasRun.current = true; // Mark the effect as having run
+      }, waitAfterMount);
+    }
+
+    return () => {
+      // When inView changes, clear the timer if it exists
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, [inView]); // Re-run the effect when `inView` changes
+}
+
+function Configurator() {
   const configurator = useRef(null);
+  const [config, setConfig] = useState(defaultConfig);
+  const [preloadConfig, setPreloadConfig] = useState(defaultConfig);
+  const [imgs, setImgs] = useState([]);
+  const [preloadImgs, setPreloadImgs] = useState([]);
+  const [preloaded, setPreloaded] = useState(false);
+  const inView = useInView(configurator, { threshold: 0.5 });
+
+  const materials = Object.keys(SHIRT_COMPONENTS_GROUPS);
+
+  useEffect(() => {
+    var images = configGetProcessedImages(config);
+    setImgs(images);
+  }, [config]);
+
+  const PREFETCH_PROPS = { materials, preloadConfig, setPreloadConfig, setPreloadImgs, setPreloaded, inView };
+  useConfigImgPrefetch(PREFETCH_PROPS);
 
   const { isBpAndDown, loading } = useResponsive();
   const mdAndDown = !(!isBpAndDown("md") || loading);
@@ -214,14 +242,12 @@ function Configurator() {
   const VIEWER_PROPS = {
     imgs,
     preloadImgs,
+    preloaded,
     mdAndDown,
     supportedMaterials,
     config,
     setConfig,
   };
-
-  // TODO: yeah i disabled the prefetch because since it loads the full res images but i reworked the rest of the component to use <Image> i don't think it'll even help because its prefetching full res but loading responsive images
-  // useConfigImgPrefetch(configurator);
 
   return (
     <>
@@ -325,7 +351,7 @@ function Configurator() {
 }
 
 function ViewerBody({ props }) {
-  var { imgs, preloadImgs, mdAndDown } = props;
+  var { imgs, preloadImgs, preloaded, mdAndDown } = props;
   return (
     <>
       <Heading type="h3" className="configurator--title viewer--heading">
@@ -336,9 +362,11 @@ function ViewerBody({ props }) {
           <div className="viewer--preview">
             <Preview imgs={imgs} />
           </div>
-          <div className="viewer--preview" style={{ visibility: "hidden", position: "absolute", width: "var(--config-panel-width)" }}>
-            <Preview imgs={preloadImgs} />
-          </div>
+          {!preloaded && (
+            <div className="viewer--preview" style={{ visibility: "hidden", position: "absolute", width: "var(--config-panel-width)" }}>
+              <Preview imgs={preloadImgs} />
+            </div>
+          )}
           {!mdAndDown && <MaterialWrapper props={props} />}
         </div>
       </div>
