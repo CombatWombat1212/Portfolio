@@ -798,51 +798,108 @@ function shouldDisplayCircle(currentIndex, totalImages, circleIndex) {
   return { display, end, paginationIndex };
 }
 
+// const Pagination = React.memo(function Pagination({ pop, handles }) {
+//   const currentIndex = pop.index;
+//   const totalImgCount = pop.group?.imgs?.filter((img) => !img.hidden).length || 0;
+
+//   return (
+//     <div className="popup--pagination">
+//       {pop.group?.imgs?.map((img, i) => {
+//         const { display, end } = shouldDisplayCircle(currentIndex, totalImgCount, i);
+//         if (img.hidden || !display) return null;
+
+//         return (
+//           <motion.div
+//             layout="position"
+//             duration={0.4}
+//             key={i}
+//             style={{
+//               opacity: 1,
+//             }}>
+//             <Circle
+//               active={i === pop.index}
+//               key={`circle ${img.src}`}
+//               end={end}
+//               display={display}
+//               index={i}
+//               current={pop.index}
+//               onClick={() => {
+//                 handles.pagination(img, i);
+//               }}
+//             />
+//           </motion.div>
+//         );
+//       })}
+//     </div>
+//   );
+
+//   function Circle({ active, end, onClick, index, current }) {
+//     const classes = `${active ? "popup--circle__active" : "popup--circle__inactive"}${end ? " popup--circle__end" : ""}`;
+
+//     return (
+//       <a className={`popup--circle ${classes}`} onClick={onClick}>
+//         <div className={`popup--circle-inner ${end ? "popup--circle-inner__end" : ""}`}></div>
+//       </a>
+//     );
+//   }
+// }, createUpdateConditions(["pop.group", "pop.index"]));
+
 const Pagination = React.memo(function Pagination({ pop, handles }) {
   const currentIndex = pop.index;
   const totalImgCount = pop.group?.imgs?.filter((img) => !img.hidden).length || 0;
+  const maxCircles = 5;
 
   return (
-    <div className="popup--pagination">
+    <div
+      className="popup--pagination"
+      style={{
+        "--max-circles": maxCircles,
+        "--middle": Math.ceil(maxCircles / 2),
+        "--left-half": Math.floor((maxCircles - 1) / 2),
+        "--img-count": totalImgCount,
+        "--index": pop.index,
+        "--more-than-max": totalImgCount > maxCircles ? 1 : 0,
+      }}>
       {pop.group?.imgs?.map((img, i) => {
         const { display, end } = shouldDisplayCircle(currentIndex, totalImgCount, i);
-        if (img.hidden || !display) return null;
+        // if (img.hidden || !display) return null;
+        if (img.hidden) return null;
 
         return (
-          <motion.div
-            layout="position"
-            duration={0.4}
-            key={i}
-            style={{
-              opacity: 1,
-            }}>
-            <Circle
-              active={i === pop.index}
-              key={`circle ${img.src}`}
-              end={end}
-              display={display}
-              index={i}
-              current={pop.index}
-              onClick={() => {
-                handles.pagination(img, i);
-              }}
-            />
-          </motion.div>
+          <Circle
+            active={i === pop.index}
+            key={`circle ${img.src}`}
+            end={end}
+            display={display}
+            index={i}
+            current={pop.index}
+            onClick={() => {
+              handles.pagination(img, i);
+            }}
+          />
         );
       })}
     </div>
   );
-
-  function Circle({ active, end, onClick, index, current }) {
-    const classes = `${active ? "popup--circle__active" : "popup--circle__inactive"}${end ? " popup--circle__end" : ""}`;
-
-    return (
-      <a className={`popup--circle ${classes}`} onClick={onClick}>
-        <div className={`popup--circle-inner ${end ? "popup--circle-inner__end" : ""}`}></div>
-      </a>
-    );
-  }
 }, createUpdateConditions(["pop.group", "pop.index"]));
+
+function Circle({ active, end, onClick, display, index, current }) {
+  const pref = "popup--circle";
+  const classList = [pref];
+  classList.push(`${pref}__${active ? "active" : "inactive"}`);
+  classList.push(`${pref}__${end ? "end" : "middle"}`);
+  classList.push(`${pref}__${display ? "on" : "off"}`);
+  const classes = classList.join(" ");
+
+  return (
+    <a className={`popup--circle ${classes}`} onClick={onClick}>
+      <div
+        className={`popup--circle-inner 
+       ${end ? "popup--circle-inner__end" : ""}
+      `}></div>
+    </a>
+  );
+}
 
 function Close({ pop, nav, popclass, handles, type = "lightbox", state }) {
   // const condition = pop.ui.visible || pop.type === "interactive" || pop.type == "gallery" || !state.desktop;

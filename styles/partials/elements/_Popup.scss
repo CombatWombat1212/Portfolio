@@ -265,12 +265,10 @@ $col-media-wrapper: rgba($col-background, 0.075);
       min-height: fit-content;
     }
 
-
-    transition: clip-path 0.2s, opacity 0.2s ;
+    transition: clip-path 0.2s, opacity 0.2s;
     &__show#{&}__default {
       // clip-path: inset(0 0 0 0);
       opacity: 1;
-
     }
     &__hidden#{&}__default {
       // clip-path: inset(0 15px 0 0);
@@ -594,7 +592,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
         &__overflow {
           cursor: pointer;
         }
-        @at-root .gallery--categories-wrapper__overflow.gallery--categories-wrapper__no-desc .gallery--categories-inner{
+        @at-root .gallery--categories-wrapper__overflow.gallery--categories-wrapper__no-desc .gallery--categories-inner {
           margin-bottom: 0.5rem;
         }
 
@@ -788,12 +786,30 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
     --circle-inner-width: #{$px * 14};
     --circle-inner-width_end: #{$px * 10};
+
+
+    --circle-count: Min(var(--img-count), var(--max-circles));
+    --pagination-width: calc((var(--circle-width) * var(--circle-count)) + (var(--gap) * (var(--circle-count) - 1)));
+
+    width: var(--pagination-width);
+
+
+    --adjusted-index_max: Max(var(--left-half), var(--index));
+    --adjusted-index: Min(var(--adjusted-index_max), calc(var(--img-count) - var(--left-half) - 1));
+    --first-circle-margin-left: calc((((var(--circle-width) + var(--gap)) * var(--adjusted-index)) * -1) + (var(--circle-width) * var(--middle)));
+
+
+    & > *:first-child {
+
+      margin-left: weighted-average(var(--first-circle-margin-left), 0rem, var(--more-than-max));
+    }
   }
 
   &--circle {
-    transition: 0.2s;
+    transition: 0.3s!important;
 
     width: var(--circle-width);
+    min-width: var(--circle-width);
     height: var(--circle-width);
     background-color: $col-background;
     border-radius: 100rem;
@@ -817,6 +833,12 @@ $col-media-wrapper: rgba($col-background, 0.075);
       // width:  var(--circle-width_end);
       // height: var(--circle-width_end);
       transform: scale(0.6);
+    }
+
+    &__off {
+      transform: scale(0);
+
+      width: 0rem;
     }
 
     &__inactive {
@@ -917,10 +939,9 @@ $col-media-wrapper: rgba($col-background, 0.075);
         @include img-contain;
       }
 
-      @include md-down{
+      @include md-down {
         --size: 11rem;
       }
-
     }
   }
 }

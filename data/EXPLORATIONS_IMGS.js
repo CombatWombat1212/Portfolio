@@ -825,7 +825,7 @@ const EXPLORATIONS_IMGS = processImages(
       title: "Website Demo",
       description: [
         "As the UX Engineer at Virtual Pangea, I developed the website for our sister company, Cryptic Pixel.  It's a fun, vibrant online identity, with a look like no other.",
-        "My front-end skills were constantly challenged by the unique, tactile UI elements. In parallel, my abilities in UX were honed through an open dialogue between myself and our talented designer.",
+        "My front-end skills were constantly pushed by the unique, tactile UI elements. In parallel, my abilities in UX were honed through an open dialogue between myself and our talented designer.",
         "I actively influenced, and extrapolated from mockups through a mutual exchange of feedback and ideas. Allowing me to elevate the look and feel of the interactions wherever possible, rather than simply taking the designs from A to B.",
         "Fully responsive, parity between major browsers, and accessible to all users.",
       ],
