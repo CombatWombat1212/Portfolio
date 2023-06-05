@@ -766,26 +766,35 @@ function MADE({ pop }) {
           </Section>
 
           <Section id="Delivery--Images-1" background="background darkest" type="passthrough" margin="none">
-            <ImageRow col="3" direction="right">
+            <ImageRow col="3" direction="right" type="scroll">
               <Graphic type="image" img={MADE_IMGS.delivery_shirt_01} />
               <Graphic type="image" img={MADE_IMGS.delivery_shirt_02} />
               <Graphic type="image" img={MADE_IMGS.delivery_shirt_03} />
+              {/* <Graphic type="image" img={MADE_IMGS.delivery_shirt_01} />
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_02} />
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_03} /> */}
             </ImageRow>
           </Section>
 
           <Section id="Delivery--Images-2" background="background darkest" type="passthrough" margin="none">
-            <ImageRow col="3" direction="left">
+            <ImageRow col="3" direction="left" type="scroll">
               <Graphic type="image" img={MADE_IMGS.delivery_shirt_04} />
               <Graphic type="image" img={MADE_IMGS.delivery_shirt_05} />
               <Graphic type="image" img={MADE_IMGS.delivery_shirt_06} />
+              {/* <Graphic type="image" img={MADE_IMGS.delivery_shirt_04} />
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_05} />
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_06} /> */}
             </ImageRow>
           </Section>
 
           <Section id="Delivery--Images-3" background="background darkest" type="passthrough" margin="none">
-            <ImageRow col="3" direction="right">
+            <ImageRow col="3" direction="right" type="scroll">
               <Graphic type="image" img={MADE_IMGS.delivery_shirt_07} />
               <Graphic type="image" img={MADE_IMGS.delivery_shirt_08} />
               <Graphic type="image" img={MADE_IMGS.delivery_shirt_09} />
+              {/* <Graphic type="image" img={MADE_IMGS.delivery_shirt_07} />
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_08} />
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_09} /> */}
             </ImageRow>
           </Section>
 
