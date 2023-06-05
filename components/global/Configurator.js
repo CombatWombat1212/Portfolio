@@ -170,18 +170,41 @@ function useConfigImgPrefetch(configurator) {
 
 function Configurator() {
   const [config, setConfig] = useState(defaultConfig);
+  const [preloadConfig, setPreloadConfig] = useState(defaultConfig);
+  const [imgs, setImgs] = useState([]);
+  const [preloadImgs, setPreloadImgs] = useState([]);
 
   var materials = [];
   for (var key in SHIRT_COMPONENTS_GROUPS) {
     materials.push(key);
   }
 
-  const [imgs, setImgs] = useState([]);
-
   useEffect(() => {
     var images = configGetProcessedImages(config);
     setImgs(images);
   }, [config]);
+
+  useEffect(() => {
+    var images = configGetProcessedImages(preloadConfig);
+    setPreloadImgs(images);
+  }, [preloadConfig]);
+
+  useEffect(() => {
+    const duration = 500;
+    const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
+    const updateMaterials = async () => {
+      for (const mat of materials) {
+        await delay(duration);
+        const set = { ...preloadConfig, material: mat };
+        setPreloadConfig(set);
+      }
+      await delay(duration);
+      setPreloadConfig(defaultConfig);
+    };
+    const timer = setTimeout(updateMaterials, 1000);
+    return () => clearTimeout(timer); // clear the timer if the component unmounts
+  }, []);
 
   const configurator = useRef(null);
 
@@ -190,6 +213,7 @@ function Configurator() {
 
   const VIEWER_PROPS = {
     imgs,
+    preloadImgs,
     mdAndDown,
     supportedMaterials,
     config,
@@ -301,7 +325,7 @@ function Configurator() {
 }
 
 function ViewerBody({ props }) {
-  var { imgs, mdAndDown } = props;
+  var { imgs, preloadImgs, mdAndDown } = props;
   return (
     <>
       <Heading type="h3" className="configurator--title viewer--heading">
@@ -311,6 +335,9 @@ function ViewerBody({ props }) {
         <div className="viewer--inner">
           <div className="viewer--preview">
             <Preview imgs={imgs} />
+          </div>
+          <div className="viewer--preview" style={{ visibility: "hidden", position: "absolute", width: "var(--config-panel-width)" }}>
+            <Preview imgs={preloadImgs} />
           </div>
           {!mdAndDown && <MaterialWrapper props={props} />}
         </div>
@@ -381,21 +408,26 @@ function Preview({ imgs }) {
   return (
     <div className="preview preview__loading" ref={preview.refs.self}>
       {Object.entries(imgs).map(([key, value]) => {
-        return (
-          <Fragment key={key}>
-            {value.map((img, index) => {
-              var pref = "preview--component";
-              var imgStyle = {
-                "--preview-img-order": img.order,
-              };
-              var active = img.active ? "on" : "off";
-
-              return <Graphic key={index} img={img} className={`${pref} ${pref}__${active}`} style={imgStyle} reference={preview.refs.component} />;
-            })}
-          </Fragment>
-        );
+        return <PreviewComponent key={key} value={value} reference={preview.refs.component} />;
       })}
     </div>
+  );
+}
+
+function PreviewComponent({ value: variants, reference }) {
+  return (
+    <>
+      {variants.map((img, index) => {
+        const pref = "preview--component";
+        const style = {
+          "--preview-img-order": img.order,
+        };
+        const active = img.active ? "on" : "off";
+        const classes = `${pref} ${pref}__${active}`;
+
+        return <Graphic key={index} img={img} className={classes} style={style} reference={reference} lazy={false} />;
+      })}
+    </>
   );
 }
 
