@@ -226,6 +226,10 @@ function Configurator() {
   const [preloaded, setPreloaded] = useState(false);
   const inView = useInView(configurator, { threshold: 0.5 });
 
+  const { isBpAndDown, loading } = useResponsive();
+
+  const mdAndDown = !(!isBpAndDown("md") || loading);
+  
   const materials = Object.keys(SHIRT_COMPONENTS_GROUPS);
 
   useEffect(() => {
@@ -236,8 +240,6 @@ function Configurator() {
   const PREFETCH_PROPS = { materials, preloadConfig, setPreloadConfig, setPreloadImgs, setPreloaded, inView };
   useConfigImgPrefetch(PREFETCH_PROPS);
 
-  const { isBpAndDown, loading } = useResponsive();
-  const mdAndDown = !(!isBpAndDown("md") || loading);
 
   const VIEWER_PROPS = {
     imgs,
