@@ -141,26 +141,26 @@ ImageRowObj.prototype.onLoad = function () {
 };
 
 ImageRowObj.prototype.setResizeListener = function () {
-    let prevWidth = window.innerWidth;
-  
-    this.rowOnLoadDelayed = () => {
-      window.clearTimeout(this.is.resizing);
-  
-      const currWidth = window.innerWidth;
-      if (prevWidth !== currWidth) {
-        this.elem.style.setProperty("--is-resizing", true);
-        this.is.resizing = setTimeout(() => {
-          this.elem.style.setProperty("--is-resizing", false);
-          this.onLoad();
-        }, RESIZE_TIMEOUT);
-      }
-  
-      prevWidth = currWidth;
-    };
-  
-    window.addEventListener("resize", this.rowOnLoadDelayed);
+  let prevWidth = window.innerWidth;
+
+  this.rowOnLoadDelayed = () => {
+    window.clearTimeout(this.is.resizing);
+
+    const currWidth = window.innerWidth;
+    if (prevWidth !== currWidth) {
+      this.elem.style.setProperty("--is-resizing", true);
+      this.is.resizing = setTimeout(() => {
+        this.elem.style.setProperty("--is-resizing", false);
+        this.onLoad();
+      }, RESIZE_TIMEOUT);
+    }
+
+    prevWidth = currWidth;
   };
-  
+
+  window.addEventListener("resize", this.rowOnLoadDelayed);
+};
+
 ImageRowObj.prototype.clearResizeListener = function () {
   window.removeEventListener("resize", this.rowOnLoadDelayed);
 };

@@ -6692,17 +6692,11 @@ h3 + .studypanel--paragraph {
   --image-row-scale: 1;
   --image-row-offset: 1;
   --image-row-auto-transition: 0.5s;
-  --image-row-auto-movement-rate: 0.025;
+  --image-row-auto-movement-rate: 0.0345;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: calc(100%);
-}
-
-@media screen and (max-width: 61.9375em) {
-  .image-row {
-    --image-row-auto-movement-rate: 0.02;
-  }
 }
 
 .image-row--wrapper {

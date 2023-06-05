@@ -4,12 +4,12 @@
   --image-row-offset: 1;
 
   --image-row-auto-transition: 0.5s;
-  --image-row-auto-movement-rate: 0.025;
+  --image-row-auto-movement-rate: 0.0345;
   
-  @include lg-down{
+  // @include lg-down{
     
-    --image-row-auto-movement-rate: 0.02;
-  }
+  //   --image-row-auto-movement-rate: 0.02;
+  // }
 
   @include flex-row-between;
 
