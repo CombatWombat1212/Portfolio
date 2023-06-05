@@ -1201,3 +1201,14 @@
 	}
   }
 	  
+
+
+  
+  @mixin combine-transform($transforms...) {
+	$transform-string: "";
+	@each $transform in $transforms {
+	  $transform-string: $transform-string + " " + $transform;
+	}
+	transform: unquote($transform-string);
+  }
+  

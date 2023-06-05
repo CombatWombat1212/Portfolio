@@ -4,14 +4,13 @@ import { MADE_IMGS } from "@/data/MADE_IMGS";
 import { Section, Chapter, Title, Column, Heading, Description, Graphic, Quote } from "@/components/sections/Sections";
 import Configurator from "@/components/global/Configurator";
 import Split from "@/components/global/Split";
-import ImageRow from "@/components/global/ImageRow";
 import ProsCons, { Con, Pro } from "@/components/global/ProsCons";
 import { STUDY_MADE } from "@/data/CASE_STUDIES";
 import { useEffect } from "react";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import Nobr from "@/components/utilities/Nobr";
 import Seo from "@/components/head/Seo";
-
+import ImageRow from "@/components/global/ImageRow/ImageRow";
 function MADE({ pop }) {
   const study = STUDY_MADE;
 
@@ -494,7 +493,7 @@ function MADE({ pop }) {
           </Section>
 
           <Section id="Texturing--Transition" type="passthrough" margin="none">
-            <ImageRow col={`${desktop ? "6" : "2"}`} direction="right">
+            <ImageRow col={`${desktop ? "6" : "2"}`} direction="right" type="auto">
               <Graphic type="image" img={MADE_IMGS.shirt_row_04} />
               <Graphic type="image" img={MADE_IMGS.shirt_row_06} />
               <Graphic type="image" img={MADE_IMGS.shirt_row_02} />

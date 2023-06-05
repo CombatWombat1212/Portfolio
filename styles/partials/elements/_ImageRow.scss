@@ -1,7 +1,16 @@
 .image-row {
   --image-row-scale: 1;
-//   --image-row-col: 1;
+  //   --image-row-col: 1;
   --image-row-offset: 1;
+
+  --image-row-auto-transition: 0.5s;
+  --image-row-auto-movement-rate: 0.025;
+  
+  @include lg-down{
+    
+    --image-row-auto-movement-rate: 0.02;
+  }
+
   @include flex-row-between;
 
   width: calc(100%);
@@ -13,37 +22,41 @@
     position: relative;
     height: var(--image-height);
 
-
-    @include safari{
+    @include safari {
       margin-top: -10rem;
       margin-bottom: -10rem;
       padding-top: 10rem;
       padding-bottom: 10rem;
- 
     }
-      
-
   }
 
   &--image {
+    $scale: scale(var(--image-row-scale)) translateY(-2.5%);
     --col-width: #{col-gap-width(100%, calc(var(--image-row-col) - var(--image-row-offset)), 0rem)};
 
     width: var(--col-width);
     min-width: var(--col-width);
-    transform: scale(var(--image-row-scale));
+    transform: $scale;
     position: absolute !important;
     top: 0;
 
-    @include safari{
-      top:unset;
+    @include safari {
+      top: unset;
     }
-
 
     --offset-size: calc((var(--image-row-offset) * var(--col-width)) * -1);
     --value1: calc(1 - var(--image-row-progress));
     --value2: var(--image-row-progress);
-    --image-row-left: calc( var(--offset-size) * #{weighted-average( var(--value1), var(--value2), var(--image-row-direction) )} );
-    
+    --image-row-left: calc(var(--offset-size) * #{weighted-average(var(--value1), var(--value2), var(--image-row-direction))});
+
+    &__auto {
+      transition: left var(--image-row-auto-transition) linear, transform 0s;
+      --image-row-translate-x_value: calc(var(--image-row-cycle) * (100% * var(--image-row-count)));
+      --image-row-translate-x: calc(var(--image-row-translate-x_value) / var(--image-row-scale));
+
+      @include combine-transform($scale, translateX(var(--image-row-translate-x)));
+    }
+
     left: calc((var(--image-row-index) * var(--col-width)) + var(--image-row-left));
   }
 }
