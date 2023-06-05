@@ -14,6 +14,7 @@ import ReactDOM from "react-dom";
 import useInView from "@/scripts/hooks/useInView";
 
 // TODO: keyboard input support for tab navigation
+// TODO: a smooth fade between material changes with a loading icon when needed
 
 const order = ["base", "placket", "collar", "cuff"];
 const supportedMaterials = ["canvas_5", "755039", "755032", "755027"];
@@ -229,7 +230,7 @@ function Configurator() {
   const { isBpAndDown, loading } = useResponsive();
 
   const mdAndDown = !(!isBpAndDown("md") || loading);
-  
+
   const materials = Object.keys(SHIRT_COMPONENTS_GROUPS);
 
   useEffect(() => {

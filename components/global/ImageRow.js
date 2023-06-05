@@ -2,7 +2,7 @@ import { clamp, map, RESIZE_TIMEOUT, splitPx } from "@/scripts/GlobalUtilities";
 import { useEffect, useRef, useState } from "react";
 import { addClassToJsxObj, addStyleToJsxObj } from "../sections/sections_utilities/ClassUtilities";
 
-function ImageRow({ children, className, col, direction }) {
+function ImageRow({ children, className, col, direction, scrollType="scroll" }) {
   const [mounted, setMounted] = useState(false);
   const [currentCol, setCurrentCol] = useState(col);
 
@@ -15,7 +15,7 @@ function ImageRow({ children, className, col, direction }) {
   useEffect(() => {
     if (!mounted) return;
     var row = reference.current;
-    rowInit(row);
+    rowInit(row, scrollType);
   }, [mounted]);
 
   useEffect(() => {
@@ -98,8 +98,10 @@ function rowGetProgress(row) {
   row.progress = progress;
 }
 
-function rowInit(elem) {
+function rowInit(elem, scollType) {
+
   var row = {
+    type: scollType,
     elem: elem,
     observer: null,
     distance: 0,

@@ -189,17 +189,24 @@ function MADE({ pop }) {
             </Column>
           </Section>
 
-          <Section id="Approach--Considerations" type="columns" titled mainType="grid">
+          <Section id="Approach--Considerations-Description" type="columns" titled="above">
             <Title>Considerations</Title>
-            <Heading>
-              Understanding shirt anatomy to create <br className="d-lg-none" /> accurate models
-            </Heading>
-            <Description className="mt-less">
-              <p>
-                A few key considerations when designing the shirt models that needed to be just right in order to accurately reflect MADE’s products:
-              </p>
-            </Description>
+            <Column>
+              <Heading>
+                Understanding shirt anatomy to create <br className="d-lg-none" /> accurate models
+              </Heading>
+            </Column>
+            <Column>
+              <Description className="mt-less">
+                <p>
+                  A few key considerations when designing the shirt models that needed to be just right in order to accurately reflect MADE’s
+                  products:
+                </p>
+              </Description>
+            </Column>
+          </Section>
 
+          <Section id="Approach--Considerations-Graphic" type="columns" titled mainType="grid" wrapperClassName='mt-less-2'>
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_seam_positions} lightbox pop={pop} />
               <Heading type={!smAndDown ? `h3` : "h5"} className={`graphic--caption ${!smAndDown && `weight-reg`}`}>
@@ -362,15 +369,6 @@ function MADE({ pop }) {
             </Column>
           </Section>
 
-
-
-
-
-
-
-
-
-
           <Section id="Texturing--Contrast-Desc" type="columns" titled="above" background="background darker" wrapperClassName="mb-less-2">
             <Title>Contrast Areas</Title>
             <Column>
@@ -445,25 +443,10 @@ function MADE({ pop }) {
             </Column>
           </Section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
           <Section id="Texturing--Details-Description" type="columns" titled="above" background="background darker" wrapperClassName="mb-less-2">
             <Title>Additional Details</Title>
             <Column>
-              <Heading>
-                The devil is in the details / the realism is in the seams
-              </Heading>
+              <Heading>The devil is in the details / the realism is in the seams</Heading>
             </Column>
             <Column>
               <Description>
@@ -545,7 +528,9 @@ function MADE({ pop }) {
           <Section id="Rendering--Shadow-Description" type="columns" titled="above" background="background darkest" wrapperClassName="mb-less">
             <Title>Shadows</Title>
             <Column>
-              <Heading>Supporting the final <Nobr>use-case</Nobr> by embedding shadows within each component image.</Heading>
+              <Heading>
+                Supporting the final <Nobr>use-case</Nobr> by embedding shadows within each component image.
+              </Heading>
             </Column>
             <Column>
               <Description className={desktop && "mt-less"}>
