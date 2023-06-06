@@ -17,13 +17,16 @@ const useBrowserClass = () => {
       document.documentElement.classList.add('windows');
     } else if (userAgentString.indexOf("Mac") !== -1) {
       document.documentElement.classList.add('mac');
-    } else if (userAgentString.indexOf("Linux") !== -1) {
+    } else if ((userAgentString.indexOf("Linux") !== -1) && (userAgentString.indexOf("Android") === -1)) {
       document.documentElement.classList.add('linux');
     } else if (userAgentString.indexOf("Android") !== -1) {
       document.documentElement.classList.add('android');
     } else if (/iPad|iPhone|iPod/.test(userAgentString) && !window.MSStream) {
       document.documentElement.classList.add('ios');
     }
+
+    console.log(userAgentString);
+    console.log(userAgentString.includes('Android'));
     
 
     // Cleanup function to remove classes when component is unmounted or conditions change.

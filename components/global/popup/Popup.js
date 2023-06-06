@@ -715,7 +715,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
     if (mediaWrapState !== "animate") return;
     setTimeout(() => {
       setMediaWrapStateClass("none");
-    }, popSeekDuration * 1000);
+    }, ((popSeekDuration+0.1) * 1000));
   }, [mediaWrapState]);
 
   const mediaWrapPref = "popup--media-wrapper";

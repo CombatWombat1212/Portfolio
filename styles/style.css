@@ -2128,6 +2128,10 @@ h3 + .studypanel--paragraph {
   border-radius: 100rem;
 }
 
+.android.chrome .tag__tool {
+  padding: 0.265rem 0.55rem 0.25rem 0.55rem;
+}
+
 .tag__inverted {
   border: 0.125rem solid #F3F3F7;
   background-color: rgba(0, 0, 0, 0);

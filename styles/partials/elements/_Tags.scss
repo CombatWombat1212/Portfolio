@@ -42,6 +42,11 @@
   &__tool{
     padding: 0.4rem 0.55rem 0.25rem 0.55rem;
     border-radius: 100rem;
+    
+    @include android-chrome{
+      padding: 0.265rem 0.55rem 0.25rem 0.55rem;
+    }
+
   }
 
   &__inverted{
