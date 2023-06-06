@@ -725,10 +725,6 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
   if (!pop.imgLoaded) mediaWrapClassList.push(`${mediaWrapPref}__loading`);
   const mediaWrapClasses = mediaWrapClassList.join(" ");
 
-  useEffect(() => {
-    console.log(mediaWrapClassList);
-  }, [mediaWrapClassList]);
-
   const animPresStyles = {
     "--aspect-width": Number(pop.img.aspect?.split("/")?.[0] || pop.img.width),
     "--aspect-height": Number(pop.img.aspect?.split("/")?.[1] || pop.img.height),
