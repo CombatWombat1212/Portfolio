@@ -165,8 +165,23 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
       splitPx(window.getComputedStyle(galInfo).height) +
       splitPx(window.getComputedStyle(galInfo).paddingTop) +
       splitPx(window.getComputedStyle(galInfo).paddingBottom);
-
     return descHeight;
+  })();
+
+  const galDescInnerHeight = (() => {
+    if (!elems.info.ref.current) return 0;
+    if (!elems.popup.ref.current) return 0;
+    if (!elems.info.ref.current.querySelector(".gallery--title")) return 0;
+
+    const title = elems.info.ref.current.querySelector(".gallery--title");
+    const titleHeight =
+      splitPx(window.getComputedStyle(title).height) +
+      splitPx(window.getComputedStyle(title).paddingTop) +
+      splitPx(window.getComputedStyle(title).paddingBottom) +
+      splitPx(window.getComputedStyle(title).marginBottom) +
+      splitPx(window.getComputedStyle(title).marginTop);
+
+    return galDescHeight + titleHeight;
   })();
 
   const galInfoHeightMax = elems.img.maxHeight != 0 && elems.img.maxHeight;
@@ -177,7 +192,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
       "--gallery-description-height": `${galDescHeight}px`,
     },
   };
-
+  galInfoHeightMax
   var hasDesc = pop.img.description || (pop.group.description && pop.group.description[pop.index]);
   var hasTitle = title ? true : false;
 
@@ -190,10 +205,10 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
   const [descScrollbar, setDescScrollbar] = useState(false);
   useEffect(() => {
     if (!elems.desc.ref.current) return;
-    if (typeof galDescHeight != "number" || typeof galInfoHeightMax != "number") return;
-    if (galDescHeight > galInfoHeightMax) setDescScrollbar(true);
+    if (typeof galDescInnerHeight != "number" || typeof galInfoHeightMax != "number") return;galDescInnerHeight
+    if (galDescInnerHeight > galInfoHeightMax) setDescScrollbar(true);
     else setDescScrollbar(false);
-  }, [elems.desc.ref.current, galDescHeight, galInfoHeightMax]);
+  }, [elems.desc.ref.current, galDescInnerHeight, galInfoHeightMax]);
 
   const infoScrollbar = useHasScrollbar(elems.info.ref, {
     debounceTime: 100,
@@ -295,7 +310,6 @@ function GalCategoriesBackground({ scrollbar, catData }) {
   if (scrollbar.desc.has) classList.push(`${pref}__scrollbar`);
   if (catData?.hovered || catData.ellipse?.hovered) classList.push(`${pref}__hovered`);
   const classes = classList.join(" ");
-
 
   return (
     <div
@@ -539,5 +553,6 @@ GalHeading.displayName = "GalHeading";
 GalInfo.displayName = "GalInfo";
 GalCategories.displayName = "GalCategories";
 GalDescription.displayName = "GalDescription";
+GalCategoriesBackground.displayName = "GalCategoriesBackground";
 
 export { GalInfo, GalCategories, GalDescription };

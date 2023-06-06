@@ -138,6 +138,30 @@ function getPopupClasses(pop) {
   return popclass;
 }
 
+function useGetIsntFallback() {
+  const { isFirefox, isSafari, browserFound } = useBrowser();
+  const [isntFirefox, setIsntFirefox] = useState(false);
+  const [isntSafari, setIsntSafari] = useState(false);
+  const [isntFallback, setIsntFallback] = useState(false);
+
+  // Use this effect to manage the isntFirefox state
+  useEffect(() => {
+    setIsntFirefox(!browserFound || !isFirefox || (browserFound && !isFirefox));
+  }, [browserFound, isFirefox]);
+
+  // Use this effect to manage the isntSafari state
+  useEffect(() => {
+    setIsntSafari(!browserFound || !isSafari || (browserFound && !isSafari));
+  }, [browserFound, isSafari]);
+
+  // Use this effect to manage the isntFallback state
+  useEffect(() => {
+    setIsntFallback(isntFirefox && isntSafari);
+  }, [isntFirefox, isntSafari]);
+
+  return isntFallback;
+}
+
 function Popup({ pop }) {
   const poptransition = 0.15;
   const wrap = useRef(null);
@@ -152,14 +176,16 @@ function Popup({ pop }) {
 
   const bp = useResponsiveUtils();
 
-  // Anim pres fixes for some browsers
-  const { isFirefox, isSafari, browserFound } = useBrowser();
-  const isntFirefox = !browserFound || !isFirefox || (browserFound && !isFirefox);
-  const isntSafari = !browserFound || !isSafari || (browserFound && !isSafari);
-  const isntFallback = isntFirefox && isntSafari;
+  // // Anim pres fixes for some browsers
+  const [delay, setDelay] = useState(false);
+  const [fallbackShowWrapper, setFallbackShowWrapper] = useState(false);
   const fallbackClass = useInOut(pop.on);
-  const [delay, setDelay] = useState(pop.on);
-  const [fallbackShowWrapper, setFallbackShowWrapper] = useState(pop.on);
+
+  const isntFallback = useGetIsntFallback();
+
+  useEffect(() => {
+    console.log(isntFallback);
+  }, [isntFallback]);
 
   const getDelay = (elem) => {
     return splitS(window.getComputedStyle(elem).getPropertyValue("--transition"));
@@ -193,6 +219,7 @@ function Popup({ pop }) {
     <>
       {isntFallback ? (
         <AnimPres
+          key="main"
           reference={wrap}
           animation={popAnims.fade}
           duration={poptransition}
@@ -202,7 +229,7 @@ function Popup({ pop }) {
           <Wrapper pop={pop} bp={bp} />
         </AnimPres>
       ) : (
-        <div className={`popup--wrapper popup--wrapper__${fallbackClass}`} ref={wrap}>
+        <div className={`popup--wrapper popup--wrapper__${fallbackClass}`} ref={wrap} key="fallback">
           {fallbackShowWrapper && <Wrapper pop={pop} bp={bp} />}
         </div>
       )}
@@ -913,7 +940,6 @@ const Pagination = React.memo(function Pagination({ pop, handles }) {
 }, createUpdateConditions(["pop.group", "pop.index"]));
 
 function Circle({ active, end, onClick, display, index, current }) {
-
   const { inner, outer } = getCircleClasses({ active, end, display });
 
   return (
@@ -922,7 +948,6 @@ function Circle({ active, end, onClick, display, index, current }) {
     </a>
   );
 }
-
 
 function Close({ pop, nav, popclass, handles, type = "lightbox", state }) {
   // const condition = pop.ui.visible || pop.type === "interactive" || pop.type == "gallery" || !state.desktop;
@@ -1060,8 +1085,6 @@ function Anim({ children, animation, condition, className, style }) {
   );
 }
 
-
-
 function getCircleClasses({ active, end, display }) {
   const classes = {
     circle: [],
@@ -1086,9 +1109,6 @@ function getCircleClasses({ active, end, display }) {
 
   return { inner, outer };
 }
-
-
-
 
 export default Popup;
 
