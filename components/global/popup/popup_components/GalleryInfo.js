@@ -45,12 +45,12 @@ function GalInfoMotionWrapper({ pop, state, elems, scrollbar, children, styles, 
     }
   }, [pop.firstImgDrawn, state.mobileGallery]);
 
-
-  // const scrollTop = useScrollTop(elems.info.ref);
-  // useEffect(() => {
-  //   console.log(scrollTop);
-  // }, [scrollTop])
-
+  const pref = "popup--info";
+  const classList = [pref];
+  classList.push(scroll);
+  classList.push(`${pref}__${type}`);
+  classList.push(`${pref}__${ready ? "show" : "hidden"}`);
+  const classes = classList.join(" ");
 
   return (
     // <motion.div
@@ -59,9 +59,7 @@ function GalInfoMotionWrapper({ pop, state, elems, scrollbar, children, styles, 
       // transition={{
       //   layout: { duration: popLayoutTransition },
       // }}
-      className={`popup--info ${scroll} popup--info__${type}
-                  popup--info__${ready ? "show" : "hidden"}
-      `}
+      className={classes}
       // ref={elems.info.ref}
 
       {...(type != "above" ? { ref: elems.info.ref } : {})}
@@ -154,7 +152,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
   })();
 
   const galDescHeight = (() => {
-    if (state.desktop) return 0;
+    // if (state.desktop) return 0;
     if (!elems.info.ref.current) return 0;
     if (!elems.popup.ref.current) return 0;
     if (!elems.info.ref.current.querySelector(".gallery--info")) return 0;
@@ -171,10 +169,11 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
     return descHeight;
   })();
 
+  const galInfoHeightMax = elems.img.maxHeight != 0 && elems.img.maxHeight;
   const styles = {
     description: {
       "--gallery-info-height": `${galInfoHeight}px`,
-      "--gallery-info-max-height": `${elems.img.maxHeight != 0 && elems.img.maxHeight}px`,
+      "--gallery-info-max-height": `${galInfoHeightMax}px`,
       "--gallery-description-height": `${galDescHeight}px`,
     },
   };
@@ -182,12 +181,19 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
   var hasDesc = pop.img.description || (pop.group.description && pop.group.description[pop.index]);
   var hasTitle = title ? true : false;
 
-  const descScrollbar = useHasScrollbar(elems.desc.ref, {
-    observer: true,
-    debounceTime: 10,
-    repeatChecks: 10,
-    repeatChecksDebounceTime: 4,
-  });
+  // const descScrollbar = useHasScrollbar(elems.desc.ref, {
+  //   debounceTime: 100,
+  //   repeatChecks: 10,
+  //   repeatChecksDebounceTime: 10,
+  // });
+
+  const [descScrollbar, setDescScrollbar] = useState(false);
+  useEffect(() => {
+    if (!elems.desc.ref.current) return;
+    if (typeof galDescHeight != "number" || typeof galInfoHeightMax != "number") return;
+    if (galDescHeight > galInfoHeightMax) setDescScrollbar(true);
+    else setDescScrollbar(false);
+  }, [elems.desc.ref.current, galDescHeight, galInfoHeightMax]);
 
   const infoScrollbar = useHasScrollbar(elems.info.ref, {
     debounceTime: 100,
@@ -276,22 +282,30 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
           <Close pop={pop} nav={nav} handles={handles} popclass={popclass} type="gallery" />
         )}
 
-        {(pop.img.disciplines || pop.img.tools) && (
-          <div
-            className={`gallery--categories-background
-        ${scrollbar.desc.has ? "gallery--categories-background__scrollbar" : ""}
-        ${catData?.hovered || catData.ellipse?.hovered ? "gallery--categories-background__hovered" : ""}
-        `}
-            style={{
-              "--categories-top": `${catData.wrapper?.top}px`,
-              "--tag-height": `${catData.tag?.height}px`,
-            }}></div>
-        )}
+        {(pop.img.disciplines || pop.img.tools) && <GalCategoriesBackground scrollbar={scrollbar} catData={catData} />}
       </GalInfoMotionWrapper>
     </>
   );
 }, createUpdateConditions(["pop.index", "pop.img", "elems.img.height", "pop.firstImgDrawn", "pop.infoDrawn", "state.mobile", "state.desktop"]));
 // }, createUpdateConditions(["pop.index", "pop.img", "elems.img.height"]));
+
+function GalCategoriesBackground({ scrollbar, catData }) {
+  const pref = "gallery--categories-background";
+  const classList = ["gallery--categories-background"];
+  if (scrollbar.desc.has) classList.push(`${pref}__scrollbar`);
+  if (catData?.hovered || catData.ellipse?.hovered) classList.push(`${pref}__hovered`);
+  const classes = classList.join(" ");
+
+
+  return (
+    <div
+      className={classes}
+      style={{
+        "--categories-top": `${catData.wrapper?.top}px`,
+        "--tag-height": `${catData.tag?.height}px`,
+      }}></div>
+  );
+}
 
 const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle, onCatDataChange, state }) {
   const catRef = useRef(null);
@@ -405,19 +419,11 @@ const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle
     });
   };
 
-  var catclasses = [];
-
-  if (hasDesc) {
-  } else {
-    catclasses.push("gallery--categories-wrapper__no-desc");
-  }
-
-  if (hasTitle) {
-  } else {
-    catclasses.push("gallery--categories-wrapper__no-title");
-  }
-
-  catclasses = catclasses.join(" ");
+  const pref = "gallery--categories-wrapper";
+  const catClassList = [];
+  if (!hasDesc) catClassList.push(`${pref}__no-desc`);
+  if (!hasTitle) catClassList.push(`${pref}__no-title`);
+  const catclasses = catClassList.join(" ");
 
   useEffect(() => {
     return () => {

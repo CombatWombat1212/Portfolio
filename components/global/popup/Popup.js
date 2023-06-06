@@ -529,8 +529,13 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
           return result;
         })();
 
+        
         var availHeight = popupElem.offsetHeight - infoHeight - gapWidth;
         var availWidth = popupElem.offsetWidth;
+
+        // console.log(`availHeight: ${availHeight}, availWidth: ${availWidth}, infoHeight: ${infoHeight}, gapWidth: ${gapWidth}`);
+        console.log(`popElem.offsetHeight: ${popupElem.offsetHeight}, infoHeight: ${infoHeight}, gapWidth: ${gapWidth}`); 
+
       }
     } else {
       var availHeight = popupElem.offsetHeight;
@@ -566,7 +571,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
       var maxHeight = scaledHeight;
       var maxWidth = availWidth;
     }
-
+    
     // Update maxHeight and maxWidth state only if their values have changed
     if (maxHeight !== elems.img.maxHeight) {
       elems.img.setMaxHeight(maxHeight);
@@ -686,6 +691,30 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
   useListener("swiped-left", handles.swipeLeft, { ref: mediaWrapperRef });
   useListener("swiped-right", handles.swipeRight, { ref: mediaWrapperRef });
 
+
+
+
+
+  const loadingWrapPref = "loading--wrapper";
+  const loadingWrapClassList = [loadingWrapPref];
+  if (!pop.imgReady || pop.imgLoaded) loadingWrapClassList.push(`${loadingWrapPref}__hidden`);
+  if (pop.zoom) loadingWrapClassList.push(`${loadingWrapPref}__zoom`);
+  if (pop.zoom && pop.type == "lightbox") loadingWrapClassList.push(`${loadingWrapPref}__lightbox-zoom`);
+  const loadingWrapClasses = loadingWrapClassList.join(" ");
+
+
+  const imgStyles = {
+    "--img-avail-width": `${elems.img.availWidth}px`,
+    "--img-avail-height": `${elems.img.availHeight}px`,
+    "--img-max-width": `${elems.img.maxWidth}px`,
+    "--img-max-height": `${elems.img.maxHeight}px`,
+  };
+
+
+  // useEffect(() => {
+  //   console.log(elems.img.maxWidth);
+  // }, [elems.img.maxWidth]);
+
   return (
     <>
       <AnimPres
@@ -714,28 +743,13 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
           autoplay
           controls
           onLoad={handleImgLoad}
-          style={{
-            "--img-avail-width": `${elems.img.availWidth}px`,
-            "--img-avail-height": `${elems.img.availHeight}px`,
-            "--img-max-width": `${elems.img.maxWidth}px`,
-            "--img-max-height": `${elems.img.maxHeight}px`,
-          }}
+          style={imgStyles}
         />
 
         {pop.imgReady && (
           <div
-            className={`
-            loading--wrapper 
-            ${(!pop.imgReady || pop.imgLoaded) && "loading--wrapper__hidden"}
-            ${pop.zoom && "loading--wrapper__zoom"}
-            ${pop.zoom && pop.type == "lightbox" && "loading--wrapper__lightbox-zoom"}
-            `}
-            style={{
-              "--img-max-width": `${elems.img.maxWidth}px`,
-              "--img-max-height": `${elems.img.maxHeight}px`,
-              "--img-avail-width": `${elems.img.availWidth}px`,
-              "--img-avail-height": `${elems.img.availHeight}px`,
-            }}>
+            className={loadingWrapClasses}
+            style={imgStyles}>
             <div className={`loading--img`}>
               <img src={loading_white.src} alt={loading_white.alt} width={loading_white.width} height={loading_white.height} />
             </div>

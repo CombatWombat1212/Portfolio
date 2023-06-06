@@ -5,20 +5,12 @@ const useHasScrollbar = (ref, options = {}) => {
   const {
     debounceTime = RESIZE_TIMEOUT,
     observer = false,
-    repeatChecks = 0, // Add the new parameter here
+    repeatChecks = 0,
   } = options;
 
   const repeatCheckDebounceTime = options.repeatCheckDebounceTime !== undefined
     ? options.repeatCheckDebounceTime
-    : repeatChecks > 0 ? 100 : 0; // Update the logic here
-
-  // const hasScrollbar = () => {
-  //   if (ref.current) {
-  //     const element = ref.current;
-  //     return element.scrollHeight > element.clientHeight;
-  //   }
-  //   return false;
-  // };
+    : repeatChecks > 0 ? 100 : 0;
 
   const hasScrollbar = () => {
     if (ref.current) {
