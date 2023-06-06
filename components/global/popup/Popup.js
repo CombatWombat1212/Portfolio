@@ -913,26 +913,8 @@ const Pagination = React.memo(function Pagination({ pop, handles }) {
 }, createUpdateConditions(["pop.group", "pop.index"]));
 
 function Circle({ active, end, onClick, display, index, current }) {
-  var classes = {
-    circle: [],
-    "circle-inner": [],
-  };
 
-  Object.keys(classes).forEach((key) => {
-    const c = classes[key];
-    const p = `popup--${key}`;
-    c.push(p);
-    c.push(`${p}__${end ? "end" : "middle"}`);
-    if (key !== "circle") return;
-    c.push(`${p}__${active ? "active" : "inactive"}`);
-    c.push(`${p}__${display ? "on" : "off"}`);
-  });
-
-  Object.keys(classes).forEach((key) => {
-    classes[key] = classes[key].join(" ");
-  });
-
-  const {circle: inner, ["circle-inner"]: outer} = classes;
+  const { inner, outer } = getCircleClasses({ active, end, display });
 
   return (
     <a className={inner} onClick={onClick}>
@@ -940,6 +922,7 @@ function Circle({ active, end, onClick, display, index, current }) {
     </a>
   );
 }
+
 
 function Close({ pop, nav, popclass, handles, type = "lightbox", state }) {
   // const condition = pop.ui.visible || pop.type === "interactive" || pop.type == "gallery" || !state.desktop;
@@ -1076,6 +1059,36 @@ function Anim({ children, animation, condition, className, style }) {
     </motion.div>
   );
 }
+
+
+
+function getCircleClasses({ active, end, display }) {
+  const classes = {
+    circle: [],
+    "circle-inner": [],
+  };
+
+  Object.keys(classes).forEach((key) => {
+    const list = classes[key];
+    const pref = `popup--${key}`;
+    list.push(pref);
+    list.push(`${pref}__${end ? "end" : "middle"}`);
+    if (key !== "circle") return;
+    list.push(`${pref}__${active ? "active" : "inactive"}`);
+    list.push(`${pref}__${display ? "on" : "off"}`);
+  });
+
+  Object.keys(classes).forEach((key) => {
+    classes[key] = classes[key].join(" ");
+  });
+
+  const { circle: inner, ["circle-inner"]: outer } = classes;
+
+  return { inner, outer };
+}
+
+
+
 
 export default Popup;
 
