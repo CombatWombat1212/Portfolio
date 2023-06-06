@@ -4210,13 +4210,9 @@ h3 + .studypanel--paragraph {
   --categories-background-offset_negative: calc(var(--categories-background-offset) * -1);
   left: var(--categories-background-offset_negative);
   top: calc(var(--categories-top) - var(--categories-background-offset));
-  width: calc(100% + (var(--categories-background-offset) * -1));
+  width: calc(var(--gallery-info-width) + (var(--categories-background-offset) * 2));
   right: var(--categories-background-offset_negative);
   height: calc(var(--tag-height) + (var(--categories-background-offset) * 2));
-}
-
-.popup .gallery--categories-background__scrollbar {
-  width: calc(100% - var(--popup-scrollbar-pad));
 }
 
 .popup .gallery--categories-background__hovered {

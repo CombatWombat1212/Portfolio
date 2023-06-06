@@ -82,7 +82,7 @@ function GalInfoAnimPres({ elems, pop, styles, state, popclass, scrollbar, child
           delay={INFO_ANIM_DELAY}
           condition={true}
           reference={elems.desc.ref}
-          className={`popup--description ${popclass.desc} ${scrollbar.desc.classes} popup--description__${type}`}
+          className={`popup--description popup--description__gallery-scrollbar ${popclass.desc} popup--description__${type}`}
           style={styles.description}
           onAnimationComplete={() => {
             pop.setInfoDrawn(true);
@@ -168,21 +168,26 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
     return descHeight;
   })();
 
-  const galDescInnerHeight = (() => {
+  const galInfoWidth = (() => {
+    // if (state.desktop) return 0;
     if (!elems.info.ref.current) return 0;
     if (!elems.popup.ref.current) return 0;
-    if (!elems.info.ref.current.querySelector(".gallery--title")) return 0;
+    if (!elems.info.ref.current.querySelector(".gallery--info")) return 0;
 
-    const title = elems.info.ref.current.querySelector(".gallery--title");
-    const titleHeight =
-      splitPx(window.getComputedStyle(title).height) +
-      splitPx(window.getComputedStyle(title).paddingTop) +
-      splitPx(window.getComputedStyle(title).paddingBottom) +
-      splitPx(window.getComputedStyle(title).marginBottom) +
-      splitPx(window.getComputedStyle(title).marginTop);
+    var infoElem = elems.info.ref.current;
+    var galInfo = infoElem.querySelector(".gallery--info");
 
-    return galDescHeight + titleHeight;
+    var width =
+      splitPx(window.getComputedStyle(galInfo).width) +
+      splitPx(window.getComputedStyle(galInfo).paddingLeft) +
+      splitPx(window.getComputedStyle(galInfo).paddingRight);
+
+    return width;
   })();
+
+
+
+
 
   const galInfoHeightMax = elems.img.maxHeight != 0 && elems.img.maxHeight;
   const styles = {
@@ -190,6 +195,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
       "--gallery-info-height": `${galInfoHeight}px`,
       "--gallery-info-max-height": `${galInfoHeightMax}px`,
       "--gallery-description-height": `${galDescHeight}px`,
+      "--gallery-info-width": `${galInfoWidth}px`,
     },
   };
   galInfoHeightMax
@@ -202,13 +208,13 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
   //   repeatChecksDebounceTime: 10,
   // });
 
-  const [descScrollbar, setDescScrollbar] = useState(false);
-  useEffect(() => {
-    if (!elems.desc.ref.current) return;
-    if (typeof galDescInnerHeight != "number" || typeof galInfoHeightMax != "number") return;galDescInnerHeight
-    if (galDescInnerHeight > galInfoHeightMax) setDescScrollbar(true);
-    else setDescScrollbar(false);
-  }, [elems.desc.ref.current, galDescInnerHeight, galInfoHeightMax]);
+  // const [descScrollbar, setDescScrollbar] = useState(false);
+  // useEffect(() => {
+  //   if (!elems.desc.ref.current) return;
+  //   if (typeof galDescInnerHeight != "number" || typeof galInfoHeightMax != "number") return;galDescInnerHeight
+  //   if (galDescInnerHeight > galInfoHeightMax) setDescScrollbar(true);
+  //   else setDescScrollbar(false);
+  // }, [elems.desc.ref.current, galDescInnerHeight, galInfoHeightMax]);
 
   const infoScrollbar = useHasScrollbar(elems.info.ref, {
     debounceTime: 100,
@@ -217,10 +223,10 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
   });
 
   const scrollbar = {
-    desc: {
-      has: descScrollbar,
-      classes: true ? "popup--description__gallery-scrollbar scrollbar" : "",
-    },
+    // desc: {
+      // has: descScrollbar,
+      // classes: true ? "popup--description__gallery-scrollbar scrollbar" : "",
+    // },
     info: {
       has: infoScrollbar,
       classes: true ? "popup--info__gallery-scrollbar scrollbar" : "",
@@ -307,7 +313,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
 function GalCategoriesBackground({ scrollbar, catData }) {
   const pref = "gallery--categories-background";
   const classList = ["gallery--categories-background"];
-  if (scrollbar.desc.has) classList.push(`${pref}__scrollbar`);
+  // if (scrollbar.desc.has) classList.push(`${pref}__scrollbar`);
   if (catData?.hovered || catData.ellipse?.hovered) classList.push(`${pref}__hovered`);
   const classes = classList.join(" ");
 
