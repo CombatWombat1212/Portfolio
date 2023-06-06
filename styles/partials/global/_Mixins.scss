@@ -1153,6 +1153,11 @@
 	  @content;
 	}
   }
+  @mixin mac-firefox {
+	.mac.firefox & {
+	  @content;
+	}
+  }
   
   @mixin windows {
 	.windows & {
