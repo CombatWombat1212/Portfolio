@@ -789,11 +789,13 @@ $col-media-wrapper: rgba($col-background, 0.075);
     --circle-width: #{$px * 22};
     --circle-width_end: #{$px * 16};
     --circle-width_before: #{$px * 34};
+    --small-circle-scale: 0.6;
 
     --circle-inner-width: #{$px * 14};
     --circle-inner-width_end: #{$px * 10};
 
     --circle-count: Min(var(--img-count), var(--max-circles));
+
     --pagination-width: calc((var(--circle-width) * var(--circle-count)) + (var(--gap) * (var(--circle-count) - 1)));
 
     width: var(--pagination-width);
@@ -808,7 +810,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
   }
 
   &--circle {
-    transition: all 0.3s, opacity 0.2s !important;
+    transition: all 0.3s, opacity 0.185s !important;
 
     width: var(--circle-width);
     min-width: var(--circle-width);
@@ -832,9 +834,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
     }
 
     &__end {
-      // width:  var(--circle-width_end);
-      // height: var(--circle-width_end);
-      transform: scale(0.6);
+      transform: scale(var(--small-circle-scale));
     }
 
     &__off {
@@ -972,9 +972,9 @@ $col-media-wrapper: rgba($col-background, 0.075);
         opacity: 0,
         transform: translateX(-1rem),
       ),
-      options:(
-        important:true,
-      )
+      options: (
+        important: true,
+      ),
     )
   );
 }

@@ -43,20 +43,7 @@ const popAnims = {
       },
     },
   
-    // slideFade: {
-    //   in: {
-    //     initial: { translateX: "1rem", opacity: 0 },
-    //     animate: { translateX: "0rem", opacity: 1 },
-    //     transition: { duration: popSeekDuration, ease: "easeInOut" },
-    //   },
-    //   out: {
-    //     animate: { translateX: "0rem", opacity: 1 },
-    //     exit: { translateX: "-1rem", opacity: 0 },
-    //     transition: { duration: popSeekDuration, ease: "easeInOut" },
-    //   },
-    // },
-  
-    slideFade :{
+    slideFadeLeft :{
       hidden: {
         translateX: "1rem",
         opacity: 0,
@@ -68,6 +55,23 @@ const popAnims = {
       },
       exit: {
         translateX: "-1rem",
+        opacity: 0,
+        transition: { duration: popSeekDuration, ease: "easeInOut" },
+      },
+    },
+
+    slideFadeRight :{
+      hidden: {
+        translateX: "-1rem",
+        opacity: 0,
+      },
+      visible: {
+        translateX: "0rem",
+        opacity: 1,
+        transition: { duration: popSeekDuration, ease: "easeInOut" },
+      },
+      exit: {
+        translateX: "1rem",
         opacity: 0,
         transition: { duration: popSeekDuration, ease: "easeInOut" },
       },

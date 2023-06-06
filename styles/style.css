@@ -4494,6 +4494,7 @@ h3 + .studypanel--paragraph {
   --circle-width: 1.375rem;
   --circle-width_end: 1rem;
   --circle-width_before: 2.125rem;
+  --small-circle-scale: 0.6;
   --circle-inner-width: 0.875rem;
   --circle-inner-width_end: 0.625rem;
   --circle-count: Min(var(--img-count), var(--max-circles));
@@ -4509,7 +4510,7 @@ h3 + .studypanel--paragraph {
 }
 
 .popup--circle {
-  transition: all 0.3s, opacity 0.2s !important;
+  transition: all 0.3s, opacity 0.185s !important;
   width: var(--circle-width);
   min-width: var(--circle-width);
   height: var(--circle-width);
@@ -4534,7 +4535,7 @@ h3 + .studypanel--paragraph {
 }
 
 .popup--circle__end {
-  transform: scale(0.6);
+  transform: scale(var(--small-circle-scale));
 }
 
 .popup--circle__off {

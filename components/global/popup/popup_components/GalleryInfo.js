@@ -78,7 +78,7 @@ function GalInfoAnimPres({ elems, pop, styles, state, popclass, scrollbar, child
         <AnimPres
           mode="wait"
           fragment
-          animation={popAnims.slideFade}
+          animation={popAnims.slideFadeLeft}
           delay={INFO_ANIM_DELAY}
           condition={true}
           reference={elems.desc.ref}

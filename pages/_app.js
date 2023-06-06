@@ -88,6 +88,7 @@ export default function App({ Component, pageProps }) {
   const [popupInfoDrawn, setPopupInfoDrawn] = useState(false);
   const [popupDrawn, setPopupDrawn] = useState(false);
   const [popupSeekCooldown, setPopupSeekCooldown] = useState(false);
+  const [popupSeekDir, setPopupSeekDir] = useState("left");
 
   const [imgReady, setImgReady] = useState(false);
   const [firstImgReady, setFirstImgReady] = useState(false);
@@ -113,6 +114,8 @@ export default function App({ Component, pageProps }) {
     setDrawn: setPopupDrawn,
     seekCooldown: popupSeekCooldown,
     setSeekCooldown: setPopupSeekCooldown,
+    seekDir: popupSeekDir,
+    setSeekDir: setPopupSeekDir,
     imgReady: imgReady,
     setImgReady: setImgReady,
     firstImgReady: firstImgReady,

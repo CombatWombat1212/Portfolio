@@ -317,6 +317,7 @@ function Wrapper({ pop, bp }) {
     pop.setImgReady(false);
     pop.setFirstImgReady(false);
     pop.setFirstImgDrawn(false);
+    pop.setSeekDir("left");
   }, [pop]);
 
   const seekHandler = useCallback(
@@ -349,11 +350,17 @@ function Wrapper({ pop, bp }) {
 
         pop.setIndex(ind);
         var img = pop.group.imgs[ind].lightboxImg ? pop.group.imgs[ind].lightboxImg : pop.group.imgs[ind];
-        pop.setImg(img);
-        pop.setZoom(img.zoom ? img.zoom : false);
-        pop.setImgLoaded(false);
-        pop.setImgReady(false);
-        pop.setImgDrawn(false);
+
+        pop.setSeekDir(direction === 1 ? "right" : "left");
+
+        setTimeout(() => {
+          pop.setImg(img);
+          pop.setZoom(img.zoom ? img.zoom : false);
+          pop.setImgLoaded(false);
+          pop.setImgReady(false);
+          pop.setImgDrawn(false);
+        }, 0);
+
         break;
       } while (pop.group.imgs[ind].hidden);
     },
@@ -508,8 +515,6 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
           return getComputedStyle(elem).position !== "absolute";
         });
 
-        console.log(contentChildren);
-
         var contentRows = contentChildren.length;
 
         var gapWidth = splitRem(window.getComputedStyle(popupElem).getPropertyValue("--popup-gap"));
@@ -640,17 +645,6 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
         }
       });
 
-    // const ensureImgLoaded = () =>
-    //   new Promise((resolve) => {
-    //     if (!pop.imgLoaded) {
-    //       if (isMounted) {
-    //         setTimeout(() => resolve(ensureImgLoaded()), 100);
-    //       }
-    //     } else {
-    //       resolve();
-    //     }
-    //   });
-
     const mainFunction = async () => {
       await ensureElementReferences();
       // if (!elems.popup.ref.current) return;
@@ -703,7 +697,8 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
     "--img-max-height": `${elems.img.maxHeight}px`,
   };
 
-  const mediaWrapDelay = pop.firstImgDrawn ? 0 : 0.1;
+  const openDelay = 0.1;
+  const mediaWrapDelay = pop.firstImgDrawn ? 0 : openDelay;
   const mediaWrapState = useInOut(drawLightbox, { startDelay: mediaWrapDelay * 1000 });
 
   const [mediaWrapStateClass, setMediaWrapStateClass] = useState("initial");
@@ -715,7 +710,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
     if (mediaWrapState !== "animate") return;
     setTimeout(() => {
       setMediaWrapStateClass("none");
-    }, ((popSeekDuration+0.1) * 1000));
+    }, (popSeekDuration + openDelay) * 1000);
   }, [mediaWrapState]);
 
   const mediaWrapPref = "popup--media-wrapper";
@@ -734,7 +729,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
     <>
       <AnimPres
         mode="wait"
-        animation={popAnims.slideFade}
+        animation={pop.seekDir == "left" ? popAnims.slideFadeRight : popAnims.slideFadeLeft}
         condition={true}
         className={mediaWrapClasses}
         style={animPresStyles}
@@ -869,56 +864,18 @@ function shouldDisplayCircle(currentIndex, totalImages, circleIndex) {
   return { display, end, paginationIndex };
 }
 
-// const Pagination = React.memo(function Pagination({ pop, handles }) {
-//   const currentIndex = pop.index;
-//   const totalImgCount = pop.group?.imgs?.filter((img) => !img.hidden).length || 0;
-
-//   return (
-//     <div className="popup--pagination">
-//       {pop.group?.imgs?.map((img, i) => {
-//         const { display, end } = shouldDisplayCircle(currentIndex, totalImgCount, i);
-//         if (img.hidden || !display) return null;
-
-//         return (
-//           <motion.div
-//             layout="position"
-//             duration={0.4}
-//             key={i}
-//             style={{
-//               opacity: 1,
-//             }}>
-//             <Circle
-//               active={i === pop.index}
-//               key={`circle ${img.src}`}
-//               end={end}
-//               display={display}
-//               index={i}
-//               current={pop.index}
-//               onClick={() => {
-//                 handles.pagination(img, i);
-//               }}
-//             />
-//           </motion.div>
-//         );
-//       })}
-//     </div>
-//   );
-
-//   function Circle({ active, end, onClick, index, current }) {
-//     const classes = `${active ? "popup--circle__active" : "popup--circle__inactive"}${end ? " popup--circle__end" : ""}`;
-
-//     return (
-//       <a className={`popup--circle ${classes}`} onClick={onClick}>
-//         <div className={`popup--circle-inner ${end ? "popup--circle-inner__end" : ""}`}></div>
-//       </a>
-//     );
-//   }
-// }, createUpdateConditions(["pop.group", "pop.index"]));
-
 const Pagination = React.memo(function Pagination({ pop, handles }) {
   const currentIndex = pop.index;
   const totalImgCount = pop.group?.imgs?.filter((img) => !img.hidden).length || 0;
   const maxCircles = 5;
+
+  // const ends = pop.group?.imgs?.reduce((acc, img, i) => {
+  //   const { display, end } = shouldDisplayCircle(currentIndex, totalImgCount, i);
+  //   if (end && !img.hidden) {
+  //     return acc + 1;
+  //   }
+  //   return acc;
+  // }, 0);
 
   return (
     <div
@@ -929,6 +886,7 @@ const Pagination = React.memo(function Pagination({ pop, handles }) {
         "--left-half": Math.floor((maxCircles - 1) / 2),
         "--img-count": totalImgCount,
         "--index": pop.index,
+        // "--end-count": ends,
         "--more-than-max": totalImgCount > maxCircles ? 1 : 0,
       }}>
       {pop.group?.imgs?.map((img, i) => {
@@ -955,19 +913,30 @@ const Pagination = React.memo(function Pagination({ pop, handles }) {
 }, createUpdateConditions(["pop.group", "pop.index"]));
 
 function Circle({ active, end, onClick, display, index, current }) {
-  const pref = "popup--circle";
-  const classList = [pref];
-  classList.push(`${pref}__${active ? "active" : "inactive"}`);
-  classList.push(`${pref}__${end ? "end" : "middle"}`);
-  classList.push(`${pref}__${display ? "on" : "off"}`);
-  const classes = classList.join(" ");
+  var classes = {
+    circle: [],
+    "circle-inner": [],
+  };
+
+  Object.keys(classes).forEach((key) => {
+    const c = classes[key];
+    const p = `popup--${key}`;
+    c.push(p);
+    c.push(`${p}__${end ? "end" : "middle"}`);
+    if (key !== "circle") return;
+    c.push(`${p}__${active ? "active" : "inactive"}`);
+    c.push(`${p}__${display ? "on" : "off"}`);
+  });
+
+  Object.keys(classes).forEach((key) => {
+    classes[key] = classes[key].join(" ");
+  });
+
+  const {circle: inner, ["circle-inner"]: outer} = classes;
 
   return (
-    <a className={`popup--circle ${classes}`} onClick={onClick}>
-      <div
-        className={`popup--circle-inner 
-       ${end ? "popup--circle-inner__end" : ""}
-      `}></div>
+    <a className={inner} onClick={onClick}>
+      <div className={outer}></div>
     </a>
   );
 }
