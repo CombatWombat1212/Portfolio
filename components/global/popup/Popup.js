@@ -22,6 +22,7 @@ import { useRouter } from "next/router";
 import { useIntercept } from "@/scripts/contexts/InterceptContext";
 import useBrowser from "@/scripts/hooks/useBrowser";
 import useInOut from "@/scripts/hooks/useInOut";
+import Image from "next/image";
 
 // TODO: update controls so that the seek buttons have a dedicated state for when they're overflowing.  or like a max number of them
 // TODO: different max heights of image based on description height?  or at least just whether or not there is a description
@@ -708,12 +709,13 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
   const [mediaWrapStateClass, setMediaWrapStateClass] = useState("initial");
 
   useEffect(() => {
+    let previousMediaWrapState = mediaWrapStateClass;
+    if (mediaWrapState == previousMediaWrapState) return;
     setMediaWrapStateClass(mediaWrapState);
-    if (mediaWrapState == "animate") {
-      setTimeout(() => {
-        setMediaWrapStateClass("none");
-      }, popSeekDuration * 1000);
-    }
+    if (mediaWrapState !== "animate") return;
+    setTimeout(() => {
+      setMediaWrapStateClass("none");
+    }, popSeekDuration * 1000);
   }, [mediaWrapState]);
 
   const mediaWrapPref = "popup--media-wrapper";
@@ -762,7 +764,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
         {pop.imgReady && (
           <div className={loadingWrapClasses} style={imgStyles}>
             <div className={`loading--img`}>
-              <img src={loading_white.src} alt={loading_white.alt} width={loading_white.width} height={loading_white.height} />
+              <Image src={loading_white.src} alt={loading_white.alt} width={loading_white.width} height={loading_white.height} />
             </div>
           </div>
         )}
