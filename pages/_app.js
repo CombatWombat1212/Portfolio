@@ -16,6 +16,8 @@ import { useBreakpoint, useResponsiveUtils } from "@/scripts/hooks/useBreakpoint
 import Providers from "@/scripts/contexts/Providers";
 import Favicon from "@/components/head/Favicon";
 import useBrowserClass from "@/scripts/hooks/useBrowserClass";
+import ImagePrefetcher from "@/components/utilities/ImagePrefetcher";
+import { ABOUT_IMGS } from "@/data/ABOUT_IMGS";
 
 // const style =
 // `font-family: "Gira Sans"; font-size: 1.4375rem;` +
@@ -147,6 +149,7 @@ export default function App({ Component, pageProps }) {
             <Footer />
           </Layout>
         </div>
+      <ImagePrefetcher images={ABOUT_IMGS.me} />
       </Providers>
     </>
   );

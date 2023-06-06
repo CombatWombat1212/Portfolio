@@ -493,7 +493,7 @@ function MADE({ pop }) {
           </Section>
 
           <Section id="Texturing--Transition" type="passthrough" margin="none">
-            <ImageRow col={`${desktop ? "6" : "2"}`} direction="right" type="auto">
+            <ImageRow col={`${desktop ? "6" : "2"}`} direction="left" type="scroll">
               <Graphic type="image" img={MADE_IMGS.shirt_row_04} />
               <Graphic type="image" img={MADE_IMGS.shirt_row_06} />
               <Graphic type="image" img={MADE_IMGS.shirt_row_02} />

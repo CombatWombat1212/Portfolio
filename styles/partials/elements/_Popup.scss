@@ -28,17 +28,39 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
     @include trans;
 
-    &__on {
+    // &__on {
+    //   opacity: 1;
+    // }
+
+    // &__off {
+    //   opacity: 0;
+    //   display: none;
+    // }
+
+    // &__tran {
+    //   opacity: 0;
+    // }
+
+    &__initial,
+    &__animate,
+    &__exit {
+      --transition: 0.15s!important;
+    }
+
+    &__initial {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity var(--transition), visibility 0s var(--transition);
+    }
+    &__animate {
+      visibility: visible;
       opacity: 1;
+      transition: opacity var(--transition), visibility 0s 0s;
     }
-
-    &__off {
+    &__exit {
+      visibility: hidden;
       opacity: 0;
-      display: none;
-    }
-
-    &__tran {
-      opacity: 0;
+      transition: opacity var(--transition), visibility 0s var(--transition);
     }
   }
 
@@ -787,26 +809,22 @@ $col-media-wrapper: rgba($col-background, 0.075);
     --circle-inner-width: #{$px * 14};
     --circle-inner-width_end: #{$px * 10};
 
-
     --circle-count: Min(var(--img-count), var(--max-circles));
     --pagination-width: calc((var(--circle-width) * var(--circle-count)) + (var(--gap) * (var(--circle-count) - 1)));
 
     width: var(--pagination-width);
 
-
     --adjusted-index_max: Max(var(--left-half), var(--index));
     --adjusted-index: Min(var(--adjusted-index_max), calc(var(--img-count) - var(--left-half) - 1));
     --first-circle-margin-left: calc((((var(--circle-width) + var(--gap)) * var(--adjusted-index)) * -1) + (var(--circle-width) * var(--middle)));
 
-
     & > *:first-child {
-
       margin-left: weighted-average(var(--first-circle-margin-left), 0rem, var(--more-than-max));
     }
   }
 
   &--circle {
-    transition: all 0.3s, opacity 0.2s!important;
+    transition: all 0.3s, opacity 0.2s !important;
 
     width: var(--circle-width);
     min-width: var(--circle-width);

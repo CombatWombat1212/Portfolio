@@ -3613,17 +3613,26 @@ h3 + .studypanel--paragraph {
   transition: var(--transition);
 }
 
-.popup--wrapper__on {
+.popup--wrapper__initial, .popup--wrapper__animate, .popup--wrapper__exit {
+  --transition: 0.15s!important;
+}
+
+.popup--wrapper__initial {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity var(--transition), visibility 0s var(--transition);
+}
+
+.popup--wrapper__animate {
+  visibility: visible;
   opacity: 1;
+  transition: opacity var(--transition), visibility 0s 0s;
 }
 
-.popup--wrapper__off {
+.popup--wrapper__exit {
+  visibility: hidden;
   opacity: 0;
-  display: none;
-}
-
-.popup--wrapper__tran {
-  opacity: 0;
+  transition: opacity var(--transition), visibility 0s var(--transition);
 }
 
 .popup--background {

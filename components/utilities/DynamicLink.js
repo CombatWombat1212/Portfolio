@@ -34,9 +34,9 @@ function DLink({ reference, color, onClick,target="_self", ...props }) {
       onClick(e);
       actualRef.current.blur();
     } else {
-      setTimeout(() => {
-        actualRef.current.blur();
-      }, 200);
+      // setTimeout(() => {
+        // actualRef.current.blur();
+      // }, 200);
     }
   };
 

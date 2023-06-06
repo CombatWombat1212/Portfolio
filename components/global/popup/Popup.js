@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Button from "../../elements/Buttons";
 import { loading_white } from "@/data/ICONS";
-import { RESIZE_TIMEOUT, createUpdateConditions, splitPx, splitRem } from "@/scripts/GlobalUtilities";
+import { RESIZE_TIMEOUT, createUpdateConditions, splitPx, splitRem, splitS } from "@/scripts/GlobalUtilities";
 import { canvasInit, canvasOnResize, canvasZoom, setCanvasImageLoaded } from "./popup_utilities/CanvasUtilities";
 import { galleryInit, lightboxInit, seekHandler, setPopupGroup, updatePopupNav } from "./popup_utilities/LightboxUtilities";
 import { Graphic, Heading } from "@/components/sections/Sections";
@@ -20,9 +20,10 @@ import { useResponsiveUtils } from "@/scripts/hooks/useBreakpoint";
 import swipeEventsInit from "@/scripts/SwipeEvents";
 import { useRouter } from "next/router";
 import { useIntercept } from "@/scripts/contexts/InterceptContext";
+import useBrowser from "@/scripts/hooks/useBrowser";
+import useInOut from "@/scripts/hooks/useInOut";
 
 // TODO: update controls so that the seek buttons have a dedicated state for when they're overflowing.  or like a max number of them
-// TODO: Stop calculations that don't need to run on mobile
 // TODO: different max heights of image based on description height?  or at least just whether or not there is a description
 
 //no more than 2 decimals
@@ -138,6 +139,7 @@ function getPopupClasses(pop) {
 
 function Popup({ pop }) {
   const poptransition = 0.15;
+  const wrap = useRef(null);
 
   useEffect(() => {
     pop.onRef.current = pop.on; // Update the ref value whenever pop.on changes
@@ -149,16 +151,63 @@ function Popup({ pop }) {
 
   const bp = useResponsiveUtils();
 
+
+
+  // Anim pres fixes for some browsers
+  const { isFirefox, isSafari, browserFound } = useBrowser();
+  const isntFirefox = !browserFound || !isFirefox || (browserFound && !isFirefox);
+  const isntSafari = !browserFound || !isSafari || (browserFound && !isSafari);
+  const isntFallback = isntFirefox && isntSafari;
+  const fallbackClass = useInOut(pop.on);
+  const [delay, setDelay] = useState(pop.on);
+  const [fallbackShowWrapper, setFallbackShowWrapper] = useState(pop.on);
+
+  const getDelay = (elem) => {
+    return splitS(window.getComputedStyle(elem).getPropertyValue("--transition"));
+  };
+
+  useEffect(() => {
+    if (!wrap.current) return;
+    setDelay(getDelay(wrap.current));
+  }, [wrap]);
+
+  useEffect(() => {
+    let timeoutId;
+    if (pop.on) {
+      setFallbackShowWrapper(true);
+    } else {
+      timeoutId = setTimeout(() => {
+        setFallbackShowWrapper(false);
+      }, delay * 2);
+    }
+    return () => clearTimeout(timeoutId);
+  }, [pop.on]);
+
+  useEffect(() => {
+    if (fallbackClass != "animate" && fallbackClass != "exit") return;
+    setTimeout(() => {
+      popAnimCompleteHandler();
+    }, delay);
+  }, [fallbackClass]);
+
+
   return (
     <>
-      <AnimPres
-        animation={popAnims.fade}
-        duration={poptransition}
-        condition={pop.on}
-        className={"popup--wrapper"}
-        onAnimationComplete={popAnimCompleteHandler}>
-        <Wrapper pop={pop} bp={bp} />
-      </AnimPres>
+      {isntFallback ? (
+        <AnimPres
+          reference={wrap}
+          animation={popAnims.fade}
+          duration={poptransition}
+          condition={pop.on}
+          className={"popup--wrapper"}
+          onAnimationComplete={popAnimCompleteHandler}>
+          <Wrapper pop={pop} bp={bp} />
+        </AnimPres>
+      ) : (
+        <div className={`popup--wrapper popup--wrapper__${fallbackClass}`} ref={wrap}>
+          {fallbackShowWrapper && <Wrapper pop={pop} bp={bp} />}
+        </div>
+      )}
     </>
   );
 }
@@ -262,7 +311,6 @@ function Wrapper({ pop, bp }) {
 
   const closeHandler = useCallback(() => {
     if (!debounceInteraction()) return;
-
     pop.setOn(false);
     pop.setImgLoaded(false);
     pop.setDrawn(false);

@@ -205,8 +205,7 @@ function About() {
           <Section id="Intro--Toolbelt" type="passthrough">
             <div className="toolbelt">
               <Heading className="color--secondary">
-                I Put the &lsquo;Discipline&rsquo; <br className="d-none d-md-flex d-sm-none" />
-                <Nobr>in &lsquo;Multidisciplinary&rsquo;</Nobr>
+                I Put the &lsquo;Discipline&rsquo; <Nobr>in &lsquo;Multidisciplinary&rsquo;</Nobr>
               </Heading>
 
               <div className="toolbelt--inner">
