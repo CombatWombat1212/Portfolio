@@ -16,25 +16,21 @@
 
   transition: var(--transition);
 
-  
   // firefox
-  &__initial {
-    visibility: hidden;
-    clip-path: polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%);
-    transition: clip-path var(--transition), visibility 0s var(--transition);
-  }
-  &__animate {
-    visibility: visible;
-    clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%);
-    transition: clip-path var(--transition), visibility 0s 0s;
-  }
-  &__exit {
-    visibility: hidden;
-    clip-path: polygon(100% 0%, 100% 100%, 100% 100%, 100% 0%);
-    transition: clip-path var(--transition), visibility 0s var(--transition);
-  }
-  
 
+  @include in-out(
+    (
+      initial: (
+        clip-path: polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%),
+      ),
+      animate: (
+        clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%),
+      ),
+      exit: (
+        clip-path: polygon(100% 0%, 100% 100%, 100% 100%, 100% 0%),
+      ),
+    )
+  );
 
   &--text {
     top: 50%;

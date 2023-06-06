@@ -1,17 +1,22 @@
 import { useEffect, useState } from 'react';
 
 const useInOut = (trigger = false, options = {}) => {
-  const { ref = null } = options;
+  const { ref = null, startDelay = 0, endDelay = 0 } = options;
   const [state, setState] = useState('initial');
-  
 
   useEffect(() => {
+    let timer;
     if (trigger) {
-      setState('animate');
+      timer = setTimeout(() => {
+        setState('animate');
+      }, startDelay);
     } else if (state === 'animate') {
-      setState('exit');
+      timer = setTimeout(() => {
+        setState('exit');
+      }, endDelay);
     }
-  }, [trigger, state]);
+    return () => clearTimeout(timer);
+  }, [trigger, state, startDelay, endDelay]);
 
   useEffect(() => {
     if (state === 'exit') {

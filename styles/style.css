@@ -1249,21 +1249,21 @@ body {
 }
 
 .loading-screen__initial {
-  visibility: hidden;
-  clip-path: polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%);
-  transition: clip-path var(--transition), visibility 0s var(--transition);
+  visibility: hidden ;
+  clip-path: polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%) ;
+  transition: clip-path var(--transition), visibility 0s var(--transition) ;
 }
 
 .loading-screen__animate {
-  visibility: visible;
-  clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%);
-  transition: clip-path var(--transition), visibility 0s 0s;
+  visibility: visible ;
+  clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%) ;
+  transition: clip-path var(--transition), visibility 0s 0s ;
 }
 
 .loading-screen__exit {
-  visibility: hidden;
-  clip-path: polygon(100% 0%, 100% 100%, 100% 100%, 100% 0%);
-  transition: clip-path var(--transition), visibility 0s var(--transition);
+  visibility: hidden ;
+  clip-path: polygon(100% 0%, 100% 100%, 100% 100%, 100% 0%) ;
+  transition: clip-path var(--transition), visibility 0s var(--transition) ;
 }
 
 .loading-screen--text {
@@ -3618,25 +3618,25 @@ h3 + .studypanel--paragraph {
 }
 
 .popup--wrapper__initial, .popup--wrapper__animate, .popup--wrapper__exit {
-  --transition: 0.15s!important;
+  --transition: 0.15s!important ;
 }
 
 .popup--wrapper__initial {
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity var(--transition), visibility 0s var(--transition);
+  visibility: hidden ;
+  opacity: 0 ;
+  transition: opacity var(--transition), visibility 0s var(--transition) ;
 }
 
 .popup--wrapper__animate {
-  visibility: visible;
-  opacity: 1;
-  transition: opacity var(--transition), visibility 0s 0s;
+  visibility: visible ;
+  opacity: 1 ;
+  transition: opacity var(--transition), visibility 0s 0s ;
 }
 
 .popup--wrapper__exit {
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity var(--transition), visibility 0s var(--transition);
+  visibility: hidden ;
+  opacity: 0 ;
+  transition: opacity var(--transition), visibility 0s var(--transition) ;
 }
 
 .popup--background {
@@ -4645,6 +4645,31 @@ h3 + .studypanel--paragraph {
   .popup .loading--img {
     --size: 11rem;
   }
+}
+
+.popanims__initial, .popanims__animate, .popanims__exit {
+  --transition: 0.175s !important;
+}
+
+.popanims__initial {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  transform: translateX(1rem) !important;
+  transition: opacity var(--transition), transform var(--transition), visibility 0s var(--transition) !important;
+}
+
+.popanims__animate {
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: translateX(0rem) !important;
+  transition: opacity var(--transition), transform var(--transition), visibility 0s 0s !important;
+}
+
+.popanims__exit {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  transform: translateX(-1rem) !important;
+  transition: opacity var(--transition), transform var(--transition), visibility 0s var(--transition) !important;
 }
 
 .scale {

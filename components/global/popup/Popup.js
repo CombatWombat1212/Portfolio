@@ -151,8 +151,6 @@ function Popup({ pop }) {
 
   const bp = useResponsiveUtils();
 
-
-
   // Anim pres fixes for some browsers
   const { isFirefox, isSafari, browserFound } = useBrowser();
   const isntFirefox = !browserFound || !isFirefox || (browserFound && !isFirefox);
@@ -189,7 +187,6 @@ function Popup({ pop }) {
       popAnimCompleteHandler();
     }, delay);
   }, [fallbackClass]);
-
 
   return (
     <>
@@ -509,6 +506,9 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
         var contentChildren = Array.from(infoElem.parentElement.children).filter((elem) => {
           return getComputedStyle(elem).position !== "absolute";
         });
+
+        console.log(contentChildren);
+
         var contentRows = contentChildren.length;
 
         var gapWidth = splitRem(window.getComputedStyle(popupElem).getPropertyValue("--popup-gap"));
@@ -529,13 +529,10 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
           return result;
         })();
 
-        
         var availHeight = popupElem.offsetHeight - infoHeight - gapWidth;
         var availWidth = popupElem.offsetWidth;
 
         // console.log(`availHeight: ${availHeight}, availWidth: ${availWidth}, infoHeight: ${infoHeight}, gapWidth: ${gapWidth}`);
-        console.log(`popElem.offsetHeight: ${popupElem.offsetHeight}, infoHeight: ${infoHeight}, gapWidth: ${gapWidth}`); 
-
       }
     } else {
       var availHeight = popupElem.offsetHeight;
@@ -571,7 +568,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
       var maxHeight = scaledHeight;
       var maxWidth = availWidth;
     }
-    
+
     // Update maxHeight and maxWidth state only if their values have changed
     if (maxHeight !== elems.img.maxHeight) {
       elems.img.setMaxHeight(maxHeight);
@@ -691,17 +688,12 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
   useListener("swiped-left", handles.swipeLeft, { ref: mediaWrapperRef });
   useListener("swiped-right", handles.swipeRight, { ref: mediaWrapperRef });
 
-
-
-
-
   const loadingWrapPref = "loading--wrapper";
   const loadingWrapClassList = [loadingWrapPref];
   if (!pop.imgReady || pop.imgLoaded) loadingWrapClassList.push(`${loadingWrapPref}__hidden`);
   if (pop.zoom) loadingWrapClassList.push(`${loadingWrapPref}__zoom`);
   if (pop.zoom && pop.type == "lightbox") loadingWrapClassList.push(`${loadingWrapPref}__lightbox-zoom`);
   const loadingWrapClasses = loadingWrapClassList.join(" ");
-
 
   const imgStyles = {
     "--img-avail-width": `${elems.img.availWidth}px`,
@@ -710,23 +702,44 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
     "--img-max-height": `${elems.img.maxHeight}px`,
   };
 
+  const mediaWrapDelay = pop.firstImgDrawn ? 0 : 0.1;
+  const mediaWrapState = useInOut(drawLightbox, { startDelay: mediaWrapDelay * 1000 });
 
-  // useEffect(() => {
-  //   console.log(elems.img.maxWidth);
-  // }, [elems.img.maxWidth]);
+  const [mediaWrapStateClass, setMediaWrapStateClass] = useState("initial");
+
+  useEffect(() => {
+    setMediaWrapStateClass(mediaWrapState);
+    if (mediaWrapState == "animate") {
+      setTimeout(() => {
+        setMediaWrapStateClass("none");
+      }, popSeekDuration * 1000);
+    }
+  }, [mediaWrapState]);
+
+  const mediaWrapPref = "popup--media-wrapper";
+  const mediaWrapClassList = [mediaWrapPref];
+  mediaWrapClassList.push(popclass.mediaWrapper);
+  mediaWrapClassList.push(`popanims__${mediaWrapStateClass}`);
+  if (!pop.imgLoaded) mediaWrapClassList.push(`${mediaWrapPref}__loading`);
+  const mediaWrapClasses = mediaWrapClassList.join(" ");
+
+  useEffect(() => {
+    console.log(mediaWrapClassList);
+  }, [mediaWrapClassList]);
+
+  const animPresStyles = {
+    "--aspect-width": Number(pop.img.aspect?.split("/")?.[0] || pop.img.width),
+    "--aspect-height": Number(pop.img.aspect?.split("/")?.[1] || pop.img.height),
+  };
 
   return (
     <>
       <AnimPres
         mode="wait"
         animation={popAnims.slideFade}
-        condition={drawLightbox}
-        className={`popup--media-wrapper ${popclass.mediaWrapper}
-           ${!pop.imgLoaded ? "popup--media-wrapper__loading" : ""}`}
-        style={{
-          "--aspect-width": Number(pop.img.aspect?.split("/")?.[0] || pop.img.width),
-          "--aspect-height": Number(pop.img.aspect?.split("/")?.[1] || pop.img.height),
-        }}
+        condition={true}
+        className={mediaWrapClasses}
+        style={animPresStyles}
         elemkey={pop.img.src}
         duration={popSeekDuration}
         delay={pop.firstImgDrawn ? 0 : 0.1}
@@ -747,9 +760,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
         />
 
         {pop.imgReady && (
-          <div
-            className={loadingWrapClasses}
-            style={imgStyles}>
+          <div className={loadingWrapClasses} style={imgStyles}>
             <div className={`loading--img`}>
               <img src={loading_white.src} alt={loading_white.alt} width={loading_white.width} height={loading_white.height} />
             </div>

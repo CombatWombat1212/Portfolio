@@ -1217,3 +1217,75 @@
 	transform: unquote($transform-string);
   }
   
+  @mixin in-out($map) {
+	$initial: map-get($map, initial);
+	$animate: map-get($map, animate);
+	$exit: map-get($map, exit);
+	$all: map-get($map, all);
+	$options: map-get($map, options);
+  
+	$important: "";
+	$visibility: true;
+	@if map-has-key($map, options) {
+	  $options: map-get($map, options);
+	  @if map-get($options, important) == true {
+		$important: "!important";
+	  }
+	  @if map-get($options, visibility) == false {
+		$visibility: false;
+	  }
+	}
+  
+	@if map-has-key($map, all) {
+	  &__initial,
+	  &__animate,
+	  &__exit {
+		@each $property, $value in $all {
+			#{if(type-of($property) == string, unquote($property), $property)}: if(type-of($value) == string, unquote($value), $value) #{$important};
+		}
+	  }
+	}
+  
+	&__initial {
+	  @include handle-state($initial, "initial", $important, $visibility);
+	}
+  
+	&__animate {
+	  @include handle-state($animate, "animate", $important, $visibility);
+	}
+  
+	&__exit {
+	  @include handle-state($exit, "exit", $important, $visibility);
+	}
+  }
+  
+  @mixin handle-state($state, $name, $important, $visibility) {
+	$transition: map-get($state, transition);
+	$properties: map-keys($state);
+  
+	@if $transition == null {
+	  $transition: "";
+	  @each $property in $properties {
+		$transition: $transition + $property + " var(--transition), ";
+	  }
+  
+	  @if $visibility == true {
+		@if $name == "animate" {
+		  $transition: $transition + "visibility 0s 0s";
+		  visibility: visible #{$important};
+		} @else {
+		  $transition: $transition + "visibility 0s var(--transition)";
+		  visibility: hidden #{$important};
+		}
+	  }
+  
+	  $transition: unquote($transition);
+	}
+  
+	@each $property, $value in $state {
+		#{if(type-of($property) == string, unquote($property), $property)}: if(type-of($value) == string, unquote($value), $value) #{$important};
+	}
+  
+	transition: $transition #{$important};
+  }
+  

@@ -28,28 +28,22 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
     @include trans;
 
-
-    &__initial,
-    &__animate,
-    &__exit {
-      --transition: 0.15s!important;
-    }
-
-    &__initial {
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity var(--transition), visibility 0s var(--transition);
-    }
-    &__animate {
-      visibility: visible;
-      opacity: 1;
-      transition: opacity var(--transition), visibility 0s 0s;
-    }
-    &__exit {
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity var(--transition), visibility 0s var(--transition);
-    }
+    @include in-out(
+      (
+        all: (
+          --transition: "0.15s!important",
+        ),
+        initial: (
+          opacity: 0,
+        ),
+        animate: (
+          opacity: 1,
+        ),
+        exit: (
+          opacity: 0,
+        ),
+      )
+    );
   }
 
   &--background {
@@ -956,4 +950,31 @@ $col-media-wrapper: rgba($col-background, 0.075);
       }
     }
   }
+}
+
+// CSS versions of PopAnims
+
+.popanims {
+  @include in-out(
+    (
+      all: (
+        --transition: 0.175s,
+      ),
+      initial: (
+        opacity: 0,
+        transform: translateX(1rem),
+      ),
+      animate: (
+        opacity: 1,
+        transform: translateX(0rem),
+      ),
+      exit: (
+        opacity: 0,
+        transform: translateX(-1rem),
+      ),
+      options:(
+        important:true,
+      )
+    )
+  );
 }
