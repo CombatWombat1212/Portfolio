@@ -50,10 +50,7 @@ function addStyleNonDestructive(elem, prop, val) {
     var styleStr = "";
     if (existingStyle.includes(prop)) {
       var existingVal = existingStyle.split(prop + ":")[1].split(";")[0];
-      existingStyle = existingStyle.replace(
-        prop + ":" + existingVal,
-        prop + ":" + val
-      );
+      existingStyle = existingStyle.replace(prop + ":" + existingVal, prop + ":" + val);
     } else {
       existingStyle += prop + ":" + val + ";";
     }
@@ -81,10 +78,7 @@ function addAttrNonDestructive(elem, prop, val, sep) {
     if (existingAttrVal.includes(val)) {
       elem.setAttribute(prop, val);
     } else {
-      var newAttr = existingAttrVal.replace(
-        existingAttrVal,
-        existingAttrVal + val
-      );
+      var newAttr = existingAttrVal.replace(existingAttrVal, existingAttrVal + val);
       elem.setAttribute(prop, newAttr);
     }
   }
@@ -96,24 +90,12 @@ function postScreenSizeToRoot() {
   var height;
 
   function getScreenSize() {
-    width =
-      window.innerWidth ||
-      document.documentElement.clientWidth ||
-      document.body.clientWidth;
+    width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
-    height =
-      window.innerHeight ||
-      document.documentElement.clientHeight ||
-      document.body.clientHeight;
+    height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
-    window.document.documentElement.style.setProperty(
-      "--screen-width",
-      width + "px"
-    );
-    window.document.documentElement.style.setProperty(
-      "--screen-height",
-      height + "px"
-    );
+    window.document.documentElement.style.setProperty("--screen-width", width + "px");
+    window.document.documentElement.style.setProperty("--screen-height", height + "px");
   }
 
   getScreenSize();
@@ -133,29 +115,17 @@ function postScreenSizeToRoot() {
 
 function overflowEllipsis() {
   function run() {
-    var overflowEllipsisElems = document.getElementsByClassName(
-      "overflow__ellipsis"
-    );
+    var overflowEllipsisElems = document.getElementsByClassName("overflow__ellipsis");
     for (var i = 0; i < overflowEllipsisElems.length; i++) {
       var elem = overflowEllipsisElems[i];
-      var elemLineHeight = splitPx(
-        window.getComputedStyle(elem, null).lineHeight
-      );
+      var elemLineHeight = splitPx(window.getComputedStyle(elem, null).lineHeight);
       var elemHeight =
         splitPx(window.getComputedStyle(elem.parentElement, null).height) -
-        splitPx(
-          window.getComputedStyle(elem.parentElement, null).paddingTop
-        ) -
-        splitPx(
-          window.getComputedStyle(elem.parentElement, null).paddingBottom
-        );
+        splitPx(window.getComputedStyle(elem.parentElement, null).paddingTop) -
+        splitPx(window.getComputedStyle(elem.parentElement, null).paddingBottom);
       var lines = Math.round(elemHeight / elemLineHeight);
 
-      addStyleNonDestructive(
-        elem,
-        "--rounded-height",
-        lines * elemLineHeight + "px"
-      );
+      addStyleNonDestructive(elem, "--rounded-height", lines * elemLineHeight + "px");
       addStyleNonDestructive(elem, "--visible-lines", lines);
       addStyleNonDestructive(elem, "--line-height", elemLineHeight + "px");
     }
@@ -176,14 +146,10 @@ function overflowEllipsis() {
 }
 
 function throwLoadErrors(img) {
-  if (typeof img.src === "undefined")
-    throw new Error("No src attribute found on img element");
-  if (typeof img.alt === "undefined")
-    throw new Error("No alt attribute found on img element");
-  if (typeof img.width === "undefined")
-    throw new Error("No width attribute found on img element");
-  if (typeof img.height === "undefined")
-    throw new Error("No height attribute found on img element");
+  if (typeof img.src === "undefined") throw new Error("No src attribute found on img element");
+  if (typeof img.alt === "undefined") throw new Error("No alt attribute found on img element");
+  if (typeof img.width === "undefined") throw new Error("No width attribute found on img element");
+  if (typeof img.height === "undefined") throw new Error("No height attribute found on img element");
 }
 
 // function loadImgExternally(img) {
@@ -234,28 +200,20 @@ function getSiblingStyle(property, elem1, elem2 = null) {
   const startIndex = elems.indexOf(elem1);
   const endIndex = elem2 ? elems.indexOf(elem2) : elems.length;
 
-  const beforeElemStyle = elems
-    .slice(0, startIndex)
-    .reduce((acc, elem) => {
-      const value = splitPx(
-        getComputedStyle(elem).getPropertyValue(property)
-      );
-      return acc + value;
-    }, 0);
+  const beforeElemStyle = elems.slice(0, startIndex).reduce((acc, elem) => {
+    const value = splitPx(getComputedStyle(elem).getPropertyValue(property));
+    return acc + value;
+  }, 0);
 
   let afterElemStyle = 0;
   if (elem2) {
     afterElemStyle = elems.slice(endIndex + 1).reduce((acc, elem) => {
-      const value = splitPx(
-        getComputedStyle(elem).getPropertyValue(property)
-      );
+      const value = splitPx(getComputedStyle(elem).getPropertyValue(property));
       return acc + value;
     }, 0);
   } else {
     afterElemStyle = elems.slice(startIndex + 1).reduce((acc, elem) => {
-      const value = splitPx(
-        getComputedStyle(elem).getPropertyValue(property)
-      );
+      const value = splitPx(getComputedStyle(elem).getPropertyValue(property));
       return acc + value;
     }, 0);
   }
@@ -268,20 +226,12 @@ function clamp(input, min, max) {
 }
 
 function map(current, in_min, in_max, out_min, out_max) {
-  const mapped =
-    ((current - in_min) * (out_max - out_min)) / (in_max - in_min) +
-    out_min;
+  const mapped = ((current - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
   return clamp(mapped, out_min, out_max);
 }
 
 function arrayItemDoesExist(arr) {
-  return (
-    arr != null &&
-    arr != undefined &&
-    arr != [] &&
-    arr != "" &&
-    arr.length > 0
-  );
+  return arr != null && arr != undefined && arr != [] && arr != "" && arr.length > 0;
 }
 
 function capFirstRemovePeriod(val) {
@@ -337,15 +287,13 @@ function toTitleCase(str) {
   });
 }
 
-
-
 function ensureArray(input) {
   return typeof input === "string" ? [input] : input;
 }
 
 function cssVarToPixels(element, cssProperty) {
   // Create a hidden element to inherit the CSS properties
-  const hiddenElement = document.createElement('div');
+  const hiddenElement = document.createElement("div");
   hiddenElement.style.cssText = `
     position: absolute;
     visibility: hidden;
@@ -361,7 +309,7 @@ function cssVarToPixels(element, cssProperty) {
   const cssValue = getComputedStyle(element)[cssProperty];
 
   // Check if the input is a CSS variable
-  const isCssVariable = cssValue.startsWith('--');
+  const isCssVariable = cssValue.startsWith("--");
 
   // Set the specified CSS property of the hidden element to the value of the CSS property or variable
   hiddenElement.style[cssProperty] = isCssVariable ? `var(${cssValue})` : cssValue;
@@ -374,9 +322,10 @@ function cssVarToPixels(element, cssProperty) {
 
   // Calculate the pixel value based on the dimensions of the target element
   let pixels;
-  if (computedValue.endsWith('%')) {
+  if (computedValue.endsWith("%")) {
     const percentage = parseFloat(computedValue) / 100;
-    const parentDimension = cssProperty === 'max-height' || cssProperty === 'height' || cssProperty === 'min-height' ? element.offsetHeight : element.offsetWidth;
+    const parentDimension =
+      cssProperty === "max-height" || cssProperty === "height" || cssProperty === "min-height" ? element.offsetHeight : element.offsetWidth;
     pixels = parentDimension * percentage;
   } else {
     pixels = parseFloat(computedValue);
@@ -386,7 +335,7 @@ function cssVarToPixels(element, cssProperty) {
   element.removeChild(hiddenElement);
 
   return pixels;
-}    
+}
 function ignoreUpdateConditions(propsToIgnore) {
   return function updateConditions(prevProps, nextProps) {
     const prevKeys = Object.keys(prevProps);
@@ -408,8 +357,6 @@ function ignoreUpdateConditions(propsToIgnore) {
   };
 }
 
-
-
 // function createUpdateConditions(propsToCheck) {
 //   return function updateConditions(prevProps, nextProps) {
 //     for (const propName of propsToCheck) {
@@ -425,7 +372,7 @@ function ignoreUpdateConditions(propsToIgnore) {
 function createUpdateConditions(propsToCheck) {
   return function updateConditions(prevProps, nextProps) {
     for (const propName of propsToCheck) {
-      if (propName.includes('.')) {
+      if (propName.includes(".")) {
         const [objName, key] = propName.split(".");
         if (prevProps[objName][key] !== nextProps[objName][key]) {
           return false;
@@ -440,16 +387,9 @@ function createUpdateConditions(propsToCheck) {
   };
 }
 
-
-
-
 function conditionalOrder(condition, elements) {
-  return condition
-    ? elements.filter(Boolean)
-    : elements.slice(1).concat(elements.slice(0, 1)).filter(Boolean);
+  return condition ? elements.filter(Boolean) : elements.slice(1).concat(elements.slice(0, 1)).filter(Boolean);
 }
-
-
 
 function isElementNearTop(el, threshold = 200) {
   const rect = el.getBoundingClientRect();
@@ -472,12 +412,10 @@ function scrollToTarget(target, attempts = 0, maxAttempts = 10, behavior = "smoo
   }
 }
 
-
-
 function cooldown(fn, delay) {
   let lastExecution = 0;
-  
-  return function(...args) {
+
+  return function (...args) {
     const currentTime = Date.now();
     if (currentTime - lastExecution >= delay) {
       fn(...args);
@@ -494,22 +432,72 @@ function getClientXFromEvent(e) {
   }
 }
 
-
-
-
-
 // Video file formats
 const VIDEO_TYPES = ["mp4", "avi", "mov", "wmv", "mkv", "flv", "webm"];
 
 // Image file formats
 const IMAGE_TYPES = ["jpg", "jpeg", "png", "gif", "svg", "bmp", "webp"];
 
+class ClassList {
+  constructor(pref) {
+    this.pref = pref;
+    this.classList = [pref];
+    this.prefDefault = true;
+  }
+
+  processNames(names) {
+    if (Array.isArray(names)) {
+      return names;
+    } else if (typeof names === 'string') {
+      return names.split(' ');
+    }
+    return [];
+  }
+
+  getClassName(name, hasPref) {
+    if (hasPref) {
+      return `${this.pref}__${name}`;
+    } else {
+      return name;
+    }
+  }
+
+  addClassNames(names, hasPref) {
+    this.processNames(names).forEach(name => this.classList.push(this.getClassName(name, hasPref)));
+  }
+
+  add(names, options = {}) {
+    const { pref: hasPref = this.prefDefault } = options;
+    this.addClassNames(names, hasPref);
+  }
+
+  addIf(names, condition, options = {}) {
+    const { pref: hasPref = this.prefDefault } = options;
+    if (condition) {
+      this.addClassNames(names, hasPref);
+    }
+  }
+
+  addEither(condition, names1, names2, options = {}) {
+    const { pref: hasPref = this.prefDefault } = options;
+    this.addClassNames(condition ? names1 : names2, hasPref);
+  }
+
+  addOnly(names) {
+    this.processNames(names).forEach(name => this.classList.push(name));
+  }
+
+  addOnlyIf(names, condition) {
+    if (condition) {
+      this.processNames(names).forEach(name => this.classList.push(name));
+    }
+  }
 
 
-
-
-
-
+  get() {
+    return this.classList.join(" ");
+  }
+}
 
 
 export {
@@ -535,9 +523,10 @@ export {
   ignoreUpdateConditions,
   conditionalOrder,
   isElementNearTop,
-scrollToTarget,
-cooldown,
-getClientXFromEvent,
+  scrollToTarget,
+  cooldown,
+  getClientXFromEvent,
+  ClassList,
   RESIZE_TIMEOUT,
   VIDEO_TYPES,
   IMAGE_TYPES,

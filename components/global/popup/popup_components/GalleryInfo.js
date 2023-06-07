@@ -1,7 +1,7 @@
 import { AnimatePresence, motion, useAnimation, useIsPresent, wrap } from "framer-motion";
 
 import Tag from "@/components/elements/Tag";
-import { createUpdateConditions, splitPx, splitRem } from "@/scripts/GlobalUtilities";
+import { ClassList, createUpdateConditions, splitPx, splitRem } from "@/scripts/GlobalUtilities";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import AnimPres from "../../AnimPres";
 import popAnims, { popLayoutTransition } from "../popup_utilities/PopupAnimations";
@@ -31,10 +31,9 @@ function useInfoAnimDelay() {
   return INFO_ANIM_DELAY;
 }
 
-function GalInfoMotionWrapper({ pop, state, elems, scrollbar, children, styles, type = "default" }) {
-  const scroll = type != "above" && scrollbar.info.classes ? scrollbar.info.classes : "";
-
+function GalInfoMotionWrapper({ pop, state, elems, children, styles, type = "default" }) {
   const INFO_ANIM_DELAY = useInfoAnimDelay();
+  const isntAbove = type != "above";
 
   const [ready, setReady] = useState(false);
   useEffect(() => {
@@ -45,31 +44,21 @@ function GalInfoMotionWrapper({ pop, state, elems, scrollbar, children, styles, 
     }
   }, [pop.firstImgDrawn, state.mobileGallery]);
 
-  const pref = "popup--info";
-  const classList = [pref];
-  classList.push(scroll);
-  classList.push(`${pref}__${type}`);
-  classList.push(`${pref}__${ready ? "show" : "hidden"}`);
-  const classes = classList.join(" ");
+  const list = new ClassList("popup--info");
+  list.addIf("gallery-scrollbar", isntAbove);
+  list.addIf("scrollbar", isntAbove, { pref: false });
+  list.add(type);
+  list.addEither(ready, "show", "hidden");
+  const classes = list.get();
 
   return (
-    // <motion.div
-    <div
-      // layout="position"
-      // transition={{
-      //   layout: { duration: popLayoutTransition },
-      // }}
-      className={classes}
-      // ref={elems.info.ref}
-
-      {...(type != "above" ? { ref: elems.info.ref } : {})}
-      style={styles.description}>
+    <div className={classes} {...(type != "above" ? { ref: elems.info.ref } : {})} style={styles.description}>
       {children}
     </div>
   );
 }
 
-function GalInfoAnimPres({ elems, pop, styles, state, popclass, scrollbar, children, type = "default" }) {
+function GalInfoAnimPres({ elems, pop, styles, state, popclass, children, type = "default" }) {
   const INFO_ANIM_DELAY = useInfoAnimDelay();
 
   return (
@@ -152,7 +141,6 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
   })();
 
   const galDescHeight = (() => {
-    // if (state.desktop) return 0;
     if (!elems.info.ref.current) return 0;
     if (!elems.popup.ref.current) return 0;
     if (!elems.info.ref.current.querySelector(".gallery--info")) return 0;
@@ -185,53 +173,18 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
     return width;
   })();
 
-
-
-
-
   const galInfoHeightMax = elems.img.maxHeight != 0 && elems.img.maxHeight;
   const styles = {
     description: {
       "--gallery-info-height": `${galInfoHeight}px`,
       "--gallery-info-max-height": `${galInfoHeightMax}px`,
-      "--gallery-description-height": `${galDescHeight}px`,
       "--gallery-info-width": `${galInfoWidth}px`,
+      "--gallery-description-height": `${galDescHeight}px`,
     },
   };
-  galInfoHeightMax
+  galInfoHeightMax;
   var hasDesc = pop.img.description || (pop.group.description && pop.group.description[pop.index]);
   var hasTitle = title ? true : false;
-
-  // const descScrollbar = useHasScrollbar(elems.desc.ref, {
-  //   debounceTime: 100,
-  //   repeatChecks: 10,
-  //   repeatChecksDebounceTime: 10,
-  // });
-
-  // const [descScrollbar, setDescScrollbar] = useState(false);
-  // useEffect(() => {
-  //   if (!elems.desc.ref.current) return;
-  //   if (typeof galDescInnerHeight != "number" || typeof galInfoHeightMax != "number") return;galDescInnerHeight
-  //   if (galDescInnerHeight > galInfoHeightMax) setDescScrollbar(true);
-  //   else setDescScrollbar(false);
-  // }, [elems.desc.ref.current, galDescInnerHeight, galInfoHeightMax]);
-
-  const infoScrollbar = useHasScrollbar(elems.info.ref, {
-    debounceTime: 100,
-    repeatChecks: 10,
-    repeatChecksDebounceTime: 10,
-  });
-
-  const scrollbar = {
-    // desc: {
-      // has: descScrollbar,
-      // classes: true ? "popup--description__gallery-scrollbar scrollbar" : "",
-    // },
-    info: {
-      has: infoScrollbar,
-      classes: true ? "popup--info__gallery-scrollbar scrollbar" : "",
-    },
-  };
 
   const [catData, setCatData] = useState({});
 
@@ -256,7 +209,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
     });
   };
 
-  const wrapperProps = { elems: elems, pop: pop, styles: styles, state: state, popclass: popclass, scrollbar: scrollbar, handles: handles };
+  const wrapperProps = { elems: elems, pop: pop, styles: styles, state: state, popclass: popclass, handles: handles };
 
   return (
     <>
@@ -303,19 +256,17 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
           <Close pop={pop} nav={nav} handles={handles} popclass={popclass} type="gallery" />
         )}
 
-        {(pop.img.disciplines || pop.img.tools) && <GalCategoriesBackground scrollbar={scrollbar} catData={catData} />}
+        {(pop.img.disciplines || pop.img.tools) && <GalCategoriesBackground catData={catData} />}
       </GalInfoMotionWrapper>
     </>
   );
 }, createUpdateConditions(["pop.index", "pop.img", "elems.img.height", "pop.firstImgDrawn", "pop.infoDrawn", "state.mobile", "state.desktop"]));
 // }, createUpdateConditions(["pop.index", "pop.img", "elems.img.height"]));
 
-function GalCategoriesBackground({ scrollbar, catData }) {
-  const pref = "gallery--categories-background";
-  const classList = ["gallery--categories-background"];
-  // if (scrollbar.desc.has) classList.push(`${pref}__scrollbar`);
-  if (catData?.hovered || catData.ellipse?.hovered) classList.push(`${pref}__hovered`);
-  const classes = classList.join(" ");
+function GalCategoriesBackground({ catData }) {
+  const list = new ClassList("gallery--categories-background");
+  list.addIf("hovered", catData?.hovered || catData.ellipse?.hovered);
+  const classes = list.get();
 
   return (
     <div
