@@ -5067,7 +5067,7 @@ h3 + .studypanel--paragraph {
   position: relative;
   aspect-ratio: var(--img-aspect-width)/var(--img-aspect-height);
   min-width: calc(66.66667% - (var(--slide-inner-pad) * 2));
-  max-height: var(--slide-max-height);
+  max-height: 67.5vh;
   height: var(--slide-max-height);
   background-color: #5D5D7E;
   overflow-y: auto;
