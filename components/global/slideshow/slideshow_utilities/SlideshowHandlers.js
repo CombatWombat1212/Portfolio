@@ -200,17 +200,11 @@ function containerSwipe(e, slide) {
 }
 
 function notchesRemoveHoverabe(slide) {
-  const notches = slide.refs.notches;
-  notches.forEach((notch) => {
-    notch.current.classList.remove("slider--notch__hoverable");
-  });
+  slide.states.setNotchesHoverable(false);
 }
 
 function notchesAddHoverabe(slide) {
-  const notches = slide.refs.notches;
-  notches.forEach((notch) => {
-    notch.current.classList.add("slider--notch__hoverable");
-  });
+  slide.states.setNotchesHoverable(true);
 }
 
 function getHandlePosFromNotch(index, slide) {

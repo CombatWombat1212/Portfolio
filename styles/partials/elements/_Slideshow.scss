@@ -413,11 +413,15 @@
       transition-duration: var(--slider-inactive-transition);
 
       pointer-events: none;
-      cursor: default;
+      // cursor: default;
 
       &__hoverable {
-        cursor: pointer;
+        cursor: grab;
         pointer-events: auto;
+      }
+      &__hovered {
+        cursor: grabbing;
+        pointer-events: none;
       }
 
       @include md-down {

@@ -5253,12 +5253,16 @@ h3 + .studypanel--paragraph {
   left: calc(var(--start) + (var(--end) - var(--start)) * (var(--slider-notch-index) / var(--slider-max)));
   transition-duration: var(--slider-inactive-transition);
   pointer-events: none;
-  cursor: default;
 }
 
 .slideshow .slider--notch__hoverable {
-  cursor: pointer;
+  cursor: grab;
   pointer-events: auto;
+}
+
+.slideshow .slider--notch__hovered {
+  cursor: grabbing;
+  pointer-events: none;
 }
 
 @media screen and (max-width: 49.9375em) {
