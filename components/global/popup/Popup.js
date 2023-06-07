@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Button from "../../elements/Buttons";
 import { loading_white } from "@/data/ICONS";
-import { RESIZE_TIMEOUT, createUpdateConditions, splitPx, splitRem, splitS } from "@/scripts/GlobalUtilities";
+import { ClassList, RESIZE_TIMEOUT, createUpdateConditions, splitPx, splitRem, splitS } from "@/scripts/GlobalUtilities";
 import { canvasInit, canvasOnResize, canvasZoom, setCanvasImageLoaded } from "./popup_utilities/CanvasUtilities";
 import { galleryInit, lightboxInit, seekHandler, setPopupGroup, updatePopupNav } from "./popup_utilities/LightboxUtilities";
 import { Graphic, Heading } from "@/components/sections/Sections";
@@ -710,20 +710,6 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
   useListener("swiped-left", handles.swipeLeft, { ref: mediaWrapperRef });
   useListener("swiped-right", handles.swipeRight, { ref: mediaWrapperRef });
 
-  const loadingWrapPref = "loading--wrapper";
-  const loadingWrapClassList = [loadingWrapPref];
-  if (!pop.imgReady || pop.imgLoaded) loadingWrapClassList.push(`${loadingWrapPref}__hidden`);
-  if (pop.zoom) loadingWrapClassList.push(`${loadingWrapPref}__zoom`);
-  if (pop.zoom && pop.type == "lightbox") loadingWrapClassList.push(`${loadingWrapPref}__lightbox-zoom`);
-  const loadingWrapClasses = loadingWrapClassList.join(" ");
-
-  const imgStyles = {
-    "--img-avail-width": `${elems.img.availWidth}px`,
-    "--img-avail-height": `${elems.img.availHeight}px`,
-    "--img-max-width": `${elems.img.maxWidth}px`,
-    "--img-max-height": `${elems.img.maxHeight}px`,
-  };
-
   const openDelay = 0.1;
   const mediaWrapDelay = pop.firstImgDrawn ? 0 : openDelay;
   const mediaWrapState = useInOut(drawLightbox, { startDelay: mediaWrapDelay * 1000 });
@@ -740,12 +726,29 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
     }, (popSeekDuration + openDelay) * 1000);
   }, [mediaWrapState]);
 
-  const mediaWrapPref = "popup--media-wrapper";
-  const mediaWrapClassList = [mediaWrapPref];
-  mediaWrapClassList.push(popclass.mediaWrapper);
-  mediaWrapClassList.push(`popanims__${mediaWrapStateClass}`);
-  if (!pop.imgLoaded) mediaWrapClassList.push(`${mediaWrapPref}__loading`);
-  const mediaWrapClasses = mediaWrapClassList.join(" ");
+  const loadWrapList = new ClassList("loading--wrapper");
+  loadWrapList.addIf("hidden", !pop.imgReady || pop.imgLoaded);
+  loadWrapList.addIf("zoom", pop.zoom);
+  loadWrapList.addIf("lightbox-zoom", pop.zoom && pop.type == "lightbox");
+  const loadWrapClasses = loadWrapList.get();
+
+  const mediaWrapList = new ClassList("popup--media-wrapper");
+  mediaWrapList.addOnly(popclass.mediaWrapper);
+  mediaWrapList.add(`popanims__${mediaWrapStateClass}`, { pref: false });
+  mediaWrapList.addIf("loading", !pop.imgLoaded);
+  const mediaWrapClasses = mediaWrapList.get();
+
+  const popMediaList = new ClassList("popup--media");
+  popMediaList.addOnly(popclass.media);
+  popMediaList.addIf("loading", !pop.imgLoaded);
+  const popMediaClasses = popMediaList.get();
+
+  const imgStyles = {
+    "--img-avail-width": `${elems.img.availWidth}px`,
+    "--img-avail-height": `${elems.img.availHeight}px`,
+    "--img-max-width": `${elems.img.maxWidth}px`,
+    "--img-max-height": `${elems.img.maxHeight}px`,
+  };
 
   const animPresStyles = {
     "--aspect-width": Number(pop.img.aspect?.split("/")?.[0] || pop.img.width),
@@ -770,7 +773,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
         reference={mediaWrapperRef}>
         <Graphic
           reference={elems.img.ref}
-          className={`popup--media ${popclass.media} ${!pop.imgLoaded ? "popup--media__loading" : ""}`}
+          className={popMediaClasses}
           img={pop.img}
           type={pop.img.media}
           autoplay
@@ -780,7 +783,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
         />
 
         {pop.imgReady && (
-          <div className={loadingWrapClasses} style={imgStyles}>
+          <div className={loadWrapClasses} style={imgStyles}>
             <div className={`loading--img`}>
               <Image src={loading_white.src} alt={loading_white.alt} width={loading_white.width} height={loading_white.height} />
             </div>

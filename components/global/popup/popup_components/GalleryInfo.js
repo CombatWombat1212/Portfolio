@@ -261,7 +261,6 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
     </>
   );
 }, createUpdateConditions(["pop.index", "pop.img", "elems.img.height", "pop.firstImgDrawn", "pop.infoDrawn", "state.mobile", "state.desktop"]));
-// }, createUpdateConditions(["pop.index", "pop.img", "elems.img.height"]));
 
 function GalCategoriesBackground({ catData }) {
   const list = new ClassList("gallery--categories-background");
