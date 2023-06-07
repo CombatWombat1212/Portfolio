@@ -18,11 +18,11 @@ import useScrollbarSize from "@/scripts/hooks/useScrollbarSize";
 import useInView from "@/scripts/hooks/useInView";
 
 function Slideshow({ children, img }) {
-  // TODO: should they be container__wide?
 
   const slide = useSlide(img);
   const handlers = slideshowCreateHandlers(slide);
   const scrollbar = useScrollbarSize();
+  const inView = useInView(slide.refs.slideshow);
 
   const styles = {
     slideshow: {
@@ -77,9 +77,10 @@ function Slideshow({ children, img }) {
       </div>
 
       <div
-        className={`slideshow--container ${slide.states.atStart ? "slideshow--container__visible" : "slideshow--container__hide"}`}
+        className={`slideshow--container ${slide.states.atStart ? "slideshow--container__visible" : "slideshow--container__hide"}
+        `}
         ref={slide.refs.container}>
-        <div className="slideshow--inner">
+        <div className={`slideshow--inner slideshow--inner__${inView ? "will-change": "no-change"}`}>
           {slide.group.imgs.map((groupImg) => {
             return (
               <div

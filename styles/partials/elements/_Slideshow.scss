@@ -60,7 +60,10 @@
     transform: translateX(var(--inner-translate-x));
     transition-duration: var(--movement-transition);
     padding-left: var(--card-gap);
-    will-change: transform;
+    
+    &__will-change{
+      will-change: transform;
+    }
   }
 
   &--card {
