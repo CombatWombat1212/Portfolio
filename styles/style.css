@@ -5252,16 +5252,12 @@ h3 + .studypanel--paragraph {
   --start: calc(0% - (var(--size) / 2));
   left: calc(var(--start) + (var(--end) - var(--start)) * (var(--slider-notch-index) / var(--slider-max)));
   transition-duration: var(--slider-inactive-transition);
-  pointer-events: none;
-}
-
-.slideshow .slider--notch__hoverable {
   cursor: grab;
   pointer-events: auto;
 }
 
-.slideshow .slider--notch__hovered {
-  cursor: grabbing;
+.slider__notches-non-hoverable .slider--notch {
+  cursor: default;
   pointer-events: none;
 }
 

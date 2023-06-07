@@ -12,7 +12,7 @@ function useSlide(img) {
   const [cardImage, setCardImage] = useState(img);
   const [descriptionOn, setDescriptionOn] = useState(false);
   const [hitStartPoint, setHitStartPoint] = useState(false);
-  const [notchesHoverable, setNotchesHoverable] = useState(true);
+  const [grabbed, setGrabbed] = useState(0);
   const group = MAKERIGHT_IMG_GROUPS[img.group];
 
   const slide = {
@@ -33,14 +33,13 @@ function useSlide(img) {
       setDesc: setDescriptionOn,
       atStart: hitStartPoint,
       setAtStart: setHitStartPoint,
-      notchesHoverable: notchesHoverable,
-      setNotchesHoverable: setNotchesHoverable,
     },
     group: group,
     width: group.width.min,
     height: group.height.min,
     slider: {
-      grabbed: 0,
+      grabbed: grabbed,
+      setGrabbed: setGrabbed,
       index: cardImage.index,
       min: 0,
       max: group.imgs.length - 1,

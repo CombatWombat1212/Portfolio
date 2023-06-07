@@ -1,33 +1,35 @@
 import { ClassList, createUpdateConditions } from "@/scripts/GlobalUtilities";
 import React, { useRef } from "react";
 
+
 function Notch({ slide, index, handlers }) {
-  const { notchOnMouseDown } = handlers;
+  const {notchOnMouseDown } = handlers;
   const group = slide.group;
   const img = slide.states.img;
   const section = group.sections.find((section) => section.name === img.section);
   const isSectionActive = section && index >= section.start && index <= section.end;
 
-  const list = new ClassList("slider--notch");
-  list.addEither(slide.states.notchesHoverable, "hoverable", "hovered");
-  if (section) list.addEither(isSectionActive, "active", "inactive");
-  const classes = list.get();
+
+  
+  const notchClass = `slider--notch ${
+    section ? (isSectionActive ? "slider--notch__active" : "slider--notch__inactive") : ""
+  }`;
 
   slide.refs.notches[index] = useRef(null);
 
   return (
     <div
-      className={classes}
+      className={notchClass}
       ref={slide.refs.notches[index]}
       style={{ "--slider-notch-index": `${index}` }}
       data-index={index}
       key={`marker ${index}`}
       onMouseDown={notchOnMouseDown}
       onTouchStart={notchOnMouseDown}
+
       ></div>
   );
-}
-
+  }
 Notch.displayName = "Notch";
 
 export default Notch;

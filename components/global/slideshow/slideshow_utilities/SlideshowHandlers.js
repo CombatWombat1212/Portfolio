@@ -164,7 +164,7 @@ function sliderMouseDown(e, slide, handlers) {
 
   handle.classList.add("slider--handle__active");
 
-  notchesRemoveHoverabe(slide);
+  notchesRemoveHoverable(slide);
 
   document.body.classList.add("cursor-grabbed");
 
@@ -185,7 +185,7 @@ function sliderMouseUp(e, slide, handlers) {
   handle.classList.remove("slider--handle__active");
   document.body.classList.remove("cursor-grabbed");
 
-  notchesAddHoverabe(slide);
+  notchesAddHoverable(slide);
 
   document.removeEventListener("mousemove", handlers.sliderMouseMove);
   document.removeEventListener("mouseup", handlers.sliderMouseUp);
@@ -199,12 +199,16 @@ function containerSwipe(e, slide) {
   slideshowUpdateCardImageAndSlider(slide, move);
 }
 
-function notchesRemoveHoverabe(slide) {
-  slide.states.setNotchesHoverable(false);
+function notchesRemoveHoverable(slide) {
+  const slider = slide.refs.slider.current;
+  slider.classList.add("slider__notches-non-hoverable");
+  slider.classList.remove("slider__notches-hoverable");
 }
 
-function notchesAddHoverabe(slide) {
-  slide.states.setNotchesHoverable(true);
+function notchesAddHoverable(slide) {
+  const slider = slide.refs.slider.current;
+  slider.classList.remove("slider__notches-non-hoverable");
+  slider.classList.add("slider__notches-hoverable");
 }
 
 function getHandlePosFromNotch(index, slide) {

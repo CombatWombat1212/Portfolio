@@ -412,17 +412,17 @@
       left: calc(var(--start) + (var(--end) - var(--start)) * (var(--slider-notch-index) / var(--slider-max)));
       transition-duration: var(--slider-inactive-transition);
 
-      pointer-events: none;
-      // cursor: default;
+      // cursor: grab;
+      // pointer-events: none;
 
-      &__hoverable {
-        cursor: grab;
-        pointer-events: auto;
-      }
-      &__hovered {
-        cursor: grabbing;
+      cursor: grab;
+      pointer-events: auto;
+
+      @at-root .slider__notches-non-hoverable .slider--notch{
+        cursor: default;
         pointer-events: none;
       }
+
 
       @include md-down {
         --size: calc(var(--slider-handle-size) / 2.25);
@@ -450,6 +450,11 @@
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 1;
+
+        // @include md-down {
+        //   width: 1.25rem;
+        //   height: 1.25rem;
+        // }
       }
     }
 

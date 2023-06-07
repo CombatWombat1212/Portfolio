@@ -15,6 +15,7 @@ function sliderHandleSet(slide) {
   if (handlePos < 0) handlePos = 0;
   if (handlePos > barWidth) handlePos = barWidth;
 
+  // console.log(`sliderHandleSet --slider-handle-left: ${handlePos}px`);
   handle.style.setProperty("--slider-handle-left", `${handlePos}px`);
 }
 

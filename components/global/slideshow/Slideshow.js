@@ -103,7 +103,7 @@ function Slideshow({ children, img }) {
       </div>
 
       <div className="slideshow--footer">
-        <div className="slider--wrapper container" onMouseMove={handlers.sliderMouseMoveStart} onTouchMove={handlers.sliderMouseMoveStart}>
+        <div className="slider--wrapper container">
           <Button
             className={`slider--button
             slider--button__left ${slide.states.img.index <= 0 ? "slider--button__disabled" : "slider--button__enabled"}`}
@@ -121,6 +121,8 @@ function Slideshow({ children, img }) {
                 className="slider--handle"
                 onMouseDown={handlers.sliderMouseDown}
                 onTouchStart={handlers.sliderMouseDown}
+                onMouseMove={handlers.sliderMouseMoveStart} 
+                onTouchMove={handlers.sliderMouseMoveStart}
                 ref={slide.refs.handle}
                 ></div>
 
