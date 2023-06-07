@@ -79,32 +79,29 @@ function Slideshow({ children, img }) {
       <div
         className={`slideshow--container ${slide.states.atStart ? "slideshow--container__visible" : "slideshow--container__hide"}`}
         ref={slide.refs.container}>
-        <div className="slideshow--empty" ref={slide.refs.empty}></div>
-        {slide.group.imgs.map((groupImg) => {
-          return (
-            <div
-              className={`slideshow--card ${groupImg.index == slide.states.img.index ? "slideshow--card__active" : "slideshow--card__inactive"}`}
-              key={`card ${groupImg.index}`}>
-              <Card
-                img={groupImg}
-                index={groupImg.index}
-                data-index={groupImg.index}
-                width={slide.width}
-                height={slide.height}
-                slide={slide}
-                onClick={handlers.cardOnClick}
-              />
-            </div>
-          );
-        })}
+        <div className="slideshow--inner">
+          {slide.group.imgs.map((groupImg) => {
+            return (
+              <div
+                className={`slideshow--card ${groupImg.index == slide.states.img.index ? "slideshow--card__active" : "slideshow--card__inactive"}`}
+                key={`card ${groupImg.index}`}>
+                <Card
+                  img={groupImg}
+                  index={groupImg.index}
+                  data-index={groupImg.index}
+                  width={slide.width}
+                  height={slide.height}
+                  slide={slide}
+                  onClick={handlers.cardOnClick}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
-      
-
-
 
       <div className="slideshow--footer">
-        <div className="slider--wrapper container"onMouseMove={handlers.sliderMouseMoveStart}
-                onTouchMove={handlers.sliderMouseMoveStart}>
+        <div className="slider--wrapper container" onMouseMove={handlers.sliderMouseMoveStart} onTouchMove={handlers.sliderMouseMoveStart}>
           <Button
             className={`slider--button
             slider--button__left ${slide.states.img.index <= 0 ? "slider--button__disabled" : "slider--button__enabled"}`}
@@ -122,8 +119,7 @@ function Slideshow({ children, img }) {
                 className="slider--handle"
                 onMouseDown={handlers.sliderMouseDown}
                 onTouchStart={handlers.sliderMouseDown}
-                ref={slide.refs.handle}
-                ></div>
+                ref={slide.refs.handle}></div>
 
               {slide.group.imgs.map((groupImg, i) => (
                 <Notch key={i} index={i} slide={slide} handlers={handlers} />
@@ -148,7 +144,7 @@ function Slideshow({ children, img }) {
         <p className="slideshow--message container">
           <ResponsiveText tag="Fragment">
             <xxl>Slide to explore the final user journey.</xxl>
-            <md>Slide or swipe to explore the user journey.</md>
+            <md>Swipe / slide to explore the user journey.</md>
           </ResponsiveText>
         </p>
       </div>

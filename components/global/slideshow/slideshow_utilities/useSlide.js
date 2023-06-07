@@ -7,7 +7,6 @@ function useSlide(img) {
   const slider = useRef(null);
   const prevBtn = useRef(null);
   const nextBtn = useRef(null);
-  const empty = useRef(null);
   const bar = useRef(null);
   const handle = useRef(null);
   const [cardImage, setCardImage] = useState(img);
@@ -22,7 +21,6 @@ function useSlide(img) {
       slider: slider,
       prevBtn: prevBtn,
       nextBtn: nextBtn,
-      empty: empty,
       bar: bar,
       handle: handle,
       notches: [],

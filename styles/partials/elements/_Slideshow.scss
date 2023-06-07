@@ -44,22 +44,23 @@
   &--container {
     min-width: var(--site-max-width);
     @include flex-row;
-    // overflow-x: scroll;
     width: 100%;
     transition-duration: 2s;
-    // scroll-snap-type: x mandatory;
-    // scroll-behavior: smooth;
     overflow-x: hidden;
-
-    @include scrollbar {
-      // display: none;
-    }
-
     &__visible {
     }
     &__hide {
       opacity: 0;
     }
+  }
+
+  &--inner {
+    // width: 100%;
+    @include flex-row;
+    transform: translateX(var(--inner-translate-x));
+    transition-duration: var(--movement-transition);
+    padding-left: var(--card-gap);
+    will-change: transform;
   }
 
   &--card {
@@ -84,17 +85,6 @@
       @include hover {
         opacity: 0.75;
       }
-    }
-  }
-
-  &--empty {
-    transition-duration: 2s;
-    --width: calc(var(--site-x-margin) - var(--card-gap) / 2);
-    width: var(--width);
-    min-width: var(--width);
-    margin-left: var(--empty-margin-left);
-    @include md-down {
-      margin-left: calc(var(--empty-margin-left) - (var(--page-scrollbar-width) / 8));
     }
   }
 
@@ -375,8 +365,8 @@
       &::before {
         content: "";
         position: absolute;
-        width: calc(var(--slider-handle-size) * 1.5);
-        height: calc(var(--slider-handle-size) * 1.5);
+        width: calc(var(--slider-handle-size) * 1.75);
+        height: calc(var(--slider-handle-size) * 1.75);
         border-radius: 100rem;
         top: 50%;
         left: 50%;
@@ -444,8 +434,8 @@
       &::before {
         content: "";
         position: absolute;
-        width: 1.5rem;
-        height: 1.5rem;
+        width: 2.75rem;
+        height: 2.75rem;
         border-radius: 100rem;
         top: 50%;
         left: 50%;

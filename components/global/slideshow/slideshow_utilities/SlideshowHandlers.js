@@ -40,8 +40,8 @@ function slideshowCreateHandlers(slide) {
 
   handlers.notchOnMouseDown = (e) => {
     sliderNotchOnClick(e,slide);
-    // sliderNotchOnMouseDown(e, slide);
-    // sliderMouseDown(e, slide, handlers);
+    sliderNotchOnMouseDown(e, slide);
+    sliderMouseDown(e, slide, handlers);
   };
 
   return handlers;
