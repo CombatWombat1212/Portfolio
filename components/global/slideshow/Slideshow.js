@@ -76,6 +76,7 @@ function Slideshow({ children, img }) {
         </div>
       </div>
 
+
       <div
         className={`slideshow--container ${slide.states.atStart ? "slideshow--container__visible" : "slideshow--container__hide"}
         `}
