@@ -4904,11 +4904,12 @@ h3 + .studypanel--paragraph {
 }
 
 .slideshow--inner {
+  width: 100%;
   display: flex;
   flex-direction: row;
   transform: translateX(var(--inner-translate-x));
   transition-duration: var(--movement-transition);
-  padding-left: var(--card-gap);
+  padding-left: calc(var(--site-x-margin) - var(--card-gap) / 2);
 }
 
 .slideshow--inner__will-change {

@@ -54,14 +54,16 @@
     }
   }
 
+
   &--inner {
-    // width: 100%;
+    width: 100%;
     @include flex-row;
     transform: translateX(var(--inner-translate-x));
     transition-duration: var(--movement-transition);
-    padding-left: var(--card-gap);
-    
-    &__will-change{
+
+    padding-left: calc(var(--site-x-margin) - var(--card-gap) / 2);
+
+    &__will-change {
       will-change: transform;
     }
   }

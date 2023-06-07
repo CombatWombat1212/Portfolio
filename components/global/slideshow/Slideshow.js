@@ -120,7 +120,8 @@ function Slideshow({ children, img }) {
                 className="slider--handle"
                 onMouseDown={handlers.sliderMouseDown}
                 onTouchStart={handlers.sliderMouseDown}
-                ref={slide.refs.handle}></div>
+                ref={slide.refs.handle}
+                ></div>
 
               {slide.group.imgs.map((groupImg, i) => (
                 <Notch key={i} index={i} slide={slide} handlers={handlers} />

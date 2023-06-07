@@ -21,8 +21,8 @@ function slideshowCreateHandlers(slide) {
       containerSwipe(e, slide);
     },
 
-    sliderMouseMoveStart: (e) => {
-      sliderMouseMoveStart(e, slide);
+    sliderMouseMoveStart: (e, { from = "handle" } = {}) => {
+      sliderMouseMoveStart(e, slide, { from });
     },
 
     sliderMouseMove: (e) => {
@@ -39,9 +39,7 @@ function slideshowCreateHandlers(slide) {
   };
 
   handlers.notchOnMouseDown = (e) => {
-    sliderNotchOnClick(e,slide);
-    sliderNotchOnMouseDown(e, slide);
-    sliderMouseDown(e, slide, handlers);
+    sliderNotchOnMouseDown(e, slide, handlers);
   };
 
   return handlers;
@@ -63,17 +61,13 @@ function slideshowButtonOnClick(e, slide) {
   slideshowUpdateCardImageAndSlider(slide, move);
 }
 
-function sliderNotchOnClick(e, slide) {
-  const target = e.target;
-  const index = parseInt(target.getAttribute("data-index"));
-  slide.states.setImg(slide.group.imgs[index]);
-}
-
-function sliderNotchOnMouseDown(e, slide) {
+function sliderNotchOnMouseDown(e, slide, handles) {
   slide.slider.grabbed++;
   const target = e.target;
   const index = parseInt(target.getAttribute("data-index"));
   slide.states.setImg(slide.group.imgs[index]);
+  handles.sliderMouseMoveStart(e, { from: "notch" });
+  handles.sliderMouseDown(e);
 }
 
 function cardOnClick(e, slide) {
@@ -100,13 +94,6 @@ function sliderMouseMove(e, slide) {
   slide.slider.mouse.cur.x = mouse.x;
 
   var handlePos = slide.slider.handle.start.x + (slide.slider.mouse.cur.x - slide.slider.mouse.start.x);
-//   console.log(
-//     `
-// handle start: ${slide.slider.handle.start.x},
-// mouse start: ${slide.slider.mouse.start.x},
-// mouse cur: ${slide.slider.mouse.cur.x},
-// handle pos: ${handlePos}`
-//   );
 
   var barWidth = getElemWidth(bar);
   var handleWidth = getElemWidth(handle);
@@ -133,32 +120,45 @@ function sliderMouseMove(e, slide) {
   slide.states.setImg(group.imgs[value]);
 }
 
+function sliderMouseMoveStart(e, slide, options = {}) {
+  const { from } = options;
+  const isFromNotch = from == "notch";
 
-
-function sliderMouseMoveStart(e, slide) {
   const handle = slide.refs.handle.current;
   var mouse = { x: 0, y: 0 };
-  
-  function updateSlideState(clientX) {
-    if (slide.slider.grabbed === 1) {
-      slide.slider.grabbed++;
-      mouse.x = clientX;
-      slide.slider.mouse.start.x = mouse.x;
-      slide.slider.handle.start.x = splitPx(window.getComputedStyle(handle).getPropertyValue("--slider-handle-left"));
+
+  function setSliderHandlerStart() {
+    if (isFromNotch) {
+      const ind = Number(e.target.getAttribute("data-index"));
+      const pos = getHandlePosFromNotch(ind, slide);
+      slide.slider.handle.start.x = pos;
+    } else {
+      const computed = splitPx(window.getComputedStyle(handle).getPropertyValue("--slider-handle-left"));
+      slide.slider.handle.start.x = computed;
     }
   }
 
-  if (e.type === "mousemove") {
+  function updateSlideState(clientX) {
+    if (slide.slider.grabbed !== 1) return;
+    slide.slider.grabbed++;
+    mouse.x = clientX;
+    slide.slider.mouse.start.x = mouse.x;
+
+    setSliderHandlerStart();
+  }
+
+  if (e.type === "mousemove" || e.type === "mousedown") {
     updateSlideState(e.clientX);
-  } else if (e.type === "touchmove") {
+  } else if (e.type === "touchmove" || e.type === "touchstart") {
     var touch = e.touches[0];
     updateSlideState(touch.clientX);
   }
 }
 
-
-
 function sliderMouseDown(e, slide, handlers) {
+  if (e.type == "mousedown") {
+    e.preventDefault();
+  }
   slide.slider.grabbed++;
   const handle = slide.refs.handle.current;
 
@@ -176,14 +176,6 @@ function sliderMouseDown(e, slide, handlers) {
     document.addEventListener("touchend", handlers.sliderMouseUp);
   }
 }
-
-
-
-
-
-
-
-
 
 function sliderMouseUp(e, slide, handlers) {
   slide.slider.grabbed = 0;
@@ -219,6 +211,25 @@ function notchesAddHoverabe(slide) {
   notches.forEach((notch) => {
     notch.current.classList.add("slider--notch__hoverable");
   });
+}
+
+function getHandlePosFromNotch(index, slide) {
+  const bar = slide.refs.bar.current;
+  const handle = slide.refs.handle.current;
+
+  var barWidth = getElemWidth(bar);
+
+  var min = slide.slider.min;
+  var max = slide.slider.max;
+
+  var notch = barWidth / (max - min);
+
+  var handlePos = Math.round(index * notch);
+
+  if (handlePos < 0) handlePos = 0;
+  if (handlePos > barWidth) handlePos = barWidth;
+
+  return handlePos;
 }
 
 export { slideshowCreateHandlers };
