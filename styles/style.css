@@ -4424,7 +4424,7 @@ h3 + .studypanel--paragraph {
   gap: var(--gap);
   column-gap: var(--gap);
   row-gap: var(--gap);
-  bottom: 3rem;
+  bottom: 3.15rem;
   width: var(--popup-width-offset);
   transition-delay: 0s !important;
 }
@@ -4432,6 +4432,12 @@ h3 + .studypanel--paragraph {
 .popup--controls__gallery {
   transform: translate(-50%, 0%);
   pointer-events: all;
+}
+
+@media screen and (max-width: 79.9375em) {
+  .popup--controls__gallery {
+    bottom: 2.65rem;
+  }
 }
 
 @media screen and (max-width: 49.9375em) {

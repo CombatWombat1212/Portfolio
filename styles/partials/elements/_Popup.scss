@@ -734,7 +734,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
     // top: calc(100% - var(--popup-controls-offset) + 1.85rem);
     --gap: 1.45rem;
     @include gap;
-    bottom: 3rem;
+    bottom: 3.15rem;
     width: var(--popup-width-offset);
 
     transition-delay: 0s !important;
@@ -744,6 +744,9 @@ $col-media-wrapper: rgba($col-background, 0.075);
       transform: translate(-50%, 0%);
       pointer-events: all;
 
+      @include xl-down {
+        bottom: 2.65rem;
+      }
       @include md-down {
         bottom: 2.25rem;
         // width: 100%;
