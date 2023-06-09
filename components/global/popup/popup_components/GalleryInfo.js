@@ -51,35 +51,48 @@ function GalInfoMotionWrapper({ pop, state, elems, children, styles, type = "def
   list.addEither(ready, "show", "hidden");
   const classes = list.get();
 
+  const infoStyles ={
+    ...styles.description,
+    "--gallery-info-scroll-top": `${elems.desc.scrollTop}px`,
+  }
+
   return (
-    <div className={classes} {...(type != "above" ? { ref: elems.info.ref } : {})} style={styles.description}>
+    <div className={classes} {...(type != "above" ? { ref: elems.info.ref } : {})} style={infoStyles}>
       {children}
     </div>
   );
 }
 
-function GalInfoAnimPres({ elems, pop, styles, state, popclass, children, type = "default" }) {
+// function GalInfoAnimPres({ elems, pop, styles, state, popclass, children, type = "default" }) {
+function GalInfoAnimPres(props) {
+  const { pop, state, children } = props;
+  return <>{(pop.firstImgDrawn || state.mobileGallery) && <GalInfoAnimPresBody {...props}> {children}</GalInfoAnimPresBody>}</>;
+}
+
+
+function GalInfoAnimPresBody({ elems, pop, styles, state, popclass, children, type = "default" }) {
   const INFO_ANIM_DELAY = useInfoAnimDelay();
 
+  const scrollTop = useScrollTop(elems.desc.ref);
+  useEffect(() => {
+    elems.desc.setScrollTop(scrollTop);
+  }, [scrollTop]);
+
   return (
-    <>
-      {(pop.firstImgDrawn || state.mobileGallery) && (
-        <AnimPres
-          mode="wait"
-          fragment
-          animation={popAnims.slideFadeLeft}
-          delay={INFO_ANIM_DELAY}
-          condition={true}
-          reference={elems.desc.ref}
-          className={`popup--description popup--description__gallery-scrollbar ${popclass.desc} popup--description__${type}`}
-          style={styles.description}
-          onAnimationComplete={() => {
-            pop.setInfoDrawn(true);
-          }}>
-          {children}
-        </AnimPres>
-      )}
-    </>
+    <AnimPres
+      mode="wait"
+      fragment
+      animation={popAnims.slideFadeLeft}
+      delay={INFO_ANIM_DELAY}
+      condition={true}
+      reference={elems.desc.ref}
+      className={`popup--description popup--description__gallery-scrollbar ${popclass.desc} popup--description__${type}`}
+      style={styles.description}
+      onAnimationComplete={() => {
+        pop.setInfoDrawn(true);
+      }}>
+      {children}
+    </AnimPres>
   );
 }
 
@@ -182,7 +195,6 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
       "--gallery-description-height": `${galDescHeight}px`,
     },
   };
-  galInfoHeightMax;
   var hasDesc = pop.img.description || (pop.group.description && pop.group.description[pop.index]);
   var hasTitle = title ? true : false;
 
@@ -256,7 +268,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
           <Close pop={pop} nav={nav} handles={handles} popclass={popclass} type="gallery" />
         )}
 
-        {(pop.img.disciplines || pop.img.tools) && <GalCategoriesBackground catData={catData} />}
+        {(pop.img.disciplines || pop.img.tools) && <GalCategoriesBackground elems={elems} catData={catData} />}
       </GalInfoMotionWrapper>
     </>
   );
@@ -266,6 +278,7 @@ function GalCategoriesBackground({ catData }) {
   const list = new ClassList("gallery--categories-background");
   list.addIf("hovered", catData?.hovered || catData.ellipse?.hovered);
   const classes = list.get();
+
 
   return (
     <div

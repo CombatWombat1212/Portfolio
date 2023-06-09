@@ -524,13 +524,19 @@ $col-media-wrapper: rgba($col-background, 0.075);
       // --categories-top
       @include b-rad;
       position: absolute;
-      transition: 0.3s;
+      // transition: 0.3s;
+      transition: all 0.3s, top 0s;
 
       --categories-background-offset: 0.5rem;
       --categories-background-offset_negative: calc(var(--categories-background-offset) * -1);
 
       left: var(--categories-background-offset_negative);
-      top: calc(var(--categories-top) - var(--categories-background-offset));
+      // top: calc(var(--categories-top) - var(--categories-background-offset));
+      top: calc(var(--categories-top) - var(--categories-background-offset) - var(--gallery-info-scroll-top) 
+      
+      
+      
+      );
       // width: 100%;
       // width: calc(100% + (var(--categories-background-offset) * -1));
       width: calc(var(--gallery-info-width) + (var(--categories-background-offset) * 2));

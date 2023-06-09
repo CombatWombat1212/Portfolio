@@ -289,6 +289,7 @@ function Wrapper({ pop, bp }) {
   const popWidth = useElementWidth(popRef);
   const descRef = useRef(null);
   const infoRef = useRef(null);
+  const [galInfoScrollTop, setGalInfoScrollTop] = useState(0);
 
   const [lightboxImgMaxHeight, setLightboxImgMaxHeight] = useState(false);
   const [lightboxImgMaxWidth, setLightboxImgMaxWidth] = useState(false);
@@ -315,6 +316,8 @@ function Wrapper({ pop, bp }) {
     },
     desc: {
       ref: descRef,
+      scrollTop: galInfoScrollTop,
+      setScrollTop: setGalInfoScrollTop,
     },
     info: {
       ref: infoRef,
@@ -760,6 +763,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
       <AnimPres
         mode="wait"
         animation={pop.seekDir == "left" ? popAnims.slideFadeRight : popAnims.slideFadeLeft}
+        layout="position"
         condition={true}
         className={mediaWrapClasses}
         style={animPresStyles}

@@ -18,6 +18,7 @@ import Favicon from "@/components/head/Favicon";
 import useBrowserClass from "@/scripts/hooks/useBrowserClass";
 import ImagePrefetcher from "@/components/utilities/ImagePrefetcher";
 import { ABOUT_IMGS } from "@/data/ABOUT_IMGS";
+import ICONS from "@/data/ICONS";
 
 // const style =
 // `font-family: "Gira Sans"; font-size: 1.4375rem;` +
@@ -140,6 +141,13 @@ export default function App({ Component, pageProps }) {
 
   useBrowserClass();
 
+
+
+  const preFetchImages = [
+    ABOUT_IMGS.me,
+    ...Object.keys(ICONS).map((key) => ICONS[key]),
+  ];
+
   return (
     <>
       <Favicon />
@@ -152,7 +160,7 @@ export default function App({ Component, pageProps }) {
             <Footer />
           </Layout>
         </div>
-      <ImagePrefetcher images={ABOUT_IMGS.me} />
+      <ImagePrefetcher images={preFetchImages} />
       </Providers>
     </>
   );
