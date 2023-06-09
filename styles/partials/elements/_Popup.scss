@@ -44,7 +44,6 @@ $col-media-wrapper: rgba($col-background, 0.075);
         ),
       )
     );
-
   }
 
   &--background {
@@ -113,7 +112,8 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
   &__gallery {
     // max-width: calc(var(--site-max-width));
-    --popup-gap: 3rem;
+    // --popup-gap: 3rem;
+    --popup-gap: 2.5rem;
     --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 10rem);
     --popup-width-offset: calc(var(--site-max-width_wide) - 8rem);
 
@@ -532,11 +532,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
       left: var(--categories-background-offset_negative);
       // top: calc(var(--categories-top) - var(--categories-background-offset));
-      top: calc(var(--categories-top) - var(--categories-background-offset) - var(--gallery-info-scroll-top) 
-      
-      
-      
-      );
+      top: calc(var(--categories-top) - var(--categories-background-offset) - var(--gallery-info-scroll-top));
       // width: 100%;
       // width: calc(100% + (var(--categories-background-offset) * -1));
       width: calc(var(--gallery-info-width) + (var(--categories-background-offset) * 2));
@@ -731,22 +727,28 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
   &--controls {
     @include flex-row;
-    position: absolute;
+    // position: absolute;
+    position: fixed;
     justify-content: center;
     // width: 100%;
-    top: calc(100% - var(--popup-controls-offset) + 1.85rem);
+    // top: calc(100% - var(--popup-controls-offset) + 1.85rem);
     --gap: 1.45rem;
     @include gap;
+    bottom: 3rem;
+    width: var(--popup-width-offset);
+
+    transition-delay: 0s !important;
 
     &__gallery {
-      top: calc(100% + 2rem);
+      // top: calc(100% + 2rem);
       transform: translate(-50%, 0%);
       pointer-events: all;
 
       @include md-down {
-        width: 100%;
+        bottom: 2.25rem;
+        // width: 100%;
         z-index: 10;
-        top: calc(100% + var(--popup-controls-offset));
+        // top: calc(100% + var(--popup-controls-offset));
       }
     }
   }
@@ -962,26 +964,49 @@ $col-media-wrapper: rgba($col-background, 0.075);
 // CSS versions of PopAnims
 
 .popanims {
-  @include in-out(
-    (
-      all: (
-        --transition: 0.175s,
-      ),
-      initial: (
-        opacity: 0,
-        transform: translateX(1rem),
-      ),
-      animate: (
-        opacity: 1,
-        transform: translateX(0rem),
-      ),
-      exit: (
-        opacity: 0,
-        transform: translateX(-1rem),
-      ),
-      options: (
-        important: true,
-      ),
-    )
-  );
+  &--slide-fade {
+    @include in-out(
+      (
+        all: (
+          --transition: 0.175s,
+        ),
+        initial: (
+          opacity: 0,
+          transform: translateX(1rem),
+        ),
+        animate: (
+          opacity: 1,
+          transform: translateX(0rem),
+        ),
+        exit: (
+          opacity: 0,
+          transform: translateX(-1rem),
+        ),
+        options: (
+          important: true,
+        ),
+      )
+    );
+  }
+  &--fade {
+    @include in-out(
+      (
+        all: (
+          --transition: 0.175s,
+        ),
+        initial: (
+          opacity: 0,
+        ),
+        animate: (
+          opacity: 1,
+        ),
+        exit: (
+          opacity: 0,
+        ),
+        options: (
+          important: true,
+        ),
+      )
+    );
+  }
 }

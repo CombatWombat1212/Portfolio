@@ -57,7 +57,8 @@ function GalInfoMotionWrapper({ pop, state, elems, children, styles, type = "def
   }
 
   return (
-    <div className={classes} {...(type != "above" ? { ref: elems.info.ref } : {})} style={infoStyles}>
+    <div 
+        className={classes} {...(type != "above" ? { ref: elems.info.ref } : {})} style={infoStyles}>
       {children}
     </div>
   );
@@ -77,7 +78,6 @@ function GalInfoAnimPresBody({ elems, pop, styles, state, popclass, children, ty
   useEffect(() => {
     elems.desc.setScrollTop(scrollTop);
   }, [scrollTop]);
-
   return (
     <AnimPres
       mode="wait"

@@ -3698,7 +3698,7 @@ h3 + .studypanel--paragraph {
 }
 
 .popup__gallery {
-  --popup-gap: 3rem;
+  --popup-gap: 2.5rem;
   --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 10rem);
   --popup-width-offset: calc(var(--site-max-width_wide) - 8rem);
   max-width: var(--popup-width-offset);
@@ -4418,26 +4418,26 @@ h3 + .studypanel--paragraph {
 .popup--controls {
   display: flex;
   flex-direction: row;
-  position: absolute;
+  position: fixed;
   justify-content: center;
-  top: calc(100% - var(--popup-controls-offset) + 1.85rem);
   --gap: 1.45rem;
   gap: var(--gap);
   column-gap: var(--gap);
   row-gap: var(--gap);
+  bottom: 3rem;
+  width: var(--popup-width-offset);
+  transition-delay: 0s !important;
 }
 
 .popup--controls__gallery {
-  top: calc(100% + 2rem);
   transform: translate(-50%, 0%);
   pointer-events: all;
 }
 
 @media screen and (max-width: 49.9375em) {
   .popup--controls__gallery {
-    width: 100%;
+    bottom: 2.25rem;
     z-index: 10;
-    top: calc(100% + var(--popup-controls-offset));
   }
 }
 
@@ -4648,29 +4648,51 @@ h3 + .studypanel--paragraph {
   }
 }
 
-.popanims__initial, .popanims__animate, .popanims__exit {
+.popanims--slide-fade__initial, .popanims--slide-fade__animate, .popanims--slide-fade__exit {
   --transition: 0.175s !important;
 }
 
-.popanims__initial {
+.popanims--slide-fade__initial {
   visibility: hidden !important;
   opacity: 0 !important;
   transform: translateX(1rem) !important;
   transition: opacity var(--transition), transform var(--transition), visibility 0s var(--transition) !important;
 }
 
-.popanims__animate {
+.popanims--slide-fade__animate {
   visibility: visible !important;
   opacity: 1 !important;
   transform: translateX(0rem) !important;
   transition: opacity var(--transition), transform var(--transition), visibility 0s 0s !important;
 }
 
-.popanims__exit {
+.popanims--slide-fade__exit {
   visibility: hidden !important;
   opacity: 0 !important;
   transform: translateX(-1rem) !important;
   transition: opacity var(--transition), transform var(--transition), visibility 0s var(--transition) !important;
+}
+
+.popanims--fade__initial, .popanims--fade__animate, .popanims--fade__exit {
+  --transition: 0.175s !important;
+}
+
+.popanims--fade__initial {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  transition: opacity var(--transition), visibility 0s var(--transition) !important;
+}
+
+.popanims--fade__animate {
+  visibility: visible !important;
+  opacity: 1 !important;
+  transition: opacity var(--transition), visibility 0s 0s !important;
+}
+
+.popanims--fade__exit {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  transition: opacity var(--transition), visibility 0s var(--transition) !important;
 }
 
 .scale {

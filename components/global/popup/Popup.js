@@ -564,7 +564,6 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
           }
           return result;
         })();
-
         var availHeight = popupElem.offsetHeight - infoHeight - gapWidth;
         var availWidth = popupElem.offsetWidth;
 
@@ -737,7 +736,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
 
   const mediaWrapList = new ClassList("popup--media-wrapper");
   mediaWrapList.addOnly(popclass.mediaWrapper);
-  mediaWrapList.add(`popanims__${mediaWrapStateClass}`, { pref: false });
+  mediaWrapList.add(`popanims--slide-fade__${mediaWrapStateClass}`, { pref: false });
   mediaWrapList.addIf("loading", !pop.imgLoaded);
   const mediaWrapClasses = mediaWrapList.get();
 
@@ -757,6 +756,15 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
     "--aspect-width": Number(pop.img.aspect?.split("/")?.[0] || pop.img.width),
     "--aspect-height": Number(pop.img.aspect?.split("/")?.[1] || pop.img.height),
   };
+
+
+  const showControls = pop.type == "gallery" && pop.group && pop.firstImgDrawn && pop.infoDrawn;
+
+  const controlsClassState = useInOut(showControls);
+
+  useEffect(() => {
+    console.log(controlsClassState);
+  }, [controlsClassState]);
 
   return (
     <>
@@ -795,11 +803,11 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
         )}
       </AnimPres>
 
-      {pop.type == "gallery" && pop.group && pop.firstImgDrawn && pop.infoDrawn && (
-        <>
-          <Controls className="popup--controls__gallery" pop={pop} nav={nav} handles={handles} state={state} />
-        </>
-      )}
+      {/* {showControls && (
+        <> */}
+          <Controls className={`popup--controls__gallery popanims--fade__${controlsClassState}`} pop={pop} nav={nav} handles={handles} state={state} />
+        {/* </>
+      )} */}
     </>
   );
 }
@@ -855,7 +863,7 @@ const Controls = React.memo(function Controls({ pop, nav, handles, className }) 
       <Seek direction="right" nav={nav} handles={handles} />
     </AnimPres>
   );
-}, createUpdateConditions(["pop.img", "pop.group", "nav.left.on", "nav.right.on"]));
+}, createUpdateConditions(["pop.img", "pop.group", "nav.left.on", "nav.right.on", "className"]));
 
 function Seek({ direction, nav, handles }) {
   var btn = direction === "left" ? nav.left : nav.right;
