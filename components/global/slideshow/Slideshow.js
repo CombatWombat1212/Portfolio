@@ -16,6 +16,7 @@ import swipeEventsInit from "@/scripts/SwipeEvents";
 import useListener from "@/scripts/hooks/useListener";
 import useScrollbarSize from "@/scripts/hooks/useScrollbarSize";
 import useInView from "@/scripts/hooks/useInView";
+import useOrientationChange from "@/scripts/hooks/useOrientationChange";
 
 function Slideshow({ children, img }) {
 
@@ -56,6 +57,8 @@ function Slideshow({ children, img }) {
   }, [slide.states.img]);
 
   useHorizontalResize(handlers.resize);
+  useOrientationChange(handlers.resize);
+  
   useOnce(() => {
     swipeEventsInit;
   });

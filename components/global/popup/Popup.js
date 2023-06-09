@@ -757,7 +757,6 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
     "--aspect-height": Number(pop.img.aspect?.split("/")?.[1] || pop.img.height),
   };
 
-
   const showControls = pop.type == "gallery" && pop.group && pop.firstImgDrawn && pop.infoDrawn;
 
   const controlsClassState = useInOut(showControls);
@@ -805,8 +804,8 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
 
       {/* {showControls && (
         <> */}
-          <Controls className={`popup--controls__gallery popanims--fade__${controlsClassState}`} pop={pop} nav={nav} handles={handles} state={state} />
-        {/* </>
+      <Controls className={`popup--controls__gallery popanims--fade__${controlsClassState}`} pop={pop} nav={nav} handles={handles} state={state} />
+      {/* </>
       )} */}
     </>
   );

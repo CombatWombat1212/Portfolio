@@ -966,7 +966,7 @@ const EXPLORATIONS_IMGS = processImages(
       tools: ["HTML/CSS/JS", "API", "Adobe XD"],
       title: "Demo 1",
       description: [
-        `"How much would it cost to own an artist's entire physical discography?"  To music collectors like myself, this can be a common question, Which is why I built the "Discography Calculator".`,
+        `"How much would it cost to own an artist's entire physical discography?"  To music collectors like myself, this can be a common question, which is why I built the "Discography Calculator".`,
         `This handy tool was designed and built with enthusiasts and record store owners in mind.  It aims to help make purchasing plans, set goals for your collection, or just to satisfy curiosity.`,
         `Powered by Node.js, and the Discogs API, the site uses live data straight from marketplace listings.  Enter the name of any artist, and receive a grand sum for each of their physical releases, the cost per album, and their percentage of the total cost.`,
       ],
