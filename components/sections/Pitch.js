@@ -5,7 +5,7 @@ import MAKERIGHT_IMGS from "@/data/MAKERIGHT_IMGS";
 import Section from "./Sections";
 import React, { useEffect, useRef, useState } from "react";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
-import { clamp, cooldown, RESIZE_TIMEOUT, splitPx, splitRem } from "@/scripts/GlobalUtilities";
+import { clamp, cooldown, createUpdateConditions, RESIZE_TIMEOUT, splitPx, splitRem } from "@/scripts/GlobalUtilities";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import usePropModifier from "@/scripts/hooks/usePropModifier";
 import swipeEventsInit from "@/scripts/SwipeEvents";
@@ -19,6 +19,8 @@ import ResponsiveText from "../global/ResponsiveText";
 import useInView from "@/scripts/hooks/useInView";
 import useInOut from "@/scripts/hooks/useInOut";
 import useAttrObserver from "@/scripts/hooks/useAttrObserver";
+import { lock, unlock } from "tua-body-scroll-lock";
+import useBrowser from "@/scripts/hooks/useBrowser";
 
 const laptop_frame = MAKERIGHT_IMGS.pitch_laptop_frame;
 
@@ -136,7 +138,6 @@ function pitchSetRowProgress(pitch) {
   if (pitchSetRowProgressCounter % 5 === 0) {
     pitch.elem.style.setProperty("--pitch-row-progress", pitch.rows.progress);
   }
-
 }
 
 function pitchGetRowProgress(pitch) {
@@ -196,12 +197,11 @@ function pitchGetInView(pitch) {
   var inView = rect.top < window.innerHeight && rect.bottom > 0;
   pitch.inView = inView;
 
-
   var within = rect.top <= 0 && rect.bottom >= window.innerHeight; // not just in view, but fully within the viewport, used for the indicator
   if (within) {
-    elem.setAttribute('data-inview', true);
+    elem.setAttribute("data-inview", true);
   } else {
-    elem.setAttribute('data-inview', false);
+    elem.setAttribute("data-inview", false);
   }
 
   if (inView && pitch.starting.set == 0) {
@@ -286,7 +286,6 @@ function Pitch({ children }) {
   const [lockScroll, setLockScroll] = useState(false);
   const [lastTouchY, setLastTouchY] = useState(null);
 
-
   useEffect(() => {
     swipeEventsInit();
   }, []);
@@ -304,7 +303,6 @@ function Pitch({ children }) {
   const lgAndDown = !(!isBpAndDown("lg") || loading);
   const mdAndDown = !(!isBpAndDown("md") || loading);
   const smAndDown = !(!isBpAndDown("sm") || loading);
-
 
   useMountEffect(() => {
     var pitchObj = new PitchItem(pitch);
@@ -326,9 +324,19 @@ function Pitch({ children }) {
 
   useListener("scroll", preventScroll, { enabled: lockScroll });
   useListener("touchstart", preventScroll, { enabled: lockScroll });
-  useListener("swiped-down", swipedDownHandler, { ref: pitch, enabled: lockScroll });
-  useListener("swiped-up", swipedUpHandler, { ref: pitch, enabled: lockScroll });
+  // useListener("swiped-down", swipedDownHandler, { ref: pitch, enabled: lockScroll });
+  // useListener("swiped-up", swipedUpHandler, { ref: pitch, enabled: lockScroll });
   useListener("touchend", () => setLastTouchY(null));
+
+  useEffect(() => {
+    if (!pitch.current) return;
+    pitch.current.addEventListener("swiped-down", swipedDownHandler);
+    pitch.current.addEventListener("swiped-up", swipedUpHandler);
+    return () => {
+      pitch.current.removeEventListener("swiped-down", swipedDownHandler);
+      pitch.current.removeEventListener("swiped-up", swipedUpHandler);
+    };
+  }, [pitch]);
 
   // if mdAndDown is true do the following:
   // cancel all scrolling once the top of .pitch (including its padding-top) has reached the top of the screen, from there listen for swipes and with every swipe up, scroll to the top of the next .pitch--placeholder, you know which one is the current placeholder based on pitch.rows.current that is set on scroll and resize
@@ -338,7 +346,7 @@ function Pitch({ children }) {
   function handleScroll(e) {
     if (!(mdAndDown && pitches.find((pitch) => pitch.inView) && isMobileDevice)) {
       setLockScroll(false);
-      return; 
+      return;
     }
 
     const pitchObj = pitches.find((p) => p.elem == pitch.current);
@@ -416,26 +424,26 @@ function Pitch({ children }) {
 
   function swipedUpHandler(e) {
     swipedUpHandlerThrottled(e);
+    console.log("swiped up");
   }
 
   function swipedDownHandler(e) {
     swipedDownHandlerThrottled(e);
+    console.log("swiped down");
   }
 
-
   const insidePitch = useAttrObserver(pitch, "data-inview");
-  // const currentRow = useAttrObserver(pitch, "--pitch-current-row", {bool:false});
+  const currentRow = useAttrObserver(pitch, "--pitch-current-row", { bool: false });
   const [showIndicator, setShowIndicator] = useState(false);
   const indicatorClassState = useInOut(showIndicator);
 
   useEffect(() => {
-    if(insidePitch) {
+    if (insidePitch) {
       setShowIndicator(true);
     } else {
       setShowIndicator(false);
     }
   }, [insidePitch]);
-
 
   return (
     <>
@@ -462,12 +470,12 @@ function Pitch({ children }) {
 
         <div className={`pitch--indicator-wrapper pitch--indicator-wrapper__${indicatorClassState}`}>
           {/* <Tag className="pitch--indicator" variant="tool" color="inverted"> */}
-          <div className="pitch--indicator" >
+          <div className="pitch--indicator">
             {/* <ResponsiveText tag="Fragment">
               <xxl>Scroll / Swipe</xxl>
-              <md>Scroll / Swipe</md>
+              <md>Swipe</md>
             </ResponsiveText> */}
-            <Graphic type="mask" className={`pitch--indicator-arrow pitch--indicator-arrow__${showIndicator ? "animate" : ''}`} img={arrow_down} />
+            <Graphic type="mask" className={`pitch--indicator-arrow`} img={arrow_down} />
           </div>
           {/* </Tag> */}
         </div>
@@ -476,7 +484,7 @@ function Pitch({ children }) {
   );
 }
 
-const PitchBody = ({ index, vectorProps, heading, description }) => {
+function PitchBody({ index, vectorProps, heading, description }) {
   return (
     <div className="pitch--row pitch--body" key={index} style={{ "--pitch-row-index": index }}>
       <Graphic {...vectorProps} />
@@ -491,6 +499,7 @@ const PitchBody = ({ index, vectorProps, heading, description }) => {
     </div>
   );
 };
+
 
 function formatRow(row) {
   var { description, title, heading, graphic, other } = row.childs;

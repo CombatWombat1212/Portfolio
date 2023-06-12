@@ -5721,7 +5721,7 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 49.9375em) {
   .pitch {
     --gap: 3rem;
-    --sticky-buffer-offset: calc(9vh / var(--zoom));
+    --sticky-buffer-offset: calc(12vh / var(--zoom));
     --pitch-progress-distance: 1rem;
     --pitch-caption-height-margin: 2rem;
     --pitch-additional-height: 20rem;
@@ -5731,7 +5731,10 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 36.9375em) {
   .pitch {
     --pitch-additional-height: 32rem;
-    --sticky-buffer-offset: calc(12.5vh / var(--zoom));
+    --sticky-buffer-offset: calc(14.5vh / var(--zoom));
+  }
+  .ios.safari .pitch {
+    --pitch-additional-height: 60rem;
   }
 }
 
@@ -5807,9 +5810,9 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 61.9375em) {
   .pitch .pitch--graphics-wrapper {
     position: sticky;
-    top: calc(var(--nav-height));
     --m: calc(var(--pitch-row-height) + var(--pitch-row-margin));
-    top: calc(var(--graphics-top) + ((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
+    top: calc(var(--graphics-top));
+    transform: translateY(calc((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
     transition: var(--pitch-progress-transition);
   }
 }
@@ -5859,6 +5862,7 @@ h3 + .studypanel--paragraph {
     margin-top: calc(var(--my));
     margin-bottom: calc(var(--my) + var(--pitch-caption-height) + var(--gap));
     top: 0rem;
+    transform: translateY(0rem);
     transition: none;
   }
 }
@@ -5890,7 +5894,7 @@ h3 + .studypanel--paragraph {
   height: var(--pitch-row-height);
   left: calc((var(--pitch-overflow-buffer-y) / 2) * -1);
   top: calc((var(--pitch-overflow-buffer-x) / 2) * -1);
-  margin-top: calc(var(--mockup-margin-top) - (var(--pitch-current-row) * var(--pitch-row-height)));
+  transform: translateY(calc(var(--mockup-margin-top) - (var(--pitch-current-row) * var(--pitch-row-height))));
 }
 
 .pitch .pitch--body {
@@ -5901,14 +5905,16 @@ h3 + .studypanel--paragraph {
   width: 100%;
   transition-duration: var(--pitch-transition);
   --mockup-margin-top: calc(var(--pitch-row-index) * var(--pitch-row-height));
-  margin-top: calc(var(--mockup-margin-top) - (var(--pitch-current-row) * var(--pitch-row-height)));
+  margin-top: var(--mockup-margin-top);
+  transform: translateY(calc((var(--pitch-current-row) * var(--pitch-row-height)) * -1));
 }
 
 @media screen and (max-width: 61.9375em) {
   .pitch .pitch--body {
     height: var(--pitch-caption-height);
     --pitch-caption-height_increased: calc(var(--pitch-caption-height) + var(--pitch-caption-height-margin));
-    margin-top: calc( var(--pitch-row-index) * var(--pitch-caption-height_increased) - (var(--pitch-current-row) * var(--pitch-caption-height_increased)));
+    margin-top: 0rem;
+    transform: translateY(calc(var(--pitch-row-index) * var(--pitch-caption-height_increased) - (var(--pitch-current-row) * var(--pitch-caption-height_increased))));
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -6009,16 +6015,44 @@ h3 + .studypanel--paragraph {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  --indicator-offset: 2.25rem;
+  --indicator-offset: 5rem;
   --indicator-position: calc((var(--pitch-progress-distance) + ((var(--pitch-row-progress)) * var(--pitch-progress-distance))) * -1);
   bottom: var(--indicator-offset);
   transform: translateY(var(--indicator-position));
 }
 
+@media screen and (max-width: 79.9375em) {
+  .pitch .pitch--indicator-wrapper {
+    --indicator-offset: 6.5rem;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  .pitch .pitch--indicator-wrapper {
+    --indicator-offset: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  .pitch .pitch--indicator-wrapper {
+    --indicator-offset: 2.75rem;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  .pitch .pitch--indicator-wrapper {
+    --indicator-offset: Min(calc(6.5vh / var(--zoom)), calc(5vw / var(--zoom)));
+  }
+}
+
+.ios.safari .pitch .pitch--indicator-wrapper {
+  top: calc(calc(100vh / var(--zoom)) - var(--indicator-offset) + 0.85rem);
+}
+
 .pitch .pitch--indicator-wrapper__initial {
   opacity: 0 ;
   transition: transform 0.35s, opacity var(--pitch-progress-transition), visibility 0s var(--pitch-progress-transition) ;
-  transform: translateY(calc(var(--indicator-offset) * -1)) ;
+  transform: translateY(var(--indicator-offset)) ;
   transition: "transform 0.35s, opacity var(--pitch-progress-transition),\a             visibility 0s var(--pitch-progress-transition)" ;
 }
 
@@ -6032,7 +6066,7 @@ h3 + .studypanel--paragraph {
 .pitch .pitch--indicator-wrapper__exit {
   opacity: 0 ;
   transition: transform 0.35s, opacity var(--pitch-progress-transition), visibility 0s var(--pitch-progress-transition) ;
-  transform: translateY(calc(var(--indicator-offset) * -1)) ;
+  transform: translateY(var(--indicator-offset)) ;
   transition: "transform 0.35s, opacity var(--pitch-progress-transition),\a             visibility 0s var(--pitch-progress-transition)" ;
 }
 
@@ -6043,26 +6077,8 @@ h3 + .studypanel--paragraph {
 }
 
 .pitch .pitch--indicator-arrow {
+  margin-top: -0.1rem;
   --graphic-scale: 0.05;
-}
-
-.pitch .pitch--indicator-arrow__animate {
-  --bob-duration: 2s;
-  --pause-duration: 2s;
-  animation: bob var(--bob-duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
-  animation-delay: var(--pause-duration);
-}
-
-@keyframes bob {
-  0%,
-  50%,
-  100% {
-    transform: translateY(0);
-  }
-  25%,
-  75% {
-    transform: translateY(0.5rem);
-  }
 }
 
 .indicator {

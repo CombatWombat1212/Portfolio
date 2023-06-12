@@ -1141,6 +1141,12 @@
 	  @content;
 	}
   }
+
+@mixin ios-safari {
+	.ios.safari & {
+	  @content;
+	}
+  }
   
   @mixin chrome {
 	.chrome & {

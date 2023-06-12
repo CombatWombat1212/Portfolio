@@ -15,7 +15,7 @@ const useBrowserClass = () => {
     // Detect OS
     if (userAgentString.indexOf("Win") !== -1) {
       document.documentElement.classList.add('windows');
-    } else if (userAgentString.indexOf("Mac") !== -1) {
+    } else if (userAgentString.indexOf("Mac") !== -1 && (userAgentString.indexOf("iPhone") === -1)) {
       document.documentElement.classList.add('mac');
     } else if ((userAgentString.indexOf("Linux") !== -1) && (userAgentString.indexOf("Android") === -1)) {
       document.documentElement.classList.add('linux');
