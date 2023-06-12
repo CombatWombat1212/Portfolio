@@ -433,17 +433,7 @@ function Pitch({ children }) {
   }
 
   const insidePitch = useAttrObserver(pitch, "data-inview");
-  const currentRow = useAttrObserver(pitch, "--pitch-current-row", { bool: false });
-  const [showIndicator, setShowIndicator] = useState(false);
-  const indicatorClassState = useInOut(showIndicator);
-
-  useEffect(() => {
-    if (insidePitch) {
-      setShowIndicator(true);
-    } else {
-      setShowIndicator(false);
-    }
-  }, [insidePitch]);
+  const indicatorClassState = useInOut(insidePitch);
 
   return (
     <>
@@ -452,6 +442,7 @@ function Pitch({ children }) {
           <Laptop rows={rows} />
         </div>
         <div className="pitch--column pitch--captions-wrapper">
+
           <div className="pitch--captions">
             {rows.map((row, i) => {
               var { description, heading, vector } = formatRow(row);
@@ -469,15 +460,15 @@ function Pitch({ children }) {
         </div>
 
         <div className={`pitch--indicator-wrapper pitch--indicator-wrapper__${indicatorClassState}`}>
-          {/* <Tag className="pitch--indicator" variant="tool" color="inverted"> */}
-          <div className="pitch--indicator">
-            {/* <ResponsiveText tag="Fragment">
-              <xxl>Scroll / Swipe</xxl>
+          <Tag className="pitch--indicator" variant="tool" color="inverted">
+          {/* <div className="pitch--indicator"> */}
+            <ResponsiveText tag="Fragment">
+              <xxl>Scroll</xxl>
               <md>Swipe</md>
-            </ResponsiveText> */}
+            </ResponsiveText>
             <Graphic type="mask" className={`pitch--indicator-arrow`} img={arrow_down} />
-          </div>
-          {/* </Tag> */}
+          {/* </div> */}
+          </Tag>
         </div>
       </div>
     </>

@@ -5731,7 +5731,7 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 36.9375em) {
   .pitch {
     --pitch-additional-height: 32rem;
-    --sticky-buffer-offset: calc(14.5vh / var(--zoom));
+    --sticky-buffer-offset: calc(15.5vh / var(--zoom));
   }
   .ios.safari .pitch {
     --pitch-additional-height: 60rem;
@@ -6035,13 +6035,13 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 49.9375em) {
   .pitch .pitch--indicator-wrapper {
-    --indicator-offset: 2.75rem;
+    --indicator-offset: 2rem;
   }
 }
 
 @media screen and (max-width: 36.9375em) {
   .pitch .pitch--indicator-wrapper {
-    --indicator-offset: Min(calc(6.5vh / var(--zoom)), calc(5vw / var(--zoom)));
+    --indicator-offset: 4rem;
   }
 }
 
@@ -6077,8 +6077,12 @@ h3 + .studypanel--paragraph {
 }
 
 .pitch .pitch--indicator-arrow {
+  --graphic-scale: 0.0325;
   margin-top: -0.1rem;
-  --graphic-scale: 0.05;
+}
+
+.ios.safari .pitch .pitch--indicator-arrow {
+  margin-top: 0.1rem;
 }
 
 .indicator {

@@ -49,7 +49,7 @@
   }
   @include sm-down {
     --pitch-additional-height: 32rem;
-    --sticky-buffer-offset: #{zoom-vh(14.5vh)};
+    --sticky-buffer-offset: #{zoom-vh(15.5vh)};
 
     @include ios-safari {
       --pitch-additional-height: 60rem;
@@ -328,10 +328,12 @@
         --indicator-offset: 1.5rem;
       }
       @include md-down {
-        --indicator-offset: 2.75rem;
+        // --indicator-offset: Min(#{zoom-vh(1vh)}, #{zoom-vw(4vw)});
+        --indicator-offset: 2rem;
       }
       @include sm-down {
-        --indicator-offset: Min(#{zoom-vh(6.5vh)}, #{zoom-vw(5vw)});
+        // --indicator-offset: Min(#{zoom-vh(3.5vh)}, #{zoom-vw(11vw)});
+        --indicator-offset: 4rem;
       }
 
 
@@ -373,9 +375,13 @@
       gap: 0.3rem;
     }
     &--indicator-arrow {
-      // --graphic-scale: 0.0325;
+      --graphic-scale: 0.0325;
+
       margin-top: -0.1rem;
-      --graphic-scale: 0.05;
+      @include ios-safari{
+        margin-top: 0.1rem;
+      }
+      // --graphic-scale: 0.05;
       // opacity:1;
       &__animate {
         // --bob-duration: 2.5s;
