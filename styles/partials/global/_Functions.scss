@@ -400,3 +400,14 @@ $enable-important-utilities: false !default;
       $opacity
     );
   }
+
+
+
+
+  @function zoom-vh($val){
+    @return calc(#{$val} / var(--zoom));
+  }
+
+    @function zoom-vw($val){
+        @return calc(#{$val} / var(--zoom));
+    }

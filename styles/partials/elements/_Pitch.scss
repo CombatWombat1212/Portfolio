@@ -19,7 +19,7 @@
 
   --sticky-buffer-offset: 2rem;
   // --sticky-buffer: calc(var(--section-gap_half) / 2);
-  --sticky-buffer: calc(((100vh - var(--nav-height)) - (var(--pitch-row-margin) * 2) - var(--pitch-row-height)) / 2);
+  --sticky-buffer: calc(((#{zoom-vh(100vh)} - var(--nav-height)) - (var(--pitch-row-margin) * 2) - var(--pitch-row-height)) / 2);
   --graphics-top: calc(var(--sticky-buffer) + var(--nav-height) - var(--sticky-buffer-offset));
 
   // increasing this number makes the scrolling slower, like you have to scroll further before the next switch
@@ -37,19 +37,19 @@
   @include lg-down {
     @include flex-col-center;
     --gap: 3.35rem;
-    --sticky-buffer-offset: 2vh;
+    --sticky-buffer-offset: #{zoom-vh(2vh)};
     --pitch-additional-height: 14rem;
   }
   @include md-down {
     --gap: 3rem;
-    --sticky-buffer-offset: 9vh;
+    --sticky-buffer-offset: #{zoom-vh(9vh)};
     --pitch-progress-distance: 1rem;
     --pitch-caption-height-margin: 2rem;
     --pitch-additional-height: 20rem;
   }
   @include sm-down {
     --pitch-additional-height: 32rem;
-    --sticky-buffer-offset: 12.5vh;
+    --sticky-buffer-offset: #{zoom-vh(12.5vh)};
   }
 
 

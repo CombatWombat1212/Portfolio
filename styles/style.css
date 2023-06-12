@@ -1269,7 +1269,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: calc(100vw / var(--zoom));
   height: 100%;
   z-index: 10000;
   pointer-events: none;
@@ -5692,7 +5692,7 @@ h3 + .studypanel--paragraph {
   --pitch-progress-distance: 2.5rem;
   --pitch-row-margin: var(--section-gap_half);
   --sticky-buffer-offset: 2rem;
-  --sticky-buffer: calc(((100vh - var(--nav-height)) - (var(--pitch-row-margin) * 2) - var(--pitch-row-height)) / 2);
+  --sticky-buffer: calc(((calc(100vh / var(--zoom)) - var(--nav-height)) - (var(--pitch-row-margin) * 2) - var(--pitch-row-height)) / 2);
   --graphics-top: calc(var(--sticky-buffer) + var(--nav-height) - var(--sticky-buffer-offset));
   --pitch-additional-height: 20rem;
   --pitch-caption-height: 13rem;
@@ -5713,7 +5713,7 @@ h3 + .studypanel--paragraph {
     flex-direction: column;
     justify-content: center;
     --gap: 3.35rem;
-    --sticky-buffer-offset: 2vh;
+    --sticky-buffer-offset: calc(2vh / var(--zoom));
     --pitch-additional-height: 14rem;
   }
 }
@@ -5721,7 +5721,7 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 49.9375em) {
   .pitch {
     --gap: 3rem;
-    --sticky-buffer-offset: 9vh;
+    --sticky-buffer-offset: calc(9vh / var(--zoom));
     --pitch-progress-distance: 1rem;
     --pitch-caption-height-margin: 2rem;
     --pitch-additional-height: 20rem;
@@ -5731,7 +5731,7 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 36.9375em) {
   .pitch {
     --pitch-additional-height: 32rem;
-    --sticky-buffer-offset: 12.5vh;
+    --sticky-buffer-offset: calc(12.5vh / var(--zoom));
   }
 }
 

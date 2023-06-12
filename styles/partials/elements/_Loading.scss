@@ -3,7 +3,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: calc(100vw / var(--zoom));
     height: 100%;
     z-index: 10000;
     pointer-events: none;
