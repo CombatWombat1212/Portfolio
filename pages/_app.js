@@ -19,6 +19,7 @@ import useBrowserClass from "@/scripts/hooks/useBrowserClass";
 import ImagePrefetcher from "@/components/utilities/ImagePrefetcher";
 import { ABOUT_IMGS } from "@/data/ABOUT_IMGS";
 import ICONS from "@/data/ICONS";
+import usePop from "@/components/global/popup/usePop";
 
 // const style =
 // `font-family: "Gira Sans"; font-size: 1.4375rem;` +
@@ -77,62 +78,8 @@ export default function App({ Component, pageProps }) {
 
   // const [popup, setPopup] = useState(false);
 
-  const [popupType, setPopupType] = useState(false);
-  const [popupImg, setPopupImg] = useState(false);
-  const [popupZoom, setPopupZoom] = useState(false);
-  const [popupOn, setPopupOn] = useState(false);
-  const [popupGroup, setPopupGroup] = useState(false);
-  const [popupIndex, setPopupIndex] = useState(false);
-  const [popupUiVisible, popupSetUIVisible] = useState(true);
-  const [popupImgLoaded, setPopupImgLoaded] = useState(false);
-  const [popupImgDrawn, setPopupImgDrawn] = useState(false);
-  const [popupInfoDrawn, setPopupInfoDrawn] = useState(false);
-  const [popupDrawn, setPopupDrawn] = useState(false);
-  const [popupSeekCooldown, setPopupSeekCooldown] = useState(false);
-  const [popupSeekDir, setPopupSeekDir] = useState("left");
 
-  const [imgReady, setImgReady] = useState(false);
-  const [firstImgReady, setFirstImgReady] = useState(false);
-  const [firstImgDrawn, setFirstImgDrawn] = useState(false);
-
-  const pop = {
-    type: popupType,
-    setType: setPopupType,
-    img: popupImg,
-    setImg: setPopupImg,
-    zoom: popupZoom,
-    setZoom: setPopupZoom,
-    on: popupOn,
-    setOn: setPopupOn,
-    onRef: useRef(popupOn),
-    group: popupGroup,
-    setGroup: setPopupGroup,
-    index: popupIndex,
-    setIndex: setPopupIndex,
-    imgLoaded: popupImgLoaded,
-    setImgLoaded: setPopupImgLoaded,
-    drawn: popupDrawn,
-    setDrawn: setPopupDrawn,
-    seekCooldown: popupSeekCooldown,
-    setSeekCooldown: setPopupSeekCooldown,
-    seekDir: popupSeekDir,
-    setSeekDir: setPopupSeekDir,
-    imgReady: imgReady,
-    setImgReady: setImgReady,
-    firstImgReady: firstImgReady,
-    setFirstImgReady: setFirstImgReady,
-    firstImgDrawn: firstImgDrawn,
-    setFirstImgDrawn: setFirstImgDrawn,
-    imgDrawn: popupImgDrawn,
-    setImgDrawn: setPopupImgDrawn,
-    infoDrawn: popupInfoDrawn,
-    setInfoDrawn: setPopupInfoDrawn,
-
-    ui: {
-      visible: popupUiVisible,
-      setVisible: popupSetUIVisible,
-    },
-  };
+  const pop = usePop();
 
   const bp = useBreakpoint();
   useEffect(() => {
@@ -140,7 +87,6 @@ export default function App({ Component, pageProps }) {
   }, [bp]);
 
   useBrowserClass();
-
 
 
   const preFetchImages = [
@@ -159,8 +105,8 @@ export default function App({ Component, pageProps }) {
             <Component pop={pop} />
             <Footer />
           </Layout>
+         <ImagePrefetcher images={preFetchImages} />
         </div>
-      <ImagePrefetcher images={preFetchImages} />
       </Providers>
     </>
   );

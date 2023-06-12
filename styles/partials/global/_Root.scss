@@ -9,12 +9,33 @@
 
   --font-height-body: Max(var(--font-size-body), var(--font-leading-body));
   --font-height-h1: Max(var(--font-size-h1), var(--font-leading-h1));
-  
+
   --sfh: 4.9406564584124654e-324;
 }
 
-html{
+html {
   scroll-behavior: smooth;
+  --zoom: 1;
+
+  zoom: var(--zoom);
+
+  /* Zoom everything on bigger screens */
+  @media (min-width: 2000px) and (max-width: 2399px) {
+    // 2304 x 1440	Retina (Apple only)
+      --zoom: 1.25;
+  }
+  @media (min-width: 2400px) and (max-width: 2599px) {
+    // 2k - 2560 x 1440
+      --zoom: 1.5;
+  }
+  @media (min-width: 2600px) and (max-width: 3299px) {
+    // 3K - 3200 x 1800
+      --zoom: 1.75;
+  }
+  @media (min-width: 3300px) and (max-width: 4000px) {
+    // 4K - 3840 x 2160
+      --zoom: 2;
+  }
 }
 
 body {

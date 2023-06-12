@@ -19,8 +19,9 @@
 
     &__home {
       @include flex-col-center;
-      height: 92vh;
       min-height: var(--studypanel-img-height);
+      height: calc(92vh / var(--zoom));
+      max-height: calc(65vw / var(--zoom));
 
       @include xl-down {
         height: 100% !important;
@@ -31,6 +32,7 @@
       @include lg-down {
         margin-top: 14rem;
         margin-bottom: 14rem;
+        max-height: unset;
       }
 
       @include md-down {
@@ -206,7 +208,7 @@
       @include lg-down {
         width: col-width(6.35);
       }
-
+      
       @include md-down {
         order: 0;
         width: col-width(7.45);
@@ -239,6 +241,7 @@
         width: col-width(7.45);
         @include mx-auto;
       }
+      
       @include sm-down {
         width: col-width(11);
       }
@@ -319,7 +322,8 @@
 
     @include md-down {
       @include flex-col-center;
-      --studypanel-img-height: 39vh;
+      --min: Min(calc(39vh / var(--zoom)), calc(92vw / var(--zoom)));
+      --studypanel-img-height: var(--min);
     }
   }
 }

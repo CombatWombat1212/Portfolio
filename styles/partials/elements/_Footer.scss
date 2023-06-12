@@ -140,6 +140,7 @@
 
     &--wrapper {
       padding-left: var(--contact-wrapper-pl);
+      // padding-left: calc(var(--contact-wrapper-pl) / var(--zoom));
 
       @include xl-down {
         padding-left: 0;

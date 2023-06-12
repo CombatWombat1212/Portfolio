@@ -32,6 +32,7 @@ const ImagePrefetcher = ({ images }) => {
       alt={imgs[imgIndex]?.alt}
       width={imgs[imgIndex]?.width}
       height={imgs[imgIndex]?.height}
+      priority={true}
     />
   );
 };
