@@ -5691,7 +5691,7 @@ h3 + .studypanel--paragraph {
   --pitch-progress-transition: 0.25s;
   --pitch-progress-distance: 2.5rem;
   --pitch-row-margin: var(--section-gap_half);
-  --sticky-buffer-offset: 2rem;
+  --sticky-buffer-offset: 4.25rem;
   --sticky-buffer: calc(((calc(100vh / var(--zoom)) - var(--nav-height)) - (var(--pitch-row-margin) * 2) - var(--pitch-row-height)) / 2);
   --graphics-top: calc(var(--sticky-buffer) + var(--nav-height) - var(--sticky-buffer-offset));
   --pitch-additional-height: 20rem;
@@ -5999,6 +5999,54 @@ h3 + .studypanel--paragraph {
 
 .pitch .pitch--empties {
   margin-top: calc((var(--pitch-row-height) + var(--section-gap_half)) * -1);
+}
+
+.pitch .pitch--indicator-wrapper {
+  position: fixed;
+  width: var(--site-max-width_wide);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  transition: var(--pitch-progress-transition);
+  --indicator-offset: 2.5rem;
+  bottom: calc(var(--indicator-offset) + var(--pitch-progress-distance) + ((var(--pitch-row-progress)) * var(--pitch-progress-distance)));
+}
+
+.pitch .pitch--indicator-wrapper__initial, .pitch .pitch--indicator-wrapper__animate, .pitch .pitch--indicator-wrapper__exit {
+  --transition: 0.175s ;
+}
+
+.pitch .pitch--indicator-wrapper__initial {
+  opacity: 0 ;
+  transition: transform 0.35s, bottom var(--transition), opacity var(--transition), visibility 0s var(--transition) ;
+  transform: translateY(calc(var(--indicator-offset) + var(--pitch-progress-distance))) ;
+  transition: "transform 0.35s, bottom var(--transition),\a             opacity var(--transition),\a             visibility 0s var(--transition)" ;
+}
+
+.pitch .pitch--indicator-wrapper__animate {
+  opacity: 1 ;
+  transition: transform 0.35s, bottom var(--transition), opacity var(--transition), visibility 0s 0s ;
+  transform: translateY(0rem) ;
+  transition: "transform 0.35s, bottom var(--transition),\a             opacity var(--transition),\a             visibility 0s 0s" ;
+}
+
+.pitch .pitch--indicator-wrapper__exit {
+  opacity: 0 ;
+  transition: transform 0.35s, bottom var(--transition), opacity var(--transition), visibility 0s var(--transition) ;
+  transform: translateY(calc(var(--indicator-offset) + var(--pitch-progress-distance))) ;
+  transition: "transform 0.35s, bottom var(--transition),\a             opacity var(--transition),\a             visibility 0s var(--transition)" ;
+}
+
+.pitch .pitch--indicator {
+  display: flex;
+  flex-direction: row;
+  gap: 0.3rem;
+}
+
+.pitch .pitch--indicator-arrow {
+  --graphic-scale: 0.05;
+  margin-top: -0.115rem;
+  animation: bob 3.4s ease-in-out infinite;
 }
 
 .indicator {

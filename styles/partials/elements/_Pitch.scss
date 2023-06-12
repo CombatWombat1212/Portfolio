@@ -17,7 +17,7 @@
 
   --pitch-row-margin: var(--section-gap_half);
 
-  --sticky-buffer-offset: 2rem;
+  --sticky-buffer-offset: 4.25rem;
   // --sticky-buffer: calc(var(--section-gap_half) / 2);
   --sticky-buffer: calc(((#{zoom-vh(100vh)} - var(--nav-height)) - (var(--pitch-row-margin) * 2) - var(--pitch-row-height)) / 2);
   --graphics-top: calc(var(--sticky-buffer) + var(--nav-height) - var(--sticky-buffer-offset));
@@ -52,8 +52,6 @@
     --sticky-buffer-offset: #{zoom-vh(12.5vh)};
   }
 
-
-
   .pitch {
     &--row {
       @include marg-y(var(--pitch-row-margin));
@@ -63,7 +61,6 @@
 
     &--placeholder {
       height: calc(var(--pitch-row-height) + var(--pitch-additional-height)) !important;
-
 
       &:last-child {
         height: calc((var(--pitch-row-height) * 2.25) + var(--pitch-additional-height)) !important;
@@ -288,7 +285,57 @@
 
     &--empties {
       margin-top: calc((var(--pitch-row-height) + var(--section-gap_half)) * -1);
+    }
 
+    &--indicator-wrapper {
+      position: fixed;
+      width: var(--site-max-width_wide);
+      @include flex-row-center;
+      transition: var(--pitch-progress-transition);
+
+      --indicator-offset: 2.5rem;
+      bottom: calc(var(--indicator-offset) + var(--pitch-progress-distance) + ((var(--pitch-row-progress)) * var(--pitch-progress-distance)));
+
+      @include in-out(
+        (
+          all: (
+            --transition: 0.175s,
+          ),
+          initial: (
+            opacity: 0,
+            transition: 'transform 0.35s, bottom var(--transition),
+            opacity var(--transition),
+            visibility 0s var(--transition)',
+            transform: translateY(calc(var(--indicator-offset) + var(--pitch-progress-distance))),
+          ),
+          animate: (
+            opacity: 1,
+            transition: 'transform 0.35s, bottom var(--transition),
+            opacity var(--transition),
+            visibility 0s 0s',
+            transform: translateY(0rem),
+          ),
+          exit: (
+            opacity: 0,
+            transition: 'transform 0.35s, bottom var(--transition),
+            opacity var(--transition),
+            visibility 0s var(--transition)',
+            transform: translateY(calc(var(--indicator-offset) + var(--pitch-progress-distance))),
+          ),
+        )
+      );
+    }
+    &--indicator {
+      @include flex-row;
+      gap: 0.3rem;
+    }
+    &--indicator-arrow {
+      // --graphic-scale: 0.035;
+      --graphic-scale: 0.05;
+      margin-top: -0.115rem;
+      animation: bob 3.4s ease-in-out infinite;
+    
     }
   }
 }
+

@@ -13,6 +13,12 @@ import useListener from "@/scripts/hooks/useListener";
 import useScrollDirection from "@/scripts/hooks/useScrollDirection";
 import useScrollType from "@/scripts/useScrollType";
 import useDeviceDetect from "@/scripts/hooks/useDetectDevice";
+import Tag from "../elements/Tag";
+import { arrow_down } from "@/data/ICONS";
+import ResponsiveText from "../global/ResponsiveText";
+import useInView from "@/scripts/hooks/useInView";
+import useInOut from "@/scripts/hooks/useInOut";
+import useAttrObserver from "@/scripts/hooks/useAttrObserver";
 
 const laptop_frame = MAKERIGHT_IMGS.pitch_laptop_frame;
 
@@ -130,6 +136,7 @@ function pitchSetRowProgress(pitch) {
   if (pitchSetRowProgressCounter % 5 === 0) {
     pitch.elem.style.setProperty("--pitch-row-progress", pitch.rows.progress);
   }
+
 }
 
 function pitchGetRowProgress(pitch) {
@@ -188,6 +195,14 @@ function pitchGetInView(pitch) {
   var rect = elem.getBoundingClientRect();
   var inView = rect.top < window.innerHeight && rect.bottom > 0;
   pitch.inView = inView;
+
+
+  var within = rect.top <= 0 && rect.bottom >= window.innerHeight; // not just in view, but fully within the viewport, used for the indicator
+  if (within) {
+    elem.setAttribute('data-inview', true);
+  } else {
+    elem.setAttribute('data-inview', false);
+  }
 
   if (inView && pitch.starting.set == 0) {
     pitch.starting.set++;
@@ -271,6 +286,7 @@ function Pitch({ children }) {
   const [lockScroll, setLockScroll] = useState(false);
   const [lastTouchY, setLastTouchY] = useState(null);
 
+
   useEffect(() => {
     swipeEventsInit();
   }, []);
@@ -288,6 +304,7 @@ function Pitch({ children }) {
   const lgAndDown = !(!isBpAndDown("lg") || loading);
   const mdAndDown = !(!isBpAndDown("md") || loading);
   const smAndDown = !(!isBpAndDown("sm") || loading);
+
 
   useMountEffect(() => {
     var pitchObj = new PitchItem(pitch);
@@ -321,7 +338,7 @@ function Pitch({ children }) {
   function handleScroll(e) {
     if (!(mdAndDown && pitches.find((pitch) => pitch.inView) && isMobileDevice)) {
       setLockScroll(false);
-      return;
+      return; 
     }
 
     const pitchObj = pitches.find((p) => p.elem == pitch.current);
@@ -405,6 +422,15 @@ function Pitch({ children }) {
     swipedDownHandlerThrottled(e);
   }
 
+
+  const insidePitch = useAttrObserver(pitch, "data-inview");
+  const indicatorClassState = useInOut(insidePitch);
+
+  useEffect(() => {
+    console.log(insidePitch);
+  }, [insidePitch]);
+
+
   return (
     <>
       <div className="pitch" ref={pitch}>
@@ -426,6 +452,18 @@ function Pitch({ children }) {
               return <div key={i} className="pitch--row pitch--placeholder"></div>;
             })}
           </div>
+        </div>
+
+        <div className={`pitch--indicator-wrapper pitch--indicator-wrapper__${indicatorClassState}`}>
+          {/* <Tag className="pitch--indicator" variant="tool" color="inverted"> */}
+          <div className="pitch--indicator" >
+            {/* <ResponsiveText tag="Fragment">
+              <xxl>Scroll / Swipe</xxl>
+              <md>Scroll / Swipe</md>
+            </ResponsiveText> */}
+            <Graphic type="mask" className="pitch--indicator-arrow" img={arrow_down} />
+          </div>
+          {/* </Tag> */}
         </div>
       </div>
     </>
@@ -455,7 +493,6 @@ function formatRow(row) {
   heading = addClassToJsxObj(heading, "pitch--heading");
   var vector = addClassToJsxObj(graphic[0], "pitch--vector");
   var mockup = addClassToJsxObj(graphic[1], "pitch--mockup");
-
 
   return {
     description,

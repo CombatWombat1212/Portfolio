@@ -183,10 +183,6 @@ function Popup({ pop }) {
 
   const isntFallback = useGetIsntFallback();
 
-  useEffect(() => {
-    console.log(isntFallback);
-  }, [isntFallback]);
-
   const getDelay = (elem) => {
     return splitS(window.getComputedStyle(elem).getPropertyValue("--transition"));
   };

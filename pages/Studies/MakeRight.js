@@ -98,9 +98,7 @@ function MakeRight({ pop }) {
                 <Heading>Choose</Heading>
                 <Description>
                   <p>
-                    from a storefront of <br className="d-lg-none" />
-                    sourced 3D models, <br className="d-lg-none d-md-block d-sm-none" />
-                    or upload your own
+                    from a storefront of <Nobr>sourced 3D models</Nobr>, <Nobr>or upload your own</Nobr>
                   </p>
                 </Description>
                 <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_choose"]} />

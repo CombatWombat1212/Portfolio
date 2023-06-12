@@ -1,27 +1,25 @@
+import { ClassList } from "@/scripts/GlobalUtilities";
 import { defaultProps, PropTypes } from "prop-types";
 
 // TODO: there should be a way to have a 'tool' variant vs the default 'category' varient, i.e. one thats round vs the default one
 
-function Tag({ children, variant, filter, color, reference }) {
+function Tag({ children, variant, filter, color, reference, className }) {
   var Elem = "div";
 
-  var tagClasses = ["tag"];
-  if (variant == "tool") {
-    tagClasses.push("tag__tool");
-  }
+  const list = new ClassList("tag");
+  list.addIf("tool", variant == "tool");
+  list.addIf("filter", filter);
+  list.addIf("inverted", color == "inverted");
+  list.addIf(className, className, {pref:false});
+  const classes = list.get();
+
   if (filter) {
-    tagClasses.push("tag__filter");
     Elem = "a";
   }
-  if (color == "inverted") {
-    tagClasses.push("tag__inverted");
-  }
-
-  tagClasses = tagClasses.join(" ");
 
   return (
     <>
-      <Elem className={`${tagClasses} text-size-h4`} ref={reference ? reference : null}>
+      <Elem className={`${classes} text-size-h4`} ref={reference ? reference : null}>
         {children}
       </Elem>
     </>
