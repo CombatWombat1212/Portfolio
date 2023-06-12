@@ -6007,34 +6007,29 @@ h3 + .studypanel--paragraph {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  transition: var(--pitch-progress-transition);
   --indicator-offset: 2.5rem;
   bottom: calc(var(--indicator-offset) + var(--pitch-progress-distance) + ((var(--pitch-row-progress)) * var(--pitch-progress-distance)));
 }
 
-.pitch .pitch--indicator-wrapper__initial, .pitch .pitch--indicator-wrapper__animate, .pitch .pitch--indicator-wrapper__exit {
-  --transition: 0.175s ;
-}
-
 .pitch .pitch--indicator-wrapper__initial {
   opacity: 0 ;
-  transition: transform 0.35s, bottom var(--transition), opacity var(--transition), visibility 0s var(--transition) ;
+  transition: transform 0.35s, bottom var(--pitch-progress-transition), opacity var(--pitch-progress-transition), visibility 0s var(--pitch-progress-transition) ;
   transform: translateY(calc(var(--indicator-offset) + var(--pitch-progress-distance))) ;
-  transition: "transform 0.35s, bottom var(--transition),\a             opacity var(--transition),\a             visibility 0s var(--transition)" ;
+  transition: "transform 0.35s, bottom var(--pitch-progress-transition),\a             opacity var(--pitch-progress-transition),\a             visibility 0s var(--pitch-progress-transition)" ;
 }
 
 .pitch .pitch--indicator-wrapper__animate {
   opacity: 1 ;
-  transition: transform 0.35s, bottom var(--transition), opacity var(--transition), visibility 0s 0s ;
+  transition: transform 0.35s, bottom var(--pitch-progress-transition), opacity var(--pitch-progress-transition), visibility 0s 0s ;
   transform: translateY(0rem) ;
-  transition: "transform 0.35s, bottom var(--transition),\a             opacity var(--transition),\a             visibility 0s 0s" ;
+  transition: "transform 0.35s, bottom var(--pitch-progress-transition),\a             opacity var(--pitch-progress-transition),\a             visibility 0s 0s" ;
 }
 
 .pitch .pitch--indicator-wrapper__exit {
   opacity: 0 ;
-  transition: transform 0.35s, bottom var(--transition), opacity var(--transition), visibility 0s var(--transition) ;
+  transition: transform 0.35s, bottom var(--pitch-progress-transition), opacity var(--pitch-progress-transition), visibility 0s var(--pitch-progress-transition) ;
   transform: translateY(calc(var(--indicator-offset) + var(--pitch-progress-distance))) ;
-  transition: "transform 0.35s, bottom var(--transition),\a             opacity var(--transition),\a             visibility 0s var(--transition)" ;
+  transition: "transform 0.35s, bottom var(--pitch-progress-transition),\a             opacity var(--pitch-progress-transition),\a             visibility 0s var(--pitch-progress-transition)" ;
 }
 
 .pitch .pitch--indicator {
@@ -6045,8 +6040,6 @@ h3 + .studypanel--paragraph {
 
 .pitch .pitch--indicator-arrow {
   --graphic-scale: 0.05;
-  margin-top: -0.115rem;
-  animation: bob 3.4s ease-in-out infinite;
 }
 
 .indicator {
