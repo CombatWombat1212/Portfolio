@@ -1,28 +1,37 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-const useAttrObserver = (ref, propertyName) => {
+const useAttrObserver = (ref, propertyName, options = {}) => {
+  const { bool = true } = options;
   const [state, setState] = useState(false);
+
+  const handlePropertyValue = (propertyValue) => {
+    if (bool) {
+      setState(propertyValue == "true");
+    } else {
+      setState(propertyValue);
+    }
+  };
 
   useEffect(() => {
     if (ref.current) {
-      const observer = new MutationObserver(mutationsList => {
-        for(let mutation of mutationsList) {
+      const observer = new MutationObserver((mutationsList) => {
+        for (let mutation of mutationsList) {
           // Check if the mutation is for the 'style' attribute and if the property name starts with '--'
-          if (mutation.type === 'attributes' && mutation.attributeName === 'style' && propertyName.startsWith('--')) {
+          if (mutation.type === "attributes" && mutation.attributeName === "style" && propertyName.startsWith("--")) {
             const propertyValue = window.getComputedStyle(ref.current).getPropertyValue(propertyName).trim();
-            setState(propertyValue === 'true');
+            handlePropertyValue(propertyValue);
           }
           // Check if the mutation is for the specified attribute and if the property name doesn't start with '--'
-          else if (mutation.type === 'attributes' && mutation.attributeName === propertyName && !propertyName.startsWith('--')) {
+          else if (mutation.type === "attributes" && mutation.attributeName === propertyName && !propertyName.startsWith("--")) {
             const attributeValue = ref.current.getAttribute(propertyName);
-            setState(attributeValue === 'true');
+            handlePropertyValue(attributeValue);
           }
         }
       });
 
       observer.observe(ref.current, {
         attributes: true,
-        attributeFilter: ['style', propertyName]
+        attributeFilter: ["style", propertyName],
       });
 
       return () => {

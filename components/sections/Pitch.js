@@ -424,10 +424,16 @@ function Pitch({ children }) {
 
 
   const insidePitch = useAttrObserver(pitch, "data-inview");
-  const indicatorClassState = useInOut(insidePitch);
+  // const currentRow = useAttrObserver(pitch, "--pitch-current-row", {bool:false});
+  const [showIndicator, setShowIndicator] = useState(false);
+  const indicatorClassState = useInOut(showIndicator);
 
   useEffect(() => {
-    console.log(insidePitch);
+    if(insidePitch) {
+      setShowIndicator(true);
+    } else {
+      setShowIndicator(false);
+    }
   }, [insidePitch]);
 
 
