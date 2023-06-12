@@ -17,7 +17,7 @@
 
   --pitch-row-margin: var(--section-gap_half);
 
-  --sticky-buffer-offset: 4.25rem;
+  --sticky-buffer-offset: 4.15rem;
   // --sticky-buffer: calc(var(--section-gap_half) / 2);
   --sticky-buffer: calc(((#{zoom-vh(100vh)} - var(--nav-height)) - (var(--pitch-row-margin) * 2) - var(--pitch-row-height)) / 2);
   --graphics-top: calc(var(--sticky-buffer) + var(--nav-height) - var(--sticky-buffer-offset));
@@ -144,7 +144,9 @@
     &--graphics {
       position: sticky;
       display: flex;
-      top: calc(var(--graphics-top) + ((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
+      // top: calc(var(--graphics-top) + ((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
+      top: var(--graphics-top);
+      transform: translateY(calc((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
       transition: var(--pitch-progress-transition);
 
       @include lg-down {
@@ -241,7 +243,8 @@
       --captions-top: calc(var(--nav-height) + var(--sticky-buffer) + var(--section-gap_half) - var(--sticky-buffer-offset));
       @include marg-y(var(--section-gap_half));
       overflow: hidden;
-      top: calc(var(--captions-top) + ((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
+      top: var(--captions-top);
+      transform: translateY(calc((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
       transition: var(--pitch-progress-transition);
 
       @include lg-down {
@@ -292,31 +295,32 @@
       width: var(--site-max-width_wide);
       @include flex-row-center;
 
-      --indicator-offset: 2.5rem;
-      bottom: calc(var(--indicator-offset) + var(--pitch-progress-distance) + ((var(--pitch-row-progress)) * var(--pitch-progress-distance)));
+      --indicator-offset: 2.25rem;
+      --indicator-position: calc((var(--pitch-progress-distance) + ((var(--pitch-row-progress)) * var(--pitch-progress-distance))) * -1);
+
+      bottom: var(--indicator-offset);
+
+      transform: translateY(var(--indicator-position));
 
       @include in-out(
         (
           initial: (
             opacity: 0,
-            transition: 'transform 0.35s, bottom var(--pitch-progress-transition),
-            opacity var(--pitch-progress-transition),
-            visibility 0s var(--pitch-progress-transition)',
-            transform: translateY(calc(var(--indicator-offset) + var(--pitch-progress-distance))),
+            transition: "transform 0.35s, opacity var(--pitch-progress-transition),
+            visibility 0s var(--pitch-progress-transition)",
+            transform: translateY(calc(var(--indicator-offset) * -1)),
           ),
           animate: (
             opacity: 1,
-            transition: 'transform 0.35s, bottom var(--pitch-progress-transition),
-            opacity var(--pitch-progress-transition),
-            visibility 0s 0s',
-            transform: translateY(0rem),
+            transition: "transform 0.35s, opacity var(--pitch-progress-transition),
+            visibility 0s 0s",
+            transform: translateY(var(--indicator-position)),
           ),
           exit: (
             opacity: 0,
-            transition: 'transform 0.35s, bottom var(--pitch-progress-transition),
-            opacity var(--pitch-progress-transition),
-            visibility 0s var(--pitch-progress-transition)',
-            transform: translateY(calc(var(--indicator-offset) + var(--pitch-progress-distance))),
+            transition: "transform 0.35s, opacity var(--pitch-progress-transition),
+            visibility 0s var(--pitch-progress-transition)",
+            transform: translateY(calc(var(--indicator-offset) * -1)),
           ),
         )
       );
@@ -328,8 +332,51 @@
     &--indicator-arrow {
       // --graphic-scale: 0.035;
       --graphic-scale: 0.05;
-    
+
+      &__animate {
+        // --bob-duration: 2s;
+        // --pause-duration: 2s;
+      
+        // animation: bob var(--bob-duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+        // animation-delay: var(--pause-duration);
+
+        --bob-duration: 2s;
+        --pause-duration: 2s;
+      
+        animation: bob var(--bob-duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+        animation-delay: var(--pause-duration);
+      }
     }
   }
 }
 
+@keyframes bob {
+  0%,
+  50%,
+  100% {
+    transform: translateY(0);
+  }
+  25%,
+  75% {
+    transform: translateY(0.5rem);
+  }
+}
+
+
+// @keyframes bob {
+//   0%,
+//   35%,
+//   70%,
+//   100% {
+//     transform: translateY(0);
+//   }
+//   17.5%,
+//   52.5% {
+//     transform: translateY(0.5rem);
+//   }
+//   70.1%,
+//   100% {
+//     transform: translateY(0);
+//     animation-play-state: paused;
+//   }
+// }

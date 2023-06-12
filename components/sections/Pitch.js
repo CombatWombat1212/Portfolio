@@ -467,7 +467,7 @@ function Pitch({ children }) {
               <xxl>Scroll / Swipe</xxl>
               <md>Scroll / Swipe</md>
             </ResponsiveText> */}
-            <Graphic type="mask" className="pitch--indicator-arrow" img={arrow_down} />
+            <Graphic type="mask" className={`pitch--indicator-arrow pitch--indicator-arrow__${showIndicator ? "animate" : ''}`} img={arrow_down} />
           </div>
           {/* </Tag> */}
         </div>

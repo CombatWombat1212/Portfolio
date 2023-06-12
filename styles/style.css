@@ -5691,7 +5691,7 @@ h3 + .studypanel--paragraph {
   --pitch-progress-transition: 0.25s;
   --pitch-progress-distance: 2.5rem;
   --pitch-row-margin: var(--section-gap_half);
-  --sticky-buffer-offset: 4.25rem;
+  --sticky-buffer-offset: 4.15rem;
   --sticky-buffer: calc(((calc(100vh / var(--zoom)) - var(--nav-height)) - (var(--pitch-row-margin) * 2) - var(--pitch-row-height)) / 2);
   --graphics-top: calc(var(--sticky-buffer) + var(--nav-height) - var(--sticky-buffer-offset));
   --pitch-additional-height: 20rem;
@@ -5847,7 +5847,8 @@ h3 + .studypanel--paragraph {
 .pitch .pitch--graphics {
   position: sticky;
   display: flex;
-  top: calc(var(--graphics-top) + ((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
+  top: var(--graphics-top);
+  transform: translateY(calc((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
   transition: var(--pitch-progress-transition);
 }
 
@@ -5940,7 +5941,8 @@ h3 + .studypanel--paragraph {
   margin-top: var(--section-gap_half);
   margin-bottom: var(--section-gap_half);
   overflow: hidden;
-  top: calc(var(--captions-top) + ((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
+  top: var(--captions-top);
+  transform: translateY(calc((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
   transition: var(--pitch-progress-transition);
 }
 
@@ -6007,29 +6009,31 @@ h3 + .studypanel--paragraph {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  --indicator-offset: 2.5rem;
-  bottom: calc(var(--indicator-offset) + var(--pitch-progress-distance) + ((var(--pitch-row-progress)) * var(--pitch-progress-distance)));
+  --indicator-offset: 2.25rem;
+  --indicator-position: calc((var(--pitch-progress-distance) + ((var(--pitch-row-progress)) * var(--pitch-progress-distance))) * -1);
+  bottom: var(--indicator-offset);
+  transform: translateY(var(--indicator-position));
 }
 
 .pitch .pitch--indicator-wrapper__initial {
   opacity: 0 ;
-  transition: transform 0.35s, bottom var(--pitch-progress-transition), opacity var(--pitch-progress-transition), visibility 0s var(--pitch-progress-transition) ;
-  transform: translateY(calc(var(--indicator-offset) + var(--pitch-progress-distance))) ;
-  transition: "transform 0.35s, bottom var(--pitch-progress-transition),\a             opacity var(--pitch-progress-transition),\a             visibility 0s var(--pitch-progress-transition)" ;
+  transition: transform 0.35s, opacity var(--pitch-progress-transition), visibility 0s var(--pitch-progress-transition) ;
+  transform: translateY(calc(var(--indicator-offset) * -1)) ;
+  transition: "transform 0.35s, opacity var(--pitch-progress-transition),\a             visibility 0s var(--pitch-progress-transition)" ;
 }
 
 .pitch .pitch--indicator-wrapper__animate {
   opacity: 1 ;
-  transition: transform 0.35s, bottom var(--pitch-progress-transition), opacity var(--pitch-progress-transition), visibility 0s 0s ;
-  transform: translateY(0rem) ;
-  transition: "transform 0.35s, bottom var(--pitch-progress-transition),\a             opacity var(--pitch-progress-transition),\a             visibility 0s 0s" ;
+  transition: transform 0.35s, opacity var(--pitch-progress-transition), visibility 0s 0s ;
+  transform: translateY(var(--indicator-position)) ;
+  transition: "transform 0.35s, opacity var(--pitch-progress-transition),\a             visibility 0s 0s" ;
 }
 
 .pitch .pitch--indicator-wrapper__exit {
   opacity: 0 ;
-  transition: transform 0.35s, bottom var(--pitch-progress-transition), opacity var(--pitch-progress-transition), visibility 0s var(--pitch-progress-transition) ;
-  transform: translateY(calc(var(--indicator-offset) + var(--pitch-progress-distance))) ;
-  transition: "transform 0.35s, bottom var(--pitch-progress-transition),\a             opacity var(--pitch-progress-transition),\a             visibility 0s var(--pitch-progress-transition)" ;
+  transition: transform 0.35s, opacity var(--pitch-progress-transition), visibility 0s var(--pitch-progress-transition) ;
+  transform: translateY(calc(var(--indicator-offset) * -1)) ;
+  transition: "transform 0.35s, opacity var(--pitch-progress-transition),\a             visibility 0s var(--pitch-progress-transition)" ;
 }
 
 .pitch .pitch--indicator {
@@ -6040,6 +6044,25 @@ h3 + .studypanel--paragraph {
 
 .pitch .pitch--indicator-arrow {
   --graphic-scale: 0.05;
+}
+
+.pitch .pitch--indicator-arrow__animate {
+  --bob-duration: 2s;
+  --pause-duration: 2s;
+  animation: bob var(--bob-duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  animation-delay: var(--pause-duration);
+}
+
+@keyframes bob {
+  0%,
+  50%,
+  100% {
+    transform: translateY(0);
+  }
+  25%,
+  75% {
+    transform: translateY(0.5rem);
+  }
 }
 
 .indicator {
