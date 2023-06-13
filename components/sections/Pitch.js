@@ -264,7 +264,6 @@ function Laptop({ rows }) {
     <>
       <div className="pitch--graphics">
         <Graphic img={laptop_frame} className={`pitch--row pitch--image pitch--laptop`} onLoad={pitchResize} />
-
         <div className="pitch--screens">
           {rows.map((row, i) => {
             var { mockup } = formatRow(row);
@@ -333,6 +332,7 @@ function Pitch({ children }) {
     pitch.current.addEventListener("swiped-down", swipedDownHandler);
     pitch.current.addEventListener("swiped-up", swipedUpHandler);
     return () => {
+      if (!pitch.current) return;
       pitch.current.removeEventListener("swiped-down", swipedDownHandler);
       pitch.current.removeEventListener("swiped-up", swipedUpHandler);
     };
@@ -432,17 +432,14 @@ function Pitch({ children }) {
     console.log("swiped down");
   }
 
-  const insidePitch = useAttrObserver(pitch, "data-inview");
-  const indicatorClassState = useInOut(insidePitch);
-
   return (
     <>
       <div className="pitch" ref={pitch}>
         <div className="pitch--column pitch--graphics-wrapper">
-          <Laptop rows={rows} />
+          <Laptop rows={rows} pitch={pitch} />
         </div>
-        <div className="pitch--column pitch--captions-wrapper">
 
+        <div className="pitch--column pitch--captions-wrapper">
           <div className="pitch--captions">
             {rows.map((row, i) => {
               var { description, heading, vector } = formatRow(row);
@@ -457,21 +454,30 @@ function Pitch({ children }) {
               return <div key={i} className="pitch--row pitch--placeholder"></div>;
             })}
           </div>
-        </div>
 
-        <div className={`pitch--indicator-wrapper pitch--indicator-wrapper__${indicatorClassState}`}>
-          <Tag className="pitch--indicator" variant="tool" color="inverted">
-          {/* <div className="pitch--indicator"> */}
-            <ResponsiveText tag="Fragment">
-              <xxl>Scroll</xxl>
-              <md>Swipe</md>
-            </ResponsiveText>
-            <Graphic type="mask" className={`pitch--indicator-arrow`} img={arrow_down} />
-          {/* </div> */}
-          </Tag>
         </div>
+          <Indicator pitch={pitch} />
       </div>
     </>
+  );
+}
+
+function Indicator({ pitch }) {
+  const insidePitch = useAttrObserver(pitch, "data-inview");
+  const indicatorClassState = useInOut(insidePitch);
+
+  return (
+      <div className={`pitch--indicator-wrapper pitch--indicator-wrapper__${indicatorClassState}`}>
+        <Tag className="pitch--indicator" variant="tool" color="inverted">
+          {/* <div className="pitch--indicator"> */}
+          <ResponsiveText tag="Fragment">
+            <xxl>Scroll</xxl>
+            <md>Swipe</md>
+          </ResponsiveText>
+          <Graphic type="mask" className={`pitch--indicator-arrow`} img={arrow_down} />
+          {/* </div> */}
+        </Tag>
+      </div>
   );
 }
 
@@ -489,8 +495,7 @@ function PitchBody({ index, vectorProps, heading, description }) {
       </div>
     </div>
   );
-};
-
+}
 
 function formatRow(row) {
   var { description, title, heading, graphic, other } = row.childs;

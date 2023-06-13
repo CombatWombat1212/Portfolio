@@ -1,3 +1,9 @@
+@mixin at-pitch {
+  @at-root .pitch {
+    @content;
+  }
+}
+
 .pitch {
   @include flex-row-between;
   --gap: 9rem;
@@ -107,43 +113,55 @@
     }
 
     &--graphics-wrapper {
-      width: calc(#{col-width(8)} - (var(--gap) / 2));
-      @include xl-down {
-        width: calc(#{col-width(7.5)} - (var(--gap) / 2));
+      @include at-pitch {
+        --pitch-graphics-wrapper-width: calc(#{col-width(8)} - (var(--gap) / 2));
+        @include xl-down {
+          --pitch-graphics-wrapper-width: calc(#{col-width(7.5)} - (var(--gap) / 2));
+        }
+        @include lg-down {
+          --pitch-graphics-wrapper-width: var(--pitch-columns-wrapper-width);
+        }
       }
+
+      width: var(--pitch-graphics-wrapper-width);
 
       @include lg-down {
         position: sticky;
-        // top: calc(var(--nav-height));
-
         --m: calc(var(--pitch-row-height) + var(--pitch-row-margin));
-        // margin-top: calc(var(--m) * -1);
-        // margin-bottom: calc(var(--m) );
-        // top: calc(var(--graphics-top) + ((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
         top: calc(var(--graphics-top));
         transform: translateY(calc((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
         transition: var(--pitch-progress-transition);
-
-        // height: calc( var(--pitch-row-height) + var(--gap) + var(--pitch-caption-height));
       }
     }
+
     &--captions-wrapper {
-      width: calc(#{col-width(4)} - (var(--gap) / 2));
-      @include xl-down {
-        width: calc(#{col-width(4.5)} - (var(--gap) / 2));
+      @include at-pitch {
+        --pitch-captions-wrapper-width: calc(#{col-width(4)} - (var(--gap) / 2));
+        @include xl-down {
+          --pitch-captions-wrapper-width: calc(#{col-width(4.5)} - (var(--gap) / 2));
+        }
+        @include lg-down {
+          --pitch-captions-wrapper-width: var(--pitch-columns-wrapper-width);
+        }
       }
+
+      width: var(--pitch-captions-wrapper-width);
     }
 
+    // both columns
     &--column {
+      @include at-pitch {
+        --pitch-columns-wrapper-width: 80%;
+        @include md-down {
+          --pitch-columns-wrapper-width: 90%;
+        }
+        @include sm-down {
+          --pitch-columns-wrapper-width: 100%;
+        }
+      }
+
       @include lg-down {
-        width: 80%;
         @include mx-auto;
-      }
-      @include md-down {
-        width: 90%;
-      }
-      @include sm-down {
-        width: 100%;
       }
     }
 
@@ -303,72 +321,59 @@
 
     &--empties {
       margin-top: calc((var(--pitch-row-height) + var(--section-gap_half)) * -1);
-
     }
 
+
+    // &--indicator-wrapper {
+    //   position: absolute;
+
+    // }
 
 
 
     &--indicator-wrapper {
-      position: fixed;
+      position: absolute;
+      top: calc(var(--nav-height) + var(--sticky-buffer) + var(--section-gap_half) - var(--sticky-buffer-offset));
+      // transform: translateY(calc((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
+      
       width: var(--site-max-width_wide);
+
       @include flex-row-center;
 
       --indicator-offset: 5rem;
       --indicator-position: calc((var(--pitch-progress-distance) + ((var(--pitch-row-progress)) * var(--pitch-progress-distance))) * -1);
 
-      bottom: var(--indicator-offset);
-
-      transform: translateY(var(--indicator-position));
-
-      @include xl-down {
-        --indicator-offset: 6.5rem;
-      }
-      @include lg-down {
-        --indicator-offset: 1.5rem;
-      }
-      @include md-down {
-        // --indicator-offset: Min(#{zoom-vh(1vh)}, #{zoom-vw(4vw)});
-        --indicator-offset: 2rem;
-      }
-      @include sm-down {
-        // --indicator-offset: Min(#{zoom-vh(3.5vh)}, #{zoom-vw(11vw)});
-        --indicator-offset: 4rem;
-      }
+      // transform: translateY(var(--indicator-position));
 
 
+      // @include ios-safari{
 
-      @include ios-safari{
+      //   top: calc(#{zoom-vh(100vh)} - var(--indicator-offset) + 0.85rem);
 
-        top: calc(#{zoom-vh(100vh)} - var(--indicator-offset) + 0.85rem);
+      // }
 
-      }
-
-
-
-
-      @include in-out(
-        (
-          initial: (
-            opacity: 0,
-            transition: "transform 0.35s, opacity var(--pitch-progress-transition),
-            visibility 0s var(--pitch-progress-transition)",
-            transform: translateY(var(--indicator-offset)),
-          ),
-          animate: (
-            opacity: 1,
-            transition: "transform 0.35s, opacity var(--pitch-progress-transition),
-            visibility 0s 0s",
-            transform: translateY(var(--indicator-position)),
-          ),
-          exit: (
-            opacity: 0,
-            transition: "transform 0.35s, opacity var(--pitch-progress-transition),
-            visibility 0s var(--pitch-progress-transition)",
-            transform: translateY(var(--indicator-offset)),
-          ),
-        )
-      );
+      // @include in-out(
+      //   (
+      //     initial: (
+      //       opacity: 0,
+      //       transition: "transform 0.35s, opacity var(--pitch-progress-transition),
+      //       visibility 0s var(--pitch-progress-transition)",
+      //       transform: translateY(var(--indicator-offset)),
+      //     ),
+      //     animate: (
+      //       opacity: 1,
+      //       transition: "transform 0.35s, opacity var(--pitch-progress-transition),
+      //       visibility 0s 0s",
+      //       transform: translateY(var(--indicator-position)),
+      //     ),
+      //     exit: (
+      //       opacity: 0,
+      //       transition: "transform 0.35s, opacity var(--pitch-progress-transition),
+      //       visibility 0s var(--pitch-progress-transition)",
+      //       transform: translateY(var(--indicator-offset)),
+      //     ),
+      //   )
+      // );
     }
     &--indicator {
       @include flex-row;
@@ -378,7 +383,7 @@
       --graphic-scale: 0.0325;
 
       margin-top: -0.1rem;
-      @include ios-safari{
+      @include ios-safari {
         margin-top: 0.1rem;
       }
       // --graphic-scale: 0.05;

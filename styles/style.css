@@ -5798,12 +5798,22 @@ h3 + .studypanel--paragraph {
 }
 
 .pitch .pitch--graphics-wrapper {
-  width: calc(66.66667% - (var(--gap) / 2));
+  width: var(--pitch-graphics-wrapper-width);
+}
+
+.pitch {
+  --pitch-graphics-wrapper-width: calc(66.66667% - (var(--gap) / 2));
 }
 
 @media screen and (max-width: 79.9375em) {
-  .pitch .pitch--graphics-wrapper {
-    width: calc(62.5% - (var(--gap) / 2));
+  .pitch {
+    --pitch-graphics-wrapper-width: calc(62.5% - (var(--gap) / 2));
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  .pitch {
+    --pitch-graphics-wrapper-width: var(--pitch-columns-wrapper-width);
   }
 }
 
@@ -5818,32 +5828,45 @@ h3 + .studypanel--paragraph {
 }
 
 .pitch .pitch--captions-wrapper {
-  width: calc(33.33333% - (var(--gap) / 2));
+  width: var(--pitch-captions-wrapper-width);
+}
+
+.pitch {
+  --pitch-captions-wrapper-width: calc(33.33333% - (var(--gap) / 2));
 }
 
 @media screen and (max-width: 79.9375em) {
-  .pitch .pitch--captions-wrapper {
-    width: calc(37.5% - (var(--gap) / 2));
+  .pitch {
+    --pitch-captions-wrapper-width: calc(37.5% - (var(--gap) / 2));
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  .pitch {
+    --pitch-captions-wrapper-width: var(--pitch-columns-wrapper-width);
+  }
+}
+
+.pitch {
+  --pitch-columns-wrapper-width: 80%;
+}
+
+@media screen and (max-width: 49.9375em) {
+  .pitch {
+    --pitch-columns-wrapper-width: 90%;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  .pitch {
+    --pitch-columns-wrapper-width: 100%;
   }
 }
 
 @media screen and (max-width: 61.9375em) {
   .pitch .pitch--column {
-    width: 80%;
     margin-right: auto;
     margin-left: auto;
-  }
-}
-
-@media screen and (max-width: 49.9375em) {
-  .pitch .pitch--column {
-    width: 90%;
-  }
-}
-
-@media screen and (max-width: 36.9375em) {
-  .pitch .pitch--column {
-    width: 100%;
   }
 }
 
@@ -6010,64 +6033,14 @@ h3 + .studypanel--paragraph {
 }
 
 .pitch .pitch--indicator-wrapper {
-  position: fixed;
+  position: absolute;
+  top: calc(var(--nav-height) + var(--sticky-buffer) + var(--section-gap_half) - var(--sticky-buffer-offset));
   width: var(--site-max-width_wide);
   display: flex;
   flex-direction: row;
   justify-content: center;
   --indicator-offset: 5rem;
   --indicator-position: calc((var(--pitch-progress-distance) + ((var(--pitch-row-progress)) * var(--pitch-progress-distance))) * -1);
-  bottom: var(--indicator-offset);
-  transform: translateY(var(--indicator-position));
-}
-
-@media screen and (max-width: 79.9375em) {
-  .pitch .pitch--indicator-wrapper {
-    --indicator-offset: 6.5rem;
-  }
-}
-
-@media screen and (max-width: 61.9375em) {
-  .pitch .pitch--indicator-wrapper {
-    --indicator-offset: 1.5rem;
-  }
-}
-
-@media screen and (max-width: 49.9375em) {
-  .pitch .pitch--indicator-wrapper {
-    --indicator-offset: 2rem;
-  }
-}
-
-@media screen and (max-width: 36.9375em) {
-  .pitch .pitch--indicator-wrapper {
-    --indicator-offset: 4rem;
-  }
-}
-
-.ios.safari .pitch .pitch--indicator-wrapper {
-  top: calc(calc(100vh / var(--zoom)) - var(--indicator-offset) + 0.85rem);
-}
-
-.pitch .pitch--indicator-wrapper__initial {
-  opacity: 0 ;
-  transition: transform 0.35s, opacity var(--pitch-progress-transition), visibility 0s var(--pitch-progress-transition) ;
-  transform: translateY(var(--indicator-offset)) ;
-  transition: "transform 0.35s, opacity var(--pitch-progress-transition),\a             visibility 0s var(--pitch-progress-transition)" ;
-}
-
-.pitch .pitch--indicator-wrapper__animate {
-  opacity: 1 ;
-  transition: transform 0.35s, opacity var(--pitch-progress-transition), visibility 0s 0s ;
-  transform: translateY(var(--indicator-position)) ;
-  transition: "transform 0.35s, opacity var(--pitch-progress-transition),\a             visibility 0s 0s" ;
-}
-
-.pitch .pitch--indicator-wrapper__exit {
-  opacity: 0 ;
-  transition: transform 0.35s, opacity var(--pitch-progress-transition), visibility 0s var(--pitch-progress-transition) ;
-  transform: translateY(var(--indicator-offset)) ;
-  transition: "transform 0.35s, opacity var(--pitch-progress-transition),\a             visibility 0s var(--pitch-progress-transition)" ;
 }
 
 .pitch .pitch--indicator {
