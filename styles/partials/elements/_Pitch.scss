@@ -59,7 +59,7 @@
   }
   @include sm-down {
     --pitch-additional-height: 32rem;
-    --sticky-buffer-offset: 14%;
+    --sticky-buffer-offset: 12%;
 
 
     // &__indicator-on{
@@ -329,9 +329,8 @@
 
 
     &--indicator-wrapper {
-      --ind-tag-border-width: 0.125rem;
-      // --ind-tag-border-width: 0rem;
-
+      // --ind-tag-border-width: 0.125rem;
+      --ind-tag-border-width: 0rem;
 
       @include flex-row-center;
       position: fixed;
@@ -401,18 +400,19 @@
       gap: 0.25rem;
 
       @include md-down{
-        // background-color: rgba($col-background, 0.10);
+        background-color: rgba($col-background, 0.115);
         @include my-auto;
       }
     }
 
     &--indicator-arrow {
-      // --graphic-scale: 0.0315;
-      --graphic-scale: 0.05;
+      --graphic-scale: 0.0315;
+      // --graphic-scale: 0.05;
       
+      margin-top: 0.05rem;
       
       @include md-down{
-        // --graphic-scale: 0.0275;
+        --graphic-scale: 0.0265;
       }
 
       @include ios-safari{
@@ -428,9 +428,9 @@
         animation: bob var(--bob-duration) ease-in-out infinite;
         animation-delay: 0.5s;
         
-        // @include md-down{
-        //   --bob-distance: 0.15rem;
-        // }
+        @include md-down{
+          --bob-distance: 0.085rem;
+        }
 
       }
 
@@ -458,17 +458,14 @@
   70%,
   100% {
     transform: translateY(0);
-    // opacity: 1;
   }
   17.5%,
   52.5% {
     transform: translateY(var(--bob-distance));
-    // opacity: 0.5;
   }
   70.1%,
   100% {
     transform: translateY(0);
-    // opacity: 1;
     animation-play-state: paused;
   }
 }

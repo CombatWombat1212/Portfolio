@@ -553,20 +553,12 @@ function Indicator({ pitch }) {
 
   return (
     <div className={`pitch--indicator-wrapper pitch--indicator-wrapper__${indicatorClassState}`}>
-      {/* {!mdAndDown ? ( */}
-        <>
-          {/* <Tag className="pitch--indicator" variant="tool" color="inverted"> */}
+        {/* <>
           <div className="pitch--indicator">
-            {/* <ResponsiveText tag="Fragment">
-            <xxl>Scroll</xxl>
-            <md>Swipe</md>
-          </ResponsiveText> */}
             <Graphic type="mask" className={classes} img={arrow_down} />
           </div>
-          {/* </Tag> */}
-        </>
-      {/* ) : ( */}
-        {/* <>
+        </> */}
+         <>
           <Tag className="pitch--indicator" variant="tool" color="inverted">
             <ResponsiveText tag="Fragment">
             <xxl>Scroll</xxl>
@@ -574,7 +566,7 @@ function Indicator({ pitch }) {
           </ResponsiveText>
             <Graphic type="mask" className={classes} img={arrow_down} />
           </Tag>
-        </> */}
+        </> 
       {/* )} */}
     </div>
   );
