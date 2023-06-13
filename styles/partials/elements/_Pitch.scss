@@ -28,6 +28,10 @@
   --pitch-caption-height: 13rem; // set with JS
   --pitch-caption-height-margin: 8rem; // used to add greater margins above and below the body elements within the caption so that they're more spaced out when they transition.
 
+
+  --captions-top: calc(var(--nav-height) + var(--sticky-buffer) + var(--pitch-row-margin) - var(--sticky-buffer-offset));
+
+
   @include pad-y(var(--pitch-row-margin));
 
   @include xxl-down {
@@ -39,9 +43,11 @@
     --gap: 3.35rem;
     --sticky-buffer-offset: #{zoom-vh(2vh)};
     --pitch-additional-height: 14rem;
+      --captions-top: calc(var(--graphics-top) + var(--pitch-row-height) + var(--gap));
+  
   }
   @include md-down {
-    --gap: 3rem;
+    --gap: 2.25rem;
     --sticky-buffer-offset: #{zoom-vh(12vh)};
     --pitch-progress-distance: 1rem;
     --pitch-caption-height-margin: 2rem;
@@ -49,7 +55,7 @@
   }
   @include sm-down {
     --pitch-additional-height: 32rem;
-    --sticky-buffer-offset: #{zoom-vh(15vh)};
+    --sticky-buffer-offset: 15%;
 
     @include ios-safari {
       --pitch-additional-height: 60rem;
@@ -252,10 +258,10 @@
       }
     }
 
+
     &--captions {
       height: var(--pitch-row-height);
       position: sticky;
-      --captions-top: calc(var(--nav-height) + var(--sticky-buffer) + var(--pitch-row-margin) - var(--sticky-buffer-offset));
       @include marg-y(var(--pitch-row-margin));
       overflow: hidden;
       top: var(--captions-top);
@@ -267,7 +273,6 @@
         height: var(--pitch-caption-height);
         margin-top: calc((var(--pitch-caption-height) + var(--gap)) * -1);
         margin-bottom: 0rem;
-        --captions-top: calc(var(--graphics-top) + var(--pitch-row-height) + var(--gap));
 
         width: calc(var(--pitch-screen-width) - 1rem);
         @include mx-auto;
@@ -311,28 +316,17 @@
 
     &--indicator-wrapper {
       --ind-tag-border-width: 0.125rem;
+      // --ind-tag-border-width: 0rem;
 
 
       @include flex-row-center;
       position: fixed;
       width: var(--site-max-width_wide);
-
-      // --indicator-offset: #{zoom-vh(8vh)};
-      --indicator-offset: calc(var(--gap) - 3rem);
+      --indicator-offset: 6rem;
       
-      // @include xxl-down {
-      //   --indicator-offset: #{zoom-vh(11vh)};
-      // }
-      // @include xl-down {
-      //   --indicator-offset: #{zoom-vh(0vh)};
-      // }
-      // @include lg-down {
-      //   --indicator-offset: #{zoom-vh(3vh)};
-      // }
-      // @include md-down {
-      // }
-      // @include sm-down {
-      // }
+      @include lg-down {
+        --indicator-offset: 4rem;
+      }
 
 
       --constant-offset: calc(var(--nav-height) + var(--pitch-row-margin) + var(--ind-tag-border-width) - var(--sticky-buffer-offset) + var(--sticky-buffer) + var(--pitch-row-height)  + var(--indicator-offset));
@@ -345,10 +339,20 @@
 
 
       @include lg-down{
-        --constant-offset: calc(var(--nav-height) + var(--pitch-row-margin) + var(--ind-tag-border-width) - var(--sticky-buffer-offset) + var(--sticky-buffer) + var(--pitch-row-height)  + var(--indicator-offset) + var(--pitch-caption-height));
+        --constant-offset: calc(var(--captions-top) + var(--pitch-caption-height) + var(--indicator-offset) );
       }
-      
-      
+
+      @include md-down{
+        --indicator-offset: 1.25rem;
+
+        top:unset;
+        // bottom: var(--indicator-offset);
+        bottom: var(--indicator-offset);
+        height: calc(100% - var(--constant-offset) );
+        @include ios-safari{
+          height: calc(100% - var(--constant-offset) + 0.5rem);
+        }
+      }
 
 
 
@@ -356,19 +360,19 @@
         (
           initial: (
             opacity: 0,
-            transition: "transform var(--pitch-progress-transition), opacity 0.15s,
+            transition: "transform 0.4s, opacity 0.4s,
             visibility 0s var(--pitch-progress-transition)",
             transform: translateY(var(--off-page-offset)),
           ),
           animate: (
             opacity: 1,
-            transition: "transform var(--pitch-progress-transition), opacity 0.15s,
+            transition: "transform 0.4s, opacity 0.4s,
             visibility 0s 0s",
             transform: translateY(var(--initial-offset)),
             ),
           exit: (
             opacity: 0,
-            transition: "transform var(--pitch-progress-transition), opacity 0.15s,
+            transition: "transform 0.4s, opacity 0.4s,
             visibility 0s var(--pitch-progress-transition)",
             transform: translateY(var(--off-page-offset)),
           ),
@@ -381,22 +385,42 @@
       --tag-border-width: var(--ind-tag-border-width);
       @include flex-row;
       gap: 0.25rem;
+
+      @include md-down{
+        // background-color: rgba($col-background, 0.10);
+        @include my-auto;
+      }
     }
+
     &--indicator-arrow {
       // --graphic-scale: 0.0315;
       --graphic-scale: 0.05;
+      
+      
+      @include md-down{
+        // --graphic-scale: 0.0275;
+      }
 
-      margin-top: -0.05rem;
       @include ios-safari{
         margin-top: 0.1rem;
       }
       // --graphic-scale: 0.05;
       // opacity:1;
+
+
       &__animate {
-        --bob-duration: 2s;
-        animation: bob var(--bob-duration) ease-in-out 1;
-        animation-delay: 0.35s;
+        --bob-duration: 2.25s;
+        --bob-distance: 0.5rem;
+        animation: bob var(--bob-duration) ease-in-out infinite;
+        animation-delay: 0.5s;
+        
+        // @include md-down{
+        //   --bob-distance: 0.15rem;
+        // }
+
       }
+
+
     
     }
   }
@@ -424,7 +448,7 @@
   }
   17.5%,
   52.5% {
-    transform: translateY(0.5rem);
+    transform: translateY(var(--bob-distance));
     // opacity: 0.5;
   }
   70.1%,

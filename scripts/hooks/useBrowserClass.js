@@ -25,7 +25,6 @@ const useBrowserClass = () => {
       document.documentElement.classList.add('ios');
     }
 
-
     // Cleanup function to remove classes when component is unmounted or conditions change.
     return () => {
       document.documentElement.classList.remove('chrome', 'safari', 'firefox', 'windows', 'mac', 'linux', 'android', 'ios');

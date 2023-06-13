@@ -2154,6 +2154,10 @@ h3 + .studypanel--paragraph {
   padding: 0.3rem 0.5rem 0.265rem 0.5rem;
 }
 
+.android.chrome .tag {
+  padding: 0.3rem 0.5rem 0.25rem 0.5rem;
+}
+
 .tag__tool {
   padding: 0.4rem 0.55rem 0.25rem 0.55rem;
   border-radius: 100rem;
@@ -5698,6 +5702,7 @@ h3 + .studypanel--paragraph {
   --pitch-additional-height: 20rem;
   --pitch-caption-height: 13rem;
   --pitch-caption-height-margin: 8rem;
+  --captions-top: calc(var(--nav-height) + var(--sticky-buffer) + var(--pitch-row-margin) - var(--sticky-buffer-offset));
   padding-top: var(--pitch-row-margin);
   padding-bottom: var(--pitch-row-margin);
 }
@@ -5716,12 +5721,13 @@ h3 + .studypanel--paragraph {
     --gap: 3.35rem;
     --sticky-buffer-offset: calc(2vh / var(--zoom));
     --pitch-additional-height: 14rem;
+    --captions-top: calc(var(--graphics-top) + var(--pitch-row-height) + var(--gap));
   }
 }
 
 @media screen and (max-width: 49.9375em) {
   .pitch {
-    --gap: 3rem;
+    --gap: 2.25rem;
     --sticky-buffer-offset: calc(12vh / var(--zoom));
     --pitch-progress-distance: 1rem;
     --pitch-caption-height-margin: 2rem;
@@ -5732,7 +5738,7 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 36.9375em) {
   .pitch {
     --pitch-additional-height: 32rem;
-    --sticky-buffer-offset: calc(15vh / var(--zoom));
+    --sticky-buffer-offset: 15%;
   }
   .ios.safari .pitch {
     --pitch-additional-height: 60rem;
@@ -5944,7 +5950,6 @@ h3 + .studypanel--paragraph {
 .pitch .pitch--captions {
   height: var(--pitch-row-height);
   position: sticky;
-  --captions-top: calc(var(--nav-height) + var(--sticky-buffer) + var(--pitch-row-margin) - var(--sticky-buffer-offset));
   margin-top: var(--pitch-row-margin);
   margin-bottom: var(--pitch-row-margin);
   overflow: hidden;
@@ -5958,7 +5963,6 @@ h3 + .studypanel--paragraph {
     height: var(--pitch-caption-height);
     margin-top: calc((var(--pitch-caption-height) + var(--gap)) * -1);
     margin-bottom: 0rem;
-    --captions-top: calc(var(--graphics-top) + var(--pitch-row-height) + var(--gap));
     width: calc(var(--pitch-screen-width) - 1rem);
     margin-right: auto;
     margin-left: auto;
@@ -6017,7 +6021,7 @@ h3 + .studypanel--paragraph {
   justify-content: center;
   position: fixed;
   width: var(--site-max-width_wide);
-  --indicator-offset: calc(var(--gap) - 3rem);
+  --indicator-offset: 6rem;
   --constant-offset: calc(var(--nav-height) + var(--pitch-row-margin) + var(--ind-tag-border-width) - var(--sticky-buffer-offset) + var(--sticky-buffer) + var(--pitch-row-height)  + var(--indicator-offset));
   --dynamic-offset: calc(var(--pitch-row-progress) * var(--pitch-progress-distance));
   --initial-offset: calc(var(--dynamic-offset) * -1);
@@ -6028,29 +6032,47 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 61.9375em) {
   .pitch .pitch--indicator-wrapper {
-    --constant-offset: calc(var(--nav-height) + var(--pitch-row-margin) + var(--ind-tag-border-width) - var(--sticky-buffer-offset) + var(--sticky-buffer) + var(--pitch-row-height)  + var(--indicator-offset) + var(--pitch-caption-height));
+    --indicator-offset: 4rem;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  .pitch .pitch--indicator-wrapper {
+    --constant-offset: calc(var(--captions-top) + var(--pitch-caption-height) + var(--indicator-offset) );
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  .pitch .pitch--indicator-wrapper {
+    --indicator-offset: 1.25rem;
+    top: unset;
+    bottom: var(--indicator-offset);
+    height: calc(100% - var(--constant-offset));
+  }
+  .ios.safari .pitch .pitch--indicator-wrapper {
+    height: calc(100% - var(--constant-offset) + 0.5rem);
   }
 }
 
 .pitch .pitch--indicator-wrapper__initial {
   opacity: 0 ;
-  transition: transform var(--pitch-progress-transition), opacity 0.15s, visibility 0s var(--pitch-progress-transition) ;
+  transition: transform 0.4s, opacity 0.4s, visibility 0s var(--pitch-progress-transition) ;
   transform: translateY(var(--off-page-offset)) ;
-  transition: "transform var(--pitch-progress-transition), opacity 0.15s,\a             visibility 0s var(--pitch-progress-transition)" ;
+  transition: "transform 0.4s, opacity 0.4s,\a             visibility 0s var(--pitch-progress-transition)" ;
 }
 
 .pitch .pitch--indicator-wrapper__animate {
   opacity: 1 ;
-  transition: transform var(--pitch-progress-transition), opacity 0.15s, visibility 0s 0s ;
+  transition: transform 0.4s, opacity 0.4s, visibility 0s 0s ;
   transform: translateY(var(--initial-offset)) ;
-  transition: "transform var(--pitch-progress-transition), opacity 0.15s,\a             visibility 0s 0s" ;
+  transition: "transform 0.4s, opacity 0.4s,\a             visibility 0s 0s" ;
 }
 
 .pitch .pitch--indicator-wrapper__exit {
   opacity: 0 ;
-  transition: transform var(--pitch-progress-transition), opacity 0.15s, visibility 0s var(--pitch-progress-transition) ;
+  transition: transform 0.4s, opacity 0.4s, visibility 0s var(--pitch-progress-transition) ;
   transform: translateY(var(--off-page-offset)) ;
-  transition: "transform var(--pitch-progress-transition), opacity 0.15s,\a             visibility 0s var(--pitch-progress-transition)" ;
+  transition: "transform 0.4s, opacity 0.4s,\a             visibility 0s var(--pitch-progress-transition)" ;
 }
 
 .pitch .pitch--indicator {
@@ -6060,9 +6082,15 @@ h3 + .studypanel--paragraph {
   gap: 0.25rem;
 }
 
+@media screen and (max-width: 49.9375em) {
+  .pitch .pitch--indicator {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}
+
 .pitch .pitch--indicator-arrow {
   --graphic-scale: 0.05;
-  margin-top: -0.05rem;
 }
 
 .ios.safari .pitch .pitch--indicator-arrow {
@@ -6070,9 +6098,10 @@ h3 + .studypanel--paragraph {
 }
 
 .pitch .pitch--indicator-arrow__animate {
-  --bob-duration: 2s;
-  animation: bob var(--bob-duration) ease-in-out 1;
-  animation-delay: 0.35s;
+  --bob-duration: 2.25s;
+  --bob-distance: 0.5rem;
+  animation: bob var(--bob-duration) ease-in-out infinite;
+  animation-delay: 0.5s;
 }
 
 @keyframes bob {
@@ -6084,7 +6113,7 @@ h3 + .studypanel--paragraph {
   }
   17.5%,
   52.5% {
-    transform: translateY(0.5rem);
+    transform: translateY(var(--bob-distance));
   }
   70.1%,
   100% {

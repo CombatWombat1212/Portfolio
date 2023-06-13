@@ -23,6 +23,7 @@ import { lock, unlock } from "tua-body-scroll-lock";
 import useBrowser from "@/scripts/hooks/useBrowser";
 import useHorizontalResize from "@/scripts/hooks/useHorizontalResize";
 import useIsScrolling from "@/scripts/hooks/useIsScrolling";
+import { motion } from "framer-motion";
 
 const laptop_frame = MAKERIGHT_IMGS.pitch_laptop_frame;
 
@@ -199,7 +200,10 @@ function pitchGetInView(pitch) {
   var inView = rect.top < window.innerHeight && rect.bottom > 0;
   pitch.inView = inView;
 
-  var within = rect.top <= 0 && rect.bottom >= window.innerHeight; // not just in view, but fully within the viewport, used for the indicator
+  const navHeight = splitRem(window.getComputedStyle(document.documentElement).getPropertyValue("--nav-height"));
+  const buffer = navHeight;
+  var within = rect.top - buffer <= 0 && rect.bottom >= window.innerHeight; // not just in view, but fully within the viewport, used for the indicator
+
   if (within) {
     elem.setAttribute("data-inview", true);
   } else {
@@ -329,8 +333,11 @@ function Pitch({ children }) {
   // useListener("swiped-up", swipedUpHandler, { ref: pitch, enabled: lockScroll });
   useListener("touchend", () => setLastTouchY(null));
 
+
+
   useEffect(() => {
     if (!pitch.current) return;
+    
     pitch.current.addEventListener("swiped-down", swipedDownHandler);
     pitch.current.addEventListener("swiped-up", swipedUpHandler);
     return () => {
@@ -424,22 +431,26 @@ function Pitch({ children }) {
   const swipedUpHandlerThrottled = cooldown(swipedUpHandlerRun, 100);
   const swipedDownHandlerThrottled = cooldown(swipedDownHandlerRun, 100);
 
+
+  const insidePitch = useAttrObserver(pitch, "data-inview");
+
   function swipedUpHandler(e) {
+    if (!insidePitch) return;
     swipedUpHandlerThrottled(e);
     console.log("swiped up");
   }
-
+  
   function swipedDownHandler(e) {
+    if (!insidePitch) return;
     swipedDownHandlerThrottled(e);
     console.log("swiped down");
   }
-
 
   return (
     <>
       <div className="pitch" ref={pitch}>
         <div className="pitch--column pitch--graphics-wrapper">
-          <Laptop rows={rows} pitch={pitch}  />
+          <Laptop rows={rows} pitch={pitch} />
         </div>
 
         <div className="pitch--column pitch--captions-wrapper">
@@ -465,36 +476,49 @@ function Pitch({ children }) {
 }
 
 function Indicator({ pitch }) {
-
   const MINIMUM_READY_DURATION = 500;
-
-  const [count, setCount] = useState(0);
+  const DEBOUNCE_DURATION = 4000;
+  
   const [delayedReady, setDelayedReady] = useState(false);
   const [ready, setReady] = useState(false);
   const [show, setShow] = useState(false);
+  const [isNotScrolling, setIsNotScrolling] = useState(false);
   
   const readyStartTimestamp = useRef(null);
+  const rowChangeTimeout = useRef(null);
+  const previousRow = useRef(null);
+  const previousRowBeforeChange = useRef(null); // New reference
   
   const insidePitch = useAttrObserver(pitch, "data-inview");
-  const currentRow = useAttrObserver(pitch, "--pitch-current-row", {bool:false});
+  const currentRow = useAttrObserver(pitch, "--pitch-current-row", { bool: false });
   const indicatorClassState = useInOut(show);
-  const isScrolling = useIsScrolling({debounce: 2650});
   
   useEffect(() => {
-    const firstRun = insidePitch && currentRow == 0;
-    const stoppedScrolling = insidePitch && !isScrolling;
+    if (previousRow.current !== currentRow) {
+      clearTimeout(rowChangeTimeout.current);
+      setIsNotScrolling(false);
+      rowChangeTimeout.current = setTimeout(() => {
+        setIsNotScrolling(true);
+      }, DEBOUNCE_DURATION);
+      previousRowBeforeChange.current = previousRow.current; // Store the previous row
+      previousRow.current = currentRow;
+    }
+  }, [currentRow]);
+  
+  useEffect(() => {
+    const firstRun = insidePitch && currentRow == 0 && previousRowBeforeChange.current != 1;
+    const stoppedScrolling = insidePitch && isNotScrolling;
     if (firstRun || stoppedScrolling) {
       setReady(true);
     } else {
       setReady(false);
     }
-  }, [insidePitch, isScrolling, currentRow]);
+  }, [insidePitch, isNotScrolling, currentRow]);
   
   useEffect(() => {
-    if(ready){
+    if (ready) {
       readyStartTimestamp.current = Date.now();
       setDelayedReady(true);
-      setCount(count + 1);
     } else {
       const readyDuration = Date.now() - readyStartTimestamp.current;
       if (readyDuration < MINIMUM_READY_DURATION) {
@@ -508,41 +532,48 @@ function Indicator({ pitch }) {
   }, [ready]);
   
   useEffect(() => {
-    if(ready){
-      setCount(count + 1);
-    }
-  }, [ready]);
-
-  useEffect(() => {
-    if(!insidePitch){
-      setCount(0);
-    }
-  }, [insidePitch]);
-
-  useEffect(() => {
-    if((delayedReady && insidePitch) || ( currentRow == 0 && insidePitch)){
+    if ((delayedReady && insidePitch) || (currentRow == 0 && insidePitch && previousRowBeforeChange.current != 1)) {
       setShow(true);
     } else {
       setShow(false);
     }
-  }, [delayedReady, insidePitch, currentRow]);
-  
+  }, [delayedReady, insidePitch, currentRow, previousRowBeforeChange]);
 
+  
   const list = new ClassList("pitch--indicator-arrow");
   list.addIf("animate", show);
   const classes = list.get();
 
+  const { desktop, isBpAndDown, bp, loading } = useResponsive();
+  const { isMobileDevice } = useDeviceDetect();
+  const lgAndDown = !(!isBpAndDown("lg") || loading);
+  const mdAndDown = !(!isBpAndDown("md") || loading);
+
   return (
     <div className={`pitch--indicator-wrapper pitch--indicator-wrapper__${indicatorClassState}`}>
-      {/* <Tag className="pitch--indicator" variant="tool" color="inverted"> */}
-        <div className="pitch--indicator">
-        {/* <ResponsiveText tag="Fragment">
-          <xxl>Scroll</xxl>
-          <md>Swipe</md>
-        </ResponsiveText> */}
-        <Graphic type="mask" className={classes} img={arrow_down} />
-        </div>
-      {/* </Tag> */}
+      {/* {!mdAndDown ? ( */}
+        <>
+          {/* <Tag className="pitch--indicator" variant="tool" color="inverted"> */}
+          <div className="pitch--indicator">
+            {/* <ResponsiveText tag="Fragment">
+            <xxl>Scroll</xxl>
+            <md>Swipe</md>
+          </ResponsiveText> */}
+            <Graphic type="mask" className={classes} img={arrow_down} />
+          </div>
+          {/* </Tag> */}
+        </>
+      {/* ) : ( */}
+        {/* <>
+          <Tag className="pitch--indicator" variant="tool" color="inverted">
+            <ResponsiveText tag="Fragment">
+            <xxl>Scroll</xxl>
+            <md>Swipe</md>
+          </ResponsiveText>
+            <Graphic type="mask" className={classes} img={arrow_down} />
+          </Tag>
+        </> */}
+      {/* )} */}
     </div>
   );
 }
