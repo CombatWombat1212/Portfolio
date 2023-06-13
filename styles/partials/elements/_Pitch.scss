@@ -399,22 +399,23 @@
       @include flex-row;
       gap: 0.25rem;
 
+      background-color: rgba($col-background, 0.115);
       @include md-down{
-        background-color: rgba($col-background, 0.115);
         @include my-auto;
       }
     }
 
     &--indicator-arrow {
-      --graphic-scale: 0.0315;
+      // --graphic-scale: 0.0315;
+      --graphic-scale: 0.0265;
       // --graphic-scale: 0.05;
       
-      margin-top: 0.05rem;
+      margin-top: -0.05rem;
       
-      @include md-down{
-        --graphic-scale: 0.0265;
+      
+      @include android-chrome{
+      margin-top: 0.05rem;
       }
-
       @include ios-safari{
         margin-top: 0.1rem;
       }
@@ -424,13 +425,13 @@
 
       &__animate {
         --bob-duration: 2.25s;
-        --bob-distance: 0.5rem;
+        // --bob-distance: 0.5rem;
         animation: bob var(--bob-duration) ease-in-out infinite;
         animation-delay: 0.5s;
         
-        @include md-down{
+        // @include md-down{
           --bob-distance: 0.085rem;
-        }
+        // }
 
       }
 

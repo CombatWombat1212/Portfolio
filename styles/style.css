@@ -6089,25 +6089,23 @@ h3 + .studypanel--paragraph {
   display: flex;
   flex-direction: row;
   gap: 0.25rem;
+  background-color: rgba(243, 243, 247, 0.115);
 }
 
 @media screen and (max-width: 49.9375em) {
   .pitch .pitch--indicator {
-    background-color: rgba(243, 243, 247, 0.115);
     margin-top: auto;
     margin-bottom: auto;
   }
 }
 
 .pitch .pitch--indicator-arrow {
-  --graphic-scale: 0.0315;
-  margin-top: 0.05rem;
+  --graphic-scale: 0.0265;
+  margin-top: -0.05rem;
 }
 
-@media screen and (max-width: 49.9375em) {
-  .pitch .pitch--indicator-arrow {
-    --graphic-scale: 0.0265;
-  }
+.android.chrome .pitch .pitch--indicator-arrow {
+  margin-top: 0.05rem;
 }
 
 .ios.safari .pitch .pitch--indicator-arrow {
@@ -6116,15 +6114,9 @@ h3 + .studypanel--paragraph {
 
 .pitch .pitch--indicator-arrow__animate {
   --bob-duration: 2.25s;
-  --bob-distance: 0.5rem;
   animation: bob var(--bob-duration) ease-in-out infinite;
   animation-delay: 0.5s;
-}
-
-@media screen and (max-width: 49.9375em) {
-  .pitch .pitch--indicator-arrow__animate {
-    --bob-distance: 0.085rem;
-  }
+  --bob-distance: 0.085rem;
 }
 
 @keyframes bob {
