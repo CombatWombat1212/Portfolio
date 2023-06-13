@@ -17,7 +17,7 @@
 
   --pitch-row-margin: var(--section-gap_half);
 
-  --sticky-buffer-offset: 4.15rem;
+  --sticky-buffer-offset: #{zoom-vh(3.5vh)};
   // --sticky-buffer: calc(var(--pitch-row-margin) / 2);
   --sticky-buffer: calc(((#{zoom-vh(100vh)} - var(--nav-height)) - (var(--pitch-row-margin) * 2) - var(--pitch-row-height)) / 2);
   --graphics-top: calc(var(--sticky-buffer) + var(--nav-height) - var(--sticky-buffer-offset));
@@ -49,7 +49,7 @@
   }
   @include sm-down {
     --pitch-additional-height: 32rem;
-    --sticky-buffer-offset: #{zoom-vh(15.5vh)};
+    --sticky-buffer-offset: #{zoom-vh(15vh)};
 
     @include ios-safari {
       --pitch-additional-height: 60rem;
@@ -317,18 +317,38 @@
       position: fixed;
       width: var(--site-max-width_wide);
 
-      --indicator-offset: 4rem;
+      // --indicator-offset: #{zoom-vh(8vh)};
+      --indicator-offset: calc(var(--gap) - 3rem);
+      
+      // @include xxl-down {
+      //   --indicator-offset: #{zoom-vh(11vh)};
+      // }
+      // @include xl-down {
+      //   --indicator-offset: #{zoom-vh(0vh)};
+      // }
+      // @include lg-down {
+      //   --indicator-offset: #{zoom-vh(3vh)};
+      // }
+      // @include md-down {
+      // }
+      // @include sm-down {
+      // }
 
 
       --constant-offset: calc(var(--nav-height) + var(--pitch-row-margin) + var(--ind-tag-border-width) - var(--sticky-buffer-offset) + var(--sticky-buffer) + var(--pitch-row-height)  + var(--indicator-offset));
       --dynamic-offset: calc(var(--pitch-row-progress) * var(--pitch-progress-distance));
       --initial-offset: calc(var(--dynamic-offset) * -1);
+      --off-page-offset: 2rem;
 
       top: var(--constant-offset);
       transform: translateY(var(--initial-offset));
+
+
+      @include lg-down{
+        --constant-offset: calc(var(--nav-height) + var(--pitch-row-margin) + var(--ind-tag-border-width) - var(--sticky-buffer-offset) + var(--sticky-buffer) + var(--pitch-row-height)  + var(--indicator-offset) + var(--pitch-caption-height));
+      }
       
       
-      --off-page-offset: 2rem;
 
 
 
@@ -360,30 +380,24 @@
     &--indicator {
       --tag-border-width: var(--ind-tag-border-width);
       @include flex-row;
-      gap: 0.3rem;
+      gap: 0.25rem;
     }
     &--indicator-arrow {
-      --graphic-scale: 0.0325;
+      // --graphic-scale: 0.0315;
+      --graphic-scale: 0.05;
 
-      margin-top: -0.1rem;
+      margin-top: -0.05rem;
       @include ios-safari{
         margin-top: 0.1rem;
       }
       // --graphic-scale: 0.05;
       // opacity:1;
       &__animate {
-        // --bob-duration: 2.5s;
-        // --pause-duration: 3s;
-
-        // animation: bob var(--bob-duration) ease-in-out infinite;
-        // animation-delay: var(--pause-duration);
-
-        // --bob-duration: 2s;
-        // --pause-duration: 2s;
-
-        // animation: bob var(--bob-duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
-        // animation-delay: var(--pause-duration);
+        --bob-duration: 2s;
+        animation: bob var(--bob-duration) ease-in-out 1;
+        animation-delay: 0.35s;
       }
+    
     }
   }
 }
@@ -396,27 +410,27 @@
 //   }
 //   25%,
 //   75% {
-//     transform: translateY(0.25rem);
+//     transform: translateY(0.45rem);
 //   }
 // }
 
-// @keyframes bob {
-//   0%,
-//   35%,
-//   70%,
-//   100% {
-//     transform: translateY(0);
-//     // opacity: 1;
-//   }
-//   17.5%,
-//   52.5% {
-//     transform: translateY(0.5rem);
-//     // opacity: 0.5;
-//   }
-//   70.1%,
-//   100% {
-//     transform: translateY(0);
-//     // opacity: 1;
-//     animation-play-state: paused;
-//   }
-// }
+@keyframes bob {
+  0%,
+  35%,
+  70%,
+  100% {
+    transform: translateY(0);
+    // opacity: 1;
+  }
+  17.5%,
+  52.5% {
+    transform: translateY(0.5rem);
+    // opacity: 0.5;
+  }
+  70.1%,
+  100% {
+    transform: translateY(0);
+    // opacity: 1;
+    animation-play-state: paused;
+  }
+}

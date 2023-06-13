@@ -5,7 +5,7 @@ import MAKERIGHT_IMGS from "@/data/MAKERIGHT_IMGS";
 import Section from "./Sections";
 import React, { useEffect, useRef, useState } from "react";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
-import { clamp, cooldown, createUpdateConditions, RESIZE_TIMEOUT, splitPx, splitRem } from "@/scripts/GlobalUtilities";
+import { clamp, ClassList, cooldown, createUpdateConditions, RESIZE_TIMEOUT, splitPx, splitRem } from "@/scripts/GlobalUtilities";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import usePropModifier from "@/scripts/hooks/usePropModifier";
 import swipeEventsInit from "@/scripts/SwipeEvents";
@@ -22,6 +22,7 @@ import useAttrObserver from "@/scripts/hooks/useAttrObserver";
 import { lock, unlock } from "tua-body-scroll-lock";
 import useBrowser from "@/scripts/hooks/useBrowser";
 import useHorizontalResize from "@/scripts/hooks/useHorizontalResize";
+import useIsScrolling from "@/scripts/hooks/useIsScrolling";
 
 const laptop_frame = MAKERIGHT_IMGS.pitch_laptop_frame;
 
@@ -464,20 +465,84 @@ function Pitch({ children }) {
 }
 
 function Indicator({ pitch }) {
+
+  const MINIMUM_READY_DURATION = 500;
+
+  const [count, setCount] = useState(0);
+  const [delayedReady, setDelayedReady] = useState(false);
+  const [ready, setReady] = useState(false);
+  const [show, setShow] = useState(false);
+  
+  const readyStartTimestamp = useRef(null);
+  
   const insidePitch = useAttrObserver(pitch, "data-inview");
-  const indicatorClassState = useInOut(insidePitch);
+  const currentRow = useAttrObserver(pitch, "--pitch-current-row", {bool:false});
+  const indicatorClassState = useInOut(show);
+  const isScrolling = useIsScrolling({debounce: 2650});
+  
+  useEffect(() => {
+    const firstRun = insidePitch && currentRow == 0;
+    const stoppedScrolling = insidePitch && !isScrolling;
+    if (firstRun || stoppedScrolling) {
+      setReady(true);
+    } else {
+      setReady(false);
+    }
+  }, [insidePitch, isScrolling, currentRow]);
+  
+  useEffect(() => {
+    if(ready){
+      readyStartTimestamp.current = Date.now();
+      setDelayedReady(true);
+      setCount(count + 1);
+    } else {
+      const readyDuration = Date.now() - readyStartTimestamp.current;
+      if (readyDuration < MINIMUM_READY_DURATION) {
+        setTimeout(() => {
+          setDelayedReady(false);
+        }, MINIMUM_READY_DURATION - readyDuration);
+      } else {
+        setDelayedReady(false);
+      }
+    }
+  }, [ready]);
+  
+  useEffect(() => {
+    if(ready){
+      setCount(count + 1);
+    }
+  }, [ready]);
+
+  useEffect(() => {
+    if(!insidePitch){
+      setCount(0);
+    }
+  }, [insidePitch]);
+
+  useEffect(() => {
+    if((delayedReady && insidePitch) || ( currentRow == 0 && insidePitch)){
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  }, [delayedReady, insidePitch, currentRow]);
+  
+
+  const list = new ClassList("pitch--indicator-arrow");
+  list.addIf("animate", show);
+  const classes = list.get();
 
   return (
     <div className={`pitch--indicator-wrapper pitch--indicator-wrapper__${indicatorClassState}`}>
-      <Tag className="pitch--indicator" variant="tool" color="inverted">
-        {/* <div className="pitch--indicator"> */}
-        <ResponsiveText tag="Fragment">
+      {/* <Tag className="pitch--indicator" variant="tool" color="inverted"> */}
+        <div className="pitch--indicator">
+        {/* <ResponsiveText tag="Fragment">
           <xxl>Scroll</xxl>
           <md>Swipe</md>
-        </ResponsiveText>
-        <Graphic type="mask" className={`pitch--indicator-arrow`} img={arrow_down} />
-        {/* </div> */}
-      </Tag>
+        </ResponsiveText> */}
+        <Graphic type="mask" className={classes} img={arrow_down} />
+        </div>
+      {/* </Tag> */}
     </div>
   );
 }

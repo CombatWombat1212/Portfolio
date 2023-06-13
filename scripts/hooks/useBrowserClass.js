@@ -25,8 +25,6 @@ const useBrowserClass = () => {
       document.documentElement.classList.add('ios');
     }
 
-    console.log(userAgentString)
-
 
     // Cleanup function to remove classes when component is unmounted or conditions change.
     return () => {
