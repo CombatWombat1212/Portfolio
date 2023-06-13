@@ -531,8 +531,13 @@ function Indicator({ pitch }) {
   useEffect(() => {
     if ((delayedReady && insidePitch) || (currentRow == 0 && insidePitch && previousRowBeforeChange.current != 1)) {
       setShow(true);
+      // leaving these here cause i think the idea is interesting but i don't love the way it worked in practise tho it could be useful
+      pitch.current.classList.add("pitch__indicator-on")
+      pitch.current.classList.remove("pitch__indicator-off")
     } else {
       setShow(false);
+      pitch.current.classList.remove("pitch__indicator-on")
+      pitch.current.classList.add("pitch__indicator-off")
     }
   }, [delayedReady, insidePitch, currentRow, previousRowBeforeChange]);
 
@@ -541,10 +546,10 @@ function Indicator({ pitch }) {
   list.addIf("animate", show);
   const classes = list.get();
 
-  const { desktop, isBpAndDown, bp, loading } = useResponsive();
-  const { isMobileDevice } = useDeviceDetect();
-  const lgAndDown = !(!isBpAndDown("lg") || loading);
-  const mdAndDown = !(!isBpAndDown("md") || loading);
+  // const { desktop, isBpAndDown, bp, loading } = useResponsive();
+  // const { isMobileDevice } = useDeviceDetect();
+  // const lgAndDown = !(!isBpAndDown("lg") || loading);
+  // const mdAndDown = !(!isBpAndDown("md") || loading);
 
   return (
     <div className={`pitch--indicator-wrapper pitch--indicator-wrapper__${indicatorClassState}`}>

@@ -18,6 +18,10 @@
   --pitch-row-margin: var(--section-gap_half);
 
   --sticky-buffer-offset: #{zoom-vh(3.5vh)};
+  
+
+
+
   // --sticky-buffer: calc(var(--pitch-row-margin) / 2);
   --sticky-buffer: calc(((#{zoom-vh(100vh)} - var(--nav-height)) - (var(--pitch-row-margin) * 2) - var(--pitch-row-height)) / 2);
   --graphics-top: calc(var(--sticky-buffer) + var(--nav-height) - var(--sticky-buffer-offset));
@@ -57,6 +61,16 @@
     --pitch-additional-height: 32rem;
     --sticky-buffer-offset: 14%;
 
+
+    // &__indicator-on{
+    //   --sticky-buffer-offset: 14%;
+    // }
+    
+    // &__indicator-off{
+    //   --sticky-buffer-offset: 10%;
+    // }
+
+    
     @include ios-safari {
       --pitch-additional-height: 60rem;
     }
