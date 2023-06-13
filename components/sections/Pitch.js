@@ -3,7 +3,7 @@ import { addClassToJsxObj } from "./sections_utilities/ClassUtilities";
 import { getSectionChildren } from "./sections_utilities/GetSectionChildren";
 import MAKERIGHT_IMGS from "@/data/MAKERIGHT_IMGS";
 import Section from "./Sections";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useMountEffect } from "@/scripts/hooks/useMountEffect";
 import { clamp, ClassList, cooldown, createUpdateConditions, RESIZE_TIMEOUT, splitPx, splitRem } from "@/scripts/GlobalUtilities";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
@@ -329,23 +329,21 @@ function Pitch({ children }) {
 
   useListener("scroll", preventScroll, { enabled: lockScroll });
   useListener("touchstart", preventScroll, { enabled: lockScroll });
-  // useListener("swiped-down", swipedDownHandler, { ref: pitch, enabled: lockScroll });
-  // useListener("swiped-up", swipedUpHandler, { ref: pitch, enabled: lockScroll });
   useListener("touchend", () => setLastTouchY(null));
 
 
 
-  useEffect(() => {
-    if (!pitch.current) return;
+  // useEffect(() => {
+  //   if (!pitch.current) return;
     
-    pitch.current.addEventListener("swiped-down", swipedDownHandler);
-    pitch.current.addEventListener("swiped-up", swipedUpHandler);
-    return () => {
-      if (!pitch.current) return;
-      pitch.current.removeEventListener("swiped-down", swipedDownHandler);
-      pitch.current.removeEventListener("swiped-up", swipedUpHandler);
-    };
-  }, [pitch]);
+  //   pitch.current.addEventListener("swiped-down", swipedDownHandler);
+  //   pitch.current.addEventListener("swiped-up", swipedUpHandler);
+  //   return () => {
+  //     if (!pitch.current) return;
+  //     pitch.current.removeEventListener("swiped-down", swipedDownHandler);
+  //     pitch.current.removeEventListener("swiped-up", swipedUpHandler);
+  //   };
+  // }, [pitch.current]);
 
   // if mdAndDown is true do the following:
   // cancel all scrolling once the top of .pitch (including its padding-top) has reached the top of the screen, from there listen for swipes and with every swipe up, scroll to the top of the next .pitch--placeholder, you know which one is the current placeholder based on pitch.rows.current that is set on scroll and resize
@@ -432,19 +430,18 @@ function Pitch({ children }) {
   const swipedDownHandlerThrottled = cooldown(swipedDownHandlerRun, 100);
 
 
-  const insidePitch = useAttrObserver(pitch, "data-inview");
-
-  function swipedUpHandler(e) {
-    if (!insidePitch) return;
+  const swipedUpHandler = (e) => {
     swipedUpHandlerThrottled(e);
-    console.log("swiped up");
   }
-  
-  function swipedDownHandler(e) {
-    if (!insidePitch) return;
+
+  const swipedDownHandler = (e) => {
     swipedDownHandlerThrottled(e);
-    console.log("swiped down");
-  }
+  }  
+
+
+  useListener("swiped-down", swipedDownHandler, { ref: pitch, enabled: lockScroll });
+  useListener("swiped-up", swipedUpHandler, { ref: pitch, enabled: lockScroll });
+
 
   return (
     <>

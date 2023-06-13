@@ -6056,23 +6056,23 @@ h3 + .studypanel--paragraph {
 
 .pitch .pitch--indicator-wrapper__initial {
   opacity: 0 ;
-  transition: transform 0.4s, opacity 0.4s, visibility 0s var(--pitch-progress-transition) ;
+  transition: transform 0.5s, opacity 0.5s, visibility 0s var(--pitch-progress-transition) ;
   transform: translateY(var(--off-page-offset)) ;
-  transition: "transform 0.4s, opacity 0.4s,\a             visibility 0s var(--pitch-progress-transition)" ;
+  transition: "transform 0.5s, opacity 0.5s,\a             visibility 0s var(--pitch-progress-transition)" ;
 }
 
 .pitch .pitch--indicator-wrapper__animate {
   opacity: 1 ;
-  transition: transform 0.4s, opacity 0.4s, visibility 0s 0s ;
+  transition: transform 0.5s, opacity 0.5s, visibility 0s 0s ;
   transform: translateY(var(--initial-offset)) ;
-  transition: "transform 0.4s, opacity 0.4s,\a             visibility 0s 0s" ;
+  transition: "transform 0.5s, opacity 0.5s,\a             visibility 0s 0s" ;
 }
 
 .pitch .pitch--indicator-wrapper__exit {
   opacity: 0 ;
-  transition: transform 0.4s, opacity 0.4s, visibility 0s var(--pitch-progress-transition) ;
+  transition: transform 0.5s, opacity 0.5s, visibility 0s var(--pitch-progress-transition) ;
   transform: translateY(var(--off-page-offset)) ;
-  transition: "transform 0.4s, opacity 0.4s,\a             visibility 0s var(--pitch-progress-transition)" ;
+  transition: "transform 0.5s, opacity 0.5s,\a             visibility 0s var(--pitch-progress-transition)" ;
 }
 
 .pitch .pitch--indicator {

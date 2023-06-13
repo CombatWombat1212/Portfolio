@@ -360,19 +360,19 @@
         (
           initial: (
             opacity: 0,
-            transition: "transform 0.4s, opacity 0.4s,
+            transition: "transform 0.5s, opacity 0.5s,
             visibility 0s var(--pitch-progress-transition)",
             transform: translateY(var(--off-page-offset)),
           ),
           animate: (
             opacity: 1,
-            transition: "transform 0.4s, opacity 0.4s,
+            transition: "transform 0.5s, opacity 0.5s,
             visibility 0s 0s",
             transform: translateY(var(--initial-offset)),
             ),
           exit: (
             opacity: 0,
-            transition: "transform 0.4s, opacity 0.4s,
+            transition: "transform 0.5s, opacity 0.5s,
             visibility 0s var(--pitch-progress-transition)",
             transform: translateY(var(--off-page-offset)),
           ),
