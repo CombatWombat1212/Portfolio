@@ -21,6 +21,7 @@ import useInOut from "@/scripts/hooks/useInOut";
 import useAttrObserver from "@/scripts/hooks/useAttrObserver";
 import { lock, unlock } from "tua-body-scroll-lock";
 import useBrowser from "@/scripts/hooks/useBrowser";
+import useHorizontalResize from "@/scripts/hooks/useHorizontalResize";
 
 const laptop_frame = MAKERIGHT_IMGS.pitch_laptop_frame;
 
@@ -432,11 +433,12 @@ function Pitch({ children }) {
     console.log("swiped down");
   }
 
+
   return (
     <>
       <div className="pitch" ref={pitch}>
         <div className="pitch--column pitch--graphics-wrapper">
-          <Laptop rows={rows} pitch={pitch} />
+          <Laptop rows={rows} pitch={pitch}  />
         </div>
 
         <div className="pitch--column pitch--captions-wrapper">
@@ -454,9 +456,8 @@ function Pitch({ children }) {
               return <div key={i} className="pitch--row pitch--placeholder"></div>;
             })}
           </div>
-
         </div>
-          <Indicator pitch={pitch} />
+        <Indicator pitch={pitch} />
       </div>
     </>
   );
@@ -467,17 +468,17 @@ function Indicator({ pitch }) {
   const indicatorClassState = useInOut(insidePitch);
 
   return (
-      <div className={`pitch--indicator-wrapper pitch--indicator-wrapper__${indicatorClassState}`}>
-        <Tag className="pitch--indicator" variant="tool" color="inverted">
-          {/* <div className="pitch--indicator"> */}
-          <ResponsiveText tag="Fragment">
-            <xxl>Scroll</xxl>
-            <md>Swipe</md>
-          </ResponsiveText>
-          <Graphic type="mask" className={`pitch--indicator-arrow`} img={arrow_down} />
-          {/* </div> */}
-        </Tag>
-      </div>
+    <div className={`pitch--indicator-wrapper pitch--indicator-wrapper__${indicatorClassState}`}>
+      <Tag className="pitch--indicator" variant="tool" color="inverted">
+        {/* <div className="pitch--indicator"> */}
+        <ResponsiveText tag="Fragment">
+          <xxl>Scroll</xxl>
+          <md>Swipe</md>
+        </ResponsiveText>
+        <Graphic type="mask" className={`pitch--indicator-arrow`} img={arrow_down} />
+        {/* </div> */}
+      </Tag>
+    </div>
   );
 }
 

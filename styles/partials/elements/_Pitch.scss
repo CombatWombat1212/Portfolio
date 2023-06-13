@@ -1,9 +1,3 @@
-@mixin at-pitch {
-  @at-root .pitch {
-    @content;
-  }
-}
-
 .pitch {
   @include flex-row-between;
   --gap: 9rem;
@@ -24,7 +18,7 @@
   --pitch-row-margin: var(--section-gap_half);
 
   --sticky-buffer-offset: 4.15rem;
-  // --sticky-buffer: calc(var(--section-gap_half) / 2);
+  // --sticky-buffer: calc(var(--pitch-row-margin) / 2);
   --sticky-buffer: calc(((#{zoom-vh(100vh)} - var(--nav-height)) - (var(--pitch-row-margin) * 2) - var(--pitch-row-height)) / 2);
   --graphics-top: calc(var(--sticky-buffer) + var(--nav-height) - var(--sticky-buffer-offset));
 
@@ -34,7 +28,7 @@
   --pitch-caption-height: 13rem; // set with JS
   --pitch-caption-height-margin: 8rem; // used to add greater margins above and below the body elements within the caption so that they're more spaced out when they transition.
 
-  @include pad-y(var(--section-gap_half));
+  @include pad-y(var(--pitch-row-margin));
 
   @include xxl-down {
     --gap: 5rem;
@@ -113,55 +107,43 @@
     }
 
     &--graphics-wrapper {
-      @include at-pitch {
-        --pitch-graphics-wrapper-width: calc(#{col-width(8)} - (var(--gap) / 2));
-        @include xl-down {
-          --pitch-graphics-wrapper-width: calc(#{col-width(7.5)} - (var(--gap) / 2));
-        }
-        @include lg-down {
-          --pitch-graphics-wrapper-width: var(--pitch-columns-wrapper-width);
-        }
+      width: calc(#{col-width(8)} - (var(--gap) / 2));
+      @include xl-down {
+        width: calc(#{col-width(7.5)} - (var(--gap) / 2));
       }
-
-      width: var(--pitch-graphics-wrapper-width);
 
       @include lg-down {
         position: sticky;
+        // top: calc(var(--nav-height));
+
         --m: calc(var(--pitch-row-height) + var(--pitch-row-margin));
+        // margin-top: calc(var(--m) * -1);
+        // margin-bottom: calc(var(--m) );
+        // top: calc(var(--graphics-top) + ((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
         top: calc(var(--graphics-top));
         transform: translateY(calc((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
         transition: var(--pitch-progress-transition);
+
+        // height: calc( var(--pitch-row-height) + var(--gap) + var(--pitch-caption-height));
       }
     }
-
     &--captions-wrapper {
-      @include at-pitch {
-        --pitch-captions-wrapper-width: calc(#{col-width(4)} - (var(--gap) / 2));
-        @include xl-down {
-          --pitch-captions-wrapper-width: calc(#{col-width(4.5)} - (var(--gap) / 2));
-        }
-        @include lg-down {
-          --pitch-captions-wrapper-width: var(--pitch-columns-wrapper-width);
-        }
+      width: calc(#{col-width(4)} - (var(--gap) / 2));
+      @include xl-down {
+        width: calc(#{col-width(4.5)} - (var(--gap) / 2));
       }
-
-      width: var(--pitch-captions-wrapper-width);
     }
 
-    // both columns
     &--column {
-      @include at-pitch {
-        --pitch-columns-wrapper-width: 80%;
-        @include md-down {
-          --pitch-columns-wrapper-width: 90%;
-        }
-        @include sm-down {
-          --pitch-columns-wrapper-width: 100%;
-        }
-      }
-
       @include lg-down {
+        width: 80%;
         @include mx-auto;
+      }
+      @include md-down {
+        width: 90%;
+      }
+      @include sm-down {
+        width: 100%;
       }
     }
 
@@ -200,7 +182,7 @@
       overflow: hidden;
       background-color: #eaf0f8;
       left: calc((var(--pitch-overflow-buffer-y-percent) / 2));
-      top: calc(var(--section-gap_half) + (var(--pitch-overflow-buffer-x-percent) / 2));
+      top: calc(var(--pitch-row-margin) + (var(--pitch-overflow-buffer-x-percent) / 2));
     }
 
     &--mockup {
@@ -273,8 +255,8 @@
     &--captions {
       height: var(--pitch-row-height);
       position: sticky;
-      --captions-top: calc(var(--nav-height) + var(--sticky-buffer) + var(--section-gap_half) - var(--sticky-buffer-offset));
-      @include marg-y(var(--section-gap_half));
+      --captions-top: calc(var(--nav-height) + var(--sticky-buffer) + var(--pitch-row-margin) - var(--sticky-buffer-offset));
+      @include marg-y(var(--pitch-row-margin));
       overflow: hidden;
       top: var(--captions-top);
       transform: translateY(calc((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
@@ -320,62 +302,63 @@
     }
 
     &--empties {
-      margin-top: calc((var(--pitch-row-height) + var(--section-gap_half)) * -1);
+      margin-top: calc((var(--pitch-row-height) + var(--pitch-row-margin)) * -1);
+
     }
 
-
-    // &--indicator-wrapper {
-    //   position: absolute;
-
-    // }
 
 
 
     &--indicator-wrapper {
-      position: absolute;
-      top: calc(var(--nav-height) + var(--sticky-buffer) + var(--section-gap_half) - var(--sticky-buffer-offset));
-      // transform: translateY(calc((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
-      
-      width: var(--site-max-width_wide);
+      --ind-tag-border-width: 0.125rem;
+
 
       @include flex-row-center;
+      position: fixed;
+      width: var(--site-max-width_wide);
 
-      --indicator-offset: 5rem;
-      --indicator-position: calc((var(--pitch-progress-distance) + ((var(--pitch-row-progress)) * var(--pitch-progress-distance))) * -1);
-
-      // transform: translateY(var(--indicator-position));
+      --indicator-offset: 4rem;
 
 
-      // @include ios-safari{
+      --constant-offset: calc(var(--nav-height) + var(--pitch-row-margin) + var(--ind-tag-border-width) - var(--sticky-buffer-offset) + var(--sticky-buffer) + var(--pitch-row-height)  + var(--indicator-offset));
+      --dynamic-offset: calc(var(--pitch-row-progress) * var(--pitch-progress-distance));
+      --initial-offset: calc(var(--dynamic-offset) * -1);
 
-      //   top: calc(#{zoom-vh(100vh)} - var(--indicator-offset) + 0.85rem);
+      top: var(--constant-offset);
+      transform: translateY(var(--initial-offset));
+      
+      
+      --off-page-offset: 2rem;
 
-      // }
 
-      // @include in-out(
-      //   (
-      //     initial: (
-      //       opacity: 0,
-      //       transition: "transform 0.35s, opacity var(--pitch-progress-transition),
-      //       visibility 0s var(--pitch-progress-transition)",
-      //       transform: translateY(var(--indicator-offset)),
-      //     ),
-      //     animate: (
-      //       opacity: 1,
-      //       transition: "transform 0.35s, opacity var(--pitch-progress-transition),
-      //       visibility 0s 0s",
-      //       transform: translateY(var(--indicator-position)),
-      //     ),
-      //     exit: (
-      //       opacity: 0,
-      //       transition: "transform 0.35s, opacity var(--pitch-progress-transition),
-      //       visibility 0s var(--pitch-progress-transition)",
-      //       transform: translateY(var(--indicator-offset)),
-      //     ),
-      //   )
-      // );
+
+      @include in-out(
+        (
+          initial: (
+            opacity: 0,
+            transition: "transform var(--pitch-progress-transition), opacity 0.15s,
+            visibility 0s var(--pitch-progress-transition)",
+            transform: translateY(var(--off-page-offset)),
+          ),
+          animate: (
+            opacity: 1,
+            transition: "transform var(--pitch-progress-transition), opacity 0.15s,
+            visibility 0s 0s",
+            transform: translateY(var(--initial-offset)),
+            ),
+          exit: (
+            opacity: 0,
+            transition: "transform var(--pitch-progress-transition), opacity 0.15s,
+            visibility 0s var(--pitch-progress-transition)",
+            transform: translateY(var(--off-page-offset)),
+          ),
+        )
+      );
+
+
     }
     &--indicator {
+      --tag-border-width: var(--ind-tag-border-width);
       @include flex-row;
       gap: 0.3rem;
     }
@@ -383,7 +366,7 @@
       --graphic-scale: 0.0325;
 
       margin-top: -0.1rem;
-      @include ios-safari {
+      @include ios-safari{
         margin-top: 0.1rem;
       }
       // --graphic-scale: 0.05;

@@ -1,5 +1,7 @@
 .tag {
 
+  --tag-border-width: 0.125rem;
+
   &--group {
     @include flex-row;
     --tag-spacing: 1rem;
@@ -11,7 +13,7 @@
 
 
   font-size: var(--font-size-h4);
-  border: 0.125rem solid $col-primary;
+  border: var(--tag-border-width) solid $col-primary;
   border-radius: var(--b-rad_less);
   background-color: $col-background;
 
@@ -50,7 +52,7 @@
   }
 
   &__inverted{
-    border: 0.125rem solid $col-background;;
+    border: var(--tag-border-width) solid $col-background;;
     background-color: rgba(0,0,0,0);
       color: $col-background!important;
   }

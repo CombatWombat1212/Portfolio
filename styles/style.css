@@ -2117,8 +2117,9 @@ h3 + .studypanel--paragraph {
 }
 
 .tag {
+  --tag-border-width: 0.125rem;
   font-size: var(--font-size-h4);
-  border: 0.125rem solid #074391;
+  border: var(--tag-border-width) solid #074391;
   border-radius: var(--b-rad_less);
   background-color: #F3F3F7;
   padding: 0.4rem 0.5rem 0.25rem 0.5rem;
@@ -2163,7 +2164,7 @@ h3 + .studypanel--paragraph {
 }
 
 .tag__inverted {
-  border: 0.125rem solid #F3F3F7;
+  border: var(--tag-border-width) solid #F3F3F7;
   background-color: rgba(0, 0, 0, 0);
   color: #F3F3F7 !important;
 }
@@ -5697,8 +5698,8 @@ h3 + .studypanel--paragraph {
   --pitch-additional-height: 20rem;
   --pitch-caption-height: 13rem;
   --pitch-caption-height-margin: 8rem;
-  padding-top: var(--section-gap_half);
-  padding-bottom: var(--section-gap_half);
+  padding-top: var(--pitch-row-margin);
+  padding-bottom: var(--pitch-row-margin);
 }
 
 @media screen and (max-width: 91.9375em) {
@@ -5798,22 +5799,12 @@ h3 + .studypanel--paragraph {
 }
 
 .pitch .pitch--graphics-wrapper {
-  width: var(--pitch-graphics-wrapper-width);
-}
-
-.pitch {
-  --pitch-graphics-wrapper-width: calc(66.66667% - (var(--gap) / 2));
+  width: calc(66.66667% - (var(--gap) / 2));
 }
 
 @media screen and (max-width: 79.9375em) {
-  .pitch {
-    --pitch-graphics-wrapper-width: calc(62.5% - (var(--gap) / 2));
-  }
-}
-
-@media screen and (max-width: 61.9375em) {
-  .pitch {
-    --pitch-graphics-wrapper-width: var(--pitch-columns-wrapper-width);
+  .pitch .pitch--graphics-wrapper {
+    width: calc(62.5% - (var(--gap) / 2));
   }
 }
 
@@ -5828,45 +5819,32 @@ h3 + .studypanel--paragraph {
 }
 
 .pitch .pitch--captions-wrapper {
-  width: var(--pitch-captions-wrapper-width);
-}
-
-.pitch {
-  --pitch-captions-wrapper-width: calc(33.33333% - (var(--gap) / 2));
+  width: calc(33.33333% - (var(--gap) / 2));
 }
 
 @media screen and (max-width: 79.9375em) {
-  .pitch {
-    --pitch-captions-wrapper-width: calc(37.5% - (var(--gap) / 2));
-  }
-}
-
-@media screen and (max-width: 61.9375em) {
-  .pitch {
-    --pitch-captions-wrapper-width: var(--pitch-columns-wrapper-width);
-  }
-}
-
-.pitch {
-  --pitch-columns-wrapper-width: 80%;
-}
-
-@media screen and (max-width: 49.9375em) {
-  .pitch {
-    --pitch-columns-wrapper-width: 90%;
-  }
-}
-
-@media screen and (max-width: 36.9375em) {
-  .pitch {
-    --pitch-columns-wrapper-width: 100%;
+  .pitch .pitch--captions-wrapper {
+    width: calc(37.5% - (var(--gap) / 2));
   }
 }
 
 @media screen and (max-width: 61.9375em) {
   .pitch .pitch--column {
+    width: 80%;
     margin-right: auto;
     margin-left: auto;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  .pitch .pitch--column {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  .pitch .pitch--column {
+    width: 100%;
   }
 }
 
@@ -5903,7 +5881,7 @@ h3 + .studypanel--paragraph {
   overflow: hidden;
   background-color: #eaf0f8;
   left: calc((var(--pitch-overflow-buffer-y-percent) / 2));
-  top: calc(var(--section-gap_half) + (var(--pitch-overflow-buffer-x-percent) / 2));
+  top: calc(var(--pitch-row-margin) + (var(--pitch-overflow-buffer-x-percent) / 2));
 }
 
 .pitch .pitch--mockup {
@@ -5966,9 +5944,9 @@ h3 + .studypanel--paragraph {
 .pitch .pitch--captions {
   height: var(--pitch-row-height);
   position: sticky;
-  --captions-top: calc(var(--nav-height) + var(--sticky-buffer) + var(--section-gap_half) - var(--sticky-buffer-offset));
-  margin-top: var(--section-gap_half);
-  margin-bottom: var(--section-gap_half);
+  --captions-top: calc(var(--nav-height) + var(--sticky-buffer) + var(--pitch-row-margin) - var(--sticky-buffer-offset));
+  margin-top: var(--pitch-row-margin);
+  margin-bottom: var(--pitch-row-margin);
   overflow: hidden;
   top: var(--captions-top);
   transform: translateY(calc((var(--pitch-row-progress) * -1) * var(--pitch-progress-distance)));
@@ -6029,21 +6007,48 @@ h3 + .studypanel--paragraph {
 }
 
 .pitch .pitch--empties {
-  margin-top: calc((var(--pitch-row-height) + var(--section-gap_half)) * -1);
+  margin-top: calc((var(--pitch-row-height) + var(--pitch-row-margin)) * -1);
 }
 
 .pitch .pitch--indicator-wrapper {
-  position: absolute;
-  top: calc(var(--nav-height) + var(--sticky-buffer) + var(--section-gap_half) - var(--sticky-buffer-offset));
-  width: var(--site-max-width_wide);
+  --ind-tag-border-width: 0.125rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  --indicator-offset: 5rem;
-  --indicator-position: calc((var(--pitch-progress-distance) + ((var(--pitch-row-progress)) * var(--pitch-progress-distance))) * -1);
+  position: fixed;
+  width: var(--site-max-width_wide);
+  --indicator-offset: 4rem;
+  --constant-offset: calc(var(--nav-height) + var(--pitch-row-margin) + var(--ind-tag-border-width) - var(--sticky-buffer-offset) + var(--sticky-buffer) + var(--pitch-row-height)  + var(--indicator-offset));
+  --dynamic-offset: calc(var(--pitch-row-progress) * var(--pitch-progress-distance));
+  --initial-offset: calc(var(--dynamic-offset) * -1);
+  top: var(--constant-offset);
+  transform: translateY(var(--initial-offset));
+  --off-page-offset: 2rem;
+}
+
+.pitch .pitch--indicator-wrapper__initial {
+  opacity: 0 ;
+  transition: transform var(--pitch-progress-transition), opacity 0.15s, visibility 0s var(--pitch-progress-transition) ;
+  transform: translateY(var(--off-page-offset)) ;
+  transition: "transform var(--pitch-progress-transition), opacity 0.15s,\a             visibility 0s var(--pitch-progress-transition)" ;
+}
+
+.pitch .pitch--indicator-wrapper__animate {
+  opacity: 1 ;
+  transition: transform var(--pitch-progress-transition), opacity 0.15s, visibility 0s 0s ;
+  transform: translateY(var(--initial-offset)) ;
+  transition: "transform var(--pitch-progress-transition), opacity 0.15s,\a             visibility 0s 0s" ;
+}
+
+.pitch .pitch--indicator-wrapper__exit {
+  opacity: 0 ;
+  transition: transform var(--pitch-progress-transition), opacity 0.15s, visibility 0s var(--pitch-progress-transition) ;
+  transform: translateY(var(--off-page-offset)) ;
+  transition: "transform var(--pitch-progress-transition), opacity 0.15s,\a             visibility 0s var(--pitch-progress-transition)" ;
 }
 
 .pitch .pitch--indicator {
+  --tag-border-width: var(--ind-tag-border-width);
   display: flex;
   flex-direction: row;
   gap: 0.3rem;
