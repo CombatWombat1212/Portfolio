@@ -473,7 +473,7 @@ function Pitch({ children }) {
 }
 
 function Indicator({ pitch }) {
-  const MINIMUM_READY_DURATION = 500;
+  const MINIMUM_READY_DURATION = 100;
   const DEBOUNCE_DURATION = 4000;
   
   const [delayedReady, setDelayedReady] = useState(false);
@@ -532,12 +532,12 @@ function Indicator({ pitch }) {
     if ((delayedReady && insidePitch) || (currentRow == 0 && insidePitch && previousRowBeforeChange.current != 1)) {
       setShow(true);
       // leaving these here cause i think the idea is interesting but i don't love the way it worked in practise tho it could be useful
-      pitch.current.classList.add("pitch__indicator-on")
-      pitch.current.classList.remove("pitch__indicator-off")
+      // pitch.current.classList.add("pitch__indicator-on");
+      // pitch.current.classList.remove("pitch__indicator-off");
     } else {
       setShow(false);
-      pitch.current.classList.remove("pitch__indicator-on")
-      pitch.current.classList.add("pitch__indicator-off")
+      // pitch.current.classList.remove("pitch__indicator-on");
+      // pitch.current.classList.add("pitch__indicator-off");
     }
   }, [delayedReady, insidePitch, currentRow, previousRowBeforeChange]);
 
