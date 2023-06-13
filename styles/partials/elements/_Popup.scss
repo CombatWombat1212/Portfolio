@@ -387,6 +387,14 @@ $col-media-wrapper: rgba($col-background, 0.075);
   }
 
   &--media-wrapper {
+
+    @include safari{
+      max-width: var(--img-max-width);
+      max-height: var(--img-max-height);
+    }
+
+
+
     &__gallery {
       background-color: $col-media-wrapper;
       @include b-rad;

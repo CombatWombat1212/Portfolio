@@ -421,7 +421,7 @@ function MakeRight({ pop }) {
                         onClick: () => {
                           pop.setOn(true);
                           pop.setType("interactive");
-                          pop.setImg(MAKERIGHT_IMGS["brainstorming_chart_full"]);
+                          pop.setImg(MAKERIGHT_IMGS["brainstorming_chart_full_expanded"]);
                         },
                       }
                     : {

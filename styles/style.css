@@ -381,7 +381,7 @@ body {
 
 .noscroll {
   overflow: hidden;
-  overflow: -moz-hidden-unscrollable;
+  touch-action: none;
 }
 
 .scrollauto {
@@ -2147,10 +2147,14 @@ h3 + .studypanel--paragraph {
 }
 
 .safari .tag {
-  padding: 0.25rem 0.5rem 0.365rem 0.5rem;
+  padding: 0.215rem 0.5rem 0.365rem 0.5rem;
 }
 
 .mac.firefox .tag {
+  padding: 0.3rem 0.5rem 0.265rem 0.5rem;
+}
+
+.windows.firefox .tag {
   padding: 0.3rem 0.5rem 0.265rem 0.5rem;
 }
 
@@ -4076,6 +4080,11 @@ h3 + .studypanel--paragraph {
 
 .popup--canvas__grabbed {
   cursor: grabbing;
+}
+
+.safari .popup--media-wrapper {
+  max-width: var(--img-max-width);
+  max-height: var(--img-max-height);
 }
 
 .popup--media-wrapper__gallery {
@@ -6193,7 +6202,8 @@ h3 + .studypanel--paragraph {
   --margin-top: calc((var(--section-progress) * -1) * var(--set-indicator-height));
   --offset: 1;
   left: 0;
-  top: calc(var(--margin-top) + (var(--offset) * var(--set-indicator-height)));
+  top: calc(var(--offset) * var(--set-indicator-height));
+  transform: translateY(var(--margin-top));
 }
 
 .indicator--background__theme-dark {
@@ -6239,11 +6249,16 @@ h3 + .studypanel--paragraph {
   padding-top: 0rem;
 }
 
-.indicator .label--empty {
+.indicator .label--inner {
+  display: flex;
+  flex-direction: column;
   transition-duration: 0.1s;
+  transform: translateY(var(--empty-margin-top));
+}
+
+.indicator .label--empty {
   height: var(--name-height);
   min-height: var(--name-height);
-  margin-top: var(--empty-margin-top);
   padding-top: var(--name-pad-y);
   padding-bottom: var(--name-pad-y);
 }

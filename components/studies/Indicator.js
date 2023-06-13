@@ -647,20 +647,22 @@ function Indicator({}) {
               })}
           </div>
           <div className="label">
-            <span className="label--empty"></span>
-            {names &&
-              names.map((n, i) => {
-                return (
-                  <span
-                    key={i}
-                    className="label--name"
-                    style={{
-                      "--label-index": i,
-                    }}>
-                    {n}
-                  </span>
-                );
-              })}
+            <div className="label--inner">
+              <span className="label--empty"></span>
+              {names &&
+                names.map((n, i) => {
+                  return (
+                    <span
+                      key={i}
+                      className="label--name"
+                      style={{
+                        "--label-index": i,
+                      }}>
+                      {n}
+                    </span>
+                  );
+                })}
+            </div>
           </div>
         </div>
       </div>

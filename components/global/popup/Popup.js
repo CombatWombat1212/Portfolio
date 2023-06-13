@@ -385,7 +385,7 @@ function Wrapper({ pop, bp }) {
           pop.setImgLoaded(false);
           pop.setImgReady(false);
           pop.setImgDrawn(false);
-        }, 0);
+        }, 10);
 
         break;
       } while (pop.group.imgs[ind].hidden);
@@ -536,6 +536,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
           scrollbarWidth;
         var availHeight = popupElem.offsetHeight;
         var availWidth = popupElem.offsetWidth - gapWidth - infoWidth;
+        
       } else {
         var contentChildren = Array.from(infoElem.parentElement.children).filter((elem) => {
           return getComputedStyle(elem).position !== "absolute";
@@ -563,13 +564,13 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
         var availHeight = popupElem.offsetHeight - infoHeight - gapWidth;
         var availWidth = popupElem.offsetWidth;
 
-        // console.log(`availHeight: ${availHeight}, availWidth: ${availWidth}, infoHeight: ${infoHeight}, gapWidth: ${gapWidth}`);
       }
     } else {
       var availHeight = popupElem.offsetHeight;
       var availWidth = popupElem.offsetWidth;
-    }
 
+    }
+    
     if (availHeight !== elems.img.availHeight) {
       elems.img.setAvailHeight(availHeight);
     }
@@ -608,13 +609,14 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
       elems.img.setMaxWidth(maxWidth);
     }
 
+    
     if (availHeight !== elems.img.availHeight) {
       elems.img.setAvailHeight(availHeight);
     }
     if (availWidth !== elems.img.availWidth) {
       elems.img.setAvailWidth(availWidth);
     }
-
+    
     return { maxHeight, maxWidth };
   }
 
@@ -747,19 +749,17 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
     "--img-max-width": `${elems.img.maxWidth}px`,
     "--img-max-height": `${elems.img.maxHeight}px`,
   };
-
+  
   const animPresStyles = {
     "--aspect-width": Number(pop.img.aspect?.split("/")?.[0] || pop.img.width),
     "--aspect-height": Number(pop.img.aspect?.split("/")?.[1] || pop.img.height),
+    "--img-max-width": `${elems.img.maxWidth}px`,
+    "--img-max-height": `${elems.img.maxHeight}px`,
   };
 
   const showControls = pop.type == "gallery" && pop.group && pop.firstImgDrawn && pop.infoDrawn;
 
   const controlsClassState = useInOut(showControls);
-
-  useEffect(() => {
-    console.log(controlsClassState);
-  }, [controlsClassState]);
 
   return (
     <>

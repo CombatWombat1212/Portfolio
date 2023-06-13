@@ -59,7 +59,10 @@ body {
 
 .noscroll {
   overflow: hidden;
-  overflow: -moz-hidden-unscrollable;
+  // overflow: -moz-hidden-unscrollable;
+  touch-action:none;
+
+  
 }
 
 .scrollauto {

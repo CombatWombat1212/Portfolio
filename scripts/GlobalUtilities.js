@@ -173,7 +173,7 @@ function loadImgExternally(img) {
 
   if (IMAGE_TYPES.includes(img.type)) {
     elem = document.createElement("img");
-    elem.src = "." + img.src;
+    elem.src = img.src;
     elem.width = img.width;
     elem.height = img.height;
     elem.alt = img.alt;
