@@ -5738,7 +5738,7 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 36.9375em) {
   .pitch {
     --pitch-additional-height: 32rem;
-    --sticky-buffer-offset: 15%;
+    --sticky-buffer-offset: 14%;
   }
   .ios.safari .pitch {
     --pitch-additional-height: 60rem;

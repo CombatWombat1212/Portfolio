@@ -55,7 +55,7 @@
   }
   @include sm-down {
     --pitch-additional-height: 32rem;
-    --sticky-buffer-offset: 15%;
+    --sticky-buffer-offset: 14%;
 
     @include ios-safari {
       --pitch-additional-height: 60rem;
