@@ -104,19 +104,18 @@ const MADE_IMGS = processImages(
       height: 1200,
       group: "considerations",
     },
-    considerations_collar_shape: {
-      name: "considerations_collar_shape",
-      src: "/assets/images/made/considerations/considerations_collar_shape.png",
-      alt: "A close up rendering of the neck-hole of a shirt, focusing on the contour of the collar",
-      width: 1200,
-      height: 1200,
-      group: "considerations",
-    },
-
     considerations_button_positions: {
       name: "considerations_button_positions",
       src: "/assets/images/made/considerations/considerations_button_positions.png",
       alt: "A close up rendering of a cuff resting on a shirt base, with buttons in various positions",
+      width: 1200,
+      height: 1200,
+      group: "considerations",
+    },
+    considerations_collar_shape: {
+      name: "considerations_collar_shape",
+      src: "/assets/images/made/considerations/considerations_collar_shape.png",
+      alt: "A close up rendering of the neck-hole of a shirt, focusing on the contour of the collar",
       width: 1200,
       height: 1200,
       group: "considerations",

@@ -21,6 +21,7 @@ import { ABOUT_IMGS } from "@/data/ABOUT_IMGS";
 import ICONS from "@/data/ICONS";
 import usePop from "@/components/global/popup/usePop";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
+import { usePostScrollbarSizeToRoot } from "@/scripts/hooks/useScrollbarSize";
 
 // const style =
 // `font-family: "Gira Sans"; font-size: 1.4375rem;` +
@@ -87,6 +88,7 @@ export default function App({ Component, pageProps }) {
   }, [bp]);
 
   useBrowserClass();
+  usePostScrollbarSizeToRoot({update:pop.on});
 
   const preFetchImages = [ABOUT_IMGS.me, ...Object.keys(ICONS).map((key) => ICONS[key])];
 

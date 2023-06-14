@@ -75,8 +75,21 @@ $col-media-wrapper: rgba($col-background, 0.075);
   z-index: 10;
   display: flex;
 
+
+
+  // this is important because firefox needed a different approach to the calculations for the width and height of the popup, search for this key in popup.js to see what i mean: `popup-site-max-width-firefox`
+  --popup-site-max-width: var(--site-max-width);
+  --popup-site-max-width_wide: var(--site-max-width_wide);
+  @include firefox{
+    --popup-site-max-width: var(--site-max-width_vw);
+    --popup-site-max-width_wide: var(--site-max-width_vw_wide);
+  }
+
+
+
+
   &__interactive {
-    width: calc(var(--site-max-width) - var(--popup-pad));
+    width: calc(var(--popup-site-max-width) - var(--popup-pad));
     height: calc(100% - var(--nav-height) - var(--popup-pad));
   }
 
@@ -84,8 +97,10 @@ $col-media-wrapper: rgba($col-background, 0.075);
   &__lightbox-group {
     aspect-ratio: var(--img-aspect-width) / var(--img-aspect-height);
 
-    --lightbox-max-width: calc(var(--site-max-width) - 5rem);
+    --lightbox-max-width: calc(var(--popup-site-max-width) - 5rem);
     --lightbox-max-height: calc(100% - var(--nav-height) - var(--popup-pad) - 2rem);
+    --lightbox-max-height: calc(100vh - (var(--nav-height)*2) - var(--popup-pad) - 2rem);
+    // 2 nav heights because the previous calculation which used 100% actually equates to '100% of the parent element' i.e. the nav bar was already included but we subtracted it anyway as a whoopsie but it also is a good and proportional amount of space
     max-width: var(--lightbox-max-width);
     max-height: var(--lightbox-max-height);
     width: auto;
@@ -93,12 +108,15 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
     @include lg-down {
       --popup-controls-offset: calc(var(--button-height) * 0.45);
-      --lightbox-max-width: calc(var(--site-max-width) - 4rem);
-      --lightbox-max-height: calc(100% - var(--nav-height) - var(--popup-pad) - 4rem);
+      --lightbox-max-width: calc(var(--popup-site-max-width) - 4rem);
+      // --lightbox-max-height: calc(100% - var(--nav-height) - var(--popup-pad) - 4rem);
+      --lightbox-max-height: calc(100vh - (var(--nav-height)*2) - var(--popup-pad) - 4rem);
     }
+
     @include md-down {
-      --lightbox-max-width: calc(var(--site-max-width));
+      --lightbox-max-width: calc(var(--popup-site-max-width));
     }
+
   }
 
   &__lightbox-group {
@@ -107,15 +125,15 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
   &__lightbox-zoom {
     max-height: calc(100% - var(--nav-height) - var(--popup-pad) - 4rem);
-    width: calc(var(--site-max-width) - var(--popup-pad));
+    width: calc(var(--popup-site-max-width) - var(--popup-pad));
   }
 
   &__gallery {
-    // max-width: calc(var(--site-max-width));
+    // max-width: calc(var(--popup-site-max-width));
     // --popup-gap: 3rem;
     --popup-gap: 2.5rem;
     --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 10rem);
-    --popup-width-offset: calc(var(--site-max-width_wide) - 8rem);
+    --popup-width-offset: calc(var(--popup-site-max-width_wide) - 8rem);
 
     max-width: var(--popup-width-offset);
     max-height: calc(100% - var(--popup-height-offset));
@@ -128,26 +146,26 @@ $col-media-wrapper: rgba($col-background, 0.075);
     @include xxl-down {
       --popup-gap: 2rem;
       --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 9rem);
-      --popup-width-offset: calc(var(--site-max-width_wide) - 6rem);
+      --popup-width-offset: calc(var(--popup-site-max-width_wide) - 6rem);
     }
     @include xl-down {
       --popup-gap: 2rem;
       --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 8rem);
-      --popup-width-offset: calc(var(--site-max-width_wide) - 1rem);
+      --popup-width-offset: calc(var(--popup-site-max-width_wide) - 1rem);
       --popup-scrollbar-pad: calc(var(--popup-gap) / 1.65);
     }
 
     @include lg-down {
       --popup-gap: 2rem;
       --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 8rem);
-      --popup-width-offset: calc(var(--site-max-width_wide) - 0rem);
+      --popup-width-offset: calc(var(--popup-site-max-width_wide) - 0rem);
       --popup-scrollbar-pad: calc(var(--popup-gap) / 1.65);
     }
 
     @include md-down {
       --popup-gap: 2rem;
       --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 6.25rem);
-      --popup-width-offset: calc(var(--site-max-width_wide) - 9rem);
+      --popup-width-offset: calc(var(--popup-site-max-width_wide) - 9rem);
       --popup-scrollbar-pad: calc(var(--popup-gap) / 1.65);
       --popup-controls-offset: calc(var(--button-height) / 1.25);
     }
@@ -155,7 +173,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
     @include sm-down {
       --popup-gap: 1.85rem;
       --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + var(--popup-gap) + var(--button-height) - 3.5rem);
-      --popup-width-offset: calc(var(--site-max-width_wide) - 0.5rem);
+      --popup-width-offset: calc(var(--popup-site-max-width_wide) - 0.5rem);
       --popup-scrollbar-pad: calc(var(--popup-gap) / 1.65);
       // --popup-controls-offset: calc(var(--button-height) / 3);
       --popup-controls-offset: calc(var(--popup-gap) / 1.25);
@@ -388,8 +406,8 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
   &--media-wrapper {
     @include safari {
-      max-width: var(--img-max-width);
-      max-height: var(--img-max-height);
+      // max-width: var(--img-max-width);
+      // max-height: var(--img-max-height);
     }
 
     // @include firefox{
@@ -446,6 +464,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
     &__lightbox{
       @include firefox{
+        width:100%;
         max-width: Min(var(--img-max-width), var(--lightbox-max-width));
         max-height: Min(var(--img-max-height), var(--lightbox-max-height));
       }
@@ -958,6 +977,9 @@ $col-media-wrapper: rgba($col-background, 0.075);
       &__hidden {
         opacity: 0;
       }
+
+      
+      background-color: $col-media-wrapper;
 
       @include md-down {
         z-index: -1;

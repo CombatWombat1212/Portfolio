@@ -20,7 +20,6 @@ import { useResponsiveUtils } from "@/scripts/hooks/useBreakpoint";
 import swipeEventsInit from "@/scripts/SwipeEvents";
 import { useRouter } from "next/router";
 import { useIntercept } from "@/scripts/contexts/InterceptContext";
-import useBrowser from "@/scripts/hooks/useBrowser";
 import useInOut from "@/scripts/hooks/useInOut";
 import Image from "next/image";
 
@@ -101,7 +100,6 @@ function getPopupClasses(pop) {
     popclass.close.push("popup--close__gallery");
     popclass.controls.push("popup--controls__gallery");
 
-
     // Nested Case 2.1: zoom is true
     if (pop.zoom) {
       popclass.media.push("popup--media__gallery-zoom");
@@ -143,30 +141,6 @@ function getPopupClasses(pop) {
   return popclass;
 }
 
-function useGetIsntFallback() {
-  const { isFirefox, isSafari, browserFound } = useBrowser();
-  const [isntFirefox, setIsntFirefox] = useState(false);
-  const [isntSafari, setIsntSafari] = useState(false);
-  const [isntFallback, setIsntFallback] = useState(false);
-
-  // Use this effect to manage the isntFirefox state
-  useEffect(() => {
-    setIsntFirefox(!browserFound || !isFirefox || (browserFound && !isFirefox));
-  }, [browserFound, isFirefox]);
-
-  // Use this effect to manage the isntSafari state
-  useEffect(() => {
-    setIsntSafari(!browserFound || !isSafari || (browserFound && !isSafari));
-  }, [browserFound, isSafari]);
-
-  // Use this effect to manage the isntFallback state
-  useEffect(() => {
-    setIsntFallback(isntFirefox && isntSafari);
-  }, [isntFirefox, isntSafari]);
-
-  return isntFallback;
-}
-
 function Popup({ pop }) {
   const poptransition = 0.15;
   const wrap = useRef(null);
@@ -185,8 +159,6 @@ function Popup({ pop }) {
   const [delay, setDelay] = useState(false);
   const [fallbackShowWrapper, setFallbackShowWrapper] = useState(false);
   const fallbackClass = useInOut(pop.on);
-
-  const isntFallback = useGetIsntFallback();
 
   const getDelay = (elem) => {
     const result = splitS(window.getComputedStyle(elem).getPropertyValue("--transition"));
@@ -219,7 +191,7 @@ function Popup({ pop }) {
 
   return (
     <>
-      {isntFallback ? (
+      {pop.isntFallback ? (
         <AnimPres
           key="main"
           reference={wrap}
@@ -491,7 +463,9 @@ function Wrapper({ pop, bp }) {
             {pop.type == "interactive" && <ScaleWrapper pop={pop} nav={nav} state={state} />}
           </div>
 
-          {pop.type == "lightbox" && pop.group && pop.firstImgDrawn && <Controls className={`${popclass.controls}`} pop={pop} nav={nav} handles={handles} />}
+          {pop.type == "lightbox" && pop.group && pop.firstImgDrawn && (
+            <Controls className={`${popclass.controls}`} pop={pop} nav={nav} handles={handles} />
+          )}
         </div>
       </div>
     </>
@@ -533,7 +507,6 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
 
     if (infoElem) {
       if (state.desktop) {
-
         var gapWidth = splitRem(window.getComputedStyle(popupElem).getPropertyValue("--popup-gap"));
         var scrollbarWidth = infoElem.offsetWidth - infoElem.clientWidth;
         var infoWidth =
@@ -543,9 +516,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
           scrollbarWidth;
         var availHeight = popupElem.offsetHeight;
         var availWidth = popupElem.offsetWidth - gapWidth - infoWidth;
-        
       } else {
-
         var contentChildren = Array.from(infoElem.parentElement.children).filter((elem) => {
           return getComputedStyle(elem).position !== "absolute";
         });
@@ -571,15 +542,25 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
         })();
         var availHeight = popupElem.offsetHeight - infoHeight - gapWidth;
         var availWidth = popupElem.offsetWidth;
-
       }
     } else {
+      var availHeight;
+      var availWidth;
 
-      var availHeight = popupElem.offsetHeight;
-      var availWidth = popupElem.offsetWidth;
+      if (!pop.isntFirefox) {
+        // `popup-site-max-width-firefox` - used to link a css explaination to this js code
+        const styleMaxWidth = splitPx(window.getComputedStyle(popupElem).getPropertyValue("max-width"));
+        const styleMaxHeight  = splitPx(window.getComputedStyle(popupElem).getPropertyValue("max-height"));
+
+        availWidth = styleMaxWidth;
+        availHeight = styleMaxHeight;
+      } else{
+        availHeight = popupElem.offsetHeight;
+        availWidth = popupElem.offsetWidth;
+      }
 
     }
-    
+
     if (availHeight !== elems.img.availHeight) {
       elems.img.setAvailHeight(availHeight);
     }
@@ -618,7 +599,6 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
       elems.img.setMaxWidth(maxWidth);
     }
 
-    
     if (availHeight !== elems.img.availHeight) {
       elems.img.setAvailHeight(availHeight);
     }
@@ -706,11 +686,9 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
 
   const [drawLightbox, setDrawLightbox] = useState(false);
   useEffect(() => {
-
     const dataReady = elems.img.availWidth != false && elems.img.availHeight != false && elems.img.maxWidth != false && elems.img.maxHeight != false;
     const isLightbox = pop.type === "lightbox";
     if (dataReady || isLightbox) {
-      console.log(dataReady)
       if (!drawLightbox) setDrawLightbox(true);
     }
   }, [elems.img.availWidth, elems.img.availHeight, elems.img.maxWidth, elems.img.maxHeight, pop.type]);
@@ -722,7 +700,6 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
   const mediaWrapperRef = useRef(null);
   useListener("swiped-left", handles.swipeLeft, { ref: mediaWrapperRef });
   useListener("swiped-right", handles.swipeRight, { ref: mediaWrapperRef });
-
 
   const openDelay = 0.3;
   const mediaWrapDelay = pop.firstImgDrawn ? 0 : openDelay;
@@ -737,7 +714,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
     if (mediaWrapState !== "animate") return;
     setTimeout(() => {
       setMediaWrapStateClass("none");
-    }, (popSeekDuration + openDelay) * 1000);
+    }, (openDelay) * 1000);
   }, [mediaWrapState]);
 
   const loadWrapList = new ClassList("loading--wrapper");
@@ -763,7 +740,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
     "--img-max-width": `${elems.img.maxWidth}px`,
     "--img-max-height": `${elems.img.maxHeight}px`,
   };
-  
+
   const animPresStyles = {
     "--aspect-width": Number(pop.img.aspect?.split("/")?.[0] || pop.img.width),
     "--aspect-height": Number(pop.img.aspect?.split("/")?.[1] || pop.img.height),
@@ -773,7 +750,6 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
 
   const showControls = (pop.type == "gallery" || pop.type == "lightbox") && pop.group && pop.firstImgDrawn && pop.infoDrawn;
   const controlsClassState = useInOut(showControls);
-
 
   return (
     <>
@@ -832,7 +808,7 @@ function Head({ pop, nav, popclass, handles, state }) {
   const isGallery = type == "gallery";
   return (
     <>
-      {isLightbox && pop.firstImgDrawn && <Close pop={pop} nav={nav} handles={handles} popclass={popclass} state={state} />}
+      {isLightbox && pop.firstImgDrawn && pop.firstImgReady && <Close pop={pop} nav={nav} handles={handles} popclass={popclass} state={state} />}
       {!isLightbox && (
         <div className={`popup--header ${popclass.header} popup--nav`}>
           <Title pop={pop} />

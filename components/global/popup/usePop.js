@@ -1,3 +1,4 @@
+import useIsntFallback from "@/scripts/hooks/useIsntFallback";
 import { useRef, useState } from "react";
 
 function usePop() {
@@ -14,6 +15,7 @@ function usePop() {
   const [popupDrawn, setPopupDrawn] = useState(false);
   const [popupSeekCooldown, setPopupSeekCooldown] = useState(false);
   const [popupSeekDir, setPopupSeekDir] = useState("left");
+  const { isntFallback, isntFirefox, isntSafari } = useIsntFallback();
 
   const [imgReady, setImgReady] = useState(false);
   const [firstImgReady, setFirstImgReady] = useState(false);
@@ -51,6 +53,9 @@ function usePop() {
     setImgDrawn: setPopupImgDrawn,
     infoDrawn: popupInfoDrawn,
     setInfoDrawn: setPopupInfoDrawn,
+    isntFallback,
+    isntFirefox,
+    isntSafari,
 
     ui: {
       visible: popupUiVisible,
