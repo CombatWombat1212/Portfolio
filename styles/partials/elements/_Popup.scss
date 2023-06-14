@@ -857,12 +857,16 @@ $col-media-wrapper: rgba($col-background, 0.075);
     --adjusted-index: Min(var(--adjusted-index_max), calc(var(--img-count) - var(--left-half) - 1));
     --first-circle-margin-left: calc((((var(--circle-width) + var(--gap)) * var(--adjusted-index)) * -1) + (var(--circle-width) * var(--middle)));
 
-    & > *:first-child {
-      margin-left: weighted-average(var(--first-circle-margin-left), 0rem, var(--more-than-max));
-    }
+    // & > *:first-child {
+      pointer-events: none;
+      transition: 0.3s;
+      transform: translateX(weighted-average(var(--first-circle-margin-left), 0rem, var(--more-than-max)));
+    // }
   }
 
   &--circle {
+    pointer-events: all;
+
     transition: all 0.3s, opacity 0.185s !important;
 
     width: var(--circle-width);
