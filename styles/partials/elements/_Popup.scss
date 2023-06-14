@@ -101,10 +101,20 @@ $col-media-wrapper: rgba($col-background, 0.075);
     --lightbox-max-height: calc(100% - var(--nav-height) - var(--popup-pad) - 2rem);
     --lightbox-max-height: calc(100vh - (var(--nav-height)*2) - var(--popup-pad) - 2rem);
     // 2 nav heights because the previous calculation which used 100% actually equates to '100% of the parent element' i.e. the nav bar was already included but we subtracted it anyway as a whoopsie but it also is a good and proportional amount of space
+
+    // width: auto;
+    // height: auto;
+    
+    width: Min(100%, var(--lightbox-max-width));
+    height: Min(100%, var(--lightbox-max-height));
+    
     max-width: var(--lightbox-max-width);
     max-height: var(--lightbox-max-height);
-    width: auto;
-    height: auto;
+
+    pointer-events: none;
+
+
+
 
     @include lg-down {
       --popup-controls-offset: calc(var(--button-height) * 0.45);
@@ -128,9 +138,8 @@ $col-media-wrapper: rgba($col-background, 0.075);
     width: calc(var(--popup-site-max-width) - var(--popup-pad));
   }
 
+  
   &__gallery {
-    // max-width: calc(var(--popup-site-max-width));
-    // --popup-gap: 3rem;
     --popup-gap: 2.5rem;
     --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 10rem);
     --popup-width-offset: calc(var(--popup-site-max-width_wide) - 8rem);
@@ -180,12 +189,21 @@ $col-media-wrapper: rgba($col-background, 0.075);
     }
   }
 
+
+
   &--inner {
     width: 100%;
     display: flex;
     position: relative;
     flex-direction: column;
     align-items: center;
+    
+    &__lightbox{
+      @include mx-auto;
+      @include my-auto;
+      width: min-content;
+      height: min-content;
+    }
     &__gallery {
       pointer-events: none;
       justify-content: center;
@@ -211,6 +229,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
     &__lightbox {
       @include no-select;
       --popup-background: #00000000;
+      @include flex-row-center;
     }
 
     &__lightbox-group {
@@ -414,6 +433,9 @@ $col-media-wrapper: rgba($col-background, 0.075);
     //   max-width: var(--img-max-width);
     //   max-height: var(--img-max-height);
     // }
+    &__lightbox{
+      pointer-events: all;
+    }
 
     &__gallery {
       background-color: $col-media-wrapper;
@@ -463,6 +485,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
     }
 
     &__lightbox{
+      width:unset;
       @include firefox{
         width:100%;
         max-width: Min(var(--img-max-width), var(--lightbox-max-width));
@@ -624,7 +647,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
       &-inner {
         // flex-wrap: wrap;
         @include flex-row;
-        column-gap: 0.95rem;
+        column-gap: 0.875rem;
         width: fit-content;
         --categories-rows: 1;
         --categories-row-gap: 0.85rem;
@@ -773,6 +796,8 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
 
     &__lightbox{
+      pointer-events: all;
+
       @include firefox{
         transform:none!important;
       }

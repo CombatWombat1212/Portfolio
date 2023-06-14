@@ -140,8 +140,7 @@ function MakeRight({ pop }) {
                 <Heading>Recieve</Heading>
                 <Description>
                   <p>
-                    the purchased item <br className="d-lg-none d-sm-block" />
-                    right at your front door
+                    the purchased item <Nobr>right at your front door</Nobr>
                   </p>
                 </Description>
                 <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_recieve"]} />

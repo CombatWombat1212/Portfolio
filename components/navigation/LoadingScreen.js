@@ -28,6 +28,8 @@ function LoadingScreen() {
   const { loading } = useResponsive();
   const loadingScreen = useRef(null);
 
+  const scrollbarWidth = useScrollbarWidth();
+
   const routeChangeStart = () => {
     document.documentElement.classList.add("scrollauto");
     document.body.classList.add("noscroll");
@@ -81,6 +83,7 @@ function LoadingScreen() {
       className="loading-screen--wrapper"
       style={{
         "--transition": `${LOADING_DURATION}s`,
+        "--scrollbar-width": `${scrollbarWidth}px`,
       }}>
       {isntFallback ? (
         <AnimatePresence>

@@ -61,6 +61,8 @@ function getPopupClasses(pop) {
     popclass.close.push("popup--close__lightbox");
     popclass.media.push("popup--media__lightbox");
     popclass.controls.push("popup--controls__lightbox");
+    popclass.inner.push("popup--inner__lightbox");
+    popclass.mediaWrapper.push("popup--media-wrapper__lightbox");
 
     // Nested Case 1.1: zoom is true
     if (pop.zoom) {
@@ -751,6 +753,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
   const showControls = (pop.type == "gallery" || pop.type == "lightbox") && pop.group && pop.firstImgDrawn && pop.infoDrawn;
   const controlsClassState = useInOut(showControls);
 
+ 
   return (
     <>
       <AnimPres

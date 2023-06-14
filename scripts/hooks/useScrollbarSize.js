@@ -21,9 +21,9 @@ const useScrollbarWidth = (options = {}) => {
 
   useEffect(() => {
     computeScrollbarWidth();
-    setTimeout(() => {
-    computeScrollbarWidth();
-    }, 1000);
+    // setTimeout(() => {
+    // computeScrollbarWidth();
+    // }, 1000);
   }, [update]);
 
 

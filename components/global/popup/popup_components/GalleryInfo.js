@@ -5,7 +5,6 @@ import { ClassList, createUpdateConditions, splitPx, splitRem } from "@/scripts/
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import AnimPres from "../../AnimPres";
 import popAnims, { popLayoutTransition } from "../popup_utilities/PopupAnimations";
-import useDelayedProps from "@/scripts/hooks/useDelayedProps";
 import { Close } from "../Popup";
 import useHasScrollbar from "@/scripts/hooks/useHasScrollbar";
 import Button from "@/components/elements/Buttons";

@@ -9,9 +9,11 @@
 
   --font-height-body: Max(var(--font-size-body), var(--font-leading-body));
   --font-height-h1: Max(var(--font-size-h1), var(--font-leading-h1));
+  --screen-width: calc(100vw - var(--scrollbar-width)); 
 
   --sfh: 4.9406564584124654e-324;
 }
+
 
 html {
   scroll-behavior: smooth;
