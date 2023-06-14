@@ -25,8 +25,11 @@ export const ResponsiveProvider = ({ children }) => {
     desktop,
   };
 
+
+  // do i wanna do this?
   return (
     <ResponsiveContext.Provider value={value}>
+      {/* {!loading && children} */}
       {children}
     </ResponsiveContext.Provider>
   );

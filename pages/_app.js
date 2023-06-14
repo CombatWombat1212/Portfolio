@@ -20,6 +20,7 @@ import ImagePrefetcher from "@/components/utilities/ImagePrefetcher";
 import { ABOUT_IMGS } from "@/data/ABOUT_IMGS";
 import ICONS from "@/data/ICONS";
 import usePop from "@/components/global/popup/usePop";
+import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 
 // const style =
 // `font-family: "Gira Sans"; font-size: 1.4375rem;` +
@@ -78,7 +79,6 @@ export default function App({ Component, pageProps }) {
 
   // const [popup, setPopup] = useState(false);
 
-
   const pop = usePop();
 
   const bp = useBreakpoint();
@@ -88,25 +88,21 @@ export default function App({ Component, pageProps }) {
 
   useBrowserClass();
 
-
-  const preFetchImages = [
-    ABOUT_IMGS.me,
-    ...Object.keys(ICONS).map((key) => ICONS[key]),
-  ];
+  const preFetchImages = [ABOUT_IMGS.me, ...Object.keys(ICONS).map((key) => ICONS[key])];
 
   return (
     <>
       <Favicon />
       <Providers>
-        <LoadingScreen />
-        <div className="site">
-          <Layout>
-            <Popup pop={pop} />
-            <Component pop={pop} />
-            <Footer />
-          </Layout>
-         <ImagePrefetcher images={preFetchImages} />
-        </div>
+            <LoadingScreen />
+            <div className="site">
+              <Layout>
+                <Popup pop={pop} />
+                <Component pop={pop} />
+                <Footer />
+              </Layout>
+              <ImagePrefetcher images={preFetchImages} />
+            </div>
       </Providers>
     </>
   );

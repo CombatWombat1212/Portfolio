@@ -52,6 +52,7 @@ function getPopupClasses(pop) {
     inner: [],
     background: [],
     close: [],
+    controls: [],
     containerStyle: {},
   };
 
@@ -59,6 +60,8 @@ function getPopupClasses(pop) {
   if (pop.type === "lightbox") {
     popclass.header.push("popup--header__condensed", "popup--nav__on");
     popclass.close.push("popup--close__lightbox");
+    popclass.media.push("popup--media__lightbox");
+    popclass.controls.push("popup--controls__lightbox");
 
     // Nested Case 1.1: zoom is true
     if (pop.zoom) {
@@ -96,6 +99,8 @@ function getPopupClasses(pop) {
     popclass.background.push("popup--background__gallery");
     popclass.inner.push("popup--inner__gallery");
     popclass.close.push("popup--close__gallery");
+    popclass.controls.push("popup--controls__gallery");
+
 
     // Nested Case 2.1: zoom is true
     if (pop.zoom) {
@@ -184,7 +189,8 @@ function Popup({ pop }) {
   const isntFallback = useGetIsntFallback();
 
   const getDelay = (elem) => {
-    return splitS(window.getComputedStyle(elem).getPropertyValue("--transition"));
+    const result = splitS(window.getComputedStyle(elem).getPropertyValue("--transition"));
+    return result;
   };
 
   useEffect(() => {
@@ -218,7 +224,7 @@ function Popup({ pop }) {
           key="main"
           reference={wrap}
           animation={popAnims.fade}
-          duration={poptransition}
+          delay={0}
           condition={pop.on}
           className={"popup--wrapper"}
           onAnimationComplete={popAnimCompleteHandler}>
@@ -485,7 +491,7 @@ function Wrapper({ pop, bp }) {
             {pop.type == "interactive" && <ScaleWrapper pop={pop} nav={nav} state={state} />}
           </div>
 
-          {pop.type == "lightbox" && pop.group && pop.firstImgDrawn && <Controls pop={pop} nav={nav} handles={handles} />}
+          {pop.type == "lightbox" && pop.group && pop.firstImgDrawn && <Controls className={`${popclass.controls}`} pop={pop} nav={nav} handles={handles} />}
         </div>
       </div>
     </>
@@ -527,6 +533,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
 
     if (infoElem) {
       if (state.desktop) {
+
         var gapWidth = splitRem(window.getComputedStyle(popupElem).getPropertyValue("--popup-gap"));
         var scrollbarWidth = infoElem.offsetWidth - infoElem.clientWidth;
         var infoWidth =
@@ -538,6 +545,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
         var availWidth = popupElem.offsetWidth - gapWidth - infoWidth;
         
       } else {
+
         var contentChildren = Array.from(infoElem.parentElement.children).filter((elem) => {
           return getComputedStyle(elem).position !== "absolute";
         });
@@ -566,6 +574,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
 
       }
     } else {
+
       var availHeight = popupElem.offsetHeight;
       var availWidth = popupElem.offsetWidth;
 
@@ -616,7 +625,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
     if (availWidth !== elems.img.availWidth) {
       elems.img.setAvailWidth(availWidth);
     }
-    
+
     return { maxHeight, maxWidth };
   }
 
@@ -697,7 +706,11 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
 
   const [drawLightbox, setDrawLightbox] = useState(false);
   useEffect(() => {
-    if ((elems.img.availWidth && elems.img.availHeight && elems.img.maxWidth && elems.img.maxHeight) || pop.type === "lightbox") {
+
+    const dataReady = elems.img.availWidth != false && elems.img.availHeight != false && elems.img.maxWidth != false && elems.img.maxHeight != false;
+    const isLightbox = pop.type === "lightbox";
+    if (dataReady || isLightbox) {
+      console.log(dataReady)
       if (!drawLightbox) setDrawLightbox(true);
     }
   }, [elems.img.availWidth, elems.img.availHeight, elems.img.maxWidth, elems.img.maxHeight, pop.type]);
@@ -710,7 +723,8 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
   useListener("swiped-left", handles.swipeLeft, { ref: mediaWrapperRef });
   useListener("swiped-right", handles.swipeRight, { ref: mediaWrapperRef });
 
-  const openDelay = 0.1;
+
+  const openDelay = 0.3;
   const mediaWrapDelay = pop.firstImgDrawn ? 0 : openDelay;
   const mediaWrapState = useInOut(drawLightbox, { startDelay: mediaWrapDelay * 1000 });
 
@@ -757,9 +771,9 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
     "--img-max-height": `${elems.img.maxHeight}px`,
   };
 
-  const showControls = pop.type == "gallery" && pop.group && pop.firstImgDrawn && pop.infoDrawn;
-
+  const showControls = (pop.type == "gallery" || pop.type == "lightbox") && pop.group && pop.firstImgDrawn && pop.infoDrawn;
   const controlsClassState = useInOut(showControls);
+
 
   return (
     <>
@@ -800,7 +814,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
 
       {/* {showControls && (
         <> */}
-      <Controls className={`popup--controls__gallery popanims--fade__${controlsClassState}`} pop={pop} nav={nav} handles={handles} state={state} />
+      <Controls className={`${popclass.controls} popanims--fade__${controlsClassState}`} pop={pop} nav={nav} handles={handles} state={state} />
       {/* </>
       )} */}
     </>

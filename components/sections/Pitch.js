@@ -503,7 +503,7 @@ function Indicator({ pitch }) {
   }, [currentRow]);
   
   useEffect(() => {
-    const firstRun = insidePitch && currentRow == 0 && previousRowBeforeChange.current != 1;
+    const firstRun = insidePitch && currentRow == 0 && previousRowBeforeChange.current == 0;
     const stoppedScrolling = insidePitch && isNotScrolling;
     if (firstRun || stoppedScrolling) {
       setReady(true);
@@ -529,7 +529,9 @@ function Indicator({ pitch }) {
   }, [ready]);
   
   useEffect(() => {
-    if ((delayedReady && insidePitch) || (currentRow == 0 && insidePitch && previousRowBeforeChange.current != 1)) {
+    console.log(previousRowBeforeChange.current);
+
+    if ((delayedReady && insidePitch) || (currentRow == 0 && insidePitch && previousRowBeforeChange.current == 0 )) {
       setShow(true);
       // leaving these here cause i think the idea is interesting but i don't love the way it worked in practise tho it could be useful
       // pitch.current.classList.add("pitch__indicator-on");
@@ -539,7 +541,14 @@ function Indicator({ pitch }) {
       // pitch.current.classList.remove("pitch__indicator-on");
       // pitch.current.classList.add("pitch__indicator-off");
     }
-  }, [delayedReady, insidePitch, currentRow, previousRowBeforeChange]);
+  }, [delayedReady, insidePitch, currentRow, previousRowBeforeChange.current]);
+
+  useEffect(() => {
+    if(!insidePitch){
+      previousRowBeforeChange.current = currentRow;
+    }
+
+  }, [insidePitch, currentRow]);
 
   
   const list = new ClassList("pitch--indicator-arrow");

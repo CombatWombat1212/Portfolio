@@ -15,6 +15,7 @@ import Nobr from "@/components/utilities/Nobr";
 import QuoteTable from "@/components/global/QuoteTable";
 import ResponsiveText from "@/components/global/ResponsiveText";
 import Seo from "@/components/head/Seo";
+import useBrowser from "@/scripts/hooks/useBrowser";
 
 function MakeRight({ pop }) {
   const study = STUDY_MAKERIGHT;
@@ -26,6 +27,13 @@ function MakeRight({ pop }) {
   const isMd = !(!isBp("md") || loading);
   const isSm = !(!isBp("sm") || loading);
   const isMdOrSm = isMd || isSm;
+
+
+  const { isFirefox, browserFound } = useBrowser();
+  const isntFirefox = !browserFound || !isFirefox || (browserFound && !isFirefox);
+  const mobileOrFirefox = !desktop || !isntFirefox;
+  
+  console.log(mobileOrFirefox);
 
   return (
     <>
@@ -412,11 +420,7 @@ function MakeRight({ pop }) {
                 <Button
                   color="primary"
                   type="bottom"
-                  //
-                  //
-                  //
-
-                  {...(desktop
+                  {...(!mobileOrFirefox
                     ? {
                         onClick: () => {
                           pop.setOn(true);
