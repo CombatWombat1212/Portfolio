@@ -29,8 +29,8 @@ export const ResponsiveProvider = ({ children }) => {
   // do i wanna do this?
   return (
     <ResponsiveContext.Provider value={value}>
-      {/* {!loading && children} */}
-      {children}
+      {!loading && children}
+      {/* {children} */}
     </ResponsiveContext.Provider>
   );
 };

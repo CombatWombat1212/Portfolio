@@ -2314,7 +2314,9 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 49.9375em) {
   .nav--item:last-child {
-    margin-right: calc(var(--site-margin-x_wide) * -1);
+    --site-margin-x_wide: calc((var(--screen-width) - var(--site-max-width_vw_wide))/2);
+    --margin-right: calc(var(--site-margin-x_wide) * -1);
+    margin-right: var(--margin-right);
   }
 }
 

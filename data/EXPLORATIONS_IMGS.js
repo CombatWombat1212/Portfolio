@@ -636,7 +636,7 @@ const EXPLORATIONS_IMGS = processImages(
       // description: "A wider 3D shot of the ocean wave projection within the exhibition space.",
       //   study: "",
       group: "obsessive_seas",
-      project: "Navigating <i>Obsessive Seas</i>",
+      project: `Navigating <br class="d-md-none" /><i>Obsessive Seas</i>`,
       index: 1,
     },
     obsessive_seas_gallery_01: {
@@ -651,7 +651,7 @@ const EXPLORATIONS_IMGS = processImages(
       // description: "A real-world image of the 'Obsessive Seas' gallery at the Serendipity Art Space in Taipei, Taiwan.",
       //   study: "",
       group: "obsessive_seas",
-      project: "Navigating <i>Obsessive Seas</i>",
+      project: `Navigating <br class="d-md-none" /><i>Obsessive Seas</i>`,
       index: 2,
     },
     obsessive_seas_render_03: {
@@ -666,7 +666,7 @@ const EXPLORATIONS_IMGS = processImages(
       description: "",
       //   study: "",
       group: "obsessive_seas",
-      project: "Navigating <i>Obsessive Seas</i>",
+      project: `Navigating <br class="d-md-none" /><i>Obsessive Seas</i>`,
       index: 3,
     },
     obsessive_seas_measurements_02: {
@@ -679,7 +679,7 @@ const EXPLORATIONS_IMGS = processImages(
       disciplines: ["3D Design", "UX Design"],
       tools: ["Blender", "Photoshop"],
       group: "obsessive_seas",
-      project: "Navigating <i>Obsessive Seas</i>",
+      project: `Navigating <br class="d-md-none" /><i>Obsessive Seas</i>`,
       index: 4,
     },
     obsessive_seas_gallery_02: {
@@ -694,7 +694,7 @@ const EXPLORATIONS_IMGS = processImages(
       // description: "A real-world image of an attendee at appreciating the artwork in the 'Obsessive Seas' gallery at the Serendipity Art Space in Taipei, Taiwan.",
       //   study: "",
       group: "obsessive_seas",
-      project: "Navigating <i>Obsessive Seas</i>",
+      project: `Navigating <br class="d-md-none" /><i>Obsessive Seas</i>`,
       index: 5,
     },
     obsessive_seas_render_04: {
@@ -709,7 +709,7 @@ const EXPLORATIONS_IMGS = processImages(
       description: "",
       //   study: "",
       group: "obsessive_seas",
-      project: "Navigating <i>Obsessive Seas</i>",
+      project: `Navigating <br class="d-md-none" /><i>Obsessive Seas</i>`,
       index: 6,
     },
     obsessive_seas_render_06: {
@@ -724,7 +724,7 @@ const EXPLORATIONS_IMGS = processImages(
       // description: "A close 3D rendering of the abstract art piece casting shadows on the back walls of the gallery.  This use of lighting was give more presence to a piece of such a small stature",
       //   study: "",
       group: "obsessive_seas",
-      project: "Navigating <i>Obsessive Seas</i>",
+      project: `Navigating <br class="d-md-none" /><i>Obsessive Seas</i>`,
       index: 7,
     },
     obsessive_seas_render_02: {
@@ -739,7 +739,7 @@ const EXPLORATIONS_IMGS = processImages(
       // description: "A close-up rendered image of the gallery interior highlighting one of the framed art pieces. Scale and measurements were important at every stage of the project, so renders like these are 1:1 with the real-world gallery space.",
       //   study: "",
       group: "obsessive_seas",
-      project: "Navigating <i>Obsessive Seas</i>",
+      project: `Navigating <br class="d-md-none" /><i>Obsessive Seas</i>`,
       index: 8,
     },
     obsessive_seas_measurements_01: {
@@ -752,7 +752,7 @@ const EXPLORATIONS_IMGS = processImages(
       disciplines: ["3D Design", "UX Design"],
       tools: ["Blender", "Photoshop"],
       group: "obsessive_seas",
-      project: "Navigating <i>Obsessive Seas</i>",
+      project: `Navigating <br class="d-md-none" /><i>Obsessive Seas</i>`,
       index: 9,
     },
     obsessive_seas_release: {
@@ -767,7 +767,7 @@ const EXPLORATIONS_IMGS = processImages(
       // description: "The Obsessive Seas exhibit's press release, as seen on the gallery's website. Translated from Mandarin to English.",
       //   study: "",
       group: "obsessive_seas",
-      project: "Navigating <i>Obsessive Seas</i>",
+      project: `Navigating <br class="d-md-none" /><i>Obsessive Seas</i>`,
       index: 10,
       zoom: true,
       aspect: "16/9",

@@ -4,6 +4,7 @@ import { NavMenuButton, NavMenu, NavItems } from "./NavItems";
 import { useEffect, useRef, useState } from "react";
 import useScreenWidth from "@/scripts/hooks/useScreenWidth";
 import { splitPx } from "@/scripts/GlobalUtilities";
+import useAttrObserver from "@/scripts/hooks/useAttrObserver";
 
 
 function Navigation() {
@@ -18,7 +19,7 @@ function Navigation() {
   const navContainerRef = useRef(null);
   const screenWidth = useScreenWidth({ debounceTime: 200 });
   const [siteMarginWide, setSiteMarginWide] = useState(0);
-  
+
   useEffect(() => {
     if (!navContainerRef.current) return;
     const marginLeft = getComputedStyle(navContainerRef.current).getPropertyValue("margin-left");
@@ -34,7 +35,6 @@ function Navigation() {
   }, [screenWidth, navContainerRef]);
 
   
-  
 
   return (
     <>
@@ -42,9 +42,10 @@ function Navigation() {
         <div
           className="nav--container container container__wide"
           ref={navContainerRef}
-          style={{
-            "--site-margin-x_wide": `${siteMarginWide}px`,
-          }}>
+          // style={{
+          //   "--site-margin-x_wide": `${siteMarginWide}px`,
+          // }}
+          >
           <div className="nav--group nav--logo">
             <NavItems filter={"Logo"} nav={nav} />
           </div>

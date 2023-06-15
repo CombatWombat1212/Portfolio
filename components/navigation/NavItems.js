@@ -9,6 +9,7 @@ import useBodyClass from "@/scripts/hooks/useBodyClass";
 import { useIntercept } from "@/scripts/contexts/InterceptContext";
 import { useBreakpoint, useBreakpointUtils } from "@/scripts/hooks/useBreakpoint";
 import { Router, useRouter } from "next/router";
+import useAttrObserver from "@/scripts/hooks/useAttrObserver";
 
 function NavLink({ item, nav, className, type }) {
   const { setOpen } = nav;
@@ -220,6 +221,14 @@ function NavMenuButton({ nav }) {
   const handleFocus = () => {
     setFocused(true);
   };
+
+
+  const margin = useAttrObserver(menuBtnRef, "--margin-right", {bool:false});
+  useEffect(() => {
+    console.log(window.getComputedStyle(menuBtnRef.current).getPropertyValue("--margin-right"));
+  }, [menuBtnRef]);
+  
+
 
   return (
     <>

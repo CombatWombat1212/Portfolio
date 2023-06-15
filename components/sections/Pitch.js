@@ -269,7 +269,7 @@ function Laptop({ rows }) {
   return (
     <>
       <div className="pitch--graphics">
-        <Graphic img={laptop_frame} className={`pitch--row pitch--image pitch--laptop`} onLoad={pitchResize} />
+        <Graphic img={laptop_frame} className={`pitch--row pitch--image pitch--laptop`} onLoad={pitchResize} lazy={false} />
         <div className="pitch--screens">
           {rows.map((row, i) => {
             var { mockup } = formatRow(row);
