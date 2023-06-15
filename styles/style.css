@@ -3857,8 +3857,10 @@ h3 + .studypanel--paragraph {
 }
 
 .popup--inner__lightbox-zoom {
-  width: var(--lightbox-max-width);
-  height: var(--lightbox-max-height);
+  width: min-content;
+  height: min-content;
+  max-width: var(--lightbox-max-width);
+  max-height: var(--lightbox-max-height);
 }
 
 .popup--inner__gallery {

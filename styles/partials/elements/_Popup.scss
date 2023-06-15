@@ -204,10 +204,12 @@ $col-media-wrapper: rgba($col-background, 0.075);
       width: min-content;
       height: min-content;
     }
-
+    
     &__lightbox-zoom{
-      width: var(--lightbox-max-width);
-      height: var(--lightbox-max-height);
+      width: min-content;
+      height: min-content;
+      max-width: var(--lightbox-max-width);
+      max-height: var(--lightbox-max-height);
     }
 
     &__gallery {
