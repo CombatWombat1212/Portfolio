@@ -20,8 +20,8 @@
     &__home {
       @include flex-col-center;
       min-height: var(--studypanel-img-height);
-      height: calc(92vh / var(--zoom));
-      max-height: calc(65vw / var(--zoom));
+      height: #{zoom-vh(92vh)};
+      max-height: #{zoom-vw(65vw)};
 
       @include xl-down {
         height: 100% !important;
@@ -262,10 +262,10 @@
     &__home,
     &__study {
       height: var(--studypanel-img-height);
-
       @include md-down {
         height: auto;
         display: flex;
+        
         img {
           max-height: var(--studypanel-img-height);
         }

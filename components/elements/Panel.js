@@ -36,7 +36,6 @@ function PanelImg({ children, className, variant, effect, ...props }) {
   return (
     <>
       <div className={`studypanel--graphic studypanel--graphic__${variant} ${className || ""}`}>
-        {/* <div className={`studypanel--img ${variant == "study" ? " studypanel--img" : ""}`} {...props}> */}
         <div className={`studypanel--img studypanel--img__${variant}`} {...props}>
           {children}
         </div>

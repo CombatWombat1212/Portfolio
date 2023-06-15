@@ -61,6 +61,14 @@ width: ($b/$column-grid-max) * 100#{'%'};
     @return ($b/$column-grid-max) * 100#{'%'};
 }
 
+@function col-width_vw ($b) {
+    @return ($b/$column-grid-max) * 100#{'vw'};
+}
+
+@function col-width_vh ($b) {
+    @return ($b/$column-grid-max) * 100#{'vh'};
+}
+
 
 
 

@@ -21,7 +21,6 @@ html {
 
   zoom: var(--zoom);
 
-  /* Zoom everything on bigger screens */
   @media (min-width: 2000px) and (max-width: 2399px) {
     // 2304 x 1440	Retina (Apple only)
       --zoom: 1.25;

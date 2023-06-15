@@ -99,7 +99,12 @@ export default function App({ Component, pageProps }) {
       <Favicon />
       <Providers>
             <LoadingScreen />
-            <div className="site">
+            <div className="site"
+            style={{
+              'opacity': loading ? '0' : '1',
+              'transition': 'opacity 0.2s',
+            }}
+            >
               <Layout>
                 <Popup pop={pop} />
                 <Component pop={pop} />

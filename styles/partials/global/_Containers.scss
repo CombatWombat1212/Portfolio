@@ -60,8 +60,8 @@ $container-max-width_wide: (
 ) !default;
 
 $container-max-width_vw: (
-  xs: calc(100vw - 2.35rem - var(--scrollbar-width)),
-  sm: calc(100vw - 2.35rem - var(--scrollbar-width)),
+  xs: calc(#{zoom-vw(100vw)} - 2.35rem - var(--scrollbar-width)),
+  sm: calc(#{zoom-vw(100vw)} - 2.35rem - var(--scrollbar-width)),
   md: 45.5rem,
   lg: 57.5rem,
   xl: 62rem,
@@ -69,12 +69,12 @@ $container-max-width_vw: (
 ) !default;
 
 $container-max-width_vw_wide: (
-  xs: calc(100vw - 2.35rem - var(--scrollbar-width)),
-  sm: calc(100vw - 2.35rem - var(--scrollbar-width)),
-  md: calc(90vw - var(--scrollbar-width)),
-  lg: calc(90vw - var(--scrollbar-width)),
-  xl: calc(88vw - var(--scrollbar-width)),
-  xxl: calc(86vw - var(--scrollbar-width)),
+  xs: calc(#{zoom-vw(100vw)} - 2.35rem - var(--scrollbar-width)),
+  sm: calc(#{zoom-vw(100vw)} - 2.35rem - var(--scrollbar-width)),
+  md: calc(#{zoom-vw(90vw)} - var(--scrollbar-width)),
+  lg: calc(#{zoom-vw(90vw)} - var(--scrollbar-width)),
+  xl: calc(#{zoom-vw(88vw)} - var(--scrollbar-width)),
+  xxl: calc(#{zoom-vw(86vw)} - var(--scrollbar-width)),
 ) !default;
 
 // $container-max-width_wide: (

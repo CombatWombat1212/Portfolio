@@ -421,8 +421,8 @@ function Wrapper({ pop, bp }) {
 
   const { isBpAndDown, loading } = bp;
 
-  const stateDesktop = !isBpAndDown("md") && !loading ? true : false;
-  const stateMobile = isBpAndDown("md") && !loading ? true : false;
+  const stateDesktop = !isBpAndDown("lg") && !loading ? true : false;
+  const stateMobile = isBpAndDown("lg") && !loading ? true : false;
   const stateGallery = pop.type == "gallery";
   const stateMobileGallery = stateMobile && stateGallery;
   const state = {

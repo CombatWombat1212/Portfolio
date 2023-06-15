@@ -22,6 +22,18 @@ function Index() {
   const captions = ["Have a look-see", "Take a gander", "Check it", "I must know", "Gimme", "Go on...", "Do tell", "I'm all ears"];
   const chosen = useRandomString(captions, { localStorage: true, key: "studypanel--buttons", count: CASE_STUDIES.length });
 
+
+
+
+  // const homeArrow = useRef(null);
+  // const firstStudyImg = useRef(null);
+
+  // const [firstGapDistance, setFirstGapDistance] = useState(0);
+  // const [secondGapDistance, setSecondGapDistance] = useState(0);
+
+
+
+
   return (
     <>
       <Seo page="home" />

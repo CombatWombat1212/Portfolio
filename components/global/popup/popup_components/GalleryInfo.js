@@ -25,8 +25,8 @@ import useScrollTop from "@/scripts/hooks/useScrollTop";
 
 function useInfoAnimDelay() {
   const { loading, isBpAndDown } = useResponsive();
-  const isMdAndDown = !(!isBpAndDown("md") || loading);
-  const INFO_ANIM_DELAY = isMdAndDown ? 0.3 : 0.1;
+  const isLgAndDown = !(!isBpAndDown("lg") || loading);
+  const INFO_ANIM_DELAY = isLgAndDown ? 0.3 : 0.1;
   return INFO_ANIM_DELAY;
 }
 
@@ -191,7 +191,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
       "--gallery-info-height": `${galInfoHeight}px`,
       "--gallery-info-max-height": `${galInfoHeightMax}px`,
       "--gallery-info-width": `${galInfoWidth}px`,
-      "--gallery-description-height": `${galDescHeight}px`,
+      "--gallery-description-height_px": `${galDescHeight}px`,
     },
   };
   var hasDesc = pop.img.description || (pop.group.description && pop.group.description[pop.index]);

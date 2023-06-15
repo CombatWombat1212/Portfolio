@@ -26,11 +26,11 @@ export const ResponsiveProvider = ({ children }) => {
   };
 
 
-  // do i wanna do this?
+  // do i wanna do this? I don't, it makes it so that you can't return to your place on reload and causes layout shift issues with images.
   return (
     <ResponsiveContext.Provider value={value}>
-      {!loading && children}
-      {/* {children} */}
+      {/* {!loading && children} */}
+      {children}
     </ResponsiveContext.Provider>
   );
 };

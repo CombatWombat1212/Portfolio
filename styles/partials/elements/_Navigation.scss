@@ -62,8 +62,21 @@
     @include flex-col-center;
 
     --nav-button-pad-y: calc((var(--nav-height) - var(--font-size)) / 2);
+    --nav-button-pad-t: calc(var(--nav-button-pad-y) * 1);
+    --nav-button-pad-b: calc(var(--nav-button-pad-y) * 1);
     --nav-button-pad-x: calc(var(--nav-button-pad-y) * var(--nav-button-padding-multiplier));
-    @include pad-y(var(--nav-button-pad-y));
+
+
+    padding-top: var(--nav-button-pad-t);
+    padding-bottom: var(--nav-button-pad-b);
+
+    @include safari{
+      @at-root .nav--links a.nav--item{
+        --nav-button-pad-t: calc(var(--nav-button-pad-y) * 0.95);
+        --nav-button-pad-b: calc(var(--nav-button-pad-y) * 1.05);  
+      }
+    }
+    
     @include pad-x(var(--nav-button-pad-x));
 
     & + & {

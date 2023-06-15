@@ -56,7 +56,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
     &__gallery {
       background-color: rgba($col-tertiary, 0.945);
-      @include md-down {
+      @include lg-down {
         background-color: rgba($col-tertiary, 0.985);
       }
     }
@@ -99,7 +99,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
     --lightbox-max-width: calc(var(--popup-site-max-width) - 5rem);
     --lightbox-max-height: calc(100% - var(--nav-height) - var(--popup-pad) - 2rem);
-    --lightbox-max-height: calc(100vh - (var(--nav-height)*2) - var(--popup-pad) - 2rem);
+    --lightbox-max-height: calc(#{zoom-vh(100vh)} - (var(--nav-height)*2) - var(--popup-pad) - 2rem);
     // 2 nav heights because the previous calculation which used 100% actually equates to '100% of the parent element' i.e. the nav bar was already included but we subtracted it anyway as a whoopsie but it also is a good and proportional amount of space
 
     // width: auto;
@@ -120,7 +120,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
       --popup-controls-offset: calc(var(--button-height) * 0.45);
       --lightbox-max-width: calc(var(--popup-site-max-width) - 4rem);
       // --lightbox-max-height: calc(100% - var(--nav-height) - var(--popup-pad) - 4rem);
-      --lightbox-max-height: calc(100vh - (var(--nav-height)*2) - var(--popup-pad) - 4rem);
+      --lightbox-max-height: calc(#{zoom-vh(100vh)} - (var(--nav-height)*2) - var(--popup-pad) - 4rem);
     }
 
     @include md-down {
@@ -164,17 +164,25 @@ $col-media-wrapper: rgba($col-background, 0.075);
       --popup-scrollbar-pad: calc(var(--popup-gap) / 1.65);
     }
 
+    // @include lg-down {
+    //   --popup-gap: 2rem;
+    //   --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 8rem);
+    //   --popup-width-offset: calc(var(--popup-site-max-width_wide) - 0rem);
+    //   --popup-scrollbar-pad: calc(var(--popup-gap) / 1.65);
+    // }
+
     @include lg-down {
       --popup-gap: 2rem;
-      --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 8rem);
-      --popup-width-offset: calc(var(--popup-site-max-width_wide) - 0rem);
+      --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 1rem);
+      --popup-width-offset: calc(var(--popup-site-max-width_wide) - 16rem);
       --popup-scrollbar-pad: calc(var(--popup-gap) / 1.65);
+      --popup-controls-offset: calc(var(--button-height) / 1.25);
     }
 
     @include md-down {
       --popup-gap: 2rem;
-      --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 6.25rem);
-      --popup-width-offset: calc(var(--popup-site-max-width_wide) - 9rem);
+      --popup-height-offset: calc(var(--nav-height) + var(--popup-pad) + 4.25rem);
+      --popup-width-offset: calc(var(--popup-site-max-width_wide) - 10rem);
       --popup-scrollbar-pad: calc(var(--popup-gap) / 1.65);
       --popup-controls-offset: calc(var(--button-height) / 1.25);
     }
@@ -258,7 +266,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
       overflow: visible;
       max-height: 100%;
 
-      @include md-down {
+      @include lg-down {
         flex-direction: column;
       }
     }
@@ -266,7 +274,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
     &__gallery-group {
       top: -1.25rem;
 
-      @include md-down {
+      @include lg-down {
         top: -2.25rem;
       }
     }
@@ -282,13 +290,10 @@ $col-media-wrapper: rgba($col-background, 0.075);
       --w: calc(#{col-width(4.25)} - var(--popup-gap));
     }
     @include xl-down {
-      --w: calc(#{col-width(4.25)} - var(--popup-gap));
-    }
-    @include lg-down {
       --w: calc(#{col-width(5)} - var(--popup-gap));
     }
 
-    @include md-down {
+    @include lg-down {
       --w: #{col-width(12)};
       @include popup-scrollbar;
       height: auto;
@@ -297,13 +302,35 @@ $col-media-wrapper: rgba($col-background, 0.075);
       pointer-events: all;
       padding-right: 0;
 
-      max-height: Min(calc(#{col-width(4.95)} - var(--popup-gap)), var(--gallery-info-height));
+      --height-col: 3.65;
+      --height-col_percent: calc(var(--height-col) / var(--column-grid-max)); 
+      //decimal percent, its unitless
 
-      min-height: Min(calc(#{col-width(4.95)} - var(--popup-gap)), var(--gallery-description-height));
+      --popup-inner-height: calc(#{zoom-vh(100vh)} - var(--popup-height-offset) - (var(--popup-gap)*2));
+      --gallery-description-height_estim: calc(var(--popup-inner-height) * var(--height-col_percent));
+
+      // just testing
+      --old-height: calc(#{col-width(4.95)} - var(--popup-gap));
+      --height: var(--old-height);
+      --height: var(--gallery-description-height_estim);
+
+      max-height: Min(var(--height), var(--gallery-info-height));
+      min-height: Min(var(--height), var(--gallery-description-height_px));
+    }
+    
+    
+    @include md-down{
+      max-height: Min(calc(#{col-width(4.95)} - var(--popup-gap)), var(--gallery-info-height));
+  
+      min-height: Min(calc(#{col-width(4.95)} - var(--popup-gap)), var(--gallery-description-height_px));
     }
 
+
+
+
+
     &__gallery-scrollbar {
-      @include md-down {
+      @include lg-down {
         padding-right: var(--popup-scrollbar-pad);
         --w: calc(100% - var(--popup-scrollbar-pad));
       }
@@ -341,7 +368,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
       max-height: var(--gallery-info-max-height);
       @include popup-scrollbar;
 
-      @include md-down {
+      @include lg-down {
         padding: none !important;
         max-height: none;
         overflow-y: visible;
@@ -358,7 +385,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
     &__gallery-scrollbar {
       padding-right: var(--popup-scrollbar-pad);
-      @include md-down {
+      @include lg-down {
         padding-right: 0rem;
       }
     }
@@ -453,14 +480,14 @@ $col-media-wrapper: rgba($col-background, 0.075);
       pointer-events: all;
       overflow: hidden;
 
-      @include md-down {
+      @include lg-down {
         background-color: #00000000;
       }
     }
 
     &__gallery-zoom {
       background-color: $col-media-wrapper;
-      @include md-down {
+      @include lg-down {
         background-color: #00000000;
       }
     }
@@ -468,7 +495,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
     &__gallery-group {
       overflow: visible;
 
-      @include md-down {
+      @include lg-down {
         overflow: hidden;
         // flex:1;
         // max-height: calc(#{col-width(9)} - (var(--popup-gap) * 1));
@@ -526,7 +553,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
       width: var(--img-max-width);
       // width:fit-content;
 
-      @include md-down {
+      @include lg-down {
         @include mx-auto;
 
         background-color: $col-media-wrapper;
@@ -540,11 +567,15 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
       --img-max-height: 10rem;
       max-height: Max(calc((var(--img-avail-width) / var(--aspect-width)) * var(--aspect-height)), var(--img-max-height));
-
+      
       aspect-ratio: unset;
       overflow-y: auto;
       @include popup-scrollbar;
       pointer-events: all;
+      
+      @include firefox{
+        max-height: Min(calc((var(--img-avail-width) / var(--aspect-width)) * var(--aspect-height)), var(--img-max-height));
+      }
     }
 
     &__loading {
@@ -564,20 +595,20 @@ $col-media-wrapper: rgba($col-background, 0.075);
 .popup {
   .gallery {
     &--info {
-      @include md-down {
+      @include lg-down {
         & > *:first-child {
           margin-top: 0rem;
         }
       }
     }
     &--title {
-      @include md-down {
+      @include lg-down {
         width: 88%;
       }
     }
     &--subheading {
       margin-top: 0.265rem !important;
-      @include md-down {
+      @include lg-down {
         width: 88%;
         margin-top: 0.075rem !important;
       }
@@ -587,7 +618,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
       // margin-top: 1.375rem;
       margin-top: 1.5rem;
 
-      @include md-down {
+      @include lg-down {
         margin-top: 1.05rem;
       }
     }
@@ -622,7 +653,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
         background-color: $col-media-wrapper;
       }
 
-      @include md-down {
+      @include lg-down {
         display: none;
       }
     }
@@ -658,7 +689,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
         margin-top: 0rem;
       }
 
-      @include md-down {
+      @include lg-down {
         margin-top: 1.35rem;
       }
     }
@@ -688,7 +719,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
           width: calc(100% + var(--ellipse-width));
         }
 
-        @include md-down {
+        @include lg-down {
           flex-wrap: wrap;
         }
       }
@@ -723,7 +754,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
         right: var(--popup-scrollbar-pad);
       }
 
-      @include md-down {
+      @include lg-down {
         display: none;
       }
     }
@@ -735,7 +766,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
         margin-bottom: -0.1rem;
       }
 
-      @include md-down {
+      @include lg-down {
         --button-padding: 0.65rem;
         --button-height: 2.25rem;
         --button-icon-size: 1rem;
@@ -757,7 +788,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
       bottom: calc(100% + 1.5rem);
       right: -0.75rem;
 
-      @include md-down {
+      @include lg-down {
         bottom: unset;
         right: calc((var(--button-padding) / 1.25) * -1);
         transform: translate(0%, -50%);
@@ -833,7 +864,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
       @include xl-down {
         bottom: 2.65rem;
       }
-      @include md-down {
+      @include lg-down {
         bottom: 2.25rem;
         // width: 100%;
         z-index: 10;
@@ -1030,7 +1061,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
       
       background-color: $col-media-wrapper;
 
-      @include md-down {
+      @include lg-down {
         z-index: -1;
         @include mx-auto;
         background-color: $col-media-wrapper;
