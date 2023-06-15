@@ -63,13 +63,14 @@ function getPopupClasses(pop) {
     popclass.controls.push("popup--controls__lightbox");
     popclass.inner.push("popup--inner__lightbox");
     popclass.mediaWrapper.push("popup--media-wrapper__lightbox");
-
+    
     // Nested Case 1.1: zoom is true
     if (pop.zoom) {
       popclass.media.push("popup--media__lightbox-zoom");
       popclass.content.push("popup--content__lightbox-zoom");
       popclass.container.push("popup__lightbox-zoom");
       popclass.header.push("popup--header__lightbox-zoom");
+      popclass.inner.push("popup--inner__lightbox-zoom");
     }
     // Nested Case 1.2: zoom is false
     if (!pop.zoom) {
@@ -553,7 +554,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
         // `popup-site-max-width-firefox` - used to link a css explaination to this js code
         const styleMaxWidth = splitPx(window.getComputedStyle(popupElem).getPropertyValue("max-width"));
         const styleMaxHeight  = splitPx(window.getComputedStyle(popupElem).getPropertyValue("max-height"));
-
+        console.log(window.getComputedStyle(popupElem).getPropertyValue("max-height"))
         availWidth = styleMaxWidth;
         availHeight = styleMaxHeight;
       } else{
@@ -788,7 +789,7 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
               <Image src={loading_white.src} alt={loading_white.alt} width={loading_white.width} height={loading_white.height} />
             </div>
           </div>
-        )}
+       )} 
       </AnimPres>
 
       {/* {showControls && (

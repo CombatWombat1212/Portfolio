@@ -33,8 +33,6 @@ function MakeRight({ pop }) {
   const isntFirefox = !browserFound || !isFirefox || (browserFound && !isFirefox);
   const mobileOrFirefox = !desktop || !isntFirefox;
   
-  console.log(mobileOrFirefox);
-
   return (
     <>
       <Seo page="makeright" />

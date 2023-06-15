@@ -133,10 +133,10 @@ $col-media-wrapper: rgba($col-background, 0.075);
     --popup-pad: 6.5rem;
   }
 
-  &__lightbox-zoom {
-    max-height: calc(100% - var(--nav-height) - var(--popup-pad) - 4rem);
-    width: calc(var(--popup-site-max-width) - var(--popup-pad));
-  }
+  // &__lightbox-zoom {
+  //   width: var(--lightbox-max-width);
+  //   height: var(--lightbox-max-height);
+  // }
 
   
   &__gallery {
@@ -204,6 +204,12 @@ $col-media-wrapper: rgba($col-background, 0.075);
       width: min-content;
       height: min-content;
     }
+
+    &__lightbox-zoom{
+      width: var(--lightbox-max-width);
+      height: var(--lightbox-max-height);
+    }
+
     &__gallery {
       pointer-events: none;
       justify-content: center;
@@ -230,6 +236,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
       @include no-select;
       --popup-background: #00000000;
       @include flex-row-center;
+      max-height: var(--lightbox-max-height);
     }
 
     &__lightbox-group {
@@ -238,6 +245,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
     &__lightbox-zoom {
       overflow-y: scroll;
       @include popup-scrollbar;
+      pointer-events: all;
     }
 
     &__gallery {
@@ -436,7 +444,6 @@ $col-media-wrapper: rgba($col-background, 0.075);
     &__lightbox{
       pointer-events: all;
     }
-
     &__gallery {
       background-color: $col-media-wrapper;
       @include b-rad;
@@ -485,15 +492,26 @@ $col-media-wrapper: rgba($col-background, 0.075);
     }
 
     &__lightbox{
-      width:unset;
+      width:100%;
+
       @include firefox{
-        width:100%;
-        max-width: Min(var(--img-max-width), var(--lightbox-max-width));
-        max-height: Min(var(--img-max-height), var(--lightbox-max-height));
+        // &:not(.popup--media__lightbox-zoom){
+
+          width:100%;
+          max-width: Min(var(--img-max-width), var(--lightbox-max-width));
+          max-height: Min(var(--img-max-height), var(--lightbox-max-height));
+        // }
       }
     }
 
     &__lightbox-zoom {
+      @include firefox{
+        max-width: 100%;
+        max-height: 100%;
+        width: Max(var(--img-avail-width), var(--lightbox-max-width));
+      }
+      width: Min(var(--img-avail-width), var(--lightbox-max-width));
+
       border-radius: var(--b-rad) 0 0 var(--b-rad);
       img {
         height: fit-content;
@@ -993,7 +1011,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
       &__zoom {
         width: var(--img-avail-width);
 
-        --img-max-height: 10rem;
+        // --img-max-height: 10rem;
         max-height: Max(calc((var(--img-avail-width) / var(--aspect-width)) * var(--aspect-height)), var(--img-max-height));
       }
 
