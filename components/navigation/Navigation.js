@@ -4,7 +4,6 @@ import { NavMenuButton, NavMenu, NavItems } from "./NavItems";
 import { useEffect, useRef, useState } from "react";
 import useScreenWidth from "@/scripts/hooks/useScreenWidth";
 import { splitPx } from "@/scripts/GlobalUtilities";
-import useAttrObserver from "@/scripts/hooks/useAttrObserver";
 
 
 function Navigation() {
