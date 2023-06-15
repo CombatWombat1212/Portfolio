@@ -87,8 +87,10 @@ export default function App({ Component, pageProps }) {
     console.log(bp);
   }, [bp]);
 
+  const {loading} = useResponsiveUtils();
+
   useBrowserClass();
-  usePostScrollbarSizeToRoot({update:pop.on});
+  usePostScrollbarSizeToRoot({update:[pop.on, loading]});
 
   const preFetchImages = [ABOUT_IMGS.me, ...Object.keys(ICONS).map((key) => ICONS[key])];
 

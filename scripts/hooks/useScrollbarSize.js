@@ -3,7 +3,7 @@ import { useState, useEffect, use } from "react";
 const useScrollbarWidth = (options = {}) => {
   const [scrollbarWidth, setScrollbarWidth] = useState(0);
   const { update = false } = options;
-  
+  const updateProps = update ? [update] : [];
 
   const computeScrollbarWidth = () => {
     const windowWidth = window.innerWidth;
@@ -20,15 +20,20 @@ const useScrollbarWidth = (options = {}) => {
   };
 
   useEffect(() => {
-    computeScrollbarWidth();
-    // setTimeout(() => {
-    // computeScrollbarWidth();
-    // }, 1000);
-  }, [update]);
-
+    let count = 0;
+    const intervalId = setInterval(() => {
+      computeScrollbarWidth();
+      count += 1;
+      if (count >= 5) {
+        clearInterval(intervalId);
+      }
+    }, 100);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [...updateProps]);
 
   useEffect(() => {
-
     window.addEventListener("resize", computeScrollbarWidth);
 
     // Compute the initial scrollbar width
@@ -45,20 +50,15 @@ const useScrollbarWidth = (options = {}) => {
 
 export default useScrollbarWidth;
 
-
-
 const usePostScrollbarSizeToRoot = (options = {}) => {
   const { update = false } = options;
-  
-  const scrollbarWidth = useScrollbarWidth({update: update});
 
-  
+  const scrollbarWidth = useScrollbarWidth({ update: update });
+
   useEffect(() => {
     const root = document.documentElement;
     root.style.setProperty("--scrollbar-width", `${scrollbarWidth}px`);
   }, [scrollbarWidth]);
-
-
 };
 
-export {usePostScrollbarSizeToRoot};
+export { usePostScrollbarSizeToRoot };
