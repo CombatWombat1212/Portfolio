@@ -51,9 +51,14 @@ function Index() {
               <br className="d-sm-none " /> <Nobr>tailor-fitted</Nobr> to <Nobr>real-world</Nobr> problems.
             </h3> */}
 
-            <h3 className="studypanel--subheading">
-              <Nobr>I make</Nobr> <Nobr>of digital solutions</Nobr>,
+            {/* <h3 className="studypanel--subheading">
+              <Nobr>I'm a maker</Nobr> <Nobr>of digital solutions</Nobr>,
               <br className="d-sm-none " /> <Nobr>tailor-fitted</Nobr> to <Nobr>real-world</Nobr> problems.
+            </h3> */}
+
+            <h3 className="studypanel--subheading">
+              I'm a multidisciplinary designer,
+              and I make digital solutions tailor-fitted to real-world problems.
             </h3>
 
             <p className="studypanel--paragraph text--body">This is my portfolio. Enjoy your stay :)</p>
@@ -101,8 +106,11 @@ function MainHeading() {
         </TitleText>
       </md>
       <sm>
+        {/* <TitleText>
+          Hi, I&apos;m <br />
+        </TitleText> */}
         <TitleText>
-          Hi I&apos;m <br />
+          I&apos;m <br />
         </TitleText>
         <TitleName />
         <TitleText>

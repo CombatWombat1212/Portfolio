@@ -22,6 +22,7 @@ import ICONS from "@/data/ICONS";
 import usePop from "@/components/global/popup/usePop";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import { usePostScrollbarSizeToRoot } from "@/scripts/hooks/useScrollbarSize";
+import MAKERIGHT_IMGS from "@/data/MAKERIGHT_IMGS";
 
 // const style =
 // `font-family: "Gira Sans"; font-size: 1.4375rem;` +
@@ -92,7 +93,11 @@ export default function App({ Component, pageProps }) {
   useBrowserClass();
   usePostScrollbarSizeToRoot({update:[pop.on, loading]});
 
-  const preFetchImages = [ABOUT_IMGS.me, ...Object.keys(ICONS).map((key) => ICONS[key])];
+  const preFetchImages = [
+    ABOUT_IMGS.me,
+    MAKERIGHT_IMGS.pitch_laptop_frame,
+     ...Object.keys(ICONS).map((key) => ICONS[key])
+    ];
 
   return (
     <>

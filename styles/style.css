@@ -9748,14 +9748,15 @@ h3 + .studypanel--paragraph {
   }
 }
 
-.studypanel--wrapper:nth-child(2) {
-  margin-top: 0;
+.studypanel--wrapper:nth-child(2), #Home + .studypanel--wrapper {
+  margin-top: 0 !important;
 }
 
 #Home.studypanel--wrapper {
-  margin: 0 !important;
-  --height: calc(100vh / var(--zoom));
-  height: calc(var(--height) - var(--nav-height)) !important;
+  height: calc(calc(100vh / var(--zoom)) - var(--nav-height)) !important;
+  margin-top: 0 !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
   margin-bottom: calc(-5vw / var(--zoom)) !important;
 }
 
@@ -9767,7 +9768,10 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 49.9375em) {
   #Home.studypanel--wrapper {
-    margin-bottom: 0 !important;
+    margin-bottom: 3rem !important;
+  }
+  .ios #Home.studypanel--wrapper {
+    margin-bottom: Min(calc(15vw / var(--zoom)), calc(15vh / var(--zoom)), 15%) !important;
   }
 }
 
