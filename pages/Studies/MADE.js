@@ -34,7 +34,7 @@ function MADE({ pop }) {
             <Column>
               <Description className={"text-col-2 gap-3 mt-3"}>
                 <p>
-                  An offering central to MADE’s image and reputation is having an <b>on-site stylist to help customers</b> find their <Nobr>best-suited look.</Nobr> However, at the time, <b>they didn’t feel their webstore reflected these offerings</b>.
+                  An offering central to MADE&rsquo;s image and reputation is having an <b>on-site stylist to help customers</b> find their <Nobr>best-suited look.</Nobr> However, at the time, <b>they didn&rsquo;t feel their webstore reflected these offerings</b>.
                 </p>
               </Description>
               <Graphic className="b-rad" img={MADE_IMGS.banner_client} />
@@ -195,7 +195,7 @@ function MADE({ pop }) {
             <Column>
               <Description className="mt-less">
                 <p>
-                  A few key considerations when designing the shirt models that needed to be just right in order to accurately reflect MADE’s
+                  A few key considerations when designing the shirt models that needed to be just right in order to accurately reflect MADE&rsquo;s
                   products:
                 </p>
               </Description>
@@ -274,7 +274,7 @@ function MADE({ pop }) {
               </Heading>
               <Description>
                 <p>
-                  With MADE’s goal of photorealism, the shirts needed an accurate ruffle to their appearance, without losing their high-fashion image.
+                  With MADE&rsquo;s goal of photorealism, the shirts needed an accurate ruffle to their appearance, without losing their high-fashion image.
                   Too few wrinkles, and the shirts looked starched to death. Too many imperfections and they looked straight out of the hamper.
                 </p>
 
@@ -288,7 +288,7 @@ function MADE({ pop }) {
 
           <Section id="Approach--Summary" titled mainClassName={"gap-"}>
             <Heading>
-              The shirts now needed to be textured <br className="d-sm-none " /> using MADE’s own fabric swatches.
+              The shirts now needed to be textured <br className="d-sm-none " /> using MADE&rsquo;s own fabric swatches.
             </Heading>
           </Section>
         </Chapter>
@@ -304,7 +304,7 @@ function MADE({ pop }) {
             <Column>
               <Description className={desktop && "mt-less"}>
                 <p>
-                  <b>In order for the models to reflect actual products, they needed to be textured with over 40 scans of MADE’s custom fabrics.</b>
+                  <b>In order for the models to reflect actual products, they needed to be textured with over 40 scans of MADE&rsquo;s custom fabrics.</b>
                 </p>
                 <p>
                   Working closely together, I tested several workflows for converting fabric scans to 3D textures. This allowed me to determine which
@@ -312,7 +312,7 @@ function MADE({ pop }) {
                 </p>
                 <p>
                   I used a combination of Blender and Photoshop to undistort the scans, and create the repeatable textures. Chosen for its efficiency,
-                  and compatibility with MADE’s scanning hardware.
+                  and compatibility with MADE&rsquo;s scanning hardware.
                 </p>
               </Description>
             </Column>
@@ -376,7 +376,7 @@ function MADE({ pop }) {
             </Column>
             <Column>
               <Description>
-                ‘Contrast areas’ are the parts of the dress shirt which accent it with an alternate fabric pallet. They were a <b>critical project requirement</b> as the online tool needed to represent the full scope of the customization available, which includes personalized accents.
+                &lsquo;Contrast areas&rsquo; are the parts of the dress shirt which accent it with an alternate fabric pallet. They were a <b>critical project requirement</b> as the online tool needed to represent the full scope of the customization available, which includes personalized accents.
               </Description>
             </Column>
           </Section>
@@ -512,7 +512,7 @@ function MADE({ pop }) {
               </Heading>
               <Description className={lgAndDown && "mts-1"}>
                 <p>
-                  MADE’s design goals were on soft, consistent lighting, without it being so flat that shirts appear bland or even
+                  MADE&rsquo;s design goals were on soft, consistent lighting, without it being so flat that shirts appear bland or even
                   artificial. Gentle shadows, with nothing distracting from the product.
                 </p>
               </Description>
@@ -535,7 +535,7 @@ function MADE({ pop }) {
                 </p>
 
                 <p>
-                  Adding generic ‘drop-shadows’ could quickly achieve this outcome, but it would sacrifice photorealism. To do this without
+                  Adding generic &lsquo;drop-shadows&rsquo; could quickly achieve this outcome, but it would sacrifice photorealism. To do this without
                   compromise, I created isolated renderings of each shadow, and combined the images in post. This is the difference between each
                   method:
                 </p>
@@ -694,7 +694,7 @@ function MADE({ pop }) {
                   ability to easily switch between them.
                 </p>
                 <p>
-                  From there, I could then render a single “video” who’s frames contained every combination of object and fabric. This allowed me to
+                  From there, I could then render a single “video” who&rsquo;s frames contained every combination of object and fabric. This allowed me to
                   push through the limits of my hardware and completed all of the rendering at no added cost to the project timeline.
                 </p>
               </Description>
@@ -731,7 +731,7 @@ function MADE({ pop }) {
                 Benefits of a <br className="d-lg-none" /> scalable approach
               </Heading>
               <Description>
-                <p>I’ve been able to tweak and reuse this same script numerous times since developing it for this project.</p>
+                <p>I&rsquo;ve been able to tweak and reuse this same script numerous times since developing it for this project.</p>
                 <p>
                   Many of my product rendering tasks employ this same workflow of having one object cycle through X materials. As such, choosing to
                   create a strong, future-proof solution to this issue has since saved me countless hours.
@@ -742,7 +742,7 @@ function MADE({ pop }) {
 
           <Section id="Rendering--Closing">
             <Heading>
-              With rendering now complete, the final images <br className="d-lg-none" /> were delivered, and placed into the webstore’s{" "}
+              With rendering now complete, the final images <br className="d-lg-none" /> were delivered, and placed into the webstore&rsquo;s{" "}
               <br className="d-lg-none" /> new dress-shirt customization tool.{" "}
             </Heading>
           </Section>
