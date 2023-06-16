@@ -57,7 +57,7 @@ function Index() {
             </h3> */}
 
             <h3 className="studypanel--subheading">
-              I'm a multidisciplinary designer,
+              I&apos;m a multidisciplinary designer,
               and I make digital solutions tailor-fitted to real-world problems.
             </h3>
 

@@ -23,7 +23,7 @@
       }
       
       @include md-down {
-        margin-bottom: 3rem!important;
+        margin-bottom: 0rem!important;
 
         @include ios{
           margin-bottom: Min(#{zoom-vw(15vw)},#{zoom-vh(15vh)}, 15%)!important;
