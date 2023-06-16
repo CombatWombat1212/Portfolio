@@ -84,6 +84,7 @@ function Slideshow({ children, img }) {
         className={`slideshow--container ${slide.states.atStart ? "slideshow--container__visible" : "slideshow--container__hide"}
         `}
         ref={slide.refs.container}>
+        {/* <div className={`slideshow--inner slideshow--inner__${inView ? "will-change": "no-change"}`}> */}
         <div className={`slideshow--inner slideshow--inner__${inView ? "will-change": "no-change"}`}>
           {slide.group.imgs.map((groupImg) => {
             return (

@@ -23,6 +23,50 @@ import usePop from "@/components/global/popup/usePop";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import { usePostScrollbarSizeToRoot } from "@/scripts/hooks/useScrollbarSize";
 import MAKERIGHT_IMGS from "@/data/MAKERIGHT_IMGS";
+import useFont from "@/scripts/hooks/useFont";
+
+
+const fonts = [
+  {
+    fontName: 'Gira Sans Regular',
+    src: '/assets/fonts/gira_sans/Gira_Sans.otf',
+    format: 'opentype'
+  },
+  {
+    fontName: 'Gira Sans Medium',
+    src: '/assets/fonts/gira_sans/Gira_Sans_Medium.otf',
+    format: 'opentype'
+  },
+  // {
+  //   fontName: 'Gira Sans Light',
+  //   src: '/assets/fonts/gira_sans/Gira_Sans_Light.otf',
+  //   format: 'opentype'
+  // },
+  // {
+  //   fontName: 'Gira Sans Light Italic',
+  //   src: '/assets/fonts/gira_sans/Gira_Sans_Light_Italic.otf',
+  //   format: 'opentype'
+  // },
+  {
+    fontName: 'Tenon Regular',
+    src: '/assets/fonts/tenon/Tenon.otf',
+    format: 'opentype'
+  },
+  // {
+  //   fontName: 'Tenon Medium',
+  //   src: '/assets/fonts/tenon/Tenon_Medium.otf',
+  //   format: 'opentype'
+  // },
+  // {
+  //   fontName: 'Tenon Bold',
+  //   src: '/assets/fonts/tenon/Tenon_Bold.otf',
+  //   format: 'opentype'
+  // },
+]
+
+
+
+
 
 // const style =
 // `font-family: "Gira Sans"; font-size: 1.4375rem;` +
@@ -81,6 +125,8 @@ export default function App({ Component, pageProps }) {
 
   // const [popup, setPopup] = useState(false);
 
+  
+
   const pop = usePop();
 
   const bp = useBreakpoint();
@@ -89,6 +135,12 @@ export default function App({ Component, pageProps }) {
   }, [bp]);
 
   const {loading} = useResponsiveUtils();
+  const fontsLoaded = useFont(fonts);
+
+  useEffect(() =>{
+    console.log(fontsLoaded);
+  }, [fontsLoaded]);
+
 
   useBrowserClass();
   usePostScrollbarSizeToRoot({update:[pop.on, loading]});
@@ -106,7 +158,8 @@ export default function App({ Component, pageProps }) {
             <LoadingScreen />
             <div className="site"
             style={{
-              'opacity': loading ? '0' : '1',
+              'opacity': (loading || !fontsLoaded) ? '0' : '1',
+              // 'overflow': (loading || !fontsLoaded) ? 'hidden' : 'visible',
               'transition': 'opacity 0.2s',
             }}
             >

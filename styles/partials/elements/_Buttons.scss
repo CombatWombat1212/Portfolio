@@ -21,11 +21,12 @@
 :root {
   --button-icon-size: 1.25rem;
   --button-icon-scale: 1;
-  --button-icon-margin: 0.75rem;
+  --button-icon-margin: 0.715rem;
   --button-padding: 1rem;
   --button-padding-top: calc(var(--button-padding) - 0.25rem);
   --button-padding-bottom: calc(var(--button-padding) + 0.25rem);
   --button-height: calc(var(--button-icon-size) + var(--button-padding-top) + var(--button-padding-bottom));
+  
 }
 
 .button {
@@ -68,11 +69,14 @@
     @include flex-col-center;
 
     &:not(.button--copy-feedback) {
-      
       @include safari {
         margin-top: calc(var(--button-height) * -1);
         margin-top: -0.25rem;
       }
+    }
+
+    @include android-chrome{
+      margin-top: -0.10rem;
     }
 
     &__copied {

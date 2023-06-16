@@ -50,9 +50,8 @@ function MakeRight({ pop }) {
                 potential to benefit everyday consumers.
               </p>
               <p>
-                In the early 2010s, we were told they would be found in every home; giving consumer&rsquo;s the power to create anything. But its
-                barriers were too great to reach these expectations, and this reality fell flat. Now, 3D printing hardly has any impact on the average
-                consumer&rsquo;s life.
+                In the early 2010s, we were told they would be found in every home; giving consumers the power to create anything. But, its
+                barriers were too great to reach these expectations, and this reality fell flat. Now, 3D printing hardly has any impact on the average consumer&rsquo;s life.
               </p>
             </Description>
 
@@ -71,11 +70,7 @@ function MakeRight({ pop }) {
             <Description>
               <p>
                 Owning a 3D printer is a steep upfront investment, and learning to use it is a massive time sink. Even then, users without 3D
-                modelling experience will still be restricted to making premade objects.
-              </p>
-              <p>
-                There needs to be a way to eliminate these barriers so that 3D printing can reach its full potential. Allowing average consumers to
-                access the benefits of the technology.
+                modelling experience will still be restricted to premade objects.
               </p>
             </Description>
 
@@ -152,23 +147,20 @@ function MakeRight({ pop }) {
               <Heading type="h3">Slashing the overhead of competitors</Heading>
               <Description>
                 <p>
-                  Competing services ruin the low-cost benefits of 3D printing by charging steep overhead fees. Created by having countless
-                  technicians and printers operating under one roof.
+                  Competing services ruin the low-cost benefits of 3D printing <Nobr>by charging</Nobr> steep overhead fees. This results from countless technicians and machines operating under one roof.
                 </p>
                 <p>
-                  MakeRight undercuts this overhead by connecting customers directly to makers. Only charging them for the work of one technician,
-                  paid to run their own equipment.
+                  MakeRight undercuts this overhead by connecting customers directly to makers. Clients are only charged for the work of one technician, running their own equipment.
                 </p>
               </Description>
             </Column>
             <Column>
               <Heading type="h3">
-                Operating much like an &apos;Uber&apos; <br className="d-md-none" /> for <Nobr>3D prints</Nobr> from local makers.
+                Operating much like an &lsquo;Uber&rsquo; <br className="d-md-none" /> for <Nobr>3D prints</Nobr> from local makers.
               </Heading>
               <Description>
                 <p>
-                  Giving customers access to 3D printing&apos;s low-cost, customizable production, without owning or operating the technology. While
-                  also enabling hobbyist makers to profit off their skills and equipment.
+                  Customers gain access to 3D printing&rsquo;s low-cost, customizable production, without owning or operating the technology. <Nobr>In parallel</Nobr>, hobbyist makers now have an accessible platform <Nobr>to profit</Nobr> off their equipment and skills.
                 </p>
               </Description>
             </Column>
@@ -211,14 +203,14 @@ function MakeRight({ pop }) {
             <Column>
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["interviews"]} />
               <Description type="h3" className="graphic--caption d-lg-none d-md-block">
-                <b>Interviews & surveys</b> to understand users&apos; experiences at a lower level
+                <b>Interviews & surveys</b> to understand users&rsquo; experiences at a lower level
               </Description>
               <Description className="graphic--caption d-none d-lg-block d-md-none">
                 <h3>
                   <b>Interviews & surveys</b>
                 </h3>
                 <p style={{ marginTop: "0.125rem" }}>
-                  to understand users&apos; experiences <Nobr>at a lower level</Nobr>
+                  to understand users&rsquo; experiences <Nobr>at a lower level</Nobr>
                 </p>
               </Description>
             </Column>
@@ -238,7 +230,7 @@ function MakeRight({ pop }) {
             <Description>
               <p>
                 <DLink href="https://www.sculpteo.com/en/ebooks/state-of-3d-printing-report-2020/" target="_blank" color="primary">
-                  Source, Sculpteo, 2020
+                  Source: Sculpteo, The State Of 3D Printing, 2020
                 </DLink>
               </p>
             </Description>
@@ -282,7 +274,7 @@ function MakeRight({ pop }) {
             <Description className={desktop ? "mt-less" : ""}>
               <p>
                 Despite identifying benefits to using 3D printing, these architecture students avoided it due to intimidation.
-                <br className="d-lg-none" /> Even with open access to printers through their schools.
+                <br className="d-lg-none" /> Even though, through their school, they had open access to printers.
               </p>
             </Description>
 
@@ -305,7 +297,7 @@ function MakeRight({ pop }) {
             <Heading type="h3">While many owners of 3D printers have idle machines, and free time</Heading>
             <Description className={desktop ? "mt-less" : ""}>
               <p>
-                Owners&apos; usage depended partially on free time, but mostly on current needs and projects. <br className="d-md-none" />
+                Owners&rsquo; usage depended partially on free time, but mostly on current needs and projects. <br className="d-md-none" />
                 Meaning there was frequent overlap between their idle printer, and free time, due to a lack of printable ideas.
               </p>
             </Description>
@@ -334,7 +326,7 @@ function MakeRight({ pop }) {
             </Column>
 
             <Column className="col-7 col-lg-6 col-md-12">
-              <Title>&apos;Aha&apos; Moment</Title>
+              <Title>&lsquo;Aha&rsquo; Moment</Title>
               <Heading>
                 Idle printers, <br className="d-md-none" />
                 potential for wider use
@@ -349,7 +341,7 @@ function MakeRight({ pop }) {
                   </li>
                   <li>
                     <span>
-                      Laypersons feel barred from 3D printing, despite having <br className="d-lg-none" /> several ideas and uses for it
+                      Laypersons feel barred from 3D printing, despite having <br className="d-lg-none" /> several ideas and uses for the tech
                     </span>
                   </li>
                 </ol>
@@ -368,7 +360,7 @@ function MakeRight({ pop }) {
             <Column>
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["brainstorming"]} />
               <Description type="h3" className="graphic--caption d-lg-none d-md-block">
-                <b>Brainstorming</b> to generate a wide number of potential solutions
+                <b>Brainstorming</b> <Nobr>to generate</Nobr> a wide number of potential solutions
               </Description>
               <Description className="graphic--caption d-none d-lg-block d-md-none">
                 <h3>
@@ -393,7 +385,7 @@ function MakeRight({ pop }) {
             <Column>
               <Graphic type="mask" background="background" img={MAKERIGHT_IMGS["focus_group_testing"]} />
               <Description type={"h3"} className="graphic--caption d-lg-none d-md-block">
-                <b>Focus group testing</b> to gauge reception and feedback from users
+                <b>Focus group testing</b> to gauge reception and feedback <Nobr>from users</Nobr>
               </Description>
               <Description className="graphic--caption d-none d-lg-block d-md-none">
                 <h3>
@@ -730,13 +722,13 @@ function MakeRight({ pop }) {
             <Column>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_printers_before"]} lightbox pop={pop} />
               <Description className="mt-more graphic--caption">
-                <p>User&rsquo;s noted: lack of parity between printer and filament inputs, and the inability to add multiple printers.</p>
+                <p>Users noted: lack of parity between printer and filament inputs, and the inability to add multiple printers.</p>
               </Description>
             </Column>
             <Column>
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_printers_after"]} lightbox pop={pop} />
               <Description className="mt-more graphic--caption">
-                <p>Redesign to match filament inputs, now with support for multiple printers, and integrated support via tooltips.</p>
+                <p>Redesign to match filament inputs, now with support <Nobr>for multiple printers,</Nobr> and integrated support via tooltips.</p>
               </Description>
             </Column>
 
@@ -750,7 +742,7 @@ function MakeRight({ pop }) {
               <Graphic className="b-rad" type="image" img={MAKERIGHT_IMGS["feedback_filament_after"]} lightbox pop={pop} />
               <Description className="mt-more graphic--caption">
                 <p>
-                  A stripe across the top of the cards match the real-world color of the inputted filament; making them much easier to differentiate.
+                  A stripe across the top of the cards match the real-world color of the inputted filament; making them much easier <Nobr>to differentiate.</Nobr>
                 </p>
               </Description>
             </Column>
@@ -764,7 +756,7 @@ function MakeRight({ pop }) {
               <Description className={`mt-more graphic--caption gap-4 gap-lg-3 ${!isLgAndDown && "graphic--caption__split"}`}>
                 <p>
                   Testers of the Maker journey were navigating much more fluidly halfway through each test. It was taking a few pages of exploration
-                  before the terminology, and flow finally clicked.
+                  before the terminology, and flow, finally clicked.
                 </p>
                 <p>
                   To ease the friction of a user&rsquo;s first order fulfillment, I added an optional tutorial system. Boxes appear one by one
@@ -844,8 +836,7 @@ function MakeRight({ pop }) {
             <Column>
               <Description>
                 <p>
-                  This project has only just begun. With every feature added, countless more had to be sidelined for the sake of scope. Some of the
-                  planned future additions to the project include:
+                  With every feature added, countless more had to be sidelined for the sake of scope. Some of these improvements to the project include:
                 </p>
                 <ul>
                   <li>
@@ -903,7 +894,7 @@ function MakeRight({ pop }) {
             <Description className={`text-col-2 ${!isLgAndDown ? "text-gap-6" : "text-gap-4"}`}>
               <p>
                 When I began planning my approach to prototyping, I chose a number of the service&rsquo;s most important features. From there, I
-                intended to create mockups of each. Eventually, I reached the question of how the service would verify that makers were capable and
+                intended to create mockups of each. Eventually, I reached the question of how the service would verify that a maker was capable and
                 trustworthy. My solution was to have them create a mock customer order. But to prototype this, I would need to mock up the entire
                 order fulfillment process. Only having a few select screens would be too disjointed.
               </p>
@@ -929,14 +920,14 @@ function MakeRight({ pop }) {
                   In this project, I spoke with 10 potential users, in two separate groups before becoming invested in any concept or solution. This
                   gave me important background information from which to build ideas. But equally valuable was my decision to involve this group once
                   again after I had developed an idea. This allowed me to gather feedback on my concept, before having created any semblance of a
-                  prototype. Providing tangible validation that my ideas were worth pursuing, and a foundation of user feedback from which to expand
+                  prototype. This provided tangible validation that my ideas were worth pursuing, and a foundation of user feedback from which to expand
                   and build.
                 </p>
 
                 <p>
                   This moment reminded me to always involve users as early and as often as possible. Often, designers forgo interviewing users in a
                   project&rsquo;s early stages. This is usually done in favour of instead testing before ideation, or after a prototype has been
-                  actualized. But, by keeping users close to my project at every stage, my solution became tailor fitted to the exact problem that I
+                  actualized. But, by keeping users close to my project at every stage, my solution became tailor-fitted to the exact problem that I
                   had observed in the 3D printing space.
                 </p>
               </Description>

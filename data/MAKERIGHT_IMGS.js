@@ -437,7 +437,7 @@ const MAKERIGHT_IMGS = processImages(
       phase: "2/3",
       description: ["Choose between the two user types, customer and maker."],
       actions: ["Fill out the provided forms and continue on."],
-      notes: ["‘What is a maker?’ text links them to an overview page on being a maker (mocked-up for the project, but is not in this case study)."],
+      notes: ["‘What is a manufacturer?’ text links them to an overview page on being a maker (mocked-up for the project, but is not in this case study)."],
       alt: "A screen to create a new account on MakeRight, with options to choose between being a customer or a maker.",
     },
 
@@ -566,7 +566,7 @@ const MAKERIGHT_IMGS = processImages(
       // actions: ["Click through the provided tutorials, Select ‘Order Details’"],
       actions: ["Select ‘Order Details’"],
       notes: [
-        "Users are reminded with the heading in the top left of the screen that all of the following process is a part of the test. The maker test also includes an ‘Info Mode’ mentioned in the top left to provide optional tutorials throughout the process.",
+        "Users are reminded with the heading on the top left of the screen that all of the following process is a part of the test. The maker test also includes an ‘Info Mode’ mentioned in the top left to provide optional tutorials throughout the process.",
       ],
       // TODO: (Include a way to disable or enable tutorials with a toggle)
       alt: "A screen showing a list of past and present job orders for makers.",
@@ -722,7 +722,7 @@ const MAKERIGHT_IMGS = processImages(
         "Click ‘View Feedback’ to review the results of their test. Outside of the test, this would allow them to see whether or not the user has verified their print. If they did, it would then be time to mail the object.",
       ],
       notes: [
-        "If they’ve passed, all that’s left is to complete a short video call, much like an uber driver’s last onboarding step would be an in-person inspection of themselves and their vehicle.",
+        "If they’ve passed, all that’s left is to complete a short video call, much like an Uber driver’s last onboarding step would be an in-person inspection of themselves and their vehicle.",
       ],
       alt: "A completed job ticket for makers to review their results, with an option to view feedback.",
     },
@@ -737,10 +737,10 @@ const MAKERIGHT_IMGS = processImages(
       title: "Customer feedback",
       phase: "3/3",
       description: [
-        "Allows the maker to review the customer’s response to their submitted images.  They can see the rating and feedback provided by the customer, much like an uber driver receives a rating after a job.",
+        "Allows the maker to review the customer’s response to their submitted images.  They can see the rating and feedback provided by the customer, much like an Uber driver receives a rating after a job.",
         "If the customer accepts and verifies the images then it’s time to mail the object.",
         "If they reject the object, they may have to reprint and correct their mistake.",
-        "In the case of the maker test, this page shows their results.  If they’ve passed, all that’s left is to complete a short video call, much like an uber driver’s last onboarding step would be an in-person inspection of themselves and their vehicle.",
+        "In the case of the maker test, this page shows their results.  If they’ve passed, all that’s left is to complete a short video call, much like an Uber driver’s last onboarding step would be an in-person inspection of themselves and their vehicle.",
       ],
       actions: [],
       alt: "A screen for makers to review customer feedback on their completed job order, including rating and feedback, and instructions for next steps.",
@@ -771,7 +771,7 @@ const MAKERIGHT_IMGS = processImages(
       title: "Create account",
       phase: "2/2",
       description: ["Choose between the two user types, customer and maker."],
-      notes: ["‘What is a maker?’ text links them to an overview page on being a maker (mocked-up for the project, but is not in this case study)."],
+      notes: ["‘What is a manufacturer?’ text links them to an overview page on being a maker (mocked-up for the project, but is not in this case study)."],
       actions: [],
       alt: "Selection screen for users to choose between creating a customer or maker account.",
     },
@@ -816,7 +816,7 @@ const MAKERIGHT_IMGS = processImages(
       phase: "3/3",
       description: ["Verify the email of the new customer account."],
       actions: [
-        "Check their email for a verification code, resend the email if necessary, enter the code and move on. Or skip for now (purchasing is not possible until account is verified).",
+        "Check their email for a verification code, resend the email if necessary, enter the code and move on. Or skip for now (purchasing is not possible until the account is verified).",
       ],
       notes: [],
       alt: "Email verification page for MakeRight, where new customers can verify their email address to activate their account.",
@@ -1080,7 +1080,7 @@ const MAKERIGHT_IMGS = processImages(
         "Once it has been confirmed that the package arrived to the customer, they have the opportunity to rate the Maker and provide feedback.  Otherwise, the ordering process is complete and the customer can enjoy their product.",
       ],
       actions: [],
-      alt: "Order delivered confirmation page for MakeRight, where customers are given the opportunity to rate their Maker and provide feedback.",
+      alt: "Order delivered confirmation page for MakeRight, where customers can rate their Maker and provide feedback.",
     },
 
     customer_screen_21: {
@@ -1096,7 +1096,7 @@ const MAKERIGHT_IMGS = processImages(
         "Once it has been confirmed that the package arrived to the customer, they have the opportunity to rate the Maker and provide feedback.  Otherwise, the ordering process is complete and the customer can enjoy their product.",
       ],
       actions: [],
-      alt: "Order ticket delivered confirmation page for MakeRight, where customers are given the opportunity to rate their Maker and provide feedback.",
+      alt: "Order ticket delivered confirmation page for MakeRight, where customers can rate their Maker and provide feedback.",
     },
   },
   "makeright"

@@ -26,7 +26,7 @@ const QUOTE_TABLES = {
         rows: [
           {
             primary: "What would get everyday consumers to use this service over alternatives?",
-            secondary: "Cheap customizability. Encourage ‘window-shopping’ within the service, show examples of what printing can offer.",
+            secondary: "Cheap customizability, and accessibility.  Encourage ‘window-shopping’ within the service, show examples of what printing can offer.",
           },
           {
             primary: "Would owners of 3D printers be interested in participating in this service?",

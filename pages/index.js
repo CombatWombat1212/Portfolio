@@ -46,7 +46,7 @@ function Index() {
             </h1>
             {/* TODO: i really think this should be 2 lines not 3.  More about length than of element size, i think you can trim it a bit */}
             {/* <h3 className="studypanel--subheading">
-              I&apos;m a multidisciplinary designer,
+              I&rsquo;m a multidisciplinary designer,
               <br className="d-sm-none " /> <Nobr>and maker</Nobr> <Nobr>of digital solutions</Nobr>,
               <br className="d-sm-none " /> <Nobr>tailor-fitted</Nobr> to <Nobr>real-world</Nobr> problems.
             </h3> */}
@@ -57,9 +57,13 @@ function Index() {
             </h3> */}
 
             <h3 className="studypanel--subheading">
-              I&apos;m a multidisciplinary designer,
-              and I make digital solutions tailor-fitted to real-world problems.
+              <Nobr>I&rsquo;m a designer,</Nobr> and I make <Nobr>digital solutions</Nobr>
+              <br className="d-md-none " /> <Nobr>tailor-fitted</Nobr> <Nobr>to real-world</Nobr> problems.
             </h3>
+
+            {/* <h3 className="studypanel--subheading">
+            <Nobr>I&rsquo;m a designer,</Nobr> and I make digital solutions <Nobr>tailor-fitted</Nobr> <Nobr>to real-world problems.</Nobr>
+            </h3> */}
 
             <p className="studypanel--paragraph text--body">This is my portfolio. Enjoy your stay :)</p>
           </PanelDesc>
@@ -92,14 +96,14 @@ function MainHeading() {
   return (
     <ResponsiveText>
       <xxl>
-        <TitleText>Hi, I&apos;m </TitleText>
+        <TitleText>Hi, I&rsquo;m </TitleText>
         <TitleName />
         <TitleText>
           , <br /> how are you?
         </TitleText>
       </xxl>
       <md>
-        <TitleText>I&apos;m </TitleText>
+        <TitleText>I&rsquo;m </TitleText>
         <TitleName />
         <TitleText>
           , <br /> how are you?
@@ -107,10 +111,10 @@ function MainHeading() {
       </md>
       <sm>
         {/* <TitleText>
-          Hi, I&apos;m <br />
+          Hi, I&rsquo;m <br />
         </TitleText> */}
         <TitleText>
-          I&apos;m <br />
+          I&rsquo;m <br />
         </TitleText>
         <TitleName />
         <TitleText>

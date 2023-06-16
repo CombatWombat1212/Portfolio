@@ -44,10 +44,7 @@ var GANTT_CHARTS = [
                 name: "Plan",
                 tasks: [
                   {
-                    name: {
-                      xxl: "Project Roadmap",
-                      sm: "Roadmap",
-                    },
+                    name: { xxl: "Project Roadmap", sm: "Roadmap" },
                     start: 14,
                     end: 17,
                   },
@@ -101,7 +98,7 @@ var GANTT_CHARTS = [
                   {
                     name: {
                       xxl: "Explore Barriers / Flaws",
-                      sm: "Explore Barriers",
+                      sm: "Find Barriers",
                     },
                     start: 35,
                     end: 38,
@@ -156,13 +153,16 @@ var GANTT_CHARTS = [
           },
 
           {
-            name: "Refine / Develop",
+            name: { xxl: "Refine / Develop", sm: "Refine" },
             stages: [
               {
                 name: "Define",
                 tasks: [
                   {
-                    name: "Define Area of Focus",
+                    name: {
+                      xxl: "Define Area of Focus",
+                      sm: "Define Focus",
+                    },
                     start: 56,
                     end: 60,
                   },
@@ -178,12 +178,15 @@ var GANTT_CHARTS = [
                 name: "Plan",
                 tasks: [
                   {
-                    name: "Project Roadmap",
+                    name: { xxl: "Project Roadmap", sm: "Roadmap" },
                     start: 60,
                     end: 63,
                   },
                   {
-                    name: "Research Plan",
+                    name: {
+                      xxl: "Research Plan",
+                      sm: "Res. Plan",
+                    },
                     start: 62,
                     end: 63,
                   },
@@ -267,7 +270,7 @@ var GANTT_CHARTS = [
                 name: "Deliver",
                 tasks: [
                   {
-                    name: "Write / Design Case Study",
+                    name: { xxl: "Write / Design Case Study", sm: "Case Study" },
                     start: 85,
                     end: 91,
                   },
@@ -288,7 +291,7 @@ var GANTT_CHARTS = [
                 name: "Define",
                 tasks: [
                   {
-                    name: "Project Statement / Goals",
+                    name: { xxl: "Project Statement / Goals", sm: "State Goals" },
                     start: 99,
                     end: 103,
                   },
@@ -304,7 +307,7 @@ var GANTT_CHARTS = [
                 name: "Plan",
                 tasks: [
                   {
-                    name: "Project Roadmap",
+                    name: { xxl: "Project Roadmap", sm: "Roadmap" },
                     start: 105,
                     end: 108,
                   },
@@ -315,7 +318,7 @@ var GANTT_CHARTS = [
                 name: "Deliver",
                 tasks: [
                   {
-                    name: "Write / Design Proposal",
+                    name: { xxl: "Write / Design Proposal", sm: "Proposal" },
                     start: 107,
                     end: 110,
                   },
@@ -325,7 +328,7 @@ var GANTT_CHARTS = [
           },
 
           {
-            name: "Dev Phase 1",
+            name: { xxl: "Dev Phase 1", sm: "Dev 1" },
             stages: [
               {
                 name: "Develop",
@@ -347,7 +350,7 @@ var GANTT_CHARTS = [
                 name: "Discover",
                 tasks: [
                   {
-                    name: "Planning / Conducting User Tests",
+                    name: { xxl: "Plan / Conduct User Tests", sm: "User Test" },
                     start: 115,
                     end: 117,
                   },
@@ -390,7 +393,7 @@ var GANTT_CHARTS = [
                 name: "Deliver",
                 tasks: [
                   {
-                    name: "Write / Design Case Study",
+                    name: { xxl: "Write / Design Case Study", sm: "Case Study" },
                     start: 124,
                     end: 129,
                   },
@@ -400,7 +403,7 @@ var GANTT_CHARTS = [
           },
 
           {
-            name: "Dev Phase 2",
+            name: { xxl: "Dev Phase 2", sm: "Dev 2" },
             stages: [
               {
                 name: "Develop",
@@ -422,7 +425,7 @@ var GANTT_CHARTS = [
                 name: "Discover",
                 tasks: [
                   {
-                    name: "Planning / Conducting User Tests",
+                    name: { xxl: "Plan / Conduct User Tests", sm: "User Test" },
                     start: 138,
                     end: 141,
                   },
@@ -455,7 +458,7 @@ var GANTT_CHARTS = [
                 name: "Discover",
                 tasks: [
                   {
-                    name: "Planning / Conducting User Tests",
+                    name: { xxl: "Plan / Conduct User Tests", sm: "User Test" },
                     start: 147,
                     end: 150,
                   },
@@ -493,7 +496,7 @@ var GANTT_CHARTS = [
                 name: "Deliver",
                 tasks: [
                   {
-                    name: "Write / Design Case Study",
+                    name: { xxl: "Write / Design Case Study", sm: "Case Study" },
                     start: 154,
                     end: 158,
                   },
@@ -503,7 +506,7 @@ var GANTT_CHARTS = [
           },
 
           {
-            name: "Dev Phase 3",
+            name: { xxl: "Dev Phase 3", sm: "Dev 3" },
             stages: [
               {
                 name: "Develop",
@@ -520,7 +523,7 @@ var GANTT_CHARTS = [
                 name: "Discover",
                 tasks: [
                   {
-                    name: "Planning / Conducting User Tests",
+                    name: { xxl: "Plan / Conduct User Tests", sm: "User Test" },
                     start: 163,
                     end: 166,
                   },
@@ -557,12 +560,12 @@ var GANTT_CHARTS = [
                 name: "Deliver",
                 tasks: [
                   {
-                    name: "Plan / Storyboard Pitch Video",
+                    name: "Planning Pitch Video",
                     start: 174,
                     end: 177,
                   },
                   {
-                    name: "Record / Produce Pitch Video",
+                    name: "Producing Pitch Video",
                     start: 177,
                     end: 184,
                   },
@@ -660,7 +663,7 @@ var GANTT_CHARTS = [
   //         },
 
   //         {
-  //           name: "Dev Phase 1",
+  //           name: {xxl:"Dev Phase 1", sm:"Dev 1"},
   //           stages: [
   //             {
   //               name: "Delete me 3",
@@ -696,7 +699,7 @@ var GANTT_CHARTS = [
   //         },
 
   //         {
-  //           name: "Dev Phase 2",
+  //           name: {xxl:"Dev Phase 2", sm:"Dev 2"},
   //           stages: [
   //             {
   //               name: "Delete me 4",
@@ -810,7 +813,7 @@ var GANTT_CHARTS = [
           },
 
           {
-            name: "Dev Phase 1",
+            name: { xxl: "Dev Phase 1", sm: "Dev 1" },
             stages: [
               {
                 name: "Delete me 3",
@@ -846,7 +849,7 @@ var GANTT_CHARTS = [
           },
 
           {
-            name: "Dev Phase 2",
+            name: { xxl: "Dev Phase 2", sm: "Dev 2" },
             stages: [
               {
                 name: "Delete me 4",

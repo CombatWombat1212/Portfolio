@@ -1,13 +1,10 @@
-
 .studypanel {
-
   // same thing twice cause the first doesn't work on safari ¯\_(ツ)_/¯
-  &--wrapper:nth-child(2), #Home + &--wrapper{
-    margin-top: 0!important;
+  &--wrapper:nth-child(2),
+  #Home + &--wrapper {
+    margin-top: 0 !important;
   }
-
 }
-
 
 #Home {
   .studypanel {
@@ -21,18 +18,23 @@
       @include lg-down {
         max-height: 60rem;
       }
-      
-      @include md-down {
-        margin-bottom: 0rem!important;
 
-        @include ios{
-          margin-bottom: Min(#{zoom-vw(15vw)},#{zoom-vh(15vh)}, 15%)!important;
+      @include md-down {
+        margin-bottom: 0rem !important;
+
+        @include ios {
+          margin-bottom: Min(#{zoom-vw(15vw)}, #{zoom-vh(15vh)}, 15%) !important;
+        }
+        
+        @include android {
+          margin-bottom: 3.5rem!important;
         }
       }
 
-
+      // @include sm-down {
+      //   margin-bottom: 2rem !important;
+      // }
     }
-
 
     &--img {
       @include mx-auto;

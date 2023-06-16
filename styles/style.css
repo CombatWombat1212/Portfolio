@@ -1433,8 +1433,8 @@ body {
 
 @media screen and (max-width: 49.9375em) {
   .studypanel--wrapper__home {
-    margin-top: 12rem;
-    margin-bottom: 12rem;
+    margin-top: 11rem;
+    margin-bottom: 11rem;
   }
 }
 
@@ -1888,7 +1888,7 @@ h3 + .studypanel--paragraph {
 :root {
   --button-icon-size: 1.25rem;
   --button-icon-scale: 1;
-  --button-icon-margin: 0.75rem;
+  --button-icon-margin: 0.715rem;
   --button-padding: 1rem;
   --button-padding-top: calc(var(--button-padding) - 0.25rem);
   --button-padding-bottom: calc(var(--button-padding) + 0.25rem);
@@ -1950,6 +1950,10 @@ h3 + .studypanel--paragraph {
 .safari .button--copy:not(.button--copy-feedback) {
   margin-top: calc(var(--button-height) * -1);
   margin-top: -0.25rem;
+}
+
+.android.chrome .button--copy {
+  margin-top: -0.10rem;
 }
 
 .button--copy__copied {
@@ -9748,7 +9752,8 @@ h3 + .studypanel--paragraph {
   }
 }
 
-.studypanel--wrapper:nth-child(2), #Home + .studypanel--wrapper {
+.studypanel--wrapper:nth-child(2),
+#Home + .studypanel--wrapper {
   margin-top: 0 !important;
 }
 
@@ -9772,6 +9777,9 @@ h3 + .studypanel--paragraph {
   }
   .ios #Home.studypanel--wrapper {
     margin-bottom: Min(calc(15vw / var(--zoom)), calc(15vh / var(--zoom)), 15%) !important;
+  }
+  .android #Home.studypanel--wrapper {
+    margin-bottom: 3.5rem !important;
   }
 }
 

@@ -61,7 +61,7 @@ function Copy({ study }) {
           {study.name}
         </Heading>
         <Description className="next-study--description">
-          <p>{study.subtitle.string}</p>
+          <p>{study.subtitle.nextStudyJsx || study.subtitle.string}</p>
         </Description>
       </div>
     </>
@@ -148,7 +148,7 @@ function NextStudies({ study }) {
 
   var adjacentStudies = [first, second];
 
-  const captions = ["Check it", "Tell me", "Gimme", "I'll bite", "Ouu", "Do tell", "Go on..."];
+  const captions = ["Check it", "Gimme", "I'll bite", "Ouu", "Do tell", "Go on..."];
   const chosen = useRandomString(captions, { localStorage: true, key: "next-study--caption", count: 2 });
 
   return (

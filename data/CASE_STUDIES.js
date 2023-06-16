@@ -1,26 +1,38 @@
 import { processGallery } from "@/scripts/processGallery";
 import { v4 as uuidv4 } from "uuid";
 import { HOME_IMGS } from "./HOME_IMGS";
+import Nobr from "@/components/utilities/Nobr";
 
 const CASE_STUDIES = caseStudiesInit([
   {
     name: "MakeRight",
     id: "Makeright",
     type: "study",
+    // subtitle: {
+    //   string: "Translating The Benefits of 3D Printing to Everyday Consumers",
+    //   jsx: (
+    //     <>
+    //       Translating The Benefits of 3D Printing
+    //       <br className="d-xxl-none" /> to Everyday Consumers
+    //     </>
+    //   ),
+    // },
     subtitle: {
-      string: "Translating The Benefits of 3D Printing to Everyday Consumers",
+      string: "3D Printing for Everyday Consumers",
       jsx: (
         <>
-          Translating The Benefits of 3D Printing
-          <br className="d-xxl-none" /> to Everyday Consumers
+          Removing the Barriers to 3D Printing
+          <br className="d-xxl-none" /> for Everyday Consumers
         </>
       ),
     },
     tags: ["Thesis", "UX/UI Design", "User Research"],
 
     brief: {
+      // description:
+      //   "For my undergraduate capstone, I created a service that directly connects owners of 3D printers to customers in need.  Based on a gig-economy model, like Uber or DoorDash, this service enables access to 3D printing without the barriers of cost, and know-how.",
       description:
-        "For my undergraduate capstone, I created a service that directly connects owners of 3D printers to customers in need.  Based on a gig-economy model, like Uber or DoorDash, this service enables access to 3D printing without the barriers of cost, and know-how.",
+        "For my undergraduate capstone, I created a service that directly connects owners of 3D printers to customers in need.  Based on a gig-economy model, this service enables access to 3D printing without the barriers of cost, and know-how.",
       tools: ["Adobe XD / Figma", "Illustrator", "Mural", "HTML/CSS/JS", "After Effects", "InDesign"],
       deliverables: [
         {
@@ -88,12 +100,21 @@ const CASE_STUDIES = caseStudiesInit([
     name: "KoalaKo",
     id: "Koalako",
     type: "study",
+    // subtitle: {
+    //   string: "Supporting Parents in Fostering Adolescent Creative Development",
+    //   jsx: (
+    //     <>
+    //       Supporting Parents in Fostering
+    //       <br className="d-lg-none" /> Adolescent Creative Development
+    //     </>
+    //   ),
+    // },
     subtitle: {
-      string: "Supporting Parents in Fostering Adolescent Creative Development",
+      string: "Supporting Parents in Fostering Creative Development",
       jsx: (
         <>
           Supporting Parents in Fostering
-          <br className="d-lg-none" /> Adolescent Creative Development
+          <br className="d-lg-none" /> Creative Development
         </>
       ),
     },
@@ -123,6 +144,11 @@ const CASE_STUDIES = caseStudiesInit([
         <>
           Undeserving of a case study,
           <br className="d-lg-none" /> but well-deserving of your attention
+        </>
+      ),
+      nextStudyJsx: (
+        <>
+          Undeserving of a case study, <Nobr>but well-deserving</Nobr> of your attention
         </>
       ),
     },
