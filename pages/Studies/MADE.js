@@ -34,7 +34,8 @@ function MADE({ pop }) {
             <Column>
               <Description className={"text-col-2 gap-3 mt-3"}>
                 <p>
-                  An offering central to MADE&rsquo;s image and reputation is having an <b>on-site stylist to help customers</b> find their <Nobr>best-suited look.</Nobr> However, at the time, <b>they didn&rsquo;t feel their webstore reflected these offerings</b>.
+                  An offering central to MADE&rsquo;s image and reputation is having an <b>on-site stylist to help customers</b> find their{" "}
+                  <Nobr>best-suited look.</Nobr> However, at the time, <b>they didn&rsquo;t feel their webstore reflected these offerings</b>.
                 </p>
               </Description>
               <Graphic className="b-rad" img={MADE_IMGS.banner_client} />
@@ -46,7 +47,8 @@ function MADE({ pop }) {
             <Heading>Provide online customers with the same flexibility as in-store clientele with a dress shirt configurator</Heading>
             <Description>
               <p>
-                <b>MADE needed identical images of their offerings to slot into their software, without separately photographing each shirt</b>. These would also become product thumbnails for their online store.
+                <b>MADE needed identical images of their offerings to slot into their software, without separately photographing each shirt</b>. These
+                would also become product thumbnails for their online store.
               </p>
               {/* <p>
                 With 3D renders being the most efficient way to complete this goal, MADE reached out to me to work together in creating <Nobr>this tool.</Nobr>
@@ -65,7 +67,9 @@ function MADE({ pop }) {
                 <Heading type={!smAndDown ? `h3` : "h5"}>
                   <b>Photorealism</b>
                 </Heading>
-                <p>Images need to be <Nobr>1 to 1</Nobr> with the product <Nobr className="d-sm-none">the customer</Nobr> receives</p>
+                <p>
+                  Images need to be <Nobr>1 to 1</Nobr> with the product <Nobr className="d-sm-none">the customer</Nobr> receives
+                </p>
               </Description>
             </Column>
 
@@ -75,7 +79,9 @@ function MADE({ pop }) {
                 <Heading type={!smAndDown ? `h3` : "h5"}>
                   <b>Consistency</b>
                 </Heading>
-                <p>Seamless switching between component styles <Nobr>and materials</Nobr></p>
+                <p>
+                  Seamless switching between component styles <Nobr>and materials</Nobr>
+                </p>
                 {/* <p>{!smAndDown ? `Shirt components cannot shift in position when their style or material is changed` : 'Seamless switching between component styles and materials'}</p> */}
               </Description>
             </Column>
@@ -86,7 +92,9 @@ function MADE({ pop }) {
                 <Heading type={!smAndDown ? `h3` : "h5"}>
                   <b>Scalability</b>
                 </Heading>
-                <p>40+ fabric variations, <Nobr>with a scalable</Nobr> approach <Nobr>to add</Nobr> more materials <Nobr>down the</Nobr> road</p>
+                <p>
+                  40+ fabric variations, <Nobr>with a scalable</Nobr> approach <Nobr>to add</Nobr> more materials <Nobr>down the</Nobr> road
+                </p>
               </Description>
             </Column>
 
@@ -96,7 +104,9 @@ function MADE({ pop }) {
                 <Heading type={!smAndDown ? `h3` : "h5"}>
                   <b>Experimentation</b>
                 </Heading>
-                <p>With the software still being ironed-out, room for testing was needed <Nobr className="d-sm-none">in the early stages</Nobr></p>
+                <p>
+                  With the software still being ironed-out, room for testing was needed <Nobr className="d-sm-none">in the early stages</Nobr>
+                </p>
               </Description>
             </Column>
           </Section>
@@ -202,14 +212,16 @@ function MADE({ pop }) {
             </Column>
           </Section>
 
-          <Section id="Approach--Considerations-Graphic" type="columns" titled mainType="grid" wrapperClassName='mt-less-2'>
+          <Section id="Approach--Considerations-Graphic" type="columns" titled mainType="grid" wrapperClassName="mt-less-2">
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.considerations_seam_positions} lightbox pop={pop} />
               <Heading type={!smAndDown ? `h3` : "h5"} className={`graphic--caption ${!smAndDown && `weight-reg`}`}>
                 Seam positions
               </Heading>
               <Description>
-                <p>Shirt proportions, <Nobr>and placement</Nobr> <Nobr>of the</Nobr> <Nobr>main seams</Nobr></p>
+                <p>
+                  Shirt proportions, <Nobr>and placement</Nobr> <Nobr>of the</Nobr> <Nobr>main seams</Nobr>
+                </p>
               </Description>
             </Column>
             <Column>
@@ -274,8 +286,8 @@ function MADE({ pop }) {
               </Heading>
               <Description>
                 <p>
-                  With MADE&rsquo;s goal of photorealism, the shirts needed an accurate ruffle to their appearance, without losing their high-fashion image.
-                  Too few wrinkles, and the shirts looked starched to death. Too many imperfections and they looked straight out of the hamper.
+                  With MADE&rsquo;s goal of photorealism, the shirts needed an accurate ruffle to their appearance, without losing their high-fashion
+                  image. Too few wrinkles, and the shirts looked starched to death. Too many imperfections and they looked straight out of the hamper.
                 </p>
 
                 <p>
@@ -304,7 +316,9 @@ function MADE({ pop }) {
             <Column>
               <Description className={desktop && "mt-less"}>
                 <p>
-                  <b>In order for the models to reflect actual products, they needed to be textured with over 40 scans of MADE&rsquo;s custom fabrics.</b>
+                  <b>
+                    In order for the models to reflect actual products, they needed to be textured with over 40 scans of MADE&rsquo;s custom fabrics.
+                  </b>
                 </p>
                 <p>
                   Working closely together, I tested several workflows for converting fabric scans to 3D textures. This allowed me to determine which
@@ -376,7 +390,9 @@ function MADE({ pop }) {
             </Column>
             <Column>
               <Description>
-                &lsquo;Contrast areas&rsquo; are the parts of the dress shirt which accent it with an alternate fabric pallet. They were a <b>critical project requirement</b> as the online tool needed to represent the full scope of the customization available, which includes personalized accents.
+                &lsquo;Contrast areas&rsquo; are the parts of the dress shirt which accent it with an alternate fabric pallet. They were a{" "}
+                <b>critical project requirement</b> as the online tool needed to represent the full scope of the customization available, which
+                includes personalized accents.
               </Description>
             </Column>
           </Section>
@@ -418,7 +434,7 @@ function MADE({ pop }) {
                 sync="Texturing--Contrast-Split"
               />
               <Description className={`graphic--caption`}>
-                Our goal was to give shoppers the ability to alter their shirt&rsquo;s accent fabric with 50+ available materials.
+                Our goal was to give shoppers the ability to alter their shirt&rsquo;s accent fabric with 40+ available materials.
               </Description>
             </Column>
             <Column caption={!desktop && "above"}>
@@ -512,8 +528,8 @@ function MADE({ pop }) {
               </Heading>
               <Description className={lgAndDown && "mts-1"}>
                 <p>
-                  MADE&rsquo;s design goals were on soft, consistent lighting, without it being so flat that shirts appear bland or even
-                  artificial. Gentle shadows, with nothing distracting from the product.
+                  MADE&rsquo;s design goals were on soft, consistent lighting, without it being so flat that shirts appear bland or even artificial.
+                  Gentle shadows, with nothing distracting from the product.
                 </p>
               </Description>
             </Column>
@@ -535,9 +551,9 @@ function MADE({ pop }) {
                 </p>
 
                 <p>
-                  Adding generic &lsquo;drop-shadows&rsquo; could quickly achieve this outcome, but it would sacrifice photorealism. To do this without
-                  compromise, I created isolated renderings of each shadow, and combined the images in post. This is the difference between each
-                  method:
+                  Adding generic &lsquo;drop-shadows&rsquo; could quickly achieve this outcome, but it would sacrifice photorealism. To do this
+                  without compromise, I created isolated renderings of each shadow, and combined the images in post. This is the difference between
+                  each method:
                 </p>
               </Description>
             </Column>
@@ -685,7 +701,9 @@ function MADE({ pop }) {
           <Section id="Rendering--Python-Description" type="columns" titled="above" background="background darker" wrapperClassName="mb-less-2">
             <Title>Roadblocks To Rendering</Title>
             <Column>
-              <Heading>Using Python to create a dynamic texture that could change fabrics every frame</Heading>
+              <Heading>
+                Using Python to create <Nobr>a dynamic</Nobr> texture that could change fabrics every frame
+              </Heading>
             </Column>
             <Column>
               <Description className={!mdAndDown && "mt-less"}>
@@ -694,8 +712,8 @@ function MADE({ pop }) {
                   ability to easily switch between them.
                 </p>
                 <p>
-                  From there, I could then render a single “video” who&rsquo;s frames contained every combination of object and fabric. This allowed me to
-                  push through the limits of my hardware and completed all of the rendering at no added cost to the project timeline.
+                  From there, I could then render a single “video” who&rsquo;s frames contained every combination of object and fabric. This allowed
+                  me to push through the limits of my hardware and completed all of the rendering at no added cost to the project timeline.
                 </p>
               </Description>
             </Column>
@@ -743,7 +761,7 @@ function MADE({ pop }) {
           <Section id="Rendering--Closing">
             <Heading>
               With rendering now complete, the final images <br className="d-lg-none" /> were delivered, and placed into the webstore&rsquo;s{" "}
-              <br className="d-lg-none" /> new dress-shirt customization tool.{" "}
+              <br className="d-lg-none" /> new customization tool.
             </Heading>
           </Section>
         </Chapter>
@@ -802,17 +820,17 @@ function MADE({ pop }) {
             <Heading>Foresight, and planning around project requirements</Heading>
             <Description className="text-col-2 text-gap-6">
               <p>
-                During this project&rsquo;s early stages, I identified many requirements for my images. Ones that I needed to meet if they were to
-                suit my client&rsquo;s needs. An example of this was when we first discussed creating a single shirt from stacked image layers. With
-                this goal understood, I was able to discern the steps necessary to match the use-case. I knew each image needed their object&rsquo;s
-                shadows placed in the background. Otherwise, they wouldn&rsquo;t combine realistically.
+                During this project&rsquo;s early stages, I identified many requirements to suit my client&rsquo;s needs. An example of this was when
+                we first discussed creating a single shirt from stacked image layers. With this goal understood, I was able to discern the steps
+                necessary to match the use-case. I knew each image needed their object&rsquo;s shadows placed in the background. Otherwise, they
+                wouldn&rsquo;t combine realistically.
               </p>
 
               <p>
                 This gave me significant time to plan ahead. I conducted tests using the first few models, and determined the best approach to
-                creating realistic shadows. Allowing me to then build the project from the ground-up with the eventuality of this challenge in mind.
-                Then, when the time came to create the objects&rsquo; shadows, I was fully prepared to traverse the issue. With this, and other
-                similar moments, the greatest success of this project was my foresight and planning.
+                creating realistic shadows. In this way, I built the project from the ground-up with the eventuality of this challenge in mind. Then,
+                when the time came to create the objects&rsquo; shadows, I was fully prepared to traverse the issue. With this, and other similar
+                moments, the greatest success of this project was my foresight and planning.
               </p>
             </Description>
 
@@ -849,8 +867,8 @@ function MADE({ pop }) {
                 </p>
                 <p>
                   This teachable moment reminded me of what is possible when you lose sight of a project&rsquo;s full scope. Going forward, I aim to
-                  address this by regularly checking my project outline with every working session. Thereby reminding myself of the bigger picture,
-                  and to look ahead to the next steps towards which I&rsquo;m building.
+                  address this by working with a broader sample size during testing, and regularly checking my project outline. Thereby reminding
+                  myself of the bigger picture, and to look ahead to the next steps towards which I&rsquo;m building.
                 </p>
               </Description>
             </Column>

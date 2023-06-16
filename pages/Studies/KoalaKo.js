@@ -37,9 +37,9 @@ function KoalaKo({ pop }) {
               </Heading>
               <Description className="text-align-center mts-1">
                 <p>
+                  Project Lead <br />
                   UX/UI Design <br />
-                  Research <br />
-                  Project Lead
+                  Research
                 </p>
               </Description>
             </Column>
@@ -89,8 +89,8 @@ function KoalaKo({ pop }) {
             </Heading>
             <Description>
               <p>
-                International design agency AKQA hosts an annual innovation competition called &lsquo;Future Lions&rsquo;. Partnering with LEGO in
-                2021, their challenge targeted the growing problem of play being seen as a &lsquo;nice to have.&rsquo; Rather than a critical part of
+                International design agency AKQA hosts an annual innovation competition called &lsquo;Future Lions.&rsquo; Partnering with LEGO in
+                2021, their challenge targeted the growing problem of play being seen as a &lsquo;nice to have,&rsquo; rather than a critical part of
                 a child&rsquo;s development.
               </p>
             </Description>
@@ -105,8 +105,11 @@ function KoalaKo({ pop }) {
               the importance of creativity, and play
             </Heading>
             <Description>
-              <Heading type={`${desktop ? "h3" : "h5"}`} className={`${desktop ? "weight-reg" : ""}`}>
+              {/* <Heading type={`${desktop ? "h3" : "h5"}`} className={`${desktop ? "weight-reg" : ""}`}>
                 “No open social platforms. ” - LEGO & AKQA
+              </Heading> */}
+              <Heading type={`${desktop ? "h3" : "h5"}`} className={`${desktop ? "weight-reg" : ""}`}>
+                No open social platforms
               </Heading>
               <p className="mts-1">
                 Child-focused social media raises many security concerns.
@@ -139,12 +142,10 @@ function KoalaKo({ pop }) {
             <Column>
               <Description className={"text-col-2 text-col-lg-1 gap-3 gap-xl-4 mts-3"}>
                 <p>
-                  This tool offers parents a curated stream of activities for kids of all ages and interests. Thereby easing the parental strain of
-                  regularly having to invent new games and types of play.
+                  This tool offers parents a curated stream of activities for kids of all ages and interests. Thereby easing the parental strain of having to invent new games and types of play.
                 </p>
                 <p>
-                  It also helps parents foster creative development by encouraging a wide breadth of exploration. Activities range from social to
-                  independent, mental to physical, and everything in-between.
+                  It also helps parents foster creative development by encouraging a wide breadth of exploration. Activities range from social to independent, mental to physical, and everything in between.
                 </p>
               </Description>
               <Graphic type="image" className="b-rad" img={KOALAKO_IMGS.banner_intro} />
@@ -156,16 +157,21 @@ function KoalaKo({ pop }) {
               <Graphic type="mask" img={KOALAKO_IMGS.solution_personal_info} />
               <Heading>
                 No personal information <br className="d-block d-sm-none" />
-                about the child
+                required from the child
               </Heading>
               <Description>
-                <p>
+              {/* <p>
                   Choosing to input your child&rsquo;s age enables KoalaKo&rsquo;s creative development support. Parents can then log a child&rsquo;s
                   play experiences to receive smart suggestions based on the types of creativity your child is lacking.
-                </p>
-                <p>
+                </p> */}
+                {/* <p>
                   Without this enabled, the app still functions as a browsable activity database. Maintaining its value of being a helping hand to
                   parents who need new ways to keep their children engaged.
+                </p> */}
+
+                <p>Child profiles allow parents to receive smart suggestions based on their age and interests. They&rsquo;re completely optional, and opting-in requires only name and age.</p>
+                <p>
+                  When disabled, the app still functions as a browsable activity database. Thereby still acting as a helping hand to parents who opt-out of child profiles.
                 </p>
               </Description>
             </Column>
@@ -189,7 +195,7 @@ function KoalaKo({ pop }) {
                   Parents can browse locations that match their desired activity, or activities that match a desired location. Refine these searches
                   with filters for cost, distance from home, and other important factors.
                 </p>
-                <p>This allows KoalaKo to fit any parent&rsquo;s needs. While still encouraging adventures outside the living room when possible. </p>
+                <p>This allows KoalaKo to fit any parent&rsquo;s needs, while still encouraging adventures outside the living room when possible.</p>
               </Description>
             </Column>
           </Section>

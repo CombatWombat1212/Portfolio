@@ -18,10 +18,10 @@ const CASE_STUDIES = caseStudiesInit([
     //   ),
     // },
     subtitle: {
-      string: "3D Printing for Everyday Consumers",
+      string: "Removing the Barriers of 3D Printing for Everyday Consumers",
       jsx: (
         <>
-          Removing the Barriers to 3D Printing
+          Removing the Barriers of 3D Printing
           <br className="d-xxl-none" /> for Everyday Consumers
         </>
       ),
@@ -122,7 +122,7 @@ const CASE_STUDIES = caseStudiesInit([
 
     brief: {
       description:
-        "Supporting parents by providing a curated stream of unique, age-appropriate activities, and locations for play.  Easing the strain of fostering creative development by helping to fill gaps in a child’s exploration.",
+        "Helping parents help their kids by providing a curated stream of unique, age-appropriate activities. A team effort, designed as a digital-age solution to fostering creative development.",
       tools: ["Adobe XD / Figma", "Mural", "InDesign"],
       deliverables: ["Interactive prototype", "Video presentation & pitch"],
       timeline: "9 Weeks",
