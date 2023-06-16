@@ -171,7 +171,7 @@ function Text() {
       <Dot />
     </Fragment>,
     `:-)`,
-    // <Img img={LOADING_IMGS.loading_snail} />,
+    <Img img={LOADING_IMGS.loading_snail} />,
   ];
 
   const text = useRandomString(loadingMessages, { localStorage: true, key: "loading-screen--text" });

@@ -24,6 +24,7 @@ import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import { usePostScrollbarSizeToRoot } from "@/scripts/hooks/useScrollbarSize";
 import MAKERIGHT_IMGS from "@/data/MAKERIGHT_IMGS";
 import useFont from "@/scripts/hooks/useFont";
+import { LOADING_IMGS } from "@/data/LOADING_IMGS";
 
 
 const fonts = [
@@ -137,19 +138,15 @@ export default function App({ Component, pageProps }) {
   const {loading} = useResponsiveUtils();
   const fontsLoaded = useFont(fonts);
 
-  useEffect(() =>{
-    console.log(fontsLoaded);
-  }, [fontsLoaded]);
-
-
   useBrowserClass();
   usePostScrollbarSizeToRoot({update:[pop.on, loading]});
 
   const preFetchImages = [
     ABOUT_IMGS.me,
     MAKERIGHT_IMGS.pitch_laptop_frame,
+    LOADING_IMGS.loading_snail,
      ...Object.keys(ICONS).map((key) => ICONS[key])
-    ];
+  ];
 
   return (
     <>

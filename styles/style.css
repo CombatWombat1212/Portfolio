@@ -1356,8 +1356,8 @@ body {
 }
 
 .loading-screen--graphic {
-  max-width: calc(100vw - 4.35rem);
-  width: 10rem;
+  max-width: calc(calc(100vw / var(--zoom)) - 4.35rem);
+  width: 12.5rem;
   display: flex;
   border-radius: var(--b-rad);
   -webkit-border-radius: var(--b-rad);
