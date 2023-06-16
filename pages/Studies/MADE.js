@@ -34,8 +34,7 @@ function MADE({ pop }) {
             <Column>
               <Description className={"text-col-2 gap-3 mt-3"}>
                 <p>
-                  An offering central to MADE’s image and reputation is having an <b>on-site stylist to support customers</b> in finding their
-                  best-suited look. However, at the time, <b>they didn’t feel their webstore reflected these offerings</b>.
+                  An offering central to MADE’s image and reputation is having an <b>on-site stylist to help customers</b> find their <Nobr>best-suited look.</Nobr> However, at the time, <b>they didn’t feel their webstore reflected these offerings</b>.
                 </p>
               </Description>
               <Graphic className="b-rad" img={MADE_IMGS.banner_client} />
@@ -47,13 +46,11 @@ function MADE({ pop }) {
             <Heading>Provide online customers with the same flexibility as in-store clientele with a dress shirt configurator</Heading>
             <Description>
               <p>
-                <b>MADE needed identical images of their offerings to slot into their software</b>. These images would also become product thumbnails
-                for their webstore, allowing customers to browse their catalogue <b>without MADE individually photographing each shirt</b>.
+                <b>MADE needed identical images of their offerings to slot into their software, without separately photographing each shirt</b>. These would also become product thumbnails for their online store.
               </p>
-              <p>
-                With 3D renders being the most efficient way to complete this goal, MADE reached out to me to work together in creating this
-                customization utility.
-              </p>
+              {/* <p>
+                With 3D renders being the most efficient way to complete this goal, MADE reached out to me to work together in creating <Nobr>this tool.</Nobr>
+              </p> */}
             </Description>
             <Graphic type="mask" img={MADE_IMGS.configurator_graphic} />
           </Section>
@@ -68,7 +65,7 @@ function MADE({ pop }) {
                 <Heading type={!smAndDown ? `h3` : "h5"}>
                   <b>Photorealism</b>
                 </Heading>
-                <p>Images need to be 1 to 1 with product the customer receives</p>
+                <p>Images need to be <Nobr>1 to 1</Nobr> with the product <Nobr className="d-sm-none">the customer</Nobr> receives</p>
               </Description>
             </Column>
 
@@ -78,7 +75,7 @@ function MADE({ pop }) {
                 <Heading type={!smAndDown ? `h3` : "h5"}>
                   <b>Consistency</b>
                 </Heading>
-                <p>Seamless switching between component styles and materials</p>
+                <p>Seamless switching between component styles <Nobr>and materials</Nobr></p>
                 {/* <p>{!smAndDown ? `Shirt components cannot shift in position when their style or material is changed` : 'Seamless switching between component styles and materials'}</p> */}
               </Description>
             </Column>
@@ -89,7 +86,7 @@ function MADE({ pop }) {
                 <Heading type={!smAndDown ? `h3` : "h5"}>
                   <b>Scalability</b>
                 </Heading>
-                <p>40+ fabric variations, with a scalable approach to add more materials down the road</p>
+                <p>40+ fabric variations, <Nobr>with a scalable</Nobr> approach <Nobr>to add</Nobr> more materials <Nobr>down the</Nobr> road</p>
               </Description>
             </Column>
 
@@ -99,7 +96,7 @@ function MADE({ pop }) {
                 <Heading type={!smAndDown ? `h3` : "h5"}>
                   <b>Experimentation</b>
                 </Heading>
-                <p>With the software still being ironed-out, room for testing was needed in the early stages</p>
+                <p>With the software still being ironed-out, room for testing was needed <Nobr className="d-sm-none">in the early stages</Nobr></p>
               </Description>
             </Column>
           </Section>
@@ -212,7 +209,7 @@ function MADE({ pop }) {
                 Seam positions
               </Heading>
               <Description>
-                <p>Shirt proportions, and placement of the main seams</p>
+                <p>Shirt proportions, <Nobr>and placement</Nobr> <Nobr>of the</Nobr> <Nobr>main seams</Nobr></p>
               </Description>
             </Column>
             <Column>
@@ -230,7 +227,7 @@ function MADE({ pop }) {
                 Button positions
               </Heading>
               <Description>
-                <p>Which components have or don’t have buttons, and where those buttons are placed</p>
+                <p>Which components have buttons, and where those buttons are placed</p>
               </Description>
             </Column>
             <Column>
@@ -239,7 +236,7 @@ function MADE({ pop }) {
                 Collar shape
               </Heading>
               <Description>
-                <p>Ensuring that all the collars match the contours and shape of the base shirt</p>
+                <p>Ensuring all collars match the contours and shape of the base shirt</p>
               </Description>
             </Column>
           </Section>
@@ -311,7 +308,7 @@ function MADE({ pop }) {
                 </p>
                 <p>
                   Working closely together, I tested several workflows for converting fabric scans to 3D textures. This allowed me to determine which
-                  was the most time-efficient, best looking, and scalable; as MADE needed the capability to rapidly add fabrics in the future.
+                  was the most time-efficient, best-looking, and scalable; as MADE needed the capability to rapidly add fabrics in the future.
                 </p>
                 <p>
                   I used a combination of Blender and Photoshop to undistort the scans, and create the repeatable textures. Chosen for its efficiency,
@@ -379,9 +376,7 @@ function MADE({ pop }) {
             </Column>
             <Column>
               <Description>
-                ‘Contrast areas’ are the parts of the dress shirt which accent the garment with an alternate fabric pallet. They were a{" "}
-                <b>critical project requirement</b> as the online tool needed to represent the full scope of the customization available, which
-                includes personalized accent areas.
+                ‘Contrast areas’ are the parts of the dress shirt which accent it with an alternate fabric pallet. They were a <b>critical project requirement</b> as the online tool needed to represent the full scope of the customization available, which includes personalized accents.
               </Description>
             </Column>
           </Section>
@@ -423,7 +418,7 @@ function MADE({ pop }) {
                 sync="Texturing--Contrast-Split"
               />
               <Description className={`graphic--caption`}>
-                Our goal was to give shoppers the ability to alter their shirt&rsquo;s accent fabric, with 50+ available materials.
+                Our goal was to give shoppers the ability to alter their shirt&rsquo;s accent fabric with 50+ available materials.
               </Description>
             </Column>
             <Column caption={!desktop && "above"}>
@@ -517,7 +512,7 @@ function MADE({ pop }) {
               </Heading>
               <Description className={lgAndDown && "mts-1"}>
                 <p>
-                  At this stage, MADE’s design goals were on soft, consistent lighting, without it being so flat that shirts appear bland or even
+                  MADE’s design goals were on soft, consistent lighting, without it being so flat that shirts appear bland or even
                   artificial. Gentle shadows, with nothing distracting from the product.
                 </p>
               </Description>
