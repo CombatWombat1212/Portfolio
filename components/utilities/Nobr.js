@@ -1,6 +1,6 @@
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 
-function Nobr({ children, className = "" }) {
+function Nobr({ children, className = "", tag="Fragment" }) {
   const { bp } = useResponsive();
   const breakpoints = getClassBreakpoints(className);
 

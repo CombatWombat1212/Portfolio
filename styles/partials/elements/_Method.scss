@@ -5,13 +5,32 @@
 
   @include b-rad;
   height: calc(100% - (var(--method-pad) * 2));
-  &--title {
-    margin-bottom: 0.25rem;
+
+
+  --graphic-scale: 0.25;
+  @include lg-down {
+    --graphic-scale: 0.35;
+    --method-pad: 1.5rem;
+
+    @include flex-row-between;
+    gap: 3.5rem;
+  }
+
+  @include md-down {
+    --graphic-scale: 0.5;
+    gap: 2rem;
+  }
+
+
+  &--inner{
+    @include md-down{
+      width:100%;
+    }
   }
 
   &--head {
-    @include flex-row;
-    gap: 3.5rem;
+    @include flex-row-between;
+    gap: 2.5rem;
     align-items: center;
 
     @include xl-down {
@@ -22,65 +41,44 @@
     }
   }
 
+  &--heading {
+    margin-top: 0.25rem;
+  }
+
   &--mask {
     @include my-auto(true);
 
-    @include xl{
-      .mask{
-        margin-top: -0.35rem!important;
+    @include lg {
+      margin-right: 0.75rem;
+    }
+
+    .mask {
+      margin-top: -0.35rem;
+      @include xl {
+        margin-top: -0.35rem !important;
       }
-    }
-    
-    @include lg{
-      margin-right:0.75rem;
-    }
-    
-    @include md-down{
-      .mask{
-        // margin-top: -0.25rem!important;
+      @include xl-down{
+        margin-top: 0rem;
+      }
+      @include md-down {
         @include mx-auto;
-        margin-top:1.25rem;
-        margin-bottom:2.65rem;
+        margin-top: 1.25rem;
+        margin-bottom: 2.65rem;
       }
     }
-
-
   }
 
   &--body {
-    margin-top: 1.75rem;
+    margin-top: 1.5rem;
     @include xl-down {
-      margin-top:1.15rem;
+      margin-top: 1.15rem;
     }
     @include lg-down {
-      margin-top:0.35rem;
+      margin-top: 0.35rem;
     }
     @include md-down {
-      margin-top:0.45rem;
+      margin-top: 0.45rem;
     }
   }
-
-  --graphic-scale: 0.95;
-  @include xxl-down {
-    --graphic-scale: 0.75;
-  }
-  @include xl-down {
-    --graphic-scale: 0.65;
-  }
-  @include lg-down {
-    --graphic-scale: 1;
-    --method-pad: 1.5rem;
-
-    @include flex-row;
-    gap: 3.5rem;
-  }
-
-  @include md-down {
-    --graphic-scale: 1.35;
-    gap: 2rem;
-  }
-  // @include sm-down {
-  //   --graphic-scale: 1.45;
-  // }
 
 }

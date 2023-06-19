@@ -122,7 +122,7 @@ const CASE_STUDIES = caseStudiesInit([
 
     brief: {
       description:
-        "Helping parents help their kids by providing a curated stream of unique, age-appropriate activities. A team effort, designed as a digital-age solution to fostering creative development.",
+        "Creative development thrives when kids can try a wide breadth of self-expression.  We provide parents with a curated feed of unique activities, and locations for play.",
       tools: ["Adobe XD / Figma", "Mural", "InDesign"],
       deliverables: ["Interactive prototype", "Video presentation & pitch"],
       timeline: "9 Weeks",

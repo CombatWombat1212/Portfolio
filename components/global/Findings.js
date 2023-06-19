@@ -94,8 +94,8 @@ function Findings({ children, className }) {
       <Button
         type="bottom"
         icon={["chevron_down", "middle", "mask"]}
-        className={`findings--button ${open ? `findings--button__open` : `findings--button__closed`} `}
-        color={`background_darkest-primary`}
+        className={`findings--button findings--button__${open ? `open` : `closed`} `}
+        color="background_darkest-primary"
         tag="div"
       />
     </a>

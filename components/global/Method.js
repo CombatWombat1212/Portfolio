@@ -2,8 +2,10 @@ import organizeChildren from "@/scripts/organizeChildren";
 import usePropModifier from "@/scripts/hooks/usePropModifier";
 import { Graphic, Heading, Title } from "../sections/Sections";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
+import { getMirrorStyleProp } from "@/scripts/useMirrorStyle";
 
-function Method({ children }) {
+function Method(props) {
+  const { children } = props;
   // console.log(children);
 
   const modChilds = usePropModifier(children, [
@@ -32,14 +34,16 @@ function Method({ children }) {
 
   return (
     <>
-      <div className="method">
+      <div className="method" {...getMirrorStyleProp(props)}>
         <div className="method--inner">
           {sm && <Graphic type="mask" img={img} className="method--mask" />}
-          <Title className="method--title">{orgChilds.title[0]}</Title>
           <div className="method--head">
-            <Heading type={type} className="method--heading">
-              {heading}
-            </Heading>
+            <div className="meathod--head-inner">
+              <Title className="method--title">{orgChilds.title[0]}</Title>
+              <Heading type={type} className="method--heading">
+                {heading}
+              </Heading>
+            </div>
             {desk && <Graphic type="mask" img={img} className="method--mask" />}
           </div>
 

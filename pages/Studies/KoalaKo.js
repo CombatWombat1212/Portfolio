@@ -21,6 +21,7 @@ function KoalaKo({ pop }) {
   const { desktop, isBpAndDown, isBp, loading } = useResponsive();
 
   const isntMd = !isBp("md") || loading;
+  const mdAndDown = !(!isBpAndDown("md") || loading);
   const isSm = !(!isBp("sm") || loading);
 
   return (
@@ -37,9 +38,12 @@ function KoalaKo({ pop }) {
               </Heading>
               <Description className="text-align-center mts-1">
                 <p>
-                  Project Lead <br />
+                  <b className="color--secondary" style={{ display: "inline-block", "margin-bottom": "0.1rem" }}>
+                    Project Lead
+                  </b>
+                  <br />
                   UX/UI Design <br />
-                  Research
+                  Research <br />
                 </p>
               </Description>
             </Column>
@@ -89,9 +93,9 @@ function KoalaKo({ pop }) {
             </Heading>
             <Description>
               <p>
-                International design agency AKQA hosts an annual innovation competition called &lsquo;Future Lions.&rsquo; Partnering with LEGO in
-                2021, their challenge targeted the growing problem of play being seen as a &lsquo;nice to have,&rsquo; rather than a critical part of
-                a child&rsquo;s development.
+                Design agency AKQA hosts an annual competition called &lsquo;Future Lions.&rsquo; Partnering with LEGO in 2021, their challenge
+                targeted the growing problem of play being seen as a &lsquo;nice to have,&rsquo; rather than a critical part of a child&rsquo;s
+                development.
               </p>
             </Description>
 
@@ -105,20 +109,17 @@ function KoalaKo({ pop }) {
               the importance of creativity, and play
             </Heading>
             <Description>
-              {/* <Heading type={`${desktop ? "h3" : "h5"}`} className={`${desktop ? "weight-reg" : ""}`}>
-                “No open social platforms. ” - LEGO & AKQA
-              </Heading> */}
-              <Heading type={`${desktop ? "h3" : "h5"}`} className={`${desktop ? "weight-reg" : ""}`}>
+              <Heading type={desktop ? "h3" : "h5"} className={desktop ? "weight-reg" : ""}>
                 No open social platforms
               </Heading>
-              <p className="mts-1">
+              <p className="mt-1">
                 Child-focused social media raises many security concerns.
                 <br className="d-block d-sm-none" /> As well, children already spend countless hours a day on existing platforms.
               </p>
-              <Heading type={`${desktop ? "h3" : "h5"}`} className={`mts-3 ${desktop ? "weight-reg" : ""}`}>
+              <Heading type={desktop ? "h3" : "h5"} className={`${desktop ? "weight-reg" : ""} mts-2`}>
                 Bring play back into the real world
               </Heading>
-              <p className="mts-1">Emphasize physical, explorative play</p>
+              <p className="mt-1">Emphasize physical, explorative play</p>
             </Description>
 
             <Graphic type="mask" img={KOALAKO_IMGS.background_kids} />
@@ -127,7 +128,7 @@ function KoalaKo({ pop }) {
           <Section id="Overview--Opporunity">
             <Title>Opportunity</Title>
             <Heading>
-              How might my team encourage explorative play <br className="d-block d-lg-none" />
+              How might we encourage explorative play <br className="d-block d-lg-none" />
               while following these considerations?
             </Heading>
           </Section>
@@ -141,11 +142,20 @@ function KoalaKo({ pop }) {
 
             <Column>
               <Description className={"text-col-2 text-col-lg-1 gap-3 gap-xl-4 mts-3"}>
-                <p>
-                  This tool offers parents a curated stream of activities for kids of all ages and interests. Thereby easing the parental strain of having to invent new games and types of play.
+                {/* <p>
+                To ease the parental strain of inventing new games and types of play, we provide parents with curated activities for kids of all ages and interests.
                 </p>
                 <p>
-                  It also helps parents foster creative development by encouraging a wide breadth of exploration. Activities range from social to independent, mental to physical, and everything in between.
+                  It also helps parents foster creative development by encouraging a wide breadth of exploration. Activities range from social to
+                  independent, mental to physical, and everything in between.
+                </p> */}
+                <p>
+                  Entertaining kids can be a challenge. To help keep play easy and fun, KoalaKo provides parents with a toolbelt of games and
+                  locations to explore.
+                </p>
+                <p>
+                  Variety is a strong focus, as it encourages creative development. Activities range from social to solo, mental to physical, and lots
+                  more.
                 </p>
               </Description>
               <Graphic type="image" className="b-rad" img={KOALAKO_IMGS.banner_intro} />
@@ -160,7 +170,7 @@ function KoalaKo({ pop }) {
                 required from the child
               </Heading>
               <Description>
-              {/* <p>
+                {/* <p>
                   Choosing to input your child&rsquo;s age enables KoalaKo&rsquo;s creative development support. Parents can then log a child&rsquo;s
                   play experiences to receive smart suggestions based on the types of creativity your child is lacking.
                 </p> */}
@@ -169,9 +179,13 @@ function KoalaKo({ pop }) {
                   parents who need new ways to keep their children engaged.
                 </p> */}
 
-                <p>Child profiles allow parents to receive smart suggestions based on their age and interests. They&rsquo;re completely optional, and opting-in requires only name and age.</p>
                 <p>
-                  When disabled, the app still functions as a browsable activity database. Thereby still acting as a helping hand to parents who opt-out of child profiles.
+                  If parents provide a child&rsquo;s name and age, they enable smart activity suggestions. These keep games age-appropriate, and
+                  varied based on past experiences.
+                </p>
+                <p>
+                  If they opt out, the app still functions as a treasure trove of activities. Searchable and browseable, just not as
+                  &lsquo;smart.&rsquo;
                 </p>
               </Description>
             </Column>
@@ -189,13 +203,12 @@ function KoalaKo({ pop }) {
             </Column>
             <Column className="solution--copy">
               <Graphic type="mask" img={KOALAKO_IMGS.solution_worldly_creativity} />
-              <Heading>Encourages worldly creativity by providing safe nearby spots to explore</Heading>
+              <Heading>
+                Search local spaces <Nobr>for worldly</Nobr> creativity
+              </Heading>
               <Description>
-                <p>
-                  Parents can browse locations that match their desired activity, or activities that match a desired location. Refine these searches
-                  with filters for cost, distance from home, and other important factors.
-                </p>
-                <p>This allows KoalaKo to fit any parent&rsquo;s needs, while still encouraging adventures outside the living room when possible.</p>
+                <p>Find a spot that perfectly matches your activity, or activities that match your spot!</p>
+                <p>Filters allow anyone to adventure outside of the living room. These include distance from home, and entry fee versus free.</p>
               </Description>
             </Column>
           </Section>
@@ -209,11 +222,11 @@ function KoalaKo({ pop }) {
           <Section id="Plan--Gantt" className="flex-col" wrapperClassName="pb-section-gap">
             <Title>Project Plan</Title>
             <Heading>
-              Roadmapping research exercises, deadlines, <br className="d-block d-md-none" />
+              Roadmapping research, deadlines, <br className="d-block d-md-none" />
               and team expectations
             </Heading>
             <Gantt study="KoalaKo" className="mts-3" />
-            <Description className="text-col-2 text-col-lg-1 gap-3 gap-xl-4 mts-4 mts-md-3">
+            {/* <Description className="text-col-2 text-col-lg-1 gap-3 gap-xl-4 mts-4 mts-md-3">
               <p>
                 Our focus when designing this project plan was to ensure enough time to research our topic before developing ideas. From there we
                 would distill concepts into those that were most promising.
@@ -222,42 +235,41 @@ function KoalaKo({ pop }) {
                 Before creating a rough prototype, to test and gather feedback from potential users. Repeating this process in cycles while addressing
                 feedback, and refining our solution.
               </p>
-            </Description>
+            </Description> */}
           </Section>
         </Chapter>
 
         <Chapter name="Research" id="Research">
-          <Section id="Research--Intro" type="columns" titled="above" background="background darker">
-            <Title>Secondary Research</Title>
+          {/* <Section id="Research--Intro" type="columns" titled="above" background="background darker">
+            <Title>Literature Review</Title>
             <Column>
-              <Heading>We began with secondary research, to gain footing within our topic</Heading>
+              <Heading>Secondary research provided footing <Nobr>within our</Nobr> topic</Heading>
             </Column>
             <Column>
-              <Description className="">
+              <Description>
                 <p>
-                  The findings shown are those most relevant to the final project, not the entire scope of research. The full list of sources can be
-                  found at the end of the study.
+                  The findings shown are those most relevant, not the entire scope of research.
                 </p>
               </Description>
             </Column>
-          </Section>
+          </Section> */}
 
           <Section id="Research--Findings" type="columns" titled background="background darker" mainType="flex" mainClassName="mts-4">
             <Title>Findings</Title>
             <Heading>
-              In exploring “creative play and development,” <br className="d-block d-lg-none" />
-              we discovered the importance of play-style breadth
+              Secondary research into creative development <br className="d-block d-lg-none" />
+              revealed the importance of play-style breadth
             </Heading>
             <Column>
               <Findings>
                 <div type="main">
-                  <Heading type={"h3"}>Unique play experiences directly encourage different types of critical development.</Heading>
+                  <Heading type={"h3"}>Unique play experiences create&nbsp;different types of critical&nbsp;development</Heading>
                 </div>
 
                 <div type="dropdown">
-                  <p>“Be sure to offer children a wide range of creative materials and experiences...”</p>
-                  <p>“...The more varied experiences children have in their lives, the wider the range of creative expression.”</p>
-                  <p className="test">“Play fosters mental development and new ways of thinking and problem solving...”</p>
+                  <p>&ldquo;Be sure to offer children a wide range of creative materials and experiences...&rdquo;</p>
+                  <p>&ldquo;...The more varied experiences children have in their lives, the wider the range of creative expression.&rdquo;</p>
+                  <p>&ldquo;Play fosters mental development and new ways of thinking and problem solving...&rdquo;</p>
                   <h4>Creativity and Play: Fostering Creativity (PBS)</h4>
                 </div>
               </Findings>
@@ -265,15 +277,13 @@ function KoalaKo({ pop }) {
             <Column>
               <Findings>
                 <div type="main">
-                  <Heading type={"h3"}>
-                    Parents can further this development, and grow their child&rsquo;s skills by encouraging new types of play.
-                  </Heading>
+                  <Heading type={"h3"}>Encouraging self expression through creativity furthers this development</Heading>
                 </div>
                 <div type="dropdown">
                   <p>
-                    “Ask [them] to paint, draw, or tell a story, about how they&rsquo;re feeling. [activities like these help your child to] learn how
-                    to express their feelings safely and creatively, allowing them to integrate into social settings and regulate their behavior more
-                    appropriately.”
+                    &ldquo;Ask [them] to paint, draw, or tell a story, about how they&rsquo;re feeling. [activities like these help your child to]
+                    learn how to express their feelings safely and creatively, allowing them to integrate into social settings and regulate their
+                    behavior more appropriately.&rdquo;
                   </p>
                   <h4>The Importance of Creative Play for Kids (The Little Gym)</h4>
                 </div>
@@ -283,8 +293,8 @@ function KoalaKo({ pop }) {
 
           <Section id="Research--Summary">
             <Heading>
-              With these findings in mind, we began searching <br className="d-block d-lg-none" />
-              for solutions that might encourage explorative play.
+              With these in mind, we began searching for solutions
+              <br className="d-block d-lg-none" /> to encourage explorative play.
             </Heading>
           </Section>
         </Chapter>
@@ -292,49 +302,46 @@ function KoalaKo({ pop }) {
         <Chapter name="Develop" id="Develop">
           <Section id="Develop--Methods" mainType="grid" type="columns" background="background darker" titled line="method">
             <Column>
-              <Method>
-                <Title>Excersize 1 - Brainstorming</Title>
-                <Heading type={`h3`}>Brainstorming the core of our solution</Heading>
+              <Method mirrorstyle={!mdAndDown && "koala_method_1 match height"}>
+                <Title>Brainstorming</Title>
+                <Heading type={`h3`}>Finding ideas</Heading>
                 <p>
-                  Our team began with brainstorming to develop a range of potential solutions. We narrowed our ideas down into a combination of 2
-                  promising concepts deemed stronger than the sum of their parts.
+                  Rapid fire idea creation, narrowed down <Nobr>to a promising</Nobr> concept.
                 </p>
-                <Graphic type="mask" img={KOALAKO_IMGS.exercise_brainstorming} />
+                <Graphic type="mask" img={KOALAKO_IMGS.exercise_brainstorming_simplified} />
               </Method>
             </Column>
             <Column>
-              <Method>
-                <Title>Exercise 2 - Crazy 8s</Title>
-                <Heading type={`h3`}>Exploring execution through sketches</Heading>
+              <Method mirrorstyle={!mdAndDown && "koala_method_1 match height"}>
+                <Title>Crazy 8s</Title>
+                <Heading type={`h3`}>Exploring medium</Heading>
                 <p>
-                  Next we used the exercise &lsquo;Crazy 8s&rsquo; to consider the UX of our solution. Is it a physical location? An app? Through what
-                  interaction do user&rsquo;s receive the intended value? We combined our concepts into a rough framework of the service and its
-                  functionality.
+                  Comic-style sketches of a user&rsquo;s journey to help us find our medium. Is it a location? An app? How does <Nobr>a user</Nobr> receive the
+                  intended value?
                 </p>
-                <Graphic type="mask" img={KOALAKO_IMGS.exercise_crazy_8s} />
+                <Graphic type="mask" img={KOALAKO_IMGS.exercise_crazy_8s_simplified} />
               </Method>
             </Column>
             <Column>
-              <Method>
-                <Title>Exercise 3 - Importance Vs. Difficulty Matrix</Title>
-                <Heading type={`h3`}>Honing functionality by removing superfluous features</Heading>
+              <Method mirrorstyle={!mdAndDown && "koala_method_2 match height"}>
+                <Title>Importance Vs. Difficulty Matrix</Title>
+                <Heading type={`h3`}>Removing fluff</Heading>
                 <p>
-                  To refine the focus of our solution, we used an &lsquo;Importance to User vs. Difficulty to Implement&rsquo; chart. Here we cut any
-                  features that didn&rsquo;t directly support our goal of helping parents encourage creativity. Leaving a tight, cohesive feature-set.
+                  We plotted our ideas on a chart of value to the user vs. difficulty to implement. Ideas were then cut if they didn't support help
+                  parents foster creativity.
                 </p>
-                <Graphic type="mask" img={KOALAKO_IMGS.exercise_importance} />
+                <Graphic type="mask" img={KOALAKO_IMGS.exercise_importance_simplified} />
               </Method>
             </Column>
             <Column>
-              <Method>
-                <Title className="title">Exercise 4 - Experience Roadmap</Title>
-                <Heading type={`h3`}>Solidifying scope with an Experience Based Roadmap</Heading>
+              <Method mirrorstyle={!mdAndDown && "koala_method_2 match height"}>
+                <Title className="title">Experience Roadmap</Title>
+                <Heading type={`h3`}>Solidifying scope</Heading>
                 <p>
-                  Using an experience-based roadmap we plotted 3 project delivery tiers from bare functionality to final service. To fit our tight
-                  timeline, we defined the target scope and featureset of our submission to be our service&rsquo;s &lsquo;minimum viable
-                  product&rsquo;.
+                  From MVP to final service, we defined 3 possible project tiers. Using this, we chose a scope that fit <Nobr>our goals</Nobr>, and those of
+                  the challenge.
                 </p>
-                <Graphic type="mask" img={KOALAKO_IMGS.exercise_roadmap} />
+                <Graphic type="mask" img={KOALAKO_IMGS.exercise_roadmap_simplified} />
               </Method>
             </Column>
           </Section>
@@ -343,7 +350,7 @@ function KoalaKo({ pop }) {
         <Chapter name="Prototyping" id="Prototyping">
           <Section id="Prototyping--LowFi" titled type="columns">
             <Title>Low-Fi Prototypes</Title>
-            <Heading>Creating low-fi prototypes for user testing</Heading>
+            <Heading>Low-fi prototypes for user testing</Heading>
 
             <Column caption="above">
               <Heading type="p" className="graphic--caption__above color--tertiary" mirrorstyle="lowfi_prototype_heading_desk match height">
@@ -381,20 +388,14 @@ function KoalaKo({ pop }) {
             </Column>
 
             <Description className="text-col-2 text-col-lg-1 gap-3 gap-xl-4" below={desktop ? true : false}>
-              <p>
-                At this stage, my team defined the &lsquo;KoalaKo&rsquo; identity. Chosen as it denotes a certain lighthearted curiosity or
-                playfulness that we hoped to embody. Like that of a growing koala joey.
-              </p>
-              <p>
-                We also cemented our choice to develop from a mobile-first perspective. This offers users the flexibility to access the service at any
-                time, from wherever play might occur.
-              </p>
+              <p>Here we chose the name &lsquo;KoalaKo.&rsquo; It's playful and curious, <Nobr>like the</Nobr> koala joey it accompanies.</p>
+              <p>Our platform would be mobile-first, prioritizing quick access from wherever play might occur.</p>
             </Description>
           </Section>
 
           <Section id="Prototyping--Testing" type="columns" background="background darker">
             <Title>Testing</Title>
-            <Heading>Gauging reception and feedback from users</Heading>
+            <Heading>Productive feedback despite user sample obstacles</Heading>
 
             <Column>
               <Title>Methodology</Title>
@@ -404,13 +405,10 @@ function KoalaKo({ pop }) {
               </Heading>
               <Description>
                 <p>
-                  We began with &lsquo;popcorn feedback&rsquo; to get a general sense of users&rsquo; immediate pain points and impressions. Once we
-                  led testers through each screen, I asked prepared questions to drill deeper into their thoughts and feelings.
+                 Freeform comments provided a snapshot of immediate impressions and pain points. Once testers were through each screen, I dug deeper by asking prepared questions.
                 </p>
                 <p>
-                  We tested with 4 classmates, unfamiliar with our project. We would&rsquo;ve liked to test entirely with parents, or even
-                  parents-child pairs. However, navigating the ethics of testing with children, and/or finding parents available to test, didn&rsquo;t
-                  fit our timeline.
+                 Subjects were a group of 4 young adults. Parents were the ideal choice, or even parent-child pairs. But navigating the ethics of testing with children, and/or finding available parents didn&rsquo;t fit our timeline.
                 </p>
               </Description>
             </Column>
@@ -419,7 +417,7 @@ function KoalaKo({ pop }) {
               <Title>Findings / Suggestions</Title>
               <Description className="mts-1">
                 <p className="paragraph__background">
-                  Finalize who will be interacting with the service. Will it ever be children? Or just the parents?
+                  Who will be interacting with the service. Will it ever be children? Or just the parents?
                 </p>
                 <p className="paragraph__background">
                   Make the location features work in two directions: Be able to browse both locations that match a desired activity, and activities
@@ -632,8 +630,8 @@ function KoalaKo({ pop }) {
             </Column>
             <Column className={"col-8 col-md-9 col-sm-12"}>
               <Quote className="b-rad" background="background">
-                “I think the &lsquo;goal setting&rsquo; feature might make me feel pressured; like if I fail to reach a goal I&rsquo;ve set, then I
-                haven&rsquo;t done enough for my child”
+                &ldquo;I think the &lsquo;goal setting&rsquo; feature might make me feel pressured; like if I fail to reach a goal I&rsquo;ve set,
+                then I haven&rsquo;t done enough for my child&rdquo;
                 <br />
                 <span style={{ display: "block" }} className="mts-1"></span>- User #1 (Parent)
               </Quote>
@@ -699,8 +697,8 @@ function KoalaKo({ pop }) {
                   Making the act of reaching goals a proud achievement, rather than something expected of the parents.
                 </p>
                 <p>
-                  Our parent user tester was thrilled to see their concerns addressed, stating that it was, “my only worry with using the service.
-                  This could be a very useful tool for parents.”
+                  Our parent user tester was thrilled to see their concerns addressed, stating that it was, &ldquo;my only worry with using the
+                  service. This could be a very useful tool for parents.&rdquo;
                 </p>
               </Description>
             </Column>
@@ -718,12 +716,12 @@ function KoalaKo({ pop }) {
               </Heading>
               <Description>
                 <p>
-                  Sharing feedback with “Begin survey” used to be the primary option for users, second to the vague option of “Next.” Flawed in that
-                  most users will prefer to move on, than share feedback.
+                  Sharing feedback with &ldquo;Begin survey&rdquo; used to be the primary option for users, second to the vague option of
+                  &ldquo;Next.&rdquo; Flawed in that most users will prefer to move on, than share feedback.
                 </p>
                 <p>
                   Now, users are greeted with a celebratory graphic, a clear primary option to exit with &lsquo;Done,&rsquo; and an appropriately
-                  secondary option to “share feedback.”
+                  secondary option to &ldquo;share feedback.&rdquo;
                 </p>
               </Description>
             </Column>

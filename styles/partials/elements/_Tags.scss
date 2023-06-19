@@ -1,5 +1,4 @@
 .tag {
-
   --tag-border-width: 0.125rem;
 
   &--group {
@@ -11,59 +10,61 @@
     }
   }
 
-
   font-size: var(--font-size-h4);
   border: var(--tag-border-width) solid $col-primary;
   border-radius: var(--b-rad_less);
   background-color: $col-background;
 
-  padding: 0.4rem 0.5rem 0.25rem 0.5rem;
-  
-  @include mac{
+  padding: 0.35rem 0.5rem 0.25rem 0.5rem;
+
+
+
+
+  @at-root .popup & {
+    @include windows-chrome {
+      padding: 0.385rem 0.5rem 0.25rem 0.5rem;
+    }
+  }
+
+
+  @include mac {
     padding: 0.25rem 0.5rem 0.365rem 0.5rem;
   }
-  @include safari{
+  @include safari {
     padding: 0.245rem 0.5rem 0.365rem 0.5rem;
   }
-  @include mac-firefox{
+  @include mac-firefox {
     padding: 0.3rem 0.5rem 0.265rem 0.5rem;
   }
 
-  @include windows-firefox{
+  @include windows-firefox {
     padding: 0.335rem 0.5rem 0.225rem 0.5rem;
   }
 
-  @include android-chrome{
+  @include android-chrome {
     padding: 0.3rem 0.5rem 0.25rem 0.5rem;
   }
 
-  
   @include s;
   --size: fit-content;
-  
+
   white-space: nowrap;
 
-  
-  
-  
   cursor: default;
   @include no-select;
-  
-  &__tool{
-    padding: 0.4rem 0.55rem 0.25rem 0.55rem;
+
+  &__tool {
+    padding: 0.35rem 0.55rem 0.25rem 0.55rem;
     border-radius: 100rem;
-    
-    @include android-chrome{
+
+    @include android-chrome {
       padding: 0.265rem 0.55rem 0.25rem 0.55rem;
     }
-
   }
 
-  &__inverted{
-    border: var(--tag-border-width) solid $col-background;;
-    background-color: rgba(0,0,0,0);
-      color: $col-background!important;
+  &__inverted {
+    border: var(--tag-border-width) solid $col-background;
+    background-color: rgba(0, 0, 0, 0);
+    color: $col-background !important;
   }
-
-
 }

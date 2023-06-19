@@ -45,8 +45,8 @@ const KOALAKO_IMGS = processImages(
       alt: "A closely cropped screenshot of a high fidelity mockup screen for KoalaKo, showing a number of filters allowing parents to fine tune the games they want to play with their child. Filters include category, budget, and number of players",
       width: 1042,
       height: 908,
-      group: 'delivery_features',
-      index:1,
+      group: "delivery_features",
+      index: 1,
     },
     delivery_game_listing: {
       name: "delivery_game_listing",
@@ -72,8 +72,8 @@ const KOALAKO_IMGS = processImages(
       alt: "A closely cropped screenshot of the KoalaKo app which shows the ability to search your local area for child friendly play areas",
       width: 1042,
       height: 922,
-      group: 'delivery_features',
-      index:0,
+      group: "delivery_features",
+      index: 0,
     },
     delivery_login: {
       name: "delivery_login",
@@ -243,6 +243,36 @@ const KOALAKO_IMGS = processImages(
       width: 142,
       height: 97,
     },
+    exercise_brainstorming_simplified: {
+      name: "exercise_brainstorming_simplified",
+      src: "./assets/images/koalako/illustrations/exercise_brainstorming_simplified.svg",
+      alt: "An illustrated graphic of a central bubble with a number of smaller bubbles branching off of it",
+      width: 287,
+      height: 242,
+    },
+    exercise_crazy_8s_simplified: {
+      name: "exercise_crazy_8s_simplified",
+      src: "./assets/images/koalako/illustrations/exercise_crazy_8s_simplified.svg",
+      alt: "An illustrated graphic of a pencil",
+      width: 209,
+      height: 223,
+    },
+    exercise_importance_simplified: {
+      name: "exercise_importance_simplified",
+      src: "./assets/images/koalako/illustrations/exercise_importance_simplified.svg",
+      alt: "An illustrated graphic of a scatterplot graph",
+      width: 247,
+      height: 236,
+    },
+    exercise_roadmap_simplified: {
+      name: "exercise_roadmap_simplified",
+      src: "./assets/images/koalako/illustrations/exercise_roadmap_simplified.svg",
+      alt: "An illustrated graphic of a cupcake",
+      width: 221,
+      height: 236,
+    },
+  
+
     solution_personal_info: {
       name: "solution_personal_info",
       src: "/assets/images/koalako/illustrations/solution_personal_info.svg",
@@ -355,9 +385,8 @@ const KOALAKO_IMGS = processImages(
       width: 692,
       height: 410,
       group: "userflow",
-      index:0,
-
-      },
+      index: 0,
+    },
     refine_post_activity_after: {
       name: "refine_post_activity_after",
       src: "/assets/images/koalako/refine/refine_post_activity_after.png",

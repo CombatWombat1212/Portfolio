@@ -1170,6 +1170,11 @@
 	  @content;
 	}
   }
+  @mixin windows-chrome {
+	.windows.chrome & {
+	  @content;
+	}
+  }
   @mixin windows-firefox {
 	.windows.firefox & {
 	  @content;

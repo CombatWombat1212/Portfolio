@@ -2164,7 +2164,7 @@ h3 + .studypanel--paragraph {
   border: var(--tag-border-width) solid #074391;
   border-radius: var(--b-rad_less);
   background-color: #F3F3F7;
-  padding: 0.4rem 0.5rem 0.25rem 0.5rem;
+  padding: 0.35rem 0.5rem 0.25rem 0.5rem;
   width: var(--size);
   height: var(--size);
   --size: fit-content;
@@ -2182,6 +2182,10 @@ h3 + .studypanel--paragraph {
 
 .tag--group > * + * {
   margin-left: var(--tag-spacing);
+}
+
+.windows.chrome .popup .tag {
+  padding: 0.385rem 0.5rem 0.25rem 0.5rem;
 }
 
 .mac .tag {
@@ -2205,7 +2209,7 @@ h3 + .studypanel--paragraph {
 }
 
 .tag__tool {
-  padding: 0.4rem 0.55rem 0.25rem 0.55rem;
+  padding: 0.35rem 0.55rem 0.25rem 0.55rem;
   border-radius: 100rem;
 }
 
@@ -7247,17 +7251,38 @@ h3 + .studypanel--paragraph {
   -moz-border-radius: var(--b-rad);
   -khtml-border-radius: var(--b-rad);
   height: calc(100% - (var(--method-pad) * 2));
-  --graphic-scale: 0.95;
+  --graphic-scale: 0.25;
 }
 
-.method--title {
-  margin-bottom: 0.25rem;
+@media screen and (max-width: 61.9375em) {
+  .method {
+    --graphic-scale: 0.35;
+    --method-pad: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 3.5rem;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  .method {
+    --graphic-scale: 0.5;
+    gap: 2rem;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  .method--inner {
+    width: 100%;
+  }
 }
 
 .method--head {
   display: flex;
   flex-direction: row;
-  gap: 3.5rem;
+  justify-content: space-between;
+  gap: 2.5rem;
   align-items: center;
 }
 
@@ -7273,9 +7298,23 @@ h3 + .studypanel--paragraph {
   }
 }
 
+.method--heading {
+  margin-top: 0.25rem;
+}
+
 .method--mask {
   margin-top: auto !important;
   margin-bottom: auto !important;
+}
+
+@media screen and (max-width: 61.9375em) and (min-width: 50em) {
+  .method--mask {
+    margin-right: 0.75rem;
+  }
+}
+
+.method--mask .mask {
+  margin-top: -0.35rem;
 }
 
 @media screen and (max-width: 79.9375em) and (min-width: 62em) {
@@ -7284,9 +7323,9 @@ h3 + .studypanel--paragraph {
   }
 }
 
-@media screen and (max-width: 61.9375em) and (min-width: 50em) {
-  .method--mask {
-    margin-right: 0.75rem;
+@media screen and (max-width: 79.9375em) {
+  .method--mask .mask {
+    margin-top: 0rem;
   }
 }
 
@@ -7300,7 +7339,7 @@ h3 + .studypanel--paragraph {
 }
 
 .method--body {
-  margin-top: 1.75rem;
+  margin-top: 1.5rem;
 }
 
 @media screen and (max-width: 79.9375em) {
@@ -7318,35 +7357,6 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 49.9375em) {
   .method--body {
     margin-top: 0.45rem;
-  }
-}
-
-@media screen and (max-width: 91.9375em) {
-  .method {
-    --graphic-scale: 0.75;
-  }
-}
-
-@media screen and (max-width: 79.9375em) {
-  .method {
-    --graphic-scale: 0.65;
-  }
-}
-
-@media screen and (max-width: 61.9375em) {
-  .method {
-    --graphic-scale: 1;
-    --method-pad: 1.5rem;
-    display: flex;
-    flex-direction: row;
-    gap: 3.5rem;
-  }
-}
-
-@media screen and (max-width: 49.9375em) {
-  .method {
-    --graphic-scale: 1.35;
-    gap: 2rem;
   }
 }
 
@@ -11813,7 +11823,7 @@ h3 + .studypanel--paragraph {
 
 #Koalako #Develop--Methods .section--main {
   grid-template-columns: repeat(2, 1fr);
-  gap: 3rem;
+  gap: 3.75rem;
 }
 
 @media screen and (max-width: 61.9375em) {
