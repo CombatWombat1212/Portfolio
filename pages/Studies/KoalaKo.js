@@ -327,7 +327,7 @@ function KoalaKo({ pop }) {
                 <Title>Importance Vs. Difficulty Matrix</Title>
                 <Heading type={`h3`}>Removing fluff</Heading>
                 <p>
-                  We plotted our ideas on a chart of value to the user vs. difficulty to implement. Ideas were then cut if they didn't support help
+                  We plotted our ideas on a chart of value to the user vs. difficulty to implement. Ideas were then cut if they didn&rsquo;t support help
                   parents foster creativity.
                 </p>
                 <Graphic type="mask" img={KOALAKO_IMGS.exercise_importance_simplified} />
@@ -388,7 +388,7 @@ function KoalaKo({ pop }) {
             </Column>
 
             <Description className="text-col-2 text-col-lg-1 gap-3 gap-xl-4" below={desktop ? true : false}>
-              <p>Here we chose the name &lsquo;KoalaKo.&rsquo; It's playful and curious, <Nobr>like the</Nobr> koala joey it accompanies.</p>
+              <p>Here we chose the name &lsquo;KoalaKo.&rsquo; It&rsquo;s playful and curious, <Nobr>like the</Nobr> koala joey it accompanies.</p>
               <p>Our platform would be mobile-first, prioritizing quick access from wherever play might occur.</p>
             </Description>
           </Section>
