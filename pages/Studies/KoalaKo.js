@@ -277,8 +277,8 @@ function KoalaKo({ pop }) {
 
           <Section id="Research--Summary">
             <Heading>
-              We began searching for solutions
-              <br className="d-block d-lg-none" /> to encourage explorative play.
+              With these findings, began searching for solutions
+              <br className="d-block d-lg-none" /> to encourage explorative play
             </Heading>
           </Section>
         </Chapter>
@@ -388,7 +388,7 @@ function KoalaKo({ pop }) {
             </Column>
             <Column>
               <Description>
-                <p>Finding available parents, or navigating the ethics of testing with children, was difficult within our timeline. </p>
+                <p>Finding available parents, or navigating the ethics of testing with children, proved difficult within our timeline. </p>
                 <p>We instead tested with 4 young adults, some of whom helped raise much younger siblings.</p>
               </Description>
             </Column>

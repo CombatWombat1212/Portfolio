@@ -652,16 +652,20 @@
     &--Features {
 
       .column-1 {
-        order:2;
+        // @include md-down{
+          order:2;
+        // }
       }
       .column-2 {
-        order:1;
+        // @include md-down{
+          order:1;
+        // }
       }
 
     }
   }
 
-  
+
   #Delivery {
     &--Submission-Description-1 {
       .section {
