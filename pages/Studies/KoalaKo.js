@@ -39,7 +39,7 @@ function KoalaKo({ pop }) {
               </Heading>
               <Description className="text-align-center mts-1">
                 <p>
-                  <b className="color--secondary" style={{ display: "inline-block", "margin-bottom": "0.1rem" }}>
+                  <b className="color--secondary" style={{ display: "inline-block", marginBottom: "0.1rem" }}>
                     Project Lead
                   </b>
                   <br />

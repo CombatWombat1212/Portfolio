@@ -12204,6 +12204,14 @@ h3 + .studypanel--paragraph {
   margin-bottom: auto;
 }
 
+#Koalako #Refine--Visuals .column-1, #Koalako #Refine--Features .column-1 {
+  order: 2;
+}
+
+#Koalako #Refine--Visuals .column-2, #Koalako #Refine--Features .column-2 {
+  order: 1;
+}
+
 #Koalako #Delivery--Submission-Graphics-1 .section, #Koalako #Delivery--Submission-Graphics-2 .section {
   --gap: 3.5rem;
   gap: var(--gap);
