@@ -11671,77 +11671,77 @@ h3 + .studypanel--paragraph {
   }
 }
 
-#Koalako #Overview--Privacy .mask, #Koalako #Overview--Wordly .mask {
+#Koalako #Overview--Exploration .mask, #Koalako #Overview--Privacy .mask, #Koalako #Overview--Wordly .mask {
   margin-top: 1.1rem;
   background-color: #F3F3F7;
 }
 
-#Koalako #Overview--Privacy .section, #Koalako #Overview--Wordly .section {
+#Koalako #Overview--Exploration .section, #Koalako #Overview--Privacy .section, #Koalako #Overview--Wordly .section {
   --gap: 4rem !important;
   gap: var(--gap) !important;
 }
 
 @media screen and (max-width: 61.9375em) and (min-width: 50em) {
-  #Koalako #Overview--Privacy .section, #Koalako #Overview--Wordly .section {
+  #Koalako #Overview--Exploration .section, #Koalako #Overview--Privacy .section, #Koalako #Overview--Wordly .section {
     display: flex;
     flex-direction: column;
   }
-  #Koalako #Overview--Privacy .section > *, #Koalako #Overview--Wordly .section > * {
+  #Koalako #Overview--Exploration .section > *, #Koalako #Overview--Privacy .section > *, #Koalako #Overview--Wordly .section > * {
     max-width: unset;
   }
 }
 
 @media screen and (max-width: 61.9375em) and (min-width: 50em) {
-  #Koalako #Overview--Privacy .section, #Koalako #Overview--Wordly .section {
+  #Koalako #Overview--Exploration .section, #Koalako #Overview--Privacy .section, #Koalako #Overview--Wordly .section {
     max-width: 60%;
   }
 }
 
 @media screen and (max-width: 61.9375em) {
-  #Koalako #Overview--Privacy .section, #Koalako #Overview--Wordly .section {
+  #Koalako #Overview--Exploration .section, #Koalako #Overview--Privacy .section, #Koalako #Overview--Wordly .section {
     --gap: 2.15rem !important;
   }
 }
 
 @media screen and (max-width: 49.9375em) and (min-width: 37em) {
-  #Koalako #Overview--Privacy .section, #Koalako #Overview--Wordly .section {
+  #Koalako #Overview--Exploration .section, #Koalako #Overview--Privacy .section, #Koalako #Overview--Wordly .section {
     max-width: 70%;
   }
 }
 
-#Koalako #Overview--Privacy .section--graphic, #Koalako #Overview--Wordly .section--graphic {
+#Koalako #Overview--Exploration .section--graphic, #Koalako #Overview--Privacy .section--graphic, #Koalako #Overview--Wordly .section--graphic {
   margin-top: 0rem;
 }
 
-#Koalako #Overview--Privacy .section--graphic .graphic--img, #Koalako #Overview--Wordly .section--graphic .graphic--img {
+#Koalako #Overview--Exploration .section--graphic .graphic--img, #Koalako #Overview--Privacy .section--graphic .graphic--img, #Koalako #Overview--Wordly .section--graphic .graphic--img {
   height: fit-content;
 }
 
-#Koalako #Overview--Privacy .section--graphic img, #Koalako #Overview--Wordly .section--graphic img {
+#Koalako #Overview--Exploration .section--graphic img, #Koalako #Overview--Privacy .section--graphic img, #Koalako #Overview--Wordly .section--graphic img {
   height: fit-content;
 }
 
-#Koalako #Overview--Privacy .section--heading, #Koalako #Overview--Wordly .section--heading {
+#Koalako #Overview--Exploration .section--heading, #Koalako #Overview--Privacy .section--heading, #Koalako #Overview--Wordly .section--heading {
   margin-top: 1.2rem;
 }
 
-#Koalako #Overview--Privacy .section--description, #Koalako #Overview--Wordly .section--description {
+#Koalako #Overview--Exploration .section--description, #Koalako #Overview--Privacy .section--description, #Koalako #Overview--Wordly .section--description {
   margin-top: 1.25rem;
 }
 
-#Koalako #Overview--Privacy .solution--copy, #Koalako #Overview--Wordly .solution--copy {
+#Koalako #Overview--Exploration .solution--copy, #Koalako #Overview--Privacy .solution--copy, #Koalako #Overview--Wordly .solution--copy {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 @media screen and (max-width: 61.9375em) {
-  #Koalako #Overview--Privacy .solution--copy, #Koalako #Overview--Wordly .solution--copy {
+  #Koalako #Overview--Exploration .solution--copy, #Koalako #Overview--Privacy .solution--copy, #Koalako #Overview--Wordly .solution--copy {
     order: 0;
   }
 }
 
-#Koalako #Overview--Privacy .solution--graphics, #Koalako #Overview--Wordly .solution--graphics {
+#Koalako #Overview--Exploration .solution--graphics, #Koalako #Overview--Privacy .solution--graphics, #Koalako #Overview--Wordly .solution--graphics {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -11750,7 +11750,7 @@ h3 + .studypanel--paragraph {
 }
 
 @media screen and (max-width: 61.9375em) {
-  #Koalako #Overview--Privacy .solution--graphics, #Koalako #Overview--Wordly .solution--graphics {
+  #Koalako #Overview--Exploration .solution--graphics, #Koalako #Overview--Privacy .solution--graphics, #Koalako #Overview--Wordly .solution--graphics {
     order: 1;
   }
 }
@@ -11918,7 +11918,7 @@ h3 + .studypanel--paragraph {
   }
 }
 
-#Koalako #Prototyping--Testing .section--description .paragraph__background {
+#Koalako #Prototyping--Testing-Results .section--description .paragraph__background {
   background-color: #F3F3F7;
   border-radius: var(--b-rad);
   -webkit-border-radius: var(--b-rad);
@@ -12149,24 +12149,59 @@ h3 + .studypanel--paragraph {
   }
 }
 
-#Koalako #Refine--Stats .section--column {
-  height: fit-content;
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-#Koalako #Refine--Trophies .section--graphic {
-  height: fit-content;
-  margin-top: auto;
-  margin-bottom: auto;
+#Koalako #Refine--Stats .section, #Koalako #Refine--Feedback .section, #Koalako #Refine--Visuals .section, #Koalako #Refine--Features .section {
+  --gap: 6.25rem;
 }
 
 @media screen and (max-width: 61.9375em) {
-  #Koalako #Refine--Minor .section--column {
-    height: fit-content;
-    margin-top: auto;
-    margin-bottom: auto;
+  #Koalako #Refine--Stats .section, #Koalako #Refine--Feedback .section, #Koalako #Refine--Visuals .section, #Koalako #Refine--Features .section {
+    --gap: 4.25rem;
   }
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Koalako #Refine--Stats .section, #Koalako #Refine--Feedback .section, #Koalako #Refine--Visuals .section, #Koalako #Refine--Features .section {
+    flex-wrap: wrap;
+    --mts: calc(var(--section-text-spacing) * 1.75);
+    --gap: var(--mts);
+  }
+}
+
+#Koalako #Refine--Stats .section .column-1, #Koalako #Refine--Feedback .section .column-1, #Koalako #Refine--Visuals .section .column-1, #Koalako #Refine--Features .section .column-1 {
+  width: 50%;
+  --column-width: 6;
+}
+
+#Koalako #Refine--Stats .section .column-2, #Koalako #Refine--Feedback .section .column-2, #Koalako #Refine--Visuals .section .column-2, #Koalako #Refine--Features .section .column-2 {
+  width: 50%;
+  --column-width: 6;
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Koalako #Refine--Stats .section--column, #Koalako #Refine--Feedback .section--column, #Koalako #Refine--Visuals .section--column, #Koalako #Refine--Features .section--column {
+    --expected-cols: 1;
+    min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+    max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+  }
+}
+
+#Koalako #Refine--Stats .section--inner-column, #Koalako #Refine--Feedback .section--inner-column, #Koalako #Refine--Visuals .section--inner-column, #Koalako #Refine--Features .section--inner-column {
+  --column-gap: 2rem;
+  --expected-cols: 2;
+  min-width: calc((100% - ((var(--expected-cols) - 1) * var(--column-gap))) / var(--expected-cols));
+  max-width: calc((100% - ((var(--expected-cols) - 1) * var(--column-gap))) / var(--expected-cols));
+}
+
+@media screen and (max-width: 49.9375em) {
+  #Koalako #Refine--Stats .section--inner-column, #Koalako #Refine--Feedback .section--inner-column, #Koalako #Refine--Visuals .section--inner-column, #Koalako #Refine--Features .section--inner-column {
+    --column-gap: 2rem;
+  }
+}
+
+#Koalako #Refine--Stats .section--graphic, #Koalako #Refine--Feedback .section--graphic, #Koalako #Refine--Visuals .section--graphic, #Koalako #Refine--Features .section--graphic {
+  height: fit-content;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 #Koalako #Delivery--Submission-Graphics-1 .section, #Koalako #Delivery--Submission-Graphics-2 .section {

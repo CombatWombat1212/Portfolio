@@ -6,8 +6,8 @@ const KOALAKO_IMGS = processImages(
       name: "banner_building",
       src: "/assets/images/koalako/banners/banner_building.png",
       alt: "A banner image of a child playing with lego blocks",
-      width: 3840,
-      height: 1001,
+      width: 5760,
+      height: 1500,
     },
     banner_closing: {
       name: "banner_closing",

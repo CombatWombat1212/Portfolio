@@ -177,6 +177,7 @@
       }
     }
 
+    &--Exploration,
     &--Privacy,
     &--Wordly {
       .mask {
@@ -386,7 +387,7 @@
       }
     }
 
-    &--Testing {
+    &--Testing-Results {
       .section {
         &--description {
           .paragraph__background {
@@ -477,7 +478,6 @@
           @include sm-down {
             row-gap: 4rem;
             grid-template-columns: repeat(1, 1fr);
-
           }
         }
 
@@ -602,29 +602,51 @@
   }
 
   #Refine {
-    &--Stats {
+    &--Stats,
+    &--Feedback,
+    &--Visuals,
+    &--Features{
       .section {
-        &--column {
-          height: fit-content;
-          @include my-auto;
+        --gap: 6.25rem;
+        
+        @include lg-down{
+          --gap: 4.25rem;
         }
-      }
-    }
-    &--Trophies {
-      .section {
+
+        @include md-down {
+          flex-wrap: wrap;
+          @include mts-val(3);
+          --gap: var(--mts);
+        }
+
+        .column-1{
+          @include col-width(6, var(--gap));
+
+        }
+        .column-2{
+          @include col-width(6, var(--gap));
+          
+        }
+
+
+        &--column {
+          // @include e-col-width(6, var(--gap));
+          @include md-down {
+            @include e-col-width(12);
+          }
+        }
+
+        &--inner-column {
+          --column-gap: 2rem;
+          @include md-down {
+            --column-gap: 2rem;
+          }
+          @include e-col-width(6, var(--column-gap));
+        }
+
         &--graphic {
           height: fit-content;
           @include my-auto;
-        }
-      }
-    }
-    &--Minor {
-      .section {
-        &--column {
-          @include lg-down {
-            height: fit-content;
-            @include my-auto;
-          }
         }
       }
     }

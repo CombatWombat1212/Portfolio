@@ -1134,6 +1134,9 @@
 @mixin mts($size) {  
 	margin-top: map-get($spacers_section, $size);
 }
+@mixin mts-val($size) {  
+	--mts: #{map-get($spacers_section, $size)};
+}
   
 
 @mixin safari {

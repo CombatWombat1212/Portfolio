@@ -32,7 +32,7 @@ width: ($b/$column-grid-max) * 100#{'%'};
 
 }
 
-@mixin e-col-width($b) {
+@mixin e-col-width($b, $gap: var(--gap)) {
     //  --expected-cols: #{floor-round(calc((12 / #{$b})))};
     // $calculated-cols: floor();
     
@@ -51,8 +51,8 @@ width: ($b/$column-grid-max) * 100#{'%'};
 
     
 
-    min-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
-    max-width: calc((100% - ((var(--expected-cols) - 1) * var(--gap))) / var(--expected-cols));
+    min-width: calc((100% - ((var(--expected-cols) - 1) * #{$gap})) / var(--expected-cols));
+    max-width: calc((100% - ((var(--expected-cols) - 1) * #{$gap})) / var(--expected-cols));
 }
 
 
