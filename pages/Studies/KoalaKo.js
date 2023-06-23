@@ -239,9 +239,9 @@ function KoalaKo({ pop }) {
 
         <Chapter name="Research" id="Research">
           <Section id="Research--Findings" type="columns" titled background="background darker" mainType="flex" mainClassName="mts-4">
-            <Title>Findings</Title>
+            <Title>Secondary Research</Title>
             <Heading>
-              Secondary research into creative development <br className="d-block d-lg-none" />
+              Research into creative development <br className="d-block d-lg-none" />
               revealed the importance of play-style breadth
             </Heading>
             <Column>
@@ -277,7 +277,7 @@ function KoalaKo({ pop }) {
 
           <Section id="Research--Summary">
             <Heading>
-              With these in mind, we began searching for solutions
+              We began searching for solutions
               <br className="d-block d-lg-none" /> to encourage explorative play.
             </Heading>
           </Section>

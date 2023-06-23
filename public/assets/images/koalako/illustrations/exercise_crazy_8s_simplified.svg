@@ -1,29 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 209.48 222.87">
-  <defs>
-    <style>
-      .cls-1 {
-        fill: #404064;
-      }
-
-      .cls-1, .cls-2 {
-        stroke: #404064;
-        stroke-linecap: round;
-        stroke-miterlimit: 10;
-        stroke-width: 12px;
-      }
-
-      .cls-2 {
-        fill: none;
-      }
-    </style>
-  </defs>
-  <path class="cls-1" d="m33.36,209.73l-26.22,5.51,3.77-26.52c11.1,1.56,20.15,9.97,22.45,21.01Z"/>
-  <path class="cls-2" d="m197.78,74.05l-112.23,124.71-.38.08-51.81,10.89c-2.3-11.04-11.35-19.45-22.45-21.01l7.19-50.65L130.33,13.35c8.2-9.12,22.25-9.86,31.37-1.65l34.42,30.98c9.12,8.21,9.86,22.25,1.65,31.37Z"/>
-  <line class="cls-2" x1="97.78" y1="49.52" x2="18.1" y2="138.07"/>
-  <line class="cls-2" x1="165.23" y1="110.22" x2="85.54" y2="198.76"/>
-  <line class="cls-2" x1="177.05" y1="97.08" x2="109.6" y2="36.39"/>
-  <line class="cls-2" x1="130.35" y1="57.86" x2="49.5" y2="147.7"/>
-  <line class="cls-2" x1="152.61" y1="77.89" x2="71.43" y2="168.09"/>
-  <path class="cls-2" d="m85.16,198.84c-2.37-11.36-7.14-21.78-13.73-30.75-5.96-8.11-13.42-15.04-21.93-20.4-8.98-5.63-19.13-9.53-29.97-11.22"/>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.6.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 209.5 222.9" style="enable-background:new 0 0 209.5 222.9;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#404064;stroke:#404064;stroke-width:12;stroke-linecap:round;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#404064;stroke-width:12;stroke-linecap:round;stroke-miterlimit:10;}
+</style>
+<path class="st0" d="M33.4,209.7l-26.2,5.5l3.8-26.5C22,190.3,31.1,198.7,33.4,209.7L33.4,209.7z"/>
+<path class="st1" d="M85.2,198.8l-51.8,10.9c-2.3-11-11.4-19.4-22.5-21l7.2-50.7L130.3,13.4c8.2-9.1,22.2-9.9,31.4-1.6l34.4,31
+	c9.1,8.2,9.9,22.2,1.6,31.4L85.2,198.8z"/>
+<line class="st1" x1="97.8" y1="49.5" x2="18.1" y2="138.1"/>
+<line class="st1" x1="165.2" y1="110.2" x2="85.5" y2="198.8"/>
+<line class="st1" x1="177.1" y1="97.1" x2="109.6" y2="36.4"/>
+<line class="st1" x1="130.4" y1="57.9" x2="49.5" y2="147.7"/>
+<line class="st1" x1="152.6" y1="77.9" x2="71.4" y2="168.1"/>
+<path class="st1" d="M85.2,198.8c-2.4-11.4-7.1-21.8-13.7-30.8c-6-8.1-13.4-15-21.9-20.4c-9-5.6-19.1-9.5-30-11.2"/>
 </svg>
