@@ -13,8 +13,8 @@ const KOALAKO_IMGS = processImages(
       name: "banner_closing",
       src: "/assets/images/koalako/banners/banner_closing.png",
       alt: "The text 'Koalako' 3D rendered in photorealistic wooden blocks with letters on each one",
-      width: 1920,
-      height: 600,
+      width: 2880,
+      height: 900,
     },
     banner_delivery: {
       name: "banner_delivery",
