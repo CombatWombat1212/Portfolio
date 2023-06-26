@@ -95,8 +95,8 @@ const EXPERIENCE = [
   {
     title: "MADE Clothing Co.",
     timeframe: "Jul. 2020 - Jan 2021",
-    position: "CGI Product Design / Rendering",
-    description: "3D clothing product rendering for online dress-shirt customization utility, and for storefront previews.",
+    position: "3D Generalist",
+    description: "3D design and rendering for storefront product thumbnails, and for a dress-shirt customization tool",
     card: "short",
     img: ABOUT_IMGS.experience_made,
   },
@@ -130,7 +130,7 @@ const WHATIM = [
         name: "3D renders and graphics",
         link: "https://www.instagram.com/3dsammyg",
       },
-      "Editing photos",
+      "Color grading photos",
     ],
   },
   {
