@@ -235,6 +235,20 @@ function Graphic(props) {
     [`--${typePref[0]}h`]: `${height / 16}rem`,
   };
 
+
+  const IMAGE_PROPS = {
+    // sizes: `(max-width: 480px) 100vw,
+    // (max-width: 768px) 100vw,
+    // (max-width: 1024px) 100vw,
+    // (max-width: 1280px) 100vw,
+    // (max-width: 1920px) 100vw,
+    // (max-width: 2560px) 100vw,
+    // (max-width: 3840px) 100vw,
+    // (max-width: 5120px) 100vw,
+    // 100vw`,
+    sizes: `100vw`,
+  }
+
   var autoplayHTML = typeof autoplayProp === "string" && autoplayProp.includes("scroll") ? false : autoplayProp ? true : false;
 
   const WRAPPER_STYLE = {
@@ -282,10 +296,12 @@ function Graphic(props) {
     onLoadingComplete: onLoad,
     ...(isVideo && INNER_COMMON_VIDEO_PROPS),
     ...(isImg && lazy == false && { loading: loading }),
+    ...(isImg && { ...IMAGE_PROPS}),
     reference: graphicref,
     'data-transparent': Boolean(img.transparent),
     'data-fallback': img.fallback ? img.fallback : false,
   };
+
 
   const renderContent = (Component, innerProps, includeChildren = false) => (
     <Wrapper props={WRAPPER_PROPS} effect={effect}>

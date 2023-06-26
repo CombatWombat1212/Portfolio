@@ -5,17 +5,15 @@ const HOME_IMGS = processImages(
     makeright_main: {
       src: "/assets/images/home/MakeRight.png",
       alt: "3D printed plastic elephant diving into a cardboard box",
-      width: 1038,
-      height: 944,
+      width: 1556,
+      height: 1415,
     },
-
     makeright_alt: {
       src: "/assets/images/home/MakeRight_Alt.png",
       alt: "3D printed plastic elephant sitting in a cardboard box",
-      width: 1038,
-      height: 716,
+      width: 1556,
+      height: 1074,
     },
-
     made_main: {
       src: "/assets/images/home/MADE.png",
       alt: "3D rendering of a blue dress-shirt",
