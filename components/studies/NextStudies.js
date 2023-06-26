@@ -1,6 +1,6 @@
 import toggle from "@/scripts/AnimationTools";
 import { getAdjacentStudy, getStudy } from "@/scripts/GetStudy";
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 import Button from "../elements/Buttons";
 import Tag from "../elements/Tag";
 import { Column } from "../sections/Columns";
@@ -12,6 +12,8 @@ import { arrow_left, arrow_right } from "@/data/ICONS";
 import DLink from "../utilities/DynamicLink";
 import useRandomString from "@/scripts/hooks/useRandomString";
 import Section from "../sections/Sections";
+import { v4 as uuidv4 } from "uuid";
+import Nobr from "../utilities/Nobr";
 
 const STUDY_HOVER_AFFECTED = ["next-study", "next-study--button", "graphic--effect__default", "graphic--effect__hover", "next-study--graphic", "tag"];
 
@@ -168,11 +170,11 @@ function Next({ study }) {
   const captions = [
     "Room for one more?",
     "Case studies, anyone?",
-    "Lets keep the good times rollin'",
     "Another one.",
-    "There's more where that came from",
-    "Get 'em while they're hot",
-    "We're just gettin' started",
+    <Fragment key={uuidv4()}>Let&rsquo;s keep the good times rollin&rsquo;</Fragment>,
+    <Fragment key={uuidv4()}>There&rsquo;s more <Nobr>where that came from</Nobr></Fragment>,
+    <Fragment key={uuidv4()}>Get &rsquo;em while <Nobr>they&rsquo;re hot</Nobr></Fragment>,
+    <Fragment key={uuidv4()}>We&rsquo;re just gettin&rsquo; started</Fragment>,
   ];
 
   const nextStudyTitle = useRandomString(captions, { localStorage: true, key: "next--title" });

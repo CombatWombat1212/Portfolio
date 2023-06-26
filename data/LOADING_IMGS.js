@@ -5,7 +5,7 @@ import { processGroups, processImages } from "@/scripts/ProcessImages";
 const LOADING_IMGS = processImages({
   loading_snail: {
     name: "loading_snail",
-    src: "/assets/loading/loading_snail.webm",
+    src: "/assets/loading/loading_snail_full.webm",
     alt: "a video of a snail in the shower",
     width: 406,
     height: 720,
