@@ -19,15 +19,15 @@ const HOME_IMGS = processImages(
     made_main: {
       src: "/assets/images/home/MADE.png",
       alt: "3D rendering of a blue dress-shirt",
-      width: 526,
-      height: 823,
+      width: 788,
+      height: 1232,
     },
 
     koalako_main: {
       src: "/assets/images/home/KoalaKo.png",
       alt: "3D rendering of a phone with an app called 'KoalaKo' open on the screen",
-      width: 738,
-      height: 842,
+      width: 1106,
+      height: 1262,
     },
 
     explorations_main: {

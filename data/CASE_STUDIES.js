@@ -122,7 +122,7 @@ const CASE_STUDIES = caseStudiesInit([
 
     brief: {
       description:
-        "Creative development thrives when kids can experience a range of mediums for self-expression.  We provide parents with a curated feed of unique activities, and locations for play.",
+        "Creative development thrives when kids can experience a range of mediums for self-expression.  We provide parents with a curated feed of unique activities and locations for play.",
       tools: ["Adobe XD / Figma", "Mural", "InDesign"],
       deliverables: ["Interactive prototype", "Video presentation & pitch"],
       timeline: "9 Weeks",

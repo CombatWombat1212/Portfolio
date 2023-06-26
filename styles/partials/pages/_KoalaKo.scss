@@ -511,10 +511,13 @@
       }
     }
 
-    .Prototyping--Features {
+    &--Features {
       .section {
-        &--wrapper {
-          max-width: 80%;
+        &--main{
+          @include sm-down{
+            max-width: 85%;
+            @include mx-auto;
+          }
         }
 
         &--description {
@@ -648,21 +651,22 @@
       }
     }
 
-    &--Visuals,
-    &--Features {
+    // &--Visuals,
+    // &--Features {
 
-      .column-1 {
-        // @include md-down{
-          order:2;
-        // }
-      }
-      .column-2 {
-        // @include md-down{
-          order:1;
-        // }
-      }
+    //   .column-1 {
+    //     // @include md-down{
+    //       order:2;
+    //     // }
+    //   }
+    //   .column-2 {
+    //     // @include md-down{
+    //       order:1;
+    //     // }
+    //   }
 
-    }
+    // }
+
   }
 
 

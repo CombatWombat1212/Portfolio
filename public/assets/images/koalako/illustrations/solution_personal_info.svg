@@ -1,9 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="69.125" height="76.756" viewBox="0 0 69.125 76.756">
-  <g id="Group_2798" data-name="Group 2798" transform="translate(-549.059 -554.506)">
-    <path id="Path_105" data-name="Path 105" d="M486.529,522.029c18.83-4.7,32.562-21.863,32.562-41.275V462.73c-13.065,0-24.754-4.89-32.562-12.587-7.808,7.7-19.5,12.587-32.563,12.587v18.024a42.957,42.957,0,0,0,32.563,41.275Z" transform="translate(97.093 107.172)" fill="none" stroke="#404064" stroke-linecap="round" stroke-miterlimit="10" stroke-width="4"/>
-    <g id="Group_2797" data-name="Group 2797" transform="translate(571.97 576.47)">
-      <path id="Path_188" data-name="Path 188" d="M1.392,0H21.909A1.392,1.392,0,0,1,23.3,1.392v15.7a1.392,1.392,0,0,1-1.392,1.392H1.392A1.392,1.392,0,0,1,0,17.093V1.392A1.392,1.392,0,0,1,1.392,0Z" transform="translate(0 14.534)" fill="none" stroke="#404064" stroke-linecap="round" stroke-width="4"/>
-      <path id="Path_106" data-name="Path 106" d="M573.227,538.3v8H559.755v-8a6.554,6.554,0,0,1,6.535-6.534h.4A6.554,6.554,0,0,1,573.227,538.3Z" transform="translate(-554.841 -531.763)" fill="none" stroke="#404064" stroke-linecap="round" stroke-miterlimit="10" stroke-width="4"/>
-    </g>
-  </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.6.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 69.1 76.8" style="enable-background:new 0 0 69.1 76.8;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#404064;stroke-width:4;stroke-linecap:round;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#404064;stroke-width:4;stroke-linecap:round;}
+</style>
+<g id="Group_2798" transform="translate(-549.059 -554.506)">
+	<path id="Path_105" class="st0" d="M583.6,629.2c18.8-4.7,32.6-21.9,32.6-41.3v-18c-13.1,0-24.8-4.9-32.6-12.6
+		c-7.8,7.7-19.5,12.6-32.6,12.6v18C551.2,607.5,564.6,624.5,583.6,629.2z"/>
+	<g id="Group_2797" transform="translate(571.97 576.47)">
+		<path id="Path_188" class="st1" d="M1.4,14.5h20.5c0.8,0,1.4,0.6,1.4,1.4v15.7c0,0.8-0.6,1.4-1.4,1.4l0,0H1.4
+			C0.6,33,0,32.4,0,31.6V15.9C0,15.2,0.6,14.5,1.4,14.5z"/>
+		<path id="Path_106" class="st0" d="M18.4,6.5v8H4.9v-8C4.9,2.9,7.8,0,11.4,0h0.4C15.5,0,18.4,2.9,18.4,6.5z"/>
+	</g>
+</g>
 </svg>

@@ -97,7 +97,6 @@ function Contact() {
               />
 
               <div className="contact--socials">
-                <Button className="contact--button" icon={["document", "alone", "mask"]} animation="scale-in" target="_blank" />
                 <Button
                   className="contact--button"
                   icon={["linkedin", "alone", "mask"]}
@@ -112,6 +111,7 @@ function Contact() {
                   href={"https://www.instagram.com/peanut.butter.and.sam/"}
                   target="_blank"
                 />
+                <Button className="contact--button" icon={["document", "alone", "mask"]} animation="scale-in" target="_blank" />
               </div>
             </div>
           </div>

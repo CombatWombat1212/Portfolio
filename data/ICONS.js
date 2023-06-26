@@ -1,4 +1,6 @@
-const ICONS = {
+import { processImages } from "@/scripts/ProcessImages";
+
+const ICONS = processImages({
   arrow_right: {
     name: "arrow_right",
     src: "/assets/icons/arrow_right.svg",
@@ -159,7 +161,7 @@ const ICONS = {
     width: 160.42,
     height: 248.06,
   },
-};
+}, "icons");
 
 function Icon(icon) {
   (this.name = icon.name), (this.src = icon.src), (this.alt = icon.alt), (this.width = icon.width), (this.height = icon.height);

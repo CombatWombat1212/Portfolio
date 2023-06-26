@@ -158,14 +158,14 @@ function KoalaKo({ pop }) {
 
           <Section id="Overview--Exploration" type="columns" background="tertiary">
             <Column className="solution--copy">
-              <Graphic type="mask" img={KOALAKO_IMGS.solution_worldly_creativity} />
+              <Graphic type="mask" img={KOALAKO_IMGS.solution_inspire} />
               <Heading>
                 Find activities <br className="d-sm-none" />
                 that inspire exploration
               </Heading>
               <Description>
                 <p>
-                  Get activity suggestions relevant to your child&rsquo;s interest, <Nobr>to help</Nobr> grow their passions and hobbies.
+                  Get activity suggestions relevant to your child&rsquo;s interests, <Nobr>to help</Nobr> grow their passions and hobbies.
                 </p>
                 <p>
                   As well as activities that push your child&rsquo;s creativity <Nobr>into new territory.</Nobr>
@@ -173,15 +173,15 @@ function KoalaKo({ pop }) {
               </Description>
             </Column>
             <Column className="solution--graphics">
-              <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_location} lightbox pop={pop} />
-              <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_map_item} lightbox pop={pop} />
+              <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_interests} lightbox pop={pop} />
+              <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_activities} lightbox pop={pop} />
             </Column>
           </Section>
 
           <Section id="Overview--Wordly" type="columns" background="tertiary">
             <Column className="solution--graphics">
-              <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_location} lightbox pop={pop} />
-              <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_map_item} lightbox pop={pop} />
+              <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_location_browse} lightbox pop={pop} />
+              <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_location_listing} lightbox pop={pop} />
             </Column>
             <Column className="solution--copy">
               <Graphic type="mask" img={KOALAKO_IMGS.solution_worldly_creativity} />
@@ -216,7 +216,7 @@ function KoalaKo({ pop }) {
 
             <Column className="solution--graphics">
               <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_setup} lightbox pop={pop} />
-              <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_skip_signup} lightbox pop={pop} />
+              <Graphic className="b-rad" img={KOALAKO_IMGS.solution_mockup_skip} lightbox pop={pop} />
             </Column>
           </Section>
 
@@ -480,8 +480,7 @@ function KoalaKo({ pop }) {
               </Heading>
               <Description className="mts-1">
                 <p>
-                  Parents can decline sharing their child&rsquo;s age or name, opting out of smart features, making the activity database accessible
-                  to all parents.
+                  Parents can decline sharing their child&rsquo;s age or name, disabling the smart features, but keeping activity browsing accessible to all users.
                 </p>
               </Description>
             </Column>
@@ -512,7 +511,7 @@ function KoalaKo({ pop }) {
                 Community feedback
               </Heading>
               <Description className="mts-1">
-                <p>Activity and location rating for better recs, and to bring poor suggestions to platform&rsquo;s attention.</p>
+                <p>Activity and location rating for better recs, and to bring poor suggestions to the platform&rsquo;s attention.</p>
               </Description>
             </Column>
             <Column>
@@ -534,7 +533,7 @@ function KoalaKo({ pop }) {
             <Column>
               <Description>
                 <p>
-                  We managed to include 1 parent in our group of 4 testers. Scheduling and timeline made it difficult to find more, despite our best
+                  We were able to include 1 parent in our group of 4 testers. Scheduling and timeline made it difficult to find more, despite our best
                   efforts. However, their feedback was invaluable.
                 </p>
               </Description>
@@ -587,14 +586,13 @@ function KoalaKo({ pop }) {
             </Column>
             <Column className={"col-8 col-md-9 col-sm-12"}>
               <Quote className="b-rad" background="background">
-                &ldquo;The &lsquo;goal setting&rsquo; feature makes me feel pressured, like if I fail to reach a goal then I haven&rsquo;t done
-                enough for my child&rdquo;
+                The &lsquo;goal setting&rsquo; feature makes me feel pressured, like if I fail to reach a goal then I haven&rsquo;t done enough for my child.
                 <br />
                 <span style={{ display: "block" }} className="mts-1"></span>- User #1 (Parent)
               </Quote>
               <Quote className="b-rad" background="background">
-                &ldquo;Achievements may help the activities feel more optional, and less like <Nobr className="d-sm-nond">you must do them</Nobr> to
-                support your child&rdquo;
+                Achievements may help the activities feel more optional, and less like <Nobr className="d-sm-nond">you must do them</Nobr> to
+                support your child.
                 <br />
                 <span style={{ display: "block" }} className="mts-1"></span>- User #3
               </Quote>
@@ -607,7 +605,7 @@ function KoalaKo({ pop }) {
             </Column>
             <Column className={"col-8 col-md-9 col-sm-12"}>
               <Quote className="b-rad" background="background">
-                &ldquo;It would be great to see a filter for one-on-one activities or team activities, or budget to play the games&rdquo;
+                It would be great to see a filter for solo, one-on-one, or group activities, or budget.
                 <br />
                 <span style={{ display: "block" }} className="mts-1"></span>- User #2
               </Quote>
@@ -670,10 +668,10 @@ function KoalaKo({ pop }) {
             </Column>
             <Column className="flex-row just-bet gap-" nocol>
               <div className="section--inner-column">
-                <Graphic type="image" className="b-rad" img={KOALAKO_IMGS.refine_stats_before} lightbox pop={pop} />
+                <Graphic type="image" className="b-rad" img={KOALAKO_IMGS.refine_trophies} lightbox pop={pop} />
               </div>
               <div className="section--inner-column">
-                <Graphic type="image" className="b-rad" img={KOALAKO_IMGS.refine_stats_after} lightbox pop={pop} />
+                <Graphic type="image" className="b-rad" img={KOALAKO_IMGS.refine_post_activity} lightbox pop={pop} />
               </div>
             </Column>
           </Section>
@@ -682,12 +680,12 @@ function KoalaKo({ pop }) {
             <Title>Hi-Fi Prototype 3</Title>
             <Column>
               <Heading>
-                Revisiting the project <Nobr>with a</Nobr> visual refresh
+                Revisiting the project <Nobr>with a</Nobr> <Nobr>visual refresh</Nobr>
               </Heading>
             </Column>
             <Column>
               <Description>
-                <p>In making this case study I decided to overhaul the UI design. This was an earlier project of mine, and its age was showing.</p>
+                <p>In making this case study I decided to overhaul the UI design. This was an earlier project of mine, and its age began to show.</p>
                 <p>
                   The screens lacked cohesion. As well, I felt the value in the service&rsquo;s concept didn&rsquo;t quite shine through in execution.
                 </p>
@@ -696,17 +694,6 @@ function KoalaKo({ pop }) {
           </Section>
 
           <Section id="Refine--Visuals" background="background darker">
-          <Column className="flex-row just-bet gap-" nocol>
-              <div className="section--inner-column">
-                <Graphic type="image" className="b-rad" img={KOALAKO_IMGS.refine_stats_before} lightbox pop={pop} />
-                <Title className="mts-1">Before</Title>
-              </div>
-              <div className="section--inner-column">
-                <Graphic type="image" className="b-rad" img={KOALAKO_IMGS.refine_stats_after} lightbox pop={pop} />
-                <Title className="mts-1">After</Title>
-              </div>
-            </Column>
-
             <Column nocol className="gap-">
               <Heading>Visual consistency</Heading>
               <Description>
@@ -717,28 +704,37 @@ function KoalaKo({ pop }) {
                 <p>Typesetting, and breathing room were a strong focus. Above all, I aimed to make the service more approachable.</p>
               </Description>
             </Column>
-          </Section>
-
-          <Section id="Refine--Features" background="background darker">
             <Column className="flex-row just-bet gap-" nocol>
               <div className="section--inner-column">
-                <Graphic type="image" className="b-rad" img={KOALAKO_IMGS.refine_stats_before} lightbox pop={pop} />
+                <Graphic type="image" className="b-rad" img={KOALAKO_IMGS.refresh_activities_feed_before} lightbox pop={pop} />
                 <Title className="mts-1">Before</Title>
               </div>
               <div className="section--inner-column">
-                <Graphic type="image" className="b-rad" img={KOALAKO_IMGS.refine_stats_after} lightbox pop={pop} />
+                <Graphic type="image" className="b-rad" img={KOALAKO_IMGS.refresh_activities_feed_after} lightbox pop={pop} />
                 <Title className="mts-1">After</Title>
               </div>
             </Column>
+          </Section>
+
+          <Section id="Refine--Features" background="background darker">
             <Column nocol className="gap-">
               <Heading>Fleshing-out features</Heading>
               <Description>
                 <p>There was some noticeably underdeveloped functionality. Activity listings, for example, were missing crucial info.</p>
                 <p>
-                  In the redesign, parents can see the number of players, and game length, at a glance. As well as a clear call to action for the
-                  &lsquo;how-to&rsquo; details, like set-up, rules, and supplies.
+                  In the redesign, parents can see player count, and game length, at a glance. They also have a clear call to action to view the &lsquo;how-to&rsquo; details, like set-up, rules, and supplies.
                 </p>
               </Description>
+            </Column>
+            <Column className="flex-row just-bet gap-" nocol>
+              <div className="section--inner-column">
+                <Graphic type="image" className="b-rad" img={KOALAKO_IMGS.refresh_activities_listing_before} lightbox pop={pop} />
+                <Title className="mts-1">Before</Title>
+              </div>
+              <div className="section--inner-column">
+                <Graphic type="image" className="b-rad" img={KOALAKO_IMGS.refresh_activities_listing_after} lightbox pop={pop} />
+                <Title className="mts-1">After</Title>
+              </div>
             </Column>
 
           </Section>
@@ -768,23 +764,23 @@ function KoalaKo({ pop }) {
 
           <Section id="Delivery--Submission-Graphics-1" wrapperClassName="mt-less-2" background="background darkest">
             <Column>
-              <Graphic className="b-rad border-tertiary-none" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_login} />
+              <Graphic className="b-rad border-none-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.submission_screen_1_intro} />
             </Column>
 
             <Column>
-              <Graphic className="b-rad border-tertiary-none" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_interests} />
+              <Graphic className="b-rad border-none-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.submission_screen_2_interests} />
             </Column>
 
             <Column>
-              <Graphic className="b-rad border-tertiary-none" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_activities} />
+              <Graphic className="b-rad border-none-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.submission_screen_3_activity_browse} />
             </Column>
 
             <Column>
-              <Graphic className="b-rad border-tertiary-none" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_game_listing} />
+              <Graphic className="b-rad border-none-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.submission_screen_4_location_browse} />
             </Column>
 
             <Column>
-              <Graphic className="b-rad border-tertiary-none" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_map} />
+              <Graphic className="b-rad border-none-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.submission_screen_5_location_listing} />
             </Column>
           </Section>
 
@@ -806,23 +802,23 @@ function KoalaKo({ pop }) {
 
           <Section id="Delivery--Submission-Graphics-2" wrapperClassName="mt-less-2" background="background darkest">
             <Column>
-              <Graphic className="b-rad border-tertiary-none" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_post_activity} />
+              <Graphic className="b-rad border-none-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.submission_screen_6_activity_listing} />
             </Column>
 
             <Column>
-              <Graphic className="b-rad border-tertiary-none" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_trophies} />
+              <Graphic className="b-rad border-none-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.submission_screen_7_post_activity} />
             </Column>
 
             <Column>
-              <Graphic className="b-rad border-tertiary-none" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_profile_parent} />
+              <Graphic className="b-rad border-none-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.submission_screen_8_trophy_case} />
             </Column>
 
             <Column>
-              <Graphic className="b-rad border-tertiary-none" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_profile_child} />
+              <Graphic className="b-rad border-none-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.submission_screen_9_child_profile} />
             </Column>
 
             <Column>
-              <Graphic className="b-rad border-tertiary-none" lightbox pop={pop} type="image" img={KOALAKO_IMGS.delivery_statistics} />
+              <Graphic className="b-rad border-none-tertiary" lightbox pop={pop} type="image" img={KOALAKO_IMGS.submission_screen_10_statistics} />
             </Column>
           </Section>
 {/* 
