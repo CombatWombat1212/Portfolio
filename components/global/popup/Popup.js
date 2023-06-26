@@ -554,7 +554,6 @@ function Lightbox({ pop, nav, handles, popclass, elems, state }) {
         // `popup-site-max-width-firefox` - used to link a css explaination to this js code
         const styleMaxWidth = splitPx(window.getComputedStyle(popupElem).getPropertyValue("max-width"));
         const styleMaxHeight  = splitPx(window.getComputedStyle(popupElem).getPropertyValue("max-height"));
-        console.log(window.getComputedStyle(popupElem).getPropertyValue("max-height"))
         availWidth = styleMaxWidth;
         availHeight = styleMaxHeight;
       } else{

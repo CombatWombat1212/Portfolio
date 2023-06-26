@@ -131,9 +131,9 @@ export default function App({ Component, pageProps }) {
   const pop = usePop();
 
   const bp = useBreakpoint();
-  useEffect(() => {
-    console.log(bp);
-  }, [bp]);
+  // useEffect(() => {
+  //   console.log(bp);
+  // }, [bp]);
 
   const {loading} = useResponsiveUtils();
   const fontsLoaded = useFont(fonts);

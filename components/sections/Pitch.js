@@ -529,7 +529,6 @@ function Indicator({ pitch }) {
   }, [ready]);
   
   useEffect(() => {
-    console.log(previousRowBeforeChange.current);
 
     if ((delayedReady && insidePitch) || (currentRow == 0 && insidePitch && previousRowBeforeChange.current == 0 )) {
       setShow(true);

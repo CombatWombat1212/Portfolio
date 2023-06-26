@@ -6,7 +6,6 @@ const ImagePrefetcher = ({ images }) => {
   const [imgIndex, setImgIndex] = useState(0);
   const [allImagesCycled, setAllImagesCycled] = useState(!images);
   const imgs = images ? (Array.isArray(images) ? images : [images]) : [];
-console.log(images);
 
   useEffect(() => {
     if (imgs.length === 0) {
