@@ -31,15 +31,15 @@ const HOME_IMGS = processImages(
     explorations_main: {
       src: "/assets/images/home/Explorations.png",
       alt: "3D rendering of a worn steel compass",
-      width: 730,
-      height: 1626,
+      width: 948,
+      height: 2113,
     },
 
     explorations_alt: {
       src: "/assets/images/home/Explorations_Alt.png",
       alt: "3D rendering of a worn steel compass on its side",
-      width: 730,
-      height: 1626,
+      width: 1974,
+      height: 994,
     },
   },
   "home"
