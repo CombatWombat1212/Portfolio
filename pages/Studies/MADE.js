@@ -505,12 +505,12 @@ function MADE({ pop }) {
 
           <Section id="Texturing--Transition" type="passthrough" margin="none">
             <ImageRow col={`${desktop ? "6" : "2"}`} direction="left" type="scroll">
-              <Graphic type="image" img={MADE_IMGS.shirt_row_04} />
-              <Graphic type="image" img={MADE_IMGS.shirt_row_06} />
-              <Graphic type="image" img={MADE_IMGS.shirt_row_02} />
-              <Graphic type="image" img={MADE_IMGS.shirt_row_01} />
-              <Graphic type="image" img={MADE_IMGS.shirt_row_03} />
-              <Graphic type="image" img={MADE_IMGS.shirt_row_05} />
+              <Graphic type="image" img={MADE_IMGS.shirt_row_04} lazy={false} />
+              <Graphic type="image" img={MADE_IMGS.shirt_row_06} lazy={false} />
+              <Graphic type="image" img={MADE_IMGS.shirt_row_02} lazy={false} />
+              <Graphic type="image" img={MADE_IMGS.shirt_row_01} lazy={false} />
+              <Graphic type="image" img={MADE_IMGS.shirt_row_03} lazy={false} />
+              <Graphic type="image" img={MADE_IMGS.shirt_row_05} lazy={false} />
             </ImageRow>
           </Section>
         </Chapter>
@@ -780,9 +780,9 @@ function MADE({ pop }) {
 
           <Section id="Delivery--Images-1" background="background darkest" type="passthrough" margin="none">
             <ImageRow col="3" direction="right" type="scroll">
-              <Graphic type="image" img={MADE_IMGS.delivery_shirt_01} />
-              <Graphic type="image" img={MADE_IMGS.delivery_shirt_02} />
-              <Graphic type="image" img={MADE_IMGS.delivery_shirt_03} />
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_01} lazy={false} />
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_02} lazy={false} />
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_03} lazy={false} />
               {/* <Graphic type="image" img={MADE_IMGS.delivery_shirt_01} />
               <Graphic type="image" img={MADE_IMGS.delivery_shirt_02} />
               <Graphic type="image" img={MADE_IMGS.delivery_shirt_03} /> */}
@@ -791,9 +791,9 @@ function MADE({ pop }) {
 
           <Section id="Delivery--Images-2" background="background darkest" type="passthrough" margin="none">
             <ImageRow col="3" direction="left" type="scroll">
-              <Graphic type="image" img={MADE_IMGS.delivery_shirt_04} />
-              <Graphic type="image" img={MADE_IMGS.delivery_shirt_05} />
-              <Graphic type="image" img={MADE_IMGS.delivery_shirt_06} />
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_04} lazy={false} />
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_05} lazy={false} />
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_06} lazy={false} />
               {/* <Graphic type="image" img={MADE_IMGS.delivery_shirt_04} />
               <Graphic type="image" img={MADE_IMGS.delivery_shirt_05} />
               <Graphic type="image" img={MADE_IMGS.delivery_shirt_06} /> */}
@@ -802,9 +802,9 @@ function MADE({ pop }) {
 
           <Section id="Delivery--Images-3" background="background darkest" type="passthrough" margin="none">
             <ImageRow col="3" direction="right" type="scroll">
-              <Graphic type="image" img={MADE_IMGS.delivery_shirt_07} />
-              <Graphic type="image" img={MADE_IMGS.delivery_shirt_08} />
-              <Graphic type="image" img={MADE_IMGS.delivery_shirt_09} />
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_07} lazy={false} />
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_08} lazy={false} />
+              <Graphic type="image" img={MADE_IMGS.delivery_shirt_09} lazy={false} />
               {/* <Graphic type="image" img={MADE_IMGS.delivery_shirt_07} />
               <Graphic type="image" img={MADE_IMGS.delivery_shirt_08} />
               <Graphic type="image" img={MADE_IMGS.delivery_shirt_09} /> */}

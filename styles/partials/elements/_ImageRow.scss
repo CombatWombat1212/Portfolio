@@ -14,11 +14,12 @@
   @include flex-row-between;
 
   width: calc(100%);
+  overflow-x:clip;
 
   &--wrapper {
     width: 100%;
     @include flex-row-between;
-    overflow-x: clip;
+    // overflow-x: clip;
     position: relative;
     height: var(--image-height);
 
@@ -28,6 +29,13 @@
       padding-top: 10rem;
       padding-bottom: 10rem;
     }
+
+    --col-width: #{col-gap-width(100%, calc(var(--image-row-col) - var(--image-row-offset)), 0rem)};
+    --offset-size: calc(var(--image-row-offset) * var(--col-width) * -1);
+    --value1: calc(1 - var(--image-row-progress));
+    --value2: var(--image-row-progress);
+    --image-row-left: calc(var(--offset-size) * #{weighted-average(var(--value1), var(--value2), var(--image-row-direction))});
+    transform: translateX(var(--image-row-left));
   }
 
   &--image {
@@ -44,19 +52,20 @@
       top: unset;
     }
 
-    --offset-size: calc((var(--image-row-offset) * var(--col-width)) * -1);
-    --value1: calc(1 - var(--image-row-progress));
-    --value2: var(--image-row-progress);
-    --image-row-left: calc(var(--offset-size) * #{weighted-average(var(--value1), var(--value2), var(--image-row-direction))});
+    // haven't upgraded auto from using left to using transform yet
+    // --offset-size: calc((var(--image-row-offset) * var(--col-width)) * -1);
+    // --value1: calc(1 - var(--image-row-progress));
+    // --value2: var(--image-row-progress);
+    // --image-row-left: calc(var(--offset-size) * #{weighted-average(var(--value1), var(--value2), var(--image-row-direction))});
 
-    &__auto {
-      transition: left var(--image-row-auto-transition) linear, transform 0s;
-      --image-row-translate-x_value: calc(var(--image-row-cycle) * (100% * var(--image-row-count)));
-      --image-row-translate-x: calc(var(--image-row-translate-x_value) / var(--image-row-scale));
+    // &__auto {
+    //   transition: left var(--image-row-auto-transition) linear, transform 0s;
+    //   --image-row-translate-x_value: calc(var(--image-row-cycle) * (100% * var(--image-row-count)));
+    //   --image-row-translate-x: calc(var(--image-row-translate-x_value) / var(--image-row-scale));
+    //   @include combine-transform($scale, translateX(var(--image-row-translate-x)));
+    // }
 
-      @include combine-transform($scale, translateX(var(--image-row-translate-x)));
-    }
-
-    left: calc((var(--image-row-index) * var(--col-width)) + var(--image-row-left));
+    // left: calc((var(--image-row-index) * var(--col-width)) + var(--image-row-left));
+    left: calc((var(--image-row-index) * var(--col-width)));
   }
 }

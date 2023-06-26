@@ -32,7 +32,7 @@ function Card({ img, index, width, height, slide, onClick, ...props }) {
   return (
     <div className={`card`} ref={card} onClick={onClick} {...props}>
       <div className="card--graphic card--graphic__off" width={width} height={height}>
-        <Graphic className="card--img" type="image" img={img} />
+        <Graphic className="card--img" type="image" img={img} lazy={false}/>
       </div>
       <div className={`card--description card--description__off section--description`}>
         <div className={`card--description-inner card--description-inner__off`}>

@@ -7076,6 +7076,7 @@ h3 + .studypanel--paragraph {
   flex-direction: row;
   justify-content: space-between;
   width: calc(100%);
+  overflow-x: clip;
 }
 
 .image-row--wrapper {
@@ -7083,9 +7084,14 @@ h3 + .studypanel--paragraph {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  overflow-x: clip;
   position: relative;
   height: var(--image-height);
+  --col-width: calc(((100% - (0rem * (calc(var(--image-row-col) - var(--image-row-offset)) - 1))) / calc(var(--image-row-col) - var(--image-row-offset))) - 0rem);
+  --offset-size: calc(var(--image-row-offset) * var(--col-width) * -1);
+  --value1: calc(1 - var(--image-row-progress));
+  --value2: var(--image-row-progress);
+  --image-row-left: calc(var(--offset-size) * calc(var(--value1) * var(--image-row-direction) + var(--value2) * (1 - var(--image-row-direction))));
+  transform: translateX(var(--image-row-left));
 }
 
 .safari .image-row--wrapper {
@@ -7102,22 +7108,11 @@ h3 + .studypanel--paragraph {
   transform: scale(var(--image-row-scale)) translateY(-2.5%);
   position: absolute !important;
   top: 0;
-  --offset-size: calc((var(--image-row-offset) * var(--col-width)) * -1);
-  --value1: calc(1 - var(--image-row-progress));
-  --value2: var(--image-row-progress);
-  --image-row-left: calc(var(--offset-size) * calc(var(--value1) * var(--image-row-direction) + var(--value2) * (1 - var(--image-row-direction))));
-  left: calc((var(--image-row-index) * var(--col-width)) + var(--image-row-left));
+  left: calc((var(--image-row-index) * var(--col-width)));
 }
 
 .safari .image-row--image {
   top: unset;
-}
-
-.image-row--image__auto {
-  transition: left var(--image-row-auto-transition) linear, transform 0s;
-  --image-row-translate-x_value: calc(var(--image-row-cycle) * (100% * var(--image-row-count)));
-  --image-row-translate-x: calc(var(--image-row-translate-x_value) / var(--image-row-scale));
-  transform:  scale(var(--image-row-scale)) translateY(-2.5%) translateX(var(--image-row-translate-x));
 }
 
 .pro-con {
