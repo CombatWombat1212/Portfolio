@@ -59,7 +59,8 @@ function ImageRow({ children, className, col, direction, type: scrollType = "scr
         "--in-view": `${inView ? "true" : "false"}`,
       }}
       ref={reference}>
-      <div className="image-row--wrapper">{childs}</div>
+      <div className={`image-row--wrapper ${!inView || "image-row--wrapper__inview"}`}
+      >{childs}</div>
     </div>
   );
 }

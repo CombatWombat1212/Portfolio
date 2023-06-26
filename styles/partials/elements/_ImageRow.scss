@@ -5,16 +5,16 @@
 
   --image-row-auto-transition: 0.5s;
   --image-row-auto-movement-rate: 0.0385;
-  
+
   // @include lg-down{
-    
+
   //   --image-row-auto-movement-rate: 0.02;
   // }
 
   @include flex-row-between;
 
   width: calc(100%);
-  overflow-x:clip;
+  overflow-x: clip;
 
   &--wrapper {
     width: 100%;
@@ -36,6 +36,12 @@
     --value2: var(--image-row-progress);
     --image-row-left: calc(var(--offset-size) * #{weighted-average(var(--value1), var(--value2), var(--image-row-direction))});
     transform: translateX(var(--image-row-left));
+    transition: 0.05s;
+    &__inview {
+      @include md-down {
+        will-change: transform;
+      }
+    }
   }
 
   &--image {

@@ -7092,6 +7092,7 @@ h3 + .studypanel--paragraph {
   --value2: var(--image-row-progress);
   --image-row-left: calc(var(--offset-size) * calc(var(--value1) * var(--image-row-direction) + var(--value2) * (1 - var(--image-row-direction))));
   transform: translateX(var(--image-row-left));
+  transition: 0.05s;
 }
 
 .safari .image-row--wrapper {
@@ -7099,6 +7100,12 @@ h3 + .studypanel--paragraph {
   margin-bottom: -10rem;
   padding-top: 10rem;
   padding-bottom: 10rem;
+}
+
+@media screen and (max-width: 49.9375em) {
+  .image-row--wrapper__inview {
+    will-change: transform;
+  }
 }
 
 .image-row--image {
