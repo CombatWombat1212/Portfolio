@@ -63,6 +63,7 @@ const SEO_DATA = processSeoData({
     img: PREVIEW_IMGS.me,
 
   },
+
 });
 
 function processSeoData(seo) {

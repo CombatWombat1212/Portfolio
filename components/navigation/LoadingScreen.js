@@ -56,8 +56,6 @@ function LoadingScreen() {
     else routeChangeEndHandler();
   }, [routeChanging]);
 
-
-
   const { isFirefox, isSafari, browserFound } = useBrowser();
   const isntFirefox = !browserFound || !isFirefox || (browserFound && !isFirefox);
   const isntSafari = !browserFound || !isSafari || (browserFound && !isSafari);
@@ -76,8 +74,6 @@ function LoadingScreen() {
 
   const fallbackLoadingState = useInOut(intercept, { ref: loadingScreen });
 
-
-  
   return (
     <div
       className="loading-screen--wrapper"
@@ -168,6 +164,10 @@ function Text() {
     <i key={uuidv4()}>*crickets*</i>,
     <Fragment key={uuidv4()}>
       pondering my orb
+      <Dot />
+    </Fragment>,
+    <Fragment key={uuidv4()}>
+      not me loading
       <Dot />
     </Fragment>,
     `:-)`,

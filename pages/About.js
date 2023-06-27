@@ -96,7 +96,7 @@ const EXPERIENCE = [
     title: "MADE Clothing Co.",
     timeframe: "Jul. 2020 - Jan 2021",
     position: "3D Generalist",
-    description: "3D design and rendering for storefront product thumbnails, and for a dress-shirt customization tool",
+    description: "3D design and rendering for webstore product images, and for a dress-shirt customization tool",
     card: "short",
     img: ABOUT_IMGS.experience_made,
   },
@@ -196,7 +196,7 @@ function About() {
                   Creating This Portfolio Site
                 </Heading>
                 <Description className="myfocus--description">
-                  <p>Intermittent development started way back in 2021. All graphics, content, and code was made by me. A labor of love.</p>
+                  <p>Intermittent development started way back in 2021. All graphics, content, and code were made by me. A labor of love.</p>
                 </Description>
               </div>
             </div>
