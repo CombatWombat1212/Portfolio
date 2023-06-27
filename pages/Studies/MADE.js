@@ -123,7 +123,7 @@ function MADE({ pop }) {
 
         <Chapter id="Approach" name="Approach">
           <Section id="Approach--Banner" background={MADE_IMGS.banner_building_renders}>
-            <Heading>Building product renders</Heading>
+            <Heading>Building <Nobr>product renders</Nobr></Heading>
           </Section>
 
           <Section id="Approach--Workflow" type="columns" titled mainType="grid" line="graphic--panel">
@@ -280,7 +280,7 @@ function MADE({ pop }) {
             <Column>
               <Title>Imperfections</Title>
               <Heading>
-                Nothing real is perfect,
+                Nothing real <Nobr>is perfect,</Nobr>
                 <br className="d-block d-lg-none d-sm-block" /> but too imperfect
                 <br className="d-block d-lg-none d-sm-block" /> is just messy
               </Heading>

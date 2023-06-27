@@ -39,7 +39,7 @@ function KoalaKo({ pop }) {
               </Heading>
               <Description className="text-align-center mts-1">
                 <p>
-                  <b className="color--secondary" style={{ display: "inline-block", marginBottom: "0.1rem" }}>
+                  <b className="" style={{ display: "inline-block", marginBottom: "0.1rem" }}>
                     Project Lead
                   </b>
                   <br />
@@ -138,7 +138,7 @@ function KoalaKo({ pop }) {
             <Title id="Solution">Solution</Title>
             <Heading>
               KoalaKo, the smart activity database <br className="d-block d-md-none" />
-              built to help parents help kids
+              <Nobr>built to </Nobr>help parents <Nobr>help kids</Nobr>
             </Heading>
 
             <Column>

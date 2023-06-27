@@ -118,7 +118,7 @@ const CASE_STUDIES = caseStudiesInit([
         </>
       ),
     },
-    tags: ["UX/UI Design", "User Research", "Team Project"],
+    tags: ["UX/UI Design", "User Research", "Team"],
 
     brief: {
       description:
