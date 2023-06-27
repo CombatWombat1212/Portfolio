@@ -69,8 +69,8 @@ const SEO_DATA = processSeoData({
 function processSeoData(seo) {
   
   // No slash at the end
-  const domain = "https://portfolio-two-gamma-70.vercel.app";
-  // const domain = "https://samgiustizia.ca";
+  // const domain = "https://portfolio-two-gamma-70.vercel.app";
+  const domain = "https://samgiustizia.ca";
 
 
   for (let page in seo) {
