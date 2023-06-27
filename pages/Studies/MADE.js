@@ -593,7 +593,7 @@ function MADE({ pop }) {
             </Column>
             <Column caption="above">
               <Description className="graphic--caption weight-reg" mirrorstyle={smAndDown && "post_processing match height"}>
-                <h3>Hidden from render</h3>
+                <h3>Hidden <Nobr>from render</Nobr></h3>
               </Description>
 
               <Graphic type="image" className="b-rad" background="background darker" img={MADE_IMGS.shadow_creation_2_hidden} lightbox pop={pop} />

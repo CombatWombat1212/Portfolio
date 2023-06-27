@@ -277,7 +277,7 @@ function KoalaKo({ pop }) {
 
           <Section id="Research--Summary">
             <Heading>
-              With these findings, began searching for solutions
+              With these findings, we began searching for solutions
               <br className="d-block d-lg-none" /> to encourage explorative play
             </Heading>
           </Section>

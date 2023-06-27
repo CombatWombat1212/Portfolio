@@ -627,6 +627,14 @@
         }
         .column-2 {
           @include col-width(6, var(--gap));
+
+          @include md {
+            min-width:unset;
+            max-width: unset;
+            @include mx-auto;
+            @include col-width(8);
+          }
+
         }
 
         &--column {
