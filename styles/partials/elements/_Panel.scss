@@ -4,7 +4,7 @@
   // TODO: Overall, even in the jsx and everthing, it might be more organized to replace 'studypanel' with 'panel__study' make it a variant of the panel element.
 
   @include flex-row-between;
-  --studypanel-img-height: 42rem;
+  --studypanel-img-height: Min(42rem, #{zoom-vh(75vh)});
   --panel-description-spacing: 1rem;
 
   @mixin panel-mt($mt) {
@@ -314,10 +314,10 @@
 
   &__home {
     @include xl-down {
-      --studypanel-img-height: 38rem;
+      --studypanel-img-height: Min(38rem, #{zoom-vh(75vh)});
     }
     @include lg-down {
-      --studypanel-img-height: 30rem;
+      --studypanel-img-height: Min(30rem, #{zoom-vh(75vh)});
     }
 
     @include md-down {

@@ -1398,7 +1398,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  --studypanel-img-height: 42rem;
+  --studypanel-img-height: Min(42rem, calc(75vh / var(--zoom)));
   --panel-description-spacing: 1rem;
 }
 
@@ -1819,13 +1819,13 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 79.9375em) {
   .studypanel__home {
-    --studypanel-img-height: 38rem;
+    --studypanel-img-height: Min(38rem, calc(75vh / var(--zoom)));
   }
 }
 
 @media screen and (max-width: 61.9375em) {
   .studypanel__home {
-    --studypanel-img-height: 30rem;
+    --studypanel-img-height: Min(30rem, calc(75vh / var(--zoom)));
   }
 }
 
