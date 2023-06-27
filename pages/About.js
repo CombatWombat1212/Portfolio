@@ -72,7 +72,8 @@ const MULTIDISCIPLINARY = [
 const EXPERIENCE = [
   {
     title: "Honours Bachelor of Interaction Design",
-    timeframe: "Graduated April 2021",
+    // timeframe: "Graduated April 2021",
+    timeframe: "Sep. 2017 - Apr. 2021",
     position: "Sheridan College",
     // TODO: rewrite this
     description: {
@@ -94,7 +95,7 @@ const EXPERIENCE = [
   },
   {
     title: "MADE Clothing Co.",
-    timeframe: "Jul. 2020 - Jan 2021",
+    timeframe: "Jul. 2020 - Jan. 2021",
     position: "3D Generalist",
     description: "3D design and rendering for webstore product images, and for a dress-shirt customization tool",
     card: "short",
