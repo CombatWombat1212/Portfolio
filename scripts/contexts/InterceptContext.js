@@ -4,7 +4,8 @@ import React, { createContext,  useContext, useEffect, useRef, useState } from "
 const InterceptContext = createContext();
 
 
-const MINIMUM_WAIT = 425;
+// const MINIMUM_WAIT = 425;
+const MINIMUM_WAIT = 450;
 // const MINIMUM_WAIT = 100000;
 export const InterceptProvider = ({ children }) => {
   const [intercept, setIntercept] = useState(false);

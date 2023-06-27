@@ -96,14 +96,14 @@ const ICONS = processImages({
 
   loading: {
     name: "loading",
-    src: "../assets/loading/loading_spinner.svg",
+    src: "/assets/loading/loading_spinner.svg",
     alt: "Spinning loading icon",
     width: 100,
     height: 100,
   },
   loading_white: {
     name: "loading_white",
-    src: "../assets/loading/loading_spinner_white.svg",
+    src: "/assets/loading/loading_spinner_white.svg",
     alt: "Spinning loading icon",
     width: 100,
     height: 100,

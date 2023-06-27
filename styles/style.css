@@ -3640,6 +3640,17 @@ h3 + .studypanel--paragraph {
   opacity: var(--graphic-overview-opacity);
 }
 
+.graphic__none {
+  --graphic-scale: 0;
+}
+
+.graphic__none,
+.graphic__none > * {
+  width: auto !important;
+  height: auto !important;
+  display: none;
+}
+
 .arrow--column {
   position: absolute;
 }
@@ -3771,7 +3782,7 @@ h3 + .studypanel--paragraph {
   aspect-ratio: var(--img-aspect-width)/var(--img-aspect-height);
   --lightbox-max-width: calc(var(--popup-site-max-width) - 5rem);
   --lightbox-max-height: calc(100% - var(--nav-height) - var(--popup-pad) - 2rem);
-  --lightbox-max-height: calc(calc(100vh / var(--zoom)) - (var(--nav-height)*2) - var(--popup-pad) - 2rem);
+  --lightbox-max-height: calc(calc(100vh / var(--zoom)) - (var(--nav-height) * 2) - var(--popup-pad) - 2rem);
   width: Min(100%, var(--lightbox-max-width));
   height: Min(100%, var(--lightbox-max-height));
   max-width: var(--lightbox-max-width);
@@ -3783,7 +3794,7 @@ h3 + .studypanel--paragraph {
   .popup__lightbox, .popup__lightbox-group {
     --popup-controls-offset: calc(var(--button-height) * 0.45);
     --lightbox-max-width: calc(var(--popup-site-max-width) - 4rem);
-    --lightbox-max-height: calc(calc(100vh / var(--zoom)) - (var(--nav-height)*2) - var(--popup-pad) - 4rem);
+    --lightbox-max-height: calc(calc(100vh / var(--zoom)) - (var(--nav-height) * 2) - var(--popup-pad) - 4rem);
   }
 }
 
@@ -3997,7 +4008,7 @@ h3 + .studypanel--paragraph {
     padding-right: 0;
     --height-col: 3.65;
     --height-col_percent: calc(var(--height-col) / var(--column-grid-max));
-    --popup-inner-height: calc(calc(100vh / var(--zoom)) - var(--popup-height-offset) - (var(--popup-gap)*2));
+    --popup-inner-height: calc(calc(100vh / var(--zoom)) - var(--popup-height-offset) - (var(--popup-gap) * 2));
     --gallery-description-height_estim: calc(var(--popup-inner-height) * var(--height-col_percent));
     --old-height: calc(41.25% - var(--popup-gap));
     --height: var(--old-height);
@@ -4384,8 +4395,16 @@ h3 + .studypanel--paragraph {
   overflow: hidden;
   cursor: pointer;
   --ellipse-width: 2rem;
-  margin-top: 1.25rem;
+  margin-top: 1.2rem;
   transition: 0.4s !important;
+}
+
+.popup .gallery--categories-wrapper__no-subheading {
+  margin-top: 1.1rem;
+}
+
+.popup .gallery--categories-wrapper__subheading {
+  margin-top: 1.2rem;
 }
 
 .popup .gallery--categories-wrapper__overflow {
@@ -12492,5 +12511,82 @@ h3 + .studypanel--paragraph {
   #About #Intro--Closer .section {
     justify-content: center;
   }
+}
+
+.four-oh-four #uh-oh {
+  padding-top: calc(var(--section-gap) / 1.65);
+  padding-bottom: calc(var(--section-gap));
+}
+
+.four-oh-four #uh-oh .section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  --gap: 4rem;
+  gap: var(--gap);
+  column-gap: var(--gap);
+  row-gap: var(--gap);
+}
+
+.four-oh-four #uh-oh .section .column-1 {
+  width: 33.33333%;
+  --column-width: 4;
+}
+
+@media screen and (max-width: 79.9375em) {
+  .four-oh-four #uh-oh .section .column-1 {
+    width: 37.5%;
+    --column-width: 4.5;
+  }
+}
+
+@media screen and (max-width: 61.9375em) {
+  .four-oh-four #uh-oh .section .column-1 {
+    width: 50%;
+    --column-width: 6;
+  }
+}
+
+@media screen and (max-width: 49.9375em) {
+  .four-oh-four #uh-oh .section .column-1 {
+    width: 56.25%;
+    --column-width: 6.75;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  .four-oh-four #uh-oh .section .column-1 {
+    width: 91.66667%;
+    --column-width: 11;
+  }
+}
+
+.four-oh-four #uh-oh .section--heading {
+  text-align: center;
+}
+
+.four-oh-four #uh-oh .section--description {
+  margin-top: 0.75rem;
+}
+
+.four-oh-four #uh-oh .section--graphic {
+  margin-top: 3rem;
+  aspect-ratio: 2 / 2.75 !important;
+}
+
+@media screen and (max-width: 49.9375em) {
+  .four-oh-four #uh-oh .section--graphic {
+    margin-top: 2rem;
+  }
+}
+
+@media screen and (max-width: 36.9375em) {
+  .four-oh-four #uh-oh .section--graphic {
+    margin-top: 1.75rem;
+  }
+}
+
+.four-oh-four #uh-oh .section--graphic > * {
+  object-fit: cover;
 }
 /*# sourceMappingURL=style.css.map */

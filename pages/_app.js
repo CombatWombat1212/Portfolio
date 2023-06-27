@@ -145,7 +145,7 @@ export default function App({ Component, pageProps }) {
     ABOUT_IMGS.me,
     MAKERIGHT_IMGS.pitch_laptop_frame,
     LOADING_IMGS.loading_snail,
-     ...Object.keys(ICONS).map((key) => ICONS[key])
+    //  ...Object.keys(ICONS).map((key) => ICONS[key])
   ];
 
   return (

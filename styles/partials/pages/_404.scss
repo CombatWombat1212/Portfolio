@@ -1,0 +1,50 @@
+.four-oh-four {
+  #uh-oh {
+    padding-top: calc(var(--section-gap) / 1.65);
+    padding-bottom: calc(var(--section-gap));
+    .section {
+      @include flex-row-center;
+      --gap: 4rem;
+      @include gap;
+      .column-1 {
+        @include col-width(4);
+
+        @include xl-down {
+          @include col-width(4.5);
+        }
+
+        @include lg-down {
+          @include col-width(6);
+        }
+        @include md-down {
+          @include col-width(6.75);
+        }
+        @include sm-down {
+          @include col-width(11);
+        }
+      }
+
+      &--heading {
+        text-align: center;
+      }
+
+      &--description {
+        margin-top: 0.75rem;
+      }
+
+      &--graphic {
+        margin-top: 3rem;
+        @include md-down {
+          margin-top: 2rem;
+        }
+        @include sm-down {
+          margin-top: 1.75rem;
+        }
+        aspect-ratio: 2 / 2.75 !important;
+        & > * {
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}

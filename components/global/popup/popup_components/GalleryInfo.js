@@ -196,6 +196,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
   };
   var hasDesc = pop.img.description || (pop.group.description && pop.group.description[pop.index]);
   var hasTitle = title ? true : false;
+  var hasSubheading = subheading ? true : false;
 
   const [catData, setCatData] = useState({});
 
@@ -241,7 +242,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
 
           <div className="gallery--info">
             {(pop.img.disciplines || pop.img.tools) && state.desktop && (
-              <GalCategories pop={pop} hasDesc={hasDesc} hasTitle={hasTitle} onCatDataChange={handleCatDataChange} state={state} />
+              <GalCategories pop={pop} hasDesc={hasDesc} hasTitle={hasTitle}  hasSubheading={hasSubheading} onCatDataChange={handleCatDataChange} state={state} />
             )}
 
             {pop.img.study && (
@@ -258,7 +259,7 @@ const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles
             {hasDesc && <GalDescription pop={pop} />}
 
             {(pop.img.disciplines || pop.img.tools) && state.mobile && (
-              <GalCategories pop={pop} hasDesc={hasDesc} hasTitle={hasTitle} onCatDataChange={handleCatDataChange} state={state} />
+              <GalCategories pop={pop} hasDesc={hasDesc} hasTitle={hasTitle} hasSubheading={hasSubheading} onCatDataChange={handleCatDataChange} state={state} />
             )}
           </div>
         </GalInfoAnimPres>
@@ -289,7 +290,7 @@ function GalCategoriesBackground({ catData }) {
   );
 }
 
-const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle, onCatDataChange, state }) {
+const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle, hasSubheading, onCatDataChange, state }) {
   const catRef = useRef(null);
   const wrapperRef = useRef(null);
   const firstTagRef = useRef(null);
@@ -405,6 +406,8 @@ const GalCategories = React.memo(function GalCategories({ pop, hasDesc, hasTitle
   const catClassList = [];
   if (!hasDesc) catClassList.push(`${pref}__no-desc`);
   if (!hasTitle) catClassList.push(`${pref}__no-title`);
+  if (!hasSubheading) catClassList.push(`${pref}__no-subheading`);
+  if (hasSubheading) catClassList.push(`${pref}__subheading`);
   const catclasses = catClassList.join(" ");
 
   useEffect(() => {

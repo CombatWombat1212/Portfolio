@@ -32,13 +32,19 @@ function Video(props) {
 
   const { ["data-fallback"]: fallback } = props;
   const hasFallback = fallback && fallback !== false;
+  const htmlLoop = props["data-loop"] == true && props["data-autoplay"] == true;
 
   const renderFallback = (classes) => <Image className={classes} src={fallback} width={props.width} height={props.height} alt={props.alt} />;
 
   const VidSource = (additionalClassName, additionalProps) => {
     const isForeground = additionalClassName.includes("foreground");
     const classes = `${className} ${additionalClassName}`;
-    const p = {...COMMON_VIDEO_PROPS, ...additionalProps, ...SOURCE_PROPS}
+    const p = {
+      ...COMMON_VIDEO_PROPS,
+      ...additionalProps,
+      ...SOURCE_PROPS,
+      ...htmlLoop ? {loop: true} : {}
+    }
     return (
       <>
         {isForeground ? (

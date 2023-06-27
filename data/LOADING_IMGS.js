@@ -9,6 +9,7 @@ const LOADING_IMGS = processImages({
     alt: "a video of a snail in the shower",
     width: 406,
     height: 720,
+    fallback: "/assets/loading/loading_snail_full.png",
   },
 });
 

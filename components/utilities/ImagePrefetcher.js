@@ -27,24 +27,12 @@ const ImagePrefetcher = ({ images }) => {
   }, [imgs]);
 
   return allImagesCycled ? null : (
-    // <Image
-    //   style={{ position: "absolute", visibility: "hidden", width:'0%', height:'0%' }}
-    //   src={imgs[imgIndex]?.src}
-    //   alt={imgs[imgIndex]?.alt}
-    //   width={imgs[imgIndex]?.width}
-    //   height={imgs[imgIndex]?.height}
-    //   priority={true}
-    // />
-
-    <Graphic 
-    className="d-none"
-          style={{ position: "absolute", visibility: "hidden", width:'0%', height:'0%' }}
-          img={imgs[imgIndex]}
-          type={imgs[imgIndex].media}
-          priority={true}
-
-    />
-
+      <Graphic
+        className="graphic__none"
+        img={imgs[imgIndex]}
+        type={imgs[imgIndex].media}
+        priority={true}
+      />
   );
 };
 
