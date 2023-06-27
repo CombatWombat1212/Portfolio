@@ -789,7 +789,7 @@ function KoalaKo({ pop }) {
             <Column>
               <Heading>
                 A digital-age solution <br />
-                to the crisis in creativity.
+                to the crisis in creativity
               </Heading>
             </Column>
 

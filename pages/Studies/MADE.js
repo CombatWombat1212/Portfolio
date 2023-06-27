@@ -300,7 +300,7 @@ function MADE({ pop }) {
 
           <Section id="Approach--Summary" titled mainClassName={"gap-"}>
             <Heading>
-              The shirts now needed to be textured <br className="d-sm-none " /> using MADE&rsquo;s own fabric swatches.
+              The shirts now needed to be textured <br className="d-sm-none " /> using MADE&rsquo;s own fabric swatches
             </Heading>
           </Section>
         </Chapter>
@@ -539,7 +539,7 @@ function MADE({ pop }) {
             <Title>Shadows</Title>
             <Column>
               <Heading>
-                Supporting the final <Nobr>use-case</Nobr> by embedding shadows within each component image.
+                Supporting the final <Nobr>use-case</Nobr> by embedding shadows within each component image
               </Heading>
             </Column>
             <Column>
@@ -761,7 +761,7 @@ function MADE({ pop }) {
           <Section id="Rendering--Closing">
             <Heading>
               With rendering now complete, the final images <br className="d-lg-none" /> were delivered, and placed into the webstore&rsquo;s{" "}
-              <br className="d-lg-none" /> new customization tool.
+              <br className="d-lg-none" /> new customization tool
             </Heading>
           </Section>
         </Chapter>

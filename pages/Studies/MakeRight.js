@@ -89,7 +89,7 @@ function MakeRight({ pop }) {
           <Section id="Overview--Solution" background="background">
             <Title>Solution</Title>
             <Heading>
-              Connect consumers with owners of 3D printers <br className="d-xxl-none" /> for stress-free, low-cost production.
+              Connect consumers with owners of 3D printers <br className="d-xxl-none" /> for stress-free, low-cost production
             </Heading>
           </Section>
 
@@ -156,7 +156,7 @@ function MakeRight({ pop }) {
             </Column>
             <Column>
               <Heading type="h3">
-                Operating much like an &lsquo;Uber&rsquo; <br className="d-md-none" /> for <Nobr>3D prints</Nobr> from local makers.
+                Operating much like an &lsquo;Uber&rsquo; <br className="d-md-none" /> for <Nobr>3D prints</Nobr> from local makers
               </Heading>
               <Description>
                 <p>
