@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { LOADING_DURATION } from "../navigation/LoadingScreen";
 import { useIntercept } from "@/scripts/contexts/InterceptContext";
 
-function DLink({ reference, color, onClick,target="_self", ...props }) {
+function DLink({ reference, color, onClick, target="_self", ...props }) {
   const internalRef = useRef();
   const actualRef = reference || internalRef;
   const router = useRouter();

@@ -11,6 +11,14 @@ const nextConfig = {
     // formats: ["image/webp"],
   },
 
+  async rewrites() {
+    return [
+      {
+        source: '/Resume',
+        destination: '/documents/Sam Giustizia Resume.pdf',
+      },
+    ]
+  },
 }
 
 module.exports = withVideos(nextConfig)

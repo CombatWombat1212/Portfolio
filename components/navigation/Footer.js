@@ -25,13 +25,13 @@ function Footer() {
               return (
                 <div className="sitemap--group" key={group.key}>
                   <div className="sitemap--title-wrapper">
-                    <FooterLink href={group.link} name={group.name} className="sitemap--title" />
+                    <FooterLink href={group.link} name={group.name} target={group.target} className="sitemap--title" />
                   </div>
                   <ul className="sitemap--list">
                     {group.list.slice(0, 3).map((link) => {
                       return (
                         <li className="sitemap--item" key={link.key}>
-                          <FooterLink className="sitemap--page" href={link.link} name={link.name} key={link.key} />
+                          <FooterLink className="sitemap--page" href={link.link} name={link.name} target={link.target} key={link.key} />
                         </li>
                       );
                     })}
@@ -46,9 +46,9 @@ function Footer() {
   );
 }
 
-function FooterLink({ href, name, className }) {
+function FooterLink({ href, name, className, target  }) {
   return (
-    <DLink className={`sitemap--link ${className || ""}`} href={href}>
+    <DLink className={`sitemap--link ${className || ""}`} href={href} target={target}>
       {name}
     </DLink>
   );
@@ -111,7 +111,7 @@ function Contact() {
                   href={"https://www.instagram.com/peanut.butter.and.sam/"}
                   target="_blank"
                 />
-                <Button className="contact--button" icon={["document", "alone", "mask"]} animation="scale-in" target="_blank" />
+                <Button className="contact--button" icon={["document", "alone", "mask"]} animation="scale-in" target="_blank" href={'/Resume'} />
               </div>
             </div>
           </div>

@@ -15,8 +15,9 @@ var footer_sitemap = [
       },
       {
         name: "Resume",
-        link: "/",
+        link: "/Resume",
         key: '',
+        target: "_blank",
       },
     ]
   },
@@ -96,6 +97,7 @@ function footerSitemapItemsInit(arr){
     var list = item.list;
     for(var i = 0; i < list.length; i++){
       list[i].key = uuidv4();
+      if(!list[i].target) list[i].target = "_self";
     }
   });
 
