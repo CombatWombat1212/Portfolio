@@ -4206,6 +4206,10 @@ h3 + .studypanel--paragraph {
 
 .popup--media-wrapper__gallery-zoom {
   background-color: rgba(243, 243, 247, 0.075);
+  border-radius: var(--b-rad);
+  -webkit-border-radius: var(--b-rad);
+  -moz-border-radius: var(--b-rad);
+  -khtml-border-radius: var(--b-rad);
 }
 
 @media screen and (max-width: 61.9375em) {
@@ -4371,8 +4375,8 @@ h3 + .studypanel--paragraph {
   }
 }
 
-.popup .gallery--paragraph {
-  margin-bottom: 1rem;
+.gallery--paragraph + .gallery--paragraph {
+  margin-top: 1rem;
 }
 
 .popup .gallery--categories-background {

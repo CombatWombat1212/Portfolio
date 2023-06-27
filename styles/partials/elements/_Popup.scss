@@ -470,6 +470,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
     &__gallery-zoom {
       background-color: $col-media-wrapper;
+      @include b-rad;
       @include lg-down {
         background-color: #00000000;
       }
@@ -613,7 +614,9 @@ $col-media-wrapper: rgba($col-background, 0.075);
       }
     }
     &--paragraph {
-      margin-bottom: 1rem;
+      @at-root .gallery--paragraph + .gallery--paragraph{
+        margin-top: 1rem;
+      }
     }
 
     &--categories-background {

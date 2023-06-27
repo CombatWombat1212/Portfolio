@@ -802,7 +802,7 @@ const EXPLORATIONS_IMGS = processImages(
       description: [
         "As Virtual Pangea's UX Engineer, I was tasked with salvaging our outsourced website.  The product we were delivered was subpar, and left us well behind schedule.",
         "I implemented necessities like navigation, and responsivity. Content blocks and features that were missing or broken, were rebuilt.",
-        "To the eye of the user, I added animations and passed over styling and typesetting.  Making a far more digestible experience. While under the hood, I added proper SEO, and optimized performance.",
+        "To the eye of the user, I added animations and passed over styling and typesetting, making a far more digestible experience. Under the hood, I added SEO, and optimized performance.",
       ],
       group: "virtual_pangea_temp",
     },
@@ -1346,7 +1346,7 @@ const EXPLORATIONS_IMGS = processImages(
       project: "KoalaKo",
       description: [
         "KoalaKo assists parents in discovering fun, and unique games for their kids.  Leading a team of 4 designers, our goal was to find a digital-age solution for fostering creativity.",
-        "Parents can explore numerous age-appropriate activities and play areas.  Choosing to track their child's creative growth enables tailored activity suggestions.  These diversify their play experience, and help build their toolkit of creative expression.",
+        "Parents can explore numerous age-appropriate activities, and locations for play.  Choosing to track their child's creative growth enables tailored activity suggestions.  These diversify their play experience, and help build their toolkit of creative expression.",
         "View my KoalaKo case study for a deeper understanding of the design, and final product!",
       ],
     },
