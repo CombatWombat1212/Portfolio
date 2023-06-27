@@ -335,10 +335,10 @@
       @include flex-row-center;
       position: fixed;
       width: var(--site-max-width_wide);
-      --indicator-offset: 6rem;
+      --indicator-offset: Min(5rem,#{zoom-vh(6.5vh)});
       
       @include lg-down {
-        --indicator-offset: 4rem;
+        --indicator-offset: Min(4rem,#{zoom-vh(6.5vh)});
       }
 
 
@@ -356,7 +356,7 @@
       }
 
       @include md-down{
-        --indicator-offset: 1.25rem;
+        --indicator-offset: Min(1.25rem,#{zoom-vh(6.5vh)});
 
         top:unset;
         // bottom: var(--indicator-offset);
@@ -416,7 +416,8 @@
       @include android-chrome{
       margin-top: 0.05rem;
       }
-      @include ios-safari{
+
+      @include safari{
         margin-top: 0.1rem;
       }
       // --graphic-scale: 0.05;

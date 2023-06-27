@@ -6174,7 +6174,7 @@ h3 + .studypanel--paragraph {
   justify-content: center;
   position: fixed;
   width: var(--site-max-width_wide);
-  --indicator-offset: 6rem;
+  --indicator-offset: Min(5rem,calc(6.5vh / var(--zoom)));
   --constant-offset: calc(var(--nav-height) + var(--pitch-row-margin) + var(--ind-tag-border-width) - var(--sticky-buffer-offset) + var(--sticky-buffer) + var(--pitch-row-height)  + var(--indicator-offset));
   --dynamic-offset: calc(var(--pitch-row-progress) * var(--pitch-progress-distance));
   --initial-offset: calc(var(--dynamic-offset) * -1);
@@ -6185,7 +6185,7 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 61.9375em) {
   .pitch .pitch--indicator-wrapper {
-    --indicator-offset: 4rem;
+    --indicator-offset: Min(4rem,calc(6.5vh / var(--zoom)));
   }
 }
 
@@ -6197,7 +6197,7 @@ h3 + .studypanel--paragraph {
 
 @media screen and (max-width: 49.9375em) {
   .pitch .pitch--indicator-wrapper {
-    --indicator-offset: 1.25rem;
+    --indicator-offset: Min(1.25rem,calc(6.5vh / var(--zoom)));
     top: unset;
     bottom: var(--indicator-offset);
     height: calc(100% - var(--constant-offset));
@@ -6252,7 +6252,7 @@ h3 + .studypanel--paragraph {
   margin-top: 0.05rem;
 }
 
-.ios.safari .pitch .pitch--indicator-arrow {
+.safari .pitch .pitch--indicator-arrow {
   margin-top: 0.1rem;
 }
 

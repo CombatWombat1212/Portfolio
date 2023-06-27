@@ -117,7 +117,7 @@ const WHATIM = [
   },
   {
     category: "What I&rsquo;m Doing",
-    items: ["Biking", "Meditating", "Finding new Music", "Hangin&rsquo; with friends"],
+    items: ["Exercising", "Meditating", "Finding new music", "Hangin&rsquo; with friends"],
   },
   {
     category: "What I&rsquo;m Making",
@@ -130,7 +130,7 @@ const WHATIM = [
         name: "3D renders and graphics",
         link: "https://www.instagram.com/3dsammyg",
       },
-      "Color grading photos",
+      "Color graded photos",
     ],
   },
   {
