@@ -779,7 +779,6 @@ const EXPLORATIONS_IMGS = processImages(
     //   //   index: 0,
     // },
 
-
     virtual_pangea_temp_thumbnail: {
       name: "virtual_pangea_temp_thumbnail",
       src: "/assets/images/explorations/frontend/virtual_pangea_temp/virtual_pangea_temp_thumbnail.png",
@@ -806,13 +805,6 @@ const EXPLORATIONS_IMGS = processImages(
       ],
       group: "virtual_pangea_temp",
     },
-  
-
-
-
-
-
-
 
     crypic_pixel_video_01: {
       name: "crypic_pixel_video_01",
@@ -953,8 +945,8 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1024,
       height: 1024,
       group: "cryptic_pixel",
-      thumbnail:true,
-      hidden:true,
+      thumbnail: true,
+      hidden: true,
     },
     discog_calc_video_01_example_brockhampton: {
       name: "discog_calc_video_01_example_brockhampton",
@@ -966,7 +958,7 @@ const EXPLORATIONS_IMGS = processImages(
       tools: ["HTML/CSS/JS", "API", "Adobe XD"],
       title: "Demo 1",
       description: [
-        `"How much would it cost to own an artist's entire physical discography?"  To music collectors like myself, this can be a common question, which is why I built the "Discography Calculator".`,
+        `“How much would it cost to own an artist's entire physical discography?”  To music collectors like myself, this can be a common question, which is why I built the “Discography Calculator”.`,
         `This handy tool was designed and built with enthusiasts and record store owners in mind.  It aims to help make purchasing plans, set goals for your collection, or just to satisfy curiosity.`,
         `Powered by Node.js, and the Discogs API, the site uses live data straight from marketplace listings.  Enter the name of any artist, and receive a grand sum for each of their physical releases, the cost per album, and their percentage of the total cost.`,
       ],
@@ -1330,8 +1322,6 @@ const EXPLORATIONS_IMGS = processImages(
       //   index: 0,
     },
 
-
-
     koalako_final_01: {
       name: "delivery_activities",
       src: "/assets/images/koalako/solution/solution_mockup_activities.png",
@@ -1609,6 +1599,40 @@ const EXPLORATIONS_IMGS = processImages(
       thumbnail: true,
     },
     // TODO: uncomment once we're compressing
+    pano_01_house: {
+      name: "pano_01_house",
+      src: "/assets/images/explorations/photography/pano_01_house.jpg",
+      alt: "A colorful panoramic image of a farm house in the countryside",
+      width: 15160,
+      height: 6781,
+            disciplines: ["Photography"],
+      tools: ["Photoshop","Lightroom"],
+      // group: "montreal_panos",
+      project: "Mount Royal",
+    },
+    pano_02_hill: {
+      name: "pano_02_hill",
+      src: "/assets/images/explorations/photography/pano_02_hill.jpg",
+      alt: "A colorful panoramic image of a treeline on top of a mountain",
+      width: 12806,
+      height: 4275,
+            disciplines: ["Photography"],
+      tools: ["Photoshop","Lightroom"],
+      // group: "montreal_panos",
+      project: "Mount Royal",
+    },
+    pano_03_neighborhood: {
+      name: "pano_03_neighborhood",
+      src: "/assets/images/explorations/photography/pano_03_neighborhood.jpg",
+      alt: "A colorful panoramic image of a neighborhood taken from the top of a mountain",
+      width: 6526,
+      height: 3834,
+            disciplines: ["Photography"],
+      tools: ["Photoshop","Lightroom"],
+      // group: "montreal_panos",
+      project: "Mount Royal",
+    },
+
     // pano_01_house: {
     //   name: "pano_01_house",
     //   src: "/assets/images/explorations/photography/pano_01_house.jpg",
@@ -1617,7 +1641,7 @@ const EXPLORATIONS_IMGS = processImages(
     //   height: 6781,
     //         disciplines: ["Photography"],
     //   tools: ["Photoshop","Lightroom"],
-    //   // group: "montreal_panos",
+    //   group: "montreal_panos",
     //   project: "Mount Royal",
     // },
     // pano_02_hill: {
@@ -1628,41 +1652,6 @@ const EXPLORATIONS_IMGS = processImages(
     //   height: 4275,
     //         disciplines: ["Photography"],
     //   tools: ["Photoshop","Lightroom"],
-    //   // group: "montreal_panos",
-    //   project: "Mount Royal",
-    // },
-    // pano_03_neighborhood: {
-    //   name: "pano_03_neighborhood",
-    //   src: "/assets/images/explorations/photography/pano_03_neighborhood.jpg",
-    //   alt: "A colorful panoramic image of a neighborhood taken from the top of a mountain",
-    //   width: 6526,
-    //   height: 3834,
-    //         disciplines: ["Photography"],
-    //   tools: ["Photoshop","Lightroom"],
-    //   // group: "montreal_panos",
-    //   project: "Mount Royal",
-    // },
-
-
-    // pano_01_house: {
-    //   name: "pano_01_house",
-    //   src: "/assets/images/explorations/photography/pano_01_house.jpg",
-    //   alt: "A colorful panoramic image of a farm house in the countryside",
-    //   width: 15160,
-    //   height: 6781,
-    //         disciplines: ["Photography"],
-    //   tools: ["Photoshop","Lightroom"],
-    //   group: "montreal_panos",
-    //   project: "Mount Royal",
-    // },
-    // pano_02_hill: {
-    //   name: "pano_02_hill",
-    //   src: "/assets/images/explorations/photography/pano_02_hill.jpg",
-    //   alt: "A colorful panoramic image of a treeline on top of a mountain",
-    //   width: 12806,
-    //   height: 4275,
-    //         disciplines: ["Photography"],
-    //   tools: ["Photoshop","Lightroom"],
     //   group: "montreal_panos",
     //   project: "Mount Royal",
     // },
@@ -1677,10 +1666,6 @@ const EXPLORATIONS_IMGS = processImages(
     //   group: "montreal_panos",
     //   project: "Mount Royal",
     // },
-
-
-
-
   },
 
   "explorations"
