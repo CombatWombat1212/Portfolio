@@ -6174,23 +6174,18 @@ h3 + .studypanel--paragraph {
   justify-content: center;
   position: fixed;
   width: var(--site-max-width_wide);
-  --indicator-offset: Min(5rem,calc(6.5vh / var(--zoom)));
   --constant-offset: calc(var(--nav-height) + var(--pitch-row-margin) + var(--ind-tag-border-width) - var(--sticky-buffer-offset) + var(--sticky-buffer) + var(--pitch-row-height)  + var(--indicator-offset));
   --dynamic-offset: calc(var(--pitch-row-progress) * var(--pitch-progress-distance));
   --initial-offset: calc(var(--dynamic-offset) * -1);
   --off-page-offset: 2rem;
   top: var(--constant-offset);
   transform: translateY(var(--initial-offset));
+  --indicator-offset: Min(5rem,calc(6.5vh / var(--zoom)));
 }
 
 @media screen and (max-width: 61.9375em) {
   .pitch .pitch--indicator-wrapper {
     --indicator-offset: Min(4rem,calc(6.5vh / var(--zoom)));
-  }
-}
-
-@media screen and (max-width: 61.9375em) {
-  .pitch .pitch--indicator-wrapper {
     --constant-offset: calc(var(--captions-top) + var(--pitch-caption-height) + var(--indicator-offset) );
   }
 }
