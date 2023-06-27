@@ -695,7 +695,7 @@ function KoalaKo({ pop }) {
 
           <Section id="Refine--Visuals" background="background darker">
             <Column nocol className="gap-">
-              <Heading>Visual consistency</Heading>
+              <Heading>Visual overhaul</Heading>
               <Description>
                 <p>
                   The original screens lacked whitespace, and had too many elements with differing design styles. Usability suffered with all the
