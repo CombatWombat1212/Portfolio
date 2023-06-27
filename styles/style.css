@@ -2304,8 +2304,8 @@ h3 + .studypanel--paragraph {
 }
 
 .nav--links a.nav--item {
-  --nav-button-pad-t: calc(var(--nav-button-pad-y) * 0.95);
-  --nav-button-pad-b: calc(var(--nav-button-pad-y) * 1.05);
+  --nav-button-pad-t: calc(var(--nav-button-pad-y) * 0.90);
+  --nav-button-pad-b: calc(var(--nav-button-pad-y) * 1.10);
 }
 
 .nav--item + .nav--item {
@@ -4302,6 +4302,10 @@ h3 + .studypanel--paragraph {
   aspect-ratio: unset;
   overflow-y: auto;
   pointer-events: all;
+}
+
+.safari .popup--media__gallery-zoom {
+  max-height: Min(calc((var(--img-avail-width) / var(--aspect-width)) * var(--aspect-height)), var(--img-max-height));
 }
 
 .popup--media__gallery-zoom::-webkit-scrollbar {

@@ -72,8 +72,8 @@
 
     @include safari{
       @at-root .nav--links a.nav--item{
-        --nav-button-pad-t: calc(var(--nav-button-pad-y) * 0.95);
-        --nav-button-pad-b: calc(var(--nav-button-pad-y) * 1.05);  
+        --nav-button-pad-t: calc(var(--nav-button-pad-y) * 0.90);
+        --nav-button-pad-b: calc(var(--nav-button-pad-y) * 1.10);  
       }
     }
     
