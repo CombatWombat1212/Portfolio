@@ -1608,7 +1608,7 @@ const EXPLORATIONS_IMGS = processImages(
             disciplines: ["Photography"],
       tools: ["Photoshop","Lightroom"],
       // group: "montreal_panos",
-      project: "Mount Royal",
+      project: "Farm house",
     },
     pano_02_hill: {
       name: "pano_02_hill",
@@ -1619,7 +1619,7 @@ const EXPLORATIONS_IMGS = processImages(
             disciplines: ["Photography"],
       tools: ["Photoshop","Lightroom"],
       // group: "montreal_panos",
-      project: "Mount Royal",
+      project: "Hill",
     },
     pano_03_neighborhood: {
       name: "pano_03_neighborhood",
@@ -1630,7 +1630,7 @@ const EXPLORATIONS_IMGS = processImages(
             disciplines: ["Photography"],
       tools: ["Photoshop","Lightroom"],
       // group: "montreal_panos",
-      project: "Mount Royal",
+      project: "Neighborhood",
     },
 
     // pano_01_house: {
