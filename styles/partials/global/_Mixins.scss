@@ -1163,10 +1163,15 @@
 	}
   }
   @mixin mac-firefox {
-	.mac.firefox & {
-	  @content;
+	  .mac.firefox & {
+		  @content;
+		}
 	}
-  }
+	@mixin not-firefox {
+		:not(.firefox) & {
+			@content;
+		}
+	}
   
   @mixin windows {
 	.windows & {

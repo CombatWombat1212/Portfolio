@@ -507,22 +507,27 @@ $col-media-wrapper: rgba($col-background, 0.075);
       width: 100%;
 
       @include firefox {
-        // &:not(.popup--media__lightbox-zoom){
-
         width: 100%;
         max-width: Min(var(--img-max-width), var(--lightbox-max-width));
         max-height: Min(var(--img-max-height), var(--lightbox-max-height));
-        // }
       }
     }
 
     &__lightbox-zoom {
+      
       @include firefox {
         max-width: 100%;
         max-height: 100%;
         width: Max(var(--img-avail-width), var(--lightbox-max-width));
       }
+
       width: Min(var(--img-avail-width), var(--lightbox-max-width));
+
+      @include not-firefox{
+        @include md-down{
+          width: var(--img-avail-width);
+        }
+      }
 
       border-radius: var(--b-rad) 0 0 var(--b-rad);
       img {

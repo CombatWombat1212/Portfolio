@@ -225,7 +225,7 @@ function MakeRight({ pop }) {
           </Section>
 
           <Section id="Research--Factors" className={`flex-col`} background="background darkest" wrapperClassName={desktop ? "" : "mb-less"}>
-            <Heading type="h3">What factors limit the adoption of 3D printing?</Heading>
+            <Heading type="h3">What factors limit the adoption of <Nobr>3D printing?</Nobr></Heading>
             <BarGraph study="MakeRight" graph="Limiting Factors" type="default" />
             <Description>
               <p>
