@@ -25,6 +25,7 @@ import { usePostScrollbarSizeToRoot } from "@/scripts/hooks/useScrollbarSize";
 import MAKERIGHT_IMGS from "@/data/MAKERIGHT_IMGS";
 import useFont from "@/scripts/hooks/useFont";
 import { LOADING_IMGS } from "@/data/LOADING_IMGS";
+import GoogleAnalytics from "@/components/head/GoogleAnalytics";
 
 
 const fonts = [
@@ -151,6 +152,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Favicon />
+      <GoogleAnalytics />
       <Providers>
             <LoadingScreen />
             <div className="site"
