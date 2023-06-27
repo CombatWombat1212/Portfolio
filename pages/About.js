@@ -102,7 +102,7 @@ const EXPERIENCE = [
   },
   {
     title: "Prepr",
-    timeframe: "May. 2020 - Sep. 2020",
+    timeframe: "May 2020 - Sep. 2020",
     position: "UX Designer / UI Designer",
     description: "UX designer, and multidisciplinary designer.  Crafting user experiences, and marketing material.",
     card: "short",
