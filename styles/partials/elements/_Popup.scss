@@ -554,7 +554,6 @@ $col-media-wrapper: rgba($col-background, 0.075);
 
       --img-max-height: 10rem;
       max-height: Max(calc((var(--img-avail-width) / var(--aspect-width)) * var(--aspect-height)), var(--img-max-height));
-      
       @include safari{
         max-height: Min(calc((var(--img-avail-width) / var(--aspect-width)) * var(--aspect-height)), var(--img-max-height));
       }
