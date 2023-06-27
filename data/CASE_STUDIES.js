@@ -114,7 +114,7 @@ const CASE_STUDIES = caseStudiesInit([
       jsx: (
         <>
           Supporting Parents in Fostering
-          <br className="d-lg-none" /> Creative Development
+          <br className="d-xl-none" /> Creative Development
         </>
       ),
     },
