@@ -949,7 +949,7 @@ $col-media-wrapper: rgba($col-background, 0.075);
     @include flex-row-center;
     align-items: center;
     cursor: pointer;
-    // position: relative;
+    position: relative;
 
     &::before {
       content: "";

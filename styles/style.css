@@ -4719,6 +4719,7 @@ h3 + .studypanel--paragraph {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  position: relative;
 }
 
 .popup--circle::before {
