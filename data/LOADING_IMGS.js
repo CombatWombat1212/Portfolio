@@ -11,6 +11,13 @@ const LOADING_IMGS = processImages({
     height: 720,
     fallback: "/assets/loading/loading_snail_full.png",
   },
+  loading_snail_no_fallback: {
+    name: "loading_snail",
+    src: "/assets/loading/loading_snail_full.webm",
+    alt: "a video of a snail in the shower",
+    width: 406,
+    height: 720,
+  },
 });
 
 const LOADING_IMG_GROUPS = processGroups(LOADING_IMGS);
