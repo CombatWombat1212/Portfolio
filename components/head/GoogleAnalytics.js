@@ -8,8 +8,8 @@ function GoogleAnalytics() {
 
   return (
     <>
-      <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-Y044SNS4TJ" async />
-      <Script strategy="afterInteractive" dangerouslySetInnerHTML={run} />
+      <Script strategy="afterInteractive" id="google-gtag" src="https://www.googletagmanager.com/gtag/js?id=G-Y044SNS4TJ" async />
+      <Script strategy="afterInteractive" id="google-gtag-inline" dangerouslySetInnerHTML={run} />
     </>
   );
 }
