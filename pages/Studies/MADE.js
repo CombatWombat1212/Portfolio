@@ -287,7 +287,7 @@ function MADE({ pop }) {
               <Description>
                 <p>
                   With MADE&rsquo;s goal of photorealism, the shirts needed an accurate ruffle to their appearance, without losing their high-fashion
-                  image. Too few wrinkles, and the shirts looked starched to death. Too many imperfections and they looked straight out of the hamper.
+                  image. Too few wrinkles and the shirts looked starched to death. Too many imperfections and they looked straight out of the hamper.
                 </p>
 
                 <p>
@@ -460,7 +460,7 @@ function MADE({ pop }) {
             </Column>
             <Column>
               <Description>
-                Lastly, the following details were added to increase the accuracy of the objects in relation to the real world products, and the
+                Lastly, the following details were added to increase the accuracy of the objects in relation to the real-world products, and the
                 subtleties of their design.
               </Description>
             </Column>
@@ -473,13 +473,13 @@ function MADE({ pop }) {
                 Color-matched threading
               </Heading>
               <Description className="graphic--caption mt-less">
-                I manually approximated fitting thread colors for each shirt material. Simple for solid-colors, trickier with complex patterns.
+                I manually approximated fitting thread colors for each shirt material. Simple for solid colors, trickier with complex patterns.
               </Description>
             </Column>
             <Column>
               <Graphic type="image" className="b-rad" img={MADE_IMGS.details_holes} lightbox pop={pop} />
               <Heading type="h3" className="graphic--caption weight-reg">
-                Color-matched button holes
+                Color-matched buttonholes
               </Heading>
               <Description className="graphic--caption mt-less">
                 Buttonhole colors for each material were done separately, in a similar way to the threading. Requiring their own fine-tuning.
@@ -539,7 +539,7 @@ function MADE({ pop }) {
             <Title>Shadows</Title>
             <Column>
               <Heading>
-                Supporting the final <Nobr>use-case</Nobr> by embedding shadows within each component image
+                Supporting the final <Nobr>use case</Nobr> by embedding shadows within each component image
               </Heading>
             </Column>
             <Column>
@@ -644,7 +644,7 @@ function MADE({ pop }) {
 
                 <p>
                   However, the <b>rendering service I used had strict file size limitations</b>. This greatly impacted my available options when
-                  trying to build a file which could render all the images continuously.
+                  trying to build a file that could render all the images continuously.
                 </p>
 
                 <p>Possible approaches to creating a continuous render sequence:</p>
@@ -702,7 +702,7 @@ function MADE({ pop }) {
             <Title>Roadblocks To Rendering</Title>
             <Column>
               <Heading>
-                Using Python to create <Nobr>a dynamic</Nobr> texture that could change fabrics every frame
+                Using Python to create <Nobr>a dynamic</Nobr> texture that could change fabric every frame
               </Heading>
             </Column>
             <Column>
@@ -712,7 +712,7 @@ function MADE({ pop }) {
                   ability to easily switch between them.
                 </p>
                 <p>
-                  From there, I could then render a single “video” who&rsquo;s frames contained every combination of object and fabric. This allowed
+                  From there, I could then render a single &ldquo;video&rdquo; whose frames contained every combination of object and fabric. This allowed
                   me to push through the limits of my hardware and completed all of the rendering at no added cost to the project timeline.
                 </p>
               </Description>
@@ -822,13 +822,13 @@ function MADE({ pop }) {
               <p>
                 During this project&rsquo;s early stages, I identified many requirements to suit my client&rsquo;s needs. An example of this was when
                 we first discussed creating a single shirt from stacked image layers. With this goal understood, I was able to discern the steps
-                necessary to match the use-case. I knew each image needed their object&rsquo;s shadows placed in the background. Otherwise, they
+                necessary to match the use case. I knew each image needed their object&rsquo;s shadows placed in the background. Otherwise, they
                 wouldn&rsquo;t combine realistically.
               </p>
 
               <p>
                 This gave me significant time to plan ahead. I conducted tests using the first few models, and determined the best approach to
-                creating realistic shadows. In this way, I built the project from the ground-up with the eventuality of this challenge in mind. Then,
+                creating realistic shadows. In this way, I built the project from the ground up with the eventuality of this challenge in mind. Then,
                 when the time came to create the objects&rsquo; shadows, I was fully prepared to traverse the issue. With this, and other similar
                 moments, the greatest success of this project was my foresight and planning.
               </p>

@@ -30,9 +30,9 @@ const CASE_STUDIES = caseStudiesInit([
 
     brief: {
       // description:
-      //   "For my undergraduate capstone, I created a service that directly connects owners of 3D printers to customers in need.  Based on a gig-economy model, like Uber or DoorDash, this service enables access to 3D printing without the barriers of cost, and know-how.",
+      //   "For my undergraduate capstone, I created a service that directly connects owners of 3D printers to customers in need.  Based on a gig economy model, like Uber or DoorDash, this service enables access to 3D printing without the barriers of cost, and know-how.",
       description:
-        "For my undergraduate capstone, I created a service that directly connects owners of 3D printers to customers in need.  Based on a gig-economy model, this service enables access to 3D printing without the barriers of cost, and know-how.",
+        "For my undergraduate capstone, I created a service that directly connects owners of 3D printers to customers in need.  Based on a gig economy model, this service enables access to 3D printing without the barriers of cost, and know-how.",
       tools: ["Adobe XD / Figma", "Illustrator", "Mural", "HTML/CSS/JS", "After Effects", "InDesign"],
       deliverables: [
         {
@@ -74,9 +74,9 @@ const CASE_STUDIES = caseStudiesInit([
 
     brief: {
       description:
-        "MADE Clothing Co. reached out to me to work together in creating a dress shirt customization tool for their webstore.  With the software already built, they needed an artist to create realistic renderings of their shirt components, and fabrics.",
+        "MADE Clothing Co. reached out to me to work together in creating a dress shirt customization tool for their webstore.  With the software already built, they needed an artist to create realistic renderings of their shirt components and fabrics.",
       tools: ["Blender 3D", "Photoshop", "Python"],
-      deliverables: ["10 object models", "50+ custom textures", "600+ unique images"],
+      deliverables: ["10 object models", "40+ custom textures", "600+ unique images"],
 
       timeline: {
         string: "3 active months of a 6 month partnership",

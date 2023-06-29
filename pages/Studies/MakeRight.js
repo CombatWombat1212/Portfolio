@@ -69,7 +69,7 @@ function MakeRight({ pop }) {
             </Heading> */}
             <Description>
               <p>
-                Owning a 3D printer is a steep upfront investment, and learning to use it is a massive time sink. Even then, users without 3D
+                Owning a 3D printer is a steep upfront investment, and learning to use it is a massive time-sink. Even then, users without 3D
                 modelling experience will still be restricted to premade objects.
               </p>
             </Description>
@@ -130,14 +130,14 @@ function MakeRight({ pop }) {
               </>
 
               <>
-                <Heading>Recieve</Heading>
+                <Heading>Receive</Heading>
                 <Description>
                   <p>
                     the purchased item <Nobr>right at your front door</Nobr>
                   </p>
                 </Description>
-                <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_recieve"]} />
-                <Graphic type="image" img={MAKERIGHT_IMGS["pitch_mockup_recieve"]} />
+                <Graphic type="mask" img={MAKERIGHT_IMGS["pitch_vector_receive"]} />
+                <Graphic type="image" img={MAKERIGHT_IMGS["pitch_mockup_receive"]} />
               </>
             </Pitch>
           </Section>
@@ -273,7 +273,7 @@ function MakeRight({ pop }) {
             </Heading>
             <Description className={desktop ? "mt-less" : ""}>
               <p>
-                Despite identifying benefits to using 3D printing, these architecture students avoided it due to intimidation.
+                Despite identifying benefits of using 3D printing, these architecture students avoided it due to intimidation.
                 <br className="d-lg-none" /> Even though, through their school, they had open access to printers.
               </p>
             </Description>
@@ -432,7 +432,7 @@ function MakeRight({ pop }) {
             <Column className="col-8 col-lg-7 col-md-12">
               <Description background="background">
                 <h3>
-                  A gig-economy-based 3D printing service,
+                  A gig economy-based 3D printing service,
                   <br className="d-lg-none" /> a <Nobr>sort-of</Nobr> Uber for 3D models.
                 </h3>
                 <ul>
@@ -486,7 +486,7 @@ function MakeRight({ pop }) {
 
             <Column>
               <Quote background="background">
-                &ldquo;I think a business like this could totally work... ...I think there’s a lot of people with printers and free time that would
+                &ldquo;I think a business like this could totally work... ...I think there&rsquo;s a lot of people with printers and free time that would
                 hop on an opportunity like this.&rdquo; <Nobr>- Maker #2</Nobr>
               </Quote>
             </Column>
@@ -547,7 +547,7 @@ function MakeRight({ pop }) {
             <Description className="mt-1">
               <p>
                 I broke development into 4 phases of 4-6 weeks. <br className="d-none d-lg-block d-sm-none" />
-                Each containing their own cycles <Nobr className="d-md-none">of development, testing, and iteration.</Nobr>
+                Each containing its own cycles <Nobr className="d-md-none">of development, testing, and iteration.</Nobr>
               </p>
             </Description>
 
@@ -672,7 +672,7 @@ function MakeRight({ pop }) {
           </Section>
 
           <Section id="Prototyping--Feedback" background="tertiary light" titled="above">
-            <Title>Noteable Feedback Changes</Title>
+            <Title>Notable Feedback Changes</Title>
             <Column>
               <Heading>
                 Significant issues addressed during <Nobr>testing and revision:</Nobr>
@@ -709,8 +709,7 @@ function MakeRight({ pop }) {
               />
               <Description className="mt-more graphic--caption">
                 <p>
-                  Now, that info exists as a single inviting page. As well, I added a brief video chat at the end onboarding to ensure new Makers have
-                  read the overview, and can ask questions.
+                  Now, that info exists as a single inviting page. As well, I added a brief video chat at the end of onboarding to ensure new Makers have read the overview, and can ask questions.
                 </p>
               </Description>
             </Column>
@@ -934,7 +933,7 @@ function MakeRight({ pop }) {
             </Column>
 
             <Column>
-              <Title>Sucesses</Title>
+              <Title>Successes</Title>
               <Heading>Creating actionable steps to achieving the core functionality of the service</Heading>
               <Description>
                 <p>

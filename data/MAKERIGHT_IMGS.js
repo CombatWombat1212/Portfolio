@@ -50,9 +50,9 @@ const MAKERIGHT_IMGS = processImages(
       height: 100.59,
     },
 
-    pitch_vector_recieve: {
-      name: "pitch_vector_recieve",
-      src: "/assets/images/makeright/pitch/pitch_vector_recieve.svg",
+    pitch_vector_receive: {
+      name: "pitch_vector_receive",
+      src: "/assets/images/makeright/pitch/pitch_vector_receive.svg",
       alt: "A graphic of a gift-wrapped 3D printed boat on a doorstep",
       width: 96.95,
       height: 117.8,
@@ -82,9 +82,9 @@ const MAKERIGHT_IMGS = processImages(
       height: 1743,
     },
 
-    pitch_laptop_recieve: {
-      name: "pitch_laptop_recieve",
-      src: "/assets/images/makeright/pitch/pitch_laptop_recieve.png",
+    pitch_laptop_receive: {
+      name: "pitch_laptop_receive",
+      src: "/assets/images/makeright/pitch/pitch_laptop_receive.png",
       alt: "MakeRight UI screenshot showing a message from your assigned 3D printer - your order is ready and images are attatched to the message to prove it",
       width: 2952,
       height: 1743,
@@ -122,9 +122,9 @@ const MAKERIGHT_IMGS = processImages(
       height: 1743,
     },
 
-    pitch_mockup_recieve: {
-      name: "pitch_mockup_recieve",
-      src: "/assets/images/makeright/pitch/pitch_mockup_recieve.png",
+    pitch_mockup_receive: {
+      name: "pitch_mockup_receive",
+      src: "/assets/images/makeright/pitch/pitch_mockup_receive.png",
       alt: "MakeRight UI screenshot showing a message from your assigned 3D printer - your order is ready and images are attatched to the message to prove it",
       width: 2952,
       height: 1743,
@@ -489,10 +489,10 @@ const MAKERIGHT_IMGS = processImages(
         "Submit proof of ownership for their equipment and supplies. This ensures that no one is able to sign up under dishonest pretenses.",
       ],
       actions: [
-        "Submit images of valid photo id, and verification images of their printer(s), available filament(s), and any relevant additional equipment.",
+        "Submit images of valid photo ID, and verification images of their printer(s), available filament(s), and any relevant additional equipment.",
       ],
       notes: [
-        "These details allow us to assign Makers based on the requirements of a job. This gives customers the ability to select the quality of machine, the print material and colour, and other printer features required to print certain forms.",
+        "These details allow us to assign Makers based on the requirements of a job. This gives customers the ability to select the quality of the machine, the print material and colour, and other printer features required to print certain forms.",
       ],
       alt: "A verification screen for makers to submit proof of ownership for their equipment and supplies.",
     },
@@ -507,7 +507,7 @@ const MAKERIGHT_IMGS = processImages(
       title: "Verify email",
       phase: "2/3",
       description: ["Ensure that users have verified their email."],
-      actions: ["Check their email for a verification code, resend the email if necessary, enter the code and begin the test."],
+      actions: ["Check their email for a verification code, resend the email if necessary, enter the code, and begin the test."],
       notes: [
         "Users need to verify their email to receive the results of the onboarding process. Therefore, this step is a brief yet necessary interruption to avoid upset Makers who weren’t able to receive their test results.",
       ],
@@ -665,7 +665,7 @@ const MAKERIGHT_IMGS = processImages(
       title: "Orders (ready to submit)",
       phase: "1/2",
       description: [
-        "Time to begin printing when ready. The maker already downloaded the file during the vetting stage, and prepared it in slicing software. Meaning, they will be ready to get started with the print as soon as they can.",
+        "Time to begin printing when ready. The maker already downloaded the file during the vetting stage and prepared it in slicing software. Meaning, they will be ready to get started with the print as soon as they can.",
       ],
       actions: ["Complete the order print, return to this page, and click ‘Submit Print’"],
       notes: [],
@@ -756,7 +756,7 @@ const MAKERIGHT_IMGS = processImages(
       title: "Login",
       phase: "1/2",
       description: [
-        "Ideally we will have a welcoming and informative homepage, however, this was not within the project scope. Therefore each user journey begins at Login.",
+        "Ideally, we will have a welcoming and informative homepage, however, this was not within the project scope. Therefore each user journey begins at Login.",
       ],
       actions: ["Click log-in or signup"],
       alt: "Login page for MakeRight, where users can click the login or sign-up button.",
@@ -816,7 +816,7 @@ const MAKERIGHT_IMGS = processImages(
       phase: "3/3",
       description: ["Verify the email of the new customer account."],
       actions: [
-        "Check their email for a verification code, resend the email if necessary, enter the code and move on. Or skip for now (purchasing is not possible until the account is verified).",
+        "Check their email for a verification code, resend the email if necessary, enter the code, and move on. Or, skip for now (purchasing is not possible until the account is verified).",
       ],
       notes: [],
       alt: "Email verification page for MakeRight, where new customers can verify their email address to activate their account.",
@@ -907,7 +907,7 @@ const MAKERIGHT_IMGS = processImages(
       width: 3840,
       height: 2160,
       group: "makeright_customer_final",
-      section: "Order in-progress",
+      section: "Order in progress",
       title: "My Orders (pending)",
       phase: "1/2",
       description: ["The page where users can view the full list of their ongoing and past orders."],
@@ -920,7 +920,7 @@ const MAKERIGHT_IMGS = processImages(
       width: 3840,
       height: 3054,
       group: "makeright_customer_final",
-      section: "Order in-progress",
+      section: "Order in progress",
       title: {
         xxl: (
           <>
@@ -941,7 +941,7 @@ const MAKERIGHT_IMGS = processImages(
       width: 3840,
       height: 4504,
       group: "makeright_customer_final",
-      section: "Order in-progress",
+      section: "Order in progress",
       title: {
         xxl: (
           <>
@@ -951,7 +951,7 @@ const MAKERIGHT_IMGS = processImages(
       },
       phase: "2/2",
       description: [
-        "The expanded view of an order ticket, i.e. the ticket’s dedicated page.  Identical to the previous screen, this shows the appearance of an order ticket that has just been accepted by a Maker if the user were to click on it from the previous My Order’s screen.",
+        "The expanded view of an order ticket, i.e. the ticket’s dedicated page.  Identical to the previous screen, this shows the appearance of an order ticket that has just been accepted by a Maker if the user were to click on it from the previous My Orders screen.",
       ],
       actions: [
         "Users can cancel the order, request changes (for a fee), communicate with their maker, and view details on their maker and the order.",

@@ -73,7 +73,7 @@ const QUOTE_TABLES = {
           {
             primary: {
               title: "3D modelling adds too much complication",
-              content: "Model creation and design is whole service in itself; including it in the service would drastically affect scope.",
+              content: "Model creation and design is a whole service in itself; including it in the service would drastically affect scope.",
             },
             secondary: {
               quote: (

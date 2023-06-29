@@ -261,7 +261,7 @@ function KoalaKo({ pop }) {
             <Column>
               <Findings>
                 <div type="main">
-                  <Heading type={"h3"}>Encouraging self expression through creativity can further this development</Heading>
+                  <Heading type={"h3"}>Encouraging self-expression through creativity can further this development</Heading>
                 </div>
                 <div type="dropdown">
                   <p>
@@ -290,7 +290,7 @@ function KoalaKo({ pop }) {
                 <Title>Brainstorming</Title>
                 <Heading type={`h3`}>Finding ideas</Heading>
                 <p>
-                  Rapid fire idea creation, narrowed down to a <Nobr>promising</Nobr> concept.
+                  Rapid-fire idea creation, narrowed down to a <Nobr>promising</Nobr> concept.
                 </p>
                 <Graphic type="mask" img={KOALAKO_IMGS.exercise_brainstorming_simplified} />
               </Method>
@@ -421,8 +421,8 @@ function KoalaKo({ pop }) {
             </Column>
           </Section>
 
-          <Section id="Prototyping--Implimentation" background="background darker">
-            <Title>Implimentation Plan</Title>
+          <Section id="Prototyping--Implementation" background="background darker">
+            <Title>Implementation Plan</Title>
             <Heading>Noting suggestions, and refocusing our goals</Heading>
 
             <Description className={"text-col-2 text-col-lg-1 gap-3 gap-xl-4"}>
@@ -500,7 +500,7 @@ function KoalaKo({ pop }) {
               </Heading>
               <Description className="mts-1">
                 <p>
-                  Explore play history, and the find which experiences your child is yet to try. Goal-setting helps to encourage regular playtime.
+                  Explore play history, and find which experiences your child is yet to try. Goal-setting helps to encourage regular playtime.
                 </p>
               </Description>
             </Column>
@@ -698,8 +698,7 @@ function KoalaKo({ pop }) {
               <Heading>Visual overhaul</Heading>
               <Description>
                 <p>
-                  The original screens lacked whitespace, and had too many elements with differing design styles. Usability suffered with all the
-                  cluttered elements and text on screen.
+                  The original screens lacked whitespace, and had too many elements with differing design styles. Usability suffered with all the cluttered elements and text on screen.
                 </p>
                 <p>Typesetting, and breathing room were a strong focus. Above all, I aimed to make the service more approachable.</p>
               </Description>
@@ -865,12 +864,12 @@ function KoalaKo({ pop }) {
                 by making child profile setup optional. These concerns could be further addressed by making the initial account setup optional as
                 well. Currently, we require an email and password to store user data to an account. But, if we save data locally to the user&rsquo;s
                 device, an account wouldn&rsquo;t be needed. Going forward, this ability to skip account setup will be an important addition. Creating
-                lower friction by not requiring sign-up, and giving privacy concerned users greater flexibility.
+                lower friction by not requiring sign-up, and giving privacy-concerned users greater flexibility.
                 <span style={{ marginBottom: "8rem" }}></span>
               </p>
 
               <p>
-                Furthermore, the initial login page is a first-impression that can be better utilized to hook user attention. Prefacing the login
+                Furthermore, the initial login page is a first impression that can be better utilized to hook user attention. Prefacing the login
                 screen, I plan to add a series of captioned graphics to convey the service&rsquo;s value. This would be a more effective start to the
                 experience, as it captures user attention, pushing them through the friction of getting started.
               </p>

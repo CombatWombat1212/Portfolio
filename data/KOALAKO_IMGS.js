@@ -288,7 +288,7 @@ const KOALAKO_IMGS = processImages(
     refine_stats_before: {
       name: "refine_stats_before",
       src: "/assets/images/koalako/refine/refine_stats_before.png",
-      alt: "An early, high fidelity version of the statistics screen of the KoalaKo app, where the user is able to view their play history, statistics, and other data on creative development. The circular progress bar denoting the users play time recieved valuable feedback, and would be removed.",
+      alt: "An early, high fidelity version of the statistics screen of the KoalaKo app, where the user is able to view their play history, statistics, and other data on creative development. The circular progress bar denoting the users play time receive valuable feedback, and would be removed.",
       width: 942,
       height: 1675,
       group: "refine_stats",

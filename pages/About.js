@@ -97,7 +97,7 @@ const EXPERIENCE = [
     title: "MADE Clothing Co.",
     timeframe: "Jul. 2020 - Jan. 2021",
     position: "3D Generalist",
-    description: "3D design and rendering for webstore product images, and for a dress-shirt customization tool",
+    description: "3D design and rendering for webstore product images, and a dress-shirt customization tool",
     card: "short",
     img: ABOUT_IMGS.experience_made,
   },
