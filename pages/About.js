@@ -138,7 +138,7 @@ const WHATIM = [
     category: "Who I&rsquo;m Following",
     items: [
       {
-        name: "@JPAugurusa",
+        name: "@jpaugurusa",
         link: "https://www.instagram.com/JPAugurusa/",
       },
       {
