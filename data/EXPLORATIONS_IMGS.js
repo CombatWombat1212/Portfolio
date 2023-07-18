@@ -614,7 +614,7 @@ const EXPLORATIONS_IMGS = processImages(
       tools: ["Blender", "Photoshop"],
       title: "Gallery Space Wide Shot",
       description: [
-        `Working with COPE NYC director Vida Sabbaghi, I designed the layout of the "Obsessive Seas" exhibition at Serendipity Artspace in Taipei. Using 3D and experiential design skills, I created a scale-accurate model of the digital gallery space and its artworks.`,
+        `Working with COPE NYC director, and gallery curator Vida Sabbaghi, I designed the layout of the "Obsessive Seas" exhibition at Serendipity Artspace in Taipei. Using 3D and experiential design skills, I created a scale-accurate model of the digital gallery space and its artworks.`,
         `I composed the interior with a sparring usage of flair to cohere the limited number of artworks. These touches included lighting, shadows, accent walls, and projected footage. They filled the space and crafted a thematically consistent atmosphere.`,
         `After completion, I added annotations to the final renders with instructions and measurements for gallery staff to set up the exhibit.`,
         `The featured artists were Barbara Ellmann, Carla Goldberg, and Jacques Jarrige.`,
