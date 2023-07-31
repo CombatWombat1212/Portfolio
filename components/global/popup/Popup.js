@@ -192,6 +192,7 @@ function Popup({ pop }) {
     }, delay);
   }, [fallbackClass]);
 
+  
   useEffect(() => {
     // only attempt to access window when in the browser (i.e., not server-side)
     if (typeof window == "undefined") return;
@@ -209,6 +210,8 @@ function Popup({ pop }) {
       currentId = ""; // update current id
     }
   }, [pop.id]);
+
+  
 
 
   return (
