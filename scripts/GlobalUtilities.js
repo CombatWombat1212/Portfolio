@@ -529,6 +529,7 @@ function getProjectId(image){
   var name = image.projectStr || image.project || image.group || image.title;
 
   let id = name.toLowerCase();
+  id = id.replace(/&/g, "and");
   id = id.replace(/\./g, "");
   id = id.replace(/\s/g, "-");
   id = id.replace(/_/g, "-");

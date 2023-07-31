@@ -136,7 +136,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D rendering of a bottle of foundation created for Jabbar & Co. as part of a project to create product renderings for their online store. This bottle is one of 110 different shades of foundation that were included in the project scope.",
       //   study: "",
       group: "foundation_bottles",
-      project: "Jabbar and Co. 110 Shades Line",
+      project: "Jabbar & Co. 110 Shades Line",
       //   index: 0,
     },
     jabbar_and_co_foundation_02: {
@@ -152,7 +152,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D rendering of a bottle of foundation created for Jabbar & Co. as part of a project to create product renderings for their online store. This bottle is one of 110 different shades of foundation that were included in the project scope.",
       //   study: "",
       group: "foundation_bottles",
-      project: "Jabbar and Co. 110 Shades Line",
+      project: "Jabbar & Co. 110 Shades Line",
       //   index: 0,
     },
     jabbar_and_co_foundation_03: {
@@ -168,7 +168,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D rendering of a bottle of foundation created for Jabbar & Co. as part of a project to create product renderings for their online store. This bottle is one of 110 different shades of foundation that were included in the project scope.",
       //   study: "",
       group: "foundation_bottles",
-      project: "Jabbar and Co. 110 Shades Line",
+      project: "Jabbar & Co. 110 Shades Line",
       //   index: 0,
     },
     jabbar_and_co_foundation_video_01: {
@@ -183,7 +183,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1200,
       height: 1200,
       group: "foundation_bottles",
-      project: "Jabbar and Co. 110 Shades Line",
+      project: "Jabbar & Co. 110 Shades Line",
     },
     jabbar_and_co_products_01: {
       name: "jabbar_and_co_products_01",
@@ -198,7 +198,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of a makeup brush created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar and Co. Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_02: {
@@ -214,7 +214,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of a tube of Botanical Cleansing Lotion created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar and Co. Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_03: {
@@ -230,7 +230,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Botanical Firming Toner created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar and Co. Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_04: {
@@ -246,7 +246,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Firming Face And Eye Serum created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar and Co. Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_05: {
@@ -262,7 +262,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Hydrating Mango Face Cream created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar and Co. Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_06: {
@@ -278,7 +278,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Setting Spray created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar and Co. Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_07: {
@@ -294,7 +294,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Anti-Aging Cream created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar and Co. Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_08: {
@@ -310,7 +310,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Anti-Aging Cream created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar and Co. Product Line",
+      project: "Jabbar & Co. Product Line",
       thumbnail: true,
 
       //   index: 0,
@@ -328,7 +328,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Hyaluronic Moisturizer created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar and Co. Product Line",
+      project: "Jabbar & Co. Product Line",
 
       //   index: 0,
     },
@@ -345,7 +345,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Hyaluronic Moisturizer created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar and Co. Product Line",
+      project: "Jabbar & Co. Product Line",
 
       //   index: 0,
     },
@@ -361,7 +361,7 @@ const EXPLORATIONS_IMGS = processImages(
       description: "3D product rendering of a Buki Brush created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar and Co. Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_12: {
@@ -377,7 +377,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Blotting Powder created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar and Co. Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_13: {
@@ -393,7 +393,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Blotting Powder created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar and Co. Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_14: {
@@ -409,7 +409,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Setting Powder created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar and Co. Product Line",
+      project: "Jabbar & Co. Product Line",
 
       //   index: 0,
     },
@@ -426,7 +426,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Setting Powder created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar and Co. Product Line",
+      project: "Jabbar & Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_16: {
@@ -442,7 +442,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of ‘Camera Ready Primer’ created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar and Co. Product Line",
+      project: "Jabbar & Co. Product Line",
 
       //   index: 0,
     },
