@@ -17,11 +17,3 @@ export default function Id({ pop }) {
     </>
   );
 }
-
-
-export async function getStaticPaths() {
-  return {
-    paths: [], // No pre-defined paths
-    fallback: true, // Generate pages on the fly
-  };
-}
