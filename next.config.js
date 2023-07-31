@@ -9,23 +9,13 @@ const nextConfig = {
     loader: "custom",
     loaderFile: "./configs/ImageLoader.js",
     formats: ["image/webp"],
-  },  
+  },
 
   async rewrites() {
     return [
       {
         source: '/Resume',
         destination: '/documents/Sam Giustizia Resume.pdf',
-      },
-    ]
-  },
-
-  async redirects() {
-    return [
-      {
-        source: '/Explorations/:slug*',
-        destination: '/Explorations',
-        permanent: false,
       },
     ]
   },
