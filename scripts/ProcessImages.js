@@ -1,4 +1,4 @@
-import { IMAGE_TYPES, VIDEO_TYPES, ensureArray } from "./GlobalUtilities";
+import { IMAGE_TYPES, VIDEO_TYPES, ensureArray, getProjectId } from "./GlobalUtilities";
 
 function checkForOverlappingIndexes(group, index, name, currentGroup) {
   for (let i = 0; i < currentGroup.length; i++) {
@@ -140,6 +140,19 @@ function collectPropertyValues(groupData, propertyName) {
   }
 }
 
+
+
+function passPropertyToGroup(groupData, propertyName) {
+
+  // if all the images in the group have the same value for the property, then pass that value to the group, otherwise do nothing
+  const allSame = groupData.imgs.every((img) => img[propertyName] === groupData.imgs[0][propertyName]);
+  if (allSame) {
+    groupData[propertyName] = groupData.imgs[0][propertyName];
+  }
+
+
+}
+
 function processGroups(images) {
   const groups = {};
 
@@ -185,6 +198,9 @@ function processGroups(images) {
     combineUniqueProperties(group, "tools");
     combineUniqueProperties(group, "disciplines");
     collectPropertyValues(group, "description");
+    passPropertyToGroup(group, "id");
+    passPropertyToGroup(group, "project");
+    passPropertyToGroup(group, "projectStr");
   }
 
 
@@ -195,8 +211,10 @@ function processImages(images, collection) {
   const processedImages = {};
   collection = collection || "";
   for (const key in images) {
+
+    const image = images[key];
+
     if (images.hasOwnProperty(key)) {
-      const image = images[key];
       const fileExtension = image.src.split(".").pop();
       image.type = fileExtension.toLowerCase();
       image.media = VIDEO_TYPES.includes(image.type) ? "video" : IMAGE_TYPES.includes(image.type) ? "image" : "unknown";
@@ -204,9 +222,29 @@ function processImages(images, collection) {
       image.collection = collection;
       processedImages[key] = image;
     }
+
+    if(collection == "explorations") {
+      const id = getProjectId(image);
+      image.id = id;    
+    }
   }
+
+
+  // good to have for testing edge cases if you ever need to debug
+  // for (const key in processedImages) {
+  //   if (processedImages.hasOwnProperty(key)) {
+  //     const image = processedImages[key];
+  //     if (image.project && !image.group) {
+  //       console.log(image)
+  //       console.log(true);
+  //     }
+  //   }
+  // }
+
   return processedImages;
 }
+
+
 
 
 export { processGroups, processImages, combineUniqueProperties, collectPropertyValues };

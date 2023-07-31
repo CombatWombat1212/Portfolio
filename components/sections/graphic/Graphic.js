@@ -8,6 +8,7 @@ import { getBackgroundClasses } from "../sections_utilities/GetClasses";
 import graphicVideoInit from "./VideoUtilities";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
 import Video from "./Video";
+import { useRouter } from "next/router";
 
 function getColor(color, colors) {
   return color.split("-to-").map((color) => {
@@ -189,25 +190,28 @@ function Graphic(props) {
 
   var buttonClasses = hasButton ? "graphic__container" : "";
 
-  var onClickHandler = (() => {
-    if (lightbox || gallery) {
-      var lightboxImg = img;
-      if (typeof lightbox == "object") {
-        lightboxImg = lightbox;
-      }
-      if (typeof gallery == "object") {
-        lightboxImg = gallery;
-      }
-      // TODO: add loading indicator for lightbox images, and smoother transitions between non-zoomed images and zoomed images
+  // var onClickHandler = (() => {
+  //   if (lightbox || gallery) {
+  //     var lightboxImg = img;
+  //     if (typeof lightbox == "object") {
+  //       lightboxImg = lightbox;
+  //     }
+  //     if (typeof gallery == "object") {
+  //       lightboxImg = gallery;
+  //     }
+  //     // TODO: add loading indicator for lightbox images, and smoother transitions between non-zoomed images and zoomed images
 
-      return () => {
-        pop.setImg(lightboxImg);
-        pop.setZoom(lightboxImg.zoom ? lightboxImg.zoom : false);
-        pop.setOn(true);
-        pop.setType(lightbox ? "lightbox" : gallery ? "gallery" : "lightbox");
-      };
-    }
-  })();
+  //     return () => {
+  //       pop.setImg(lightboxImg);
+  //       pop.setZoom(lightboxImg.zoom ? lightboxImg.zoom : false);
+  //       pop.setOn(true);
+  //       pop.setType(lightbox ? "lightbox" : gallery ? "gallery" : "lightbox");
+  //     };
+  //   }
+  // })();
+
+  const router = useRouter();
+  var onClickHandler = createGraphicClickHandler({router, lightbox, gallery, img, pop});
 
   // var allClasses = `section--graphic graphic ${backgroundClasses} ${className} ${buttonClasses} ${lightbox ? "graphic__lightbox" : ""} ${
   //   isSquare && "graphic__square"
@@ -235,7 +239,6 @@ function Graphic(props) {
     [`--${typePref[0]}h`]: `${height / 16}rem`,
   };
 
-
   const IMAGE_PROPS = {
     // sizes: `(max-width: 480px) 100vw,
     // (max-width: 768px) 100vw,
@@ -247,7 +250,7 @@ function Graphic(props) {
     // (max-width: 5120px) 100vw,
     // 100vw`,
     sizes: `100vw`,
-  }
+  };
 
   var autoplayHTML = typeof autoplayProp === "string" && autoplayProp.includes("scroll") ? false : autoplayProp ? true : false;
 
@@ -296,12 +299,11 @@ function Graphic(props) {
     onLoadingComplete: onLoad,
     ...(isVideo && INNER_COMMON_VIDEO_PROPS),
     ...(isImg && lazy == false && { loading: loading }),
-    ...(isImg && { ...IMAGE_PROPS}),
+    ...(isImg && { ...IMAGE_PROPS }),
     reference: graphicref,
-    'data-transparent': Boolean(img.transparent),
-    'data-fallback': img.fallback ? img.fallback : false,
+    "data-transparent": Boolean(img.transparent),
+    "data-fallback": img.fallback ? img.fallback : false,
   };
-
 
   const renderContent = (Component, innerProps, includeChildren = false) => (
     <Wrapper props={WRAPPER_PROPS} effect={effect}>
@@ -328,6 +330,33 @@ function Wrapper({ props, children, effect }) {
   );
 }
 
+function createGraphicClickHandler({router, lightbox, gallery, img, pop}) {
+
+  const isExploration = router.pathname.includes("Exploration");
+
+  if (lightbox || gallery) {
+    var lightboxImg = img;
+    if (typeof lightbox == "object") {
+      lightboxImg = lightbox;
+    }
+    if (typeof gallery == "object") {
+      lightboxImg = gallery;
+    }
+    // TODO: add loading indicator for lightbox images, and smoother transitions between non-zoomed images and zoomed images
+
+    return () => {
+      pop.setImg(lightboxImg);
+      pop.setZoom(lightboxImg.zoom ? lightboxImg.zoom : false);
+      pop.setOn(true);
+      pop.setType(lightbox ? "lightbox" : gallery ? "gallery" : "lightbox");
+
+      if (isExploration && gallery && lightboxImg.id) {
+        pop.setId(lightboxImg.id);
+      }
+    };
+  }
+}
+
 Effect.displayName = "Effect";
 Graphic.displayName = "Graphic";
 Wrapper.displayName = "Wrapper";
@@ -346,3 +375,5 @@ Graphic.propTypes = {
 };
 
 export default Graphic;
+
+export {createGraphicClickHandler};

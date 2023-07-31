@@ -108,6 +108,7 @@ function GalHeading({ title, subheading, state }) {
 }
 
 const GalInfo = React.memo(function GalInfo({ pop, popclass, elems, nav, handles, state, children }) {
+  
   var title, subheading;
   if (pop.img.project) {
     title = pop.img.project;

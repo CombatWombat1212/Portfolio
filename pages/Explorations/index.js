@@ -1,27 +1,159 @@
 import Seo from "@/components/head/Seo";
 import Section, { Chapter, Column, Graphic, Heading } from "@/components/sections/Sections";
+import { createGraphicClickHandler } from "@/components/sections/graphic/Graphic";
 import CaseStudyPage from "@/components/studies/CaseStudyPage";
+import { ABOUT_IMGS } from "@/data/ABOUT_IMGS";
 import { STUDY_EXPLORATIONS } from "@/data/CASE_STUDIES";
 import { EXPLORATIONS_IMGS, EXPLORATIONS_IMG_GROUPS, EXPLORATIONS_ORDER } from "@/data/EXPLORATIONS_IMGS";
 import { play, stack } from "@/data/ICONS";
-import { IMAGE_TYPES, VIDEO_TYPES, ensureArray } from "@/scripts/GlobalUtilities";
-import { useMemo } from "react";
+import { IMAGE_TYPES, VIDEO_TYPES, ensureArray, scrollToTarget } from "@/scripts/GlobalUtilities";
+import { useRouter } from "next/router";
+import { useEffect, useMemo, useState } from "react";
 
-function Explorations({ pop }) {
+function getProjectTitle(project) {
+  const title =
+    project.projectStr ||
+    project.project ||
+    project.title ||
+    (project.imgs && (project.imgs[0].projectStr || project.imgs[0].project)) ||
+    (project.imgs && project.imgs[0].title) ||
+    project.name;
+
+  return title;
+}
+
+function getProjectDescription(project) {
+  var val = false;
+
+  const isGroup = Boolean(project.imgs);
+
+  function processDescription(description) {
+    let descExists = Boolean(description);
+    let descIsNonEmptyString = typeof description === "string" && description.trim() !== "";
+    let descIsArrayofNonEmptyStrings =
+      Array.isArray(description) && description.every((element) => typeof element === "string" && element.trim() !== "");
+
+    if (descExists && (descIsNonEmptyString || descIsArrayofNonEmptyStrings)) {
+      return Array.isArray(description) ? description.join(" ") : description;
+    }
+
+    return false;
+  }
+
+
+  const target = isGroup ? project.imgs.find((img) => !img.hidden) || project.imgs[0] : project;
+  val = processDescription(target.description) || processDescription(target.alt) || "Gallery image.";
+
+  val = val.trim();
+  if (!val.endsWith(".") && !val.endsWith("!") && !val.endsWith("?")) {
+    val += ".";
+  }
+
+  return val;
+}
+
+function getProjectTags(project) {
+  var val = '';
+  var disciplines = project.disciplines;
+  var tools = project.tools;
+
+  var list = [ 
+    ...disciplines,
+    ...tools,
+  ];
+
+  for (var i = 1; i < list.length; i++) {
+    list[i] = ", #" + list[i];
+  }
+
+  val = "#" + list.join("");
+
+  return val.trim();
+}
+
+function getSeoDescription(title, description, tags) {
+  var buffer = 3;
+  var val = `${description} ${tags}`.trim();
+
+  // If val's length is greater than 160 characters, cut it and add "..."
+  if (val.length > 160) {
+    val = val.substring(0, 160 - buffer) + "...";
+  }
+
+  val = val.trim();
+  if (!val.endsWith(".") && !val.endsWith("!") && !val.endsWith("?")) {
+    val += ".";
+  }
+
+  return val;
+}
+
+
+
+function getGalleryProjectSeo(projects) {
+  projects.forEach((project) => {
+    const title = getProjectTitle(project);
+    const description = getProjectDescription(project);
+    const tags = getProjectTags(project);
+
+    const seoDescription = getSeoDescription(title, description, tags);
+
+    const seo = {
+      title: `Explorations - ${title}`,
+      description: seoDescription,
+      keywords: `Sam Giustizia, Explorations, Portfolio, Gallery, Project`,
+      url: `/Explorations/${project.id}`,
+      img: ABOUT_IMGS.me,
+    };
+
+    project.seo = seo;
+  });
+
+  return projects;
+
+}
+
+function processGalleryContent(images, groups) {
+  const ungroupedImages = Object.values(images).filter((img) => !img.group);
+  const groupedImages = Object.values(groups);
+
+  const GALLERY_CONTENT = getGalleryProjectSeo(
+    [...ungroupedImages, ...groupedImages].map((item) => ({
+      ...item,
+      drawn: false,
+    }))
+  );
+
+  return GALLERY_CONTENT;
+}
+
+function Explorations({ pop, id = false, project = null, setProject = null }) {
   const study = STUDY_EXPLORATIONS;
 
   const disciplines = study.brief.disciplines;
 
-  const ungroupedImages = Object.values(EXPLORATIONS_IMGS).filter((img) => !img.group);
-  const groupedImages = Object.values(EXPLORATIONS_IMG_GROUPS);
-
-  const GALLERY_CONTENT = [...ungroupedImages, ...groupedImages].map((item) => ({
-    ...item,
-    drawn: false,
-  }));
+  const GALLERY_CONTENT = processGalleryContent(EXPLORATIONS_IMGS, EXPLORATIONS_IMG_GROUPS);
 
   const orderedDisciplines = useOrderedDisciplines(disciplines, EXPLORATIONS_ORDER);
   const orderedItems = useOrderedItems(GALLERY_CONTENT, orderedDisciplines, EXPLORATIONS_ORDER);
+
+  const router = useRouter();
+  const [initialPopShown, setInitialPopShown] = useState(false);
+
+  useEffect(() => {
+    if (!id) return;
+    const found = GALLERY_CONTENT.find((item) => item.id === id);
+    if (found) setProject(found);
+  }, [id]);
+
+  useEffect(() => {
+    if (!project || initialPopShown) return;
+    setInitialPopShown(true);
+    const firstImg = (project.imgs && (project.imgs.find((img) => !img.hidden) || project.imgs[0])) || project;
+    document.querySelector(`#${firstImg.id}`).scrollIntoView({ behavior: "smooth", block: "center" });
+    createGraphicClickHandler({ router, lightbox: false, gallery: true, img: firstImg, pop })();
+  }, [project]);
+
 
   return (
     <>
@@ -43,7 +175,7 @@ function Explorations({ pop }) {
                   const { isGroup, type, isVideo, isStack, img, thumb } = getMediaDetails({ item }, { onlyFirst: true });
 
                   return (
-                    <Column key={img.src} className={'gallery--column'}>
+                    <Column key={img.src} className={"gallery--column"}>
                       <Graphic
                         className="gallery--graphic"
                         type={type}
@@ -51,6 +183,7 @@ function Explorations({ pop }) {
                         // {...popup}
                         gallery={img}
                         pop={pop}
+                        id={img.id}
                       />
 
                       {(isVideo || isStack) && (

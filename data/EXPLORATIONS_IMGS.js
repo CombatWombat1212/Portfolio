@@ -1,4 +1,4 @@
-import { processGroups, processImages } from "@/scripts/ProcessImages";
+import { processGalleryContent, processGroups, processImages } from "@/scripts/ProcessImages";
 
 const EXPLORATIONS_IMGS = processImages(
   {
@@ -104,11 +104,11 @@ const EXPLORATIONS_IMGS = processImages(
       height: 1200,
       disciplines: ["3D Design", "Motion Graphics"],
       tools: ["Blender", "Meshroom", "Photoshop"],
-      title: "Grafitti Alley",
       description: "Photogrammetry study of a grafitti covered alleyway in downtown Toronto.",
       group: "to_alleyway",
       hidden: true,
       thumbnail: true,
+      project: "Grafitti Alley"
     },
     to_alleyway_video: {
       name: "to_alleyway_video",
@@ -118,9 +118,9 @@ const EXPLORATIONS_IMGS = processImages(
       height: 1200,
       disciplines: ["3D Design", "Motion Graphics"],
       tools: ["Blender", "Meshroom", "Photoshop"],
-      title: "Grafitti Alley",
       description: "Photogrammetry study of a grafitti covered alleyway in downtown Toronto.",
       group: "to_alleyway",
+      project: "Grafitti Alley"
     },
 
     jabbar_and_co_foundation_01: {
@@ -136,7 +136,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D rendering of a bottle of foundation created for Jabbar & Co. as part of a project to create product renderings for their online store. This bottle is one of 110 different shades of foundation that were included in the project scope.",
       //   study: "",
       group: "foundation_bottles",
-      project: "Jabbar & Co. 110 Shades Line",
+      project: "Jabbar and Co. 110 Shades Line",
       //   index: 0,
     },
     jabbar_and_co_foundation_02: {
@@ -152,7 +152,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D rendering of a bottle of foundation created for Jabbar & Co. as part of a project to create product renderings for their online store. This bottle is one of 110 different shades of foundation that were included in the project scope.",
       //   study: "",
       group: "foundation_bottles",
-      project: "Jabbar & Co. 110 Shades Line",
+      project: "Jabbar and Co. 110 Shades Line",
       //   index: 0,
     },
     jabbar_and_co_foundation_03: {
@@ -168,7 +168,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D rendering of a bottle of foundation created for Jabbar & Co. as part of a project to create product renderings for their online store. This bottle is one of 110 different shades of foundation that were included in the project scope.",
       //   study: "",
       group: "foundation_bottles",
-      project: "Jabbar & Co. 110 Shades Line",
+      project: "Jabbar and Co. 110 Shades Line",
       //   index: 0,
     },
     jabbar_and_co_foundation_video_01: {
@@ -183,7 +183,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1200,
       height: 1200,
       group: "foundation_bottles",
-      project: "Jabbar & Co. 110 Shades Line",
+      project: "Jabbar and Co. 110 Shades Line",
     },
     jabbar_and_co_products_01: {
       name: "jabbar_and_co_products_01",
@@ -198,7 +198,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of a makeup brush created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co. Product Line",
+      project: "Jabbar and Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_02: {
@@ -214,7 +214,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of a tube of Botanical Cleansing Lotion created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co. Product Line",
+      project: "Jabbar and Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_03: {
@@ -230,7 +230,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Botanical Firming Toner created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co. Product Line",
+      project: "Jabbar and Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_04: {
@@ -246,7 +246,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Firming Face And Eye Serum created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co. Product Line",
+      project: "Jabbar and Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_05: {
@@ -262,7 +262,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Hydrating Mango Face Cream created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co. Product Line",
+      project: "Jabbar and Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_06: {
@@ -278,7 +278,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Setting Spray created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co. Product Line",
+      project: "Jabbar and Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_07: {
@@ -294,7 +294,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Anti-Aging Cream created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co. Product Line",
+      project: "Jabbar and Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_08: {
@@ -310,7 +310,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Anti-Aging Cream created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co. Product Line",
+      project: "Jabbar and Co. Product Line",
       thumbnail: true,
 
       //   index: 0,
@@ -328,7 +328,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Hyaluronic Moisturizer created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co. Product Line",
+      project: "Jabbar and Co. Product Line",
 
       //   index: 0,
     },
@@ -345,7 +345,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Hyaluronic Moisturizer created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co. Product Line",
+      project: "Jabbar and Co. Product Line",
 
       //   index: 0,
     },
@@ -361,7 +361,7 @@ const EXPLORATIONS_IMGS = processImages(
       description: "3D product rendering of a Buki Brush created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co. Product Line",
+      project: "Jabbar and Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_12: {
@@ -377,7 +377,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Blotting Powder created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co. Product Line",
+      project: "Jabbar and Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_13: {
@@ -393,7 +393,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Blotting Powder created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co. Product Line",
+      project: "Jabbar and Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_14: {
@@ -409,7 +409,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Setting Powder created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co. Product Line",
+      project: "Jabbar and Co. Product Line",
 
       //   index: 0,
     },
@@ -426,7 +426,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of Setting Powder created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co. Product Line",
+      project: "Jabbar and Co. Product Line",
       //   index: 0,
     },
     jabbar_and_co_products_16: {
@@ -442,7 +442,7 @@ const EXPLORATIONS_IMGS = processImages(
         "3D product rendering of ‘Camera Ready Primer’ created for Jabbar & Co. as part of a project to create images for their online storefront.",
       //   study: "",
       group: "jabbar_and_co_products",
-      project: "Jabbar & Co. Product Line",
+      project: "Jabbar and Co. Product Line",
 
       //   index: 0,
     },
@@ -622,6 +622,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: "",
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
+      projectStr: 'Navigating Obsessive Seas',
       index: 0,
     },
     obsessive_seas_render_05: {
@@ -637,6 +638,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: "",
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
+      projectStr: 'Navigating Obsessive Seas',
       index: 1,
     },
     obsessive_seas_gallery_01: {
@@ -652,6 +654,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: "",
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
+      projectStr: 'Navigating Obsessive Seas',
       index: 2,
     },
     obsessive_seas_render_03: {
@@ -667,6 +670,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: "",
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
+      projectStr: 'Navigating Obsessive Seas',
       index: 3,
     },
     obsessive_seas_measurements_02: {
@@ -680,6 +684,7 @@ const EXPLORATIONS_IMGS = processImages(
       tools: ["Blender", "Photoshop"],
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
+      projectStr: 'Navigating Obsessive Seas',
       index: 4,
     },
     obsessive_seas_gallery_02: {
@@ -695,6 +700,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: "",
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
+      projectStr: 'Navigating Obsessive Seas',
       index: 5,
     },
     obsessive_seas_render_04: {
@@ -710,6 +716,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: "",
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
+      projectStr: 'Navigating Obsessive Seas',
       index: 6,
     },
     obsessive_seas_render_06: {
@@ -725,6 +732,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: "",
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
+      projectStr: 'Navigating Obsessive Seas',
       index: 7,
     },
     obsessive_seas_render_02: {
@@ -740,6 +748,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: "",
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
+      projectStr: 'Navigating Obsessive Seas',
       index: 8,
     },
     obsessive_seas_measurements_01: {
@@ -753,6 +762,7 @@ const EXPLORATIONS_IMGS = processImages(
       tools: ["Blender", "Photoshop"],
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
+      projectStr: 'Navigating Obsessive Seas',
       index: 9,
     },
     obsessive_seas_release: {
@@ -768,6 +778,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: "",
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
+      projectStr: 'Navigating Obsessive Seas',
       index: 10,
       zoom: true,
       aspect: "16/9",
@@ -788,6 +799,7 @@ const EXPLORATIONS_IMGS = processImages(
       group: "virtual_pangea_temp",
       thumbnail: true,
       hidden: true,
+      project: "Virtual Pangea Website"
     },
     virtual_pangea_temp_video: {
       name: "virtual_pangea_temp_video",
@@ -797,13 +809,14 @@ const EXPLORATIONS_IMGS = processImages(
       height: 1080,
       disciplines: ["UX Engineering", "Frontend Development", "UX Design", "UI Design"],
       tools: ["HTML/CSS/JS"],
-      title: "Virtual Pangea Website",
+      // title: "Virtual Pangea Website",
       description: [
         "As Virtual Pangea’s UX Engineer, I was tasked with salvaging our outsourced website.  The product we were delivered was subpar, and left us well behind schedule.",
         "I implemented necessities like navigation, and responsivity. Content blocks and features that were missing or broken, were rebuilt.",
         "To the eye of the user, I added animations and passed over styling and typesetting, making a far more digestible experience. Under the hood, I added SEO, and optimized performance.",
       ],
       group: "virtual_pangea_temp",
+      project: "Virtual Pangea Website"
     },
 
     crypic_pixel_video_01: {
@@ -945,6 +958,7 @@ const EXPLORATIONS_IMGS = processImages(
       width: 1024,
       height: 1024,
       group: "cryptic_pixel",
+      project: "Cryptic Pixel",
       thumbnail: true,
       hidden: true,
     },
@@ -1083,6 +1097,7 @@ const EXPLORATIONS_IMGS = processImages(
       group: "killer_mike",
       hidden: true,
       thumbnail: true,
+      project:"Kinetic Typography",
     },
     killer_mike_motion_graphic_thumbnail_02: {
       name: "killer_mike_motion_graphic_thumbnail_02",
@@ -1092,6 +1107,7 @@ const EXPLORATIONS_IMGS = processImages(
       height: 1080,
       group: "killer_mike",
       hidden: true,
+      project:"Kinetic Typography",
     },
     killer_mike_motion_graphic_video: {
       name: "killer_mike_motion_graphic_video",
@@ -1101,13 +1117,13 @@ const EXPLORATIONS_IMGS = processImages(
       height: 1080,
       disciplines: ["Motion Graphics"],
       tools: ["After Effects", "Adobe Illustrator", "Photoshop"],
-      title: "Kinetic Typography",
       description: [
         "I set out to create a kinetic typography animation that enhanced an audio clip without overshadowing its core message.",
         "I refined the visual style through iteration, storyboarding, and embracing feedback. Each shot features engaging graphics that complement the tone and words spoken.",
         "This project pushed my skills in After Effects at every turn.  Thankfully, my passion for the subject and medium kept me motivated throughout.",
       ],
       group: "killer_mike",
+      project:"Kinetic Typography",
     },
     makeright_presentation_thumbnail: {
       name: "makeright_presentation_thumbnail",
@@ -1118,6 +1134,7 @@ const EXPLORATIONS_IMGS = processImages(
       group: "makeright_presentation",
       hidden: true,
       thumbnail: true,
+      project: "MakeRight Presentation"
     },
     makeright_presentation_video: {
       name: "makeright_presentation_video",
@@ -1135,6 +1152,7 @@ const EXPLORATIONS_IMGS = processImages(
       ],
       study: "makeright",
       group: "makeright_presentation",
+      project: "MakeRight Presentation"
     },
 
     // makeright_presentation_video: {
@@ -1597,6 +1615,7 @@ const EXPLORATIONS_IMGS = processImages(
       group: "makeright_final",
       hidden: true,
       thumbnail: true,
+      project: "MakeRight",
     },
     // TODO: uncomment once we’re compressing
     pano_01_house: {
@@ -1608,7 +1627,8 @@ const EXPLORATIONS_IMGS = processImages(
       disciplines: ["Photography"],
       tools: ["Photoshop", "Lightroom"],
       // group: "montreal_panos",
-      project: "Farmhouse",
+      // project: "Farmhouse",
+      title: "Farmhouse",
     },
     pano_02_hill: {
       name: "pano_02_hill",
@@ -1619,7 +1639,8 @@ const EXPLORATIONS_IMGS = processImages(
       disciplines: ["Photography"],
       tools: ["Photoshop", "Lightroom"],
       // group: "montreal_panos",
-      project: "Hill",
+      // project: "Hill",
+      title: "Hill",
     },
     pano_03_neighborhood: {
       name: "pano_03_neighborhood",
@@ -1630,7 +1651,8 @@ const EXPLORATIONS_IMGS = processImages(
       disciplines: ["Photography"],
       tools: ["Photoshop", "Lightroom"],
       // group: "montreal_panos",
-      project: "Neighborhood",
+      // project: "Neighborhood",
+      title: "Neighborhood",
     },
 
     // pano_01_house: {
@@ -1718,5 +1740,11 @@ const EXPLORATIONS_ORDER = {
   },
 };
 
-export { EXPLORATIONS_IMGS, EXPLORATIONS_IMG_GROUPS };
+
+
+
+
+
+
+export { EXPLORATIONS_IMGS, EXPLORATIONS_IMG_GROUPS};
 export { EXPLORATIONS_ORDER };

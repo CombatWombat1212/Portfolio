@@ -1,18 +1,26 @@
 import SEO_DATA from "@/data/SEO_DATA";
+import { getProjectId } from "@/scripts/GlobalUtilities";
 import Head from "next/head";
 
-function Seo({ page: pageName }) {
-  const page = SEO_DATA[pageName];
+
+
+
+
+function Seo({ page: pageName, project }) {
+
+  const data = SEO_DATA[pageName];
+
   return (
     <>
-      <Info page={page} />
-      <Preview page={page} />
+      <Info data={data} />
+      <Preview data={data} /> 
     </>
   );
 }
 
-function Info({ page }) {
-  const { title, description, keywords } = page;
+function Info({ data }) {
+
+  const { title, description, keywords } = data;
 
   const Meta = ({ name, content, property }) => (
     <meta key={name || property} {...(name ? { name: name } : {})} {...(property ? { property: property } : {})} content={content} />
@@ -24,13 +32,12 @@ function Info({ page }) {
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
       <meta name="theme-color" content="#074391" />
-
     </Head>
   );
 }
 
-function Preview({ page }) {
-  const { title, description, img, imgUrl, url } = page;
+function Preview({ data }) {
+  const { title, description, img, imgUrl, url } = data;
   return (
     <Head>
       <meta property="og:type" content="website" />

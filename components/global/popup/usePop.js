@@ -15,6 +15,8 @@ function usePop() {
   const [popupDrawn, setPopupDrawn] = useState(false);
   const [popupSeekCooldown, setPopupSeekCooldown] = useState(false);
   const [popupSeekDir, setPopupSeekDir] = useState("left");
+  const [popupId, setPopupId] = useState(false);
+
   const { isntFallback, isntFirefox, isntSafari } = useIsntFallback();
 
   const [imgReady, setImgReady] = useState(false);
@@ -53,6 +55,8 @@ function usePop() {
     setImgDrawn: setPopupImgDrawn,
     infoDrawn: popupInfoDrawn,
     setInfoDrawn: setPopupInfoDrawn,
+    id: popupId,
+    setId: setPopupId,
     isntFallback,
     isntFirefox,
     isntSafari,

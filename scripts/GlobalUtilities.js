@@ -391,20 +391,21 @@ function conditionalOrder(condition, elements) {
   return condition ? elements.filter(Boolean) : elements.slice(1).concat(elements.slice(0, 1)).filter(Boolean);
 }
 
-function isElementNearTop(el, threshold = 200) {
+function isElementNearTop(el, {threshold = 200} = {}) {
   const rect = el.getBoundingClientRect();
   return rect.top >= 0 && rect.top <= threshold;
 }
 
-function scrollToTarget(target, attempts = 0, maxAttempts = 10, behavior = "smooth") {
-  target.scrollIntoView({ behavior: behavior });
+function scrollToTarget(target, {attempts = 0, maxAttempts = 10, behavior = "smooth", block = "start" } = {}) {
+
+  target.scrollIntoView({ behavior: behavior, block: block });
 
   if (attempts < maxAttempts) {
     const timeoutId = setTimeout(() => {
       const targetNearTop = isElementNearTop(target);
 
       if (!targetNearTop) {
-        scrollToTarget(target, attempts + 1, maxAttempts);
+        scrollToTarget(target, {attempts: attempts + 1, maxAttempts: maxAttempts, block: block});
       } else {
         clearTimeout(timeoutId);
       }
@@ -521,6 +522,22 @@ class ClassList {
   }
 }
 
+
+
+function getProjectId(image){
+
+  var name = image.projectStr || image.project || image.group || image.title;
+
+  let id = name.toLowerCase();
+  id = id.replace(/\./g, "");
+  id = id.replace(/\s/g, "-");
+  id = id.replace(/_/g, "-");
+  id = id.replace(/[^\w-]/g, "");
+
+  return id;
+}
+
+
 export {
   addStyleNonDestructive,
   addAttrNonDestructive,
@@ -547,6 +564,7 @@ export {
   scrollToTarget,
   cooldown,
   getClientXFromEvent,
+  getProjectId,
   ClassList,
   RESIZE_TIMEOUT,
   VIDEO_TYPES,
