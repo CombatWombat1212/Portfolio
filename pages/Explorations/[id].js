@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 export default function Id({ pop }) {
   const router = useRouter();
   const { id } = router.query;
-  console.log(router.query);
   const [project, setProject] = useState(null);
 
   // removed seo for now, it needs more work to get it to work with dynamic pages

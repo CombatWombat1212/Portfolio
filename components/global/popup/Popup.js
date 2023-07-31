@@ -192,48 +192,24 @@ function Popup({ pop }) {
     }, delay);
   }, [fallbackClass]);
 
-
-
-
-
-  
   useEffect(() => {
-    let hasRun = false;
-  
-    const handleLoad = () => {
-      if (hasRun) return;
-  
-      let currentId = window.location.pathname.split("/")[2]; // get current id from url
-  
-      if (pop.id) {
-        if (pop.id !== currentId) {
-          window.history.replaceState({}, "", `/Explorations/${pop.id}`);
-          currentId = pop.id; // update current id
-        }
-      } else {
-        // when pop.id is falsy
-        window.history.replaceState({}, "", `/Explorations`);
-        currentId = ""; // update current id
+    // only attempt to access window when in the browser (i.e., not server-side)
+    if (typeof window == "undefined") return;
+
+    let currentId = window.location.pathname.split("/")[2]; // get current id from url
+
+    if (pop.id) {
+      if (pop.id !== currentId) {
+        window.history.replaceState({}, "", `/Explorations/${pop.id}`);
+        currentId = pop.id; // update current id
       }
-  
-      hasRun = true;
-    };
-  
-    if (typeof window !== "undefined") {
-      window.addEventListener("load", handleLoad);
+    } else {
+      // when pop.id is falsy
+      window.history.replaceState({}, "", `/Explorations`);
+      currentId = ""; // update current id
     }
-  
-    // Cleanup function
-    return () => {
-      if (typeof window !== "undefined") {
-        window.removeEventListener("load", handleLoad);
-      }
-    };
   }, [pop.id]);
-  
-  
-  
-  
+
 
   return (
     <>
