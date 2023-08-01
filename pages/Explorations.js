@@ -134,28 +134,8 @@ function Explorations({ pop }) {
 
   const [initialPopShown, setInitialPopShown] = useState(false);
 
-  // const router = useRouter();
-  // const [initialPopShown, setInitialPopShown] = useState(false);
 
-  // const { ignore, setIgnore } = useIntercept();
-
-  // useEffect(() => {
-  //   setIgnore(true);
-  //   console.log("set");
-  //   return () => {
-  //     setIgnore(false);
-  //     console.log("unset");
-  //   };
-  // }, []);
-
-  // console.log(router);
-
-  // useEffect(() => {
-  //   if (!id) return;
-  //   const found = GALLERY_CONTENT.find((item) => item.id === id);
-  //   if (found) setProject(found);
-  // }, [id]);
-
+  
   const router = useRouter();
   useEffect(() => {
     const project = router.asPath.includes("Explorations?") ? router.asPath.split("=")[1] : false;
