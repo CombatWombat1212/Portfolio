@@ -204,7 +204,8 @@ function Popup({ pop }) {
 
     if (pop.id) {
       if (pop.id !== currentId) {
-        window.history.replaceState({}, "", `/Explorations?project=${pop.id}`);
+        // window.history.replaceState({}, "", `/Explorations?project=${pop.id}`);
+        window.history.replaceState({}, "", `/Explorations/${pop.id}`);
         currentId = pop.id; // update current id
       }
     } else {
