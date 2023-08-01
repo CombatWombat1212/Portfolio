@@ -132,10 +132,10 @@ function Explorations({ pop, project = null, setProject = null }) {
   const orderedDisciplines = useOrderedDisciplines(disciplines, EXPLORATIONS_ORDER);
   const orderedItems = useOrderedItems(GALLERY_CONTENT, orderedDisciplines, EXPLORATIONS_ORDER);
 
-  const router = useRouter();
-  const [initialPopShown, setInitialPopShown] = useState(false);
+  // const router = useRouter();
+  // const [initialPopShown, setInitialPopShown] = useState(false);
 
-  const { ignore, setIgnore } = useIntercept();
+  // const { ignore, setIgnore } = useIntercept();
 
   // useEffect(() => {
   //   setIgnore(true);
@@ -154,17 +154,21 @@ function Explorations({ pop, project = null, setProject = null }) {
   //   if (found) setProject(found);
   // }, [id]);
 
-  // useEffect(() => {
-  //   if (!project || initialPopShown) return;
-  //   setInitialPopShown(true);
-  //   const firstImg = (project.imgs && (project.imgs.find((img) => !img.hidden) || project.imgs[0])) || project;
-  //   document.querySelector(`#${firstImg.id}`).scrollIntoView({ behavior: "smooth", block: "center" });
-  //   createGraphicClickHandler({ router, lightbox: false, gallery: true, img: firstImg, pop })();
-  // }, [project]);
 
-  const thingOnClick = (e) => {
-    console.log("set");
-  };
+  const router = useRouter();
+  useEffect(() => {
+    console.log(router);
+    if (!project || initialPopShown) return;
+    setInitialPopShown(true);
+    const firstImg = (project.imgs && (project.imgs.find((img) => !img.hidden) || project.imgs[0])) || project;
+    document.querySelector(`#${firstImg.id}`).scrollIntoView({ behavior: "smooth", block: "center" });
+    createGraphicClickHandler({ router, lightbox: false, gallery: true, img: firstImg, pop })();
+  }, []);
+
+
+  // const thingOnClick = (e) => {
+  //   console.log("set");
+  // };
 
   return (
     <>
@@ -187,7 +191,7 @@ function Explorations({ pop, project = null, setProject = null }) {
 
                   return (
                     <Column key={img.src} className={"gallery--column"}>
-                      <DLink
+                      {/* <DLink
                         href={`/Explorations?id=${img.id}`}
                         onClick={() => {
                           // setIgnore(true);
@@ -195,14 +199,14 @@ function Explorations({ pop, project = null, setProject = null }) {
                           //   setIgnore(false);
                           // }, 0);
                           createGraphicClickHandler({ router, lightbox: false, gallery: true, img: img, pop })();
-                        }}>
+                        }}> */}
                         <Graphic
                           className="gallery--graphic"
                           type={type}
                           img={thumb}
                           // {...popup}
-                          // gallery={img}
-                          // pop={pop}
+                          gallery={img}
+                          pop={pop}
                           id={img.id}
                           // onClick={thingOnClick}
                         />
@@ -215,7 +219,7 @@ function Explorations({ pop, project = null, setProject = null }) {
                             </div>
                           </>
                         )}
-                      </DLink>{" "}
+                      {/* </DLink> */}
                     </Column>
                   );
                 })}
