@@ -49,14 +49,9 @@ function DLink({ reference, color, onClick, target="_self", ...props }) {
     if (isExternal || isMail) return;
     e.preventDefault();
     actualRef.current.blur();
-    if (isNewLink) {
-      console.log('intercepted')
-      setIntercept(true);
-    }
+    if (isNewLink) setIntercept(true);
     setTimeout(() => {
-      if (isNewLink) {router.push(href);
-        console.log('pushed')
-      }
+      if (isNewLink) router.push(href);
     }, LOADING_DURATION * 1000);
   };
 
