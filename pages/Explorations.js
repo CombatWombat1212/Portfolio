@@ -2,13 +2,15 @@ import Seo from "@/components/head/Seo";
 import Section, { Chapter, Column, Graphic, Heading } from "@/components/sections/Sections";
 import { createGraphicClickHandler } from "@/components/sections/graphic/Graphic";
 import CaseStudyPage from "@/components/studies/CaseStudyPage";
+import DLink from "@/components/utilities/DynamicLink";
 import { ABOUT_IMGS } from "@/data/ABOUT_IMGS";
 import { STUDY_EXPLORATIONS } from "@/data/CASE_STUDIES";
 import { EXPLORATIONS_IMGS, EXPLORATIONS_IMG_GROUPS, EXPLORATIONS_ORDER } from "@/data/EXPLORATIONS_IMGS";
 import { play, stack } from "@/data/ICONS";
 import { IMAGE_TYPES, VIDEO_TYPES, ensureArray, scrollToTarget } from "@/scripts/GlobalUtilities";
+import { useIntercept } from "@/scripts/contexts/InterceptContext";
 import { useRouter } from "next/router";
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 function getProjectTitle(project) {
   const title =
@@ -40,7 +42,6 @@ function getProjectDescription(project) {
     return false;
   }
 
-
   const target = isGroup ? project.imgs.find((img) => !img.hidden) || project.imgs[0] : project;
   val = processDescription(target.description) || processDescription(target.alt) || "Gallery image.";
 
@@ -53,14 +54,11 @@ function getProjectDescription(project) {
 }
 
 function getProjectTags(project) {
-  var val = '';
+  var val = "";
   var disciplines = project.disciplines;
   var tools = project.tools;
 
-  var list = [ 
-    ...disciplines,
-    ...tools,
-  ];
+  var list = [...disciplines, ...tools];
 
   for (var i = 1; i < list.length; i++) {
     list[i] = ", #" + list[i];
@@ -88,8 +86,6 @@ function getSeoDescription(title, description, tags) {
   return val;
 }
 
-
-
 function getGalleryProjectSeo(projects) {
   projects.forEach((project) => {
     const title = getProjectTitle(project);
@@ -110,7 +106,6 @@ function getGalleryProjectSeo(projects) {
   });
 
   return projects;
-
 }
 
 function processGalleryContent(images, groups) {
@@ -127,7 +122,7 @@ function processGalleryContent(images, groups) {
   return GALLERY_CONTENT;
 }
 
-function Explorations({ pop, id = false, project = null, setProject = null }) {
+function Explorations({ pop, project = null, setProject = null }) {
   const study = STUDY_EXPLORATIONS;
 
   const disciplines = study.brief.disciplines;
@@ -140,20 +135,36 @@ function Explorations({ pop, id = false, project = null, setProject = null }) {
   const router = useRouter();
   const [initialPopShown, setInitialPopShown] = useState(false);
 
-  useEffect(() => {
-    if (!id) return;
-    const found = GALLERY_CONTENT.find((item) => item.id === id);
-    if (found) setProject(found);
-  }, [id]);
+  const { ignore, setIgnore } = useIntercept();
 
-  useEffect(() => {
-    if (!project || initialPopShown) return;
-    setInitialPopShown(true);
-    const firstImg = (project.imgs && (project.imgs.find((img) => !img.hidden) || project.imgs[0])) || project;
-    document.querySelector(`#${firstImg.id}`).scrollIntoView({ behavior: "smooth", block: "center" });
-    createGraphicClickHandler({ router, lightbox: false, gallery: true, img: firstImg, pop })();
-  }, [project]);
+  // useEffect(() => {
+  //   setIgnore(true);
+  //   console.log("set");
+  //   return () => {
+  //     setIgnore(false);
+  //     console.log("unset");
+  //   };
+  // }, []);
 
+  // console.log(router);
+
+  // useEffect(() => {
+  //   if (!id) return;
+  //   const found = GALLERY_CONTENT.find((item) => item.id === id);
+  //   if (found) setProject(found);
+  // }, [id]);
+
+  // useEffect(() => {
+  //   if (!project || initialPopShown) return;
+  //   setInitialPopShown(true);
+  //   const firstImg = (project.imgs && (project.imgs.find((img) => !img.hidden) || project.imgs[0])) || project;
+  //   document.querySelector(`#${firstImg.id}`).scrollIntoView({ behavior: "smooth", block: "center" });
+  //   createGraphicClickHandler({ router, lightbox: false, gallery: true, img: firstImg, pop })();
+  // }, [project]);
+
+  const thingOnClick = (e) => {
+    console.log("set");
+  };
 
   return (
     <>
@@ -176,24 +187,35 @@ function Explorations({ pop, id = false, project = null, setProject = null }) {
 
                   return (
                     <Column key={img.src} className={"gallery--column"}>
-                      <Graphic
-                        className="gallery--graphic"
-                        type={type}
-                        img={thumb}
-                        // {...popup}
-                        gallery={img}
-                        pop={pop}
-                        id={img.id}
-                      />
+                      <DLink
+                        href={`/Explorations?id=${img.id}`}
+                        onClick={() => {
+                          // setIgnore(true);
+                          // setTimeout(() => {
+                          //   setIgnore(false);
+                          // }, 0);
+                          createGraphicClickHandler({ router, lightbox: false, gallery: true, img: img, pop })();
+                        }}>
+                        <Graphic
+                          className="gallery--graphic"
+                          type={type}
+                          img={thumb}
+                          // {...popup}
+                          // gallery={img}
+                          // pop={pop}
+                          id={img.id}
+                          // onClick={thingOnClick}
+                        />
 
-                      {(isVideo || isStack) && (
-                        <>
-                          <div className="gallery--icons">
-                            {isVideo && <Graphic type="mask" img={play} className="gallery--icon" />}
-                            {isStack && <Graphic type="mask" img={stack} className="gallery--icon" />}
-                          </div>
-                        </>
-                      )}
+                        {(isVideo || isStack) && (
+                          <>
+                            <div className="gallery--icons">
+                              {isVideo && <Graphic type="mask" img={play} className="gallery--icon" />}
+                              {isStack && <Graphic type="mask" img={stack} className="gallery--icon" />}
+                            </div>
+                          </>
+                        )}
+                      </DLink>{" "}
                     </Column>
                   );
                 })}

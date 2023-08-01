@@ -193,25 +193,57 @@ function Popup({ pop }) {
   }, [fallbackClass]);
 
   
-  useEffect(() => {
-    // only attempt to access window when in the browser (i.e., not server-side)
-    if (typeof window == "undefined") return;
 
-    let currentId = window.location.pathname.split("/")[2]; // get current id from url
+
+
+  // useEffect(() => {
+  //   // only attempt to access window when in the browser (i.e., not server-side)
+  //   if (typeof window == "undefined") return;
+
+  //   let currentId = window.location.pathname.split("/")[2]; // get current id from url
+
+  //   if (pop.id) {
+  //     if (pop.id !== currentId) {
+  //       window.history.replaceState({}, "", `/Explorations/${pop.id}`);
+  //       currentId = pop.id; // update current id
+  //     }
+  //   } else {
+  //     // when pop.id is falsy
+  //     window.history.replaceState({}, "", `/Explorations`);
+  //     currentId = ""; // update current id
+  //   }
+  // }, [pop.id]);
+
+  
+
+  const router = useRouter(); // get the router object
+
+  useEffect(() => {
+    // Extract the currentId from the query parameters
+    let currentId = router.query.id; 
 
     if (pop.id) {
       if (pop.id !== currentId) {
-        window.history.replaceState({}, "", `/Explorations/${pop.id}`);
+        // When changing only the query parameters, we can use shallow routing
+        router.push({
+          pathname: router.pathname,
+          query: { ...router.query, id: pop.id },
+        }, undefined, { shallow: true });
         currentId = pop.id; // update current id
       }
     } else {
-      // when pop.id is falsy
-      window.history.replaceState({}, "", `/Explorations`);
+      // When pop.id is falsy, remove the id from the query parameters
+      const { id, ...restQuery } = router.query;
+      router.push({
+        pathname: router.pathname,
+        query: restQuery,
+      }, undefined, { shallow: true });
       currentId = ""; // update current id
     }
   }, [pop.id]);
+    
 
-  
+
 
 
   return (
@@ -455,11 +487,13 @@ function Wrapper({ pop, bp }) {
     mobileGallery: stateMobileGallery,
   };
 
-  const { routeChanging } = useIntercept();
+  const { routeChanging, ignore } = useIntercept();
+  // close popup on route change
   useEffect(() => {
     if (!routeChanging) return;
+    // if (ignore) return;
     handles.close();
-  }, [routeChanging]);
+  }, [routeChanging, ignore]);
 
   return (
     <>

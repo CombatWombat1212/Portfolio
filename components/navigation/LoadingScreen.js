@@ -1,5 +1,5 @@
 // LoadingScreen.js
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { v4 as uuidv4 } from "uuid";
 import { useResponsive } from "@/scripts/contexts/ResponsiveContext";
@@ -23,7 +23,7 @@ const variants = {
 const LOADING_DURATION = 0.3;
 
 function LoadingScreen() {
-  const { intercept, setIntercept, routeChanging } = useIntercept();
+  const { intercept, routeChanging } = useIntercept();
 
   const { loading } = useResponsive();
   const loadingScreen = useRef(null);
@@ -35,22 +35,19 @@ function LoadingScreen() {
     document.body.classList.add("noscroll");
     setTimeout(() => window.scroll(0, 0), 0);
   };
-
   const routeChangeEnd = () => {
     document.documentElement.classList.remove("scrollauto");
     document.body.classList.remove("noscroll");
   };
-
   const routeChangeStartHandler = (url) => {
     routeChangeStart();
   };
-
   const routeChangeEndHandler = () => {
     if (!loading) {
       routeChangeEnd();
     }
   };
-
+  
   useEffect(() => {
     if (routeChanging) routeChangeStartHandler();
     else routeChangeEndHandler();

@@ -13,16 +13,20 @@ function DLink({ reference, color, onClick, target="_self", ...props }) {
   const { href, children, ...otherProps } = props;
   const [isLink, setIsLink] = useState(href && href.length > 0);
   const [isAnchor, setIsAnchor] = useState(false);
+  const [isParameter, setParameter] = useState(false);
   const [isNewLink, setIsNewLink] = useState(false);
-  const { intercept, setIntercept } = useIntercept();
+  const { intercept, setIntercept, setDestination, ignore, setIgnore } = useIntercept();
   const isExternal = target == "_blank";
   const isMail = href && href.startsWith("mailto:");
 
   useEffect(() => {
     setIsLink(href && href.length > 0);
     const checkAnchor = href && (href.startsWith("#") || href.startsWith(`${router.pathname}#`));
+    const checkParameter = href && (href.startsWith("?") || href.startsWith(`${router.pathname}?`));
     if (checkAnchor) setIsAnchor(true);
     else setIsAnchor(false);
+    if (checkParameter) setParameter(true);
+    else setParameter(false);
   }, [href, router.pathname]);
 
   useEffect(() => {
@@ -41,18 +45,24 @@ function DLink({ reference, color, onClick, target="_self", ...props }) {
   };
 
   const delayedOnClick = (e) => {
-    if (isAnchor || !isLink) return;
+    if (isAnchor || isParameter || !isLink) return;
     if (isExternal || isMail) return;
     e.preventDefault();
     actualRef.current.blur();
-    if (isNewLink) setIntercept(true);
+    if (isNewLink) {
+      console.log('intercepted')
+      setIntercept(true);
+    }
     setTimeout(() => {
-      if (isNewLink) router.push(href);
+      if (isNewLink) {router.push(href);
+        console.log('pushed')
+      }
     }, LOADING_DURATION * 1000);
   };
 
   const onClickHandler = (e) => {
     defaultOnClick(e);
+    // if (isLink) setDestination(href);
     if (isLink) delayedOnClick(e);
   };
 
