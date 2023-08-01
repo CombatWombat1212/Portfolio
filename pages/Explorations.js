@@ -122,7 +122,7 @@ function processGalleryContent(images, groups) {
   return GALLERY_CONTENT;
 }
 
-function Explorations({ pop, project = null, setProject = null }) {
+function Explorations({ pop }) {
   const study = STUDY_EXPLORATIONS;
 
   const disciplines = study.brief.disciplines;
@@ -131,6 +131,8 @@ function Explorations({ pop, project = null, setProject = null }) {
 
   const orderedDisciplines = useOrderedDisciplines(disciplines, EXPLORATIONS_ORDER);
   const orderedItems = useOrderedItems(GALLERY_CONTENT, orderedDisciplines, EXPLORATIONS_ORDER);
+
+  const [initialPopShown, setInitialPopShown] = useState(false);
 
   // const router = useRouter();
   // const [initialPopShown, setInitialPopShown] = useState(false);
@@ -154,21 +156,24 @@ function Explorations({ pop, project = null, setProject = null }) {
   //   if (found) setProject(found);
   // }, [id]);
 
-
   const router = useRouter();
   useEffect(() => {
-    console.log(router);
-    if (!project || initialPopShown) return;
+    const project = router.asPath.includes("Explorations?") ? router.asPath.split("=")[1] : false;
+    const found = project ? GALLERY_CONTENT.find((item) => item.id === project) : false;
+    if (!project || !found || initialPopShown) return;
+
     setInitialPopShown(true);
-    const firstImg = (project.imgs && (project.imgs.find((img) => !img.hidden) || project.imgs[0])) || project;
-    document.querySelector(`#${firstImg.id}`).scrollIntoView({ behavior: "smooth", block: "center" });
-    createGraphicClickHandler({ router, lightbox: false, gallery: true, img: firstImg, pop })();
+    const img = (found.imgs && (found.imgs.find((img) => !img.hidden) || found.imgs[0])) || found;
+
+    setTimeout(() => {
+    document.querySelector(`#${img.id}`).scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 0);
+
+    setTimeout(() => {
+    createGraphicClickHandler({ router, lightbox: false, gallery: true, img: img, pop })();
+    }, 100);
   }, []);
 
-
-  // const thingOnClick = (e) => {
-  //   console.log("set");
-  // };
 
   return (
     <>
@@ -191,35 +196,24 @@ function Explorations({ pop, project = null, setProject = null }) {
 
                   return (
                     <Column key={img.src} className={"gallery--column"}>
-                      {/* <DLink
-                        href={`/Explorations?id=${img.id}`}
-                        onClick={() => {
-                          // setIgnore(true);
-                          // setTimeout(() => {
-                          //   setIgnore(false);
-                          // }, 0);
-                          createGraphicClickHandler({ router, lightbox: false, gallery: true, img: img, pop })();
-                        }}> */}
-                        <Graphic
-                          className="gallery--graphic"
-                          type={type}
-                          img={thumb}
-                          // {...popup}
-                          gallery={img}
-                          pop={pop}
-                          id={img.id}
-                          // onClick={thingOnClick}
-                        />
+                      <Graphic
+                        className="gallery--graphic"
+                        type={type}
+                        img={thumb}
+                        // {...popup}
+                        gallery={img}
+                        pop={pop}
+                        id={img.id}
+                      />
 
-                        {(isVideo || isStack) && (
-                          <>
-                            <div className="gallery--icons">
-                              {isVideo && <Graphic type="mask" img={play} className="gallery--icon" />}
-                              {isStack && <Graphic type="mask" img={stack} className="gallery--icon" />}
-                            </div>
-                          </>
-                        )}
-                      {/* </DLink> */}
+                      {(isVideo || isStack) && (
+                        <>
+                          <div className="gallery--icons">
+                            {isVideo && <Graphic type="mask" img={play} className="gallery--icon" />}
+                            {isStack && <Graphic type="mask" img={stack} className="gallery--icon" />}
+                          </div>
+                        </>
+                      )}
                     </Column>
                   );
                 })}
