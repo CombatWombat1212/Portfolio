@@ -201,17 +201,20 @@ function Popup({ pop }) {
     // only attempt to access window when in the browser (i.e., not server-side)
     if (typeof window == "undefined") return;
 
+    let currentPath = window.location.pathname.split("/")[1]; // get current path from url
     let currentId = window.location.pathname.split("/")[2]; // get current id from url
 
-    if (pop.id) {
-      if (pop.id !== currentId) {
-        window.history.replaceState({}, "", `/Explorations?project=${pop.id}`);
-        currentId = pop.id; // update current id
+    if (currentPath.toLowerCase().includes('explorations')) {
+      if (pop.id) {
+        if (pop.id !== currentId) {
+          window.history.replaceState({}, "", `/Explorations?project=${pop.id}`);
+          currentId = pop.id; // update current id
+        }
+      } else {
+        // when pop.id is falsy
+        window.history.replaceState({}, "", `/Explorations`);
+        currentId = ""; // update current id
       }
-    } else {
-      // when pop.id is falsy
-      window.history.replaceState({}, "", `/Explorations`);
-      currentId = ""; // update current id
     }
   }, [pop.id]);
 
