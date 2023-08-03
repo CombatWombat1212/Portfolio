@@ -11742,6 +11742,7 @@ h3 + .studypanel--paragraph {
 
 #Koalako #Overview--Exploration .section--graphic, #Koalako #Overview--Privacy .section--graphic, #Koalako #Overview--Wordly .section--graphic {
   margin-top: 0rem;
+  min-height: 1rem;
 }
 
 #Koalako #Overview--Exploration .section--graphic .graphic--img, #Koalako #Overview--Privacy .section--graphic .graphic--img, #Koalako #Overview--Wordly .section--graphic .graphic--img {
@@ -11783,7 +11784,6 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 61.9375em) {
   #Koalako #Overview--Exploration .solution--graphics, #Koalako #Overview--Privacy .solution--graphics, #Koalako #Overview--Wordly .solution--graphics {
     order: 1;
-    min-height: 1rem;
   }
 }
 

@@ -208,6 +208,7 @@
 
         &--graphic {
           margin-top: 0rem;
+          min-height:1rem;
 
           .graphic--img {
             height: fit-content;
@@ -239,12 +240,10 @@
         &--graphics {
           @include flex-row-between;
           gap: 2rem;
-
           align-items: center;
 
           @include lg-down {
             order: 1;
-            min-height:1rem;
           }
         }
       }
