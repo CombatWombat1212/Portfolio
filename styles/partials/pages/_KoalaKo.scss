@@ -244,6 +244,7 @@
 
           @include lg-down {
             order: 1;
+            min-height:1rem;
           }
         }
       }

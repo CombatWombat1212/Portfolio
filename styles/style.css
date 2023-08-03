@@ -11783,6 +11783,7 @@ h3 + .studypanel--paragraph {
 @media screen and (max-width: 61.9375em) {
   #Koalako #Overview--Exploration .solution--graphics, #Koalako #Overview--Privacy .solution--graphics, #Koalako #Overview--Wordly .solution--graphics {
     order: 1;
+    min-height: 1rem;
   }
 }
 
