@@ -55,15 +55,21 @@ function FooterLink({ href, name, className, target  }) {
 }
 
 function Contact() {
+
+
   const { isBpOrUp } = useResponsiveUtils({ debouceTime: 200 });
 
-  const width = useScreenWidth({ debounceTime: 200, checkIf: isBpOrUp("xl") });
+  const width = useScreenWidth({ debounceTime: 0, checkIf: isBpOrUp("xl") });
   const [ml, setMl] = useState(0);
 
   useEffect(() => {
-    const ml = splitPx(getComputedStyle(document.querySelector(".nav--container")).getPropertyValue("margin-left"));
+    const navCon = document.querySelector(".nav--container");
+    const margLeft = splitPx(getComputedStyle(navCon).getPropertyValue("margin-left"));
+    const ml = margLeft == 0 ? navCon.getBoundingClientRect().left : margLeft;
     setMl(ml);
   }, [width]);
+
+
 
   return (
     <>
