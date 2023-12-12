@@ -1,3 +1,4 @@
+import DLink from "@/components/utilities/DynamicLink";
 import { processGalleryContent, processGroups, processImages } from "@/scripts/ProcessImages";
 
 const EXPLORATIONS_IMGS = processImages(
@@ -108,7 +109,7 @@ const EXPLORATIONS_IMGS = processImages(
       group: "to_alleyway",
       hidden: true,
       thumbnail: true,
-      project: "Grafitti Alley"
+      project: "Grafitti Alley",
     },
     to_alleyway_video: {
       name: "to_alleyway_video",
@@ -120,7 +121,7 @@ const EXPLORATIONS_IMGS = processImages(
       tools: ["Blender", "Meshroom", "Photoshop"],
       description: "Photogrammetry study of a grafitti covered alleyway in downtown Toronto.",
       group: "to_alleyway",
-      project: "Grafitti Alley"
+      project: "Grafitti Alley",
     },
 
     jabbar_and_co_foundation_01: {
@@ -622,7 +623,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: "",
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
-      projectStr: 'Navigating Obsessive Seas',
+      projectStr: "Navigating Obsessive Seas",
       index: 0,
     },
     obsessive_seas_render_05: {
@@ -638,7 +639,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: "",
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
-      projectStr: 'Navigating Obsessive Seas',
+      projectStr: "Navigating Obsessive Seas",
       index: 1,
     },
     obsessive_seas_gallery_01: {
@@ -654,7 +655,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: "",
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
-      projectStr: 'Navigating Obsessive Seas',
+      projectStr: "Navigating Obsessive Seas",
       index: 2,
     },
     obsessive_seas_render_03: {
@@ -670,7 +671,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: "",
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
-      projectStr: 'Navigating Obsessive Seas',
+      projectStr: "Navigating Obsessive Seas",
       index: 3,
     },
     obsessive_seas_measurements_02: {
@@ -684,7 +685,7 @@ const EXPLORATIONS_IMGS = processImages(
       tools: ["Blender", "Photoshop"],
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
-      projectStr: 'Navigating Obsessive Seas',
+      projectStr: "Navigating Obsessive Seas",
       index: 4,
     },
     obsessive_seas_gallery_02: {
@@ -700,7 +701,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: "",
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
-      projectStr: 'Navigating Obsessive Seas',
+      projectStr: "Navigating Obsessive Seas",
       index: 5,
     },
     obsessive_seas_render_04: {
@@ -716,7 +717,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: "",
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
-      projectStr: 'Navigating Obsessive Seas',
+      projectStr: "Navigating Obsessive Seas",
       index: 6,
     },
     obsessive_seas_render_06: {
@@ -732,7 +733,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: "",
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
-      projectStr: 'Navigating Obsessive Seas',
+      projectStr: "Navigating Obsessive Seas",
       index: 7,
     },
     obsessive_seas_render_02: {
@@ -748,7 +749,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: "",
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
-      projectStr: 'Navigating Obsessive Seas',
+      projectStr: "Navigating Obsessive Seas",
       index: 8,
     },
     obsessive_seas_measurements_01: {
@@ -762,7 +763,7 @@ const EXPLORATIONS_IMGS = processImages(
       tools: ["Blender", "Photoshop"],
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
-      projectStr: 'Navigating Obsessive Seas',
+      projectStr: "Navigating Obsessive Seas",
       index: 9,
     },
     obsessive_seas_release: {
@@ -778,7 +779,7 @@ const EXPLORATIONS_IMGS = processImages(
       //   study: "",
       group: "obsessive_seas",
       project: `Navigating <i>Obsessive\u00A0Seas</i>`,
-      projectStr: 'Navigating Obsessive Seas',
+      projectStr: "Navigating Obsessive Seas",
       index: 10,
       zoom: true,
       aspect: "16/9",
@@ -799,7 +800,7 @@ const EXPLORATIONS_IMGS = processImages(
       group: "virtual_pangea_temp",
       thumbnail: true,
       hidden: true,
-      project: "Virtual Pangea Website"
+      project: "Virtual Pangea Website",
     },
     virtual_pangea_temp_video: {
       name: "virtual_pangea_temp_video",
@@ -816,7 +817,7 @@ const EXPLORATIONS_IMGS = processImages(
         "To the eye of the user, I added animations and passed over styling and typesetting, making a far more digestible experience. Under the hood, I added SEO, and optimized performance.",
       ],
       group: "virtual_pangea_temp",
-      project: "Virtual Pangea Website"
+      project: "Virtual Pangea Website",
     },
 
     crypic_pixel_video_01: {
@@ -1097,7 +1098,7 @@ const EXPLORATIONS_IMGS = processImages(
       group: "killer_mike",
       hidden: true,
       thumbnail: true,
-      project:"Kinetic Typography",
+      project: "Kinetic Typography",
     },
     killer_mike_motion_graphic_thumbnail_02: {
       name: "killer_mike_motion_graphic_thumbnail_02",
@@ -1107,7 +1108,7 @@ const EXPLORATIONS_IMGS = processImages(
       height: 1080,
       group: "killer_mike",
       hidden: true,
-      project:"Kinetic Typography",
+      project: "Kinetic Typography",
     },
     killer_mike_motion_graphic_video: {
       name: "killer_mike_motion_graphic_video",
@@ -1123,7 +1124,7 @@ const EXPLORATIONS_IMGS = processImages(
         "This project pushed my skills in After Effects at every turn.  Thankfully, my passion for the subject and medium kept me motivated throughout.",
       ],
       group: "killer_mike",
-      project:"Kinetic Typography",
+      project: "Kinetic Typography",
     },
     makeright_presentation_thumbnail: {
       name: "makeright_presentation_thumbnail",
@@ -1134,7 +1135,7 @@ const EXPLORATIONS_IMGS = processImages(
       group: "makeright_presentation",
       hidden: true,
       thumbnail: true,
-      project: "MakeRight Presentation"
+      project: "MakeRight Presentation",
     },
     makeright_presentation_video: {
       name: "makeright_presentation_video",
@@ -1152,8 +1153,75 @@ const EXPLORATIONS_IMGS = processImages(
       ],
       study: "makeright",
       group: "makeright_presentation",
-      project: "MakeRight Presentation"
+      project: "MakeRight Presentation",
     },
+
+    anc_solutions_preroll_animation: {
+      name: "anc_solutions_preroll_animation",
+      src: "/assets/images/explorations/motion_graphics/anc_solutions_preroll_animation/anc_solutions_preroll_animation_video.mp4",
+      alt: "A short motion graphic animation for ANC Solutions which I was commissioned to create for their website homepage.",
+      width: 2000,
+      height: 2250,
+      disciplines: ["Motion Graphics"],
+      tools: ["After Effects", "Adobe Illustrator", "Adobe XD", "Photoshop"],
+      // title: "ANC Hero Animation",
+      description: [
+        <>Working alongside design studio <DLink href="https://www.bettergood.agency/" target="_blank">Better Good</DLink>, I created this short, looping motion graphic for pre-roll manufacturer ANC Solutions.</>,
+        <>
+          The goal was to give users an exciting introduction to ANC’s new online identity, and their company ethos, <i>“precision in every roll</i>.<i>”</i>
+        </>,
+        "Created with a tight focus on aesthetic consistency with their site, and identity.",
+      ],
+      group: "anc_hero",
+      project: "ANC Solutions Hero Animation",
+    },
+
+    anc_solutions_preroll_animation_screenshot: {
+      name: "animation_in_situ",
+      src: "/assets/images/explorations/motion_graphics/anc_solutions_preroll_animation/animation_in_situ.png",
+      disciplines: ["Motion Graphics"],
+      tools: ["After Effects", "Adobe Illustrator", "Adobe XD", "Photoshop"],
+      alt: "",
+      width: 1899,
+      height: 1080,
+      index:2,
+      group: "anc_hero",
+      project: "ANC Solutions Hero Animation",
+    },
+
+    anc_solutions_preroll_animation_thumbnail: {
+      name: "thumb1",
+      src: "/assets/images/explorations/motion_graphics/anc_solutions_preroll_animation/thumb1.png",
+      alt: "Thumbnail for the hero animation I created for ANC Solutions.",
+      width: 2000,
+      height: 2250,
+      group: "anc_hero",
+      project: "ANC Solutions Hero Animation",
+      hidden: true,
+      thumbnail: true,
+    },
+
+    // thumb1: {
+    //   name: "thumb1",
+    //   src: "./assets/images/explorations/motion_graphics/anc_solutions_preroll_animation/thumb1.png",
+    //   alt: "",
+    //   width: 2000,
+    //   height: 2250,
+    // },
+    // thumb2: {
+    //   name: "thumb2",
+    //   src: "./assets/images/explorations/motion_graphics/anc_solutions_preroll_animation/thumb2.png",
+    //   alt: "",
+    //   width: 2000,
+    //   height: 2250,
+    // },
+    // anc_solutions_preroll_animation_video: {
+    //   name: "anc_solutions_preroll_animation_video",
+    //   src: "./assets/images/explorations/motion_graphics/anc_solutions_preroll_animation/anc_solutions_preroll_animation_video.mp4",
+    //   alt: "",
+    //   width: 2000,
+    //   height: 2250,
+    // },
 
     // makeright_presentation_video: {
     //   name: "makeright_presentation_video",
@@ -1740,11 +1808,5 @@ const EXPLORATIONS_ORDER = {
   },
 };
 
-
-
-
-
-
-
-export { EXPLORATIONS_IMGS, EXPLORATIONS_IMG_GROUPS};
+export { EXPLORATIONS_IMGS, EXPLORATIONS_IMG_GROUPS };
 export { EXPLORATIONS_ORDER };
