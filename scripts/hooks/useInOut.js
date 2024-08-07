@@ -26,9 +26,14 @@ const useInOut = (trigger = false, options = {}) => {
         const computedStyle = window.getComputedStyle(ref.current);
         const transitionValue = computedStyle.getPropertyValue('transition') || computedStyle.getPropertyValue('--transition');
 
+
         if (transitionValue) {
+
           // Extract the duration from the transition value
-          const [property, duration] = transitionValue.split(' ');
+          let [property, duration] = transitionValue.split(' ');
+          if(!duration) duration = property;
+
+
 
           // Convert the duration to milliseconds
           if (duration.includes('s')) {
